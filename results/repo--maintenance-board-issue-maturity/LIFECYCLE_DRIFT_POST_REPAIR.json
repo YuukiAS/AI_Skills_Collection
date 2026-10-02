@@ -1,0 +1,485 @@
+{
+  "schema": "AI_SKILLS_MAINTENANCE_BOARD_LIFECYCLE_DRIFT_POST_REPAIR_V1",
+  "task": "repo--maintenance-board-issue-maturity",
+  "branch": "reviewed/repo--maintenance-board-issue-maturity",
+  "generated_at": "2026-10-01T09:11:22.683293Z",
+  "live_lifecycle_repair": "COMPLETE",
+  "reviewed_reconciliation_review": "results/repo--maintenance-board-issue-maturity/LIFECYCLE_DRIFT_RECONCILIATION_REVIEW.md",
+  "reviewed_resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+  "g7_label_cutover_authorized": false,
+  "repository_heads": {
+    "local_head": "a1f44211c36049248b525dbc4ae08ed98465c392",
+    "remote_task_branch": "a1f44211c36049248b525dbc4ae08ed98465c392",
+    "origin_main": "520dcac9875bd0eb77e81e01cb23b4b66621e9de"
+  },
+  "mutation_scope": [
+    {
+      "issue_number": 53,
+      "operation": "updateProjectV2ItemFieldValue",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jG54",
+      "field": "Resolution commit",
+      "field_id": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+      "value": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "issue_number": 54,
+      "operation": "updateProjectV2ItemFieldValue",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jG-8",
+      "field": "Resolution commit",
+      "field_id": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+      "value": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "issue_number": 55,
+      "operation": "updateProjectV2ItemFieldValue",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHFA",
+      "field": "Resolution commit",
+      "field_id": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+      "value": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "issue_number": 56,
+      "operation": "updateProjectV2ItemFieldValue",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHMI",
+      "field": "Resolution commit",
+      "field_id": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+      "value": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "issue_number": 57,
+      "operation": "updateProjectV2ItemFieldValue",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHRU",
+      "field": "Resolution commit",
+      "field_id": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+      "value": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "issue_number": 58,
+      "operation": "updateProjectV2ItemFieldValue",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHWk",
+      "field": "Resolution commit",
+      "field_id": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+      "value": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "issue_number": 59,
+      "operation": "updateProjectV2ItemFieldValue",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHcI",
+      "field": "Resolution commit",
+      "field_id": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+      "value": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "issue_number": 63,
+      "operation": "updateProjectV2ItemFieldValue",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHu0",
+      "field": "Resolution commit",
+      "field_id": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+      "value": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "issue_number": 64,
+      "operation": "updateProjectV2ItemFieldValue",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jH0o",
+      "field": "Resolution commit",
+      "field_id": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+      "value": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "issue_number": 65,
+      "operation": "updateProjectV2ItemFieldValue",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jH5k",
+      "field": "Resolution commit",
+      "field_id": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw",
+      "value": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "issue_number": 52,
+      "operation": "deleteProjectV2Item",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jG1E"
+    },
+    {
+      "issue_number": 60,
+      "operation": "deleteProjectV2Item",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHhY"
+    },
+    {
+      "issue_number": 61,
+      "operation": "deleteProjectV2Item",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHmI"
+    },
+    {
+      "issue_number": 62,
+      "operation": "deleteProjectV2Item",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHp4"
+    },
+    {
+      "issue_number": 66,
+      "operation": "deleteProjectV2Item",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jH-8"
+    },
+    {
+      "issue_number": 67,
+      "operation": "deleteProjectV2Item",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jIFc"
+    },
+    {
+      "issue_number": 68,
+      "operation": "deleteProjectV2Item",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jIMw"
+    },
+    {
+      "issue_number": 69,
+      "operation": "deleteProjectV2Item",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jISc"
+    },
+    {
+      "issue_number": 70,
+      "operation": "deleteProjectV2Item",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jIYQ"
+    },
+    {
+      "issue_number": 71,
+      "operation": "deleteProjectV2Item",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jIdA"
+    },
+    {
+      "issue_number": 72,
+      "operation": "deleteProjectV2Item",
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jIi4"
+    }
+  ],
+  "completed_post_repair_readback": [
+    {
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jG54",
+      "project_id": "PVT_kwHOA0Lgf84BkjCU",
+      "project_title": "AI Skills Maintenance",
+      "issue_id": "I_kwDOSWdKMM8AAAABS-frjw",
+      "issue_number": 53,
+      "title": "Desktop-native acceptance must not be inferred from browser fixtures",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/53",
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "labels": [
+        "maintenance-track"
+      ],
+      "project_status": "DONE",
+      "project_area": "web-development",
+      "resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jG-8",
+      "project_id": "PVT_kwHOA0Lgf84BkjCU",
+      "project_title": "AI Skills Maintenance",
+      "issue_id": "I_kwDOSWdKMM8AAAABS-fvpA",
+      "issue_number": 54,
+      "title": "Motion, hover grammar, and performance budgets belong to the design system",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/54",
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "labels": [
+        "maintenance-track"
+      ],
+      "project_status": "DONE",
+      "project_area": "web-development",
+      "resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHFA",
+      "project_id": "PVT_kwHOA0Lgf84BkjCU",
+      "project_title": "AI Skills Maintenance",
+      "issue_id": "I_kwDOSWdKMM8AAAABS-f0FA",
+      "issue_number": 55,
+      "title": "Component craftsmanship must be part of the definition of done",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/55",
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "labels": [
+        "maintenance-track"
+      ],
+      "project_status": "DONE",
+      "project_area": "web-development",
+      "resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHMI",
+      "project_id": "PVT_kwHOA0Lgf84BkjCU",
+      "project_title": "AI Skills Maintenance",
+      "issue_id": "I_kwDOSWdKMM8AAAABS-f5pA",
+      "issue_number": 56,
+      "title": "External review should confirm quality, not discover obvious local P2 defects",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/56",
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "labels": [
+        "maintenance-track"
+      ],
+      "project_status": "DONE",
+      "project_area": "web-development",
+      "resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHRU",
+      "project_id": "PVT_kwHOA0Lgf84BkjCU",
+      "project_title": "AI Skills Maintenance",
+      "issue_id": "I_kwDOSWdKMM8AAAABS-f-Dw",
+      "issue_number": 57,
+      "title": "Freeze whole-screen visual direction before implementation polish",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/57",
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "labels": [
+        "maintenance-track"
+      ],
+      "project_status": "DONE",
+      "project_area": "web-development",
+      "resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHWk",
+      "project_id": "PVT_kwHOA0Lgf84BkjCU",
+      "project_title": "AI Skills Maintenance",
+      "issue_id": "I_kwDOSWdKMM8AAAABS-gCHg",
+      "issue_number": 58,
+      "title": "Canonical design artifacts must gate production implementation",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/58",
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "labels": [
+        "maintenance-track"
+      ],
+      "project_status": "DONE",
+      "project_area": "web-development",
+      "resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHcI",
+      "project_id": "PVT_kwHOA0Lgf84BkjCU",
+      "project_title": "AI Skills Maintenance",
+      "issue_id": "I_kwDOSWdKMM8AAAABS-gHGw",
+      "issue_number": 59,
+      "title": "Visual acceptance must include a whole-product taste gate, not only defect checklists",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/59",
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "labels": [
+        "maintenance-track"
+      ],
+      "project_status": "DONE",
+      "project_area": "web-development",
+      "resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHu0",
+      "project_id": "PVT_kwHOA0Lgf84BkjCU",
+      "project_title": "AI Skills Maintenance",
+      "issue_id": "I_kwDOSWdKMM8AAAABS-gZAg",
+      "issue_number": 63,
+      "title": "Normal UI must have a human-readable presentation boundary",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/63",
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "labels": [
+        "maintenance-track"
+      ],
+      "project_status": "DONE",
+      "project_area": "web-development",
+      "resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jH0o",
+      "project_id": "PVT_kwHOA0Lgf84BkjCU",
+      "project_title": "AI Skills Maintenance",
+      "issue_id": "I_kwDOSWdKMM8AAAABS-gd1A",
+      "issue_number": 64,
+      "title": "Primary surfaces should optimize for actionability, not implementation completeness",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/64",
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "labels": [
+        "maintenance-track"
+      ],
+      "project_status": "DONE",
+      "project_area": "web-development",
+      "resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    },
+    {
+      "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jH5k",
+      "project_id": "PVT_kwHOA0Lgf84BkjCU",
+      "project_title": "AI Skills Maintenance",
+      "issue_id": "I_kwDOSWdKMM8AAAABS-gjkg",
+      "issue_number": 65,
+      "title": "Metric labels and rankings must be backed by the data semantics they imply",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/65",
+      "state": "CLOSED",
+      "state_reason": "COMPLETED",
+      "labels": [
+        "maintenance-track"
+      ],
+      "project_status": "DONE",
+      "project_area": "web-development",
+      "resolution_commit": "c232f2ea906277f2217c4bbce4f56df1ebd5827c"
+    }
+  ],
+  "duplicate_post_repair_readback": [
+    {
+      "issue_id": "I_kwDOSWdKMM8AAAABS-fnSw",
+      "issue_number": 52,
+      "title": "Production icon sourcing and icon-registry discipline",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/52",
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "labels": [
+        "maintenance-track"
+      ],
+      "matching_ai_skills_maintenance_project_items": []
+    },
+    {
+      "issue_id": "I_kwDOSWdKMM8AAAABS-gL6A",
+      "issue_number": 60,
+      "title": "Design corrections must round-trip through the canonical Figma before code changes",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/60",
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "labels": [
+        "maintenance-track"
+      ],
+      "matching_ai_skills_maintenance_project_items": []
+    },
+    {
+      "issue_id": "I_kwDOSWdKMM8AAAABS-gQFA",
+      "issue_number": 61,
+      "title": "“Figma complete” needs an explicit definition of done",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/61",
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "labels": [
+        "maintenance-track"
+      ],
+      "matching_ai_skills_maintenance_project_items": []
+    },
+    {
+      "issue_id": "I_kwDOSWdKMM8AAAABS-gU4g",
+      "issue_number": 62,
+      "title": "Design-to-code goals must not stop at either Figma or implementation",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/62",
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "labels": [
+        "maintenance-track"
+      ],
+      "matching_ai_skills_maintenance_project_items": []
+    },
+    {
+      "issue_id": "I_kwDOSWdKMM8AAAABS-gogQ",
+      "issue_number": 66,
+      "title": "Comparable resource cards need one coherent progress and reset grammar",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/66",
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "labels": [
+        "maintenance-track"
+      ],
+      "matching_ai_skills_maintenance_project_items": []
+    },
+    {
+      "issue_id": "I_kwDOSWdKMM8AAAABS-gsuQ",
+      "issue_number": 67,
+      "title": "Opaque identifiers and formatting artifacts must not leak into glanceable UI",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/67",
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "labels": [
+        "maintenance-track"
+      ],
+      "matching_ai_skills_maintenance_project_items": []
+    },
+    {
+      "issue_id": "I_kwDOSWdKMM8AAAABS-gxFA",
+      "issue_number": 68,
+      "title": "Severity colors must encode one stable semantic meaning",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/68",
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "labels": [
+        "maintenance-track"
+      ],
+      "matching_ai_skills_maintenance_project_items": []
+    },
+    {
+      "issue_id": "I_kwDOSWdKMM8AAAABS-g2CA",
+      "issue_number": 69,
+      "title": "原生交互验收要覆盖真实控制路径",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/69",
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "labels": [
+        "maintenance-track"
+      ],
+      "matching_ai_skills_maintenance_project_items": []
+    },
+    {
+      "issue_id": "I_kwDOSWdKMM8AAAABS-g63Q",
+      "issue_number": 70,
+      "title": "Configured surfaces must collapse from setup mode to status mode",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/70",
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "labels": [
+        "maintenance-track"
+      ],
+      "matching_ai_skills_maintenance_project_items": []
+    },
+    {
+      "issue_id": "I_kwDOSWdKMM8AAAABS-hAYw",
+      "issue_number": 71,
+      "title": "Typography governance must define semantic roles and hierarchy, not only token values",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/71",
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "labels": [
+        "maintenance-track"
+      ],
+      "matching_ai_skills_maintenance_project_items": []
+    },
+    {
+      "issue_id": "I_kwDOSWdKMM8AAAABS-hFkg",
+      "issue_number": 72,
+      "title": "Status chrome must follow one coherent visual grammar",
+      "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/72",
+      "state": "CLOSED",
+      "state_reason": "DUPLICATE",
+      "labels": [
+        "maintenance-track"
+      ],
+      "matching_ai_skills_maintenance_project_items": []
+    }
+  ],
+  "source_todo_integrity": {
+    "path": "docs/plugin-todos/web-development.md",
+    "blob_at_head": "3b36b3c87bd0c07d1d93f212e15147628febdbe1",
+    "maturity_evidence_tracking_changed": false,
+    "unchanged_by_repair": true
+  },
+  "taxonomy_labels_changed": false,
+  "issue_title_body_state_mutation_attempted": false,
+  "project_status_mutation_attempted": false,
+  "project_area_mutation_attempted": false,
+  "unrelated_issue_or_project_mutation_attempted": false,
+  "transient_executor_note": "Initial mutation script completed live mutations, then failed during duplicate readback because of a malformed GraphQL query. Corrected readback was performed before evidence generation; no rollback was required.",
+  "verification": {
+    "completed_count": 10,
+    "completed_all_closed_completed": true,
+    "completed_all_project_done": true,
+    "completed_area_unchanged": true,
+    "completed_resolution_commit_all_reviewed_exact_commit": true,
+    "duplicate_count": 11,
+    "duplicates_all_closed_duplicate": true,
+    "duplicates_absent_from_ai_skills_maintenance_project": true,
+    "source_todo_unchanged": true,
+    "labels_unchanged_for_21_issues": true,
+    "worktree_status_before_evidence_write": "",
+    "post_repair_errors": []
+  },
+  "next_action": "INDEPENDENT_LIFECYCLE_REPAIR_REVIEW"
+}

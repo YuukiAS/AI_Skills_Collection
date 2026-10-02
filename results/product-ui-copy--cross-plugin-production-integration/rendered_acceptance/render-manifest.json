@@ -1,0 +1,48 @@
+{
+  "fixture": "Product UI Copy rendered acceptance",
+  "html": {
+    "file": "product-ui-copy-fixture.html",
+    "sha256": "8bffd3761d629b64b40f7b90051aa55a6a7f614b617fcb5313463eec22087f84"
+  },
+  "css": {
+    "file": "product-ui-copy-fixture.css",
+    "sha256": "55bee25fa84d2fac2667beac2903d5b405f16aee8811f5254b42f19e9fcf569f"
+  },
+  "captures": [
+    {
+      "name": "wide-desktop",
+      "width": 1440,
+      "height": 1200,
+      "file": "wide-desktop.png",
+      "sha256": "135e716a612773f7cfb226d1a39e50c82f10933e9647e30189a4cd348622cff1"
+    },
+    {
+      "name": "narrow-mobile",
+      "width": 390,
+      "height": 1200,
+      "file": "narrow-mobile.png",
+      "sha256": "4a7b3c82c8eacef107a6699dc1adc4495587544479391f575e52a8947ddd1399"
+    },
+    {
+      "name": "trust-disclosure",
+      "width": 920,
+      "height": 900,
+      "file": "trust-disclosure.png",
+      "sha256": "b1efbb0f1edcc0886e5dfeec8d4d5e7a8e6c623d385524267fcb30e5b25004e7"
+    },
+    {
+      "name": "keep-control",
+      "width": 760,
+      "height": 820,
+      "file": "keep-control.png",
+      "sha256": "b6683edca7592e24cfed20d126e4f01e92e9abd12e0fb4cd2a00def5107515ec"
+    }
+  ],
+  "coverage": [
+    "wide/desktop layout",
+    "narrow/mobile layout",
+    "multi-block linguistic page rhythm",
+    "trust/help disclosure and CTA relationship",
+    "already-good KEEP control"
+  ]
+}

@@ -22,18 +22,73 @@ Use this skill to turn research and product intent into an executable visual sys
 ## Boundary
 
 - Define tokens, density, typography, color, icon strategy, layout rhythm, and interaction tone.
+- Act as the normal Frontend Design coordinator for production UI work. Classify the task before choosing delegates.
+- Treat product-interface work as Frontend work even when the user says
+  "browser extension", "popup", "settings page", "desktop", "Tauri",
+  "Electron", "native-WebView", "mobile", "Android", or "Compose" rather than
+  "web page".
 - Do not implement the app; route implementation to the official `build-web-apps` capability or project code workflow.
 - Do not rely on decorative blobs, generic purple gradients, or unexplained hero copy.
 - Do not use academic or journal-inspired palettes from `palette/` as direct UI colors. Product surfaces need semantic tokens; scientific palettes may map only to chart roles.
 
 ## Workflow
 
-1. Summarize the product job, audience, and information density.
-2. Choose a coherent visual direction and one differentiating move.
-3. Translate taste references into concrete constraints: image/reference first, clear hierarchy, disciplined typography, spacing rhythm, contextual brand cues, and purposeful motion.
-4. Define tokens for color, type, spacing, radius, borders, charts, and motion.
-5. State responsive and accessibility constraints.
-6. Produce a handoff brief that a frontend implementation tool can execute.
+1. P0 product/state contract: summarize the product job, primary states, user actions, and target surface.
+2. P1 design authority and direction: identify canonical Figma, another durable authority, or current production grammar for a narrow fix; choose the visual direction and delegate only where needed.
+3. P2 implementation handoff: translate the accepted direction into concrete tokens, components, states, assets, motion, and implementation notes.
+4. P3 actual-surface convergence: verify the rendered browser or native-WebView surface that the claim is about; record P1/P2/P3 findings against the exact candidate.
+5. P4 whole-product taste: ask observable taste questions and require independent confirmation for substantive redesign, release gates, major canonical-design convergence, major native user-flow milestones, or whole-product hierarchy/interaction-model changes.
+
+For product-interface copy, insert a content-architecture handoff before final
+wording:
+
+```text
+SURFACE:
+UI_ROLE:
+PRODUCT_STATE:
+USER_JOB:
+USER_CONSEQUENCE_OR_NEXT_ACTION:
+NEIGHBORING_VISIBLE_COPY:
+LOCALE:
+PROTECTED_MEANING:
+DISCLOSURE_LEVEL:
+LENGTH_OR_VIEWPORT_CONSTRAINT:
+DESIGN_AUTHORITY: optional
+TERMINOLOGY_OR_BRAND_TOKENS: optional
+```
+
+Send that handoff to Clear Writing `product-ui-copy` for wording under frozen
+meaning. Frontend remains responsible for whether the text belongs there,
+amount, hierarchy, progressive disclosure, neighboring-copy relationship, and
+final rendered page/screen rhythm.
+
+Scale the work before delegating:
+
+- S1 targeted/local fix: use existing production grammar; do not force Figma, full redesign, or independent review unless the fix exposes a larger product/design gap.
+- S2 bounded UI change: extend only the affected states, components, and authority source.
+- S3 product/redesign: run the full P0-P4 loop.
+
+Design authority and surface are modifiers, not size classes. Figma is conditional authority, not mandatory. Browser evidence proves browser behavior; native-WebView claims need native evidence or a clearly bounded user-only stop.
+
+Delegate ownership:
+
+- `product-ux-planning`: product job, primary states, actionability, lifecycle, normal-vs-diagnostic boundary, visible metric/ranking semantics.
+- `visual-direction`: whole-screen direction, composition, differentiator, and observable taste questions.
+- `design-system-tokens`: component craft, icon source/registry/provenance, semantic typography, color, status, state, and token grammar.
+- `figma-design-to-code`: canonical Figma authority, completeness, round-trip, and final design/render convergence.
+- `motion-interaction`: motion intent and the boundary between design motion and runtime latency or jank.
+- `responsive-accessibility-review`: applicable P1 accessibility/responsive constraints and P3 closure.
+- `webapp-testing`: browser evidence companion for F-C; not a native or design authority.
+- `research-product-frontend`: research-specific UI constraints after this coordinator has classified the generic product/design route.
+
+Do not activate this coordinator for backend/API/math tasks, provider/runtime
+debugging, network/tunnel changes, Room/WorkManager/data-layer changes, or
+README/docs-only writing when no user-facing product interface is in scope.
+
+When a platform-specific product UI task routes through this coordinator, keep
+local platform authority intact. For example, Android/Compose implementation
+details still belong to the project's Android/Compose owner; Frontend Design
+coordinates product-interface architecture and rendered acceptance.
 
 ## Production Frontend Design Gates
 
@@ -70,8 +125,31 @@ Screenshots alone do not prove click, native, provider, persistence, or live
 behavior. Producer self-QA should catch obvious hierarchy, spacing, overflow,
 translation-token, interaction, and motion defects before external acceptance.
 
+### F-D Producer Admission And Handoff Reachability
+
+Producer self-QA is admission to independent review or user handoff, not an
+independent quality proof. Bind `P1=0/P2=0` to the exact candidate, surface,
+state, and evidence. If the final report asks the user to click, select, expand,
+save, or authorize a UI control and the producer can safely exercise it, verify
+that the control is visible, enabled, triggered by real interaction, reaches the
+expected next state or user-only boundary, and has no obvious P2 defect.
+
+Classify defects before repair:
+
+- Design defect: return to P0/P1 and the relevant authority/delegate.
+- Implementation drift: repair the implementation without changing the design source.
+- Product semantic defect: return to product UX/state semantics.
+- Runtime-only repair: fix runtime behavior while preserving accepted design intent.
+
+Interaction causality belongs to F-C. Ordinary browser locator/actionability
+plus a postcondition is enough unless there is a competing route or control-path
+claim; then prove the specific route.
+
 ## Quality Bar
 
 - Avoid generic "AI page" tells: undifferentiated purple gradients, oversized cards, weak contrast, random icon mixes, decorative motion, and unsupported hero copy.
 - Prefer one strong visual idea over a pile of effects.
 - Use screenshot comparison and browser QA to verify hierarchy, density, text fit, responsive behavior, and motion restraint.
+- Whole-product taste is observable judgment: ask whether hierarchy, density,
+  motion, iconography, affordances, copy placement, and state transitions feel
+  coherent in the actual screen, not whether a checklist keyword appears.

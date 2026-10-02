@@ -1,0 +1,43 @@
+name: Maintenance board intake
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  pre-admission-triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ensure triage label for non-tracked intake
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_LABELS_JSON: ${{ toJson(github.event.issue.labels) }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import subprocess
+
+          labels = {item.get("name") for item in json.loads(os.environ["ISSUE_LABELS_JSON"])}
+          if "maintenance-track" in labels or "triage:needed" in labels:
+              raise SystemExit(0)
+
+          subprocess.run(
+              [
+                  "gh",
+                  "issue",
+                  "edit",
+                  os.environ["ISSUE_NUMBER"],
+                  "--repo",
+                  os.environ["GITHUB_REPOSITORY"],
+                  "--add-label",
+                  "triage:needed",
+              ],
+              check=True,
+          )
+          PY

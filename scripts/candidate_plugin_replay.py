@@ -448,6 +448,39 @@ def cleanup_stale_candidates(codex: Path) -> list[str]:
 
 
 def safe_stage_candidate(root: Path, candidate: CandidatePlugin, run_dir: Path) -> Path:
+    return safe_stage_candidates(root, [candidate], run_dir)
+
+
+def safe_stage_candidates(root: Path, candidates: list[CandidatePlugin], run_dir: Path) -> Path:
+    if not candidates:
+        raise ReplayError("at least one candidate plugin is required")
+    seen_names: set[str] = set()
+    marketplace_plugins: list[dict[str, Any]] = []
+    marketplace_root = run_dir / "marketplace"
+    for candidate in candidates:
+        if candidate.name in seen_names:
+            raise ReplayError(f"duplicate candidate plugin: {candidate.name}")
+        seen_names.add(candidate.name)
+        stage_one_candidate(root, candidate, run_dir, marketplace_root)
+        marketplace_plugins.append(
+            {
+                "name": candidate.name,
+                "source": {"source": "local", "path": f"./plugins/{candidate.name}"},
+                "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+            }
+        )
+    manifest_dir = marketplace_root / ".agents" / "plugins"
+    manifest_dir.mkdir(parents=True, exist_ok=True)
+    manifest = {
+        "name": MARKETPLACE_NAME,
+        "displayName": "AI Skills Candidate",
+        "plugins": marketplace_plugins,
+    }
+    (manifest_dir / "marketplace.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    return marketplace_root
+
+
+def stage_one_candidate(root: Path, candidate: CandidatePlugin, run_dir: Path, marketplace_root: Path) -> None:
     # git archive stdout is binary; keep the public wrapper above easy to test by
     # using subprocess directly for this one command.
     proc = subprocess.run(
@@ -466,25 +499,9 @@ def safe_stage_candidate(root: Path, candidate: CandidatePlugin, run_dir: Path) 
     source = extract_dir / candidate.source_path
     if not source.exists():
         raise ReplayError("failed to stage candidate plugin from committed tree")
-    marketplace_root = run_dir / "marketplace"
     plugin_dest = marketplace_root / "plugins" / candidate.name
     plugin_dest.parent.mkdir(parents=True, exist_ok=True)
     shutil.copytree(source, plugin_dest)
-    manifest_dir = marketplace_root / ".agents" / "plugins"
-    manifest_dir.mkdir(parents=True, exist_ok=True)
-    manifest = {
-        "name": MARKETPLACE_NAME,
-        "displayName": "AI Skills Candidate",
-        "plugins": [
-            {
-                "name": candidate.name,
-                "source": {"source": "local", "path": f"./plugins/{candidate.name}"},
-                "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
-            }
-        ],
-    }
-    (manifest_dir / "marketplace.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
-    return marketplace_root
 
 
 def repo_relative_existing_file(root: Path, path: str) -> Path:
@@ -622,7 +639,7 @@ def remove_candidate_plugin(codex: Path, plugin_id: str) -> None:
 def run_child_exec(
     codex: Path,
     marketplace_root: Path,
-    plugin_id: str,
+    plugin_id: str | list[str],
     workspace: Path,
     output_dir: Path,
     prompt: str,
@@ -633,24 +650,34 @@ def run_child_exec(
     timeout_seconds: float = DEFAULT_CHILD_TIMEOUT_SECONDS,
     terminate_grace_seconds: float = DEFAULT_CHILD_TERMINATE_GRACE_SECONDS,
 ) -> CommandResult:
+    plugin_ids = [plugin_id] if isinstance(plugin_id, str) else plugin_id
     args = [
         str(codex),
         "exec",
         "--ignore-user-config",
         "--json",
         *codex_config_args(marketplace_root),
-        "-c",
-        f"plugins.{plugin_id}.enabled=true",
-        "-s",
-        "workspace-write",
-        "-C",
-        str(workspace),
-        "--add-dir",
-        str(output_dir),
-        "--skip-git-repo-check",
-        "--ephemeral",
-        "-",
     ]
+    for one_plugin_id in plugin_ids:
+        args.extend(
+            [
+                "-c",
+                f"plugins.{one_plugin_id}.enabled=true",
+            ]
+        )
+    args.extend(
+        [
+            "-s",
+            "workspace-write",
+            "-C",
+            str(workspace),
+            "--add-dir",
+            str(output_dir),
+            "--skip-git-repo-check",
+            "--ephemeral",
+            "-",
+        ]
+    )
     for writable_dir in writable_dirs or []:
         args[args.index("--skip-git-repo-check"):args.index("--skip-git-repo-check")] = [
             "--add-dir",
@@ -714,28 +741,53 @@ def run_replay(
     input_args: list[str],
     writable_dir_args: list[str] | None = None,
 ) -> dict[str, Any]:
+    return run_replay_multi(root, [plugin], candidate_commit, task_arg, input_args, writable_dir_args, legacy_single=True)
+
+
+def run_replay_multi(
+    root: Path,
+    plugins: list[str],
+    candidate_commit: str,
+    task_arg: str,
+    input_args: list[str],
+    writable_dir_args: list[str] | None = None,
+    *,
+    legacy_single: bool = False,
+) -> dict[str, Any]:
     runtime = ensure_runtime_available(root)
     paths = runtime_paths(root)
     task = repo_relative_existing_file(root, task_arg)
     inputs = [repo_relative_existing_file(root, item) for item in input_args]
     writable_dirs = [repo_relative_existing_dir(root, item) for item in (writable_dir_args or [])]
-    candidate = resolve_candidate_plugin(root, candidate_commit, plugin)
+    candidates = [resolve_candidate_plugin(root, candidate_commit, plugin) for plugin in plugins]
+    resolved_commit = candidates[0].commit
+    if any(candidate.commit != resolved_commit for candidate in candidates):
+        raise ReplayError("candidate plugins must resolve to the same commit")
     run_id = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime()) + f"-{os.getpid()}"
     run_dir = paths.state_root / "runs" / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
-    plugin_id = f"{plugin}{CANDIDATE_NAMESPACE_SUFFIX}"
-    installed_path: str | None = None
-    before_snapshot: list[dict[str, Any]] = []
+    plugin_ids = [f"{plugin}{CANDIDATE_NAMESPACE_SUFFIX}" for plugin in plugins]
+    installed_paths: dict[str, str] = {}
+    before_snapshots: dict[str, list[dict[str, Any]]] = {}
     try:
         with replay_lock(root):
             cleanup_stale_candidates(paths.codex)
             before_list = run_codex_json(paths.codex, ["plugin", "list", "--json"])
-            before_snapshot = same_name_installed_snapshot(before_list, plugin)
-            marketplace_root = safe_stage_candidate(root, candidate, run_dir)
+            before_snapshots = {
+                plugin: same_name_installed_snapshot(before_list, plugin)
+                for plugin in plugins
+            }
+            marketplace_root = safe_stage_candidates(root, candidates, run_dir)
             try:
-                plugin_id, installed_path, add_payload = add_candidate_plugin(paths.codex, marketplace_root, plugin)
+                add_payloads: dict[str, Any] = {}
+                installed_plugin_ids: dict[str, str] = {}
+                for plugin in plugins:
+                    plugin_id, installed_path, add_payload = add_candidate_plugin(paths.codex, marketplace_root, plugin)
+                    installed_plugin_ids[plugin] = plugin_id
+                    installed_paths[plugin] = installed_path
+                    add_payloads[plugin] = add_payload
                 (run_dir / "plugin-add.json").write_text(
-                    json.dumps(add_payload, indent=2, sort_keys=True) + "\n",
+                    json.dumps(add_payloads, indent=2, sort_keys=True) + "\n",
                     encoding="utf-8",
                 )
                 workspace, output_dir, prompt = prepare_workspace(root, run_dir, task, inputs)
@@ -744,7 +796,7 @@ def run_replay(
                 child = run_child_exec(
                     paths.codex,
                     marketplace_root,
-                    plugin_id,
+                    list(installed_plugin_ids.values()),
                     workspace,
                     output_dir,
                     prompt,
@@ -756,36 +808,71 @@ def run_replay(
                     stdout_path.write_text(child.stdout, encoding="utf-8")
                 if not stderr_path.exists():
                     stderr_path.write_text(child.stderr, encoding="utf-8")
-                evidence = parse_consumption(child.stdout, installed_path)
+                evidence_by_plugin = {
+                    plugin: parse_consumption(child.stdout, installed_path)
+                    for plugin, installed_path in installed_paths.items()
+                }
                 if child.returncode != 0:
                     raise ReplayError(f"candidate child exec failed ({child.returncode}): {child.stderr.strip()}")
-                if evidence is None:
-                    raise ReplayError("candidate actual consumption was not proven by parsed JSON event")
-                result = {
-                    "candidate_commit": candidate.commit,
-                    "plugin_id": plugin_id,
-                    "installed_path": installed_path,
+                missing = [plugin for plugin, evidence in evidence_by_plugin.items() if evidence is None]
+                if missing:
+                    raise ReplayError(
+                        "candidate actual consumption was not proven by parsed JSON event for: "
+                        + ", ".join(sorted(missing))
+                    )
+                plugin_results = []
+                for plugin in plugins:
+                    evidence = evidence_by_plugin[plugin]
+                    assert evidence is not None
+                    plugin_results.append(
+                        {
+                            "name": plugin,
+                            "plugin_id": installed_plugin_ids[plugin],
+                            "installed_path": installed_paths[plugin],
+                            "actual_consumption": {
+                                "proven": True,
+                                "event_type": evidence.event_type,
+                                "line_index": evidence.line_index,
+                            },
+                            "add_payload": add_payloads[plugin],
+                        }
+                    )
+                result: dict[str, Any] = {
+                    "candidate_commit": resolved_commit,
                     "runtime_version": runtime["version"],
-                    "actual_consumption": {
-                        "proven": True,
-                        "event_type": evidence.event_type,
-                        "line_index": evidence.line_index,
+                    "plugins": plugin_results,
+                    "actual_consumption_by_plugin": {
+                        item["name"]: item["actual_consumption"] for item in plugin_results
                     },
-                    "add_payload": add_payload,
                     "stdout_path": str(stdout_path),
                     "stderr_path": str(stderr_path),
                     "writable_dirs": [str(path) for path in writable_dirs],
                 }
+                if legacy_single and len(plugin_results) == 1:
+                    single = plugin_results[0]
+                    result.update(
+                        {
+                            "plugin_id": single["plugin_id"],
+                            "installed_path": single["installed_path"],
+                            "actual_consumption": single["actual_consumption"],
+                            "add_payload": single["add_payload"],
+                        }
+                    )
                 (run_dir / "run.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
                 return result
             finally:
-                with contextlib.suppress(Exception):
-                    remove_candidate_plugin(paths.codex, plugin_id)
+                for plugin_id in plugin_ids:
+                    with contextlib.suppress(Exception):
+                        remove_candidate_plugin(paths.codex, plugin_id)
                 with contextlib.suppress(Exception):
                     shutil.rmtree(run_dir / "marketplace")
                 after_list = run_codex_json(paths.codex, ["plugin", "list", "--json"])
                 assert_candidate_absent(after_list)
-                assert_production_unchanged(before_snapshot, same_name_installed_snapshot(after_list, plugin))
+                for plugin in plugins:
+                    assert_production_unchanged(
+                        before_snapshots[plugin],
+                        same_name_installed_snapshot(after_list, plugin),
+                    )
     except Exception:
         with contextlib.suppress(Exception):
             shutil.rmtree(run_dir / "marketplace")
@@ -797,7 +884,7 @@ def build_parser() -> argparse.ArgumentParser:
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("ensure-runtime", help="download and verify the fixed repo-local Codex runtime")
     replay = sub.add_parser("replay", help="run a committed candidate plugin through the fixed repo-local runtime")
-    replay.add_argument("--plugin", required=True)
+    replay.add_argument("--plugin", action="append", required=True)
     replay.add_argument("--candidate-commit", required=True)
     replay.add_argument("--task", required=True)
     replay.add_argument("--input", action="append", default=[], required=True)
@@ -812,7 +899,10 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "ensure-runtime":
             result = ensure_runtime(root)
         elif args.command == "replay":
-            result = run_replay(root, args.plugin, args.candidate_commit, args.task, args.input, args.writable_dir)
+            if len(args.plugin) == 1:
+                result = run_replay(root, args.plugin[0], args.candidate_commit, args.task, args.input, args.writable_dir)
+            else:
+                result = run_replay_multi(root, args.plugin, args.candidate_commit, args.task, args.input, args.writable_dir)
         else:
             raise ReplayError(f"unknown command: {args.command}")
     except ReplayError as exc:

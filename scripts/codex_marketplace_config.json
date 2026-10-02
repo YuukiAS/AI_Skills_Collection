@@ -75,9 +75,9 @@
     },
     {
       "name": "writing-style",
-      "version": "0.3",
+      "version": "0.4",
       "displayName": "Clear Writing",
-      "description": "Writing quality layer with source-fidelity guardrails, heavy Chinese source-faithful structural rewrites, Chinese reader-facing say-it-plain final passes, and English scientific prose cleanup without detector evasion or research-structure decisions.",
+      "description": "Writing quality layer with source-fidelity guardrails, Product UI Copy for protected-meaning interface microcopy, heavy Chinese source-faithful structural rewrites, Chinese reader-facing say-it-plain final passes, and English scientific prose cleanup without detector evasion or research-structure decisions.",
       "category": "Research",
       "brandColor": "#7C3AED",
       "composerIcon": "./assets/codex/plugin-icons/writing-style/composer.svg",
@@ -92,7 +92,9 @@
         "Fix version labels in this Markdown/PDF without changing facts.",
         "Remove defensive scientific framing without overclaiming.",
         "Rewrite this in Chinese-first, say-it-plain style.",
-        "Final-check this Markdown/PDF report for human-readable Chinese and version fidelity."
+        "Final-check this Markdown/PDF report for human-readable Chinese and version fidelity.",
+        "Improve this product-interface microcopy under frozen product meaning.",
+        "Localize this UI copy for zh-Hans and zh-Hant-HK without changing product semantics."
       ],
       "skills": [
         {
@@ -104,6 +106,12 @@
           "type": "copy",
           "source": "skills/writing/core/scientific-prose",
           "artifact_id": "sci"
+        },
+        {
+          "type": "copy",
+          "source": "skills/writing/core/product-ui-copy",
+          "artifact_id": "product-ui-copy",
+          "description": "Protected-meaning Product UI Copy for labels, CTAs, states, help, onboarding, settings, trust/privacy disclosure, and locale-specific interface wording."
         },
         {
           "type": "copy",
@@ -334,9 +342,9 @@
     },
     {
       "name": "web-development",
-      "version": "0.2",
+      "version": "0.4",
       "displayName": "Frontend Design",
-      "description": "Frontend reference research, visual taste systems, motion/icon resource routing, and research product frontend constraints that complement official build-web-apps and Figma.",
+      "description": "Frontend Design coordinator for product-interface content architecture, rendered acceptance, visual systems, reference research, motion/icon resource routing, and research product frontend constraints across browser extension, web, desktop/WebView, and mobile UI surfaces.",
       "category": "Web Development",
       "brandColor": "#EA580C",
       "composerIcon": "./assets/codex/plugin-icons/web-development/composer.svg",
@@ -345,7 +353,9 @@
         "Research frontend references.",
         "Distill AI frontend taste and motion resources.",
         "Create a visual system brief.",
-        "Plan a research product UI."
+        "Plan a research product UI.",
+        "Plan product-interface copy architecture and hand off wording to Product UI Copy.",
+        "Review rendered UI copy rhythm across desktop and mobile viewports."
       ],
       "skills": [
         {
@@ -357,13 +367,19 @@
           "type": "aggregate",
           "name": "frontend-visual-systems",
           "artifact_id": "visual",
-          "description": "Frontend visual direction, design tokens, typography, palette, icon, layout, density, and motion brief.",
+          "description": "Frontend visual direction, product-interface content architecture, Product UI Copy handoff, rendered acceptance, design tokens, typography, palette, icon, layout, density, and motion brief.",
           "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
           "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
+          "routing_mode": "coordinator-first",
+          "coordinator_artifact_id": "system",
           "source_skills": [
             {
               "source": "skills/tools/frontend/frontend-visual-systems",
               "artifact_id": "system"
+            },
+            {
+              "source": "skills/tools/frontend/product-ux-planning",
+              "artifact_id": "ux"
             },
             {
               "source": "skills/tools/frontend/visual-direction",
@@ -380,24 +396,18 @@
             {
               "source": "skills/tools/frontend/motion-interaction",
               "artifact_id": "motion"
-            }
-          ]
-        },
-        {
-          "type": "aggregate",
-          "name": "research-product-frontend",
-          "artifact_id": "research",
-          "description": "High-density research product frontend planning for imaging, phenotype, model comparison, provenance, and experiment interfaces.",
-          "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
-          "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
-          "source_skills": [
-            {
-              "source": "skills/tools/frontend/research-product-frontend",
-              "artifact_id": "product"
             },
             {
-              "source": "skills/tools/frontend/product-ux-planning",
-              "artifact_id": "ux"
+              "source": "skills/tools/frontend/responsive-accessibility-review",
+              "artifact_id": "responsive"
+            },
+            {
+              "source": "skills/tools/frontend/webapp-testing",
+              "artifact_id": "webapp-testing"
+            },
+            {
+              "source": "skills/tools/frontend/research-product-frontend",
+              "artifact_id": "research"
             }
           ]
         }

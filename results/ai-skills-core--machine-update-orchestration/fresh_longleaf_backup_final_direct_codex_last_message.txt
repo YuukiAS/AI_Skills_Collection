@@ -1,0 +1,14 @@
+PASS。
+
+已按已安装的 production plugin normal-entry 验证完成，未执行 `upgrade/add/remove/install`、`git fetch/pull/checkout/commit/push`、release 推进、optional plugin 安装或仓库/配置修改。唯一注意点：`codex plugin list --available --json` 自身打印了 “could not create PATH aliases: Read-only file system”，但该尝试失败，未成功写入。
+
+验证结果：
+
+1. fresh process 已加载 installed `ai-skills-core` `0.5`：当前进程 skill catalogue 路径为 `/overflow/htzhu/mingcheng_new/.codex/plugins/cache/yuukias-ai-skills/ai-skills-core/0.5/...`，`codex plugin list` 也显示 `ai-skills-core@yuukias-ai-skills` installed/enabled `0.5`。
+2. 请求已路由到 `machine-update-orchestrator`：读取的是 installed cache 中的 `skills/orchestrator/SKILL.md`，描述匹配 `sync this machine` normal entry。
+3. Marketplace 当前为 `release@a7028195f3e97d32d51c32ef8c87f658f92048e5`：`config.toml`、`.codex-marketplace-install.json`、Marketplace checkout `HEAD/origin/release` 均一致。
+4. `writing-style` 当前已安装为 `0.4`：`codex plugin list` 显示 installed/enabled `0.4`。
+5. `web-development` 当前未安装：`codex plugin list` 仅在 available 中显示，`installed:false`。
+6. Bridge package/runtime = `0.9.3`：`python import ai_bridge_kit` 返回 `version=0.9.3`，路径为 Bridge checkout；`pyproject.toml` 和 `ai_bridge_kit/__init__.py` 也都是 `0.9.3`。
+7. Bridge release relation = `ALIGNED` at `9dad0ba4bfa54e251f345091c5151ae991251ec9`：Bridge `origin/release`/local `HEAD` 指向该 SHA，closure 文档记录 `RELEASE_REF_VERIFIED=YES` 和 `REMOTE_REFS_HEADS_RELEASE=9dad0ba...`。
+8. `ai-bridge host validate` = configured：命令退出 0，输出 `overall state: configured`。

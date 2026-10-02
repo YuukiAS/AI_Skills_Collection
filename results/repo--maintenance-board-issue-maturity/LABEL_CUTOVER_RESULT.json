@@ -1,0 +1,915 @@
+{
+  "G7_LABEL_CUTOVER": "PASS",
+  "created_labels": [
+    "triage:needed",
+    "triage:needs-info",
+    "kind:regression",
+    "kind:enhancement",
+    "kind:new-capability",
+    "kind:governance",
+    "scope:plugin",
+    "scope:standalone-skill",
+    "scope:repo-workflow",
+    "scope:cross-repo",
+    "area:workflow-core",
+    "area:ai-skills-core",
+    "area:writing-style",
+    "area:research-writing",
+    "area:presentations",
+    "area:scientific-visualization",
+    "area:web-development",
+    "area:statistical-modeling",
+    "area:bioinformatics",
+    "area:medical-imaging",
+    "area:standalone-skill",
+    "area:repo",
+    "area:cross-plugin",
+    "integration:bridge-kit"
+  ],
+  "final_readback": [
+    {
+      "after": {
+        "color": "fbca04",
+        "description": "进入正式维护前，等待 AI_Skills central triage",
+        "exists": true
+      },
+      "intended": {
+        "color": "fbca04",
+        "description": "进入正式维护前，等待 AI_Skills central triage",
+        "name": "triage:needed"
+      },
+      "name": "triage:needed",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "fef2c0",
+        "description": "进入正式维护前仍缺少关键事实或证据",
+        "exists": true
+      },
+      "intended": {
+        "color": "fef2c0",
+        "description": "进入正式维护前仍缺少关键事实或证据",
+        "name": "triage:needs-info"
+      },
+      "name": "triage:needs-info",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "d73a4a",
+        "description": "已建立能力或规则在真实使用中失效或回归",
+        "exists": true
+      },
+      "intended": {
+        "color": "d73a4a",
+        "description": "已建立能力或规则在真实使用中失效或回归",
+        "name": "kind:regression"
+      },
+      "name": "kind:regression",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "a2eeef",
+        "description": "改进现有能力的质量、易用性、完整性或可维护性",
+        "exists": true
+      },
+      "intended": {
+        "color": "a2eeef",
+        "description": "改进现有能力的质量、易用性、完整性或可维护性",
+        "name": "kind:enhancement"
+      },
+      "name": "kind:enhancement",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "0e8a16",
+        "description": "新增当前系统尚未实质提供的用户能力",
+        "exists": true
+      },
+      "intended": {
+        "color": "0e8a16",
+        "description": "新增当前系统尚未实质提供的用户能力",
+        "name": "kind:new-capability"
+      },
+      "name": "kind:new-capability",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "7057ff",
+        "description": "维护流程、生命周期、发布、交接或治理机制",
+        "exists": true
+      },
+      "intended": {
+        "color": "7057ff",
+        "description": "维护流程、生命周期、发布、交接或治理机制",
+        "name": "kind:governance"
+      },
+      "name": "kind:governance",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "c5def5",
+        "description": "主要属于一个中央 plugin 的维护工作",
+        "exists": true
+      },
+      "intended": {
+        "color": "c5def5",
+        "description": "主要属于一个中央 plugin 的维护工作",
+        "name": "scope:plugin"
+      },
+      "name": "scope:plugin",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "bfdadc",
+        "description": "主要属于独立安装的 standalone skill",
+        "exists": true
+      },
+      "intended": {
+        "color": "bfdadc",
+        "description": "主要属于独立安装的 standalone skill",
+        "name": "scope:standalone-skill"
+      },
+      "name": "scope:standalone-skill",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "f9d0c4",
+        "description": "AI_Skills_Collection 仓库级 workflow 或治理",
+        "exists": true
+      },
+      "intended": {
+        "color": "f9d0c4",
+        "description": "AI_Skills_Collection 仓库级 workflow 或治理",
+        "name": "scope:repo-workflow"
+      },
+      "name": "scope:repo-workflow",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "d4c5f9",
+        "description": "AI_Skills owner 的工作跨越一个以上 canonical repo",
+        "exists": true
+      },
+      "intended": {
+        "color": "d4c5f9",
+        "description": "AI_Skills owner 的工作跨越一个以上 canonical repo",
+        "name": "scope:cross-repo"
+      },
+      "name": "scope:cross-repo",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: workflow-core",
+        "exists": true
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: workflow-core",
+        "name": "area:workflow-core"
+      },
+      "name": "area:workflow-core",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: ai-skills-core",
+        "exists": true
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: ai-skills-core",
+        "name": "area:ai-skills-core"
+      },
+      "name": "area:ai-skills-core",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: writing-style",
+        "exists": true
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: writing-style",
+        "name": "area:writing-style"
+      },
+      "name": "area:writing-style",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: research-writing",
+        "exists": true
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: research-writing",
+        "name": "area:research-writing"
+      },
+      "name": "area:research-writing",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: presentations",
+        "exists": true
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: presentations",
+        "name": "area:presentations"
+      },
+      "name": "area:presentations",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: scientific-visualization",
+        "exists": true
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: scientific-visualization",
+        "name": "area:scientific-visualization"
+      },
+      "name": "area:scientific-visualization",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: web-development",
+        "exists": true
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: web-development",
+        "name": "area:web-development"
+      },
+      "name": "area:web-development",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: statistical-modeling",
+        "exists": true
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: statistical-modeling",
+        "name": "area:statistical-modeling"
+      },
+      "name": "area:statistical-modeling",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: bioinformatics",
+        "exists": true
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: bioinformatics",
+        "name": "area:bioinformatics"
+      },
+      "name": "area:bioinformatics",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: medical-imaging",
+        "exists": true
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: medical-imaging",
+        "name": "area:medical-imaging"
+      },
+      "name": "area:medical-imaging",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: standalone-skill",
+        "exists": true
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: standalone-skill",
+        "name": "area:standalone-skill"
+      },
+      "name": "area:standalone-skill",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: repo",
+        "exists": true
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: repo",
+        "name": "area:repo"
+      },
+      "name": "area:repo",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: cross-plugin",
+        "exists": true
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: cross-plugin",
+        "name": "area:cross-plugin"
+      },
+      "name": "area:cross-plugin",
+      "ready": true
+    },
+    {
+      "after": {
+        "color": "0366d6",
+        "description": "AI_Skills-owned work has a real Bridge Kit integration/dependency dimension",
+        "exists": true
+      },
+      "intended": {
+        "color": "0366d6",
+        "description": "AI_Skills-owned work has a real Bridge Kit integration/dependency dimension",
+        "name": "integration:bridge-kit"
+      },
+      "name": "integration:bridge-kit",
+      "ready": true
+    }
+  ],
+  "finished_at": "2026-10-01T13:55:27.456340+00:00",
+  "maintenance_track_after": {
+    "color": "5319e7",
+    "description": "Tracked by AI Skills Maintenance board",
+    "exists": true
+  },
+  "maintenance_track_before": {
+    "color": "5319e7",
+    "description": "Tracked by AI Skills Maintenance board",
+    "exists": true
+  },
+  "maintenance_track_mutated": false,
+  "operations": [
+    {
+      "after_readback": {
+        "color": "fbca04",
+        "description": "进入正式维护前，等待 AI_Skills central triage",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "fbca04",
+        "description": "进入正式维护前，等待 AI_Skills central triage",
+        "name": "triage:needed"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "triage:needed",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "fef2c0",
+        "description": "进入正式维护前仍缺少关键事实或证据",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "fef2c0",
+        "description": "进入正式维护前仍缺少关键事实或证据",
+        "name": "triage:needs-info"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "triage:needs-info",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "d73a4a",
+        "description": "已建立能力或规则在真实使用中失效或回归",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "d73a4a",
+        "description": "已建立能力或规则在真实使用中失效或回归",
+        "name": "kind:regression"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "kind:regression",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "a2eeef",
+        "description": "改进现有能力的质量、易用性、完整性或可维护性",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "a2eeef",
+        "description": "改进现有能力的质量、易用性、完整性或可维护性",
+        "name": "kind:enhancement"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "kind:enhancement",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "0e8a16",
+        "description": "新增当前系统尚未实质提供的用户能力",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "0e8a16",
+        "description": "新增当前系统尚未实质提供的用户能力",
+        "name": "kind:new-capability"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "kind:new-capability",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "7057ff",
+        "description": "维护流程、生命周期、发布、交接或治理机制",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "7057ff",
+        "description": "维护流程、生命周期、发布、交接或治理机制",
+        "name": "kind:governance"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "kind:governance",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "c5def5",
+        "description": "主要属于一个中央 plugin 的维护工作",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "c5def5",
+        "description": "主要属于一个中央 plugin 的维护工作",
+        "name": "scope:plugin"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "scope:plugin",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "bfdadc",
+        "description": "主要属于独立安装的 standalone skill",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "bfdadc",
+        "description": "主要属于独立安装的 standalone skill",
+        "name": "scope:standalone-skill"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "scope:standalone-skill",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "f9d0c4",
+        "description": "AI_Skills_Collection 仓库级 workflow 或治理",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "f9d0c4",
+        "description": "AI_Skills_Collection 仓库级 workflow 或治理",
+        "name": "scope:repo-workflow"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "scope:repo-workflow",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "d4c5f9",
+        "description": "AI_Skills owner 的工作跨越一个以上 canonical repo",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "d4c5f9",
+        "description": "AI_Skills owner 的工作跨越一个以上 canonical repo",
+        "name": "scope:cross-repo"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "scope:cross-repo",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: workflow-core",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: workflow-core",
+        "name": "area:workflow-core"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "area:workflow-core",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: ai-skills-core",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: ai-skills-core",
+        "name": "area:ai-skills-core"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "area:ai-skills-core",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: writing-style",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: writing-style",
+        "name": "area:writing-style"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "area:writing-style",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: research-writing",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: research-writing",
+        "name": "area:research-writing"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "area:research-writing",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: presentations",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: presentations",
+        "name": "area:presentations"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "area:presentations",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: scientific-visualization",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: scientific-visualization",
+        "name": "area:scientific-visualization"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "area:scientific-visualization",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: web-development",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: web-development",
+        "name": "area:web-development"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "area:web-development",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: statistical-modeling",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: statistical-modeling",
+        "name": "area:statistical-modeling"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "area:statistical-modeling",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: bioinformatics",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: bioinformatics",
+        "name": "area:bioinformatics"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "area:bioinformatics",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: medical-imaging",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: medical-imaging",
+        "name": "area:medical-imaging"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "area:medical-imaging",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: standalone-skill",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: standalone-skill",
+        "name": "area:standalone-skill"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "area:standalone-skill",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: repo",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: repo",
+        "name": "area:repo"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "area:repo",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: cross-plugin",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "ededed",
+        "description": "Search mirror of Project Area: cross-plugin",
+        "name": "area:cross-plugin"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "area:cross-plugin",
+      "operation": "create",
+      "result": "READY"
+    },
+    {
+      "after_readback": {
+        "color": "0366d6",
+        "description": "AI_Skills-owned work has a real Bridge Kit integration/dependency dimension",
+        "exists": true
+      },
+      "before": {
+        "color": null,
+        "description": null,
+        "exists": false
+      },
+      "intended": {
+        "color": "0366d6",
+        "description": "AI_Skills-owned work has a real Bridge Kit integration/dependency dimension",
+        "name": "integration:bridge-kit"
+      },
+      "mutation_returncode": 0,
+      "mutation_stderr": "",
+      "name": "integration:bridge-kit",
+      "operation": "create",
+      "result": "READY"
+    }
+  ],
+  "pre_cutover_snapshot": "results/repo--maintenance-board-issue-maturity/PRE_CUTOVER_LABEL_DEFINITIONS.json",
+  "reconciled_existing_labels": [],
+  "repo": "YuukiAS/AI_Skills_Collection",
+  "rollback_performed": false,
+  "schema": "ai-skills-maintenance-board-v7-label-cutover-result/v1",
+  "started_at": "2026-10-01T13:55:06.219244+00:00"
+}

@@ -75,8 +75,8 @@ project-specific context: CAT-TRACE, VicFlora, COI, OTU, MGP and specific slide 
 ### Full-deck audience-context and responsive-layout review still regresses after repeated real revisions
 status: NEW
 tracking: #35
-source: TRACE / CAT-TRACE 33-page group-meeting deck v8 review
-evidence: `YuukiAS/TRACE` commit `26fd2ad0f042f0a8d7c7dc2154392e3f9460760d`. v8 successfully fixed several long-running issues by adding spacing tokens and regenerating presentation-specific figures, but human/GPT review still found: inconsistent same-role label scale/gutters on P2; a cognitively repetitive catalogue explanation on P3; first-use terms on P4/P19 that were expanded without enough local purpose/context; repeated/non-unified Example treatment across P3/P5/P15; diagram transition text on P10 colliding with arrows or wrapping formulas awkwardly; sequential CORAL content still arranged as three columns despite large unused vertical space; short table row labels wrapping unnecessarily on P16; a newly introduced duplicate `diag(Sigma_W)=1` step on P18; a contextless MGP acronym and defensive source-note-like threshold sentence on P19; cramped oracle-side text on P24; inconsistent Question line spacing/hyphenation across P27-P29; and P29/P30 body compositions whose figure/data regions remain visually unbalanced. The v8 English-final-pass record also states that it only reviewed visible wording touched in v8.
+source: TRACE / CAT-TRACE 33-page group-meeting deck v8 review; STAT5060 Tutorial 1 annotated teaching deck review, 2026-09-29
+evidence: STAT5060 adds unrelated real-use evidence: pages 8–10, 12–14, 18, 20 and 22 were called out for weak composition despite no simple overflow failure - content stranded at page bottoms, awkward side-by-side figure/table pairings, over-centred captions, a cramped posterior-summary/PPC page, and a visibly inconsistent type scale on page 22. Existing TRACE evidence: `YuukiAS/TRACE` commit `26fd2ad0f042f0a8d7c7dc2154392e3f9460760d`. v8 successfully fixed several long-running issues by adding spacing tokens and regenerating presentation-specific figures, but human/GPT review still found: inconsistent same-role label scale/gutters on P2; a cognitively repetitive catalogue explanation on P3; first-use terms on P4/P19 that were expanded without enough local purpose/context; repeated/non-unified Example treatment across P3/P5/P15; diagram transition text on P10 colliding with arrows or wrapping formulas awkwardly; sequential CORAL content still arranged as three columns despite large unused vertical space; short table row labels wrapping unnecessarily on P16; a newly introduced duplicate `diag(Sigma_W)=1` step on P18; a contextless MGP acronym and defensive source-note-like threshold sentence on P19; cramped oracle-side text on P24; inconsistent Question line spacing/hyphenation across P27-P29; and P29/P30 body compositions whose figure/data regions remain visually unbalanced. The v8 English-final-pass record also states that it only reviewed visible wording touched in v8.
 problem: The production path now has many local rules, but it still lacks a sufficiently strong full-artifact reader-effort gate. A final presentation review should not ask only whether each requested object changed. It must inspect every final page for: (1) unfamiliar term introduced with both expansion and immediate purpose/context; (2) one clear reading path with minimal semantic repetition; (3) columns used only for genuinely peer-level comparison, not sequential stages; (4) same-role typography, gutters, question leading and intra-node text/formula spacing; (5) short labels kept on one line when space permits; (6) no new duplicate math, awkward hyphenation, defensive/meta prose or source-note language introduced by a repair; and (7) responsive fallback when a region becomes cramped. Full-deck language/readability QA must cover the final rendered artifact, not only source lines edited in the current round.
 project-specific context: VicFlora, COI, metabarcoding, MGP, CAT-TRACE equations and specific page numbers belong to TRACE. The generic issue is full-deck audience-context, cognitive-load, responsive layout and no-new-regression review, not a CAT-TRACE-specific template.
 
@@ -99,8 +99,8 @@ project-specific context: CAT-TRACE 的具体页码、公式和图形属于项�
 ### Deck-wide formula, text and emphasis scale still lacks a stable hierarchy
 status: NEW
 tracking: #38
-source: TRACE / CAT-TRACE group-meeting deck v5 and v7 reviews
-evidence: v5 shows an oversized residual formula, an oversized connective word and a too-small model-closure formula; v7 P18 still leaves a key three-step mathematical chain comparatively small in a large empty body area
+source: TRACE / CAT-TRACE group-meeting deck v5 and v7 reviews; STAT5060 Tutorial 1 annotated teaching deck review, 2026-09-29
+evidence: STAT5060 independently exposed the same hierarchy drift: page 22 mixed visibly different text scales in one dense frame, page 18 made the formula/plot/table hierarchy feel unbalanced, and several sparse pages left key explanatory objects smaller than the available space justified. Existing TRACE evidence: v5 shows an oversized residual formula, an oversized connective word and a too-small model-closure formula; v7 P18 still leaves a key three-step mathematical chain comparatively small in a large empty body area
 problem: 当前 plugin 有“按科学重要性分配空间”的原则，但缺少足够稳定的 deck-level typography/math scale contract。核心公式、supporting formula、diagram/table 内数学、正文、caption/source、强调粗体之间会逐页漂移；`resizebox` 还可能把普通连接词和数学对象一起放大。需要一种模板相对、角色驱动的尺度层级，并把“页面有大量空白但 supporting/core math 仍然偏小”也纳入最终层级检查，而不是只防止公式过大。
 project-specific context: 用户把 CAT-TRACE v5 P14 的核心 borrowing equation 视为当前 deck 可接受的最大公式视觉尺度，这是本 deck 的局部标尺；通用规则不应硬编码该页或某个绝对字号。
 
@@ -150,8 +150,8 @@ project-specific context: Finland/Madagascar/Victoria prevalence 图和 grouped-
 ### Table, list and paragraph primitives still drift across one deck
 status: NEW
 tracking: #40
-source: TRACE / CAT-TRACE group-meeting deck v4, v5 and v7 reviews
-evidence: v4 P11–P13, P21–P26；v5 metabarcoding definition block and tables; v7 P3 still reads heavily because one concept is split across a definition paragraph, three boxed statements, a separate sample matrix and a bottom example paragraph
+source: TRACE / CAT-TRACE group-meeting deck v4, v5 and v7 reviews; STAT5060 Tutorial 1 annotated teaching deck review, 2026-09-29
+evidence: STAT5060 adds teaching-mode evidence: the user explicitly asked whether page 12 should use bullets or prose, requested interpretation next to tables rather than a table alone, disliked a figure and table forced side-by-side on page 18, and found multiple pages to have facts placed in visually arbitrary bottom paragraphs. Existing TRACE evidence: v4 P11–P13, P21–P26；v5 metabarcoding definition block and tables; v7 P3 still reads heavily because one concept is split across a definition paragraph, three boxed statements, a separate sample matrix and a bottom example paragraph
 problem: paragraph/list/table 的选择规则还不足以覆盖整页 composition。连续论证适合短 paragraph；多个并列、可独立理解的定义/事实适合 bullets；重复比较相同属性或数值对齐才适合 table。除此以外，还应限制同一页同时出现的 container/primitive 类型：不要为了“结构化”把一个简单关系拆成多组卡片 + diagram + prose。相同意思的事实应该合并，而不是分别占一个 box。
 project-specific context: P3 的 VicFlora/catalogue 页面是新的真实证据；通用问题是 paragraph/bullet/table 选择与 information-slide composition grammar。
 
@@ -185,6 +185,258 @@ source: TRACE / CAT-TRACE group-meeting deck v4 review
 evidence: v4 task要求读取 `scientific-prose`，但最终仍反复出现 `Failure prevented`, 机械 `Example.` 标签、noun-stack/table microcopy 和不自然开场；presentation skill 当前只规定英文 slide text “can use” scientific-prose
 problem: presentation 结构和科学事实稳定后，没有一个明确的 reader-facing English final-pass handoff/acceptance gate。仅“读取 writing skill”或让 Codex顺手润色不足以阻止模板化、机器式科研英语进入最终 PDF。
 project-specific context: 具体 CAT-TRACE 术语和句子属于当前 deck；通用问题是 presentations 与 writing-style 的 routing/QA 边界，不能把 presentation layout 责任交给 writing-style。
+
+
+### Course-standard teaching template needs structural navigation, not only colours and bands
+status: PROMOTE_NOW
+tracking: #49
+planner disposition: promoted only into Presentations Stage 1 two-template adapter foundation; implementation remains pending execution-ready Critic PASS
+source: STAT5060 Tutorial 1 annotated Beamer review, 2026-09-29
+evidence: `YuukiAS/STAT5060-TA` work branch `work/stat5060--tutorial-01-v2`, content commit `4366e33bb58594ead5156002eba0aae30a2595dd`; 27-page Beamer candidate reviewed by the user with 56 highlight annotations in a local annotated PDF (not committed to this public repo). The first real course-standard use was judged too bare even though the blue-title/white-body visual direction was acceptable.
+problem: The current `course-standard` contract captures a 4:3 reference look, frame-title colour, bullets and page number, but real teaching use needs a fuller structural shell: a deliberately sparse opening slide, section-aware navigation, PDF outline/bookmarks, top/bottom navigation/action affordances where the Beamer runtime supports them, stable footline/page-number behaviour, and an intentional concluding frame. Template identity should separate this structural/navigation grammar from a rigid aspect ratio: exact Chapter1 reproduction may default to 4:3, but a user-requested 16:9 teaching deck should be able to preserve the same course-standard identity instead of falling back to an unrelated template.
+project-specific context: STAT5060 exact section names, page count and tomorrow's tutorial content remain course-local. The generic issue is that a teaching template is more than colours/fonts; it also owns opening/closing structure, section state, navigation/bookmarks and ratio-aware identity.
+candidate_action: Treat this as a narrow Stage-1 course-standard template-contract amendment before the two-template foundation is implemented. Do not pull later composition/storyline intelligence into Stage 1.
+
+### Teaching decks need a presenter-learning companion distinct from student-visible slides
+status: NEW
+tracking: #50
+source: STAT5060 Tutorial 1 annotated Beamer review, 2026-09-29
+evidence: user marked technically acceptable content in blue where the presenter still needed to learn how to explain it, especially the Poisson Pearson-residual plot and model-misspecification interpretation; yellow questions also asked what NB2 means, what adding a random intercept changes, why the simulation uses a chosen kappa, what the true slope 0.5 represents, and how to interpret posterior diagnostics.
+problem: A teaching deck can be visually correct and student-readable while still leaving the presenter unable to teach the method confidently. Teaching mode needs an optional instructor-learning artifact separate from speaker-facing slide copy: for each nontrivial diagnostic/model object, record why it appears, what the displayed object means, how to read a good/poor pattern, what a common misconception is, one likely student question, and a source anchor for deeper review. This material must not inflate student slides or turn ordinary speaker notes into an internal QA dump.
+project-specific context: Poisson residuals, NB2, Ohio GLMM, the specific simulation and PyMC/brms details belong to STAT5060. The generic gap is presenter preparation for technical teaching content.
+candidate_action: Keep out of Stage 1 template implementation. Promote later only as a bounded teaching-mode notes/companion capability, ideally consuming source-grounded domain explanations rather than inventing pedagogy from layout rules.
+
+### Teaching presentations need optional lecture/source cross-references without duplicating the lecture
+status: NEW
+tracking: #51
+source: STAT5060 Tutorial 1 annotated Beamer review, 2026-09-29
+evidence: on the multinomial/alligator section the user asked for an explicit pointer to the relevant Lecture Note page so students can connect Tutorial material back to the course source, while also warning not to repeat too much of the Lecture or conflict with it.
+problem: Current source-fidelity machinery is mostly internal. Teaching presentations sometimes need a small audience-facing cross-reference such as “Lecture 2, pp. 42–46” or an equivalent source cue so students know where the model was introduced. The cue should be optional, compact and source-verified; it must not become citation clutter, reproduce the lecture, or let a tutorial silently contradict the canonical course source.
+project-specific context: the exact Chapter 2/3 pages and course file locations belong to STAT5060. The generic issue is a teaching-source anchor that connects derived tutorial material to canonical lecture material without duplicating it.
+candidate_action: Record now; implement after the base course-standard adapter unless the existing source/citation layer already supports a trivial teaching-source role.
+
+### Assessment-introduction slides need answer-leakage and provisional-administration guardrails
+status: NEW
+tracking: #52
+source: STAT5060 Tutorial 1 annotated Beamer review, 2026-09-29
+evidence: the user rejected a detailed “Tutorial topic -> Application in HW1” matrix because it felt like a solution scaffold rather than a student-facing tutorial slide; the course-assessment/project pages also need to tolerate still-unknown dates and evolving oral-defense details without sounding like internal engineering status.
+problem: Teaching decks that introduce homework/projects need a distinct audience contract. They should explain what the assessment is for, broad deliverables, what skills students are expected to demonstrate, and what information is confirmed vs forthcoming. They should not expose internal alignment matrices, rubric logic, model-by-model answer hints, or unstable administrative placeholders. Provisional details should use normal course language (“details will be announced on Blackboard / stay tuned”) rather than “unconfirmed/release blocker” language. Project rationale may explain why the assessment format changed (for example, to emphasize analysis and explanation in an AI-assisted environment) without leaking grading internals.
+project-specific context: STAT5060's exact HW1 questions, deadlines, weights, oral-defense duration and AI policy are course-local and remain in the course repo. The generic issue is student-facing assessment introduction versus instructor/internal assessment design.
+candidate_action: Keep out of Stage 1 template work. Use the current tutorial as real evidence for a later teaching-mode semantic/composition guardrail.
+
+### Closing frames need a teaching-purpose contract, not a generic Questions/Thanks default
+status: NEW
+tracking: #53
+source: STAT5060 Tutorial 1 annotated Beamer review, 2026-09-29
+evidence: the user explicitly questioned whether the final frame should be a question, a takeaway, a Thanks frame, or another conclusion form, and whether the current “What evidence would make you reconsider a fitted model?” actually aligns with Tutorial 1, HW1 and Lectures 2–3.
+problem: The presentation layer should choose the closing job from the talk's purpose. For a teaching deck, an integrative question can be useful when it rehearses the central reasoning students need next; a recap is better when the session introduced several methods that need consolidation; a bare “Thanks” is only a terminal social frame and should not replace pedagogical closure. Template structure should provide a closing frame slot, while semantic planning chooses recap/question/Q&A/thanks based on audience and next action. The closing prompt itself must be checked against the actual lecture/tutorial/assessment goals rather than generated as generic reflective prose.
+project-specific context: the current STAT5060 closing question belongs to this tutorial. The generic issue is structural closing support plus a purpose-driven choice of closing content.
+candidate_action: Split ownership: Stage 1 template may add a canonical closing-frame primitive; semantic choice should remain a later composition/storyline responsibility.
+
+
+
+### Final presentation reviewer must be extracted from the human-accepted STAT5060 reviewer, not reconstructed from memory
+status: NEW
+tracking: #54
+source: STAT5060 Tutorial 1 V4–V7 repeated false-positive review cycle, 2026-09-29
+evidence: `YuukiAS/STAT5060-TA` work branch `work/stat5060--tutorial-01-v2`; V4/V5/V6 all produced executor/reviewer PASS artifacts that were immediately rejected by the user after inspecting the rendered PDF. The review protocol is still being hardened in the course repo and is not yet frozen.
+problem: Presentations currently has reviewer logic, but repeated real use shows that a reviewer can still self-certify a visibly poor deck by over-weighting mechanical evidence such as successful build, no clipping, page count, outline existence, or executor-written closure narratives. The final generic reviewer must not be reinvented later from these intermediate TODO notes. Once the STAT5060 reviewer reaches a human-accepted frozen version, Presentations should extract that exact reviewed contract, genericize only course-specific names/thresholds, preserve the acceptance semantics, and regression-test it against the known V4/V5/V6 rejected artifacts.
+candidate_action: Do not promote an intermediate STAT5060 reviewer into production. Add an explicit extraction task after the Tutorial reaches human acceptance: record exact source commit/path, copy the final reviewer contract into Presentations, remove course-specific details, and verify that historical rejected decks still deterministically fail.
+promotion_gate: human acceptance of a final STAT5060 Tutorial reviewer package + successful replay on at least V4, V5 and V6 rejected artifacts + one unrelated deck.
+project-specific context: STAT5060 page numbers, lecture references, assessment wording and exact course slides stay in `STAT5060-TA`. The generic asset to extract is the reviewer architecture and gate semantics.
+
+### Reviewer calibration must be blind, artifact-bound and proven before candidate review
+status: NEW
+tracking: #55
+source: STAT5060 Tutorial 1 V6/V7 reviewer hardening
+evidence: the initial calibration proposal exposed the expected V6 failure list to the reviewer before calibration, making it possible to pass by paraphrasing the answer sheet rather than detecting defects from pixels.
+problem: A reviewer-quality check is meaningless if the reviewer sees the expected failures in advance. Presentation review needs a blind pre-gate: a fresh isolated calibration run receives only a rejected artifact, rendered evidence, role and broad categories; an external aggregator holds the expected minimum-hit set. Candidate review starts only after calibration proves that the reviewer independently detected the required defects with page/evidence/concrete observation. Calibration run identity and output hash should travel with the candidate-review artifact.
+candidate_action: Add reviewer calibration as a reusable QA primitive after #54 is extracted. Keep expected failure sets outside the reviewer context; never pass human-rejection answer keys into the calibration run.
+promotion_gate: replay where a weak/answer-fed reviewer fails calibration while a genuinely pixel-reading reviewer passes, without requiring project-specific page names.
+
+### Human rejection must invalidate prior reviewer PASS and create persistent regression guards
+status: NEW
+tracking: #56
+source: STAT5060 Tutorial 1 V4–V7; repeated recurrence of already-rejected patterns
+evidence: after prior PASS claims, later candidates reintroduced previously rejected behaviour including answer-mapping assessment slides, first-use violations, AI-like source wording, oversized diagram elements, cramped code stacks and weak closing frames.
+problem: Current revision workflows can treat the latest candidate as a fresh deck and forget that a human already rejected specific visible patterns. A human rejection must be higher authority than any earlier executor/reviewer PASS. Every rejection should produce a persistent regression-guard ledger that later candidates must check explicitly; a candidate cannot pass merely because the original page changed enough that the old finding no longer matches by line number.
+candidate_action: Store semantic regression guards such as “no answer scaffold”, “no first-use before introduction”, “no low-contrast header”, “no internal QA language”, rather than page-number-only fixes. On every later round, report ABSENT/PRESENT against the full final render.
+promotion_gate: at least one replay where the guard ledger catches a regression that ordinary changed-page review misses.
+
+### Independent presentation review needs role separation, verdict isolation and role-scoped closure
+status: NEW
+tracking: #57
+source: STAT5060 Tutorial 1 V6/V7 reviewer redesign
+evidence: repeated false PASS showed that one generic reviewer can shallowly repeat executor claims. The hardened course review separates visual/template QA from teaching/language QA and isolates their verdicts.
+problem: One reviewer asked to judge template fidelity, figure readability, natural scientific language, pedagogy, first-use order and assessment boundaries tends to perform each shallowly. The generic reviewer system should support at least two independent roles: visual/presentation and teaching/language (or domain/audience for non-teaching decks). Both inspect the full deck, but each owns explicit gates. Neither sees executor PASS narratives or the other reviewer verdict before freezing its own decision. Round-2 closure is role-scoped; only an aggregator checks the union after both verdicts freeze and it cannot override reviewer findings.
+candidate_action: Promote only after the final STAT5060 reviewer is frozen; preserve distinct run IDs, isolated contexts, role-owned finding IDs, full-deck re-review after repair and aggregator non-override semantics.
+promotion_gate: successful two-role replay on a rejected deck where each role catches distinct failures and neither can hide the other's failure behind a top-level PASS.
+
+### Rendered-pixel review must use whole-slide projection scale before zoomed diagnostics
+status: NEW
+tracking: #58
+source: STAT5060 Tutorial 1 V4–V7 + CAT-TRACE figure-readability failures
+evidence: reviewers repeatedly called small plots/readability acceptable when high-resolution evidence could be zoomed, even though the same axes, legends and labels were poor in the whole projected slide.
+problem: High-resolution screenshots can make an unreadable slide appear acceptable. Presentation QA should judge every page first at a fixed whole-slide projection representation (for example 1920×1080 fit-to-screen, no zoom), then use high-resolution pages/crops only to diagnose failures. Figure-internal text, code, tables, header/footer controls and captions must be judged at the final rendered scale.
+candidate_action: Add a mandatory whole-slide evidence tier and make high-res diagnostic-only. A page that fails whole-slide readability cannot be rescued by a zoomed crop.
+promotion_gate: historical replay where at least one figure passes zoomed inspection but correctly fails whole-slide review.
+
+### Template QA must test semantic behaviour and optical geometry, not element presence
+status: NEW
+tracking: #59
+source: STAT5060 Tutorial 1 V5–V7 course-standard template iterations
+evidence: a candidate contained section labels, dots, navigation symbols and page numbers yet remained visibly poor: inactive labels/dots had weak contrast, current-state emphasis was unclear, footer controls and page number were not optically aligned, and ordinary navigation leaked onto title/closing frames.
+problem: “Section dots exist” and “footer exists” are not enough. Template review needs semantic and geometric invariants: section/bookmark order, dot count/order/current state, readable active/inactive contrast, title/closing special behaviour, stable source safe-zone, and optical alignment of navigation controls with page number. Renderer/source implementation details such as independent raisebox hacks should not be accepted when the final pixels remain misaligned.
+candidate_action: Add template-specific rendered crops/evidence and behaviour checks to course-standard and CUHK-research adapters. Keep thresholds template-relative, with contrast and pixel-alignment checks used as evidence rather than universal design constants.
+promotion_gate: replay on at least one failed teaching template and one research template.
+
+### First-use dependency checks must inspect legends, plot titles, captions, annotations and footers
+status: NEW
+tracking: #60
+source: STAT5060 Tutorial 1 V6 first-use regression
+evidence: the crab-data slide displayed an NB2 curve/legend before NB2 had been introduced, while body-text-oriented review still reported the sequence as acceptable.
+problem: Current first-use checks can miss scientific concepts introduced visually. A term/model shown in a legend, figure title, caption, annotation, table label or footer counts as audience-visible use. Narrative-order QA must build first-use from the final rendered artifact, not only body copy or source headings.
+candidate_action: Extend first-use/dependency scan to every visible text surface and figure semantics. When a concept is intentionally previewed, the planner must explicitly justify the preview rather than letting it happen accidentally.
+promotion_gate: replay where a visual legend/caption first-use violation is caught although body text alone would pass.
+
+### Figure-caption policy must be semantic: explain the scientific object, never narrate the slide
+status: NEW
+tracking: #61
+source: STAT5060 Tutorial 1 V7 emergency repair
+evidence: a mechanical “every image needs a caption” interpretation generated audience-noise such as “Data plot: ...” and “Crab image: context only.” The user rejected these immediately even though they technically satisfied a caption checklist.
+problem: Caption existence is not the goal. Scientific figures need enough explanation to identify the statistic/comparison/reference line/panel when the visual is not self-explanatory. Obvious contextual images do not need meta captions that merely say what the image is. Captions should be concise, audience-facing, normally left-aligned, and should not duplicate the frame title or narrate slide construction.
+candidate_action: Replace boolean caption-presence QA with a semantic caption-role check: REQUIRED / OPTIONAL / REMOVE. Require captions for ambiguous scientific plots; permit no caption when axes/legend + nearby prose already fully explain an obvious object; always retain source attribution separately when needed.
+promotion_gate: replay where a technically present but useless meta-caption is rejected and a meaningful statistical caption passes.
+
+### Teaching/course-standard route should freeze a reusable standard Beamer separate from CUHK research and commercial PPT
+status: NEW
+tracking: #62
+source: STAT5060 Tutorial 1 V7 course-standard hardening
+evidence: repeated tutorial work showed that the research CUHK Beamer, a generic teaching Beamer and commercial/business PPT have different structural needs. The user now requires a cleaned reusable standard Beamer to be extracted from the human-accepted Tutorial design.
+problem: Presentations currently discusses two built-in templates but real product routing needs a clearer modality boundary. CUHK research decks can keep the research template and research-specific rhythm; tutorial/course teaching needs a restrained standard Beamer with readable section navigation, stable footer, title/closing primitives, figure-caption discipline and audience-safe typography; commercial PPT should remain a separate workflow rather than being forced into either academic route.
+candidate_action: After final STAT5060 human acceptance, import the exact standard-Beamer theme/usage note as the canonical course-standard reference implementation. Do not accept the earlier failed theme or a renamed copy. Preserve aspect-ratio flexibility and template identity across 4:3/16:9 where supported.
+promotion_gate: accepted STAT5060 standard Beamer + one additional tutorial/course deck + one regression check that CUHK research routing remains unchanged.
+
+### Teaching closing frames may combine pedagogical recap with durable contact information
+status: NEW
+tracking: #63
+source: STAT5060 Tutorial 1 V7 closing-frame redesign
+evidence: generic Questions/Thanks/reflective-question endings repeatedly felt unfinished. The teaching use case benefits from leaving a concise summary plus TA/instructor contact information visible during Q&A.
+problem: A teaching closing frame often has two legitimate jobs: consolidate the session and provide a stable contact path. A bare “Thanks” wastes the final visible screen; a generic reflective question can feel generated; a pure contact card loses pedagogical closure.
+candidate_action: Add a course-standard closing primitive supporting 2–4 recap bullets plus a compact contact block (name/email/optional phone/office when explicitly supplied). Contact fields are user/course data, not inferred. Closing frames normally suppress ordinary navigation/header clutter.
+promotion_gate: accepted real teaching deck where recap+contact is judged better than generic Questions/Thanks.
+
+### Student-facing slide language needs a rendered full-deck anti-meta/anti-AI gate
+status: NEW
+tracking: #64
+source: STAT5060 Tutorial 1 V4–V7 language failures
+evidence: repeated candidates reintroduced phrases such as “Course anchor”, validation/parity wording, internal release language, assessment-design explanation, generic “under a ... lens” titles and meta narration even after source-level writing passes.
+problem: Clear Writing/source prose checks alone are insufficient if the final slide language is not independently re-read in context. The presentation reviewer needs a full-deck rendered-language gate focused on audience function: every visible sentence should teach, label, interpret, source, or instruct the audience. Sentences whose main function is to explain internal workflow, validation status, assessment design, slide construction or generic AI-style framing should fail.
+candidate_action: Couple Presentations with Clear Writing at the final rendered-artifact stage, but keep presentation-specific anti-meta checks in the reviewer. Ordinary academic titles should be preferred over slogan-like generated headings.
+promotion_gate: replay across teaching and research decks where the gate catches functionally similar AI/meta prose without relying only on a phrase blacklist.
+
+
+
+### Reviewer runtime contract must include agent type, model, reasoning and image capability
+status: NEW
+tracking: #65
+source: STAT5060 Tutorial 1 V7 blind-calibration failure, 2026-09-29
+evidence: the executor spawned multiple blind-calibration reviewers as built-in `explorer` agents. They could identify text-visible defects such as NB2 first-use and closing/contact issues but repeatedly missed pixel-dependent failures such as header contrast, footer optical alignment, P13 geometry, P20 crowding and P22 wasted space.
+problem: A reviewer prompt is not enough. Presentation acceptance quality depends on the runtime contract that executes it. If a generic code-exploration agent, low-reasoning model or image-incapable context runs the same prompt, the output can still be a false PASS. The final reviewer extracted from STAT5060 must freeze reviewer agent class/capabilities, model/reasoning floor, read-only execution posture and direct image-consumption capability in addition to textual rubric.
+candidate_action: Once the STAT5060 reviewer is human-accepted, capture the exact reviewer runtime contract alongside the prompt. Presentations should refuse visual PASS when reviewer runtime identity/capabilities do not satisfy the frozen contract.
+promotion_gate: one replay showing the same rubric fails under an unsuitable explorer/text-only runtime and succeeds under the intended reviewer runtime.
+
+### Presentation visual review must prove actual pixel consumption, not merely receive an archive
+status: NEW
+tracking: #66
+source: STAT5060 Tutorial 1 V7 calibration bundles
+evidence: blind reviewers were given a tar.gz containing PDF/renders/contact sheet, but repeated misses on visual defects created no proof that the reviewer had actually opened and inspected the rendered pages.
+problem: Supplying image files is not equivalent to consuming them. Visual acceptance needs evidence that the reviewer actually viewed final page pixels. A bundle/archive can degrade into text-only or filename-level review if the agent never invokes image viewing. Presentations should record image evidence consumption or use a review entry that directly attaches/opens whole-slide renders.
+candidate_action: Add a reviewer-evidence requirement such as viewed-image manifest/tool trace/direct image attachment. If visual evidence was not actually consumed, return BLOCKED_VISUAL_REVIEW_NOT_PERFORMED rather than PASS.
+promotion_gate: replay where a reviewer receiving but not viewing images is correctly blocked.
+
+### Blind calibration must be frozen, sentinel-based and must not become prompt tuning on the holdout
+status: NEW
+tracking: #67
+source: STAT5060 Tutorial 1 V7 calibration A–F cycle
+evidence: after A/B failed blind calibration, successive C/D/E/F prompts were made progressively more exhaustive while using the same rejected V6 holdout. This improves hit rate but starts tuning the calibration prompt to the holdout, weakening its meaning as an independent reviewer-quality test.
+problem: Reviewer calibration can itself overfit. A blind holdout cannot remain a meaningful capability test if the prompt is repeatedly edited after each miss. Calibration should use a frozen prompt and a small objective sentinel set rather than require reproduction of every human complaint. Failure should trigger runtime/capability repair or a new calibration fixture, not repeated wording changes against the same expected answers.
+candidate_action: Freeze role-specific calibration prompts before the first run. Use a sentinel policy: require a small set of objective visual/teaching defects plus additional independently discovered findings. Record prompt hash. After a calibration failure, do not edit the prompt against the same holdout.
+promotion_gate: successful fixed-prompt calibration across at least two reviewer runtimes and one fresh rejected deck.
+
+### Artifact review must not depend on the unfinished Presentations production plugin
+status: NEW
+tracking: #68
+source: STAT5060 Tutorial 1 V7 reviewer dispatch failure
+evidence: the executor initially attempted `ai-bridge plugin-replay --plugin presentations`; the current Codex identity did not have the Presentations production plugin installed/enabled and review stalled even though the deck artifacts themselves were reviewable.
+problem: This creates a circular dependency: a deck is being used to improve Presentations, but its independent reviewer requires the unfinished Presentations plugin to run. Generic artifact review must be able to operate as a plain fresh reviewer context/process over explicit PDF/render evidence. Production plugin replay is for validating installed plugins, not a mandatory transport for presentation artifact acceptance.
+candidate_action: Separate `presentation artifact reviewer` from `Presentations plugin production replay`. The former must have a plugin-independent review entry; the latter remains a later product-validation path.
+promotion_gate: independent artifact review of a deck succeeds on a machine without Presentations installed.
+
+### Review transport should distinguish plugin replay from fresh reviewer execution
+status: NEW
+tracking: #69
+source: STAT5060 Tutorial 1 V7 + Bridge Kit 0.9.x usage confusion
+evidence: the executor treated the need for a fresh independent child as a reason to reach for `plugin-replay`, despite the task being artifact review rather than installed-plugin replay.
+problem: “fresh child” and “plugin replay” are different capabilities. Presentation review needs a fresh isolated read-only reviewer context with explicit artifacts; it should not inherit plugin-replay requirements such as installed production plugin identity. Conflating them causes avoidable blocking and fallback pressure.
+candidate_action: Document a canonical reviewer dispatch matrix: artifact review -> native fresh reviewer/subagent or isolated fresh Codex process; plugin regression -> plugin replay; human/ChatGPT review -> explicit external handoff. Fail closed if no qualifying reviewer transport exists.
+promotion_gate: routing tests for all three cases without cross-route fallback.
+
+### Review standards must not Goodhart into renderer hacks
+status: NEW
+tracking: #70
+source: STAT5060 Tutorial 1 V7 footer alignment repair
+evidence: a synthetic “<=2 px centre difference” footer metric caused the executor to replace ordinary Beamer navigation with custom TikZ-drawn chrome purely to satisfy the measured threshold. The result optimized the metric rather than the intended mature Beamer behaviour.
+problem: Quantitative diagnostics are useful evidence, but turning them into implementation targets can create worse designs. Reviewer rules should state the perceptual invariant (“controls and page number are optically aligned”) while numeric measurements remain diagnostic, not a renderer contract. Similar risk applies to whitespace percentages, font-size thresholds and pixel gaps.
+candidate_action: Distinguish hard semantic constraints from diagnostic heuristics. Reviewers may cite measurements to support REVISE, but generators must not be instructed to optimize arbitrary pixel numbers unless the template itself truly requires them.
+promotion_gate: replay where the generic reviewer rejects a visually misaligned footer without requiring custom chrome or a universal pixel constant.
+
+### Native template chrome must remain native; diagrams and scientific graphics use separate rendering ownership
+status: NEW
+tracking: #71
+source: STAT5060 Tutorial 1 V7 footer regression
+evidence: while repairing footer alignment, the executor temporarily introduced custom TikZ navigation/footer controls. The user explicitly rejected this because ordinary Beamer already owns navigation chrome.
+problem: Rendering ownership should be explicit. Template chrome (headline/miniframes/footline/navigation/page numbers) belongs to the template/runtime, not diagram drawing. TikZ may be appropriate for conceptual scientific diagrams; R/Python for data-driven plots; native Beamer for Beamer UI. Crossing these ownership boundaries makes themes brittle and visually inconsistent.
+candidate_action: Add renderer-ownership QA: native Beamer template chrome, R/Python data figures, TikZ only for conceptual diagrams unless a frozen template explicitly says otherwise.
+promotion_gate: accepted standard-Beamer reference and regression test preventing custom-drawn navigation chrome.
+
+### Final candidate review should bind to a frozen artifact identity before independent acceptance
+status: NEW
+tracking: #72
+source: STAT5060 Tutorial 1 V7 finalization
+evidence: repeated emergency fixes changed PDF, render evidence and template after earlier checks. Reviewer status became ambiguous unless every review named the exact candidate hash.
+problem: Presentation review is meaningless if evidence and verdict can refer to different renders. Before independent acceptance, freeze PDF/slide source/render-manifest identities. Reviewer artifacts must state the exact PDF hash and render-set identity they inspected; any subsequent mutation invalidates the verdict and requires fresh review.
+candidate_action: Make artifact identity binding mandatory at candidate freeze. Reuse the same principle for PPTX and other export formats.
+promotion_gate: a mutation-after-review test correctly invalidates previous PASS.
+
+
+
+### Final presentation artifacts must be surfaced as actual openable/downloadable deliverables
+status: NEW
+tracking: #73
+source: STAT5060 Tutorial 1 Rich Edition final handoff, 2026-10-01
+evidence: `YuukiAS/STAT5060-TA` commit `511fddfda9721f00c1d8bdb3774d9a17f37c3e95` produced `STAT5060_TUTORIAL_01_RICH_EDITION_BEAMER.pdf` plus complete build/render evidence, but the executor completion message primarily exposed repository paths and status fields. The user had to ask separately whether the PDF existed and requested a result they could click to open/save locally.
+problem: A deck can pass build/render/QA and still fail the user-facing handoff if the finished PDF/PPTX is not surfaced as an actual artifact. Repository paths, commits and hashes are provenance; they are not a substitute for handing the user the file. A presentation run should not claim final human handoff merely because an artifact exists somewhere in the repo.
+candidate_action:
+- Add a final delivery gate: when a finished PDF/PPTX/source bundle exists and the host supports attachment/file-card/download/open surfaces, the final response must expose the real artifact through that surface.
+- Report canonical repo path, commit and SHA separately for provenance, but never make them the only delivery mechanism when a direct artifact surface is available.
+- Prefer at least the primary audience artifact (PDF or PPTX) and, when useful, the editable source as separate user-accessible artifacts.
+- If the runtime genuinely cannot surface a file, state that limitation explicitly and use the nearest supported materialization/handoff mechanism. Path-only output must not be treated as `READY_FOR_HUMAN_ACCEPTANCE=YES`.
+promotion_gate: one real Beamer/PDF delivery and one real editable PPTX delivery where the user can directly open/save the produced artifact from the completion message.
+
+### Beamer navigation QA must reject duplicate section declarations and duplicate visible section labels
+status: NEW
+tracking: #74
+source: STAT5060 Tutorial 1 Rich Edition human acceptance, 2026-10-01
+evidence: `YuukiAS/STAT5060-TA` commit `511fddfda9721f00c1d8bdb3774d9a17f37c3e95`; the generated Rich Edition TeX contained pairs such as `\\section{GLMs}` followed by `\\section[GLMs]{GLMs}`, likewise for GLMMs/Simulation/Bayesian/Assessment/Summary. The compiled PDF therefore exposed duplicated top-navigation labels such as `GLMs GLMs`, `GLMMs GLMMs`, `Simulation Sim`, while the automated `navigation_check.json` still reported PASS because frame counts, page denominator and destination coverage were correct.
+problem: Current navigation checks can verify page count and miniframe coverage yet miss a visibly broken section model. In Beamer, section identity is structural template chrome: duplicate section declarations must not survive merely because all frame destinations exist. This is also direct evidence for TODO #49: a course-standard template needs one canonical section declaration per logical section and a reviewer that inspects the rendered section labels, not only frame counts.
+candidate_action:
+- For generated Beamer, maintain a canonical logical-section manifest and assert exactly one `\\section...` declaration per logical section unless an explicit frozen template requires otherwise.
+- Compare the declared section sequence with rendered headline/miniframe labels; reject duplicated adjacent labels and long-title/short-title pairs that accidentally become two sections.
+- Navigation QA should check both structure and rendered text: logical section count, declaration count, visible label sequence, frame membership, destination coverage and page denominator.
+- Keep native Beamer ownership. Do not repair duplicate labels by drawing custom navigation chrome or hiding them with overlays.
+- Add a regression fixture from this Rich Edition failure so a 37-page deck with correct frame counts but duplicated section labels deterministically fails.
+promotion_gate: course-standard template implementation plus one unrelated Beamer deck both pass the structural/rendered-label gate, while the Rich Edition pre-repair artifact fails.
 
 真实项目 thread 新增时只需要最小格式：
 
@@ -234,8 +486,8 @@ promotion_gate: theorem/statistical-method real deck replay + unrelated math-hea
 ### Simulation, metric and structured-fact presentation
 status: CANDIDATE_GENERIC
 tracking: #47
-source: repeated real statistics deck feedback
-evidence: presentation maintenance archive
+source: repeated real statistics deck feedback; STAT5060 Tutorial 1 annotated teaching deck review, 2026-09-29
+evidence: presentation maintenance archive + STAT5060 pages 16–18. The tutorial exposed exactly the unresolved reader questions this candidate targets: why run the simulation at all, what the true slope 0.5 represents, why NB2 uses kappa=1.5, and how Bias/RMSE relate to the displayed figure rather than appearing as detached formulas.
 target layer: reasoning/rendering/qa
 problem: DGP、estimand、baseline、metric direction、dataset facts、seed/reproducibility 信息容易混成段落或弱表格，读起来很累。
 candidate_action: 新的 simulation-heavy / real-data deck 再次出现时，再提炼更稳定的 table/list patterns 和 QA。
@@ -244,8 +496,8 @@ promotion_gate: 至少一个 simulation-heavy 和一个 real-data deck 的真实
 ### Natural scientific slide language
 status: CANDIDATE_GENERIC
 tracking: #48
-source: repeated presentation and writing-style feedback
-evidence: presentation maintenance archive + `docs/plugin-todos/writing-style.md`
+source: repeated presentation and writing-style feedback; STAT5060 Tutorial 1 annotated teaching deck review, 2026-09-29
+evidence: presentation maintenance archive + `docs/plugin-todos/writing-style.md` + nine pink annotations in the STAT5060 27-page tutorial candidate. The teaching deck still contained formulaic/AI-like prose even after a dedicated content rewrite, including generic caveat sentences, mechanical “same displayed probabilities”/“these are specified parameters” phrasing, and engineering-flavoured audience copy.
 target layer: writing/qa
 problem: slides 仍可能出现内部流程词、模板化对比句、面向作者而不是面向听众的说法。
 candidate_action: 真实失败出现后再决定应该改 `research-presentations`、`scientific-prose`，还是两者的交接；不要重复造一套写作规则。

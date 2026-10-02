@@ -1,0 +1,1406 @@
+{
+  "schema": "AI_SKILLS_MAINTENANCE_BOARD_LIFECYCLE_DRIFT_ROLLBACK_V1",
+  "task": "repo--maintenance-board-issue-maturity",
+  "branch": "reviewed/repo--maintenance-board-issue-maturity",
+  "generated_at": "2026-10-01T09:11:22.683293Z",
+  "rollback_required": false,
+  "rollback_executed": false,
+  "rollback_success": null,
+  "reason": "No repair mutation failed and corrected readback found no duplicate auto-add or residual partial failure.",
+  "rollback_metadata": {
+    "project_id": "PVT_kwHOA0Lgf84BkjCU",
+    "project_title": "AI Skills Maintenance",
+    "field_ids": {
+      "Status": "PVTSSF_lAHOA0Lgf84BkjCUzhjTPss",
+      "Area": "PVTSSF_lAHOA0Lgf84BkjCUzhjTQOI",
+      "Resolution commit": "PVTF_lAHOA0Lgf84BkjCUzhjTQOw"
+    },
+    "option_ids": {
+      "Status.DONE": "53de53ba",
+      "Area.web-development": "78957c15"
+    },
+    "completed_restore_strategy": "clear/restore each completed Project item Resolution commit to its exact pre-repair value; all reviewed pre-repair values were empty",
+    "duplicate_restore_strategy": "re-add the same Issue to AI Skills Maintenance and restore exact pre-repair Status DONE / Area web-development / empty Resolution commit",
+    "pre_repair_snapshot": [
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Production icon sourcing and icon-registry discipline",
+            "heading_line": 16,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Merged into #55. Retained icon-source/registry/provenance semantics are implemented in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 19,
+            "status": "SUPERSEDED",
+            "tracking": "#55",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Assessment-introduction slides need answer-leakage and provisional-administration guardrails",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:47Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #52 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #52 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Production icon sourcing and icon-registry discipline",
+            "resolution": "Merged into #55. Retained icon-source/registry/provenance semantics are implemented in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "SUPERSEDED",
+            "tracking": "#55"
+          }
+        ],
+        "issue_number": 52,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jG1E",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "DUPLICATE",
+        "title": "Production icon sourcing and icon-registry discipline",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/52"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Desktop-native acceptance must not be inferred from browser fixtures",
+            "heading_line": 38,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Promoted in web-development 0.3; browser/native evidence separation is part of the coordinator evidence contract; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 41,
+            "status": "PROMOTED",
+            "tracking": "#53",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Closing frames need a teaching-purpose contract, not a generic Questions/Thanks default",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Desktop-native acceptance must not be inferred from browser fixtures",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "PROMOTED",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Native interaction acceptance must prove the intended control path, not only the final window state",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "SUPERSEDED",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:24Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #53 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #53 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Desktop-native acceptance must not be inferred from browser fixtures",
+            "resolution": "Promoted in web-development 0.3; browser/native evidence separation is part of the coordinator evidence contract; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "PROMOTED",
+            "tracking": "#53"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+            "result": "supplementary_release_task_evidence_read"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+            "result": "supplementary_independent_review_pass_read"
+          },
+          {
+            "locator": "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+            "result": "owner_repo_commit_exists",
+            "subject": "Release Frontend Design 0.3 coordinator-first production entry"
+          }
+        ],
+        "issue_number": 53,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jG54",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "COMPLETED",
+        "title": "Desktop-native acceptance must not be inferred from browser fixtures",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/53"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Motion, hover grammar, and performance budgets belong to the design system",
+            "heading_line": 54,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Promoted in web-development 0.3; motion intent is separated from runtime latency/jank without a universal numeric budget; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 57,
+            "status": "PROMOTED",
+            "tracking": "#54",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Final presentation reviewer must be extracted from the human-accepted STAT5060 reviewer, not reconstructed from memory",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Motion, hover grammar, and performance budgets belong to the design system",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "PROMOTED",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:26Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #54 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #54 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Motion, hover grammar, and performance budgets belong to the design system",
+            "resolution": "Promoted in web-development 0.3; motion intent is separated from runtime latency/jank without a universal numeric budget; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "PROMOTED",
+            "tracking": "#54"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+            "result": "supplementary_release_task_evidence_read"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+            "result": "supplementary_independent_review_pass_read"
+          },
+          {
+            "locator": "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+            "result": "owner_repo_commit_exists",
+            "subject": "Release Frontend Design 0.3 coordinator-first production entry"
+          }
+        ],
+        "issue_number": 54,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jG-8",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "COMPLETED",
+        "title": "Motion, hover grammar, and performance budgets belong to the design system",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/54"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Component craftsmanship must be part of the definition of done",
+            "heading_line": 72,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Promoted in web-development 0.3 as the component/system grammar anchor; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 75,
+            "status": "PROMOTED",
+            "tracking": "#55",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Reviewer calibration must be blind, artifact-bound and proven before candidate review",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Production icon sourcing and icon-registry discipline",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "SUPERSEDED",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Component craftsmanship must be part of the definition of done",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "PROMOTED",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Comparable resource cards need one coherent progress and reset grammar",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "SUPERSEDED",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Severity colors must encode one stable semantic meaning",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "SUPERSEDED",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Typography governance must define semantic roles and hierarchy, not only token values",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "SUPERSEDED",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Status chrome must follow one coherent visual grammar",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "SUPERSEDED",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:28Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #55 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #55 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Component craftsmanship must be part of the definition of done",
+            "resolution": "Promoted in web-development 0.3 as the component/system grammar anchor; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "PROMOTED",
+            "tracking": "#55"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+            "result": "supplementary_release_task_evidence_read"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+            "result": "supplementary_independent_review_pass_read"
+          },
+          {
+            "locator": "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+            "result": "owner_repo_commit_exists",
+            "subject": "Release Frontend Design 0.3 coordinator-first production entry"
+          }
+        ],
+        "issue_number": 55,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHFA",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "COMPLETED",
+        "title": "Component craftsmanship must be part of the definition of done",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/55"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "External review should confirm quality, not discover obvious local P2 defects",
+            "heading_line": 93,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Promoted in web-development 0.3 through producer self-QA / review-admission rules; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 96,
+            "status": "PROMOTED",
+            "tracking": "#56",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Human rejection must invalidate prior reviewer PASS and create persistent regression guards",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "External review should confirm quality, not discover obvious local P2 defects",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "PROMOTED",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:30Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #56 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #56 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::External review should confirm quality, not discover obvious local P2 defects",
+            "resolution": "Promoted in web-development 0.3 through producer self-QA / review-admission rules; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "PROMOTED",
+            "tracking": "#56"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+            "result": "supplementary_release_task_evidence_read"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+            "result": "supplementary_independent_review_pass_read"
+          },
+          {
+            "locator": "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+            "result": "owner_repo_commit_exists",
+            "subject": "Release Frontend Design 0.3 coordinator-first production entry"
+          }
+        ],
+        "issue_number": 56,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHMI",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "COMPLETED",
+        "title": "External review should confirm quality, not discover obvious local P2 defects",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/56"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Freeze whole-screen visual direction before implementation polish",
+            "heading_line": 113,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Promoted in web-development 0.3 through whole-screen direction and hierarchy-before-polish rules; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 116,
+            "status": "PROMOTED",
+            "tracking": "#57",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Independent presentation review needs role separation, verdict isolation and role-scoped closure",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Freeze whole-screen visual direction before implementation polish",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "PROMOTED",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:32Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #57 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #57 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Freeze whole-screen visual direction before implementation polish",
+            "resolution": "Promoted in web-development 0.3 through whole-screen direction and hierarchy-before-polish rules; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "PROMOTED",
+            "tracking": "#57"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+            "result": "supplementary_release_task_evidence_read"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+            "result": "supplementary_independent_review_pass_read"
+          },
+          {
+            "locator": "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+            "result": "owner_repo_commit_exists",
+            "subject": "Release Frontend Design 0.3 coordinator-first production entry"
+          }
+        ],
+        "issue_number": 57,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHRU",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "COMPLETED",
+        "title": "Freeze whole-screen visual direction before implementation polish",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/57"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Canonical design artifacts must gate production implementation",
+            "heading_line": 136,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Promoted in web-development 0.3 as the design-authority / canonical-design anchor, while preserving no-Figma completion; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 139,
+            "status": "PROMOTED",
+            "tracking": "#58",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Rendered-pixel review must use whole-slide projection scale before zoomed diagnostics",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Canonical design artifacts must gate production implementation",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "PROMOTED",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Design corrections must round-trip through the canonical Figma before code changes",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "SUPERSEDED",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "“Figma complete” needs an explicit definition of done",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "SUPERSEDED",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Design-to-code goals must not stop at either Figma or implementation",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "SUPERSEDED",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:34Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #58 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #58 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Canonical design artifacts must gate production implementation",
+            "resolution": "Promoted in web-development 0.3 as the design-authority / canonical-design anchor, while preserving no-Figma completion; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "PROMOTED",
+            "tracking": "#58"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+            "result": "supplementary_release_task_evidence_read"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+            "result": "supplementary_independent_review_pass_read"
+          },
+          {
+            "locator": "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+            "result": "owner_repo_commit_exists",
+            "subject": "Release Frontend Design 0.3 coordinator-first production entry"
+          }
+        ],
+        "issue_number": 58,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHWk",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "COMPLETED",
+        "title": "Canonical design artifacts must gate production implementation",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/58"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Visual acceptance must include a whole-product taste gate, not only defect checklists",
+            "heading_line": 156,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Promoted in web-development 0.3 through observable whole-product taste and first-glance rejection checks; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 159,
+            "status": "PROMOTED",
+            "tracking": "#59",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Template QA must test semantic behaviour and optical geometry, not element presence",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Visual acceptance must include a whole-product taste gate, not only defect checklists",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "PROMOTED",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:36Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #59 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #59 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Visual acceptance must include a whole-product taste gate, not only defect checklists",
+            "resolution": "Promoted in web-development 0.3 through observable whole-product taste and first-glance rejection checks; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "PROMOTED",
+            "tracking": "#59"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+            "result": "supplementary_release_task_evidence_read"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+            "result": "supplementary_independent_review_pass_read"
+          },
+          {
+            "locator": "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+            "result": "owner_repo_commit_exists",
+            "subject": "Release Frontend Design 0.3 coordinator-first production entry"
+          }
+        ],
+        "issue_number": 59,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHcI",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "COMPLETED",
+        "title": "Visual acceptance must include a whole-product taste gate, not only defect checklists",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/59"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Design corrections must round-trip through the canonical Figma before code changes",
+            "heading_line": 173,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Merged into #58. Design-defect / implementation-drift / product-semantic / runtime-only repair routing is retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 176,
+            "status": "SUPERSEDED",
+            "tracking": "#58",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "First-use dependency checks must inspect legends, plot titles, captions, annotations and footers",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:49Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #60 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #60 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Design corrections must round-trip through the canonical Figma before code changes",
+            "resolution": "Merged into #58. Design-defect / implementation-drift / product-semantic / runtime-only repair routing is retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "SUPERSEDED",
+            "tracking": "#58"
+          }
+        ],
+        "issue_number": 60,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHhY",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "DUPLICATE",
+        "title": "Design corrections must round-trip through the canonical Figma before code changes",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/60"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "“Figma complete” needs an explicit definition of done",
+            "heading_line": 193,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Merged into #58. Figma-complete state/variant/responsive/interaction coverage semantics are retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 196,
+            "status": "SUPERSEDED",
+            "tracking": "#58",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Figure-caption policy must be semantic: explain the scientific object, never narrate the slide",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:52Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #61 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #61 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::“Figma complete” needs an explicit definition of done",
+            "resolution": "Merged into #58. Figma-complete state/variant/responsive/interaction coverage semantics are retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "SUPERSEDED",
+            "tracking": "#58"
+          }
+        ],
+        "issue_number": 61,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHmI",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "DUPLICATE",
+        "title": "“Figma complete” needs an explicit definition of done",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/61"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Design-to-code goals must not stop at either Figma or implementation",
+            "heading_line": 213,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Merged into #58 as maintenance tracking only. End-to-end authority -> implementation -> actual surface -> producer QA -> confirmation remains independently retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 216,
+            "status": "SUPERSEDED",
+            "tracking": "#58",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Teaching/course-standard route should freeze a reusable standard Beamer separate from CUHK research and commercial PPT",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:54Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #62 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #62 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Design-to-code goals must not stop at either Figma or implementation",
+            "resolution": "Merged into #58 as maintenance tracking only. End-to-end authority -> implementation -> actual surface -> producer QA -> confirmation remains independently retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "SUPERSEDED",
+            "tracking": "#58"
+          }
+        ],
+        "issue_number": 62,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHp4",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "DUPLICATE",
+        "title": "Design-to-code goals must not stop at either Figma or implementation",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/62"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Normal UI must have a human-readable presentation boundary",
+            "heading_line": 230,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Promoted in web-development 0.3 as the normal-UI presentation boundary; natural-language copy refinement remains deferred to Clear Writing; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 233,
+            "status": "PROMOTED",
+            "tracking": "#63",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Teaching closing frames may combine pedagogical recap with durable contact information",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Normal UI must have a human-readable presentation boundary",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "PROMOTED",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Opaque identifiers and formatting artifacts must not leak into glanceable UI",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "SUPERSEDED",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:38Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #63 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #63 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Normal UI must have a human-readable presentation boundary",
+            "resolution": "Promoted in web-development 0.3 as the normal-UI presentation boundary; natural-language copy refinement remains deferred to Clear Writing; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "PROMOTED",
+            "tracking": "#63"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+            "result": "supplementary_release_task_evidence_read"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+            "result": "supplementary_independent_review_pass_read"
+          },
+          {
+            "locator": "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+            "result": "owner_repo_commit_exists",
+            "subject": "Release Frontend Design 0.3 coordinator-first production entry"
+          }
+        ],
+        "issue_number": 63,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jHu0",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "COMPLETED",
+        "title": "Normal UI must have a human-readable presentation boundary",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/63"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Primary surfaces should optimize for actionability, not implementation completeness",
+            "heading_line": 239,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Promoted in web-development 0.3 through primary-task/actionability and lifecycle disclosure rules; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 242,
+            "status": "PROMOTED",
+            "tracking": "#64",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Student-facing slide language needs a rendered full-deck anti-meta/anti-AI gate",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Primary surfaces should optimize for actionability, not implementation completeness",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "PROMOTED",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Configured surfaces must collapse from setup mode to status mode",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "SUPERSEDED",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:40Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #64 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #64 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Primary surfaces should optimize for actionability, not implementation completeness",
+            "resolution": "Promoted in web-development 0.3 through primary-task/actionability and lifecycle disclosure rules; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "PROMOTED",
+            "tracking": "#64"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+            "result": "supplementary_release_task_evidence_read"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+            "result": "supplementary_independent_review_pass_read"
+          },
+          {
+            "locator": "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+            "result": "owner_repo_commit_exists",
+            "subject": "Release Frontend Design 0.3 coordinator-first production entry"
+          }
+        ],
+        "issue_number": 64,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jH0o",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "COMPLETED",
+        "title": "Primary surfaces should optimize for actionability, not implementation completeness",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/64"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Metric labels and rankings must be backed by the data semantics they imply",
+            "heading_line": 251,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Promoted in web-development 0.3; visible metric/ranking labels require explicit scope/denominator/order semantics from the owning data/domain layer; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 254,
+            "status": "PROMOTED",
+            "tracking": "#65",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Reviewer runtime contract must include agent type, model, reasoning and image capability",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          },
+          {
+            "entry": "Metric labels and rankings must be backed by the data semantics they imply",
+            "source": "docs/plugin-todos/web-development.md",
+            "status": "PROMOTED",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:42Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #65 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #65 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Metric labels and rankings must be backed by the data semantics they imply",
+            "resolution": "Promoted in web-development 0.3; visible metric/ranking labels require explicit scope/denominator/order semantics from the owning data/domain layer; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "PROMOTED",
+            "tracking": "#65"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/FINAL_REPORT.md",
+            "result": "supplementary_release_task_evidence_read"
+          },
+          {
+            "locator": "results/web-development--frontend-design-production-consolidation/REVIEW_1.md",
+            "result": "supplementary_independent_review_pass_read"
+          },
+          {
+            "locator": "git commit c232f2ea906277f2217c4bbce4f56df1ebd5827c",
+            "result": "owner_repo_commit_exists",
+            "subject": "Release Frontend Design 0.3 coordinator-first production entry"
+          }
+        ],
+        "issue_number": 65,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jH5k",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "COMPLETED",
+        "title": "Metric labels and rankings must be backed by the data semantics they imply",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/65"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Comparable resource cards need one coherent progress and reset grammar",
+            "heading_line": 260,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Merged into #55. Comparable resource/status component grammar is retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 263,
+            "status": "SUPERSEDED",
+            "tracking": "#55",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Presentation visual review must prove actual pixel consumption, not merely receive an archive",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:56Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #66 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #66 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Comparable resource cards need one coherent progress and reset grammar",
+            "resolution": "Merged into #55. Comparable resource/status component grammar is retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "SUPERSEDED",
+            "tracking": "#55"
+          }
+        ],
+        "issue_number": 66,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jH-8",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "DUPLICATE",
+        "title": "Comparable resource cards need one coherent progress and reset grammar",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/66"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Opaque identifiers and formatting artifacts must not leak into glanceable UI",
+            "heading_line": 269,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Merged into #63. Human labels, zero normalization and deliberate date/time presentation are retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 272,
+            "status": "SUPERSEDED",
+            "tracking": "#63",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Blind calibration must be frozen, sentinel-based and must not become prompt tuning on the holdout",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:04:58Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #67 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #67 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Opaque identifiers and formatting artifacts must not leak into glanceable UI",
+            "resolution": "Merged into #63. Human labels, zero normalization and deliberate date/time presentation are retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "SUPERSEDED",
+            "tracking": "#63"
+          }
+        ],
+        "issue_number": 67,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jIFc",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "DUPLICATE",
+        "title": "Opaque identifiers and formatting artifacts must not leak into glanceable UI",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/67"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Severity colors must encode one stable semantic meaning",
+            "heading_line": 278,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Merged into #55. Stable semantic color/severity meaning is retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 281,
+            "status": "SUPERSEDED",
+            "tracking": "#55",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Artifact review must not depend on the unfinished Presentations production plugin",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:05:00Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #68 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #68 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Severity colors must encode one stable semantic meaning",
+            "resolution": "Merged into #55. Stable semantic color/severity meaning is retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "SUPERSEDED",
+            "tracking": "#55"
+          }
+        ],
+        "issue_number": 68,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jIMw",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "DUPLICATE",
+        "title": "Severity colors must encode one stable semantic meaning",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/68"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "entry": "Review transport should distinguish plugin replay from fresh reviewer execution",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:05:03Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #69 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #69 comments(first:100)",
+            "result": "no_commit_sha_found"
+          }
+        ],
+        "issue_number": 69,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jISc",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "DUPLICATE",
+        "title": "原生交互验收要覆盖真实控制路径",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/69"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Configured surfaces must collapse from setup mode to status mode",
+            "heading_line": 297,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Merged into #64. Configured/healthy surfaces collapse from setup to status/action, with setup/recovery disclosed on demand; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 300,
+            "status": "SUPERSEDED",
+            "tracking": "#64",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Review standards must not Goodhart into renderer hacks",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:05:05Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #70 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #70 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Configured surfaces must collapse from setup mode to status mode",
+            "resolution": "Merged into #64. Configured/healthy surfaces collapse from setup to status/action, with setup/recovery disclosed on demand; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "SUPERSEDED",
+            "tracking": "#64"
+          }
+        ],
+        "issue_number": 70,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jIYQ",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "DUPLICATE",
+        "title": "Configured surfaces must collapse from setup mode to status mode",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/70"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Typography governance must define semantic roles and hierarchy, not only token values",
+            "heading_line": 306,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Merged into #55. Semantic typography roles remain linked to whole-screen hierarchy in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 309,
+            "status": "SUPERSEDED",
+            "tracking": "#55",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Native template chrome must remain native; diagrams and scientific graphics use separate rendering ownership",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:05:07Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #71 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #71 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Typography governance must define semantic roles and hierarchy, not only token values",
+            "resolution": "Merged into #55. Semantic typography roles remain linked to whole-screen hierarchy in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "SUPERSEDED",
+            "tracking": "#55"
+          }
+        ],
+        "issue_number": 71,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jIdA",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "DUPLICATE",
+        "title": "Typography governance must define semantic roles and hierarchy, not only token values",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/71"
+      },
+      {
+        "canonical_source_locators": [
+          {
+            "heading": "Status chrome must follow one coherent visual grammar",
+            "heading_line": 315,
+            "path": "docs/plugin-todos/web-development.md",
+            "resolution": "Merged into #55. Status chrome follows semantic-role grammar in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "resolution_line": 318,
+            "status": "SUPERSEDED",
+            "tracking": "#55",
+            "type": "current_canonical_source_entry"
+          },
+          {
+            "entry": "Final candidate review should bind to a frozen artifact identity before independent acceptance",
+            "source": "docs/plugin-todos/presentations.md",
+            "status": "NEW",
+            "type": "stage_a_snapshot_canonical_source"
+          }
+        ],
+        "closed_at": "2026-09-28T04:05:10Z",
+        "current_resolution_commit": "",
+        "examined_closure_evidence_locators": [
+          {
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #72 body",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "comment_urls_with_hits": [],
+            "commit_like_shas": [],
+            "locator": "GitHub Issue #72 comments(first:100)",
+            "result": "no_commit_sha_found"
+          },
+          {
+            "locator": "docs/plugin-todos/web-development.md::Status chrome must follow one coherent visual grammar",
+            "resolution": "Merged into #55. Status chrome follows semantic-role grammar in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.",
+            "result": "canonical_entry_read",
+            "status": "SUPERSEDED",
+            "tracking": "#55"
+          }
+        ],
+        "issue_number": 72,
+        "labels": [
+          "maintenance-track"
+        ],
+        "project_area": "web-development",
+        "project_item_id": "PVTI_lAHOA0Lgf84BkjCUzg8jIi4",
+        "project_status": "DONE",
+        "state": "CLOSED",
+        "state_reason": "DUPLICATE",
+        "title": "Status chrome must follow one coherent visual grammar",
+        "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/72"
+      }
+    ],
+    "duplicate_issue_ids": {
+      "52": "https://github.com/YuukiAS/AI_Skills_Collection/issues/52",
+      "60": "https://github.com/YuukiAS/AI_Skills_Collection/issues/60",
+      "61": "https://github.com/YuukiAS/AI_Skills_Collection/issues/61",
+      "62": "https://github.com/YuukiAS/AI_Skills_Collection/issues/62",
+      "66": "https://github.com/YuukiAS/AI_Skills_Collection/issues/66",
+      "67": "https://github.com/YuukiAS/AI_Skills_Collection/issues/67",
+      "68": "https://github.com/YuukiAS/AI_Skills_Collection/issues/68",
+      "69": "https://github.com/YuukiAS/AI_Skills_Collection/issues/69",
+      "70": "https://github.com/YuukiAS/AI_Skills_Collection/issues/70",
+      "71": "https://github.com/YuukiAS/AI_Skills_Collection/issues/71",
+      "72": "https://github.com/YuukiAS/AI_Skills_Collection/issues/72"
+    },
+    "duplicate_old_project_item_ids": {
+      "52": "PVTI_lAHOA0Lgf84BkjCUzg8jG1E",
+      "60": "PVTI_lAHOA0Lgf84BkjCUzg8jHhY",
+      "61": "PVTI_lAHOA0Lgf84BkjCUzg8jHmI",
+      "62": "PVTI_lAHOA0Lgf84BkjCUzg8jHp4",
+      "66": "PVTI_lAHOA0Lgf84BkjCUzg8jH-8",
+      "67": "PVTI_lAHOA0Lgf84BkjCUzg8jIFc",
+      "68": "PVTI_lAHOA0Lgf84BkjCUzg8jIMw",
+      "69": "PVTI_lAHOA0Lgf84BkjCUzg8jISc",
+      "70": "PVTI_lAHOA0Lgf84BkjCUzg8jIYQ",
+      "71": "PVTI_lAHOA0Lgf84BkjCUzg8jIdA",
+      "72": "PVTI_lAHOA0Lgf84BkjCUzg8jIi4"
+    }
+  },
+  "residual_drift_after_rollback": []
+}

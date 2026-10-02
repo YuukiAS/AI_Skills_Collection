@@ -1,0 +1,149 @@
+{
+  "schema": "AI_SKILLS_WORKSTATION_FINAL_CLOSURE_REFRESH_V1",
+  "task_key": "ai-skills-core--machine-update-orchestration",
+  "reviewed_branch": "reviewed/ai-skills-core--machine-update-orchestration",
+  "consumer": "Workstation",
+  "status": "PASS",
+  "fresh_under_freeze": true,
+  "updated_at": "2026-09-29T17:11:54+08:00",
+  "freeze": {
+    "file": "FINAL_CLOSURE_FREEZE.json",
+    "frozen_ai_skills_release": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+    "frozen_ai_skills_repository_version": "5.4.0",
+    "frozen_ai_skills_core_version": "0.5",
+    "frozen_bridge_release": "9dad0ba4bfa54e251f345091c5151ae991251ec9",
+    "frozen_bridge_version": "0.9.3",
+    "reused_existing_freeze": true
+  },
+  "live_remote_refs_rechecked": {
+    "ai_skills": {
+      "repository": "YuukiAS/AI_Skills_Collection",
+      "main": "85d4b2acd990654e8439c1c0dd007493360fa82b",
+      "release": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+      "release_to_main_ai_skills_core_diff": "none",
+      "release_manifest_version": "0.5",
+      "main_manifest_version": "0.5",
+      "target_plugin_changed_review_required": false
+    },
+    "bridge": {
+      "repository": "YuukiAS/GPT_Codex_AI_Bridge_Kit",
+      "main": "5a640ec02a20106c778a35ba94eb2164d2b91537",
+      "release": "9dad0ba4bfa54e251f345091c5151ae991251ec9"
+    }
+  },
+  "identity": {
+    "hostname": "WORKSTATION",
+    "platform": "Windows",
+    "user": "WORKSTATION\\humc2",
+    "home_env": null,
+    "userprofile": "C:\\Users\\humc2",
+    "effective_codex_home": "C:\\Users\\humc2\\.codex",
+    "codex_executable": "C:\\Users\\humc2\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+    "codex_version": "codex-cli 0.158.0-alpha.2.1"
+  },
+  "ai_skills": {
+    "marketplace": "yuukias-ai-skills",
+    "source": "https://github.com/YuukiAS/AI_Skills_Collection.git",
+    "ref_after": "release",
+    "revision_before": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+    "revision_after": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+    "marketplace_upgrade_result": {
+      "selected": true,
+      "upgraded_roots": [],
+      "errors": []
+    },
+    "installed_enabled_before": {
+      "ai-skills-core@yuukias-ai-skills": "0.5",
+      "writing-style@yuukias-ai-skills": "0.4"
+    },
+    "installed_enabled_after": {
+      "ai-skills-core@yuukias-ai-skills": "0.5",
+      "writing-style@yuukias-ai-skills": "0.4"
+    },
+    "plugins_updated": [],
+    "plugins_already_current": [
+      "ai-skills-core@yuukias-ai-skills 0.5",
+      "writing-style@yuukias-ai-skills 0.4"
+    ],
+    "kept_uninstalled": [
+      "workflow-core@yuukias-ai-skills",
+      "research-writing@yuukias-ai-skills",
+      "presentations@yuukias-ai-skills",
+      "scientific-visualization@yuukias-ai-skills",
+      "web-development@yuukias-ai-skills",
+      "statistical-modeling@yuukias-ai-skills",
+      "bioinformatics@yuukias-ai-skills",
+      "medical-imaging@yuukias-ai-skills"
+    ]
+  },
+  "bridge": {
+    "repository": "YuukiAS/GPT_Codex_AI_Bridge_Kit",
+    "canonical_checkout": "D:\\Code\\GPT_Codex_AI_Bridge_Kit",
+    "origin": "https://github.com/YuukiAS/GPT_Codex_AI_Bridge_Kit.git",
+    "head_before": "9d15247d5cec5472a0f3c280a6bdd9d194a193fc",
+    "head_after": "9dad0ba4bfa54e251f345091c5151ae991251ec9",
+    "origin_release": "9dad0ba4bfa54e251f345091c5151ae991251ec9",
+    "origin_main": "5a640ec02a20106c778a35ba94eb2164d2b91537",
+    "release_relation": "ALIGNED",
+    "dirty_before": "clean",
+    "runtime_version_before": "0.9.2",
+    "version_after": {
+      "module_version": "0.9.3",
+      "package_metadata": "0.9.3",
+      "module_path": "D:\\Code\\GPT_Codex_AI_Bridge_Kit\\ai_bridge_kit\\__init__.py"
+    },
+    "host_validate_before": "DRIFTED Bridge-owned managed block/rules drift",
+    "host_install_performed": true,
+    "host_install_reason": "Bridge-owned managed block/rules drift only",
+    "host_install_backup": "C:\\Users\\humc2\\.codex\\ai-bridge-kit\\backups\\20260929T090311Z",
+    "host_validate_after": "CONFIGURED",
+    "actions": [
+      "verified live Bridge main and release refs",
+      "verified origin, clean worktree, fast-forward ancestry and release version/closure evidence",
+      "fast-forwarded canonical checkout to the frozen formal release without following main",
+      "refreshed the existing editable package to 0.9.3",
+      "ran ai-bridge host install only for Bridge-owned managed drift",
+      "verified ai-bridge host validate configured"
+    ],
+    "not_done": [
+      "did not advance Bridge release",
+      "did not follow Bridge origin/main",
+      "did not modify Bridge source logic",
+      "did not stash, reset, restore, or clean user work"
+    ]
+  },
+  "fresh_session": {
+    "method": "direct codex exec --ephemeral",
+    "session_id": "01a0ec68-0de8-7f52-9433-c72e3c856766",
+    "request": "使用 AI Skills Maintainer，同步这台机器。",
+    "production_plugin_path": "C:\\Users\\humc2\\.codex\\plugins\\cache\\yuukias-ai-skills\\ai-skills-core\\0.5",
+    "owner_route": "machine-update-orchestrator",
+    "last_message": "workstation_windows_final_direct_codex_last_message.txt",
+    "last_message_sha256": "F2757CF8D8A78ABA39014B109994AB1BA384EC4E3031989C01A1E274F935202B",
+    "status": "PASS",
+    "semantic_result": "ALREADY_CURRENT",
+    "confirmed": [
+      "installed production AI Skills Maintainer / ai-skills-core 0.5 loaded",
+      "machine-update-orchestrator route consumed the request",
+      "Marketplace release@a7028195f3e97d32d51c32ef8c87f658f92048e5",
+      "ai-skills-core 0.5 and writing-style 0.4 installed/enabled",
+      "all other central optional plugins remained uninstalled",
+      "Bridge release 9dad0ba4bfa54e251f345091c5151ae991251ec9 / version 0.9.3",
+      "ai-bridge host validate configured"
+    ]
+  },
+  "should_not_change": {
+    "optional_plugins_installed": false,
+    "ai_skills_release_advanced": false,
+    "bridge_release_advanced": false,
+    "bridge_main_followed": false,
+    "bridge_source_logic_modified": false,
+    "unrelated_dirty_work_overwritten": false,
+    "other_consumer_evidence_modified": false,
+    "paid_api_used": false,
+    "private_artifact_uploaded": false
+  },
+  "next_required_consumer": "CUHK_Workstation_WSL_Codex",
+  "overall_done": false,
+  "issue_86_close": false
+}

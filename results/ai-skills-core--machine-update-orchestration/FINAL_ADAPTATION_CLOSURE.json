@@ -1,0 +1,154 @@
+{
+  "schema": "AI_SKILLS_CORE_FINAL_ADAPTATION_CLOSURE_V1",
+  "task_key": "ai-skills-core--machine-update-orchestration",
+  "date": "2026-09-29",
+  "status": "COMPLETE",
+  "exactly_five_required_consumers": true,
+  "required_consumer_count": 5,
+  "all_required_consumers_pass": true,
+  "current_main_at_final_evidence_authoring": "573224edb9b81fc4f53dbc1ce9cc9b719483e8c8",
+  "formal_release": {
+    "ai_skills_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+    "repository_version": "5.4.0",
+    "ai_skills_core_version": "0.5",
+    "bridge_revision": "9dad0ba4bfa54e251f345091c5151ae991251ec9",
+    "bridge_version": "0.9.3"
+  },
+  "freeze": {
+    "file": "FINAL_CLOSURE_FREEZE.json",
+    "target_plugin_change_check": "none",
+    "result": "NO_TARGET_PLUGIN_CHANGED_REVIEW_REQUIRED"
+  },
+  "consumers": [
+    {
+      "name": "Longleaf_Codex",
+      "status": "PASS",
+      "actual_identity": "c0810.ll.unc.edu / aereinh / /users/a/e/aereinh/.codex",
+      "marketplace_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+      "loaded_ai_skills_core": "0.5",
+      "installed_plugins_current": true,
+      "fresh_session": "01a0ec34-838f-7621-8d4e-52b545824ff9",
+      "normal_entry_route": "machine-update-orchestrator",
+      "bridge": "9dad0ba4bfa54e251f345091c5151ae991251ec9 / 0.9.3",
+      "host_policy": "configured",
+      "evidence": [
+        "LONGLEAF_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.md",
+        "LONGLEAF_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.json",
+        "fresh_longleaf_users_direct_codex_last_message.txt"
+      ]
+    },
+    {
+      "name": "Longleaf_Backup_Codex",
+      "status": "PASS",
+      "actual_identity": "c151404.ll.unc.edu / aereinh / /overflow/htzhu/mingcheng_new/.codex",
+      "marketplace_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+      "loaded_ai_skills_core": "0.5",
+      "installed_plugins_current": true,
+      "fresh_session": "01a0ec43-0bf4-7f33-a1e3-00ebeb441061",
+      "normal_entry_route": "machine-update-orchestrator",
+      "bridge": "9dad0ba4bfa54e251f345091c5151ae991251ec9 / 0.9.3",
+      "host_policy": "configured",
+      "evidence": [
+        "LONGLEAF_BACKUP_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.md",
+        "LONGLEAF_BACKUP_CODEX_FINAL_CLOSURE_REFRESH_2026-09-29.json",
+        "fresh_longleaf_backup_final_direct_codex_last_message.txt"
+      ]
+    },
+    {
+      "name": "CUHK_Workstation_WSL_Codex",
+      "status": "PASS",
+      "acceptance_basis": "PASS_FREEZE_EQUIVALENT",
+      "actual_identity": "Workstation WSL2 / yuukias / /home/yuukias/.codex",
+      "marketplace_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+      "loaded_ai_skills_core": "0.5",
+      "installed_plugins_current": true,
+      "fresh_session": "01a0ec12-f8bd-74e0-90df-b28a5e96b350",
+      "normal_entry_route": "machine-update-orchestrator",
+      "bridge": "9dad0ba4bfa54e251f345091c5151ae991251ec9 / 0.9.3",
+      "host_policy": "configured",
+      "equivalence_evidence_commit": "77f433805de033f60f6c8f9f8b3153d5af3295de",
+      "machine_mutation_replayed": false,
+      "fresh_session_replayed": false,
+      "evidence": [
+        "CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.md",
+        "CUHK_WORKSTATION_WSL_CODEX_MACHINE_SYNC_2026-09-29.json",
+        "cuhk_workstation_wsl_fresh_normal_entry_last_message.txt"
+      ]
+    },
+    {
+      "name": "Workstation",
+      "status": "PASS",
+      "actual_identity": "WORKSTATION / WORKSTATION\\humc2 / C:\\Users\\humc2\\.codex",
+      "marketplace_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+      "loaded_ai_skills_core": "0.5",
+      "installed_plugins_current": true,
+      "fresh_session": "01a0ec68-0de8-7f52-9433-c72e3c856766",
+      "normal_entry_route": "machine-update-orchestrator",
+      "bridge": "9dad0ba4bfa54e251f345091c5151ae991251ec9 / 0.9.3",
+      "host_policy": "configured",
+      "evidence": [
+        "WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.md",
+        "WORKSTATION_WINDOWS_CODEX_MACHINE_SYNC_2026-09-29.json",
+        "workstation_windows_final_direct_codex_last_message.txt"
+      ]
+    },
+    {
+      "name": "Legion",
+      "status": "PASS",
+      "actual_identity": "Legion-Y9000P / legion-y9000p\\yuukias / C:\\Users\\yuukias\\.codex",
+      "marketplace_revision": "a7028195f3e97d32d51c32ef8c87f658f92048e5",
+      "loaded_ai_skills_core": "0.5",
+      "installed_plugins_current": true,
+      "fresh_session": "01a0ec53-e3e3-7880-a6d5-5108239c0fbd",
+      "normal_entry_route": "machine-update-orchestrator",
+      "bridge": "9dad0ba4bfa54e251f345091c5151ae991251ec9 / 0.9.3",
+      "host_policy": "configured",
+      "evidence": [
+        "LEGION_FINAL_CLOSURE_REFRESH_2026-09-29.md",
+        "LEGION_FINAL_CLOSURE_REFRESH_2026-09-29.json",
+        "legion_final_direct_codex_last_message.txt"
+      ]
+    }
+  ],
+  "identity_normalization": {
+    "Workstation": "Windows WORKSTATION\\humc2 at C:\\Users\\humc2\\.codex",
+    "CUHK_Workstation_WSL_Codex": "Linux WSL2 yuukias at /home/yuukias/.codex",
+    "Workstation_Windows_Codex_is_extra_row": false
+  },
+  "should_not_change": {
+    "production_plugin_source_changed": false,
+    "generated_marketplace_payload_changed": false,
+    "optional_plugins_newly_installed": false,
+    "bridge_main_followed": false,
+    "bridge_release_advanced": false,
+    "bridge_source_logic_changed": false,
+    "user_dirty_work_overwritten": false,
+    "readme_changed": false,
+    "repository_bump": "NONE",
+    "plugin_bump": "NONE"
+  },
+  "durable_evidence_locator": "results/ai-skills-core--machine-update-orchestration/",
+  "readme_check": "README checked: no update required",
+  "product_closure": "COMPLETE",
+  "repository_closure": "COMPLETE",
+  "resolution_commit": "573224edb9b81fc4f53dbc1ce9cc9b719483e8c8",
+  "issue_86": "CLOSED",
+  "issue_update": {
+    "status": "READER_FACING_BODY_UPDATED",
+    "writing_route": "installed writing-style 0.4 / chinese-prose",
+    "fresh_session": "01a0ecb7-925e-7cf1-ab24-5f7c6f0fd7f6",
+    "updated_at_utc": "2026-09-29T10:32:25Z"
+  },
+  "project_status": "DONE",
+  "project_area": "ai-skills-core",
+  "project_mutation": {
+    "project": "AI Skills Maintenance",
+    "issue": 86,
+    "status": "DONE",
+    "area": "ai-skills-core",
+    "resolution_commit": "573224edb9b81fc4f53dbc1ce9cc9b719483e8c8"
+  },
+  "overall_done": true,
+  "overall_result": "PASS",
+  "version_bump": "NONE"
+}

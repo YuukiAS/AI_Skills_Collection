@@ -1,0 +1,61 @@
+{
+  "task": "repo--maintenance-board-lifecycle",
+  "tracking_issue": 4,
+  "date": "2026-10-02",
+  "current_required_set_frozen": true,
+  "current_required_set": [
+    {
+      "consumer": "AI Research Stack ChatGPT Project instructions",
+      "status": "PASS",
+      "evidence": [
+        "results/repo--maintenance-board-lifecycle/CENTRAL_CLOSURE_STATUS.md"
+      ]
+    },
+    {
+      "consumer": "Longleaf_Codex",
+      "status": "PASS",
+      "evidence": [
+        "GitHub Issue #92 live readback: CLOSED / COMPLETED, Project DONE",
+        "results/repo--maintenance-board-issue-maturity/V7_FINAL_CLOSURE.md",
+        "results/repo--maintenance-board-lifecycle/METADATA_AUDIT_CURRENT_2026-10-02.json",
+        "GitHub Issue #93 live readback: OPEN, Project DOING, Area standalone-skill",
+        "GitHub Issue #94 live readback: CLOSED / NOT_PLANNED, triage:needed, no Project item",
+        "results/repo--maintenance-board-issue-maturity/STAGE_B_AUTO_ADD_POST_CHANGE.md",
+        "results/repo--maintenance-board-issue-maturity/STAGE_B_DUPLICATE_REPAIR_V0_4.json"
+      ],
+      "v7_final_closure_commit": "700234d7e94bb5613f951b8adeb7155d3b15ec3f"
+    }
+  ],
+  "current_non_required_historical_consumers": [
+    {
+      "consumer": "CUHK_Workstation_WSL_Codex",
+      "status": "NOT_REQUIRED_FOR_ISSUE_4_CURRENT_CONTRACT",
+      "pass": false,
+      "na": false
+    },
+    {
+      "consumer": "Longleaf_Backup_Codex",
+      "status": "NOT_REQUIRED_FOR_ISSUE_4_CURRENT_CONTRACT",
+      "pass": false,
+      "na": false
+    },
+    {
+      "consumer": "Workstation",
+      "status": "NOT_REQUIRED_FOR_ISSUE_4_CURRENT_CONTRACT",
+      "pass": false,
+      "na": false
+    },
+    {
+      "consumer": "Legion",
+      "status": "NOT_REQUIRED_FOR_ISSUE_4_CURRENT_CONTRACT",
+      "pass": false,
+      "na": false
+    }
+  ],
+  "all_required_consumers": "PASS_OR_NA",
+  "final_remaining_consumer": "NONE",
+  "issue_4_ready_for_completed_close": true,
+  "repository_bump": "NONE",
+  "plugin_bump": "NONE",
+  "production_plugin_capability_gate": "NOT_REQUIRED"
+}

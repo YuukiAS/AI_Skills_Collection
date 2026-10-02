@@ -1,0 +1,25 @@
+{
+  "base_branch": "main",
+  "base_commit": "9d1923d2002c529352ad6464599e7da08eb6787c",
+  "ci_required": true,
+  "ci_status": "PASS",
+  "implementation_commit": "256e9cbe9f674db5e934d49ba1cc784363a51507",
+  "last_review_decision": "PASS",
+  "max_plan_revisions": 1,
+  "max_review_rounds": 2,
+  "next_action": "NO_AUTOMATIC_TRANSITION",
+  "plan_revision": 0,
+  "review_round": 1,
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "state": "AWAIT_HUMAN_DECISION",
+  "task_key": "web-development--frontend-design-production-consolidation",
+  "human_gate_reason": "PASS",
+  "human_decision": {
+    "decision": "ACCEPT",
+    "recorded_at": "2026-09-28T03:58:43.613262Z",
+    "body": "用户明确批准集成。",
+    "previous_human_gate_reason": "PASS",
+    "review_round": 1,
+    "plan_revision": 0
+  }
+}

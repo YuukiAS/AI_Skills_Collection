@@ -155,6 +155,22 @@ candidate_action:
 promotion_gate: replay on two independent bilingual research reports and confirm semantic parity without literal translation artifacts.
 
 
+
+### Final research artifacts must be surfaced as actual user-openable/downloadable deliverables
+status: NEW
+tracking: #29
+source: STAT5060 Tutorial 1 Rich Edition final handoff, 2026-10-01
+evidence: `YuukiAS/STAT5060-TA` commit `511fddfda9721f00c1d8bdb3774d9a17f37c3e95` successfully produced the canonical Rich Edition PDF and full provenance/QA evidence, but the executor-facing completion report exposed repository paths/status rather than an immediate user-openable/downloadable artifact surface; the user then had to ask whether the PDF had actually been produced and how to get it.
+target layer: research-reporting -> artifact/workflow handoff -> user delivery
+problem: A canonical repository path, checksum and PASS receipt prove provenance but do not complete user delivery. When Research Authoring produces or delegates a PDF/DOCX/LaTeX artifact, the final handoff should surface the actual finished file through the host's supported attachment/file-card/download/open mechanism whenever available, while still reporting the canonical repo path/hash separately. Research Authoring should not reimplement transport or renderer mechanics, but its delivery contract must not treat a path-only response as equivalent to handing the document to the user.
+candidate_action:
+- Add a user-delivery requirement to the Research Authoring artifact handoff: `canonical identity + real artifact surface + concise open/save instruction only when needed`.
+- Prefer the host's native attachment/file reference or equivalent clickable artifact surface. Do not merely print a filesystem/repository path when a real file has been created and can be surfaced.
+- Keep provenance separate: canonical repo path, commit and SHA remain useful evidence, but they supplement rather than replace the user-facing deliverable.
+- If the current execution environment genuinely cannot expose the file directly, say so explicitly and use the nearest supported materialization/handoff mechanism; do not report a path-only artifact as fully delivered.
+- Keep low-level delivery implementation in workflow/artifact infrastructure. Research Authoring owns the requirement that a requested finished research document reaches the user as an actual artifact.
+promotion_gate: replay on one formal research-report PDF and one editable/office-style research deliverable; verify that the user can open/save the finished artifact directly without needing a second message asking where the file is.
+
 ## Recently promoted / established
 
 - Advisor-facing reports organize around scientific question and decision, not run/debug chronology.

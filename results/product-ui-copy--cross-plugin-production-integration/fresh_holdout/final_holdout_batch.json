@@ -1,0 +1,258 @@
+{
+  "schema": "PRODUCT_UI_COPY_FRESH_HOLDOUT_V1",
+  "task_key": "product-ui-copy--cross-plugin-production-integration",
+  "phase": "H3 planner-owned exact fresh holdout",
+  "candidate_commit": "a06ff050bc82bb22358dfcb3e4faa885fddd285b",
+  "candidate_versions": {
+    "repository": "5.4.0",
+    "web-development": "0.4",
+    "writing-style": "0.4"
+  },
+  "h0_binding": {
+    "path": "results/product-ui-copy--cross-plugin-production-integration/h0_preflight/H0_FRESH_EVIDENCE_PREFLIGHT.md",
+    "blob_sha": "687d7e33c3281d52e06c30df5f104cc720d33f45",
+    "batch_size": 8
+  },
+  "h2_binding": {
+    "evidence_path": "results/product-ui-copy--cross-plugin-production-integration/h2_release_candidate/H2_G1_G6_EVIDENCE.md",
+    "replay_path": "results/product-ui-copy--cross-plugin-production-integration/h2_release_candidate/H2_SAME_SESSION_REPLAY_PASS.json",
+    "release_critical_g1_g6": "PASS"
+  },
+  "freeze_rules": {
+    "one_shot_full_batch": true,
+    "replacement_after_failure": false,
+    "cherry_pick": false,
+    "easy_case_padding": false,
+    "candidate_modification_before_verdict": false,
+    "if_candidate_changes_after_results": "this batch becomes known regression and cannot remain fresh"
+  },
+  "scenarios": [
+    {
+      "id": "H3-01",
+      "surface": "web account settings",
+      "locale": "zh-Hans",
+      "user_request": "这个账号设置页只有一处提示和一个按钮。现有文案是“邮箱地址已更新。”，按钮是“完成”。如果已经自然就别为了显得有优化硬改。",
+      "current_visible_copy": {
+        "status": "邮箱地址已更新。",
+        "primary_action": "完成"
+      },
+      "frozen_product_meaning": [
+        "邮箱地址已经成功更新",
+        "点击“完成”只关闭当前确认状态，不会触发额外操作"
+      ],
+      "expected_owner": "product-ui-copy",
+      "expected_outcome_class": "KEEP",
+      "must_not": [
+        "为了展示能力而扩写",
+        "加入不存在的安全、同步或通知承诺",
+        "把简单完成态改成营销式口号"
+      ],
+      "evaluation_focus": [
+        "是否识别为已经足够自然",
+        "是否保持核心文案基本不变",
+        "是否没有添加新产品语义"
+      ]
+    },
+    {
+      "id": "H3-02",
+      "surface": "mobile onboarding",
+      "locale": "zh-Hant-HK",
+      "user_request": "這是香港用戶的手機 onboarding。現有文案有點像把簡體逐字轉成繁體，請按香港產品介面語氣整理，但不要改產品意思。",
+      "current_visible_copy": {
+        "title": "驗證完成",
+        "body": "你的個人資料已經保存到帳號中。你可以繼續下一步。",
+        "primary_action": "繼續下一步"
+      },
+      "frozen_product_meaning": [
+        "身份驗證已完成",
+        "個人資料已保存到該使用者帳戶",
+        "主要動作是繼續 onboarding"
+      ],
+      "expected_owner": "product-ui-copy",
+      "expected_outcome_class": "LOCALE/REGISTER",
+      "must_not": [
+        "把香港用語當成純字形轉換",
+        "加入不存在的審核、同步或私隱承諾",
+        "改變驗證是否已完成的狀態"
+      ],
+      "evaluation_focus": [
+        "香港產品介面語氣是否自然",
+        "是否保留原有三個產品命題",
+        "CTA 是否像正常介面動作而非完整說明句"
+      ]
+    },
+    {
+      "id": "H3-03",
+      "surface": "desktop backup settings",
+      "locale": "zh-Hans",
+      "user_request": "这个桌面应用设置页每一块都能看懂，但整体特别重复。请先判断是文案问题还是页面内容结构问题，再处理。",
+      "current_visible_copy": {
+        "badge": "自动备份已开启",
+        "heading": "自动备份已开启",
+        "body": "当前已开启自动备份。系统会按照已开启的自动备份设置进行备份。",
+        "primary_action": "管理已开启的自动备份",
+        "secondary_help": "你可以在这里管理当前已经开启的自动备份。"
+      },
+      "frozen_product_meaning": [
+        "自动备份当前处于开启状态",
+        "用户可以进入管理自动备份设置"
+      ],
+      "expected_owner": "frontend-content-architecture",
+      "expected_outcome_class": "CONTENT ARCHITECTURE",
+      "must_not": [
+        "把五处重复信息分别润色后全部保留",
+        "擅自改变自动备份开关状态",
+        "虚构备份频率、位置或恢复能力"
+      ],
+      "evaluation_focus": [
+        "是否识别重复 payload 是内容架构问题",
+        "是否建议合并/删除/降级而不是逐句改写",
+        "是否保留状态与管理动作两项核心意义"
+      ]
+    },
+    {
+      "id": "H3-04",
+      "surface": "web workspace deletion dialog",
+      "locale": "zh-Hans",
+      "user_request": "帮我把删除工作区的确认弹窗改得更清楚。现在产品说明只确定会立即移除当前工作区入口，但还没确定文件是否保留、多久能恢复，也没确定管理员是否能恢复。",
+      "current_visible_copy": {
+        "title": "删除工作区？",
+        "body": "删除后无法恢复，所有文件都会永久删除。",
+        "destructive_action": "永久删除"
+      },
+      "frozen_product_meaning": [
+        "确认操作会立即移除当前工作区入口"
+      ],
+      "unresolved_product_facts": [
+        "底层文件是否保留",
+        "是否存在恢复窗口",
+        "管理员是否有恢复能力"
+      ],
+      "expected_owner": "product-domain-authority",
+      "expected_outcome_class": "PRODUCT SEMANTICS",
+      "must_not": [
+        "继续保留“永久删除/无法恢复”作为已确认事实",
+        "自行假设文件会保留或可恢复",
+        "仅靠更委婉的措辞掩盖产品语义缺口"
+      ],
+      "evaluation_focus": [
+        "是否停止做最终文案承诺并明确缺失事实",
+        "是否指出需要先由产品 owner 冻结删除/恢复语义",
+        "是否区分已知的入口移除和未知的数据生命周期"
+      ]
+    },
+    {
+      "id": "H3-05",
+      "surface": "browser extension personalization consent",
+      "locale": "zh-Hant-HK",
+      "user_request": "這個瀏覽器擴充功能準備加個人化推薦。現時只知道會分析使用紀錄來調整推薦，但未有正式決定保存多久、會不會傳到伺服器、能否之後刪除。先幫我看介面文案。",
+      "current_visible_copy": {
+        "heading": "開啟個人化推薦",
+        "body": "我們只會安全使用你的活動資料來改善推薦，不會造成任何私隱風險。",
+        "consent_action": "同意並開啟"
+      },
+      "frozen_product_meaning": [
+        "開啟後會使用某些使用紀錄來調整推薦"
+      ],
+      "unresolved_trust_facts": [
+        "保存期限",
+        "是否上傳伺服器",
+        "刪除/撤回後的資料處理",
+        "可以承諾到甚麼程度的私隱風險"
+      ],
+      "expected_owner": "legal-trust-product-authority",
+      "expected_outcome_class": "LEGAL/TRUST/SAFETY",
+      "must_not": [
+        "保留或重寫成無依據的“沒有任何私隱風險”",
+        "自行補全保存、上傳或刪除政策",
+        "把未定 consent 語義包裝成已批准"
+      ],
+      "evaluation_focus": [
+        "是否拒绝用自然度掩盖 trust/consent 缺口",
+        "是否明确哪些事实必须先冻结",
+        "是否保护已知的‘使用记录用于推荐’这一命题"
+      ]
+    },
+    {
+      "id": "H3-06",
+      "surface": "mobile file upload error",
+      "locale": "zh-Hans",
+      "user_request": "这个上传失败提示太像后台报错，帮我改成正常产品文案。事实已经确认：文件上限 10 MB，这次文件是 14 MB，用户可以换一个文件重新上传。",
+      "current_visible_copy": {
+        "title": "Upload rejected",
+        "body": "payload exceeds configured max_size=10485760; request aborted",
+        "action": "Retry"
+      },
+      "frozen_product_meaning": [
+        "当前文件 14 MB，超过 10 MB 上限",
+        "本次上传没有成功",
+        "用户可以换一个不超过 10 MB 的文件再次上传"
+      ],
+      "expected_owner": "product-ui-copy",
+      "expected_outcome_class": "WORDING/NATURALNESS",
+      "must_not": [
+        "隐藏 10 MB 限制",
+        "暗示系统会自动压缩或修复文件",
+        "保留实现参数 max_size 或 payload 作为普通用户主文案"
+      ],
+      "evaluation_focus": [
+        "是否以用户可理解的状态/下一步表达",
+        "是否保留具体限制和可恢复动作",
+        "CTA 是否与真正动作一致"
+      ]
+    },
+    {
+      "id": "H3-07",
+      "surface": "web product landing page",
+      "locale": "zh-Hans",
+      "user_request": "这个首页每一段单独读都没错，但连起来很像模板文案。请从整页节奏处理，不要把它改得更夸张。",
+      "current_visible_copy": {
+        "hero": "这不是一个普通的协作空间，而是一个真正理解团队节奏的工作台。",
+        "block_1": "你不是在管理任务，而是在管理团队真正重要的工作。",
+        "block_2": "只有先看清优先级，才能真正把时间留给重要的事情。",
+        "block_3": "你可以先整理，再协作，再把真正重要的结果交付出去。",
+        "primary_action": "开始使用"
+      },
+      "frozen_product_meaning": [
+        "产品是团队协作工作台",
+        "帮助团队看清优先级并协作推进工作",
+        "主要动作是开始使用"
+      ],
+      "expected_owner": "product-ui-copy",
+      "expected_outcome_class": "WORDING/NATURALNESS",
+      "page_rhythm_required": true,
+      "must_not": [
+        "继续堆叠‘不是…而是…/只有…才…/先…再…’的对称结构",
+        "引入新的夸张价值承诺",
+        "为了简短删除产品的协作和优先级含义"
+      ],
+      "evaluation_focus": [
+        "是否把整页当成一个 copy set 而非四句独立润色",
+        "是否降低重复的人称和修辞节奏",
+        "是否让 hero/正文/CTA 的角色层级更自然"
+      ]
+    },
+    {
+      "id": "H3-08",
+      "surface": "background cache service",
+      "locale": "n/a",
+      "user_request": "把后台缓存刷新从每 30 秒轮询改成事件触发，并保持失败重试和现有日志字段。UI 不变，任何用户可见文案也不变。",
+      "current_visible_copy": null,
+      "frozen_product_meaning": [
+        "这是后台运行机制修改",
+        "没有 UI 或用户可见 copy 变化"
+      ],
+      "expected_owner": "non-frontend-runtime-owner",
+      "expected_outcome_class": "NO_FRONTEND_OR_PRODUCT_UI_COPY",
+      "must_not": [
+        "激活 Frontend Design",
+        "激活 Product UI Copy",
+        "凭空提出 UI/文案改版"
+      ],
+      "evaluation_focus": [
+        "是否正确保持在 backend/runtime 路由",
+        "是否没有因为出现‘日志’或‘刷新’就误触发 UI 能力"
+      ]
+    }
+  ]
+}

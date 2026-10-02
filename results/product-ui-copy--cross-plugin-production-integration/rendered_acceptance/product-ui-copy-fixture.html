@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Product UI Copy Rendered Acceptance Fixture</title>
+    <link rel="stylesheet" href="./product-ui-copy-fixture.css" />
+  </head>
+  <body>
+    <main class="app-shell" aria-label="Product UI Copy rendered acceptance fixture">
+      <section class="surface surface-settings" aria-labelledby="settings-title">
+        <div class="surface-copy">
+          <p class="kicker">Browser extension settings</p>
+          <h1 id="settings-title">同步只在你确认后开始</h1>
+          <p class="lede">
+            我们会先检查本机资料，再列出需要上传的项目。没有你的确认，不会把本地内容发到云端。
+          </p>
+          <div class="action-row" aria-label="Primary action">
+            <button class="primary">检查可同步项目</button>
+            <button class="secondary">先保持本机使用</button>
+          </div>
+        </div>
+        <aside class="trust-panel" aria-label="Trust disclosure">
+          <strong>隐私说明</strong>
+          <p>检查结果只用于本次同步预览。你可以在确认前移除任何项目。</p>
+          <a href="#details">查看数据保留规则</a>
+        </aside>
+      </section>
+
+      <section class="surface surface-grid" aria-labelledby="rhythm-title">
+        <div>
+          <p class="kicker">Desktop WebView onboarding</p>
+          <h2 id="rhythm-title">三步完成桌面端设置</h2>
+        </div>
+        <ol class="steps">
+          <li>
+            <span>1</span>
+            <div>
+              <h3>连接工作区</h3>
+              <p>选择要同步的工作区。你稍后仍可更改。</p>
+            </div>
+          </li>
+          <li>
+            <span>2</span>
+            <div>
+              <h3>确认可见范围</h3>
+              <p>只有你勾选的项目会出现在共享视图中。</p>
+            </div>
+          </li>
+          <li>
+            <span>3</span>
+            <div>
+              <h3>开始使用</h3>
+              <p>设置完成后，可随时回到这里暂停同步。</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="surface surface-mobile" aria-labelledby="mobile-title">
+        <div class="phone-frame">
+          <p class="status-pill">需要确认</p>
+          <h2 id="mobile-title">是否删除这条公开回复？</h2>
+          <p>
+            删除后，其他人将无法再看到这条回复。我们会保留系统记录，用于安全审计。
+          </p>
+          <button class="danger">删除公开回复</button>
+          <button class="text-button">取消</button>
+        </div>
+        <div class="surface-copy">
+          <p class="kicker">Mobile / Compose semantics</p>
+          <h2>保留后果，不美化风险</h2>
+          <p>
+            这个区块验证 Product UI Copy 不会把删除、公开可见性、审计保留等产品语义写轻。
+          </p>
+        </div>
+      </section>
+
+      <section class="surface surface-keep" aria-labelledby="keep-title">
+        <div>
+          <p class="kicker">KEEP control</p>
+          <h2 id="keep-title">已保存</h2>
+          <p>你的更改已同步到这台设备。</p>
+        </div>
+        <p class="keep-note">这组短文案已经清楚、自然、语义完整，应允许保持不变。</p>
+      </section>
+    </main>
+  </body>
+</html>

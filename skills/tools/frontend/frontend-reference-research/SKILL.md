@@ -25,7 +25,9 @@ Use this skill before visual design when the user provides or requests outside U
 - Keep private screenshots and Notion pages in local intake unless the user explicitly approves public reuse.
 - Do not commit full third-party pages, watermarked assets, unclear brand images, or private screenshots.
 - Treat private Notion images and binary attachments as evidence only. If a connector returns text but not downloadable binary URLs, record the unresolved asset instead of inventing content.
-- Hand the distilled brief to `frontend-visual-systems` or `research-product-frontend`.
+- Hand the distilled brief to `frontend-visual-systems`, which acts as the
+  normal Frontend Design coordinator and delegates research-specific constraints
+  when needed.
 
 ## Output
 

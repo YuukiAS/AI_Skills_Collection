@@ -141,3 +141,26 @@ promotion_gate: 当前 `writing-style` 在该真实 replay 上无法同时满足
 
 - Do not create detector-evasion or generic humanizer behavior.
 - Do not let style rewriting change equations, claims, labels, versions or citation meaning.
+
+### Product UI copy naturalness needs a dedicated microcopy capability, not more long-form prose rules
+status: NEW
+tracking: #90
+source: CUHK Date / Meet at CU production copy-naturalness audit + founder calibration, 2026-09-26
+evidence_path: `docs/design/product-ui-copy/evidence/CUHK_DATE_PRODUCT_COPY_NATURALNESS_AUDIT_2026-09-26.md`
+target layer: writing-style routing / Chinese product microcopy / cross-plugin frontend handoff
+evidence: anonymous production audit classified 150 public-facing zh-Hans/zh-Hant-HK strings as A=53 natural, B=72 readable-but-modelish, C=15 clearly unnatural, D=10 product/semantic problems. Repeated B/C patterns included product self-definition before user action, unnecessary explicit second person, over-balanced `not X but Y / only X then Y / first X then Y` rhetoric, ordinary status turned into slogans, internal product-state nouns, over-complete reassurance, and mechanical Simplified/Traditional adaptation. Founder independently identified examples such as `你先完成资料` and `只开放注册 / 先把资料准备好` as readable but not like mature product UI.
+problem: current `chinese-prose` already performs well for reports, README, technical/scientific documents and general Chinese de-template cleanup. Its unit of reasoning is primarily prose/document-level readability. UI microcopy requires a different unit: **one text role inside a rendered product state, with neighboring copy and spatial/interaction context**. Expanding `chinese-prose` with many UI-specific rules risks regressing its now-useful long-form behavior while still failing to decide when a string should be deleted rather than rewritten.
+candidate_action:
+- Design a dedicated sibling capability such as `product-ui-copy` / `product-copy-naturalness` under the writing layer rather than turning `chinese-prose` into a universal UI copy skill.
+- Keep `writing-fidelity` as the protected-meaning layer: registration/matching state, verification meaning, consent/privacy boundaries, legal facts and other product truths must not be softened away for naturalness.
+- Require structured UI context from Frontend Design: surface, UI role, product state, user consequence/action, neighboring copy, locale, protected meaning, and length/viewport constraints. A bare sentence should not be the preferred production input.
+- Use a line-level classification with at least: **KEEP/NATURAL**, **NATURALNESS_REWRITE**, **LOCALE_OR_REGISTER_REWRITE**, and **ESCALATE_PRODUCT_SEMANTICS**. The last class must not be automatically rewritten.
+- Add a page-level rhythm pass after line realization. Detect accumulated rhetorical symmetry, repeated explicit pronouns, sloganization of state, repeated reassurance, repeated internal nouns, and multiple differently worded copies of one state.
+- Realize zh-Hans and zh-Hant-HK independently from the same protected meaning. Do not implement localization as character conversion.
+- Prefer state/action/consequence-first copy over product self-definition when the UI role is transactional or status-bearing; however do not create a universal `please` rule or phrase ban-list.
+- Build evaluation from abstracted real-project patterns plus independent holdouts. CUHK Date exact strings may be retained as maintenance evidence/replay cases, but project-specific tone must not become a universal house style.
+- Add positive/negative/near-miss trigger tests so long-form Chinese reports continue to route to `chinese-prose`, while labels/help/status/CTA/empty/error/landing microcopy route to the dedicated UI capability.
+- Do not build AI-detector evasion or a generic humanizer.
+boundary: Frontend Design decides whether/where/how much to say and owns rendered hierarchy; the writing layer realizes natural language after UI role and product meaning are frozen.
+promotion_gate: do not implement this as an isolated Clear Writing patch while Frontend Design remains an unstable upstream owner. First establish a usable Frontend Design baseline; then run one cross-plugin Planner/Critic task that freezes ownership, routing, handoff schema and shared evaluation before implementation.
+

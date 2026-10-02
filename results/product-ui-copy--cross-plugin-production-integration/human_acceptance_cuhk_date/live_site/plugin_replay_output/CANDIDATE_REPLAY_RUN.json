@@ -1,0 +1,57 @@
+{
+  "actual_consumption_by_plugin": {
+    "web-development": {
+      "event_type": "item.started",
+      "line_index": 4,
+      "proven": true
+    },
+    "writing-style": {
+      "event_type": "item.started",
+      "line_index": 4,
+      "proven": true
+    }
+  },
+  "candidate_commit": "a06ff050bc82bb22358dfcb3e4faa885fddd285b",
+  "plugins": [
+    {
+      "actual_consumption": {
+        "event_type": "item.started",
+        "line_index": 4,
+        "proven": true
+      },
+      "add_payload": {
+        "authPolicy": "ON_INSTALL",
+        "installedPath": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.4",
+        "marketplaceName": "ai-skills-candidate",
+        "name": "web-development",
+        "pluginId": "web-development@ai-skills-candidate",
+        "version": "0.4"
+      },
+      "installed_path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.4",
+      "name": "web-development",
+      "plugin_id": "web-development@ai-skills-candidate"
+    },
+    {
+      "actual_consumption": {
+        "event_type": "item.started",
+        "line_index": 4,
+        "proven": true
+      },
+      "add_payload": {
+        "authPolicy": "ON_INSTALL",
+        "installedPath": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/writing-style/0.4",
+        "marketplaceName": "ai-skills-candidate",
+        "name": "writing-style",
+        "pluginId": "writing-style@ai-skills-candidate",
+        "version": "0.4"
+      },
+      "installed_path": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/writing-style/0.4",
+      "name": "writing-style",
+      "plugin_id": "writing-style@ai-skills-candidate"
+    }
+  ],
+  "runtime_version": "codex-cli 0.153.4",
+  "stderr_path": "/home/yuukias/AI_Skills_Collection-product-ui-copy--cross-plugin-production-integration/.local-runtime/candidate-plugin-replay/runs/20260929T054911Z-1132248/child.stderr",
+  "stdout_path": "/home/yuukias/AI_Skills_Collection-product-ui-copy--cross-plugin-production-integration/.local-runtime/candidate-plugin-replay/runs/20260929T054911Z-1132248/child.stdout.jsonl",
+  "writable_dirs": []
+}

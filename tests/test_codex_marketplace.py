@@ -33,10 +33,10 @@ CENTRAL_PLUGIN_NAMES = [
 EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
     "workflow-core": "0.4",
     "ai-skills-core": "0.5",
-    "writing-style": "0.3",
+    "writing-style": "0.4",
     "research-writing": "0.2",
     "presentations": "0.3",
-    "web-development": "0.2",
+    "web-development": "0.4",
 }
 REPOSITORY_SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 PLUGIN_VERSION_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)$")
@@ -264,7 +264,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         visual_sources = {entry["source"] for entry in visual["source_skills"]}
 
         self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "workflow-core")["version"], "0.4")
-        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "web-development")["version"], "0.2")
+        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "web-development")["version"], "0.4")
         self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "ai-skills-core")["version"], "0.5")
         self.assertIn("skills/tools/frontend/figma-design-to-code", visual_sources)
         self.assertIn("skills/tools/frontend/motion-interaction", visual_sources)
@@ -572,6 +572,181 @@ class CodexMarketplaceTests(unittest.TestCase):
             self.assertEqual(meta["recommended_scope"], "project")
             self.assertEqual(meta["provenance"], "generated")
             self.assertEqual(meta["source_skills"], ["skills/a/network", "skills/b/runner"])
+
+    def test_coordinator_first_aggregate_requires_valid_coordinator_source(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_skill(root, "skills/a/system", "system")
+            write_skill(root, "skills/a/delegate", "delegate")
+            write_config(
+                root,
+                [
+                    plugin(
+                        "p",
+                        [
+                            {
+                                "type": "aggregate",
+                                "name": "agg",
+                                "description": "Aggregate.",
+                                "routing_mode": "coordinator-first",
+                                "coordinator_artifact_id": "missing",
+                                "source_skills": [
+                                    {"source": "skills/a/system", "artifact_id": "system"},
+                                    {"source": "skills/a/delegate", "artifact_id": "delegate"},
+                                ],
+                            }
+                        ],
+                    )
+                ],
+            )
+            with patched_build_root(root), self.assertRaisesRegex(build.BuildError, "coordinator_artifact_id missing"):
+                build.generate_layer(root / "out")
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_skill(root, "skills/a/system", "system")
+            write_config(
+                root,
+                [
+                    plugin(
+                        "p",
+                        [
+                            {
+                                "type": "aggregate",
+                                "name": "agg",
+                                "description": "Aggregate.",
+                                "routing_mode": "coordinator-first",
+                                "source_skills": [{"source": "skills/a/system", "artifact_id": "system"}],
+                            }
+                        ],
+                    )
+                ],
+            )
+            with patched_build_root(root), self.assertRaisesRegex(build.BuildError, "needs coordinator_artifact_id"):
+                build.generate_layer(root / "out")
+
+    def test_coordinator_first_aggregate_reads_coordinator_before_delegates(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_skill(root, "skills/a/system", "system")
+            write_skill(root, "skills/a/delegate", "delegate")
+            write_config(
+                root,
+                [
+                    plugin(
+                        "p",
+                        [
+                            {
+                                "type": "aggregate",
+                                "name": "agg",
+                                "description": "Aggregate.",
+                                "routing_mode": "coordinator-first",
+                                "coordinator_artifact_id": "system",
+                                "source_skills": [
+                                    {"source": "skills/a/system", "artifact_id": "system"},
+                                    {"source": "skills/a/delegate", "artifact_id": "delegate"},
+                                ],
+                            }
+                        ],
+                    )
+                ],
+            )
+            with patched_build_root(root):
+                build.generate_layer(root / "out")
+            text = (root / "out/plugins/codex/plugins/p/skills/agg/SKILL.md").read_text(encoding="utf-8")
+            meta, _ = build.read_frontmatter(root / "out/plugins/codex/plugins/p/skills/agg/SKILL.md")
+
+            self.assertEqual(meta["routing_mode"], "coordinator-first")
+            self.assertEqual(meta["coordinator_artifact_id"], "system")
+            self.assertIn("Read the coordinator source `_src/system/source.md` first.", text)
+            self.assertIn("Load delegate sources only after the coordinator selects them.", text)
+            self.assertNotIn("Choose the source workflow whose trigger boundary best matches", text)
+
+    def test_default_aggregate_generation_keeps_choose_one_workflow(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_skill(root, "skills/a/one", "one")
+            write_skill(root, "skills/a/two", "two")
+            write_config(
+                root,
+                [
+                    plugin(
+                        "p",
+                        [
+                            {
+                                "type": "aggregate",
+                                "name": "agg",
+                                "description": "Aggregate.",
+                                "source_skills": ["skills/a/one", "skills/a/two"],
+                            }
+                        ],
+                    )
+                ],
+            )
+            with patched_build_root(root):
+                build.generate_layer(root / "out")
+            text = (root / "out/plugins/codex/plugins/p/skills/agg/SKILL.md").read_text(encoding="utf-8")
+            meta, _ = build.read_frontmatter(root / "out/plugins/codex/plugins/p/skills/agg/SKILL.md")
+
+            self.assertNotIn("routing_mode", meta)
+            self.assertIn("Choose the source workflow whose trigger boundary best matches the user request.", text)
+            self.assertNotIn("Read the coordinator source", text)
+
+    def test_frontend_design_marketplace_uses_coordinator_first_topology(self) -> None:
+        config = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        web = next(plugin for plugin in config["plugins"] if plugin["name"] == "web-development")
+        entries = web["skills"]
+        visual = next(entry for entry in entries if entry.get("artifact_id") == "visual")
+
+        self.assertEqual(visual["routing_mode"], "coordinator-first")
+        self.assertEqual(visual["coordinator_artifact_id"], "system")
+        self.assertFalse(any(entry.get("artifact_id") == "research" for entry in entries))
+
+        visual_sources = {entry["artifact_id"]: entry["source"] for entry in visual["source_skills"]}
+        self.assertEqual(visual_sources["system"], "skills/tools/frontend/frontend-visual-systems")
+        for artifact_id, source in {
+            "ux": "skills/tools/frontend/product-ux-planning",
+            "direction": "skills/tools/frontend/visual-direction",
+            "tokens": "skills/tools/frontend/design-system-tokens",
+            "figma": "skills/tools/frontend/figma-design-to-code",
+            "motion": "skills/tools/frontend/motion-interaction",
+            "responsive": "skills/tools/frontend/responsive-accessibility-review",
+            "webapp-testing": "skills/tools/frontend/webapp-testing",
+            "research": "skills/tools/frontend/research-product-frontend",
+        }.items():
+            self.assertEqual(visual_sources[artifact_id], source)
+
+    def test_frontend_design_source_ownership_contracts_are_source_authoritative(self) -> None:
+        frontend_root = REPO_ROOT / "skills/tools/frontend"
+        coordinator = (frontend_root / "frontend-visual-systems/SKILL.md").read_text(encoding="utf-8")
+        product = (frontend_root / "product-ux-planning/SKILL.md").read_text(encoding="utf-8")
+        direction = (frontend_root / "visual-direction/SKILL.md").read_text(encoding="utf-8")
+        tokens = (frontend_root / "design-system-tokens/SKILL.md").read_text(encoding="utf-8")
+        figma = (frontend_root / "figma-design-to-code/SKILL.md").read_text(encoding="utf-8")
+        motion = (frontend_root / "motion-interaction/SKILL.md").read_text(encoding="utf-8")
+        responsive = (frontend_root / "responsive-accessibility-review/SKILL.md").read_text(encoding="utf-8")
+        webapp = (frontend_root / "webapp-testing/SKILL.md").read_text(encoding="utf-8")
+        research = (frontend_root / "research-product-frontend/SKILL.md").read_text(encoding="utf-8")
+        builder = (frontend_root / "implementation-react-tailwind/SKILL.md").read_text(encoding="utf-8")
+
+        for marker in [
+            "normal Frontend Design coordinator",
+            "P0 product/state contract",
+            "S1 targeted/local fix",
+            "F-D Producer Admission And Handoff Reachability",
+            "Design defect",
+            "Interaction causality belongs to F-C",
+        ]:
+            self.assertIn(marker, coordinator)
+        self.assertIn("visible metrics, rankings", product)
+        self.assertIn("whole-screen direction", direction)
+        self.assertIn("canonical platform/component", tokens)
+        self.assertIn("Treat Figma as authority only", figma)
+        self.assertIn("Separate design motion from runtime latency", motion)
+        self.assertIn("P1 closure", responsive)
+        self.assertIn("browser evidence companion", webapp)
+        self.assertIn("Do not bypass the coordinator", research)
+        self.assertIn("does not own design", builder)
 
     def test_secret_reference_without_frontmatter_declaration_fails(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -98,11 +98,15 @@ tracking label = maintenance-track
 
 Project lifecycle item 只能是带 `maintenance-track` label 的 Issue。
 
-Auto-add 至少满足：
+Active auto-add admission must satisfy:
 
 ```text
-is:issue label:maintenance-track
+is:issue is:open label:maintenance-track
 ```
+
+Open `maintenance-track` Issues are eligible for automatic Project admission.
+`maintenance-track` remains the formal tracking/admission label, but the
+auto-add filter is only the active-open admission predicate.
 
 Implementation/design PR 不作为 lifecycle item。`pull request merged -> Done` 必须禁用。`issue closed -> Done` 只用于完整 closure 后的最后机械动作。
 
@@ -114,6 +118,21 @@ Implementation/design PR 不作为 lifecycle item。`pull request merged -> Done
 - repository-wide auto-close 规则保持原样。
 
 Rejected、superseded、duplicate、not-planned item 不得显示为 DONE。需要关闭时，先从 Project 移除或归档，再 truthfully close。
+
+Completed Issues that are already present in the Project remain DONE / History
+after closure. The active auto-add filter is not the mechanism for rebuilding
+completed History after a completed Project item has been removed, and tightening
+the filter must not remove existing completed Project items.
+
+Closed non-completion Issues, including duplicate, not-planned, rejected, and
+superseded Issues, remain out of the Project after removal or archival. They may
+retain `maintenance-track` as historical tracking metadata; because they are
+closed, they do not match the active auto-add admission filter.
+
+If a tracked Issue is truthfully reopened, it becomes open and can again match
+the active auto-add admission predicate.
+
+The existing `issue closed -> DONE` workflow remains unchanged.
 
 ## 6. Tracking Issue Copy
 
@@ -278,22 +297,30 @@ ADAPTING 不等于 DONE。
 
 ## 14. Required Consumers For Machine-Consumed Work
 
-当前默认 required logical consumers：
+对于 machine-consumed workflow / shared maintenance mechanism，required
+consumers 是当前 tracked item 的 frozen completion claim 成立所必须覆盖的
+actual normal-entry consumers，加上该 tracked item 或其产品合同明确承诺的
+fallback environments。
 
-Server / remote Codex：
+某台机器不能仅因为以下事实而自动成为 required consumer：
 
-1. `Longleaf_Codex`
-2. `Longleaf_Backup_Codex`
-3. `CUHK_Workstation_WSL_Codex`
+- AI Skills Maintainer 安装在那里；
+- 它出现在另一个 product / machine-update acceptance matrix 中；
+- 它安装了 Codex；
+- 它技术上能够 clone 或运行本 repo。
 
-Local：
+fallback / backup environment 只有在当前 tracked item 或其 frozen product
+contract 明确承诺该 fallback path 时才 required。
 
-4. `Workstation`
-5. `Legion`
-
-这些 consumer requirement 只适用于 machine-consumed workflow / shared maintenance mechanism。普通文档、单一 artifact quality improvement、普通 domain plugin quality improvement 不自动继承五机验收。
+这些 required-consumer 规则只适用于 machine-consumed workflow / shared
+maintenance mechanism。普通文档、单一 artifact quality improvement、普通
+domain plugin quality improvement 不自动继承 machine-consumer 验收。
 
 进入 ADAPTING 时，tracking Issue 必须冻结每个 required consumer 的 exact current identity / locator。若解析 identity 需要访问某台机器，必须先获得该 consumer 的 bounded authority；不得猜 locator。
+
+required-consumer set 必须由 evidence 支撑。若 normal-entry / fallback
+evidence 有实质歧义，item 保持 ADAPTING 并返回 Planner；不得为了保险多加
+机器，也不得静默漏掉产品合同明确承诺的 environment。
 
 每个 consumer PASS 至少需要：
 
@@ -305,7 +332,8 @@ Local：
 - risk-matched should-not-change / failure safety；
 - durable evidence locator。
 
-单台 consumer PASS 不能关闭 top-level Issue。
+单个 required consumer PASS 不能关闭 top-level Issue，除非当前 tracked item
+冻结的 required-consumer set 只包含这一项，且最终 DONE 的其他条件也全部成立。
 
 ## 15. AI Skills Maintainer Boundary
 
@@ -320,7 +348,7 @@ AI Skills Maintainer 是 per-current-consumer adaptation executor，不是 cross
 - durable evidence；
 - current-consumer PASS / truthful blocker。
 
-五 consumer aggregate truth 属于 tracking Issue / Project lifecycle。AI Skills Maintainer 不持有 machine registry，不做五机 orchestrator，不做 credential broker。
+当前 tracked item 的 required-consumer 聚合真值属于 tracking Issue / Project lifecycle。AI Skills Maintainer 不持有 machine registry，不做多机器 orchestrator，不做 credential broker。
 
 ## 16. Final DONE
 
@@ -347,3 +375,141 @@ Repository bump decision: NONE
 Affected plugins:
 - all: NO_BUMP
 ```
+## 18. Issue Maturity v7 Taxonomy And Intake
+
+Issue labels in v7 are searchable metadata only. They do not replace canonical
+TODO maturity, source `tracking: #N`, Project `Status`, or Project `Area`.
+
+### 18.1 Protected Admission Label
+
+`maintenance-track` remains the only Project admission label and must keep this
+definition unless a separate reviewed board-policy task changes it:
+
+```text
+maintenance-track
+color = 5319e7
+description = Tracked by AI Skills Maintenance board
+```
+
+v7 must not redefine, delete, or otherwise mutate `maintenance-track`.
+
+### 18.2 Approved Taxonomy Labels
+
+Pre-admission triage labels:
+
+```text
+triage:needed      | fbca04 | 进入正式维护前，等待 AI_Skills central triage
+triage:needs-info  | fef2c0 | 进入正式维护前仍缺少关键事实或证据
+```
+
+These labels are pre-admission only. A `maintenance-track` Issue should not keep
+`triage:needed` or `triage:needs-info` unless a later reviewed policy explicitly
+changes that rule.
+
+Every `maintenance-track` Issue must have exactly one kind label:
+
+```text
+kind:regression      | d73a4a | 已建立能力或规则在真实使用中失效或回归
+kind:enhancement     | a2eeef | 改进现有能力的质量、易用性、完整性或可维护性
+kind:new-capability  | 0e8a16 | 新增当前系统尚未实质提供的用户能力
+kind:governance      | 7057ff | 维护流程、生命周期、发布、交接或治理机制
+```
+
+Every `maintenance-track` Issue must have exactly one scope label:
+
+```text
+scope:plugin            | c5def5 | 主要属于一个中央 plugin 的维护工作
+scope:standalone-skill  | bfdadc | 主要属于独立安装的 standalone skill
+scope:repo-workflow     | f9d0c4 | AI_Skills_Collection 仓库级 workflow 或治理
+scope:cross-repo        | d4c5f9 | AI_Skills owner 的工作跨越一个以上 canonical repo
+```
+
+Every `maintenance-track` Issue must have exactly one area label. `area:*` is a
+search mirror of Project `Area`; Project `Area` remains authoritative. All area
+labels use color `ededed` and description
+`Search mirror of Project Area: <exact area value>`.
+
+```text
+area:workflow-core
+area:ai-skills-core
+area:writing-style
+area:research-writing
+area:presentations
+area:scientific-visualization
+area:web-development
+area:statistical-modeling
+area:bioinformatics
+area:medical-imaging
+area:standalone-skill
+area:repo
+area:cross-plugin
+```
+
+Optional integration metadata:
+
+```text
+integration:bridge-kit | 0366d6 | AI_Skills-owned work has a real Bridge Kit integration/dependency dimension
+```
+
+Do not add lifecycle, priority, oncall, or `area:bridge-kit` labels as part of
+v7.
+
+### 18.3 Classification Authority
+
+Project `Area` is the source of truth for `area:*`. If an area label drifts, the
+label changes; Project `Area` does not change merely to match a label.
+
+Scope follows canonical ownership and the real Issue contract:
+
+- central plugin work -> `scope:plugin`;
+- standalone skill work -> `scope:standalone-skill`;
+- repository workflow or governance -> `scope:repo-workflow`;
+- AI_Skills-owned work spanning more than one canonical repo -> `scope:cross-repo`.
+
+Kind is a semantic maintainer classification based on canonical problem/evidence,
+Issue body, and needed design or closure evidence. It must not be assigned by
+keyword regex, title regex, or an LLM Action. Genuine ambiguity stops migration
+before any partial live taxonomy backfill.
+
+### 18.4 Intake Forms And Pre-admission Action
+
+The repository may provide human Issue Forms for:
+
+- existing plugin / skill real failures;
+- new AI_Skills capability proposals.
+
+Forms are intake surfaces only. They must not add `maintenance-track`, Project
+items, scope labels, area labels, or guessed lifecycle metadata. Blank Issues
+remain enabled so internal Codex/maintainer work can still create Issues without
+a form round trip.
+
+The bounded intake Action may run only on `issues: opened`, with `issues: write`
+permission, and may only ensure `triage:needed` when the new Issue is not already
+`maintenance-track`. It must not checkout code, use repository secrets, execute
+Issue body content, classify kind/scope/area, close/reopen Issues, mutate the
+Project, or edit canonical TODO files.
+
+### 18.5 Native Hierarchy Only
+
+Use only GitHub-native sub-issues and `blocked by` / `blocking` dependencies.
+Do not create a hierarchy database or a blocked lifecycle label. A Bridge runtime
+/product bug remains Bridge-owned; an AI_Skills integration Issue may reference
+it with a native dependency while keeping the correct AI_Skills Area.
+
+### 18.6 Metadata Audit
+
+The deterministic audit for `maintenance-track` Issues is read-only. It checks
+that every tracked Issue has exactly one kind/scope/area label, no pre-admission
+triage labels, no lifecycle `status:*` labels, `area:*` matching Project Area,
+canonical backlinks where plugin/standalone Issues are TODO-backed, and close
+state compatible with Project `Status` plus `Resolution commit`.
+
+The audit is not a reconciler, scheduled daemon, database, or state machine. It
+exits non-zero on violations and leaves repair to a reviewed maintenance action.
+
+### 18.7 Stale Safety
+
+No workflow may close `maintenance-track` Issues because of inactivity.
+Inactivity alone is not evidence for DONE or not-planned. Any future stale policy
+must be separately reviewed, target only pre-admission intake, explicitly exempt
+`maintenance-track`, and avoid false Project DONE.

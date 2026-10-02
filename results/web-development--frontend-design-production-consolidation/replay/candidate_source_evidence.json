@@ -1,0 +1,57 @@
+{
+  "plugin": "web-development@ai-skills-candidate",
+  "version": "0.3",
+  "installation_root": "/home/yuukias/.codex/plugins/cache/ai-skills-candidate/web-development/0.3",
+  "source_reads": {
+    "order": "manifest -> generated normal entry -> coordinator -> selected delegates (batched); unchanged content reused per scenario",
+    "files": [
+      {
+        "path": ".codex-plugin/plugin.json",
+        "sha256": "9e20d882dda470720f188cb3d97a57096be91dda52892c313c88aea30e9b45e0"
+      },
+      {
+        "path": "skills/visual/SKILL.md",
+        "sha256": "f974c12884452f27fc8fb1e411c55ab025d07f7a61f987ae60360d601b624f84"
+      },
+      {
+        "path": "skills/visual/_src/system/source.md",
+        "sha256": "cc55cd7637d5209841ba4dfdb24b8117274aa83c03717d3385981d78f130c77a"
+      },
+      {
+        "path": "skills/visual/_src/ux/source.md",
+        "sha256": "fd3ca2d8d9175b8a364f674892a54ab7d6e34bfa8dc871c60770ed797089eb04"
+      },
+      {
+        "path": "skills/visual/_src/direction/source.md",
+        "sha256": "ed4c05469870b60e5f1300d7217dc51535ab3810e6e58275104c24a9a999178d"
+      },
+      {
+        "path": "skills/visual/_src/tokens/source.md",
+        "sha256": "64898aea9a77c533e47a89a51164cd87b4db65588a2900033ebdf632dd3f62f7"
+      },
+      {
+        "path": "skills/visual/_src/responsive/source.md",
+        "sha256": "91a6e25732663011a92fda2850da7b4e5477825a5d20951e59953caa5f6ba527"
+      },
+      {
+        "path": "skills/visual/_src/webapp-testing/source.md",
+        "sha256": "0522127c7dd6ef69f4d467a8a991f2da1685edea5b400fddff6365a9c41ca78b"
+      },
+      {
+        "path": "skills/visual/_src/figma/source.md",
+        "sha256": "0de0ae7eb88d976e738e032bd40d5dfdd4940145b0ec04b4a33f85a215d82920"
+      },
+      {
+        "path": "skills/visual/_src/research/source.md",
+        "sha256": "6c6f291eab109d4d4c621636b11dce7d84db103356f6d66d590afd2602322003"
+      }
+    ]
+  },
+  "input_sha256": "60444a644e607d209a28997f6c1e57320bde77731196ad288813d67d2997b49c",
+  "validation": {
+    "scenario_count": 8,
+    "required_fields_per_scenario": 8,
+    "result": "PASS"
+  },
+  "evidence_scope": "Routing/admission analysis only; no actual app, browser, native, Figma or independent quality verification performed; no external project modified."
+}
