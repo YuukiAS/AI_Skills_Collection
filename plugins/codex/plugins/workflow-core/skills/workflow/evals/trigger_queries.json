@@ -4,7 +4,9 @@
     "修复这个 GitHub issue，完成实现、测试、生成层更新和最终验收，但不要自动 push",
     "这个训练 pipeline 结果不可信，需要从配置、运行日志、产物和指标一路查到可复现结论",
     "另一个 Codex task 给了方案，请你审计它的假设，执行必要修改，然后用证据确认完成",
-    "我要一个端到端交付，不要只停在代码改动；请检查 live state、测试结果和用户可见产物"
+    "我要一个端到端交付，不要只停在代码改动；请检查 live state、测试结果和用户可见产物",
+    "这个 repo-local build 可以在 workspace 里完成，但上次 approval 被拒后 agent 想换 raw push；请按最小权限 normal entry 修复并保留已成功证据",
+    "一个 bounded publisher 失败了；请区分 build/render/commit 已通过和 publication blocked，不要改用更高权限 fallback"
   ],
   "negative": [
     "把这句话翻译成英文",
@@ -14,14 +16,18 @@
     "编译这个 LaTeX 文件",
     "查一下这个 Slurm job 的状态",
     "tmux 里怎么开鼠标滚动",
-    "把这个 Markdown 渲染成 PDF"
+    "把这个 Markdown 渲染成 PDF",
+    "用项目里已经指定的 PDF 渲染 runner 编译这个文件",
+    "删除这个已经不需要的临时 cache 目录"
   ],
   "near_miss": [
     "帮我写一个很短的回复",
     "告诉我怎么运行 pytest",
     "给我一个简单 bash 命令",
     "解释一下什么是 smoke test",
-    "这个单文件函数哪里报错"
+    "这个单文件函数哪里报错",
+    "默认 PATH 没有 xelatex，告诉我 specialist runner 在哪里",
+    "artifact 已经生成了，顺手清一下 cache 失败了怎么办"
   ],
   "notes": "Trigger on cross-cutting execution, routing, verification, and acceptance risk. Do not trigger only because a task mentions PDF, LaTeX, Slurm, tmux, or prose editing."
 }

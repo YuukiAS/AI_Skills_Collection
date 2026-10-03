@@ -560,3 +560,51 @@ USER_AUTHORIZED_IMPLEMENTATION_PHASE=YES
 READY_FOR_CODEX=NO
 NEXT_HANDOFF=CRITIC
 ```
+
+
+## 2026-10-02 dependent execution recovery amendment v0.1
+
+Current recovery anchor:
+
+docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_DEPENDENT_EXECUTION_RECOVERY_PLAN_V0_1_2026-10-02.md
+
+Resume draft:
+
+docs/operations/prompts/PROJECT_INSTRUCTIONS_EDITOR_DEPENDENT_EXECUTION_RESUME_V0_1.md
+
+Observed current-main drift at Planner recovery:
+
+origin/main = 4ce1946ba047ea200c4ab41ae824de999ef535ed
+VERSION = 5.4.1
+workflow-core = 0.5
+shared candidate-replay timeout = 3
+
+Exact task branch observed:
+
+work/project-instructions-editor--standalone-skill-implementation
+HEAD = ebbebee0c42f93d362811594a829bc336a481e8f
+
+Recovery decision:
+
+- product/design freeze remains unchanged;
+- R1 remains OPEN;
+- R2 remains OPEN;
+- old R3 is SUPERSEDED_BY_CURRENT_MAIN_SYNC;
+- VERSION_DRIFT=YES, but repository bump type remains MINOR;
+- if recovery-time main remains 5.4.1, candidate target remains 5.5.0;
+- current-main workflow-core 0.5, 5.4.1 release history and shared-test behavior must be preserved;
+- recovery uses ordinary non-force merge of latest origin/main into the same exact task branch/worktree;
+- no rebase, force push, successor branch, remote remap or shared-timeout redesign;
+- after synchronization and candidate-owned reconciliation, create a new C2 and rerun G1/G2/G3/G4 packet from C2;
+- old C evidence cannot be stitched into C2 release evidence.
+
+Project target remains DOING / standalone-skill. Current execution anchor should be the recovery Plan above.
+
+Current surface still has no GitHub Project-field mutation and no verifiable Clear Writing invocation:
+
+CLEAR_WRITING_UNAVAILABLE
+
+READY_FOR_GATES=NO
+READY_FOR_INTEGRATION=NO
+READY_FOR_RELEASE=NO
+NEXT_HANDOFF=CRITIC

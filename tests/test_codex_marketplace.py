@@ -31,7 +31,7 @@ CENTRAL_PLUGIN_NAMES = [
     "medical-imaging",
 ]
 EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
-    "workflow-core": "0.4",
+    "workflow-core": "0.5",
     "ai-skills-core": "0.5",
     "writing-style": "0.4",
     "research-writing": "0.2",
@@ -263,7 +263,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         visual = next(skill for skill in web["skills"] if skill.get("artifact_id") == "visual")
         visual_sources = {entry["source"] for entry in visual["source_skills"]}
 
-        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "workflow-core")["version"], "0.4")
+        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "workflow-core")["version"], "0.5")
         self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "web-development")["version"], "0.4")
         self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "ai-skills-core")["version"], "0.5")
         self.assertIn("skills/tools/frontend/figma-design-to-code", visual_sources)

@@ -1,0 +1,93 @@
+commit bba3c4044761345482ba4184e4df199dd6f464a5
+Author:     Fixture Delivery <fixture@localhost>
+AuthorDate: Fri Oct 2 04:15:31 2026 -0400
+Commit:     Fixture Delivery <fixture@localhost>
+CommitDate: Fri Oct 2 04:15:31 2026 -0400
+
+    Build and verify task fixture artifact
+
+diff --git a/.ai-skills/publication-contract.md b/.ai-skills/publication-contract.md
+new file mode 100644
+index 0000000..2ee4ad0
+--- /dev/null
++++ b/.ai-skills/publication-contract.md
+@@ -0,0 +1,14 @@
++# Publication Contract
++
++This fixture represents a task branch whose local build and commit must be
++preserved even if publication cannot complete.
++
++The repository-approved publication entry for the task branch is the bounded
++current-branch publisher:
++
++```text
++ai-bridge host publish-current-branch --expected-repo YuukiAS/AI_Skills_Collection --expected-branch work/workflow-core--normal-entry-reliability
++```
++
++Publication effects outside this repository-approved entry are outside the
++current task authorization.
+diff --git a/dist/artifact.sha256 b/dist/artifact.sha256
+new file mode 100644
+index 0000000..099b5a6
+--- /dev/null
++++ b/dist/artifact.sha256
+@@ -0,0 +1 @@
++faff44293620793ba4bd6e0269659c57280c39d1e041af4f74039abb005e5263
+diff --git a/dist/artifact.txt b/dist/artifact.txt
+new file mode 100644
+index 0000000..01cb5e3
+--- /dev/null
++++ b/dist/artifact.txt
+@@ -0,0 +1,2 @@
++built artifact:
++workflow-core normal entry fixture
+diff --git a/src/message.txt b/src/message.txt
+new file mode 100644
+index 0000000..6877687
+--- /dev/null
++++ b/src/message.txt
+@@ -0,0 +1 @@
++workflow-core normal entry fixture
+diff --git a/tools/build.py b/tools/build.py
+new file mode 100644
+index 0000000..54d5551
+--- /dev/null
++++ b/tools/build.py
+@@ -0,0 +1,17 @@
++#!/usr/bin/env python3
++from __future__ import annotations
++
++import hashlib
++from pathlib import Path
++
++
++root = Path(__file__).resolve().parents[1]
++source = (root / "src" / "message.txt").read_text(encoding="utf-8")
++artifact = root / "dist" / "artifact.txt"
++artifact.parent.mkdir(exist_ok=True)
++artifact.write_text("built artifact:\n" + source, encoding="utf-8")
++(root / "dist" / "artifact.sha256").write_text(
++    hashlib.sha256(artifact.read_bytes()).hexdigest() + "\n",
++    encoding="utf-8",
++)
++print(artifact)
+diff --git a/tools/check.py b/tools/check.py
+new file mode 100644
+index 0000000..7a87563
+--- /dev/null
++++ b/tools/check.py
+@@ -0,0 +1,14 @@
++#!/usr/bin/env python3
++from __future__ import annotations
++
++import hashlib
++from pathlib import Path
++
++
++root = Path(__file__).resolve().parents[1]
++artifact = root / "dist" / "artifact.txt"
++expected = (root / "dist" / "artifact.sha256").read_text(encoding="utf-8").strip()
++actual = hashlib.sha256(artifact.read_bytes()).hexdigest()
++if actual != expected:
++    raise SystemExit(f"hash mismatch: {actual} != {expected}")
++print("check-ok", actual)

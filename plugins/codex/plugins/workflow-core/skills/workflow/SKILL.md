@@ -170,6 +170,69 @@ worktree or known-good local clone when isolation is needed. Network clone only
 when no usable local source exists, and do not solve source confusion by
 remapping remotes.
 
+### Normal Entry And Approval-Boundary Routing
+
+Before treating a capability as absent or asking for more authority, classify
+the effect as `required`, `optional`, or `unknown`. Optional cleanup,
+convenience, cache pruning, cosmetic sync, or post-success housekeeping must not
+drive escalation and must not block a frozen objective unless the Goal names it
+as required.
+
+Choose the least-privilege normal entry in this order:
+
+1. current-user, frozen-task, or repository canonical route;
+2. matched specialist probe, resource, wrapper, or runner;
+3. project-declared environment or runtime;
+4. current workspace normal capability;
+5. authority path only when the required effect clearly exceeds every valid
+   normal boundary.
+
+Missing tools on the default `PATH`, an unavailable optional mode, a failed
+local flag, or a rejected approval request are not by themselves proof that the
+capability is absent. Check the relevant specialist or project-declared route
+first. Repo-local build, check, render, QA, and deterministic validation that
+can run inside the current workspace must use the workspace-write normal entry
+instead of proactively selecting `require_escalated`, a broader shell wrapper,
+or an unrelated external route.
+
+Automatic recovery is allowed only when all six dimensions remain equivalent
+and the privilege or authority surface does not increase:
+
+```text
+frozen effect
+professional quality
+acceptance evidence strength
+safety/privacy
+artifact identity
+current authorization scope
+```
+
+If any dimension is unknown or changed, fail closed and return to the real
+owner, Planner, or user-authority path. Do not replace a bounded/canonical
+publisher, reviewer, transport, credential path, or approved route with a raw
+or broader-privilege route merely because the bounded route failed.
+
+Approval rejection and authority-boundary failures must be attributed to one of
+these classes before retrying:
+
+1. optional or non-required effect;
+2. unnecessarily privileged selected route;
+3. genuine authority or safety boundary;
+4. canonical or normal entry unavailable or broken, including its policy,
+   runtime, or transport owner failure.
+
+The fourth class is not permission to bypass the boundary. When no legal
+six-dimension-equivalent, privilege-non-increasing recovery exists, preserve the
+successful local work, mark only the blocked effect as blocked, and stop. For
+example, a publication failure must not be reported as a build, render, QA, or
+local-commit failure when those effects already passed.
+
+When the same approval-sensitive effect is rejected more than once, or when an
+agent is about to retry the same bounded effect through an equal-or-higher
+privilege route, stop approval-sensitive execution and perform route
+reassessment first. Merely switching to `bash`, Python, a raw wrapper, another
+escalation flag, or a different command spelling is not new information.
+
 ### Reviewed Handoff Bootstrap And Resume Routing
 
 When an approved Reviewed Handoff task names an exact repository, task key,
