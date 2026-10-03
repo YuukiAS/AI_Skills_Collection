@@ -4,6 +4,51 @@
 
 No unreleased changes.
 
+## 5.4.2 - 2026-10-03
+
+Repository `5.4.2` is a compatible patch release for Slurm Workflows routing
+and capacity lifecycle repair after the `5.4.1` release line.
+
+Repository bump decision: PATCH
+Reason: this release improves the existing standalone `slurm-workflows`
+capability without adding a new repository-level user capability.
+
+Affected standalone skills:
+- `slurm-workflows`: `0.2` -> `0.3`
+  Reason: Slurm Workflows preserves sticky workload/capacity state, reconciles
+  persistent capacity against calendar target windows, requires exact
+  enrollment `scope_digest` before mutation-capable lifecycle actions, stops
+  emitting obsolete race defaults in fresh local config, keeps doctor
+  requiredness site-aware, verifies true installed normal-entry behavior with
+  fake Slurm, and keeps generated repo artifacts public-safe.
+
+Affected central plugins:
+- all central plugins: NO_BUMP
+  Reason: this release does not change central Marketplace plugin behavior.
+
+Bridge Kit: NO CHANGE.
+
+Unchanged central plugin versions: `workflow-core 0.5`, `ai-skills-core 0.5`,
+`writing-style 0.4`, `research-writing 0.2`, `presentations 0.3`,
+`scientific-visualization 0.1`, `web-development 0.4`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- The installed Slurm Workflows normal entry can carry accepted workload
+  contracts and capacity-family state across independent loads without adding a
+  history database.
+- Persistent capacity reconciliation checks recurrence, target windows,
+  successor lead time, minimum useful duration, and cutoff semantics instead of
+  treating any compatible running GPU allocation as sufficient.
+- Enrollment authorization fails closed unless the current scope exactly
+  matches the stored digest and bounded mutation scope.
+- Fresh local routing config avoids obsolete generic race defaults, while
+  legacy fields remain readable for compatibility.
+- Doctor and generated references avoid one-size-fits-all site assumptions and
+  avoid persisting private scheduler/account/path details into public repo
+  artifacts.
+
 ## 5.4.1 - 2026-10-02
 
 Repository `5.4.1` is a compatible patch release for Verified Workflow

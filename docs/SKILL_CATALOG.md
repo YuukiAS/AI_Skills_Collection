@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Generated at `2026-10-02T04:03:58+00:00` from `registry.json` metadata. Do not edit by hand.
+Generated at `2026-10-03T14:50:17+00:00` from `registry.json` metadata. Do not edit by hand.
 
 Budget warnings in this catalog are guidance for context hygiene; they do not make complete domain installation invalid.
 

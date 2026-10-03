@@ -11,4 +11,4 @@ Site profiles may restrict or clarify public policy, but they are not a supporte
 
 Local overrides may provide private account names, QOS, partitions, local site ids, private paths, modules, partition preference and accelerator preference. Secrets and raw discovery dumps must never be written to generated skill references.
 
-Generated references should contain only a public-safe locator and summary: `local_site_id`, optional `policy_overlay_id`, scheduler family, profile revision, local override path, runtime availability and fact provenance. Hidden or unavailable facts remain `UNKNOWN`.
+Generated references should contain only a public-safe locator and summary: `local_site_id`, optional `policy_overlay_id`, scheduler family, profile revision, local override locator/alias, runtime availability and fact provenance. Hidden or unavailable facts remain `UNKNOWN`; arbitrary absolute local paths, raw cluster identities, accounts and QOS values must stay out of repo-targeted generated references and manifests.

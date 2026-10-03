@@ -118,11 +118,13 @@ class SkillUpdateTests(unittest.TestCase):
             )
             first = skills.environment_apply_plan(args, skills.environment_plan_payload(args))
             second = skills.environment_apply_plan(args, skills.environment_plan_payload(args))
-            manifest_path = Path(first["target_root"]) / skills.ENV_MANIFEST_NAME
+            target_root = skills.environment_target_root(args)
+            manifest_path = target_root / skills.ENV_MANIFEST_NAME
             self.assertTrue(manifest_path.exists())
             self.assertEqual(first["site_id"], "cuhk-central-cluster")
             self.assertEqual(second["site_id"], "cuhk-central-cluster")
-            self.assertTrue((Path(first["target_root"]) / "slurm-workflows" / "references" / "_generated" / "site-profile.md").exists())
+            self.assertEqual(first["target_root"], "repo:.agents/skills")
+            self.assertTrue((target_root / "slurm-workflows" / "references" / "_generated" / "site-profile.md").exists())
 
     def test_environment_init_site_writes_only_selected_section_and_refuses_overwrite(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -169,7 +171,8 @@ class SkillUpdateTests(unittest.TestCase):
             self.assertIn("unknown-site", diagnostics["unknown_sites"])
             self.assertIn("unknown_field", diagnostics["unknown_fields"])
             self.assertIn("account", diagnostics["empty_fields"])
-            self.assertIn("partition", diagnostics["missing_required_fields"])
+            self.assertIn("account", diagnostics["missing_required_fields"])
+            self.assertNotIn("partition", diagnostics["missing_required_fields"])
             self.assertIn("scratch_root", diagnostics["inaccessible_paths"])
             self.assertIn("render_resource_dirs", diagnostics["inaccessible_paths"])
 
