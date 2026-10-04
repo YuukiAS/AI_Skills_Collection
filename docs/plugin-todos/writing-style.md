@@ -4,22 +4,22 @@ Canonical maintenance inbox for the `writing-style` plugin.
 
 ## Incoming real-use feedback
 
-### Codex-authored README should always use Clear Writing, with Chinese README prose kept genuinely Chinese
-status: NEW
+### 任何 README.md 修改都必须经过 Clear Writing 检查
+status: PROMOTED
 tracking: #12
-source: user feedback / AI Research Stack README authoring, 2026-09-24
-evidence: repeated cross-repo README edits by Codex can leave technically correct but reader-facing prose full of unnecessary English scaffolding even when the document is explicitly Chinese; user now requires Clear Writing to be part of README authoring rather than an optional afterthought
-target layer: routing / README authoring / Chinese reader-facing prose
-problem: README is a primary user-facing artifact, but Codex can currently treat it as ordinary maintenance text and bypass the dedicated language layer. This creates two recurring failures: (1) README wording remains mechanically technical or implementation-facing even when the repository is meant for ordinary users; (2) Chinese README files regress into unnecessary English nouns, headings, connective phrases and mixed-language scaffolding simply because the underlying code/config uses English identifiers. The technical maintainer should still own facts, commands, versions, install steps and repository semantics, but reader-facing README prose should be passed through Clear Writing before closure.
+source: 用户反馈 / AI Research Stack README authoring, 2026-09-24；Issue #12 follow-up, 2026-10-04
+evidence: Codex 多次跨仓库修改 README 时，可能让技术事实保持正确，却在明确中文的文档里留下不必要的英文脚手架。2026-10-04 的真实反馈进一步指出：现有 README 修改再次出现了普通英文可以中文化却仍保留的问题，说明当前 Clear Writing / `chinese-prose` 已有对应语言能力，但正常 README 修改入口没有稳定消费它。
+target layer: 仓库维护 / README 消费入口 / Clear Writing 终审
+problem: README 是主要面向读者的仓库入口，但 Codex 仍可能把它当作普通维护文本处理，绕过专门的语言终审。缺口不在于 Clear Writing 缺少“中文 README、中文为主、删除非必要英文、保留精确技术字符串”的能力，而在于 README 修改任务没有稳定触发它。当前任务负责人 / repository maintainer 仍负责事实、命令、版本、安装步骤、架构和范围；Clear Writing 负责最终读者可见语言质量，并且不得改变技术含义。
 candidate_action:
-- When Codex creates a new README or materially rewrites an existing README, require a real production invocation of Clear Writing after technical content and repository facts are frozen. Reading the source skill text is not sufficient proof of invocation.
-- Treat README language as an artifact-level contract. If the README is Chinese, ordinary explanatory prose, headings, transitions, labels and user guidance should be natural Chinese by default.
-- Preserve English only where it is genuinely necessary: exact commands, code/config identifiers, file paths, API names, package/library/product names, standard acronyms, protocol names, version strings, error literals, and other exact technical tokens whose translation would reduce fidelity.
-- Do not leave unnecessary English scaffolding such as generic headings, status labels, workflow prose, implementation nouns or connective phrases merely because Codex is editing a technical repository. Prefer the natural Chinese equivalent when no exact-name constraint exists.
-- Do not translate away exact user-facing product names or code literals just to make the page look uniformly Chinese.
-- The repository maintainer / domain owner remains responsible for factual correctness, install instructions, architecture and scope. Clear Writing owns the final reader-facing language pass and must not change technical meaning.
-- README closure should check the whole affected reader-facing section, not only the lines directly edited in the implementation diff, because surrounding mixed-language prose may make the new section inconsistent.
-promotion_gate: replay on at least two unrelated repositories with Chinese README updates and one English README control. The Chinese cases should show that unnecessary English is removed while exact technical tokens remain intact; the English control should confirm that this rule does not force Chinese when the README language is English.
+- 只要本仓库根 `README.md` 被当前任务修改，无论修改大小，任务结束前都必须实际调用当前安装的 Clear Writing（`writing-style`）做读者可见语言检查。只读 source `SKILL.md`、在 prompt 里声称遵守规则或做字符串扫描，都不能算已经调用。
+- 检查至少覆盖受影响的读者区域；如果局部修改造成上下文语言不一致，就扩大到相关章节，而不是只看 diff 中新增的几个词。
+- 中文 README 的普通解释、标题、连接语、维护说明和面向读者的技术说明默认使用自然中文；普通英文概念不因代码、配置或来源使用英文就继续暴露给读者。
+- 产品正式名称、插件名称、代码、命令、路径、文件名、字段、配置键、版本、协议值、状态值和其他必须精确匹配的机器字符串可以保留，不为了中文化而翻译。
+- 如果本次 README 修改只有版本号、链接或其他机器字符串，Clear Writing 检查后可以原样放行，不得为了证明调用而强行改文案。
+- repository maintainer / 当前任务负责人负责 README 的事实、版本、命令、架构和范围；Clear Writing 负责最终面向读者的语言质量，不接管 Research Authoring、`workflow-core` 或技术事实判断。
+observed_handling: 2026-10-04 已提升为仓库级 `AGENTS.md` README 修改合同，并新增最小回归测试，防止规则退回“只有新建或大改 README 才触发”。本次只改变仓库治理规则和 tracking 文案；没有修改 `writing-style`、`ai-skills-core`、`workflow-core` 或 `research-writing` 的 production skill source，也没有版本发布。
+promotion_gate: 至少在 2 个彼此无关的中文 README 修改任务和 1 个英文 README 对照任务中回放。中文案例应证明非必要英文会被清理，同时精确技术字符串保持不变；英文对照应证明这条规则不会在 README 语言本来是英文时强行中文化。
 
 
 ### Promote `writing-style` into the generic content-preserving language layer
@@ -163,4 +163,3 @@ candidate_action:
 - Do not build AI-detector evasion or a generic humanizer.
 boundary: Frontend Design decides whether/where/how much to say and owns rendered hierarchy; the writing layer realizes natural language after UI role and product meaning are frozen.
 promotion_gate: do not implement this as an isolated Clear Writing patch while Frontend Design remains an unstable upstream owner. First establish a usable Frontend Design baseline; then run one cross-plugin Planner/Critic task that freezes ownership, routing, handoff schema and shared evaluation before implementation.
-

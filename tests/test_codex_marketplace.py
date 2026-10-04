@@ -381,6 +381,34 @@ class CodexMarketplaceTests(unittest.TestCase):
             self.assertIn(f"<code>{plugin['name']}</code>", readme)
             self.assertIn(f"v`{plugin['version']}`", readme)
 
+    def test_any_readme_change_requires_clear_writing_contract(self) -> None:
+        agents = (REPO_ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        readme_section = agents.split("## 1.2 任务规模必须和读取规模匹配", 1)[0].split(
+            "## 1.1 README 永远写给人看", 1
+        )[1]
+        todo = (REPO_ROOT / "docs" / "plugin-todos" / "writing-style.md").read_text(encoding="utf-8")
+        issue12 = todo.split("### Promote `writing-style`", 1)[0]
+
+        self.assertIn("只要当前任务修改根 `README.md`", readme_section)
+        self.assertIn("无论修改大小", readme_section)
+        self.assertIn("必须实际调用当前安装的 Clear Writing（`writing-style`）", readme_section)
+        self.assertIn("只读 `SKILL.md`、在提示词里声称遵守规则或做字符串扫描，都不算调用", readme_section)
+        self.assertIn("版本、链接或其他机器字符串", readme_section)
+        self.assertIn("原样放行", readme_section)
+        self.assertIn("代码、命令、路径、文件名、字段、配置键、版本", readme_section)
+        self.assertIn("README 的事实、版本、命令、架构和范围由当前任务负责人 / repository maintainer 负责", readme_section)
+        self.assertIn("Clear Writing 只负责最终面向读者的语言质量", readme_section)
+
+        self.assertIn("### 任何 README.md 修改都必须经过 Clear Writing 检查", issue12)
+        self.assertIn("无论修改大小", issue12)
+        self.assertIn("当前安装的 Clear Writing（`writing-style`）", issue12)
+        self.assertIn("版本号、链接或其他机器字符串", issue12)
+        self.assertIn("status: PROMOTED", issue12)
+        self.assertIn("不接管 Research Authoring、`workflow-core` 或技术事实判断", issue12)
+        self.assertIn("没有修改 `writing-style`、`ai-skills-core`、`workflow-core` 或 `research-writing` 的 production skill source", issue12)
+        self.assertNotIn("creates a new README or materially rewrites", issue12)
+        self.assertNotIn("new README or materially rewrites", issue12)
+
     def test_workflow_identity_and_gate_lifecycle_contracts_are_source_authoritative(self) -> None:
         policy = (REPO_ROOT / "docs/workflows/PLUGIN_CAPABILITY_GATE_POLICY.md").read_text(encoding="utf-8")
         planner = (REPO_ROOT / "docs/workflows/PLANNER_ROLE_CONTRACT.md").read_text(encoding="utf-8")
