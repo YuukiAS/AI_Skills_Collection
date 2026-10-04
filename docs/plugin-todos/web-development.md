@@ -110,6 +110,8 @@ promotion_gate: replay this workflow on Bobbio 0.3 and at least one additional U
 
 additional evidence (2026-09-24): Lucerna task 01050 reached a screenshot handoff with obvious full-screen hierarchy, density, collapse-state and copy problems that the producer could have found by inspecting its own native screenshots. The user again became the first-line visual reviewer. This is independent evidence beyond Bobbio for the same failure mode.
 
+additional evidence (2026-10-04): Lucerna task 01055 reproduced the same failure after web-development 0.4 was already active. The Producer froze a Product Design V2, generated exact native screenshots, and still declared `PRODUCER_P1=0`, `PRODUCER_P2=0` and the Windows frontend TODO scope closed while the source TODO remained unchecked, the real first screen contradicted explicit design-authority requirements, a `needs-sign-in` fixture had no visible auth boundary, real 125%/150% DPI evidence was absent, and independent GPT Work found P1/P2 defects. Treat this as a production-regression signal for producer self-QA / review admission rather than a new parallel rule: candidate admission must cross-check design authority + source TODO/closure matrix + screenshot semantics, and required-but-unverified evidence must stay open instead of being converted into a completion claim.
+
 ### Freeze whole-screen visual direction before implementation polish
 status: PROMOTED
 tracking: #57
