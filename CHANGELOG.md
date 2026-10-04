@@ -4,6 +4,43 @@
 
 No unreleased changes.
 
+## 5.4.3 - 2026-10-04
+
+Repository `5.4.3` is a compatible patch release for Project Thread Handoff
+v0.2 recovery on the current `5.4.2` formal release line.
+
+Repository bump decision: PATCH
+Reason: Project Thread Handoff is an existing standalone repository capability;
+this release compatibly extends that workflow with same-Project old-thread
+semantic recovery and target past-chat provenance boundaries.
+
+Affected standalone skills:
+- `project-thread-handoff`: `0.1` -> `0.2`
+  Reason: Project Thread Handoff keeps Mode A current-thread handoff and adds
+  Mode B same-Project old-thread recovery with strong vs limited recovery,
+  target past-chat provenance, canonical source vs conversation authority, and
+  generic Saved Memory / profile / unsourced recall boundaries.
+
+Affected central plugins:
+- all central plugins: NO_BUMP
+  Reason: this release does not change central Marketplace plugin behavior.
+
+Changed repository behavior:
+
+- Mode A current-thread handoff remains available for producing one
+  initialization prompt from the current long project thread.
+- Mode B can recover semantic continuation state from an identifiable old
+  conversation in the same ChatGPT Project when the user explicitly invokes
+  recovery.
+- Strong Mode B recovery requires target past-chat provenance for
+  route-changing claims; limited recovery must separate target-chat-backed facts
+  from unsourced recall.
+- Repository, artifact, report, result, and runtime facts remain anchored in
+  current canonical sources rather than in conversation memory alone.
+- The existing skills-only ChatGPT personal Plugin remains only a distribution
+  wrapper; no central Marketplace Plugin, MCP, database, app, external API, or
+  transcript system is added.
+
 ## 5.4.2 - 2026-10-03
 
 Repository `5.4.2` is a compatible patch release for Slurm Workflows routing

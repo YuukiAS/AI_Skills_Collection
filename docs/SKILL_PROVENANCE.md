@@ -5,9 +5,9 @@ This report records what can be proven from files currently in this repository. 
 ## Summary
 
 - Scope: `active_and_non_archived`
-- Skills audited: 151
+- Skills audited: 154
 - Skills with explicit source fields: 11
-- User-authored skills: 19
+- User-authored skills: 22
 - External adapted skills: 11
 - External vendored skills: 0
 - Generated skills: 0
@@ -23,14 +23,16 @@ This report records what can be proven from files currently in this repository. 
 | external-adapted | 11 |
 | local | 7 |
 | unknown | 114 |
-| user-authored | 19 |
+| user-authored | 22 |
 
 ## User Authored
 
 | Skill | Path | Provenance | Source |
 | --- | --- | --- | --- |
 | ai-skills-repository-maintainer | skills/core/codex-system/ai-skills-repository-maintainer | user-authored |  |
+| bridge-kit-maintainer | skills/core/codex-system/bridge-kit-maintainer | user-authored |  |
 | codex-workflow-protocol | skills/core/codex-system/codex-workflow-protocol | user-authored |  |
+| machine-update-orchestrator | skills/core/codex-system/machine-update-orchestrator | user-authored |  |
 | cardiac-mri | skills/domains/medical-imaging/cardiac-mri | user-authored |  |
 | medical-imaging-terminology-measurement | skills/domains/medical-imaging/medical-imaging-terminology-measurement | user-authored |  |
 | clinical-guideline-checking | skills/domains/medicine-clinical/clinical-guideline-checking | user-authored |  |
@@ -46,6 +48,7 @@ This report records what can be proven from files currently in this repository. 
 | frontend-visual-systems | skills/tools/frontend/frontend-visual-systems | user-authored |  |
 | research-product-frontend | skills/tools/frontend/research-product-frontend | user-authored |  |
 | slurm-workflows | skills/tools/hpc/slurm-workflows | user-authored |  |
+| product-ui-copy | skills/writing/core/product-ui-copy | user-authored |  |
 | writing-fidelity | skills/writing/core/writing-fidelity | user-authored |  |
 | research-reporting | skills/writing/research/research-reporting | user-authored |  |
 

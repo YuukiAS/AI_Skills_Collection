@@ -1,6 +1,6 @@
 {
-  "version": "5.4.2",
-  "generated_at": "2026-10-03T14:50:12+00:00",
+  "version": "5.4.3",
+  "generated_at": "2026-10-04T01:39:13+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
   "skill_count": 154,
@@ -2383,7 +2383,7 @@
       "subcategory": "communication",
       "slug": "project-thread-handoff",
       "install_selector": "science/communication/project-thread-handoff",
-      "description": "Use only after explicit Skill selection in an existing long project thread to produce one continuation prompt for a new thread; do not use for ordinary summaries, status checks, brainstorming, or general project continuation.",
+      "description": "Use only after explicit Skill selection to hand off the current project thread or recover a same-Project old thread; do not use for ordinary summaries, status checks, brainstorming, or general continuation.",
       "status": "active",
       "provenance": "user-authored",
       "source_repo_url": "",

@@ -1,6 +1,6 @@
 {
   "license_counts": {
-    "(missing)": 48,
+    "(missing)": 51,
     "3-clause BSD license": 1,
     "Apache License, Version 2.0": 1,
     "Apache-2.0": 4,
@@ -31,7 +31,7 @@
     "https://github.com/sympy/sympy/blob/master/LICENSE": 1
   },
   "metadata_skill_author_counts": {
-    "(missing)": 47,
+    "(missing)": 50,
     "AHK Strategies (ashrafkahoush-ux)": 2,
     "AI Skills Collection maintainers": 2,
     "AI Skills Collection maintainers with recorded upstream sources": 11,
@@ -47,18 +47,18 @@
     "external-adapted": 11,
     "local": 7,
     "unknown": 114,
-    "user-authored": 19
+    "user-authored": 22
   },
   "provenance_counts": {
     "external-adapted": 11,
     "local": 7,
     "unknown": 114,
-    "user-authored": 19
+    "user-authored": 22
   },
   "rows_with_license_files_count": 11,
   "rows_with_urls_count": 66,
   "scope": "active_and_non_archived",
-  "skill_count": 151,
+  "skill_count": 154,
   "skills": [
     {
       "license": "",
@@ -77,8 +77,34 @@
       "license": "",
       "license_files": [],
       "metadata_skill_author": "",
+      "name": "bridge-kit-maintainer",
+      "path": "skills/core/codex-system/bridge-kit-maintainer",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
       "name": "codex-workflow-protocol",
       "path": "skills/core/codex-system/codex-workflow-protocol",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "machine-update-orchestrator",
+      "path": "skills/core/codex-system/machine-update-orchestrator",
       "provenance": "user-authored",
       "provenance_category": "user-authored",
       "source_fields": {},
@@ -2194,6 +2220,19 @@
       "path": "skills/writing/core/chinese-prose",
       "provenance": "local",
       "provenance_category": "local",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "product-ui-copy",
+      "path": "skills/writing/core/product-ui-copy",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
       "source_fields": {},
       "status": "active",
       "url_count": 0,
