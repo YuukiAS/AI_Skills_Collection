@@ -468,6 +468,33 @@ candidate_action:
 - A claimed `ALL_PAGES_VIEWED=YES` must be backed by unique page-level notes; executor self-review is not independent acceptance.
 promotion_gate: replay the Rich v2 failed candidate so the strengthened gate rejects it for both source-contract drift and visual composition; then pass the bounded repair candidate plus one unrelated deck without requiring project-specific page logic.
 
+### Beamer header miniframe markers need native-size projection QA
+status: NEW
+tracking: #98
+source: STAT5060 Tutorial 1 Rich v2 human screenshot review, 2026-10-04
+evidence: Rich v2 course-standard theme overrode Beamer miniframe markers with custom `\scalebox{0.55}` bullet/open-circle glyphs. At normal slide scale, the section labels were readable but the per-frame markers collapsed into tiny pinpricks. Both executor QA and independent release review missed the defect because they checked names/link destinations, not marker visibility.
+problem: A navigation header can be structurally correct and clickable while still failing as presentation chrome because the miniframe markers are too small to read as progress/state indicators at whole-slide scale.
+candidate_action:
+- Shared Beamer core should use the same native miniframe template/size for `cuhk-research` and `course-standard`; do not downscale native markers with arbitrary `scalebox` values.
+- Treat section text and miniframe row as one visual unit. Marker outer size, inter-marker spacing, and vertical separation from the section label must remain legible at 1920x1080 whole-slide view.
+- Add a header crop/fixture with short and long sections (including 10+ frames) and reject markers that visually collapse to punctuation.
+- QA must check marker visibility/state contrast in addition to full section labels, destination coverage, and clickability.
+- Prefer native Beamer ownership; do not repair by drawing a custom navigation overlay.
+promotion_gate: the failed STAT5060 header deterministically fails the new projection-size gate; repaired course-standard and CUHK fixtures use the same marker template/metrics and pass at normal whole-slide scale.
+
+### Code typography is a deliberate compact role, not body-text typography
+status: NEW
+tracking: #98
+source: STAT5060 Tutorial 1 Rich v2 human screenshot review, 2026-10-04
+evidence: a release audit incorrectly treated `\scriptsize` teaching code as a defect because body text uses a larger role. The actual 1920x1080 slide showed the code legible, and the user explicitly prefers code to remain compact because code blocks routinely contain more characters and lines than prose.
+problem: Same-role typography parity must not be misread as “all slide content uses body size.” Code is a distinct semantic role with different density constraints.
+candidate_action:
+- Freeze formal Beamer code/listing typography to monospaced `\scriptsize` by default for both CUHK and course-standard.
+- Do not flag code merely for being smaller than body text.
+- Code QA should instead check whole-slide legibility, line wrapping, clipping, balanced paired boxes, syntax fidelity, and whether a denser slide should reduce code content rather than silently shrink below the code token.
+- `\tiny` remains forbidden for normal code; body/table/caption roles keep their own independent size tokens.
+promotion_gate: paired R/Python and a dense research-code fixture both remain readable at 1920x1080 with fixed scriptsize code, while injected tiny/clipped code fails.
+
 真实项目 thread 新增时只需要最小格式：
 
 ```text
