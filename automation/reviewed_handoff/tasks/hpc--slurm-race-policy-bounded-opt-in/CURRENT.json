@@ -1,0 +1,16 @@
+{
+  "base_branch": "main",
+  "base_commit": "818b7e643210b0115cbb3add91ad9be90d78a8b2",
+  "ci_required": true,
+  "ci_status": "PENDING",
+  "implementation_commit": "2a357dca3d536aff728bfa1834b30318cfef08a8",
+  "last_review_decision": null,
+  "max_plan_revisions": 1,
+  "max_review_rounds": 2,
+  "next_action": "WAIT_FINAL_CRITIC",
+  "plan_revision": 0,
+  "review_round": 0,
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "state": "READY_FOR_GPT_REVIEW",
+  "task_key": "hpc--slurm-race-policy-bounded-opt-in"
+}
