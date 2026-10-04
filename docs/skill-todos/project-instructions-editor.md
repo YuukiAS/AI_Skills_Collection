@@ -648,3 +648,58 @@ FINAL_SERVER_VPS_USER_ACCEPTANCE=PENDING
 READY_FOR_INTEGRATION=NO
 READY_FOR_RELEASE=NO
 \`\`\`
+
+
+## 2026-10-04 final delivery closure planning
+
+Implementation is independently accepted:
+
+- FINAL_CANDIDATE_COMMIT: \`266334ca807640b08605faddbdded7d5a6591aa1\`
+- EVIDENCE_HEAD: \`34428d3db409ffc97aea36cc3776c14f33b94289\`
+- G4 review PASS: \`254e9ea5ca1739dee0689afa13f7a1d34ac4469d\`
+- implementation review PASS: \`ad217bd9d131456ba646fe70367a1b77a7fc912f\`
+
+Current state:
+
+\`\`\`text
+IMPLEMENTATION_OVERALL=PASS
+G1=PASS
+G2=PASS
+G3=PASS
+G4=PASS
+READY_FOR_INTEGRATION=YES
+READY_FOR_RELEASE=NO
+\`\`\`
+
+The user selected the real Server+VPS ChatGPT Project as the one final last-mile consumption acceptance before formal integration/release.
+
+Final-delivery package:
+
+- Plan: \`docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_FINAL_DELIVERY_CLOSURE_PLAN_V0_1_2026-10-04.md\`
+- Goal: \`docs/goals/PROJECT_INSTRUCTIONS_EDITOR_FINAL_DELIVERY_CLOSURE_GOAL_V0_1.md\`
+- Future integration/release Kickoff: \`docs/operations/prompts/PROJECT_INSTRUCTIONS_EDITOR_FINAL_INTEGRATION_RELEASE_KICKOFF_V0_1.md\`
+- Package commit: \`7bbe8d5982b9cd6abdca503ca6b12094976b92c6\`
+
+The earlier Server+VPS acceptance addendum is subsumed by this final-delivery plan for sequencing; its real-user acceptance intent is preserved.
+
+Distribution decision for final acceptance:
+
+- create one PRIVATE / USER-scope / skills-only ChatGPT personal Plugin wrapper around exact C4;
+- canonical source remains the standalone Skill;
+- no central Marketplace Plugin;
+- no MCP;
+- use exact C4 \`assets/app-facing.svg\` for both wrapper root and bundled Skill icon; no icon search/redesign;
+- initial wrapper name \`project-instructions-editor\`, version \`0.1.0\`;
+- future wrapper updates are discovered and applied through Plugin Creator using current release identity, without asking the user to copy Plugin IDs, find icons, or build archives.
+
+The user's exact local integration worktree may contain newer unpushed README wording. Remote README must not be treated as the authoritative integration text until the Executor inspects local \`git status\` and README diffs. Task-owned local README edits must be preserved/reconciled, not silently overwritten.
+
+Planner observed current main \`5.4.3\`; if integration-time main remains on the \`5.4.x\` formal line without overlapping PIE integration, repository target remains \`5.5.0\`. Patch drift within \`5.4.x\` is not by itself a new Planner blocker.
+
+Issue #93 remains \`DOING\` until private-wrapper delivery, Server+VPS acceptance, main integration, formal release advancement, and board closure are all truthful.
+
+\`\`\`text
+FINAL_SERVER_VPS_USER_ACCEPTANCE=PENDING
+READY_FOR_RELEASE=NO
+NEXT_HANDOFF=CRITIC
+\`\`\`
