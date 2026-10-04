@@ -6,27 +6,20 @@ This skill is not one of the central Marketplace plugins, so its real-use failur
 
 ## Open candidates
 
+## Recently promoted
+
 ### Bounded duplicate-race opt-in when no site prohibition is known
-status: PROMOTE_NOW
+status: PROMOTED
 tracking: #96
-source: Bounded implementation task `hpc--slurm-race-policy-bounded-opt-in`
-evidence: `skills/tools/hpc/slurm-workflows/SKILL.md`; `skills/tools/hpc/slurm-workflows/scripts/slurm_routing.py`; `tests/test_slurm_workflows.py`
-kind: regression
-scope: standalone-skill
-area: standalone-skill
+source: Reviewed Handoff task `hpc--slurm-race-policy-bounded-opt-in`
+evidence: `results/hpc--slurm-race-policy-bounded-opt-in/RESULT.md`; Final Critic PASS in `results/hpc--slurm-race-policy-bounded-opt-in/FINAL_CRITIC_REVIEW_R3_2026-10-04.md`; GitHub CI run `37187784359`; product candidate `5a3dc447da2ea429ba2d229b0301c378be9e8018`; central release closure evidence in `results/hpc--slurm-race-policy-bounded-opt-in/CENTRAL_RELEASE_CLOSURE_2026-10-04.md`
 target layer: routing / policy / qa
 problem:
-- `slurm-workflows 0.3` requires a site profile to explicitly say duplicate race is allowed before a user/local opt-in can matter.
-- That is too strict for missing, `UNKNOWN`, `disabled_by_default`, and `explicit_user_opt_in` policy states when no site prohibition is known and the user has explicitly opted in.
-project-specific context: This is scoped to public standalone Slurm Workflows behavior and deterministic fake-Slurm/read-only evidence. It does not authorize real `sbatch`, `salloc`, `scancel`, duplicate GPU race execution, weekly GPU enrollment, DII installation/adaptation, Bridge Kit changes, central plugin topology changes, main integration, or release advancement.
-candidate action:
-- Keep duplicate race off by default and require explicit user/local opt-in.
-- Let missing, `UNKNOWN`, `disabled_by_default`, and `explicit_user_opt_in` site policy proceed only when no prohibition is known and the bounded race contract is satisfied.
-- Keep explicit site prohibition higher priority than local opt-in.
-- Require exactly two candidate routes, identical workload/scientific contract, hard resource compatibility on both routes, and a frozen winner/loser cancellation contract before submission.
-promotion gate: READY when `slurm-workflows 0.4` has targeted race-policy coverage, complete `tests.test_slurm_workflows`, update/full-suite validation, generated parity, normal-entry smoke evidence, exact reviewed-branch CI, and Final Critic review. `REAL_SLURM_MUTATION = NO`.
-
-## Recently promoted
+- `slurm-workflows 0.3` required a site profile to explicitly allow duplicate race before a user/local opt-in could matter.
+- That was too strict for missing, `UNKNOWN`, `disabled_by_default`, and `explicit_user_opt_in` policy states when no site prohibition is known and the user has explicitly opted in.
+project-specific context: This entry is scoped to public standalone Slurm Workflows behavior and deterministic fake-Slurm/read-only evidence. It does not authorize real `sbatch`, `salloc`, `scancel`, duplicate GPU race execution, weekly GPU enrollment, DII installation/adaptation, Bridge Kit changes, or central plugin topology changes.
+current behavior: Repository `5.4.4` formally ships standalone `slurm-workflows 0.4`. Duplicate race remains off by default; final race authorization requires explicit user/local opt-in, no explicit site prohibition, exactly two distinct candidate routes, full workload/scientific contract identity, hard resource compatibility, and a frozen safe winner/loser cancellation policy. Central Plugins remain `NO_BUMP`; Bridge Kit remains `NO CHANGE`; `REAL_SLURM_MUTATION = NO`.
+promotion gate: CLOSED by product candidate `5a3dc447da2ea429ba2d229b0301c378be9e8018`, GitHub CI run `37187784359`, Final Critic PASS, and formal release commit `06d135d8a6ee62cd41abb40fc5771fcef7f8db25`. Issue #96 remains open for DII consumer adaptation.
 
 ### Slurm routing and capacity maintenance closure regression
 status: PROMOTED
