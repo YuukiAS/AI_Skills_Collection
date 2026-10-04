@@ -95,6 +95,8 @@ Use duplicate race only when all of the following are true:
 
 `allowed` site policy is not enough without user opt-in. `missing`, `UNKNOWN`, `disabled_by_default`, and `explicit_user_opt_in` site policy are not default permission, but they can enter bounded race when the user opts in and there is no known prohibition. If a site policy says `forbidden`, `prohibited`, `disabled`, `disallowed`, or an equivalent hard no, fail closed even when the user opts in.
 
+Treat site-policy plus user-opt-in checks as eligibility only. Final duplicate-race authorization must come from the complete bounded gate that validates workload identity, hard resources, two distinct routes, and the cancellation contract.
+
 Do not change data, split, model, endpoint, GPU count, per-candidate walltime, training budget, or other scientific semantics to make a race possible. If a workload requires H100, do not race it on A100 unless the workload contract explicitly says both accelerator types are valid for the same result. If the scheduler or site rejects duplicate submission, fail closed and do not try another command form to bypass that policy.
 
 ## Outputs

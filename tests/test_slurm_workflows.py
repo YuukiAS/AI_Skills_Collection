@@ -120,9 +120,15 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
             "native_widen",
         )
         self.assertFalse(helper.duplicate_race_decision({}, False)["allowed"])
-        self.assertTrue(helper.duplicate_race_decision({}, True)["allowed"])
-        self.assertTrue(helper.duplicate_race_decision({"duplicate_race": "allowed"}, True)["allowed"])
-        self.assertFalse(helper.duplicate_race_decision({"race_execution": "forbidden"}, True)["allowed"])
+        self.assertFalse(helper.duplicate_race_decision({}, False)["eligible"])
+        opt_in = helper.duplicate_race_decision({}, True)
+        self.assertFalse(opt_in["allowed"])
+        self.assertTrue(opt_in["eligible"])
+        self.assertTrue(opt_in["requires_bounded_contract"])
+        allowed_site = helper.duplicate_race_decision({"duplicate_race": "allowed"}, True)
+        self.assertFalse(allowed_site["allowed"])
+        self.assertTrue(allowed_site["eligible"])
+        self.assertFalse(helper.duplicate_race_decision({"race_execution": "forbidden"}, True)["eligible"])
 
     def test_duplicate_race_policy_opt_in_truth_table_and_bounded_contract(self) -> None:
         helper = load_helper()
@@ -140,22 +146,48 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         for site_policy, user_opt_in, allowed, reason in truth_table:
             with self.subTest(site_policy=site_policy, user_opt_in=user_opt_in):
                 decision = helper.duplicate_race_decision(site_policy, user_opt_in)
-                self.assertEqual(decision["allowed"], allowed)
+                self.assertFalse(decision["allowed"])
+                self.assertEqual(decision["eligible"], allowed)
                 self.assertEqual(decision["reason"], reason)
 
         workload = {
+            "workload_scope_digest": "sha256:cohort-a-fold-1-seg-v2",
             "data": "cohort-a",
             "split": "fold-1",
             "model": "seg-v2",
             "endpoint": "train.py",
+            "augmentation": "none",
+            "loss_variant": "dice-ce",
+            "checkpoint_selection": "val-dice",
+            "preprocessing": "zscore-v1",
             "gpus": 1,
             "gpu_type": "h100",
+            "memory_mb": 65536,
+            "cpus_per_task": 8,
             "walltime_minutes": 240,
             "training_budget": "full",
         }
         candidates = [
-            {"partition": "h100-short", "gpus": 1, "gpu_type": "h100", "walltime_minutes": 240, "workload_contract": workload},
-            {"partition": "h100-main", "gpus": 1, "gpu_type": "h100", "walltime_minutes": 240, "workload_contract": workload},
+            {
+                "partition": "h100-short",
+                "qos": "normal",
+                "gpus": 1,
+                "gpu_type": "h100",
+                "memory_mb": 65536,
+                "cpus_per_task": 8,
+                "walltime_minutes": 240,
+                "workload_contract": workload,
+            },
+            {
+                "partition": "h100-main",
+                "qos": "normal",
+                "gpus": 1,
+                "gpu_type": "h100",
+                "memory_mb": 65536,
+                "cpus_per_task": 8,
+                "walltime_minutes": 240,
+                "workload_contract": workload,
+            },
         ]
         cancellation = {
             "winner_rule": "first_running_job",
@@ -174,6 +206,10 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         self.assertFalse(too_many["allowed"])
         self.assertEqual(too_many["reason"], "requires_exactly_two_candidates")
 
+        duplicate_route = helper.bounded_duplicate_race_decision({}, True, [candidates[0], dict(candidates[0])], workload, cancellation)
+        self.assertFalse(duplicate_route["allowed"])
+        self.assertEqual(duplicate_route["reason"], "duplicate_route_identity")
+
         missing_cancel = helper.bounded_duplicate_race_decision({}, True, candidates, workload, {"winner_rule": "first_running_job"})
         self.assertFalse(missing_cancel["allowed"])
         self.assertEqual(missing_cancel["reason"], "missing_loser_cancellation_contract")
@@ -183,19 +219,69 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         self.assertFalse(no_contract["allowed"])
         self.assertEqual(no_contract["reason"], "missing_workload_contract")
 
+        augmentation_mismatch = [
+            candidates[0],
+            dict(candidates[1], workload_contract=dict(workload, augmentation="flip")),
+        ]
+        incompatible_science = helper.bounded_duplicate_race_decision({}, True, augmentation_mismatch, workload, cancellation)
+        self.assertFalse(incompatible_science["allowed"])
+        self.assertEqual(incompatible_science["reason"], "incompatible_workload_contract")
+
+        digest_mismatch = [
+            candidates[0],
+            dict(candidates[1], workload_contract=dict(workload, workload_scope_digest="sha256:different")),
+        ]
+        stale_digest = helper.bounded_duplicate_race_decision({}, True, digest_mismatch, workload, cancellation)
+        self.assertFalse(stale_digest["allowed"])
+        self.assertEqual(stale_digest["reason"], "workload_scope_digest_mismatch")
+
+        low_memory = [candidates[0], dict(candidates[1], memory_mb=32768)]
+        memory_requirement = helper.bounded_duplicate_race_decision({}, True, low_memory, workload, cancellation)
+        self.assertFalse(memory_requirement["allowed"])
+        self.assertEqual(memory_requirement["reason"], "hard_resource_requirement_not_met")
+
+        low_cpu = [candidates[0], dict(candidates[1], cpus_per_task=4)]
+        cpu_requirement = helper.bounded_duplicate_race_decision({}, True, low_cpu, workload, cancellation)
+        self.assertFalse(cpu_requirement["allowed"])
+        self.assertEqual(cpu_requirement["reason"], "hard_resource_requirement_not_met")
+
         downgraded_gpu = [candidates[0], dict(candidates[1], gpu_type="a100")]
         hard_requirement = helper.bounded_duplicate_race_decision({}, True, downgraded_gpu, workload, cancellation)
         self.assertFalse(hard_requirement["allowed"])
         self.assertEqual(hard_requirement["reason"], "hard_resource_requirement_not_met")
 
-        incompatible_budget = [candidates[0], dict(candidates[1], training_budget="debug")]
-        incompatible = helper.bounded_duplicate_race_decision({}, True, incompatible_budget, workload, cancellation)
-        self.assertFalse(incompatible["allowed"])
-        self.assertEqual(incompatible["reason"], "incompatible_workload_contract")
+        arbitrary_winner = helper.bounded_duplicate_race_decision(
+            {},
+            True,
+            candidates,
+            workload,
+            dict(cancellation, winner_rule="largest_backfill_score"),
+        )
+        self.assertFalse(arbitrary_winner["allowed"])
+        self.assertEqual(arbitrary_winner["reason"], "unsupported_winner_rule")
+
+        keep_both = helper.bounded_duplicate_race_decision(
+            {},
+            True,
+            candidates,
+            workload,
+            dict(cancellation, running_tie_policy="keep_both"),
+        )
+        self.assertFalse(keep_both["allowed"])
+        self.assertEqual(keep_both["reason"], "unsupported_running_tie_policy")
+
+        unknown_tie = helper.bounded_duplicate_race_decision(
+            {},
+            True,
+            candidates,
+            workload,
+            dict(cancellation, running_tie_policy="do_something_site_specific"),
+        )
+        self.assertFalse(unknown_tie["allowed"])
+        self.assertEqual(unknown_tie["reason"], "unsupported_running_tie_policy")
 
         flexible_workload = dict(workload, allowed_gpu_types=["h100", "a100"])
         flexible_workload.pop("gpu_type")
-        flexible_workload["accelerator_hard"] = False
         flexible_candidates = [
             dict(candidates[0], workload_contract=flexible_workload),
             dict(candidates[1], gpu_type="a100", workload_contract=flexible_workload),
@@ -506,6 +592,88 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         self.assertIn("local_site_id: third-party", reference)
         self.assertIn("policy_overlay_id: none", reference)
         self.assertEqual(route["decision"], "route")
+
+    def test_g6_installed_normal_entry_duplicate_race_bounded_gate(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp) / "project"
+            override = Path(tmp) / "local-overrides.toml"
+            override.write_text(
+                "[sites.third-party]\nlocal_site_id = \"third-party\"\npartition_priority = \"h100-short,h100-main\"\n",
+                encoding="utf-8",
+            )
+            args = argparse.Namespace(
+                site="third-party",
+                target="repo",
+                project=str(project),
+                hostname=None,
+                path=None,
+                local_override=str(override),
+                dry_run=False,
+                json=True,
+            )
+            plan = skills.environment_plan_payload(args)
+            skills.environment_apply_plan(args, plan)
+            installed = skills.environment_target_root(args) / "slurm-workflows"
+            installed_helper = load_helper(installed / "scripts" / "slurm_routing.py")
+            workload = {
+                "workload_scope_digest": "sha256:installed-race-smoke",
+                "data": "cohort-a",
+                "split": "fold-1",
+                "model": "seg-v2",
+                "endpoint": "train.py",
+                "augmentation": "none",
+                "gpus": 1,
+                "gpu_type": "h100",
+                "memory_mb": 65536,
+                "cpus_per_task": 8,
+                "walltime_minutes": 240,
+                "training_budget": "full",
+            }
+            candidates = [
+                {
+                    "partition": "h100-short",
+                    "qos": "normal",
+                    "gpus": 1,
+                    "gpu_type": "h100",
+                    "memory_mb": 65536,
+                    "cpus_per_task": 8,
+                    "walltime_minutes": 240,
+                    "workload_contract": workload,
+                },
+                {
+                    "partition": "h100-main",
+                    "qos": "normal",
+                    "gpus": 1,
+                    "gpu_type": "h100",
+                    "memory_mb": 65536,
+                    "cpus_per_task": 8,
+                    "walltime_minutes": 240,
+                    "workload_contract": workload,
+                },
+            ]
+            cancellation = {
+                "winner_rule": "first_running_job",
+                "cancel_loser": True,
+                "running_tie_policy": "keep_lowest_job_id_cancel_other",
+            }
+            allowed = installed_helper.bounded_duplicate_race_decision(
+                {"race_execution": "disabled_by_default"},
+                True,
+                candidates,
+                workload,
+                cancellation,
+            )
+            unsafe_cancellation = installed_helper.bounded_duplicate_race_decision(
+                {"race_execution": "disabled_by_default"},
+                True,
+                candidates,
+                workload,
+                dict(cancellation, running_tie_policy="keep_both"),
+            )
+        self.assertTrue(allowed["allowed"])
+        self.assertEqual(allowed["reason"], "bounded_two_route_race")
+        self.assertFalse(unsafe_cancellation["allowed"])
+        self.assertEqual(unsafe_cancellation["reason"], "unsupported_running_tie_policy")
 
     def test_g6_installed_persistent_capacity_state_normal_entry(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
