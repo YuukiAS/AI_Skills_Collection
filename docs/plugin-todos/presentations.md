@@ -438,6 +438,20 @@ candidate_action:
 - Add a regression fixture from this Rich Edition failure so a 37-page deck with correct frame counts but duplicated section labels deterministically fails.
 promotion_gate: course-standard template implementation plus one unrelated Beamer deck both pass the structural/rendered-label gate, while the Rich Edition pre-repair artifact fails.
 
+### Beamer font identity must be fixed and renderer-owned, not host-selected
+status: NEW
+tracking: #98
+source: STAT5060 Tutorial 1 Rich v2 font-blocker recovery, 2026-10-04
+evidence: Rich v2 implementation stopped because a temporary handoff required Times New Roman; host `fc-match` resolved Liberation Serif instead. Review of `render-chinese-math-pdf` showed the established reliable pattern is fixed bundle-local font files, not host font substitution. Canonical Presentations font policy was then written to `shared/font-policy.md`.
+problem: Presentation templates must not choose a body/math font per machine, and an unavailable proprietary font must not force ordinary deck work into repeated blocked states. CUHK and course-standard also cannot drift onto different scientific font stacks merely because their legacy sources differ.
+candidate_action:
+- Treat the font set as a shared Beamer-core contract, not a skin choice.
+- Reuse the render-owner resource resolver and load exact bundled files: TeX Gyre Termes for Latin text, TeX Gyre Termes Math for math, New Computer Modern Math only for cal/bfcal, Noto Serif/Sans SC for CJK, and Latin Modern Mono for code.
+- Remove legacy Times New Roman from the migrated CUHK shared-core implementation; do not replace it with Liberation/DejaVu/fontconfig fallbacks.
+- Add preflight + `pdffonts` allowlist QA and record font-file hashes in render receipts.
+- Keep missing canonical bundle files as a typed installation/resource error, while explicitly preventing “Times New Roman missing” from being a deck-level blocker.
+promotion_gate: both `cuhk-research` and `course-standard` render the same typography fixture from two supported resource-root configurations; exact allowed font identities are embedded, injected host-font fallback is rejected, and neither adapter contains its own font discovery logic.
+
 真实项目 thread 新增时只需要最小格式：
 
 ```text
