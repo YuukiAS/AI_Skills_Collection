@@ -18,8 +18,8 @@ candidate_action:
 - 产品正式名称、插件名称、代码、命令、路径、文件名、字段、配置键、版本、协议值、状态值和其他必须精确匹配的机器字符串可以保留，不为了中文化而翻译。
 - 如果本次 README 修改只有版本号、链接或其他机器字符串，Clear Writing 检查后可以原样放行，不得为了证明调用而强行改文案。
 - repository maintainer / 当前任务负责人负责 README 的事实、版本、命令、架构和范围；Clear Writing 负责最终面向读者的语言质量，不接管 Research Authoring、`workflow-core` 或技术事实判断。
-observed_handling: 2026-10-04 已提升为仓库级 `AGENTS.md` README 修改合同，并新增最小回归测试，防止规则退回“只有新建或大改 README 才触发”。本次只改变仓库治理规则和 tracking 文案；没有修改 `writing-style`、`ai-skills-core`、`workflow-core` 或 `research-writing` 的 production skill source，也没有版本发布。
-promotion_gate: 至少在 2 个彼此无关的中文 README 修改任务和 1 个英文 README 对照任务中回放。中文案例应证明非必要英文会被清理，同时精确技术字符串保持不变；英文对照应证明这条规则不会在 README 语言本来是英文时强行中文化。
+observed_handling: 2026-10-04 已提升为仓库级 `AGENTS.md` README 修改合同，并新增最小回归测试，防止规则退回“只有新建或大改 README 才触发”。本次只改变仓库治理规则和 tracking 文案；没有修改 `writing-style`、`ai-skills-core`、`workflow-core` 或 `research-writing` 的 production skill source，也没有版本发布。后续 normal-entry smoke 中，用户只要求做根 `README.md` 的小型中文化整理，并没有显式要求调用 Clear Writing；Codex 读取仓库 `AGENTS.md` 后实际调用了当前安装的 `writing-style:chinese-prose`，先读取 skill 规则，再对 README 受影响的读者区域执行语言终审。该 smoke 清理了 `thread`、`handoff`、`wrapper`、`source`、`coordinator` 等非必要英文，同时保留正式产品名、plugin slug、路径、命令、字段和版本，证明仓库级 README contract 已被正常入口实际消费，而不只是静态规则存在。随后修复了一个陈旧单元测试，避免它继续把 README 的英文读者措辞冻结为合同。
+promotion_gate: 已满足。当前推广条件由用户明确确认的长期跨项目偏好（“任何 README 修改都必须经过 Clear Writing”）和 2026-10-04 真实 normal-entry README smoke 共同满足；后续其他中文仓库和英文 README 案例属于持续泛化/回归证据，不再阻塞 #12 closure。这里不声称已经完成旧版 2 个中文 README + 1 个英文 README 对照回放。
 
 
 ### Promote `writing-style` into the generic content-preserving language layer

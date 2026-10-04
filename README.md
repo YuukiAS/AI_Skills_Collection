@@ -6,30 +6,30 @@ Repository / CLI release: `5.4.4`
 
 ## 可单独安装的技能
 
-这些是 Standalone Skills：可以按单个 Skill 安装和使用，不是中央 Marketplace Plugins。
+这些技能可以单独安装和使用，不属于中央插件。
 
 |  |  |
 |---|---|
-| <img src="./skills/science/communication/project-thread-handoff/assets/app-facing.svg" width="40" alt="Project Thread Handoff icon"> | <strong>Project Thread Handoff</strong><br><code>project-thread-handoff</code> · v`0.2`<br>用于长期项目聊天的上下文交接与续接：既支持当前长 thread 主动 handoff，也支持旧 thread 已满后在同 ChatGPT Project 新 thread 做有来源约束的语义恢复。 |
-| <img src="./skills/tools/documents-media/render-chinese-math-pdf/assets/app-facing.svg" width="40" alt="Chinese Math PDF icon"> | <strong>Chinese Math PDF</strong><br><code>render-chinese-math-pdf</code> · v`0.2`<br>用于中文、中英混合和数学密集型科研 PDF 的可靠渲染与检查。 |
-| <img src="./skills/tools/hpc/slurm-workflows/assets/slurm-workflows.svg" width="40" alt="Slurm Workflows icon"> | <strong>Slurm Workflows</strong><br><code>slurm-workflows</code> · v`0.4`<br>用于 Slurm/HPC 集群任务的可移植规划、路由、监控、诊断和可复用容量管理。 |
+| <img src="./skills/science/communication/project-thread-handoff/assets/app-facing.svg" width="40" alt="Project Thread Handoff 图标"> | <strong>Project Thread Handoff</strong><br><code>project-thread-handoff</code> · v`0.2`<br>用于长期项目聊天的上下文交接与续接：既支持当前长对话主动交接，也支持旧对话已满后，在同一个 ChatGPT Project 的新对话里做有来源约束的语义恢复。 |
+| <img src="./skills/tools/documents-media/render-chinese-math-pdf/assets/app-facing.svg" width="40" alt="Chinese Math PDF 图标"> | <strong>Chinese Math PDF</strong><br><code>render-chinese-math-pdf</code> · v`0.2`<br>用于中文、中英混合和数学密集型科研 PDF 的可靠渲染与检查。 |
+| <img src="./skills/tools/hpc/slurm-workflows/assets/slurm-workflows.svg" width="40" alt="Slurm Workflows 图标"> | <strong>Slurm Workflows</strong><br><code>slurm-workflows</code> · v`0.4`<br>用于 Slurm/HPC 集群任务的可移植规划、路由、监控、诊断和可复用容量管理。 |
 
-`Project Thread Handoff` 也可以通过一个 `skills-only` ChatGPT personal Plugin wrapper 使用；这个 wrapper 不含 MCP，也不是第二份能力 source。更新说明见：[docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md](docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md)。
+`Project Thread Handoff` 也可以通过 `skills-only` ChatGPT 个人 Plugin 封装使用；这个封装不含 MCP，也不是第二份能力来源。更新说明见：[docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md](docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md)。
 
 ## 中央插件
 
 |  |  |
 |---|---|
-| <img src="./assets/codex/plugin-icons/workflow-core/composer.svg" width="40" alt="Verified Workflow icon"> | <strong>Verified Workflow</strong><br><code>workflow-core</code> · v`0.5`<br>复杂任务的执行、验证与可靠收尾。 |
-| <img src="./assets/codex/plugin-icons/ai-skills-core/composer.svg" width="40" alt="AI Skills Maintainer icon"> | <strong>AI Skills Maintainer</strong><br><code>ai-skills-core</code> · v`0.5`<br>维护本仓库插件，也负责用短请求同步当前机器上的 AI_Skills 与 Bridge Kit 正式发布版本。 |
-| <img src="./assets/codex/plugin-icons/writing-style/composer.svg" width="40" alt="Clear Writing icon"> | <strong>Clear Writing</strong><br><code>writing-style</code> · v`0.4`<br>在保留事实与原意的前提下，改善科研/技术表达，也处理产品界面短文案。 |
-| <img src="./assets/codex/plugin-icons/research-writing/composer.svg" width="40" alt="Research Authoring icon"> | <strong>Research Authoring</strong><br><code>research-writing</code> · v`0.2`<br>支持研究报告、论文、文献、引用和证据组织；正式 PDF 会交给配套渲染器处理。 |
-| <img src="./assets/codex/plugin-icons/presentations/composer.svg" width="40" alt="Presentations icon"> | <strong>Presentations</strong><br><code>presentations</code> · v`0.3`<br>规划和返修科研组会、研究汇报与商务演示文稿。 |
-| <img src="./assets/codex/plugin-icons/scientific-visualization/composer.svg" width="40" alt="Scientific Visualization icon"> | <strong>Scientific Visualization</strong><br><code>scientific-visualization</code> · v`0.1`<br>处理科研图、配色、示意图、海报和视觉检查。 |
-| <img src="./assets/codex/plugin-icons/web-development/composer.svg" width="40" alt="Frontend Design icon"> | <strong>Frontend Design</strong><br><code>web-development</code> · v`0.4`<br>让前端设计先进入统一 coordinator，并能把界面内容架构交给 Clear Writing 做安全文案。 |
-| <img src="./assets/codex/plugin-icons/statistical-modeling/composer.svg" width="40" alt="Statistical Modeling icon"> | <strong>Statistical Modeling</strong><br><code>statistical-modeling</code> · v`0.1`<br>支持统计建模、Bayesian 工作流、诊断和数据分析。 |
-| <img src="./assets/codex/plugin-icons/bioinformatics/composer.svg" width="40" alt="Bioinformatics icon"> | <strong>Bioinformatics</strong><br><code>bioinformatics</code> · v`0.1`<br>覆盖数据库、单细胞、GWAS 和组学分析工作流。 |
-| <img src="./assets/codex/plugin-icons/medical-imaging/composer.svg" width="40" alt="Medical Imaging icon"> | <strong>Medical Imaging</strong><br><code>medical-imaging</code> · v`0.1`<br>支持 DICOM/NIfTI、分割、配准和影像 AI 工作流。 |
+| <img src="./assets/codex/plugin-icons/workflow-core/composer.svg" width="40" alt="Verified Workflow 图标"> | <strong>Verified Workflow</strong><br><code>workflow-core</code> · v`0.5`<br>复杂任务的执行、验证与可靠收尾。 |
+| <img src="./assets/codex/plugin-icons/ai-skills-core/composer.svg" width="40" alt="AI Skills Maintainer 图标"> | <strong>AI Skills Maintainer</strong><br><code>ai-skills-core</code> · v`0.5`<br>维护本仓库插件，也负责用短请求同步当前机器上的 AI_Skills 与 Bridge Kit 正式发布版本。 |
+| <img src="./assets/codex/plugin-icons/writing-style/composer.svg" width="40" alt="Clear Writing 图标"> | <strong>Clear Writing</strong><br><code>writing-style</code> · v`0.4`<br>在保留事实与原意的前提下，改善科研/技术表达，也处理产品界面短文案。 |
+| <img src="./assets/codex/plugin-icons/research-writing/composer.svg" width="40" alt="Research Authoring 图标"> | <strong>Research Authoring</strong><br><code>research-writing</code> · v`0.2`<br>支持研究报告、论文、文献、引用和证据组织；正式 PDF 会交给配套渲染器处理。 |
+| <img src="./assets/codex/plugin-icons/presentations/composer.svg" width="40" alt="Presentations 图标"> | <strong>Presentations</strong><br><code>presentations</code> · v`0.3`<br>规划和返修科研组会、研究汇报与商务演示文稿。 |
+| <img src="./assets/codex/plugin-icons/scientific-visualization/composer.svg" width="40" alt="Scientific Visualization 图标"> | <strong>Scientific Visualization</strong><br><code>scientific-visualization</code> · v`0.1`<br>处理科研图、配色、示意图、海报和视觉检查。 |
+| <img src="./assets/codex/plugin-icons/web-development/composer.svg" width="40" alt="Frontend Design 图标"> | <strong>Frontend Design</strong><br><code>web-development</code> · v`0.4`<br>让前端设计先进入统一协调入口，并能把界面内容架构交给 Clear Writing 做安全文案。 |
+| <img src="./assets/codex/plugin-icons/statistical-modeling/composer.svg" width="40" alt="Statistical Modeling 图标"> | <strong>Statistical Modeling</strong><br><code>statistical-modeling</code> · v`0.1`<br>支持统计建模、Bayesian 工作流、诊断和数据分析。 |
+| <img src="./assets/codex/plugin-icons/bioinformatics/composer.svg" width="40" alt="Bioinformatics 图标"> | <strong>Bioinformatics</strong><br><code>bioinformatics</code> · v`0.1`<br>覆盖数据库、单细胞、GWAS 和组学分析工作流。 |
+| <img src="./assets/codex/plugin-icons/medical-imaging/composer.svg" width="40" alt="Medical Imaging 图标"> | <strong>Medical Imaging</strong><br><code>medical-imaging</code> · v`0.1`<br>支持 DICOM/NIfTI、分割、配准和影像 AI 工作流。 |
 
 ## 开始使用
 

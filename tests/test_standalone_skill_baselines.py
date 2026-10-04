@@ -71,8 +71,6 @@ class StandaloneSkillBaselineTests(unittest.TestCase):
 
     def test_readme_versions_match_skill_metadata(self) -> None:
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("Standalone Skills", readme)
-        self.assertIn("不是中央 Marketplace Plugins", readme)
 
         for slug, info in STANDALONE_SKILLS.items():
             meta, _ = read_frontmatter(REPO_ROOT / info["path"] / "SKILL.md")
