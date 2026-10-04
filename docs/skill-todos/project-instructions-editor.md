@@ -608,3 +608,43 @@ READY_FOR_GATES=NO
 READY_FOR_INTEGRATION=NO
 READY_FOR_RELEASE=NO
 NEXT_HANDOFF=CRITIC
+
+
+## 2026-10-04 Server+VPS final user acceptance
+
+The user selected the real ChatGPT Server+VPS Project as the final last-mile acceptance surface after independent implementation/G4 review.
+
+Acceptance contract:
+
+\`docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_SERVER_VPS_FINAL_USER_ACCEPTANCE_V0_1_2026-10-04.md\`
+
+This does not replace G4 and does not add a fifth Capability Gate.
+
+The sequence is:
+
+\`\`\`text
+C2 + G1/G2/G3 + public-safe G4 packet
+-> independent G4 / implementation review
+-> one real Server+VPS user acceptance
+-> only then final integration/release closure may claim the user-selected consumption test passed
+\`\`\`
+
+The private live Server+VPS Project setting is not copied into this public repository. Acceptance uses the then-current live setting and one frozen natural prompt in the actual Project.
+
+The real regression being tested is not primarily technical correctness. It is whether complex infrastructure audits obey the Project reading contract: user-facing conclusion/action/next-step first, necessary evidence second, while preserving ownership, authorization, fail-closed, secrets, network-state, and evidence-strength semantics.
+
+The current bad-answer signature starts with audit/PASS/FAIL machinery and delays the actionable conclusion. The acceptance plan explicitly allows the editor to choose a bounded edit, bounded consolidation, or justified no-op; it must not assume that adding more rules is always the right fix.
+
+Current reader-facing Issue copy is not modified in this round because there is no verifiable Clear Writing invocation surface:
+
+\`\`\`text
+CLEAR_WRITING_UNAVAILABLE
+\`\`\`
+
+Project target remains \`DOING / standalone-skill\`. No Project field mutation surface is currently available; the current acceptance document is a repo-side execution/acceptance anchor, not a claim that the Project card has been synchronized.
+
+\`\`\`text
+FINAL_SERVER_VPS_USER_ACCEPTANCE=PENDING
+READY_FOR_INTEGRATION=NO
+READY_FOR_RELEASE=NO
+\`\`\`
