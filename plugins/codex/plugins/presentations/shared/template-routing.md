@@ -22,3 +22,12 @@ CUHK exact mode:
 - Use `templates/cuhk/beamer/source/` as the canonical template source.
 - The first/title slide layout must match the CUHK template. Only metadata/content fields such as title, subtitle, author, institute, date, and similar text placeholders may change.
 - Do not use `templates/cuhk/design-tokens.json`, `templates/cuhk/beamer/main.tex`, `templates/cuhk/pptx/build_reference_deck.py`, or `templates/cuhk/pptx/cuhk-reference-deck.pptx` for exact CUHK reproduction; those files are derived convenience scaffolds for non-exact/test workflows.
+
+
+## Canonical Beamer Font Contract
+
+All formal Beamer routes must read and obey `shared/font-policy.md`.
+
+The font set is fixed. Presentation generation must not choose fonts from the host at runtime and must not use Times New Roman, Liberation, DejaVu, Windows font mounts, or fontconfig substitution as a fallback.
+
+Both `cuhk-research` and `course-standard` use the same generated-text font identities; their differences belong to colour, brand assets, and template skin.
