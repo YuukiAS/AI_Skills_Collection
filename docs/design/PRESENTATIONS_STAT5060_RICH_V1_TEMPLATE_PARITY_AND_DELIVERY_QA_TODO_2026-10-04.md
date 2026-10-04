@@ -71,6 +71,38 @@ STAT5060 repo 内的：
 
 “相同设置”不要求不同品牌页面逐像素相同；但同角色的字号、间距、header/footer 行为和语义样式不能无理由不同。
 
+## 4A. Canonical font contract
+
+本轮根据 `render-chinese-math-pdf` 的稳定架构，冻结 Presentations 的 Beamer 字体策略。**字体不是 deck 级设计自由，也不允许按机器 fallback。**
+
+两个内置 Beamer adapter 都必须使用：
+
+- Latin text：TeX Gyre Termes；
+- Math：TeX Gyre Termes Math；
+- `cal/bfcal`：New Computer Modern Math，仅对应字形范围；
+- CJK serif：Noto Serif SC；
+- CJK sans/CJK mono：Noto Sans SC；
+- Latin code：Latin Modern Mono，仅 code/listing context。
+
+禁止作为生成文本字体或 fallback：
+
+- Times New Roman；
+- Liberation；
+- DejaVu；
+- Arial；
+- Calibri/Carlito；
+- Cambria/Caladea；
+- Fandol；
+- Windows font mounts；
+- `fc-match` / fontconfig guessing。
+
+具体 active policy：
+
+- `skills/tools/documents-media/presentations/shared/font-policy.md`
+- `plugins/codex/plugins/presentations/shared/font-policy.md`
+
+字体资源由 `render-chinese-math-pdf` 的 `render_resources/chinese_math_pdf` 解析并以文件路径绑定。不存在“Times New Roman 不可用，所以换 Liberation”的运行时分支。legacy CUHK source 的 Times New Roman 属于历史实现；迁移 shared core 时必须改用上述固定 allowlist。
+
 ## 5. Header 合同
 
 1. section label 默认必须使用完整名称；没有用户明确授权不得缩写。
