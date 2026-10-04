@@ -452,6 +452,22 @@ candidate_action:
 - Keep missing canonical bundle files as a typed installation/resource error, while explicitly preventing “Times New Roman missing” from being a deck-level blocker.
 promotion_gate: both `cuhk-research` and `course-standard` render the same typography fixture from two supported resource-root configurations; exact allowed font identities are embedded, injected host-font fallback is rejected, and neither adapter contains its own font discovery logic.
 
+### Final release review must be requirement-led, not self-attested or render-only
+status: NEW
+tracking: #35
+source: STAT5060 Tutorial 1 Rich v2 independent release review, 2026-10-04
+evidence: candidate `f4c3572e97a94886c61a17ccb1f827bec36a117f` produced 37 renders and a passing executor QA summary, but independent review found missing footer navigation, multiple unimplemented frozen page repairs, invalid whitespace metrics, and generic `39/39 CLOSED_VISIBLE` evidence. A second independent audit additionally found frozen-spec drift on P01, P03/P20, P06 and P34 that the first reviewer missed.
+problem: Presentation acceptance can still falsely PASS when evidence files are self-attested, when whole-slide review is described but not demonstrated page-by-page, or when the reviewer judges only visual plausibility instead of checking every frozen requirement against both source and render.
+candidate_action:
+- Require a three-way release ledger: `frozen requirement -> exact source evidence -> final render evidence`. Every bounded repair item must have one row and one explicit PASS/REVISE result.
+- Reject repeated boilerplate page-review rows such as “top navigation, content balance...” without a page-specific observation naming the primary object, bottom edge, and any intentional whitespace reason.
+- Annotation closure must map annotation ID -> page -> original issue -> exact repair -> source anchor -> after-render/crop. Generic identical `CLOSED_VISIBLE` lines are invalid evidence.
+- Whitespace metrics must exclude fixed chrome (headline, footer, page number, source credit) and operate on the usable body. Automated metrics are triggers only; final composition status requires whole-slide inspection.
+- Add source-level assertions for deterministic frozen facts before visual review: protected frame options, required macros, exact footer primitives, code font role, column widths, caption role, table width, exact frozen strings, and forbidden legacy strings/layout primitives.
+- Final independent reviewer must separately answer “looks acceptable?” and “matches the frozen repair contract?”. Either failure blocks release.
+- A claimed `ALL_PAGES_VIEWED=YES` must be backed by unique page-level notes; executor self-review is not independent acceptance.
+promotion_gate: replay the Rich v2 failed candidate so the strengthened gate rejects it for both source-contract drift and visual composition; then pass the bounded repair candidate plus one unrelated deck without requiring project-specific page logic.
+
 真实项目 thread 新增时只需要最小格式：
 
 ```text
