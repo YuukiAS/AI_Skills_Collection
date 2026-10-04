@@ -703,3 +703,50 @@ FINAL_SERVER_VPS_USER_ACCEPTANCE=PENDING
 READY_FOR_RELEASE=NO
 NEXT_HANDOFF=CRITIC
 \`\`\`
+
+
+## 2026-10-04 final delivery closure v0.2 / FD1
+
+Critic review:
+
+\`docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_FINAL_DELIVERY_CLOSURE_CRITIC_REVIEW_V0_1_2026-10-04.md\`
+
+Critic blocker:
+
+\`\`\`text
+FD1 = final release contract must distinguish formal release baseline drift
+      from unrelated unreleased production drift on main
+\`\`\`
+
+Planner disposition:
+
+\`\`\`text
+FD1=ACCEPT
+\`\`\`
+
+Full v0.2 package:
+
+- Plan: \`docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_FINAL_DELIVERY_CLOSURE_PLAN_V0_2_2026-10-04.md\`
+- Goal: \`docs/goals/PROJECT_INSTRUCTIONS_EDITOR_FINAL_DELIVERY_CLOSURE_GOAL_V0_2.md\`
+- Kickoff: \`docs/operations/prompts/PROJECT_INSTRUCTIONS_EDITOR_FINAL_INTEGRATION_RELEASE_KICKOFF_V0_2.md\`
+- Package commit: \`0278c53fbb1674081a7085ee1831dc2856c9c179\`
+
+The already-passed wrapper, icon, Server+VPS acceptance, user-burden, local README preservation, and C4 immutability contracts remain unchanged.
+
+New final-release rule:
+
+- \`origin/release\` is the formal release baseline;
+- main \`VERSION=5.4.x\` is not sufficient proof of release cleanliness;
+- final integration/release must classify \`origin/release..origin/main\`;
+- docs/TODO/review/evidence-only non-production drift may continue;
+- unrelated unreleased production/generated/plugin/profile/routing/runtime drift sets \`WAITING_FOR_FORMAL_RELEASE_BASELINE=YES\` and blocks only final integration/release mutation;
+- default recovery is to wait for that other task's own formal release and rerun the same preflight;
+- a compatible formal 5.4.x baseline advance does not require a new Planner round;
+- no ad-hoc cherry-pick, revert, force/rebase, or silent absorption into PIE 5.5.0.
+
+Parallel plugin development is therefore allowed to continue; PIE only requires a clean formal release boundary at the actual release edge.
+
+\`\`\`text
+READY_FOR_RELEASE=NO
+NEXT_HANDOFF=CRITIC
+\`\`\`
