@@ -119,8 +119,89 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
             helper.widening_plan({"state": "PENDING"}, ["p1", "p2"], {"native_multi_partition": True})["action"],
             "native_widen",
         )
-        self.assertFalse(helper.duplicate_race_decision({}, True)["allowed"])
+        self.assertFalse(helper.duplicate_race_decision({}, False)["allowed"])
+        self.assertTrue(helper.duplicate_race_decision({}, True)["allowed"])
         self.assertTrue(helper.duplicate_race_decision({"duplicate_race": "allowed"}, True)["allowed"])
+        self.assertFalse(helper.duplicate_race_decision({"race_execution": "forbidden"}, True)["allowed"])
+
+    def test_duplicate_race_policy_opt_in_truth_table_and_bounded_contract(self) -> None:
+        helper = load_helper()
+        truth_table = [
+            ({"race_execution": "forbidden"}, True, False, "explicit_site_prohibition"),
+            ({}, False, False, "missing_user_opt_in"),
+            ({}, True, True, "no_known_prohibition_and_opt_in"),
+            ({"race_execution": "UNKNOWN"}, False, False, "missing_user_opt_in"),
+            ({"race_execution": "UNKNOWN"}, True, True, "no_known_prohibition_and_opt_in"),
+            ({"race_execution": "disabled_by_default"}, True, True, "no_known_prohibition_and_opt_in"),
+            ({"race_execution": "explicit_user_opt_in"}, True, True, "no_known_prohibition_and_opt_in"),
+            ({"race_execution": "allowed"}, True, True, "explicit_allow_and_opt_in"),
+            ({"race_execution": "allowed"}, False, False, "missing_user_opt_in"),
+        ]
+        for site_policy, user_opt_in, allowed, reason in truth_table:
+            with self.subTest(site_policy=site_policy, user_opt_in=user_opt_in):
+                decision = helper.duplicate_race_decision(site_policy, user_opt_in)
+                self.assertEqual(decision["allowed"], allowed)
+                self.assertEqual(decision["reason"], reason)
+
+        workload = {
+            "data": "cohort-a",
+            "split": "fold-1",
+            "model": "seg-v2",
+            "endpoint": "train.py",
+            "gpus": 1,
+            "gpu_type": "h100",
+            "walltime_minutes": 240,
+            "training_budget": "full",
+        }
+        candidates = [
+            {"partition": "h100-short", "gpus": 1, "gpu_type": "h100", "walltime_minutes": 240, "workload_contract": workload},
+            {"partition": "h100-main", "gpus": 1, "gpu_type": "h100", "walltime_minutes": 240, "workload_contract": workload},
+        ]
+        cancellation = {
+            "winner_rule": "first_running_job",
+            "cancel_loser": True,
+            "running_tie_policy": "keep_lowest_job_id_cancel_other",
+        }
+        allowed = helper.bounded_duplicate_race_decision({}, True, candidates, workload, cancellation)
+        self.assertTrue(allowed["allowed"])
+        self.assertEqual(allowed["reason"], "bounded_two_route_race")
+
+        explicit_forbidden = helper.bounded_duplicate_race_decision({"race_execution": "forbidden"}, True, candidates, workload, cancellation)
+        self.assertFalse(explicit_forbidden["allowed"])
+        self.assertEqual(explicit_forbidden["reason"], "explicit_site_prohibition")
+
+        too_many = helper.bounded_duplicate_race_decision({}, True, candidates + [dict(candidates[0], partition="h100-extra")], workload, cancellation)
+        self.assertFalse(too_many["allowed"])
+        self.assertEqual(too_many["reason"], "requires_exactly_two_candidates")
+
+        missing_cancel = helper.bounded_duplicate_race_decision({}, True, candidates, workload, {"winner_rule": "first_running_job"})
+        self.assertFalse(missing_cancel["allowed"])
+        self.assertEqual(missing_cancel["reason"], "missing_loser_cancellation_contract")
+
+        missing_proof = [candidates[0], {key: value for key, value in candidates[1].items() if key != "workload_contract"}]
+        no_contract = helper.bounded_duplicate_race_decision({}, True, missing_proof, workload, cancellation)
+        self.assertFalse(no_contract["allowed"])
+        self.assertEqual(no_contract["reason"], "missing_workload_contract")
+
+        downgraded_gpu = [candidates[0], dict(candidates[1], gpu_type="a100")]
+        hard_requirement = helper.bounded_duplicate_race_decision({}, True, downgraded_gpu, workload, cancellation)
+        self.assertFalse(hard_requirement["allowed"])
+        self.assertEqual(hard_requirement["reason"], "hard_resource_requirement_not_met")
+
+        incompatible_budget = [candidates[0], dict(candidates[1], training_budget="debug")]
+        incompatible = helper.bounded_duplicate_race_decision({}, True, incompatible_budget, workload, cancellation)
+        self.assertFalse(incompatible["allowed"])
+        self.assertEqual(incompatible["reason"], "incompatible_workload_contract")
+
+        flexible_workload = dict(workload, allowed_gpu_types=["h100", "a100"])
+        flexible_workload.pop("gpu_type")
+        flexible_workload["accelerator_hard"] = False
+        flexible_candidates = [
+            dict(candidates[0], workload_contract=flexible_workload),
+            dict(candidates[1], gpu_type="a100", workload_contract=flexible_workload),
+        ]
+        flexible = helper.bounded_duplicate_race_decision({}, True, flexible_candidates, flexible_workload, cancellation)
+        self.assertTrue(flexible["allowed"])
 
     def test_g5_bounded_monitoring_replacement(self) -> None:
         helper = load_helper()

@@ -25,6 +25,8 @@ UNKNOWN = "UNKNOWN"
 LIVE_KNOWN = "LIVE_KNOWN"
 LOCAL_EXPLICIT = "LOCAL_EXPLICIT"
 PROFILE_POLICY = "PROFILE_POLICY"
+WORKLOAD_INVARIANT_KEYS = {"data", "split", "model", "endpoint", "training_budget", "workload_scope_digest"}
+RESOURCE_REQUIREMENT_KEYS = {"gpus", "walltime", "walltime_minutes"}
 
 
 SINFO_FIELDS = "%P|%a|%l|%D|%c|%m|%G|%f|%T|%Q"
@@ -460,8 +462,107 @@ def widening_plan(job: dict[str, Any], candidates: list[str], capabilities: dict
 
 
 def duplicate_race_decision(site_policy: dict[str, Any], user_opt_in: bool) -> dict[str, Any]:
-    allowed = site_policy.get("duplicate_race") == "allowed" or site_policy.get("race_execution") == "allowed"
-    return {"allowed": bool(allowed and user_opt_in), "reason": "explicit_allow_and_opt_in" if allowed and user_opt_in else "disabled_or_missing_authority"}
+    values = {
+        str(site_policy.get(key) or "").strip().lower()
+        for key in ("duplicate_race", "race_execution")
+        if site_policy.get(key) is not None
+    }
+    forbidden = {"forbidden", "prohibited", "disallowed", "disabled", "no", "false", "never"}
+    if values & forbidden:
+        return {"allowed": False, "reason": "explicit_site_prohibition"}
+    if not user_opt_in:
+        return {"allowed": False, "reason": "missing_user_opt_in"}
+    allowed_without_prohibition = {"", "unknown", "disabled_by_default", "explicit_user_opt_in", "allowed", "allow"}
+    if not values or values <= allowed_without_prohibition:
+        reason = "explicit_allow_and_opt_in" if "allowed" in values or "allow" in values else "no_known_prohibition_and_opt_in"
+        return {"allowed": True, "reason": reason}
+    return {"allowed": False, "reason": "unrecognized_site_policy"}
+
+
+def _normalized_contract_subset(values: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(values, dict):
+        return {}
+    keys = (
+        "data",
+        "split",
+        "model",
+        "endpoint",
+        "gpus",
+        "gpu_type",
+        "allowed_gpu_types",
+        "walltime",
+        "walltime_minutes",
+        "training_budget",
+        "workload_scope_digest",
+    )
+    return {key: values[key] for key in keys if key in values}
+
+
+def _candidate_value(candidate: dict[str, Any], key: str) -> Any:
+    if key in candidate:
+        return candidate.get(key)
+    resources = candidate.get("resources")
+    if isinstance(resources, dict):
+        return resources.get(key)
+    return None
+
+
+def bounded_duplicate_race_decision(
+    site_policy: dict[str, Any],
+    user_opt_in: bool,
+    candidates: list[dict[str, Any]],
+    workload_contract: dict[str, Any],
+    cancellation_contract: dict[str, Any],
+) -> dict[str, Any]:
+    authority = duplicate_race_decision(site_policy, user_opt_in)
+    if not authority["allowed"]:
+        return {"allowed": False, "reason": authority["reason"], "authority": authority}
+    if len(candidates) != 2:
+        return {"allowed": False, "reason": "requires_exactly_two_candidates", "authority": authority}
+    if cancellation_contract.get("cancel_loser") is not True:
+        return {"allowed": False, "reason": "missing_loser_cancellation_contract", "authority": authority}
+    if not cancellation_contract.get("winner_rule"):
+        return {"allowed": False, "reason": "missing_winner_rule", "authority": authority}
+    if not cancellation_contract.get("running_tie_policy"):
+        return {"allowed": False, "reason": "missing_running_tie_policy", "authority": authority}
+
+    expected = _normalized_contract_subset(workload_contract)
+    allowed_gpu_types = {str(item).lower() for item in workload_contract.get("allowed_gpu_types") or []}
+    hard_gpu = bool(workload_contract.get("accelerator_hard", bool(workload_contract.get("gpu_type"))))
+    for candidate in candidates:
+        candidate_contract = _normalized_contract_subset(candidate.get("workload_contract"))
+        for key, value in expected.items():
+            if key in {"allowed_gpu_types", "gpu_type"}:
+                continue
+            has_contract_key = key in candidate_contract
+            candidate_value = _candidate_value(candidate, key)
+            if has_contract_key and candidate_contract[key] != value:
+                return {"allowed": False, "reason": "incompatible_workload_contract", "authority": authority}
+            if candidate_value is not None and candidate_value != value:
+                return {"allowed": False, "reason": "incompatible_workload_contract", "authority": authority}
+            if not has_contract_key and candidate_value is None and key in WORKLOAD_INVARIANT_KEYS:
+                return {"allowed": False, "reason": "missing_workload_contract", "authority": authority}
+            if not has_contract_key and candidate_value is None and key in RESOURCE_REQUIREMENT_KEYS:
+                return {"allowed": False, "reason": "hard_resource_requirement_not_met", "authority": authority}
+        candidate_gpu = _candidate_value(candidate, "gpu_type")
+        if candidate_gpu is not None:
+            normalized_gpu = str(candidate_gpu).lower()
+            if allowed_gpu_types and normalized_gpu not in allowed_gpu_types:
+                return {"allowed": False, "reason": "hard_resource_requirement_not_met", "authority": authority}
+            if hard_gpu and workload_contract.get("gpu_type") and normalized_gpu != str(workload_contract["gpu_type"]).lower():
+                return {"allowed": False, "reason": "hard_resource_requirement_not_met", "authority": authority}
+
+    return {
+        "allowed": True,
+        "reason": "bounded_two_route_race",
+        "authority": authority,
+        "candidate_count": 2,
+        "cancellation_contract": {
+            "winner_rule": cancellation_contract["winner_rule"],
+            "cancel_loser": True,
+            "running_tie_policy": cancellation_contract["running_tie_policy"],
+        },
+    }
 
 
 def bounded_replacement_decision(monitor: dict[str, Any], old_job: dict[str, Any]) -> dict[str, Any]:

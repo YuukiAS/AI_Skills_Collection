@@ -6,7 +6,25 @@ This skill is not one of the central Marketplace plugins, so its real-use failur
 
 ## Open candidates
 
-No open candidates.
+### Bounded duplicate-race opt-in when no site prohibition is known
+status: PROMOTE_NOW
+tracking: #96
+source: Bounded implementation task `hpc--slurm-race-policy-bounded-opt-in`
+evidence: `skills/tools/hpc/slurm-workflows/SKILL.md`; `skills/tools/hpc/slurm-workflows/scripts/slurm_routing.py`; `tests/test_slurm_workflows.py`
+kind: regression
+scope: standalone-skill
+area: standalone-skill
+target layer: routing / policy / qa
+problem:
+- `slurm-workflows 0.3` requires a site profile to explicitly say duplicate race is allowed before a user/local opt-in can matter.
+- That is too strict for missing, `UNKNOWN`, `disabled_by_default`, and `explicit_user_opt_in` policy states when no site prohibition is known and the user has explicitly opted in.
+project-specific context: This is scoped to public standalone Slurm Workflows behavior and deterministic fake-Slurm/read-only evidence. It does not authorize real `sbatch`, `salloc`, `scancel`, duplicate GPU race execution, weekly GPU enrollment, DII installation/adaptation, Bridge Kit changes, central plugin topology changes, main integration, or release advancement.
+candidate action:
+- Keep duplicate race off by default and require explicit user/local opt-in.
+- Let missing, `UNKNOWN`, `disabled_by_default`, and `explicit_user_opt_in` site policy proceed only when no prohibition is known and the bounded race contract is satisfied.
+- Keep explicit site prohibition higher priority than local opt-in.
+- Require exactly two candidate routes, identical workload/scientific contract, hard resource compatibility on both routes, and a frozen winner/loser cancellation contract before submission.
+promotion gate: READY when `slurm-workflows 0.4` has targeted race-policy coverage, complete `tests.test_slurm_workflows`, update/full-suite validation, generated parity, normal-entry smoke evidence, exact reviewed-branch CI, and Final Critic review. `REAL_SLURM_MUTATION = NO`.
 
 ## Recently promoted
 

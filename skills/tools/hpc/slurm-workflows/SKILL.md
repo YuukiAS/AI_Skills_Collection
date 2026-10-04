@@ -2,7 +2,7 @@
 name: slurm-workflows
 description: Plan, submit, monitor, diagnose, and safely iterate Slurm jobs with live Slurm discovery, optional public policy overlays, sticky resource contracts, workload modes, and guarded capacity lifecycle semantics.
 status: active
-version: "0.3"
+version: "0.4"
 provenance: user-authored
 trusted: false
 requires_network: false
@@ -47,7 +47,7 @@ Keep these layers separate:
 
 Unknown account, QOS, partition, association, hidden partition or site policy fields stay `UNKNOWN`. Do not guess them.
 
-Use `scripts/slurm_routing.py` for deterministic SiteContext normalization, routing order, resource-contract hysteresis, JobId safety checks, duplicate-race authority checks and persistent-capacity reconciliation.
+Use `scripts/slurm_routing.py` for deterministic SiteContext normalization, routing order, resource-contract hysteresis, JobId safety checks, duplicate-race authority and bounded-contract checks, and persistent-capacity reconciliation.
 
 ## Workflow
 
@@ -82,7 +82,20 @@ An enrolled GPU family activates only for matching family/resource intent. A CPU
 
 ## Race Policy
 
-Race execution means submitting multiple alternative jobs and cancelling losers after a winner is verified. Only use it when site authority explicitly allows duplicate race and the user/local config opts in to the resource cost. Unknown site authority disables duplicate race. Always record cancellation criteria.
+Race execution means submitting two alternative jobs for the same workload and cancelling the loser after a winner is selected. It is off by default.
+
+Use duplicate race only when all of the following are true:
+
+- no site policy explicitly forbids duplicate submissions or race execution;
+- the user or local machine configuration explicitly opts in to the extra resource cost;
+- the race has exactly two candidate routes;
+- both routes satisfy the same workload and scientific contract;
+- both routes independently meet hard resource requirements;
+- winner selection, loser cancellation, and near-simultaneous RUNNING behavior are frozen before submission.
+
+`allowed` site policy is not enough without user opt-in. `missing`, `UNKNOWN`, `disabled_by_default`, and `explicit_user_opt_in` site policy are not default permission, but they can enter bounded race when the user opts in and there is no known prohibition. If a site policy says `forbidden`, `prohibited`, `disabled`, `disallowed`, or an equivalent hard no, fail closed even when the user opts in.
+
+Do not change data, split, model, endpoint, GPU count, per-candidate walltime, training budget, or other scientific semantics to make a race possible. If a workload requires H100, do not race it on A100 unless the workload contract explicitly says both accelerator types are valid for the same result. If the scheduler or site rejects duplicate submission, fail closed and do not try another command form to bypass that policy.
 
 ## Outputs
 
