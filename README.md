@@ -2,7 +2,7 @@
 
 给 Codex 使用的科研与工程技能库。它把常用的写作、汇报、统计、医学影像、前端设计和仓库维护经验整理成可安装的插件，让日常任务更稳、更容易验收。
 
-Repository / CLI release: `5.4.3`
+Repository / CLI release: `5.4.4`
 
 ## 可单独安装的技能
 
@@ -12,7 +12,7 @@ Repository / CLI release: `5.4.3`
 |---|---|
 | <img src="./skills/science/communication/project-thread-handoff/assets/app-facing.svg" width="40" alt="Project Thread Handoff 图标"> | <strong>Project Thread Handoff</strong><br><code>project-thread-handoff</code> · v`0.2`<br>用于长期项目聊天的上下文交接与续接：既支持当前长对话主动交接，也支持旧对话已满后，在同一个 ChatGPT Project 的新对话里做有来源约束的语义恢复。 |
 | <img src="./skills/tools/documents-media/render-chinese-math-pdf/assets/app-facing.svg" width="40" alt="Chinese Math PDF 图标"> | <strong>Chinese Math PDF</strong><br><code>render-chinese-math-pdf</code> · v`0.2`<br>用于中文、中英混合和数学密集型科研 PDF 的可靠渲染与检查。 |
-| <img src="./skills/tools/hpc/slurm-workflows/assets/slurm-workflows.svg" width="40" alt="Slurm Workflows 图标"> | <strong>Slurm Workflows</strong><br><code>slurm-workflows</code> · v`0.3`<br>用于 Slurm/HPC 集群任务的可移植规划、路由、监控、诊断和可复用容量管理。 |
+| <img src="./skills/tools/hpc/slurm-workflows/assets/slurm-workflows.svg" width="40" alt="Slurm Workflows 图标"> | <strong>Slurm Workflows</strong><br><code>slurm-workflows</code> · v`0.4`<br>用于 Slurm/HPC 集群任务的可移植规划、路由、监控、诊断和可复用容量管理。 |
 
 `Project Thread Handoff` 也可以通过 `skills-only` ChatGPT 个人 Plugin 封装使用；这个封装不含 MCP，也不是第二份能力来源。更新说明见：[docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md](docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md)。
 

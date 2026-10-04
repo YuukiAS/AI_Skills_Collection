@@ -25,6 +25,23 @@ UNKNOWN = "UNKNOWN"
 LIVE_KNOWN = "LIVE_KNOWN"
 LOCAL_EXPLICIT = "LOCAL_EXPLICIT"
 PROFILE_POLICY = "PROFILE_POLICY"
+ROUTE_ONLY_WORKLOAD_KEYS = {
+    "account",
+    "constraint",
+    "partition",
+    "partition_priority",
+    "qos",
+    "reservation",
+    "route",
+    "route_id",
+}
+ROUTE_IDENTITY_KEYS = ("cluster", "partition", "qos", "account", "constraint", "reservation")
+GPU_COUNT_KEYS = ("gpus", "gpu_count")
+GPU_TYPE_KEYS = ("gpu_type", "accelerator", "accelerator_type")
+RESOURCE_EXACT_KEYS = ("gpus", "gpu_count", "nodes", "ntasks", "tasks", "walltime", "walltime_minutes", "time_limit")
+RESOURCE_MINIMUM_KEYS = ("memory_mb", "mem_mb", "mem", "cpus_per_task", "cpus", "cpu_count")
+SUPPORTED_RACE_WINNER_RULES = {"first_running_job"}
+SUPPORTED_RACE_TIE_POLICIES = {"keep_lowest_job_id_cancel_other"}
 
 
 SINFO_FIELDS = "%P|%a|%l|%D|%c|%m|%G|%f|%T|%Q"
@@ -460,8 +477,169 @@ def widening_plan(job: dict[str, Any], candidates: list[str], capabilities: dict
 
 
 def duplicate_race_decision(site_policy: dict[str, Any], user_opt_in: bool) -> dict[str, Any]:
-    allowed = site_policy.get("duplicate_race") == "allowed" or site_policy.get("race_execution") == "allowed"
-    return {"allowed": bool(allowed and user_opt_in), "reason": "explicit_allow_and_opt_in" if allowed and user_opt_in else "disabled_or_missing_authority"}
+    values = {
+        str(site_policy.get(key) or "").strip().lower()
+        for key in ("duplicate_race", "race_execution")
+        if site_policy.get(key) is not None
+    }
+    forbidden = {"forbidden", "prohibited", "disallowed", "disabled", "no", "false", "never"}
+    if values & forbidden:
+        return {"allowed": False, "eligible": False, "reason": "explicit_site_prohibition"}
+    if not user_opt_in:
+        return {"allowed": False, "eligible": False, "reason": "missing_user_opt_in"}
+    allowed_without_prohibition = {"", "unknown", "disabled_by_default", "explicit_user_opt_in", "allowed", "allow"}
+    if not values or values <= allowed_without_prohibition:
+        reason = "explicit_allow_and_opt_in" if "allowed" in values or "allow" in values else "no_known_prohibition_and_opt_in"
+        return {"allowed": False, "eligible": True, "reason": reason, "requires_bounded_contract": True}
+    return {"allowed": False, "eligible": False, "reason": "unrecognized_site_policy"}
+
+
+def _normalized_workload_contract(values: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(values, dict):
+        return {}
+    return {
+        str(key): _normalize_digest_value(value)
+        for key, value in values.items()
+        if str(key) not in ROUTE_ONLY_WORKLOAD_KEYS
+    }
+
+
+def _candidate_value(candidate: dict[str, Any], key: str) -> Any:
+    if key in candidate:
+        return candidate.get(key)
+    resources = candidate.get("resources")
+    if isinstance(resources, dict):
+        return resources.get(key)
+    return None
+
+
+def _resource_requirements(workload_contract: dict[str, Any]) -> dict[str, Any]:
+    requirements: dict[str, Any] = {}
+    explicit = workload_contract.get("hard_resource_requirements")
+    if isinstance(explicit, dict):
+        requirements.update(explicit)
+    resources = workload_contract.get("resources")
+    if isinstance(resources, dict):
+        requirements.update(resources)
+    for key in (*RESOURCE_EXACT_KEYS, *RESOURCE_MINIMUM_KEYS, *GPU_TYPE_KEYS, "allowed_gpu_types"):
+        if key in workload_contract:
+            requirements[key] = workload_contract[key]
+    return requirements
+
+
+def _numeric(value: Any) -> float | None:
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, (int, float)):
+        return float(value)
+    if value is None:
+        return None
+    match = re.fullmatch(r"\s*(\d+(?:\.\d+)?)\s*", str(value))
+    if match:
+        return float(match.group(1))
+    return None
+
+
+def _route_identity(candidate: dict[str, Any]) -> tuple[tuple[str, Any], ...]:
+    identity: list[tuple[str, Any]] = []
+    for key in ROUTE_IDENTITY_KEYS:
+        value = _candidate_value(candidate, key)
+        if value is not None and str(value).strip():
+            identity.append((key, _normalize_digest_value(value)))
+    return tuple(identity)
+
+
+def _candidate_satisfies_resource(candidate: dict[str, Any], key: str, required: Any) -> bool:
+    value = _candidate_value(candidate, key)
+    if value is None:
+        return False
+    if key in RESOURCE_MINIMUM_KEYS:
+        candidate_number = _numeric(value)
+        required_number = _numeric(required)
+        if candidate_number is not None and required_number is not None:
+            return candidate_number >= required_number
+    return _normalize_digest_value(value) == _normalize_digest_value(required)
+
+
+def _resource_contract_satisfied(candidate: dict[str, Any], workload_contract: dict[str, Any]) -> bool:
+    requirements = _resource_requirements(workload_contract)
+    allowed_gpu_types = {str(item).lower() for item in requirements.get("allowed_gpu_types") or []}
+    if allowed_gpu_types:
+        candidate_gpu_type = next(
+            (_candidate_value(candidate, key) for key in GPU_TYPE_KEYS if _candidate_value(candidate, key) is not None),
+            None,
+        )
+        if candidate_gpu_type is None or str(candidate_gpu_type).lower() not in allowed_gpu_types:
+            return False
+    for key, required in requirements.items():
+        if key == "allowed_gpu_types":
+            continue
+        if key in GPU_TYPE_KEYS and allowed_gpu_types:
+            candidate_gpu = _candidate_value(candidate, key)
+            if candidate_gpu is None:
+                return False
+            if str(candidate_gpu).lower() not in allowed_gpu_types:
+                return False
+            continue
+        if not _candidate_satisfies_resource(candidate, key, required):
+            return False
+    return True
+
+
+def bounded_duplicate_race_decision(
+    site_policy: dict[str, Any],
+    user_opt_in: bool,
+    candidates: list[dict[str, Any]],
+    workload_contract: dict[str, Any],
+    cancellation_contract: dict[str, Any],
+) -> dict[str, Any]:
+    eligibility = duplicate_race_decision(site_policy, user_opt_in)
+    if not eligibility.get("eligible"):
+        return {"allowed": False, "reason": eligibility["reason"], "eligibility": eligibility}
+    if eligibility.get("allowed"):
+        return {"allowed": False, "reason": "authority_helper_not_final_gate", "eligibility": eligibility}
+    if not isinstance(workload_contract, dict) or not workload_contract:
+        return {"allowed": False, "reason": "missing_workload_contract", "eligibility": eligibility}
+    if not isinstance(cancellation_contract, dict):
+        return {"allowed": False, "reason": "missing_loser_cancellation_contract", "eligibility": eligibility}
+    if len(candidates) != 2:
+        return {"allowed": False, "reason": "requires_exactly_two_candidates", "eligibility": eligibility}
+    route_identities = [_route_identity(candidate) for candidate in candidates]
+    if not all(route_identities):
+        return {"allowed": False, "reason": "missing_route_identity", "eligibility": eligibility}
+    if route_identities[0] == route_identities[1]:
+        return {"allowed": False, "reason": "duplicate_route_identity", "eligibility": eligibility}
+    if cancellation_contract.get("cancel_loser") is not True:
+        return {"allowed": False, "reason": "missing_loser_cancellation_contract", "eligibility": eligibility}
+    if cancellation_contract.get("winner_rule") not in SUPPORTED_RACE_WINNER_RULES:
+        return {"allowed": False, "reason": "unsupported_winner_rule", "eligibility": eligibility}
+    if cancellation_contract.get("running_tie_policy") not in SUPPORTED_RACE_TIE_POLICIES:
+        return {"allowed": False, "reason": "unsupported_running_tie_policy", "eligibility": eligibility}
+
+    expected = _normalized_workload_contract(workload_contract)
+    expected_digest = expected.get("workload_scope_digest")
+    for candidate in candidates:
+        candidate_contract = _normalized_workload_contract(candidate.get("workload_contract"))
+        if not candidate_contract:
+            return {"allowed": False, "reason": "missing_workload_contract", "eligibility": eligibility}
+        if expected_digest and candidate_contract.get("workload_scope_digest") != expected_digest:
+            return {"allowed": False, "reason": "workload_scope_digest_mismatch", "eligibility": eligibility}
+        if candidate_contract != expected:
+            return {"allowed": False, "reason": "incompatible_workload_contract", "eligibility": eligibility}
+        if not _resource_contract_satisfied(candidate, workload_contract):
+            return {"allowed": False, "reason": "hard_resource_requirement_not_met", "eligibility": eligibility}
+
+    return {
+        "allowed": True,
+        "reason": "bounded_two_route_race",
+        "eligibility": eligibility,
+        "candidate_count": 2,
+        "cancellation_contract": {
+            "winner_rule": cancellation_contract["winner_rule"],
+            "cancel_loser": True,
+            "running_tie_policy": cancellation_contract["running_tie_policy"],
+        },
+    }
 
 
 def bounded_replacement_decision(monitor: dict[str, Any], old_job: dict[str, Any]) -> dict[str, Any]:

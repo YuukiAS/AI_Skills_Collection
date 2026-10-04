@@ -4,6 +4,51 @@
 
 No unreleased changes.
 
+## 5.4.4 - 2026-10-04
+
+Repository `5.4.4` is a compatible patch release for Slurm Workflows duplicate
+race policy.
+
+Repository bump decision: PATCH
+Reason: this release changes existing `slurm-workflows` behavior by allowing
+bounded duplicate race when there is no known site prohibition, the user or
+local machine explicitly opts in, and the two-route safety contract is frozen.
+
+Affected standalone skills:
+- `slurm-workflows`: `0.3` -> `0.4`
+  Reason: Slurm Workflows no longer requires a site profile to explicitly say
+  duplicate race is allowed before an opted-in bounded race can be considered.
+  Explicit site prohibition still blocks race; user/local opt-in is always
+  required; and the race must keep the same workload/scientific contract,
+  satisfy hard resource requirements on both routes, cap candidates at two, and
+  freeze winner/loser cancellation before submission.
+
+Affected central plugins:
+- all central plugins: NO_BUMP
+  Reason: this release does not change central Marketplace plugin behavior.
+
+Bridge Kit: NO CHANGE.
+
+Unchanged central plugin versions: `workflow-core 0.5`, `ai-skills-core 0.5`,
+`writing-style 0.4`, `research-writing 0.2`, `presentations 0.3`,
+`scientific-visualization 0.1`, `web-development 0.4`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Changed repository behavior:
+
+- Duplicate race remains off by default and still requires explicit user/local
+  opt-in.
+- `missing`, `UNKNOWN`, `disabled_by_default`, and `explicit_user_opt_in` site
+  policy no longer fail closed solely because the site did not publish an
+  explicit allow; they can proceed only when no prohibition is known and the
+  bounded two-route contract is satisfied.
+- Explicit prohibition takes precedence over user opt-in.
+- Race candidates must serve the same workload/scientific contract and may not
+  alter data, split, model, endpoint, GPU count, per-candidate walltime,
+  training budget, or hard resource requirements.
+- Winner/loser cancellation behavior, including near-simultaneous RUNNING
+  handling, must be frozen before submission.
+
 ## 5.4.3 - 2026-10-04
 
 Repository `5.4.3` is a compatible patch release for Project Thread Handoff
