@@ -510,6 +510,89 @@ candidate_action:
 - Cross-gate consistency: if whitespace metrics, requirement ledger, annotation closure, and page review disagree, overall release QA must be REVISE.
 promotion_gate: replay the STAT5060 candidate so P14/P16/P22/P28/P30/P31/P36 fail automatically and title/closing pages remain valid exceptions; then pass a repaired candidate plus an unrelated deck using the same archetype-aware rule.
 
+### Teaching code/reference slides need runnable-context and PDF-copyability QA
+status: NEW
+tracking: #35
+source: STAT5060 Tutorial 1 student-deck V05 human review, 2026-10-05
+evidence: V04 showed package names and partial snippets but omitted imports, data-object creation, complete model calls, posterior extraction/predictive calls, and honest backend disclosure. The final PDF text layer also converted straight code quotes into typographic quotes on several code pages, so visually plausible code could not be copied and executed.
+problem: A teaching presentation can look technically sophisticated while failing its practical teaching job if code is shown as fragments rather than a runnable workflow. Source-level syntax correctness is not enough; the final rendered PDF must preserve copyable code text.
+candidate_action:
+- Treat code/reference slides as a distinct teaching artifact role: prerequisites -> complete call -> relevant output/extraction -> interpretation.
+- Require imports/data objects before use; do not show an object that has not been created.
+- Require the package call actually used for the claimed statistical task, including package-specific parameterisation differences and any shared backend.
+- Require final-PDF code extraction QA: ASCII quotes/operators/underscores preserved, zero curly quotes in code, syntax parse/smoke checks, and visible result/meaning on the page.
+- A software-name matrix or API-name list does not satisfy software teaching when the page job is “how to fit/check this model”.
+promotion_gate: replay STAT5060 V04 so the fragmentary brms/PyMC/code pages and curly-quote PDF fail; pass V05-style complete syntax pages plus one unrelated teaching deck.
+
+### Column layout is for peer comparison; sequential reasoning must use a vertical reading path
+status: NEW
+tracking: #35
+source: STAT5060 Tutorial 1 V04 annotations plus CAT-TRACE v8/v9 layout evidence, 2026-10-05
+evidence: V04 repeatedly forced sequential explanations into side-by-side regions: relative-logit weights vs normalization, condition/marginal diagrams, blocked-Gibbs -> MH-within-Gibbs, and HMC/NUTS stages. CAT-TRACE had already shown that learn -> prior -> update became clearer after changing from columns to a vertical sequence, while genuinely peer objects remained successful in columns.
+problem: “There is horizontal space” is not a valid reason to use columns. Columns imply simultaneous peer status and invite wide meaningless gutters when the content is actually causal, temporal, inferential or prerequisite-ordered.
+candidate_action:
+- Before composing a multi-column slide, record the semantic relation: PEER_COMPARE or SEQUENTIAL_DEPENDENCY.
+- Allow columns only for peer objects with comparable roles and matching anchors (e.g. R vs Python, ordinary model vs GLMM).
+- Use vertical/stacked flow when object B depends on A, one denominator/formula governs the next step, or the explanation has a natural prerequisite order.
+- QA must inspect actual nearest-object gutter, top/formula/code alignment and lower-edge balance; declared column widths alone are insufficient.
+- If one column becomes mostly a label while the other carries the explanation, collapse to a single vertical reading path.
+promotion_gate: same fixture set must reject sequential content placed in columns and retain peer-comparison columns without false positives.
+
+### Semantic proximity must be a release gate, not sacrificed to whitespace metrics
+status: NEW
+tracking: #35
+source: STAT5060 Tutorial 1 V04/V05 human review, 2026-10-05
+evidence: prior repairs reduced bottom whitespace by pushing conclusions toward the lower page, which separated interpretation from the table/figure/formula it explained. Pages could satisfy a bottom-gap threshold while becoming harder to read.
+problem: Whitespace occupancy and semantic grouping are different constraints. A page can be “full” and still be badly composed if evidence and its interpretation are visually far apart.
+candidate_action:
+- Define semantic groups before layout: evidence object + interpretation/conclusion.
+- Measure or review evidence-to-interpretation proximity in addition to bottom gap.
+- Ordinary figure/table interpretation should normally stay near the object; do not use vfill to separate items that belong to one semantic group.
+- Permit stretch glue only between independently meaningful groups.
+- Release QA must fail pages where a conclusion is moved away from its evidence merely to satisfy whitespace thresholds.
+promotion_gate: replay known STAT5060 pages where bottom-gap passed but evidence/interpretation proximity failed, then pass repaired layouts and an unrelated sparse slide.
+
+### Connector geometry needs a minimum visible shaft and boundary-to-boundary contract
+status: NEW
+tracking: #39
+source: STAT5060 Tutorial 1 V04 arrows plus CAT-TRACE v7-v9 diagram fixes, 2026-10-05
+evidence: STAT5060 V04 simulation/HMC/GLMM diagrams contained arrows that were too short, detached-looking or visually crowded. CAT-TRACE independently established the same failure mode and converged on boundary-clipped edges with about 8–10 mm visible shaft where space permits.
+problem: A connector can be syntactically present and collision-free yet still fail visually if it is too short to read as a relationship, starts/ends inside a node, or is compressed until arrowheads/labels collide.
+candidate_action:
+- Default connector rule: node-boundary to node-boundary; no overlap with text/formula/border/other connectors.
+- At 1920x1080, target at least about 36 px / 8 mm visible shaft; peer-row arrows should use comparable visible lengths.
+- Relation labels require stable clearance from the shaft.
+- Do not use arbitrary shorten values that create detached arrows.
+- If the available width cannot support readable connectors, switch to a numbered vertical sequence instead of keeping miniature arrows.
+- Add rendered connector-length/collision evidence to final QA; source styles alone do not prove acceptability.
+promotion_gate: failed short-arrow fixtures must be rejected; repaired peer-flow and vertical-fallback fixtures pass across CUHK and course-standard skins.
+
+### Footer alignment must be regression-tested after every theme/font/page-count change
+status: NEW
+tracking: #98
+source: STAT5060 Tutorial 1 V04 human review, 2026-10-05
+evidence: footer alignment regressed after earlier accepted rounds even though the footer structure, navigation groups and page count had previously passed review. The user again observed native action buttons visually misaligned relative to source credit/page number.
+problem: Footer acceptance is being treated as a one-time template fact, but font, theme, total-page count and nearby layout changes can move optical alignment. Structural presence of the right controls does not guarantee a mature footer.
+candidate_action:
+- Treat footer as shared-core chrome consumed by CUHK/course-standard skins rather than duplicate project-local implementations.
+- After any theme/font/page-count change, rerun footer crops on title, code, figure, dense-model, assessment and closing pages.
+- Check source/page-number baseline, native action-group optical centre, action-to-page-number horizontal gap, exact approved action set and collisions.
+- Prior footer PASS must be invalidated when a dependency affecting geometry changes.
+promotion_gate: an injected vertical/button offset must fail the shared fixture; both adapters pass the same footer-core geometry with skin-only differences.
+
+### Question vertical-rule geometry must follow the rendered text box
+status: NEW
+tracking: #32
+source: STAT5060 Tutorial 1 V04 annotation A004, 2026-10-05
+evidence: the Question macro was present and stylistically consistent, yet the accent rule extended above the first question line and read as a misplaced decoration.
+problem: Macro presence and colour-role consistency do not guarantee correct rendered geometry.
+candidate_action:
+- Bind rule top/bottom to the actual rendered label+question text box.
+- At release scale, allow at most about 1 px optical overshoot.
+- Rule must not extend into title, previous object, or following object.
+- Multi-line Question blocks and full-width Questions require dedicated regression fixtures.
+promotion_gate: the V04-style overshooting rule fails; one-line and multi-line Question fixtures pass in both skins.
+
 真实项目 thread 新增时只需要最小格式：
 
 ```text
