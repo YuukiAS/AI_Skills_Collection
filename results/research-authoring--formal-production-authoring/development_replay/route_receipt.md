@@ -1,0 +1,10 @@
+# Route receipt
+
+- **Document family:** Report — concise advisor-facing research update; not a manuscript or execution log.
+- **Audience and purpose:** Advisor deciding whether the experiment package can support a short internal milestone report. The update recommends a provisional report while leaving the overall robustness claim conditional.
+- **Source authority:** `inputs/01-DEV_REPORT_RAW_NOTES.md` is the sole supplied evidence source. Its observations are treated as raw notes, not independently verified measurements. No external literature or citations were needed or added.
+- **Claim and section roles:** Scientific question and decision first; qualitative seed table for comparison; ablation and figure limitations for interpretation; next actions separated into scientific work and artifact cleanup. No formula is warranted by the supplied evidence.
+- **Unresolved evidence:** Seeds 4–5; numerical metric values and uncertainty; evaluation comparability and metric definitions; strength of the ablation evidence. `fig_calibration_shifted.png` is mentioned in the notes but was not inspected. Segmentation overlays remain unavailable. The table is explicitly incomplete.
+- **Internal provenance boundary:** The preemption/relaunch of Slurm job `918273`, rename from `scratch_v7.ipynb` to `shifted_eval_summary.ipynb`, and timestamps/retry notes remain author-only provenance. No evidence supplied shows that these events alter the scientific comparison.
+- **Downstream artifact route:** `research-authoring-core` → `research-reporting` → fidelity and language review → document-level evidence QA → `outputs/advisor_update.md`. This receipt is `outputs/route_receipt.md`. Markdown is the requested final format; no PDF or slide rendering was invoked. Any later formal PDF should preserve report semantics and delegate rendering to `render-chinese-math-pdf`.
+- **QA scope:** Checked the authored text against the supplied notes for unsupported claims, missing-result visibility, audience relevance, and separation of science from runtime history. Experimental results and figure contents were not independently validated.
