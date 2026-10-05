@@ -13,7 +13,7 @@ DEVELOPMENT_REPLAY=PASS
 G4_WRAPPER_ARCHIVE_PREPARED=YES
 FINAL_GATES_NOT_STARTED=YES
 PREFINAL_CANDIDATE_READY=NO
-NEXT_HANDOFF=PLANNER_OR_CRITIC
+NEXT_HANDOFF=PLANNER
 BLOCKER=G2_G3_EXACT_REAL_FINAL_TASKS_NOT_FROZEN
 ```
 
@@ -29,3 +29,6 @@ Implemented the approved Research Authoring v0.3 candidate within the frozen arc
 Validation passed, including full unit discovery and candidate plugin replay.
 
 Pre-final Critic admission is not yet truthful because exact real G2 and G3 final tasks are not frozen in the repo/worktree. The task must return to Planner/Critic for final task artifact selection or approval before claiming `PREFINAL_CANDIDATE_READY=YES`.
+
+Current handoff:
+- `results/research-authoring--formal-production-authoring/PLANNER_HANDOFF.md`
