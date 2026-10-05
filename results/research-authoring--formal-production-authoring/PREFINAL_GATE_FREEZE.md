@@ -1,8 +1,9 @@
 # Pre-Final Gate Freeze Status
 
-Task: `research-authoring--formal-production-authoring`
-Candidate commit C0: `1c37c0715aca0096606f24e56192b7857e72bbd6`
-Final gates: not started
+Task: `research-authoring--formal-production-authoring`  
+Branch: `work/research-authoring--formal-production-authoring`  
+Candidate commit C0: `1c37c0715aca0096606f24e56192b7857e72bbd6`  
+Final gates: NOT STARTED
 
 ## G1 Frozen Case Bank
 
@@ -21,66 +22,101 @@ Near-miss/support-only entries:
 - Render-only: "Render this already-final Markdown to PDF."
 - Ordinary Q&A: "Explain why calibration can improve while Dice drops."
 
-G1 final evidence must be run only after pre-final Critic PASS.
+G1 final evidence starts only after pre-final Critic PASS.
 
-## G2 Freeze Status
+## G2 — FROZEN
 
-Required by Goal:
-- one approved real report-family task;
-- Phase 1 raw evidence -> greenfield complete report;
-- independent Phase 1 PASS;
-- Phase 2 uses a delta frozen before Phase 1 and invisible to Phase 1;
-- no product/rubric/task/delta change between phases.
+Exact task:
+- project: `YuukiAS/Distributed_Imaging_Inference`
+- ref: `c6ed0fb40c702936ec1f41454390ef188a5b4d97`
+- task: greenfield advisor research update on clean CARE / H-ROBUST / supporting M&Ms evidence, followed by a pre-frozen personalized-partial-pooling delta.
 
-Current status:
-- `G2_EXACT_REAL_TASK_FROZEN=NO`
-- `G2_PHASE1_RAW_INPUT_SCOPE_FROZEN=NO`
-- `G2_PHASE2_DELTA_FROZEN=NO`
+Frozen files:
+- `private/exports/research-authoring--formal-production-authoring/final_tasks/G2/PHASE1_RAW_SCOPE.md`
+- `private/exports/research-authoring--formal-production-authoring/final_tasks/G2/PHASE1_INPUT_MANIFEST.md`
+- `private/exports/research-authoring--formal-production-authoring/final_tasks/G2/PHASE2_DELTA.md`
+- `private/exports/research-authoring--formal-production-authoring/final_tasks/G2/G2_RUBRIC.md`
+- `private/exports/research-authoring--formal-production-authoring/final_tasks/G2/REVIEWER_ACCESS.md`
 
-Reason:
-- The current repository/worktree does not contain a task-owned `private/exports/research-authoring--formal-production-authoring/` G2 real report-family artifact bundle.
-- Public/generated development fixtures and old DII/CAT-TRACE references are development regression material only and must not be relabeled final fresh evidence.
-
-This blocks a truthful `PREFINAL_CANDIDATE_READY=YES`.
-
-## G3 Freeze Status
-
-Required by Goal:
-- a real manuscript production task frozen before pre-final Critic;
-- not used for 059 product tuning;
-- exact source repo/ref, venue/project authority, package subset, access path, and rubric.
-
-Current status:
-- `G3_EXACT_REAL_MANUSCRIPT_TASK_FROZEN=NO`
-- `G3_VENUE_PROJECT_AUTHORITY_FROZEN=NO`
-- `G3_PACKAGE_SUBSET_RUBRIC_FROZEN=NO`
-
-Reason:
-- The current repository/worktree does not expose an exact real manuscript task bundle that is both unused for 059 product tuning and suitable for final fresh G3.
-- Existing CAT-TRACE / presentation paper holdout materials are not automatically eligible; the Plan explicitly says those are default development/regression or structure-reference material unless Critic approves a specific fresh task.
-
-This also blocks a truthful `PREFINAL_CANDIDATE_READY=YES`.
-
-## G4 Wrapper Package
-
-Prepared offline package:
-- composition: `private/exports/research-authoring--formal-production-authoring/wrapper/WRAPPER_COMPOSITION.md`
-- archive: `private/exports/research-authoring--formal-production-authoring/wrapper/research-authoring-wrapper-0.1.0-candidate-1c37c071.tar.gz`
-- manifest: `private/exports/research-authoring--formal-production-authoring/wrapper/MANIFEST.md`
-- SHA256: `83c5848e325430d10667e82777ad1da008350f6c2e0a238a2051574922e632c6`
-
-Live Plugin Creator / ChatGPT account mutation:
-- not authorized;
-- not attempted;
-- must stop for one new bounded user authorization if/when reached after final G1-G3 readiness.
-
-## Stop Status
-
-```ini
-PREFINAL_CANDIDATE_READY=NO
-FINAL_GATES_NOT_STARTED=YES
-NEXT_HANDOFF=PLANNER
-BLOCKER=G2_G3_EXACT_REAL_FINAL_TASKS_NOT_FROZEN
+State:
+```text
+G2_EXACT_REAL_TASK_FROZEN=YES
+G2_PHASE1_RAW_INPUT_SCOPE_FROZEN=YES
+G2_PHASE2_DELTA_FROZEN=YES
+G2_REVIEWER_RUBRIC_FROZEN=YES
+G2_REVIEWER_ACCESS_FROZEN=YES
+G2_FINAL_EXECUTION_STARTED=NO
 ```
 
-This is an early, truthful stop before consuming final fresh evidence.
+Phase 1 may receive only the declared raw manifest. Phase 2 delta is withheld until independent `PHASE1=PASS`.
+
+Freshness basis:
+- exact task/input/delta frozen after C0;
+- exact H-ROBUST/personalized-partial-pooling two-stage task was not used in 059 design/development replay;
+- pre-final Critic must independently confirm this before C0 becomes final C.
+
+## G3 — FROZEN
+
+Exact task:
+- project: `YuukiAS/MoSAIC_Paper`
+- ref: `590bfbac1450fbab5e4ca8ce77c877ece845f094`
+- task: produce a clean double-blind CARE 2026 LNCS submission package from the author-approved manuscript truth, reduce the current 14-page baseline to the frozen <=12-page absolute limit without scientific drift, and deliver buildable source + PDF + concise submission manifest.
+
+Frozen files:
+- `private/exports/research-authoring--formal-production-authoring/final_tasks/G3/TASK_IDENTITY.md`
+- `private/exports/research-authoring--formal-production-authoring/final_tasks/G3/VENUE_PROJECT_AUTHORITY.md`
+- `private/exports/research-authoring--formal-production-authoring/final_tasks/G3/PACKAGE_SUBSET.md`
+- `private/exports/research-authoring--formal-production-authoring/final_tasks/G3/G3_RUBRIC.md`
+- `private/exports/research-authoring--formal-production-authoring/final_tasks/G3/REVIEWER_ACCESS.md`
+
+State:
+```text
+G3_EXACT_REAL_MANUSCRIPT_TASK_FROZEN=YES
+G3_VENUE_PROJECT_AUTHORITY_FROZEN=YES
+G3_PACKAGE_SUBSET_RUBRIC_FROZEN=YES
+G3_REVIEWER_ACCESS_FROZEN=YES
+G3_FINAL_EXECUTION_STARTED=NO
+```
+
+Freshness basis:
+- exact MoSAIC task/ref/truth set was frozen after C0;
+- this exact manuscript-production task was not used to tune C0;
+- older MoSAIC generic writing lessons do not make this exact task an 059 tuning sample;
+- pre-final Critic must independently confirm.
+
+## G4 — FROZEN TASK REUSE
+
+G4 reuses G2 after G2 full PASS.
+
+Frozen files:
+- `private/exports/research-authoring--formal-production-authoring/final_tasks/G4/REUSED_TASK_DECISION.md`
+- `private/exports/research-authoring--formal-production-authoring/final_tasks/G4/CHAT_CODEX_HANDOFF_RUBRIC.md`
+
+State:
+```text
+G4_REUSED_TASK=G2
+G4_WRAPPER_LIVE_MUTATION_AUTHORIZED=NO
+G4_FINAL_EXECUTION_STARTED=NO
+```
+
+Offline wrapper package prepared previously:
+- `private/exports/research-authoring--formal-production-authoring/wrapper/WRAPPER_COMPOSITION.md`
+- `private/exports/research-authoring--formal-production-authoring/wrapper/MANIFEST.md`
+- SHA256: `83c5848e325430d10667e82777ad1da008350f6c2e0a238a2051574922e632c6`
+
+Live Plugin Creator / ChatGPT account mutation remains separately gated by user authorization.
+
+## Pre-final admission status
+
+No final G1-G4 output has been generated or consumed.
+
+```ini
+PREFINAL_CANDIDATE_READY=YES
+C0=1c37c0715aca0096606f24e56192b7857e72bbd6
+FINAL_GATES_NOT_STARTED=YES
+G2_G3_EXACT_REAL_FINAL_TASKS_FROZEN=YES
+NEXT_HANDOFF=CRITIC
+BLOCKER=NONE_AT_PLANNER_FREEZE
+```
+
+C0 becomes `FINAL_CANDIDATE_COMMIT=C` only if independent pre-final Critic PASSes this exact packet without requiring candidate-owned changes.
