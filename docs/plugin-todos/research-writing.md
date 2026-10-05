@@ -4,6 +4,16 @@ Canonical maintenance inbox for the `research-writing` plugin.
 
 ## Open candidates
 
+### Research Authoring formal production authoring promotion
+status: PROMOTE_NOW
+tracking: #99
+source: 059 Research Authoring formal production architecture v0.3 and Implementation Plan v0.1
+evidence: `docs/design/059_RESEARCH_AUTHORING_FORMAL_PRODUCTION_ARCHITECTURE_V0_3_PLANNER_PROPOSAL_2026-10-04.md`; `docs/design/059_RESEARCH_AUTHORING_FORMAL_PRODUCTION_ARCHITECTURE_V0_3_CRITIC_REVIEW_2026-10-04.md`; `docs/design/059_RESEARCH_AUTHORING_FORMAL_PRODUCTION_IMPLEMENTATION_PLAN_V0_1_2026-10-04.md`; `docs/design/059_RESEARCH_AUTHORING_FORMAL_PRODUCTION_EXECUTION_READY_CRITIC_REVIEW_V0_1_2026-10-04.md`
+problem: existing `report`, `paper`, and `litcite` entries can each handle local work, but document-producing Research Authoring requests still need one canonical document-level core, an incremental authoring contract, formal manuscript package closure, and ChatGPT/Codex final production evidence.
+target layer: research-writing routing / orchestration / document-level QA
+candidate action: implement canonical `research-authoring-core`, thin report/paper/litcite routes, real profile/Marketplace/generated consumers, RA2 incremental authoring, and the approved G1-G4 same-final-candidate evidence path.
+promotion gate: G1-G4 PASS on the same frozen `research-writing 0.3` final candidate, with independent pre-final Critic and independent final Reviewer as defined in the approved 059 plan.
+
 
 ### Formal research reports can be scientifically correct yet still lack a coherent academic document identity
 status: PARTIALLY_PROMOTED_IN_5.2.1
@@ -141,7 +151,8 @@ promotion_gate: replay on the next long-running computational research project a
 
 ### Advisor reports drafted before experiment completion should freeze the scientific story and leave only bounded result slots
 status: NEW
-tracking: UNASSIGNED
+tracking: #99
+disposition: MERGED_INTO_TRACKING_ISSUE
 source: Distributed_Imaging_Inference / reusable-risk advisor report, 2026-10-02
 evidence: DII `deliverables/group_meeting_2026-10-03/group_meeting_report_v1.md` at commit `259c9fcc1821a63533401e402b9b4a6016c58916`; frozen feasibility design and execution goal in `docs/research/2026-10-02_risk_transmission/05_FIRST_REUSABLE_RISK_FEASIBILITY_PROTOCOL.md` and `jobs/GOAL_MMS_FIRST_REUSABLE_RISK_FEASIBILITY_2026-10-02.md`
 target layer: research-reporting planning / evidence-boundary / late-result update
@@ -175,7 +186,8 @@ promotion_gate: replay on two independent bilingual research reports and confirm
 
 ### Formula display and notation should follow scientific role, not a blanket inline/block rule
 status: NEW
-tracking: UNASSIGNED
+tracking: #99
+disposition: MERGED_INTO_TRACKING_ISSUE
 source: Distributed_Imaging_Inference / advisor-report PDF review, 2026-10-02
 evidence: DII \`deliverables/group_meeting_2026-10-03/group_meeting_report_v1.pdf\` rendered from commit \`259c9fcc1821a63533401e402b9b4a6016c58916\`; user feedback that key formulas were visually buried while difficult calligraphic notation reduced readability; revised source in DII commit \`53c910c060782ecb1e925f35cf232462654adfd4\`
 target layer: research-reporting document semantics / mathematical presentation / QA
@@ -195,7 +207,8 @@ promotion_gate: replay on one additional advisor-facing mathematical report and 
 
 ### Advisor-facing reports should separate reader-facing sources from internal authoring provenance
 status: NEW
-tracking: UNASSIGNED
+tracking: #99
+disposition: MERGED_INTO_TRACKING_ISSUE
 source: Distributed_Imaging_Inference / advisor-report PDF review, 2026-10-02
 evidence: the first rendered DII advisor PDF placed repository paths, internal source notes and authoring reminders on its final page together with real references; after review, public-facing references were kept in the report while internal paths were moved to \`deliverables/group_meeting_2026-10-03/group_meeting_report_v1_sources.md\`
 target layer: research-reporting inclusion/exclusion planning / provenance boundary

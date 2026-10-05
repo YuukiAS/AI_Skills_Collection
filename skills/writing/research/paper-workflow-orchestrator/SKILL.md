@@ -27,6 +27,8 @@ metadata:
 
 Use this skill to plan and coordinate manuscript work. Do not use it as a prose-polishing skill; hand off paragraph-level editing to `scientific-writing`, `scientific-prose`, or `writing-fidelity`.
 
+For new manuscripts, substantial manuscript revisions, supplements, reviewer responses, cover letters, thesis chapters, or submission packages, enter `research-authoring-core` first. This skill is the paper-family delegate after the core has frozen the document purpose, source authority, claim-evidence spine, section jobs, package scope, citation authority, and incremental-edit boundary.
+
 ## Research Paper Production Workbench
 
 Use this skill when the user needs the paper process itself organized, not just
@@ -34,21 +36,23 @@ a paragraph rewritten. Route by task shape:
 
 1. Intake and scoping: identify the research question, target audience, current
    artifact state, available evidence, missing evidence, and deadline pressure.
-2. Argument spine: turn scattered notes, experiments, or conclusions into a
+2. Research Authoring brief: consume the core's audience, purpose, source boundary, document family, claim-evidence spine, section jobs, table/figure/formula roles, citation authority, venue/project authority, and incremental-edit scope.
+3. Argument spine: turn scattered notes, experiments, or conclusions into a
    problem -> gap -> method -> evidence -> claim -> limitation structure.
-3. Section contracts: define what each manuscript section must prove, which
+4. Section contracts: define what each manuscript section must prove, which
    figures/tables carry the proof, and which claims must be removed or narrowed.
-4. Draft production: sequence the writing so methods, results, figures, and
+5. Draft production: sequence the writing so methods, results, figures, and
    claims stay synchronized; do not generate a polished paper that outruns the
    evidence ledger.
-5. Revision loop: audit reviewer attack surfaces, unsupported superiority or
+6. Revision loop: audit reviewer attack surfaces, unsupported superiority or
    robustness claims, missing comparisons, stale numbers, and inconsistent
    terminology before prose polishing.
-6. Submission/rebuttal handoff: create venue checklist, reviewer concern matrix,
+7. Submission/rebuttal handoff: create venue checklist, reviewer concern matrix,
    required experiments or text fixes, and final artifact QA tasks for the
    downstream writing, citation, LaTeX, PDF, or review skills.
-7. Result-to-claim gate: after experiments or audits finish, decide which claims are supported, which must be narrowed, which are draft-only, and which require new evidence before writing.
-8. Final artifact gate: before treating a manuscript, Markdown, PDF, response, or report as final, identify the selected artifact, evidence authority, unresolved checks, and the downstream style/fidelity skill that must run.
+8. Result-to-claim gate: after experiments or audits finish, decide which claims are supported, which must be narrowed, which are draft-only, and which require new evidence before writing.
+9. Incremental update gate: when revising an existing canonical manuscript or response, patch the minimal dependency closure unless the user, evidence, or venue/project authority requires broader restructuring.
+10. Final artifact gate: before treating a manuscript, Markdown, PDF, response, or report as final, identify the selected artifact, evidence authority, unresolved checks, and the downstream style/fidelity skill that must run.
 
 Use `literature-review` for single-paper cards or field synthesis. Use
 `peer-review` for reviewer scoring, acceptance risk, and rebuttal assessment.

@@ -1,6 +1,6 @@
 {
   "license_counts": {
-    "(missing)": 51,
+    "(missing)": 52,
     "3-clause BSD license": 1,
     "Apache License, Version 2.0": 1,
     "Apache-2.0": 4,
@@ -31,7 +31,7 @@
     "https://github.com/sympy/sympy/blob/master/LICENSE": 1
   },
   "metadata_skill_author_counts": {
-    "(missing)": 50,
+    "(missing)": 51,
     "AHK Strategies (ashrafkahoush-ux)": 2,
     "AI Skills Collection maintainers": 2,
     "AI Skills Collection maintainers with recorded upstream sources": 11,
@@ -47,18 +47,18 @@
     "external-adapted": 11,
     "local": 7,
     "unknown": 114,
-    "user-authored": 22
+    "user-authored": 23
   },
   "provenance_counts": {
     "external-adapted": 11,
     "local": 7,
     "unknown": 114,
-    "user-authored": 22
+    "user-authored": 23
   },
   "rows_with_license_files_count": 11,
   "rows_with_urls_count": 66,
   "scope": "active_and_non_archived",
-  "skill_count": 154,
+  "skill_count": 155,
   "skills": [
     {
       "license": "",
@@ -2415,6 +2415,19 @@
       "path": "skills/writing/research/peer-review",
       "provenance": "unknown",
       "provenance_category": "unknown",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "research-authoring-core",
+      "path": "skills/writing/research/research-authoring-core",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
       "source_fields": {},
       "status": "active",
       "url_count": 0,

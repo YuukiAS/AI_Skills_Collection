@@ -129,14 +129,15 @@
     },
     {
       "name": "research-writing",
-      "version": "0.2",
+      "version": "0.3",
       "displayName": "Research Authoring",
-      "description": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization.",
+      "description": "Research documents, reports, manuscripts, literature synthesis, citations, claim-evidence organization, and incremental authoring through a shared document-level core.",
       "category": "Research",
       "brandColor": "#1D4ED8",
       "composerIcon": "./assets/codex/plugin-icons/research-writing/composer.svg",
       "logo": "./assets/codex/plugin-icons/research-writing/composer.svg",
       "defaultPrompt": [
+        "Plan this Research Authoring document through the shared core.",
         "Write a repo-grounded research report.",
         "Plan this paper workflow.",
         "Check literature and citations.",
@@ -147,9 +148,28 @@
       ],
       "skills": [
         {
-          "type": "copy",
-          "source": "skills/writing/research/research-reporting",
-          "artifact_id": "report"
+          "type": "aggregate",
+          "name": "research-reporting",
+          "artifact_id": "report",
+          "description": "Report-family Research Authoring route for advisor reports, group-meeting written reports, milestones, research updates, methods notes, experiment retrospectives, and evidence-backed technical notes; enter the document-level core first, then delegate report semantics to research-reporting.",
+          "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
+          "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
+          "routing_mode": "coordinator-first",
+          "coordinator_artifact_id": "core",
+          "workflow_notes": [
+            "For document-producing report-family requests, read `_src/core/source.md` first to freeze audience, purpose, source authority, claim-evidence spine, section jobs, table/figure/formula roles, citation authority, incremental-edit scope, downstream route, and final document-level QA.",
+            "For explicit formal PDF delivery, keep report semantics in Research Authoring and delegate only rendering mechanics to `render-chinese-math-pdf` when that companion is installed through the active profile; standalone Marketplace Research Authoring must fail closed when the renderer companion is missing."
+          ],
+          "source_skills": [
+            {
+              "source": "skills/writing/research/research-authoring-core",
+              "artifact_id": "core"
+            },
+            {
+              "source": "skills/writing/research/research-reporting",
+              "artifact_id": "report"
+            }
+          ]
         },
         {
           "type": "aggregate",
@@ -158,7 +178,17 @@
           "description": "Formal manuscript planning, drafting, revision, reviewer-style critique, rubric scoring, rebuttal, supplement, venue, and LaTeX coordination; route literature discovery and citation checks to literature-and-citations.",
           "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
           "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
+          "routing_mode": "coordinator-first",
+          "coordinator_artifact_id": "core",
+          "workflow_notes": [
+            "For document-producing manuscript, supplement, reviewer-response, cover-letter, thesis-chapter, or submission-package work, read `_src/core/source.md` first, then delegate paper-family planning, prose, review, venue, LaTeX, and citation work to the relevant source workflow.",
+            "Do not use paper-family delegates as bypasses around the document-level Research Authoring core."
+          ],
           "source_skills": [
+            {
+              "source": "skills/writing/research/research-authoring-core",
+              "artifact_id": "core"
+            },
             {
               "source": "skills/writing/research/scientific-writing",
               "artifact_id": "write"
@@ -196,7 +226,17 @@
           "description": "Current paper lookup, literature synthesis, single-paper evidence cards, citation support checks, BibTeX and reference metadata hygiene, and Zotero-oriented workflows.",
           "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
           "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
+          "routing_mode": "coordinator-first",
+          "coordinator_artifact_id": "core",
+          "workflow_notes": [
+            "For document-producing literature reviews, related-work sections, evidence syntheses, paper-card synthesis artifacts, or scholarly field summaries, read `_src/core/source.md` first and then delegate literature/citation work.",
+            "For support-only lookup, citation verification, BibTeX, metadata, or Zotero/library hygiene, the core should explicitly route to the appropriate delegate without forcing a full document plan."
+          ],
           "source_skills": [
+            {
+              "source": "skills/writing/research/research-authoring-core",
+              "artifact_id": "core"
+            },
             {
               "source": "skills/writing/research/literature-review",
               "artifact_id": "lit"

@@ -40,12 +40,42 @@ class ResearchWritingRoutingTests(unittest.TestCase):
 
     def test_research_main_installs_renderer_but_marketplace_research_writing_does_not(self) -> None:
         profile = json.loads((REPO_ROOT / "profiles/research-main.json").read_text(encoding="utf-8"))
+        self.assertIn("skills/writing/research/research-authoring-core", profile["skills"])
         self.assertIn("skills/tools/documents-media/render-chinese-math-pdf", profile["skills"])
 
         data = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
         research = next(plugin for plugin in data["plugins"] if plugin["name"] == "research-writing")
         serialized = json.dumps(research)
         self.assertNotIn("skills/tools/documents-media/render-chinese-math-pdf", serialized)
+
+    def test_codex_research_writing_installs_research_authoring_core(self) -> None:
+        profile = json.loads((REPO_ROOT / "profiles/codex-research-writing.json").read_text(encoding="utf-8"))
+        self.assertIn("skills/writing/research/research-authoring-core", profile["skills"])
+
+    def test_research_writing_uses_core_coordinator_for_document_routes(self) -> None:
+        data = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
+        research = next(plugin for plugin in data["plugins"] if plugin["name"] == "research-writing")
+        self.assertEqual(research["version"], "0.3")
+
+        route_by_artifact = {entry["artifact_id"]: entry for entry in research["skills"]}
+        for artifact_id in ("report", "paper", "litcite"):
+            route = route_by_artifact[artifact_id]
+            self.assertEqual(route["type"], "aggregate")
+            self.assertEqual(route["routing_mode"], "coordinator-first")
+            self.assertEqual(route["coordinator_artifact_id"], "core")
+            self.assertIn(
+                {"source": "skills/writing/research/research-authoring-core", "artifact_id": "core"},
+                route["source_skills"],
+            )
+
+    def test_research_authoring_core_defines_document_and_support_boundaries(self) -> None:
+        text = read_skill("skills/writing/research/research-authoring-core")
+        self.assertIn("document-producing", text)
+        self.assertIn("support-only", text)
+        self.assertIn("incremental authoring contract", text)
+        self.assertIn("minimal dependency closure", text)
+        self.assertIn("presentations", text)
+        self.assertIn("render-only", text)
 
     def test_research_reporting_formal_pdf_handoff_fails_closed_without_companion(self) -> None:
         text = read_skill("skills/writing/research/research-reporting")
@@ -94,6 +124,7 @@ class ResearchWritingRoutingTests(unittest.TestCase):
         self.assertEqual(
             {entry["source"] for entry in paper["source_skills"]},
             {
+                "skills/writing/research/research-authoring-core",
                 "skills/writing/research/scientific-writing",
                 "skills/writing/research/paper-workflow-orchestrator",
                 "skills/writing/research/nature-manuscript-workflow",
@@ -112,6 +143,7 @@ class ResearchWritingRoutingTests(unittest.TestCase):
         self.assertEqual(
             {entry["source"] for entry in litcite["source_skills"]},
             {
+                "skills/writing/research/research-authoring-core",
                 "skills/writing/research/literature-review",
                 "skills/writing/research/citation-verification",
                 "skills/science/discovery/citation-management",
@@ -122,6 +154,7 @@ class ResearchWritingRoutingTests(unittest.TestCase):
 
     def test_scientific_writing_routes_non_prose_work_to_neighbors(self) -> None:
         text = read_skill("skills/writing/research/scientific-writing")
+        self.assertIn("research-authoring-core", text)
         self.assertIn("paragraph-writing skill", text)
         self.assertIn("whole-paper planning", text)
         self.assertIn("reviewer-risk critique", text)
@@ -144,6 +177,11 @@ class ResearchWritingRoutingTests(unittest.TestCase):
         research_lookup = read_skill("skills/science/discovery/research-lookup")
         citation_verification = read_skill("skills/writing/research/citation-verification")
         citation_management = read_skill("skills/science/discovery/citation-management")
+
+        self.assertIn("research-authoring-core", literature_review)
+        self.assertIn("research-authoring-core", research_lookup)
+        self.assertIn("research-authoring-core", citation_verification)
+        self.assertIn("research-authoring-core", citation_management)
 
         self.assertIn("single-paper evidence cards", literature_review)
         self.assertIn("fast lookup", literature_review)

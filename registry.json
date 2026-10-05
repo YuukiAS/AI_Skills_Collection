@@ -1,9 +1,9 @@
 {
   "version": "5.4.4",
-  "generated_at": "2026-10-04T07:00:42+00:00",
+  "generated_at": "2026-10-05T01:10:52+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
-  "skill_count": 154,
+  "skill_count": 155,
   "selectors": {
     "domains": [
       "ai-ml",
@@ -5708,6 +5708,45 @@
         "writing-research-peer-review",
         "writing/peer-review",
         "writing/research/peer-review"
+      ]
+    },
+    {
+      "id": "writing.research-writing.research-authoring-core",
+      "name": "research-authoring-core",
+      "path": "skills/writing/research/research-authoring-core",
+      "flat_name": "writing-research-research-authoring-core",
+      "scope": "writing",
+      "domain": "research-writing",
+      "category": "research",
+      "subcategory": "research",
+      "slug": "research-authoring-core",
+      "install_selector": "writing/research/research-authoring-core",
+      "description": "Canonical document-level coordinator for Research Authoring. Use before producing or substantially revising research reports, manuscripts, related-work documents, research updates, reviewer responses, or supplements; route support-only lookup, citation/BibTeX/Zotero, local prose polishing, render-only, PPT/Beamer, and ordinary Q&A to their owners.",
+      "status": "active",
+      "provenance": "user-authored",
+      "source_repo_url": "",
+      "source_path": "",
+      "source_ref": "",
+      "source_imported_at": "",
+      "source_license": "",
+      "source_note": "",
+      "source_skills": [],
+      "trusted": false,
+      "requires_network": false,
+      "writes_files": true,
+      "executes_code": false,
+      "secrets_needed": [],
+      "last_reviewed": "2026-10-05",
+      "profile_tags": [
+        "research-writing"
+      ],
+      "recommended_scope": "project",
+      "selectors": [
+        "research-authoring-core",
+        "skills/writing/research/research-authoring-core",
+        "writing-research-research-authoring-core",
+        "writing/research-authoring-core",
+        "writing/research/research-authoring-core"
       ]
     },
     {

@@ -27,6 +27,8 @@ compatibility: PARALLEL_API_KEY and OPENROUTER_API_KEY required
 
 This skill provides real-time research information lookup for current evidence and paper discovery. Users should be able to ask naturally for "recent papers," "latest studies," or "current evidence"; backend names are implementation details.
 
+This is a support-only discovery skill unless the user asks to write, revise, or assemble a reader-facing research document from the findings. For document-producing reports, manuscripts, related-work sections, or evidence syntheses, enter `research-authoring-core` first and use lookup only for the current-evidence retrieval part.
+
 Backend routing:
 
 - **Parallel Chat API** (`core` model): Default backend for all general research queries. Provides comprehensive, multi-source research reports with inline citations via the OpenAI-compatible Chat API at `https://api.parallel.ai`.

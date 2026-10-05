@@ -5,9 +5,9 @@ This report records what can be proven from files currently in this repository. 
 ## Summary
 
 - Scope: `active_and_non_archived`
-- Skills audited: 154
+- Skills audited: 155
 - Skills with explicit source fields: 11
-- User-authored skills: 22
+- User-authored skills: 23
 - External adapted skills: 11
 - External vendored skills: 0
 - Generated skills: 0
@@ -23,7 +23,7 @@ This report records what can be proven from files currently in this repository. 
 | external-adapted | 11 |
 | local | 7 |
 | unknown | 114 |
-| user-authored | 22 |
+| user-authored | 23 |
 
 ## User Authored
 
@@ -50,6 +50,7 @@ This report records what can be proven from files currently in this repository. 
 | slurm-workflows | skills/tools/hpc/slurm-workflows | user-authored |  |
 | product-ui-copy | skills/writing/core/product-ui-copy | user-authored |  |
 | writing-fidelity | skills/writing/core/writing-fidelity | user-authored |  |
+| research-authoring-core | skills/writing/research/research-authoring-core | user-authored |  |
 | research-reporting | skills/writing/research/research-reporting | user-authored |  |
 
 ## External Adapted

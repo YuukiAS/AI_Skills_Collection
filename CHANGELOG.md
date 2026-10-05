@@ -2,7 +2,19 @@
 
 ## Unreleased
 
-No unreleased changes.
+Repository bump decision: NONE
+Reason: this implementation branch prepares a `research-writing 0.3` final
+candidate but does not merge `main`, advance `release`, tag, or publish a formal
+repository release.
+
+Affected central plugins:
+- `research-writing`: `0.2` -> `0.3` candidate
+  Reason: Research Authoring gains a shared document-level core for
+  document-producing report, paper, and literature routes; RA2 incremental
+  authoring is now an explicit contract; and report/paper/litcite Marketplace
+  routes consume the core before delegating to family-specific skills.
+
+Unchanged repository version: `5.4.4`.
 
 ## 5.4.4 - 2026-10-04
 

@@ -26,6 +26,8 @@ Manage citations systematically throughout the research and writing process. Thi
 
 This is a technical reference-management skill, not the final authority on whether a cited source supports a manuscript claim. Use `citation-verification` for source-existence, DOI/PMID consistency, claim-support, and citation-drift verdicts.
 
+This remains support-only for bibliography and metadata hygiene. If bibliography work becomes part of producing a reader-facing report, manuscript, related-work section, or submission package, enter `research-authoring-core` first and use this skill only for record resolution, BibTeX, duplicate repair, and formatting inside that document plan.
+
 ## When to Use This Skill
 
 Use this skill when:

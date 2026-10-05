@@ -26,6 +26,8 @@ Use this skill to draft and revise scientific manuscript prose. It is the paragr
 
 Scientific writing is a process for communicating research with precision and clarity. Write manuscript sections using IMRAD structure, evidence-bounded claims, complete paragraphs, and applicable reporting-guideline language. Use neighboring skills for the paper plan, submission package, venue format, bibliography, citation support verdict, figures, diagrams, or LaTeX mechanics.
 
+When the user is creating, restructuring, or materially updating a manuscript section as part of a reader-facing research document, enter `research-authoring-core` first and use this skill only as the paragraph/section prose delegate. Pure local prose polishing after the document meaning is frozen can remain support-only and does not need a new Research Authoring document plan.
+
 **Critical Principle: Always write in full paragraphs with flowing prose. Never submit bullet points in the final manuscript.** Use a two-stage process when drafting from notes: first create section outlines from the available evidence and any required lookup results, then convert those outlines into complete paragraphs.
 
 ## When to Use This Skill
@@ -40,6 +42,7 @@ This skill should be used when:
 - Addressing reviewer comments and revising manuscripts
 
 Do not use this skill as the primary route for:
+- Document-level Research Authoring decisions such as audience, document purpose, source boundary, claim-evidence spine, section jobs, table/figure/formula roles, citation authority, incremental-edit scope, or final document-level scientific QA; use `research-authoring-core`.
 - Whole-paper process planning, claim-evidence spines, section contracts, or figure/text synchronization; use `paper-workflow-orchestrator`.
 - Reviewer-style critique, acceptance-risk diagnosis, or rebuttal assessment; use `peer-review`.
 - Rubric-based quantitative scholarly scoring; use `scholar-evaluation`.

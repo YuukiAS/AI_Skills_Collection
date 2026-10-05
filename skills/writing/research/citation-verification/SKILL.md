@@ -28,6 +28,8 @@ metadata:
 
 Use this as a verification gate. Formatting a bibliography is not enough; check whether the cited source exists and supports the claim being made.
 
+This is a support-only skill unless the user asks to turn citation findings into a reader-facing research document. For manuscript/report/related-work authoring, enter `research-authoring-core` first, then use this skill for citation existence, metadata, claim-support, and citation-drift checks inside the document plan.
+
 ## Workflow
 
 1. Inventory all citation-bearing artifacts: manuscript, slides, figures, tables, BibTeX, references, captions, and supplementary files.

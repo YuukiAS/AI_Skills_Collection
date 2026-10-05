@@ -24,6 +24,8 @@ allowed-tools: Read Write Edit Bash
 
 Conduct systematic, comprehensive literature reviews following rigorous academic methodology. Search or organize literature when synthesis is the deliverable, then synthesize findings thematically and identify research gaps. Use `citation-verification` for final claim-support verdicts and `citation-management` for bibliography/BibTeX hygiene.
 
+When the requested literature work becomes a reader-facing scholarly document, related-work section, evidence synthesis, field review, or paper-card synthesis artifact, enter `research-authoring-core` first. This skill then owns the literature-specific search, screening, synthesis, and evidence-card work inside the document plan. Fast lookup, DOI checks, BibTeX cleanup, and Zotero/library hygiene remain support-only routes.
+
 This skill integrates with multiple scientific skills for database access (gget, bioservices, datacommons-client) and provides specialized tools for citation verification, result aggregation, and document generation.
 
 This is not the fast lookup tool for "find a few recent papers," and it is not the bibliography cleanup tool. Use `research-lookup` for current paper discovery, `citation-verification` for DOI/PMID existence or sentence-level support checks, `citation-management` for BibTeX/metadata cleanup, and `pyzotero` for Zotero collection operations.
@@ -42,6 +44,8 @@ Use this skill when:
 - Extracting a claim-evidence chain, method map, limitations, and research ideas from one supplied paper/PDF/arXiv/DOI
 
 Do not use this skill when the user only asks to find a small set of recent papers, check whether one DOI/PMID is real, decide whether a citation supports one sentence, clean a `.bib` file, or organize a Zotero library. Route those tasks to `research-lookup`, `citation-verification`, `citation-management`, or `pyzotero` respectively.
+
+Do not bypass `research-authoring-core` when the user asks to write, revise, or assemble a literature review, related-work section, thematic synthesis, or paper-card synthesis into a formal research document.
 
 
 ## Single-Paper Deep Reading Card

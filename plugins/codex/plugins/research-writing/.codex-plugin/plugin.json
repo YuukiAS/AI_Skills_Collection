@@ -1,7 +1,7 @@
 {
   "name": "research-writing",
-  "version": "0.2",
-  "description": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization.",
+  "version": "0.3",
+  "description": "Research documents, reports, manuscripts, literature synthesis, citations, claim-evidence organization, and incremental authoring through a shared document-level core.",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Research Authoring",
-    "shortDescription": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization.",
-    "longDescription": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "Research documents, reports, manuscripts, literature synthesis, citations, claim-evidence organization, and incremental authoring through a shared document-level core.",
+    "longDescription": "Research documents, reports, manuscripts, literature synthesis, citations, claim-evidence organization, and incremental authoring through a shared document-level core. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [
@@ -27,9 +27,9 @@
     ],
     "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
     "defaultPrompt": [
+      "Plan this Research Authoring document through the shared core.",
       "Write a repo-grounded research report.",
-      "Plan this paper workflow.",
-      "Check literature and citations."
+      "Plan this paper workflow."
     ],
     "brandColor": "#1D4ED8",
     "composerIcon": "./.codex-plugin/assets/composer.svg",

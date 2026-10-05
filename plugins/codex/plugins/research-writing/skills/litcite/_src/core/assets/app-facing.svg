@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Research authoring core icon">
+  <rect width="64" height="64" rx="12" fill="#0F766E"/>
+  <path d="M18 16h24l6 6v26H18z" fill="#ECFEFF"/>
+  <path d="M42 16v8h8" fill="#99F6E4"/>
+  <path d="M24 30h18M24 38h14M24 46h20" stroke="#0F766E" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="45" cy="43" r="8" fill="#FDE68A"/>
+  <path d="M41 43h8M45 39v8" stroke="#164E63" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
