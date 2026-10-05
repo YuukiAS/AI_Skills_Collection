@@ -1,6 +1,6 @@
 # Result
 
-Task: `research-authoring--formal-production-authoring`
+Task: `research-authoring--formal-production-authoring`  
 Date: 2026-10-05
 
 ## Status
@@ -11,24 +11,22 @@ C0=1c37c0715aca0096606f24e56192b7857e72bbd6
 DETERMINISTIC_VALIDATION=PASS
 DEVELOPMENT_REPLAY=PASS
 G4_WRAPPER_ARCHIVE_PREPARED=YES
+G2_G3_EXACT_REAL_FINAL_TASKS_FROZEN=YES
 FINAL_GATES_NOT_STARTED=YES
-PREFINAL_CANDIDATE_READY=NO
-NEXT_HANDOFF=PLANNER
-BLOCKER=G2_G3_EXACT_REAL_FINAL_TASKS_NOT_FROZEN
+PREFINAL_CANDIDATE_READY=YES
+NEXT_HANDOFF=CRITIC
 ```
 
 ## Summary
 
-Implemented the approved Research Authoring v0.3 candidate within the frozen architecture:
-- added canonical `research-authoring-core`;
-- routed `report`, `paper`, and `litcite` document-producing normal entries through the core;
-- preserved support-only boundaries for lookup/citation/BibTeX/Zotero/local polishing/render-only/PPT/Q&A;
-- updated `research-main`, `codex-research-writing`, Marketplace source config, tests, generated layer, README, root changelog, plugin changelog, and Research Authoring version `0.3`;
-- left repository `VERSION` and maturity unchanged.
+Executor completed implementation/development work and stopped before final evidence. Planner has now frozen exact real final tasks without changing Research Authoring candidate C0:
 
-Validation passed, including full unit discovery and candidate plugin replay.
+- G2: DII greenfield + incremental report task with Phase 1 isolated raw inputs and a Phase 2 delta frozen before Phase 1;
+- G3: MoSAIC_Paper CARE 2026 double-blind manuscript production/package task at an exact source ref;
+- G4: reuse G2 for ChatGPT -> Codex formal PDF production.
 
-Pre-final Critic admission is not yet truthful because exact real G2 and G3 final tasks are not frozen in the repo/worktree. The task must return to Planner/Critic for final task artifact selection or approval before claiming `PREFINAL_CANDIDATE_READY=YES`.
+All detailed task identities, rubrics and reviewer-access contracts are under:
 
-Current handoff:
-- `results/research-authoring--formal-production-authoring/PLANNER_HANDOFF.md`
+`private/exports/research-authoring--formal-production-authoring/final_tasks/`
+
+Final G1-G4 remain unstarted. C0 is not yet declared final C; that promotion requires independent pre-final Critic PASS of this frozen packet.
