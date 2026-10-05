@@ -1,0 +1,98 @@
+{
+  "files": [
+    {
+      "bytes": 4322,
+      "frozen_expected": "fac809c4806fbd2863f36fd1740c818a8acfabb2",
+      "git_blob_sha": "fac809c4806fbd2863f36fd1740c818a8acfabb2",
+      "path": "README.md",
+      "sha256": "28f6fdb53984302b86e34f8c56c979c46eb2307743c9032d29714c8ce8d88afb"
+    },
+    {
+      "bytes": 2361,
+      "frozen_expected": "e490479bf1853c64a87d72b4ab13eb275af816cb",
+      "git_blob_sha": "e490479bf1853c64a87d72b4ab13eb275af816cb",
+      "path": "PAPER_STATUS.md",
+      "sha256": "53bc8bebe6344967a4dd63c61e46b8abb55ec79f12c4a2e968658d257d8c6445"
+    },
+    {
+      "bytes": 7457,
+      "frozen_expected": "b184fafea4d6fad14bedd5f99ee73c39a62a3786",
+      "git_blob_sha": "b184fafea4d6fad14bedd5f99ee73c39a62a3786",
+      "path": "RESULTS_TRUTH.md",
+      "sha256": "5b2c5313cdc02b7f6f74159cad309235e6db3969716b12f8f90ebea2b704ed55"
+    },
+    {
+      "bytes": 6841,
+      "frozen_expected": "94e8c1ce98221ab6482737847c6ae6dea6fe4c7a",
+      "git_blob_sha": "94e8c1ce98221ab6482737847c6ae6dea6fe4c7a",
+      "path": "METHOD_TRUTH.md",
+      "sha256": "77c54ac72690f25452875344e59021e419be67350444a93a247574c67dcbc6d4"
+    },
+    {
+      "bytes": 4771,
+      "frozen_expected": "c1f15b2aabd63d926776998a65d0b065c8cc0183",
+      "git_blob_sha": "c1f15b2aabd63d926776998a65d0b065c8cc0183",
+      "path": "CLAIM_LEDGER.md",
+      "sha256": "5962d221053135ddc0b9db1ce6383e646aef757f9bd537eb98de412008f84876"
+    },
+    {
+      "bytes": 4281,
+      "frozen_expected": "a9e3b73d1788c5d4364d986569f8013a28c205ac",
+      "git_blob_sha": "a9e3b73d1788c5d4364d986569f8013a28c205ac",
+      "path": "review/AUTHOR_DECISIONS.md",
+      "sha256": "0b5b71002dfcf25e74cf6832c2e831a871a31b017aeb9ac2c433633d7dd73181"
+    },
+    {
+      "bytes": 35646,
+      "frozen_expected": "cd859d6815fc3b13e68f309c2cefe5353288b43d",
+      "git_blob_sha": "cd859d6815fc3b13e68f309c2cefe5353288b43d",
+      "path": "submission/mosaic.tex",
+      "sha256": "e2f15e35efd15821eed96a20dac7a372c8cd3809336f9526af876aa3b9399834"
+    },
+    {
+      "bytes": 14208,
+      "frozen_expected": "85f6a61ca5040f35abc214d3b55016d3c89bafaa",
+      "git_blob_sha": "85f6a61ca5040f35abc214d3b55016d3c89bafaa",
+      "path": "submission/refs.bib",
+      "sha256": "5c9ce4bff4e4669c82ed9be87cffa63a864dcd5a049ce855b0fe7efeea2bfecd"
+    },
+    {
+      "bytes": 43402,
+      "frozen_expected": "ea17bb35f5bc244b93f71e93e5ec7a532e36c911",
+      "git_blob_sha": "ea17bb35f5bc244b93f71e93e5ec7a532e36c911",
+      "path": "submission/llncs.cls",
+      "sha256": "a3cfe775b394aba8db8fbb54b8920ecbb12f4532cf787cd6d9b04712f58d0d1a"
+    },
+    {
+      "bytes": 32146,
+      "frozen_expected": "7d63c492d92fd1aa5db77c3f18b469e1c359ff93",
+      "git_blob_sha": "7d63c492d92fd1aa5db77c3f18b469e1c359ff93",
+      "path": "submission/splncs04.bst",
+      "sha256": "f36c3a17e5304a692706359aafa9de709395a085e579eb47c027095aeaa35174"
+    },
+    {
+      "bytes": 155221,
+      "frozen_expected": "f57a036d6a44de8adc60fa5520f6b1b67f24dc58",
+      "git_blob_sha": "f57a036d6a44de8adc60fa5520f6b1b67f24dc58",
+      "path": "submission/figures/fig1_original_redraw.pdf",
+      "sha256": "60f78983eee2cbd238510ec97b558e6bab5bc5c521d58dbc501f6634d3edc7ac"
+    },
+    {
+      "bytes": 459663,
+      "frozen_expected": "ec701587ad6caa55596e7f8ac22a1d51939d0c49",
+      "git_blob_sha": "ec701587ad6caa55596e7f8ac22a1d51939d0c49",
+      "path": "submission/mosaic.pdf",
+      "sha256": "6e745b84c4b13d2fe1dd820bfa461cbc1f5d81f7d5a6eca6458a9d07f27c3869"
+    },
+    {
+      "bytes": 923,
+      "frozen_expected": null,
+      "git_blob_sha": "7e722c5e2e202e7611be1033656489e761573ead",
+      "path": "AGENTS.md",
+      "sha256": "fb3d3ca4cd72a582b3984a74321975b150d70422a71f8bfe34ee3099656e73c4"
+    }
+  ],
+  "gate": "G3",
+  "source_ref": "590bfbac1450fbab5e4ca8ce77c877ece845f094",
+  "source_repo": "YuukiAS/MoSAIC_Paper"
+}

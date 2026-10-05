@@ -1,0 +1,112 @@
+{
+  "artifacts": [
+    {
+      "bytes": 1724,
+      "path": "G2_PHASE2_REPLAY_TASK.md",
+      "sha256": "43f33e7b5ede9aa0df0be594baf898308db297193169f6596a024bd55d0401e6"
+    },
+    {
+      "bytes": 0,
+      "path": "child.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 130515,
+      "path": "child.stdout.jsonl",
+      "sha256": "b3696fce2bc90a1c7997d01081ab965bd00249709e2a01236f1aff34176e4e46"
+    },
+    {
+      "bytes": 1659,
+      "path": "frozen_contracts/G2_PHASE1_REVIEW.md",
+      "sha256": "3398c70e14efa1047c617cde82340be1fb332f3f766562acbbf371b0d641f192"
+    },
+    {
+      "bytes": 3057,
+      "path": "frozen_contracts/G2_RUBRIC.md",
+      "sha256": "b3f41aa78a5bc5ad3f564101a3b5febd14f875a886e06daede1db9ae40d9f776"
+    },
+    {
+      "bytes": 2169,
+      "path": "frozen_contracts/PHASE2_DELTA.md",
+      "sha256": "b2748e220c80c0bf5c201e0a651e57bfa210f3976e60f4d71524616da1fbe2d7"
+    },
+    {
+      "bytes": 1436,
+      "path": "frozen_contracts/REVIEWER_ACCESS.md",
+      "sha256": "0acb722519ffeb02d244b50761f9bc8d9ca66044271d5ba1d994bb9729eea957"
+    },
+    {
+      "bytes": 2169,
+      "path": "inputs/01-PHASE2_DELTA.md",
+      "sha256": "b2748e220c80c0bf5c201e0a651e57bfa210f3976e60f4d71524616da1fbe2d7"
+    },
+    {
+      "bytes": 3057,
+      "path": "inputs/02-G2_RUBRIC.md",
+      "sha256": "b3f41aa78a5bc5ad3f564101a3b5febd14f875a886e06daede1db9ae40d9f776"
+    },
+    {
+      "bytes": 1800,
+      "path": "inputs/03-MATERIALIZED_PHASE2_DELTA.json",
+      "sha256": "3574fd15a65d8520214d3f281702040d14046cb8eb4ae876b0a54fe2a1b7f10b"
+    },
+    {
+      "bytes": 10171,
+      "path": "inputs/04-G2_PHASE1_PASS_BASELINE.md",
+      "sha256": "ce7914b594d9723d9563fcaf26e1528913858c5eaf63475075ec354acdfc7139"
+    },
+    {
+      "bytes": 2458,
+      "path": "inputs/05-experiment_contract.json",
+      "sha256": "949d4edb514b429f0eeb1afc4de59a5bf075d773944b6b764943901fd42d9c72"
+    },
+    {
+      "bytes": 2304,
+      "path": "inputs/06-personalization_gate_decision.json",
+      "sha256": "268f549475fc86a523a3b56b3292a9f5e14817280243796fb2bd38086908fbdd"
+    },
+    {
+      "bytes": 3842,
+      "path": "inputs/07-gap_closure_summary.csv",
+      "sha256": "aa2a9950cc1c70b62f9cd14f951e5f067911b4659cd5e03743635188ae218e8c"
+    },
+    {
+      "bytes": 67372,
+      "path": "inputs/08-paired_bootstrap_ci.csv",
+      "sha256": "ba259faf956d2d28626bb514e3b094ca9f6fa5ea2e70f7db5c6ad1dae0cf53bd"
+    },
+    {
+      "bytes": 13818,
+      "path": "outputs/G2_PHASE2_ADVISOR_UPDATE.md",
+      "sha256": "15bec572fc06948bce0f2f9419f332dea96b07bff4f00d838c26bfb933627149"
+    },
+    {
+      "bytes": 8392,
+      "path": "outputs/G2_PHASE2_BASELINE_TO_UPDATED.diff",
+      "sha256": "0c45c9ebe845482169254756161c80ed09ce5b19d42699054f9459ae1d2e7793"
+    },
+    {
+      "bytes": 6672,
+      "path": "outputs/G2_PHASE2_CLAIM_EVIDENCE.md",
+      "sha256": "f2550b624c8df1e74543d5e380b1cbf8eaf5813c9076b391cdff684efe70bee4"
+    },
+    {
+      "bytes": 8439,
+      "path": "outputs/G2_PHASE2_ROUTE_EVIDENCE.md",
+      "sha256": "8a9d0d902d80b32fef315e3357ff1a75c3186da586d7fbf8e159eca8e4a9be13"
+    },
+    {
+      "bytes": 324,
+      "path": "plugin-add.json",
+      "sha256": "e3485a26ca1f6a20b3598e652a32e91e2f4707076187f0e037d79b535440ac60"
+    },
+    {
+      "bytes": 1980,
+      "path": "run.json",
+      "sha256": "cc09c0c56bb6ea8e6b739545f9ea7ae45bd27376a144ebca6414f984b3980ca9"
+    }
+  ],
+  "gate": "G2",
+  "phase": "PHASE2",
+  "run_id": "20261005T040934Z-2727854"
+}

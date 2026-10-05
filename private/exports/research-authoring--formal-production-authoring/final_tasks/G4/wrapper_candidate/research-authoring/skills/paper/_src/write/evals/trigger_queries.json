@@ -1,0 +1,17 @@
+{
+  "positive": [
+    "帮我写论文的 Results 和 Discussion，所有 claim 都要有证据边界。",
+    "Draft the abstract and introduction from this method and result ledger.",
+    "Revise this manuscript section into full scientific paragraphs, not bullets.",
+    "Rewrite the methods section so each module has motivation, design, and evidence role."
+  ],
+  "negative": [
+    "Only check whether the final PDF has missing glyphs.",
+    "Review this manuscript as a hostile reviewer without rewriting it."
+  ],
+  "near_miss": [
+    "Plan the paper structure before writing any sections.",
+    "Make this English scientific paragraph less defensive."
+  ],
+  "notes": "Use for manuscript prose drafting and revision; visuals are conditional, not automatic."
+}

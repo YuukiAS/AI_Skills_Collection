@@ -1,0 +1,17 @@
+{
+  "positive": [
+    "帮我验收这篇论文，像审稿人一样看哪里会被攻击。",
+    "Do a pre-submission acceptance-risk check for this manuscript.",
+    "Check whether the paper claims are supported strongly enough for reviewer scrutiny.",
+    "Assess this rebuttal and mark which reviewer concerns remain unresolved."
+  ],
+  "negative": [
+    "Polish this paragraph for smoother English.",
+    "Search PubMed for recent papers on this disease."
+  ],
+  "near_miss": [
+    "Write the manuscript from these results.",
+    "Make a journal club slide deck from this paper."
+  ],
+  "notes": "Trigger does not require a named venue; ICLR/top-conference review is a sub-mode."
+}

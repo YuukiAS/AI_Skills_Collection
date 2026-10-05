@@ -1,0 +1,39 @@
+{
+  "author": {
+    "email": "humc2013@gmail.com",
+    "name": "YuukiAS",
+    "url": "https://github.com/YuukiAS"
+  },
+  "description": "Private user-scope skills-only wrapper for Research Authoring 0.3 with same-commit Clear Writing support skills.",
+  "homepage": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "interface": {
+    "brandColor": "#1D4ED8",
+    "capabilities": [
+      "Skills"
+    ],
+    "category": "Research",
+    "composerIcon": "./.codex-plugin/assets/composer.svg",
+    "defaultPrompt": [
+      "Plan this Research Authoring document through the shared core.",
+      "Write a repo-grounded research report.",
+      "Prepare this manuscript/package without changing scientific truth."
+    ],
+    "developerName": "YuukiAS",
+    "displayName": "Research Authoring",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Private user-scope skills-only wrapper binding Research Authoring 0.3 to the final candidate commit, with same-commit Clear Writing support for fidelity, Chinese prose, and scientific prose. It contains no renderer runtime, MCP, connector, database, watcher, or state.",
+    "shortDescription": "Private Research Authoring wrapper for reports, manuscripts, citations, and incremental research document production.",
+    "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection"
+  },
+  "keywords": [
+    "codex",
+    "research",
+    "authoring",
+    "skills",
+    "writing"
+  ],
+  "name": "research-authoring",
+  "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "skills": "./skills/",
+  "version": "0.3"
+}

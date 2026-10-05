@@ -1,0 +1,108 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{eitel2011cardiac,ibanez2015evolving}
+\citation{kim1999relationship}
+\citation{abdelaty2004delayed}
+\citation{li2023myops,zhuang2019multivariate}
+\citation{zhang2019deeplearningcine,ding2025cinemyops}
+\@writefile{toc}{\contentsline {title}{MoSAIC: Motion- and Supervision-Aware Inference for\unskip \ \ignorespaces  Myocardial Scar and Edema Segmentation from\unskip \ \ignorespaces  Multi-Sequence and Cine CMR}{1}{chapter.1}\protected@file@percent }
+\@writefile{toc}{\authcount {1}}
+\@writefile{toc}{\contentsline {author}{Anonymous Author(s)}{1}{chapter.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1.1}\protected@file@percent }
+\citation{zhuang2019multivariate,li2023myops}
+\citation{qiu2023myopsnet}
+\citation{ding2023aligning}
+\citation{zhai2020coarsemyops,wang2022awsnet}
+\citation{ronneberger2015unet,isensee2021nnunet}
+\citation{havaei2016hemis,dorent2019hetero}
+\citation{shi2021marginal,zhou2019priorpartial,fidon2021labelsetloss}
+\citation{zhang2019deeplearningcine}
+\citation{scatteia2017strain,morales2021deepstrain}
+\citation{qin2018jointmotion}
+\citation{ding2025cinemyops}
+\citation{ronneberger2015unet}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Preliminaries}{2}{section.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Method}{2}{section.1.4}\protected@file@percent }
+\citation{bookstein1989principal}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overview of MoSAIC. A coarse anatomy stage defines the spatial prior; separate multi-sequence scar, edema-zone, and cine-motion branches produce task-specific predictions that are fused in the challenge label space. $Z$ denotes the injury zone; final pure edema excludes scar.}}{3}{figure.1.1}\protected@file@percent }
+\newlabel{fig:pipeline}{{1}{3}{Overview of MoSAIC. A coarse anatomy stage defines the spatial prior; separate multi-sequence scar, edema-zone, and cine-motion branches produce task-specific predictions that are fused in the challenge label space. $Z$ denotes the injury zone; final pure edema excludes scar}{figure.1.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Stage 1: Anatomy Conditioning}{3}{subsection.1.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Stage 2a: Multi-Sequence Scar and Anatomy Decoding}{3}{subsection.1.4.2}\protected@file@percent }
+\citation{salehi2017tversky}
+\citation{lin2017focal}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}A Supervision-Masked Objective for Ragged Annotation}{4}{subsection.1.4.3}\protected@file@percent }
+\newlabel{eq:masked}{{2}{4}{A Supervision-Masked Objective for Ragged Annotation}{equation.1.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Stage 2b: A Dedicated Edema Expert}{4}{subsection.1.4.4}\protected@file@percent }
+\citation{zhuang2019multivariate,qiu2023myopsnet,ding2023aligning,ding2025cinemyops}
+\citation{ulyanov2016instance}
+\citation{loshchilov2019adamw}
+\citation{loshchilov2017sgdr}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Stage 2c: Motion-Derived Scar from Cine}{5}{subsection.1.4.5}\protected@file@percent }
+\newlabel{eq:cinehead}{{4}{5}{Stage 2c: Motion-Derived Scar from Cine}{equation.1.4.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Inference}{5}{subsection.1.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Experiments}{5}{section.1.5}\protected@file@percent }
+\newlabel{sec:exp}{{5}{5}{Experiments}{section.1.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces The CARE-2026 CARE-Myocardium training cohort. Sequence availability and annotated classes both vary by center: 116 of 220 multi-sequence cases provide LGE alone, and 80 carry edema labels. The evaluation cohort provides all three sequences, so a model can learn from partial training protocols and exploit complete inputs at test time.}}{6}{table.1.1}\protected@file@percent }
+\newlabel{tab:cohort}{{1}{6}{The CARE-2026 CARE-Myocardium training cohort. Sequence availability and annotated classes both vary by center: 116 of 220 multi-sequence cases provide LGE alone, and 80 carry edema labels. The evaluation cohort provides all three sequences, so a model can learn from partial training protocols and exploit complete inputs at test time}{table.1.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Main Results}{6}{subsection.1.5.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Author-retained five-fold results, mean\,$\pm $\,s.d.\ across folds; table-generation provenance remains unresolved. Pure-edema metrics use cases with edema annotations; the remaining metrics use their corresponding annotated cohorts. Cine scar uses motion and anatomy, without contrast-enhanced input.}}{7}{table.1.2}\protected@file@percent }
+\newlabel{tab:main}{{2}{7}{Author-retained five-fold results, mean\,$\pm $\,s.d.\ across folds; table-generation provenance remains unresolved. Pure-edema metrics use cases with edema annotations; the remaining metrics use their corresponding annotated cohorts. Cine scar uses motion and anatomy, without contrast-enhanced input}{table.1.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Best organizer-scored MoSAIC entries and the nnU-Net comparator on the CARE-2026 validation leaderboards, reported as Dice/HD (mm). For each target, the MoSAIC row is the submitted entry with the highest Dice.}}{7}{table.1.3}\protected@file@percent }
+\newlabel{tab:leaderboard}{{3}{7}{Best organizer-scored MoSAIC entries and the nnU-Net comparator on the CARE-2026 validation leaderboards, reported as Dice/HD (mm). For each target, the MoSAIC row is the submitted entry with the highest Dice}{table.1.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Discussion}{7}{subsection.1.5.2}\protected@file@percent }
+\bibstyle{splncs04}
+\bibdata{refs}
+\bibcite{abdelaty2004delayed}{1}
+\bibcite{bookstein1989principal}{2}
+\bibcite{ding2025cinemyops}{3}
+\bibcite{ding2023aligning}{4}
+\bibcite{dorent2019hetero}{5}
+\bibcite{eitel2011cardiac}{6}
+\bibcite{fidon2021labelsetloss}{7}
+\bibcite{havaei2016hemis}{8}
+\bibcite{ibanez2015evolving}{9}
+\bibcite{isensee2021nnunet}{10}
+\bibcite{kim1999relationship}{11}
+\bibcite{li2023myops}{12}
+\bibcite{lin2017focal}{13}
+\bibcite{loshchilov2017sgdr}{14}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{8}{section.1.6}\protected@file@percent }
+\bibcite{loshchilov2019adamw}{15}
+\bibcite{morales2021deepstrain}{16}
+\bibcite{qin2018jointmotion}{17}
+\bibcite{qiu2023myopsnet}{18}
+\bibcite{ronneberger2015unet}{19}
+\bibcite{salehi2017tversky}{20}
+\bibcite{scatteia2017strain}{21}
+\bibcite{shi2021marginal}{22}
+\bibcite{ulyanov2016instance}{23}
+\bibcite{wang2022awsnet}{24}
+\bibcite{zhai2020coarsemyops}{25}
+\bibcite{zhang2019deeplearningcine}{26}
+\bibcite{zhou2019priorpartial}{27}
+\bibcite{zhuang2019multivariate}{28}
+\citation{bookstein1989principal}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Thin-Plate Spline Alignment Field}{9}{section.A.1}\protected@file@percent }
+\newlabel{app:tps}{{A}{9}{Thin-Plate Spline Alignment Field}{section.A.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Cross-Modality Gated Fusion}{10}{section.A.2}\protected@file@percent }
+\newlabel{app:fusion}{{B}{10}{Cross-Modality Gated Fusion}{section.A.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {C}Auxiliary Training Objectives}{10}{section.A.3}\protected@file@percent }
+\newlabel{app:losses}{{C}{10}{Auxiliary Training Objectives}{section.A.3}{}}
+\gdef \@abspage@last{10}

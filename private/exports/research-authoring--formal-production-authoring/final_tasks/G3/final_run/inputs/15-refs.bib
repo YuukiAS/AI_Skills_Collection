@@ -1,0 +1,383 @@
+% ---------------------------------------------------------------------------
+% Required data citations for the CARE-Myocardium track (MyoPS / CineMyoPS).
+% ---------------------------------------------------------------------------
+@article{zhuang2019multivariate,
+  author  = {Zhuang, Xiahai},
+  title   = {Multivariate Mixture Model for Myocardial Segmentation Combining
+             Multi-Source Images},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  volume  = {41},
+  number  = {12},
+  pages   = {2933--2946},
+  year    = {2019}
+}
+
+@article{qiu2023myopsnet,
+  author  = {Qiu, Junyi and Li, Lei and Wang, Sihan and Zhang, Ke and Chen, Yinyin
+             and Yang, Shan and Zhuang, Xiahai},
+  title   = {{MyoPS-Net}: Myocardial Pathology Segmentation with Flexible
+             Combination of Multi-Sequence {CMR} Images},
+  journal = {Medical Image Analysis},
+  volume  = {84},
+  pages   = {102694},
+  year    = {2023}
+}
+
+@article{ding2023aligning,
+  author  = {Ding, Wangbin and Li, Lei and Qiu, Junyi and Wang, Sihan and
+             Huang, Liqin and Chen, Yinyin and Yang, Shan and Zhuang, Xiahai},
+  title   = {Aligning Multi-Sequence {CMR} Towards Fully Automated Myocardial
+             Pathology Segmentation},
+  journal = {IEEE Transactions on Medical Imaging},
+  year    = {2023}
+}
+
+@article{ding2025cinemyops,
+  author  = {Ding, Wangbin and Li, Lei and Qiu, Junyi and Lin, Bogen and
+             Yang, Mingjing and Huang, Liqin and Wu, Lianming and Wang, Sihan and
+             Zhuang, Xiahai},
+  title   = {{CineMyoPS}: Segmenting Myocardial Pathologies from Cine Cardiac {MR}},
+  journal = {IEEE Transactions on Medical Imaging},
+  year    = {2025}
+}
+
+% ---------------------------------------------------------------------------
+% Benchmarks and clinical background
+% ---------------------------------------------------------------------------
+@article{li2023myops,
+  author  = {Li, Lei and Wu, Fuping and Wang, Sihan and Luo, Xinzhe and
+             Mart{\'\i}n-Isla, Carlos and Zhai, Shuwei and others},
+  title   = {{MyoPS}: A Benchmark of Myocardial Pathology Segmentation Combining
+             Three-Sequence Cardiac Magnetic Resonance Images},
+  journal = {Medical Image Analysis},
+  volume  = {87},
+  pages   = {102808},
+  year    = {2023}
+}
+
+@article{ibanez2015evolving,
+  author  = {Ib{\'a}{\~n}ez, Borja and Heusch, Gerd and Ovize, Michel and
+             Van de Werf, Frans},
+  title   = {Evolving Therapies for Myocardial Ischemia/Reperfusion Injury},
+  journal = {Journal of the American College of Cardiology},
+  volume  = {65},
+  number  = {14},
+  pages   = {1454--1471},
+  year    = {2015}
+}
+
+@article{eitel2011cardiac,
+  author  = {Eitel, Ingo and Desch, Steffen and Fuernau, Georg and Hildebrand, Lysann
+             and Gutberlet, Matthias and Schuler, Gerhard and Thiele, Holger},
+  title   = {Prognostic Significance and Determinants of Myocardial Salvage
+             Assessed by Cardiovascular Magnetic Resonance in Acute Reperfused
+             Myocardial Infarction},
+  journal = {Journal of the American College of Cardiology},
+  volume  = {55},
+  number  = {22},
+  pages   = {2470--2479},
+  year    = {2010}
+}
+
+@article{kim1999relationship,
+  author  = {Kim, Raymond J. and Fieno, David S. and Parrish, Todd B. and
+             Harris, Kathleen and Chen, Enn-Ling and Simonetti, Orlando and others},
+  title   = {Relationship of {MRI} Delayed Contrast Enhancement to Irreversible
+             Injury, Infarct Age, and Contractile Function},
+  journal = {Circulation},
+  volume  = {100},
+  number  = {19},
+  pages   = {1992--2002},
+  year    = {1999}
+}
+
+@article{abdelaty2004delayed,
+  author  = {Abdel-Aty, Hassan and Zagrosek, Anna and Schulz-Menger, Jeanette and
+             Taylor, Andrew J. and Messroghli, Daniel and Kumar, Andreas and others},
+  title   = {Delayed Enhancement and {T2}-Weighted Cardiovascular Magnetic
+             Resonance Imaging Differentiate Acute from Chronic Myocardial
+             Infarction},
+  journal = {Circulation},
+  volume  = {109},
+  number  = {20},
+  pages   = {2411--2416},
+  year    = {2004}
+}
+
+% ---------------------------------------------------------------------------
+% Segmentation architectures
+% ---------------------------------------------------------------------------
+@inproceedings{ronneberger2015unet,
+  author    = {Ronneberger, Olaf and Fischer, Philipp and Brox, Thomas},
+  title     = {{U-Net}: Convolutional Networks for Biomedical Image Segmentation},
+  booktitle = {MICCAI},
+  pages     = {234--241},
+  year      = {2015}
+}
+
+@article{isensee2021nnunet,
+  author  = {Isensee, Fabian and Jaeger, Paul F. and Kohl, Simon A. A. and
+             Petersen, Jens and Maier-Hein, Klaus H.},
+  title   = {{nnU-Net}: A Self-Configuring Method for Deep Learning-Based
+             Biomedical Image Segmentation},
+  journal = {Nature Methods},
+  volume  = {18},
+  number  = {2},
+  pages   = {203--211},
+  year    = {2021}
+}
+
+@inproceedings{oktay2018attention,
+  author    = {Oktay, Ozan and Schlemper, Jo and Folgoc, Loic Le and Lee, Matthew
+               and Heinrich, Mattias and Misawa, Kazunari and others},
+  title     = {Attention {U-Net}: Learning Where to Look for the Pancreas},
+  booktitle = {MIDL},
+  year      = {2018}
+}
+
+@inproceedings{roth2018multiscale,
+  author    = {Roth, Holger R. and Oda, Hirohisa and Hayashi, Yuichiro and
+               Oda, Masahiro and Shimizu, Natsuki and Fujiwara, Michitaka and others},
+  title     = {A Multi-Scale Pyramid of {3D} Fully Convolutional Networks for
+               Abdominal Multi-Organ Segmentation},
+  booktitle = {MICCAI},
+  year      = {2018}
+}
+
+% ---------------------------------------------------------------------------
+% Spatial transformers, deformable alignment, registration
+% ---------------------------------------------------------------------------
+@inproceedings{jaderberg2015spatial,
+  author    = {Jaderberg, Max and Simonyan, Karen and Zisserman, Andrew and
+               Kavukcuoglu, Koray},
+  title     = {Spatial Transformer Networks},
+  booktitle = {NeurIPS},
+  pages     = {2017--2025},
+  year      = {2015}
+}
+
+@article{bookstein1989principal,
+  author  = {Bookstein, Fred L.},
+  title   = {Principal Warps: Thin-Plate Splines and the Decomposition of
+             Deformations},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  volume  = {11},
+  number  = {6},
+  pages   = {567--585},
+  year    = {1989}
+}
+
+@article{balakrishnan2019voxelmorph,
+  author  = {Balakrishnan, Guha and Zhao, Amy and Sabuncu, Mert R. and
+             Guttag, John and Dalca, Adrian V.},
+  title   = {{VoxelMorph}: A Learning Framework for Deformable Medical Image
+             Registration},
+  journal = {IEEE Transactions on Medical Imaging},
+  volume  = {38},
+  number  = {8},
+  pages   = {1788--1800},
+  year    = {2019}
+}
+
+@inproceedings{xu2019deepatlas,
+  author    = {Xu, Zhenlin and Niethammer, Marc},
+  title     = {{DeepAtlas}: Joint Semi-Supervised Learning of Image Registration
+               and Segmentation},
+  booktitle = {MICCAI},
+  pages     = {420--429},
+  year      = {2019}
+}
+
+@article{mattes2003pet,
+  author  = {Mattes, David and Haynor, David R. and Vesselle, Hubert and
+             Lewellen, Thomas K. and Eubank, William},
+  title   = {{PET-CT} Image Registration in the Chest Using Free-Form
+             Deformations},
+  journal = {IEEE Transactions on Medical Imaging},
+  volume  = {22},
+  number  = {1},
+  pages   = {120--128},
+  year    = {2003}
+}
+
+% ---------------------------------------------------------------------------
+% Missing modalities and partial / heterogeneous annotation
+% ---------------------------------------------------------------------------
+@inproceedings{havaei2016hemis,
+  author    = {Havaei, Mohammad and Guizard, Nicolas and Chapados, Nicolas and
+               Bengio, Yoshua},
+  title     = {{HeMIS}: Hetero-Modal Image Segmentation},
+  booktitle = {MICCAI},
+  pages     = {469--477},
+  year      = {2016}
+}
+
+@inproceedings{dorent2019hetero,
+  author    = {Dorent, Reuben and Joutard, Samuel and Modat, Marc and
+               Ourselin, S{\'e}bastien and Vercauteren, Tom},
+  title     = {Hetero-Modal Variational Encoder-Decoder for Joint Modality
+               Completion and Segmentation},
+  booktitle = {MICCAI},
+  pages     = {74--82},
+  year      = {2019}
+}
+
+@article{shi2021marginal,
+  author    = {Shi, Gonglei and Xiao, Li and Chen, Yang and Zhou, S. Kevin},
+  title     = {Marginal Loss and Exclusion Loss for Partially Supervised
+               Multi-Organ Segmentation},
+  journal   = {Medical Image Analysis},
+  volume    = {70},
+  pages     = {101979},
+  year      = {2021}
+}
+
+@inproceedings{zhou2019priorpartial,
+  author    = {Zhou, Yuyin and Li, Zhe and Bai, Song and Wang, Chong and
+               Chen, Xinlei and Han, Mei and Fishman, Elliot and Yuille, Alan},
+  title     = {Prior-Aware Neural Network for Partially-Supervised Multi-Organ
+               Segmentation},
+  booktitle = {ICCV},
+  pages     = {10672--10681},
+  year      = {2019}
+}
+
+@inproceedings{fidon2021labelsetloss,
+  author    = {Fidon, Lucas and Aertsen, Michael and Emam, Doaa and Mufti, Nada
+               and others},
+  title     = {Label-Set Loss Functions for Partial Supervision: Application to
+               Fetal Brain {3D} {MRI} Parcellation},
+  booktitle = {MICCAI},
+  pages     = {647--657},
+  year      = {2021}
+}
+
+% ---------------------------------------------------------------------------
+% Losses for small / imbalanced structures
+% ---------------------------------------------------------------------------
+@inproceedings{salehi2017tversky,
+  author    = {Salehi, Seyed Sadegh Mohseni and Erdogmus, Deniz and
+               Gholipour, Ali},
+  title     = {Tversky Loss Function for Image Segmentation Using {3D} Fully
+               Convolutional Deep Networks},
+  booktitle = {MLMI},
+  pages     = {379--387},
+  year      = {2017}
+}
+
+@inproceedings{lin2017focal,
+  author    = {Lin, Tsung-Yi and Goyal, Priya and Girshick, Ross and He, Kaiming
+               and Doll{\'a}r, Piotr},
+  title     = {Focal Loss for Dense Object Detection},
+  booktitle = {ICCV},
+  pages     = {2980--2988},
+  year      = {2017}
+}
+
+@inproceedings{milletari2016vnet,
+  author    = {Milletari, Fausto and Navab, Nassir and Ahmadi, Seyed-Ahmad},
+  title     = {{V-Net}: Fully Convolutional Neural Networks for Volumetric
+               Medical Image Segmentation},
+  booktitle = {3DV},
+  pages     = {565--571},
+  year      = {2016}
+}
+
+% ---------------------------------------------------------------------------
+% Cine CMR: motion, strain, and infarct assessment without contrast
+% ---------------------------------------------------------------------------
+@article{zhang2019deeplearningcine,
+  author  = {Zhang, Nan and Yang, Guang and Gao, Zhifan and Xu, Chenchu and
+             Zhang, Yanping and Shi, Rui and others},
+  title   = {Deep Learning for Diagnosis of Chronic Myocardial Infarction on
+             Nonenhanced Cardiac Cine {MRI}},
+  journal = {Radiology},
+  volume  = {291},
+  number  = {3},
+  pages   = {606--617},
+  year    = {2019}
+}
+
+@article{scatteia2017strain,
+  author  = {Scatteia, Alessandra and Baritussio, Anna and Bucciarelli-Ducci, Chiara},
+  title   = {Strain Imaging Using Cardiac Magnetic Resonance},
+  journal = {Heart Failure Reviews},
+  volume  = {22},
+  number  = {4},
+  pages   = {465--476},
+  year    = {2017}
+}
+
+@inproceedings{qin2018jointmotion,
+  author    = {Qin, Chen and Bai, Wenjia and Schlemper, Jo and Petersen, Steffen E.
+               and Piechnik, Stefan K. and Neubauer, Stefan and Rueckert, Daniel},
+  title     = {Joint Learning of Motion Estimation and Segmentation for Cardiac
+               {MR} Image Sequences},
+  booktitle = {MICCAI},
+  pages     = {472--480},
+  year      = {2018}
+}
+
+@article{morales2021deepstrain,
+  author  = {Morales, Manuel A. and van den Boomen, Maaike and Nguyen, Christopher
+             and Kalpathy-Cramer, Jayashree and Rosen, Bruce R. and others},
+  title   = {{DeepStrain}: A Deep Learning Workflow for the Automated
+             Characterization of Cardiac Mechanics},
+  journal = {Frontiers in Cardiovascular Medicine},
+  volume  = {8},
+  pages   = {730316},
+  year    = {2021}
+}
+
+% ---------------------------------------------------------------------------
+% Optimisation / training
+% ---------------------------------------------------------------------------
+@inproceedings{loshchilov2019adamw,
+  author    = {Loshchilov, Ilya and Hutter, Frank},
+  title     = {Decoupled Weight Decay Regularization},
+  booktitle = {ICLR},
+  year      = {2019}
+}
+
+@inproceedings{loshchilov2017sgdr,
+  author    = {Loshchilov, Ilya and Hutter, Frank},
+  title     = {{SGDR}: Stochastic Gradient Descent with Warm Restarts},
+  booktitle = {ICLR},
+  year      = {2017}
+}
+
+@article{ulyanov2016instance,
+  author    = {Ulyanov, Dmitry and Vedaldi, Andrea and Lempitsky, Victor},
+  title     = {Instance Normalization: The Missing Ingredient for Fast Stylization},
+  journal   = {arXiv preprint arXiv:1607.08022},
+  year      = {2016}
+}
+
+
+@inproceedings{zhai2020coarsemyops,
+  author    = {Zhai, Shuwei and Gu, Ran and Lei, Wenhui and Wang, Guotai},
+  title     = {Myocardial Edema and Scar Segmentation Using a Coarse-to-Fine
+               Framework with Weighted Ensemble},
+  booktitle = {Myocardial Pathology Segmentation Combining Multi-Sequence
+               Cardiac Magnetic Resonance Images},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {12554},
+  pages     = {49--59},
+  publisher = {Springer},
+  year      = {2020},
+  doi       = {10.1007/978-3-030-65651-5_5}
+}
+
+@article{wang2022awsnet,
+  author  = {Wang, Kai-Ni and Yang, Xin and Miao, Juzheng and Li, Lei and Yao,
+             Jing and Zhou, Ping and Xue, Wufeng and Zhou, Guang-Quan and
+             Zhuang, Xiahai and Ni, Dong},
+  title   = {{AWSnet}: An Auto-Weighted Supervision Attention Network for
+             Myocardial Scar and Edema Segmentation in Multi-Sequence Cardiac
+             Magnetic Resonance Images},
+  journal = {Medical Image Analysis},
+  volume  = {77},
+  pages   = {102362},
+  year    = {2022},
+  doi     = {10.1016/j.media.2022.102362}
+}

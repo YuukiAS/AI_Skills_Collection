@@ -1,0 +1,21 @@
+{
+  "candidate_pdf_pages": 10,
+  "candidate_pdf_sha256": "8dddea5921b08b95a0400b3057094f6d950506f34e2d17ca6abb5e985b2a9652",
+  "final_log_contains_undefined_citation": false,
+  "final_log_contains_undefined_refs": false,
+  "input_tex_sha256": "e2f15e35efd15821eed96a20dac7a372c8cd3809336f9526af876aa3b9399834",
+  "llncs_unchanged": true,
+  "output_tex_sha256": "04858c2d6677ed0563cbc5a3a975d7935c24aa3d64de87cef10aa5de47bbfce5",
+  "package_files": [
+    "SUBMISSION_MANIFEST.md",
+    "figures/fig1_original_redraw.pdf",
+    "llncs.cls",
+    "mosaic.pdf",
+    "mosaic.tex",
+    "refs.bib",
+    "splncs04.bst"
+  ],
+  "rebuilt_pdf_pages": 10,
+  "rebuilt_pdf_sha256": "e45ad1cf18d17586b255ac569d2e53382d2d29e8ec474406e17727967b5f9260",
+  "splncs04_unchanged": true
+}

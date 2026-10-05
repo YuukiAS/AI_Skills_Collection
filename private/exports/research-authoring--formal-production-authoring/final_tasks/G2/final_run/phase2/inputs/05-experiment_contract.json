@@ -1,0 +1,68 @@
+{
+  "D_adapt_site_counts": {
+    "CenterA": 32,
+    "CenterB": 14,
+    "CenterC": 18,
+    "CenterE": 3,
+    "CenterF": 4,
+    "CenterG": 3,
+    "CenterH": 14
+  },
+  "D_adapt_subjects": 88,
+  "D_test_policy": "D_test is used only for final gate evaluation, never for training, checkpoint selection, lambda selection, or epoch selection",
+  "D_test_site_counts": {
+    "CenterA": 16,
+    "CenterB": 7,
+    "CenterC": 9,
+    "CenterE": 2,
+    "CenterF": 2,
+    "CenterG": 2,
+    "CenterH": 7
+  },
+  "D_test_subjects": 45,
+  "checkpoint": "results/care_clean_subject_disjoint_2026-09-04/nnunet_results/Dataset501_CAREMyoPS/nnUNetTrainer_500epochs__nnUNetPlans__3d_fullres/fold_0/checkpoint_best.pth",
+  "checkpoint_sha256": "a2b42732d56d5d42be077aaad42fb89f12106ed252a7943f996051fc0dfc3509",
+  "decision_rules": {
+    "P-LOCALONLY": "full LocalFT helps but low-dimensional and finite-shrinkage options fail to preserve most of the gain.",
+    "P-LOWDIM": "last-decoder-stage or decoder personalization has >=70% of full LocalFT mean closure with much lower local storage.",
+    "P-NONE": "no personalized condition has stable negative Delta_global on the primary metric.",
+    "P-SHRINK": "a finite lambda has negative Delta_global in all seeds and improves mean local-regret or closure relative to lambda=0.",
+    "P-SIMPLE": "FedAvg_then_LocalFT has negative Delta_global in all seeds and mean gap closure >= 0.5."
+  },
+  "fedavg_anchor_epochs": 4,
+  "goal_file": "jobs/GOAL_PERSONALIZED_PARTIAL_POOLING_GATE_2026-09-04.md",
+  "lambda_grid": [
+    0.0,
+    0.0001,
+    0.001,
+    0.01
+  ],
+  "lambda_selection_policy": "all pre-frozen lambdas are reported; D_test is not used to choose a single winner",
+  "personalization_epochs": 2,
+  "primary_dataset": "CARE",
+  "primary_metric": "scar_fraction_abs_error",
+  "primary_scope": "full-model",
+  "research_program": "docs/POST_CARE_MMS_REPLICATION_RESEARCH_PROGRAM_2026-09-04.md",
+  "secondary_local_components": [
+    "last-decoder-stage",
+    "decoder"
+  ],
+  "seeds": [
+    20260828,
+    20260829,
+    20260830
+  ],
+  "status": "frozen",
+  "support_metrics": [
+    "scar_fraction_abs_error",
+    "scar_fraction_signed_error",
+    "scar_volume_ml_abs_error",
+    "scar_volume_ml_signed_error",
+    "whole_myo_volume_ml_abs_error",
+    "whole_myo_volume_ml_signed_error",
+    "scar_dice_positive",
+    "whole_myocardium_dice",
+    "scar_false_negative_burden"
+  ],
+  "timestamp": "2026-09-04T03:18:35-0400"
+}

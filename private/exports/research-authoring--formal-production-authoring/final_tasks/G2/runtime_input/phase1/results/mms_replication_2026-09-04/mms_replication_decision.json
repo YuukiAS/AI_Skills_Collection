@@ -1,0 +1,13 @@
+{
+  "created_at": "2026-09-04T02:30:48-0400",
+  "design": "Design S",
+  "mms_replication_decision": "MMS-H",
+  "primary_positive_rows": 9,
+  "primary_total_rows": 9,
+  "scope": "primary_full_model",
+  "seeds": [
+    20260904,
+    20260905,
+    20260906
+  ]
+}

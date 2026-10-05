@@ -1,0 +1,46 @@
+{
+  "explanation": "heterogeneity / single-global-model penalty",
+  "final_pattern": "Pattern H",
+  "scope_decisions": [
+    {
+      "fedavg_minus_pooled_cross_seed_mean": 0.03951482315305351,
+      "fedavg_minus_pooled_seed_mean_diffs": [
+        0.02849811257513399,
+        0.04067798162035137,
+        0.049368375263675164
+      ],
+      "off_site_local_cross_mean": 0.20002677440073754,
+      "own_site_better_than_off_site": true,
+      "own_site_local_cross_mean": 0.06835324043009293,
+      "pattern": "Pattern H",
+      "pooled_minus_local_oracle_cross_seed_mean": 0.03716455200351474,
+      "pooled_minus_local_oracle_seed_mean_diffs": [
+        0.0381282474811019,
+        0.04004697553141396,
+        0.03331843299802838
+      ],
+      "scope": "decoder"
+    },
+    {
+      "fedavg_minus_pooled_cross_seed_mean": 0.07447546918746113,
+      "fedavg_minus_pooled_seed_mean_diffs": [
+        0.0638494814704673,
+        0.06648343710911253,
+        0.09309348898280355
+      ],
+      "off_site_local_cross_mean": 0.22453502687476695,
+      "own_site_better_than_off_site": true,
+      "own_site_local_cross_mean": 0.0650325079464907,
+      "pattern": "Pattern H",
+      "pooled_minus_local_oracle_cross_seed_mean": 0.022192355716963125,
+      "pooled_minus_local_oracle_seed_mean_diffs": [
+        0.020809524111486188,
+        0.02075035065285149,
+        0.0250171923865517
+      ],
+      "scope": "full-model"
+    }
+  ],
+  "status": "complete",
+  "timestamp": "2026-09-04 00:57:19 -0400"
+}

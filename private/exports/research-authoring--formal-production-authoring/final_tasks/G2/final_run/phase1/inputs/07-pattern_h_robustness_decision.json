@@ -1,0 +1,13 @@
+{
+  "centerh_integrity_status": "PASS",
+  "created_at": "2026-09-04T01:46:31-0400",
+  "decision": "H-ROBUST",
+  "interpretation": "Pattern H is robust if own-site local predictions beat off-site local predictions on D_test scar-fraction error across scopes, seeds, subsets, and leave-one-center recomputations.",
+  "leave_one_positive_rows": 42,
+  "leave_one_total_rows": 42,
+  "primary_positive_rows": 6,
+  "primary_rows": 6,
+  "primary_total_rows": 6,
+  "subset_positive_rows": 30,
+  "subset_total_rows": 30
+}

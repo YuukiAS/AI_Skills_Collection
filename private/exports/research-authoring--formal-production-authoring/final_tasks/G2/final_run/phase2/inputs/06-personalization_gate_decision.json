@@ -1,0 +1,91 @@
+{
+  "D_test_used_for_hyperparameter_selection": false,
+  "decision_labels": [
+    "P-SIMPLE",
+    "P-SHRINK",
+    "P-LOWDIM"
+  ],
+  "finite_lambda_rows": [
+    {
+      "closure": [
+        0.6966376669963438,
+        1.6214804573564896,
+        -0.5901269017781922
+      ],
+      "delta_global": [
+        -0.11146852086609535,
+        -0.11615067250112791,
+        -0.10365446319201287
+      ],
+      "delta_local": [
+        -0.010621781690007243,
+        -0.007451841603963587,
+        0.011297542297880683
+      ],
+      "lambda": 0.0001
+    },
+    {
+      "closure": [
+        0.9277762097313198,
+        1.9143328457807023,
+        1.2031695368108684
+      ],
+      "delta_global": [
+        -0.10253005819428612,
+        -0.11624377902435742,
+        -0.11451199986239936
+      ],
+      "delta_local": [
+        -0.0016833190181979952,
+        -0.007544948127193095,
+        0.00044000562749418393
+      ],
+      "lambda": 0.001
+    },
+    {
+      "closure": [
+        0.5592262978854707,
+        0.839584186426142,
+        1.3285947064416908
+      ],
+      "delta_global": [
+        -0.11496524599255559,
+        -0.11121734660754959,
+        -0.11029573523304675
+      ],
+      "delta_local": [
+        -0.01411850681646747,
+        -0.0025185157103852682,
+        0.00465627025684679
+      ],
+      "lambda": 0.01
+    }
+  ],
+  "global_comparison": "Delta_global_personalized_minus_same_run_FedAvg_anchor",
+  "historical_clean_fedavg_exact_reload_available": false,
+  "lowdim_candidates": [
+    [
+      "FedAvg_then_LocalDecoder",
+      "decoder",
+      1.2608882063138491
+    ]
+  ],
+  "primary_metric": "scar_fraction_abs_error",
+  "reasons": [
+    "FedAvg_then_LocalFT improved over FedAvg in all seeds and closed at least half of the FedAvg-local gap on average.",
+    "At least one finite lambda was stable vs FedAvg and improved closure or local regret relative to lambda=0.",
+    "A low-dimensional decoder component recovered at least 70% of full LocalFT gap closure with lower storage."
+  ],
+  "simple_delta_global_by_seed": [
+    -0.10468123995761212,
+    -0.11868223559668249,
+    -0.11749338558916776
+  ],
+  "simple_gap_closure_by_seed": [
+    0.4687692975601002,
+    1.4991197817042052,
+    1.6826014446840762
+  ],
+  "status": "complete",
+  "timestamp": "2026-09-04T03:51:17-0400"
+}

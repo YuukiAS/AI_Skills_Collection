@@ -1,0 +1,151 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{abdelaty2004delayed}
+Abdel-Aty, H., Zagrosek, A., Schulz-Menger, J., Taylor, A.J., Messroghli, D.,
+  Kumar, A., et~al.: Delayed enhancement and {T2}-weighted cardiovascular
+  magnetic resonance imaging differentiate acute from chronic myocardial
+  infarction. Circulation  \textbf{109}(20),  2411--2416 (2004)
+
+\bibitem{bookstein1989principal}
+Bookstein, F.L.: Principal warps: Thin-plate splines and the decomposition of
+  deformations. IEEE Transactions on Pattern Analysis and Machine Intelligence
+  \textbf{11}(6),  567--585 (1989)
+
+\bibitem{ding2025cinemyops}
+Ding, W., Li, L., Qiu, J., Lin, B., Yang, M., Huang, L., Wu, L., Wang, S.,
+  Zhuang, X.: {CineMyoPS}: Segmenting myocardial pathologies from cine cardiac
+  {MR}. IEEE Transactions on Medical Imaging  (2025)
+
+\bibitem{ding2023aligning}
+Ding, W., Li, L., Qiu, J., Wang, S., Huang, L., Chen, Y., Yang, S., Zhuang, X.:
+  Aligning multi-sequence {CMR} towards fully automated myocardial pathology
+  segmentation. IEEE Transactions on Medical Imaging  (2023)
+
+\bibitem{dorent2019hetero}
+Dorent, R., Joutard, S., Modat, M., Ourselin, S., Vercauteren, T.: Hetero-modal
+  variational encoder-decoder for joint modality completion and segmentation.
+  In: MICCAI. pp. 74--82 (2019)
+
+\bibitem{eitel2011cardiac}
+Eitel, I., Desch, S., Fuernau, G., Hildebrand, L., Gutberlet, M., Schuler, G.,
+  Thiele, H.: Prognostic significance and determinants of myocardial salvage
+  assessed by cardiovascular magnetic resonance in acute reperfused myocardial
+  infarction. Journal of the American College of Cardiology  \textbf{55}(22),
+  2470--2479 (2010)
+
+\bibitem{fidon2021labelsetloss}
+Fidon, L., Aertsen, M., Emam, D., Mufti, N., et~al.: Label-set loss functions
+  for partial supervision: Application to fetal brain {3D} {MRI} parcellation.
+  In: MICCAI. pp. 647--657 (2021)
+
+\bibitem{havaei2016hemis}
+Havaei, M., Guizard, N., Chapados, N., Bengio, Y.: {HeMIS}: Hetero-modal image
+  segmentation. In: MICCAI. pp. 469--477 (2016)
+
+\bibitem{ibanez2015evolving}
+Ib{\'a}{\~n}ez, B., Heusch, G., Ovize, M., Van~de Werf, F.: Evolving therapies
+  for myocardial ischemia/reperfusion injury. Journal of the American College
+  of Cardiology  \textbf{65}(14),  1454--1471 (2015)
+
+\bibitem{isensee2021nnunet}
+Isensee, F., Jaeger, P.F., Kohl, S.A.A., Petersen, J., Maier-Hein, K.H.:
+  {nnU-Net}: A self-configuring method for deep learning-based biomedical image
+  segmentation. Nature Methods  \textbf{18}(2),  203--211 (2021)
+
+\bibitem{kim1999relationship}
+Kim, R.J., Fieno, D.S., Parrish, T.B., Harris, K., Chen, E.L., Simonetti, O.,
+  et~al.: Relationship of {MRI} delayed contrast enhancement to irreversible
+  injury, infarct age, and contractile function. Circulation  \textbf{100}(19),
+   1992--2002 (1999)
+
+\bibitem{li2023myops}
+Li, L., Wu, F., Wang, S., Luo, X., Mart{\'\i}n-Isla, C., Zhai, S., et~al.:
+  {MyoPS}: A benchmark of myocardial pathology segmentation combining
+  three-sequence cardiac magnetic resonance images. Medical Image Analysis
+  \textbf{87},  102808 (2023)
+
+\bibitem{lin2017focal}
+Lin, T.Y., Goyal, P., Girshick, R., He, K., Doll{\'a}r, P.: Focal loss for
+  dense object detection. In: ICCV. pp. 2980--2988 (2017)
+
+\bibitem{loshchilov2017sgdr}
+Loshchilov, I., Hutter, F.: {SGDR}: Stochastic gradient descent with warm
+  restarts. In: ICLR (2017)
+
+\bibitem{loshchilov2019adamw}
+Loshchilov, I., Hutter, F.: Decoupled weight decay regularization. In: ICLR
+  (2019)
+
+\bibitem{morales2021deepstrain}
+Morales, M.A., van~den Boomen, M., Nguyen, C., Kalpathy-Cramer, J., Rosen,
+  B.R., et~al.: {DeepStrain}: A deep learning workflow for the automated
+  characterization of cardiac mechanics. Frontiers in Cardiovascular Medicine
+  \textbf{8},  730316 (2021)
+
+\bibitem{qin2018jointmotion}
+Qin, C., Bai, W., Schlemper, J., Petersen, S.E., Piechnik, S.K., Neubauer, S.,
+  Rueckert, D.: Joint learning of motion estimation and segmentation for
+  cardiac {MR} image sequences. In: MICCAI. pp. 472--480 (2018)
+
+\bibitem{qiu2023myopsnet}
+Qiu, J., Li, L., Wang, S., Zhang, K., Chen, Y., Yang, S., Zhuang, X.:
+  {MyoPS-Net}: Myocardial pathology segmentation with flexible combination of
+  multi-sequence {CMR} images. Medical Image Analysis  \textbf{84},  102694
+  (2023)
+
+\bibitem{ronneberger2015unet}
+Ronneberger, O., Fischer, P., Brox, T.: {U-Net}: Convolutional networks for
+  biomedical image segmentation. In: MICCAI. pp. 234--241 (2015)
+
+\bibitem{salehi2017tversky}
+Salehi, S.S.M., Erdogmus, D., Gholipour, A.: Tversky loss function for image
+  segmentation using {3D} fully convolutional deep networks. In: MLMI. pp.
+  379--387 (2017)
+
+\bibitem{scatteia2017strain}
+Scatteia, A., Baritussio, A., Bucciarelli-Ducci, C.: Strain imaging using
+  cardiac magnetic resonance. Heart Failure Reviews  \textbf{22}(4),  465--476
+  (2017)
+
+\bibitem{shi2021marginal}
+Shi, G., Xiao, L., Chen, Y., Zhou, S.K.: Marginal loss and exclusion loss for
+  partially supervised multi-organ segmentation. Medical Image Analysis
+  \textbf{70},  101979 (2021)
+
+\bibitem{ulyanov2016instance}
+Ulyanov, D., Vedaldi, A., Lempitsky, V.: Instance normalization: The missing
+  ingredient for fast stylization. arXiv preprint arXiv:1607.08022  (2016)
+
+\bibitem{wang2022awsnet}
+Wang, K.N., Yang, X., Miao, J., Li, L., Yao, J., Zhou, P., Xue, W., Zhou, G.Q.,
+  Zhuang, X., Ni, D.: {AWSnet}: An auto-weighted supervision attention network
+  for myocardial scar and edema segmentation in multi-sequence cardiac magnetic
+  resonance images. Medical Image Analysis  \textbf{77},  102362 (2022).
+  \doi{10.1016/j.media.2022.102362}
+
+\bibitem{zhai2020coarsemyops}
+Zhai, S., Gu, R., Lei, W., Wang, G.: Myocardial edema and scar segmentation
+  using a coarse-to-fine framework with weighted ensemble. In: Myocardial
+  Pathology Segmentation Combining Multi-Sequence Cardiac Magnetic Resonance
+  Images. Lecture Notes in Computer Science, vol. 12554, pp. 49--59. Springer
+  (2020). \doi{10.1007/978-3-030-65651-5_5}
+
+\bibitem{zhang2019deeplearningcine}
+Zhang, N., Yang, G., Gao, Z., Xu, C., Zhang, Y., Shi, R., et~al.: Deep learning
+  for diagnosis of chronic myocardial infarction on nonenhanced cardiac cine
+  {MRI}. Radiology  \textbf{291}(3),  606--617 (2019)
+
+\bibitem{zhou2019priorpartial}
+Zhou, Y., Li, Z., Bai, S., Wang, C., Chen, X., Han, M., Fishman, E., Yuille,
+  A.: Prior-aware neural network for partially-supervised multi-organ
+  segmentation. In: ICCV. pp. 10672--10681 (2019)
+
+\bibitem{zhuang2019multivariate}
+Zhuang, X.: Multivariate mixture model for myocardial segmentation combining
+  multi-source images. IEEE Transactions on Pattern Analysis and Machine
+  Intelligence  \textbf{41}(12),  2933--2946 (2019)
+
+\end{thebibliography}

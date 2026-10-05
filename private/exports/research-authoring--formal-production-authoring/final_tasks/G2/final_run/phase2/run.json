@@ -1,0 +1,49 @@
+{
+  "actual_consumption": {
+    "event_type": "item.started",
+    "line_index": 5,
+    "proven": true
+  },
+  "actual_consumption_by_plugin": {
+    "research-writing": {
+      "event_type": "item.started",
+      "line_index": 5,
+      "proven": true
+    }
+  },
+  "add_payload": {
+    "authPolicy": "ON_INSTALL",
+    "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3",
+    "marketplaceName": "ai-skills-candidate",
+    "name": "research-writing",
+    "pluginId": "research-writing@ai-skills-candidate",
+    "version": "0.3"
+  },
+  "candidate_commit": "1c37c0715aca0096606f24e56192b7857e72bbd6",
+  "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3",
+  "plugin_id": "research-writing@ai-skills-candidate",
+  "plugins": [
+    {
+      "actual_consumption": {
+        "event_type": "item.started",
+        "line_index": 5,
+        "proven": true
+      },
+      "add_payload": {
+        "authPolicy": "ON_INSTALL",
+        "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3",
+        "marketplaceName": "ai-skills-candidate",
+        "name": "research-writing",
+        "pluginId": "research-writing@ai-skills-candidate",
+        "version": "0.3"
+      },
+      "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3",
+      "name": "research-writing",
+      "plugin_id": "research-writing@ai-skills-candidate"
+    }
+  ],
+  "runtime_version": "codex-cli 0.153.4",
+  "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261005T040934Z-2727854/child.stderr",
+  "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261005T040934Z-2727854/child.stdout.jsonl",
+  "writable_dirs": []
+}

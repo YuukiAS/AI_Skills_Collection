@@ -1,0 +1,10 @@
+{
+  "research-writing": {
+    "authPolicy": "ON_INSTALL",
+    "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3",
+    "marketplaceName": "ai-skills-candidate",
+    "name": "research-writing",
+    "pluginId": "research-writing@ai-skills-candidate",
+    "version": "0.3"
+  }
+}

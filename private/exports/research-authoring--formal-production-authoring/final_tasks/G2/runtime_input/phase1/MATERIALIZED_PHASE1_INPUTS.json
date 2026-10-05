@@ -1,0 +1,49 @@
+{
+  "files": [
+    {
+      "bytes": 2524,
+      "git_blob_sha": "bb39b2b5c697dece8a592d4163d59c477e0c3184",
+      "path": "results/care_clean_subject_disjoint_2026-09-04/experiment_contract.json",
+      "role": "clean CARE experiment definition",
+      "sha256": "699fb690cd99ea9946c8c9636b4c74c309a650f5389572977ea2c9e12f9362f5"
+    },
+    {
+      "bytes": 1502,
+      "git_blob_sha": "fc8f2635ae0e698cdf626a52421aef806f2bf35c",
+      "path": "results/care_clean_subject_disjoint_2026-09-04/clean_replication_pattern_decision.json",
+      "role": "clean replication decision",
+      "sha256": "315d783e3b0d73ee869f77d9e0d4dc4e9eab71d1fa0e7e75d2754f79357867c2"
+    },
+    {
+      "bytes": 512,
+      "git_blob_sha": "74ff50a4bf7bf68beb47f451d16ddf021290d47e",
+      "path": "results/care_pattern_h_robustness_2026-09-04/pattern_h_robustness_decision.json",
+      "role": "H-ROBUST decision",
+      "sha256": "7d12878c8f5d005211558d9a5a28d6bca0f41e3a5008ef4f698a9e2659d4bd27"
+    },
+    {
+      "bytes": 6470,
+      "git_blob_sha": "3d5eff2fd1d3b3e99c391cdf5e474de89fdffe44",
+      "path": "results/care_pattern_h_robustness_2026-09-04/paired_bootstrap_ci.csv",
+      "role": "uncertainty/effect evidence",
+      "sha256": "a50a9174004a5d7b4a069294ed0cc27677419c68f787e7a75266c500be75476b"
+    },
+    {
+      "bytes": 791,
+      "git_blob_sha": "190b97e77e30ec85ae5873759d9fd58ae510a98f",
+      "path": "results/mms_replication_2026-09-04/mms_experiment_contract.json",
+      "role": "supporting M&Ms experiment definition",
+      "sha256": "7bb19f405e04c7695f953503593b6b8c053198f0196b37e4ded9e09c007b8e26"
+    },
+    {
+      "bytes": 259,
+      "git_blob_sha": "c41cb36586708a4361b94f43c95e794c87f48eb0",
+      "path": "results/mms_replication_2026-09-04/mms_replication_decision.json",
+      "role": "supporting replication decision",
+      "sha256": "bfa54621b1e256c55f2e5dc3e3db03e727a046974afe4f6b1a9354a262484fd6"
+    }
+  ],
+  "phase": "G2_PHASE1",
+  "source_ref": "c6ed0fb40c702936ec1f41454390ef188a5b4d97",
+  "source_repo": "YuukiAS/Distributed_Imaging_Inference"
+}

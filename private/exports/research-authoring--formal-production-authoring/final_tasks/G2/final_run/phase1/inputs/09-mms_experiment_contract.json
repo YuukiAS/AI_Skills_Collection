@@ -1,0 +1,23 @@
+{
+  "checkpoint_selection_rule": "D_pretrain_mms internal validation only; external Validation remains unseen until formal evaluation",
+  "client_identity": "Centre",
+  "created_at": "2026-09-04T02:05:58-0400",
+  "formal_external_test": "Validation",
+  "label_mapping": {
+    "0": "background",
+    "1": "LV cavity",
+    "2": "LV myocardium",
+    "3": "RV cavity"
+  },
+  "primary_measurements": [
+    "LV cavity volume ED/ES",
+    "RV cavity volume ED/ES",
+    "LV myocardium volume ED/ES",
+    "EDV/ESV/EF where label semantics hold"
+  ],
+  "selected_design": "Design S",
+  "status": "FROZEN",
+  "training_labeled_usage": "split into D_pretrain_mms and D_adapt_mms",
+  "training_unlabeled_usage": "excluded",
+  "vendor_usage": "metadata covariate/support descriptor, not client identity"
+}

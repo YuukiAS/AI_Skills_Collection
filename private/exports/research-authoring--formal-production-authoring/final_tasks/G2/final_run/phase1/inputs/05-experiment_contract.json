@@ -1,0 +1,72 @@
+{
+  "D_adapt_site_counts": {
+    "CenterA": 32,
+    "CenterB": 14,
+    "CenterC": 18,
+    "CenterE": 3,
+    "CenterF": 4,
+    "CenterG": 3,
+    "CenterH": 14
+  },
+  "D_adapt_subjects": 88,
+  "D_test_site_counts": {
+    "CenterA": 16,
+    "CenterB": 7,
+    "CenterC": 9,
+    "CenterE": 2,
+    "CenterF": 2,
+    "CenterG": 2,
+    "CenterH": 7
+  },
+  "D_test_subjects": 45,
+  "checkpoint": "results/care_clean_subject_disjoint_2026-09-04/nnunet_results/Dataset501_CAREMyoPS/nnUNetTrainer_500epochs__nnUNetPlans__3d_fullres/fold_0/checkpoint_best.pth",
+  "checkpoint_differs_from_old_fold0": true,
+  "checkpoint_sha256": "a2b42732d56d5d42be077aaad42fb89f12106ed252a7943f996051fc0dfc3509",
+  "clean_manifest": "results/care_clean_subject_disjoint_2026-09-04/clean_subject_manifest.csv",
+  "cuda_device_name": "NVIDIA H100 NVL",
+  "fedprox_mu": 0.01,
+  "goal_file": "jobs/GOAL_CARE_CLEAN_SUBJECT_DISJOINT_REPLICATION_2026-09-04.md",
+  "matched_exposure_result": "docs/CARE_MATCHED_EXPOSURE_AGGREGATION_RESULT_2026-09-04.md",
+  "matched_local_epochs": 4,
+  "methods": [
+    "checkpoint",
+    "pooled",
+    "local_oracle",
+    "local_cross_site",
+    "FedAvg",
+    "FedProx",
+    "probability_ensemble"
+  ],
+  "old_fold0_checkpoint": "/users/a/e/aereinh/CARE/data/nnUNet/nnUNet_results/Dataset501_CAREMyoPS/nnUNetTrainer_500epochs__nnUNetPlans__3d_fullres/fold_0/checkpoint_best.pth",
+  "old_fold0_checkpoint_sha256": "f139ca5525322d340a0284c6562a9bcb9cb9cae0a512e14ef40ce85a66f53278",
+  "physical_volume_policy": "Use nnUNetPlans 3d_fullres target spacing only; manifest/reference spacing and pkl spacing are original/cropped provenance, not directly multiplied into preprocessed voxel counts.",
+  "primary_measurement": "scar volume fraction absolute error on D_test",
+  "program_file": "docs/MEASUREMENT_PRESERVING_DISTRIBUTED_IMAGING_PROGRAM_2026-09-04.md",
+  "question": "Does clean subject-disjoint CARE replication localize measurement validity loss to aggregation, heterogeneity, no replication, or mixed weak-init?",
+  "scar_label": 5,
+  "scopes": [
+    "decoder",
+    "full-model"
+  ],
+  "seeds": [
+    20260828,
+    20260829,
+    20260830
+  ],
+  "slurm_job_id": "66371002",
+  "status": "frozen",
+  "supporting_endpoints": [
+    "scar_volume_ml_abs_error",
+    "whole_myo_volume_ml_abs_error",
+    "scar_fraction_signed_error",
+    "scar_dice_positive",
+    "whole_myocardium_dice",
+    "scar_false_negative_burden"
+  ],
+  "timestamp": "2026-09-04 00:27:09 -0400",
+  "whole_myocardium_labels": [
+    1,
+    4,
+    5
+  ]
+}

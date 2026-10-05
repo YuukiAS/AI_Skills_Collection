@@ -1,0 +1,43 @@
+{
+  "files": [
+    {
+      "bytes": 2458,
+      "git_blob_sha": "4d7661f340f8e893eaffaf991b7045760042bbf6",
+      "path": "results/care_personalized_partial_pooling_2026-09-04/experiment_contract.json",
+      "role": "personalized partial-pooling experiment definition",
+      "sha256": "949d4edb514b429f0eeb1afc4de59a5bf075d773944b6b764943901fd42d9c72"
+    },
+    {
+      "bytes": 2304,
+      "git_blob_sha": "8e063c0af3cc4f097b59a998f06c6fef95043576",
+      "path": "results/care_personalized_partial_pooling_2026-09-04/personalization_gate_decision.json",
+      "role": "personalization decision",
+      "sha256": "268f549475fc86a523a3b56b3292a9f5e14817280243796fb2bd38086908fbdd"
+    },
+    {
+      "bytes": 3842,
+      "git_blob_sha": "97bc144aa3399e3dde75c62411656575e4f59636",
+      "path": "results/care_personalized_partial_pooling_2026-09-04/gap_closure_summary.csv",
+      "role": "gap closure summary",
+      "sha256": "aa2a9950cc1c70b62f9cd14f951e5f067911b4659cd5e03743635188ae218e8c"
+    },
+    {
+      "bytes": 67372,
+      "git_blob_sha": "5764bf36da252ab63ac5cc269ca26a5f80856ca5",
+      "path": "results/care_personalized_partial_pooling_2026-09-04/paired_bootstrap_ci.csv",
+      "role": "paired bootstrap uncertainty/effect evidence",
+      "sha256": "ba259faf956d2d28626bb514e3b094ca9f6fa5ea2e70f7db5c6ad1dae0cf53bd"
+    },
+    {
+      "bytes": 10171,
+      "git_blob_sha": "1b7ae6fd3bee80ad27eab84f5b742067d721024f",
+      "path": "G2_PHASE1_PASS_BASELINE.md",
+      "role": "frozen Phase 1 PASS baseline",
+      "sha256": "ce7914b594d9723d9563fcaf26e1528913858c5eaf63475075ec354acdfc7139"
+    }
+  ],
+  "phase": "G2_PHASE2",
+  "phase1_review": "PHASE1=PASS",
+  "source_ref": "c6ed0fb40c702936ec1f41454390ef188a5b4d97",
+  "source_repo": "YuukiAS/Distributed_Imaging_Inference"
+}

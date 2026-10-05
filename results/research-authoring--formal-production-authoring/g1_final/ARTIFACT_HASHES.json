@@ -1,0 +1,36 @@
+{
+  "artifacts": [
+    {
+      "bytes": 7394,
+      "file": "G1_ROUTE_EVIDENCE.md",
+      "sha256": "4ae68acb9fcf1dbd9c7912b7decf528d8a500d5052cb97f4018d111003a19234"
+    },
+    {
+      "bytes": 1980,
+      "file": "run.json",
+      "sha256": "6af276c05660641e4653305233b48017d63b58581cb24b0935ff141d3efd5b5c"
+    },
+    {
+      "bytes": 52367,
+      "file": "child.stdout.jsonl",
+      "sha256": "6952b12261bf24dec7146d73eba73020dee21bfc1fee51d19cfd78fdafc18eb6"
+    },
+    {
+      "bytes": 0,
+      "file": "child.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 927,
+      "file": "workspace_task.md",
+      "sha256": "c5c2ea48c11036fb578b2da7526ade52bdd6c8f2a8247e82c2ed0979ef98e795"
+    },
+    {
+      "bytes": 1712,
+      "file": "workspace_input_G1_CASES.md",
+      "sha256": "ba891b5482e267b7787391e6863b4a59b6a7cfd0df40bea70c25415578a2192a"
+    }
+  ],
+  "gate": "G1",
+  "run_id": "20261005T035405Z-2692051"
+}

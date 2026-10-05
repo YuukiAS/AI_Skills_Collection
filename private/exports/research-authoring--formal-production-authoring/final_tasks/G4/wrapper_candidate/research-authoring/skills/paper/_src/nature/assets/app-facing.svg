@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AI skill icon">
+  <rect width="64" height="64" rx="12" fill="#111827"/>
+  <path d="M18 18h28v8H18zM18 30h20v8H18zM18 42h28v8H18z" fill="#E5E7EB"/>
+  <circle cx="48" cy="18" r="7" fill="#38BDF8"/>
+  <path d="M44 18h8M48 14v8" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+</svg>
