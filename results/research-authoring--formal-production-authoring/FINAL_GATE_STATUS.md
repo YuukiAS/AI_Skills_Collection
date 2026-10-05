@@ -28,16 +28,18 @@ Pre-final Critic review:
   - Reviewer: `01a10a50-24b7-7d53-ab24-b5408bec92d9`
   - Evidence: `private/exports/research-authoring--formal-production-authoring/final_tasks/G3/final_run/`
   - Review: `results/research-authoring--formal-production-authoring/G3_FINAL_REVIEW.md`
-- G4: `NON_LIVE_PREPARED`
+- G4: `BLOCKED_UNAVAILABLE_PLUGIN_CREATOR_TOOL`
   - Requires G2 full PASS: satisfied.
   - Wrapper candidate archive:
     `private/exports/research-authoring--formal-production-authoring/final_tasks/G4/research-authoring-wrapper-candidate.tar.gz`
   - Wrapper manifest:
     `private/exports/research-authoring--formal-production-authoring/final_tasks/G4/WRAPPER_MANIFEST.json`
-  - Live Plugin Creator / ChatGPT account mutation: not authorized and not performed.
+  - Live mutation attempt evidence:
+    `private/exports/research-authoring--formal-production-authoring/final_tasks/G4/LIVE_PLUGIN_CREATOR_ATTEMPT.md`
+  - Live Plugin Creator / ChatGPT account mutation: authorized by the user for this exact wrapper, but not performed because the current Codex tool surface did not expose the required `create_plugin` live mutation tool.
 
 ## Stop State
 
-G4 live wrapper mutation is the next required step. This task must stop and request bounded user authorization before creating or updating the PRIVATE / USER-scope / skills-only `research-authoring` wrapper in a live ChatGPT account.
+G4 live wrapper mutation is the next required step. The exact live mutation is authorized for this task, but the current Codex tool surface does not expose the required Plugin Creator `create_plugin` tool. Execution must resume from the frozen wrapper candidate once that tool is available; do not substitute another distribution route or mutate another plugin.
 
 No main merge, formal release, paid API call, private external upload, Plugin Creator live mutation, or ChatGPT live account mutation was performed.
