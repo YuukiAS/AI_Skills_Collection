@@ -495,6 +495,21 @@ candidate_action:
 - `\tiny` remains forbidden for normal code; body/table/caption roles keep their own independent size tokens.
 promotion_gate: paired R/Python and a dense research-code fixture both remain readable at 1920x1080 with fixed scriptsize code, while injected tiny/clipped code fails.
 
+### Whitespace QA must use archetype-aware hard gates and cannot be waived by free-text reasons
+status: NEW
+tracking: #35
+source: STAT5060 Tutorial 1 Rich v2 final rereview, 2026-10-05
+evidence: reviewed candidate `bda8d2c68d86041da746026b32bf6e0217977f92`, PDF SHA256 `b267917df179aa5a50ff341a7a71343a13bbb15525f4754bb298f02678890c78`. Executor evidence used `usable_body_bbox=[80,135,1840,990]`, which still included the frame-title region, and then cleared >25% bottom-gap pages P14/P16/P22/P30/P31/P36 using free-text `intentional_whitespace_reason`. Independent rereview using a post-title body region found seven ordinary content pages over the frozen 25% hard threshold: P14/P16/P22/P28/P30/P31/P36.
+problem: A whitespace metric can look quantitative while still being semantically wrong if its body region includes fixed chrome or if ordinary content pages can self-exempt with arbitrary prose. Requirement ledgers can also falsely PASS if they summarize composition requirements rather than enumerate every frozen page-level repair.
+candidate_action:
+- Derive the usable body from template chrome boundaries: below the rendered frame-title region and above the footer rule/source/navigation area. Do not use a single hard-coded top coordinate that includes the frame title.
+- Separate page archetype from free-text rationale. Hard-threshold exemptions must come from a frozen archetype allowlist (e.g. title, section-divider, closing); an executor-written `intentional_whitespace_reason` must never waive an ordinary-content hard gate.
+- Ordinary content pages over the hard gap threshold fail automatically. Pages over the soft threshold require primary-object scale + visual-balance review; the executor cannot clear the trigger by narrative alone.
+- Store both metric geometry and the detected chrome geometry in evidence so independent review can reproduce the denominator.
+- Requirement ledger completeness must be machine-checkable against the frozen requirement IDs: no grouped summary row may silently omit page-level composition repairs.
+- Cross-gate consistency: if whitespace metrics, requirement ledger, annotation closure, and page review disagree, overall release QA must be REVISE.
+promotion_gate: replay the STAT5060 candidate so P14/P16/P22/P28/P30/P31/P36 fail automatically and title/closing pages remain valid exceptions; then pass a repaired candidate plus an unrelated deck using the same archetype-aware rule.
+
 真实项目 thread 新增时只需要最小格式：
 
 ```text
