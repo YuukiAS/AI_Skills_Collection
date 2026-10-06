@@ -313,13 +313,14 @@ Restoration/equality verification still runs after such a failure.
 11. child non-zero restoration;
 12. timeout restoration;
 13. ordinary exception restoration;
-14. stale quarantine recovery;
-15. ambiguous recovery fail closed;
-16. account-backed original-path rehydration/read -> FAIL;
-17. three-way candidate/original/quarantine read proof;
-18. concurrency preflight positive -> fail closed;
-19. concurrency preflight no-conflict -> no regression;
-20. remote Plugin/config not mutated.
+14. catchable SIGTERM restoration;
+15. stale quarantine recovery;
+16. ambiguous recovery fail closed;
+17. account-backed original-path rehydration/read -> FAIL;
+18. three-way candidate/original/quarantine read proof;
+19. concurrency preflight positive -> fail closed;
+20. concurrency preflight no-conflict -> no regression;
+21. remote Plugin/config not mutated.
 
 Existing helper tests must continue to pass：
 
