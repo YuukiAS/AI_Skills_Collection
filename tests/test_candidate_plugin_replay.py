@@ -1173,6 +1173,12 @@ class CandidateConsumerIsolationRecoveryTests(unittest.TestCase):
                 with mock.patch.object(replay, "ancestor_pids", return_value={os.getpid()}):
                     replay.assert_no_concurrent_codex_consumers(codex_home)
 
+    def test_concurrency_preflight_does_not_match_codex_run_substring(self) -> None:
+        codex_home = Path("/users/a/e/aereinh/.codex")
+        command = "/path/to/codex app-server proxy --sock /users/a/e/aereinh/.codex-run/as/socket"
+
+        self.assertFalse(replay.command_has_explicit_codex_home(command, codex_home))
+
 
 if __name__ == "__main__":
     unittest.main()

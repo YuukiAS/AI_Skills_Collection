@@ -9,6 +9,7 @@ import io
 import json
 import os
 import platform
+import shlex
 import shutil
 import signal
 import stat
@@ -1243,7 +1244,6 @@ def assert_no_concurrent_codex_consumers(codex_home: Path) -> None:
     if result.returncode != 0:
         raise ReplayError("CONCURRENT_SHARED_CODEX_HOME_CONSUMER: process preflight failed")
     protected = ancestor_pids()
-    codex_home_text = str(codex_home)
     conflicts: list[str] = []
     for line in result.stdout.splitlines():
         fields = line.strip().split(None, 4)
@@ -1260,10 +1260,28 @@ def assert_no_concurrent_codex_consumers(codex_home: Path) -> None:
             continue
         if "codex" not in command:
             continue
-        if codex_home_text in command or f"CODEX_HOME={codex_home_text}" in command:
+        if command_has_explicit_codex_home(command, codex_home):
             conflicts.append(f"pid={pid} cmd={command}")
     if conflicts:
         raise ReplayError("CONCURRENT_SHARED_CODEX_HOME_CONSUMER: " + "; ".join(conflicts[:3]))
+
+
+def command_has_explicit_codex_home(command: str, codex_home: Path) -> bool:
+    codex_home_text = str(codex_home)
+    try:
+        tokens = shlex.split(command)
+    except ValueError:
+        tokens = command.split()
+    for index, token in enumerate(tokens):
+        if token == f"CODEX_HOME={codex_home_text}":
+            return True
+        if token.startswith("CODEX_HOME="):
+            return token.split("=", 1)[1] == codex_home_text
+        if token in {"--codex-home", "--codex_home"} and index + 1 < len(tokens):
+            return tokens[index + 1] == codex_home_text
+        if token.startswith("--codex-home=") or token.startswith("--codex_home="):
+            return token.split("=", 1)[1] == codex_home_text
+    return False
 
 
 @contextlib.contextmanager
