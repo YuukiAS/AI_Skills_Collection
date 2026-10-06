@@ -677,3 +677,96 @@ The authoring contract should specify both:
 
 This prevents a renderer from preserving the correct words while introducing a misleading visual hierarchy.
 
+
+
+## 19. Page budgeting is a constrained composition problem, not a page-count reflex
+
+A document should not oscillate between a cramped one-page version and a sparse two-page version. Page count must be decided only after content, typography and visual rhythm are treated as explicit constraints.
+
+### Hard constraint versus soft preference
+
+Every document should declare:
+
+```text
+PAGE_COUNT_MODE = HARD | PREFERRED | FREE
+PAGE_COUNT_TARGET = <n or range or NONE>
+CONTENT_MUTABLE = YES | NO
+FONT_MUTABLE = YES | NO
+MARGINS_MUTABLE = YES | NO
+RHYTHM_MINIMUMS = <frozen spacing floor>
+```
+
+Interpretation:
+
+- `HARD`: page count itself is a requirement; if content cannot fit without violating frozen readability constraints, return a conflict instead of silently compressing.
+- `PREFERRED`: aim for the target only if it fits above the minimum readability floor.
+- `FREE`: let semantic blocks and visual rhythm determine the page count.
+
+### Compaction ladder
+
+When a shorter document is desired, apply changes in this order:
+
+1. remove accidental / duplicated vertical whitespace;
+2. rebalance semantic-block placement and keep-together rules;
+3. use the approved normal line-spacing target rather than locally enlarged spacing;
+4. reduce paragraph / heading / list spacing only within the frozen acceptable range;
+5. only if explicitly allowed, reconsider margins or font size;
+6. never delete, paraphrase or weaken content merely to hit a page target.
+
+A renderer must not jump directly to font reduction or ultra-tight list spacing.
+
+### Density balance across pages
+
+For multi-page documents, do not optimize each page independently. Review the document as a sequence.
+
+Reject:
+
+- a dense Page 1 followed by a mostly empty Page 2;
+- a semantic block split only to fill Page 1;
+- a whole section moved to Page 2 when modest spacing rebalance would keep a coherent one-page artifact;
+- a page whose bottom is visually crowded while the next page is largely blank.
+
+Prefer:
+
+- comparable reading density across adjacent pages;
+- semantic boundaries as page boundaries;
+- purposeful white space;
+- a single page when content comfortably fits without violating rhythm;
+- two pages when one page would require compression below the readability floor.
+
+### One-page policy / brief heuristic
+
+For a short policy or brief whose content is frozen:
+
+- first determine whether all semantic blocks can fit on one page using the normal family font, geometry and standard single-reading leading;
+- if yes, use one page and distribute spacing consistently;
+- if no, use two pages and rebalance the whole artifact rather than letting the second page contain one tiny residual block.
+
+The page-count decision belongs to the authoring/composition stage and should be approved before rendering.
+
+## 20. Semantic classes should not be visually mixed
+
+Reader-facing documents often contain materially different information classes, such as:
+
+- required task;
+- ungraded instructions;
+- graded assessment criteria;
+- warnings / penalties;
+- source quotation;
+- contextual explanation.
+
+If two classes imply different reader actions, give them distinct visual hierarchy.
+
+A scored component should not appear as an ordinary prose paragraph between ungraded instructions. If a reader must treat it as part of assessment, use an explicit heading, compact table, or otherwise distinct block.
+
+Likewise, warnings, quotations and optional context should not borrow the same hierarchy as required tasks.
+
+The source-to-reader map should therefore add:
+
+```text
+SEMANTIC_CLASS = task | instruction | assessed | warning | source_quote | context
+VISUAL_ROLE = body | heading | table | quote | note
+```
+
+Visual distinction must clarify meaning without turning the document into cards/dashboard UI.
+
