@@ -335,3 +335,20 @@ Do not promote into generic plugin runtime:
 - exact 193-item registry.
 
 Those remain evidence in the course repository. The generic promotion target is the workflow discipline above.
+
+
+## P0 — Default existing-deck revision workflow
+
+User-approved default for long-running presentation revision:
+
+1. historical-feedback preflight with explicit counts;
+2. lifecycle/supersession resolution;
+3. explicit current-round modify scope plus human-locked and round-frozen scope;
+4. bounded high-risk proof pack before broad rebuilds when material visual/pedagogical changes are involved;
+5. direct proof review against historical guard IDs;
+6. immediate page/component locking after explicit human PASS;
+7. full candidate only after proof approval;
+8. full-candidate review repeats complete-history consumption;
+9. evidence/release closure last.
+
+A future workflow may strengthen this sequence but must not silently replace it with a latest-version-only or full-deck-first revision path.
