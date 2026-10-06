@@ -4,6 +4,32 @@ Use this reference for real research deck revisions after reading `SKILL.md`.
 It keeps mature cross-project rules in runtime context without carrying
 project-specific TODO history into installed plugins.
 
+## Canonical workflow inheritance
+
+Before planning or revising a non-trivial deck, read and apply:
+
+`../../../shared/authoring-production-workflow.md`
+
+That workflow is the canonical end-to-end route. In particular:
+
+- ChatGPT/Planner owns audience, narrative, page jobs, exact visible copy,
+  semantic layout relations, feedback lifecycle and locks;
+- a complete deck is not the first visual prototype;
+- shared-component proofs and a small golden-page pack precede full-deck
+  production for materially new or historically unstable designs;
+- Codex production/review/repair runs inside one autonomous Controller Goal;
+- the user is not asked to relay intermediate completion blocks or act as first
+  QA;
+- revisions are bounded by explicit PageID/component allowlists and layered
+  locks;
+- accepted scope grows monotonically and ordinary review issues shrink across
+  two to four user-facing rounds;
+- final delivery still receives one complete whole-deck regression.
+
+The anti-shortcut and independent-review contracts strengthen this workflow;
+they do not replace its authoring, component-proof, golden-page or artifact-first
+stages.
+
 ## Rule Inheritance
 
 For any deck revision based on user, advisor, reviewer, or visual-review
