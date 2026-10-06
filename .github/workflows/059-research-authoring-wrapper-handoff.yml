@@ -1,0 +1,34 @@
+name: 059 Research Authoring Wrapper Handoff
+
+on:
+  push:
+    branches:
+      - work/research-authoring--formal-production-authoring
+    paths:
+      - ".github/workflows/059-research-authoring-wrapper-handoff.yml"
+      - "private/exports/research-authoring--formal-production-authoring/final_tasks/G4/research-authoring-wrapper-candidate.tar.gz"
+
+permissions:
+  contents: read
+
+jobs:
+  upload-wrapper:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify frozen wrapper archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          file="private/exports/research-authoring--formal-production-authoring/final_tasks/G4/research-authoring-wrapper-candidate.tar.gz"
+          test -f "$file"
+          actual="$(sha256sum "$file" | awk '{print $1}')"
+          expected="deca604877ac47441160bd99d885470bb887646902bbf7718911e801386f725f"
+          test "$actual" = "$expected"
+      - name: Upload exact wrapper
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-authoring-wrapper-g4
+          path: private/exports/research-authoring--formal-production-authoring/final_tasks/G4/research-authoring-wrapper-candidate.tar.gz
+          if-no-files-found: error
+          retention-days: 3
