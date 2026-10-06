@@ -528,3 +528,54 @@ Promotion evidence must show:
 - no assumption that all source material belongs in the final artifact;
 - no claim that automated tests can replace human reader review;
 - no permission for implementation agents to broaden semantic scope.
+
+
+## 15. Quoted-source integrity and citation presentation
+
+Direct quotation is a separate authoring mode from paraphrase and must be protected as source content.
+
+Required rules:
+
+1. A direct quote must be copied exactly from the cited source. Do not silently modernize, simplify, normalize, or improve its wording.
+2. A substantive direct quote should use a visibly distinct quotation treatment, such as a block quote with a left rule or equivalent publication-appropriate quotation style. Do not hide a substantive quotation inside ordinary prose merely by adding quotation marks.
+3. Attribution belongs immediately with the quote. Record the exact source title and, where relevant, section / policy / page locator.
+4. Paraphrase must remain visually and semantically distinct from direct quotation. Do not place a paraphrase in quotation marks.
+5. The approved body must contain the exact quotation, attribution text, link labels, link destinations and desired presentation role before implementation.
+6. Codex or another renderer may style an approved quotation but may not invent, extend, shorten, reword, merge, or source a quotation on its own.
+7. If the source does not support the desired sentence exactly, return to the author/content stage; do not manufacture a quote that sounds plausible.
+8. Later revisions must verify quotation text parity and citation-target parity in addition to general semantic parity.
+
+Recommended source map fields for quoted content:
+
+```text
+QUOTE_TEXT = <exact approved source text>
+QUOTE_SOURCE = <canonical source>
+QUOTE_LOCATOR = <section/page/heading>
+QUOTE_STYLE = <block quote / pull quote / inline short quote>
+ATTRIBUTION_TEXT = <exact approved attribution>
+LINK_LABEL = <exact approved label if any>
+LINK_TARGET = <exact approved target if any>
+```
+
+## 16. Document-family identity across related artifacts
+
+A group of related artifacts should share a stable document-family identity unless a deliberate redesign is approved.
+
+For related Homework / Project / technical-report families, explicitly freeze:
+
+- title hierarchy;
+- title wording conventions;
+- course/project identity placement;
+- academic-year / version placement;
+- due-date or document-date label and placement;
+- weight/status metadata placement when applicable;
+- typeface and math family;
+- page geometry;
+- heading hierarchy;
+- footer / page-number behavior;
+- hyperlink and quotation style.
+
+Artifact-specific values remain source-controlled; family consistency governs presentation and label structure, not the invention of missing values.
+
+A renderer must not redesign one member of the family merely because another template is available. A later artifact should first recover the accepted family contract and then change only what its own reader task requires.
+
