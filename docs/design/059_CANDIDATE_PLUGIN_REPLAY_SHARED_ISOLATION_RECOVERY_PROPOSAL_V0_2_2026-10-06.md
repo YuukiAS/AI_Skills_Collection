@@ -574,14 +574,33 @@ Evidence only：
     -不覆盖、不删除、不启动child。
 
 11. **conflict rehydration/read detection**
-    -若 child期间 conflict package重新出现或被读取；
-    - replay FAIL，即使 candidate也被读。
+    - child期间 original conflict path重新出现或被读取；
+    - replay FAIL，即使 candidate也被读；
+    - finally仍恢复并核验原状态。
 
-12. **path/symlink safety**
-    - quarantine只允许 `$CODEX_HOME/plugins/cache` 内 resolved目录；
-    -拒绝越界/symlink逃逸。
+12. **quarantine discovery-root exclusion / same-filesystem**
+    - quarantine resolved path必须位于 plugin discovery/cache root之外；
+    - `original.st_dev == quarantine_parent.st_dev`；
+    -不同 filesystem时 fail closed；
+    -不得 copy + delete；
+    -不得退回 `plugins/cache/**` 内隐藏目录。
 
-13. **remote-object non-mutation**
+13. **path/symlink safety**
+    - quarantine resolved path不得通过 symlink落回 plugin discovery root；
+    -拒绝越界、已有冲突路径与不可验证 provenance。
+
+14. **quarantine path consumption proof**
+    - `CANDIDATE_PATH_READS > 0`；
+    - `ORIGINAL_CONFLICT_PATH_READS = 0`；
+    - `QUARANTINE_PATH_READS = 0`。
+
+15. **concurrency preflight**
+    -明显存在共享同一 `CODEX_HOME` 的其他活跃 Codex consumer时 fail closed；
+    -无并发时不退化；
+    -不 kill/pause其他进程；
+    -不新增 watcher/daemon。
+
+16. **remote-object non-mutation**
     - helper不得调用 Plugin Creator；
     -不修改 user config/remote Plugin identity。
 
