@@ -4,6 +4,7 @@ import io
 import json
 import contextlib
 import os
+import shutil
 import signal
 import stat
 import subprocess
@@ -947,6 +948,54 @@ class ReplayMechanismTests(unittest.TestCase):
 
 
 class CandidateConsumerIsolationRecoveryTests(unittest.TestCase):
+    def make_equivalent_rehydration_fixture(
+        self,
+        root: Path,
+        *,
+        run_id: str = "run",
+        before_list: dict | None = None,
+    ) -> tuple[Path, Path, Path, replay.QuarantineTransaction, dict]:
+        codex_home = root / ".codex"
+        discovery = codex_home / "plugins" / "cache"
+        original = make_cached_package(
+            discovery,
+            "created-by-me-remote",
+            "research-authoring",
+            "0.3.0",
+            ["research-reporting"],
+        )
+        package = replay.cached_plugin_package_from_path(original, discovery)
+        self.assertIsNotNone(package)
+        assert package is not None
+        paths = replay.runtime_paths(root)
+        record = replay.QuarantineRecord(
+            package=package,
+            quarantine_path=(
+                replay.quarantine_parent(codex_home, run_id)
+                / "created-by-me-remote"
+                / "research-authoring"
+                / "0.3.0"
+            ),
+            overlapping_skill_names=("research-reporting",),
+        )
+        plugin_list = before_list or {
+            "plugins": [
+                {
+                    "pluginId": "research-authoring@created-by-me-remote",
+                    "name": "research-authoring",
+                    "enabled": True,
+                    "marketplaceName": "created-by-me-remote",
+                    "installedPath": str(original),
+                }
+            ]
+        }
+        with mock.patch.object(replay, "effective_codex_home", return_value=codex_home.resolve()):
+            transaction = replay.prepare_quarantine_transaction(paths, run_id, plugin_list, {}, [record])
+        self.assertIsNotNone(transaction)
+        assert transaction is not None
+        replay.activate_quarantine(transaction)
+        return codex_home, discovery, original, transaction, plugin_list
+
     def test_detects_different_plugin_name_same_skill_conflict(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             cache = Path(tmp) / ".codex" / "plugins" / "cache"
@@ -1139,6 +1188,195 @@ class CandidateConsumerIsolationRecoveryTests(unittest.TestCase):
 
             with self.assertRaisesRegex(replay.ReplayError, "RESTORATION_AMBIGUOUS"):
                 replay.recover_stale_quarantines(paths)
+
+    def test_equivalent_rehydration_deletes_only_transaction_owned_quarantine_duplicate(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            codex_home, _discovery, original, transaction, plugin_list = self.make_equivalent_rehydration_fixture(root)
+            self.assertFalse(original.exists())
+            quarantine = transaction.records[0].quarantine_path
+            self.assertTrue(quarantine.exists())
+            shutil.copytree(quarantine, original)
+
+            result = replay.restore_quarantine(
+                transaction,
+                read_proof={
+                    "candidate_path_reads": 1,
+                    "original_conflict_path_reads": 0,
+                    "quarantine_path_reads": 0,
+                },
+                current_plugin_list=plugin_list,
+                codex_home=codex_home.resolve(),
+            )
+
+            self.assertTrue(result.verified_equivalent_rehydration)
+            self.assertTrue(result.final_persistent_state_equivalent_to_before)
+            self.assertTrue(original.exists())
+            self.assertFalse(quarantine.exists())
+            self.assertFalse(transaction.manifest_path.exists())
+            self.assertEqual(replay.tree_sha256(original), transaction.records[0].package.tree_sha256)
+
+    def test_equivalent_rehydration_without_candidate_proof_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            codex_home, _discovery, original, transaction, plugin_list = self.make_equivalent_rehydration_fixture(root)
+            quarantine = transaction.records[0].quarantine_path
+            shutil.copytree(quarantine, original)
+
+            with self.assertRaisesRegex(replay.ReplayError, "candidate consumption proof"):
+                replay.restore_quarantine(
+                    transaction,
+                    read_proof={
+                        "candidate_path_reads": 0,
+                        "original_conflict_path_reads": 0,
+                        "quarantine_path_reads": 0,
+                    },
+                    current_plugin_list=plugin_list,
+                    codex_home=codex_home.resolve(),
+                )
+
+            self.assertTrue(original.exists())
+            self.assertTrue(quarantine.exists())
+            self.assertTrue(transaction.manifest_path.exists())
+
+    def test_equivalent_rehydration_with_conflict_read_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            codex_home, _discovery, original, transaction, plugin_list = self.make_equivalent_rehydration_fixture(root)
+            quarantine = transaction.records[0].quarantine_path
+            shutil.copytree(quarantine, original)
+
+            with self.assertRaisesRegex(replay.ReplayError, "conflict package read proof"):
+                replay.restore_quarantine(
+                    transaction,
+                    read_proof={
+                        "candidate_path_reads": 1,
+                        "original_conflict_path_reads": 1,
+                        "quarantine_path_reads": 0,
+                    },
+                    current_plugin_list=plugin_list,
+                    codex_home=codex_home.resolve(),
+                )
+
+            self.assertTrue(original.exists())
+            self.assertTrue(quarantine.exists())
+            self.assertTrue(transaction.manifest_path.exists())
+
+    def test_equivalent_rehydration_hash_mismatch_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            codex_home, _discovery, original, transaction, plugin_list = self.make_equivalent_rehydration_fixture(root)
+            quarantine = transaction.records[0].quarantine_path
+            shutil.copytree(quarantine, original)
+            (original / "skills" / "skill-1" / "SKILL.md").write_text("changed\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(replay.ReplayError, "tree hash mismatch"):
+                replay.restore_quarantine(
+                    transaction,
+                    read_proof={
+                        "candidate_path_reads": 1,
+                        "original_conflict_path_reads": 0,
+                        "quarantine_path_reads": 0,
+                    },
+                    current_plugin_list=plugin_list,
+                    codex_home=codex_home.resolve(),
+                )
+
+            self.assertTrue(original.exists())
+            self.assertTrue(quarantine.exists())
+            self.assertTrue(transaction.manifest_path.exists())
+
+    def test_run_replay_allows_verified_equivalent_rehydration_without_conflict_reads(self) -> None:
+        tmp, root, commit = make_repo()
+        self.addCleanup(tmp.cleanup)
+        (root / "task.md").write_text("Do the task.\n", encoding="utf-8")
+        (root / "input.md").write_text("Input.\n", encoding="utf-8")
+        codex_home = root / ".codex"
+        discovery = codex_home / "plugins" / "cache"
+        original = make_cached_package(
+            discovery,
+            "created-by-me-remote",
+            "research-authoring",
+            "0.3.0",
+            ["research-reporting"],
+        )
+        package = replay.cached_plugin_package_from_path(original, discovery)
+        self.assertIsNotNone(package)
+        assert package is not None
+        conflict = replay.QuarantineRecord(
+            package=package,
+            quarantine_path=Path(),
+            overlapping_skill_names=("research-reporting",),
+        )
+        installed = root / "plugins" / "cache" / "ai-skills-candidate" / "writing-style" / "0.1"
+        installed.mkdir(parents=True)
+        before_list = {
+            "plugins": [
+                {
+                    "pluginId": "research-authoring@created-by-me-remote",
+                    "name": "research-authoring",
+                    "enabled": True,
+                    "marketplaceName": "created-by-me-remote",
+                    "installedPath": str(original),
+                }
+            ]
+        }
+        remove_calls: list[str] = []
+
+        def fake_stage(_root: Path, _candidates: list[replay.CandidatePlugin], run_dir: Path) -> Path:
+            marketplace = run_dir / "marketplace"
+            marketplace.mkdir(parents=True)
+            return marketplace
+
+        def fake_run_codex_json(_codex: Path, args: list[str], **_kwargs):
+            if args[:3] == ["plugin", "list", "--json"]:
+                return before_list
+            return None
+
+        def fake_child(*_args, **_kwargs):
+            quarantines = list((codex_home / ".candidate-plugin-replay-quarantine").glob("*/*/*/*"))
+            self.assertEqual(len(quarantines), 1)
+            self.assertFalse(original.exists())
+            shutil.copytree(quarantines[0], original)
+            event = {
+                "type": "item.completed",
+                "item": {
+                    "type": "command_execution",
+                    "command": f"cat {installed}/skills/zh/SKILL.md",
+                },
+            }
+            return replay.CommandResult(("codex", "exec"), 0, json.dumps(event) + "\n", "")
+
+        with mock.patch.object(replay, "ensure_runtime_available", return_value={"version": replay.EXPECTED_CODEX_VERSION}):
+            with mock.patch.object(replay, "safe_stage_candidates", side_effect=fake_stage):
+                with mock.patch.object(replay, "run_codex_json", side_effect=fake_run_codex_json):
+                    with mock.patch.object(
+                        replay,
+                        "add_candidate_plugin",
+                        return_value=("writing-style@ai-skills-candidate", str(installed), {}),
+                    ):
+                        with mock.patch.object(replay, "effective_codex_home", return_value=codex_home.resolve()):
+                            with mock.patch.object(replay, "detect_conflicting_cached_packages", return_value=[conflict]):
+                                with mock.patch.object(replay, "assert_no_concurrent_codex_consumers"):
+                                    with mock.patch.object(replay, "run_child_exec", side_effect=fake_child):
+                                        with mock.patch.object(
+                                            replay,
+                                            "remove_candidate_plugin",
+                                            side_effect=lambda _c, plugin_id: remove_calls.append(plugin_id),
+                                        ):
+                                            result = replay.run_replay(
+                                                root,
+                                                "writing-style",
+                                                commit,
+                                                "task.md",
+                                                ["input.md"],
+                                            )
+
+        self.assertEqual(remove_calls, ["writing-style@ai-skills-candidate"])
+        self.assertTrue(result["restoration"]["verified_equivalent_rehydration"])
+        self.assertTrue(result["consumer_isolation"]["final_persistent_state_equivalent_to_before"])
+        self.assertTrue(original.exists())
+        self.assertFalse(any((codex_home / ".candidate-plugin-replay-quarantine").glob("*/*/*/*")))
 
     def test_three_way_candidate_original_quarantine_read_proof(self) -> None:
         candidate = "/home/me/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3"

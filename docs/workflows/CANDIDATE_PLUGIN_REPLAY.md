@@ -49,8 +49,8 @@ The helper:
   frontmatter `name` overlap;
 - when conflicts exist, temporarily moves only those conflicting cached Plugin
   packages outside the plugin discovery root by same-filesystem atomic rename;
-- writes a durable recovery manifest before mutation and restores the original
-  cache paths after success, failure, timeout or ordinary exception;
+- writes a durable recovery manifest before mutation and restores or reconciles
+  the original cache paths after success, failure, timeout or ordinary exception;
 - records `plugin-add.json`, child JSONL/stdout and stderr in the ignored run directory;
 - streams the long-running child stdout/stderr to those run-directory files while the child is still alive;
 - proves actual candidate consumption only from parsed `command_execution` JSON events that read `SKILL.md` under the candidate plugin cache path;
@@ -75,12 +75,30 @@ the JSONL command trace. A replay may pass only when:
 CANDIDATE_PATH_READS > 0
 ORIGINAL_CONFLICT_PATH_READS = 0
 QUARANTINE_PATH_READS = 0
+FINAL_PERSISTENT_STATE_EQUIVALENT_TO_BEFORE = YES
 ```
 
-If the account-backed plugin reappears at the original path, or if the child
-reads either the original conflicting package or its quarantine path, the
-candidate consumption evidence is invalid and the replay fails after attempting
-exact restoration.
+If an account-backed plugin reappears at the original path while the
+transaction-owned quarantine copy still exists, that passive rehydration is not
+by itself a consumer-isolation failure. The helper may keep the rehydrated
+original and delete only the exact transaction-owned quarantine duplicate when
+all of the following proof is present:
+
+```text
+original tree hash == quarantine tree hash == pre-run tree hash
+plugin manifest hashes are identical to the pre-run manifest hash
+marketplace/plugin/version/path identity is identical
+config hash and normalized plugin state match the pre-run state
+CANDIDATE_PATH_READS > 0
+ORIGINAL_CONFLICT_PATH_READS = 0
+QUARANTINE_PATH_READS = 0
+the quarantine path is owned by the current transaction
+```
+
+After deleting the duplicate, the helper fsyncs and rechecks persistent state
+before removing the recovery manifest. If any proof is missing or inconsistent,
+the condition remains `RESTORATION_AMBIGUOUS`: do not delete, overwrite,
+continue replay, or treat the output as a candidate PASS.
 
 ## Safety boundaries
 
@@ -118,8 +136,9 @@ Classify before changing anything:
   fix the shared replay path or return to Planner/Critic;
 - a stale quarantine can be proven by manifest and hash -> recover at helper
   entry before installing a new candidate;
-- original and quarantine both exist, hashes do not match, or filesystem
-  assumptions changed -> `RESTORATION_AMBIGUOUS`; do not overwrite/delete;
+- original and quarantine both exist without full verified-equivalent-rehydration
+  proof, hashes do not match, or filesystem assumptions changed ->
+  `RESTORATION_AMBIGUOUS`; do not overwrite/delete;
 - candidate is loaded but wrong skill/route is selected -> target plugin routing failure;
 - correct route is selected but domain receipt/mechanical validation fails -> target plugin implementation failure;
 - process/receipt passes but user artifact is poor -> PRODUCT / ARTIFACT failure, not harness success;

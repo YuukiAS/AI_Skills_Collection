@@ -21,7 +21,7 @@ import time
 import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Callable, Iterable
 
 
 CODEX_VERSION = "0.153.4"
@@ -112,6 +112,13 @@ class QuarantineTransaction:
     discovery_root: Path
     quarantine_parent: Path
     records: tuple[QuarantineRecord, ...]
+
+
+@dataclass(frozen=True)
+class RestorationResult:
+    actions: tuple[str, ...]
+    verified_equivalent_rehydration: bool
+    final_persistent_state_equivalent_to_before: bool
 
 
 def repo_root() -> Path:
@@ -724,6 +731,31 @@ def config_hash(codex_home: Path) -> str | None:
     return optional_file_sha256(codex_home / "config.toml")
 
 
+def plugin_manifest_path(package_path: Path) -> Path:
+    return package_path / ".codex-plugin" / "plugin.json"
+
+
+def package_identity(path: Path, discovery_root: Path) -> dict[str, str]:
+    resolved_root = discovery_root.resolve()
+    resolved = path.resolve()
+    if not is_relative_to_path(resolved, resolved_root):
+        raise ReplayError(f"package path is outside discovery root: {path}")
+    parts = resolved.relative_to(resolved_root).parts
+    if len(parts) != 3:
+        raise ReplayError(f"package path does not have marketplace/plugin/version identity: {path}")
+    return {"marketplace": parts[0], "plugin": parts[1], "version": parts[2]}
+
+
+def read_proof_counts(read_proof: dict[str, Any] | None) -> tuple[int, int, int]:
+    if not read_proof:
+        return 0, 0, 0
+    return (
+        int(read_proof.get("candidate_path_reads") or 0),
+        int(read_proof.get("original_conflict_path_reads") or 0),
+        int(read_proof.get("quarantine_path_reads") or 0),
+    )
+
+
 def quarantine_parent(codex_home: Path, run_id: str) -> Path:
     return (codex_home / ".candidate-plugin-replay-quarantine" / run_id).resolve()
 
@@ -813,6 +845,12 @@ def update_transaction_phase(transaction: QuarantineTransaction, phase: str) -> 
     write_json_durable(transaction.manifest_path, payload)
 
 
+def update_transaction_payload(transaction: QuarantineTransaction, updates: dict[str, Any]) -> None:
+    payload = json.loads(transaction.manifest_path.read_text(encoding="utf-8"))
+    payload.update(updates)
+    write_json_durable(transaction.manifest_path, payload)
+
+
 def activate_quarantine(transaction: QuarantineTransaction) -> None:
     for record in transaction.records:
         record.quarantine_path.parent.mkdir(parents=True, exist_ok=True)
@@ -826,16 +864,170 @@ def activate_quarantine(transaction: QuarantineTransaction) -> None:
     update_transaction_phase(transaction, "quarantined")
 
 
-def restore_quarantine(transaction: QuarantineTransaction) -> None:
+def write_post_child_evidence(
+    transaction: QuarantineTransaction,
+    *,
+    stdout_path: Path,
+    stderr_path: Path,
+    installed_paths: dict[str, str],
+    candidate_read_events: list[SkillReadEvent],
+    original_conflict_events: list[SkillReadEvent],
+    quarantine_events: list[SkillReadEvent],
+) -> dict[str, Any]:
+    proof = {
+        "stdout_path": str(stdout_path),
+        "stdout_sha256": sha256_file(stdout_path) if stdout_path.is_file() else None,
+        "stderr_path": str(stderr_path),
+        "stderr_sha256": sha256_file(stderr_path) if stderr_path.is_file() else None,
+        "candidate_installed_paths": installed_paths,
+        "candidate_path_reads": len(candidate_read_events),
+        "original_conflict_path_reads": len(original_conflict_events),
+        "quarantine_path_reads": len(quarantine_events),
+        "candidate_read_events": read_event_payload(candidate_read_events),
+        "original_conflict_read_events": read_event_payload(original_conflict_events),
+        "quarantine_read_events": read_event_payload(quarantine_events),
+        "post_child_original_presence": {
+            str(record.package.path): record.package.path.exists()
+            for record in transaction.records
+        },
+        "recovery_manifest_path": str(transaction.manifest_path),
+    }
+    update_transaction_payload(transaction, {"phase": "post_child_evidence", "post_child_evidence": proof})
+    return proof
+
+
+def verify_equivalent_rehydration_record(
+    *,
+    manifest: dict[str, Any],
+    record_payload: dict[str, Any],
+    transaction: QuarantineTransaction,
+    record: QuarantineRecord,
+    read_proof: dict[str, Any] | None,
+    current_plugin_list: Any,
+    codex_home: Path,
+) -> dict[str, Any]:
+    candidate_reads, original_reads, quarantine_reads = read_proof_counts(read_proof)
+    original = record.package.path.resolve()
+    quarantine = record.quarantine_path.resolve()
+    expected_original = Path(record_payload["original_path"]).resolve()
+    expected_quarantine = Path(record_payload["quarantine_path"]).resolve()
+    if original != expected_original or quarantine != expected_quarantine:
+        raise ReplayError("RESTORATION_AMBIGUOUS: package path does not match recovery manifest")
+    if not is_relative_to_path(quarantine, transaction.quarantine_parent.resolve()):
+        raise ReplayError("RESTORATION_AMBIGUOUS: quarantine path is not owned by this transaction")
+    if not original.exists() or not quarantine.exists():
+        raise ReplayError("RESTORATION_AMBIGUOUS: equivalent rehydration requires both copies")
+    original_tree = tree_sha256(original)
+    quarantine_tree = tree_sha256(quarantine)
+    expected_tree = record_payload.get("tree_sha256")
+    if not expected_tree or original_tree != quarantine_tree or original_tree != expected_tree:
+        raise ReplayError("RESTORATION_AMBIGUOUS: equivalent rehydration tree hash mismatch")
+    original_manifest_hash = optional_file_sha256(plugin_manifest_path(original))
+    quarantine_manifest_hash = optional_file_sha256(plugin_manifest_path(quarantine))
+    expected_manifest_hash = record_payload.get("plugin_manifest_sha256")
+    if not expected_manifest_hash or original_manifest_hash != quarantine_manifest_hash or original_manifest_hash != expected_manifest_hash:
+        raise ReplayError("RESTORATION_AMBIGUOUS: equivalent rehydration plugin manifest hash mismatch")
+    identity = package_identity(original, transaction.discovery_root)
+    quarantine_identity = {
+        "marketplace": record_payload.get("marketplace"),
+        "plugin": record_payload.get("plugin"),
+        "version": record_payload.get("version"),
+    }
+    if identity != quarantine_identity:
+        raise ReplayError("RESTORATION_AMBIGUOUS: original marketplace/plugin/version identity mismatch")
+    quarantine_rel = quarantine.relative_to(transaction.quarantine_parent.resolve()).parts
+    if tuple(quarantine_rel) != (identity["marketplace"], identity["plugin"], identity["version"]):
+        raise ReplayError("RESTORATION_AMBIGUOUS: quarantine marketplace/plugin/version identity mismatch")
+    if config_hash(codex_home) != manifest.get("config_hash"):
+        raise ReplayError("RESTORATION_AMBIGUOUS: config hash mismatch")
+    if normalized_plugin_list(current_plugin_list) != manifest.get("normalized_before_plugin_list"):
+        raise ReplayError("RESTORATION_AMBIGUOUS: normalized plugin state mismatch")
+    if candidate_reads <= 0:
+        raise ReplayError("RESTORATION_AMBIGUOUS: candidate consumption proof is missing")
+    if original_reads != 0 or quarantine_reads != 0:
+        raise ReplayError("RESTORATION_AMBIGUOUS: conflict package read proof is nonzero")
+    return {
+        "classification": "VERIFIED_EQUIVALENT_REHYDRATION",
+        "original_path": str(original),
+        "quarantine_path": str(quarantine),
+        "tree_sha256": original_tree,
+        "plugin_manifest_sha256": original_manifest_hash,
+        "identity": identity,
+        "candidate_path_reads": candidate_reads,
+        "original_conflict_path_reads": original_reads,
+        "quarantine_path_reads": quarantine_reads,
+    }
+
+
+def remove_equivalent_quarantine_duplicate(record: QuarantineRecord) -> None:
+    quarantine = record.quarantine_path.resolve()
+    if not quarantine.is_dir():
+        raise ReplayError(f"RESTORATION_AMBIGUOUS: quarantine duplicate is missing: {quarantine}")
+    shutil.rmtree(quarantine)
+    fsync_path(quarantine.parent)
+
+
+def restore_quarantine(
+    transaction: QuarantineTransaction,
+    *,
+    read_proof: dict[str, Any] | None = None,
+    current_plugin_list: Any | None = None,
+    final_plugin_list_reader: Callable[[], Any] | None = None,
+    codex_home: Path | None = None,
+) -> RestorationResult:
+    manifest = json.loads(transaction.manifest_path.read_text(encoding="utf-8"))
+    record_payloads = manifest.get("records")
+    if not isinstance(record_payloads, list) or len(record_payloads) != len(transaction.records):
+        raise ReplayError(f"RESTORATION_AMBIGUOUS: invalid recovery manifest {transaction.manifest_path}")
     errors: list[str] = []
+    actions: list[str] = []
+    verified_equivalent = False
     for record in reversed(transaction.records):
         original = record.package.path
         quarantine = record.quarantine_path
+        record_payload = next(
+            (
+                item for item in record_payloads
+                if Path(item.get("original_path", "")).resolve() == original.resolve()
+                and Path(item.get("quarantine_path", "")).resolve() == quarantine.resolve()
+            ),
+            None,
+        )
+        if not isinstance(record_payload, dict):
+            errors.append(f"RESTORATION_AMBIGUOUS: missing manifest record for {original}")
+            continue
         if original.exists() and quarantine.exists():
-            errors.append(f"RESTORATION_AMBIGUOUS: both original and quarantine exist for {original}")
+            if current_plugin_list is None or codex_home is None:
+                errors.append(f"RESTORATION_AMBIGUOUS: both original and quarantine exist for {original}")
+                continue
+            try:
+                proof = verify_equivalent_rehydration_record(
+                    manifest=manifest,
+                    record_payload=record_payload,
+                    transaction=transaction,
+                    record=record,
+                    read_proof=read_proof,
+                    current_plugin_list=current_plugin_list,
+                    codex_home=codex_home,
+                )
+                remove_equivalent_quarantine_duplicate(record)
+                if tree_sha256(original) != proof["tree_sha256"]:
+                    raise ReplayError("RESTORATION_AMBIGUOUS: final original tree hash changed")
+                if optional_file_sha256(plugin_manifest_path(original)) != proof["plugin_manifest_sha256"]:
+                    raise ReplayError("RESTORATION_AMBIGUOUS: final original plugin manifest hash changed")
+                if config_hash(codex_home) != manifest.get("config_hash"):
+                    raise ReplayError("RESTORATION_AMBIGUOUS: final config hash mismatch")
+                final_plugin_list = final_plugin_list_reader() if final_plugin_list_reader else current_plugin_list
+                if normalized_plugin_list(final_plugin_list) != manifest.get("normalized_before_plugin_list"):
+                    raise ReplayError("RESTORATION_AMBIGUOUS: final normalized plugin state mismatch")
+                actions.append(f"deleted-equivalent-quarantine-duplicate:{quarantine}")
+                verified_equivalent = True
+            except ReplayError as exc:
+                errors.append(str(exc))
             continue
         if not quarantine.exists():
             if original.exists():
+                actions.append(f"original-present-no-quarantine:{original}")
                 continue
             errors.append(f"RESTORATION_AMBIGUOUS: neither original nor quarantine exists for {original}")
             continue
@@ -846,12 +1038,18 @@ def restore_quarantine(transaction: QuarantineTransaction) -> None:
         quarantine.rename(original)
         fsync_path(original.parent)
         fsync_path(quarantine.parent)
+        actions.append(f"restored-quarantine-to-original:{original}")
     if errors:
         raise ReplayError("; ".join(errors))
     update_transaction_phase(transaction, "restored")
     with contextlib.suppress(FileNotFoundError):
         transaction.manifest_path.unlink()
         fsync_path(transaction.manifest_path.parent)
+    return RestorationResult(
+        actions=tuple(actions),
+        verified_equivalent_rehydration=verified_equivalent,
+        final_persistent_state_equivalent_to_before=True,
+    )
 
 
 def recover_stale_quarantines(paths: RuntimePaths) -> list[str]:
@@ -1338,6 +1536,8 @@ def run_replay_multi(
     installed_paths: dict[str, str] = {}
     before_snapshots: dict[str, list[dict[str, Any]]] = {}
     quarantine: QuarantineTransaction | None = None
+    read_proof: dict[str, Any] | None = None
+    result_payload: dict[str, Any] | None = None
     try:
         with replay_lock(root):
             stale_recoveries = recover_stale_quarantines(paths)
@@ -1411,20 +1611,24 @@ def run_replay_multi(
                     else []
                 )
                 candidate_read_events = parse_candidate_read_events(child.stdout, installed_paths.values())
-                rehydrated_originals = [
-                    str(record.package.path)
-                    for record in quarantine.records
-                    if record.package.path.exists()
-                ] if quarantine else []
+                if quarantine:
+                    read_proof = write_post_child_evidence(
+                        quarantine,
+                        stdout_path=stdout_path,
+                        stderr_path=stderr_path,
+                        installed_paths=installed_paths,
+                        candidate_read_events=candidate_read_events,
+                        original_conflict_events=original_conflict_events,
+                        quarantine_events=quarantine_events,
+                    )
                 if child.returncode != 0:
                     raise ReplayError(f"candidate child exec failed ({child.returncode}): {child.stderr.strip()}")
-                if original_conflict_events or quarantine_events or rehydrated_originals:
+                if original_conflict_events or quarantine_events:
                     examples = "; ".join(
                         [f"original line {item.line_index}: {item.command}" for item in original_conflict_events[:2]]
                         + [f"quarantine line {item.line_index}: {item.command}" for item in quarantine_events[:2]]
-                        + [f"rehydrated original: {path}" for path in rehydrated_originals[:2]]
                     )
-                    raise ReplayError("candidate consumer isolation failed; conflicting cached package was visible: " + examples)
+                    raise ReplayError("candidate consumer isolation failed; conflicting cached package was read: " + examples)
                 missing = [plugin for plugin, evidence in evidence_by_plugin.items() if evidence is None]
                 if missing:
                     raise ReplayError(
@@ -1494,6 +1698,7 @@ def run_replay_multi(
                     "stderr_path": str(stderr_path),
                     "writable_dirs": [str(path) for path in writable_dirs],
                 }
+                result_payload = result
                 if legacy_single and len(plugin_results) == 1:
                     single = plugin_results[0]
                     result.update(
@@ -1508,9 +1713,16 @@ def run_replay_multi(
                 return result
             finally:
                 restore_error: Exception | None = None
+                restoration: RestorationResult | None = None
                 if quarantine:
                     try:
-                        restore_quarantine(quarantine)
+                        restoration = restore_quarantine(
+                            quarantine,
+                            read_proof=read_proof,
+                            current_plugin_list=run_codex_json(paths.codex, ["plugin", "list", "--json"]),
+                            final_plugin_list_reader=lambda: run_codex_json(paths.codex, ["plugin", "list", "--json"]),
+                            codex_home=effective_codex_home(),
+                        )
                     except Exception as exc:  # noqa: BLE001 - preserve exact failure after cleanup attempt.
                         restore_error = exc
                 for plugin_id in plugin_ids:
@@ -1527,6 +1739,23 @@ def run_replay_multi(
                     )
                 if normalized_plugin_list(after_list) != before_normalized:
                     raise ReplayError("persistent plugin list changed")
+                if result_payload is not None:
+                    result_payload["restoration"] = {
+                        "actions": list(restoration.actions) if restoration else [],
+                        "verified_equivalent_rehydration": (
+                            restoration.verified_equivalent_rehydration if restoration else False
+                        ),
+                        "final_persistent_state_equivalent_to_before": (
+                            restoration.final_persistent_state_equivalent_to_before if restoration else True
+                        ),
+                    }
+                    result_payload["consumer_isolation"]["final_persistent_state_equivalent_to_before"] = (
+                        restoration.final_persistent_state_equivalent_to_before if restoration else True
+                    )
+                    (run_dir / "run.json").write_text(
+                        json.dumps(result_payload, indent=2, sort_keys=True) + "\n",
+                        encoding="utf-8",
+                    )
                 if restore_error:
                     raise restore_error
     except Exception:
