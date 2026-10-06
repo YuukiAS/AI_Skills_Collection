@@ -170,6 +170,59 @@ Rules:
 Promotion gate:
 - Workflow refuses to enter evidence-closure mode while a human/pedagogical guard is open.
 
+## P0 — Acceptance standards are cumulative, not substitutive
+
+Problem:
+- A later review standard can accidentally “simplify” the process and drop hardening that was added because of an earlier false PASS.
+- This is itself a regression. A new pedagogical gate must not silently remove artifact binding, whole-slide review, role separation, first-use checks, template regression, figure provenance, or other already-proven gates.
+
+Required generic behavior:
+- Every new/revised acceptance contract must declare its parent review standards and produce a carry-forward matrix:
+  `prior_gate -> current_gate -> PRESERVED / STRENGTHENED / EXPLICITLY_RETIRED_WITH_REASON`.
+- Missing prior gates are automatic review-spec failure.
+- A gate may be retired only by an explicit Planner/human decision with rationale and replacement coverage; silence is not retirement.
+- New requirements are additive unless they explicitly supersede an older requirement.
+- Historical known-failure fixtures remain part of regression testing after new gates are added.
+
+Minimum carry-forward set for mature presentation review:
+- exact artifact/commit/hash binding;
+- all-page whole-slide review before zoomed diagnostics;
+- contact-sheet/deck-rhythm review;
+- role-separated independent review where enabled;
+- reviewer calibration / known-failure replay where enabled;
+- concrete page-level PASS/REVISE observations;
+- template/header/footer/navigation behavior;
+- projection readability and typography;
+- figure/source provenance;
+- first-use/narrative-order checks across all visible text layers;
+- natural audience language;
+- assessment/instructor-vs-audience boundary;
+- cumulative human-feedback regression;
+- pedagogical sufficiency;
+- exact-copy compliance when locked;
+- code copyability/reproducibility;
+- evidence identity only after audience-facing gates;
+- final human authority.
+
+Promotion gate:
+- Start from a previously hardened review contract, add one new gate, and verify that the generated successor contract still contains every unretired predecessor gate. A deliberately omitted predecessor gate must fail spec validation.
+
+## P0 — Review-role isolation and calibration must survive later workflow upgrades
+
+Problem:
+- Past false PASS events required two independent reviewer roles, verdict isolation, and blind known-failure calibration. A later “single comprehensive review” can lose that protection while appearing more modern.
+
+Required generic behavior:
+- If an artifact family has activated role-separated review, later review standards keep that architecture unless a human explicitly retires it.
+- Visual/presentation and teaching/language reviewers inspect the same immutable artifact but freeze verdicts independently.
+- Neither sees executor PASS labels or the other reviewer verdict before its own freeze.
+- Calibration uses a known rejected artifact without giving the reviewer the human answer key; expected minimum hits remain with the aggregator.
+- Repair closure is role-scoped; the aggregator can only union/verify findings, never override a reviewer.
+- A final human rejection invalidates both reviewer PASS results as acceptance authority for successor versions.
+
+Promotion gate:
+- Replay one historical false-PASS deck; a shallow reviewer must fail calibration or candidate review, while role-separated reviewers detect distinct visual and teaching defects.
+
 ## P1 — Human annotation colour semantics should be configurable and persistent
 
 Evidence from real workflows shows colour is meaningful but project-specific.
