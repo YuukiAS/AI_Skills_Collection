@@ -24,6 +24,42 @@ Required generic behavior:
 Promotion gate:
 - Replay a deck in which a rejected pattern returns on a different page number. The cumulative guard must catch it even when changed-page review does not.
 
+## P0 — Feedback history must encode supersession, not just accumulate rows
+
+Problem:
+- A cumulative ledger can still fail if it stores contradictory historical comments without deciding which instruction is currently effective.
+- A later human decision may refine or reject the geometry implied by an earlier comment. Literal accumulation can therefore recreate an old failure while claiming “history was preserved.”
+
+Required generic behavior:
+- Every feedback item has lifecycle state: `ACTIVE / SUPERSEDED / RETIRED / INSTRUCTOR_ONLY / RESOLVED_BUT_GUARDED`.
+- When a newer human comment conflicts with or refines an older item, record an explicit `supersedes_feedback_id` / `superseded_by_feedback_id` chain.
+- Preserve the original comment verbatim; never delete it.
+- Candidate planning consumes the **effective active decision set**, not a flat bag of all historical comments.
+- Reviewer reports both historical provenance and the currently effective rule.
+- If conflict cannot be resolved from human evidence, stop for Planner/human decision; executor must not choose.
+
+Promotion gate:
+- Replay a real sequence where an earlier styling request is later rejected/refined. The planner must apply the latest effective rule while preserving the earlier record for provenance.
+
+## P0 — Page PASS requires demonstrated consumption of relevant historical feedback
+
+Problem:
+- Merely attaching a master ledger to the review package does not prove the reviewer used it.
+- A reviewer can still mark a page PASS while overlooking an earlier human complaint that is visibly present again.
+
+Required generic behavior:
+- Before a page can PASS, the reviewer must list the active historical guard IDs relevant to that page/semantic role.
+- The page row must state concrete current evidence for each applicable guard.
+- `PASS` with an empty/irrelevant guard set is invalid when historical feedback exists for that page role.
+- The review system must distinguish:
+  - `HISTORY_LOADED=YES`
+  - `RELEVANT_GUARDS_RESOLVED=YES`
+  These are not the same condition.
+- A known historical failure fixture reappearing in final pixels automatically forces REVISE even if the current frozen spec accidentally permits it.
+
+Promotion gate:
+- Historical replay where the ledger is present but the reviewer ignores one relevant guard must fail review-spec validation.
+
 ## P0 — Human rejection overrides executor/reviewer/evidence PASS
 
 Problem:
