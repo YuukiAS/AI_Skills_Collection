@@ -1,8 +1,8 @@
 {
   "archive": {
-    "bytes": 117580,
+    "bytes": 111061,
     "path": "private/exports/research-authoring--formal-production-authoring/final_tasks/G4/research-authoring-wrapper-candidate.tar.gz",
-    "sha256": "deca604877ac47441160bd99d885470bb887646902bbf7718911e801386f725f"
+    "sha256": "14b80579bddb0aab7bd21bf302355a84dce8b34998b9c3d4bdfbf367627bb97d"
   },
   "clear_writing_support": {
     "commit": "1c37c0715aca0096606f24e56192b7857e72bbd6",
@@ -330,5 +330,6 @@
     "source": "plugins/codex/plugins/research-writing",
     "version": "0.3"
   },
-  "stop_before_live_plugin_creator_mutation": true
+  "stop_before_live_plugin_creator_mutation": true,
+  "chatgpt_wrapper_version": "0.3.0"
 }
