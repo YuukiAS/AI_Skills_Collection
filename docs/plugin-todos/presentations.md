@@ -716,6 +716,16 @@ problem: slides 仍可能出现内部流程词、模板化对比句、面向作�
 candidate_action: 真实失败出现后再决定应该改 `research-presentations`、`scientific-prose`，还是两者的交接；不要重复造一套写作规则。
 promotion_gate: 多个独立英文科研 slide 的真实证据。
 
+### Cumulative human-feedback memory and teaching-deck authoring authority
+status: NEW
+source: STAT5060 Tutorial 1 repeated human rejection, 2026-09-29 through 2026-10-06
+evidence: the course project recovered 193 student-deck feedback objects across multiple annotated/rejected versions. A later candidate still reintroduced previously rejected under-explanation, software-plumbing prose, weak whitespace use and orphan visible text after executor/GPT/evidence PASS. Detailed generic requirements are frozen in `docs/design/PRESENTATIONS_CUMULATIVE_HUMAN_FEEDBACK_AND_TEACHING_DECK_AUTHORING_TODO_2026-10-06.md`.
+problem: existing-deck revision currently lacks a first-class cumulative human-feedback memory, exact-copy authoring lock, pedagogical-sufficiency gate and review ordering that prevents mechanical evidence work from outranking audience quality.
+candidate_action:
+- Implement the P0 gates in the dedicated TODO before claiming the presentation workflow can safely own long-running teaching-deck revision.
+- Reuse existing human-rejection/regression, natural-language, semantic-proximity and evidence-integrity work rather than creating parallel systems.
+promotion_gate: historical STAT5060 replay must preserve all active human semantic guards across page/version changes and block executor prose invention.
+
 ## Current real-use focus
 
 现在不继续做 synthetic challenge chain。
