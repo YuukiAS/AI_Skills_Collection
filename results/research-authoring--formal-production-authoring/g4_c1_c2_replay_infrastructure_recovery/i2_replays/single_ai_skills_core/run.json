@@ -1,0 +1,131 @@
+{
+  "actual_consumption": {
+    "event_type": "item.started",
+    "line_index": 6,
+    "proven": true
+  },
+  "actual_consumption_by_plugin": {
+    "ai-skills-core": {
+      "event_type": "item.started",
+      "line_index": 6,
+      "proven": true
+    }
+  },
+  "add_payload": {
+    "authPolicy": "ON_INSTALL",
+    "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/ai-skills-core/0.5",
+    "marketplaceName": "ai-skills-candidate",
+    "name": "ai-skills-core",
+    "pluginId": "ai-skills-core@ai-skills-candidate",
+    "version": "0.5"
+  },
+  "candidate_commit": "363565d29fe4dc7c334b480a85c37f15c09e331e",
+  "consumer_isolation": {
+    "allowed_candidate_skill_roots": [
+      "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/ai-skills-core/0.5/skills"
+    ],
+    "candidate_path_reads": 4,
+    "candidate_read_events": [
+      {
+        "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/ai-skills-core/0.5/skills/maint/SKILL.md'",
+        "event_type": "item.started",
+        "line_index": 6
+      },
+      {
+        "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/ai-skills-core/0.5/skills/maint/SKILL.md'",
+        "event_type": "item.completed",
+        "line_index": 7
+      },
+      {
+        "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/ai-skills-core/0.5/skills/bridge/SKILL.md'",
+        "event_type": "item.started",
+        "line_index": 13
+      },
+      {
+        "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/ai-skills-core/0.5/skills/bridge/SKILL.md'",
+        "event_type": "item.completed",
+        "line_index": 14
+      }
+    ],
+    "candidate_skill_names": [
+      "ai-skills-repository-maintainer",
+      "bridge-kit-maintainer",
+      "machine-update-orchestrator",
+      "project-skill-installer",
+      "skill-library-analysis"
+    ],
+    "candidate_skill_names_by_plugin": {
+      "ai-skills-core": [
+        "ai-skills-repository-maintainer",
+        "bridge-kit-maintainer",
+        "machine-update-orchestrator",
+        "project-skill-installer",
+        "skill-library-analysis"
+      ]
+    },
+    "config_hash": "38521e804411aa087aac652343278278454fdc5e433cc0d231c99b8514245954",
+    "conflicts_suppressed": [
+      {
+        "original_path": "/users/a/e/aereinh/.codex/plugins/cache/yuukias-ai-skills/ai-skills-core/0.5",
+        "overlapping_skill_names": [
+          "ai-skills-repository-maintainer",
+          "bridge-kit-maintainer",
+          "machine-update-orchestrator",
+          "project-skill-installer",
+          "skill-library-analysis"
+        ],
+        "quarantine_path": "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T122301Z-83596/yuukias-ai-skills/ai-skills-core/0.5",
+        "tree_sha256": "5820d81e9db34964da4bb39a2a90a894d320a1aee7a38d1659d6003f547257c4"
+      }
+    ],
+    "enforced": true,
+    "final_persistent_state_equivalent_to_before": true,
+    "original_conflict_path_reads": 0,
+    "original_conflict_read_events": [],
+    "original_paths": [
+      "/users/a/e/aereinh/.codex/plugins/cache/yuukias-ai-skills/ai-skills-core/0.5"
+    ],
+    "persistent_plugin_state_equal": true,
+    "quarantine_manifest_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/recovery/20261006T122301Z-83596.json",
+    "quarantine_path_reads": 0,
+    "quarantine_paths": [
+      "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T122301Z-83596/yuukias-ai-skills/ai-skills-core/0.5"
+    ],
+    "quarantine_read_events": [],
+    "stale_recoveries": []
+  },
+  "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/ai-skills-core/0.5",
+  "plugin_id": "ai-skills-core@ai-skills-candidate",
+  "plugins": [
+    {
+      "actual_consumption": {
+        "event_type": "item.started",
+        "line_index": 6,
+        "proven": true
+      },
+      "add_payload": {
+        "authPolicy": "ON_INSTALL",
+        "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/ai-skills-core/0.5",
+        "marketplaceName": "ai-skills-candidate",
+        "name": "ai-skills-core",
+        "pluginId": "ai-skills-core@ai-skills-candidate",
+        "version": "0.5"
+      },
+      "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/ai-skills-core/0.5",
+      "name": "ai-skills-core",
+      "plugin_id": "ai-skills-core@ai-skills-candidate"
+    }
+  ],
+  "restoration": {
+    "actions": [
+      "restored-quarantine-to-original:/users/a/e/aereinh/.codex/plugins/cache/yuukias-ai-skills/ai-skills-core/0.5"
+    ],
+    "diagnostics": {},
+    "final_persistent_state_equivalent_to_before": true,
+    "verified_equivalent_rehydration": false
+  },
+  "runtime_version": "codex-cli 0.153.4",
+  "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T122301Z-83596/child.stderr",
+  "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T122301Z-83596/child.stdout.jsonl",
+  "writable_dirs": []
+}

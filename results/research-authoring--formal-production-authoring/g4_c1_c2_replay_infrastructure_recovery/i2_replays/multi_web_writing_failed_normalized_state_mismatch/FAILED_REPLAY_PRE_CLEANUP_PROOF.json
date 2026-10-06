@@ -1,0 +1,683 @@
+{
+  "candidate_path_reads": 2,
+  "candidate_read_events": [
+    {
+      "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/web-development/0.4/skills/visual/SKILL.md\ncat /users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.4/skills/product-ui-copy/SKILL.md'",
+      "event_type": "item.started",
+      "line_index": 6
+    },
+    {
+      "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/web-development/0.4/skills/visual/SKILL.md\ncat /users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.4/skills/product-ui-copy/SKILL.md'",
+      "event_type": "item.completed",
+      "line_index": 7
+    }
+  ],
+  "checked_at_utc": "2026-10-06T12:28:37Z",
+  "child_stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T122517Z-88923/child.stdout.jsonl",
+  "child_stdout_sha256": "aa8f70f689a189e8210cb21ef5dfca4ce6592b8a76ce08e025a74f4f7559fb67",
+  "classification": "VERIFIED_EQUIVALENT_REHYDRATION",
+  "cleanup_precondition_normalized_plugin_state": [
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "Plugin_0f6b9c5599c0819195583d9b9ce1d9bf"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "Plugin_a572ec6bf27481919ce6fa6e5651eb7b"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "Plugin_fa77aec24fc08191bc6e57f377126d76"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_asdk_app_69c18c28f1188191bf5b8445c4ab0a2e"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_asdk_app_69d3e5ee6a708191baa733f7b8931995"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_1a69035c238881919c4190932b2df699"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_2330815c823c8191941e5dc465bb899f"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_4a72ddeef4c481918f92d8e8df18fb2c"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_6317a32dbf5c81919acd66de6722daf5"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_689987207de08191979cf68eca2941c6"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_95d39881713c8191931482a62d6edff9"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_ab21a553bfbc81919ea8fd1858e3ffa7"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_b3438d6beb9081918fba3625bc988128"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_bccf6c8660c08191ae4470d9ae4877fa"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_e1a10c53223481918a42f1510ec46c1e"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_68df038e0ba48191908c8434991bbac2"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugins~Plugin_4efcdf475f9881919671c7eb6476b26b"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugins~Plugin_d0e159446ee48191b94ce1960780cc3c"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "build-web-apps",
+      "pluginId": "build-web-apps@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "defense-factory",
+      "pluginId": "defense-factory@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "figma",
+      "pluginId": "figma@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "github",
+      "pluginId": "github@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "gmail",
+      "pluginId": "gmail@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "google-drive",
+      "pluginId": "google-drive@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "healthcare-public-data",
+      "pluginId": "healthcare-public-data@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "notion",
+      "pluginId": "notion@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "openai-templates",
+      "pluginId": "openai-templates@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "pages",
+      "pluginId": "pages@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "plugin-creator",
+      "pluginId": "plugin-creator@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "plugin-management",
+      "pluginId": "plugin-management@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "product-design",
+      "pluginId": "product-design@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "sites",
+      "pluginId": "sites@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "supabase",
+      "pluginId": "supabase@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "test-android-apps",
+      "pluginId": "test-android-apps@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "work-pets",
+      "pluginId": "work-pets@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "zotero",
+      "pluginId": "zotero@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "yuukias-ai-skills",
+      "name": "ai-skills-core",
+      "pluginId": "ai-skills-core@yuukias-ai-skills"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "yuukias-ai-skills",
+      "name": "research-writing",
+      "pluginId": "research-writing@yuukias-ai-skills"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "yuukias-ai-skills",
+      "name": "web-development",
+      "pluginId": "web-development@yuukias-ai-skills"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "yuukias-ai-skills",
+      "name": "workflow-core",
+      "pluginId": "workflow-core@yuukias-ai-skills"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "yuukias-ai-skills",
+      "name": "writing-style",
+      "pluginId": "writing-style@yuukias-ai-skills"
+    }
+  ],
+  "config_hash_drift_observed": true,
+  "current_config_hash_diagnostic": "ca3bf9d49a0fc07da44d81cd04262e8f03883a794274a9a698c28f8ab4f6dde3",
+  "duplicate_quarantine_paths_to_remove": [
+    "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T122517Z-88923/created-by-me-remote/research-authoring/0.3.0"
+  ],
+  "failed_replay_error": "RESTORATION_AMBIGUOUS: normalized plugin state mismatch",
+  "full_config_hash_is_diagnostic_only": true,
+  "original_conflict_path_reads": 0,
+  "original_conflict_read_events": [],
+  "original_only_records": [
+    "yuukias-ai-skills/web-development/0.4",
+    "yuukias-ai-skills/writing-style/0.4"
+  ],
+  "pre_cleanup_pass": true,
+  "quarantine_path_reads": 0,
+  "quarantine_read_events": [],
+  "record_states_before_cleanup": [
+    {
+      "marketplace": "created-by-me-remote",
+      "original_exists": true,
+      "original_identity": {
+        "marketplace": "created-by-me-remote",
+        "plugin": "research-authoring",
+        "version": "0.3.0"
+      },
+      "original_path": "/users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0",
+      "original_plugin_manifest_sha256": "e13c6e3c0e7ce00a06eff23b0f29800a5408636ae9d87c7e92e755bb30e54f36",
+      "original_tree_sha256": "452f9837e9307008ff3821b0e1902feb804906d3278e28f8ba33f2fed04f4502",
+      "plugin": "research-authoring",
+      "quarantine_exists": true,
+      "quarantine_path": "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T122517Z-88923/created-by-me-remote/research-authoring/0.3.0",
+      "quarantine_plugin_manifest_sha256": "e13c6e3c0e7ce00a06eff23b0f29800a5408636ae9d87c7e92e755bb30e54f36",
+      "quarantine_relative_to_parent": "created-by-me-remote/research-authoring/0.3.0",
+      "quarantine_transaction_owned": true,
+      "quarantine_tree_sha256": "452f9837e9307008ff3821b0e1902feb804906d3278e28f8ba33f2fed04f4502",
+      "recorded_plugin_manifest_sha256": "e13c6e3c0e7ce00a06eff23b0f29800a5408636ae9d87c7e92e755bb30e54f36",
+      "recorded_tree_sha256": "452f9837e9307008ff3821b0e1902feb804906d3278e28f8ba33f2fed04f4502",
+      "version": "0.3.0"
+    },
+    {
+      "marketplace": "yuukias-ai-skills",
+      "original_exists": true,
+      "original_identity": {
+        "marketplace": "yuukias-ai-skills",
+        "plugin": "web-development",
+        "version": "0.4"
+      },
+      "original_path": "/users/a/e/aereinh/.codex/plugins/cache/yuukias-ai-skills/web-development/0.4",
+      "original_plugin_manifest_sha256": "dcaa0760dcf19796dc53674045998ed2503b0d927c32bde19cc70d4432a279a9",
+      "original_tree_sha256": "3796f74f7452b89f64ddd9c8c19de8e61865b1c8b41f1cb17e7008b9bdada8e0",
+      "plugin": "web-development",
+      "quarantine_exists": false,
+      "quarantine_path": "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T122517Z-88923/yuukias-ai-skills/web-development/0.4",
+      "quarantine_relative_to_parent": "yuukias-ai-skills/web-development/0.4",
+      "quarantine_transaction_owned": true,
+      "recorded_plugin_manifest_sha256": "dcaa0760dcf19796dc53674045998ed2503b0d927c32bde19cc70d4432a279a9",
+      "recorded_tree_sha256": "3796f74f7452b89f64ddd9c8c19de8e61865b1c8b41f1cb17e7008b9bdada8e0",
+      "version": "0.4"
+    },
+    {
+      "marketplace": "yuukias-ai-skills",
+      "original_exists": true,
+      "original_identity": {
+        "marketplace": "yuukias-ai-skills",
+        "plugin": "writing-style",
+        "version": "0.4"
+      },
+      "original_path": "/users/a/e/aereinh/.codex/plugins/cache/yuukias-ai-skills/writing-style/0.4",
+      "original_plugin_manifest_sha256": "af7e94f1b2b5bf86addcd16a8d2033df817cfa1d4c72a365ddb15bbae659a749",
+      "original_tree_sha256": "22e7ced70624f8a3b5e9b18ab8ef47259f1dfe2e2b1da44cb2d1965522c7628a",
+      "plugin": "writing-style",
+      "quarantine_exists": false,
+      "quarantine_path": "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T122517Z-88923/yuukias-ai-skills/writing-style/0.4",
+      "quarantine_relative_to_parent": "yuukias-ai-skills/writing-style/0.4",
+      "quarantine_transaction_owned": true,
+      "recorded_plugin_manifest_sha256": "af7e94f1b2b5bf86addcd16a8d2033df817cfa1d4c72a365ddb15bbae659a749",
+      "recorded_tree_sha256": "22e7ced70624f8a3b5e9b18ab8ef47259f1dfe2e2b1da44cb2d1965522c7628a",
+      "version": "0.4"
+    }
+  ],
+  "recorded_config_hash_diagnostic": "b98403dab5b5cde88f38c34bf55c4804d3928fa2234b831f37504a0ff7efda66",
+  "recorded_normalized_plugin_state": [
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "Plugin_0f6b9c5599c0819195583d9b9ce1d9bf"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "Plugin_a572ec6bf27481919ce6fa6e5651eb7b"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "Plugin_fa77aec24fc08191bc6e57f377126d76"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_asdk_app_69c18c28f1188191bf5b8445c4ab0a2e"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_asdk_app_69d3e5ee6a708191baa733f7b8931995"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_1a69035c238881919c4190932b2df699"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_2330815c823c8191941e5dc465bb899f"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_4a72ddeef4c481918f92d8e8df18fb2c"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_6317a32dbf5c81919acd66de6722daf5"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_689987207de08191979cf68eca2941c6"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_95d39881713c8191931482a62d6edff9"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_ab21a553bfbc81919ea8fd1858e3ffa7"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_b3438d6beb9081918fba3625bc988128"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_bccf6c8660c08191ae4470d9ae4877fa"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_1p_e1a10c53223481918a42f1510ec46c1e"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugin_connector_68df038e0ba48191908c8434991bbac2"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugins~Plugin_4efcdf475f9881919671c7eb6476b26b"
+    },
+    {
+      "enabled": null,
+      "installedPath": null,
+      "marketplaceName": null,
+      "name": null,
+      "pluginId": "plugins~Plugin_d0e159446ee48191b94ce1960780cc3c"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "build-web-apps",
+      "pluginId": "build-web-apps@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "defense-factory",
+      "pluginId": "defense-factory@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "figma",
+      "pluginId": "figma@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "github",
+      "pluginId": "github@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "gmail",
+      "pluginId": "gmail@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "google-drive",
+      "pluginId": "google-drive@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "healthcare-public-data",
+      "pluginId": "healthcare-public-data@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "notion",
+      "pluginId": "notion@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "openai-templates",
+      "pluginId": "openai-templates@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "pages",
+      "pluginId": "pages@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "plugin-creator",
+      "pluginId": "plugin-creator@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "plugin-management",
+      "pluginId": "plugin-management@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "product-design",
+      "pluginId": "product-design@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "sites",
+      "pluginId": "sites@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "supabase",
+      "pluginId": "supabase@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "test-android-apps",
+      "pluginId": "test-android-apps@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "work-pets",
+      "pluginId": "work-pets@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "openai-curated-remote",
+      "name": "zotero",
+      "pluginId": "zotero@openai-curated-remote"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "yuukias-ai-skills",
+      "name": "ai-skills-core",
+      "pluginId": "ai-skills-core@yuukias-ai-skills"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "yuukias-ai-skills",
+      "name": "research-writing",
+      "pluginId": "research-writing@yuukias-ai-skills"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "yuukias-ai-skills",
+      "name": "web-development",
+      "pluginId": "web-development@yuukias-ai-skills"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "yuukias-ai-skills",
+      "name": "workflow-core",
+      "pluginId": "workflow-core@yuukias-ai-skills"
+    },
+    {
+      "enabled": true,
+      "installedPath": null,
+      "marketplaceName": "yuukias-ai-skills",
+      "name": "writing-style",
+      "pluginId": "writing-style@yuukias-ai-skills"
+    }
+  ],
+  "run_id": "20261006T122517Z-88923",
+  "run_json_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T122517Z-88923/run.json",
+  "run_json_sha256": "fb0f950a8ef30da585cb7e67182e09b403e8e3ade92b2b41fb28937375242fe7",
+  "runtime_manifest_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/recovery/20261006T122517Z-88923.json",
+  "runtime_manifest_sha256_before_cleanup": "c14c52e35848dcf4ea56a454db988703acec003b28d313a937792759888657dd"
+}
