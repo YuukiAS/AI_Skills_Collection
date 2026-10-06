@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Scientific Rewrite">
+  <rect width="128" height="128" rx="24" fill="#0F766E"/>
+  <path d="M28 34h44c11 0 20 9 20 20v40H48c-11 0-20-9-20-20V34z" fill="#ECFDF5"/>
+  <path d="M44 52h36M44 66h28M44 80h40" stroke="#0F766E" stroke-width="7" stroke-linecap="round"/>
+  <path d="M91 33l12 12-32 32-15 3 3-15 32-32z" fill="#F59E0B"/>
+</svg>

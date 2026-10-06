@@ -1,0 +1,38 @@
+{
+  "name": "ai-skills-core",
+  "version": "0.5",
+  "description": "Maintenance companion for AI_Skills_Collection plugin refinement and current-machine AI Research Stack updates: formal release routing, generated parity, replay, regression, versions, changelogs, profile installation, and Bridge Kit distribution delegation.",
+  "author": {
+    "name": "YuukiAS",
+    "email": "humc2013@gmail.com",
+    "url": "https://github.com/YuukiAS"
+  },
+  "homepage": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "keywords": [
+    "ai",
+    "codex",
+    "core",
+    "skills"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "AI Skills Maintainer",
+    "shortDescription": "Maintenance companion for AI_Skills_Collection plugin refinement and current-machine AI Research Stack updates: formal release routing, generated parity, replay, regression, versions, changelogs, profile installation, and Bridge Kit distribution delegation.",
+    "longDescription": "Maintenance companion for AI_Skills_Collection plugin refinement and current-machine AI Research Stack updates: formal release routing, generated parity, replay, regression, versions, changelogs, profile installation, and Bridge Kit distribution delegation. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "developerName": "YuukiAS",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Skills"
+    ],
+    "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
+    "defaultPrompt": [
+      "Install this repository's project profiles.",
+      "Refine an existing AI_Skills plugin from a real failure.",
+      "Maintain a plugin improvement through source, generated layer, replay, regression, version, and changelog closure."
+    ],
+    "brandColor": "#0F766E",
+    "composerIcon": "./.codex-plugin/assets/composer.svg",
+    "logo": "./.codex-plugin/assets/logo.svg"
+  }
+}

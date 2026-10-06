@@ -1,0 +1,1 @@
+Use the frontend/product-writing workflow to turn the provided public product note into a compact UI handoff. Produce one Markdown file under the requested output directory with: target screen, primary user action, three UI labels, and a short plain-language empty state.
