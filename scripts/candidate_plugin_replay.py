@@ -80,6 +80,39 @@ class ConsumerIsolationViolation:
     command: str
 
 
+@dataclass(frozen=True)
+class SkillReadEvent:
+    line_index: int
+    event_type: str
+    command: str
+
+
+@dataclass(frozen=True)
+class CachedPluginPackage:
+    path: Path
+    marketplace: str
+    plugin: str
+    version: str
+    skill_names: tuple[str, ...]
+    tree_sha256: str
+    plugin_manifest_sha256: str | None
+
+
+@dataclass(frozen=True)
+class QuarantineRecord:
+    package: CachedPluginPackage
+    quarantine_path: Path
+    overlapping_skill_names: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class QuarantineTransaction:
+    manifest_path: Path
+    discovery_root: Path
+    quarantine_parent: Path
+    records: tuple[QuarantineRecord, ...]
+
+
 def repo_root() -> Path:
     return Path(__file__).resolve().parents[1]
 
@@ -487,6 +520,374 @@ def safe_stage_candidates(root: Path, candidates: list[CandidatePlugin], run_dir
     return marketplace_root
 
 
+def parse_skill_frontmatter_name(skill_md: Path) -> str | None:
+    try:
+        lines = skill_md.read_text(encoding="utf-8").splitlines()
+    except UnicodeDecodeError as exc:
+        raise ReplayError(f"skill file is not valid UTF-8: {skill_md}") from exc
+    if not lines or lines[0].strip() != "---":
+        return None
+    for line in lines[1:]:
+        stripped = line.strip()
+        if stripped == "---":
+            return None
+        if stripped.startswith("name:"):
+            value = stripped.split(":", 1)[1].strip().strip('"').strip("'")
+            return value or None
+    return None
+
+
+def top_level_skill_names(plugin_root: Path) -> set[str]:
+    skills_root = plugin_root / "skills"
+    if not skills_root.is_dir():
+        return set()
+    names: set[str] = set()
+    for skill_md in sorted(skills_root.glob("*/SKILL.md")):
+        name = parse_skill_frontmatter_name(skill_md)
+        if name:
+            names.add(name)
+    return names
+
+
+def candidate_skill_name_union(marketplace_root: Path, candidates: list[CandidatePlugin]) -> dict[str, set[str]]:
+    by_plugin: dict[str, set[str]] = {}
+    owner_by_skill: dict[str, str] = {}
+    duplicates: dict[str, list[str]] = {}
+    for candidate in candidates:
+        names = top_level_skill_names(marketplace_root / "plugins" / candidate.name)
+        by_plugin[candidate.name] = names
+        for name in names:
+            previous = owner_by_skill.get(name)
+            if previous and previous != candidate.name:
+                duplicates.setdefault(name, [previous]).append(candidate.name)
+            else:
+                owner_by_skill[name] = candidate.name
+    if duplicates:
+        detail = ", ".join(f"{name}: {sorted(set(owners))}" for name, owners in sorted(duplicates.items()))
+        raise ReplayError(f"candidate-candidate duplicate top-level skill name is ambiguous: {detail}")
+    return by_plugin
+
+
+def effective_codex_home() -> Path:
+    return Path(os.environ.get("CODEX_HOME", str(Path.home() / ".codex"))).expanduser().resolve()
+
+
+def plugin_discovery_root(codex_home: Path | None = None) -> Path:
+    return (codex_home or effective_codex_home()) / "plugins" / "cache"
+
+
+def is_relative_to_path(path: Path, parent: Path) -> bool:
+    try:
+        path.relative_to(parent)
+        return True
+    except ValueError:
+        return False
+
+
+def sha256_bytes(value: bytes) -> str:
+    return hashlib.sha256(value).hexdigest()
+
+
+def optional_file_sha256(path: Path) -> str | None:
+    return sha256_file(path) if path.is_file() else None
+
+
+def tree_sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    root = path.resolve()
+    if not root.is_dir():
+        raise ReplayError(f"cannot hash missing package tree: {path}")
+    for current, dirs, files in os.walk(root):
+        dirs.sort()
+        files.sort()
+        current_path = Path(current)
+        for name in dirs:
+            item = current_path / name
+            rel = item.relative_to(root).as_posix()
+            if item.is_symlink():
+                h.update(f"L\t{rel}\t{os.readlink(item)}\n".encode("utf-8"))
+            else:
+                h.update(f"D\t{rel}\n".encode("utf-8"))
+        for name in files:
+            item = current_path / name
+            rel = item.relative_to(root).as_posix()
+            if item.is_symlink():
+                h.update(f"L\t{rel}\t{os.readlink(item)}\n".encode("utf-8"))
+            else:
+                h.update(f"F\t{rel}\t".encode("utf-8"))
+                with item.open("rb") as fh:
+                    for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+                        h.update(chunk)
+                h.update(b"\n")
+    return h.hexdigest()
+
+
+def cached_plugin_package_from_path(path: Path, discovery_root: Path) -> CachedPluginPackage | None:
+    resolved_root = discovery_root.resolve()
+    resolved = path.resolve()
+    if not is_relative_to_path(resolved, resolved_root):
+        return None
+    rel_parts = resolved.relative_to(resolved_root).parts
+    if len(rel_parts) != 3:
+        return None
+    if rel_parts[0] == MARKETPLACE_NAME:
+        return None
+    if not (resolved / ".codex-plugin" / "plugin.json").is_file():
+        return None
+    skill_names = tuple(sorted(top_level_skill_names(resolved)))
+    return CachedPluginPackage(
+        path=resolved,
+        marketplace=rel_parts[0],
+        plugin=rel_parts[1],
+        version=rel_parts[2],
+        skill_names=skill_names,
+        tree_sha256=tree_sha256(resolved),
+        plugin_manifest_sha256=optional_file_sha256(resolved / ".codex-plugin" / "plugin.json"),
+    )
+
+
+def discover_cached_plugin_packages(discovery_root: Path) -> list[CachedPluginPackage]:
+    if not discovery_root.is_dir():
+        return []
+    packages: list[CachedPluginPackage] = []
+    for manifest in sorted(discovery_root.glob("*/*/*/.codex-plugin/plugin.json")):
+        package = cached_plugin_package_from_path(manifest.parents[1], discovery_root)
+        if package:
+            packages.append(package)
+    return packages
+
+
+def detect_conflicting_cached_packages(
+    discovery_root: Path,
+    candidate_skill_names: Iterable[str],
+) -> list[QuarantineRecord]:
+    candidate_names = set(candidate_skill_names)
+    if not candidate_names:
+        return []
+    conflicts: list[QuarantineRecord] = []
+    for package in discover_cached_plugin_packages(discovery_root):
+        overlap = tuple(sorted(candidate_names.intersection(package.skill_names)))
+        if overlap:
+            conflicts.append(
+                QuarantineRecord(
+                    package=package,
+                    quarantine_path=Path(),
+                    overlapping_skill_names=overlap,
+                )
+            )
+    return conflicts
+
+
+def fsync_path(path: Path) -> None:
+    try:
+        fd = os.open(path, os.O_RDONLY)
+    except OSError:
+        return
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
+def write_json_durable(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + ".tmp")
+    with tmp.open("w", encoding="utf-8") as fh:
+        json.dump(payload, fh, indent=2, sort_keys=True)
+        fh.write("\n")
+        fh.flush()
+        os.fsync(fh.fileno())
+    tmp.replace(path)
+    fsync_path(path.parent)
+
+
+def normalized_plugin_list(payload: Any) -> Any:
+    records = []
+    for record in plugin_records(payload):
+        plugin_id = record_plugin_id(record)
+        if plugin_id and plugin_id.endswith(CANDIDATE_NAMESPACE_SUFFIX):
+            continue
+        records.append(
+            {
+                "pluginId": plugin_id,
+                "name": record_plugin_name(record),
+                "enabled": record_enabled(record),
+                "marketplaceName": record.get("marketplaceName"),
+                "installedPath": record.get("installedPath"),
+            }
+        )
+    return sorted(records, key=lambda item: json.dumps(item, sort_keys=True))
+
+
+def config_hash(codex_home: Path) -> str | None:
+    return optional_file_sha256(codex_home / "config.toml")
+
+
+def quarantine_parent(codex_home: Path, run_id: str) -> Path:
+    return (codex_home / ".candidate-plugin-replay-quarantine" / run_id).resolve()
+
+
+def quarantine_destination(parent: Path, package: CachedPluginPackage) -> Path:
+    return parent / package.marketplace / package.plugin / package.version
+
+
+def validate_quarantine_destination(discovery_root: Path, parent: Path, original: Path, dest: Path) -> None:
+    discovery_resolved = discovery_root.resolve()
+    parent_resolved = parent.resolve()
+    if parent_resolved == discovery_resolved or is_relative_to_path(parent_resolved, discovery_resolved):
+        raise ReplayError("SAFE_QUARANTINE_UNAVAILABLE: quarantine parent resolves inside plugin discovery root")
+    original_resolved = original.resolve()
+    if original_resolved == parent_resolved or is_relative_to_path(parent_resolved, original_resolved):
+        raise ReplayError("SAFE_QUARANTINE_UNAVAILABLE: quarantine parent resolves inside original package")
+    if dest.exists():
+        raise ReplayError(f"SAFE_QUARANTINE_UNAVAILABLE: quarantine destination already exists: {dest}")
+    parent.mkdir(parents=True, exist_ok=True)
+    if original.stat().st_dev != parent.stat().st_dev:
+        raise ReplayError("SAFE_QUARANTINE_UNAVAILABLE: quarantine parent is on a different filesystem")
+
+
+def prepare_quarantine_transaction(
+    paths: RuntimePaths,
+    run_id: str,
+    before_list: Any,
+    installed_paths: dict[str, str],
+    conflict_records: list[QuarantineRecord],
+) -> QuarantineTransaction | None:
+    if not conflict_records:
+        return None
+    codex_home = effective_codex_home()
+    discovery_root = plugin_discovery_root(codex_home).resolve()
+    parent = quarantine_parent(codex_home, run_id)
+    prepared_records: list[QuarantineRecord] = []
+    for record in conflict_records:
+        dest = quarantine_destination(parent, record.package)
+        validate_quarantine_destination(discovery_root, parent, record.package.path, dest)
+        prepared_records.append(
+            QuarantineRecord(
+                package=record.package,
+                quarantine_path=dest,
+                overlapping_skill_names=record.overlapping_skill_names,
+            )
+        )
+    manifest_path = paths.state_root / "recovery" / f"{run_id}.json"
+    manifest = {
+        "run_id": run_id,
+        "phase": "prepared",
+        "codex_home": str(codex_home),
+        "discovery_root": str(discovery_root),
+        "quarantine_parent": str(parent),
+        "discovery_root_st_dev": discovery_root.stat().st_dev if discovery_root.exists() else None,
+        "quarantine_parent_st_dev": parent.stat().st_dev,
+        "normalized_before_plugin_list": normalized_plugin_list(before_list),
+        "config_hash": config_hash(codex_home),
+        "candidate_installed_paths": installed_paths,
+        "records": [
+            {
+                "marketplace": record.package.marketplace,
+                "plugin": record.package.plugin,
+                "version": record.package.version,
+                "original_path": str(record.package.path),
+                "quarantine_path": str(record.quarantine_path),
+                "original_st_dev": record.package.path.stat().st_dev,
+                "quarantine_parent_st_dev": parent.stat().st_dev,
+                "tree_sha256": record.package.tree_sha256,
+                "plugin_manifest_sha256": record.package.plugin_manifest_sha256,
+                "overlapping_skill_names": list(record.overlapping_skill_names),
+            }
+            for record in prepared_records
+        ],
+    }
+    write_json_durable(manifest_path, manifest)
+    return QuarantineTransaction(
+        manifest_path=manifest_path,
+        discovery_root=discovery_root,
+        quarantine_parent=parent,
+        records=tuple(prepared_records),
+    )
+
+
+def update_transaction_phase(transaction: QuarantineTransaction, phase: str) -> None:
+    payload = json.loads(transaction.manifest_path.read_text(encoding="utf-8"))
+    payload["phase"] = phase
+    write_json_durable(transaction.manifest_path, payload)
+
+
+def activate_quarantine(transaction: QuarantineTransaction) -> None:
+    for record in transaction.records:
+        record.quarantine_path.parent.mkdir(parents=True, exist_ok=True)
+    update_transaction_phase(transaction, "quarantining")
+    for record in transaction.records:
+        if not record.package.path.exists():
+            raise ReplayError(f"SAFE_QUARANTINE_UNAVAILABLE: original package missing before quarantine: {record.package.path}")
+        record.package.path.rename(record.quarantine_path)
+        fsync_path(record.package.path.parent)
+        fsync_path(record.quarantine_path.parent)
+    update_transaction_phase(transaction, "quarantined")
+
+
+def restore_quarantine(transaction: QuarantineTransaction) -> None:
+    errors: list[str] = []
+    for record in reversed(transaction.records):
+        original = record.package.path
+        quarantine = record.quarantine_path
+        if original.exists() and quarantine.exists():
+            errors.append(f"RESTORATION_AMBIGUOUS: both original and quarantine exist for {original}")
+            continue
+        if not quarantine.exists():
+            if original.exists():
+                continue
+            errors.append(f"RESTORATION_AMBIGUOUS: neither original nor quarantine exists for {original}")
+            continue
+        if tree_sha256(quarantine) != record.package.tree_sha256:
+            errors.append(f"RESTORATION_AMBIGUOUS: quarantine hash mismatch for {quarantine}")
+            continue
+        original.parent.mkdir(parents=True, exist_ok=True)
+        quarantine.rename(original)
+        fsync_path(original.parent)
+        fsync_path(quarantine.parent)
+    if errors:
+        raise ReplayError("; ".join(errors))
+    update_transaction_phase(transaction, "restored")
+    with contextlib.suppress(FileNotFoundError):
+        transaction.manifest_path.unlink()
+        fsync_path(transaction.manifest_path.parent)
+
+
+def recover_stale_quarantines(paths: RuntimePaths) -> list[str]:
+    recovery_dir = paths.state_root / "recovery"
+    if not recovery_dir.is_dir():
+        return []
+    recovered: list[str] = []
+    for manifest_path in sorted(recovery_dir.glob("*.json")):
+        payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+        if payload.get("phase") == "restored":
+            manifest_path.unlink()
+            recovered.append(f"removed-restored-manifest:{manifest_path.name}")
+            continue
+        records = payload.get("records")
+        if not isinstance(records, list):
+            raise ReplayError(f"RESTORATION_AMBIGUOUS: invalid recovery manifest {manifest_path}")
+        for item in records:
+            original = Path(item["original_path"]).resolve()
+            quarantine = Path(item["quarantine_path"]).resolve()
+            expected_hash = item["tree_sha256"]
+            if original.exists() and quarantine.exists():
+                raise ReplayError(f"RESTORATION_AMBIGUOUS: original and quarantine both exist: {original}")
+            if original.exists() and not quarantine.exists():
+                continue
+            if not original.exists() and quarantine.exists() and tree_sha256(quarantine) == expected_hash:
+                original.parent.mkdir(parents=True, exist_ok=True)
+                quarantine.rename(original)
+                fsync_path(original.parent)
+                fsync_path(quarantine.parent)
+                recovered.append(str(original))
+                continue
+            raise ReplayError(f"RESTORATION_AMBIGUOUS: cannot safely recover {original}")
+        manifest_path.unlink()
+        fsync_path(manifest_path.parent)
+    return recovered
+
+
 def stage_one_candidate(root: Path, candidate: CandidatePlugin, run_dir: Path, marketplace_root: Path) -> None:
     # git archive stdout is binary; keep the public wrapper above easy to test by
     # using subprocess directly for this one command.
@@ -635,16 +1036,45 @@ def parse_consumer_isolation_violations(
     return violations
 
 
-def consumer_isolation_prompt(candidate_installed_paths: dict[str, str]) -> str:
-    lines = [
-        "Candidate replay consumer isolation:",
-        "For this replay, the only plugin-cache skills in scope are the installed candidate plugins below.",
-        "If you need a candidate skill, read and use its SKILL.md from one of these candidate paths.",
-        "Do not read, load, or rely on SKILL.md files from any other /plugins/cache/ path, including live or wrapper plugins.",
+def parse_skill_read_events(stdout: str, roots: Iterable[Path | str]) -> list[SkillReadEvent]:
+    prefixes = [str(Path(root) / "skills") for root in roots]
+    events: list[SkillReadEvent] = []
+    for line_index, line in enumerate(stdout.splitlines(), start=1):
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        event_type = first_event_type(event)
+        for command in command_execution_evidence_strings(event):
+            if points_to_any_skill_prefix(command, prefixes):
+                events.append(SkillReadEvent(line_index=line_index, event_type=event_type, command=command))
+    return events
+
+
+def parse_candidate_read_events(stdout: str, installed_paths: Iterable[str]) -> list[SkillReadEvent]:
+    prefixes = candidate_skill_prefixes(installed_paths)
+    events: list[SkillReadEvent] = []
+    for line_index, line in enumerate(stdout.splitlines(), start=1):
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        event_type = first_event_type(event)
+        for command in command_execution_evidence_strings(event):
+            if points_to_any_skill_prefix(command, prefixes):
+                events.append(SkillReadEvent(line_index=line_index, event_type=event_type, command=command))
+    return events
+
+
+def read_event_payload(events: list[SkillReadEvent]) -> list[dict[str, Any]]:
+    return [
+        {
+            "line_index": event.line_index,
+            "event_type": event.event_type,
+            "command": event.command,
+        }
+        for event in events
     ]
-    for plugin_id, installed_path in sorted(candidate_installed_paths.items()):
-        lines.append(f"- {plugin_id}: {Path(installed_path) / 'skills'}")
-    return "\n".join(lines) + "\n\n"
 
 
 def iter_strings(value: Any) -> Iterable[str]:
@@ -703,7 +1133,6 @@ def run_child_exec(
     stdout_path: Path,
     stderr_path: Path,
     writable_dirs: list[Path] | None = None,
-    candidate_installed_paths: dict[str, str] | None = None,
     timeout_seconds: float = DEFAULT_CHILD_TIMEOUT_SECONDS,
     terminate_grace_seconds: float = DEFAULT_CHILD_TERMINATE_GRACE_SECONDS,
 ) -> CommandResult:
@@ -755,12 +1184,7 @@ def run_child_exec(
                 start_new_session=start_new_session,
             )
             try:
-                child_prompt = (
-                    consumer_isolation_prompt(candidate_installed_paths) + prompt
-                    if candidate_installed_paths
-                    else prompt
-                )
-                proc.communicate(input=child_prompt, timeout=timeout_seconds)
+                proc.communicate(input=prompt, timeout=timeout_seconds)
             except subprocess.TimeoutExpired as exc:
                 terminate_child_tree(proc, start_new_session, terminate_grace_seconds)
                 raise ReplayError(
@@ -793,6 +1217,70 @@ def terminate_child_tree(proc: subprocess.Popen[str], use_process_group: bool, g
         with contextlib.suppress(ProcessLookupError):
             proc.kill()
     proc.wait()
+
+
+def ancestor_pids(pid: int | None = None) -> set[int]:
+    current = pid or os.getpid()
+    ancestors = {current}
+    while current > 1:
+        stat_path = Path(f"/proc/{current}/stat")
+        try:
+            parts = stat_path.read_text(encoding="utf-8").split()
+            parent = int(parts[3])
+        except (OSError, ValueError, IndexError):
+            break
+        if parent in ancestors:
+            break
+        ancestors.add(parent)
+        current = parent
+    return ancestors
+
+
+def assert_no_concurrent_codex_consumers(codex_home: Path) -> None:
+    user = os.environ.get("USER")
+    args = ["ps", "-u", user, "-o", "pid=,ppid=,stat=,etime=,cmd="] if user else ["ps", "-o", "pid=,ppid=,stat=,etime=,cmd="]
+    result = run_command(args, check=False)
+    if result.returncode != 0:
+        raise ReplayError("CONCURRENT_SHARED_CODEX_HOME_CONSUMER: process preflight failed")
+    protected = ancestor_pids()
+    codex_home_text = str(codex_home)
+    conflicts: list[str] = []
+    for line in result.stdout.splitlines():
+        fields = line.strip().split(None, 4)
+        if len(fields) < 5:
+            continue
+        try:
+            pid = int(fields[0])
+        except ValueError:
+            continue
+        if pid in protected:
+            continue
+        command = fields[4]
+        if "candidate_plugin_replay.py" in command:
+            continue
+        if "codex" not in command:
+            continue
+        if codex_home_text in command or f"CODEX_HOME={codex_home_text}" in command:
+            conflicts.append(f"pid={pid} cmd={command}")
+    if conflicts:
+        raise ReplayError("CONCURRENT_SHARED_CODEX_HOME_CONSUMER: " + "; ".join(conflicts[:3]))
+
+
+@contextlib.contextmanager
+def catch_sigterm_as_error():
+    if os.name != "posix":
+        yield
+        return
+    previous = signal.getsignal(signal.SIGTERM)
+
+    def _handler(_signum, _frame):
+        raise ReplayError("received SIGTERM during candidate replay")
+
+    signal.signal(signal.SIGTERM, _handler)
+    try:
+        yield
+    finally:
+        signal.signal(signal.SIGTERM, previous)
 
 
 def run_replay(
@@ -831,15 +1319,20 @@ def run_replay_multi(
     plugin_ids = [f"{plugin}{CANDIDATE_NAMESPACE_SUFFIX}" for plugin in plugins]
     installed_paths: dict[str, str] = {}
     before_snapshots: dict[str, list[dict[str, Any]]] = {}
+    quarantine: QuarantineTransaction | None = None
     try:
         with replay_lock(root):
+            stale_recoveries = recover_stale_quarantines(paths)
             cleanup_stale_candidates(paths.codex)
             before_list = run_codex_json(paths.codex, ["plugin", "list", "--json"])
+            before_normalized = normalized_plugin_list(before_list)
             before_snapshots = {
                 plugin: same_name_installed_snapshot(before_list, plugin)
                 for plugin in plugins
             }
             marketplace_root = safe_stage_candidates(root, candidates, run_dir)
+            candidate_skill_names_by_plugin = candidate_skill_name_union(marketplace_root, candidates)
+            candidate_skill_names = set().union(*candidate_skill_names_by_plugin.values()) if candidate_skill_names_by_plugin else set()
             try:
                 add_payloads: dict[str, Any] = {}
                 installed_plugin_ids: dict[str, str] = {}
@@ -855,18 +1348,32 @@ def run_replay_multi(
                 workspace, output_dir, prompt = prepare_workspace(root, run_dir, task, inputs)
                 stdout_path = run_dir / "child.stdout.jsonl"
                 stderr_path = run_dir / "child.stderr"
-                child = run_child_exec(
-                    paths.codex,
-                    marketplace_root,
-                    list(installed_plugin_ids.values()),
-                    workspace,
-                    output_dir,
-                    prompt,
-                    stdout_path=stdout_path,
-                    stderr_path=stderr_path,
-                    writable_dirs=writable_dirs,
-                    candidate_installed_paths=installed_paths,
+                codex_home = effective_codex_home()
+                discovery_root = plugin_discovery_root(codex_home).resolve()
+                conflict_candidates = detect_conflicting_cached_packages(discovery_root, candidate_skill_names)
+                if conflict_candidates:
+                    assert_no_concurrent_codex_consumers(codex_home)
+                quarantine = prepare_quarantine_transaction(
+                    paths,
+                    run_id,
+                    before_list,
+                    installed_paths,
+                    conflict_candidates,
                 )
+                if quarantine:
+                    activate_quarantine(quarantine)
+                with catch_sigterm_as_error():
+                    child = run_child_exec(
+                        paths.codex,
+                        marketplace_root,
+                        list(installed_plugin_ids.values()),
+                        workspace,
+                        output_dir,
+                        prompt,
+                        stdout_path=stdout_path,
+                        stderr_path=stderr_path,
+                        writable_dirs=writable_dirs,
+                    )
                 if not stdout_path.exists():
                     stdout_path.write_text(child.stdout, encoding="utf-8")
                 if not stderr_path.exists():
@@ -875,20 +1382,31 @@ def run_replay_multi(
                     plugin: parse_consumption(child.stdout, installed_path)
                     for plugin, installed_path in installed_paths.items()
                 }
-                consumer_isolation_violations = parse_consumer_isolation_violations(
-                    child.stdout,
-                    installed_paths.values(),
+                original_conflict_events = (
+                    parse_skill_read_events(child.stdout, [record.package.path for record in quarantine.records])
+                    if quarantine
+                    else []
                 )
+                quarantine_events = (
+                    parse_skill_read_events(child.stdout, [record.quarantine_path for record in quarantine.records])
+                    if quarantine
+                    else []
+                )
+                candidate_read_events = parse_candidate_read_events(child.stdout, installed_paths.values())
+                rehydrated_originals = [
+                    str(record.package.path)
+                    for record in quarantine.records
+                    if record.package.path.exists()
+                ] if quarantine else []
                 if child.returncode != 0:
                     raise ReplayError(f"candidate child exec failed ({child.returncode}): {child.stderr.strip()}")
-                if consumer_isolation_violations:
+                if original_conflict_events or quarantine_events or rehydrated_originals:
                     examples = "; ".join(
-                        f"line {item.line_index}: {item.command}" for item in consumer_isolation_violations[:3]
+                        [f"original line {item.line_index}: {item.command}" for item in original_conflict_events[:2]]
+                        + [f"quarantine line {item.line_index}: {item.command}" for item in quarantine_events[:2]]
+                        + [f"rehydrated original: {path}" for path in rehydrated_originals[:2]]
                     )
-                    raise ReplayError(
-                        "candidate consumer isolation failed; child read non-candidate plugin-cache skill(s): "
-                        + examples
-                    )
+                    raise ReplayError("candidate consumer isolation failed; conflicting cached package was visible: " + examples)
                 missing = [plugin for plugin, evidence in evidence_by_plugin.items() if evidence is None]
                 if missing:
                     raise ReplayError(
@@ -921,10 +1439,38 @@ def run_replay_multi(
                     },
                     "consumer_isolation": {
                         "enforced": True,
-                        "allowed_skill_roots": [
+                        "candidate_skill_names": sorted(candidate_skill_names),
+                        "candidate_skill_names_by_plugin": {
+                            plugin: sorted(names) for plugin, names in candidate_skill_names_by_plugin.items()
+                        },
+                        "conflicts_suppressed": [
+                            {
+                                "original_path": str(record.package.path),
+                                "quarantine_path": str(record.quarantine_path),
+                                "overlapping_skill_names": list(record.overlapping_skill_names),
+                                "tree_sha256": record.package.tree_sha256,
+                            }
+                            for record in quarantine.records
+                        ] if quarantine else [],
+                        "candidate_path_reads": len(candidate_read_events),
+                        "original_conflict_path_reads": len(original_conflict_events),
+                        "quarantine_path_reads": len(quarantine_events),
+                        "candidate_read_events": read_event_payload(candidate_read_events),
+                        "original_conflict_read_events": read_event_payload(original_conflict_events),
+                        "quarantine_read_events": read_event_payload(quarantine_events),
+                        "stale_recoveries": stale_recoveries,
+                        "quarantine_manifest_path": str(quarantine.manifest_path) if quarantine else None,
+                        "original_paths": [
+                            str(record.package.path) for record in quarantine.records
+                        ] if quarantine else [],
+                        "quarantine_paths": [
+                            str(record.quarantine_path) for record in quarantine.records
+                        ] if quarantine else [],
+                        "persistent_plugin_state_equal": True,
+                        "config_hash": config_hash(effective_codex_home()),
+                        "allowed_candidate_skill_roots": [
                             str(Path(installed_path) / "skills") for installed_path in installed_paths.values()
                         ],
-                        "non_candidate_plugin_cache_skill_reads": 0,
                     },
                     "stdout_path": str(stdout_path),
                     "stderr_path": str(stderr_path),
@@ -943,6 +1489,12 @@ def run_replay_multi(
                 (run_dir / "run.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
                 return result
             finally:
+                restore_error: Exception | None = None
+                if quarantine:
+                    try:
+                        restore_quarantine(quarantine)
+                    except Exception as exc:  # noqa: BLE001 - preserve exact failure after cleanup attempt.
+                        restore_error = exc
                 for plugin_id in plugin_ids:
                     with contextlib.suppress(Exception):
                         remove_candidate_plugin(paths.codex, plugin_id)
@@ -955,6 +1507,10 @@ def run_replay_multi(
                         before_snapshots[plugin],
                         same_name_installed_snapshot(after_list, plugin),
                     )
+                if normalized_plugin_list(after_list) != before_normalized:
+                    raise ReplayError("persistent plugin list changed")
+                if restore_error:
+                    raise restore_error
     except Exception:
         with contextlib.suppress(Exception):
             shutil.rmtree(run_dir / "marketplace")

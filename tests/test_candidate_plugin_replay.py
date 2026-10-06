@@ -27,6 +27,31 @@ def run(args: list[str], cwd: Path) -> subprocess.CompletedProcess:
     return subprocess.run(args, cwd=str(cwd), stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
 
 
+def write_skill(plugin_root: Path, slug: str, name: str) -> Path:
+    skill = plugin_root / "skills" / slug / "SKILL.md"
+    skill.parent.mkdir(parents=True, exist_ok=True)
+    skill.write_text(f"---\nname: {name}\ndescription: Test skill.\n---\n\nBody.\n", encoding="utf-8")
+    return skill
+
+
+def make_cached_package(
+    cache_root: Path,
+    marketplace: str,
+    plugin: str,
+    version: str,
+    skill_names: list[str],
+) -> Path:
+    package = cache_root / marketplace / plugin / version
+    (package / ".codex-plugin").mkdir(parents=True, exist_ok=True)
+    (package / ".codex-plugin" / "plugin.json").write_text(
+        json.dumps({"name": plugin, "version": version}) + "\n",
+        encoding="utf-8",
+    )
+    for index, name in enumerate(skill_names, start=1):
+        write_skill(package, f"skill-{index}", name)
+    return package
+
+
 def make_repo(marketplace_plugin: dict | None = None) -> tuple[tempfile.TemporaryDirectory[str], Path, str]:
     tmp = tempfile.TemporaryDirectory()
     root = Path(tmp.name)
@@ -556,6 +581,17 @@ class ReplayMechanismTests(unittest.TestCase):
         (root / "input.md").write_text("Input.\n", encoding="utf-8")
         installed = root / "plugins" / "cache" / "ai-skills-candidate" / "writing-style" / "0.1"
         installed.mkdir(parents=True)
+        codex_home = root / ".codex"
+        discovery = codex_home / "plugins" / "cache"
+        original = make_cached_package(discovery, "live", "writing-style", "0.4", ["chinese-prose"])
+        package = replay.cached_plugin_package_from_path(original, discovery)
+        self.assertIsNotNone(package)
+        assert package is not None
+        conflict = replay.QuarantineRecord(
+            package=package,
+            quarantine_path=Path(),
+            overlapping_skill_names=("chinese-prose",),
+        )
         remove_calls: list[str] = []
 
         def fake_stage(_root: Path, _candidate: replay.CandidatePlugin, run_dir: Path) -> Path:
@@ -582,7 +618,7 @@ class ReplayMechanismTests(unittest.TestCase):
                 "type": "item.completed",
                 "item": {
                     "type": "command_execution",
-                    "command": "cat /root/plugins/cache/live/writing-style/0.1/skills/zh/SKILL.md",
+                    "command": f"cat {original}/skills/skill-1/SKILL.md",
                 },
             }
         )
@@ -595,14 +631,17 @@ class ReplayMechanismTests(unittest.TestCase):
                         "add_candidate_plugin",
                         return_value=("writing-style@ai-skills-candidate", str(installed), {}),
                     ):
-                        with mock.patch.object(replay, "run_child_exec", return_value=child):
-                            with mock.patch.object(
-                                replay,
-                                "remove_candidate_plugin",
-                                side_effect=lambda _c, plugin_id: remove_calls.append(plugin_id),
-                            ):
-                                with self.assertRaisesRegex(replay.ReplayError, "consumer isolation"):
-                                    replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
+                        with mock.patch.object(replay, "effective_codex_home", return_value=codex_home.resolve()):
+                            with mock.patch.object(replay, "detect_conflicting_cached_packages", return_value=[conflict]):
+                                with mock.patch.object(replay, "assert_no_concurrent_codex_consumers"):
+                                    with mock.patch.object(replay, "run_child_exec", return_value=child):
+                                        with mock.patch.object(
+                                            replay,
+                                            "remove_candidate_plugin",
+                                            side_effect=lambda _c, plugin_id: remove_calls.append(plugin_id),
+                                        ):
+                                            with self.assertRaisesRegex(replay.ReplayError, "consumer isolation"):
+                                                replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
 
         self.assertEqual(remove_calls, ["writing-style@ai-skills-candidate"])
 
@@ -781,7 +820,7 @@ class ReplayMechanismTests(unittest.TestCase):
         self.assertIn("plugins.writing-style@ai-skills-candidate.enabled=true", captured)
         self.assertNotIn('plugins."writing-style@ai-skills-candidate".enabled=true', captured)
 
-    def test_child_exec_injects_candidate_consumer_isolation_prompt(self) -> None:
+    def test_child_exec_does_not_inject_candidate_consumer_isolation_prompt(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             workspace = root / "workspace"
@@ -806,17 +845,14 @@ class ReplayMechanismTests(unittest.TestCase):
                 "Rewrite this.",
                 stdout_path=root / "run" / "child.stdout.jsonl",
                 stderr_path=root / "run" / "child.stderr",
-                candidate_installed_paths={"writing-style@ai-skills-candidate": installed},
                 timeout_seconds=5,
                 terminate_grace_seconds=0.1,
             )
 
             prompt = prompt_file.read_text(encoding="utf-8")
 
-        self.assertIn("Candidate replay consumer isolation:", prompt)
-        self.assertIn(f"{installed}/skills", prompt)
-        self.assertIn("Do not read, load, or rely on SKILL.md files from any other /plugins/cache/ path", prompt)
-        self.assertTrue(prompt.rstrip().endswith("Rewrite this."))
+        self.assertEqual(installed, "/root/plugins/cache/ai-skills-candidate/writing-style/0.1")
+        self.assertEqual(prompt, "Rewrite this.")
 
     def test_child_exec_can_add_repo_local_writable_dirs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -908,6 +944,234 @@ class ReplayMechanismTests(unittest.TestCase):
         )
 
         self.assertEqual(args.plugin, ["web-development", "writing-style"])
+
+
+class CandidateConsumerIsolationRecoveryTests(unittest.TestCase):
+    def test_detects_different_plugin_name_same_skill_conflict(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cache = Path(tmp) / ".codex" / "plugins" / "cache"
+            make_cached_package(cache, "created-by-me-remote", "research-authoring", "0.3.0", ["research-reporting"])
+
+            conflicts = replay.detect_conflicting_cached_packages(cache, {"research-reporting"})
+
+        self.assertEqual(len(conflicts), 1)
+        self.assertEqual(conflicts[0].package.plugin, "research-authoring")
+        self.assertEqual(conflicts[0].overlapping_skill_names, ("research-reporting",))
+
+    def test_no_conflict_path_returns_empty(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cache = Path(tmp) / ".codex" / "plugins" / "cache"
+            make_cached_package(cache, "yuukias-ai-skills", "presentations", "0.4", ["slide-authoring"])
+
+            conflicts = replay.detect_conflicting_cached_packages(cache, {"research-reporting"})
+
+        self.assertEqual(conflicts, [])
+
+    def test_detects_same_name_production_conflict(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cache = Path(tmp) / ".codex" / "plugins" / "cache"
+            make_cached_package(cache, "yuukias-ai-skills", "writing-style", "0.4", ["chinese-prose"])
+
+            conflicts = replay.detect_conflicting_cached_packages(cache, {"chinese-prose"})
+
+        self.assertEqual(len(conflicts), 1)
+        self.assertEqual(conflicts[0].package.plugin, "writing-style")
+
+    def test_multi_candidate_duplicate_skill_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            market = root / "marketplace"
+            first = market / "plugins" / "alpha"
+            second = market / "plugins" / "beta"
+            write_skill(first, "one", "shared-skill")
+            write_skill(second, "two", "shared-skill")
+            candidates = [
+                replay.CandidatePlugin(commit="abc", name="alpha", source_path="plugins/alpha"),
+                replay.CandidatePlugin(commit="abc", name="beta", source_path="plugins/beta"),
+            ]
+
+            with self.assertRaisesRegex(replay.ReplayError, "duplicate top-level skill"):
+                replay.candidate_skill_name_union(market, candidates)
+
+    def test_quarantine_destination_is_outside_discovery_root_and_same_filesystem(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            codex_home = Path(tmp) / ".codex"
+            discovery = codex_home / "plugins" / "cache"
+            original = make_cached_package(discovery, "live", "research-authoring", "0.3.0", ["research-reporting"])
+            parent = replay.quarantine_parent(codex_home, "run-1")
+            dest = replay.quarantine_destination(
+                parent,
+                replay.cached_plugin_package_from_path(original, discovery),  # type: ignore[arg-type]
+            )
+
+            replay.validate_quarantine_destination(discovery, parent, original, dest)
+
+        self.assertFalse(replay.is_relative_to_path(parent.resolve(), discovery.resolve()))
+
+    def test_cross_filesystem_quarantine_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            codex_home = Path(tmp) / ".codex"
+            discovery = codex_home / "plugins" / "cache"
+            original = make_cached_package(discovery, "live", "research-authoring", "0.3.0", ["research-reporting"])
+            parent = replay.quarantine_parent(codex_home, "run-1")
+            real_stat = Path.stat
+
+            def fake_stat(path: Path, *args, **kwargs):
+                result = real_stat(path, *args, **kwargs)
+                if Path(path) == parent:
+                    fake = mock.Mock()
+                    fake.st_dev = result.st_dev + 1
+                    return fake
+                return result
+
+            with mock.patch.object(Path, "stat", fake_stat):
+                with self.assertRaisesRegex(replay.ReplayError, "different filesystem"):
+                    replay.validate_quarantine_destination(discovery, parent, original, parent / "live" / "x" / "1")
+
+    def test_cache_hidden_quarantine_fallback_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            codex_home = Path(tmp) / ".codex"
+            discovery = codex_home / "plugins" / "cache"
+            original = make_cached_package(discovery, "live", "research-authoring", "0.3.0", ["research-reporting"])
+            parent = discovery / ".candidate-plugin-replay-quarantine" / "run"
+
+            with self.assertRaisesRegex(replay.ReplayError, "inside plugin discovery"):
+                replay.validate_quarantine_destination(discovery, parent, original, parent / "live" / "x" / "1")
+
+    def test_symlink_resolve_back_to_discovery_root_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            codex_home = Path(tmp) / ".codex"
+            discovery = codex_home / "plugins" / "cache"
+            original = make_cached_package(discovery, "live", "research-authoring", "0.3.0", ["research-reporting"])
+            link = codex_home / "quarantine-link"
+            link.symlink_to(discovery, target_is_directory=True)
+
+            with self.assertRaisesRegex(replay.ReplayError, "inside plugin discovery"):
+                replay.validate_quarantine_destination(discovery, link, original, link / "live" / "x" / "1")
+
+    def test_success_restoration_restores_tree_and_removes_manifest(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            codex_home = root / ".codex"
+            discovery = codex_home / "plugins" / "cache"
+            original = make_cached_package(discovery, "live", "research-authoring", "0.3.0", ["research-reporting"])
+            package = replay.cached_plugin_package_from_path(original, discovery)
+            self.assertIsNotNone(package)
+            paths = replay.runtime_paths(root)
+            record = replay.QuarantineRecord(package=package, quarantine_path=replay.quarantine_parent(codex_home, "run") / "live" / "research-authoring" / "0.3.0", overlapping_skill_names=("research-reporting",))
+            with mock.patch.object(replay, "effective_codex_home", return_value=codex_home.resolve()):
+                transaction = replay.prepare_quarantine_transaction(paths, "run", {"plugins": []}, {}, [record])
+
+            self.assertIsNotNone(transaction)
+            assert transaction is not None
+            replay.activate_quarantine(transaction)
+            self.assertFalse(original.exists())
+            self.assertTrue(record.quarantine_path.exists())
+            replay.restore_quarantine(transaction)
+
+            self.assertTrue(original.exists())
+            self.assertFalse(transaction.manifest_path.exists())
+
+    def test_timeout_or_exception_style_restoration_can_run_after_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            codex_home = root / ".codex"
+            discovery = codex_home / "plugins" / "cache"
+            original = make_cached_package(discovery, "live", "research-authoring", "0.3.0", ["research-reporting"])
+            package = replay.cached_plugin_package_from_path(original, discovery)
+            self.assertIsNotNone(package)
+            paths = replay.runtime_paths(root)
+            record = replay.QuarantineRecord(package=package, quarantine_path=replay.quarantine_parent(codex_home, "run") / "live" / "research-authoring" / "0.3.0", overlapping_skill_names=("research-reporting",))
+            with mock.patch.object(replay, "effective_codex_home", return_value=codex_home.resolve()):
+                transaction = replay.prepare_quarantine_transaction(paths, "run", {"plugins": []}, {}, [record])
+            assert transaction is not None
+            replay.activate_quarantine(transaction)
+            try:
+                raise replay.ReplayError("child timed out")
+            except replay.ReplayError:
+                replay.restore_quarantine(transaction)
+
+            self.assertTrue(original.exists())
+
+    def test_catchable_sigterm_handler_restores_previous_handler(self) -> None:
+        if os.name != "posix":
+            self.skipTest("POSIX signal test")
+        previous = signal.getsignal(signal.SIGTERM)
+        with self.assertRaisesRegex(replay.ReplayError, "SIGTERM"):
+            with replay.catch_sigterm_as_error():
+                os.kill(os.getpid(), signal.SIGTERM)
+        self.assertEqual(signal.getsignal(signal.SIGTERM), previous)
+
+    def test_stale_quarantine_recovery_restores_missing_original(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            codex_home = root / ".codex"
+            discovery = codex_home / "plugins" / "cache"
+            original = make_cached_package(discovery, "live", "research-authoring", "0.3.0", ["research-reporting"])
+            package = replay.cached_plugin_package_from_path(original, discovery)
+            self.assertIsNotNone(package)
+            paths = replay.runtime_paths(root)
+            record = replay.QuarantineRecord(package=package, quarantine_path=replay.quarantine_parent(codex_home, "run") / "live" / "research-authoring" / "0.3.0", overlapping_skill_names=("research-reporting",))
+            with mock.patch.object(replay, "effective_codex_home", return_value=codex_home.resolve()):
+                transaction = replay.prepare_quarantine_transaction(paths, "run", {"plugins": []}, {}, [record])
+            assert transaction is not None
+            replay.activate_quarantine(transaction)
+            recovered = replay.recover_stale_quarantines(paths)
+
+            self.assertTrue(original.exists())
+            self.assertIn(str(original.resolve()), recovered)
+
+    def test_ambiguous_recovery_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            codex_home = root / ".codex"
+            discovery = codex_home / "plugins" / "cache"
+            original = make_cached_package(discovery, "live", "research-authoring", "0.3.0", ["research-reporting"])
+            package = replay.cached_plugin_package_from_path(original, discovery)
+            self.assertIsNotNone(package)
+            paths = replay.runtime_paths(root)
+            record = replay.QuarantineRecord(package=package, quarantine_path=replay.quarantine_parent(codex_home, "run") / "live" / "research-authoring" / "0.3.0", overlapping_skill_names=("research-reporting",))
+            with mock.patch.object(replay, "effective_codex_home", return_value=codex_home.resolve()):
+                transaction = replay.prepare_quarantine_transaction(paths, "run", {"plugins": []}, {}, [record])
+            assert transaction is not None
+            replay.activate_quarantine(transaction)
+            make_cached_package(discovery, "live", "research-authoring", "0.3.0", ["research-reporting"])
+
+            with self.assertRaisesRegex(replay.ReplayError, "RESTORATION_AMBIGUOUS"):
+                replay.recover_stale_quarantines(paths)
+
+    def test_three_way_candidate_original_quarantine_read_proof(self) -> None:
+        candidate = "/home/me/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3"
+        original = "/home/me/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0"
+        quarantine = "/home/me/.codex/.candidate-plugin-replay-quarantine/run/created-by-me-remote/research-authoring/0.3.0"
+        stdout = "\n".join(
+            [
+                json.dumps({"type": "item.completed", "item": {"type": "command_execution", "command": f"cat {candidate}/skills/report/SKILL.md"}}),
+                json.dumps({"type": "item.completed", "item": {"type": "command_execution", "command": f"cat {original}/skills/report/SKILL.md"}}),
+                json.dumps({"type": "item.completed", "item": {"type": "command_execution", "command": f"cat {quarantine}/skills/report/SKILL.md"}}),
+            ]
+        )
+
+        self.assertEqual(len(replay.parse_candidate_read_events(stdout, [candidate])), 1)
+        self.assertEqual(len(replay.parse_skill_read_events(stdout, [original])), 1)
+        self.assertEqual(len(replay.parse_skill_read_events(stdout, [quarantine])), 1)
+
+    def test_concurrency_preflight_positive_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            codex_home = Path(tmp) / ".codex"
+            ps = f"99999 1 S 00:01 codex exec CODEX_HOME={codex_home} --json\n"
+            with mock.patch.object(replay, "run_command", return_value=replay.CommandResult(("ps",), 0, ps, "")):
+                with mock.patch.object(replay, "ancestor_pids", return_value={os.getpid()}):
+                    with self.assertRaisesRegex(replay.ReplayError, "CONCURRENT_SHARED_CODEX_HOME_CONSUMER"):
+                        replay.assert_no_concurrent_codex_consumers(codex_home)
+
+    def test_concurrency_preflight_ignores_current_process_tree(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            codex_home = Path(tmp) / ".codex"
+            ps = f"{os.getpid()} 1 S 00:01 codex exec CODEX_HOME={codex_home} --json\n"
+            with mock.patch.object(replay, "run_command", return_value=replay.CommandResult(("ps",), 0, ps, "")):
+                with mock.patch.object(replay, "ancestor_pids", return_value={os.getpid()}):
+                    replay.assert_no_concurrent_codex_consumers(codex_home)
 
 
 if __name__ == "__main__":
