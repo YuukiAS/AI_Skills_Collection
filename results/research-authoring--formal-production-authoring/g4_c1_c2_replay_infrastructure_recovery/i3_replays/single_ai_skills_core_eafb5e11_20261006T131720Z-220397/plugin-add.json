@@ -1,0 +1,10 @@
+{
+  "ai-skills-core": {
+    "authPolicy": "ON_INSTALL",
+    "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/ai-skills-core/0.5",
+    "marketplaceName": "ai-skills-candidate",
+    "name": "ai-skills-core",
+    "pluginId": "ai-skills-core@ai-skills-candidate",
+    "version": "0.5"
+  }
+}

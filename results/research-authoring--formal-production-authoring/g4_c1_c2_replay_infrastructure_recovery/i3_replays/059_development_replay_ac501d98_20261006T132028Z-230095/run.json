@@ -1,0 +1,151 @@
+{
+  "actual_consumption": {
+    "event_type": "item.started",
+    "line_index": 4,
+    "proven": true
+  },
+  "actual_consumption_by_plugin": {
+    "research-writing": {
+      "event_type": "item.started",
+      "line_index": 4,
+      "proven": true
+    }
+  },
+  "add_payload": {
+    "authPolicy": "ON_INSTALL",
+    "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3",
+    "marketplaceName": "ai-skills-candidate",
+    "name": "research-writing",
+    "pluginId": "research-writing@ai-skills-candidate",
+    "version": "0.3"
+  },
+  "candidate_commit": "ac501d988f00cb6672fec105ae5fd51a0679cae0",
+  "consumer_isolation": {
+    "allowed_candidate_skill_roots": [
+      "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3/skills"
+    ],
+    "candidate_path_reads": 2,
+    "candidate_read_events": [
+      {
+        "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3/skills/report/SKILL.md'",
+        "event_type": "item.started",
+        "line_index": 4
+      },
+      {
+        "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3/skills/report/SKILL.md'",
+        "event_type": "item.completed",
+        "line_index": 5
+      }
+    ],
+    "candidate_skill_names": [
+      "literature-and-citations",
+      "research-paper-workflow",
+      "research-reporting"
+    ],
+    "candidate_skill_names_by_plugin": {
+      "research-writing": [
+        "literature-and-citations",
+        "research-paper-workflow",
+        "research-reporting"
+      ]
+    },
+    "config_hash": "c82b11125df2825124b47b1b9b92377f680757fa6aa1a7a39eb9bb69ce239573",
+    "conflicts_suppressed": [
+      {
+        "original_path": "/users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0",
+        "overlapping_skill_names": [
+          "literature-and-citations",
+          "research-paper-workflow",
+          "research-reporting"
+        ],
+        "quarantine_path": "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T132028Z-230095/created-by-me-remote/research-authoring/0.3.0",
+        "tree_sha256": "452f9837e9307008ff3821b0e1902feb804906d3278e28f8ba33f2fed04f4502"
+      },
+      {
+        "original_path": "/users/a/e/aereinh/.codex/plugins/cache/yuukias-ai-skills/research-writing/0.2",
+        "overlapping_skill_names": [
+          "literature-and-citations",
+          "research-paper-workflow",
+          "research-reporting"
+        ],
+        "quarantine_path": "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T132028Z-230095/yuukias-ai-skills/research-writing/0.2",
+        "tree_sha256": "e15f56a3a37b4f5108ea7079354e64519df083d7c37e07fe716e0d8bb308262b"
+      }
+    ],
+    "enforced": true,
+    "final_persistent_state_equivalent_to_before": true,
+    "original_conflict_path_reads": 0,
+    "original_conflict_read_events": [],
+    "original_paths": [
+      "/users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0",
+      "/users/a/e/aereinh/.codex/plugins/cache/yuukias-ai-skills/research-writing/0.2"
+    ],
+    "persistent_plugin_state_equal": true,
+    "quarantine_manifest_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/recovery/20261006T132028Z-230095.json",
+    "quarantine_path_reads": 0,
+    "quarantine_paths": [
+      "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T132028Z-230095/created-by-me-remote/research-authoring/0.3.0",
+      "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T132028Z-230095/yuukias-ai-skills/research-writing/0.2"
+    ],
+    "quarantine_read_events": [],
+    "stale_recoveries": []
+  },
+  "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3",
+  "plugin_id": "research-writing@ai-skills-candidate",
+  "plugins": [
+    {
+      "actual_consumption": {
+        "event_type": "item.started",
+        "line_index": 4,
+        "proven": true
+      },
+      "add_payload": {
+        "authPolicy": "ON_INSTALL",
+        "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3",
+        "marketplaceName": "ai-skills-candidate",
+        "name": "research-writing",
+        "pluginId": "research-writing@ai-skills-candidate",
+        "version": "0.3"
+      },
+      "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3",
+      "name": "research-writing",
+      "plugin_id": "research-writing@ai-skills-candidate"
+    }
+  ],
+  "restoration": {
+    "actions": [
+      "restored-quarantine-to-original:/users/a/e/aereinh/.codex/plugins/cache/yuukias-ai-skills/research-writing/0.2",
+      "deleted-equivalent-quarantine-duplicate:/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T132028Z-230095/created-by-me-remote/research-authoring/0.3.0"
+    ],
+    "diagnostics": {
+      "/users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0": {
+        "candidate_path_reads": 2,
+        "classification": "VERIFIED_EQUIVALENT_REHYDRATION",
+        "config_hash_drift_observed": false,
+        "current_config_hash_diagnostic": "c82b11125df2825124b47b1b9b92377f680757fa6aa1a7a39eb9bb69ce239573",
+        "final_config_hash_diagnostic": "c82b11125df2825124b47b1b9b92377f680757fa6aa1a7a39eb9bb69ce239573",
+        "identity": {
+          "marketplace": "created-by-me-remote",
+          "plugin": "research-authoring",
+          "version": "0.3.0"
+        },
+        "ignored_plugin_ids_for_restoration_state_check": [
+          "research-writing@ai-skills-candidate"
+        ],
+        "original_conflict_path_reads": 0,
+        "original_path": "/users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0",
+        "plugin_manifest_sha256": "e13c6e3c0e7ce00a06eff23b0f29800a5408636ae9d87c7e92e755bb30e54f36",
+        "quarantine_path": "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T132028Z-230095/created-by-me-remote/research-authoring/0.3.0",
+        "quarantine_path_reads": 0,
+        "recorded_config_hash_diagnostic": "c82b11125df2825124b47b1b9b92377f680757fa6aa1a7a39eb9bb69ce239573",
+        "tree_sha256": "452f9837e9307008ff3821b0e1902feb804906d3278e28f8ba33f2fed04f4502"
+      }
+    },
+    "final_persistent_state_equivalent_to_before": true,
+    "verified_equivalent_rehydration": true
+  },
+  "runtime_version": "codex-cli 0.153.4",
+  "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T132028Z-230095/child.stderr",
+  "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T132028Z-230095/child.stdout.jsonl",
+  "writable_dirs": []
+}

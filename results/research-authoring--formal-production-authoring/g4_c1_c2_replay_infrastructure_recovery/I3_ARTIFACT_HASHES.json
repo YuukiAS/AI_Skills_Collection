@@ -1,0 +1,166 @@
+[
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/059_development_replay_ac501d98_20261006T132028Z-230095/DEVELOPMENT_REPLAY_BOUNDARY_QA.json",
+    "sha256": "1f9231b898f80dcd1ce96b0e5c24e8e386c9a93f5a68f4f355c73987a69e2017"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/059_development_replay_ac501d98_20261006T132028Z-230095/DEVELOPMENT_REPLAY_BOUNDARY_QA_CORRECTED.json",
+    "sha256": "e3fbd1bb4057925682bba355f10e363a6cda89b11754250e25b6867be5d731d5"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/059_development_replay_ac501d98_20261006T132028Z-230095/child.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/059_development_replay_ac501d98_20261006T132028Z-230095/child.stdout.jsonl",
+    "sha256": "ae198b2ed6bc4fbe798be11fb7d95a5e31fd3532383cbde7e97d4ffe19056f8e"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/059_development_replay_ac501d98_20261006T132028Z-230095/plugin-add.json",
+    "sha256": "e3485a26ca1f6a20b3598e652a32e91e2f4707076187f0e037d79b535440ac60"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/059_development_replay_ac501d98_20261006T132028Z-230095/run.json",
+    "sha256": "a6e47188dd043385172e48640760c87c3ddf60d33e27d2471300954461a031c3"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/059_development_replay_ac501d98_20261006T132028Z-230095/workspace/C2_DEV_REPLAY_TASK.md",
+    "sha256": "c239d93aa1b40d2744fa6399a58b216607057f4e71d04a270a6b55ed29e67433"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/059_development_replay_ac501d98_20261006T132028Z-230095/workspace/inputs/01-C2_DEV_REPORT_RAW_NOTES.md",
+    "sha256": "96ece1b53a95ec5fec8935c47c01e02318af8eb6915fb4f876e225c84f512703"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/059_development_replay_ac501d98_20261006T132028Z-230095/workspace/outputs/advisor_update_source.md",
+    "sha256": "e44e1a105bade65d0c4fa4070abd44b09228d123c6ba8caa0b26333d7fdda6d8"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/059_development_replay_ac501d98_20261006T132028Z-230095/workspace/outputs/downstream_renderer_handoff.md",
+    "sha256": "4c8296d7b0ef9546d010727356977fc6a814399c0b8a41d93e726557c41fdbb7"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/059_development_replay_ac501d98_20261006T132028Z-230095/workspace/outputs/route_receipt.md",
+    "sha256": "81000c37ad3b2cd242c044ab021c70b9d0940da8641e1a7c3099aab032d9b125"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_eafb5e11_20261006T131912Z-227355/child.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_eafb5e11_20261006T131912Z-227355/child.stdout.jsonl",
+    "sha256": "c765f361b745a540b49d1bc442373337661939ed93f9a13feaa5f158e52f4463"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_eafb5e11_20261006T131912Z-227355/plugin-add.json",
+    "sha256": "b7b4a6ff91c4a7dc10078e25845ca5a262c7986a9e8d90087baa64ee459b9943"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_eafb5e11_20261006T131912Z-227355/run.json",
+    "sha256": "4193f415a2ceac49df413df328fb86b03a3f3b3bdb9c841d033aca059d8edb74"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_eafb5e11_20261006T131912Z-227355/workspace/inputs/01-multi_web_writing_input.md",
+    "sha256": "eba2ccd7f8c8b61d6eb3a2e3d6e4710c16a1aee8bef1930b6ab860fff13b09dc"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_eafb5e11_20261006T131912Z-227355/workspace/multi_web_writing_task.md",
+    "sha256": "4c4014d893e53b913eda7d3d17f2325c18f127733afde605ad051fd7ccbe0595"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_eafb5e11_20261006T131912Z-227355/workspace/outputs/ui-handoff.md",
+    "sha256": "d68edcc5050330bfb48107f48974aa826e39de6c9ebef6e6ee30e895bf2b6c5e"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_failed_normalized_state_mismatch_20261006T130720Z-193514/BOUNDED_RECOVERY_AFTER_FAILURE.json",
+    "sha256": "d21431c8e61aba7bf7de7c0842343d437a6de0f44b1f867dfa2f51687815853e"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_failed_normalized_state_mismatch_20261006T130720Z-193514/child.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_failed_normalized_state_mismatch_20261006T130720Z-193514/child.stdout.jsonl",
+    "sha256": "e1bfeed740c7781104c9a3970e05c6d3ac9f608bdb508b408747586590b9544c"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_failed_normalized_state_mismatch_20261006T130720Z-193514/plugin-add.json",
+    "sha256": "b7b4a6ff91c4a7dc10078e25845ca5a262c7986a9e8d90087baa64ee459b9943"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_failed_normalized_state_mismatch_20261006T130720Z-193514/recovery-manifest.json",
+    "sha256": "b647e4c53d602bd4fbf169a549073b1fc65078e97c43d3d0abde83fd98e254ce"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_failed_normalized_state_mismatch_20261006T130720Z-193514/run.json",
+    "sha256": "cc73ee16789ed8abc4a20d0d23b5d0fae233f180c7b959bc5321658bdc479d7c"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_failed_normalized_state_mismatch_20261006T130720Z-193514/workspace/inputs/01-multi_web_writing_input.md",
+    "sha256": "eba2ccd7f8c8b61d6eb3a2e3d6e4710c16a1aee8bef1930b6ab860fff13b09dc"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_failed_normalized_state_mismatch_20261006T130720Z-193514/workspace/multi_web_writing_task.md",
+    "sha256": "4c4014d893e53b913eda7d3d17f2325c18f127733afde605ad051fd7ccbe0595"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/multi_web_writing_failed_normalized_state_mismatch_20261006T130720Z-193514/workspace/outputs/ui-handoff.md",
+    "sha256": "2145ef74bd2c38ff7321bb6e808ffd0a645dd8aa73fa00b112990e72529514a3"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/single_ai_skills_core_20261006T130432Z-187905/child.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/single_ai_skills_core_20261006T130432Z-187905/child.stdout.jsonl",
+    "sha256": "c4f019f8d37a3411e6a49bd0aecacd37cf490057a7ef655ae8621dae0b5ba774"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/single_ai_skills_core_20261006T130432Z-187905/plugin-add.json",
+    "sha256": "8e46eac999001fbd6142e75df2c27cef658b0a007005a1e35a0b5edf493ec0b3"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/single_ai_skills_core_20261006T130432Z-187905/run.json",
+    "sha256": "4723095e617b01db66493a27d5b22917bb2abb6a0a907963db7306dcd5605e2f"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/single_ai_skills_core_20261006T130432Z-187905/workspace/inputs/01-single_ai_skills_core_input.md",
+    "sha256": "18d10d3d6e97b71efaad11c95c8374b03e22bebd8c231d97bbea93b9b7be672c"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/single_ai_skills_core_20261006T130432Z-187905/workspace/outputs/maintainer-triage.md",
+    "sha256": "18523bb9ed558d2eefa66b109c040afba0d14e75b45bee40b313d03da36f6362"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/single_ai_skills_core_20261006T130432Z-187905/workspace/single_ai_skills_core_task.md",
+    "sha256": "eb5d136aa38192a2e83b3d43948ad332be720f273a044b3a7caa69fa5193503d"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/single_ai_skills_core_eafb5e11_20261006T131720Z-220397/child.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/single_ai_skills_core_eafb5e11_20261006T131720Z-220397/child.stdout.jsonl",
+    "sha256": "2c1175dcbd106e0ae87ce4f165fdbfdfabb2e2578a1b5e19a2180ee15ad36c0c"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/single_ai_skills_core_eafb5e11_20261006T131720Z-220397/plugin-add.json",
+    "sha256": "8e46eac999001fbd6142e75df2c27cef658b0a007005a1e35a0b5edf493ec0b3"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/single_ai_skills_core_eafb5e11_20261006T131720Z-220397/run.json",
+    "sha256": "7d912ead9a694255e3624d46aa1b474c877de0ce802d56cd3a9ca85e6a5fc662"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/single_ai_skills_core_eafb5e11_20261006T131720Z-220397/workspace/inputs/01-single_ai_skills_core_input.md",
+    "sha256": "18d10d3d6e97b71efaad11c95c8374b03e22bebd8c231d97bbea93b9b7be672c"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/single_ai_skills_core_eafb5e11_20261006T131720Z-220397/workspace/outputs/maintainer-triage.md",
+    "sha256": "91aef1191df3fec572e375ef838cbd0dad557f75d446c3622909afea8f5ad9c0"
+  },
+  {
+    "path": "results/research-authoring--formal-production-authoring/g4_c1_c2_replay_infrastructure_recovery/i3_replays/single_ai_skills_core_eafb5e11_20261006T131720Z-220397/workspace/single_ai_skills_core_task.md",
+    "sha256": "eb5d136aa38192a2e83b3d43948ad332be720f273a044b3a7caa69fa5193503d"
+  }
+]

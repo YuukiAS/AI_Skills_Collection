@@ -1,0 +1,14 @@
+{
+  "command_count": 22,
+  "development_regression_pass": true,
+  "forbidden_executable_violations": [],
+  "no_pdf_creation_or_render_mechanics": true,
+  "pdf_files": [],
+  "scope": "actual command invocation and produced artifact check; heredoc/document prose is not treated as an executable command",
+  "source_handoff_success": true,
+  "source_outputs": [
+    "outputs/advisor_update_source.md",
+    "outputs/downstream_renderer_handoff.md",
+    "outputs/route_receipt.md"
+  ]
+}

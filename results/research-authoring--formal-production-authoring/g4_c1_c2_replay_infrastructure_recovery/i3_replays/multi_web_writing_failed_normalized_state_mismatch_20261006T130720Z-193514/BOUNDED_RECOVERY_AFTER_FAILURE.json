@@ -1,0 +1,39 @@
+{
+  "cleanup_result": {
+    "actions": [
+      "original-present-no-quarantine:/users/a/e/aereinh/.codex/plugins/cache/yuukias-ai-skills/writing-style/0.4",
+      "original-present-no-quarantine:/users/a/e/aereinh/.codex/plugins/cache/yuukias-ai-skills/web-development/0.4",
+      "deleted-equivalent-quarantine-duplicate:/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T130720Z-193514/created-by-me-remote/research-authoring/0.3.0"
+    ],
+    "diagnostics": {
+      "/users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0": {
+        "candidate_path_reads": 4,
+        "classification": "VERIFIED_EQUIVALENT_REHYDRATION",
+        "config_hash_drift_observed": true,
+        "current_config_hash_diagnostic": "ca3bf9d49a0fc07da44d81cd04262e8f03883a794274a9a698c28f8ab4f6dde3",
+        "final_config_hash_diagnostic": "ca3bf9d49a0fc07da44d81cd04262e8f03883a794274a9a698c28f8ab4f6dde3",
+        "identity": {
+          "marketplace": "created-by-me-remote",
+          "plugin": "research-authoring",
+          "version": "0.3.0"
+        },
+        "ignored_plugin_ids_for_restoration_state_check": [
+          "web-development@ai-skills-candidate",
+          "writing-style@ai-skills-candidate"
+        ],
+        "original_conflict_path_reads": 0,
+        "original_path": "/users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0",
+        "plugin_manifest_sha256": "e13c6e3c0e7ce00a06eff23b0f29800a5408636ae9d87c7e92e755bb30e54f36",
+        "quarantine_path": "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T130720Z-193514/created-by-me-remote/research-authoring/0.3.0",
+        "quarantine_path_reads": 0,
+        "recorded_config_hash_diagnostic": "b98403dab5b5cde88f38c34bf55c4804d3928fa2234b831f37504a0ff7efda66",
+        "tree_sha256": "452f9837e9307008ff3821b0e1902feb804906d3278e28f8ba33f2fed04f4502"
+      }
+    },
+    "final_persistent_state_equivalent_to_before": true,
+    "verified_equivalent_rehydration": true
+  },
+  "current_candidate_plugin_ids_after": [],
+  "recovery_manifest_exists_after": false,
+  "run_id": "20261006T130720Z-193514"
+}

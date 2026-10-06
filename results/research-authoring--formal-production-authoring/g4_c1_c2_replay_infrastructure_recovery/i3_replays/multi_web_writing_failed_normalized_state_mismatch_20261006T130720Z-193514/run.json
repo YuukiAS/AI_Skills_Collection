@@ -1,0 +1,167 @@
+{
+  "actual_consumption_by_plugin": {
+    "web-development": {
+      "event_type": "item.started",
+      "line_index": 6,
+      "proven": true
+    },
+    "writing-style": {
+      "event_type": "item.started",
+      "line_index": 8,
+      "proven": true
+    }
+  },
+  "candidate_commit": "595ab6ab7b9d8d5cd6a642a7701f1e3a56f6ed46",
+  "consumer_isolation": {
+    "allowed_candidate_skill_roots": [
+      "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/web-development/0.4/skills",
+      "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.4/skills"
+    ],
+    "candidate_path_reads": 4,
+    "candidate_read_events": [
+      {
+        "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/web-development/0.4/skills/visual/SKILL.md'",
+        "event_type": "item.started",
+        "line_index": 6
+      },
+      {
+        "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/web-development/0.4/skills/visual/SKILL.md'",
+        "event_type": "item.completed",
+        "line_index": 7
+      },
+      {
+        "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.4/skills/product-ui-copy/SKILL.md'",
+        "event_type": "item.started",
+        "line_index": 8
+      },
+      {
+        "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.4/skills/product-ui-copy/SKILL.md'",
+        "event_type": "item.completed",
+        "line_index": 9
+      }
+    ],
+    "candidate_skill_names": [
+      "chinese-prose",
+      "frontend-reference-research",
+      "frontend-visual-systems",
+      "product-ui-copy",
+      "scientific-prose",
+      "scientific-rewrite",
+      "writing-fidelity"
+    ],
+    "candidate_skill_names_by_plugin": {
+      "web-development": [
+        "frontend-reference-research",
+        "frontend-visual-systems"
+      ],
+      "writing-style": [
+        "chinese-prose",
+        "product-ui-copy",
+        "scientific-prose",
+        "scientific-rewrite",
+        "writing-fidelity"
+      ]
+    },
+    "config_hash": "b98403dab5b5cde88f38c34bf55c4804d3928fa2234b831f37504a0ff7efda66",
+    "conflicts_suppressed": [
+      {
+        "original_path": "/users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0",
+        "overlapping_skill_names": [
+          "chinese-prose",
+          "scientific-prose",
+          "writing-fidelity"
+        ],
+        "quarantine_path": "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T130720Z-193514/created-by-me-remote/research-authoring/0.3.0",
+        "tree_sha256": "452f9837e9307008ff3821b0e1902feb804906d3278e28f8ba33f2fed04f4502"
+      },
+      {
+        "original_path": "/users/a/e/aereinh/.codex/plugins/cache/yuukias-ai-skills/web-development/0.4",
+        "overlapping_skill_names": [
+          "frontend-reference-research",
+          "frontend-visual-systems"
+        ],
+        "quarantine_path": "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T130720Z-193514/yuukias-ai-skills/web-development/0.4",
+        "tree_sha256": "3796f74f7452b89f64ddd9c8c19de8e61865b1c8b41f1cb17e7008b9bdada8e0"
+      },
+      {
+        "original_path": "/users/a/e/aereinh/.codex/plugins/cache/yuukias-ai-skills/writing-style/0.4",
+        "overlapping_skill_names": [
+          "chinese-prose",
+          "product-ui-copy",
+          "scientific-prose",
+          "scientific-rewrite",
+          "writing-fidelity"
+        ],
+        "quarantine_path": "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T130720Z-193514/yuukias-ai-skills/writing-style/0.4",
+        "tree_sha256": "22e7ced70624f8a3b5e9b18ab8ef47259f1dfe2e2b1da44cb2d1965522c7628a"
+      }
+    ],
+    "enforced": true,
+    "final_persistent_state_equivalent_to_before": true,
+    "original_conflict_path_reads": 0,
+    "original_conflict_read_events": [],
+    "original_paths": [
+      "/users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0",
+      "/users/a/e/aereinh/.codex/plugins/cache/yuukias-ai-skills/web-development/0.4",
+      "/users/a/e/aereinh/.codex/plugins/cache/yuukias-ai-skills/writing-style/0.4"
+    ],
+    "persistent_plugin_state_equal": true,
+    "quarantine_manifest_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/recovery/20261006T130720Z-193514.json",
+    "quarantine_path_reads": 0,
+    "quarantine_paths": [
+      "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T130720Z-193514/created-by-me-remote/research-authoring/0.3.0",
+      "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T130720Z-193514/yuukias-ai-skills/web-development/0.4",
+      "/users/a/e/aereinh/.codex/.candidate-plugin-replay-quarantine/20261006T130720Z-193514/yuukias-ai-skills/writing-style/0.4"
+    ],
+    "quarantine_read_events": [],
+    "stale_recoveries": []
+  },
+  "plugins": [
+    {
+      "actual_consumption": {
+        "event_type": "item.started",
+        "line_index": 6,
+        "proven": true
+      },
+      "add_payload": {
+        "authPolicy": "ON_INSTALL",
+        "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/web-development/0.4",
+        "marketplaceName": "ai-skills-candidate",
+        "name": "web-development",
+        "pluginId": "web-development@ai-skills-candidate",
+        "version": "0.4"
+      },
+      "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/web-development/0.4",
+      "name": "web-development",
+      "plugin_id": "web-development@ai-skills-candidate"
+    },
+    {
+      "actual_consumption": {
+        "event_type": "item.started",
+        "line_index": 8,
+        "proven": true
+      },
+      "add_payload": {
+        "authPolicy": "ON_INSTALL",
+        "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.4",
+        "marketplaceName": "ai-skills-candidate",
+        "name": "writing-style",
+        "pluginId": "writing-style@ai-skills-candidate",
+        "version": "0.4"
+      },
+      "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.4",
+      "name": "writing-style",
+      "plugin_id": "writing-style@ai-skills-candidate"
+    }
+  ],
+  "restoration": {
+    "actions": [],
+    "diagnostics": {},
+    "final_persistent_state_equivalent_to_before": true,
+    "verified_equivalent_rehydration": false
+  },
+  "runtime_version": "codex-cli 0.153.4",
+  "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T130720Z-193514/child.stderr",
+  "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T130720Z-193514/child.stdout.jsonl",
+  "writable_dirs": []
+}

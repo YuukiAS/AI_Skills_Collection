@@ -1,0 +1,18 @@
+{
+  "web-development": {
+    "authPolicy": "ON_INSTALL",
+    "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/web-development/0.4",
+    "marketplaceName": "ai-skills-candidate",
+    "name": "web-development",
+    "pluginId": "web-development@ai-skills-candidate",
+    "version": "0.4"
+  },
+  "writing-style": {
+    "authPolicy": "ON_INSTALL",
+    "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.4",
+    "marketplaceName": "ai-skills-candidate",
+    "name": "writing-style",
+    "pluginId": "writing-style@ai-skills-candidate",
+    "version": "0.4"
+  }
+}
