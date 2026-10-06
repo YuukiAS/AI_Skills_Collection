@@ -455,6 +455,85 @@ class ReplayMechanismTests(unittest.TestCase):
         with self.assertRaisesRegex(replay.ReplayError, "still installed"):
             replay.assert_candidate_absent({"plugins": [{"pluginId": "writing-style@ai-skills-candidate"}]})
 
+    def test_normalized_plugin_list_can_ignore_exact_current_run_candidates(self) -> None:
+        baseline = {
+            "plugins": [
+                {
+                    "pluginId": "writing-style@yuukias-ai-skills",
+                    "name": "writing-style",
+                    "enabled": True,
+                    "marketplaceName": "yuukias-ai-skills",
+                    "installedPath": "/cache/yuukias-ai-skills/writing-style/0.4",
+                }
+            ]
+        }
+        current = {
+            "plugins": baseline["plugins"]
+            + [
+                {
+                    "pluginId": "web-development@ai-skills-candidate",
+                    "name": "web-development",
+                    "enabled": True,
+                    "marketplaceName": "ai-skills-candidate",
+                    "installedPath": "/cache/ai-skills-candidate/web-development/0.4",
+                },
+                {
+                    "pluginId": "writing-style@ai-skills-candidate",
+                    "name": "writing-style",
+                    "enabled": True,
+                    "marketplaceName": "ai-skills-candidate",
+                    "installedPath": "/cache/ai-skills-candidate/writing-style/0.4",
+                },
+            ]
+        }
+
+        self.assertEqual(
+            replay.normalized_plugin_list(
+                current,
+                ignored_plugin_ids={
+                    "web-development@ai-skills-candidate",
+                    "writing-style@ai-skills-candidate",
+                },
+            ),
+            replay.normalized_plugin_list(baseline),
+        )
+
+    def test_normalized_plugin_list_detects_unrelated_non_candidate_change(self) -> None:
+        baseline = {"plugins": [{"pluginId": "writing-style@yuukias-ai-skills", "enabled": True}]}
+        current = {
+            "plugins": baseline["plugins"]
+            + [
+                {"pluginId": "writing-style@ai-skills-candidate", "enabled": True},
+                {"pluginId": "unrelated@yuukias-ai-skills", "enabled": True},
+            ]
+        }
+
+        self.assertNotEqual(
+            replay.normalized_plugin_list(
+                current,
+                ignored_plugin_ids={"writing-style@ai-skills-candidate"},
+            ),
+            replay.normalized_plugin_list(baseline),
+        )
+
+    def test_normalized_plugin_list_with_explicit_ignore_keeps_other_candidate_plugins(self) -> None:
+        baseline = {"plugins": [{"pluginId": "writing-style@yuukias-ai-skills", "enabled": True}]}
+        current = {
+            "plugins": baseline["plugins"]
+            + [
+                {"pluginId": "writing-style@ai-skills-candidate", "enabled": True},
+                {"pluginId": "other@ai-skills-candidate", "enabled": True},
+            ]
+        }
+
+        self.assertNotEqual(
+            replay.normalized_plugin_list(
+                current,
+                ignored_plugin_ids={"writing-style@ai-skills-candidate"},
+            ),
+            replay.normalized_plugin_list(baseline),
+        )
+
     def test_production_same_name_identity_unchanged(self) -> None:
         before = [{"pluginId": "writing-style@yuukias-ai-skills", "enabled": True}]
         replay.assert_production_unchanged(before, [{"pluginId": "writing-style@yuukias-ai-skills", "enabled": True}])
@@ -1246,6 +1325,112 @@ class CandidateConsumerIsolationRecoveryTests(unittest.TestCase):
             self.assertEqual(proof["current_config_hash_diagnostic"], replay.config_hash(codex_home))
             self.assertEqual(proof["final_config_hash_diagnostic"], replay.config_hash(codex_home))
 
+    def test_equivalent_rehydration_allows_current_run_candidate_ids_during_restore(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            codex_home, _discovery, original, transaction, plugin_list = self.make_equivalent_rehydration_fixture(root)
+            quarantine = transaction.records[0].quarantine_path
+            shutil.copytree(quarantine, original)
+            current_list = {
+                "plugins": plugin_list["plugins"]
+                + [
+                    {
+                        "pluginId": "web-development@ai-skills-candidate",
+                        "name": "web-development",
+                        "enabled": True,
+                        "marketplaceName": "ai-skills-candidate",
+                    },
+                    {
+                        "pluginId": "writing-style@ai-skills-candidate",
+                        "name": "writing-style",
+                        "enabled": True,
+                        "marketplaceName": "ai-skills-candidate",
+                    },
+                ]
+            }
+
+            result = replay.restore_quarantine(
+                transaction,
+                read_proof={
+                    "candidate_path_reads": 1,
+                    "original_conflict_path_reads": 0,
+                    "quarantine_path_reads": 0,
+                },
+                current_plugin_list=current_list,
+                final_plugin_list_reader=lambda: current_list,
+                codex_home=codex_home.resolve(),
+                ignored_plugin_ids={
+                    "web-development@ai-skills-candidate",
+                    "writing-style@ai-skills-candidate",
+                },
+            )
+
+            self.assertTrue(result.verified_equivalent_rehydration)
+            self.assertTrue(result.final_persistent_state_equivalent_to_before)
+            self.assertFalse(quarantine.exists())
+
+    def test_equivalent_rehydration_rejects_unrelated_state_change_during_restore(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            codex_home, _discovery, original, transaction, plugin_list = self.make_equivalent_rehydration_fixture(root)
+            quarantine = transaction.records[0].quarantine_path
+            shutil.copytree(quarantine, original)
+            current_list = {
+                "plugins": plugin_list["plugins"]
+                + [
+                    {"pluginId": "writing-style@ai-skills-candidate", "enabled": True},
+                    {"pluginId": "unrelated@yuukias-ai-skills", "enabled": True},
+                ]
+            }
+
+            with self.assertRaisesRegex(replay.ReplayError, "normalized plugin state mismatch"):
+                replay.restore_quarantine(
+                    transaction,
+                    read_proof={
+                        "candidate_path_reads": 1,
+                        "original_conflict_path_reads": 0,
+                        "quarantine_path_reads": 0,
+                    },
+                    current_plugin_list=current_list,
+                    codex_home=codex_home.resolve(),
+                    ignored_plugin_ids={"writing-style@ai-skills-candidate"},
+                )
+
+            self.assertTrue(original.exists())
+            self.assertTrue(quarantine.exists())
+            self.assertTrue(transaction.manifest_path.exists())
+
+    def test_equivalent_rehydration_rejects_non_current_run_candidate_plugin(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            codex_home, _discovery, original, transaction, plugin_list = self.make_equivalent_rehydration_fixture(root)
+            quarantine = transaction.records[0].quarantine_path
+            shutil.copytree(quarantine, original)
+            current_list = {
+                "plugins": plugin_list["plugins"]
+                + [
+                    {"pluginId": "writing-style@ai-skills-candidate", "enabled": True},
+                    {"pluginId": "other@ai-skills-candidate", "enabled": True},
+                ]
+            }
+
+            with self.assertRaisesRegex(replay.ReplayError, "normalized plugin state mismatch"):
+                replay.restore_quarantine(
+                    transaction,
+                    read_proof={
+                        "candidate_path_reads": 1,
+                        "original_conflict_path_reads": 0,
+                        "quarantine_path_reads": 0,
+                    },
+                    current_plugin_list=current_list,
+                    codex_home=codex_home.resolve(),
+                    ignored_plugin_ids={"writing-style@ai-skills-candidate"},
+                )
+
+            self.assertTrue(original.exists())
+            self.assertTrue(quarantine.exists())
+            self.assertTrue(transaction.manifest_path.exists())
+
     def test_equivalent_rehydration_without_candidate_proof_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -1351,6 +1536,19 @@ class CandidateConsumerIsolationRecoveryTests(unittest.TestCase):
                 }
             ]
         }
+        candidate_plugin_list = {
+            "plugins": before_list["plugins"]
+            + [
+                {
+                    "pluginId": "writing-style@ai-skills-candidate",
+                    "name": "writing-style",
+                    "enabled": True,
+                    "marketplaceName": "ai-skills-candidate",
+                    "installedPath": str(installed),
+                }
+            ]
+        }
+        candidate_installed = {"value": False}
         remove_calls: list[str] = []
 
         def fake_stage(_root: Path, _candidates: list[replay.CandidatePlugin], run_dir: Path) -> Path:
@@ -1360,7 +1558,7 @@ class CandidateConsumerIsolationRecoveryTests(unittest.TestCase):
 
         def fake_run_codex_json(_codex: Path, args: list[str], **_kwargs):
             if args[:3] == ["plugin", "list", "--json"]:
-                return before_list
+                return candidate_plugin_list if candidate_installed["value"] else before_list
             return None
 
         def fake_child(*_args, **_kwargs):
@@ -1383,7 +1581,10 @@ class CandidateConsumerIsolationRecoveryTests(unittest.TestCase):
                     with mock.patch.object(
                         replay,
                         "add_candidate_plugin",
-                        return_value=("writing-style@ai-skills-candidate", str(installed), {}),
+                        side_effect=lambda *_args, **_kwargs: (
+                            candidate_installed.__setitem__("value", True)
+                            or ("writing-style@ai-skills-candidate", str(installed), {})
+                        ),
                     ):
                         with mock.patch.object(replay, "effective_codex_home", return_value=codex_home.resolve()):
                             with mock.patch.object(replay, "detect_conflicting_cached_packages", return_value=[conflict]):
@@ -1392,7 +1593,10 @@ class CandidateConsumerIsolationRecoveryTests(unittest.TestCase):
                                         with mock.patch.object(
                                             replay,
                                             "remove_candidate_plugin",
-                                            side_effect=lambda _c, plugin_id: remove_calls.append(plugin_id),
+                                            side_effect=lambda _c, plugin_id: (
+                                                remove_calls.append(plugin_id),
+                                                candidate_installed.__setitem__("value", False),
+                                            ),
                                         ):
                                             result = replay.run_replay(
                                                 root,

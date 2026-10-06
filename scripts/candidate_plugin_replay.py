@@ -710,12 +710,16 @@ def write_json_durable(path: Path, payload: dict[str, Any]) -> None:
     fsync_path(path.parent)
 
 
-def normalized_plugin_list(payload: Any) -> Any:
+def normalized_plugin_list(payload: Any, *, ignored_plugin_ids: Iterable[str] | None = None) -> Any:
+    ignored_ids = set(ignored_plugin_ids) if ignored_plugin_ids is not None else None
     records = []
     for record in plugin_records(payload):
         plugin_id = record_plugin_id(record)
-        if plugin_id and plugin_id.endswith(CANDIDATE_NAMESPACE_SUFFIX):
-            continue
+        if plugin_id:
+            if ignored_ids is None and plugin_id.endswith(CANDIDATE_NAMESPACE_SUFFIX):
+                continue
+            if ignored_ids is not None and plugin_id in ignored_ids:
+                continue
         records.append(
             {
                 "pluginId": plugin_id,
@@ -906,6 +910,7 @@ def verify_equivalent_rehydration_record(
     read_proof: dict[str, Any] | None,
     current_plugin_list: Any,
     codex_home: Path,
+    ignored_plugin_ids: Iterable[str] | None = None,
 ) -> dict[str, Any]:
     candidate_reads, original_reads, quarantine_reads = read_proof_counts(read_proof)
     original = record.package.path.resolve()
@@ -940,7 +945,7 @@ def verify_equivalent_rehydration_record(
     if tuple(quarantine_rel) != (identity["marketplace"], identity["plugin"], identity["version"]):
         raise ReplayError("RESTORATION_AMBIGUOUS: quarantine marketplace/plugin/version identity mismatch")
     current_config_hash = config_hash(codex_home)
-    if normalized_plugin_list(current_plugin_list) != manifest.get("normalized_before_plugin_list"):
+    if normalized_plugin_list(current_plugin_list, ignored_plugin_ids=ignored_plugin_ids) != manifest.get("normalized_before_plugin_list"):
         raise ReplayError("RESTORATION_AMBIGUOUS: normalized plugin state mismatch")
     if candidate_reads <= 0:
         raise ReplayError("RESTORATION_AMBIGUOUS: candidate consumption proof is missing")
@@ -959,6 +964,7 @@ def verify_equivalent_rehydration_record(
         "recorded_config_hash_diagnostic": manifest.get("config_hash"),
         "current_config_hash_diagnostic": current_config_hash,
         "config_hash_drift_observed": current_config_hash != manifest.get("config_hash"),
+        "ignored_plugin_ids_for_restoration_state_check": sorted(set(ignored_plugin_ids or ())),
     }
 
 
@@ -977,6 +983,7 @@ def restore_quarantine(
     current_plugin_list: Any | None = None,
     final_plugin_list_reader: Callable[[], Any] | None = None,
     codex_home: Path | None = None,
+    ignored_plugin_ids: Iterable[str] | None = None,
 ) -> RestorationResult:
     manifest = json.loads(transaction.manifest_path.read_text(encoding="utf-8"))
     record_payloads = manifest.get("records")
@@ -1013,6 +1020,7 @@ def restore_quarantine(
                     read_proof=read_proof,
                     current_plugin_list=current_plugin_list,
                     codex_home=codex_home,
+                    ignored_plugin_ids=ignored_plugin_ids,
                 )
                 remove_equivalent_quarantine_duplicate(record)
                 if tree_sha256(original) != proof["tree_sha256"]:
@@ -1020,7 +1028,7 @@ def restore_quarantine(
                 if optional_file_sha256(plugin_manifest_path(original)) != proof["plugin_manifest_sha256"]:
                     raise ReplayError("RESTORATION_AMBIGUOUS: final original plugin manifest hash changed")
                 final_plugin_list = final_plugin_list_reader() if final_plugin_list_reader else current_plugin_list
-                if normalized_plugin_list(final_plugin_list) != manifest.get("normalized_before_plugin_list"):
+                if normalized_plugin_list(final_plugin_list, ignored_plugin_ids=ignored_plugin_ids) != manifest.get("normalized_before_plugin_list"):
                     raise ReplayError("RESTORATION_AMBIGUOUS: final normalized plugin state mismatch")
                 proof["final_config_hash_diagnostic"] = config_hash(codex_home)
                 actions.append(f"deleted-equivalent-quarantine-duplicate:{quarantine}")
@@ -1727,6 +1735,7 @@ def run_replay_multi(
                             current_plugin_list=run_codex_json(paths.codex, ["plugin", "list", "--json"]),
                             final_plugin_list_reader=lambda: run_codex_json(paths.codex, ["plugin", "list", "--json"]),
                             codex_home=effective_codex_home(),
+                            ignored_plugin_ids=plugin_ids,
                         )
                     except Exception as exc:  # noqa: BLE001 - preserve exact failure after cleanup attempt.
                         restore_error = exc

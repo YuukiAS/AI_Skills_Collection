@@ -88,7 +88,9 @@ all of the following proof is present:
 original tree hash == quarantine tree hash == pre-run tree hash
 plugin manifest hashes are identical to the pre-run manifest hash
 marketplace/plugin/version/path identity is identical
-normalized plugin state matches the pre-run state
+normalized non-candidate plugin state matches the pre-run state; during
+restoration this comparison may ignore only the exact candidate plugin IDs
+installed by the current replay run
 CANDIDATE_PATH_READS > 0
 ORIGINAL_CONFLICT_PATH_READS = 0
 QUARANTINE_PATH_READS = 0
@@ -102,10 +104,14 @@ explicit minimal projection before mutation instead of relying on the full
 config file hash.
 
 After deleting the duplicate, the helper fsyncs and rechecks the rehydrated
-original package identity and normalized plugin state before removing the
-recovery manifest. If any hard proof is missing or inconsistent, the condition
-remains `RESTORATION_AMBIGUOUS`: do not delete, overwrite, continue replay, or
-treat the output as a candidate PASS.
+original package identity and normalized non-candidate plugin state before
+removing the recovery manifest. Candidate plugin IDs may be ignored only while
+the current run is still inside the restoration step. After candidate cleanup,
+the final persistent plugin-state check still requires the full plugin list to
+match the replay's pre-run baseline, with no candidate identity left installed.
+If any hard proof is missing or inconsistent, the condition remains
+`RESTORATION_AMBIGUOUS`: do not delete, overwrite, continue replay, or treat the
+output as a candidate PASS.
 
 ## Safety boundaries
 
