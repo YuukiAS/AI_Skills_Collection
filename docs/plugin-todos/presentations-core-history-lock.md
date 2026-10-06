@@ -1,13 +1,14 @@
 # Presentations Core TODO — History, Locks, and Bounded Convergence
 
 Status: PROMOTE_NOW  
-Source: repeated STAT5060 Tutorial 01 revisions through V09 and two failed governance materializations, plus earlier research-deck regressions  
+Source: repeated STAT5060 Tutorial 01 revisions through V09 and three failed governance materializations, plus earlier research-deck regressions  
 Detailed specifications:
 
 - `docs/design/PRESENTATIONS_HISTORY_PREFLIGHT_PAGE_LOCK_AND_MATH_FIGURE_TODO_2026-10-06.md`
 - `docs/design/PRESENTATIONS_EXISTING_DECK_CONVERGENCE_ARCHITECTURE_V1_2026-10-06.md`
 - `docs/design/PRESENTATIONS_CONTROL_PLANE_SEMANTIC_FIDELITY_AND_REAL_DETECTOR_TODO_2026-10-06.md`
 - `docs/design/PRESENTATIONS_ANTI_SELF_CERTIFICATION_AND_CONVERGENCE_GOVERNANCE_TODO_2026-10-06.md`
+- `docs/design/PRESENTATIONS_PRODUCTION_DETECTOR_AUTHENTICITY_AND_EVIDENCE_BINDING_TODO_2026-10-06.md`
 
 ## Core requirements
 
@@ -40,7 +41,13 @@ The presentations workflow must add first-class support for:
 25. base-to-head audience-artifact protection rather than clean-worktree or staged-diff self-certification;
 26. semantically relevant component proof-fixture contracts rather than arbitrary unique or index-rotated fixture tuples;
 27. general invariant detectors with positive controls and multiple distinct mutations, not one magic bad number, phrase, token or hash;
-28. separate materializer and validator paths so generated truth is not validated by regenerating it through the same code.
+28. separate materializer and validator paths so generated truth is not validated by regenerating it through the same code;
+29. production-hook identity: accepted controls, negative mutations and persisted validation call the same detector function;
+30. fixture-name branches are forbidden inside detector logic;
+31. row ancestry validates exact allowed stable/component target sets, not merely global ID validity or page-map existence;
+32. persisted Git object identities are real 40-hex blobs resolved from commit plus path, never echoed path strings;
+33. non-self-referential implementation/evidence binding, preferably an implementation commit followed by an evidence commit whose runtime validator checks the actual remote head;
+34. detector-catalog coverage with honest phase states such as `EXECUTED_PASS` and `SPEC_READY_NOT_EXECUTED`, rather than reporting future copy/render detectors as already passing.
 
 ## Why this is core
 
@@ -50,7 +57,9 @@ The first governance failure showed that a control plane can report the correct 
 
 The second governance failure showed that even structured inputs and 24/24 rejected fixtures can self-certify an incomplete system: annotation totals can be wrong, ancestry can remain unenforced row by row, source evidence can be stale, component fixtures can be made unique but irrelevant, and detectors can be tuned to one chosen bad value while still returning `PASS`.
 
-Counts, schema presence, unique fixture tuples and fixture totals are necessary but never sufficient.
+The third governance failure showed that separate materializer/validator files and corrected headline counts are still insufficient when mutation tests branch on fixture names, positive controls only assert constants, persisted blob fields contain paths rather than Git objects, and final/remote arguments are accepted by syntax rather than verified against repository state.
+
+Counts, schema presence, unique fixture tuples, fixture totals and file separation are necessary but never sufficient.
 
 ## Promotion gate
 
@@ -58,10 +67,13 @@ Counts, schema presence, unique fixture tuples and fixture totals are necessary 
 - wrong batch-level annotation-type totals block editing;
 - a generic/non-actionable normalized feedback guard blocks editing;
 - an unknown or wrong historical-page mapping blocks editing even when the target PageID is otherwise valid;
+- a row whose targets are globally valid but not allowed for its exact historical artifact/page blocks editing;
 - unresolved feedback conflict blocks editing;
 - Markdown/code-span pipe corruption blocks source materialization;
 - an executor mutation of Planner authority blocks acceptance unless separately ratified, and still remains a scope finding;
 - stale or unvalidated persisted preflight evidence blocks review;
+- a persisted `git_blob_sha` that is not a real 40-hex object blocks review;
+- final/remote commit arguments must match actual local and remote repository state, not merely a SHA-shaped string;
 - page deletion without approved semantic relocation blocks editing;
 - incomplete page/component binding blocks implementation;
 - touching a round-frozen page blocks commit;
@@ -73,6 +85,8 @@ Counts, schema presence, unique fixture tuples and fixture totals are necessary 
 - Question/Answer one-line and multi-line fixtures align within calibrated whole-slide tolerance;
 - a figure labelled with literal `eta` fails, while a `$\eta$` render passes;
 - malformed fixtures mutate real inputs and are caught by general production detectors without fixture-ID branches or magic predicates;
+- positive controls pass through those same production detector functions;
 - component fixtures are demonstrably relevant to the component they claim to test;
 - a committed forbidden audience-path change is detected even after the worktree is clean;
+- detector coverage names every required detector and distinguishes executed proof from future specification readiness;
 - one real existing deck converges within two to four review rounds under the new workflow.
