@@ -542,7 +542,7 @@ promotion_gate: same fixture set must reject sequential content placed in column
 status: NEW
 tracking: #35
 source: STAT5060 Tutorial 1 V04/V05 human review, 2026-10-05
-evidence: prior repairs reduced bottom whitespace by pushing conclusions toward the lower page, which separated interpretation from the table/figure/formula it explained. Pages could satisfy a bottom-gap threshold while becoming harder to read.
+evidence: prior repairs reduced bottom whitespace by pushing conclusions toward the lower page, which separated interpretation from the table/figure/formula it explained. Pages could satisfy a bottom-gap threshold while becoming harder to read. STAT5060 Tutorial 1 Student Deck V06 reproduced the failure on P18 and P35: both satisfied the lower-body whitespace gate, while whole-slide review still showed a large internal gap splitting one semantic group. The generated `semantic_proximity.json` only measured whole-body centre distance from the slide-body centre and therefore returned PASS without measuring evidence-to-interpretation or block-to-follow-up distance.
 problem: Whitespace occupancy and semantic grouping are different constraints. A page can be “full” and still be badly composed if evidence and its interpretation are visually far apart.
 candidate_action:
 - Define semantic groups before layout: evidence object + interpretation/conclusion.
@@ -597,7 +597,7 @@ promotion_gate: the V04-style overshooting rule fails; one-line and multi-line Q
 status: NEW
 tracking: #36
 source: STAT5060 Tutorial 1 Student Deck V05 independent review, 2026-10-06
-evidence: V05 had a 46-page PDF, but `page_review.md` contained only 45 rows, labeled the actual title page as “Tutorial overview”, shifted every later title by one page, and omitted P46. `requirement_ledger.md` was only a summary paragraph. Six supposed representative footer crops were the exact same 637-byte Git blob. Column/semantic/connector evidence files contained prose or page names rather than frozen metrics. The artifact manifest named an evidence directory but did not bind its Git tree.
+evidence: V05 had a 46-page PDF, but `page_review.md` contained only 45 rows, labeled the actual title page as “Tutorial overview”, shifted every later title by one page, and omitted P46. `requirement_ledger.md` was only a summary paragraph. Six supposed representative footer crops were the exact same 637-byte Git blob. Column/semantic/connector evidence files contained prose or page names rather than frozen metrics. The artifact manifest named an evidence directory but did not bind its Git tree. V06 then showed that a nominal evidence-integrity checker can still self-certify bad evidence: the requirement ledger hard-coded its own integrity requirement as PASS; RGB `Image.getbbox()` would accept an all-white crop as nonblank; no malformed fixture proved fail-closed behaviour; and the recorded evidence payload/tree identities disagreed with the committed evidence root.
 problem: Presentation QA evidence can currently look complete by filename while being internally inconsistent, off-by-one, blank/duplicated, or unrelated to the reviewed artifact.
 candidate_action:
 - Add an evidence-integrity preflight that validates page-review row count == PDF page count and matches every row title to text extracted from the same final PDF.
