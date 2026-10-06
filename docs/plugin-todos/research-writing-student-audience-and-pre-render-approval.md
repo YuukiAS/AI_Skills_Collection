@@ -579,3 +579,101 @@ Artifact-specific values remain source-controlled; family consistency governs pr
 
 A renderer must not redesign one member of the family merely because another template is available. A later artifact should first recover the accepted family contract and then change only what its own reader task requires.
 
+
+
+## 17. Visual rhythm and composition must be specified, not delegated to renderer taste
+
+A renderer can satisfy clipping, overflow, page-count and token-presence checks while still producing a visibly cramped or compositionally poor document. Visual quality therefore cannot be treated as an emergent property of successful compilation.
+
+### Failure pattern
+
+The STAT5060 HW1 AI-policy artifact reproduced this failure:
+
+- all required text was present;
+- the quotation and links were technically correct;
+- the PDF fit on one page;
+- automated checks passed;
+- yet body leading, paragraph spacing, section spacing and list spacing were inconsistent and too compressed for comfortable reading.
+
+The error was not only an implementation defect. The authoring contract had failed to define a visual-rhythm target, so the implementation optimized for fitting content rather than for reading.
+
+### Required visual-composition contract
+
+Before rendering a substantial document, freeze a composition contract covering at least:
+
+```text
+BODY_SIZE = <size>
+BODY_LEADING = <line-height / line-spacing target>
+PARAGRAPH_SPACING = <target>
+HEADING_SPACING_BEFORE = <target>
+HEADING_SPACING_AFTER = <target>
+LIST_TOP_BOTTOM_SPACING = <target>
+LIST_ITEM_SPACING = <target>
+QUOTE_SPACING = <target>
+TABLE_ROW_SPACING = <target>
+BLOCK_KEEP_TOGETHER_RULE = <rule>
+PAGE_BREAK_POLICY = <rule>
+PAGE_COUNT_TARGET = NONE | <actual requirement>
+```
+
+Exact implementation units may differ across LaTeX / Word / HTML, but the rendered visual rhythm must be equivalent.
+
+### Readability over page minimization
+
+Unless a page count is itself an approved requirement:
+
+- do not compress line spacing or vertical whitespace merely to keep a document on one page;
+- a two-page readable policy is preferable to a one-page cramped policy;
+- if a short semantic block cannot fit comfortably in the remaining page space, move the whole block to the next page;
+- do not leave only one or two lines of a named instruction block at the bottom of a page;
+- do not use global spacing reduction as a local overflow fix.
+
+### Semantic-block pagination
+
+Treat short titled or labeled units as semantic blocks, for example:
+
+- a policy subsection;
+- a numerical-reporting instruction;
+- a warning/caution block;
+- a short numbered alternative;
+- a quotation plus attribution.
+
+For blocks short enough to fit on one page, keep the block together. If insufficient space remains, start the block on the next page rather than splitting it into a narrow fragment.
+
+### Pixel-level visual QA
+
+Visual QA must review the rendered pages at realistic reading/print scale, not only text extraction or bounding-box overflow.
+
+The reviewer must explicitly judge:
+
+- body line spacing;
+- paragraph rhythm;
+- heading-to-body spacing;
+- list hierarchy;
+- quote separation;
+- density at top/middle/bottom of page;
+- whether a page is cramped merely to avoid another page;
+- whether a semantic block is awkwardly split;
+- whether white space is purposeful rather than accidental.
+
+A report that says only `NO_OVERFLOW = PASS` is insufficient.
+
+### Implementation boundary
+
+Codex may implement a frozen visual-composition contract. It must not choose its own global spacing system merely to make content fit.
+
+If approved content does not fit under the visual contract, Codex should add a page or return a layout conflict. It should not silently tighten leading, paragraph spacing, list spacing, margins or font size.
+
+## 18. Metadata adjacency and compact identity blocks
+
+Metadata rows that are conceptually one block (for example Due date and Weight/Total) must be authored and rendered as one compact unit.
+
+A blank paragraph, section-like gap or unrelated metadata field must not be inserted between adjacent rows unless explicitly approved.
+
+The authoring contract should specify both:
+
+- content order;
+- visual adjacency.
+
+This prevents a renderer from preserving the correct words while introducing a misleading visual hierarchy.
+
