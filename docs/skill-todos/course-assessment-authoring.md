@@ -177,6 +177,40 @@ For student-facing policy or institutional guidance:
 The student-facing approved body must freeze both the exact quotation and the exact course-authored connective prose before implementation.
 
 
+
+
+### 14. Page-budget and assessment-semantic composition
+
+Course assessment artifacts need an explicit page-budget decision before rendering.
+
+The reusable specialization should distinguish:
+
+- hard page limits imposed on students;
+- preferred authoring length for course handouts;
+- free page count for policy/reference sheets.
+
+For the handout itself, page count should never be optimized by silently shrinking fonts or compressing spacing. Use the Research Authoring compaction ladder and preserve a readable spacing floor.
+
+Adjacent front-matter pages should be reviewed as a pair. A dense first page followed by a mostly empty second page is a composition failure even when both pages individually pass overflow checks.
+
+Course materials also need semantic-class separation. In particular:
+
+- graded components should not be visually buried among ungraded instructions;
+- penalties should not look like ordinary explanatory prose;
+- student tasks should dominate over implementation guidance;
+- institutional quotations should be visually distinct from course-authored rules.
+
+A source-to-reader map for assessment materials should record:
+
+```text
+SEMANTIC_CLASS = task | instruction | assessed | penalty | policy | source_quote | context
+STUDENT_ACTION = <what the student should do with this information>
+VISUAL_ROLE = body | heading | table | quote | note
+```
+
+This is an information-architecture rule, not a decorative styling rule.
+
+
 ## Candidate workflow to evaluate later
 
 A later Planner should evaluate a workflow such as:
