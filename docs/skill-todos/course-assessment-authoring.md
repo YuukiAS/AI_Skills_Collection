@@ -139,6 +139,44 @@ A release check must go beyond existence, searchability, page size and clipping.
 - Codex should not independently choose what students need to know, how much rubric detail to reveal, or how course-source terminology should be reorganized.
 - Substantial student-facing artifacts require a frozen reader-facing content specification before implementation.
 
+
+
+### 12. Course document-family identity
+
+Homework, Project, Milestone and related student documents should inherit a course-level family contract rather than inventing metadata layout independently.
+
+The reusable specialization should support a family schema covering:
+
+- full course title;
+- artifact title;
+- academic year / term;
+- due-date label and placement;
+- course-weight / total-points metadata when applicable;
+- compact metadata spacing;
+- page geometry and type family;
+- heading hierarchy;
+- page number/footer conventions;
+- hyperlink style;
+- direct-quotation style.
+
+The contract controls presentation and labels. Exact dates, weights and points remain course-specific canonical data.
+
+A later artifact may deviate only when the instructor explicitly approves a different reader need. “Use a different template because it looks nicer” is not sufficient.
+
+### 13. Direct quotations and source-backed policy text
+
+For student-facing policy or institutional guidance:
+
+- quote only source text that has been explicitly selected and verified;
+- render substantive quotations in an unmistakable quotation style, preferably a block quote with a left rule or equivalent restrained academic treatment;
+- keep exact attribution adjacent to the quote;
+- distinguish direct quotation from course-authored paraphrase;
+- preserve approved link labels and link destinations;
+- do not let Codex invent policy prose, citation text, quotation wording or source interpretation during rendering.
+
+The student-facing approved body must freeze both the exact quotation and the exact course-authored connective prose before implementation.
+
+
 ## Candidate workflow to evaluate later
 
 A later Planner should evaluate a workflow such as:
