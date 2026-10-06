@@ -226,6 +226,30 @@ candidate_action:
 - Keep low-level delivery implementation in workflow/artifact infrastructure. Research Authoring owns the requirement that a requested finished research document reaches the user as an actual artifact.
 promotion_gate: replay on one formal research-report PDF and one editable/office-style research deliverable; verify that the user can open/save the finished artifact directly without needing a second message asking where the file is.
 
+### Table layout must preserve semantic rows and forbid arbitrary wrapping
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 HW1 student-handout review, 2026-10-06
+evidence: human review of a rendered numerical-reporting table where the row label `Coefficients, standard errors, ratios, confidence-interval endpoints, probabilities, NB2 shape, Bias, RMSE` was allowed to wrap across multiple visually arbitrary lines while the right-aligned value remained isolated; the table was technically within page bounds but materially harder to scan.
+target layer: Research Authoring table semantics / artifact handoff / visual QA
+problem:
+- A table can be mathematically correct and free of clipping yet still be poor reader-facing design if cells wrap according to renderer convenience rather than semantic structure.
+- Uncontrolled wrapping can split one logical item into several fragments, leave a short dangling line, detach a label from its unit/value, or create a visually unbalanced row whose right-hand numeric value appears unrelated to the text it qualifies.
+- This failure is especially damaging in compact technical tables, policy tables, specification matrices and result summaries, where readers depend on one-row scanning and stable column alignment.
+- Global font shrinking is not an acceptable repair. A table should not gain fit by silently reducing text below the surrounding document contract.
+candidate_action:
+- Define the **semantic row contract before rendering**. One row should represent one logical item/comparison whenever possible. Do not allow the renderer to create a new apparent sub-row merely because a long cell wrapped.
+- Treat semantically atomic content as non-breakable where practical: numeric value + unit, estimate + uncertainty marker, category label, method name, compact status token, short file/path token, and short reporting targets such as `3 decimal places`.
+- For prose cells, permit wrapping only at meaningful phrase boundaries. Avoid dangling one-word or two-word continuation lines and avoid line breaks that visually separate a qualifier from the quantity or claim it modifies.
+- If a row is too wide, repair in this order: **(1) simplify the wording without losing meaning; (2) rebalance column widths; (3) move explanatory detail to a caption/note/prose; (4) split one overloaded row into multiple semantically explicit rows; (5) split one overloaded table into two logical tables; (6) use landscape/wider layout only when the table itself genuinely requires it.** Do not start by shrinking font or letting arbitrary soft-wraps accumulate.
+- Prefer stable narrow columns for numbers/units/status and give the descriptive column the remaining width. Numeric/status columns should normally not wrap.
+- A long descriptive list inside one cell is often evidence that the content should become several rows or a short list instead of one table cell.
+- When a wrap is unavoidable, author the break deliberately and keep continuation lines aligned with the start of the cell content rather than creating pseudo-rows.
+- Research Authoring owns the semantic decision: row/column roles, atomic content, approved abbreviations, where a long explanation belongs, and whether the information should be a table at all. The renderer owns exact widths and break mechanics only after that semantic contract is frozen.
+- Add render QA for tables: inspect at ordinary reading scale, not only for overflow. Fail on arbitrary word fragments, dangling continuation lines, wrapped numeric/status cells, detached units, inconsistent header/body wrapping, or row heights that make scan order ambiguous.
+- For production artifacts, require a table-specific readability check on every nontrivial table. “No clipping” is necessary but not sufficient for PASS.
+promotion_gate: replay on one research report with quantitative result tables and one policy/specification-style technical document; confirm that the rules improve scanability without inflating page count or forcing prose duplication.
+
 ## Recently promoted / established
 
 - Advisor-facing reports organize around scientific question and decision, not run/debug chronology.
