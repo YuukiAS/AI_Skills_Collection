@@ -250,6 +250,40 @@ candidate_action:
 - For production artifacts, require a table-specific readability check on every nontrivial table. “No clipping” is necessary but not sufficient for PASS.
 promotion_gate: replay on one research report with quantitative result tables and one policy/specification-style technical document; confirm that the rules improve scanability without inflating page count or forcing prose duplication.
 
+### Student-facing educational artifacts require an explicit human-authority lock
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 HW1 handout regressions, 2026-10-06
+evidence: repeated real production failures while revising a student-facing homework handout. The executor first replaced an already-acceptable homework handout style with a different report-template style; later introduced a two-column front-matter layout solely to satisfy a page-count target; earlier revisions also changed policy wording, section labels and information architecture without explicit user approval. Each change was locally defensible as a rendering/layout optimization, but the combined result was materially worse for the student reader and repeatedly forced the human reviewer to undo executor-authored design decisions.
+target layer: Research Authoring planning / authority freeze / student-facing artifact QA / executor handoff
+problem:
+- Student-facing educational artifacts are high-authority communication surfaces. Small changes in wording can change obligations, grading expectations, submission rules, AI policy, or what a student reasonably believes is required.
+- Layout is also semantic. Column count, page architecture, section ordering, whether a rule is prose/table/bullet, font scale, margins, heading hierarchy, and where questions begin all affect reading order and cognitive load. These are not low-level renderer details when students are the audience.
+- A renderer/executor that is told to "make it fit" can silently optimize the wrong objective: fewer pages, denser packing, or a technically clean PDF instead of a clear student handout.
+- Passing mechanical checks such as no overflow, expected page count, or successful PDF generation does not authorize unrequested wording or macro-layout changes.
+- Once human wording/design has been supplied or approved, the absence of an explicit prohibition is **not** permission to redesign it.
+candidate_action:
+- Introduce a **STUDENT_FACING_AUTHORITY_LOCK** for course handouts, assignments, tutorials, rubrics released to students, policy sheets, submission instructions, report templates, and similar educational artifacts.
+- When the lock is active, treat all approved student-facing wording as immutable. **Do not add, delete, condense, expand, paraphrase, reorder, relabel, or "clarify" any student-visible text without explicit human approval.** Mechanical encoding changes such as LaTeX escaping, Unicode-safe symbol representation, hyperlink encoding, or line-break control are allowed only when visible wording/meaning is unchanged.
+- Treat the following as **major layout decisions requiring explicit human approval**: single vs multi-column; page size/orientation; margins; body font family/size; global line/paragraph spacing; title and heading hierarchy; page architecture; question grouping; hard page-break plan; table vs prose vs bullet conversion; moving content between the main handout and README/appendix/policy sheet; adding/removing a cover/TOC; changing template routes; changing the visual family of the artifact.
+- The executor may perform only **minor bounded layout adjustments** without new approval: widow/orphan prevention; non-breaking spaces; suppression of ugly hyphenation; small local whitespace/column-width adjustments inside an already-approved structure; keeping a heading with its first paragraph; fixing clipping/overflow without changing wording, typography contract, column count, or information architecture; preserving active links and glyph integrity.
+- Minor adjustments must not alter reading order, semantic grouping, visible hierarchy, page-count policy, or the amount of information a student sees.
+- **Never introduce multi-column layout for a student-facing artifact unless the human explicitly approved multi-column for that exact artifact.** Page-count pressure alone is not a justification.
+- **Never change wording to solve a fit problem.** If the frozen text cannot fit under the frozen layout contract, return a blocked state with concrete evidence and ask for a human decision between clearly bounded alternatives (for example: allow one extra page, shorten a specified block, or change a specified layout constraint).
+- **Never make a major layout decision implicitly.** If a requested task cannot be completed without changing one of the major-layout items above, stop before implementation and surface the decision to the human.
+- Preserve a separation of roles: Research Authoring/human authority freezes student-facing semantics and macro-layout; Codex/renderer implements the frozen specification and performs mechanical QA; an independent visual review verifies the actual pages.
+- Add a preflight handoff section for student-facing artifacts:
+  - `STUDENT_FACING = YES`
+  - `VISIBLE_TEXT_AUTHORITY = <exact file/commit>`
+  - `VISIBLE_TEXT_MUTATION_ALLOWED = NO` unless explicitly granted
+  - `MACRO_LAYOUT_AUTHORITY = <exact spec/commit>`
+  - `MAJOR_LAYOUT_MUTATION_ALLOWED = NO` unless explicitly granted
+  - `ALLOWED_MINOR_ADJUSTMENTS = <bounded list>`
+  - `ON_CONFLICT = STOP_AND_REQUEST_HUMAN_DECISION`
+- Add post-build QA that diffs the visible text and macro-layout contract against the frozen authority. A render must fail if it contains unauthorized wording changes, section-label changes, column-count changes, page-architecture changes, or other major-layout mutations even when visual/mechanical tests otherwise pass.
+- Treat user-approved wording/layout as a contract, not a suggestion. A renderer may report a constraint conflict; it may not resolve the conflict by inventing a new student-facing design.
+promotion_gate: replay on one homework/assignment, one tutorial/teaching handout and one student-facing policy/rubric artifact. Verify that executors stop on real conflicts instead of changing wording or macro-layout, while still being able to make harmless micro-typographic repairs without unnecessary human interruption.
+
 ## Recently promoted / established
 
 - Advisor-facing reports organize around scientific question and decision, not run/debug chronology.
