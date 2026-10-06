@@ -43,7 +43,7 @@ answer/request -> problem or opportunity -> evidence and impact -> plan -> resou
 3. Keep each slide tied to one decision-relevant message.
 4. Use the CUHK default visual system only when no company, client, course, or event template is specified.
 5. Apply the shared writing handoff before final deck creation: Chinese slide text gets `writing-fidelity` plus `chinese-prose`; English scientific slide prose can use `scientific-prose` when the deck includes research evidence.
-6. Route editable deck creation to official Presentation/Slides and keep visual QA evidence.
+6. Route editable deck creation to official Presentation/Slides and keep visual QA evidence. For non-trivial production or revision, apply `../../shared/independent-review-contract.md`: the executor may build/render and run smoke checks but may only report readiness for independent validation; final deterministic acceptance must run after executor stop in a fresh process/CI or strictly isolated read-only subagent.
 
 ## References
 
@@ -52,3 +52,4 @@ answer/request -> problem or opportunity -> evidence and impact -> plan -> resou
 - `../../shared/ppt-skill-routing.md`
 - `../../shared/source-fidelity.md`
 - `../../shared/visual-qa.md`
+- `../../shared/independent-review-contract.md`
