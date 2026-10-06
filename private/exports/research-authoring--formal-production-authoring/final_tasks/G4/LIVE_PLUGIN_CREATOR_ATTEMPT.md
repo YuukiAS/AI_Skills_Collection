@@ -1,3 +1,29 @@
+# Resolution — 2026-10-06
+
+The historical Codex-side attempts below correctly record that the Codex surface did not expose Plugin Creator. That blocker has now been handed to the ChatGPT-side owner and resolved.
+
+```text
+BLOCKER_RESOLVED=YES
+LIVE_PLUGIN_MUTATION_PERFORMED=YES
+PLUGIN_CREATE=PASS
+PLUGIN_NAME=research-authoring
+PLUGIN_VERSION=0.3.0
+PLUGIN_SCOPE=USER
+PLUGIN_DISCOVERABILITY=PRIVATE
+PLUGIN_ID=plugins_6ac4471b735881918c17cd310f262429
+RELEASE_ID=pluginrel_6ac4471c7b90819189bc23af890135f3
+```
+
+The live mutation result and direct readback evidence are recorded in:
+
+`private/exports/research-authoring--formal-production-authoring/final_tasks/G4/LIVE_PLUGIN_CREATOR_RESULT.md`
+
+The only packaging correction required by Plugin Creator was the ChatGPT distribution wrapper version string `0.3 -> 0.3.0` to satisfy semantic-version syntax. The Research Authoring payload remains version `0.3` at final candidate commit `1c37c0715aca0096606f24e56192b7857e72bbd6`.
+
+The remaining G4 work is the frozen live ChatGPT -> Codex production-chain validation and independent G4 review. The old unavailable-tool evidence is retained below as historical audit evidence.
+
+---
+
 # G4 Live Plugin Creator Attempt
 
 Task: `research-authoring--formal-production-authoring`
