@@ -1,0 +1,78 @@
+{
+  "candidate": "ac501d988f00cb6672fec105ae5fd51a0679cae0",
+  "g1_positive_evidence_ready": false,
+  "positive_cases": {
+    "positive_1_methods": {
+      "actual_consumption_proven": true,
+      "candidate_commit": "ac501d988f00cb6672fec105ae5fd51a0679cae0",
+      "candidate_path_reads": 2,
+      "final_persistent_state_equivalent_to_before": true,
+      "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3",
+      "original_conflict_path_reads": 0,
+      "plugin_id": "research-writing@ai-skills-candidate",
+      "quarantine_path_reads": 0,
+      "run_dir": "results/research-authoring--formal-production-authoring/c2_final/G1/runs/positive_1_methods.run"
+    },
+    "positive_2_research_update": {
+      "actual_consumption_proven": true,
+      "candidate_commit": "ac501d988f00cb6672fec105ae5fd51a0679cae0",
+      "candidate_path_reads": 6,
+      "final_persistent_state_equivalent_to_before": true,
+      "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3",
+      "original_conflict_path_reads": 0,
+      "plugin_id": "research-writing@ai-skills-candidate",
+      "quarantine_path_reads": 0,
+      "run_dir": "results/research-authoring--formal-production-authoring/c2_final/G1/runs/positive_2_research_update.run"
+    },
+    "positive_3_related_work": {
+      "actual_consumption_proven": true,
+      "candidate_commit": "ac501d988f00cb6672fec105ae5fd51a0679cae0",
+      "candidate_path_reads": 2,
+      "final_persistent_state_equivalent_to_before": true,
+      "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3",
+      "original_conflict_path_reads": 0,
+      "plugin_id": "research-writing@ai-skills-candidate",
+      "quarantine_path_reads": 0,
+      "run_dir": "results/research-authoring--formal-production-authoring/c2_final/G1/runs/positive_3_related_work.run"
+    },
+    "positive_4_existing_revision": {
+      "actual_consumption_proven": true,
+      "candidate_commit": "ac501d988f00cb6672fec105ae5fd51a0679cae0",
+      "candidate_path_reads": 2,
+      "final_persistent_state_equivalent_to_before": true,
+      "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3",
+      "original_conflict_path_reads": 0,
+      "plugin_id": "research-writing@ai-skills-candidate",
+      "quarantine_path_reads": 0,
+      "run_dir": "results/research-authoring--formal-production-authoring/c2_final/G1/runs/positive_4_existing_revision.run"
+    },
+    "positive_5_formal_pdf_handoff": {
+      "actual_consumption_proven": true,
+      "candidate_commit": "ac501d988f00cb6672fec105ae5fd51a0679cae0",
+      "candidate_path_reads": 2,
+      "final_persistent_state_equivalent_to_before": true,
+      "formal_pdf_boundary_forbidden_executable_violations": [],
+      "formal_pdf_boundary_no_forbidden_executables": true,
+      "formal_pdf_boundary_pdf_files": [
+        "workspace/outputs/build/research_update.generated.pdf",
+        "workspace/outputs/research_update.pdf"
+      ],
+      "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/research-writing/0.3",
+      "original_conflict_path_reads": 0,
+      "outputs": [
+        "outputs/build",
+        "outputs/extracted_text.txt",
+        "outputs/original_notes.md",
+        "outputs/previews",
+        "outputs/qa.md",
+        "outputs/render_receipt.json",
+        "outputs/research_update.md",
+        "outputs/research_update.pdf",
+        "outputs/source_and_handoff.md"
+      ],
+      "plugin_id": "research-writing@ai-skills-candidate",
+      "quarantine_path_reads": 0,
+      "run_dir": "results/research-authoring--formal-production-authoring/c2_final/G1/runs/positive_5_formal_pdf_handoff.run"
+    }
+  }
+}

@@ -1,0 +1,338 @@
+{
+  "commands": {
+    "pandoc_latex": {
+      "args": [
+        "pandoc",
+        "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T143041Z-441229/workspace/outputs/research_update.md",
+        "--from",
+        "markdown+tex_math_dollars+tex_math_single_backslash",
+        "--to",
+        "latex",
+        "--standalone",
+        "--include-in-header",
+        "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T143041Z-441229/workspace/outputs/build/canonical-header.tex",
+        "--variable",
+        "papersize=a4",
+        "--variable",
+        "fontsize=11pt",
+        "--variable",
+        "geometry:margin=25mm",
+        "--variable",
+        "linestretch=1.15",
+        "-o",
+        "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T143041Z-441229/workspace/outputs/build/research_update.generated.tex"
+      ],
+      "output": "",
+      "returncode": 0
+    },
+    "xelatex": [
+      {
+        "args": [
+          "/usr/bin/xelatex",
+          "-interaction=nonstopmode",
+          "-halt-on-error",
+          "-output-directory",
+          "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T143041Z-441229/workspace/outputs/build",
+          "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T143041Z-441229/workspace/outputs/build/research_update.generated.tex"
+        ],
+        "output": "This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex)\n restricted \\write18 enabled.\nentering extended mode\n\n(/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-\nproduction-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T14304\n1Z-441229/workspace/outputs/build/research_update.generated.tex\nLaTeX2e <2020-10-01> patch level 4\nL3 programming layer <2021-02-18>\n(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls\nDocument Class: article 2020/04/10 v1.4m Standard LaTeX document class\n(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo))\n(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty\nFor additional information on amsmath, use the `?' option.\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/lm/lmodern.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty)\n(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/unicode-math/unicode-math.sty\n(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty\n(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xetex.def\n(|extractbb --version)))\n(/usr/share/texlive/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.sty\n(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty\n(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse-2020-10-01.st\ny (/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse-generic.tex\n))) (/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.sty\n(/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty\n(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.cfg)))\n(/usr/share/texlive/texmf-dist/tex/latex/base/fix-cm.sty\n(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def))\n(/usr/share/texlive/texmf-dist/tex/latex/unicode-math/unicode-math-table.tex)))\n(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.sty\n(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype-xetex.def)\n(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.cfg))\n(/usr/share/texlive/texmf-dist/tex/latex/parskip/parskip.sty\n(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty\n(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)\n(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty)))\n(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty\n(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)\n(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def))\n(/usr/share/texlive/texmf-dist/tex/latex/bookmark/bookmark.sty\n(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty\n(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty\n(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty))\n(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)\n(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)\n(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref-langpatches.def)\n(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty)\n(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def)\n(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)\n(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty\n(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hxetex.def\n(/usr/share/texlive/texmf-dist/tex/generic/stringenc/stringenc.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty\n(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty)\n(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))\n(/usr/share/texlive/texmf-dist/tex/latex/bookmark/bkm-dvipdfm.def))\n(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty\n(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/footnotehyper/footnotehyper.sty)\n(/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/tex/xelatex/xecjk/x\neCJK.sty\n(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty)\n(/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/tex/latex/ctex/ctex\nhook.sty)\n(/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/tex/xelatex/xecjk/x\neCJK.cfg)) (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty\n(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty))\nNo file research_update.generated.aux.\n\nPackage unicode-math Warning: Using \\overbracket and \\underbracket from\n(unicode-math)                `mathtools' package.\n(unicode-math)                 \n(unicode-math)                 Use \\Uoverbracket and \\Uunderbracket for\n(unicode-math)                original `unicode-math' definition.\n\n\nPackage unicode-math Warning: I'm going to overwrite the following commands\n(unicode-math)                from the `mathtools' package: \n(unicode-math)                 \n(unicode-math)                     \\dblcolon, \\coloneqq, \\Coloneqq, \\eqqcolon.\n(unicode-math)                \n(unicode-math)                 \n(unicode-math)                 Note that since I won't overwrite the other\n(unicode-math)                colon-like commands, using them will lead to\n(unicode-math)                inconsistencies.\n\n(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty\n(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty)\n(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty))\n\nPackage hyperref Warning: Rerun to get /PageLabels entry.\n\n*geometry* driver: auto-detecting\n*geometry* detected driver: xetex\n(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty\n(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty\n(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)))\n(/usr/share/texlive/texmf-dist/tex/latex/lm/omllmm.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg)\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg)\n\nPackage longtable Warning: Column widths have changed\n(longtable)                in table 1 on input line 154.\n\n\nPackage longtable Warning: Table widths have changed. Rerun LaTeX.\n\n[1]\n(/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-\nproduction-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T14304\n1Z-441229/workspace/outputs/build/research_update.generated.aux)\n\nLaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.\n\n )\nOutput written on /overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-a\nuthoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/ru\nns/20261006T143041Z-441229/workspace/outputs/build/research_update.generated.pd\nf (1 page).\nTranscript written on /overflow/htzhu/mingcheng_new/AI_Skills_Collection-resear\nch-authoring--formal-production-authoring/.local-runtime/candidate-plugin-repla\ny/runs/20261006T143041Z-441229/workspace/outputs/build/research_update.generate\nd.log.\n",
+        "returncode": 0
+      },
+      {
+        "args": [
+          "/usr/bin/xelatex",
+          "-interaction=nonstopmode",
+          "-halt-on-error",
+          "-output-directory",
+          "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T143041Z-441229/workspace/outputs/build",
+          "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T143041Z-441229/workspace/outputs/build/research_update.generated.tex"
+        ],
+        "output": "This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex)\n restricted \\write18 enabled.\nentering extended mode\n\n(/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-\nproduction-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T14304\n1Z-441229/workspace/outputs/build/research_update.generated.tex\nLaTeX2e <2020-10-01> patch level 4\nL3 programming layer <2021-02-18>\n(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls\nDocument Class: article 2020/04/10 v1.4m Standard LaTeX document class\n(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo))\n(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty\nFor additional information on amsmath, use the `?' option.\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/lm/lmodern.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty)\n(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/unicode-math/unicode-math.sty\n(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty\n(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xetex.def\n(|extractbb --version)))\n(/usr/share/texlive/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.sty\n(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty\n(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse-2020-10-01.st\ny (/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse-generic.tex\n))) (/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.sty\n(/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty\n(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.cfg)))\n(/usr/share/texlive/texmf-dist/tex/latex/base/fix-cm.sty\n(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def))\n(/usr/share/texlive/texmf-dist/tex/latex/unicode-math/unicode-math-table.tex)))\n(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.sty\n(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype-xetex.def)\n(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.cfg))\n(/usr/share/texlive/texmf-dist/tex/latex/parskip/parskip.sty\n(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty\n(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)\n(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty)))\n(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty\n(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)\n(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def))\n(/usr/share/texlive/texmf-dist/tex/latex/bookmark/bookmark.sty\n(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty\n(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty\n(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty))\n(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)\n(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)\n(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref-langpatches.def)\n(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty)\n(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def)\n(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)\n(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty\n(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hxetex.def\n(/usr/share/texlive/texmf-dist/tex/generic/stringenc/stringenc.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty\n(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty)\n(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))\n(/usr/share/texlive/texmf-dist/tex/latex/bookmark/bkm-dvipdfm.def))\n(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty\n(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty))\n(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/footnotehyper/footnotehyper.sty)\n(/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/tex/xelatex/xecjk/x\neCJK.sty\n(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty)\n(/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/tex/latex/ctex/ctex\nhook.sty)\n(/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/tex/xelatex/xecjk/x\neCJK.cfg)) (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty\n(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty))\n(/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-\nproduction-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T14304\n1Z-441229/workspace/outputs/build/research_update.generated.aux)\n\nPackage unicode-math Warning: Using \\overbracket and \\underbracket from\n(unicode-math)                `mathtools' package.\n(unicode-math)                 \n(unicode-math)                 Use \\Uoverbracket and \\Uunderbracket for\n(unicode-math)                original `unicode-math' definition.\n\n\nPackage unicode-math Warning: I'm going to overwrite the following commands\n(unicode-math)                from the `mathtools' package: \n(unicode-math)                 \n(unicode-math)                     \\dblcolon, \\coloneqq, \\Coloneqq, \\eqqcolon.\n(unicode-math)                \n(unicode-math)                 \n(unicode-math)                 Note that since I won't overwrite the other\n(unicode-math)                colon-like commands, using them will lead to\n(unicode-math)                inconsistencies.\n\n(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty\n(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty)\n(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty))\n*geometry* driver: auto-detecting\n*geometry* detected driver: xetex\n(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty\n(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty\n(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)\n(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)))\n(/usr/share/texlive/texmf-dist/tex/latex/lm/omllmm.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg)\n(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)\n(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg) [1]\n(/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-\nproduction-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T14304\n1Z-441229/workspace/outputs/build/research_update.generated.aux) )\nOutput written on /overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-a\nuthoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/ru\nns/20261006T143041Z-441229/workspace/outputs/build/research_update.generated.pd\nf (1 page).\nTranscript written on /overflow/htzhu/mingcheng_new/AI_Skills_Collection-resear\nch-authoring--formal-production-authoring/.local-runtime/candidate-plugin-repla\ny/runs/20261006T143041Z-441229/workspace/outputs/build/research_update.generate\nd.log.\n",
+        "returncode": 0
+      }
+    ]
+  },
+  "effective_profile": {
+    "authority": "canonical-default",
+    "engine": "pandoc-ast-to-latex-xelatex",
+    "fonts": {
+      "cjk_sans": "Noto Sans SC",
+      "cjk_serif": "Noto Serif SC",
+      "latin_main": "TeX Gyre Termes",
+      "math": "TeX Gyre Termes Math"
+    },
+    "fontsize": "11pt",
+    "linestretch": "1.15",
+    "margin": "25mm",
+    "number_sections": false,
+    "ordinary_prose_downscaling": false,
+    "paper": "a4",
+    "profile_id": "canonical-formal-note-v0.2",
+    "resource_dir": "/users/a/e/aereinh/render_resources/chinese_math_pdf",
+    "route": "canonical-markdown",
+    "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T143041Z-441229/workspace/outputs/research_update.md",
+    "toc": false
+  },
+  "generated_tex": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T143041Z-441229/workspace/outputs/build/research_update.generated.tex",
+  "generated_tex_math_survival": {
+    "checks": [],
+    "failures": [],
+    "passed": true
+  },
+  "output_pdf": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T143041Z-441229/workspace/outputs/research_update.pdf",
+  "post_transform_ast_observed": false,
+  "post_transform_math_signature": null,
+  "post_transform_note": "No independent post-transform Pandoc AST stage is used by this route; generated TeX survival is checked directly.",
+  "probe": {
+    "commands": {
+      "kpsewhich": {
+        "available": true,
+        "first_line": "kpathsea version 6.3.2",
+        "path": "/usr/bin/kpsewhich"
+      },
+      "pandoc": {
+        "available": true,
+        "first_line": "pandoc 2.14.0.3",
+        "path": "/usr/bin/pandoc"
+      },
+      "pdffonts": {
+        "available": true,
+        "first_line": "pdffonts version 21.01.0",
+        "path": "/usr/bin/pdffonts"
+      },
+      "pdftoppm": {
+        "available": true,
+        "first_line": "pdftoppm version 21.01.0",
+        "path": "/usr/bin/pdftoppm"
+      },
+      "pdftotext": {
+        "available": true,
+        "first_line": "pdftotext version 21.01.0",
+        "path": "/usr/bin/pdftotext"
+      },
+      "xelatex": {
+        "available": true,
+        "first_line": "XeTeX 3.14159265-2.6-0.999992 (TeX Live 2020)",
+        "path": "/usr/bin/xelatex"
+      }
+    },
+    "default_renderer": "pandoc_xelatex",
+    "failure_status": null,
+    "fonts": {
+      "newcm_math_calligraphic": {
+        "available": true,
+        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/newcomputermodern/NewCMMath-Regular.otf",
+        "sha256": "d66ac1cc91c55c24d3636ae2df1238076debdff51841f9893fc5419cc2df3df7"
+      },
+      "noto_sans_sc_bold": {
+        "available": true,
+        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSansSC-Bold.otf",
+        "sha256": "c6cb5a93abaa9edc8ee7463b7ebb7f42d618d40e6ed2f7a5371c97b0b64767c0"
+      },
+      "noto_sans_sc_regular": {
+        "available": true,
+        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSansSC-Regular.otf",
+        "sha256": "faa6c9df652116dde789d351359f3d7e5d2285a2b2a1f04a2d7244df706d5ea9"
+      },
+      "noto_serif_sc_bold": {
+        "available": true,
+        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSerifSC-Bold.otf",
+        "sha256": "24693d48bdb9152f0a06b02af625638a1097abd6de4010ebba027f6e82710527"
+      },
+      "noto_serif_sc_regular": {
+        "available": true,
+        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSerifSC-Regular.otf",
+        "sha256": "e8f396decc1f0963a016a989c3d8852e863d1350996f573860a80767c83a1cd3"
+      },
+      "texgyretermes_bold": {
+        "available": true,
+        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-bold.otf",
+        "sha256": "2fb3e952065fa153c7e4e64e04b98b9d79225739b6025aa3f0f0782d299ff61e"
+      },
+      "texgyretermes_bolditalic": {
+        "available": true,
+        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-bolditalic.otf",
+        "sha256": "1bf6af99cb0e26c12951317032d79b96ae009551e59ccf02a5b24f325ecfec87"
+      },
+      "texgyretermes_italic": {
+        "available": true,
+        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-italic.otf",
+        "sha256": "6dd103a1672e50568cd2f8a706ccd48443d44d7d073a59d2286f4e6f746575d6"
+      },
+      "texgyretermes_math": {
+        "available": true,
+        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes-math/texgyretermes-math.otf",
+        "sha256": "e5ce42b4fe826b7ea4c0874359decf0b294439355c511a4794107a9924e2cd5a"
+      },
+      "texgyretermes_regular": {
+        "available": true,
+        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-regular.otf",
+        "sha256": "cc3fe7c707b81428d23d54df3eadd9228a2bf6a4d43125d94df56f5f63134659"
+      }
+    },
+    "forbidden_default_dependencies": {
+      "chromium_latex_fallback": false,
+      "fc_match_times_new_roman": false,
+      "times_new_roman": false,
+      "windows_fonts_mount": false
+    },
+    "latex_packages": {
+      "booktabs.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty"
+      },
+      "fontspec.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.sty"
+      },
+      "geometry.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty"
+      },
+      "graphicx.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty"
+      },
+      "longtable.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty"
+      },
+      "mathtools.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty"
+      },
+      "unicode-math.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/unicode-math/unicode-math.sty"
+      },
+      "xcolor.sty": {
+        "available": true,
+        "path": "/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty"
+      },
+      "xeCJK.sty": {
+        "available": true,
+        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/tex/xelatex/xecjk/xeCJK.sty"
+      }
+    },
+    "local_override_paths_checked": [
+      "/users/a/e/aereinh/.config/ai-skills/local-overrides.toml"
+    ],
+    "ready": true,
+    "resource_candidates": [
+      "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T143041Z-441229/workspace/render_resources/chinese_math_pdf",
+      "/users/a/e/aereinh/render_resources/chinese_math_pdf",
+      "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T143041Z-441229/render_resources/chinese_math_pdf",
+      "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/render_resources/chinese_math_pdf",
+      "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/render_resources/chinese_math_pdf",
+      "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/render_resources/chinese_math_pdf",
+      "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/render_resources/chinese_math_pdf",
+      "/overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf",
+      "/overflow/render_resources/chinese_math_pdf",
+      "/render_resources/chinese_math_pdf"
+    ],
+    "resource_dir": "/users/a/e/aereinh/render_resources/chinese_math_pdf"
+  },
+  "qa": {
+    "errors": [],
+    "font_checks": {
+      "canonical_font_rows": [
+        {
+          "embedded": "yes",
+          "name": "SHQZNB+NotoSerifSC-Regular-Identity-H",
+          "raw": "SHQZNB+NotoSerifSC-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      5  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "LDXEOR+TeXGyreTermes-Regular-Identity-H",
+          "raw": "LDXEOR+TeXGyreTermes-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      7  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "FQJCDK+NotoSerifSC-Bold-Identity-H",
+          "raw": "FQJCDK+NotoSerifSC-Bold-Identity-H   CID Type 0C       Identity-H       yes yes yes      9  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "KOATEJ+TeXGyreTermes-Bold-Identity-H",
+          "raw": "KOATEJ+TeXGyreTermes-Bold-Identity-H CID Type 0C       Identity-H       yes yes yes     11  0",
+          "subset": "yes",
+          "unicode": "yes"
+        }
+      ],
+      "cjk_font_rows": [],
+      "cjk_unicode_failures": [],
+      "errors": [],
+      "font_rows": [
+        {
+          "embedded": "yes",
+          "name": "SHQZNB+NotoSerifSC-Regular-Identity-H",
+          "raw": "SHQZNB+NotoSerifSC-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      5  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "LDXEOR+TeXGyreTermes-Regular-Identity-H",
+          "raw": "LDXEOR+TeXGyreTermes-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      7  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "FQJCDK+NotoSerifSC-Bold-Identity-H",
+          "raw": "FQJCDK+NotoSerifSC-Bold-Identity-H   CID Type 0C       Identity-H       yes yes yes      9  0",
+          "subset": "yes",
+          "unicode": "yes"
+        },
+        {
+          "embedded": "yes",
+          "name": "KOATEJ+TeXGyreTermes-Bold-Identity-H",
+          "raw": "KOATEJ+TeXGyreTermes-Bold-Identity-H CID Type 0C       Identity-H       yes yes yes     11  0",
+          "subset": "yes",
+          "unicode": "yes"
+        }
+      ],
+      "unexpected_canonical_fallback_rows": [],
+      "warnings": [
+        "CJK text found but no obvious CJK font name was detected in pdffonts"
+      ]
+    },
+    "fonts_embedded": true,
+    "pages": 1,
+    "pdf": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/.local-runtime/candidate-plugin-replay/runs/20261006T143041Z-441229/workspace/outputs/research_update.pdf",
+    "pdffonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nSHQZNB+NotoSerifSC-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      5  0\nLDXEOR+TeXGyreTermes-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      7  0\nFQJCDK+NotoSerifSC-Bold-Identity-H   CID Type 0C       Identity-H       yes yes yes      9  0\nKOATEJ+TeXGyreTermes-Bold-Identity-H CID Type 0C       Identity-H       yes yes yes     11  0\n",
+    "pdfinfo": "Title:          时序模型与非时序基线的初步比较\nCreator:        LaTeX via pandoc\nProducer:       xdvipdfmx (20200315)\nCreationDate:   Tue Oct  6 09:33:29 2026 EDT\nTagged:         no\nUserProperties: no\nSuspects:       no\nForm:           none\nJavaScript:     no\nPages:          1\nEncrypted:      no\nPage size:      595.28 x 841.89 pts (A4)\nPage rot:       0\nFile size:      59506 bytes\nOptimized:      no\nPDF version:    1.5\n",
+    "preview_paths": [
+      "outputs/previews/research_update-1.png"
+    ],
+    "preview_prefix": "outputs/previews/research_update",
+    "text_checks": {
+      "errors": [],
+      "fragmentation": {
+        "cjk_lines": 20,
+        "failed": false,
+        "short_cjk_lines": 0,
+        "short_ratio": 0.0
+      },
+      "table_survival": {
+        "checked_rows": 3,
+        "failed": false,
+        "matched_rows": 3,
+        "source_table_rows": 3
+      },
+      "warnings": []
+    },
+    "warnings": [
+      "CJK text found but no obvious CJK font name was detected in pdffonts"
+    ]
+  },
+  "route": "canonical-markdown",
+  "source_math_signature": [],
+  "status": "complete"
+}
