@@ -344,6 +344,12 @@ promotion_gate: validate on Lucerna repair plus one independent secure/provider-
 - One product's visual taste is project-local unless repeated or explicitly adopted as a long-term cross-project preference.
 - Runtime bugs belong to the app/repo or build capability, not automatically to this plugin.
 
+additional evidence (2026-10-06, Lucerna 01056r2): the next candidate fixed frontend Cancel/management-switch cleanup but GPT Work still found that tray-toggle, light-dismiss and outside-click native hide paths bypassed that JavaScript cleanup. The same review also found capability matrices overstating setup/preflight surfaces as operational completion, a Tailnet provider hard-coding a developer-machine Workstation alias instead of reusing canonical discovery, and external-review PNGs tracking real private repo/account/infrastructure metadata. This strengthens the candidate in four generic directions:
+- sensitive draft lifecycle must bind to native window lifecycle, not only button handlers;
+- provider/capability acceptance must require portable discovery and operational depth, not setup/parser presence;
+- cross-provider aggregation must preserve checking/presence-only/partial truth rather than gate it away by `LIVE` status;
+- external review evidence needs privacy minimization as a first-class acceptance artifact distinct from local real-live validation.
+
 ### Product UI copy needs an explicit Frontend Design content-architecture contract
 status: NEW
 tracking: #89
