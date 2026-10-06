@@ -837,3 +837,29 @@ The default mechanism for ordinary prose/rules is:
 
 This prevents the common failure in which a large blank lower half is created by a planner-selected hard break while the next page begins with content that could have flowed naturally.
 
+
+
+## 22. Visual-audit triggers must block automatic PASS
+
+A visual metric is useless if the implementation can record a threshold violation and still declare visual PASS.
+
+When a composition contract defines a review trigger (for example sparse-page occupancy, adjacent-page density imbalance, semantic-block split, orphan heading, or residual-page pattern), the trigger must have executable consequences.
+
+Required state model:
+
+```text
+VISUAL_TRIGGER_COUNT = <n>
+AUTO_VISUAL_PASS_ALLOWED = YES | NO
+HUMAN_OVERRIDE_REQUIRED = YES | NO
+HUMAN_OVERRIDE_REASON = <text or NONE>
+```
+
+Rules:
+
+- if any hard visual trigger fires, automatic visual PASS is forbidden;
+- if a soft trigger fires, the renderer/reviewer must either revise the layout or record a specific human-approved justification;
+- the implementation agent cannot write its own justification and count that as human approval;
+- a report containing a triggered metric plus `VISUAL_REVIEW = PASS` without closure is internally inconsistent and must fail QA.
+
+This requirement exists because the STAT5060 HW1 V7 report recorded Page 1 occupancy around 0.50 and an adjacent-page density difference far above the stated review threshold, yet still declared `FRONT_MATTER_DENSITY_REVIEW = PASS`. The metric was present but had no enforcement path.
+
