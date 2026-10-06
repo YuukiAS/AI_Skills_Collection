@@ -37,6 +37,7 @@ docs/plugin-todos/<plugin>.md
 | `render-chinese-math-pdf` | [docs/skill-todos/render-chinese-math-pdf.md](docs/skill-todos/render-chinese-math-pdf.md) |
 | `project-instructions-editor` | [docs/skill-todos/project-instructions-editor.md](docs/skill-todos/project-instructions-editor.md) |
 | `slurm-workflows` | [docs/skill-todos/slurm-workflows.md](docs/skill-todos/slurm-workflows.md) |
+| `course-assessment-authoring` | [docs/skill-todos/course-assessment-authoring.md](docs/skill-todos/course-assessment-authoring.md) |
 
 这里仍然沿用真实项目反馈的原则：项目 thread 先记录 `status: NEW` 的事实和证据；是否抽象成通用规则、如何修改实现、验收标准和 release 决策，留给后续 AI_Skills Planner / maintainer。
 
