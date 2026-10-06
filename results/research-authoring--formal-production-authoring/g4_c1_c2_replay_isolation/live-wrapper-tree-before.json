@@ -1,0 +1,293 @@
+{
+  "exists": true,
+  "file_count": 57,
+  "files": [
+    {
+      "path": ".codex-plugin/assets/composer.svg",
+      "sha256": "773b5b9d34c84c330274567ad2c16fecce32b4efd8d80415e4649aa6ebb13c00",
+      "size": 348
+    },
+    {
+      "path": ".codex-plugin/assets/logo.svg",
+      "sha256": "773b5b9d34c84c330274567ad2c16fecce32b4efd8d80415e4649aa6ebb13c00",
+      "size": 348
+    },
+    {
+      "path": ".codex-plugin/plugin.json",
+      "sha256": "e13c6e3c0e7ce00a06eff23b0f29800a5408636ae9d87c7e92e755bb30e54f36",
+      "size": 1594
+    },
+    {
+      "path": "skills/chinese-prose/SKILL.md",
+      "sha256": "8358a5a3a881d77f7ef2fbfa8e6237cd7bef14e610554189c368b17f5ee138a2",
+      "size": 22753
+    },
+    {
+      "path": "skills/chinese-prose/assets/app-facing.svg",
+      "sha256": "190eae30252b2cab6622cef59b3c846314ea8ae4b4957cd1f44f252cd0c7c472",
+      "size": 314
+    },
+    {
+      "path": "skills/chinese-prose/evals/trigger_queries.json",
+      "sha256": "768d82bdadf310a6a29dfa70f69842305781bfe2f7c49e66db02d9f3b7463e85",
+      "size": 1462
+    },
+    {
+      "path": "skills/chinese-prose/references/chinese-prose-checklist.md",
+      "sha256": "c0d23054b3f59981edf3f986aa2401aec4fb639b20098714b88b7b93b75290bb",
+      "size": 4668
+    },
+    {
+      "path": "skills/chinese-prose/references/group-meeting-chinese-report-prompt.md",
+      "sha256": "c3471cde987b4c78140f4b5f7a19fffb1b840315486a75f425cbd5e6ab85d4fb",
+      "size": 4037
+    },
+    {
+      "path": "skills/chinese-prose/references/source-notes.md",
+      "sha256": "ff86232d7406a33fafa0bba6ebaaed2416c50ca029436a8983365802fba41d59",
+      "size": 2253
+    },
+    {
+      "path": "skills/litcite/SKILL.md",
+      "sha256": "f1519913f73a00460a8cd1487ecca8731b0eb0766bfbfe1d7f46b6ef83278db2",
+      "size": 4362
+    },
+    {
+      "path": "skills/litcite/_src/cite/assets/app-facing.svg",
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "size": 374
+    },
+    {
+      "path": "skills/litcite/_src/cite/source.md",
+      "sha256": "207dc55c6200eb245b70ad73efdb6dcddefe0e6ee1ff24c33a0585f4b51a12d2",
+      "size": 33622
+    },
+    {
+      "path": "skills/litcite/_src/core/assets/app-facing.svg",
+      "sha256": "7d5a6f6a96d05c83a807ba47ae742730f51f9742320afa0e197438349ec99801",
+      "size": 505
+    },
+    {
+      "path": "skills/litcite/_src/core/source.md",
+      "sha256": "433fd9a5b5fecfa0dd277bf99472cd403d6c3b822ff7d8f7ac4a963dc4951aa2",
+      "size": 7552
+    },
+    {
+      "path": "skills/litcite/_src/lit/assets/app-facing.svg",
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "size": 374
+    },
+    {
+      "path": "skills/litcite/_src/lit/source.md",
+      "sha256": "5dd686b339e646840653fe38c7a0e489bbba840963445d4e646e85a1d525e806",
+      "size": 27091
+    },
+    {
+      "path": "skills/litcite/_src/lookup/assets/app-facing.svg",
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "size": 374
+    },
+    {
+      "path": "skills/litcite/_src/lookup/source.md",
+      "sha256": "48782de1a6a17e8f258e1cc8c7d69e3b95263a833e9aa7e8db6705c4f414c7af",
+      "size": 17835
+    },
+    {
+      "path": "skills/litcite/_src/verify/assets/app-facing.svg",
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "size": 374
+    },
+    {
+      "path": "skills/litcite/_src/verify/source.md",
+      "sha256": "f11751f9aa6ed65e622a886dca59f3f9d049dc7dee58bf2c54682f143ada3a09",
+      "size": 3269
+    },
+    {
+      "path": "skills/litcite/_src/zotero/assets/app-facing.svg",
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "size": 374
+    },
+    {
+      "path": "skills/litcite/_src/zotero/source.md",
+      "sha256": "dd088f72d12e0e6074d01a329beacc8a29d2fc4c35e741d269568736f744164a",
+      "size": 4429
+    },
+    {
+      "path": "skills/paper/SKILL.md",
+      "sha256": "2cc5ee55534b66b48860c8ad92adbc4e8d80a9ea905485a158a0cb2ce2d6500d",
+      "size": 5145
+    },
+    {
+      "path": "skills/paper/_src/core/assets/app-facing.svg",
+      "sha256": "7d5a6f6a96d05c83a807ba47ae742730f51f9742320afa0e197438349ec99801",
+      "size": 505
+    },
+    {
+      "path": "skills/paper/_src/core/source.md",
+      "sha256": "433fd9a5b5fecfa0dd277bf99472cd403d6c3b822ff7d8f7ac4a963dc4951aa2",
+      "size": 7552
+    },
+    {
+      "path": "skills/paper/_src/flow/assets/app-facing.svg",
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "size": 374
+    },
+    {
+      "path": "skills/paper/_src/flow/evals/trigger_queries.json",
+      "sha256": "135b45466c9497c4855af04ab6e8849d3be04e591adde175e3e8afff6938071f",
+      "size": 800
+    },
+    {
+      "path": "skills/paper/_src/flow/source.md",
+      "sha256": "841e1eb540bfa2cfd2d56200175d59b5939eda952e7576d52feb9553415bf2e0",
+      "size": 6362
+    },
+    {
+      "path": "skills/paper/_src/latex/assets/app-facing.svg",
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "size": 374
+    },
+    {
+      "path": "skills/paper/_src/latex/source.md",
+      "sha256": "8737228f999dd0c13acd8039418a418e604e305b01263077d664781c1abfec2c",
+      "size": 2795
+    },
+    {
+      "path": "skills/paper/_src/nature/assets/app-facing.svg",
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "size": 374
+    },
+    {
+      "path": "skills/paper/_src/nature/source.md",
+      "sha256": "0fcf2f0529d21e5025a05c869d75cc40773f42b69aeb4865caad22c7cabb4552",
+      "size": 3221
+    },
+    {
+      "path": "skills/paper/_src/review/assets/app-facing.svg",
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "size": 374
+    },
+    {
+      "path": "skills/paper/_src/review/evals/trigger_queries.json",
+      "sha256": "e922f7137a4c08abd846d5918dc5221a5c8b51202fc9c224ea97787188080d8f",
+      "size": 688
+    },
+    {
+      "path": "skills/paper/_src/review/source.md",
+      "sha256": "71ff8ba6dc9c13fb92c579e7b05365607d88844d08e932829aa08c2e9d9487a3",
+      "size": 26827
+    },
+    {
+      "path": "skills/paper/_src/score/assets/app-facing.svg",
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "size": 374
+    },
+    {
+      "path": "skills/paper/_src/score/source.md",
+      "sha256": "0bcf96112a77e11d1057928036ce7c00c20eff7d4045f67c43ca27988309e8b1",
+      "size": 12644
+    },
+    {
+      "path": "skills/paper/_src/venue/assets/app-facing.svg",
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "size": 374
+    },
+    {
+      "path": "skills/paper/_src/venue/source.md",
+      "sha256": "11ec0afdca3aa200bcd7ad6b945d7f7a7e5ce82fe1d3daf5e46ed24d7feb3203",
+      "size": 22585
+    },
+    {
+      "path": "skills/paper/_src/write/assets/app-facing.svg",
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "size": 374
+    },
+    {
+      "path": "skills/paper/_src/write/evals/trigger_queries.json",
+      "sha256": "e6448fda14c38ef4a96dbc52e5e62a36dfd053da8f30cbab26e7bc56ee76d41e",
+      "size": 768
+    },
+    {
+      "path": "skills/paper/_src/write/source.md",
+      "sha256": "fe3dbd1a956d7b06258a5b3855151e554e6d60b674afcf7cb273163a43d70ec3",
+      "size": 32916
+    },
+    {
+      "path": "skills/report/SKILL.md",
+      "sha256": "1b2dcf754c1918ddd41d779ae69b1da182e37ea1bd074b3aedfbacf3136dbe95",
+      "size": 3094
+    },
+    {
+      "path": "skills/report/_src/core/assets/app-facing.svg",
+      "sha256": "7d5a6f6a96d05c83a807ba47ae742730f51f9742320afa0e197438349ec99801",
+      "size": 505
+    },
+    {
+      "path": "skills/report/_src/core/source.md",
+      "sha256": "433fd9a5b5fecfa0dd277bf99472cd403d6c3b822ff7d8f7ac4a963dc4951aa2",
+      "size": 7552
+    },
+    {
+      "path": "skills/report/_src/report/assets/app-facing.svg",
+      "sha256": "b27a77b625ba2aa40b246aa0ba9858781991d8fe7aeb4474365d8379e5d9a6a4",
+      "size": 351
+    },
+    {
+      "path": "skills/report/_src/report/references/group-meeting-advisor-reports.md",
+      "sha256": "4a3fdb87c7b364da727241e6dad21d1314b377e542603d425e4a409b98a7790d",
+      "size": 5619
+    },
+    {
+      "path": "skills/report/_src/report/source.md",
+      "sha256": "279b65a99d073162d06718423897035c4c126e4b57698aa257ccf1d9d68885b8",
+      "size": 9790
+    },
+    {
+      "path": "skills/scientific-prose/SKILL.md",
+      "sha256": "2e5417d2ca461d15005de2c3e238820d6d05d58f834bab4b51fa78990f5dce04",
+      "size": 7509
+    },
+    {
+      "path": "skills/scientific-prose/assets/app-facing.svg",
+      "sha256": "69bd6a9842ff495754bcd47faf3a71956055797bafc5265f96a2cd39ce07c223",
+      "size": 375
+    },
+    {
+      "path": "skills/scientific-prose/evals/trigger_queries.json",
+      "sha256": "ed0579b262304a1a6ab0fac14f11f1b5a39c6229da25cd8a8a5d2ee3a27d934a",
+      "size": 697
+    },
+    {
+      "path": "skills/scientific-prose/references/scientific-report-checklist.md",
+      "sha256": "df9ebdcbdb6d92ff48563d25e2ceb270ac4d5aa4b158575fca200f080e00cf55",
+      "size": 3161
+    },
+    {
+      "path": "skills/scientific-prose/references/source-notes.md",
+      "sha256": "407e0e7ec0123da7300a9f77f3af770addf1cebb5b4dee592df7928f4dd9045e",
+      "size": 1274
+    },
+    {
+      "path": "skills/writing-fidelity/SKILL.md",
+      "sha256": "f012b730f95364d5093f16c8c433342121701c5cdcd8b5101a457c4a1e9160a4",
+      "size": 15115
+    },
+    {
+      "path": "skills/writing-fidelity/assets/app-facing.svg",
+      "sha256": "dc3d6ffae1d0e5dcfe02c9a9bc818f0c58e3301d3767ad81138798260c0b818f",
+      "size": 405
+    },
+    {
+      "path": "skills/writing-fidelity/evals/trigger_queries.json",
+      "sha256": "d1c728d8f6d2a6a6d0f8607f808401921134b1687978e403fa0e402fc04246e6",
+      "size": 1076
+    },
+    {
+      "path": "skills/writing-fidelity/references/failure-summary.md",
+      "sha256": "38e2224c3ec3fa3fecaa44591411a2380295e972927ff60efb83fc1910a46c56",
+      "size": 4293
+    }
+  ],
+  "root": "/users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0",
+  "tree_sha256": "b532774eb73036b1a12be2408ca2f3fed0b222fc05f452385e48891fe3c2146b"
+}

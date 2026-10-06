@@ -1,0 +1,26 @@
+[
+  {
+    "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/report/SKILL.md'",
+    "line_index": 5
+  },
+  {
+    "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/report/SKILL.md'",
+    "line_index": 6
+  },
+  {
+    "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/scientific-prose/SKILL.md'",
+    "line_index": 13
+  },
+  {
+    "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/scientific-prose/SKILL.md'",
+    "line_index": 14
+  },
+  {
+    "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/writing-fidelity/SKILL.md'",
+    "line_index": 17
+  },
+  {
+    "command": "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/writing-fidelity/SKILL.md'",
+    "line_index": 21
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/report/SKILL.md'"
+    ],
+    "event_type": "item.started",
+    "line_index": 5
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/report/SKILL.md'"
+    ],
+    "event_type": "item.completed",
+    "line_index": 6
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat inputs/01-C2_DEV_REPORT_RAW_NOTES.md'"
+    ],
+    "event_type": "item.started",
+    "line_index": 7
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat inputs/01-C2_DEV_REPORT_RAW_NOTES.md'"
+    ],
+    "event_type": "item.completed",
+    "line_index": 8
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/report/_src/core/source.md'"
+    ],
+    "event_type": "item.started",
+    "line_index": 9
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/report/_src/core/source.md'"
+    ],
+    "event_type": "item.completed",
+    "line_index": 10
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/report/_src/report/source.md'"
+    ],
+    "event_type": "item.started",
+    "line_index": 11
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/report/_src/report/source.md'"
+    ],
+    "event_type": "item.completed",
+    "line_index": 12
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/scientific-prose/SKILL.md'"
+    ],
+    "event_type": "item.started",
+    "line_index": 13
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/scientific-prose/SKILL.md'"
+    ],
+    "event_type": "item.completed",
+    "line_index": 14
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/report/_src/report/references/group-meeting-advisor-reports.md'"
+    ],
+    "event_type": "item.started",
+    "line_index": 16
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/writing-fidelity/SKILL.md'"
+    ],
+    "event_type": "item.started",
+    "line_index": 17
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/scientific-prose/references/scientific-report-checklist.md'"
+    ],
+    "event_type": "item.started",
+    "line_index": 18
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/scientific-prose/references/scientific-report-checklist.md'"
+    ],
+    "event_type": "item.completed",
+    "line_index": 19
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/report/_src/report/references/group-meeting-advisor-reports.md'"
+    ],
+    "event_type": "item.completed",
+    "line_index": 20
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc 'cat /users/a/e/aereinh/.codex/plugins/cache/created-by-me-remote/research-authoring/0.3.0/skills/writing-fidelity/SKILL.md'"
+    ],
+    "event_type": "item.completed",
+    "line_index": 21
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\nimport hashlib\nroot=Path('.')\nreport=(root/'outputs/advisor_update_source.md').read_text()\nfor token in ['0.714','0.671','+0.043','[0.018, 0.071]','[0.004, 0.049]','0.46','0.51','fewer than four','One seed','preliminary','clinical validity','deployability']:\n    assert token in report, token\nassert round(.714-.671,3)==.043\npaths=['inputs/01-C2_DEV_REPORT_RAW_NOTES.md','outputs/advisor_update_source.md','outputs/downstream_renderer_handoff.md']\nreceipt=root/'outputs/route_receipt.md'\nwith receipt.open('a') as f:\n    for name in paths:\n        digest=hashlib.sha256((root/name).read_bytes()).hexdigest()\n        f.write(f'\\\\n- \"'`{name}`: `{digest}`'\"\\\\n')\nfor name in ['advisor_update_source.md','downstream_renderer_handoff.md','route_receipt.md']:\n    p=root/'outputs'/name\n    assert p.is_file() and p.stat().st_size>0\n    print(f'{p}: {len(p.read_text().split())} words')\nprint('Protected numerical/qualifier checks passed; three Markdown deliverables present.')\nPY\""
+    ],
+    "event_type": "item.started",
+    "line_index": 25
+  },
+  {
+    "commands": [
+      "/usr/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\nimport hashlib\nroot=Path('.')\nreport=(root/'outputs/advisor_update_source.md').read_text()\nfor token in ['0.714','0.671','+0.043','[0.018, 0.071]','[0.004, 0.049]','0.46','0.51','fewer than four','One seed','preliminary','clinical validity','deployability']:\n    assert token in report, token\nassert round(.714-.671,3)==.043\npaths=['inputs/01-C2_DEV_REPORT_RAW_NOTES.md','outputs/advisor_update_source.md','outputs/downstream_renderer_handoff.md']\nreceipt=root/'outputs/route_receipt.md'\nwith receipt.open('a') as f:\n    for name in paths:\n        digest=hashlib.sha256((root/name).read_bytes()).hexdigest()\n        f.write(f'\\\\n- \"'`{name}`: `{digest}`'\"\\\\n')\nfor name in ['advisor_update_source.md','downstream_renderer_handoff.md','route_receipt.md']:\n    p=root/'outputs'/name\n    assert p.is_file() and p.stat().st_size>0\n    print(f'{p}: {len(p.read_text().split())} words')\nprint('Protected numerical/qualifier checks passed; three Markdown deliverables present.')\nPY\""
+    ],
+    "event_type": "item.completed",
+    "line_index": 26
+  }
+]

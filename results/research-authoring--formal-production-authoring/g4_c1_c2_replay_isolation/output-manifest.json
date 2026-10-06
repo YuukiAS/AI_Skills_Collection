@@ -1,0 +1,17 @@
+[
+  {
+    "path": "advisor_update_source.md",
+    "sha256": "209bf818682d44507353a88614311b4cd26095e4e12c86ead2cbe0b29ca51733",
+    "size": 3798
+  },
+  {
+    "path": "downstream_renderer_handoff.md",
+    "sha256": "4ab65ed61623450d87a3382967a4a7f38c24db513bef28392f950898043d8c4b",
+    "size": 5125
+  },
+  {
+    "path": "route_receipt.md",
+    "sha256": "3c111defa35b3c72c9740d59ba9149e5bf0bda12c424e3672af51286a81a8b2d",
+    "size": 3923
+  }
+]
