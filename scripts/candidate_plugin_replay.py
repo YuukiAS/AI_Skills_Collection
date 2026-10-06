@@ -73,6 +73,13 @@ class ConsumptionEvidence:
     event_type: str
 
 
+@dataclass(frozen=True)
+class ConsumerIsolationViolation:
+    line_index: int
+    event_type: str
+    command: str
+
+
 def repo_root() -> Path:
     return Path(__file__).resolve().parents[1]
 
@@ -546,22 +553,27 @@ def prepare_workspace(root: Path, run_dir: Path, task: Path, inputs: list[Path])
 
 
 def parse_consumption(stdout: str, installed_path: str) -> ConsumptionEvidence | None:
-    installed_skills_path = str(Path(installed_path) / "skills")
-    stable_suffix = stable_cache_suffix(installed_path)
-    stable_skills_suffix = f"{stable_suffix}/skills/" if stable_suffix else None
+    allowed_prefixes = candidate_skill_prefixes([installed_path])
     for line_index, line in enumerate(stdout.splitlines(), start=1):
         try:
             event = json.loads(line)
         except json.JSONDecodeError:
             continue
         strings = list(command_execution_evidence_strings(event))
-        if any(points_to_skill(value, installed_skills_path) for value in strings):
-            event_type = first_event_type(event)
-            return ConsumptionEvidence(line_index=line_index, event_type=event_type)
-        if stable_skills_suffix and any(points_to_skill(value, stable_skills_suffix) for value in strings):
+        if any(points_to_any_skill_prefix(value, allowed_prefixes) for value in strings):
             event_type = first_event_type(event)
             return ConsumptionEvidence(line_index=line_index, event_type=event_type)
     return None
+
+
+def candidate_skill_prefixes(installed_paths: Iterable[str]) -> list[str]:
+    prefixes: list[str] = []
+    for installed_path in installed_paths:
+        prefixes.append(str(Path(installed_path) / "skills"))
+        stable_suffix = stable_cache_suffix(installed_path)
+        if stable_suffix:
+            prefixes.append(f"{stable_suffix}/skills/")
+    return prefixes
 
 
 def stable_cache_suffix(installed_path: str) -> str | None:
@@ -589,6 +601,50 @@ def command_execution_evidence_strings(value: Any) -> Iterable[str]:
 
 def points_to_skill(value: str, skills_prefix: str) -> bool:
     return skills_prefix in value and "SKILL.md" in value
+
+
+def points_to_any_skill_prefix(value: str, skills_prefixes: Iterable[str]) -> bool:
+    return any(points_to_skill(value, prefix) for prefix in skills_prefixes)
+
+
+def is_plugin_cache_skill_read(value: str) -> bool:
+    return "/plugins/cache/" in value and "SKILL.md" in value
+
+
+def parse_consumer_isolation_violations(
+    stdout: str,
+    candidate_installed_paths: Iterable[str],
+) -> list[ConsumerIsolationViolation]:
+    allowed_prefixes = candidate_skill_prefixes(candidate_installed_paths)
+    violations: list[ConsumerIsolationViolation] = []
+    for line_index, line in enumerate(stdout.splitlines(), start=1):
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        event_type = first_event_type(event)
+        for command in command_execution_evidence_strings(event):
+            if is_plugin_cache_skill_read(command) and not points_to_any_skill_prefix(command, allowed_prefixes):
+                violations.append(
+                    ConsumerIsolationViolation(
+                        line_index=line_index,
+                        event_type=event_type,
+                        command=command,
+                    )
+                )
+    return violations
+
+
+def consumer_isolation_prompt(candidate_installed_paths: dict[str, str]) -> str:
+    lines = [
+        "Candidate replay consumer isolation:",
+        "For this replay, the only plugin-cache skills in scope are the installed candidate plugins below.",
+        "If you need a candidate skill, read and use its SKILL.md from one of these candidate paths.",
+        "Do not read, load, or rely on SKILL.md files from any other /plugins/cache/ path, including live or wrapper plugins.",
+    ]
+    for plugin_id, installed_path in sorted(candidate_installed_paths.items()):
+        lines.append(f"- {plugin_id}: {Path(installed_path) / 'skills'}")
+    return "\n".join(lines) + "\n\n"
 
 
 def iter_strings(value: Any) -> Iterable[str]:
@@ -647,6 +703,7 @@ def run_child_exec(
     stdout_path: Path,
     stderr_path: Path,
     writable_dirs: list[Path] | None = None,
+    candidate_installed_paths: dict[str, str] | None = None,
     timeout_seconds: float = DEFAULT_CHILD_TIMEOUT_SECONDS,
     terminate_grace_seconds: float = DEFAULT_CHILD_TERMINATE_GRACE_SECONDS,
 ) -> CommandResult:
@@ -698,7 +755,12 @@ def run_child_exec(
                 start_new_session=start_new_session,
             )
             try:
-                proc.communicate(input=prompt, timeout=timeout_seconds)
+                child_prompt = (
+                    consumer_isolation_prompt(candidate_installed_paths) + prompt
+                    if candidate_installed_paths
+                    else prompt
+                )
+                proc.communicate(input=child_prompt, timeout=timeout_seconds)
             except subprocess.TimeoutExpired as exc:
                 terminate_child_tree(proc, start_new_session, terminate_grace_seconds)
                 raise ReplayError(
@@ -803,6 +865,7 @@ def run_replay_multi(
                     stdout_path=stdout_path,
                     stderr_path=stderr_path,
                     writable_dirs=writable_dirs,
+                    candidate_installed_paths=installed_paths,
                 )
                 if not stdout_path.exists():
                     stdout_path.write_text(child.stdout, encoding="utf-8")
@@ -812,8 +875,20 @@ def run_replay_multi(
                     plugin: parse_consumption(child.stdout, installed_path)
                     for plugin, installed_path in installed_paths.items()
                 }
+                consumer_isolation_violations = parse_consumer_isolation_violations(
+                    child.stdout,
+                    installed_paths.values(),
+                )
                 if child.returncode != 0:
                     raise ReplayError(f"candidate child exec failed ({child.returncode}): {child.stderr.strip()}")
+                if consumer_isolation_violations:
+                    examples = "; ".join(
+                        f"line {item.line_index}: {item.command}" for item in consumer_isolation_violations[:3]
+                    )
+                    raise ReplayError(
+                        "candidate consumer isolation failed; child read non-candidate plugin-cache skill(s): "
+                        + examples
+                    )
                 missing = [plugin for plugin, evidence in evidence_by_plugin.items() if evidence is None]
                 if missing:
                     raise ReplayError(
@@ -843,6 +918,13 @@ def run_replay_multi(
                     "plugins": plugin_results,
                     "actual_consumption_by_plugin": {
                         item["name"]: item["actual_consumption"] for item in plugin_results
+                    },
+                    "consumer_isolation": {
+                        "enforced": True,
+                        "allowed_skill_roots": [
+                            str(Path(installed_path) / "skills") for installed_path in installed_paths.values()
+                        ],
+                        "non_candidate_plugin_cache_skill_reads": 0,
                     },
                     "stdout_path": str(stdout_path),
                     "stderr_path": str(stderr_path),

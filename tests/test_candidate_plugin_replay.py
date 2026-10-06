@@ -335,6 +335,58 @@ class ReplayMechanismTests(unittest.TestCase):
 
         self.assertIsNotNone(replay.parse_consumption(event + "\n", installed))
 
+    def test_consumer_isolation_allows_candidate_stable_suffix(self) -> None:
+        installed = "/canonical/root/plugins/cache/ai-skills-candidate/writing-style/0.1"
+        event = json.dumps(
+            {
+                "type": "item.completed",
+                "item": {
+                    "type": "command_execution",
+                    "command": (
+                        "cat /logical/root/plugins/cache/ai-skills-candidate/"
+                        "writing-style/0.1/skills/zh/SKILL.md"
+                    ),
+                },
+            }
+        )
+
+        self.assertEqual(replay.parse_consumer_isolation_violations(event + "\n", [installed]), [])
+
+    def test_consumer_isolation_flags_live_plugin_cache_skill_read(self) -> None:
+        installed = "/canonical/root/plugins/cache/ai-skills-candidate/writing-style/0.1"
+        event = json.dumps(
+            {
+                "type": "item.completed",
+                "item": {
+                    "type": "command_execution",
+                    "command": (
+                        "cat /users/me/.codex/plugins/cache/created-by-me-remote/"
+                        "research-authoring/0.3.0/skills/report/SKILL.md"
+                    ),
+                },
+            }
+        )
+
+        violations = replay.parse_consumer_isolation_violations(event + "\n", [installed])
+
+        self.assertEqual(len(violations), 1)
+        self.assertEqual(violations[0].line_index, 1)
+        self.assertIn("created-by-me-remote/research-authoring", violations[0].command)
+
+    def test_consumer_isolation_ignores_non_plugin_cache_skill_read(self) -> None:
+        installed = "/canonical/root/plugins/cache/ai-skills-candidate/writing-style/0.1"
+        event = json.dumps(
+            {
+                "type": "item.completed",
+                "item": {
+                    "type": "command_execution",
+                    "command": "cat /repo/skills/writing-style/SKILL.md",
+                },
+            }
+        )
+
+        self.assertEqual(replay.parse_consumer_isolation_violations(event + "\n", [installed]), [])
+
     def test_writable_dir_must_be_existing_repo_local_directory(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -496,6 +548,63 @@ class ReplayMechanismTests(unittest.TestCase):
         self.assertEqual(stdout_files[0].read_text(encoding="utf-8"), child_stdout)
         self.assertEqual(stderr_files[0].read_text(encoding="utf-8"), child_stderr)
         self.assertEqual(json.loads(add_payload_files[0].read_text(encoding="utf-8")), {"writing-style": {}})
+
+    def test_consumer_isolation_failure_still_cleans_candidate(self) -> None:
+        tmp, root, commit = make_repo()
+        self.addCleanup(tmp.cleanup)
+        (root / "task.md").write_text("Do the task.\n", encoding="utf-8")
+        (root / "input.md").write_text("Input.\n", encoding="utf-8")
+        installed = root / "plugins" / "cache" / "ai-skills-candidate" / "writing-style" / "0.1"
+        installed.mkdir(parents=True)
+        remove_calls: list[str] = []
+
+        def fake_stage(_root: Path, _candidate: replay.CandidatePlugin, run_dir: Path) -> Path:
+            marketplace = run_dir / "marketplace"
+            marketplace.mkdir(parents=True)
+            return marketplace
+
+        def fake_run_codex_json(_codex: Path, args: list[str], **_kwargs):
+            if args[:3] == ["plugin", "list", "--json"]:
+                return {"plugins": [{"pluginId": "writing-style@yuukias-ai-skills", "name": "writing-style", "enabled": True}]}
+            return None
+
+        candidate_event = json.dumps(
+            {
+                "type": "item.completed",
+                "item": {
+                    "type": "command_execution",
+                    "command": f"cat {installed}/skills/zh/SKILL.md",
+                },
+            }
+        )
+        live_event = json.dumps(
+            {
+                "type": "item.completed",
+                "item": {
+                    "type": "command_execution",
+                    "command": "cat /root/plugins/cache/live/writing-style/0.1/skills/zh/SKILL.md",
+                },
+            }
+        )
+        child = replay.CommandResult(("codex", "exec"), 0, candidate_event + "\n" + live_event + "\n", "")
+        with mock.patch.object(replay, "ensure_runtime_available", return_value={"version": replay.EXPECTED_CODEX_VERSION}):
+            with mock.patch.object(replay, "safe_stage_candidate", side_effect=fake_stage):
+                with mock.patch.object(replay, "run_codex_json", side_effect=fake_run_codex_json):
+                    with mock.patch.object(
+                        replay,
+                        "add_candidate_plugin",
+                        return_value=("writing-style@ai-skills-candidate", str(installed), {}),
+                    ):
+                        with mock.patch.object(replay, "run_child_exec", return_value=child):
+                            with mock.patch.object(
+                                replay,
+                                "remove_candidate_plugin",
+                                side_effect=lambda _c, plugin_id: remove_calls.append(plugin_id),
+                            ):
+                                with self.assertRaisesRegex(replay.ReplayError, "consumer isolation"):
+                                    replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
+
+        self.assertEqual(remove_calls, ["writing-style@ai-skills-candidate"])
 
     def test_child_exec_normal_completion_persists_streams(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -671,6 +780,43 @@ class ReplayMechanismTests(unittest.TestCase):
 
         self.assertIn("plugins.writing-style@ai-skills-candidate.enabled=true", captured)
         self.assertNotIn('plugins."writing-style@ai-skills-candidate".enabled=true', captured)
+
+    def test_child_exec_injects_candidate_consumer_isolation_prompt(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            workspace = root / "workspace"
+            output_dir = workspace / "outputs"
+            workspace.mkdir()
+            output_dir.mkdir()
+            prompt_file = root / "prompt.txt"
+            codex = self.make_executable(
+                root,
+                "#!/usr/bin/env python3\n"
+                "import pathlib, sys\n"
+                f"pathlib.Path({str(prompt_file)!r}).write_text(sys.stdin.read(), encoding='utf-8')\n",
+            )
+            installed = "/root/plugins/cache/ai-skills-candidate/writing-style/0.1"
+
+            replay.run_child_exec(
+                codex,
+                root / "candidate-marketplace",
+                "writing-style@ai-skills-candidate",
+                workspace,
+                output_dir,
+                "Rewrite this.",
+                stdout_path=root / "run" / "child.stdout.jsonl",
+                stderr_path=root / "run" / "child.stderr",
+                candidate_installed_paths={"writing-style@ai-skills-candidate": installed},
+                timeout_seconds=5,
+                terminate_grace_seconds=0.1,
+            )
+
+            prompt = prompt_file.read_text(encoding="utf-8")
+
+        self.assertIn("Candidate replay consumer isolation:", prompt)
+        self.assertIn(f"{installed}/skills", prompt)
+        self.assertIn("Do not read, load, or rely on SKILL.md files from any other /plugins/cache/ path", prompt)
+        self.assertTrue(prompt.rstrip().endswith("Rewrite this."))
 
     def test_child_exec_can_add_repo_local_writable_dirs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

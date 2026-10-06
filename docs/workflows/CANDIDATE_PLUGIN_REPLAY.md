@@ -45,13 +45,27 @@ The helper:
 - reuses the existing Codex account identity rather than copying credentials into a second home;
 - uses the reserved temporary `@ai-skills-candidate` namespace;
 - launches a fresh ephemeral `codex exec --ignore-user-config` child with the candidate enabled process-locally;
+- injects a replay-level consumer-isolation preamble that tells the child to use
+  only the installed candidate plugin-cache skill roots for plugin-cache skills;
 - records `plugin-add.json`, child JSONL/stdout and stderr in the ignored run directory;
 - streams the long-running child stdout/stderr to those run-directory files while the child is still alive;
 - proves actual candidate consumption only from parsed `command_execution` JSON events that read `SKILL.md` under the candidate plugin cache path;
+- fails the replay if parsed child `command_execution` events read `SKILL.md`
+  under any non-candidate `/plugins/cache/` path, including same-name
+  production plugins, live wrapper plugins, or stale cached plugin packages;
 - removes the temporary candidate in `finally` cleanup;
 - verifies the pre-existing same-name production plugin identity/enabled state is unchanged.
 
 A replay does **not** prove domain quality by itself. The generic helper proves candidate identity, fresh-runtime loading, actual skill consumption, cleanup and production-identity preservation. The target plugin/task still owns domain-specific route receipts, fidelity checks, rendered artifacts, scientific correctness, qualitative acceptance and unrelated regression.
+
+Consumer isolation is a replay harness boundary, not a product prompt
+blacklist. It does not uninstall, remove, update, or disable the user's live
+plugins persistently. It also does not claim that `codex exec
+--ignore-user-config` makes other plugin-cache skills impossible to discover.
+Instead, the helper constrains the child at the replay prompt boundary and then
+audits the JSONL command trace. If the child reads a live wrapper or any other
+non-candidate plugin-cache `SKILL.md`, the candidate consumption evidence is
+invalid and the replay fails.
 
 ## Safety boundaries
 
@@ -65,6 +79,9 @@ Do not use this workflow to:
 - overwrite `writing-style@yuukias-ai-skills` or another production identity with a candidate;
 - inject internal subskill/route names into a natural black-box production prompt merely to manufacture a PASS;
 - treat a receipt/test/JSONL event as reader-facing PRODUCT PASS.
+- work around a consumer-isolation failure by uninstalling/removing a live
+  plugin, editing global user plugin state, or adding task-specific prompt
+  blacklists.
 
 `replay` is local-only and must not silently download a runtime. If the runtime is missing, run `ensure-runtime` explicitly.
 
@@ -79,6 +96,9 @@ Never print, commit or push private plaintext, credentials, `auth.json`, token-b
 Classify before changing anything:
 
 - runtime/package/CLI/config/parser failure -> replay infrastructure failure; fix only when the failure is real and generic;
+- child reads a non-candidate `/plugins/cache/.../SKILL.md` during candidate
+  replay -> replay consumer-isolation failure; fix the shared replay path or
+  return to Planner/Critic, do not count the run as candidate PASS;
 - candidate is loaded but wrong skill/route is selected -> target plugin routing failure;
 - correct route is selected but domain receipt/mechanical validation fails -> target plugin implementation failure;
 - process/receipt passes but user artifact is poor -> PRODUCT / ARTIFACT failure, not harness success;
