@@ -28,18 +28,36 @@ Pre-final Critic review:
   - Reviewer: `01a10a50-24b7-7d53-ab24-b5408bec92d9`
   - Evidence: `private/exports/research-authoring--formal-production-authoring/final_tasks/G3/final_run/`
   - Review: `results/research-authoring--formal-production-authoring/G3_FINAL_REVIEW.md`
-- G4: `BLOCKED_UNAVAILABLE_PLUGIN_CREATOR_TOOL`
+- G4: `LIVE_PLUGIN_CREATED__CHAIN_PENDING`
   - Requires G2 full PASS: satisfied.
-  - Wrapper candidate archive:
-    `private/exports/research-authoring--formal-production-authoring/final_tasks/G4/research-authoring-wrapper-candidate.tar.gz`
-  - Wrapper manifest:
-    `private/exports/research-authoring--formal-production-authoring/final_tasks/G4/WRAPPER_MANIFEST.json`
-  - Live mutation attempt evidence:
-    `private/exports/research-authoring--formal-production-authoring/final_tasks/G4/LIVE_PLUGIN_CREATOR_ATTEMPT.md`
-  - Live Plugin Creator / ChatGPT account mutation: authorized by the user for this exact wrapper, but not performed because the current Codex tool surface did not expose the required `create_plugin` live mutation tool.
+  - Live plugin:
+    - name: `research-authoring`
+    - version: `0.3.0`
+    - scope: `USER`
+    - discoverability: `PRIVATE`
+    - plugin id: `plugins_6ac4471b735881918c17cd310f262429`
+    - release id: `pluginrel_6ac4471c7b90819189bc23af890135f3`
+  - Live mutation result:
+    `private/exports/research-authoring--formal-production-authoring/final_tasks/G4/LIVE_PLUGIN_CREATOR_RESULT.md`
+  - Frozen handoff rubric:
+    `private/exports/research-authoring--formal-production-authoring/final_tasks/G4/CHAT_CODEX_HANDOFF_RUBRIC.md`
+  - G4 is not PASS yet: the live ChatGPT -> exact-C Codex production chain, final PDF, renderer QA, final Research Authoring scientific QA, and independent G4 Reviewer remain to be executed.
 
-## Stop State
+## Current State
 
-G4 live wrapper mutation is the next required step. The exact live mutation is authorized for this task, but the current Codex tool surface does not expose the required Plugin Creator `create_plugin` tool. Execution must resume from the frozen wrapper candidate once that tool is available; do not substitute another distribution route or mutate another plugin.
+The former Plugin Creator tool-surface blocker is resolved. The live PRIVATE / USER-scope / skills-only Research Authoring wrapper was created and read back from Plugin Creator.
 
-No main merge, formal release, paid API call, private external upload, Plugin Creator live mutation, or ChatGPT live account mutation was performed.
+The next required step is the already-frozen G4 live chain:
+
+```text
+live research-authoring ChatGPT wrapper
+-> frozen G2 semantic baseline
+-> complete production handoff
+-> exact-C Codex research-main
+-> canonical PDF renderer route
+-> renderer QA
+-> final Research Authoring scientific QA
+-> independent G4 Reviewer
+```
+
+No main merge, formal release, paid API call, or additional plugin mutation is authorized by this status.
