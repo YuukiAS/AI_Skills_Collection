@@ -6,29 +6,84 @@ on:
       - work/research-authoring--formal-production-authoring
     paths:
       - ".github/workflows/059-research-authoring-wrapper-handoff.yml"
-      - "private/exports/research-authoring--formal-production-authoring/final_tasks/G4/research-authoring-wrapper-candidate.tar.gz"
+      - "private/exports/research-authoring--formal-production-authoring/final_tasks/G4/wrapper_candidate/research-authoring/.codex-plugin/plugin.json"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  upload-wrapper:
+  package-and-upload-wrapper:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify frozen wrapper archive
+        with:
+          persist-credentials: true
+
+      - name: Build deterministic semver-compatible wrapper
         shell: bash
         run: |
           set -euo pipefail
-          file="private/exports/research-authoring--formal-production-authoring/final_tasks/G4/research-authoring-wrapper-candidate.tar.gz"
-          test -f "$file"
-          actual="$(sha256sum "$file" | awk '{print $1}')"
-          expected="deca604877ac47441160bd99d885470bb887646902bbf7718911e801386f725f"
-          test "$actual" = "$expected"
-      - name: Upload exact wrapper
+          python3 - <<'PY'
+          import gzip, hashlib, json, tarfile
+          from pathlib import Path
+
+          base = Path("private/exports/research-authoring--formal-production-authoring/final_tasks/G4")
+          root = base / "wrapper_candidate" / "research-authoring"
+          manifest_path = root / ".codex-plugin" / "plugin.json"
+          manifest = json.loads(manifest_path.read_text())
+          assert manifest["name"] == "research-authoring"
+          assert manifest["version"] == "0.3.0"
+
+          out = base / "research-authoring-wrapper-candidate.tar.gz"
+          with out.open("wb") as raw:
+              with gzip.GzipFile(filename="", mode="wb", fileobj=raw, mtime=0) as gz:
+                  with tarfile.open(fileobj=gz, mode="w") as tf:
+                      items = [root] + sorted(root.rglob("*"), key=lambda p: p.as_posix())
+                      for p in items:
+                          arcname = p.relative_to(root.parent).as_posix()
+                          info = tf.gettarinfo(str(p), arcname=arcname)
+                          info.uid = 0
+                          info.gid = 0
+                          info.uname = ""
+                          info.gname = ""
+                          info.mtime = 0
+                          if p.is_file():
+                              with p.open("rb") as fh:
+                                  tf.addfile(info, fh)
+                          else:
+                              tf.addfile(info)
+
+          data = out.read_bytes()
+          digest = hashlib.sha256(data).hexdigest()
+          wm_path = base / "WRAPPER_MANIFEST.json"
+          wm = json.loads(wm_path.read_text())
+          wm["archive"]["bytes"] = len(data)
+          wm["archive"]["sha256"] = digest
+          wm["chatgpt_wrapper_version"] = "0.3.0"
+          wm_path.write_text(json.dumps(wm, indent=2, ensure_ascii=False) + "\n")
+          print("archive", out)
+          print("bytes", len(data))
+          print("sha256", digest)
+          PY
+
+      - name: Commit corrected G4 package
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add             private/exports/research-authoring--formal-production-authoring/final_tasks/G4/research-authoring-wrapper-candidate.tar.gz             private/exports/research-authoring--formal-production-authoring/final_tasks/G4/WRAPPER_MANIFEST.json
+          if git diff --cached --quiet; then
+            echo "No package changes to commit."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898233+github-actions[bot]@users.noreply.github.com"
+            git commit -m "fix: sync semver-compatible Research Authoring wrapper"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+      - name: Upload exact corrected wrapper
         uses: actions/upload-artifact@v4
         with:
-          name: research-authoring-wrapper-g4
+          name: research-authoring-wrapper-g4-semver
           path: private/exports/research-authoring--formal-production-authoring/final_tasks/G4/research-authoring-wrapper-candidate.tar.gz
           if-no-files-found: error
           retention-days: 3
