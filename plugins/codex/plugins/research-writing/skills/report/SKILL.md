@@ -37,7 +37,11 @@ Use this aggregate Codex App skill by entering the coordinator source first.
 ## Plugin Workflow Notes
 
 - For document-producing report-family requests, read `_src/core/source.md` first to freeze audience, purpose, source authority, claim-evidence spine, section jobs, table/figure/formula roles, citation authority, incremental-edit scope, downstream route, and final document-level QA.
-- For explicit formal PDF delivery, keep report semantics in Research Authoring and delegate only rendering mechanics to `render-chinese-math-pdf` when that companion is installed through the active profile; standalone Marketplace Research Authoring must fail closed when the renderer companion is missing.
+- For explicit formal PDF delivery, keep report semantics in Research Authoring and delegate only rendering mechanics to `render-chinese-math-pdf` when that companion is installed through the active profile.
+- On standalone or skills-only surfaces where the approved renderer companion is absent, stop after stable Markdown/LaTeX scientific source plus a complete downstream production handoff; do not create, open, render, compile, preview, or QA a PDF.
+- Renderer mechanics include local/preview/QA compile, XeLaTeX, `latexmk`, Pandoc-to-PDF or equivalent PDF compilation, PDF creation/open/render, page rasterization, page visual inspection, and PDF-derived text/font/page QA such as `pdftotext`, `pdfinfo`, or `pdffonts`.
+- Generic runtime, file, or compute capability is not a substitute for `render-chinese-math-pdf`; Markdown/LaTeX source authoring, source-only semantic/fidelity QA, and full Codex/downstream renderer handoff remain allowed.
+- Any layout correctness that requires compile/render stays pending for the downstream renderer and must not be closed by standalone Research Authoring.
 
 ## Workflow
 

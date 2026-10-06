@@ -84,6 +84,45 @@ class ResearchWritingRoutingTests(unittest.TestCase):
         self.assertIn("markdown-only research authoring requests remain markdown-only", text)
         self.assertIn("formal pdf", text)
 
+    def test_research_writing_report_aggregate_blocks_standalone_pdf_rendering(self) -> None:
+        data = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
+        research = next(plugin for plugin in data["plugins"] if plugin["name"] == "research-writing")
+        route_by_artifact = {entry["artifact_id"]: entry for entry in research["skills"]}
+
+        report = route_by_artifact["report"]
+        notes = "\n".join(report["workflow_notes"]).lower()
+
+        self.assertEqual(report["routing_mode"], "coordinator-first")
+        self.assertEqual(report["coordinator_artifact_id"], "core")
+        self.assertIn("standalone or skills-only surfaces", notes)
+        self.assertIn("approved renderer companion is absent", notes)
+        self.assertIn("stop after stable markdown/latex scientific source", notes)
+        self.assertIn("complete downstream production handoff", notes)
+        self.assertIn("local/preview/qa compile", notes)
+        self.assertIn("xelatex", notes)
+        self.assertIn("latexmk", notes)
+        self.assertIn("pandoc-to-pdf", notes)
+        self.assertIn("pdf creation/open/render", notes)
+        self.assertIn("page rasterization", notes)
+        self.assertIn("page visual inspection", notes)
+        self.assertIn("pdf-derived text/font/page qa", notes)
+        self.assertIn("pdftotext", notes)
+        self.assertIn("pdfinfo", notes)
+        self.assertIn("pdffonts", notes)
+        self.assertIn("generic runtime, file, or compute capability is not a substitute", notes)
+        self.assertIn("render-chinese-math-pdf", notes)
+        self.assertIn("markdown/latex source authoring", notes)
+        self.assertIn("source-only semantic/fidelity qa", notes)
+        self.assertIn("full codex/downstream renderer handoff remain allowed", notes)
+        self.assertIn("layout correctness that requires compile/render stays pending", notes)
+
+        paper_notes = "\n".join(route_by_artifact["paper"]["workflow_notes"]).lower()
+        litcite_notes = "\n".join(route_by_artifact["litcite"]["workflow_notes"]).lower()
+        self.assertNotIn("pdftotext", paper_notes)
+        self.assertNotIn("pdftotext", litcite_notes)
+        self.assertNotIn("generic runtime, file, or compute capability", paper_notes)
+        self.assertNotIn("generic runtime, file, or compute capability", litcite_notes)
+
     def test_research_main_agents_notes_route_report_pdf_through_reporting_first(self) -> None:
         profile = json.loads((REPO_ROOT / "profiles/research-main.json").read_text(encoding="utf-8"))
         notes = "\n".join(profile.get("routing_notes", [])).lower()
