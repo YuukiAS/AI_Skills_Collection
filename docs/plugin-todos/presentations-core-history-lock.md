@@ -9,6 +9,7 @@ Detailed specifications:
 - `docs/design/PRESENTATIONS_CONTROL_PLANE_SEMANTIC_FIDELITY_AND_REAL_DETECTOR_TODO_2026-10-06.md`
 - `docs/design/PRESENTATIONS_ANTI_SELF_CERTIFICATION_AND_CONVERGENCE_GOVERNANCE_TODO_2026-10-06.md`
 - `docs/design/PRESENTATIONS_PRODUCTION_DETECTOR_AUTHENTICITY_AND_EVIDENCE_BINDING_TODO_2026-10-06.md`
+- `docs/design/PRESENTATIONS_INDEPENDENT_EXECUTION_AND_REVIEW_ARCHITECTURE_2026-10-06.md`
 
 ## Core requirements
 
@@ -47,7 +48,13 @@ The presentations workflow must add first-class support for:
 31. row ancestry validates exact allowed stable/component target sets, not merely global ID validity or page-map existence;
 32. persisted Git object identities are real 40-hex blobs resolved from commit plus path, never echoed path strings;
 33. non-self-referential implementation/evidence binding, preferably an implementation commit followed by an evidence commit whose runtime validator checks the actual remote head;
-34. detector-catalog coverage with honest phase states such as `EXECUTED_PASS` and `SPEC_READY_NOT_EXECUTED`, rather than reporting future copy/render detectors as already passing.
+34. detector-catalog coverage with honest phase states such as `EXECUTED_PASS` and `SPEC_READY_NOT_EXECUTED`, rather than reporting future copy/render detectors as already passing;
+35. trust-domain separation: the executor that edits a candidate cannot authoritatively validate or accept that same candidate;
+36. the authoritative deterministic validator runs only after executor stop in a fresh process/CI or strictly isolated read-only subagent;
+37. validator/reviewer runtime is version-pinned and immutable during an ordinary deck revision task;
+38. executor completion state is at most `READY_FOR_INDEPENDENT_VALIDATION`, never final PASS;
+39. blind rendered-artifact review is isolated from executor narrative and expected human-rejection answer keys;
+40. repeated new P0 self-certification defects trigger a generic validator rebuild rather than indefinite project-local V5/V6/V7 patches.
 
 ## Why this is core
 
@@ -89,4 +96,8 @@ Counts, schema presence, unique fixture tuples, fixture totals and file separati
 - component fixtures are demonstrably relevant to the component they claim to test;
 - a committed forbidden audience-path change is detected even after the worktree is clean;
 - detector coverage names every required detector and distinguishes executed proof from future specification readiness;
+- the candidate executor cannot modify the authoritative validator/reviewer runtime in the same task;
+- authoritative validation is launched outside the executor context and is artifact/commit-bound;
+- a subagent counts as independent only when it has fresh context, read-only candidate/authority, no answer key and no permission to edit tests or gates;
+- executor self-tests are debugging evidence only and cannot become release acceptance;
 - one real existing deck converges within two to four review rounds under the new workflow.
