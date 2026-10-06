@@ -1,0 +1,84 @@
+# G4 ChatGPT Input — Frozen G2 Semantic Baseline
+
+This file is the exact G2-approved semantic baseline for the frozen G4 cross-surface production test.
+
+- Task: `research-authoring--formal-production-authoring`
+- Research Authoring final candidate: `1c37c0715aca0096606f24e56192b7857e72bbd6`
+- G2 final status: `PASS`
+- G2 reviewer: `01a10a45-1fca-73a2-b8f0-01cbb4cfc470`
+- Source locator: `private/exports/research-authoring--formal-production-authoring/final_tasks/G2/final_run/phase2/outputs/G2_PHASE2_ADVISOR_UPDATE.md`
+
+The document below is already scientifically reviewed. The G4 ChatGPT stage must preserve its scientific content, numerical values, uncertainty, limitations, evidence strength, and citation/evidence-anchor meaning. It may reorganize only as needed for a stable formal-document source and production handoff.
+
+---
+
+# Site-conditioned measurement heterogeneity: evidence and the next scientific question
+
+The clean CARE evidence supports a site-conditioned component of measurement error: local models predict scar fraction more accurately on their own site's held-out subjects than when transferred across sites. This advantage persists across the reported robustness checks. The evidence also suggests a penalty from fitting one shared model, although that comparison is smaller and less certain. M&Ms provides supporting evidence from a different cardiac measurement setting, with insufficient detail to establish the same effect size or mechanism. A subsequent CARE experiment supports lower held-out scar-fraction error after bounded site-specific adaptation relative to its same-run FedAvg reference. Whether sharing adds value beyond local-only learning, and whether the gains hold at small or unseen centers, remains unresolved. [C3–C5, C7, C10–C11, D1–D4]
+
+## What must a clean comparison establish?
+
+The scientific target is measurement fidelity: whether a model preserves scar fraction and related cardiac volumes when used across sites. A site-associated difference in segmentation quality matters here because it may alter the quantities used for subsequent analysis. CARE therefore treats scar-volume-fraction absolute error as the primary endpoint, with volume errors and Dice overlap as supporting outcomes. Lower absolute error indicates better measurement agreement; higher Dice indicates better overlap. [C2]
+
+Subject-disjoint evaluation is necessary to distinguish transfer to unseen people from performance that could benefit from subject reuse. The supplied clean CARE design separates 88 adaptation subjects from 45 test subjects across seven centers and evaluates three seeds with decoder-only and full-model adaptation. It uses a checkpoint different from the earlier one. These materials define the clean comparison, but do not provide the subject-level memberships needed to independently verify every pretraining and adaptation boundary. They therefore do not establish that any particular earlier result was caused by leakage. [C1]
+
+The comparisons address different explanations. Pooled training is the centralized shared-model reference; the local-oracle reference uses the corresponding site's local model; cross-site local prediction tests how well such a model transfers elsewhere. FedAvg provides a federated shared-model comparison. The adaptation budget is specified as four matched local epochs. Physical volume calculations use the target spacing of the preprocessed images, so original-image spacing is not directly multiplied by preprocessed voxel counts. The available numerical conclusions concern these comparisons, rather than every method listed in the experiment design. [C2]
+
+## Does the deficit follow aggregation or the site–model pairing?
+
+**Table 1. CARE comparisons on held-out scar-fraction absolute error.** Positive error differences favor the second-named method. Values are in fraction units and rounded to four decimals. Decision-summary means and bootstrap seed estimates are shown separately because their aggregation definitions are not fully supplied. [C3–C4]
+
+| Comparison or summary | Decoder adaptation | Full-model adaptation |
+|---|---:|---:|
+| FedAvg − pooled, cross-seed mean error difference | 0.0395 | 0.0745 |
+| Pooled − local oracle, cross-seed mean error difference | 0.0372 | 0.0222 |
+| Own-site / off-site local mean error, decision summary | 0.0684 / 0.2000 | 0.0650 / 0.2245 |
+| Off-site − own-site local error, range of three bootstrap-table seed estimates | 0.1314–0.1508 | 0.1397–0.1776 |
+
+FedAvg has higher mean error than pooled training in both adaptation scopes, and pooled training has higher mean error than the local-oracle reference. Each direction holds in all three seed summaries. The pooled/local difference makes aggregation alone insufficient to explain the observed pattern: a deficit remains in the centralized shared-model comparison. The additional FedAvg/pooled gap remains compatible with an aggregation-related contribution. Together with the own-site advantage, these results support the interpretation termed Pattern H: heterogeneity associated with the site–model pairing and a possible single-global-model penalty in this setting. They do not show that all shared models must perform worse than local models. [C3]
+
+The reported intervals most consistently support the own-site versus off-site comparison. All six primary paired bootstrap intervals lie above zero. For example, one decoder comparison estimates an off-site penalty of 0.1314, with a reported interval of [0.1002, 0.1639]. By contrast, three of the six pooled-minus-local-oracle intervals include zero, despite positive point estimates throughout. The supplied table does not specify the interval confidence level or resampling scheme, so these intervals should not be assigned an unstated nominal coverage or interpreted as independent confirmations across seeds. [C4–C5]
+
+Supporting endpoints show an own-site advantage for whole-myocardium volume error, scar-volume error, and myocardial and scar Dice, with positive intervals in the corresponding favorable direction. Scar-positive Dice uses 44 subjects, whereas the volume and primary-endpoint comparisons use 45. The pooled/local comparison is less uniform across endpoints: all six scar-volume-error intervals include zero, and one decoder point estimate favors pooled training. Thus the conclusion is strongest for site-conditioned transfer and must remain endpoint-specific. [C6]
+
+## Which explanations have been narrowed, and which remain open?
+
+The robustness summary reports positive own-site advantages in all six primary comparisons, all 30 subset comparisons, and all 42 leave-one-center recomputations. Within these reported checks, the pattern cannot be attributed solely to one seed, one adaptation scope, or one indispensable center. The consistent directions across CARE seeds and adaptation scopes also argue against a failure to replicate the pattern. The detailed subset definitions and leave-one-center estimates are not supplied, however, so these counts support persistence of direction without establishing effect stability in every subgroup. [C7]
+
+These comparisons narrow the possible explanations but do not identify the cause of the site differences. The clean design addresses subject reuse as a threat to interpretation, while the pooled comparison shows why a purely federated-aggregation explanation is incomplete. Neither establishes that initialization, optimization, or other design choices are irrelevant. A changed checkpoint is not a test of every weak-initialization explanation. Likewise, consistent own-site advantages do not distinguish acquisition differences, annotation practices, patient composition, or other factors associated with center identity. Those remain candidate mechanisms. [C1, C3, C8]
+
+Precision is particularly limited for small centers: three contribute two test subjects each and have only three or four adaptation subjects. Three seeds do not add independent patients or centers. The evidence supports a relative accuracy difference under the studied conditions, but supplies neither a clinical error tolerance nor evidence of reliable transfer to an unseen center. It therefore cannot establish that any method has recovered adequate measurement validity for downstream scientific or clinical use. [C8]
+
+## What does M&Ms add?
+
+M&Ms asks a related question using cardiac chamber and myocardial measurements. Its design defines clients by center, treats vendor as a descriptive covariate, splits labeled training data into pretraining and adaptation partitions, and excludes unlabeled training data. Checkpoint selection uses internal pretraining validation; the external Validation set is reserved for formal evaluation. Outcomes concern left- and right-ventricular cavity and left-ventricular myocardial volumes at end-diastole and end-systole, with end-diastolic volume, end-systolic volume, and ejection fraction evaluated where label semantics permit. This is a different measurement setting from CARE scar fraction. [C9]
+
+The supplied M&Ms decision classifies the result as consistent with heterogeneity and reports nine of nine positive primary rows across three seeds in the full-model scope. This adds decision-level support beyond CARE. Its evidential weight is limited by the absence of row-level comparator definitions, effect sizes, intervals, sample sizes, and endpoint-specific results. It does not establish the magnitude of transfer loss, success on every listed outcome, a vendor-specific cause, or a shared causal mechanism with CARE. [C10]
+
+## Can sharing retain useful information while allowing site-specific correction?
+
+The earlier evidence left open whether a shared model followed by bounded site-specific adaptation could reduce held-out measurement error. CARE motivated this question because local site matching helps, yet small adaptation samples make purely local learning an uncertain reference for reliable deployment. The follow-up now provides evidence of improvement over a same-run shared reference under a short adaptation budget. [C8, C11, D1–D3]
+
+The follow-up retains 88 adaptation subjects and 45 test subjects across seven centers and three seeds. It specifies a four-epoch FedAvg anchor followed by two personalization epochs, with full-model adaptation as the primary scope and decoder and last-decoder-stage adaptation as secondary components. The contract reserves test subjects for final evaluation and reports all frozen shrinkage strengths (λ = 0, 0.0001, 0.001, 0.01), without choosing a winner on the test set. The historical clean FedAvg model was not available for exact reload: the new comparisons use the same-run FedAvg anchor and cannot be read as direct corrections to Table 1. The extra personalization epochs also prevent attributing the gain uniquely to site conditioning rather than additional training. [D1–D2]
+
+**Table 2. CARE personalization evidence on scar-fraction absolute error.** Error differences are personalized minus same-run FedAvg; negative values favor personalization. Each seed-specific primary comparison uses 45 subjects. The range summarizes three point estimates, not an interval. Mean closure is the arithmetic mean of the three reported seed closure values; it is kept separate from the paired error differences. [D3–D4]
+
+| Personalization condition | Error-difference range across seeds | Paired intervals below zero | Mean reported gap closure |
+|---|---:|---:|---:|
+| Full model, λ = 0 | -0.1187 to -0.1047 | 3/3 | 1.2168 |
+| Decoder, λ = 0 | -0.1214 to -0.1126 | 3/3 | 1.2609 |
+| Last decoder stage, λ = 0 | -0.0237 to -0.0218 | 3/3 | 0.2919 |
+| Full model, λ = 0.0001 | -0.1162 to -0.1037 | 3/3 | 0.5760 |
+| Full model, λ = 0.001 | -0.1162 to -0.1025 | 3/3 | 1.3484 |
+| Full model, λ = 0.01 | -0.1150 to -0.1103 | 3/3 | 0.9091 |
+
+Full-model personalization improves over the same-run FedAvg anchor in all three seeds, with all three reported paired intervals below zero. Its comparisons with local-site models are less decisive: all three primary intervals include zero. This supports adaptation as a candidate remedy for shared-model error under the studied conditions, while leaving the added value of sharing over local-only learning unresolved. The decoder recovers a similar mean closure, whereas adapting only the last decoder stage leaves positive error differences relative to local models with intervals above zero in all three seeds. [D2–D4]
+
+The supplied decision labels support simple personalization, finite shrinkage, and decoder-level adaptation. Their scope matters. The decoder's reported lower-storage advantage has no parameter or byte counts in these files. The mean closure for λ = 0.001 exceeds that for λ = 0, but the files supply no direct paired comparison between these settings; this does not establish an optimal shrinkage strength. At λ = 0.0001, one seed has negative closure and a positive personalized-minus-local error interval. Finite shrinkage therefore does not uniformly improve on local learning. [D1–D4]
+
+Closure is more uncertain than the direction of the FedAvg comparison. Its table reports 27, 30, and 29 subjects with FedAvg error worse than local error, compared with 45 subjects in the primary paired comparisons. The files do not fully specify the closure formula or how its error-mean columns relate to the paired estimates, so the two summaries should not be interchanged. Closure values can exceed one or be negative. For full-model personalization at λ = 0, the three closure intervals are [−0.1525, 1.1387], [0.6101, 2.9208], and [0.1480, 4.2410]; the first includes zero. The supplied files do not state the bootstrap confidence level or resampling scheme. These results do not establish uniform gap recovery across subjects or centers. [D3–D4]
+
+The next discriminating question is whether the gain persists with matched total training budgets and center-level evaluation, especially at the smallest centers, and whether sharing improves on local-only learning on scar-fraction error and the supporting volume outcomes. Test subjects should remain outside adaptation and model selection, and acceptable measurement-error tolerances should be specified before evaluation. The new evidence supports pursuing bounded personalization on CARE; it does not establish a causal site mechanism, clinical adequacy, transfer to unseen centers, or personalization success on M&Ms. [C8, C10–C11, D1–D4]
+
+*Evidence anchors C1–C11 and D1–D4 are resolved in the accompanying claim–evidence map; repository provenance is kept outside this advisor narrative.*
+
