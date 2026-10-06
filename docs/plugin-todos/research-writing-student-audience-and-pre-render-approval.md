@@ -770,3 +770,70 @@ VISUAL_ROLE = body | heading | table | quote | note
 
 Visual distinction must clarify meaning without turning the document into cards/dashboard UI.
 
+
+
+## 21. Continuous-flow zones and explicit break authority
+
+A page break is not a neutral rendering detail. It changes reading flow, grouping and emphasis.
+
+### Continuous-flow contract
+
+When the author or reviewer states that a sequence of blocks should “follow” one another, treat that sequence as a **continuous-flow zone**.
+
+Example:
+
+```text
+FLOW_ZONE = Submission -> Report format -> Page limit -> Analysis workflow -> Numerical reporting -> AI assistance
+INTERNAL_HARD_BREAKS = FORBIDDEN
+HARD_BREAK_AFTER = AI assistance
+```
+
+Within a continuous-flow zone:
+
+- the renderer may allow the typesetting engine to break naturally between blocks;
+- short blocks may use bounded keep-together / needspace rules to avoid awkward splits;
+- the renderer may not insert a fixed hard page break merely to “balance” pages;
+- the authoring planner may not later introduce a hard break that contradicts an earlier explicit flow instruction unless the user re-approves the change.
+
+### Explicit negative constraints outrank later layout optimization
+
+If a user has said:
+
+- “do not break here”;
+- “these sections should follow one another”;
+- “only break after X”;
+- “do not move Y”;
+
+that instruction becomes an active rejection/recurrence guard.
+
+A later planner or renderer cannot override it because a different page composition appears cleaner.
+
+Required field:
+
+```text
+FLOW_GUARDS:
+- <exact user-approved continuity / break constraint>
+```
+
+Every revision must revalidate all flow guards before proposing a new page plan.
+
+### Hard-break authorization
+
+A fixed hard break may be introduced only when one of these is true:
+
+1. the user explicitly approved the break;
+2. the document-family contract makes the break structural (for example, a new chapter/section artifact);
+3. a hard page-count requirement and frozen block integrity leave no legal natural solution, in which case the break is returned for approval before rendering.
+
+“Page balance” alone is not sufficient authority.
+
+### Natural flow versus block integrity
+
+The default mechanism for ordinary prose/rules is:
+
+1. continuous natural flow;
+2. bounded keep-together for short semantic blocks;
+3. hard break only at an explicitly approved boundary.
+
+This prevents the common failure in which a large blank lower half is created by a planner-selected hard break while the next page begins with content that could have flowed naturally.
+
