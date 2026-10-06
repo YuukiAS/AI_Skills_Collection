@@ -593,6 +593,57 @@ candidate_action:
 - Multi-line Question blocks and full-width Questions require dedicated regression fixtures.
 promotion_gate: the V04-style overshooting rule fails; one-line and multi-line Question fixtures pass in both skins.
 
+### QA evidence artifacts must be self-validating, page-index aligned, and hash-bound
+status: NEW
+tracking: #36
+source: STAT5060 Tutorial 1 Student Deck V05 independent review, 2026-10-06
+evidence: V05 had a 46-page PDF, but `page_review.md` contained only 45 rows, labeled the actual title page as “Tutorial overview”, shifted every later title by one page, and omitted P46. `requirement_ledger.md` was only a summary paragraph. Six supposed representative footer crops were the exact same 637-byte Git blob. Column/semantic/connector evidence files contained prose or page names rather than frozen metrics. The artifact manifest named an evidence directory but did not bind its Git tree.
+problem: Presentation QA evidence can currently look complete by filename while being internally inconsistent, off-by-one, blank/duplicated, or unrelated to the reviewed artifact.
+candidate_action:
+- Add an evidence-integrity preflight that validates page-review row count == PDF page count and matches every row title to text extracted from the same final PDF.
+- Require requirement IDs and one row per frozen requirement; prose-only ledgers are invalid.
+- Bind each crop to source page/render hash; reject blank crops, wrong dimensions, and duplicate crop hashes where distinct pages are expected.
+- Require numeric/schema fields for column alignment, semantic proximity, connector shaft/collision, footer baseline/optical/gap checks.
+- Record PDF/source/theme hashes plus evidence-root Git tree SHA in the artifact manifest.
+- Cross-evidence contradictions automatically force REVISE.
+promotion_gate: replay STAT5060 V05 so the 45/46 page-review mismatch, six duplicate footer crops, prose-only ledger, and metric-free audits all fail before independent review.
+
+### Reviewer capability limits need NOT_VERIFIED semantics, not false artifact failures
+status: NEW
+tracking: #36
+source: STAT5060 Tutorial 1 Student Deck V05 GPT Work review and independent binary recheck, 2026-10-06
+evidence: GPT Work returned `CODE_COPYABILITY = FAIL` only because its connector could not materialize the final PDF bytes. A second reviewer received the exact uploaded binary, independently ran `pdftotext -layout`, reproduced the expected PDF SHA256, found zero curly quotation marks and zero replacement characters, and confirmed ASCII quoted code across all code pages.
+problem: Review tooling limitations are currently conflated with defects in the artifact. This produces false FAIL findings and makes it impossible to distinguish “bad PDF” from “reviewer could not independently verify the PDF”.
+candidate_action:
+- Review status vocabulary must distinguish PASS / REVISE(artifact defect) / NOT_INDEPENDENTLY_VERIFIED(capability or evidence access missing).
+- A mandatory gate that is NOT_INDEPENDENTLY_VERIFIED still blocks release, but must not be reported as a demonstrated content/layout defect.
+- Binary-only gates should record the exact artifact hash and extraction capability used by each reviewer.
+promotion_gate: a fixture with inaccessible bytes produces NOT_INDEPENDENTLY_VERIFIED; the same artifact supplied as bytes is independently extracted and can PASS without changing the artifact.
+
+### Template/core references must pin exact provenance instead of saying “current CUHK”
+status: NEW
+tracking: #98
+source: STAT5060 Tutorial footer regressions during course-standard/CUHK parity work, 2026-10-06
+evidence: project specifications referred to the “accepted/current CUHK footer core” while the central CUHK template continued to evolve. A later repository state can therefore point at different footer primitives than the ones used when the project contract was frozen.
+problem: Cross-template parity is not reproducible if a project says “match current template” without commit/blob identity. Later maintenance can silently change the reference under an already-frozen deck.
+candidate_action:
+- Every template-derived frozen contract must record template repo, commit, source path and source blob/hash.
+- Runtime/executor should verify the pinned identity before copying or comparing a shared primitive.
+- Newer template revisions require an explicit migration decision, not silent substitution during a bounded deck repair.
+promotion_gate: a deck frozen against template identity A rejects silent use of later identity B; an explicit migration updates the recorded provenance and reruns affected chrome regression tests.
+
+### Short Question/label blocks need a no-awkward-hyphenation render gate
+status: NEW
+tracking: #32
+source: STAT5060 Tutorial 1 Student Deck V05 P30, 2026-10-06
+evidence: the short Question “Do the priors put substantial mass...” rendered `substan-` / `tial` despite ample room for a cleaner line break. Source text and semantic macro were correct, so source-level QA missed the visible language defect.
+problem: Automatic TeX hyphenation inside short questions, labels and takeaways can make otherwise correct slide language look mechanical and harder to read.
+candidate_action:
+- Question/Answer/Takeaway/Example semantic primitives should strongly discourage automatic word hyphenation.
+- Final render QA flags discretionary hyphens in short audience-facing semantic blocks and prefers clean phrase-level line breaks.
+- Do not globally disable scientific hyphenation in long prose; scope the rule to short semantic blocks or explicitly authored labels.
+promotion_gate: the V05 P30 fixture fails; a clean non-hyphenated reflow passes without changing the sentence.
+
 真实项目 thread 新增时只需要最小格式：
 
 ```text
