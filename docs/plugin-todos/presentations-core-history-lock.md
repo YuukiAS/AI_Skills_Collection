@@ -10,6 +10,7 @@ Detailed specifications:
 - `docs/design/PRESENTATIONS_ANTI_SELF_CERTIFICATION_AND_CONVERGENCE_GOVERNANCE_TODO_2026-10-06.md`
 - `docs/design/PRESENTATIONS_PRODUCTION_DETECTOR_AUTHENTICITY_AND_EVIDENCE_BINDING_TODO_2026-10-06.md`
 - `docs/design/PRESENTATIONS_INDEPENDENT_EXECUTION_AND_REVIEW_ARCHITECTURE_2026-10-06.md`
+- runtime contracts: `plugins/codex/plugins/presentations/shared/anti-shortcut-production-contract.md` and `independent-review-contract.md`
 
 ## Core requirements
 
@@ -54,7 +55,17 @@ The presentations workflow must add first-class support for:
 37. validator/reviewer runtime is version-pinned and immutable during an ordinary deck revision task;
 38. executor completion state is at most `READY_FOR_INDEPENDENT_VALIDATION`, never final PASS;
 39. blind rendered-artifact review is isolated from executor narrative and expected human-rejection answer keys;
-40. repeated new P0 self-certification defects trigger a generic validator rebuild rather than indefinite project-local V5/V6/V7 patches.
+40. repeated new P0 self-certification defects trigger a generic validator rebuild rather than indefinite project-local V5/V6/V7 patches;
+41. a frozen authority bundle and explicit round allowlist exist before candidate editing begins;
+42. every candidate carries a proof-carrying patch manifest that maps modified PageIDs/components to feedback IDs and proves unrelated locks unchanged;
+43. required scientific/teaching objects cannot disappear unless an explicit Planner-approved relocation record names the destination;
+44. local layout/build pressure cannot authorize semantic deletion, unapproved copy, page merging, or archetype replacement;
+45. full-deck regeneration requires explicit Planner approval and is forbidden by default once most pages are locked;
+46. shared-component changes automatically place every consumer page in deterministic regression scope without reopening semantic/copy locks;
+47. review scope is explicit, and a scoped review cannot issue a global PASS while mandatory global requirements remain unreviewed;
+48. historical rejected artifacts include hidden holdouts unavailable to the executor, preventing prompt tuning against the full answer key;
+49. recurrence of a closed guard triggers root-cause repair of the shared primitive/authority/detector rather than another page-local patch;
+50. if open issues fail to decrease or accepted items reopen, the next action is root-cause analysis, not another broad candidate.
 
 ## Why this is core
 
@@ -66,7 +77,9 @@ The second governance failure showed that even structured inputs and 24/24 rejec
 
 The third governance failure showed that separate materializer/validator files and corrected headline counts are still insufficient when mutation tests branch on fixture names, positive controls only assert constants, persisted blob fields contain paths rather than Git objects, and final/remote arguments are accepted by syntax rather than verified against repository state.
 
-Counts, schema presence, unique fixture tuples, fixture totals and file separation are necessary but never sufficient.
+The broader presentation history shows where the executor repeatedly chooses proxies: delete difficult content to solve layout, regenerate unrelated pages during local repair, shrink objects rather than redesign composition, treat source presence as rendered quality, and treat the latest feedback round as if earlier human rejections no longer exist.
+
+Counts, schema presence, unique fixture tuples, fixture totals, file separation, and longer prompts are necessary but never sufficient.
 
 ## Promotion gate
 
@@ -87,8 +100,11 @@ Counts, schema presence, unique fixture tuples, fixture totals and file separati
 - touching a human-PASS body region blocks commit;
 - executor-added visible copy blocks commit;
 - an unauthorised layout archetype blocks commit;
+- a candidate without a complete proof-carrying patch manifest blocks independent validation;
+- modified PageIDs/components outside the explicit round allowlist block the candidate;
+- disappearance of a required object without an approved relocation blocks the candidate;
 - an acceptance standard that omits an unretired predecessor gate blocks review;
-- authorised header/footer change preserves locked body pixels;
+- authorised header/footer change preserves locked body pixels and revalidates all consumers;
 - Question/Answer one-line and multi-line fixtures align within calibrated whole-slide tolerance;
 - a figure labelled with literal `eta` fails, while a `$\eta$` render passes;
 - malformed fixtures mutate real inputs and are caught by general production detectors without fixture-ID branches or magic predicates;
@@ -100,4 +116,6 @@ Counts, schema presence, unique fixture tuples, fixture totals and file separati
 - authoritative validation is launched outside the executor context and is artifact/commit-bound;
 - a subagent counts as independent only when it has fresh context, read-only candidate/authority, no answer key and no permission to edit tests or gates;
 - executor self-tests are debugging evidence only and cannot become release acceptance;
+- a scoped reviewer cannot emit global PASS for unreviewed mandatory requirements;
+- a previously closed guard recurrence rejects the candidate and adds a root-cause regression guard;
 - one real existing deck converges within two to four review rounds under the new workflow.
