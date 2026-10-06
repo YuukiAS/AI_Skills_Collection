@@ -9,6 +9,7 @@
 - `writing-style.md`
 - `research-writing.md`
 - `presentations.md`
+- `presentations-core-history-lock.md` — presentations 的 P0 历史预检、已验收页面锁、共享组件锁和图内数学符号要求
 - `scientific-visualization.md`
 - `web-development.md`
 - `statistical-modeling.md`
