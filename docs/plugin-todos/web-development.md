@@ -350,6 +350,13 @@ additional evidence (2026-10-06, Lucerna 01056r2): the next candidate fixed fron
 - cross-provider aggregation must preserve checking/presence-only/partial truth rather than gate it away by `LIVE` status;
 - external review evidence needs privacy minimization as a first-class acceptance artifact distinct from local real-live validation.
 
+additional evidence (2026-10-06, Lucerna 01056r2 review): after frontend Cancel/surface-switch cleanup was added, native tray-toggle/light-dismiss/outside-click still bypassed the JavaScript scrub path; controlled-state coverage still bypassed the production aggregate; a `Tailnet devices` status label conflated local backend connectivity with fleet/device presence; and the external review pack tracked private repo/account/infrastructure metadata despite no literal secret leak. Generic implications:
+- sensitive lifecycle acceptance must include every native window-hide cause and reopen-after-hide verification;
+- controlled-state QA must start from provider/component inputs and exercise the production aggregate/presentation chain;
+- status labels need scope/denominator truth (control plane vs device fleet vs host presence vs full health);
+- privacy-safe external evidence is a separate deliverable from local real-live validation, not merely a token/OTP redaction pass;
+- action-ledger/evidence artifacts require referential integrity and mechanical reconciliation with actual rendered controls.
+
 ### Product UI copy needs an explicit Frontend Design content-architecture contract
 status: NEW
 tracking: #89
