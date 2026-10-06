@@ -1216,6 +1216,36 @@ class CandidateConsumerIsolationRecoveryTests(unittest.TestCase):
             self.assertFalse(transaction.manifest_path.exists())
             self.assertEqual(replay.tree_sha256(original), transaction.records[0].package.tree_sha256)
 
+    def test_equivalent_rehydration_records_config_drift_without_blocking_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            codex_home, _discovery, original, transaction, plugin_list = self.make_equivalent_rehydration_fixture(root)
+            quarantine = transaction.records[0].quarantine_path
+            shutil.copytree(quarantine, original)
+            (codex_home / "config.toml").write_text("changed = true\n", encoding="utf-8")
+
+            result = replay.restore_quarantine(
+                transaction,
+                read_proof={
+                    "candidate_path_reads": 1,
+                    "original_conflict_path_reads": 0,
+                    "quarantine_path_reads": 0,
+                },
+                current_plugin_list=plugin_list,
+                codex_home=codex_home.resolve(),
+            )
+
+            self.assertTrue(result.verified_equivalent_rehydration)
+            self.assertTrue(result.final_persistent_state_equivalent_to_before)
+            self.assertTrue(original.exists())
+            self.assertFalse(quarantine.exists())
+            diagnostics = result.diagnostics or {}
+            proof = diagnostics[str(original.resolve())]
+            self.assertTrue(proof["config_hash_drift_observed"])
+            self.assertIsNone(proof["recorded_config_hash_diagnostic"])
+            self.assertEqual(proof["current_config_hash_diagnostic"], replay.config_hash(codex_home))
+            self.assertEqual(proof["final_config_hash_diagnostic"], replay.config_hash(codex_home))
+
     def test_equivalent_rehydration_without_candidate_proof_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

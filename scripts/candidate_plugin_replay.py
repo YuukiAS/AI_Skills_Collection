@@ -119,6 +119,7 @@ class RestorationResult:
     actions: tuple[str, ...]
     verified_equivalent_rehydration: bool
     final_persistent_state_equivalent_to_before: bool
+    diagnostics: dict[str, Any] | None = None
 
 
 def repo_root() -> Path:
@@ -938,8 +939,7 @@ def verify_equivalent_rehydration_record(
     quarantine_rel = quarantine.relative_to(transaction.quarantine_parent.resolve()).parts
     if tuple(quarantine_rel) != (identity["marketplace"], identity["plugin"], identity["version"]):
         raise ReplayError("RESTORATION_AMBIGUOUS: quarantine marketplace/plugin/version identity mismatch")
-    if config_hash(codex_home) != manifest.get("config_hash"):
-        raise ReplayError("RESTORATION_AMBIGUOUS: config hash mismatch")
+    current_config_hash = config_hash(codex_home)
     if normalized_plugin_list(current_plugin_list) != manifest.get("normalized_before_plugin_list"):
         raise ReplayError("RESTORATION_AMBIGUOUS: normalized plugin state mismatch")
     if candidate_reads <= 0:
@@ -956,6 +956,9 @@ def verify_equivalent_rehydration_record(
         "candidate_path_reads": candidate_reads,
         "original_conflict_path_reads": original_reads,
         "quarantine_path_reads": quarantine_reads,
+        "recorded_config_hash_diagnostic": manifest.get("config_hash"),
+        "current_config_hash_diagnostic": current_config_hash,
+        "config_hash_drift_observed": current_config_hash != manifest.get("config_hash"),
     }
 
 
@@ -982,6 +985,7 @@ def restore_quarantine(
     errors: list[str] = []
     actions: list[str] = []
     verified_equivalent = False
+    diagnostics: dict[str, Any] = {}
     for record in reversed(transaction.records):
         original = record.package.path
         quarantine = record.quarantine_path
@@ -1015,13 +1019,13 @@ def restore_quarantine(
                     raise ReplayError("RESTORATION_AMBIGUOUS: final original tree hash changed")
                 if optional_file_sha256(plugin_manifest_path(original)) != proof["plugin_manifest_sha256"]:
                     raise ReplayError("RESTORATION_AMBIGUOUS: final original plugin manifest hash changed")
-                if config_hash(codex_home) != manifest.get("config_hash"):
-                    raise ReplayError("RESTORATION_AMBIGUOUS: final config hash mismatch")
                 final_plugin_list = final_plugin_list_reader() if final_plugin_list_reader else current_plugin_list
                 if normalized_plugin_list(final_plugin_list) != manifest.get("normalized_before_plugin_list"):
                     raise ReplayError("RESTORATION_AMBIGUOUS: final normalized plugin state mismatch")
+                proof["final_config_hash_diagnostic"] = config_hash(codex_home)
                 actions.append(f"deleted-equivalent-quarantine-duplicate:{quarantine}")
                 verified_equivalent = True
+                diagnostics[str(original)] = proof
             except ReplayError as exc:
                 errors.append(str(exc))
             continue
@@ -1049,6 +1053,7 @@ def restore_quarantine(
         actions=tuple(actions),
         verified_equivalent_rehydration=verified_equivalent,
         final_persistent_state_equivalent_to_before=True,
+        diagnostics=diagnostics,
     )
 
 
@@ -1748,6 +1753,7 @@ def run_replay_multi(
                         "final_persistent_state_equivalent_to_before": (
                             restoration.final_persistent_state_equivalent_to_before if restoration else True
                         ),
+                        "diagnostics": restoration.diagnostics if restoration else {},
                     }
                     result_payload["consumer_isolation"]["final_persistent_state_equivalent_to_before"] = (
                         restoration.final_persistent_state_equivalent_to_before if restoration else True

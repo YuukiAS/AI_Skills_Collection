@@ -88,17 +88,24 @@ all of the following proof is present:
 original tree hash == quarantine tree hash == pre-run tree hash
 plugin manifest hashes are identical to the pre-run manifest hash
 marketplace/plugin/version/path identity is identical
-config hash and normalized plugin state match the pre-run state
+normalized plugin state matches the pre-run state
 CANDIDATE_PATH_READS > 0
 ORIGINAL_CONFLICT_PATH_READS = 0
 QUARANTINE_PATH_READS = 0
 the quarantine path is owned by the current transaction
 ```
 
-After deleting the duplicate, the helper fsyncs and rechecks persistent state
-before removing the recovery manifest. If any proof is missing or inconsistent,
-the condition remains `RESTORATION_AMBIGUOUS`: do not delete, overwrite,
-continue replay, or treat the output as a candidate PASS.
+The full `$CODEX_HOME/config.toml` hash is recorded as diagnostic provenance,
+but full config-file drift alone is not a cleanup hard gate. If a future
+transaction needs plugin-relevant config validation, it must snapshot an
+explicit minimal projection before mutation instead of relying on the full
+config file hash.
+
+After deleting the duplicate, the helper fsyncs and rechecks the rehydrated
+original package identity and normalized plugin state before removing the
+recovery manifest. If any hard proof is missing or inconsistent, the condition
+remains `RESTORATION_AMBIGUOUS`: do not delete, overwrite, continue replay, or
+treat the output as a candidate PASS.
 
 ## Safety boundaries
 
