@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-07-13
+last_reviewed: 2026-10-06
 profile_tags:
   - presentations
 recommended_scope: project
@@ -43,7 +43,9 @@ answer/request -> problem or opportunity -> evidence and impact -> plan -> resou
 3. Keep each slide tied to one decision-relevant message.
 4. Use the CUHK default visual system only when no company, client, course, or event template is specified.
 5. Apply the shared writing handoff before final deck creation: Chinese slide text gets `writing-fidelity` plus `chinese-prose`; English scientific slide prose can use `scientific-prose` when the deck includes research evidence.
-6. Route editable deck creation to official Presentation/Slides and keep visual QA evidence. For non-trivial production or revision, apply `../../shared/independent-review-contract.md`: the executor may build/render and run smoke checks but may only report readiness for independent validation; final deterministic acceptance must run after executor stop in a fresh process/CI or strictly isolated read-only subagent.
+6. For non-trivial production or revision, freeze an authority bundle and explicit round allowlist, then apply `../../shared/anti-shortcut-production-contract.md`. The executor must produce a proof-carrying patch manifest and may not turn a local repair into a full-deck rewrite, add unapproved visible prose, delete required content to solve layout pressure, or alter validation rules.
+7. Route editable deck creation to official Presentation/Slides and keep visual QA evidence. Apply `../../shared/independent-review-contract.md`: the executor may build/render and run smoke checks but may only report `READY_FOR_INDEPENDENT_VALIDATION`; final deterministic acceptance runs after executor stop in a fresh process/CI or strictly isolated read-only subagent, followed by independent rendered review.
+8. Existing-deck revisions must converge monotonically: open issues shrink, accepted/locked slides and components grow, and unrelated changes remain zero. A recurrence of an accepted issue triggers root-cause repair of the shared primitive, authority, or detector rather than another broad candidate.
 
 ## References
 
@@ -52,4 +54,5 @@ answer/request -> problem or opportunity -> evidence and impact -> plan -> resou
 - `../../shared/ppt-skill-routing.md`
 - `../../shared/source-fidelity.md`
 - `../../shared/visual-qa.md`
+- `../../shared/anti-shortcut-production-contract.md`
 - `../../shared/independent-review-contract.md`
