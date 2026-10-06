@@ -106,12 +106,14 @@ config file hash.
 After deleting the duplicate, the helper fsyncs and rechecks the rehydrated
 original package identity and normalized non-candidate plugin state before
 removing the recovery manifest. Candidate plugin IDs may be ignored only while
-the current run is still inside the restoration step. After candidate cleanup,
-the final persistent plugin-state check still requires the full plugin list to
-match the replay's pre-run baseline, with no candidate identity left installed.
-If any hard proof is missing or inconsistent, the condition remains
-`RESTORATION_AMBIGUOUS`: do not delete, overwrite, continue replay, or treat the
-output as a candidate PASS.
+the current run is still inside the restoration step. In multi-record recovery,
+that state check is made after any earlier ordinary quarantine restores have
+completed, so the comparison is against the restored non-candidate state rather
+than an entry-of-cleanup snapshot. After candidate cleanup, the final persistent
+plugin-state check still requires the full plugin list to match the replay's
+pre-run baseline, with no candidate identity left installed. If any hard proof
+is missing or inconsistent, the condition remains `RESTORATION_AMBIGUOUS`: do
+not delete, overwrite, continue replay, or treat the output as a candidate PASS.
 
 ## Safety boundaries
 

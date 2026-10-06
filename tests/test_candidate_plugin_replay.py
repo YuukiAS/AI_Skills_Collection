@@ -1431,6 +1431,119 @@ class CandidateConsumerIsolationRecoveryTests(unittest.TestCase):
             self.assertTrue(quarantine.exists())
             self.assertTrue(transaction.manifest_path.exists())
 
+    def test_equivalent_rehydration_rechecks_plugin_state_after_prior_normal_restore(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            codex_home = root / ".codex"
+            discovery = codex_home / "plugins" / "cache"
+            dual_original = make_cached_package(
+                discovery,
+                "created-by-me-remote",
+                "research-authoring",
+                "0.3.0",
+                ["writing-fidelity"],
+            )
+            normal_original = make_cached_package(
+                discovery,
+                "yuukias-ai-skills",
+                "writing-style",
+                "0.4",
+                ["writing-fidelity"],
+            )
+            dual_package = replay.cached_plugin_package_from_path(dual_original, discovery)
+            normal_package = replay.cached_plugin_package_from_path(normal_original, discovery)
+            self.assertIsNotNone(dual_package)
+            self.assertIsNotNone(normal_package)
+            assert dual_package is not None
+            assert normal_package is not None
+            before_list = {
+                "plugins": [
+                    {
+                        "pluginId": "writing-style@yuukias-ai-skills",
+                        "name": "writing-style",
+                        "enabled": True,
+                        "marketplaceName": "yuukias-ai-skills",
+                    },
+                    {
+                        "pluginId": "research-writing@yuukias-ai-skills",
+                        "name": "research-writing",
+                        "enabled": True,
+                        "marketplaceName": "yuukias-ai-skills",
+                    },
+                ]
+            }
+            current_before_restore = {
+                "plugins": [
+                    before_list["plugins"][1],
+                    {
+                        "pluginId": "writing-style@ai-skills-candidate",
+                        "name": "writing-style",
+                        "enabled": True,
+                        "marketplaceName": "ai-skills-candidate",
+                    },
+                ]
+            }
+            current_after_normal_restore = {
+                "plugins": before_list["plugins"]
+                + [
+                    {
+                        "pluginId": "writing-style@ai-skills-candidate",
+                        "name": "writing-style",
+                        "enabled": True,
+                        "marketplaceName": "ai-skills-candidate",
+                    }
+                ]
+            }
+            paths = replay.runtime_paths(root)
+            records = [
+                replay.QuarantineRecord(
+                    package=dual_package,
+                    quarantine_path=(
+                        replay.quarantine_parent(codex_home, "run")
+                        / "created-by-me-remote"
+                        / "research-authoring"
+                        / "0.3.0"
+                    ),
+                    overlapping_skill_names=("writing-fidelity",),
+                ),
+                replay.QuarantineRecord(
+                    package=normal_package,
+                    quarantine_path=(
+                        replay.quarantine_parent(codex_home, "run")
+                        / "yuukias-ai-skills"
+                        / "writing-style"
+                        / "0.4"
+                    ),
+                    overlapping_skill_names=("writing-fidelity",),
+                ),
+            ]
+            with mock.patch.object(replay, "effective_codex_home", return_value=codex_home.resolve()):
+                transaction = replay.prepare_quarantine_transaction(paths, "run", before_list, {}, records)
+            self.assertIsNotNone(transaction)
+            assert transaction is not None
+            replay.activate_quarantine(transaction)
+            shutil.copytree(transaction.records[0].quarantine_path, dual_original)
+
+            result = replay.restore_quarantine(
+                transaction,
+                read_proof={
+                    "candidate_path_reads": 1,
+                    "original_conflict_path_reads": 0,
+                    "quarantine_path_reads": 0,
+                },
+                current_plugin_list=current_before_restore,
+                final_plugin_list_reader=lambda: current_after_normal_restore,
+                codex_home=codex_home.resolve(),
+                ignored_plugin_ids={"writing-style@ai-skills-candidate"},
+            )
+
+            self.assertTrue(result.verified_equivalent_rehydration)
+            self.assertTrue(result.final_persistent_state_equivalent_to_before)
+            self.assertTrue(dual_original.exists())
+            self.assertTrue(normal_original.exists())
+            self.assertFalse(transaction.records[0].quarantine_path.exists())
+            self.assertFalse(transaction.records[1].quarantine_path.exists())
+
     def test_equivalent_rehydration_without_candidate_proof_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

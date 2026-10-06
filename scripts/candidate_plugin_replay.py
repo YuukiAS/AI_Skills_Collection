@@ -1011,6 +1011,7 @@ def restore_quarantine(
             if current_plugin_list is None or codex_home is None:
                 errors.append(f"RESTORATION_AMBIGUOUS: both original and quarantine exist for {original}")
                 continue
+            verification_plugin_list = final_plugin_list_reader() if final_plugin_list_reader else current_plugin_list
             try:
                 proof = verify_equivalent_rehydration_record(
                     manifest=manifest,
@@ -1018,7 +1019,7 @@ def restore_quarantine(
                     transaction=transaction,
                     record=record,
                     read_proof=read_proof,
-                    current_plugin_list=current_plugin_list,
+                    current_plugin_list=verification_plugin_list,
                     codex_home=codex_home,
                     ignored_plugin_ids=ignored_plugin_ids,
                 )
@@ -1027,7 +1028,7 @@ def restore_quarantine(
                     raise ReplayError("RESTORATION_AMBIGUOUS: final original tree hash changed")
                 if optional_file_sha256(plugin_manifest_path(original)) != proof["plugin_manifest_sha256"]:
                     raise ReplayError("RESTORATION_AMBIGUOUS: final original plugin manifest hash changed")
-                final_plugin_list = final_plugin_list_reader() if final_plugin_list_reader else current_plugin_list
+                final_plugin_list = final_plugin_list_reader() if final_plugin_list_reader else verification_plugin_list
                 if normalized_plugin_list(final_plugin_list, ignored_plugin_ids=ignored_plugin_ids) != manifest.get("normalized_before_plugin_list"):
                     raise ReplayError("RESTORATION_AMBIGUOUS: final normalized plugin state mismatch")
                 proof["final_config_hash_diagnostic"] = config_hash(codex_home)
