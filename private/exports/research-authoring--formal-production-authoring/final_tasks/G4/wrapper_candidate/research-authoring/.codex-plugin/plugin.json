@@ -35,5 +35,5 @@
   "name": "research-authoring",
   "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
   "skills": "./skills/",
-  "version": "0.3"
+  "version": "0.3.0"
 }
