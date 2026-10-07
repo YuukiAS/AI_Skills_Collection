@@ -253,10 +253,10 @@ promotion_gate: replay on one additional annotated Homework/Project revision and
 
 
 ### Student-assessment typography should allow a bounded rendered size range and preserve successful positive samples
-status: NEW
+status: SUCCESS_SAMPLE_ACCEPTED
 tracking: UNASSIGNED
-source: STAT5060 Project Guide V6 12pt review, 2026-10-07
-evidence: private user-provided `Project-V6-12pt.pdf` (2-page A4; not copied into the public repository) plus the related STAT5060 Project Guide recovery lineage in `YuukiAS/STAT5060-TA`. The user judged this version comparatively successful after multiple annotation rounds. At 12pt body text, the first page remains dense but readable and the second page has intentional rather than accidental whitespace; the larger body text improves reading comfort without forcing a third page.
+source: STAT5060 Project Guide V6 12pt user acceptance, 2026-10-07
+evidence: private user-provided `Project-V6-12pt.pdf`, SHA256 `07978fe3cff3565663646e4d4c062df448d715c7ede44d3171e9a2f62cb70296` (2-page A4; not copied into the public repository), plus `YuukiAS/STAT5060-TA/docs/review/STAT5060_PROJECT_GUIDE_USER_ACCEPTANCE_V12.md`. The user explicitly accepted this version as the successful Project Guide baseline after cumulative annotation replay. At 12pt body text, the first page remains dense but readable and the second page has intentional rather than accidental whitespace; the larger body text improves reading comfort without forcing a third page.
 target layer: student-assessment visual planning / positive-baseline registry / rendered review
 problem:
 - A single globally hard-coded body font size is too rigid for short student-facing assessment documents. The visually best size depends on content length, page count, document family, title hierarchy and the amount of natural whitespace.
