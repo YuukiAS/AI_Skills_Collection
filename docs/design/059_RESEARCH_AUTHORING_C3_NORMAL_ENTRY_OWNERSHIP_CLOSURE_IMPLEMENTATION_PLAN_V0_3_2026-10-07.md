@@ -22,7 +22,7 @@ Development Critic：
 `docs/design/059_RESEARCH_AUTHORING_C3_DEVELOPMENT_CRITIC_REVIEW_V0_1_2026-10-07.md`
 @ `71cf5105570ad46ff29c492d8354b44121315a55`
 
-This v0.3 supersedes Plan v0.2 for the next implementation attempt. It keeps the approved C3 architecture and changes only the integrated `research-main` enforcement needed to close `RA-C3DEV1`.
+This v0.3 supersedes Plan v0.2 for the next implementation attempt. It keeps the approved C3 architecture and changes only the integrated `research-main` enforcement needed to close `RA-C3DEV1`. After Critic review `e24ae290647456200c7f66c555caf61a56278d3c`, this same v0.3 now also freezes the missing direct existing-LaTeX normal entry and its DEV-07 should-not-change subrun; no new architecture or case family is introduced.
 
 ## 1. Frozen current state
 
@@ -182,25 +182,41 @@ FIRST Research Authoring core/report
 -> Research Authoring scientific QA
 ~~~
 
-### New/substantial manuscript + PDF
+### New/substantial manuscript, with or without final PDF
 
 ~~~text
 FIRST Research Authoring core/paper
 -> explicitly load latex-paper-authoring only if source/package work needs it
--> source/package + handoff
+-> return source/package to the Research Authoring owner
+-> if final PDF requested: source/package + handoff
 -> explicitly load render-chinese-math-pdf
 -> renderer mechanics/QA
 -> Research Authoring scientific QA
 ~~~
 
+The existing-LaTeX direct route below must not bypass Research Authoring for a new or substantially revised manuscript.
+
+### Existing LaTeX compile/debug/template/source-maintenance
+
+When the user already has LaTeX source and the main task is compile/debug, template repair, source hygiene, bibliography/build troubleshooting, or an existing-source build：
+
+~~~text
+explicitly load latex-paper-authoring
+-> compile/debug/build allowed
+~~~
+
+Research Authoring must not rewrite or re-plan the existing manuscript merely to service this source-maintenance task.
+
 ### Finalized-source render-only
+
+When the source is already final and the task is only final PDF render/QA：
 
 ~~~text
 explicitly load render-chinese-math-pdf immediately
 -> render/QA
 ~~~
 
-No Research Authoring planning.
+No Research Authoring planning. Do not route source-debug/template repair through the renderer merely because the source is LaTeX.
 
 ### Existing-PDF manipulation
 
@@ -488,13 +504,34 @@ Forbidden：
 - direct `pdflatex` final route;
 - final PDF produced by LaTeX delegate before renderer handoff.
 
-### DEV-06/07 render-only
+### DEV-06/07 render-only + existing-LaTeX direct mode
 
 Preserve existing standalone direct renderer evidence.
 
-Also add a research-main-profile should-not-change subrun proving its explicit-only installed renderer remains reachable for finalized Markdown/LaTeX render-only without Research Authoring planning.
+Also add a research-main-profile finalized-source subrun proving its explicit-only installed renderer remains reachable for finalized Markdown/LaTeX render-only without Research Authoring planning.
 
-This is a subrun, not a twelfth Gate/case family.
+Within DEV-07, add one separate natural existing-LaTeX compile/debug/template/source-hygiene/build subrun：
+
+~~~text
+research-main
++ existing LaTeX source
++ natural compile/debug/template/build request
+-> explicitly load latex-paper-authoring
+-> latex-paper-authoring actual read > 0
+-> compile/debug succeeds
+-> Research Authoring does not rewrite or re-plan the existing paper
+-> generic pdf does not become owner
+-> render-chinese-math-pdf does not misclassify source-debug as render-only
+~~~
+
+The request must not name internal Skills or contain evaluation-only routing hints.
+
+The two DEV-07 research-main subruns deliberately distinguish：
+
+- existing-source compile/debug/source maintenance -> LaTeX direct mode;
+- finalized-source render-only/final artifact -> canonical renderer direct mode.
+
+These are should-not-change subruns, not a twelfth Gate/case family.
 
 ### DEV-08 neighboring owners
 
@@ -624,6 +661,8 @@ Stop before P2 or C3 if：
 - project-local explicit-only copy fails to contain a same-name global Skill;
 - explicit renderer cannot be reached after handoff;
 - generic PDF existing-PDF support becomes unusable;
+- existing-LaTeX direct compile/debug/template/source-maintenance cannot explicitly reach latex-paper-authoring;
+- source-debug/template repair is incorrectly routed to the renderer;
 - LaTeX direct mode regresses;
 - any shared profile without override changes behavior;
 - source tree is dirtied by profile install;
