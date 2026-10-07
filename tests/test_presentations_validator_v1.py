@@ -20,7 +20,7 @@ from plugins.codex.plugins.presentations.shared.validator_v1.detectors import (
     detect_text_collision,
     detect_typography,
 )
-from plugins.codex.plugins.presentations.shared.validator_v1.review import build_review_packet, review_rendered_page
+from plugins.codex.plugins.presentations.shared.validator_v1.review import build_review_packet, normalize_reviewer_row, review_rendered_page
 
 
 def packet(**overrides):
@@ -122,10 +122,39 @@ class ValidatorCoreTests(unittest.TestCase):
 
     def test_protected_packet_aggregation_and_review_packet(self):
         p = packet(protected_objects=[{"object_id": "diagram", "description": "must remain visible"}])
-        self.assertEqual(build_protected_object_check(p).status, "PASS")
-        review = review_rendered_page(p, reviewer_context_id="unit")
+        self.assertEqual(build_protected_object_check(p).status, "N/A")
+        review = normalize_reviewer_row(
+            p,
+            {
+                "artifact_id": "A",
+                "physical_page": 1,
+                "page_png_sha256": "0" * 64,
+                "reviewer_run_id": "unit",
+                "fresh_context": "YES",
+                "read_only_candidate": "YES",
+                "image_inspection_runtime": "unit_visual_inspection",
+                "overall_visual_verdict": "PASS",
+                "checks": {
+                    "shell": {"check_id": "shell", "status": "PASS", "positive_evidence": ["visible shell"]},
+                    "typography": {"check_id": "typography", "status": "PASS", "positive_evidence": ["readable text"]},
+                    "scientific_object_internal_readability": {"check_id": "scientific_object_internal_readability", "status": "N/A", "not_applicable_reason": "no object"},
+                    "primary_object_scale": {"check_id": "primary_object_scale", "status": "PASS", "positive_evidence": ["object scale acceptable"]},
+                    "whitespace": {"check_id": "whitespace", "status": "PASS", "positive_evidence": ["whitespace acceptable"]},
+                    "reading_path": {"check_id": "reading_path", "status": "PASS", "positive_evidence": ["reading path clear"]},
+                    "peer_layout": {"check_id": "peer_layout", "status": "N/A", "not_applicable_reason": "no peers"},
+                    "q_a_geometry": {"check_id": "q_a_geometry", "status": "N/A", "not_applicable_reason": "no QA"},
+                    "evidence_interpretation_proximity": {"check_id": "evidence_interpretation_proximity", "status": "N/A", "not_applicable_reason": "no evidence object"},
+                    "code_output_proximity": {"check_id": "code_output_proximity", "status": "N/A", "not_applicable_reason": "no code"},
+                    "protected_object": {"check_id": "protected_object", "status": "PASS", "positive_evidence": ["protected diagram visible"]},
+                    "internal_identifier_or_markup_leak": {"check_id": "internal_identifier_or_markup_leak", "status": "PASS", "positive_evidence": ["no identifiers"]},
+                    "audience_boundary": {"check_id": "audience_boundary", "status": "PASS", "positive_evidence": ["student-facing"]},
+                    "historical_guard_closure": {"check_id": "historical_guard_closure", "status": "PASS", "positive_evidence": ["guards closed"]},
+                },
+                "substantive_observation": "Unit reviewer inspected the image and found the protected diagram visible.",
+            },
+        )
         result = aggregate_page_result(p, review, [])
-        self.assertIn(result["verdict"], {"PASS", "REVISE"})
+        self.assertEqual(result["verdict"], "PASS")
 
     def test_png_opened_for_review_packet_and_anti_fitting(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -146,6 +175,8 @@ class ValidatorCoreTests(unittest.TestCase):
                 guards=[],
             )
             self.assertEqual(packet_obj["features"]["image"]["png_sha256"], packet_obj["page_png_sha256"])
+            blocked = review_rendered_page(packet_obj, reviewer_context_id="unit")
+            self.assertEqual(blocked["overall_visual_verdict"], "BLOCKED")
         report = scan_paths_for_answer_fitting([Path("plugins/codex/plugins/presentations/shared/validator_v1")])
         self.assertEqual(report["AST_ANTI_FITTING"], "PASS")
 

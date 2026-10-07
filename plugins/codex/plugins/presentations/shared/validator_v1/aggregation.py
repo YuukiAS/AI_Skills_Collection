@@ -9,7 +9,11 @@ def aggregate_page_result(packet: dict[str, Any], review_row: dict[str, Any], de
     issue_classes = sorted(
         {
             *(review_row.get("issue_classes") or []),
-            *(f.get("finding_class") for f in deterministic_findings if f.get("status") == "REVISE" and f.get("finding_class")),
+            *(
+                f.get("finding_class")
+                for f in deterministic_findings
+                if f.get("status") == "REVISE" and f.get("finding_class") and f.get("deterministic_role") == "HARD_FAIL"
+            ),
         }
     )
     verdict = "REVISE" if issue_classes or review_row.get("overall_visual_verdict") != "PASS" else "PASS"

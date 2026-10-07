@@ -138,8 +138,19 @@ def inspect_rendered_png(png_path: Path, *, max_components: int = 20) -> dict[st
         bottom_void = 1.0
 
     small_nonwhite = np.any(small_rgb < 245, axis=2)
-    components = _scaled_components(
+    shell_components = _scaled_components(
         small_nonwhite,
+        scale_x=width / small_nonwhite.shape[1],
+        scale_y=height / small_nonwhite.shape[0],
+    )[:max_components]
+    body_y0 = int(small_nonwhite.shape[0] * 0.14)
+    body_y1 = int(small_nonwhite.shape[0] * 0.86)
+    body_x0 = int(small_nonwhite.shape[1] * 0.04)
+    body_x1 = int(small_nonwhite.shape[1] * 0.96)
+    body_only = np.zeros_like(small_nonwhite)
+    body_only[body_y0:body_y1, body_x0:body_x1] = small_nonwhite[body_y0:body_y1, body_x0:body_x1]
+    components = _scaled_components(
+        body_only,
         scale_x=width / small_nonwhite.shape[1],
         scale_y=height / small_nonwhite.shape[0],
     )[:max_components]
@@ -161,7 +172,10 @@ def inspect_rendered_png(png_path: Path, *, max_components: int = 20) -> dict[st
         "top_void_ratio": round(float(top_void), 5),
         "bottom_void_ratio": round(float(bottom_void), 5),
         "content_components": components,
+        "body_content_components": components,
+        "shell_components": shell_components,
         "largest_component": largest,
+        "largest_body_component": largest,
         "top_components_area_ratio": round(component_area / max(1, width * height), 5),
         "left_occupancy": round(left, 5),
         "center_occupancy": round(center, 5),

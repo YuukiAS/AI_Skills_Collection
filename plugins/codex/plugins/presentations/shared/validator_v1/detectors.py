@@ -29,7 +29,16 @@ def _packet_text(packet: dict[str, Any]) -> str:
     return packet.get("features", {}).get("text", {}).get("text_excerpt", "")
 
 
+def _applies(packet: dict[str, Any], key: str) -> bool:
+    applicability = packet.get("applicability") or {}
+    if key in applicability:
+        return bool(applicability[key])
+    return True
+
+
 def detect_text_collision(packet: dict[str, Any]) -> CheckResult:
+    if not _applies(packet, "text_collision"):
+        return check_na("text_collision", "Text-collision check is not applicable to this page authority.")
     spans = packet.get("features", {}).get("text", {}).get("spans", [])
     collisions = []
     for i, a in enumerate(spans[:500]):
@@ -59,6 +68,8 @@ def detect_typography(packet: dict[str, Any]) -> CheckResult:
 
 
 def detect_object_scale_whitespace(packet: dict[str, Any]) -> CheckResult:
+    if not _applies(packet, "object_scale_whitespace"):
+        return check_na("object_scale_whitespace", "Primary-object/whitespace check is not applicable to this page authority.")
     image = packet.get("features", {}).get("image", {})
     bbox_area = float(image.get("body_bbox_area_ratio") or 0)
     top_void = float(image.get("top_void_ratio") or 0)
@@ -73,6 +84,8 @@ def detect_object_scale_whitespace(packet: dict[str, Any]) -> CheckResult:
 
 
 def detect_peer_layout(packet: dict[str, Any]) -> CheckResult:
+    if not _applies(packet, "peer_layout"):
+        return check_na("peer_layout", "Peer-layout check is not applicable because no peer-region authority applies.")
     text = packet.get("features", {}).get("text", {})
     image = packet.get("features", {}).get("image", {})
     left = int(text.get("left_body_words") or 0)
@@ -90,6 +103,8 @@ def detect_peer_layout(packet: dict[str, Any]) -> CheckResult:
 
 
 def detect_reading_path(packet: dict[str, Any]) -> CheckResult:
+    if not _applies(packet, "reading_path"):
+        return check_na("reading_path", "Reading-path check is not applicable because no sequential-reading authority applies.")
     text = packet.get("features", {}).get("text", {})
     job = (packet.get("page_job") or "").lower()
     guard_text = " ".join(g.get("requirement", "") for g in packet.get("guards", [])).lower()
@@ -100,6 +115,8 @@ def detect_reading_path(packet: dict[str, Any]) -> CheckResult:
 
 
 def detect_qa_geometry(packet: dict[str, Any]) -> CheckResult:
+    if not _applies(packet, "q_a_geometry"):
+        return check_na("q_a_geometry", "Q/A geometry check is not applicable because no Q/A authority applies.")
     text = packet.get("features", {}).get("text", {})
     q = text.get("question_spans", [])
     a = text.get("answer_spans", [])
@@ -124,6 +141,8 @@ def detect_qa_geometry(packet: dict[str, Any]) -> CheckResult:
 
 
 def detect_scientific_object_readability(packet: dict[str, Any]) -> CheckResult:
+    if not _applies(packet, "scientific_object_internal_readability"):
+        return check_na("scientific_object_internal_readability", "Scientific-object readability check is not applicable because no plot/table/code authority applies.")
     text = packet.get("features", {}).get("text", {})
     image = packet.get("features", {}).get("image", {})
     object_words = [s for s in text.get("spans", []) if s["y0"] > image.get("height", 0) * 0.22 and s["y1"] < image.get("height", 0) * 0.86]
@@ -134,6 +153,8 @@ def detect_scientific_object_readability(packet: dict[str, Any]) -> CheckResult:
 
 
 def detect_code_output_proximity(packet: dict[str, Any]) -> CheckResult:
+    if not _applies(packet, "code_output_proximity"):
+        return check_na("code_output_proximity", "Code/output proximity check is not applicable because no code-output authority applies.")
     spans = packet.get("features", {}).get("text", {}).get("spans", [])
     job = (packet.get("page_job") or "").lower()
     guard_text = " ".join(g.get("requirement", "") for g in packet.get("guards", [])).lower()
@@ -153,6 +174,8 @@ def detect_code_output_proximity(packet: dict[str, Any]) -> CheckResult:
 
 
 def detect_evidence_interpretation_proximity(packet: dict[str, Any]) -> CheckResult:
+    if not _applies(packet, "evidence_interpretation_proximity"):
+        return check_na("evidence_interpretation_proximity", "Evidence/interpretation proximity check is not applicable because no evidence-object authority applies.")
     spans = packet.get("features", {}).get("text", {}).get("spans", [])
     evidence = [s for s in spans if re.search(r"\b(plot|figure|table|observed|estimate|interval|ratio|rhat|ess|mcse|bias|rmse)\b", s.get("text", ""), re.I)]
     interp = [s for s in spans if re.search(r"\b(therefore|suggest|means|interpret|because|shows|answer|conclusion)\b", s.get("text", ""), re.I)]
@@ -194,6 +217,7 @@ def detect_internal_identifier_leak(packet: dict[str, Any]) -> CheckResult:
         r"\bV\d{2}\b.*\bproof\b",
         r"\bcheckpoint\b|\binternal\b|\bproduction\b",
     ]
+    patterns.extend(packet.get("forbidden_identifier_patterns") or [])
     hits = [pat for pat in patterns if re.search(pat, text, re.I)]
     if hits:
         return check_revise("internal_identifier_or_markup_leak", "INTERNAL_IDENTIFIER_OR_RAW_MARKUP_LEAK", f"Visible text matched forbidden internal/raw patterns: {hits[:3]}.")
@@ -204,11 +228,7 @@ def build_protected_object_check(packet: dict[str, Any]) -> CheckResult:
     protected = packet.get("protected_objects") or []
     if not protected:
         return check_na("protected_object", "No protected visual object in packet.")
-    image = packet.get("features", {}).get("image", {})
-    components = image.get("content_components", [])
-    if not components:
-        return check_revise("protected_object", "PROTECTED_OBJECT_PACKET_MISSING_VISIBLE_REGION", "Protected object required but no rendered components were detected.")
-    return check_pass("protected_object", f"Protected-object review packet contains {len(protected)} object requirement(s) and {len(components)} visible region candidates.")
+    return check_na("protected_object", "Protected-object verdict belongs to the independent rendered reviewer; packet contains protected-object authority.")
 
 
 DETECTOR_FUNCTIONS = [

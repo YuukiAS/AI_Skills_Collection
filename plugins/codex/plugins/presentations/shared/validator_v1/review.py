@@ -1,11 +1,15 @@
-"""Rendered review packet construction and page review."""
+"""Rendered review packet construction and reviewer-row validation.
+
+The generic core deliberately does not author final rendered-review verdicts.
+Fresh read-only reviewer workers must inspect exact page PNGs and write rows.
+This module builds packets and validates those externally authored rows.
+"""
 
 from __future__ import annotations
 
 from pathlib import Path
 from typing import Any
 
-from .detectors import run_detectors
 from .features import inspect_rendered_png, text_geometry_features
 
 
@@ -38,6 +42,8 @@ def build_review_packet(
     guards: list[dict[str, Any]],
     protected_objects: list[dict[str, Any]] | None = None,
     page_role: str = "ordinary",
+    applicability: dict[str, bool] | None = None,
+    forbidden_identifier_patterns: list[str] | None = None,
 ) -> dict[str, Any]:
     image = inspect_rendered_png(page_png_path)
     text = text_geometry_features(pdf_text_page, image["width"], image["height"])
@@ -53,73 +59,91 @@ def build_review_packet(
         "guards": guards,
         "protected_objects": protected_objects or [],
         "page_role": page_role,
+        "applicability": applicability or {},
+        "forbidden_identifier_patterns": forbidden_identifier_patterns or [],
         "features": {"image": image, "text": text},
     }
 
 
-def review_rendered_page(packet: dict[str, Any], *, reviewer_context_id: str) -> dict[str, Any]:
-    checks = run_detectors(packet)
-    by_id = {c["check_id"]: c for c in checks}
-    normalized_checks = {}
-    for check_id in CHECK_ORDER:
-        source = by_id.get(check_id)
-        if source:
-            normalized_checks[check_id] = source
-        elif check_id == "primary_object_scale":
-            normalized_checks[check_id] = by_id.get("object_scale_whitespace", {"check_id": check_id, "status": "N/A", "not_applicable_reason": "No object-scale detector output."})
-        elif check_id == "whitespace":
-            normalized_checks[check_id] = by_id.get("object_scale_whitespace", {"check_id": check_id, "status": "N/A", "not_applicable_reason": "No whitespace detector output."})
-        elif check_id == "audience_boundary":
-            normalized_checks[check_id] = by_id.get("internal_identifier_or_markup_leak", {"check_id": check_id, "status": "N/A", "not_applicable_reason": "No audience-boundary detector output."})
-        else:
-            normalized_checks[check_id] = {"check_id": check_id, "status": "N/A", "not_applicable_reason": "No applicable signal."}
-
-    revise = [c for c in normalized_checks.values() if c.get("status") == "REVISE"]
-    blocked = [c for c in normalized_checks.values() if c.get("status") == "BLOCKED"]
-    positive = [p for c in normalized_checks.values() for p in c.get("positive_evidence", [])]
-    negative = [n for c in normalized_checks.values() for n in c.get("negative_evidence", [])]
-    if blocked:
-        verdict = "BLOCKED"
-    elif revise:
-        verdict = "REVISE"
-    elif positive:
-        verdict = "PASS"
-    else:
-        verdict = "REVISE"
-        negative.append("No positive visible evidence was produced; PASS fallthrough is forbidden.")
-        normalized_checks["pass_fallthrough_guard"] = {
-            "check_id": "pass_fallthrough_guard",
-            "status": "REVISE",
-            "finding_class": "PASS_FALLTHROUGH",
-            "evidence": "No positive visible evidence was produced.",
+def blocked_rendered_review_row(packet: dict[str, Any], *, reason: str) -> dict[str, Any]:
+    checks = {
+        check_id: {
+            "check_id": check_id,
+            "status": "BLOCKED",
+            "evidence": reason,
+            "finding_class": "RENDERED_REVIEW_BLOCKED",
+            "locations": [],
+            "positive_evidence": [],
+            "negative_evidence": [reason],
+            "not_applicable_reason": None,
         }
-
-    locations = [loc for c in normalized_checks.values() for loc in c.get("locations", [])]
-    issue_classes = sorted({c.get("finding_class") for c in normalized_checks.values() if c.get("finding_class")})
-    image = packet["features"]["image"]
-    text = packet["features"]["text"]
-    largest = image.get("largest_component") or {}
-    targets = ",".join((packet.get("stable_targets") or packet.get("component_targets") or ["unmapped"])[:3])
-    guard_ids = ",".join(str(g.get("guard_id", "guard")) for g in packet.get("guards", [])[:3]) or "none"
-    excerpt = " ".join((text.get("text_excerpt") or "").split()[:10])
-    visible_context = (
-        f"{packet['artifact_id']} P{packet['physical_page']} targets={targets} "
-        f"guards={guard_ids} whole-slide PNG opened; words={text.get('word_count', 0)}, "
-        f"median_word_px={text.get('median_word_height_px', 0)}, components={len(image.get('content_components', []))}, "
-        f"body_bbox_ratio={image.get('body_bbox_area_ratio', 0)}, largest_bbox=({largest.get('x0')},{largest.get('y0')},{largest.get('x1')},{largest.get('y1')}), "
-        f"text_start='{excerpt}'."
-    )
-    if revise:
-        finding_summary = " ".join(f"{c.get('finding_class')}: {c.get('evidence', '')}" for c in revise[:3])
-        headline = f"{visible_context} Visible finding(s): {finding_summary}"
-    else:
-        positive_summary = " ".join(positive[:3])
-        headline = f"{visible_context} Positive visible evidence: {positive_summary}"
+        for check_id in CHECK_ORDER + ["historical_guard_closure"]
+    }
     return {
         "artifact_id": packet["artifact_id"],
         "physical_page": packet["physical_page"],
         "page_png_sha256": packet["page_png_sha256"],
-        "reviewer_context_id": reviewer_context_id,
+        "reviewer_run_id": "BLOCKED_RENDER_REVIEW_RUNTIME",
+        "fresh_context": "NO",
+        "read_only_candidate": "YES",
+        "image_inspection_runtime": "UNAVAILABLE",
+        "review_scope": "WHOLE_SLIDE",
+        "checks": checks,
+        "problem_locations": [],
+        "positive_visible_evidence": [],
+        "negative_visible_evidence": [reason],
+        "issue_classes": ["RENDERED_REVIEW_BLOCKED"],
+        "overall_visual_verdict": "BLOCKED",
+        "substantive_observation": reason,
+    }
+
+
+def normalize_reviewer_row(packet: dict[str, Any], row: dict[str, Any]) -> dict[str, Any]:
+    normalized_checks: dict[str, dict[str, Any]] = {}
+    source_checks = row.get("checks") or {}
+    for check_id in CHECK_ORDER:
+        if isinstance(source_checks, dict):
+            source = source_checks.get(check_id)
+        else:
+            source = next((c for c in source_checks if c.get("check_id") == check_id), None)
+        if not source:
+            source = {"check_id": check_id, "status": "BLOCKED", "evidence": f"Reviewer omitted {check_id}.", "finding_class": "REVIEWER_SCHEMA_MISSING_CHECK"}
+        status = source.get("status")
+        if status not in {"PASS", "REVISE", "N/A", "BLOCKED"}:
+            source["status"] = "BLOCKED"
+            source["finding_class"] = "REVIEWER_SCHEMA_INVALID_STATUS"
+            source["evidence"] = f"Invalid reviewer status for {check_id}: {status}"
+        normalized_checks[check_id] = source
+    hist = (row.get("checks") or {}).get("historical_guard_closure") if isinstance(row.get("checks"), dict) else None
+    normalized_checks["historical_guard_closure"] = hist or {
+        "check_id": "historical_guard_closure",
+        "status": "BLOCKED",
+        "finding_class": "HISTORICAL_GUARD_CLOSURE_MISSING",
+        "evidence": "Reviewer row omitted historical_guard_closure.",
+    }
+    if row.get("page_png_sha256") != packet["page_png_sha256"]:
+        normalized_checks["image_binding"] = {
+            "check_id": "image_binding",
+            "status": "BLOCKED",
+            "finding_class": "REVIEWER_IMAGE_HASH_MISMATCH",
+            "evidence": "Reviewer row page_png_sha256 does not match packet.",
+        }
+    positive = [p for c in normalized_checks.values() for p in c.get("positive_evidence", [])]
+    negative = [n for c in normalized_checks.values() for n in c.get("negative_evidence", [])]
+    locations = [loc for c in normalized_checks.values() for loc in c.get("locations", [])]
+    issue_classes = sorted({c.get("finding_class") for c in normalized_checks.values() if c.get("finding_class")})
+    verdict = row.get("overall_visual_verdict")
+    if verdict not in {"PASS", "REVISE", "BLOCKED"}:
+        verdict = "BLOCKED"
+        issue_classes.append("REVIEWER_SCHEMA_INVALID_VERDICT")
+    return {
+        "artifact_id": packet["artifact_id"],
+        "physical_page": packet["physical_page"],
+        "page_png_sha256": packet["page_png_sha256"],
+        "reviewer_run_id": row.get("reviewer_run_id"),
+        "fresh_context": row.get("fresh_context"),
+        "read_only_candidate": row.get("read_only_candidate"),
+        "image_inspection_runtime": row.get("image_inspection_runtime"),
         "review_scope": "WHOLE_SLIDE",
         "checks": normalized_checks,
         "problem_locations": locations,
@@ -127,5 +151,12 @@ def review_rendered_page(packet: dict[str, Any], *, reviewer_context_id: str) ->
         "negative_visible_evidence": negative,
         "issue_classes": issue_classes,
         "overall_visual_verdict": verdict,
-        "substantive_observation": headline,
+        "substantive_observation": row.get("substantive_observation", ""),
     }
+
+
+def review_rendered_page(packet: dict[str, Any], *, reviewer_context_id: str) -> dict[str, Any]:
+    return blocked_rendered_review_row(
+        packet,
+        reason="The deterministic generic core cannot author rendered-review verdicts in V3; provide an external fresh reviewer row.",
+    )
