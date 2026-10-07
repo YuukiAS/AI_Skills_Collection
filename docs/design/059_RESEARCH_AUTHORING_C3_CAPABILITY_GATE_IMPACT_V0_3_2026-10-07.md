@@ -50,8 +50,11 @@ No new case family is created.
 Existing case families gain risk-matched subruns：
 
 - DEV-06/07: research-main finalized-source render-only still reaches the explicit-only renderer;
+- DEV-07 additionally checks the affected direct existing-LaTeX mode: a natural compile/debug/template/source-hygiene/bibliography/build request must explicitly reach `latex-paper-authoring`, compilation/debug must remain allowed, Research Authoring must not rewrite the existing manuscript, generic `pdf` must not steal ownership, and the renderer must not misclassify source-debug as render-only;
 - DEV-08: research-main existing-PDF support still reaches the explicit-only generic pdf;
 - DEV-04/05: record exact Skill read order and profile policy identity.
+
+The DEV-07 direct-LaTeX subrun is should-not-change development evidence for an existing capability directly affected by the explicit-only policy. It is not DEV-12 and does not alter G1-G4 taxonomy.
 
 ## 6. Final Gate policy after C3
 
