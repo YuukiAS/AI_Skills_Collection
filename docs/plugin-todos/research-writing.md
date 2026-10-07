@@ -251,6 +251,27 @@ candidate_action:
 - When the user says a previous version had better wording, recover that exact accepted wording/history before drafting a replacement; do not reconstruct it from memory or let an executor improvise.
 promotion_gate: replay on one additional annotated Homework/Project revision and one new student-facing assessment artifact; verify that student action remains complete while duplicate/irrelevant administrative prose decreases and no StrikeOut content recurs.
 
+
+### Student-assessment typography should allow a bounded rendered size range and preserve successful positive samples
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 Project Guide V6 12pt review, 2026-10-07
+evidence: private user-provided `Project-V6-12pt.pdf` (2-page A4; not copied into the public repository) plus the related STAT5060 Project Guide recovery lineage in `YuukiAS/STAT5060-TA`. The user judged this version comparatively successful after multiple annotation rounds. At 12pt body text, the first page remains dense but readable and the second page has intentional rather than accidental whitespace; the larger body text improves reading comfort without forcing a third page.
+target layer: student-assessment visual planning / positive-baseline registry / rendered review
+problem:
+- A single globally hard-coded body font size is too rigid for short student-facing assessment documents. The visually best size depends on content length, page count, document family, title hierarchy and the amount of natural whitespace.
+- Earlier recovery work showed the opposite failure as well: font-size changes can invalidate pagination controls, so an executor must not freely shrink or enlarge text after seeing the render.
+- A successful artifact can be lost if it is treated only as the latest candidate rather than registered as a positive sample with the characteristics that made it work.
+candidate_action:
+- Allow the Planner to freeze a **bounded typography candidate set** rather than one exact body size when typography is still genuinely open. For a restrained A4 assessment handout, a task may for example permit `11pt / 11.5pt / 12pt`; the exact range is document-family specific, not a universal constant.
+- Hold copy, margins, typeface family, title hierarchy and information architecture fixed while comparing the permitted body sizes. Do not use font-size reduction as a hidden page-count repair.
+- Run deterministic checks first, then let fresh rendered review choose among already-valid size candidates based on legibility, hierarchy, paragraph rhythm, page balance and reading effort. Occupancy/density remains diagnostic rather than a universal hard gate.
+- Any body-size/leading change automatically reopens dependent pagination controls such as `Needspace`, keep-together rules and manual break hints, consistent with the existing non-recurrence amendment.
+- Positive-baseline metadata should record the accepted artifact plus the relevant typography envelope: page size, margins, body size/leading, title sizes, page count and any intentionally accepted whitespace pattern.
+- Treat the STAT5060 Project Guide V6 12pt PDF as a **successful positive sample** for concise postgraduate student-facing assessment guides: short two-page A4 artifact, restrained academic styling, clear title/due-date hierarchy, minimum-sufficient administrative detail, and statistical-task language dominant over policy/process language.
+- Do not generalize its information architecture to Homework or other artifact families; reuse the principles and visual calibration, not the exact layout.
+promotion_gate: replay the bounded-size selection on one additional student-facing assessment document and verify that the chosen size is selected by independent rendered review without changing approved copy, margins or page-count semantics.
+
 ## Recently promoted / established
 
 - Advisor-facing reports organize around scientific question and decision, not run/debug chronology.
