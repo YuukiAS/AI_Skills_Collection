@@ -1,195 +1,230 @@
 # Independent Review Contract
 
-Before applying this contract, read `presentation-end-to-end-pre-execution-runbook.md` and then `pre-execution-cumulative-acceptance-contract.md`. Its cumulative guard ownership is authoritative across Critic, Codex Auditor, rendered review, GPT Work, and later revision rounds.
+Before applying this contract, read in order:
 
-This shared contract applies to non-trivial presentation planning, production, and revision.
+1. `presentation-end-to-end-pre-execution-runbook.md`
+2. `pre-execution-cumulative-acceptance-contract.md`
+3. `rendered-artifact-positive-ancestry-acceptance-contract.md`
 
-It separates three different review jobs:
+This contract separates four review jobs that must not be conflated:
 
-1. **prebuild Critic** — judges whether the Planner specification is ready;
-2. **postbuild deterministic/rendered review** — judges the exact candidate artifact;
-3. **GPT Work final gate** — judges aesthetics, reader effort, and whole-deck communication on the exact immutable render.
+1. **prebuild specification Critic** — judges whether Planner authority is ready;
+2. **fresh deterministic Auditor** — judges exact source/candidate conformance;
+3. **fresh rendered-artifact Auditor** — judges every required page image and render-dependent guard;
+4. **GPT Work final gate** — judges aesthetics, reader effort, pedagogy, and whole-deck communication.
 
-These jobs are not interchangeable.
+A PASS from one layer cannot substitute for another.
 
-## 1. Prebuild Critic gate
+---
 
-### 1.1 When required
+## 1. Prebuild specification Critic
 
-A fresh read-only prebuild Critic is mandatory for:
+Required for failed-version recovery, major revision, and substantial high-risk new decks.
 
-- failed-version recovery;
-- major revision;
-- substantial high-risk new teaching/research/decision decks;
-- any revision changing page count, section order, page jobs, shared shell, layout archetypes, broad visible copy, or scientific/pedagogical meaning;
-- any case where a closed historical guard has recurred or the Planner may have misread cumulative feedback.
+It reviews:
 
-A bounded minor revision may skip a separate Critic only when:
-
-- page count, section order, page jobs, shell, and archetypes remain unchanged;
-- scope is normally at most three pages and one already-defined component;
-- copy changes are local and source-supported;
-- no closed guard has recurred;
-- ChatGPT Planner freezes the exact allowlist, locks, and active guard bundle.
-
-If uncertain, classify as major.
-
-### 1.2 What the Critic reviews
-
-The Critic receives read-only Planner authority and source/history evidence. It must verify:
-
-- exact source and historical-feedback consumption;
+- exact source/history consumption;
 - page count and sequence;
 - every page job and required/forbidden object;
 - content correctness and audience sufficiency;
-- student/audience versus presenter/instructor/internal boundary;
+- audience versus speaker/instructor boundary;
 - visible-copy completeness;
 - layout/archetype suitability;
+- positive/negative visual ancestry completeness;
 - historical-regression protection;
-- the proposed autonomous Codex Controller and review loop.
+- the proposed autonomous Controller and review loop.
 
 It returns:
 
-- `PASS`; or
-- `REVISE` with a bounded Planner-amendment list; or
-- `BLOCKED_HISTORY_NOT_CONSUMED` / source-equivalent block.
+- `PASS`;
+- `REVISE` with bounded Planner amendments;
+- or `BLOCKED_HISTORY_NOT_CONSUMED` / source-equivalent block.
 
-The Critic does not author slides or repair the specification itself.
+A prebuild Critic PASS means only that the specification is coherent enough to produce. It never certifies the future render.
 
-A major Planner amendment after Critic review requires a fresh Critic pass before production.
+---
 
 ## 2. Executor trust separation
 
-The agent/process that edits a candidate deck or its acceptance implementation is the **executor**. It may build, render, run smoke checks, and prepare evidence, but it may not authoritatively accept its own candidate.
+The agent/process that edits a candidate is the Producer/executor.
 
-The strongest executor completion state is:
+It may build, render, run smoke tests, and prepare evidence. It may not authoritatively accept its own candidate.
+
+Its strongest state is:
 
 ```text
 READY_FOR_INDEPENDENT_VALIDATION = YES
 ```
 
-Do not report final `PASS`, release readiness, or human acceptance from executor self-review.
+Do not report final PASS, release readiness, or human acceptance from Producer self-review.
 
-## 3. Authoritative deterministic validation
+---
 
-Run deterministic acceptance only after the executor stops writing the candidate.
+## 3. Fresh deterministic Auditor
+
+Run only after the Producer stops writing the exact candidate.
 
 Preferred transport:
 
-1. fresh CI job or fresh process on a clean checkout of the exact candidate commit;
-2. fresh read-only subagent with isolated context when process/CI separation is unavailable;
-3. same executor process only for debugging, never as authoritative acceptance.
+1. fresh CI/fresh process on a clean checkout;
+2. fresh read-only subagent with isolated context;
+3. same executor process only for debugging, never authoritative acceptance.
 
-The authoritative validator must:
+The Auditor must:
 
-- bind to exact repository, commit, artifact hashes, and authority hashes;
-- use a pre-existing version-pinned validator/detector runtime;
+- bind to exact repository, source commit, artifact hashes, and authority hashes;
+- use a pre-existing version-pinned validator runtime;
 - treat Planner/user authority as read-only;
-- have no permission to change candidate source, fixtures, detectors, thresholds, or acceptance rules;
-- receive no executor scratchpad or self-review narrative;
-- execute the same production detector functions for real validation, accepted controls, and negative mutations;
-- reject fixture-name branches and magic-value-only predicates;
+- have no permission to edit candidate, fixtures, gates, or thresholds;
+- receive no executor scratchpad or self-acceptance narrative;
+- verify exact copy, PageIDs, count/order, locks, allowlist, history coverage, required objects, positive visual object preservation, code execution, numerical results, figure labels, PDF/PPTX structure, and artifact identity;
 - persist machine-readable evidence.
 
-If a validator defect is found, stop the deck task and repair/version the validator separately before rerunning the frozen candidate.
+If a validator defect is found, repair/version the validator separately before rerunning the frozen candidate.
 
-## 4. Subagent requirements
+---
 
-A subagent is independent only when all of these hold:
+## 4. Fresh rendered-artifact Auditor
 
-- fresh context;
-- artifact/commit-bound input;
-- read-only candidate and authority;
-- no expected human-rejection answer key;
-- no permission to edit tests, detector code, or gates;
-- no access to executor chain-of-thought/scratchpad;
-- persisted output with exact artifact identity.
+This is a distinct review stage. It cannot be replaced by source review, extracted text, or representative-page inspection.
 
-If these cannot be guaranteed, do not treat the subagent as authoritative validation.
+The Auditor receives:
 
-## 5. Independent rendered-artifact review
+- exact PDF/PPTX hash;
+- exact page PNG hashes;
+- full contact sheet;
+- PageIDs;
+- frozen copy/layout/component/positive-ancestry authority;
+- active historical guards;
+- render-pending closure matrix template;
+- relevant source anchors.
 
-After deterministic validation passes, run a separate blind rendered review.
+For major/full-deck work it must:
 
-The reviewer receives:
+- inspect every page at whole-slide scale;
+- inspect the full contact sheet;
+- create one persisted row per page;
+- create one persisted row per render-dependent historical item;
+- verify primary-object scale, typography, whitespace, reading path, evidence proximity, Q/A geometry, component consistency, and whole-deck rhythm;
+- verify protected diagrams/figures/tables/code-output relationships were not silently deleted;
+- validate suspicious charts/traces/diagnostic plots against underlying quantities and nearby numerical summaries;
+- bind findings to the exact candidate and page-image hashes.
 
-- exact final render;
-- PageIDs and review scope;
-- frozen copy/layout/component contract;
-- relevant source anchors and active guards;
-- review rubric.
+A claimed full-deck PASS is invalid when:
 
-Do not provide executor completion prose or expected failure answers.
+- any page lacks a review row;
+- any mandatory `RENDER_PENDING` item lacks an exact-render verdict;
+- a protected visual object disappears without retirement authority;
+- review evidence is bound to another candidate;
+- P0/P1/P2 findings remain open.
 
-Rendered review covers:
+---
 
-- hierarchy and reading path;
-- scientific/decision object scale;
-- whitespace and semantic proximity;
-- audience language;
-- visual consistency and whole-deck rhythm;
-- pedagogical or decision sufficiency;
-- historical visual recurrence.
+## 5. Subagent independence
 
-A rendered reviewer cannot override deterministic failures.
+A subagent counts as independent only if:
+
+- it starts with fresh context;
+- its inputs are artifact/commit-bound;
+- candidate and authority are read-only;
+- it receives no expected human-rejection answer key;
+- it cannot edit tests, detector code, gates, or thresholds;
+- it has no access to Producer scratchpad/chain-of-thought;
+- its output is persisted with exact artifact identity.
+
+Otherwise its review is advisory only.
+
+---
 
 ## 6. GPT Work final gate
 
-GPT Work is the final independent aesthetic, reader-effort, and communication review for formal decks.
+GPT Work runs after deterministic and rendered review have closed routine defects.
 
 ### Major/new/recovery candidate
 
-GPT Work reviews all pages and the full contact sheet on the exact immutable candidate.
+Review:
+
+- every page;
+- full contact sheet;
+- high-risk pages at high resolution;
+- cumulative visual/pedagogical guards;
+- positive visual ancestry;
+- whole-deck rhythm and density;
+- audience reader effort;
+- natural language;
+- semantic proximity;
+- whether pages feel complete rather than merely populated.
 
 ### Minor bounded revision
 
-GPT Work may review only:
-
-- changed pages;
-- affected shared-component consumers;
-- minimum context pages;
-- the full contact sheet;
-
-provided page count, section order, shell, page jobs, and archetypes remain locked. Final release still requires one complete whole-deck regression.
+May review changed pages, affected consumers, minimum context, and full contact sheet only when page count, section order, shell, page jobs, and archetypes remain locked. Final release still requires a whole-deck regression.
 
 GPT Work:
 
 - does not implement fixes;
 - does not change scientific/statistical meaning;
-- does not override deterministic failures;
-- returns `PASS` or `REVISE` with page/component-scoped findings;
-- on `REVISE`, routes findings back through a fresh Producer and then a fresh deterministic/rendered review before another GPT Work pass.
+- does not override deterministic or numerical failures;
+- returns PASS or REVISE with page/component-scoped findings;
+- on REVISE, routes findings through a fresh Producer, fresh deterministic review, fresh rendered review, and then another GPT Work pass.
 
-## 7. Acceptance aggregation
+If GPT Work finds a defect that an earlier layer should have caught, the workflow must both repair the candidate and strengthen the upstream permanent guard.
 
-Final presentation acceptance is the conjunction of:
+---
+
+## 7. Internal proof policy
+
+For failed-version recovery and materially new visual systems:
+
+- real-content component proof is mandatory;
+- high-risk-page proof is mandatory;
+- internal review/repair is mandatory before full-deck production.
+
+The user may choose not to see the proof. That never authorizes skipping it.
+
+---
+
+## 8. Acceptance aggregation
+
+Final acceptance is the conjunction of:
 
 - required prebuild Critic PASS;
-- deterministic validation PASS;
-- no unresolved mandatory `NOT_INDEPENDENTLY_VERIFIED` gate;
-- rendered-artifact review PASS;
+- Planner freezes intact;
+- internal proofs PASS;
+- deterministic Auditor PASS;
+- rendered-artifact Auditor PASS;
+- every mandatory render-dependent guard resolved on the exact candidate;
+- positive visual ancestry preserved or explicitly retired;
 - GPT Work PASS when required;
-- required user/human decisions PASS;
+- required human decisions PASS;
 - all previous locks preserved.
 
 The aggregator cannot convert a failure to PASS.
 
-## 8. Revision monotonicity
+---
 
-For existing-deck revision:
+## 9. Revision monotonicity
 
 ```text
-open_pages_next <= open_pages_current
+open_feedback_next <= open_feedback_current
 locked_pages_next >= locked_pages_current
+locked_components_next >= locked_components_current
+positive_visual_object_losses = 0
 unrelated_changes = 0
 ```
 
-Only explicitly authorized pages/components may change. User review should receive changed pages plus minimal context, not a full-deck re-annotation request.
+Only explicitly authorized pages/components may change.
 
-## 9. Repeated-control-failure escalation
+---
 
-If an implementation round reveals a new P0 self-certification class—test-specific bypass, validator edited to fit the candidate, stale/fake evidence identity, production hook not used, or protected-path proof not derived—do not continue indefinite project-local patch versions.
+## 10. Repeated review/control failure
 
-Freeze the candidate and authority, move validator repair to the presentations plugin, independently review/version the validator, replay historical failures plus an unrelated deck, then return to the frozen candidate.
+If a candidate with obvious full-deck defects reaches the user after claimed internal PASS:
 
-A simple mechanical defect may receive one bounded correction; a new trust-boundary failure triggers the generic rebuild route.
+1. mark the candidate human-rejected;
+2. forbid minor page-local patching;
+3. identify which gate failed to execute or lacked evidence;
+4. add permanent cumulative guards;
+5. replay the rejected candidate through the strengthened review path;
+6. repair/version generic review infrastructure if the trust boundary failed.
+
+A simple mechanical defect may receive a bounded correction. A new self-certification or missing-scope class triggers generic workflow repair.
