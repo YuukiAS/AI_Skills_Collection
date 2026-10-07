@@ -4,9 +4,10 @@ Status: **canonical workflow contract**
 Applies to: non-trivial teaching, research, business, product, and technical presentations  
 Primary evidence: STAT5060 Tutorial 01, CAT-TRACE, CUHK Date, Lucerna, Bobbio, and prior presentation-plugin production/review work
 
-**Mandatory first read before any non-trivial execution:**
+**Mandatory read-before-work order for every non-trivial presentation task:**
 
-- `pre-execution-cumulative-acceptance-contract.md`
+1. `presentation-end-to-end-pre-execution-runbook.md` — complete end-to-end workflow;
+2. `pre-execution-cumulative-acceptance-contract.md` — cumulative guards and review ownership.
 
 Then read with:
 
