@@ -3,6 +3,14 @@
 Status: **canonical app-facing authoring contract**  
 Applies to: non-trivial presentation creation, revision, recovery, and review planning initiated from ChatGPT Web
 
+## 0. Mandatory first read
+
+Before ChatGPT Web plans, revises, or hands off any non-trivial presentation task, read:
+
+`pre-execution-cumulative-acceptance-contract.md`
+
+The Planner must classify the task, determine whether a Critic is required, identify the current freeze state, and bind the cumulative guard/lock state before production planning.
+
 ## 1. Purpose
 
 ChatGPT Web is the presentation author and Planner. It may invoke the presentations capability to understand sources, design the deck, freeze audience-facing decisions, digest human feedback, inspect rendered artifacts, and prepare autonomous Codex production Goals.
