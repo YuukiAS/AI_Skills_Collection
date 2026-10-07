@@ -368,3 +368,32 @@ This amendment is considered successfully adopted only when:
 - a seeded relational inconsistency is caught;
 - a seeded aesthetic-threshold ownership defect is caught;
 - a local repair preserves all unrelated accepted regions.
+
+
+---
+
+## 17. Typography changes invalidate pagination guards
+
+A font-size, body-leading, geometry, or comparable global typography change invalidates page-protection controls that were tuned under the previous typography.
+
+Controls such as:
+
+- `Needspace`;
+- keep-with-next / keep-together thresholds;
+- widow/orphan protections;
+- manual break hints;
+- minimum-space guards before headings, questions, tables, equations, or list items
+
+must be treated as **dependent layout state**, not as immutable content.
+
+Before declaring a typography alternative visually infeasible:
+
+1. inspect the actual generated source around every unexpected blank/residual page;
+2. inventory all explicit and effective pagination controls affecting that region;
+3. distinguish natural text reflow from a stale guard inherited from the old typography;
+4. repair only the stale pagination guard while keeping copy, semantics, margins, and the requested typography change fixed;
+5. rerender and independently review the repaired alternative.
+
+A candidate must not be rejected as “font size does not work” when the visible failure is actually caused by a stale `Needspace` / keep-together / break control from the previous font scale.
+
+For bounded typography comparisons, pagination guards are automatically reopened for review even when visible copy remains locked.
