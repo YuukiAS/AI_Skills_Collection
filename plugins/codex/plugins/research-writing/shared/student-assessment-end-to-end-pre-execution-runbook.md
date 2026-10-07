@@ -1308,3 +1308,65 @@ FRONT_MATTER_BLOCK_RHYTHM = PASS
 ```
 
 Do not repair one heading locally with an ad hoc vertical skip; fix the shared component/token.
+
+
+# 24. Opening-page information-value and composition rule
+
+The first page of a student assessment has a distinct reader job. It should normally let the student identify:
+
+- what artifact this is;
+- when it is due and the visible total/weight information that has been approved;
+- what data/context they need before starting;
+- what they must submit;
+- where the assessed work begins.
+
+A sparse first page is **not** permission to add filler.
+
+When the opening page becomes visually underfilled after legitimate simplification, use this order:
+
+1. recover concise, source-backed context that materially helps interpretation or action;
+2. improve the scan structure of existing required information, for example a short data map or a numbered submission list;
+3. allow the first assessed block to flow naturally upward/downward under the semantic-pagination rules;
+4. accept purposeful whitespace if no additional information passes the reader-value test.
+
+Any newly proposed contextual sentence must pass at least one of:
+
+```text
+INTERPRETATION_VALUE = helps the student interpret the data/task correctly
+NAVIGATION_VALUE = helps locate/reuse a relevant course example/source
+ACTION_VALUE = changes or clarifies what the student must do/submit
+ERROR_PREVENTION_VALUE = prevents a likely substantive misunderstanding
+```
+
+If none apply, exclude the sentence.
+
+For a short Homework brief, contextual enrichment should normally be no more than one or two compact sentences before the data/deliverable structure.
+
+Good candidates include:
+
+- whether a shared dataset is synthetic/observational when that affects interpretation;
+- whether treatment/group assignment was not randomized when causal interpretation matters;
+- that several questions deliberately reuse one dataset/context;
+- that a later question revisits a named lecture example when this helps students locate relevant course material.
+
+Do not add:
+
+- motivational filler;
+- generic course summaries;
+- “what a good answer looks like” teaching unless explicitly approved;
+- privacy/provenance disclaimers that do not change student action;
+- internal design rationale;
+- text whose only purpose is to occupy vertical space.
+
+For multiple required submission files, prefer a short numbered or bulleted deliverable list when it is more scannable than a dense paragraph. Put consequences immediately after the relevant requirement, in plain student language.
+
+Required review fields:
+
+```text
+FIRST_PAGE_READER_JOB = PASS
+FIRST_PAGE_CONTEXT_VALUE = PASS | N/A
+FILLER_COPY_ADDED = NO
+SUBMISSION_SCANNABILITY = PASS
+FIRST_ASSESSED_BLOCK_VISIBLE = YES
+OPENING_PAGE_RHYTHM = PASS
+```
