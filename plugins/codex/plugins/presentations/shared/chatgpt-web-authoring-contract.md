@@ -5,9 +5,10 @@ Applies to: non-trivial presentation creation, revision, recovery, and review pl
 
 ## 0. Mandatory first read
 
-Before ChatGPT Web plans, revises, or hands off any non-trivial presentation task, read:
+Before ChatGPT Web plans, revises, or hands off any non-trivial presentation task, read in order:
 
-`pre-execution-cumulative-acceptance-contract.md`
+1. `presentation-end-to-end-pre-execution-runbook.md`;
+2. `pre-execution-cumulative-acceptance-contract.md`.
 
 The Planner must classify the task, determine whether a Critic is required, identify the current freeze state, and bind the cumulative guard/lock state before production planning.
 
