@@ -503,3 +503,24 @@ Page occupancy, bottom blank area and adjacent-page density may be logged as dia
 If a bounded candidate search returns zero survivors because every candidate fails the same aesthetic-density threshold, acceptance stops and the Planner must repair the gate ownership before more production. Do not expand the parameter grid until this review is complete.
 
 A rendered Reviewer may still reject a deterministic PASS candidate for poor whitespace, rhythm, scanability or reader effort.
+
+
+# 21. Gate R — annotation and editorial-fidelity acceptance
+
+For annotated-PDF revisions and lecture-source-grounded assessment copy, require:
+
+```text
+ANNOTATION_OBJECTS_EXTRACTED = YES | N/A
+STRIKEOUTS_APPLIED_OR_EXPLICITLY_SUPERSEDED = YES | N/A
+HIGHLIGHTS_MAPPED_TO_CURRENT_BLOCKS = YES | N/A
+ANNOTATION_COMMENTS_CONSUMED = YES | N/A
+DIRECT_USER_SUPERSESSIONS_RECORDED = YES | N/A
+STUDENT_TERMINOLOGY_FIDELITY = PASS
+UNAPPROVED_SOFTWARE_SHORTHAND = NONE
+REDUNDANT_STUDENT_PROSE = NONE
+GRATUITOUS_DISPLAY_MATH = ZERO
+TITLE_HIERARCHY = PASS
+QUESTION_HEADING_BODY_GAP_CONSISTENCY = PASS
+```
+
+A visually polished render fails this gate if it reintroduces struck-out prose, invents course terminology not used by the canonical source, or uses unnecessary display mathematics that degrades reading flow.
