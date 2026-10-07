@@ -117,25 +117,41 @@ Research Authoring core/report
 -> Research Authoring scientific QA
 ~~~
 
-### Manuscript + PDF
+### New/substantially revised manuscript
+
+With or without a final-PDF request：
 
 ~~~text
 Research Authoring core/paper
--> explicit LaTeX delegate if needed
--> stable source/package + handoff
+-> explicit LaTeX delegate only if source/package work is needed
+-> return source/package to Research Authoring owner
+-> if PDF requested: stable source/package + handoff
 -> explicit renderer delegate
 -> PDF + renderer QA
 -> Research Authoring scientific QA
 ~~~
 
+### Existing LaTeX compile/debug/source-maintenance
+
+For an already-existing LaTeX source where the main task is compile/debug, template repair, source hygiene, bibliography/build troubleshooting, or an existing-source build：
+
+~~~text
+explicit latex-paper-authoring delegate
+-> compile/debug/build allowed
+~~~
+
+Research Authoring must not rewrite the existing manuscript merely to perform this direct source-maintenance task.
+
 ### Finalized render-only
+
+For already-final Markdown/LaTeX where only final render/QA is requested：
 
 ~~~text
 explicit renderer delegate
 -> PDF + QA
 ~~~
 
-No Research Authoring planning.
+No Research Authoring planning. Source-debug/template repair must remain distinct from render-only.
 
 ### Existing PDF operation
 
@@ -247,7 +263,19 @@ Research Authoring/paper must precede LaTeX delegate; LaTeX delegate must stop a
 
 ### DEV-06/07
 
-Preserve standalone render-only PASS and add research-main profile subruns proving explicit-only renderer remains reachable for finalized source.
+Preserve standalone render-only PASS and add research-main finalized-source subruns proving explicit-only renderer remains reachable for final render-only work.
+
+DEV-07 must also include one separate natural existing-LaTeX compile/debug/template/source-hygiene/build subrun proving：
+
+~~~text
+latex-paper-authoring actual read > 0
+compile/debug succeeds
+Research Authoring rewrite/planning = 0
+generic pdf ownership = 0
+render-chinese-math-pdf source-debug ownership = 0
+~~~
+
+This subrun is part of DEV-07 and does not create a twelfth case family.
 
 ### DEV-08
 
@@ -327,4 +355,4 @@ FINAL_GATES_NOT_STARTED=YES
 NEXT_HANDOFF=CRITIC
 ~~~
 
-If the profile-scoped explicit-only mechanism is not reliable on the pinned runtime, stop without C3.
+If the profile-scoped explicit-only mechanism is not reliable on the pinned runtime, or if it breaks the direct existing-LaTeX compile/debug/source-maintenance route, stop without C3.
