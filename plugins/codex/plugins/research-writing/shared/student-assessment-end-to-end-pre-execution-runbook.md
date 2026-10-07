@@ -1370,3 +1370,45 @@ SUBMISSION_SCANNABILITY = PASS
 FIRST_ASSESSED_BLOCK_VISIBLE = YES
 OPENING_PAGE_RHYTHM = PASS
 ```
+
+
+# 25. Annotated revision is delta-preserving by default
+
+When an instructor/user annotates an existing reader-facing artifact, treat the annotated artifact as a **positive copy baseline plus explicit deltas**, unless they explicitly reopen the whole content layer.
+
+Default semantics:
+
+```text
+STRIKEOUT = remove the marked copy
+HIGHLIGHT/COMMENT = inspect and apply the stated change
+DIRECT_USER_DECISION = supersedes the corresponding earlier copy/annotation
+UNMARKED_READER_VISIBLE_COPY = preserve
+```
+
+A task being classified as `MAJOR_REVISION` does **not** itself authorize deleting unmarked useful reader-facing copy.
+
+Before drafting the revised body, create a copy-preservation map:
+
+```text
+block_id
+baseline_copy
+annotation_state = UNMARKED | STRUCK | HIGHLIGHTED | COMMENTED
+current_disposition = PRESERVE | REMOVE | REVISE | SUPERSEDED
+authority
+```
+
+Unmarked content may be removed only when:
+
+1. the user/instructor explicitly removes or supersedes it;
+2. a higher canonical source makes it false/stale;
+3. the artifact information architecture is explicitly reopened and the Planner records why the content is no longer needed by the reader.
+
+Required acceptance:
+
+```text
+UNMARKED_COPY_PRESERVATION = PASS
+UNMARKED_COPY_LOSS_COUNT = 0
+SILENT_COPY_DELETION = NO
+```
+
+This rule is especially important when simplifying a document: simplification means removing explicitly rejected or demonstrably unnecessary content, not silently erasing useful context that the reviewer left untouched.
