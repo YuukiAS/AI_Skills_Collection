@@ -150,10 +150,10 @@ Deliver proportionally:
 
 - For a small bounded edit, give the concise decision, exact additions/deletions/replacements, short reasons, key unchanged semantics, length/delta when available, and a clean full setting only when safe.
 - For a medium edit, also explain scope impact, locator/bridge substitutions, effective enforcement, balance, and budget margin when relevant.
-- For a full replacement, state the edit mode, why bounded edit is insufficient or why greenfield/reset applies, major placement changes, direct rules/bridges, preserved invariants, budget change, and the complete clean replacement.
+- For a full replacement, explain the user-relevant basis only when it affects understanding or safety: that the candidate is based on the existing setting, starts from an empty setting, or follows an explicit reset. Do not print internal mode labels such as `preservation-sensitive`, `greenfield`, or `explicit reset` in ordinary user output.
 - For missing inputs, provide only safe bounded advice or clauses, name the single missing input that truly blocks a full replacement, and avoid offloading repo/source lookup that you can do yourself.
 - For no-op, say that the Project setting should not change, identify the correct owner, locator, already-covered rule, or semantic risk, and explain why no material in-scope defect is safely repairable.
 
-By default, normal user-facing output should not expose internal labels such as preservation-sensitive, durable semantic map, disposition table, invariant checklist, or coverage/redundancy review. Use a short conclusion, the replacement or bounded edit when safe, and only the few key changes a user needs to trust the edit. Expose audit detail only when the user asks for review evidence or the task is explicitly an audit packet.
+By default, normal user-facing output should not expose internal labels such as preservation-sensitive, greenfield, explicit reset, durable semantic map, disposition table, invariant checklist, or coverage/redundancy review. Use a short conclusion, the replacement or bounded edit when safe, and only the few key changes a user needs to trust the edit. Expose audit detail and internal labels only when the user asks for formal audit or review evidence.
 
 Never present mechanical surface scoring as the quality decision.

@@ -196,6 +196,23 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
         ]:
             self.assertNotIn(prohibited_active_mechanism, combined)
 
+    def test_default_output_contract_hides_internal_edit_mode_labels(self) -> None:
+        skill_body = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+        contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
+        combined = skill_body + "\n" + contract
+
+        self.assertNotIn("state the edit mode", combined)
+        self.assertNotIn("Full replacements must include mode", combined)
+        self.assertIn("Do not print internal mode labels", skill_body)
+        self.assertIn("must not print internal mode labels", contract)
+        for label in ["`preservation-sensitive`", "`greenfield`", "`explicit reset`"]:
+            self.assertIn(label, combined)
+        self.assertIn("only when it affects understanding or safety", combined)
+        self.assertIn("based on the existing setting", combined)
+        self.assertIn("starts from an empty setting", combined)
+        self.assertIn("follows an explicit reset", combined)
+        self.assertIn("formal audit", combined)
+
     def test_trigger_queries_cover_positive_and_near_miss_boundaries(self) -> None:
         data = json.loads((SKILL_DIR / "evals" / "trigger_queries.json").read_text(encoding="utf-8"))
         positives = " ".join(data["positive"])

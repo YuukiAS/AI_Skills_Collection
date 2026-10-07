@@ -226,14 +226,14 @@ Small bounded edits should be concise: decision, concrete edit, short reason, ke
 
 Medium edits may add scope impact, locator/bridge reasoning, enforcement placement, balance, and budget margin.
 
-Full replacements must include mode, reason bounded edit is insufficient or reset/greenfield applies, major placement changes, direct rules/bridges, preserved invariants, budget change, and a clean complete replacement.
+Full replacements should explain the user-relevant basis only when it affects understanding or safety: that the candidate is based on the existing setting, starts from an empty setting, or follows an explicit reset. Ordinary user output must not print internal mode labels such as `preservation-sensitive`, `greenfield`, or `explicit reset`.
 
 Missing-input outputs must avoid false-safe full settings. Name only the input that truly blocks safe completion and provide safe partial work.
 
 No-op is valid only when the setting already satisfies the active contract, the remaining difference is cosmetic, or changing Project settings would duplicate, weaken, misplace, overfit, or add semantic risk.
 
 Normal user-facing answers should be concise and should not expose internal
-preservation-sensitive labels, semantic maps, disposition tables, invariant
-checklists, or coverage/redundancy reviews unless the user asks for audit
-evidence. The default delivery is a short conclusion, the bounded edit or clean
-replacement when safe, and a few key reasons.
+mode labels, semantic maps, disposition tables, invariant checklists, or
+coverage/redundancy reviews unless the user asks for formal audit evidence. The
+default delivery is a short conclusion, the bounded edit or clean replacement
+when safe, and a few key reasons.
