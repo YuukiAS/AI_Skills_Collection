@@ -1,0 +1,1 @@
+f805fde6b48585bb03d8ad53e712a907871b304df6023544225771165827c38f  research-authoring-wrapper-c3.tar.gz

@@ -1,0 +1,129 @@
+Intensity-Clipping Robustness for Compact Lesion Segmentation
+Internal manuscript draft
+Draft compiled from supplied notes
+
+Abstract
+Small-lesion segmentation can be sensitive to intensity variation at inference time. This
+compact manuscript draft summarizes a preliminary internal validation study in which test-time
+percentile clipping was added before an existing 3D U-Net inference pipeline. On one internal
+validation split of 18 volumes, the clipped pipeline increased small-lesion Dice from 0.421 to
+0.469 and mean Dice from 0.742 to 0.758, while HD95 changed from 18.4 mm to 17.9 mm. These
+observations suggest that intensity clipping may improve segmentation stability on this split,
+but they do not establish broad robustness: a motion-corrupted scan remained a failure case,
+and no external validation or statistical testing is available in the supplied evidence.
+
+1
+
+Introduction
+
+Compact lesion segmentation pipelines are often evaluated under constrained validation settings
+before broader clinical or multi-site testing is available. In this setting, a small change to test-time
+preprocessing can be useful if it improves lesion delineation without requiring model retraining.
+The present draft evaluates one such change: percentile-based intensity clipping applied before an
+existing 3D U-Net inference pipeline.
+The evidence is intentionally narrow. The available notes describe one internal validation split
+with 18 volumes, three aggregate metrics, and one persistent failure case. The manuscript therefore
+treats the result as preliminary evidence for a scoped preprocessing effect, not as a general robustness
+claim.
+
+2
+2.1
+
+Methods
+Validation setting
+
+The study used one internal validation split containing 18 volumes. The source notes do not specify
+the dataset name, acquisition protocol, lesion definition, scanner distribution, or train/validation
+partitioning beyond this split size. These details should be supplied before external submission or
+archival release.
+
+2.2
+
+Segmentation pipeline
+
+The baseline system was an existing 3D U-Net inference pipeline for lesion segmentation. The
+evaluated modification added test-time percentile clipping before inference. Because the notes do
+not define the exact lower and upper percentile thresholds, the present source package records the
+clipping operation as a pending method detail rather than inventing a parameter value.
+
+1
+
+2.3
+
+Evaluation metrics
+
+The supplied evidence reports small-lesion Dice, mean Dice, and the 95th-percentile Hausdorff
+distance (HD95, in millimeters). No confidence intervals, statistical tests, per-case distributions, or
+subgroup analyses were provided. Results are therefore presented as descriptive aggregate changes
+on the internal split.
+
+3
+
+Results
+
+Table 1 summarizes the reported aggregate metrics. Percentile clipping was associated with higher
+Dice values and a small reduction in HD95 on the internal validation split.
+Table 1: Reported internal validation metrics for the baseline pipeline and the test-time percentileclipping variant.
+Metric
+Small-lesion Dice
+Mean Dice
+HD95 (mm)
+
+Baseline
+
+Percentile clipping
+
+Change
+
+0.421
+0.742
+18.4
+
+0.469
+0.758
+17.9
+
++0.048
++0.016
+-0.5
+
+The largest reported change was for small-lesion Dice, which increased by 0.048 absolute points.
+Mean Dice increased by 0.016, and HD95 decreased by 0.5 mm. These values are consistent with a
+modest improvement in this internal split. The supplied notes also identify a motion-corrupted scan
+that remained a failure case after clipping, indicating that the preprocessing change did not resolve
+all image-quality-driven errors.
+
+4
+
+Limitations
+
+The study is preliminary. It uses one internal validation split with 18 volumes and does not include
+external validation, repeated splits, statistical uncertainty, ablation of clipping thresholds, or per-case
+error analysis. The exact percentile bounds are not specified in the source notes. The persistent
+failure on a motion-corrupted scan further limits any broad robustness interpretation. The current
+evidence supports only a scoped statement that test-time percentile clipping may improve aggregate
+lesion-segmentation metrics on this internal split.
+
+5
+
+Discussion
+
+The observed pattern suggests that percentile clipping is a plausible low-cost inference-time adjustment for this pipeline. The improvement is most visible in small-lesion Dice, which is the metric
+most likely to reflect sensitivity to small target structures. At the same time, the evidence does
+not show that clipping generalizes across datasets, scanners, lesion types, or severe artifacts. The
+motion-corrupted failure case should remain visible in any downstream manuscript version, because
+it defines the current boundary of the result.
+Before this draft is treated as a submission-ready manuscript, the next production pass should
+add the exact clipping thresholds, dataset and split details, citation-supported background, per-case
+or uncertainty summaries, and venue-specific formatting. The scientific claim should remain bounded
+unless additional experiments support a broader conclusion.
+2
+
+Citation Status
+No bibliography is included in this compact source package. Citation support is pending and must
+be supplied explicitly before submission or public release; no external citations were invented for
+this draft.
+
+3
+
+

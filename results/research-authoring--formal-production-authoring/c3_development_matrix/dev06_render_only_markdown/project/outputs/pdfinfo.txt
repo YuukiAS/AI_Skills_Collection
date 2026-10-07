@@ -1,0 +1,15 @@
+Creator:        LaTeX via pandoc
+Producer:       xdvipdfmx (20200315)
+CreationDate:   Tue Oct  6 22:30:01 2026 EDT
+Tagged:         no
+UserProperties: no
+Suspects:       no
+Form:           none
+JavaScript:     no
+Pages:          1
+Encrypted:      no
+Page size:      595.28 x 841.89 pts (A4)
+Page rot:       0
+File size:      24391 bytes
+Optimized:      no
+PDF version:    1.5

@@ -1,0 +1,24 @@
+{
+  "authoritative_evidence_roots": [
+    "results/research-authoring--formal-production-authoring/c3_development_matrix",
+    "private/exports/research-authoring--formal-production-authoring/c3_offline_wrapper"
+  ],
+  "c2_failed_candidate": "ac501d988f00cb6672fec105ae5fd51a0679cae0",
+  "c3_final_candidate_commit": "04a17a904ce522cb4a517cb33f22e062f2bcbc09",
+  "c3_provisional_product_commit": "04a17a904ce522cb4a517cb33f22e062f2bcbc09",
+  "cases": {
+    "DEV01_standalone_report_formal_pdf": "PASS: candidate Research Authoring consumed; source+handoff produced; no PDF artifact in outputs.",
+    "DEV02_standalone_advisor_report": "PASS: candidate Research Authoring consumed; advisor report produced.",
+    "DEV03_standalone_manuscript_formal_pdf": "PASS: core/paper route consumed; source package+handoff produced; no PDF artifact.",
+    "DEV04_research_main_report_formal_pdf": "PASS: research-main produced source, handoff, real PDF, renderer QA, post-render scientific QA; run2 is authoritative, first run interrupted.",
+    "DEV05_research_main_manuscript_pdf": "PASS: research-main produced manuscript source package, PDF, renderer evidence, post-render scientific QA; first child interrupted, continuation authoritative.",
+    "DEV06_render_only_markdown": "PASS: direct renderer route produced PDF/QA; original failed font attempts retained, continuation authoritative.",
+    "DEV07_render_only_latex": "PASS: direct XeLaTeX renderer route produced PDF/QA; Research Authoring path read search is empty.",
+    "DEV08_neighboring_owners": "PASS: Beamer outline, citation-only cleanup, ordinary Dice Q&A completed without document-producing Research Authoring route.",
+    "DEV09_global_renderer_counterexample": "PASS: renderer globally/profile discoverable in research-main render-only cases, while standalone DEV01/DEV03 stopped at handoff without PDF artifacts.",
+    "DEV10_unrelated_global_skill_counterexample": "PASS: unrelated installed skills visible in profile manifests/traces without changing target owner in DEV06/DEV08.",
+    "DEV11_codex_research_writing_authoring_only": "PASS: managed AGENTS/profile install wrote authoring-only route; RA core/paper read >0; source package+handoff produced; no PDF artifact or renderer output."
+  },
+  "final_gates_started": false,
+  "offline_wrapper_archive": "private/exports/research-authoring--formal-production-authoring/c3_offline_wrapper/research-authoring-wrapper-c3.tar.gz"
+}

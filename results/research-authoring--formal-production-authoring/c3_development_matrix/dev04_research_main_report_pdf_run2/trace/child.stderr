@@ -1,0 +1,2 @@
+WARNING: failed to clean up stale arg0 temp dirs: Directory not empty (os error 39)
+2026-10-07T03:12:07.904514Z ERROR codex_core::tools::router: error=apply_patch verification failed: Failed to read /overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/results/research-authoring--formal-production-authoring/c3_development_matrix/dev04_research_main_report_pdf_run2/project/outputs/research_update_page2.png: invalid utf-8 sequence of 1 bytes from index 0

@@ -1,0 +1,45 @@
+\documentclass{beamer}
+
+\title{Calibration-First Lesion Segmentation Update}
+\author{}
+\date{}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Motivation}
+  \begin{itemize}
+    \item Shift the update from mask-only accuracy to reliable confidence.
+    \item Treat calibration as a first-class requirement for lesion review.
+    \item Support safer thresholding, triage, and downstream measurement.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Current Focus}
+  \begin{itemize}
+    \item Measure segmentation quality with Dice and boundary-sensitive checks.
+    \item Measure probability quality with calibration curves and expected calibration error.
+    \item Compare operating points before and after calibration-aware tuning.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Update Plan}
+  \begin{itemize}
+    \item Audit confidence distributions across lesion size, site, and image quality.
+    \item Tune thresholds using validation-set calibration behavior.
+    \item Report paired mask metrics and confidence reliability metrics.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Next Readout}
+  \begin{itemize}
+    \item Show qualitative examples where calibration changes decisions.
+    \item Summarize tradeoffs between Dice, sensitivity, and false positives.
+    \item Decide whether calibrated probabilities are ready for reviewer-facing outputs.
+  \end{itemize}
+\end{frame}
+
+\end{document}

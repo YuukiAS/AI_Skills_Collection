@@ -1,0 +1,13 @@
+Finalized Rendering Note
+This source is already final and only needs rendering and PDF QA.
+   The Dice coeﬀicient is
+                                      2T P
+                           D=                    .
+                                2T P + F P + F N
+   Mean Dice is 0.758 and small-lesion Dice is 0.469.
+
+
+
+
+                                      1
+

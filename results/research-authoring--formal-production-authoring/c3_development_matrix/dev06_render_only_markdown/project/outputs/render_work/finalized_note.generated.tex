@@ -1,0 +1,147 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+  a4paper,
+]{article}
+\author{}
+\date{}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=25mm]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{unicode-math}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\defaultfontfeatures{Ligatures=TeX}
+
+\setmainfont[
+  Path=/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes/,
+  Extension=.otf,
+  UprightFont=texgyretermes-regular,
+  BoldFont=texgyretermes-bold,
+  ItalicFont=texgyretermes-italic,
+  BoldItalicFont=texgyretermes-bolditalic
+]{texgyretermes-regular}
+
+\setmathfont[
+  Path=/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes-math/,
+  Extension=.otf
+]{texgyretermes-math}
+
+\setmathfont[
+  Path=/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/newcomputermodern/,
+  Extension=.otf,
+  range={cal,bfcal}
+]{NewCMMath-Regular}
+
+\setCJKmainfont[
+  Path=/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf,
+  UprightFont=NotoSerifSC-Regular,
+  BoldFont=NotoSerifSC-Bold,
+  AutoFakeSlant=0.18
+]{NotoSerifSC-Regular}
+
+\setCJKsansfont[
+  Path=/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf,
+  UprightFont=NotoSansSC-Regular,
+  BoldFont=NotoSansSC-Bold,
+  AutoFakeSlant=0.18
+]{NotoSansSC-Regular}
+
+\setCJKmonofont[
+  Path=/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf,
+  UprightFont=NotoSansSC-Regular,
+  BoldFont=NotoSansSC-Bold
+]{NotoSansSC-Regular}
+
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue}
+\emergencystretch=3em
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\begin{document}
+
+\setstretch{1.15}
+\hypertarget{finalized-rendering-note}{%
+\section{Finalized Rendering Note}\label{finalized-rendering-note}}
+
+这是已经定稿的渲染测试说明，不需要重写或重新组织科研内容。
+
+核心公式：\(D = \frac{2TP}{2TP + FP + FN}\)。
+
+\begin{longtable}[]{@{}lr@{}}
+\toprule
+指标 & 数值 \\
+\midrule
+\endhead
+Mean Dice & 0.758 \\
+Small-lesion Dice & 0.469 \\
+\bottomrule
+\end{longtable}
+
+请保持文本含义不变，仅用于正式 PDF 渲染和可读性检查。
+
+\end{document}

@@ -1,0 +1,45 @@
+{
+  "surface": "standalone Research Authoring candidate",
+  "entry": "research-writing:research-reporting -> research-authoring-core -> research-reporting",
+  "source_and_handoff_status": "complete",
+  "formal_pdf_status": "pending_downstream_renderer",
+  "overall_formal_pdf_delivery_status": "partial_complete",
+  "admission_reason": "Standalone authoring-only surface; no explicitly admitted renderer sequence. Global renderer discovery does not grant admission.",
+  "checks": {
+    "all_six_source_metric_values_preserved": true,
+    "absolute_changes_verified": true,
+    "sample_size_and_split_preserved": true,
+    "motion_failure_preserved": true,
+    "validation_boundary_preserved": true,
+    "proposal_is_conditional": true,
+    "no_pdf_in_outputs": true
+  },
+  "source_only_editorial_review": {
+    "performed": true,
+    "skills": [
+      "writing-fidelity",
+      "scientific-prose"
+    ],
+    "findings": "Numbers, comparison direction, failure case, and validation limitation retained. Recommendation is conditional and distinct from observed evidence. No invented citations, calibration result, or architecture comparison. Advisor-facing text contains no execution log."
+  },
+  "pending": [
+    "PDF production",
+    "Rendered layout/font/page QA",
+    "Post-render scientific QA"
+  ],
+  "pdf_operations_performed": false,
+  "files": [
+    {
+      "path": "inputs/01-report_notes.md",
+      "sha256": "4e517468ec385f0dc6d88a65a27a146c55215bed7cb375d4af4d3d0243a26bcb"
+    },
+    {
+      "path": "outputs/advisor_research_update.md",
+      "sha256": "e4c6b33227fd7ff058a89cb8f6ce6481275ad8563ed4017f11706d23ad8c504a"
+    },
+    {
+      "path": "outputs/production_handoff.md",
+      "sha256": "7fa385dc8986665ae0e18e4c594f9c02be8c87a80b8b7d8e120425c9446308e6"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "pdf": "outputs/finalized_note.pdf",
+  "errors": [],
+  "warnings": [
+    "CJK text found but no obvious CJK font name was detected in pdffonts"
+  ],
+  "pdfinfo": "Creator:        LaTeX via pandoc\nProducer:       xdvipdfmx (20200315)\nCreationDate:   Tue Oct  6 22:30:01 2026 EDT\nTagged:         no\nUserProperties: no\nSuspects:       no\nForm:           none\nJavaScript:     no\nPages:          1\nEncrypted:      no\nPage size:      595.28 x 841.89 pts (A4)\nPage rot:       0\nFile size:      24391 bytes\nOptimized:      no\nPDF version:    1.5\n",
+  "pages": 1,
+  "pdffonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nOEPWZS+TeXGyreTermes-Bold-Identity-H CID Type 0C       Identity-H       yes yes yes      5  0\nTQPAFR+NotoSerifSC-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      7  0\nETBYSX+TeXGyreTermesMath-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      9  0\nUBXYHQ+TeXGyreTermes-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes     11  0\n",
+  "fonts_embedded": true,
+  "text_checks": {
+    "errors": [],
+    "warnings": [],
+    "fragmentation": {
+      "cjk_lines": 4,
+      "short_cjk_lines": 0,
+      "short_ratio": 0.0,
+      "failed": false
+    },
+    "table_survival": {
+      "source_table_rows": 3,
+      "checked_rows": 3,
+      "matched_rows": 3,
+      "failed": false
+    }
+  },
+  "font_checks": {
+    "errors": [],
+    "warnings": [
+      "CJK text found but no obvious CJK font name was detected in pdffonts"
+    ],
+    "font_rows": [
+      {
+        "raw": "OEPWZS+TeXGyreTermes-Bold-Identity-H CID Type 0C       Identity-H       yes yes yes      5  0",
+        "name": "OEPWZS+TeXGyreTermes-Bold-Identity-H",
+        "embedded": "yes",
+        "subset": "yes",
+        "unicode": "yes"
+      },
+      {
+        "raw": "TQPAFR+NotoSerifSC-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      7  0",
+        "name": "TQPAFR+NotoSerifSC-Regular-Identity-H",
+        "embedded": "yes",
+        "subset": "yes",
+        "unicode": "yes"
+      },
+      {
+        "raw": "ETBYSX+TeXGyreTermesMath-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      9  0",
+        "name": "ETBYSX+TeXGyreTermesMath-Regular-Identity-H",
+        "embedded": "yes",
+        "subset": "yes",
+        "unicode": "yes"
+      },
+      {
+        "raw": "UBXYHQ+TeXGyreTermes-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes     11  0",
+        "name": "UBXYHQ+TeXGyreTermes-Regular-Identity-H",
+        "embedded": "yes",
+        "subset": "yes",
+        "unicode": "yes"
+      }
+    ],
+    "cjk_font_rows": [],
+    "cjk_unicode_failures": [],
+    "canonical_font_rows": [
+      {
+        "raw": "OEPWZS+TeXGyreTermes-Bold-Identity-H CID Type 0C       Identity-H       yes yes yes      5  0",
+        "name": "OEPWZS+TeXGyreTermes-Bold-Identity-H",
+        "embedded": "yes",
+        "subset": "yes",
+        "unicode": "yes"
+      },
+      {
+        "raw": "TQPAFR+NotoSerifSC-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      7  0",
+        "name": "TQPAFR+NotoSerifSC-Regular-Identity-H",
+        "embedded": "yes",
+        "subset": "yes",
+        "unicode": "yes"
+      },
+      {
+        "raw": "ETBYSX+TeXGyreTermesMath-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      9  0",
+        "name": "ETBYSX+TeXGyreTermesMath-Regular-Identity-H",
+        "embedded": "yes",
+        "subset": "yes",
+        "unicode": "yes"
+      },
+      {
+        "raw": "UBXYHQ+TeXGyreTermes-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes     11  0",
+        "name": "UBXYHQ+TeXGyreTermes-Regular-Identity-H",
+        "embedded": "yes",
+        "subset": "yes",
+        "unicode": "yes"
+      }
+    ],
+    "unexpected_canonical_fallback_rows": []
+  },
+  "preview_prefix": "outputs/preview_independent/finalized_note",
+  "preview_paths": [
+    "outputs/preview_independent/finalized_note-1.png"
+  ]
+}

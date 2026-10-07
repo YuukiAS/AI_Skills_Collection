@@ -1,0 +1,1 @@
+Using the attached research notes, write a concise advisor-facing research update. Work through the normal Research Authoring entry and save the report source and any route receipt under the provided output directory.

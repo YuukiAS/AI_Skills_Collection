@@ -1,0 +1,1 @@
+Dice measures the overlap between a predicted segmentation mask and the reference mask: it is twice the shared area or volume divided by the total size of both masks. A Dice score of 1 means perfect overlap, while 0 means no overlap, so it is commonly used to summarize how well a lesion segmentation matches the ground truth.

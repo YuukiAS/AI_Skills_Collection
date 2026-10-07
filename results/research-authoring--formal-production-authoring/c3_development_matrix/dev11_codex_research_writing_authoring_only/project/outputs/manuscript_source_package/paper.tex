@@ -1,0 +1,69 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\title{A Preliminary Internal Validation of Test-Time Intensity Clipping for Compact Lesion Segmentation}
+\author{Author list pending}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This compact manuscript describes a preliminary internal validation of test-time intensity clipping for compact lesion segmentation. The evaluated approach adds percentile clipping before inference in an existing 3D U-Net pipeline, without changing the trained model. On one internal validation split containing 18 volumes, the clipped inference setting may improve small-lesion Dice from 0.421 to 0.469 and mean Dice from 0.742 to 0.758, while HD95 changes from 18.4 mm to 17.9 mm. These findings should be interpreted as early evidence from a limited internal split rather than as a broad robustness claim. A motion-corrupted scan remains a failure case, indicating that intensity clipping alone does not address all acquisition artifacts.
+\end{abstract}
+
+\section{Introduction}
+
+Lesion segmentation pipelines can be sensitive to intensity variation at inference time, especially when compact lesions occupy a small fraction of the image volume. This manuscript evaluates a narrow intervention: applying percentile-based intensity clipping before test-time inference in an existing 3D U-Net segmentation pipeline. The objective is not to introduce a new segmentation architecture, but to document whether this preprocessing step is associated with measurable changes in segmentation metrics on the available internal validation split.
+
+The evidence in this source package is deliberately bounded. The study uses one internal validation split with 18 volumes, and no external dataset, prospective cohort, or additional ablation experiment is included in the source notes. Accordingly, the manuscript frames the observed metric changes as preliminary and split-specific.
+
+\section{Methods}
+
+The baseline system is an existing 3D U-Net inference pipeline for lesion segmentation. The evaluated modification inserts a test-time percentile clipping step before model inference. The source notes do not specify the exact clipping percentiles, so the formal production route should confirm and insert those values before submission or external circulation. No training change, architecture change, or additional model selection procedure is implied by the available evidence.
+
+The evaluation uses one internal validation split containing 18 volumes. Segmentation performance is summarized using Dice-based overlap metrics and the 95th-percentile Hausdorff distance (HD95, in millimeters). The available notes distinguish small-lesion Dice, mean Dice, and HD95. Because only aggregate metrics are supplied, this manuscript does not report confidence intervals, hypothesis tests, per-case distributions, or subgroup analyses.
+
+\section{Results}
+
+On the internal validation split, test-time percentile clipping is associated with numerically higher Dice metrics than the existing inference configuration. Small-lesion Dice changes from 0.421 to 0.469, and mean Dice changes from 0.742 to 0.758. HD95 changes from 18.4 mm to 17.9 mm. These values are summarized in Table~\ref{tab:metrics}.
+
+\begin{table}[htbp]
+\centering
+\caption{Preliminary internal validation metrics for the existing 3D U-Net inference pipeline with and without test-time percentile clipping.}
+\label{tab:metrics}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Metric & Existing inference & With test-time clipping & Absolute change \\
+\midrule
+Small-lesion Dice & 0.421 & 0.469 & +0.048 \\
+Mean Dice & 0.742 & 0.758 & +0.016 \\
+HD95 (mm) & 18.4 & 17.9 & -0.5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The motion-corrupted scan remains a failure case under the clipping condition. This observation limits the interpretation of the metric changes: percentile clipping may help with some intensity-related variation in this split, but it does not provide a general solution for motion-corrupted acquisitions.
+
+\section{Limitations}
+
+The study is preliminary and uses only one internal validation split with 18 volumes. The source notes do not provide external validation, statistical uncertainty, per-case metric distributions, lesion-size stratification beyond the reported small-lesion Dice value, or details about the exact clipping percentiles. These omissions prevent strong claims about generalization, robustness across scanners or protocols, or clinical reliability.
+
+The continued failure on the motion-corrupted scan is a particularly important limitation. It shows that the tested preprocessing step does not remove all failure modes and should not be described as a broad robustness solution. Additional experiments would be needed to determine whether the observed metric changes persist across independent data, different acquisition artifacts, and alternative preprocessing settings.
+
+\section{Discussion}
+
+Within the narrow evidence boundary available here, test-time percentile clipping appears to be a low-complexity modification that may improve overlap metrics for compact lesion segmentation on the internal validation split. The strongest observed change is in small-lesion Dice, which increases by 0.048 in absolute terms. The mean Dice increase and HD95 decrease are smaller, and the aggregate nature of the available metrics prevents assessment of whether the changes are consistent across cases.
+
+The practical value of this result depends on follow-up validation. Before the work is advanced as a full scientific claim, the production team should confirm the clipping percentiles, inspect per-case behavior, document the failure case, and test whether the effect holds beyond the current 18-volume split. Until those checks are complete, the manuscript should be treated as a compact preliminary source package rather than a submission-ready evidence claim.
+
+\section*{Citation Support Status}
+
+Citation support is pending. No external references, dataset citations, venue requirements, or related-work claims have been verified or inserted in this source package.
+
+\end{document}

@@ -1,0 +1,1 @@
+Using the attached manuscript notes, substantially revise them into a manuscript-ready paper source/package and prepare it for formal PDF production. Work through the normal Research Authoring manuscript entry for this standalone Research Authoring candidate and save the appropriate source, package, handoff, receipts, or final artifacts under the provided output directory.

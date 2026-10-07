@@ -1,0 +1,38 @@
+---
+title: "Compact Lesion-Segmentation Reliability Check"
+subtitle: "Advisor-facing research update"
+author: "Current project"
+date: "2026-10-07"
+geometry: margin=0.85in
+fontsize: 10pt
+papersize: letter
+colorlinks: true
+---
+
+## Decision point
+
+The current question is whether next week should focus on calibration analysis before investing effort in architecture changes. On the available internal validation split, test-time intensity percentile clipping improves all reported segmentation metrics relative to the nnU-Net-style 3D U-Net baseline, with the clearest gain in small lesions. The result supports a calibration-focused follow-up, but it should be treated as a validation-only reliability check rather than a final benchmark.
+
+## Evidence snapshot
+
+All rows use the same fixed preprocessing and the same 18-volume internal development validation split. Dice is higher-is-better; HD95 is lower-is-better.
+
+| Method | Mean Dice | Small-lesion Dice | HD95 (mm) |
+|---|---:|---:|---:|
+| Baseline nnU-Net-style 3D U-Net | 0.742 | 0.421 | 18.4 |
+| Baseline + test-time intensity percentile clipping | 0.758 | 0.469 | 17.9 |
+| Absolute change | +0.016 | +0.048 | -0.5 |
+
+## Interpretation
+
+Percentile clipping gives a modest improvement in mean Dice and a larger gain for small lesions. That pattern is consistent with the candidate method helping reliability under intensity variation, especially where lesion size makes the segmentation more sensitive to preprocessing and decision thresholds.
+
+The shared failure case limits the conclusion. One scan with severe motion still produces disconnected false positives under both the baseline and the clipped variant, so the current evidence does not show that clipping resolves motion-driven failure modes. It also does not establish external generalization, because the check used 18 validation volumes from the internal development split only.
+
+## Recommended next step
+
+I recommend prioritizing a calibration analysis before changing model architecture. The next analysis should test whether percentile clipping changes confidence calibration, threshold sensitivity, and small-lesion error profiles, while keeping the current architecture fixed. If calibration explains the small-lesion gain and the motion case remains unresolved, the following architecture work can be narrowed to failure modes that preprocessing and threshold calibration do not address.
+
+## Advisor question
+
+Should next week be scoped as a calibration-first analysis using the fixed nnU-Net-style model, with architecture changes deferred until we know whether the observed small-lesion gain comes from better calibration, threshold behavior, or a narrower preprocessing effect?
