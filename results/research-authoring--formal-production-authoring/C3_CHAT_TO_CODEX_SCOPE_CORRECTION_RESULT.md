@@ -54,7 +54,7 @@ Preserved evidence:
 
 ## Validation
 
-To be filled by the Executor before commit:
+Completed by the Executor before commit:
 
 ```text
 git diff --check=PASS

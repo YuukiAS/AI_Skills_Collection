@@ -1,0 +1,3 @@
+| <img src="./skills/tools/documents-media/render-chinese-math-pdf/assets/app-facing.svg" width="40" alt="Chinese Math PDF 图标"> | <strong>Chinese Math PDF</strong><br><code>render-chinese-math-pdf</code> · v`0.3`<br>用于已定稿的 Markdown/LaTeX，或由文档负责人交接后的中文、中英混合、数学密集型科研文档的 PDF 渲染与检查。 |
+
+Reason: 原句意思准确，但“用于已定稿 Markdown/LaTeX，或已经由……”读起来略绕。这个版本只补顺中文语气，不改变 `v0.3`、skill slug，也保留“定稿/负责人交接后才进入 PDF 渲染与检查”的边界。
