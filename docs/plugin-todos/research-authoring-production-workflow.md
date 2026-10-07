@@ -669,3 +669,43 @@ NO_UNNECESSARY_HARD_BREAKS = PASS
 ```
 
 This is a rendered-review judgment. Page occupancy remains diagnostic rather than a universal hard threshold.
+
+
+## 18. Information-value-first opening-page composition
+
+The STAT5060 HW1 natural-flow proof showed a useful second-order issue: whole-document pagination can improve substantially while the first page still feels visually light after unnecessary administrative prose has been removed.
+
+The generic response must not be “add more text.”
+
+For the opening page:
+
+1. preserve the reader job and positive document-family baseline;
+2. review whether existing context/deliverables are too compressed to scan;
+3. recover only high-value source-backed context from earlier/source artifacts;
+4. restructure submission/data information before inventing prose;
+5. let assessed content flow naturally;
+6. accept remaining purposeful whitespace.
+
+A recovered historical sentence is eligible only when it still matches current authority and materially helps interpretation, navigation, action or error prevention.
+
+For Homework briefs, useful opening context is often:
+
+- a one-sentence shared data/story context;
+- a causality/provenance fact that affects interpretation;
+- a concise mapping from data files to questions;
+- a clear two- or three-item submission list.
+
+The workflow should reject both extremes:
+
+- dense paragraph blocks that hide deliverables;
+- decorative/filler prose added only to make Page 1 look fuller.
+
+Acceptance:
+
+```text
+OPENING_PAGE_INFORMATION_DENSITY = APPROPRIATE
+HIGH_VALUE_CONTEXT_ONLY = YES
+SUBMISSION_BLOCK_SCANNABLE = YES
+FILLER_FOR_WHITESPACE = NO
+WHOLE_DOCUMENT_FLOW_PRESERVED = YES
+```
