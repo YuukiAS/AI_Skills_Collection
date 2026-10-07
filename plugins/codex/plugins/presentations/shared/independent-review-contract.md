@@ -1,5 +1,7 @@
 # Independent Review Contract
 
+Before applying this contract, read `pre-execution-cumulative-acceptance-contract.md`. Its cumulative guard ownership is authoritative across Critic, Codex Auditor, rendered review, GPT Work, and later revision rounds.
+
 This shared contract applies to non-trivial presentation planning, production, and revision.
 
 It separates three different review jobs:
