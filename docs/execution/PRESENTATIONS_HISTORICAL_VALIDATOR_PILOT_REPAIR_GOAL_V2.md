@@ -61,6 +61,12 @@ At minimum close these classes:
 - production tests did not exercise production detectors;
 - ordinary defect classes were missing;
 - evidence metadata was not regenerated against exact published candidate bytes;
+- historical guard authority was loaded/count-checked but not actually consumed by
+  verdict/reviewer logic;
+- multi-target page guards were reduced to the first PageID and target membership
+  used unsafe substring matching;
+- PDF/PNG hashes were recorded but exact inventory identity was not enforced as a
+  pre-review gate;
 - detector inventory overstated actual implemented capability.
 
 The current Planner repair specification may add further findings. Those are
