@@ -1198,3 +1198,113 @@ frozen content
 ```
 
 This is the document analogue of presentation layout-archetype and golden-page proof. The renderer does not decide the semantic structure, while the deterministic validator does not substitute itself for aesthetic review.
+
+
+# 23. Annotation fidelity, source terminology, and mathematical typography
+
+## 23.1 Annotated-PDF revision is annotation-first
+
+When the user/instructor provides a marked PDF, do not infer the revision only from rendered appearance or prior chat summaries.
+
+Before drafting:
+
+1. extract the annotation object inventory;
+2. render the annotated pages;
+3. map each Highlight / StrikeOut / Underline / comment to the selected text or region;
+4. preserve raw annotation text/comments;
+5. map every substantive annotation to a stable feedback ID and lifecycle state;
+6. apply later direct user decisions as explicit supersession, never as silent replacement.
+
+Required fields:
+
+```text
+ANNOTATION_OBJECT_COUNT =
+SUBSTANTIVE_ANNOTATION_COUNT =
+STRIKEOUTS_MAPPED = YES
+HIGHLIGHTS_MAPPED = YES
+ANNOTATION_COMMENTS_MAPPED = YES
+DIRECT_USER_SUPERSESSIONS_MAPPED = YES
+```
+
+A StrikeOut normally means remove the marked student-visible content. A Highlight does not have a universal meaning: use its comment, surrounding context, and direct instructor/user decision. Do not guess from colour alone.
+
+## 23.2 Source terminology outranks convenient shorthand
+
+Student-facing method names and parameterization language should follow the instructor's lecture notes / canonical course source unless the instructor explicitly approves a modernization or alternate notation.
+
+Do not introduce a shorthand label merely because it is common in software or another textbook.
+
+Examples:
+
+- if the lecture uses “negative binomial distribution” / “negative binomial loglinear model”, do not silently relabel it “NB2”;
+- if the lecture defines dispersion through (k) and/or (D), use that notation or explicitly define any conversion;
+- package-specific names belong in implementation/help text, not automatically in the assessment question.
+
+Required:
+
+```text
+COURSE_TERMINOLOGY_SOURCE =
+STUDENT_TERMINOLOGY_FIDELITY = PASS
+UNAPPROVED_SOFTWARE_SHORTHAND = NONE
+```
+
+## 23.3 Minimum sufficient student prose
+
+Every student-visible sentence must do at least one of:
+
+- define the task;
+- identify required input/output;
+- state a condition/constraint;
+- state a consequence;
+- provide essential context for interpretation.
+
+If removing the sentence does not change what the student must do or understand, remove it.
+
+Do not retain process prose merely because it existed in a previous version.
+
+## 23.4 Mathematical display restraint
+
+Use inline mathematics for short expressions that read naturally inside a sentence.
+
+Use display mathematics only when at least one is true:
+
+- the equation is central to the task and must be read as an object;
+- multiple related expressions must be compared together;
+- the formula is long/multiline;
+- students must use the formula directly and visual separation materially improves comprehension.
+
+Do not create separate display blocks for single short expressions such as a mean function or one distribution statement when they can be written inline. Consolidate related generating-model statements into one sentence or one compact aligned block.
+
+Required visual check:
+
+```text
+GRATUITOUS_DISPLAY_MATH = ZERO
+RELATED_FORMULAS_GROUPED = PASS
+MATH_FLOW_READS_NATURALLY = PASS
+```
+
+## 23.5 Title and heading-to-body rhythm
+
+The visual hierarchy must reflect reader importance, not default LaTeX size steps.
+
+For a course handout:
+
+- course identity should be prominent but must not dwarf the assignment title;
+- the assignment title must be visually substantial;
+- if both are centered, the course title should normally be only modestly larger than the assignment title;
+- academic-year metadata is subordinate.
+
+Every repeated major-question heading must use one shared heading-to-first-body spacing token. The first paragraph/subpart must not sit noticeably tighter than elsewhere.
+
+Likewise, repeated front-matter labels such as Data / Submission / Report format should use a coherent block rhythm.
+
+Required:
+
+```text
+TITLE_HIERARCHY = PASS
+QUESTION_HEADING_BODY_GAP_TOKEN = FROZEN
+QUESTION_HEADING_BODY_GAP_CONSISTENCY = PASS
+FRONT_MATTER_BLOCK_RHYTHM = PASS
+```
+
+Do not repair one heading locally with an ad hoc vertical skip; fix the shared component/token.
