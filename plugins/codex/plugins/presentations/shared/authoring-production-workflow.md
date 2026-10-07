@@ -4,11 +4,17 @@ Status: **canonical workflow contract**
 Applies to: non-trivial teaching, research, business, product, and technical presentations  
 Primary evidence: STAT5060 Tutorial 01, CAT-TRACE, CUHK Date, Lucerna, Bobbio, and prior presentation-plugin production/review work
 
-Read with:
+**Mandatory first read before any non-trivial execution:**
+
+- `pre-execution-cumulative-acceptance-contract.md`
+
+Then read with:
 
 - `chatgpt-web-authoring-contract.md`
 - `anti-shortcut-production-contract.md`
 - `independent-review-contract.md`
+
+No later workflow, domain skill, or task-local prompt may weaken the cumulative acceptance and review-ownership rules in the pre-execution contract.
 
 ## 1. Objective
 
