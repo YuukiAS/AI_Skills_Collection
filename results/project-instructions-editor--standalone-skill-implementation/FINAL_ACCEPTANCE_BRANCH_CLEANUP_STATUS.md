@@ -69,6 +69,8 @@ reviewed/workflow-core--first-remote-publication-gate
 reviewed/workflow-core--first-remote-publication-repair-gate
 work/presentations-validator-v1
 work/project-instructions-editor--standalone-skill-implementation
+reviewed/repo--maintenance-board-issue-maturity
+reviewed/presentations--stage1-front-door-two-template-foundation
 ```
 
 Evidence preserved from deleted branches:
