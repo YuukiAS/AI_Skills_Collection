@@ -1,9 +1,9 @@
 {
-  "version": "5.4.4",
-  "generated_at": "2026-10-04T07:00:42+00:00",
+  "version": "5.5.0",
+  "generated_at": "2026-10-07T02:19:19+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
-  "skill_count": 154,
+  "skill_count": 155,
   "selectors": {
     "domains": [
       "ai-ml",
@@ -371,6 +371,44 @@
         "skills/core/codex-system/system-skills/plugin-creator",
         "skills/system/codex-system/plugin-creator",
         "system/codex-system/plugin-creator"
+      ]
+    },
+    {
+      "id": "core.core.project-instructions-editor",
+      "name": "project-instructions-editor",
+      "path": "skills/core/codex-system/project-instructions-editor",
+      "flat_name": "core-codex-system-project-instructions-editor",
+      "scope": "core",
+      "domain": "core",
+      "category": "codex-system",
+      "subcategory": "codex-system",
+      "slug": "project-instructions-editor",
+      "install_selector": "core/codex-system/project-instructions-editor",
+      "description": "Use when the user explicitly asks to create, update, compress, sync, restructure, or reset long-lived ChatGPT Project instructions, even if the live setting is missing; do not use for ordinary prose, writing fidelity, scientific rewrite, AI_Skills maintenance, workflow/control, generic agent/system prompts, or global Custom Instructions.",
+      "status": "active",
+      "provenance": "user-authored",
+      "source_repo_url": "",
+      "source_path": "",
+      "source_ref": "",
+      "source_imported_at": "",
+      "source_license": "",
+      "source_note": "",
+      "source_skills": [],
+      "trusted": false,
+      "requires_network": false,
+      "writes_files": false,
+      "executes_code": false,
+      "secrets_needed": [],
+      "last_reviewed": "2026-10-07",
+      "profile_tags": [],
+      "recommended_scope": "global",
+      "selectors": [
+        "core-codex-system-project-instructions-editor",
+        "core/codex-system/project-instructions-editor",
+        "project-instructions-editor",
+        "skills/core/codex-system/project-instructions-editor",
+        "skills/system/codex-system/project-instructions-editor",
+        "system/codex-system/project-instructions-editor"
       ]
     },
     {

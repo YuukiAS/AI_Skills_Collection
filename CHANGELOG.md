@@ -4,6 +4,60 @@
 
 No unreleased changes.
 
+## 5.5.0 - 2026-10-07
+
+Repository `5.5.0` adds Project Instructions Editor v0.1 as a standalone
+ChatGPT Project-instruction editing skill.
+
+Repository bump decision: MINOR
+Reason: this release adds a new repository-level user capability: editing
+long-lived ChatGPT Project instructions for creation, bounded updates,
+compression, synchronization, restructuring, and reset while preserving live
+settings, accepted and rejected user decisions, canonical-source ownership,
+authorization, privacy, safety, evidence strength, exact identifiers, and
+finite instruction budgets.
+
+Affected standalone skills:
+- `project-instructions-editor`: NEW -> `0.1`
+  Reason: Project Instructions Editor is now a standalone skill for ordinary
+  ChatGPT Web / Project use. It does not require an MCP finalizer,
+  `OPENAI_API_KEY`, hosting, a sibling-Skill chain, external model calls, or
+  extra API billing for normal operation.
+
+Affected central plugins:
+- all central plugins: NO_BUMP
+  Reason: this release does not change central Marketplace plugin behavior.
+
+Bridge Kit: NO CHANGE.
+
+Unchanged central plugin versions: `workflow-core 0.5`, `ai-skills-core 0.5`,
+`writing-style 0.4`, `research-writing 0.2`, `presentations 0.3`,
+`scientific-visualization 0.1`, `web-development 0.4`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Unchanged standalone skill versions: `project-thread-handoff 0.2`,
+`render-chinese-math-pdf 0.2`, `slurm-workflows 0.4`.
+
+Changed repository behavior:
+
+- Project Instructions Editor can be invoked naturally for long-lived ChatGPT
+  Project instruction creation, editing, compression, synchronization,
+  restructuring, and explicit reset.
+- Preservation-sensitive edits use the live Project setting as the baseline
+  rather than stale candidates, summaries, or older generated settings.
+- The skill protects accepted decisions, explicit deletions and rejections,
+  source ownership, locator bridges, protected absence, no-op eligibility,
+  exact identifiers, authorization, privacy, safety, evidence strength,
+  mandatory/optional force, and known character budgets.
+- Missing live baseline, source, budget, or authority evidence now produces
+  honest bounded/degraded output rather than a false-safe complete replacement.
+- Project Instructions Editor v0.1 does not claim a cross-turn final
+  reader-layer guarantee. C11 reader-layer failure evidence is preserved and is
+  not reclassified as PASS; future cross-turn natural-language finalization is
+  owned by Clear Writing work, not by this v0.1 release.
+- The standalone icon, registry, catalog, provenance, contact sheet, README,
+  and focused tests now include Project Instructions Editor v0.1.
+
 ## 5.4.4 - 2026-10-04
 
 Repository `5.4.4` is a compatible patch release for Slurm Workflows duplicate
