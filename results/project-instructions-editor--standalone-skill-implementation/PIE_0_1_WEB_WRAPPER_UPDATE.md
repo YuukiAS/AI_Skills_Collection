@@ -2,66 +2,76 @@
 
 Date: 2026-10-07
 
-Final standalone Skill source commit:
+## Current live wrapper
 
-```text
-162199ccfa69509033422411b24e58520effd331
-```
-
-ChatGPT personal Plugin:
+The personal ChatGPT Plugin has been updated to the exact historical runtime
+source that previously backed live wrapper 0.2.1.
 
 ```text
 plugin_id=plugins_6ac24c3637188191937fe99610ace3f2
-wrapper_version_before=0.2.5
-wrapper_version_after=0.2.6
-release_id=pluginrel_6ac62ecb0034819182b814bb1652ff05
+wrapper_version_before=0.2.6
+wrapper_version_after=0.2.7
+release_id=pluginrel_6ac643171b788191a0f3f44fc5c6827d
 scope=USER
 discoverability=PRIVATE
 ```
 
-The Codex run could not create its wrapper candidate because the sandbox denied
-the exact worktree export write. The ChatGPT-side wrapper update therefore used
-an independently reconstructed delta archive built from the current live wrapper
-manifest shape plus the exact final source files at
-`162199ccfa69509033422411b24e58520effd331`.
-
-Exact source identity was checked before upload:
+Historical runtime source:
 
 ```text
-skills/project-instructions-editor/SKILL.md
-git_blob=3d9c53633ae77c1c3ee917f168015ada947aa784
-size=11182 bytes
-
-skills/project-instructions-editor/references/editor-contract.md
-git_blob=d391040431c3ac8e5e8f4f345b75cb697866cc4c
-size=15952 bytes
+6c098ce07d9a01e2d2e353841443d2f13a943dc6
+historical_live_wrapper_version=0.2.1
 ```
 
-Locally reconstructed delta archive:
+Restoration branch source:
 
 ```text
-project-instructions-editor-v0.1-wrapper-0.2.6-live.zip
-sha256=0a9f3ed150453cf5d5bebce19015d0bf8c9a2f91888893214fe9f31af9feb56b
+01423430eb61529518cc7e3fa5993bc17e617947
+packaging_head=142d1c52df197dbda5034fbe06ebc3b64fc0650b
 ```
 
-Post-update readback confirmed:
+The Codex-produced source payload candidate was verified before the live update:
 
 ```text
-wrapper_version=0.2.6
-Skill version=0.1
-Simple Editing Core=present
-K1-K7 Runtime Kernel=absent
-Known-Good Candidate Construction=present
-Protected Absence=present
-C11 unsupported reader-layer boundary=present
+candidate_sha256=5f0c9e36484e856f3c8d04f168e1b52be3589db4cb0b0acf550eca4f9ce1ce90
+runtime_subtree_exact=YES
+later_fixes_ported=NO
 ```
 
-The wrapper remains PRIVATE / USER scope. No MCP finalizer, sibling-Skill chain,
-external model provider, hosted service, or API key was introduced.
+The live wrapper update archive changed only the wrapper manifests to version
+0.2.7 and overlaid the exact historical runtime files.
 
-Remaining release blocker: one fresh normal-entry Server+VPS ChatGPT Web
-acceptance using this restored live wrapper. Compare the first complete response
-against the user-confirmed earlier good structural baseline and the two recent
-source-shaped failures.
+Post-update readback was compared byte-for-byte against GitHub commit
+`6c098ce07d9a01e2d2e353841443d2f13a943dc6`.
 
-C11 reader-layer failure preserved; not reclassified as PASS.
+```text
+SKILL.md=EXACT
+blob=5cd97e087c0e3747a514cd82f0b00ffebd2b5b0a
+
+agents/openai.yaml=EXACT
+blob=d84c958a7be2092c06d944007ceb14c09ca1d180
+
+assets/app-facing.svg=EXACT
+blob=3f9db7f1d98308d53d45fe249c324da23d02de21
+
+evals/trigger_queries.json=EXACT
+blob=f79d719756e57bd53b5e962f4f565c318568e174
+
+references/editor-contract.md=EXACT
+blob=2a4932ff0b01e2d3021959d9a97b2923550ae0dd
+```
+
+Both wrapper manifests read back as version 0.2.7.
+
+This update intentionally does not port later PIE repairs. It exists to test one
+question cleanly: whether the exact historical runtime that backed the known
+good 0.2.1 period reproduces the desired Server+VPS Project-instruction behavior
+in ordinary ChatGPT Web today.
+
+No MCP finalizer, sibling-Skill chain, external provider, hosted service, or API
+key was added.
+
+Remaining step: one fresh Server+VPS normal-entry Web test using the same natural
+Project-instructions review prompt. Judge the first complete answer only.
+
+C11 reader-layer failure remains preserved; not reclassified as PASS.
