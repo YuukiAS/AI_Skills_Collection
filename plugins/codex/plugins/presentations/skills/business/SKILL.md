@@ -38,7 +38,7 @@ answer/request -> problem or opportunity -> evidence and impact -> plan -> resou
 
 ## Workflow
 
-0. Before any non-trivial presentation work, read `../../shared/pre-execution-cumulative-acceptance-contract.md` first and derive task classification, Critic requirement, history scope, freeze state, locks, and round allowlist.
+0. Before any non-trivial presentation work, read `../../shared/presentation-end-to-end-pre-execution-runbook.md` in full, then read `../../shared/pre-execution-cumulative-acceptance-contract.md` and derive task classification, Critic requirement, history scope, freeze state, locks, and round allowlist.
 1. Read and apply `../../shared/authoring-production-workflow.md` for every non-trivial deck. ChatGPT/Planner owns audience, narrative, page jobs, visible copy, layout semantics and locks; Codex owns production and autonomous Producer/Reviewer repair loops.
 2. Clarify the decision, audience, time limit, and required output format.
 3. Produce `deck-plan.yaml` for non-trivial decks and keep each slide tied to one decision-relevant message.
@@ -52,6 +52,7 @@ answer/request -> problem or opportunity -> evidence and impact -> plan -> resou
 
 ## References
 
+- `../../shared/presentation-end-to-end-pre-execution-runbook.md`
 - `../../shared/pre-execution-cumulative-acceptance-contract.md`
 - `../../shared/authoring-production-workflow.md`
 - `../../shared/deck-plan.schema.json`
