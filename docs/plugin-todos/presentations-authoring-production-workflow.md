@@ -4,7 +4,8 @@ Status: **PROMOTE_NOW / CANONICAL WORKFLOW ADOPTION**
 
 Canonical runtime contracts:
 
-- `plugins/codex/plugins/presentations/shared/pre-execution-cumulative-acceptance-contract.md` **(mandatory first read; cumulative acceptance + failure ownership)**
+- `plugins/codex/plugins/presentations/shared/presentation-end-to-end-pre-execution-runbook.md` **(mandatory first read; complete workflow)**
+- `plugins/codex/plugins/presentations/shared/pre-execution-cumulative-acceptance-contract.md` **(mandatory second read; cumulative acceptance + failure ownership)**
 - `plugins/codex/plugins/presentations/shared/authoring-production-workflow.md`
 - `plugins/codex/plugins/presentations/shared/chatgpt-web-authoring-contract.md`
 - `plugins/codex/plugins/presentations/shared/anti-shortcut-production-contract.md`
@@ -19,7 +20,7 @@ Historical design inputs remain evidence and must not be discarded:
 
 ## 0. P0 — Mandatory read-before-work gate
 
-Every non-trivial presentation task must begin by reading `pre-execution-cumulative-acceptance-contract.md` and emitting/deriving the task classification, Critic requirement, history scope, freeze state, locks, and round allowlist before execution.
+Every non-trivial presentation task must begin by reading `presentation-end-to-end-pre-execution-runbook.md` in full and then `pre-execution-cumulative-acceptance-contract.md` and emitting/deriving the task classification, Critic requirement, history scope, freeze state, locks, and round allowlist before execution.
 
 The failure-class ownership table in that contract is cumulative. Future revisions may append new failure classes or strengthen ownership, but may not silently drop an existing class because one candidate fixed it.
 
