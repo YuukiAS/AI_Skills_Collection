@@ -285,3 +285,25 @@ Therefore `RULE-PAGELIMIT` is an atomic semantic block.
 The version that leaves the explanatory paragraph on Page 1 and begins Page 2 with the deduction table is semantically weaker because Page 2 begins with a dependent child and the student must turn back to recover the rule context.
 
 The preferred version moves the complete page-limit paragraph, table and consequence sentence to Page 2. The extra whitespace at the end of Page 1 is purposeful because it preserves a complete rule unit and creates a clear boundary between submission/report-format instructions and page-limit/workflow instructions.
+
+
+## 12. Heading plus first-body spacing is a component relation
+
+A heading and its first substantive paragraph/subpart are an atomic visual relation.
+
+The semantic rule is not only “do not orphan the heading”; it also requires a stable, readable gap after the heading.
+
+For repeated question headings:
+
+- define one shared heading-to-body gap token;
+- do not allow one question to have a noticeably tighter first-body gap than another;
+- a typography or heading-size change reopens this token for validation;
+- fix the shared question-heading component rather than inserting local skips.
+
+Required:
+
+```text
+HEADING_FIRST_BODY_ATOMICITY = PASS
+QUESTION_HEADING_BODY_GAP_CONSISTENCY = PASS
+LOCAL_HEADING_SPACING_HACKS = ZERO
+```
