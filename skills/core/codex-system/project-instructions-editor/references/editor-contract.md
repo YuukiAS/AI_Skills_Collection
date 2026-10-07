@@ -67,6 +67,8 @@ then clusters them into semantic families before drafting.
 
 This preserves the earlier long-lived semantic map discipline and adds a second
 family-clustering layer before final wording.
+Together those layers form the two-level semantic spine: atomic durable meanings
+first, semantic families second, final wording last.
 
 The spine prevents common failures:
 
@@ -105,17 +107,111 @@ Disposition is semantic, not phrase matching. It depends on current support,
 effective enforcement, durability, lookup-before-action needs, budget, and
 should-not-change semantics.
 
+### Semantic Mutation Radius And Surface Reconstruction Radius
+
+Bounded edit controls the semantic mutation radius: which long-lived meanings
+may change. It does not automatically constrain the surface reconstruction
+radius. A complete replacement may be globally regrouped, renamed, reordered,
+and redrafted when the old structure is duplicated, source-shaped, or otherwise
+defective, provided the allowed durable meanings remain unchanged except for
+the current authorized edit.
+
+Do not use the live setting as a paragraph-by-paragraph scaffold merely because
+the semantic edit is small. Use it as semantic evidence:
+
+```text
+live setting -> allowed durable meanings -> normalized families
+-> fresh candidate -> coverage/provenance reconciliation
+```
+
+### Allowed Durable Meaning Set
+
+For preservation-sensitive review, freeze a closed-world Allowed Durable
+Meaning Set before drafting. It may contain only:
+
+1. durable meanings already present in the live setting;
+2. explicit additions, deletions, or corrections in the current user request;
+3. current canonical-source facts needed to resolve an in-scope owner, locator,
+   dynamic fact, or explicitly requested synchronization;
+4. the minimum Project-resident bridge needed so future work performs a required
+   lookup before action.
+
+The following cannot independently add a durable rule, exception, concrete
+example, enumeration, or hardening clause:
+
+- old candidates;
+- historical generated settings;
+- memory;
+- prior incidents;
+- model best practice;
+- source examples outside the current synchronization need;
+- adjacent topics that appeared in past Project work.
+
+History may protect a deletion/rejection, clarify the force/status of a live
+rule, or confirm a current user decision. Historical-only absent content remains
+absent unless the current user re-adopts it or the current authorized source
+synchronization brings it into scope.
+
+Concrete examples are semantic content. Adding an example list can narrow,
+broaden, or fossilize a rule, so each example needs the same current support as
+a durable rule. If an example cannot be mapped to the Allowed Durable Meaning
+Set, omit it.
+
+### Runtime Kernel Details
+
+K1 freezes the Allowed Durable Meaning Set and blocks drafting until the set is
+closed.
+
+K2 normalizes each meaning into the minimal fields needed for rendering:
+governed surface, trigger, behavior/prohibition, authority, breadth, volatility,
+failure consequence, exact identifiers, and disposition.
+
+K3 clusters normalized meanings into semantic families. Families are based on
+practical trigger and user consequence, not source headings or old section
+structure.
+
+K4 applies global transforms before prose: duplicate merge, scope dominance,
+dynamic-set abstraction, volatile-detail relocation, protected absence, and
+exact-identity preservation. A transform fails if the stale equivalent survives
+elsewhere in the candidate.
+
+K5 renders a fresh candidate from semantic families. For Chinese-facing
+settings, ordinary concepts are expressed naturally in Chinese at drafting time;
+exact machine/formal identifiers remain exact. This is not a Latin-token scan,
+blacklist, translation table, percentage score, or fixed template.
+
+K6 performs bidirectional reconciliation:
+
+- coverage direction: each allowed meaning that must remain Project-effective is
+  represented once, safely bridged, or explicitly removed by the current user;
+- provenance direction: every durable rule, exception, concrete example,
+  enumeration, or requirement in the candidate maps back to one allowed meaning.
+
+Unsupported helpful additions are removed, not retained as nice-to-have
+hardening.
+
+K7 delivers only the user-facing conclusion, edit/replacement, and a few key
+reasons unless formal audit evidence is requested.
+
 ### Scope Dominance
 
-When two rules overlap, compare their semantic scope. A broad authorization,
-safety, privacy, evidence, completion, or fail-closed boundary cannot be removed
-merely because a narrower special-case rule survives.
+When two currently allowed rules overlap, compare their semantic scope. A broad
+authorization, safety, privacy, evidence, completion, or fail-closed boundary
+cannot be removed merely because a narrower special-case rule survives.
 
 Retain the broad boundary once at the broadest correct home. Retain a narrower
 rule only when it adds action-specific detail that the broad rule does not
 provide. A client-specific, workflow-specific, or tool-specific authorization
 rule does not replace a general rule that governs more production objects,
 actions, or resources.
+
+Scope dominance operates only inside the Allowed Durable Meaning Set:
+
+- live broad rule + live narrow rule -> broad survives;
+- live narrow rule + historical-only broad rule -> protected absence wins;
+- current user re-adopts broad rule -> broad becomes allowed;
+- current authorized canonical synchronization supports broad rule -> evaluate
+  it within that synchronization scope.
 
 ### Dynamic-Set Abstraction
 
@@ -129,6 +225,11 @@ canonical source" plus the locator and lookup-before-action trigger. Keep a
 concrete enumeration only when the member set itself is a durable user
 constraint, a formal finite machine/protocol/state set, or needed before lookup
 for routing, authorization, safety, or exact identity.
+
+Apply this globally. If one section says to use the canonical source for the
+current supported set, another section may not preserve the same set's current
+members as durable Project state. The abstraction is semantic, not literal
+platform-name matching.
 
 ### Trigger and Consequence Merge
 
