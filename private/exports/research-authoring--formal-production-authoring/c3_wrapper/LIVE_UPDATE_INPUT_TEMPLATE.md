@@ -1,6 +1,6 @@
 # Future guarded live update input template
 
-Do not execute during pre-final preparation. Plugin Creator/live mutation requires a fresh bounded user authorization at the G4 boundary.
+Do not execute during pre-final preparation. Before the first ChatGPT wrapper final evidence is collected, obtain one fresh bounded user authorization for this exact hash-bound wrapper. If wrapper identity, scope, discoverability, and archive hash remain unchanged, that same authorization covers both G1 and G4.
 
 ```text
 target_name=research-authoring

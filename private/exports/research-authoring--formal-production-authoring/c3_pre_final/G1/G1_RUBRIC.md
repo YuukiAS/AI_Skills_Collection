@@ -2,6 +2,8 @@
 
 Candidate: `9e88d7eda1749c09bac0ed97562909a90810ccdb`
 
+Before any ChatGPT wrapper final evidence is collected, obtain one fresh bounded user authorization for the exact hash-bound C3 wrapper. If wrapper identity, scope, discoverability, and archive hash remain unchanged, that same authorization covers both G1 and G4. This pre-final packet does not authorize live Plugin mutation.
+
 PASS requires:
 
 - the exact C3 wrapper payload is active;

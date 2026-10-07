@@ -20,14 +20,20 @@ G1 validates the ChatGPT Web / skills-only wrapper Research Authoring normal ent
    - Natural request: "把这些论文卡片整理成 related work 小节，说明每类方法和我们工作的关系。"
    - Expected route: Research Authoring document-producing literature route.
 
+4. Existing research document revision:
+   - Natural request: "这份研究更新已经有一版草稿，请根据新增结果和导师反馈做最小必要修订，保留已经成立的结论和证据边界。"
+   - Expected route: Research Authoring incremental document revision.
+   - Expected output: revised stable source plus complete Codex production handoff when a final artifact is requested.
+
 ## Near misses
 
 1. Citation verification only.
 2. Paper lookup / BibTeX cleanup only.
 3. Content-preserving one-sentence polish.
-4. Render-only finalized Markdown/LaTeX.
-5. PPT / Beamer / slide deck request.
-6. Ordinary research Q&A without document production.
+4. README / email writing that is not a research document.
+5. Render-only finalized Markdown/LaTeX.
+6. PPT / Beamer / slide deck request.
+7. Ordinary research Q&A without document production.
 
 ## Pass contract
 

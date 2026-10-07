@@ -24,7 +24,9 @@ G4 does not test raw Codex authoring owner competition.
 
 - G2 Phase 1 PASS and Phase 2 PASS exist for exact C3 final evidence.
 - The ChatGPT wrapper is exact C3 and skills-only.
-- Live Plugin mutation remains unauthorized until a fresh bounded user authorization is given at the G4 boundary.
+- Before the first ChatGPT wrapper final evidence is collected, obtain one fresh bounded user authorization for the exact hash-bound C3 wrapper.
+- If wrapper identity, scope, discoverability, and archive hash remain unchanged, the same bounded authorization covers both G1 and G4.
+- Live Plugin mutation remains unauthorized in this pre-final packet and must not occur in this evidence-only repair.
 
 ## Failure conditions
 

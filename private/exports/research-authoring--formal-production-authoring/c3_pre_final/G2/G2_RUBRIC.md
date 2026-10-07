@@ -1,6 +1,6 @@
 # G2 Final Reviewer Rubric
 
-Candidate before pre-final promotion: C0 `1c37c0715aca0096606f24e56192b7857e72bbd6`.
+Candidate before pre-final promotion: C3 `9e88d7eda1749c09bac0ed97562909a90810ccdb`.
 
 The same final candidate and this same rubric must govern both phases.
 

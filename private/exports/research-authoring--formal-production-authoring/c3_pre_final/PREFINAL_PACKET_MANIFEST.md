@@ -8,6 +8,7 @@ FINAL_GATES_NOT_STARTED=YES
 LIVE_PLUGIN_MUTATION=NO
 PAID_API=NO
 MAIN_MERGE_RELEASE=NO
+READY_FOR_CHATGPT_FINAL_REVIEW=YES
 ```
 
 ## Scope-corrected authority
@@ -52,10 +53,24 @@ Copied unchanged from the approved G3 final-task packet:
 
 - `SHOULD_NOT_CHANGE_BANK.md`
 
+## Live wrapper authorization timing
+
+Before any ChatGPT wrapper final evidence is collected, obtain one fresh bounded user authorization for the exact hash-bound C3 wrapper:
+
+```text
+archive=G4/research-authoring-wrapper-0.3.1-c3-9e88d7ed.tar.gz
+archive_sha256=4783abc0b95c1a0775b9d801825d822819fa5426a8a38a418ad16759a028b388
+scope=USER
+discoverability=PRIVATE
+skills_only=YES
+```
+
+If wrapper identity, scope, discoverability, and archive hash remain unchanged, that same authorization covers both G1 and G4. This pre-final packet does not authorize live Plugin mutation.
+
 ## Packet status
 
 ```text
 PREFINAL_PACKET_READY=YES
 FINAL_GATES_STARTED=NO
-NEXT_HANDOFF=CRITIC
+READY_FOR_CHATGPT_FINAL_REVIEW=YES
 ```
