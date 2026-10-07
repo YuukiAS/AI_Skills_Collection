@@ -709,3 +709,29 @@ SUBMISSION_BLOCK_SCANNABLE = YES
 FILLER_FOR_WHITESPACE = NO
 WHOLE_DOCUMENT_FLOW_PRESERVED = YES
 ```
+
+
+## 19. Annotated baselines are positive copy baselines
+
+A rendered artifact returned with instructor annotations should be interpreted as:
+
+```text
+accepted/unmarked visible copy
++ explicit strikeout removals
++ explicit highlight/comment changes
++ later direct decisions
+```
+
+unless the instructor explicitly says to rewrite the entire body.
+
+The STAT5060 HW1 replay exposed the opposite failure: useful unmarked data-context explanation disappeared during a major revision even though the instructor had not marked it for removal.
+
+Generic rule:
+
+- major revision may reopen structure/assessment meaning where authorized;
+- it does not erase the positive copy baseline;
+- unmarked useful context is preserved by default;
+- every deletion needs a disposition in the feedback/copy registry;
+- simplification must be evidence-based, not deletion-by-omission.
+
+This should be enforced before visible-copy freeze and again in the final semantic diff.
