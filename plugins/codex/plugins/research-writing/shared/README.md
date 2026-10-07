@@ -5,8 +5,11 @@ For every non-trivial student-facing Homework, Project, milestone, policy, templ
 1. `student-assessment-end-to-end-pre-execution-runbook.md`
 2. `student-assessment-cumulative-acceptance-contract.md`
 3. `student-assessment-hw1-nonrecurrence-amendment-v1.md`
+4. `student-assessment-delivery-closure-amendment-v1.md`
 
 The third file is a binding amendment derived from the first full STAT5060 HW1 replay. It adds positive-baseline, authority-coherence, relational-invariant, feasibility, validator-calibration, task-proportionality and incident-escalation requirements.
+
+The fourth file is a binding delivery-closure amendment derived from the later HW1 convergence failure. It adds one-active-route discipline, preservation after 'basically good', non-blocking exploratory alternatives, typography-dependent pagination invalidation, small candidate budgets, validator admission controls, and final closure rules.
 
 No task-local prompt may weaken these contracts. Course-specific authority may add stricter requirements.
 
@@ -16,6 +19,7 @@ A task must not begin production until it can report:
 RUNBOOK_READ = YES
 CUMULATIVE_ACCEPTANCE_CONTRACT_READ = YES
 NONRECURRENCE_AMENDMENT_READ = YES
+DELIVERY_CLOSURE_AMENDMENT_READ = YES
 ```
 
 If any file conflicts with a later explicitly versioned shared contract, stop and resolve the shared-contract version rather than choosing locally.
