@@ -62,15 +62,25 @@ DIRECT_HUMAN_DECISIONS = 20
 
 其中两条历史 highlight 只有计数、缺少完整原文，必须保留为 `SOURCE_GAP_UNVERIFIABLE`，不得猜测。
 
-主要历史 candidate corpus：
+主要历史 candidate corpus **不在本 Goal 中硬编码数量**。实现开始时必须读取：
+
+`YuukiAS/STAT5060-TA/docs/recovery/2026-27/tutorial-01/STAT5060_TUTORIAL_01_HISTORICAL_CORPUS_INVENTORY_V1.json`
+
+以其中当前 `main_historical` inventory 为唯一执行分母。
+
+当前 bootstrap snapshot 是：
 
 ```text
-MAIN_HISTORICAL_ARTIFACTS = 18
-MAIN_HISTORICAL_PAGES = 629
-COMPLETE_PAGE_RENDERS = 18/18
+MAIN_HISTORICAL_ARTIFACTS = 15
+MAIN_HISTORICAL_PAGES = 515
+COMPLETE_PAGE_RENDERS = 15/15
 ```
 
-另有 taught baseline、component proof、golden proof，可作为补充 fixture，但不改变 629 页主分母。
+此前存在的 V10–V12 属于内部 candidate，已从当前 main historical corpus 移出；除非当前 inventory 明确重新纳入，不得自行复活、重建或扩大分母。
+
+另有 taught baseline、component proof、golden proof，可作为补充 fixture，但不进入 main historical denominator。
+
+若启动时 inventory 又有合法更新，则以启动时读取的 current inventory 为准，并在报告中记录实际 artifact/page totals。
 
 ## 4. 八个验收方面
 
@@ -80,7 +90,7 @@ COMPLETE_PAGE_RENDERS = 18/18
 
 - exact PDF/render identity；
 - page count、page hash、artifact map；
-- 18 个主要历史 artifact、629 页全部执行；
+- 当前 inventory 中全部 `main_historical` artifact/page 全部执行；
 - 缺页或无法读取必须 `REVISE/BLOCKED_EVIDENCE`，不得跳过。
 
 ### B. 课程 shell 与共享组件
@@ -205,8 +215,8 @@ COMPLETE_PAGE_RENDERS = 18/18
 ```text
 Parent Controller
 ├─ Producer：实现 extractor、rules、adapter、runner
-├─ fresh deterministic Auditor：检查 18 artifacts / 629 pages、hash、schema、coverage、anti-hardcode
-├─ fresh rendered Reviewer workers：按 artifact 分批看全部 page PNG，合并成 629/629 page rows
+├─ fresh deterministic Auditor：检查当前 inventory 的全部 main artifacts/pages、hash、schema、coverage、anti-hardcode
+├─ fresh rendered Reviewer workers：按 artifact 分批看全部 page PNG，合并成 exact discovered-total page rows
 ├─ fresh Repair Producer：修复 Auditor/Reviewer 发现的 root mechanism
 └─ fresh rerun，直到 bootstrap gate 通过
 ```
@@ -215,7 +225,7 @@ Rendered Reviewer 可以按 artifact 分给多个 fresh read-only subagents，�
 
 - 每页只能有一个 canonical row；
 - 所有 worker 使用同一 rubric/schema；
-- aggregator 必须验证 629/629，无重复、无遗漏；
+- aggregator 必须验证 discovered_total/discovered_total，无重复、无遗漏；
 - Reviewer 不能编辑 detector、threshold 或 candidate。
 
 ## 7. Workflow 角色边界
@@ -228,13 +238,13 @@ Rendered Reviewer 可以按 artifact 分给多个 fresh read-only subagents，�
 
 ### GPT Work
 
-本轮不作为 bootstrap validator 的日常检测器，也不承担 629 页逐页初筛。
+本轮不作为 bootstrap validator 的日常检测器，也不承担历史全 corpus 逐页初筛。
 
 以后仅在真正 V14 immutable candidate 通过 deterministic + rendered audit 后，承担最终 aesthetic / reader-effort / pedagogy / deck-rhythm gate。
 
 ### 用户
 
-用户不是 routine QA，不审 629 页，不负责指出明显双栏、空白、字号和对象丢失问题。
+用户不是 routine QA，不审历史全 corpus，不负责指出明显双栏、空白、字号和对象丢失问题。
 
 用户以后只看：
 
@@ -298,7 +308,7 @@ fresh_rendered_review.md
 bootstrap_acceptance_report.md
 ```
 
-`page_results.jsonl` 必须正好覆盖 629 个主要历史页面，每行至少包含：
+`page_results.jsonl` 必须正好覆盖 current inventory 中全部 main historical pages，每行至少包含：
 
 ```text
 artifact_id
@@ -320,8 +330,8 @@ reviewer_id
 
 ```text
 RESULT = BOOTSTRAP_VALIDATOR_READY_FOR_CRITIC_CALIBRATION
-MAIN_HISTORICAL_ARTIFACTS_EXECUTED = 18/18
-MAIN_HISTORICAL_PAGES_REVIEWED = 629/629
+MAIN_HISTORICAL_ARTIFACTS_EXECUTED = <discovered>/<discovered>
+MAIN_HISTORICAL_PAGES_REVIEWED = <discovered>/<discovered>
 MISSING_PAGE_ROWS = 0
 DUPLICATE_PAGE_ROWS = 0
 PAGE_ROWS_WITHOUT_SUBSTANTIVE_OBSERVATION = 0
