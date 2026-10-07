@@ -1,6 +1,6 @@
 interface:
   display_name: "Project Instructions Editor"
-  short_description: "Edits long-lived ChatGPT Project instructions"
+  short_description: "Edits only for explicit ChatGPT Project instructions baselines"
   icon_small: "./assets/app-facing.svg"
   icon_large: "./assets/app-facing.svg"
   brand_color: "#0F766E"

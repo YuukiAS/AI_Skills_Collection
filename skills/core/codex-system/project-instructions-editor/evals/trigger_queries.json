@@ -4,8 +4,7 @@
     "Compress these Project instructions under the current character budget without weakening the safety and evidence rules.",
     "Create initial Project instructions for a new research coding Project; the setting is empty.",
     "Reset this Project setting from scratch and rebuild it around these current canonical repo rules.",
-    "Sync the Project instructions with AGENTS.md, but keep only the direct Project bridge where the repo remains the detailed source.",
-    "Restructure this Project setting so the accepted decisions stay in force and volatile workflow details point back to their source files."
+    "Sync the Project instructions with AGENTS.md, but keep only the direct Project bridge where the repo remains the detailed source."
   ],
   "negative": [
     "把这段中文改自然一点。",
@@ -22,5 +21,5 @@
     "Rewrite this scientific methods section with better structure.",
     "Add a rule to AGENTS.md for repository maintenance."
   ],
-  "notes": "Positive examples target long-lived ChatGPT Project instruction creation, editing, compression, synchronization, restructuring, or explicit reset without naming the skill. Negative and near-miss examples protect prose, writing-fidelity, scientific rewrite, workflow-core, ai-skills-core, generic prompt, and global Custom Instructions owners."
+  "notes": "Positive examples target long-lived ChatGPT Project instruction creation, editing, compression, synchronization, or explicit reset without naming the skill. Negative and near-miss examples protect prose, writing-fidelity, scientific rewrite, workflow-core, ai-skills-core, generic prompt, and global Custom Instructions owners."
 }

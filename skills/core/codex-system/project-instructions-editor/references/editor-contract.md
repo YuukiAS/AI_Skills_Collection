@@ -11,7 +11,7 @@ The skill owns semantic placement for ChatGPT Project instructions:
 - what should stay in the current task or thread;
 - what must be protected because it is already accepted, corrected, deleted, uncertain, safety-sensitive, or outside the authorized scope.
 
-It does not own ordinary prose polishing, generic system prompts, global Custom Instructions, AI_Skills repository maintenance, workflow state management, Project history storage, database/ledger construction, watcher behavior, live ChatGPT account mutation, external finalization services, or cross-turn final reader-layer guarantees.
+It does not own ordinary prose polishing, generic system prompts, global Custom Instructions, AI_Skills repository maintenance, workflow state management, Project history storage, database/ledger construction, watcher behavior, or live ChatGPT account mutation.
 
 ## Modes
 
@@ -35,7 +35,7 @@ Use only when the current user clearly authorizes discarding the old Project set
 
 `targeted history` means reading only decision history relevant to the current edit: acceptance, rejection, explicit deletion, repeated correction, durable authority, or temporary status. Missing history should produce honest uncertainty, not broader search by default.
 
-`canonical source` is needed when the requested edit depends on current repository, document, workflow, policy, version, task, inventory, or locator facts. If the source is unavailable, block only the claim that depends on it unless that claim governs the whole replacement.
+`canonical source` is needed when the requested edit depends on current repository, document, workflow, policy, version, task, or locator facts. If the source is unavailable, block only the claim that depends on it unless that claim governs the whole replacement.
 
 `budget` includes current length, candidate length, delta, hard product limit when known, planning budget, remaining margin, and requested headroom. Do not turn a historical planning budget such as 8000 characters into a universal product rule.
 
@@ -49,7 +49,7 @@ For every affected durable rule, decide both:
 Allowed dispositions for the current edit are:
 
 1. direct Project-resident rule;
-2. short locator bridge or trigger plus canonical source locator;
+2. short Project-resident bridge or trigger plus canonical source locator;
 3. canonical-source only;
 4. task/thread only;
 5. another verified effective layer;
@@ -57,36 +57,7 @@ Allowed dispositions for the current edit are:
 
 Semantic ownership alone is not enough to remove a rule from Project settings. Rules about routing, authority, authorization, safety, privacy, distribution, evidence, completion, output contract, and lookup-before-action often need a direct Project subset or bridge even when their details live elsewhere.
 
-## Known-Good Candidate Construction
-
-The known-good editing behavior is intentionally simple:
-
-```text
-live setting + current request + necessary current source facts
--> identify durable user-facing rule groups
--> consolidate duplicates
--> move volatile detail behind stable source bridges
--> preserve current semantic force
--> emit clean replacement
-```
-
-Use the live setting as semantic evidence, not as a paragraph-by-paragraph scaffold. Source headings, source labels, old section names, source order, duplicated rationale, and document grouping are not protected by default. They may be merged, renamed, reordered, or omitted when the durable meanings remain covered.
-
-Group rules by governed actor or surface, trigger or phase, owner or authority, intended behavior or prohibition, and user consequence. Merge clauses with the same normal trigger and user consequence into one primary durable home. Keep a distinct family only when the trigger, governed surface, owner, or consequence is materially different.
-
-Project instructions should grow only when growth corresponds to a real long-lived semantic change or repair. A new or materially changed Project-resident rule, exception, concrete example, enumeration, or current-member list needs current semantic support from at least one of:
-
-- the live Project setting;
-- the current request;
-- a current canonical authority in the requested synchronization scope;
-- explicit current re-adoption by the user;
-- a necessary lookup-before-action bridge.
-
-Do not create durable rules whose only support is stale history, old generated candidates, rejected/deleted history, prior incidents, model best practice, source wrapper wording, task-local commentary, review labels, or incidental source examples. Keep the underlying deleted/rejected rule absent and keep its deletion history out of the final setting unless the current user explicitly asks to preserve that history or prohibition as durable Project state.
-
-Concrete examples are semantic content. Adding an example list can narrow, broaden, or fossilize a rule, so each example needs the same current support as a durable rule.
-
-## Locator Substitution And Volatile Detail
+## Locator Substitution
 
 Move detail out of Project instructions only when all are true:
 
@@ -98,29 +69,6 @@ Move detail out of Project instructions only when all are true:
 - the external source is genuinely the current semantic owner.
 
 The point is maintainable recovery, not pushing all text out of Project instructions.
-
-When a client, platform, device, route, inventory, supported-target, or other set has mutable membership and a stable canonical source owns the current list, Project instructions should preserve coverage and lookup, not current members. Use a short bridge such as "all currently supported items defined by the canonical source" plus the locator and lookup-before-action trigger.
-
-Apply this globally. If one section says to use the canonical source for the current supported set, another section may not preserve the same set's current members as durable Project state. The abstraction is semantic, not literal platform-name matching.
-
-## Scope, Bounded Edit, And Full Rewrite
-
-Bounded edit is the default. It limits the semantic change, not necessarily the surface reconstruction. If the old structure is duplicated, source-shaped, or overloaded, a complete replacement may globally regroup, rename, reorder, and redraft while keeping unrelated valid semantics intact.
-
-Use full rewrite or restructure only when at least one real condition holds:
-
-- the user explicitly requests and authorizes it;
-- local edits cannot resolve a cross-cutting contradiction;
-- copied workflow detail has polluted the setting broadly;
-- multiple scopes are materially imbalanced;
-- required durable semantics cannot fit the budget through local deduplication and locator substitution;
-- source ownership or locator use has systematically drifted or conflicted.
-
-"It would be cleaner" or "the recent topic is important" is not enough. Preservation-sensitive full rewrite also requires a live baseline and enough current facts to preserve affected semantics.
-
-When two currently supported rules overlap, a broad authorization, safety, privacy, evidence, completion, or fail-closed boundary cannot be removed merely because a narrower special-case rule survives. Retain the broad boundary once at the broadest correct home. Retain a narrower rule only when it adds action-specific detail that the broad rule does not provide.
-
-This broad-rule preservation applies to current live or currently authorized meanings. A historical-only broad rule that is absent from the live setting remains absent unless the current user re-adopts it or current authorized source synchronization brings it into scope.
 
 ## Protected Absence
 
@@ -135,13 +83,28 @@ Protected absence does not create a permanent tombstone registry. It is a conser
 
 If a deleted or rejected rule is already absent from the live Project setting, the final long-lived setting should normally omit both the deleted rule and its deletion history. Use the deletion evidence internally to avoid reintroducing the rule, but do not emit `do not restore X`, `X was deleted`, or any equivalent Project-resident tombstone unless the current user explicitly asks to preserve that prohibition or history marker as durable Project state.
 
+## Bounded Edit and Full Rewrite
+
+Bounded edit is the default. Keep unrelated valid semantics intact and make the smallest change that closes the current request.
+
+Use full rewrite or restructure only when at least one real condition holds:
+
+- the user explicitly requests and authorizes it;
+- local edits cannot resolve a cross-cutting contradiction;
+- copied workflow detail has polluted the setting broadly;
+- multiple scopes are materially imbalanced;
+- required durable semantics cannot fit the budget through local deduplication and locator substitution;
+- source ownership or locator use has systematically drifted or conflicted.
+
+"It would be cleaner" or "the recent topic is important" is not enough. Preservation-sensitive full rewrite also requires a live baseline and enough current facts to preserve affected semantics.
+
 ## No-Op Eligibility
 
-Before returning no-op, review the live Project setting itself within the current user's requested scope. Treat it as the candidate and check whether it already satisfies active contracts for placement, semantic ownership, durability, safety, privacy, authorization, evidence strength, fail-closed behavior, and mandatory/optional force.
+Before returning no-op, review the live Project setting itself within the current user's requested scope. Treat it as the candidate and check whether it already satisfies active contracts for reading layer, language, placement, semantic ownership, durability, safety, privacy, authorization, evidence strength, fail-closed behavior, and mandatory/optional force.
 
 No-op is valid when the setting already satisfies those contracts, when the remaining difference is only cosmetic preference, or when changing it would duplicate, weaken, misplace, overfit, or add semantic risk.
 
-No-op is not eligible when the editor identifies a material live-setting defect in scope and a bounded edit or bounded consolidation can fix it without weakening unrelated semantics. Material defects include a clear wrong owner or placement, volatile implementation or inventory detail that has a stable canonical source owner, duplicate detail that creates long-term maintenance burden, or another issue the current user explicitly asked the editor to check.
+No-op is not eligible when the editor identifies a material live-setting defect in scope and a bounded edit or bounded consolidation can fix it without weakening unrelated semantics. Material defects include an active reading-layer or language-contract violation, a clear wrong owner or placement, volatile implementation or inventory detail that has a stable canonical source owner, duplicate detail that creates long-term maintenance burden, or another issue the current user explicitly asked the editor to check.
 
 When the material defect is volatile implementation, inventory, status, or client/detail copied from a stable canonical source, the bounded repair should keep a short trigger and locator bridge and omit the copied volatile list or detail unless a specific item is truly needed before lookup for routing, authorization, safety, or exact identity.
 
@@ -162,17 +125,66 @@ Never silently weaken or alter:
 - current user explicit corrections, deletions, rejections, or acceptances;
 - unrelated live scopes.
 
-Exact identifiers include paths, commands, branch names, repository names, versions, state values, fields, model identifiers, protocol/product names, and other tokens that need exact matching. Ordinary prose can be edited for the current Project setting, but exact identifiers must remain exact when future work depends on exact spelling.
+Exact identifiers include paths, commands, branch names, repository names, versions, state values, fields, model identifiers, and other tokens that need exact matching. Ordinary prose does not become exact merely because its source is in English.
 
-For Chinese-facing Project settings, express ordinary source labels and descriptive prose naturally in Chinese while preserving exact machine/formal identifiers. This is not mechanical language scoring, a banned-term table, a translation table, a percentage metric, or a fixed-section template. If the target Project has no Chinese or natural-language requirement, do not impose one.
+## Mandatory Final Replacement Pass
 
-## Runtime Boundary
+Every path that emits a complete replacement must run the same mandatory final replacement pass on the actual replacement text. This includes bounded edit replacements, bounded consolidation, no-op rejected into bounded repair, full replacement, greenfield or explicit reset complete settings, reading/language repair, and protected-absence repair.
 
-PIE v0.1 uses `FINAL_ROUTE=SIMPLE_FORMAL_CORE`.
+No complete replacement may be delivered before this pass. Check the actual final setting, in order:
 
-It runs as an ordinary ChatGPT Web / Project chat Skill. It does not require and must not claim an MCP finalizer, `OPENAI_API_KEY`, external model provider, sibling Skill chain, hosted service, or extra paid API call for normal operation.
+1. protected absence and history residue;
+2. the target Project's active reading-layer and language contract;
+3. every remaining Latin-script token or mixed phrase for exact/formal necessity;
+4. semantic invariants.
 
-PIE v0.1 may produce a clear, concise Project setting for the current edit, including natural Chinese when the current user or Project calls for it. It must not claim to guarantee cross-turn final reader-layer behavior for future chats. C11 evidence remains a preserved failure boundary: advanced multi-call or cross-turn reading-layer finalization is unsupported in PIE v0.1 and belongs to future Clear Writing work.
+This pass is over the durable replacement itself, not only over analysis notes, source notes, or self-check prose.
+
+Before delivery, also review each newly introduced or materially changed durable rule for current semantic support. Valid support can come from the current user request, the live Project setting, a current canonical source within the requested synchronization scope, or another current authority already valid under the ownership and effective-enforcement contract. Targeted deletion or rejection history is current-edit control evidence; by itself, it must not create a new durable Project rule.
+
+If a candidate rule's only support is targeted deletion or rejection history, remove that newly generated durable rule from the final long-lived setting, keep the underlying deleted/rejected rule absent, and keep the deletion/rejection history out of the final setting. A durable prohibition or history marker is allowed only when the current user explicitly asks to store that marker as long-lived Project state.
+
+If that Project requires ordinary explanation in natural Chinese, the final long-lived setting must itself use natural Chinese for ordinary explanatory prose. Descriptive English labels from old settings, repository text, logs, history, or workflow notes are not automatically exact identifiers.
+
+Keep formal identities and machine strings exact when future work needs exact matching: repository names, paths, commands, file names, fields, state values, process names, versions, protocol or product names, and similarly precise tokens. Naturalize ordinary technical, engineering, workflow, management, and explanatory concepts under the Project's language contract.
+
+The pass also applies to language introduced by the editor's own draft. If the target Project calls for natural prose, do not leave editor analysis labels, source labels, workflow shorthand, or policy jargon in the final setting unless they are exact identifiers.
+
+The final setting is durable instructions, not a review note about old settings, sources, logs, or history. Do not preserve ordinary English examples from the input in the replacement as examples of what to avoid; explain that reasoning outside the replacement and make the replacement itself natural.
+
+When the input classifies a group of English phrases as ordinary descriptive terms, budget waste, copied workflow detail, or non-exact prose, treat that group as non-exact for the replacement. If the user supplies an exact-preserve list, keep those exact strings and genuinely formal names; naturalize remaining ordinary English instead of repeating it as examples.
+
+For a Project with an explicit Chinese reading-layer contract, review each remaining Latin-script token in the replacement. Keep the token only when it is exact or formal; otherwise rewrite it naturally in Chinese. This is a semantic token-by-token review aid, not an English-percentage score or banned-word check.
+
+For every remaining Latin-script token or phrase in a Chinese final setting, the preservation reason must satisfy at least one concrete exactness condition: future lookup, execution, or matching depends on exact spelling; the token is a formal repository, product, protocol, path, command, file, field, state, process, version, or other machine identity; or translation would create material ambiguity that natural Chinese cannot remove. Preserve only the exact/formal part of a mixed phrase and naturalize generic labels around it.
+
+Do not treat a token as exact only because it is technical, common in the field, useful for reviewer context, appears in a source, appeared in an earlier setting, or has product/context value. If the editor's self-check keeps an ordinary token, it must give the concrete exact/formal reason; otherwise naturalize it.
+
+When a Latin-script phrase mixes a formal identity with a generic descriptive label, preserve only the formal identity. A product, protocol, repository, or scope name does not make neighboring labels exact; translate the label unless the whole phrase is itself a formal UI string, field, command, state value, or lookup key.
+
+Do not copy the editor's own English meta-labels into a Chinese replacement. If an English phrase is only naming the instruction surface, current baseline, output mode, review category, or safety concept, express that label in natural Chinese unless the exact English phrase is itself a formal UI string, field, command, state value, or lookup key.
+
+Generic category labels are not exact merely because they are technical. In a Chinese final setting, write ordinary labels in Chinese rather than as Latin-script tokens unless the user marks the exact spelling as required. The following are examples to translate, not examples to preserve: setting, repo, log, history, identifier, secret, token, endpoint, service, driver, watchdog, artifact, candidate, validation, routing, rollback, and fail closed.
+
+If the user-visible self-check says ordinary English was naturalized, inspect the final replacement itself before making that claim. The self-check must match the replacement and cannot excuse ordinary non-exact English that remains in the durable Project setting.
+
+If the target Project has no Chinese or natural-language requirement, do not impose one. Language normalization must not weaken or change ownership, authorization, privacy, safety, fail-closed behavior, evidence strength, uncertainty, or mandatory/optional force.
+
+This pass reviews semantic consistency of the whole candidate. It is not a banned-word list, translation dictionary, English ratio, keyword score, or surface-form scoring rule.
+
+## Formal Runtime Route
+
+FINAL_ROUTE=`SIMPLE_FORMAL_CORE`.
+
+The formal runtime is ordinary ChatGPT Web / Project chat with this Skill loaded. The Skill must be directly usable without an MCP finalizer, `OPENAI_API_KEY`, hosting, separate API billing, an external model provider, or a deployed model service.
+
+The historical C10 helper-composition route and the C11 external finalizer route are not adopted as production dependencies. They must not be executed as fallback routes, advertised as required normal routes, or used as independent PASS gates for complete Project-instruction replacements.
+
+Complete replacements are drafted and checked by the Skill itself using the current edit-mode and semantic-preservation contract. The mandatory final replacement pass remains required for every complete replacement, but it is an in-skill semantic consistency review of the actual durable setting, not a call to a sibling Skill, service, MCP tool, or separate provider.
+
+If a complete replacement cannot be supported from the current chat's live baseline, canonical sources, budget, or authority evidence, the safe result is bounded advice, a clause, or a request for the missing input. Do not claim independent multi-call finalization, external Chinese realization, or raw-source fidelity verification.
+
+ADVANCED_INDEPENDENT_MULTI_CALL_FINALIZATION=`UNSUPPORTED`.
 
 ## Regression Families
 
@@ -185,13 +197,13 @@ Use these families as review coverage, not as a fixed gate count:
 - preservation-sensitive replacement with missing live baseline;
 - greenfield and explicit reset;
 - locator substitution with lookup-before-action requirements;
-- volatile source-owned inventory moved behind a bridge;
 - protected absence under partial history;
 - no-op when the correct owner is a canonical source or already-covered rule;
 - no-op eligibility when a material in-scope defect has a safe bounded repair;
 - should-not-change checks for authorization, safety, evidence strength, exact identifiers, and explicit user deletion/correction.
+- final-candidate reading-layer consistency after bounded edits, consolidation, or full replacement.
 
-Do not convert regression examples into banned-word tables, language-percentage metrics, keyword scorers, fixed paragraph counts, fixed heading counts, fixed formula counts, or fixed character-per-section quotas.
+Do not convert regression examples into banned-word tables, English ratios, keyword scorers, fixed paragraph counts, fixed heading counts, fixed formula counts, or fixed character-per-section quotas.
 
 ## User Delivery
 
@@ -201,10 +213,8 @@ Small bounded edits should be concise: decision, concrete edit, short reason, ke
 
 Medium edits may add scope impact, locator/bridge reasoning, enforcement placement, balance, and budget margin.
 
-Full replacements should explain the user-relevant basis only when it affects understanding or safety: that the candidate is based on the existing setting, starts from an empty setting, or follows an explicit reset. Ordinary user output must not print internal mode labels such as `preservation-sensitive`, `greenfield`, or `explicit reset`.
+Full replacements must include mode, reason bounded edit is insufficient or reset/greenfield applies, major placement changes, direct rules/bridges, preserved invariants, budget change, and a clean complete replacement.
 
 Missing-input outputs must avoid false-safe full settings. Name only the input that truly blocks safe completion and provide safe partial work.
 
 No-op is valid only when the setting already satisfies the active contract, the remaining difference is cosmetic, or changing Project settings would duplicate, weaken, misplace, overfit, or add semantic risk.
-
-Normal user-facing answers should be concise and should not expose internal mode labels, semantic maps, disposition tables, invariant checklists, or coverage/redundancy reviews unless the user asks for formal audit evidence. The default delivery is a short conclusion, the bounded edit or clean replacement when safe, and a few key reasons.
