@@ -39,7 +39,10 @@ It validates:
 
 ### Project adapter
 
-Lives with the project and supplies:
+Lives with the project and supplies implementation-time project constraints, but
+does **not** own historical expected verdicts.
+
+It supplies:
 
 - artifact inventory and lineage;
 - PageIDs and page jobs;
@@ -47,10 +50,30 @@ Lives with the project and supplies:
 - active historical guards;
 - positive visual ancestry;
 - domain-specific numbers, variables, labels and source anchors;
-- project-specific expected issue classes for historical artifacts;
+- project-specific mappings/guards needed to interpret generic findings;
 - current release-state rules.
 
 The adapter cannot weaken or suppress generic findings.
+
+### Critic-owned evaluation oracle
+
+The exact expected historical artifact/page outcomes are frozen by an independent
+project Critic before implementation. They are evaluation data, not detector
+configuration.
+
+The oracle supplies, for evaluation only:
+
+- artifact/page expected status;
+- expected failure classes;
+- known positive scoped controls;
+- severity/evidence bindings;
+- explicit rebuttals of prior classifications.
+
+Neither Generic Producer nor Adapter Producer may receive the oracle or a mirror
+of its expected verdict fields. The Parent Controller and fresh Auditor may load
+it only after Producer candidate commits freeze.
+
+If the oracle is incomplete or ambiguous, implementation is blocked.
 
 ## 2. Detector API boundary
 
@@ -72,6 +95,8 @@ It must not receive artifact version names, project PageIDs, feedback IDs or
 expected verdict labels as detector control flow inputs.
 
 The adapter maps generic findings back to project identities after detection.
+Expected verdict comparison occurs outside both production layers in the
+Parent/Auditor evaluation plane.
 
 ## 3. Required generic detector families
 
@@ -121,7 +146,7 @@ Parent Controller
 ├─ fresh Producer: implements validator candidate
 ├─ public tests only
 ├─ candidate commit freezes
-├─ Parent creates hidden holdout/mutation pack outside Producer context
+├─ Parent loads Critic-frozen oracle and creates hidden holdout/mutation pack outside Producer context
 ├─ fresh read-only Auditor: runs hidden pack and historical corpus
 ├─ fresh Mechanism Critic: inspects architecture, evidence and false pass/fail risk
 └─ repair loop with new Producer/Auditor/Critic contexts
@@ -130,6 +155,7 @@ Parent Controller
 The Producer cannot see:
 
 - hidden expected findings;
+- Critic-frozen oracle rows or any derivative verdict table;
 - hidden holdout artifact/page selection;
 - hidden mutation seeds;
 - exact hidden threshold-boundary cases;
@@ -215,7 +241,39 @@ allowed_tolerance
 The generic core validates that the rendered figure and source evidence agree.
 A clean image is not evidence of numerical correctness.
 
-## 9. Required evidence outputs
+## 9. Oracle isolation
+
+The accepted mechanism must emit `oracle_isolation_report.json` showing:
+
+- exact oracle file/hash used by Parent/Auditor;
+- Generic Producer workspace did not contain oracle bytes;
+- Adapter Producer workspace did not contain oracle expected verdict fields;
+- generic and adapter import graphs contain no oracle module/path;
+- generated public tests contain no historical expected verdict mirror;
+- oracle comparison occurs only in Parent/Auditor evaluation code after
+  candidate freeze.
+
+Any Producer access to oracle expected outcomes is an anti-fitting failure.
+
+## 10. Reuse extraction
+
+The accepted mechanism must emit `reusability_extraction_report.md` with three
+classes:
+
+```text
+GENERIC_REUSABLE_NOW
+GENERIC_CANDIDATE_NEEDS_MORE_CROSS_DECK_EVIDENCE
+STAT5060_SPECIFIC
+```
+
+Reusable detector/runtime/schema logic belongs in the shared presentations
+plugin. Project lineage, PageIDs, human feedback, historical verdicts, exact
+course numerical contracts and release rules stay in the project repository.
+
+Promotion to `GENERIC_REUSABLE_NOW` requires unrelated-deck evidence; passing
+only the Tutorial corpus is insufficient.
+
+## 11. Required evidence outputs
 
 ```text
 corpus_manifest.json
@@ -233,13 +291,15 @@ static_anti_fitting_report.json
 unrelated_deck_results.json
 fresh_auditor_report.md
 mechanism_critic_report.md
+oracle_isolation_report.json
+reusability_extraction_report.md
 final_acceptance_report.md
 ```
 
 Every page-level PASS must include substantive observations, not only flags and
 hashes.
 
-## 10. Acceptance
+## 12. Acceptance
 
 ```text
 GENERIC_CORE_PROJECT_SPECIFIC_BRANCHES = 0
@@ -255,6 +315,10 @@ UNRELATED_DECK_GENERALISATION = PASS
 FINDING_PRECISION = PASS
 FRESH_AUDITOR = PASS
 MECHANISM_CRITIC = PASS
+CRITIC_ORACLE_COVERAGE = PASS
+PRODUCER_ORACLE_ACCESS = NO
+ORACLE_ISOLATION_REPORT = PASS
+REUSABILITY_EXTRACTION = PASS
 ```
 
 The runtime is not promotable until these conditions are demonstrated on a real

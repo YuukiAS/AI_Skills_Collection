@@ -37,11 +37,28 @@ Read in full:
 ### STAT5060 adapter authority
 
 - `docs/frozen/2026-27/STAT5060_TUTORIAL_01_V1_V13_BLACKBOX_VALIDATION_SPEC_V1.md`;
+- `docs/frozen/2026-27/STAT5060_TUTORIAL_01_VALIDATOR_ORACLE_GOVERNANCE_AND_REUSE_FREEZE_V1.md`;
+- `docs/frozen/2026-27/STAT5060_TUTORIAL_01_HISTORICAL_EXPECTED_OUTCOME_ORACLE_V1.yaml`;
+- `docs/reviews/2026-27/STAT5060_TUTORIAL_01_VALIDATOR_PREBUILD_ORACLE_CRITIC_REVIEW_V1.md`;
 - `docs/frozen/2026-27/STAT5060_TUTORIAL_01_V14_PAGE_BY_PAGE_VISUAL_REPAIR_FREEZE_V1.yaml`;
 - current Tutorial recovery manifest;
 - 193-row feedback authority, direct decisions, page lineage and version manifests;
 - V1–V13 sources/PDFs/renders/evidence;
 - V13 human rejection and recovery plan.
+
+Before implementation, require the prebuild oracle Critic report to state:
+
+```text
+CRITIC_RESULT = PASS
+ORACLE_COVERAGE = COMPLETE
+ORACLE_AMBIGUITIES = 0
+PRODUCER_ORACLE_ACCESS = FORBIDDEN
+GENERIC_SPECIFIC_REUSE_BOUNDARY = PASS
+VALIDATOR_BUILD_ALLOWED = YES
+```
+
+If any line is not satisfied, stop with `NEEDS_GPT_PLANNER`. Do not create,
+repair or reinterpret the historical oracle inside this Controller.
 
 Emit a read manifest before implementation.
 
@@ -64,7 +81,13 @@ allowed. Modifying or replacing the historical artifact is not.
 
 ## 3. Trust-separated topology
 
-Use distinct fresh contexts/workspaces:
+Use distinct fresh contexts/workspaces.
+
+The Critic-frozen historical expected-outcome oracle is **evaluation-only**.
+Neither Producer workspace may receive it or any derivative expected verdict
+table.
+
+Use:
 
 ```text
 Parent Controller
@@ -95,6 +118,7 @@ Do not provide access to:
 
 - `YuukiAS/STAT5060-TA`;
 - historical expected outcomes;
+- the Critic-frozen oracle file or derived expected verdict rows;
 - hidden holdout selection;
 - hidden mutation seeds;
 - course PageIDs/feedback IDs/version labels.
@@ -120,7 +144,7 @@ GENERIC_VALIDATOR_ACCEPTED = NO
 
 ## 5. Adapter Producer B boundary
 
-Adapter Producer may read STAT5060 authority and historical artifact manifests.
+Adapter Producer may read STAT5060 authority and historical artifact manifests, but its workspace must exclude the Critic-frozen expected-outcome oracle.
 It implements only:
 
 - corpus discovery;
@@ -138,12 +162,14 @@ scripts/presentation_validation/tutorial01_validator_adapter_v1/
 tests/presentation_validation/tutorial01_public/
 results/tutorial-01-validator-v1/public/
 docs/reviews/2026-27/STAT5060_TUTORIAL_01_VALIDATOR_IMPLEMENTATION_REPORT_V1.md
+results/tutorial-01-validator-v1/oracle_isolation_report.json
 ```
 
 Adapter Producer may not:
 
 - edit generic detector logic;
 - encode expected PASS/FAIL by version;
+- read/import the Critic-frozen expected-outcome oracle or any generated mirror of its verdict fields;
 - suppress generic findings;
 - edit slide/theme/figure/PDF/render paths;
 - edit frozen Planner authority.
@@ -203,13 +229,14 @@ silently skipped.
 
 ## 8. Parent-owned hidden pack
 
-Only after both producer candidates freeze, Parent creates a hidden temporary
-pack outside both producer repositories/workspaces.
+Only after both producer candidates freeze, Parent loads the exact
+Critic-frozen oracle by hash and creates a hidden temporary pack outside both
+producer repositories/workspaces.
 
 It contains:
 
 - randomly selected held-out historical artifacts/pages;
-- expected failure classes derived from immutable human review evidence;
+- expected failure classes taken from the Critic-frozen oracle, whose rows are evidence-bound to immutable human review;
 - scoped historical positive controls;
 - randomized/metamorphic mutations;
 - coordinated mutations that change multiple fields together;
@@ -218,8 +245,13 @@ It contains:
 
 Do not reveal pack contents, seeds or expected outcomes to either Producer.
 
-Hash the hidden pack before the Auditor run. The final evidence may publish the
-pack hash and summarized results. Future reruns use a fresh seed/pack.
+Hash the oracle and hidden pack before the Auditor run. The final evidence may
+publish hashes and summarized results. Future reruns use a fresh seed/pack but
+the same frozen oracle revision unless a new Critic explicitly supersedes it.
+
+Produce `oracle_isolation_report.json` proving that neither Producer workspace,
+source tree, import graph nor generated test fixture contains oracle verdict
+fields.
 
 ## 9. Hidden mutations
 
@@ -334,7 +366,29 @@ Maximum ordinary cycles: 3. If the same class recurs twice, rewrite the responsi
 mechanism instead of patching the example. If the frozen architecture itself is
 insufficient, stop with `NEEDS_GPT_PLANNER` and name the exact unresolved decision.
 
-## 14. Required outputs
+## 14. Reuse extraction
+
+The implementation must end with a deliberate reuse decision, not merely a
+working Tutorial harness.
+
+Produce `reusability_extraction_report.md` classifying every implemented
+mechanism as:
+
+```text
+GENERIC_REUSABLE_NOW
+GENERIC_CANDIDATE_NEEDS_MORE_CROSS_DECK_EVIDENCE
+STAT5060_SPECIFIC
+```
+
+For generic items, record implementation path, detector/schema/runtime role,
+public/hidden coverage and unrelated-deck evidence. For project-specific items,
+record why promotion would leak PageIDs, feedback, historical verdicts, exact
+course numbers or release rules.
+
+The report must verify that reusable mechanisms live in the shared presentations
+plugin and that Tutorial-only logic is not copied into the generic core.
+
+## 15. Required outputs
 
 Generic repository:
 
@@ -352,9 +406,11 @@ results/tutorial-01-validator-v1/
 docs/reviews/2026-27/STAT5060_TUTORIAL_01_VALIDATOR_IMPLEMENTATION_REPORT_V1.md
 ```
 
-Evidence bundle must contain all files required by the frozen validation spec.
+Evidence bundle must contain all files required by the frozen validation spec,
+including `oracle_isolation_report.json` and
+`reusability_extraction_report.md`.
 
-## 15. Final acceptance
+## 16. Final acceptance
 
 Final success requires:
 
@@ -376,6 +432,10 @@ UNRELATED_DECK_GENERALISATION = PASS
 FRESH_AUDITOR = PASS
 MECHANISM_CRITIC = PASS
 GENERIC_SPECIFIC_OWNERSHIP_MATRIX = PASS
+CRITIC_ORACLE_COVERAGE = PASS
+PRODUCER_ORACLE_ACCESS = NO
+ORACLE_ISOLATION_REPORT = PASS
+REUSABILITY_EXTRACTION = PASS
 USER_ROUTINE_QA_USED = NO
 V14_SLIDE_PRODUCTION_ALLOWED = NO
 NEXT_ACTION = CHATGPT_FREEZE_VALIDATOR_ACCEPTANCE_AND_P26_NUMERICAL_REPAIR

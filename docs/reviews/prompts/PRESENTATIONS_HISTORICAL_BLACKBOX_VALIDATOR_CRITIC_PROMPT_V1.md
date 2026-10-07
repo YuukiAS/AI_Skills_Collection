@@ -19,6 +19,9 @@ Read:
 - rendered-artifact/positive-ancestry contract;
 - historical black-box validator specification;
 - STAT5060 V1–V13 black-box validation specification;
+- STAT5060 validator oracle-governance/reuse freeze;
+- the exact Critic-frozen historical expected-outcome oracle and its prebuild
+  Critic report;
 - STAT5060 V14 page-by-page visual repair freeze;
 - generic and adapter source/tests;
 - static anti-fitting report;
@@ -38,7 +41,23 @@ Does the mechanism demonstrate, without answer fitting, that:
 5. generic reusable logic is separated from STAT5060-specific mapping;
 6. the user will not again become the first effective visual reviewer?
 
-## 3. Mandatory architecture audit
+## 3. Oracle isolation audit
+
+Verify independently that:
+
+- the oracle was authored/frozen before validator implementation;
+- its prebuild Critic gate passed with complete coverage and zero ambiguity;
+- neither Generic Producer nor Adapter Producer had access to expected verdict
+  fields;
+- no source, generated fixture, cache or import graph in either Producer
+  candidate mirrors oracle verdict rows;
+- Parent/Auditor loaded the exact frozen oracle only after candidate freeze;
+- any historical classification change is an explicit evidence-backed rebuttal,
+  not a silent Planner/Producer reinterpretation.
+
+Any Producer oracle access is P0.
+
+## 13. Mandatory architecture audit
 
 Verify:
 
@@ -164,9 +183,9 @@ Verify the numerical framework binds:
 P26 must not PASS without resolving the plotted quantity/scale. A clean PNG or
 matching hash is insufficient.
 
-## 10. Generic versus project-specific ownership
+## 11. Generic versus project-specific ownership
 
-Review `detector_ownership_matrix.json`.
+Review `detector_ownership_matrix.json` and `reusability_extraction_report.md`.
 
 Generic reusable checks must be implemented in `AI_Skills_Collection`.
 STAT5060 content, PageIDs, feedback and exact numerical contracts must remain in
@@ -177,9 +196,11 @@ Fail if:
 - course literals enter generic detectors;
 - generic whitespace/readability/ancestry logic is duplicated only in the course
   adapter;
-- the adapter can change generic thresholds or suppress findings.
+- the adapter can change generic thresholds or suppress findings;
+- a Tutorial-only rule is promoted as generic without unrelated-deck evidence;
+- a genuinely reusable detector is duplicated only inside the Tutorial adapter.
 
-## 11. Evidence quality
+## 12. Evidence quality
 
 A page-level PASS requires a substantive observation row including object scale,
 typography, whitespace, reading path, ancestry, and applicable numerical checks.
@@ -188,7 +209,7 @@ Flags and hashes alone do not count.
 Check exact candidate identity throughout. Stale reports or mismatched hashes are
 P0.
 
-## 12. Required output
+## 13. Required output
 
 Write an immutable Critic report with:
 
@@ -218,6 +239,10 @@ V13_FAILURE_REPLAY = PASS | FAIL
 POSITIVE_VISUAL_ANCESTRY = PASS | FAIL
 NUMERICAL_FIGURE_VALIDATION = PASS | FAIL
 GENERIC_SPECIFIC_SEPARATION = PASS | FAIL
+CRITIC_ORACLE_COVERAGE = PASS | FAIL
+PRODUCER_ORACLE_ACCESS = NO | LEAKED
+ORACLE_ISOLATION_REPORT = PASS | FAIL
+REUSABILITY_EXTRACTION = PASS | FAIL
 EVIDENCE_COMPLETENESS = PASS | FAIL
 P0 = <n>
 P1 = <n>
