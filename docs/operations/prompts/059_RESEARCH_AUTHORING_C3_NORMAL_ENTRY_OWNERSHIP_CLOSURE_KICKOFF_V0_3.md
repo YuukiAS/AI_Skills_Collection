@@ -15,17 +15,17 @@ Stable C3 Proposal：
 Integrated recovery Proposal：
 
 `docs/design/059_RESEARCH_AUTHORING_C3_INTEGRATED_OWNER_CHAIN_RECOVERY_PROPOSAL_V0_1_2026-10-07.md`
-@ `e8ede43b78d279d246c7aae81bfde782cab6dd11`
+@ `b4cfef6685b232a215d56b942175bf50de415a98`
 
 Implementation Plan v0.3：
 
 `docs/design/059_RESEARCH_AUTHORING_C3_NORMAL_ENTRY_OWNERSHIP_CLOSURE_IMPLEMENTATION_PLAN_V0_3_2026-10-07.md`
-@ `164c204b474839cce35c0d1a45fc86c4e703336c`
+@ `409dedc44931527e02551ac9689521655b328db3`
 
 Canonical Goal v0.3：
 
 `docs/goals/059_RESEARCH_AUTHORING_C3_NORMAL_ENTRY_OWNERSHIP_CLOSURE_GOAL_V0_3.md`
-@ `04b5172fde45491b2dca8907c4eca31a5ebea92e`
+@ `89aef6c6454d449b23c953cb5a66b3c7a27a1c5a`
 
 Capability Gate impact v0.3：
 
@@ -194,20 +194,34 @@ Research Authoring core/report
 -> Research Authoring scientific QA
 ~~~
 
-Manuscript route：
+New or substantially revised manuscript route, whether or not the final target is PDF：
 
 ~~~text
 Research Authoring core/paper
--> optional explicit LaTeX delegate
--> source/package + handoff
+-> optional explicit LaTeX delegate only for source/package work
+-> return source/package to Research Authoring
+-> if final PDF requested: handoff
 -> explicit renderer delegate
 -> PDF/QA
 -> Research Authoring scientific QA
 ~~~
 
+Existing LaTeX source compile/debug/template/source-hygiene/bibliography/build troubleshooting：
+
+~~~text
+explicit latex-paper-authoring delegate directly
+-> compile/debug/build allowed
+~~~
+
+Do not force Research Authoring to rewrite or re-plan the existing manuscript for this direct source-maintenance route.
+
 Finalized-source render-only：
 
-explicit renderer delegate directly.
+~~~text
+explicit renderer delegate directly
+~~~
+
+Do not treat source-debug/template repair as render-only merely because the source is LaTeX.
 
 Existing-PDF operations：
 
@@ -280,6 +294,16 @@ DEV-05 must show：
 Research Authoring core/paper before LaTeX delegate; LaTeX stops at source/package; explicit renderer after handoff; generic pdf does not own new manuscript PDF; no direct pdflatex final route.
 
 DEV-06/07 must keep standalone render-only PASS and include research-main subruns showing the explicit-only renderer remains reachable for finalized source.
+
+DEV-07 must also include one separate natural research-main existing-LaTeX compile/debug/template/source-hygiene/build subrun. It must prove：
+
+- latex-paper-authoring actual read > 0;
+- compile/debug succeeds;
+- Research Authoring does not rewrite/re-plan the existing paper;
+- generic pdf does not become owner;
+- render-chinese-math-pdf does not misclassify source-debug as render-only.
+
+This remains part of DEV-07; do not create DEV-12.
 
 DEV-08 must keep neighboring-owner checks and include research-main existing-PDF support through explicit generic pdf delegate.
 
