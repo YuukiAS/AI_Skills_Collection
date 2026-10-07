@@ -51,6 +51,7 @@ Do not expose internal labels such as `belief_update`, `evidence_quality`, `rout
 
 ## Workflow
 
+0. Before any non-trivial presentation work, read `../../shared/pre-execution-cumulative-acceptance-contract.md` first. Do not begin planning or execution until task classification, Critic requirement, history scope, freeze state, locks, and round allowlist are known.
 1. Read source material and identify source anchors: Markdown sections, PDF pages, figures, tables, code outputs, prior slides, or review comments.
 2. For `research-group-meeting`, build the Research State and Evidence Board first. Inventory available figures, medical images, qualitative examples, quantitative plots, model diagrams, equations, experiment logs, failed experiments, literature figures to redraw, and missing evidence.
 3. Choose page archetypes from the scientific job: `RESULT_FIGURE`, `FAILURE_CASE`, `MEDICAL_IMAGE_COMPARISON`, `STATISTICAL_MODEL`, `METHOD_DIAGRAM`, `EXPERIMENT_DESIGN`, `NEGATIVE_RESULT`, `RESEARCH_UPDATE`, `NEXT_EXPERIMENT`, or `SUPERVISOR_DECISION`.
@@ -124,6 +125,7 @@ If an urgent real group meeting must be delivered before the editable PPTX path 
 - `../../shared/ppt-skill-routing.md`
 - `../../shared/source-fidelity.md`
 - `../../shared/visual-qa.md`
+- `../../shared/pre-execution-cumulative-acceptance-contract.md`
 - `../../shared/anti-shortcut-production-contract.md`
 - `../../shared/independent-review-contract.md`
 - `../../shared/references/RESEARCH_GROUP_MEETING_MODE.md`
