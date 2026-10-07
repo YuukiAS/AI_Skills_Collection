@@ -57,7 +57,7 @@ Verify independently that:
 
 Any Producer oracle access is P0.
 
-## 13. Mandatory architecture audit
+## 4. Mandatory architecture audit
 
 Verify:
 
@@ -74,7 +74,7 @@ Verify:
 
 Any failure is P0.
 
-## 4. Anti-fitting audit
+## 5. Anti-fitting audit
 
 Independently inspect the generic source and static report for:
 
@@ -93,7 +93,7 @@ Independently inspect the generic source and static report for:
 Do not accept a self-reported zero. Inspect representative code paths and rerun
 static analysis.
 
-## 5. Corpus completeness
+## 6. Corpus completeness
 
 Independently reconcile the discovered corpus with:
 
@@ -107,7 +107,7 @@ named early, Rich, later-student and proof/golden lineages.
 
 A missing or skipped artifact cannot be hidden by changing the denominator.
 
-## 6. Good-pass / bad-fail audit
+## 7. Good-pass / bad-fail audit
 
 ### Positive behavior
 
@@ -139,7 +139,7 @@ HISTORICAL_P0_P1_FALSE_NEGATIVES = 0
 RELEASE_FALSE_PASSES = 0
 ```
 
-## 7. Exact V13 failure replay
+## 8. Exact V13 failure replay
 
 Confirm the validator detects, at minimum:
 
@@ -157,7 +157,7 @@ Confirm the validator detects, at minimum:
 
 If these are not surfaced precisely, Critic result is REVISE.
 
-## 8. Positive visual ancestry audit
+## 9. Positive visual ancestry audit
 
 Verify the mechanism can distinguish:
 
@@ -168,7 +168,7 @@ Verify the mechanism can distinguish:
 
 Run or inspect hidden tests for P16, P21, P23, P30 and P38-style ancestry cases.
 
-## 9. Numerical figure audit
+## 10. Numerical figure audit
 
 Verify the numerical framework binds:
 
