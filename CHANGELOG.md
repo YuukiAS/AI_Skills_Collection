@@ -11,8 +11,17 @@ Affected central plugins:
 - `research-writing`: `0.2` -> `0.3` candidate
   Reason: Research Authoring gains a shared document-level core for
   document-producing report, paper, and literature routes; RA2 incremental
-  authoring is now an explicit contract; and report/paper/litcite Marketplace
-  routes consume the core before delegating to family-specific skills.
+  authoring is now an explicit contract; report/paper/litcite Marketplace
+  routes consume the core before delegating to family-specific skills; and C3
+  tightens normal-entry ownership so standalone authoring stops at source plus
+  handoff while `research-main` admits renderer production after handoff.
+
+Affected standalone skills:
+- `render-chinese-math-pdf`: `0.2` -> `0.3` candidate
+  Reason: renderer discovery now distinguishes finalized-source render-only and
+  explicit downstream handoff from first-owner research-document authoring; it
+  should not take over new report/manuscript creation merely because the final
+  requested artifact is PDF.
 
 Unchanged repository version: `5.4.4`.
 

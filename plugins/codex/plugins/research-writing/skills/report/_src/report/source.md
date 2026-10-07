@@ -1,6 +1,6 @@
 ---
 name: research-reporting
-description: Create repo-grounded research reports, milestone summaries, experiment reviews, technical notes, advisor/group-meeting reports, and result retrospectives from project evidence. Use for report semantics even when the final deliverable is a formal PDF; rendering mechanics belong to companion document skills.
+description: Create repo-grounded research reports, milestone summaries, experiment reviews, technical notes, advisor/group-meeting reports, and result retrospectives from project evidence. Use for report semantics even when the final deliverable is a formal PDF; stabilize source and handoff before an explicitly admitted renderer owns mechanics.
 status: active
 provenance: user-authored
 trusted: false
@@ -30,13 +30,23 @@ For new reports or substantial updates to an existing report, enter `research-au
 - Do not use for full manuscript planning, rebuttals, supplements, or grants; route those to the appropriate paper/grant workflow.
 - Do not implement low-level PDF, DOCX, PPTX, or LaTeX file mechanics here.
 - If the user explicitly asks for a final formal PDF, first stabilize the
-  research document semantics here, then hand artifact mechanics to the
-  companion `render-chinese-math-pdf` skill. The exact companion dependency is:
+  research document semantics here and create the canonical downstream
+  production handoff. Only an explicitly admitted current route may then pass
+  artifact mechanics to the companion `render-chinese-math-pdf` skill. The
+  exact companion dependency is:
   `skills/tools/documents-media/render-chinese-math-pdf`.
+- "Renderer companion" means the active surface/profile admits the renderer for
+  this task after Research Authoring handoff. A globally discoverable renderer
+  is not enough.
 - If this skill is installed through standalone Marketplace Research Authoring
-  without that renderer companion, fail closed for formal PDF requests with the
-  dependency above. Do not invent a private XeLaTeX template, silently use
-  Chromium, or ask for a second manual prompt as the normal path.
+  or another authoring-only surface without an admitted renderer route, stop
+  after stable Markdown/LaTeX scientific source plus the complete downstream
+  production handoff. Do not invent a private XeLaTeX template, silently use
+  Chromium, use generic runtime/file/compute capability as a substitute, close
+  layout QA that requires compilation, or ask for a second manual prompt as the
+  normal path.
+- The complete downstream production handoff belongs to Research Authoring even
+  when the later renderer mechanics happen elsewhere.
 - Markdown-only research authoring requests remain Markdown-only. Do not render
   a PDF unless the user explicitly requests a PDF or a formal rendered artifact.
 - Keep `writing-fidelity` active when facts, equations, labels, citations, versions, or evidence authority must be preserved.
@@ -120,10 +130,13 @@ Reject or revise the report if it shows these patterns:
 12. Run `chinese-prose` or the appropriate language/style pass.
 13. Re-run document-level scientific QA after any language pass.
 14. Verify important claims against evidence anchors one more time.
-15. For explicit formal PDF delivery, pass the stable Markdown/LaTeX source,
-    document purpose, table/figure roles, and any user/venue/project formatting
-    contract to `render-chinese-math-pdf`; keep claim/evidence semantics here
-    and leave route/profile/font/layout mechanics to the renderer.
+15. For explicit formal PDF delivery on an integrated production surface, pass
+    the stable Markdown/LaTeX source, document purpose, table/figure roles, and
+    any user/venue/project formatting contract to `render-chinese-math-pdf`;
+    keep claim/evidence semantics here and leave route/profile/font/layout
+    mechanics to the renderer. On standalone or authoring-only surfaces, stop
+    at source plus handoff and leave compile/render/layout QA pending for the
+    downstream renderer.
 
 ## Acceptance
 

@@ -10,6 +10,8 @@ Before: `report`, `paper`, and `litcite` could each handle local research-writin
 
 After: Research Authoring has a canonical `research-authoring-core` that freezes audience, document purpose, source authority, claim-evidence spine, section jobs, table/figure/formula roles, citation authority, incremental-edit scope, downstream route, and final document-level QA before delegating to report, paper, literature, citation, or artifact skills.
 
+C3 candidate update: the normal-entry owner boundary now distinguishes renderer discovery from renderer admission. Standalone Research Authoring report/manuscript requests that eventually want formal PDF stop at stable source/package plus downstream handoff; `research-main` is the integrated route that admits rendering after handoff and returns to Research Authoring scientific QA; render-only finalized sources bypass Research Authoring planning.
+
 This is a branch-local final-candidate entry. It does not by itself publish a formal repository release, merge to `main`, or change repository `VERSION`.
 
 ## 0.2 - 2026-09-23

@@ -1,6 +1,6 @@
 ---
 name: research-authoring-core
-description: Canonical document-level coordinator for Research Authoring. Use before producing or substantially revising research reports, manuscripts, related-work documents, research updates, reviewer responses, or supplements; route support-only lookup, citation/BibTeX/Zotero, local prose polishing, render-only, PPT/Beamer, and ordinary Q&A to their owners.
+description: Canonical document-level coordinator for Research Authoring. Use before producing or substantially revising reports, manuscripts, related work, research updates, responses, or supplements, including formal-PDF intent. Stabilize source/handoff before admitted rendering; route render-only and support-only work to owners.
 status: active
 provenance: user-authored
 trusted: false
@@ -38,6 +38,18 @@ Do not force this core for support-only work:
 
 If a support-only task later becomes "write these findings into a report, manuscript section, or related-work document", enter this core from that point onward.
 
+## Artifact And Renderer Admission Contract
+
+Research Authoring is the first owner for creating, rebuilding, or substantively revising a research report or manuscript even when the requested final artifact is a formal PDF. A renderer being globally installed, discoverable, or mentioned by another profile is not renderer admission for the current Research Authoring task.
+
+Use this owner sequence:
+
+- Standalone or authoring-only surfaces: produce stable Markdown/LaTeX/source package plus a complete downstream production handoff, then stop. Do not create, compile, open, preview, render, visually inspect, or PDF-QA the artifact by substituting generic runtime/file/compute capability for an admitted renderer.
+- Integrated `research-main` production: Research Authoring first stabilizes the source/package and handoff; an admitted renderer then owns PDF mechanics and renderer QA; Research Authoring resumes after rendering for final scientific QA of claims, evidence, citations, figures, tables, formulas, and limitations.
+- Render-only finalized source: if the user provides already-final Markdown/LaTeX and asks only for rendering or PDF QA, route directly to the renderer and do not run full Research Authoring planning.
+
+A complete downstream production handoff names the audience, purpose, source authority, claim/evidence boundaries, table/figure/formula roles, citation/bibliography authority, intended format, renderer/route expectations when known, and scientific QA checks that must be revisited after rendering.
+
 ## Document Brief
 
 Before drafting or delegating, freeze a compact document brief:
@@ -65,7 +77,7 @@ After the brief:
 - Use `literature-review` for document-producing literature reviews, related-work sections, paper-card synthesis, evidence maps, and thematic syntheses.
 - Use `citation-verification`, `citation-management`, `research-lookup`, or `pyzotero` directly when the task is support-only citation, bibliography, lookup, or library work.
 - Use Clear Writing support only after Research Authoring has frozen audience, purpose, claim/evidence, allowed structural freedom, and table/figure/formula roles.
-- Use `render-chinese-math-pdf`, LaTeX, DOCX, Quarto, or PDF skills only for artifact mechanics after the document semantics are stable.
+- Use `render-chinese-math-pdf`, LaTeX, DOCX, Quarto, or PDF skills only for artifact mechanics after the document semantics are stable and the active profile/surface explicitly admits that downstream production route.
 - Use Presentations for PPT/PPTX, Google Slides, Beamer/slide decks, posters, and slide-export PDFs.
 
 ## Incremental Authoring Contract

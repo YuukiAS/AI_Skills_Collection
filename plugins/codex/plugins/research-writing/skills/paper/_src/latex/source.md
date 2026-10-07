@@ -1,6 +1,6 @@
 ---
 name: latex-paper-authoring
-description: Author, organize, repair, and prepare LaTeX research papers for arXiv, Overleaf, conference templates, or journal submission. Use when manuscript structure, LaTeX source hygiene, compilation, figures, bibliography, or template cleanup is central.
+description: Author, organize, repair, and prepare LaTeX research paper source/packages for arXiv, Overleaf, templates, or submission. Use directly for existing-LaTeX compile/debug/source hygiene; for new/substantial manuscripts, act after Research Authoring/paper admission and do not become final PDF owner before renderer handoff.
 status: active
 provenance: external-adapted
 source_repo_url: https://github.com/yunshenwuchuxun/latex-paper-skills
@@ -27,6 +27,14 @@ metadata:
 # LaTeX Paper Authoring
 
 Use this when the source format and compilation path matter. Prefer `scientific-writing` when the main work is prose, and `paper-workflow-orchestrator` when the main work is paper strategy.
+
+## Entry Boundary
+
+Directly own tasks where the user already has LaTeX source and the main work is compile/debug, template cleanup, source hygiene, Overleaf/arXiv readiness, bibliography wiring, figure inclusion, or build troubleshooting.
+
+For new manuscripts or substantial manuscript revisions, enter `research-authoring-core` and `paper-workflow-orchestrator` first. In that route this skill may prepare the LaTeX source tree, package files, bibliography, figures, and reproducibility notes, but it must not become the final artifact owner merely because the source is compilable.
+
+For Research Authoring-owned final PDF production, prepare source/package and downstream handoff. Actual compile/render/PDF QA belongs to the admitted renderer route unless the task is genuinely existing-LaTeX render/debug work from the start.
 
 ## Workflow
 

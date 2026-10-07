@@ -1,7 +1,12 @@
 {
   "name": "codex-research-writing",
-  "description": "Project-local profile for manuscripts, literature review, citations, PDFs, figures, and peer review. Presentation work is installed with presentation-desktop.",
+  "description": "Project-local authoring/source profile for manuscripts, literature review, citations, source packages, figures, and peer review. Formal research-document PDF production stops at source plus handoff here; use research-main for integrated rendering.",
   "max_active_skills": 24,
+  "routing_notes": [
+    "This is an authoring/source/package profile, not the integrated formal-PDF production profile. For new or substantially revised research reports/manuscripts that mention formal PDF, first use Research Authoring (`research-authoring-core`, then report/paper delegates) to produce stable Markdown/LaTeX/source package plus a complete downstream production handoff, then stop.",
+    "A globally discoverable renderer does not convert this profile into `research-main`. Generic `pdf`, runtime/file/compute capability, XeLaTeX, latexmk, Pandoc-to-PDF, PDF open/render, page raster/visual inspection, pdftotext, pdfinfo, or pdffonts is not the artifact owner for a new research document from this profile.",
+    "For complete formal PDF production, install/use the `research-main` profile so Research Authoring can hand off to the admitted renderer and then resume final scientific QA. Existing-PDF manipulation may still use the generic `pdf` helper when it is truly PDF support work rather than new research-document authorship."
+  ],
   "skills": [
     "skills/writing/research/research-authoring-core",
     "skills/writing/research/scientific-writing",

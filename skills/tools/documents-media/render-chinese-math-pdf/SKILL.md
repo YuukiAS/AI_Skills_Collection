@@ -1,8 +1,8 @@
 ---
 name: render-chinese-math-pdf
-description: Render and validate Chinese or mixed Chinese/English mathematical Markdown/LaTeX as PDF. Use for CJK text, Unicode math, equations, tables, Pandoc/XeLaTeX, TeX font/cache failures, citation cleanup, or readable PDF QA.
+description: Render and validate finalized Chinese or mixed Chinese/English mathematical Markdown/LaTeX as PDF, or run PDF QA after document-owner handoff. Use for render-only source and admitted renderer stages. Do not become first owner for creating, rewriting, reorganizing, or scientifically revising a report/manuscript merely because PDF is requested.
 status: active
-version: "0.2"
+version: "0.3"
 provenance: user-authored
 trusted: false
 requires_network: false
@@ -19,10 +19,24 @@ icon_large: assets/app-facing.svg
 
 ## Trigger Boundary
 
-Use this skill when the requested deliverable is a readable PDF from Chinese,
-mixed Chinese/English, or math-heavy Markdown/LaTeX, especially when the likely
-failure mode is CJK font setup, Unicode math, Pandoc/XeLaTeX behavior, tables,
-citations, or PDF text readability.
+Use this skill when the current task is PDF mechanics for already-final or
+renderer-admitted source:
+
+- the user provides finalized Markdown/LaTeX and asks only to render or QA it;
+- a document owner, such as Research Authoring, has produced an explicit
+  downstream handoff and the active profile admits this renderer stage;
+- an existing PDF/rendering stage needs readable PDF QA, font/layout checks, or
+  route/profile identity validation.
+
+This skill is especially relevant when the likely failure mode is CJK font
+setup, Unicode math, Pandoc/XeLaTeX behavior, tables, citations, or PDF text
+readability.
+
+Do not use this skill as the first owner for creating, substantively rewriting,
+reorganizing, or scientifically revising a research report or manuscript merely
+because the final requested artifact is PDF. For those tasks, Research Authoring
+must first stabilize the source/package and handoff. Global discoverability of
+this renderer is not route authorization.
 
 Do not use this skill for general PDF text extraction, image-only OCR, or
 non-CJK documents unless the user specifically asks for this rendering QA

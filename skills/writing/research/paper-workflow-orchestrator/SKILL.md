@@ -1,6 +1,6 @@
 ---
 name: paper-workflow-orchestrator
-description: Orchestrate research paper workflows: manuscript plan, claim-evidence spine, result-to-claim gate, section contracts, figure/text sync, pre-submission acceptance checks, rebuttal planning, final artifact QA, and paper-structure rescue rather than paragraph polishing.
+description: Orchestrate research paper workflows: manuscript plan, claim-evidence spine, result-to-claim gate, section contracts, figure/text sync, pre-submission checks, rebuttal planning, source/package handoff, and post-render scientific QA; do not let PDF mechanics pre-empt paper ownership.
 status: active
 provenance: external-adapted
 source_repo_url: https://github.com/WUBING2023/PaperSpine
@@ -29,6 +29,8 @@ Use this skill to plan and coordinate manuscript work. Do not use it as a prose-
 
 For new manuscripts, substantial manuscript revisions, supplements, reviewer responses, cover letters, thesis chapters, or submission packages, enter `research-authoring-core` first. This skill is the paper-family delegate after the core has frozen the document purpose, source authority, claim-evidence spine, section jobs, package scope, citation authority, and incremental-edit boundary.
 
+Formal PDF intent does not bypass this paper-family route. For new or substantially revised manuscripts, Research Authoring owns the manuscript semantics until the source/package and complete downstream production handoff are stable. Standalone or authoring-only surfaces stop there. In an explicitly integrated production route, renderer mechanics run only after that handoff, and this paper route resumes after rendering for final scientific QA.
+
 ## Research Paper Production Workbench
 
 Use this skill when the user needs the paper process itself organized, not just
@@ -48,11 +50,12 @@ a paragraph rewritten. Route by task shape:
    robustness claims, missing comparisons, stale numbers, and inconsistent
    terminology before prose polishing.
 7. Submission/rebuttal handoff: create venue checklist, reviewer concern matrix,
-   required experiments or text fixes, and final artifact QA tasks for the
-   downstream writing, citation, LaTeX, PDF, or review skills.
+   required experiments or text fixes, source/package requirements, and final
+   artifact QA tasks for the downstream writing, citation, LaTeX, PDF, or
+   review skills.
 8. Result-to-claim gate: after experiments or audits finish, decide which claims are supported, which must be narrowed, which are draft-only, and which require new evidence before writing.
 9. Incremental update gate: when revising an existing canonical manuscript or response, patch the minimal dependency closure unless the user, evidence, or venue/project authority requires broader restructuring.
-10. Final artifact gate: before treating a manuscript, Markdown, PDF, response, or report as final, identify the selected artifact, evidence authority, unresolved checks, and the downstream style/fidelity skill that must run.
+10. Final artifact gate: before treating a manuscript, Markdown, PDF, response, or report as final, identify the selected artifact, evidence authority, unresolved checks, and the downstream style/fidelity skill that must run. If final PDF production is requested, also identify whether the active surface admits renderer mechanics now; if not, stop at source/package plus handoff.
 
 Use `literature-review` for single-paper cards or field synthesis. Use
 `peer-review` for reviewer scoring, acceptance risk, and rebuttal assessment.
@@ -86,7 +89,7 @@ headings, numbers, or evidence boundaries have been corrected before.
 - Use `literature-review` for field synthesis and related-work structure.
 - Use `citation-verification` before submission or when claims rely on citations.
 - Use `nature-manuscript-workflow` for broad-journal/high-impact framing, figure-to-claim logic, data availability, and Nature-family checks when relevant.
-- Use `latex-paper-authoring` when LaTeX structure, Overleaf readiness, or compilation is the main issue.
+- Use `latex-paper-authoring` when LaTeX structure, Overleaf readiness, source-package preparation, or existing-source compilation/debug is the main issue. In a Research Authoring-owned manuscript workflow, LaTeX source/package work is a delegate, not the final PDF owner before renderer handoff.
 - Use `scientific-visualization` for manuscript figure palettes, plotting snippets,
   figure export QA, top-conference figure presets, and publication-ready visual
   checks. Use `drawio-diagrams` or `d2-diagrams` when editable diagrams are the

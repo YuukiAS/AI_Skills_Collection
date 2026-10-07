@@ -6,6 +6,13 @@ This skill is not one of the central Marketplace plugins, so its real-use failur
 
 ## Open candidates
 
+### 2026-10-07 Research Authoring owner-admission boundary
+status: CANDIDATE_IN_059_C3
+source: `research-authoring--formal-production-authoring` C3 normal-entry ownership closure
+evidence: `skills/tools/documents-media/render-chinese-math-pdf/SKILL.md`; `profiles/research-main.json`; `profiles/codex-research-writing.json`; `tests/test_render_chinese_math_pdf.py`; `tests/test_research_writing_routing.py`
+candidate action: standalone renderer metadata moves from broad "requested deliverable is PDF" discovery toward an admitted renderer-stage boundary. It remains direct owner for finalized Markdown/LaTeX render-only and explicit downstream document-owner handoff, but must not become first owner for creating, substantively rewriting, reorganizing, or scientifically revising a research report/manuscript merely because the final artifact is PDF.
+release note: if the C3 development matrix and later review pass, this is the candidate `render-chinese-math-pdf 0.2 -> 0.3` behavior change; repository `VERSION` is not changed by this task branch.
+
 ### 2026-09-22 release closure note
 status: PROMOTED_IN_5.2.1
 source: `documents-media--scientific-pdf-rendering-reliability`

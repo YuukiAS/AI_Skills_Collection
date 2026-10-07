@@ -76,13 +76,22 @@ class ResearchWritingRoutingTests(unittest.TestCase):
         self.assertIn("minimal dependency closure", text)
         self.assertIn("presentations", text)
         self.assertIn("render-only", text)
+        self.assertIn("globally installed, discoverable", text)
+        self.assertIn("is not renderer admission", text)
+        self.assertIn("standalone or authoring-only surfaces", text)
+        self.assertIn("complete downstream production handoff", text)
+        self.assertIn("integrated `research-main` production", text)
+        self.assertIn("research authoring resumes after rendering", text)
 
     def test_research_reporting_formal_pdf_handoff_fails_closed_without_companion(self) -> None:
         text = read_skill("skills/writing/research/research-reporting")
         self.assertIn("skills/tools/documents-media/render-chinese-math-pdf", text)
-        self.assertIn("fail closed", text)
+        self.assertIn("authoring-only surface", text)
         self.assertIn("markdown-only research authoring requests remain markdown-only", text)
         self.assertIn("formal pdf", text)
+        self.assertIn("globally discoverable renderer", text)
+        self.assertIn("not enough", text)
+        self.assertIn("complete downstream production handoff", text)
 
     def test_research_writing_report_aggregate_blocks_standalone_pdf_rendering(self) -> None:
         data = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
@@ -98,6 +107,8 @@ class ResearchWritingRoutingTests(unittest.TestCase):
         self.assertIn("approved renderer companion is absent", notes)
         self.assertIn("stop after stable markdown/latex scientific source", notes)
         self.assertIn("complete downstream production handoff", notes)
+        self.assertIn("active profile/surface admits", notes)
+        self.assertIn("globally installed or discoverable renderer is not admission", notes)
         self.assertIn("local/preview/qa compile", notes)
         self.assertIn("xelatex", notes)
         self.assertIn("latexmk", notes)
@@ -118,6 +129,10 @@ class ResearchWritingRoutingTests(unittest.TestCase):
 
         paper_notes = "\n".join(route_by_artifact["paper"]["workflow_notes"]).lower()
         litcite_notes = "\n".join(route_by_artifact["litcite"]["workflow_notes"]).lower()
+        self.assertIn("stable source/package plus complete downstream production handoff", paper_notes)
+        self.assertIn("standalone or authoring-only surfaces stop there", paper_notes)
+        self.assertIn("not the final pdf artifact owner", paper_notes)
+        self.assertIn("admitted renderer handoff", paper_notes)
         self.assertNotIn("pdftotext", paper_notes)
         self.assertNotIn("pdftotext", litcite_notes)
         self.assertNotIn("generic runtime, file, or compute capability", paper_notes)
@@ -126,9 +141,14 @@ class ResearchWritingRoutingTests(unittest.TestCase):
     def test_research_main_agents_notes_route_report_pdf_through_reporting_first(self) -> None:
         profile = json.loads((REPO_ROOT / "profiles/research-main.json").read_text(encoding="utf-8"))
         notes = "\n".join(profile.get("routing_notes", [])).lower()
+        self.assertIn("research-authoring-core", notes)
         self.assertIn("research-reporting", notes)
         self.assertIn("render-chinese-math-pdf", notes)
         self.assertLess(notes.index("research-reporting"), notes.index("render-chinese-math-pdf"))
+        self.assertIn("finally return to research authoring", notes)
+        self.assertIn("route directly to `render-chinese-math-pdf`", notes)
+        self.assertIn("generic `pdf` helper", notes)
+        self.assertIn("not the creator-owner", notes)
 
         with tempfile.TemporaryDirectory() as tmp:
             args = argparse.Namespace(
@@ -148,12 +168,61 @@ class ResearchWritingRoutingTests(unittest.TestCase):
             agents = (Path(tmp) / "AGENTS.md").read_text(encoding="utf-8")
 
         self.assertIn("## Profile Routing Notes", agents)
-        self.assertIn("first read and apply `research-reporting`", agents)
+        self.assertIn("read `research-authoring-core`, then `research-reporting`", agents)
         self.assertIn("then use `render-chinese-math-pdf`", agents)
         self.assertLess(
-            agents.index("first read and apply `research-reporting`"),
+            agents.index("read `research-authoring-core`, then `research-reporting`"),
             agents.index("then use `render-chinese-math-pdf`"),
         )
+
+    def test_codex_research_writing_profile_is_authoring_only_for_formal_pdf(self) -> None:
+        profile = json.loads((REPO_ROOT / "profiles/codex-research-writing.json").read_text(encoding="utf-8"))
+        serialized = json.dumps(profile)
+        self.assertIn("skills/writing/research/research-authoring-core", profile["skills"])
+        self.assertIn("skills/tools/documents-media/pdf", profile["skills"])
+        self.assertNotIn("skills/tools/documents-media/render-chinese-math-pdf", serialized)
+        notes = "\n".join(profile.get("routing_notes", [])).lower()
+        self.assertIn("authoring/source/package profile", notes)
+        self.assertIn("formal pdf", notes)
+        self.assertIn("stable markdown/latex/source package", notes)
+        self.assertIn("complete downstream production handoff", notes)
+        self.assertIn("globally discoverable renderer", notes)
+        self.assertIn("does not convert this profile into `research-main`", notes)
+        self.assertIn("generic `pdf`", notes)
+        self.assertIn("not the artifact owner for a new research document", notes)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            args = argparse.Namespace(
+                profile=["codex-research-writing"],
+                domain=[],
+                category=[],
+                skill=[],
+                target="repo",
+                project=tmp,
+                mode="copy",
+                dry_run=False,
+                json=True,
+                write_agents_md=True,
+                prune_managed=False,
+            )
+            skills.install_result(args)
+            agents = (Path(tmp) / "AGENTS.md").read_text(encoding="utf-8")
+
+        self.assertIn("## Profile Routing Notes", agents)
+        self.assertIn("authoring/source/package profile", agents)
+        self.assertIn("globally discoverable renderer", agents)
+        self.assertIn("research-main", agents)
+
+    def test_paper_and_latex_routes_preserve_authoring_before_artifact_owner(self) -> None:
+        paper = read_skill("skills/writing/research/paper-workflow-orchestrator")
+        latex = read_skill("skills/writing/research/latex-paper-authoring")
+        self.assertIn("formal pdf intent does not bypass", paper)
+        self.assertIn("source/package and complete downstream production handoff", paper)
+        self.assertIn("resumes after rendering for final scientific qa", paper)
+        self.assertIn("directly own tasks where the user already has latex source", latex)
+        self.assertIn("new manuscripts or substantial manuscript revisions", latex)
+        self.assertIn("must not become the final artifact owner", latex)
+        self.assertIn("actual compile/render/pdf qa belongs to the admitted renderer route", latex)
 
     def test_research_writing_aggregate_keeps_internal_paper_boundaries(self) -> None:
         data = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))

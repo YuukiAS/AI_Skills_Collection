@@ -158,7 +158,8 @@
           "coordinator_artifact_id": "core",
           "workflow_notes": [
             "For document-producing report-family requests, read `_src/core/source.md` first to freeze audience, purpose, source authority, claim-evidence spine, section jobs, table/figure/formula roles, citation authority, incremental-edit scope, downstream route, and final document-level QA.",
-            "For explicit formal PDF delivery, keep report semantics in Research Authoring and delegate only rendering mechanics to `render-chinese-math-pdf` when that companion is installed through the active profile.",
+            "For explicit formal PDF delivery, keep report semantics in Research Authoring and delegate only rendering mechanics to `render-chinese-math-pdf` after a canonical handoff and only when the active profile/surface admits that renderer route.",
+            "A globally installed or discoverable renderer is not admission for a standalone Research Authoring task; the current surface must explicitly authorize the Research Authoring -> renderer sequence.",
             "On standalone or skills-only surfaces where the approved renderer companion is absent, stop after stable Markdown/LaTeX scientific source plus a complete downstream production handoff; do not create, open, render, compile, preview, or QA a PDF.",
             "Renderer mechanics include local/preview/QA compile, XeLaTeX, `latexmk`, Pandoc-to-PDF or equivalent PDF compilation, PDF creation/open/render, page rasterization, page visual inspection, and PDF-derived text/font/page QA such as `pdftotext`, `pdfinfo`, or `pdffonts`.",
             "Generic runtime, file, or compute capability is not a substitute for `render-chinese-math-pdf`; Markdown/LaTeX source authoring, source-only semantic/fidelity QA, and full Codex/downstream renderer handoff remain allowed.",
@@ -186,7 +187,10 @@
           "coordinator_artifact_id": "core",
           "workflow_notes": [
             "For document-producing manuscript, supplement, reviewer-response, cover-letter, thesis-chapter, or submission-package work, read `_src/core/source.md` first, then delegate paper-family planning, prose, review, venue, LaTeX, and citation work to the relevant source workflow.",
-            "Do not use paper-family delegates as bypasses around the document-level Research Authoring core."
+            "Do not use paper-family delegates as bypasses around the document-level Research Authoring core.",
+            "For new or substantially revised manuscripts that request formal PDF, Research Authoring remains the document owner through stable source/package plus complete downstream production handoff; standalone or authoring-only surfaces stop there.",
+            "`latex-paper-authoring` may prepare source/package or handle existing-LaTeX compile/debug tasks, but it is not the final PDF artifact owner inside a Research Authoring manuscript workflow before an admitted renderer handoff.",
+            "Integrated `research-main` production may continue to renderer mechanics only after the Research Authoring handoff, then must return to Research Authoring for final scientific QA."
           ],
           "source_skills": [
             {

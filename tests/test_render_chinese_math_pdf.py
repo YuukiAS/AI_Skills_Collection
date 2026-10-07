@@ -76,6 +76,20 @@ class RenderChineseMathPdfTests(unittest.TestCase):
                     break
         self.assertEqual([], offenders)
 
+    def test_skill_metadata_declares_renderer_admission_boundary(self) -> None:
+        text = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8").lower()
+        self.assertIn('version: "0.3"', text)
+        self.assertIn("render-only source", text)
+        self.assertIn("document-owner handoff", text)
+        self.assertIn("explicit\n  downstream handoff", text)
+        self.assertIn("already-final or", text)
+        self.assertIn("renderer-admitted source", text)
+        self.assertIn("do not use this skill as the first owner", text)
+        self.assertIn("creating, substantively rewriting", text)
+        self.assertIn("research report or manuscript", text)
+        self.assertIn("global discoverability", text)
+        self.assertIn("is not route authorization", text)
+
     def test_project_local_resource_precedes_environment_and_overrides(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
