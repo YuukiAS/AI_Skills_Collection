@@ -2,43 +2,51 @@
 
 Status: **CANONICAL / MUST READ IN FULL BEFORE EVERY NON-TRIVIAL PRESENTATION TASK**  
 Applies to: teaching, research, business, product, technical, decision, seminar, group-meeting, defense, and course presentations  
-Companion acceptance contract: \`pre-execution-cumulative-acceptance-contract.md\`
+Mandatory companion contracts:
+
+1. `pre-execution-cumulative-acceptance-contract.md`
+2. `rendered-artifact-positive-ancestry-acceptance-contract.md`
 
 This runbook is the complete operating procedure for presentation work.
 
-It exists because repeated failures showed that isolated rules are not enough. A presentation can fail even when individual requirements are correct if the overall production sequence is wrong: the Planner freezes an incomplete specification, Codex improvises layout or copy, a later revision regenerates accepted pages, a reviewer checks only representative pages, or the latest round silently forgets earlier human feedback.
+It exists because repeated real-world failures showed that isolated rules are not enough. A deck can have correct page count, correct copy, correct formulas, a passing build, and even a prebuild Critic PASS while the rendered artifact is still visibly poor: tiny objects, half-empty pages, deleted diagrams, unreadable tables, broken visual ancestry, or a suspicious figure that was never validated against the underlying quantity.
 
-The rule from now on is:
+The governing rule is:
 
-> **Before any non-trivial presentation work begins, read this runbook in full, then read the cumulative acceptance contract. Only then may planning, Critic review, production, revision, or release work start.**
+> **Before any non-trivial presentation work begins, read this runbook in full, then read both companion contracts. Only then may planning, Critic review, production, revision, or release work start.**
 
-No task-local prompt, domain skill, or later workflow may weaken this runbook. Domain-specific skills may add requirements.
+No task-local prompt, domain skill, later workflow, or executor preference may weaken this runbook. Domain-specific skills may add requirements.
 
 ---
 
 # 1. Core objective
 
-The workflow must optimize three things simultaneously:
+The workflow must optimize four things simultaneously:
 
-1. **content quality** — what is taught/claimed/shown is correct, sufficient, audience-appropriate, and source-grounded;
-2. **visual quality** — hierarchy, composition, object scale, whitespace, typography, navigation, and rhythm are deliberate;
-3. **revision efficiency** — accepted work stays accepted, obvious defects are solved internally, and the user normally sees only two to four shrinking review deltas.
+1. **content quality** — what is taught, claimed, or shown is correct, sufficient, audience-appropriate, and source-grounded;
+2. **visual quality** — hierarchy, composition, object scale, whitespace, typography, navigation, evidence proximity, and rhythm are deliberate;
+3. **historical fidelity** — accepted content, visual objects, and solved failure modes do not silently disappear or regress;
+4. **revision efficiency** — obvious defects are solved internally and the user normally sees only two to four shrinking review deltas.
 
 The user is never the first QA pass.
 
-Infrastructure exists to support a good presentation. Once enough authority is frozen, the process must move to visible artifacts. Do not spend open-ended time extending governance while no useful slide artifact appears.
+Infrastructure exists to support a good presentation. Once sufficient authority is frozen, the process must move to visible artifacts. Do not spend open-ended time extending governance while no useful render appears.
 
 ---
 
-# 2. Mandatory first-step output
+# 2. Mandatory pre-execution declaration
 
-Before doing substantive work, the Planner/Controller must determine and be able to report:
+Before substantive work, the Planner or Controller must determine and record:
 
-\`\`\`text
+```text
 RUNBOOK_READ = YES
 CUMULATIVE_ACCEPTANCE_CONTRACT_READ = YES
+RENDERED_ARTIFACT_CONTRACT_READ = YES
 TASK_CLASSIFICATION =
 CRITIC_REQUIRED =
+INTERNAL_COMPONENT_PROOF_REQUIRED =
+INTERNAL_HIGH_RISK_PAGE_PROOF_REQUIRED =
+GPT_WORK_REQUIRED =
 DELIVERABLE_FORMAT =
 AUDIENCE =
 PURPOSE =
@@ -47,21 +55,21 @@ SOURCE_SET =
 HISTORY_SCOPE =
 CURRENT_FREEZE_LEVEL =
 ACTIVE_GLOBAL_GUARDS =
+RENDER_PENDING_GUARDS =
 LOCKED_PAGEIDS =
 LOCKED_COMPONENTS =
+POSITIVE_VISUAL_ANCESTRY_READY = YES | NO
 IN_SCOPE_PAGEIDS =
 IN_SCOPE_COMPONENTS =
 ROUND_ALLOWLIST =
 USER_IS_FIRST_QA = NO
-\`\`\`
+```
 
-If these fields cannot yet be determined, the next action is source/history recovery or Planner clarification, not slide production.
+If these cannot be determined, implementation does not start.
 
 ---
 
 # 3. Task classification
-
-Classify before authoring.
 
 ## 3.1 NEW_SMALL
 
@@ -69,21 +77,15 @@ Use only when:
 
 - the deck is small and low-risk;
 - source and audience are clear;
-- no complex historical feedback exists;
-- no new high-risk teaching/scientific meaning is being introduced;
+- no complex history exists;
+- no major scientific, statistical, pedagogical, or template decision is introduced;
 - the visual system is already established or simple.
 
-A separate prebuild Critic is optional.
+A separate prebuild Critic may be optional. Rendered review is still required.
 
 ## 3.2 NEW_MAJOR
 
-Use when a new deck is:
-
-- substantial;
-- teaching-heavy;
-- scientific/high-stakes;
-- template-defining;
-- likely to need non-trivial page-count, content-depth, or layout judgments.
+Use when a new deck is substantial, high-stakes, teaching-heavy, scientific, template-defining, or likely to require non-trivial page-count, content-depth, or layout judgments.
 
 A prebuild Critic is required before broad production.
 
@@ -93,9 +95,9 @@ A revision is minor only if **all** are true:
 
 - page count unchanged;
 - section order unchanged;
-- no page job changes;
+- no page-job changes;
 - no scientific/statistical/pedagogical claim changes;
-- no title/header/footer/navigation/template redesign;
+- no shell/header/footer/navigation/template redesign;
 - no new archetype;
 - no page split or merge;
 - visible-copy changes are local and source-supported;
@@ -103,22 +105,20 @@ A revision is minor only if **all** are true:
 - no closed historical guard has recurred;
 - no shared-root failure is suspected.
 
-Minor work may skip the prebuild Critic.
+A separate prebuild Critic may be skipped. A bounded render review is still mandatory.
 
 ## 3.4 MAJOR_REVISION
 
 Major when any of the following holds:
 
-- page count changes;
-- section order or narrative changes;
-- page jobs change;
+- page count, section order, narrative, or page jobs change;
 - broad copy/content changes span multiple pages;
-- shared shell/template/header/footer/navigation changes;
-- new layout archetype or major figure system is introduced;
-- page split/merge is required;
+- shell/template/header/footer/navigation changes;
+- a new layout archetype or major figure system is introduced;
+- a page is split or merged;
 - scientific/statistical/pedagogical/assessment meaning changes;
-- repeated regression suggests the current Planner authority may be wrong;
-- user asks to rethink, rebuild, overhaul, or reread all history.
+- repeated regression suggests the Planner authority is wrong;
+- the user asks to rethink, rebuild, overhaul, or reread all history.
 
 If uncertain, classify as major.
 
@@ -131,11 +131,16 @@ Required additions:
 - authoritative version map;
 - exact reviewer-seen historical renders;
 - raw annotation recovery;
-- feedback lifecycle/supersession;
-- positive baselines;
-- rejected/negative baselines;
-- explicit recovery decision;
-- prebuild Critic before implementation.
+- lifecycle and supersession;
+- positive visual ancestors;
+- rejected/negative ancestors;
+- explicit recovery decisions;
+- prebuild Critic;
+- mandatory internal component proof;
+- mandatory internal high-risk-page proof;
+- full rendered-artifact review before user delivery.
+
+**A failed-version recovery may not skip internal proof merely because the user does not want to review intermediate artifacts.** The proof may remain internal, but it must exist and pass.
 
 ---
 
@@ -143,95 +148,83 @@ Required additions:
 
 ## 4.1 ChatGPT Web / Planner / Presentation Author
 
-ChatGPT Web owns human-level judgment.
-
-It is responsible for:
+Owns human-level judgment:
 
 - source reading and reconciliation;
 - audience, purpose, duration, format, and desired audience change;
 - task classification and Critic routing;
-- narrative and section sequence;
-- page count;
-- stable PageIDs;
-- one page job per PageID;
+- narrative, section sequence, and page count;
+- stable PageIDs and one job per page;
 - primary scientific/teaching/decision object;
 - required and forbidden content;
 - source anchors;
 - audience vs speaker/instructor/internal boundary;
 - exact visible copy;
-- layout semantic relationship;
-- layout archetype selection;
-- feedback interpretation, lifecycle, supersession;
+- semantic relationship and layout archetype;
+- historical-feedback interpretation, lifecycle, and supersession;
+- positive and negative visual ancestry;
 - locks and unlocks;
 - Planner amendments;
 - Critic prompt;
 - autonomous Codex Controller Goal;
-- deciding whether a finding is a specification defect or an implementation defect.
+- deciding whether a finding is a specification defect or implementation defect.
 
 ChatGPT Web must not be reduced to “write a prompt telling Codex to make it better.”
 
-ChatGPT Web does **not** own:
+It does not own TeX/PPTX implementation, compilation, final rendering, or repository production mechanics.
 
-- TeX/PPTX implementation;
-- compilation;
-- final rendering;
-- low-level figure generation;
-- deterministic build QA;
-- repository production mechanics.
+## 4.2 Prebuild Specification Critic
 
-## 4.2 Prebuild Critic
+Fresh, read-only, and independent.
 
-Fresh, read-only, independent.
-
-Required for major revision, failed-version recovery, and major/high-risk new decks.
-
-The Critic verifies:
+It verifies the **specification before production**:
 
 - actual source/history consumption;
-- exact feedback counts where relevant;
+- exact feedback counts;
 - page count and sequence;
 - every page job;
-- content correctness;
-- content sufficiency;
+- content correctness and sufficiency;
 - audience boundary;
 - exact-copy completeness;
 - layout/archetype suitability;
-- historical regression coverage;
+- positive/negative visual ancestry completeness;
+- historical guard coverage;
 - Controller review/repair plan.
 
-The Critic returns:
+It does **not** certify final visual quality because no final render exists yet.
 
-- \`PASS\`;
-- \`REVISE\` with a bounded Planner-amendment list;
-- or \`BLOCKED_HISTORY_NOT_CONSUMED\` / source-equivalent block.
+Its allowed outcomes are:
 
-The Critic does not implement slides.
+- `PASS` — production may begin;
+- `REVISE` — Planner authority only;
+- `BLOCKED_HISTORY_NOT_CONSUMED` or source-equivalent block.
 
-A major Planner amendment after Critic review requires another fresh Critic pass.
+A major Planner amendment after Critic review requires a new fresh Critic.
 
 ## 4.3 Codex Parent Controller
 
-Owns the autonomous engineering/review loop.
+Owns the autonomous production/review loop:
 
-It must coordinate:
-
-\`\`\`text
+```text
 fresh Producer
 -> Producer self-QA
--> fresh read-only Auditor/Reviewer
+-> mandatory internal component/high-risk proof when applicable
+-> fresh deterministic Auditor
+-> fresh rendered-artifact Auditor
 -> fresh Producer repair
--> new immutable candidate if bytes changed
--> new fresh review
+-> new immutable candidate if bytes change
+-> new fresh complete review
+-> GPT Work final gate
 -> repeat until independently accepted
-\`\`\`
+```
 
 The Parent:
 
-- binds exact candidate/authority/round scope;
-- does not make new semantic decisions;
+- binds exact candidate, authority, history, and round scope;
+- makes no new semantic decisions;
 - does not ask the user to relay intermediate completion blocks;
-- routes ordinary findings to fresh Producer contexts;
-- stops only for a real Planner decision, human-only external action, or proven reviewer-runtime failure.
+- routes routine findings to fresh Producer contexts;
+- stops only for a genuine Planner decision, human-only external action, or proven reviewer-runtime failure.
 
 ## 4.4 Codex Producer
 
@@ -240,112 +233,93 @@ Owns implementation only.
 Allowed:
 
 - typeset approved copy;
-- implement approved archetype;
-- choose line breaks, spacing, widths, alignment within the frozen archetype;
-- use approved fallback;
-- generate approved figures/assets from frozen values/labels;
-- crop/scale without changing meaning;
-- build/render/export;
-- run code and deterministic smoke tests;
-- prepare proof-carrying patch manifest;
-- repair Auditor findings inside frozen scope.
+- implement approved archetypes;
+- choose line breaks, widths, spacing, crop, and alignment within frozen bounds;
+- use approved responsive fallbacks;
+- regenerate approved figures from frozen data, labels, and semantics;
+- build, render, export, and run code;
+- prepare proof-carrying patch manifests;
+- repair findings inside frozen scope.
 
 Forbidden:
 
-- decide what to teach or claim;
-- add/delete/paraphrase audience-visible prose;
-- change page count;
-- merge/split pages without Planner authority;
+- decide what to teach, claim, omit, merge, split, or rewrite;
+- add/delete/paraphrase visible copy;
+- change page count or section order;
 - invent a new archetype;
-- delete difficult content to fix layout;
+- shrink below approved typography floors;
+- delete a difficult figure/diagram/table and replace it with prose unless Planner authority explicitly retires that object;
 - change shared components without explicit unlock;
-- edit tests/gates/acceptance rules to make candidate pass;
+- edit gates or acceptance rules to make a candidate pass;
 - declare final acceptance.
 
-## 4.5 Fresh Codex deterministic Auditor
+## 4.5 Fresh deterministic Auditor
 
 Fresh, read-only, independent from Producer.
 
 Checks objective conformance:
 
-- exact copy;
-- exact PageID/order/count;
-- scope/allowlist;
-- locks;
-- active historical guards;
+- exact copy, PageIDs, order, and count;
+- allowlist and locks;
+- complete history/guard coverage;
 - required-object preservation;
+- positive-visual-ancestor object preservation;
 - component bindings and consumers;
-- shell presence/consistency;
-- code execution/copyability;
-- mathematical glyphs;
-- figure labels;
-- PDF/PPTX structure;
-- artifact identity/versioning;
-- forbidden visible strings/roles;
-- recurrence of deterministic historical defects.
+- code execution and copyability;
+- formulas, numerical results, mathematical glyphs, figure labels;
+- PDF/PPTX structure and artifact identity;
+- forbidden strings and roles;
+- recurrence of deterministic historical failures.
 
-## 4.6 Fresh rendered-artifact Reviewer
+## 4.6 Fresh rendered-artifact Auditor
 
-Reviews actual renders after Producer stops.
+Fresh, read-only, and bound to the exact candidate bytes.
 
-Checks:
+Checks the actual page images, not only source or extracted text:
 
-- page hierarchy;
-- reading path;
+- page hierarchy and reading path;
 - primary-object scale;
-- whitespace;
-- semantic proximity;
+- typography at projection scale;
+- whitespace and density;
+- evidence-interpretation proximity;
 - table/code/figure readability;
-- shared-component optical consistency;
 - Q/A geometry;
-- page rhythm;
-- deck rhythm;
-- obvious audience-language problems.
+- shared-component optical consistency;
+- positive visual ancestry;
+- every render-dependent historical guard;
+- suspicious charts, traces, or numerical visualizations against underlying variables and summaries;
+- page rhythm and whole-deck rhythm.
 
-This is still internal Codex-controlled QA. It should eliminate routine visible defects before GPT Work.
+For major/full-deck work it must inspect every page and the full contact sheet.
 
 ## 4.7 GPT Work
 
-Final independent aesthetic / reader-effort / communication gate.
+Final independent aesthetic, reader-effort, pedagogical, and communication gate.
 
-For major/new/recovery full candidates:
+For major/new/recovery candidates it reviews:
 
-- review all pages;
-- review full contact sheet;
-- inspect high-risk pages at high resolution;
-- apply cumulative visual/pedagogical historical guards;
-- judge whole-deck rhythm;
-- judge audience reading effort;
-- judge naturalness;
-- judge evidence-interpretation proximity;
-- judge whether pages are convincingly communicative rather than merely mechanically valid.
-
-For minor bounded revisions, GPT Work may review:
-
-- changed pages;
-- affected shared-component consumers;
-- minimum context pages;
+- all pages at whole-slide scale;
 - full contact sheet;
+- high-risk pages at high resolution;
+- cumulative visual/pedagogical guards;
+- positive visual ancestry and deleted-object regressions;
+- whole-deck rhythm, density, and natural language;
+- whether the audience can actually follow the page;
+- whether whitespace feels intentional;
+- whether evidence and interpretation remain visually connected.
 
-only when global structure, shell, page jobs, and archetypes are locked.
-
-GPT Work does not:
-
-- implement fixes;
-- invent content;
-- change scientific/statistical meaning;
-- override deterministic failures.
+GPT Work does not implement fixes and cannot override deterministic or statistical failures.
 
 ## 4.8 User
 
-The user owns only:
+Owns only:
 
 - genuine subjective preference between already acceptable options;
 - new semantic/course/research decisions not determined by source;
-- explicit page/component locking;
+- explicit page/component locks;
 - final subjective acceptance.
 
-The user is not routine QA.
+The user is never routine QA.
 
 ---
 
@@ -358,11 +332,10 @@ Later stages cannot silently reopen earlier freezes.
 Freeze:
 
 - source set;
-- baseline artifact;
-- reviewer-seen version;
-- historical feedback;
-- positive/negative baselines;
+- exact reviewer-seen baseline;
 - artifact/version identity;
+- raw historical feedback;
+- positive and negative baselines;
 - current locks.
 
 ## F1 — narrative/page-job freeze
@@ -374,7 +347,7 @@ Freeze:
 - stable PageIDs;
 - one job per PageID;
 - primary object;
-- required/forbidden objects;
+- required and forbidden objects;
 - source anchors;
 - transitions;
 - audience vs speaker/instructor boundary.
@@ -383,17 +356,14 @@ Freeze:
 
 Freeze every audience-visible string:
 
-- titles;
-- subtitles;
-- prose;
-- bullets;
+- title/subtitle;
+- prose/bullets;
 - equations and labels;
 - Question/Answer;
 - table cells;
 - figure labels;
 - code;
-- captions;
-- source lines;
+- captions/sources;
 - administrative instructions.
 
 ## F3 — layout-semantics freeze
@@ -402,118 +372,97 @@ Freeze:
 
 - semantic relationship;
 - reading path;
-- archetype;
+- approved archetype;
 - primary-object priority;
+- typography floors;
 - allowed fallback;
 - forbidden fallback;
 - shared-component bindings.
 
-## F4 — shared-component freeze
+## F3V — positive visual ancestry freeze
 
-After proof and internal review, lock:
+For every non-trivial page/component, freeze:
 
-- title;
+```text
+page_or_component_id
+best_content_ancestor
+best_visual_ancestor
+negative_ancestors
+mandatory_visual_objects
+mandatory_relationships
+minimum_scale_or_readability_expectation
+preserve_geometry_or_composition_features
+allowed_changes
+forbidden_deletions_or_substitutions
+retirement_authority_if_any
+```
+
+A visual object that previously worked is not merely “reference material.” It is a protected asset until explicitly retired.
+
+## F4 — shared-component proof freeze
+
+Using real deck content, prove and lock:
+
+- title shell;
 - header/navigation;
 - footer/source/buttons/page number;
 - typography;
 - Question/Answer grammar;
 - table/code/caption/figure grammar;
-- closing.
+- closing shell.
 
-## F5 — golden-page composition freeze
+## F5 — internal high-risk-page composition freeze
 
-Lock representative:
+Internally prove representative high-risk pages covering:
 
-- density;
-- scale;
-- composition;
-- archetype behavior;
-- high-risk page patterns.
+- opening and closing;
+- dense and sparse layouts;
+- every major archetype;
+- figures, tables, formulas, code, and Q/A;
+- historically recurrent failures;
+- pages with positive visual ancestors that must be preserved.
+
+The user need not review this proof. The proof still must exist and pass.
 
 ## F6 — full-candidate freeze
 
 Freeze exact:
 
-- source;
-- commit;
+- source commit;
 - PDF/PPTX;
-- renders;
+- per-page renders;
 - hashes;
 - page map;
+- history-to-render closure matrix;
 - review bundle.
 
 ## F7 — human locks
 
-Explicit acceptance creates a page/component lock until a named unlock gives:
-
-- stable ID;
-- reason;
-- authorized scope.
+Explicit user acceptance creates immutable page/component locks until a named unlock states reason and scope.
 
 ---
 
-# 6. Historical feedback policy
+# 6. How historical feedback is actually consumed
 
-Historical acceptance is cumulative.
+“History consumed” means more than counting rows.
 
-## 6.1 Major revision / recovery
+Every raw human annotation must pass through this chain:
 
-Planner + Critic reread:
+```text
+raw annotation
+-> exact historical artifact/page
+-> stable PageID/component
+-> normalized requirement
+-> semantic / copy / visual / component / process classification
+-> lifecycle and supersession
+-> positive ancestor and negative example where applicable
+-> Planner field that encodes the requirement
+-> responsible verification layer
+-> exact evidence required for closure
+-> current resolution state
+```
 
-- complete raw feedback;
-- direct human decisions;
-- rendered lineage;
-- lifecycle/supersession;
-- positive baselines;
-- rejected baselines.
-
-They report:
-
-- exact counts;
-- source gaps;
-- conflicts;
-- affected PageIDs/components.
-
-## 6.2 Every Codex round
-
-Codex receives a read-only compiled authority bundle containing:
-
-- all active global guards;
-- all guards for modified PageIDs/components;
-- current-round feedback;
-- current human locks;
-- round-frozen scope;
-- ancestry;
-- component consumers;
-- unresolved conflicts.
-
-The fresh Auditor verifies bundle coverage against the cumulative registry.
-
-Codex does not resolve human-feedback conflicts.
-
-## 6.3 Minor revision
-
-Planner reads:
-
-- current feedback;
-- exact reviewer-seen baseline;
-- all active global guards;
-- complete affected-page/component history;
-- locks and dependencies.
-
-Escalate to major if:
-
-- a closed guard recurs;
-- history is ambiguous;
-- shared shell changes;
-- page job changes;
-- cross-page root cause appears.
-
-## 6.4 Mandatory historical-feedback resolution ledger
-
-For every major/recovery prebuild Critic, and for every later Critic round after Planner amendments, raw historical feedback must be audited **item by item**. A guard summary is not enough.
-
-The Critic must maintain one cumulative resolution ledger with one row per historical annotation/direct human decision. Each row must contain at least:
+The mandatory row schema is:
 
 ```text
 feedback_id
@@ -521,64 +470,102 @@ historical_artifact
 historical_physical_page
 historical_feedback_text
 historical_type_or_batch_type
-historical_lifecycle
-historical_guard_ids
-current_page_id
-current_page_number
-current_component_if_any
-current_evidence_locator
+stable_page_id
+current_physical_page
+component_id_if_any
+requirement_class
+normalized_requirement
+positive_visual_ancestor_if_any
+negative_ancestor_if_any
+planner_authority_locator
+verification_owner
+required_evidence
 resolution_state
 resolution_reason
-next_owner
 ```
 
-When historical page numbers changed, the row must still retain the old physical page and map it to the current stable PageID/current page number. Do not compare “P12 then” to “P12 now” by number alone.
+Allowed states:
 
-Allowed resolution states are:
-
-- `UNRESOLVED` — active requirement is not satisfied by current Planner authority;
-- `PARTIAL` — some but not all of the historical requirement is represented;
-- `RESOLVED_IN_SPEC` — current copy/page-plan/guard fully addresses the semantic requirement;
-- `RENDER_PENDING` — specification contains the intended visual/geometric fix, but no current render exists yet; **this is not resolved**;
-- `RESOLVED_IN_RENDER` — exact current rendered artifact has been inspected and the visual/geometric requirement passes;
-- `RETIRED_BY_PAGE_CHANGE` — the historical failure object/page no longer exists because an explicit later human/Planner decision removed, merged, or replaced it; the row must name the replacement PageID or retired object and the authority that permits retirement;
-- `SUPERSEDED` — a later explicit human decision replaces the old requirement; name the superseding feedback ID;
-- `ROUTED_INSTRUCTOR_ONLY` / audience-equivalent — intentionally removed from audience artifact and preserved in the appropriate speaker/instructor artifact;
-- `SOURCE_GAP_UNVERIFIABLE` — a counted historical annotation exists but its original text/page cannot be recovered; never silently mark it resolved.
+- `UNRESOLVED`
+- `PARTIAL`
+- `RESOLVED_IN_SPEC`
+- `RENDER_PENDING`
+- `RESOLVED_IN_RENDER`
+- `RETIRED_BY_PAGE_CHANGE`
+- `SUPERSEDED`
+- `ROUTED_INSTRUCTOR_ONLY` / audience-equivalent
+- `SOURCE_GAP_UNVERIFIABLE`
 
 Rules:
 
-1. `RENDER_PENDING` is an open state. A Critic cannot convert it to PASS before the new rendered artifact is actually reviewed.
-2. Page deletion/merge does not erase history. Use `RETIRED_BY_PAGE_CHANGE` only when explicit authority proves the old failure mode cannot recur in the new structure.
-3. `RESOLVED_IN_SPEC` closes semantic/copy/planning requirements, but does not close visual requirements that need rendering.
-4. Every `UNRESOLVED` or `PARTIAL` row must name the current PageID/page number, historical source/page, exact missing requirement, and the Planner file/field that owns the repair.
-5. Every `RESOLVED_IN_RENDER` row must name the exact candidate/version/render identity reviewed.
-6. Every Critic round updates the same cumulative ledger; it may change only rows whose evidence changed. Do not rebuild history from scratch and do not drop old rows.
-7. The Critic must report counts by resolution state and explicitly answer:
-   - how many historical items are fully closed;
-   - how many remain open;
-   - how many wait for render;
-   - how many were retired by page/structure change;
-   - how many are source gaps.
-8. Broad production is blocked while any required semantic/copy/planning item is `UNRESOLVED` or `PARTIAL`.
-9. Final release is blocked while any mandatory visual item remains `RENDER_PENDING`.
+1. `RENDER_PENDING` remains open.
+2. A visual guard can become `RESOLVED_IN_RENDER` only after the exact candidate image is inspected.
+3. A page deletion/merge does not erase history.
+4. A visual object cannot be deleted merely because it is difficult to implement.
+5. A later version inherits every active or resolved-but-guarded requirement.
+6. Every major Critic and every final render review updates the same cumulative ledger.
+7. Final release is blocked while mandatory visual items remain `RENDER_PENDING`.
 
-## 6.4 Authority precedence
+For each production candidate, generate two matrices:
 
-\`\`\`text
-latest explicit human decision
-> active raw feedback and named Planner amendment
-> lifecycle/supersession decision
-> compiled guard registry
-> latest candidate
-> executor preference
-\`\`\`
+### 6.1 History-to-authority matrix
 
-Derived summaries organize history; they do not outrank active human feedback.
+Proves every human item is represented by current Planner authority.
+
+### 6.2 History-to-render closure matrix
+
+Proves every render-dependent item was checked against the exact page image and records:
+
+```text
+feedback_id
+candidate_id
+page_id
+page_png_sha256
+render_evidence_locator
+verdict
+reviewer
+review_date
+```
+
+A report saying “all history consumed” without these mappings is insufficient.
 
 ---
 
-# 7. Page-planning rule
+# 7. Positive and negative ancestry
+
+## 7.1 Positive ancestry
+
+For each page, identify the best prior content and visual ancestors independently.
+
+Examples of protected positive assets include:
+
+- a useful teaching diagram;
+- a readable prior table;
+- a strong figure-plus-interpretation composition;
+- code output placed beside the correct code block;
+- an accepted title/closing shell;
+- an aligned Q/A pattern.
+
+The Producer may improve them, but cannot silently remove them.
+
+## 7.2 Negative ancestry
+
+Rejected versions remain regression fixtures. Their failure modes must be named and replayed against each new candidate.
+
+## 7.3 No deletion-as-repair
+
+If historical feedback says “repair the diagram,” deleting the diagram and replacing it with prose is not compliance.
+
+Deletion requires explicit Planner retirement authority stating:
+
+- why the object no longer serves the page job;
+- what replaces its teaching function;
+- why the old failure cannot recur;
+- which historical guards are retired or remapped.
+
+---
+
+# 8. Page planning
 
 Every page must have:
 
@@ -590,136 +577,112 @@ Every page must have:
 - source anchor;
 - transition in/out;
 - audience boundary;
-- layout semantic relation;
-- approved archetype.
+- semantic relationship;
+- approved archetype;
+- typography floor;
+- positive visual ancestor or explicit “new composition” authority;
+- render-level acceptance tests.
 
-A page should not be created because “there is room for another slide.”
-
-A page should not be merged because “we can fit both topics.”
-
-Split/merge decisions are semantic decisions, not layout conveniences.
+Pages are split or merged for semantic reasons, never merely to fit content.
 
 ---
 
-# 8. Layout grammar
+# 9. Layout grammar
 
-Layout is selected from semantic relationship.
+## 9.1 Columns are for true peers
 
-## 8.1 Columns are appropriate for true peers
-
-Examples:
+Appropriate examples:
 
 - R vs Python;
 - before vs after;
 - model A vs model B;
-- written vs oral roles;
 - two independent evidence panels;
-- stable figure + interpretation pair.
+- stable figure + adjacent interpretation.
 
 Conditions:
 
 - either side can be understood without finishing the other first;
-- both remain readable;
-- peer headings/formulas align;
-- primary object is not shrunk for symmetry;
-- interpretation remains adjacent to evidence.
+- both remain readable at slide scale;
+- headings/formulas share anchors;
+- the primary object is not shrunk for symmetry;
+- interpretation stays next to its evidence.
 
-## 8.2 Columns are inappropriate for sequential logic
+## 9.2 Sequential logic stays vertical
 
-Use vertical flow for:
+Vertical flow is default for:
 
 - derivations;
 - algorithms;
 - mechanism chains;
 - Question -> evidence -> Answer;
 - count -> exposure -> rate;
-- stepwise interpretation;
-- any page where the right side depends on the left.
+- any page where the right region depends on the left.
 
 Test:
 
 > If the audience must finish the left region before the right region makes sense, the relationship is sequential and should normally be vertical.
 
-## 8.3 Codex layout freedom
+## 9.3 Codex freedom
 
-Codex may adjust:
+Codex may adjust widths, spacing, line breaks, crop, and alignment within the approved archetype.
 
-- widths;
-- spacing;
-- line breaks;
-- alignment;
-- crop/scale;
-- approved responsive fallback.
-
-Codex may not:
-
-- invent a new archetype;
-- delete text;
-- split/merge pages;
-- replace explanation with cards or slogans;
-- switch to columns merely because horizontal space exists.
+Codex may not change archetype, shrink below typography floors, delete content, split/merge pages, or replace visual explanation with generic cards/prose.
 
 ---
 
-# 9. Whitespace and density
+# 10. Whitespace and density
 
 Whitespace is judged **after content sufficiency**.
-
-## 9.1 Acceptable whitespace
 
 Accept when:
 
 - page job is complete;
-- primary object is already readable and properly scaled;
+- primary object is already large/readable;
 - reading path is clear;
-- space supports grouping/breathing room;
-- title/closing restraint is intentional.
-
-## 9.2 Failing whitespace
+- space supports grouping or deliberate restraint.
 
 Fail when large unused space coexists with:
 
-- undersized figure/table/formula/code;
+- undersized figures, tables, formulas, or code;
 - missing explanation;
-- result far from evidence;
-- result pushed to bottom;
+- result pushed far from evidence;
 - tiny text;
-- lower void caused by columns;
-- deleted/compressed teaching content;
-- unfinished composition.
+- a lower void caused by columns;
+- deleted/compressed content;
+- an unfinished-looking composition.
 
-Do not fill space with:
+Do not fill space with slogans, decorative cards, generic arrows, repeated labels, filler captions, or generic takeaway boxes.
 
-- slogans;
-- cards;
-- decorative arrows;
-- repeated labels;
-- filler captions;
-- generic takeaway boxes.
-
-Use available space to improve:
+Use space first to improve:
 
 - primary-object scale;
+- typography;
 - evidence-interpretation proximity;
 - grouping;
 - needed explanation.
 
-Whitespace must be judged on whole-slide renders and on the contact sheet.
+### 10.1 Objective warning rule
+
+Automated geometry is a warning, not the sole aesthetic judge. However, the following combination is a hard review trigger:
+
+```text
+large unused body region
++ primary object below its page-specific scale floor
+or
++ text below approved typography floor
+```
+
+A reviewer must explain why the whitespace is intentional or fail the page.
 
 ---
 
-# 10. Shared components
+# 11. Shared components
 
-Shared components must be centralized and independently reviewable.
-
-At minimum:
+Shared components must be centralized and independently reviewable:
 
 - title shell;
-- section/header navigation;
-- footer;
-- page number;
-- source line;
-- navigation/action buttons;
+- header/navigation;
+- footer/source/buttons/page number;
 - typography;
 - Question;
 - Answer;
@@ -729,343 +692,290 @@ At minimum:
 - figure/diagram treatment;
 - closing shell.
 
-If one shared component changes:
+If a shared component changes:
 
 - unlock only that component;
-- automatically place all consumer pages in regression scope;
+- automatically revalidate every consumer page;
 - do not reopen semantic/copy locks on those pages;
-- rerender/review all affected consumers.
+- rerender and review all affected consumers.
 
 ---
 
-# 11. Question/Answer grammar
+# 12. Question/Answer grammar
 
-Question and Answer are paired semantic components.
-
-Rules:
-
-- use consistent accent-rule grammar;
-- both Question and Answer retain their intended rule;
-- rule aligns to the rendered text block;
-- sequential Question -> evidence -> Answer stays vertical;
-- when one continuous Answer is required, do not fragment it into repeated Answer labels;
-- Question/Answer must not become arbitrary cards or decorative blocks.
+- Question and Answer are paired semantic components.
+- Both use the intended aligned accent rule.
+- One continuous answer uses one continuous rule.
+- Sequential Q -> evidence -> A stays vertical.
+- A key conclusion must not fall outside the Answer block.
+- Q/A must not become arbitrary cards.
 
 ---
 
-# 12. Figure / caption / evidence rules
+# 13. Figure, chart, caption, and numerical validation
 
 A figure is not decoration.
 
 Rules:
 
-- figure must encode data, mechanism, model, uncertainty, or evidence;
+- it must encode data, mechanism, model, uncertainty, or evidence;
 - mathematical variables use actual mathematical glyphs;
 - captions are captions, not hidden paragraphs;
 - interpretation stays adjacent to evidence;
-- photo/crop aspect ratio must support the teaching role;
-- do not distort images;
-- regenerate figures for slide scale when paper/export versions are unreadable;
-- do not shrink a primary figure while leaving large empty regions.
+- primary figures are not shrunk while large empty regions remain;
+- paper/export figures may be regenerated for slide scale;
+- suspicious traces, posterior plots, diagnostic values, axes, legends, and labels must be checked against the exact underlying variable and numerical summaries.
+
+A chart can fail even if it renders cleanly. The Auditor must confirm that the plotted quantity, scale, filtering stage, and label agree with the source data and surrounding claims.
 
 ---
 
-# 13. Code-page rules
+# 14. Code-page rules
 
-Code pages must be student/audience useful.
-
-Rules:
-
-- code is copyable;
-- actual code is run when results are shown;
-- visible results stay near the code;
-- code syntax is subordinate to the statistical/scientific job;
-- avoid package/API inventory as the page's teaching purpose unless package behavior itself is the topic;
-- peer code blocks use aligned roles and reasonable balance;
-- do not leave one column short with a large lower void while the other is dense;
-- no curly quotes or broken PDF text extraction.
+- code must be copyable;
+- shown code is actually run;
+- visible output stays near the code that produces it;
+- code syntax is subordinate to the scientific/statistical job;
+- package/API inventory is not the teaching purpose unless explicitly authorized;
+- peer code blocks use aligned roles and readable scale;
+- one short column may not create a large lower void while another is dense;
+- no curly quotes or broken text extraction.
 
 ---
 
-# 14. Prebuild Critic workflow
+# 15. Prebuild Critic workflow
 
 Required for major/recovery and major new decks.
 
-Critic must:
+The Critic must:
 
 1. prove source/history consumption;
-2. independently evaluate page count;
-3. independently evaluate sequence;
-4. review every planned PageID;
-5. check content correctness;
-6. check student/audience sufficiency;
-7. check visible-copy boundary;
-8. check layout suitability;
+2. independently evaluate page count and sequence;
+3. review every planned PageID;
+4. check content correctness and sufficiency;
+5. check audience boundary;
+6. check visible-copy completeness;
+7. check layout/archetype suitability;
+8. check positive and negative visual ancestry;
 9. list relevant historical guards;
-10. audit the autonomous Codex Controller;
-11. update the mandatory historical-feedback resolution ledger **one feedback item at a time**;
-12. distinguish `UNRESOLVED`, `PARTIAL`, `RESOLVED_IN_SPEC`, `RENDER_PENDING`, `RESOLVED_IN_RENDER`, `RETIRED_BY_PAGE_CHANGE`, `SUPERSEDED`, audience-routed items, and source gaps;
-13. for every open item, report historical source/page -> current PageID/current page number -> exact missing requirement -> Planner owner;
-14. refuse to count render-dependent historical feedback as resolved before the exact new render is inspected.
+10. audit the Controller;
+11. update the cumulative historical ledger item by item.
 
-If any planned page is REVISE, broad production stays blocked.
+A prebuild Critic PASS means only:
 
-The response is:
+> the specification is coherent enough to produce.
 
-\`\`\`text
-PASS
-or
-REVISE -> Planner amendment only
-or
-BLOCKED_HISTORY_NOT_CONSUMED
-\`\`\`
+It does **not** mean:
 
-Do not say “production can fix it later.”
+> the future rendered deck is visually accepted.
 
 ---
 
-# 15. Component proof and golden pages
+# 16. Mandatory internal proof before broad production
 
-## 15.1 Shared-component proof
+## 16.1 Component proof
 
-Before broad production in a materially new visual system, prove real-content shared components.
+Required for:
 
-Use real deck content, not lorem ipsum.
+- new or materially changed visual systems;
+- failed-version recovery;
+- shell/component redesign;
+- repeated component regression.
 
-Internal loop:
+Use real deck content, not placeholder text.
 
-\`\`\`text
-Producer
--> deterministic checks
--> fresh Reviewer
--> repair
--> fresh Reviewer
-\`\`\`
+## 16.2 High-risk-page proof
 
-## 15.2 Golden-page proof
+Required internally for failed-version recovery and substantial major revision.
 
-Normally select six to ten pages covering:
+Select pages covering:
 
-- highest-risk content;
 - every major archetype;
-- historical failure classes;
+- opening and closing;
 - dense and sparse pages;
-- figure/table/code/formula/Q&A;
-- opening and closing.
+- figures, tables, code, formulas, and Q/A;
+- historical recurrent failures;
+- pages whose positive visual ancestors must be preserved;
+- pages with numerical figures requiring validation.
 
-Golden pages establish:
+## 16.3 User boundary
 
-- density floor;
-- composition grammar;
-- component behavior;
-- object scale;
-- slide-level quality.
+The user does not have to review these proofs. The internal Controller must complete them.
 
-## 15.3 Exception
+The following shortcut is forbidden:
 
-A major Critic may authorize direct full-deck production in an urgent recovery only when:
+```text
+user does not want an intermediate proof
+-> skip proof
+-> generate full deck immediately
+```
 
-- shell is frozen;
-- copy is frozen;
-- archetypes are frozen;
-- historical guards are frozen;
-- review route is strong enough;
-- user explicitly does not want another proof round.
+The correct route is:
 
-This is an exception, not the default.
+```text
+internal proof
+-> internal review/repair
+-> full deck
+-> final review
+-> user sees only the accepted candidate
+```
 
 ---
 
-# 16. Full-candidate production
+# 17. Full-candidate production
 
-Full candidate production uses one autonomous Controller Goal.
-
-Sequence:
-
-\`\`\`text
-Producer builds full candidate
+```text
+Producer builds exact candidate
 -> Producer self-QA
--> fresh deterministic Auditor
--> fresh rendered Reviewer
+-> deterministic Auditor
+-> rendered-artifact Auditor over all pages
 -> repair all P0/P1/P2
 -> new immutable candidate if bytes change
--> new fresh full review
--> repeat until internally accepted
+-> fresh full re-review
 -> GPT Work final gate
-\`\`\`
+```
 
-The user does not receive intermediate candidate defects.
+The user does not receive intermediate defects.
 
 ---
 
-# 17. Producer self-QA
+# 18. Producer self-QA
 
-Before launching fresh review, Producer must remove obvious defects.
-
-Minimum checks:
+Before independent review, Producer must remove obvious defects:
 
 - clean build;
-- exact page count/order;
-- exact copy;
-- required objects;
-- forbidden strings/roles;
-- code execution;
-- correct numerical results;
-- correct math labels;
+- exact page count/order/copy;
+- required objects present;
+- positive-ancestor mandatory objects preserved;
+- forbidden strings/roles absent;
+- code and numerical outputs verified;
+- formulas/labels correct;
 - no clipping/overlap;
-- shared shell present;
-- component geometry present;
-- renders/contact sheet exist;
-- obvious whitespace issue fixed;
-- tiny-object issue fixed;
-- bad column choice fixed only within allowed archetype;
-- footer/header issue fixed;
-- Q/A geometry fixed;
-- caption-role problem fixed;
-- patch manifest matches real diff.
+- no page-local font shrinking;
+- shell/components render;
+- page images/contact sheet exist;
+- obvious whitespace/tiny-object problems fixed;
+- bad columns, footer/header, Q/A, caption, and crop issues fixed;
+- patch manifest matches actual changes.
 
-Producer self-QA does not create final PASS.
+Producer self-QA cannot issue final PASS.
 
 ---
 
-# 18. Fresh Codex Auditor
+# 19. Deterministic Auditor
 
-For major/full deck, review every page and contact sheet.
+For every candidate, verify:
 
-Per page, record:
+- source/commit/artifact identity;
+- copy/PageID/order/count;
+- allowlist and locks;
+- history bundle coverage;
+- positive visual object preservation;
+- code execution/copyability;
+- mathematical and numerical fidelity;
+- component consumer regression;
+- no unauthorized object deletion;
+- no stale or fake review evidence.
 
-\`\`\`text
-PageID
-historical guards checked
-page job
-primary object
-copy fidelity
-shell/component fidelity
-reading path
-object scale
+A source change after audit creates a new candidate identity.
+
+---
+
+# 20. Rendered-artifact Auditor
+
+For major/full-deck work, review every page and the contact sheet.
+
+Per page record:
+
+```text
+page_id
+physical_page
+page_png_sha256
+active_historical_guards
+positive_visual_ancestor
+mandatory_visual_objects
+preserved_or_missing_objects
+page_job
+primary_object
+copy_fidelity
+component_fidelity
+reading_path
+object_scale
+typography
 whitespace
-semantic proximity
-audience boundary
-statistical/pedagogical sufficiency
-finding or PASS reason
+semantic_proximity
+numerical_visual_validation
+audience_boundary
+observed_issue_or_pass_reason
 verdict
-\`\`\`
+```
 
-A source change after Auditor review requires:
+The Auditor must also update every `RENDER_PENDING` historical row against the exact candidate image.
 
-- new candidate identity/version;
-- new fresh Auditor.
+Global PASS is forbidden unless:
 
-Representative-page review may guide development but cannot issue global PASS.
+- every page has a row;
+- every mandatory render-dependent guard has a verdict;
+- all page image hashes bind to the reviewed candidate;
+- no required visual object was silently deleted;
+- no unexplained suspicious numerical figure remains;
+- P0=P1=P2=0.
 
 ---
 
-# 19. GPT Work gate
+# 21. GPT Work gate
 
-GPT Work is the final aesthetic/reader-effort/communication gate.
+For major/recovery decks, GPT Work reviews all pages and the full contact sheet.
 
-## Major / recovery / substantial new deck
+It judges:
 
-Review:
-
-- all pages;
-- full contact sheet;
-- key high-resolution pages;
-- cumulative visual guards;
-- whole-deck rhythm;
-- density changes;
+- true projection-scale readability;
+- hierarchy and audience effort;
+- whitespace and density;
+- positive visual ancestry;
 - natural language;
-- semantic proximity;
-- audience effort;
-- historical visual recurrence.
+- evidence proximity;
+- deck rhythm;
+- whether a page feels complete rather than technically populated.
 
-## Minor revision
+If GPT Work finds a defect that should have been caught earlier, two actions are required:
 
-May review:
-
-- changed pages;
-- affected shared-component consumers;
-- minimum context;
-- full contact sheet;
-
-provided global structure remains locked.
-
-## Routing findings
-
-Mechanical/layout defect:
-
-\`\`\`text
-fresh Producer repair
--> fresh Auditor
--> GPT Work re-review
-\`\`\`
-
-Shared-component defect:
-
-\`\`\`text
-unlock named component
--> repair primitive
--> revalidate all consumers
--> fresh Auditor
--> GPT Work
-\`\`\`
-
-Planner/content/pedagogy defect:
-
-\`\`\`text
-return to Planner
--> amend F1/F2/F3
--> if major, fresh Critic
--> resume production
-\`\`\`
-
-New failure class:
-
-\`\`\`text
-append cumulative guard
--> assign permanent owner
--> strengthen upstream gate
--> replay rejected example
-\`\`\`
+1. repair the candidate;
+2. strengthen the upstream guard/reviewer so the failure becomes a permanent regression test.
 
 ---
 
-# 20. User review
+# 22. User review
 
-The user should receive:
+The user receives:
 
-- final internally accepted candidate;
-- or a bounded delta;
-- before/after for changed pages when useful;
+- the internally accepted candidate or bounded delta;
 - resolved feedback IDs;
-- genuine remaining subjective decisions;
-- proof that unrelated locks remain unchanged.
+- before/after where useful;
+- genuine remaining subjective choices;
+- proof unrelated locks remained unchanged.
 
-The user should not receive:
-
-- intermediate defect lists;
-- routine QA logs;
-- completion-block relay tasks;
-- requests to find basic whitespace/footer/title/code issues.
+The user does not receive routine defect lists, build logs, reviewer relay tasks, or obviously unfinished pages.
 
 ---
 
-# 21. Bounded revision
+# 23. Bounded revision
 
 Every revision round freezes:
 
 - exact baseline;
-- allowed PageIDs/components;
-- current feedback IDs;
+- allowlisted PageIDs/components;
+- addressed feedback IDs;
 - locks;
 - round-frozen scope;
-- shared-component consumers;
+- component consumers;
 - explicit unlocks;
-- change budget.
+- change budget;
+- positive visual ancestor expectations.
 
-Producer provides proof-carrying patch manifest:
+Producer supplies:
 
-\`\`\`text
+```text
 candidate_id
 parent_candidate_id
 baseline_commit
@@ -1074,192 +984,152 @@ modified_component_ids
 addressed_feedback_ids
 unchanged_locked_page_ids
 unchanged_locked_component_ids
+preserved_positive_visual_objects
+retired_visual_objects_with_authority
 required_object_relocations
 visible_copy_changes
 dependency_invalidations
 open_items_before
 open_items_after
-\`\`\`
+```
 
 Out-of-allowlist changes fail.
 
 ---
 
-# 22. Monotone convergence
+# 24. Monotone convergence
 
 Each accepted round must satisfy:
 
-\`\`\`text
+```text
 open_feedback_next is a strict subset of open_feedback_current
 human_locked_pages_next is a superset of human_locked_pages_current
 human_locked_components_next is a superset of human_locked_components_current
-modified_ids are a subset of the explicit allowlist
+modified_ids are a subset of explicit_allowlist
 unrelated_source_changes = 0
 unrelated_render_changes = 0
 closed_guard_recurrences = 0
-\`\`\`
+positive_visual_object_losses = 0
+```
 
-Normal target: two to four user review rounds.
+Normal user review target: two to four rounds.
 
-If open issues do not decrease or accepted work reopens:
-
-- do not create another broad candidate;
-- diagnose authority/copy/archetype/component/reviewer root cause first.
+If open issues do not decrease or accepted work reopens, stop broad generation and diagnose the authority, copy, archetype, component, positive ancestry, or reviewer-coverage root cause.
 
 ---
 
-# 23. Failure escalation
+# 25. Failure escalation
 
 ## Planner/specification failure
 
-Examples:
-
-- wrong page count;
-- insufficient explanation;
-- wrong audience boundary;
-- wrong archetype;
-- contradictory shell requirement.
-
-Route:
-
-\`\`\`text
-Planner amendment
--> fresh Critic if major
--> production resumes only after PASS
-\`\`\`
+Return to Planner; amend F1/F2/F3/F3V; fresh Critic if major.
 
 ## Producer implementation failure
 
-Examples:
-
-- spacing;
-- crop;
-- alignment;
-- footer;
-- Q/A line;
-- code copyability;
-- clipping.
-
-Route:
-
-\`\`\`text
-fresh Producer
--> fresh Auditor
-\`\`\`
+Fresh Producer repair -> fresh deterministic/rendered review.
 
 ## Shared-component failure
 
-Route:
+Unlock named component only -> repair root primitive -> revalidate all consumers.
 
-\`\`\`text
-unlock component only
--> repair root primitive
--> revalidate all consumers
--> fresh rendered review
-\`\`\`
+## Positive-ancestry failure
+
+Restore or explicitly re-authorize the protected visual object. Do not accept a prose substitution as repair.
 
 ## Review-coverage failure
 
-A defect was present but reviewers returned PASS.
-
-Route:
-
-\`\`\`text
-add permanent guard
--> strengthen responsible layer
--> replay historical rejected example
-\`\`\`
+Add a permanent guard, strengthen the responsible layer, and replay the rejected artifact.
 
 ## Self-certification/control-plane failure
 
-Route:
-
-\`\`\`text
-stop project-local patch chain
--> repair/version generic validator/reviewer runtime
--> replay historical and unrelated decks
-\`\`\`
+Stop project-local patching and repair/version the generic validator/reviewer runtime.
 
 ---
 
-# 24. Cumulative acceptance
+# 26. Severe rendered-deck failure rule
 
-Read the companion:
+A candidate is a severe workflow failure when several of the following occur together:
 
-\`pre-execution-cumulative-acceptance-contract.md\`
+- technically correct content but widespread tiny-object / large-void composition;
+- historically protected diagrams or visual structures disappear;
+- multiple `RENDER_PENDING` guards remain visibly violated;
+- suspicious numerical plots are not validated;
+- all-page review is claimed without page-level evidence;
+- GPT Work PASS is absent, scoped incorrectly, or not bound to the exact artifact;
+- the user is the first person to identify obvious full-deck visual problems.
 
-Its guard lifecycle and failure ownership are mandatory.
+Consequence:
 
-New feedback:
+```text
+CANDIDATE = HUMAN_REJECTED
+MINOR_PATCH = FORBIDDEN
+RETURN_TO = HISTORY + POSITIVE_VISUAL_ANCESTRY + RENDER_ACCEPTANCE_REPAIR
+```
 
-- adds guards;
-- strengthens guards;
-- or explicitly supersedes/retires guards.
-
-New feedback does not silently erase old guards.
-
-A later version cannot PASS while any inherited active or resolved-but-guarded requirement fails.
+Do not continue page-local polishing on top of an invalid visual system.
 
 ---
 
-# 25. Final full-deck regression
+# 27. Final full-deck regression
 
 Before release, review the exact delivery artifact for:
 
-- all pages and ordering;
-- all active historical guards;
-- semantic/copy/layout/component locks;
-- header/footer/navigation;
-- outline/bookmarks;
+- all pages/order;
+- all active and resolved-but-guarded historical requirements;
+- semantic/copy/layout/component/positive-visual locks;
+- header/footer/navigation/bookmarks;
 - typography;
-- math glyphs;
+- formulas and numerical figures;
 - figures/tables/code;
 - code copyability;
 - PDF/PPTX text quality;
-- whitespace;
+- whitespace and object scale;
 - semantic proximity;
 - deck rhythm;
 - source fidelity;
-- artifact identity;
-- reproducibility.
+- artifact identity and reproducibility.
 
 Delta review never replaces final full-deck regression.
 
 ---
 
-# 26. Completion rule
+# 28. Completion rule
 
 A presentation is complete only when all applicable layers agree:
 
 - runbook read;
 - cumulative acceptance contract read;
-- required Critic PASS;
+- rendered-artifact contract read;
+- required prebuild Critic PASS;
 - Planner freezes intact;
+- internal component/high-risk proof PASS;
 - Producer self-QA complete;
 - fresh deterministic Auditor PASS;
-- fresh rendered review PASS;
+- fresh rendered-artifact Auditor PASS;
+- all `RENDER_PENDING` guards closed on the exact render;
 - GPT Work PASS where required;
-- all cumulative guards PASS;
-- all prior locks preserved;
+- positive visual ancestry preserved or explicitly retired;
+- prior locks preserved;
 - final full-deck regression PASS;
 - artifact identity/reproducibility PASS;
-- user final subjective acceptance where required.
+- user final subjective acceptance when required.
 
 A file existing, compiling, or looking acceptable on representative pages is never sufficient.
 
 ---
 
-# 27. Mandatory read order for future work
+# 29. Mandatory read order
 
 Before every non-trivial presentation task, read in this order:
 
-1. **this file** — \`presentation-end-to-end-pre-execution-runbook.md\`;
-2. **cumulative acceptance contract** — \`pre-execution-cumulative-acceptance-contract.md\`;
-3. \`authoring-production-workflow.md\`;
-4. \`chatgpt-web-authoring-contract.md\` when ChatGPT Web is planning;
-5. \`anti-shortcut-production-contract.md\`;
-6. \`independent-review-contract.md\`;
-7. domain skill / project-specific authority;
-8. task-local source, baseline, history, and locks.
+1. `presentation-end-to-end-pre-execution-runbook.md`;
+2. `pre-execution-cumulative-acceptance-contract.md`;
+3. `rendered-artifact-positive-ancestry-acceptance-contract.md`;
+4. `authoring-production-workflow.md`;
+5. `chatgpt-web-authoring-contract.md` when ChatGPT Web is planning;
+6. `anti-shortcut-production-contract.md`;
+7. `independent-review-contract.md`;
+8. domain skill / project-specific authority;
+9. task-local source, baseline, history, ancestry, and locks.
 
-Do not begin execution until steps 1–2 are complete.
+Do not begin execution until steps 1–3 are complete.
