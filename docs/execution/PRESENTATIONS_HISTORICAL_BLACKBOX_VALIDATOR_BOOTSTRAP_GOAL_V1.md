@@ -326,7 +326,34 @@ verdict = PASS | REVISE
 reviewer_id
 ```
 
-## 11. Bootstrap 完成门槛
+## 11. Immutable candidate publication
+
+A bootstrap run is **not complete** while its implementation/evidence exists only
+in a local or detached worktree.
+
+Before reporting completion, the Controller must:
+
+1. stage only the allowed validator/test/bootstrap-evidence paths;
+2. commit the exact implementation and exact evidence that were audited;
+3. push the coherent candidate to the declared remote branches;
+4. record both resulting remote commit SHAs in `bootstrap_acceptance_report.md`;
+5. refetch the remote branches and verify the pushed commits are reachable from
+   the advertised branch HEADs;
+6. verify no Tutorial slide/theme/figure/current audience PDF/render or historical
+   fixture bytes were modified by the publication commit.
+
+A local path such as `/tmp/...` is not an auditable final handoff.
+
+Required evidence:
+
+```text
+GENERIC_REMOTE_CANDIDATE_COMMIT =
+STAT5060_REMOTE_CANDIDATE_COMMIT =
+REMOTE_CANDIDATE_REFETCH_VERIFIED = YES
+ALLOWED_PATHS_ONLY = YES
+```
+
+## 12. Bootstrap 完成门槛
 
 ```text
 RESULT = BOOTSTRAP_VALIDATOR_READY_FOR_CRITIC_CALIBRATION
@@ -344,7 +371,10 @@ REUSE_CLASSIFICATION_COMPLETE = YES
 FINAL_CRITIC_CALIBRATION = PENDING
 VALIDATOR_ACCEPTED = NO
 V14_PRODUCTION_ALLOWED = NO
-NEXT_ACTION = COMPARE_WITH_FRESH_CRITIC_AND_CALIBRATE
+GENERIC_REMOTE_CANDIDATE_COMMIT = <sha>
+STAT5060_REMOTE_CANDIDATE_COMMIT = <sha>
+REMOTE_CANDIDATE_REFETCH_VERIFIED = YES
+NEXT_ACTION = INDEPENDENT_IMPLEMENTATION_AUDIT_THEN_CRITIC_CALIBRATION
 ```
 
 不允许停在“代码已写完但没有跑完整 corpus”。不允许只跑抽样页面。不允许要求用户手动检查页面。
