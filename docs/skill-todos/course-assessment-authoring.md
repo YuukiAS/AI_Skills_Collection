@@ -243,3 +243,33 @@ Before creating or releasing a skill, obtain evidence from multiple course artif
 The promotion review should confirm that the skill improves reader usability without taking over assessment design or leaking course-specific policy into the reusable layer.
 
 ## Recently promoted
+
+
+### 15. Opening-page context and submission-block design
+
+Homework and Project first pages need a specialized composition rule.
+
+After removing internal/process material, a first page may become visually light. The author should not refill it with policy prose or generic explanation.
+
+Preferred repair order:
+
+- add at most one or two source-backed sentences that help students interpret the task/data or locate relevant course material;
+- present data/file mappings in a concise hierarchy;
+- present multiple deliverables as a scannable list when appropriate;
+- keep consequences adjacent to the submission requirement they qualify;
+- allow the first assessed task to share Page 1 naturally;
+- retain purposeful whitespace when there is no additional student-relevant information.
+
+For course assessment, context is justified when it changes interpretation. Examples include an observational/non-randomized assignment fact or that later questions reuse a named lecture example. Such context should not become a mini-lecture.
+
+A future skill should therefore support:
+
+```text
+FIRST_PAGE_CONTEXT_BUDGET = 0-2 compact sentences
+DATA_CONTEXT_MAP = optional / concise
+SUBMISSION_DELIVERABLE_LIST = preferred for multiple files
+FIRST_ASSESSED_BLOCK_ON_PAGE1 = preferred when natural
+FILLER_COPY = forbidden
+```
+
+The rendered reviewer should judge both information value and visual balance.
