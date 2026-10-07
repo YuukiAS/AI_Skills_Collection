@@ -2,58 +2,48 @@
 
 Date: 2026-10-07
 
-Standalone Skill source commit:
+Final standalone Skill source commit:
 
 ```text
-47f3a2d9caec295955040d90cfb19c0f4d3bf7a8
-```
-
-Closure branch observed before wrapper update:
-
-```text
-work/project-instructions-editor--0.1-closure
-b4a93960acb5f42334cb42649bd87aef61aa4b4f
+9cdbe8ed712caf3a3a90592cd09c61ac146d9b02
 ```
 
 ChatGPT personal Plugin:
 
 ```text
 plugin_id=plugins_6ac24c3637188191937fe99610ace3f2
-wrapper_version_before=0.2.1
-wrapper_version_after=0.2.2
-release_id=pluginrel_6ac5c9e43f1c8191806259956695dea8
+wrapper_version_before=0.2.2
+wrapper_version_after=0.2.3
+release_id=pluginrel_6ac5d8c91bb88191821b02a96cdba816
 scope=USER
 discoverability=PRIVATE
 ```
 
-The wrapper payload was updated to the PIE 0.1 source files from commit
-`47f3a2d9caec295955040d90cfb19c0f4d3bf7a8`:
+The live wrapper was updated with the exact final PIE 0.1 source for:
 
 ```text
-SKILL.md
-agents/openai.yaml
-assets/app-facing.svg
-evals/trigger_queries.json
-references/editor-contract.md
+skills/project-instructions-editor/SKILL.md
+skills/project-instructions-editor/references/editor-contract.md
 ```
 
-The standalone Skill version remains `0.1`. The wrapper package version is
-independent and was advanced to `0.2.2` because Plugin Creator requires a new
-wrapper version for an update.
-
-Post-update readback confirmed the current personal Plugin release contains the
-PIE 0.1 runtime boundary, including:
+Post-update readback confirmed wrapper version `0.2.3`, Skill version `0.1`,
+and current embedded file sizes matching the final source payload:
 
 ```text
-ADVANCED_INDEPENDENT_MULTI_CALL_FINALIZATION=UNSUPPORTED
-CROSS_TURN_FINAL_READER_LAYER_GUARANTEE=UNSUPPORTED_IN_PIE_0_1
+SKILL.md=16028 bytes
+references/editor-contract.md=14705 bytes
 ```
+
+The final source keeps the surface-consolidation repair and the tightened
+user-output contract: normal user replies do not print internal edit-mode labels,
+semantic maps, disposition tables, or invariant checklists unless formal audit
+evidence is requested.
 
 No MCP finalizer, external model provider, sibling-Skill chain, hosted service,
 or API key was added.
 
 Remaining release blocker: one fresh normal-entry Server+VPS Project acceptance
-using the updated wrapper. Reader-layer language quality is out of scope for PIE
-0.1 and remains tracked under Clear Writing #13.
+using this live wrapper. Reader-layer behavior beyond the current edited Project
+setting remains out of PIE 0.1 scope and stays with Clear Writing #13.
 
 C11 reader-layer failure preserved; not reclassified as PASS.
