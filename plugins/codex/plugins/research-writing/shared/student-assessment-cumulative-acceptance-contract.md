@@ -524,3 +524,19 @@ QUESTION_HEADING_BODY_GAP_CONSISTENCY = PASS
 ```
 
 A visually polished render fails this gate if it reintroduces struck-out prose, invents course terminology not used by the canonical source, or uses unnecessary display mathematics that degrades reading flow.
+
+
+# 22. Gate S — unmarked-copy preservation
+
+For a revision driven by an annotated baseline:
+
+```text
+ANNOTATED_BASELINE_BOUND = YES
+UNMARKED_COPY_PRESERVATION = PASS
+UNMARKED_COPY_LOSS_COUNT = 0
+STRIKEOUT_DISPOSITIONS = CLOSED
+HIGHLIGHT_COMMENT_DISPOSITIONS = CLOSED
+DIRECT_SUPERSESSIONS_RECORDED = YES
+```
+
+Any unmarked reader-visible baseline copy that disappears must have an explicit source/user/Planner authority. A general instruction to simplify the document or a `MAJOR_REVISION` classification is not sufficient authority for silent deletion.
