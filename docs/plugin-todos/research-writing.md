@@ -247,6 +247,8 @@ candidate_action:
 - Do not make student-facing documents explain internal rubric logic, QA mechanics, package engineering, or every exception merely because these are needed by graders or executors.
 - Add a deterministic duplication check for high-salience rules such as due date, hard deadline, page limit, file count, and named required statements. The intended occurrence count should be frozen by the Planner rather than inferred by the renderer.
 - In annotated-document revisions, require a compact annotation ledger with counts by annotation type and an explicit disposition for every Highlight and StrikeOut before rendering.
+- **Cumulative annotation replay must cross rounds, not only the latest PDF.** Before authoring a new annotated revision, reread every still-active Highlight/StrikeOut from prior rounds, mark supersession explicitly, and verify that a locally correct new edit does not resurrect an older rejected phrase or erase an earlier accepted sentence. A latest-round annotation ledger is insufficient without the cumulative lifecycle view.
+- When the user says a previous version had better wording, recover that exact accepted wording/history before drafting a replacement; do not reconstruct it from memory or let an executor improvise.
 promotion_gate: replay on one additional annotated Homework/Project revision and one new student-facing assessment artifact; verify that student action remains complete while duplicate/irrelevant administrative prose decreases and no StrikeOut content recurs.
 
 ## Recently promoted / established
