@@ -1,5 +1,7 @@
 # Anti-Shortcut Production Contract
 
+Before applying this contract, read `presentation-end-to-end-pre-execution-runbook.md` and then `pre-execution-cumulative-acceptance-contract.md`.
+
 This contract governs non-trivial presentation creation and revision. It is designed for the actual failure mode of an executor that optimizes the easiest observable proxy rather than the intended presentation outcome.
 
 The executor is not assumed to remember prior feedback, preserve accepted work voluntarily, or interpret a prose checklist exactly as the Planner intended. Every important requirement must therefore be represented by authority, scope, a production check, and independent review.
