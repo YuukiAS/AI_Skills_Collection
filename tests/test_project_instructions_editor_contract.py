@@ -56,6 +56,7 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
             "explicit reset",
             "Protected Absence",
             "Surface Consolidation",
+            "semantic spine",
             "No-Op Eligibility",
             "Semantic Invariants",
             "FINAL_ROUTE=`SIMPLE_FORMAL_CORE`",
@@ -195,6 +196,50 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
             "Use a fixed-section template",
         ]:
             self.assertNotIn(prohibited_active_mechanism, combined)
+
+    def test_semantic_spine_repair_contract_is_structural_and_generic(self) -> None:
+        skill_body = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+        contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
+        combined = skill_body + "\n" + contract
+        fixture = json.loads((FIXTURE_DIR / "semantic_spine_repair.json").read_text(encoding="utf-8"))
+
+        for phrase in [
+            "two-level semantic spine",
+            "atomic durable meanings",
+            "semantic families",
+            "governed actor or surface",
+            "trigger or phase",
+            "failure consequence",
+            "Structure is not protected by default",
+            "heading count",
+            "source grouping",
+            "scope dominance",
+            "broad authorization",
+            "narrower special-case rule",
+            "Dynamic-Set Abstraction",
+            "all currently supported items defined by the canonical source",
+            "same trigger and user consequence",
+            "Source English is evidence, not default vocabulary",
+            "semantic-spine reconciliation",
+        ]:
+            self.assertIn(phrase, combined)
+
+        expectations = fixture["semantic_spine_expectations"]
+        self.assertIn("governed actor/surface", expectations["family_construction"]["clusters_by"])
+        self.assertTrue(fixture["expected_final_candidate_properties"]["keeps_broad_authorization_boundary"])
+        self.assertTrue(fixture["expected_final_candidate_properties"]["does_not_replace_broad_boundary_with_narrow_special_case"])
+        self.assertTrue(fixture["expected_final_candidate_properties"]["abstracts_mutable_source_owned_set"])
+        self.assertTrue(fixture["expected_final_candidate_properties"]["merges_overlapping_normal_delivery_rules"])
+        self.assertTrue(fixture["expected_final_candidate_properties"]["keeps_distinct_closure_trigger_when_needed"])
+        self.assertTrue(fixture["expected_final_candidate_properties"]["has_no_project_resident_deletion_tombstone"])
+
+        fixture_text = json.dumps(fixture, ensure_ascii=False)
+        for project_specific_term in ["Server+VPS", "Android", "Windows", "macOS", "iPadOS"]:
+            self.assertNotIn(project_specific_term, fixture_text)
+        self.assertNotIn("nine-section", combined)
+        for prohibited_mechanism in ["Latin-token scan", "blacklist", "translation table", "English ratio"]:
+            self.assertIn(prohibited_mechanism, fixture_text)
+        self.assertNotIn("fixed nine-section template", combined)
 
     def test_default_output_contract_hides_internal_edit_mode_labels(self) -> None:
         skill_body = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")

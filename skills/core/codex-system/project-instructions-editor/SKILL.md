@@ -53,16 +53,17 @@ Respect the actual instruction budget when known. Track current length, candidat
 2. Classify the edit mode.
 3. Compare live setting, relevant history, canonical sources, and budget only as far as needed for the current edit.
 4. Build a durable semantic map before drafting. Collapse live rules, current request, relevant history, and canonical-source facts by long-lived meaning rather than by source wording, log labels, or repeated surface phrases.
-5. For each affected durable meaning, decide semantic ownership and effective enforcement placement separately: direct Project rule, short locator bridge, source-only, task-only, another verified layer, or omit.
-6. Merge rules with the same semantic effect. Keep the stronger or clearer enforceable wording, preserve mandatory/optional force and trigger conditions, and avoid repeating the same long-lived rule under several source labels.
-7. Prefer bounded edit when it closes the request without weakening unrelated semantics.
-8. Use full rewrite only when explicitly authorized or when bounded edits cannot resolve a real cross-scope contradiction, pervasive copied detail, material scope imbalance, budget impossibility, or systematic source/locator drift.
-9. Apply candidate expansion discipline: every newly introduced or materially changed Project-resident rule must have current semantic support from the live setting, current request, current canonical authority, explicit current re-adoption, or a necessary lookup-before-action bridge. If a rule's only support is stale history, rejected/deleted history, source wrapper wording, or task-local commentary, omit it from the final Project setting.
-10. Preserve semantic invariants: mandatory versus optional force, trigger conditions, authority, permission, safety, privacy, distribution, evidence strength, role ownership, uncertainty, current-versus-future status, exact identifiers, and explicit user corrections or deletions.
-11. Before returning no-op, check whether a material in-scope Project-setting defect has a safe bounded repair.
-12. If required live baseline, authority, budget, or source evidence is missing, degrade honestly with bounded advice, a clause, or a request for the missing input.
-13. Before delivery, run a semantic coverage and redundancy review over the actual candidate: required meanings are still covered, unsupported durable rules are absent, repeated meanings have been consolidated, locator bridges still trigger lookup before action, protected absence remains protected, and the known budget/headroom still holds.
-14. Deliver only what the current chat can support: a complete replacement when the Skill can preserve the relevant semantics, or an explicit partial/degraded result when it cannot.
+5. Cluster the atomic meanings into semantic families before writing final text. Draft from this semantic spine, not from source headings, source order, or old section structure.
+6. For each affected durable meaning, decide semantic ownership and effective enforcement placement separately: direct Project rule, short locator bridge, source-only, task-only, another verified layer, or omit.
+7. Merge rules with the same semantic effect. Keep the stronger or clearer enforceable wording, preserve mandatory/optional force and trigger conditions, and avoid repeating the same long-lived rule under several source labels.
+8. Prefer bounded edit when it closes the request without weakening unrelated semantics.
+9. Use full rewrite only when explicitly authorized or when bounded edits cannot resolve a real cross-scope contradiction, pervasive copied detail, material scope imbalance, budget impossibility, or systematic source/locator drift.
+10. Apply candidate expansion discipline: every newly introduced or materially changed Project-resident rule must have current semantic support from the live setting, current request, current canonical authority, explicit current re-adoption, or a necessary lookup-before-action bridge. If a rule's only support is stale history, rejected/deleted history, source wrapper wording, or task-local commentary, omit it from the final Project setting.
+11. Preserve semantic invariants: mandatory versus optional force, trigger conditions, authority, permission, safety, privacy, distribution, evidence strength, role ownership, uncertainty, current-versus-future status, exact identifiers, and explicit user corrections or deletions.
+12. Before returning no-op, check whether a material in-scope Project-setting defect has a safe bounded repair.
+13. If required live baseline, authority, budget, or source evidence is missing, degrade honestly with bounded advice, a clause, or a request for the missing input.
+14. Before delivery, run semantic-spine reconciliation over the actual candidate: required meanings are still covered, broader boundaries have not been narrowed, dynamic source-owned sets are abstracted, unsupported durable rules are absent, repeated meanings have been consolidated, locator bridges still trigger lookup before action, protected absence remains protected, and the known budget/headroom still holds.
+15. Deliver only what the current chat can support: a complete replacement when the Skill can preserve the relevant semantics, or an explicit partial/degraded result when it cannot.
 
 Read [references/editor-contract.md](references/editor-contract.md) when the edit involves compression, full replacement, locator substitution, partial history, multiple Project scopes, missing live settings, or evidence for a release/review gate.
 
@@ -96,9 +97,13 @@ When a rule was deleted or rejected and is absent from the live Project setting,
 
 Protected absence is a current-edit safety principle, not a tombstone registry or permanent ban.
 
-## Surface Consolidation
+## Semantic Spine and Surface Consolidation
 
-Complex source, history, and live-setting packets must be reduced to a long-lived semantic map before writing the final Project setting. Do not copy every source heading, current-task note, audit label, client inventory, workflow step, or old candidate sentence into Project instructions merely because it appeared in an input.
+Complex source, history, and live-setting packets must be reduced to a two-level semantic spine before writing the final Project setting. First identify atomic durable meanings, then cluster them into semantic families. A family is defined by governed actor or surface, trigger or phase, intended behavior or prohibition, owner or authority, and failure consequence. Draft from families, not from source headings, source order, log labels, or old section structure.
+
+Structure is not protected by default. Heading names, heading count, section order, duplicated rationale, source labels, and source grouping are not semantic invariants merely because they exist in the live setting or a canonical source. A preservation-sensitive cleanup may merge, reorder, or rename them when protected meanings stay intact.
+
+Do not copy every source heading, current-task note, audit label, client inventory, workflow step, or old candidate sentence into Project instructions merely because it appeared in an input.
 
 Use these dispositions:
 
@@ -110,7 +115,15 @@ Use these dispositions:
 
 The final candidate should expand only for real semantic reasons: adding a missing required rule, repairing a wrong owner or locator, preserving a stronger live requirement, restoring necessary evidence/safety/authorization force, or replacing volatile copied detail with a durable bridge. Do not expand the setting just because the input packet is long, because a source uses many labels, or because history contains several near-duplicate formulations.
 
-After drafting, compare the candidate against the semantic map rather than against source surface order. If two candidate clauses have the same long-lived effect, consolidate them. If a clause has no current semantic support, remove it. If a source-owned detail is volatile, keep only the lookup trigger and locator needed for future enforcement.
+Apply scope dominance during family construction. A broad authorization, safety, privacy, evidence, completion, or fail-closed boundary cannot be dropped merely because a narrower special-case rule overlaps it. Keep the broad rule once at the broadest correct home; keep a narrower rule only when it adds materially useful action-specific detail. A specialized client, tool, or workflow rule does not replace a general current-task authorization boundary.
+
+Apply dynamic-set abstraction. If a client, platform, device, route, inventory, or other mutable set is owned by a stable canonical source and future work only needs coverage after lookup, do not freeze the current members as durable Project text. Preserve a bridge such as "all currently supported items defined by the canonical source" plus the locator and lookup trigger. Keep concrete lists only when the member set itself is a durable user constraint, a formal finite machine/protocol/state set, or needed before lookup for routing, authorization, safety, or exact identity.
+
+Merge by trigger and user consequence. Rules with the same normal trigger and the same effect on the user should have one primary home even if source files split them across sections. Keep distinct triggers separate: for example, a formal production-closure report need not merge into normal response behavior.
+
+For Chinese-facing Project instructions, choose natural Chinese terms for ordinary concepts before drafting family text. Source English is evidence, not default vocabulary. Preserve exact machine/formal identifiers, but do not use Latin-token scanning, a blacklist, a translation table, language-percentage scoring, or fixed wording template as the decision mechanism.
+
+After drafting, compare the candidate against the semantic spine rather than against source surface order. If two candidate clauses have the same long-lived effect, consolidate them. If a clause has no current semantic support, remove it. If a source-owned detail is volatile, keep only the lookup trigger and locator needed for future enforcement.
 
 For a Project whose current setting or user request calls for natural Chinese, the current replacement should digest ordinary source labels and descriptive English into natural Chinese when that does not change meaning. Keep exact machine/formal identifiers unchanged. This is current-artifact readability inside the edit, not a promise that PIE v0.1 will enforce future cross-turn reader-layer behavior.
 

@@ -57,18 +57,40 @@ Allowed dispositions for the current edit are:
 
 Semantic ownership alone is not enough to remove a rule from Project settings. Rules about routing, authority, authorization, safety, privacy, distribution, evidence, completion, output contract, and lookup-before-action often need a direct Project subset or bridge even when their details live elsewhere.
 
-## Durable Semantic Map
+## Durable Semantic Spine
 
 For complex edits, compression, synchronization, or full replacement, first form
-a durable semantic map. The map is internal reasoning, not normal user-facing
-output. It groups live setting clauses, current-request changes, targeted
-history, and canonical-source facts by long-lived meaning.
+a durable semantic map and cluster it into a semantic spine. The spine is internal reasoning, not normal
+user-facing output. It starts with atomic durable meanings from live setting
+clauses, current-request changes, targeted history, and canonical-source facts,
+then clusters them into semantic families before drafting.
 
-The map prevents two common failures:
+This preserves the earlier long-lived semantic map discipline and adds a second
+family-clustering layer before final wording.
+
+The spine prevents common failures:
 
 - copying source/history surface labels directly into the Project setting;
 - letting several near-duplicate clauses survive because they came from
   different sources.
+- keeping a mutable source-owned list as durable Project text.
+- narrowing a broad boundary because a narrower special case overlaps it.
+
+A semantic family is defined by:
+
+- governed actor or surface;
+- trigger or phase;
+- intended behavior or prohibition;
+- owner or authority;
+- failure consequence.
+
+Draft from semantic families, not from source headings, source order, old section
+structure, or repository document layout.
+
+Structure is not a protected semantic invariant by default. Heading names,
+heading count, section order, duplicated rationale, source labels, and source
+grouping may be merged, renamed, or reordered during preservation-sensitive
+cleanup when the protected meanings remain covered.
 
 Each meaning receives one current disposition:
 
@@ -82,6 +104,40 @@ Each meaning receives one current disposition:
 Disposition is semantic, not phrase matching. It depends on current support,
 effective enforcement, durability, lookup-before-action needs, budget, and
 should-not-change semantics.
+
+### Scope Dominance
+
+When two rules overlap, compare their semantic scope. A broad authorization,
+safety, privacy, evidence, completion, or fail-closed boundary cannot be removed
+merely because a narrower special-case rule survives.
+
+Retain the broad boundary once at the broadest correct home. Retain a narrower
+rule only when it adds action-specific detail that the broad rule does not
+provide. A client-specific, workflow-specific, or tool-specific authorization
+rule does not replace a general rule that governs more production objects,
+actions, or resources.
+
+### Dynamic-Set Abstraction
+
+When a client, platform, device, route, inventory, supported-target, or other
+set has mutable membership and a stable canonical source owns the current list,
+Project instructions should preserve coverage and lookup, not the current
+members.
+
+Use a short bridge such as "all currently supported items defined by the
+canonical source" plus the locator and lookup-before-action trigger. Keep a
+concrete enumeration only when the member set itself is a durable user
+constraint, a formal finite machine/protocol/state set, or needed before lookup
+for routing, authorization, safety, or exact identity.
+
+### Trigger and Consequence Merge
+
+Clauses with the same normal trigger and the same user consequence should have
+one primary durable home even when source files split them across sections.
+Keep a distinct family only when the trigger, governed surface, owner, or
+failure consequence is materially different. A formal production-closure report,
+for example, may remain separate from ordinary response behavior because its
+trigger is different.
 
 ## Locator Substitution
 
@@ -143,18 +199,29 @@ absent and keep its deletion history out of the final setting unless the current
 user explicitly asks to preserve that history or prohibition as durable Project
 state.
 
-Before delivering a complete candidate, run a final semantic coverage and redundancy review against the actual candidate text:
+Before delivering a complete candidate, run final semantic-spine reconciliation,
+including the earlier semantic coverage and redundancy review, against the
+actual candidate text:
 
 - required live/current/canonical meanings remain covered;
+- broader authorization, safety, privacy, evidence, completion, and fail-closed
+  boundaries have not been narrowed by consolidation;
+- mutable source-owned sets are abstracted with the necessary lookup bridge
+  instead of copied as current member lists;
 - protected absence remains absent;
 - unsupported durable rules are absent;
-- repeated clauses with the same semantic effect are consolidated;
+- repeated clauses with the same trigger and user consequence are consolidated;
+- source headings, source labels, and source grouping did not become final
+  structure merely by inertia;
 - source-owned volatile detail has either a valid locator bridge or is omitted;
 - authorization, safety, privacy, evidence strength, uncertainty, completion
   claims, exact identifiers, and mandatory/optional force remain unchanged;
 - known hard budget and headroom are still satisfied.
 
-This review is not an English-token scan, blacklist, translation table,
+When the target Project calls for Chinese-facing instructions, choose natural
+Chinese terms for ordinary concepts before drafting the family text. Source
+English is evidence, not preferred vocabulary. Preserve exact machine/formal
+identities, but do not use an English-token scan, blacklist, translation table,
 percentage score, or fixed-section template.
 
 ## No-Op Eligibility
