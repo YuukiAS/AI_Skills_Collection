@@ -57,6 +57,32 @@ Allowed dispositions for the current edit are:
 
 Semantic ownership alone is not enough to remove a rule from Project settings. Rules about routing, authority, authorization, safety, privacy, distribution, evidence, completion, output contract, and lookup-before-action often need a direct Project subset or bridge even when their details live elsewhere.
 
+## Durable Semantic Map
+
+For complex edits, compression, synchronization, or full replacement, first form
+a durable semantic map. The map is internal reasoning, not normal user-facing
+output. It groups live setting clauses, current-request changes, targeted
+history, and canonical-source facts by long-lived meaning.
+
+The map prevents two common failures:
+
+- copying source/history surface labels directly into the Project setting;
+- letting several near-duplicate clauses survive because they came from
+  different sources.
+
+Each meaning receives one current disposition:
+
+1. direct Project-resident rule;
+2. short locator bridge or trigger plus canonical source locator;
+3. source-only;
+4. task/thread only;
+5. another verified effective layer;
+6. omit or no change.
+
+Disposition is semantic, not phrase matching. It depends on current support,
+effective enforcement, durability, lookup-before-action needs, budget, and
+should-not-change semantics.
+
 ## Locator Substitution
 
 Move detail out of Project instructions only when all are true:
@@ -98,6 +124,39 @@ Use full rewrite or restructure only when at least one real condition holds:
 
 "It would be cleaner" or "the recent topic is important" is not enough. Preservation-sensitive full rewrite also requires a live baseline and enough current facts to preserve affected semantics.
 
+## Expansion, Coverage, and Redundancy
+
+Project instructions should grow only when the growth corresponds to a real
+long-lived semantic change or repair. A new or materially changed
+Project-resident rule needs current semantic support from at least one of:
+
+- the live Project setting;
+- the current request;
+- a current canonical authority in the requested synchronization scope;
+- explicit current re-adoption by the user;
+- a necessary lookup-before-action bridge.
+
+Do not create durable rules whose only support is stale history, old generated
+candidates, rejected/deleted history, source wrapper wording, task-local
+commentary, or review/audit labels. Keep the underlying deleted/rejected rule
+absent and keep its deletion history out of the final setting unless the current
+user explicitly asks to preserve that history or prohibition as durable Project
+state.
+
+Before delivering a complete candidate, run a final semantic coverage and redundancy review against the actual candidate text:
+
+- required live/current/canonical meanings remain covered;
+- protected absence remains absent;
+- unsupported durable rules are absent;
+- repeated clauses with the same semantic effect are consolidated;
+- source-owned volatile detail has either a valid locator bridge or is omitted;
+- authorization, safety, privacy, evidence strength, uncertainty, completion
+  claims, exact identifiers, and mandatory/optional force remain unchanged;
+- known hard budget and headroom are still satisfied.
+
+This review is not an English-token scan, blacklist, translation table,
+percentage score, or fixed-section template.
+
 ## No-Op Eligibility
 
 Before returning no-op, review the live Project setting itself within the current user's requested scope. Treat it as the candidate and check whether it already satisfies active contracts for placement, semantic ownership, durability, safety, privacy, authorization, evidence strength, fail-closed behavior, and mandatory/optional force.
@@ -135,6 +194,12 @@ It runs as an ordinary ChatGPT Web / Project chat Skill. It does not require and
 
 PIE v0.1 may produce a clear, concise Project setting for the current edit, including natural Chinese when the current user or Project calls for it. It must not claim to guarantee cross-turn final reader-layer behavior for future chats. C11 evidence remains a preserved failure boundary: advanced multi-call or cross-turn reading-layer finalization is unsupported in PIE v0.1 and belongs to future Clear Writing work.
 
+When the active Project setting or current request calls for Chinese-facing
+Project instructions, the current replacement should express ordinary source
+labels and descriptive prose naturally in Chinese while preserving exact
+machine/formal identifiers. This narrow current-artifact language responsibility
+does not make PIE v0.1 the owner of future cross-turn reader-layer enforcement.
+
 ## Regression Families
 
 Use these families as review coverage, not as a fixed gate count:
@@ -166,3 +231,9 @@ Full replacements must include mode, reason bounded edit is insufficient or rese
 Missing-input outputs must avoid false-safe full settings. Name only the input that truly blocks safe completion and provide safe partial work.
 
 No-op is valid only when the setting already satisfies the active contract, the remaining difference is cosmetic, or changing Project settings would duplicate, weaken, misplace, overfit, or add semantic risk.
+
+Normal user-facing answers should be concise and should not expose internal
+preservation-sensitive labels, semantic maps, disposition tables, invariant
+checklists, or coverage/redundancy reviews unless the user asks for audit
+evidence. The default delivery is a short conclusion, the bounded edit or clean
+replacement when safe, and a few key reasons.

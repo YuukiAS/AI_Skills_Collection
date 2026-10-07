@@ -14,6 +14,7 @@ from skill_utils import read_frontmatter  # noqa: E402
 
 
 SKILL_DIR = REPO_ROOT / "skills" / "core" / "codex-system" / "project-instructions-editor"
+FIXTURE_DIR = REPO_ROOT / "tests" / "fixtures" / "project_instructions_editor"
 
 
 class ProjectInstructionsEditorContractTests(unittest.TestCase):
@@ -54,6 +55,7 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
             "greenfield",
             "explicit reset",
             "Protected Absence",
+            "Surface Consolidation",
             "No-Op Eligibility",
             "Semantic Invariants",
             "FINAL_ROUTE=`SIMPLE_FORMAL_CORE`",
@@ -95,6 +97,12 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
             "protected absence",
             "lookup-before-action",
             "Semantic ownership alone is not enough",
+            "durable semantic map",
+            "direct Project-resident rule",
+            "short locator bridge",
+            "source-only",
+            "task/thread only",
+            "semantic coverage and redundancy review",
             "mandatory versus optional",
             "authorization boundaries",
             "evidence strength",
@@ -142,6 +150,51 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
         combined = contract + skill_body
         for phrase in removed_claims:
             self.assertNotIn(phrase, combined)
+
+    def test_surface_consolidation_repair_contract_is_structural_not_mechanical(self) -> None:
+        skill_body = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+        contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
+        combined = skill_body + "\n" + contract
+        fixture = json.loads((FIXTURE_DIR / "surface_consolidation_repair.json").read_text(encoding="utf-8"))
+
+        for phrase in [
+            "long-lived semantic map",
+            "same semantic effect",
+            "candidate expansion discipline",
+            "current semantic support",
+            "semantic coverage and redundancy review",
+            "source wrapper wording",
+            "ordinary source labels",
+            "not a promise that PIE v0.1 will enforce future cross-turn reader-layer behavior",
+            "should not expose internal labels",
+        ]:
+            self.assertIn(phrase, combined)
+
+        expected_dispositions = {
+            item["disposition"] for item in fixture["expected_semantic_dispositions"]
+        }
+        self.assertEqual(
+            expected_dispositions,
+            {
+                "direct_project_rule",
+                "short_locator_bridge",
+                "source_only",
+                "omit",
+                "task_only",
+            },
+        )
+        self.assertTrue(fixture["expected_final_candidate_properties"]["has_no_project_resident_deletion_tombstone"])
+        self.assertTrue(fixture["expected_final_candidate_properties"]["does_not_expose_internal_meaning_map_by_default"])
+
+        for non_goal in fixture["non_goals"]:
+            self.assertIn(non_goal, fixture["non_goals"])
+        for prohibited_active_mechanism in [
+            "Use a Latin-token score",
+            "Use an English ratio",
+            "Use a translation dictionary",
+            "Use a fixed-section template",
+        ]:
+            self.assertNotIn(prohibited_active_mechanism, combined)
 
     def test_trigger_queries_cover_positive_and_near_miss_boundaries(self) -> None:
         data = json.loads((SKILL_DIR / "evals" / "trigger_queries.json").read_text(encoding="utf-8"))

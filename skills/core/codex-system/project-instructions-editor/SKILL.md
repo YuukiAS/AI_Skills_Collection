@@ -52,13 +52,17 @@ Respect the actual instruction budget when known. Track current length, candidat
 1. Identify the requested Project-instruction change and authorized scope.
 2. Classify the edit mode.
 3. Compare live setting, relevant history, canonical sources, and budget only as far as needed for the current edit.
-4. For each affected durable rule, decide semantic ownership and effective enforcement placement separately.
-5. Prefer bounded edit when it closes the request without weakening unrelated semantics.
-6. Use full rewrite only when explicitly authorized or when bounded edits cannot resolve a real cross-scope contradiction, pervasive copied detail, material scope imbalance, budget impossibility, or systematic source/locator drift.
-7. Preserve semantic invariants: mandatory versus optional force, trigger conditions, authority, permission, safety, privacy, distribution, evidence strength, role ownership, uncertainty, current-versus-future status, exact identifiers, and explicit user corrections or deletions.
-8. Before returning no-op, check whether a material in-scope Project-setting defect has a safe bounded repair.
-9. If required live baseline, authority, budget, or source evidence is missing, degrade honestly with bounded advice, a clause, or a request for the missing input.
-10. Deliver only what the current chat can support: a complete replacement when the Skill can preserve the relevant semantics, or an explicit partial/degraded result when it cannot.
+4. Build a durable semantic map before drafting. Collapse live rules, current request, relevant history, and canonical-source facts by long-lived meaning rather than by source wording, log labels, or repeated surface phrases.
+5. For each affected durable meaning, decide semantic ownership and effective enforcement placement separately: direct Project rule, short locator bridge, source-only, task-only, another verified layer, or omit.
+6. Merge rules with the same semantic effect. Keep the stronger or clearer enforceable wording, preserve mandatory/optional force and trigger conditions, and avoid repeating the same long-lived rule under several source labels.
+7. Prefer bounded edit when it closes the request without weakening unrelated semantics.
+8. Use full rewrite only when explicitly authorized or when bounded edits cannot resolve a real cross-scope contradiction, pervasive copied detail, material scope imbalance, budget impossibility, or systematic source/locator drift.
+9. Apply candidate expansion discipline: every newly introduced or materially changed Project-resident rule must have current semantic support from the live setting, current request, current canonical authority, explicit current re-adoption, or a necessary lookup-before-action bridge. If a rule's only support is stale history, rejected/deleted history, source wrapper wording, or task-local commentary, omit it from the final Project setting.
+10. Preserve semantic invariants: mandatory versus optional force, trigger conditions, authority, permission, safety, privacy, distribution, evidence strength, role ownership, uncertainty, current-versus-future status, exact identifiers, and explicit user corrections or deletions.
+11. Before returning no-op, check whether a material in-scope Project-setting defect has a safe bounded repair.
+12. If required live baseline, authority, budget, or source evidence is missing, degrade honestly with bounded advice, a clause, or a request for the missing input.
+13. Before delivery, run a semantic coverage and redundancy review over the actual candidate: required meanings are still covered, unsupported durable rules are absent, repeated meanings have been consolidated, locator bridges still trigger lookup before action, protected absence remains protected, and the known budget/headroom still holds.
+14. Deliver only what the current chat can support: a complete replacement when the Skill can preserve the relevant semantics, or an explicit partial/degraded result when it cannot.
 
 Read [references/editor-contract.md](references/editor-contract.md) when the edit involves compression, full replacement, locator substitution, partial history, multiple Project scopes, missing live settings, or evidence for a release/review gate.
 
@@ -91,6 +95,24 @@ When history is missing or partial, keep absent any durable rule that is not in 
 When a rule was deleted or rejected and is absent from the live Project setting, use that evidence only to protect the current edit. The final long-lived Project setting should omit both the deleted rule and its deletion history; do not emit `do not restore X`, `X was deleted`, or equivalent Project-resident tombstones unless the current user explicitly asks to keep that prohibition or history marker as a durable rule.
 
 Protected absence is a current-edit safety principle, not a tombstone registry or permanent ban.
+
+## Surface Consolidation
+
+Complex source, history, and live-setting packets must be reduced to a long-lived semantic map before writing the final Project setting. Do not copy every source heading, current-task note, audit label, client inventory, workflow step, or old candidate sentence into Project instructions merely because it appeared in an input.
+
+Use these dispositions:
+
+- `direct Project rule`: the Project must enforce the rule before doing future work.
+- `short locator bridge`: the Project needs a trigger plus stable locator, while details stay in the canonical source.
+- `source-only`: the source owns the detail and the Project does not need a pre-lookup rule.
+- `task-only`: the fact matters only to the current task/thread.
+- `omit`: the fact is stale, unsupported, deleted/rejected, duplicative, or outside the authorized scope.
+
+The final candidate should expand only for real semantic reasons: adding a missing required rule, repairing a wrong owner or locator, preserving a stronger live requirement, restoring necessary evidence/safety/authorization force, or replacing volatile copied detail with a durable bridge. Do not expand the setting just because the input packet is long, because a source uses many labels, or because history contains several near-duplicate formulations.
+
+After drafting, compare the candidate against the semantic map rather than against source surface order. If two candidate clauses have the same long-lived effect, consolidate them. If a clause has no current semantic support, remove it. If a source-owned detail is volatile, keep only the lookup trigger and locator needed for future enforcement.
+
+For a Project whose current setting or user request calls for natural Chinese, the current replacement should digest ordinary source labels and descriptive English into natural Chinese when that does not change meaning. Keep exact machine/formal identifiers unchanged. This is current-artifact readability inside the edit, not a promise that PIE v0.1 will enforce future cross-turn reader-layer behavior.
 
 ## Semantic Invariants
 
@@ -131,5 +153,7 @@ Deliver proportionally:
 - For a full replacement, state the edit mode, why bounded edit is insufficient or why greenfield/reset applies, major placement changes, direct rules/bridges, preserved invariants, budget change, and the complete clean replacement.
 - For missing inputs, provide only safe bounded advice or clauses, name the single missing input that truly blocks a full replacement, and avoid offloading repo/source lookup that you can do yourself.
 - For no-op, say that the Project setting should not change, identify the correct owner, locator, already-covered rule, or semantic risk, and explain why no material in-scope defect is safely repairable.
+
+By default, normal user-facing output should not expose internal labels such as preservation-sensitive, durable semantic map, disposition table, invariant checklist, or coverage/redundancy review. Use a short conclusion, the replacement or bounded edit when safe, and only the few key changes a user needs to trust the edit. Expose audit detail only when the user asks for review evidence or the task is explicitly an audit packet.
 
 Never present mechanical surface scoring as the quality decision.
