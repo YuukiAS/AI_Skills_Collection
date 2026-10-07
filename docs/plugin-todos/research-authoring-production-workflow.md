@@ -641,3 +641,31 @@ Success requires:
 - complete release-layer regression before HW1 closure.
 
 The experiment fails if the user must again discover obvious spacing, whitespace, block-split, numbering or cross-reference defects.
+
+
+## 17. Whole-sequence composition for short assessment handouts
+
+The STAT5060 HW1 replay exposed a composition failure not captured by ordinary no-overflow checks: consecutive short questions were effectively assigned to fixed pages, producing visually underfilled pages even though the document had ample total content.
+
+Generic lesson:
+
+- optimize the full semantic sequence, not one page at a time;
+- major questions are continuable unless explicitly frozen as atomic;
+- page starts should follow legal semantic breakpoints, not a fixed “N questions per page” template;
+- remove unnecessary hard breaks / stale keep-together guards before changing typography;
+- a short final question should normally follow preceding content if semantic flow and orphan rules permit;
+- do not fill white space with prose or decoration merely to make the page look occupied.
+
+For a short Homework proof, the Planner should normally request one **natural-flow composition proof** before authorizing page-specific micro-adjustments.
+
+Acceptance should ask:
+
+```text
+WHOLE_SEQUENCE_RHYTHM = PASS
+QUESTION_FLOW_NOT_PAGE_PAIRING = PASS
+PURPOSEFUL_WHITESPACE_ONLY = PASS
+NO_FILLER_FOR_DENSITY = PASS
+NO_UNNECESSARY_HARD_BREAKS = PASS
+```
+
+This is a rendered-review judgment. Page occupancy remains diagnostic rather than a universal hard threshold.
