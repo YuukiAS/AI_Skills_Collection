@@ -31,23 +31,23 @@ Main architecture is not reopened.
 
 1. Recovery Proposal  
    `docs/design/059_RESEARCH_AUTHORING_C3_INTEGRATED_OWNER_CHAIN_RECOVERY_PROPOSAL_V0_1_2026-10-07.md`  
-   @ `e8ede43b78d279d246c7aae81bfde782cab6dd11`
+   @ `b4cfef6685b232a215d56b942175bf50de415a98`
 
 2. Implementation Plan v0.3  
    `docs/design/059_RESEARCH_AUTHORING_C3_NORMAL_ENTRY_OWNERSHIP_CLOSURE_IMPLEMENTATION_PLAN_V0_3_2026-10-07.md`  
-   @ `164c204b474839cce35c0d1a45fc86c4e703336c`
+   @ `409dedc44931527e02551ac9689521655b328db3`
 
 3. Canonical Goal v0.3  
    `docs/goals/059_RESEARCH_AUTHORING_C3_NORMAL_ENTRY_OWNERSHIP_CLOSURE_GOAL_V0_3.md`  
-   @ `04b5172fde45491b2dca8907c4eca31a5ebea92e`
+   @ `89aef6c6454d449b23c953cb5a66b3c7a27a1c5a`
 
 4. Capability Gate impact v0.3  
    `docs/design/059_RESEARCH_AUTHORING_C3_CAPABILITY_GATE_IMPACT_V0_3_2026-10-07.md`  
-   @ `c50f92484161816d9715d9b991e493277521626a`
+   @ `c66a7be9b81d976e65ad54081326c4d3ad5fb687`
 
 5. Kickoff Draft v0.3  
    `docs/operations/prompts/059_RESEARCH_AUTHORING_C3_NORMAL_ENTRY_OWNERSHIP_CLOSURE_KICKOFF_V0_3.md`  
-   @ `5cef1c89ea92cd8210f80f0d2ec13003085e727a`
+   @ `30c6e3d733126b8862c0592cced3e969b685df66`
 
 6. Existing exact-C3 ChatGPT wrapper preparation plan  
    `docs/operations/059_RESEARCH_AUTHORING_C3_CHATGPT_PLUGIN_PREPARATION_V0_1.md`  
@@ -100,6 +100,42 @@ DEV-05 proved：
 - direct pdflatex produced final PDF.
 
 Therefore another metadata wording pass is not accepted as the recovery.
+
+## RA-C3DEV1 direct-LaTeX closure
+
+After Critic review：
+
+`docs/design/059_RESEARCH_AUTHORING_C3_INTEGRATED_OWNER_CHAIN_RECOVERY_CRITIC_REVIEW_V0_1_2026-10-07.md`
+@ `e24ae290647456200c7f66c555caf61a56278d3c`
+
+the package now explicitly preserves the direct existing-LaTeX normal entry affected by making `latex-paper-authoring` explicit-only.
+
+Within `research-main`：
+
+~~~text
+existing LaTeX source
++ compile/debug/template repair/source hygiene/bibliography/build troubleshooting
+-> explicitly load latex-paper-authoring
+-> compile/debug allowed
+~~~
+
+This is distinct from：
+
+~~~text
+finalized Markdown/LaTeX render-only
+-> explicitly load render-chinese-math-pdf
+~~~
+
+and from：
+
+~~~text
+new/substantially revised manuscript
+-> Research Authoring first
+-> optional LaTeX source/package delegate
+-> renderer only after handoff when final PDF is requested
+~~~
+
+The corresponding real should-not-change regression is folded into DEV-07; no DEV-12 and no G5 are added.
 
 ## P2
 
