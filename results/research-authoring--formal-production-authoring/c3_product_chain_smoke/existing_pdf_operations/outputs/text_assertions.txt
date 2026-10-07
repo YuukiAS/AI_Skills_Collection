@@ -1,0 +1,6 @@
+4:less sensitive to scanner contrast. In this toy run, the clipped-window setting reached Dice 0.806,
+5:compared with 0.781 for the baseline.
+13:0.781
+14:0.806
+16:This is a small directional gain, not enough to claim method superiority. The useful conclusion is
+20:Rerun the same comparison with three seeds, keep the same train/validation split, and add a short

@@ -1,0 +1,7 @@
+已完成 handoff 生产交付，文件都在 `outputs/`：
+
+- [advisor_update.md](/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/results/research-authoring--formal-production-authoring/c3_product_chain_smoke/codex_handoff_consumer/project/outputs/advisor_update.md)
+- [advisor_update.pdf](/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/results/research-authoring--formal-production-authoring/c3_product_chain_smoke/codex_handoff_consumer/project/outputs/advisor_update.pdf)
+- [post_render_scientific_qa.md](/overflow/htzhu/mingcheng_new/AI_Skills_Collection-research-authoring--formal-production-authoring/results/research-authoring--formal-production-authoring/c3_product_chain_smoke/codex_handoff_consumer/project/outputs/post_render_scientific_qa.md)
+
+已用本地 `pandoc`/`pdflatex` 渲染 PDF，并用 `pdfinfo` 确认是一页；用 `pdftotext` 抽取最终 PDF 文本核对了 `0.781`、`0.806`、非结论性表述，以及三 seed rerun 和 boundary-touching failure review 的 next action。

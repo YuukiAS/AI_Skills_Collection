@@ -1,0 +1,6 @@
+Existing LaTeX Compile Smoke
+
+This existing LaTeX source should compile without changing Research Authoring source.
+∆Dice = 0.806 − 0.781 = 0.025.
+
+1

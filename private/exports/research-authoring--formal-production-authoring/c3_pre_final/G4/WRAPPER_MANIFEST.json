@@ -1,0 +1,419 @@
+{
+  "name": "research-authoring",
+  "version": "0.3.1",
+  "displayName": "Research Authoring",
+  "scope": "USER",
+  "discoverability": "PRIVATE",
+  "capabilities": [
+    "Skills"
+  ],
+  "skills_only": true,
+  "research_authoring_payload_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb",
+  "research_writing_version": "0.3",
+  "clear_writing_support_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb",
+  "clear_writing_support_skills": [
+    "writing-fidelity",
+    "chinese-prose",
+    "scientific-prose"
+  ],
+  "excluded": [
+    "renderer runtime",
+    "MCP",
+    "connector",
+    "database",
+    "watcher",
+    "state machine"
+  ],
+  "archive": {
+    "path": "research-authoring-wrapper-0.3.1-c3-9e88d7ed.tar.gz",
+    "bytes": 114449,
+    "sha256": "4783abc0b95c1a0775b9d801825d822819fa5426a8a38a418ad16759a028b388"
+  },
+  "files": [
+    {
+      "path": ".codex-plugin/plugin.json",
+      "bytes": 1990,
+      "sha256": "b69f806829d036f10c1d957eb4b10e0310c31ea1111d15da9d088720b485f5c1",
+      "source_locator": "generated wrapper metadata @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/litcite/SKILL.md",
+      "bytes": 4333,
+      "sha256": "3057407f5eb9d85c381ce82ad3b24e1b31c10fef9a298718368de26b1967198f",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/litcite/SKILL.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/litcite/_src/cite/assets/app-facing.svg",
+      "bytes": 374,
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/litcite/_src/cite/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/litcite/_src/cite/source.md",
+      "bytes": 33622,
+      "sha256": "207dc55c6200eb245b70ad73efdb6dcddefe0e6ee1ff24c33a0585f4b51a12d2",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/litcite/_src/cite/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/litcite/_src/core/assets/app-facing.svg",
+      "bytes": 505,
+      "sha256": "7d5a6f6a96d05c83a807ba47ae742730f51f9742320afa0e197438349ec99801",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/litcite/_src/core/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/litcite/_src/core/source.md",
+      "bytes": 9134,
+      "sha256": "a8bcd0c871336050ce3647ec8be0e3169deb1c840580a5c7eee84864cfdf25c5",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/litcite/_src/core/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/litcite/_src/lit/assets/app-facing.svg",
+      "bytes": 374,
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/litcite/_src/lit/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/litcite/_src/lit/source.md",
+      "bytes": 27091,
+      "sha256": "5dd686b339e646840653fe38c7a0e489bbba840963445d4e646e85a1d525e806",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/litcite/_src/lit/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/litcite/_src/lookup/assets/app-facing.svg",
+      "bytes": 374,
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/litcite/_src/lookup/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/litcite/_src/lookup/source.md",
+      "bytes": 17835,
+      "sha256": "48782de1a6a17e8f258e1cc8c7d69e3b95263a833e9aa7e8db6705c4f414c7af",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/litcite/_src/lookup/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/litcite/_src/verify/assets/app-facing.svg",
+      "bytes": 374,
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/litcite/_src/verify/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/litcite/_src/verify/source.md",
+      "bytes": 3269,
+      "sha256": "f11751f9aa6ed65e622a886dca59f3f9d049dc7dee58bf2c54682f143ada3a09",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/litcite/_src/verify/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/litcite/_src/zotero/assets/app-facing.svg",
+      "bytes": 374,
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/litcite/_src/zotero/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/litcite/_src/zotero/source.md",
+      "bytes": 4429,
+      "sha256": "dd088f72d12e0e6074d01a329beacc8a29d2fc4c35e741d269568736f744164a",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/litcite/_src/zotero/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/SKILL.md",
+      "bytes": 5858,
+      "sha256": "208c8e5abc1e16e14610dc84e61a4c33124aa0c75d1145671ce9eb55db055b0d",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/SKILL.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/core/assets/app-facing.svg",
+      "bytes": 505,
+      "sha256": "7d5a6f6a96d05c83a807ba47ae742730f51f9742320afa0e197438349ec99801",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/core/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/core/source.md",
+      "bytes": 9134,
+      "sha256": "a8bcd0c871336050ce3647ec8be0e3169deb1c840580a5c7eee84864cfdf25c5",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/core/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/flow/assets/app-facing.svg",
+      "bytes": 374,
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/flow/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/flow/evals/trigger_queries.json",
+      "bytes": 800,
+      "sha256": "135b45466c9497c4855af04ab6e8849d3be04e591adde175e3e8afff6938071f",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/flow/evals/trigger_queries.json @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/flow/source.md",
+      "bytes": 7205,
+      "sha256": "b31c3b08623b1f0ea0eddb210f87351aa9ca0b18e21c4e483286a20e946f4ab2",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/flow/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/latex/assets/app-facing.svg",
+      "bytes": 374,
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/latex/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/latex/source.md",
+      "bytes": 3699,
+      "sha256": "b70d9ee74e6fe129bdc218830ec38aae6bce37a91de365670fc4d6378dcc8206",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/latex/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/nature/assets/app-facing.svg",
+      "bytes": 374,
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/nature/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/nature/source.md",
+      "bytes": 3221,
+      "sha256": "0fcf2f0529d21e5025a05c869d75cc40773f42b69aeb4865caad22c7cabb4552",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/nature/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/review/assets/app-facing.svg",
+      "bytes": 374,
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/review/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/review/evals/trigger_queries.json",
+      "bytes": 688,
+      "sha256": "e922f7137a4c08abd846d5918dc5221a5c8b51202fc9c224ea97787188080d8f",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/review/evals/trigger_queries.json @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/review/source.md",
+      "bytes": 26827,
+      "sha256": "71ff8ba6dc9c13fb92c579e7b05365607d88844d08e932829aa08c2e9d9487a3",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/review/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/score/assets/app-facing.svg",
+      "bytes": 374,
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/score/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/score/source.md",
+      "bytes": 12644,
+      "sha256": "0bcf96112a77e11d1057928036ce7c00c20eff7d4045f67c43ca27988309e8b1",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/score/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/venue/assets/app-facing.svg",
+      "bytes": 374,
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/venue/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/venue/source.md",
+      "bytes": 22585,
+      "sha256": "11ec0afdca3aa200bcd7ad6b945d7f7a7e5ce82fe1d3daf5e46ed24d7feb3203",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/venue/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/write/assets/app-facing.svg",
+      "bytes": 374,
+      "sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/write/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/write/evals/trigger_queries.json",
+      "bytes": 768,
+      "sha256": "e6448fda14c38ef4a96dbc52e5e62a36dfd053da8f30cbab26e7bc56ee76d41e",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/write/evals/trigger_queries.json @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/paper/_src/write/source.md",
+      "bytes": 32916,
+      "sha256": "fe3dbd1a956d7b06258a5b3855151e554e6d60b674afcf7cb273163a43d70ec3",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/paper/_src/write/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/report/SKILL.md",
+      "bytes": 4120,
+      "sha256": "4ad8147f57214987e54e8ed80d1fef871c58d97a783b5e5a1c2d45f12d7f0a89",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/report/SKILL.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/report/_src/core/assets/app-facing.svg",
+      "bytes": 505,
+      "sha256": "7d5a6f6a96d05c83a807ba47ae742730f51f9742320afa0e197438349ec99801",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/report/_src/core/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/report/_src/core/source.md",
+      "bytes": 9134,
+      "sha256": "a8bcd0c871336050ce3647ec8be0e3169deb1c840580a5c7eee84864cfdf25c5",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/report/_src/core/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/report/_src/report/assets/app-facing.svg",
+      "bytes": 351,
+      "sha256": "b27a77b625ba2aa40b246aa0ba9858781991d8fe7aeb4474365d8379e5d9a6a4",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/report/_src/report/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/report/_src/report/references/group-meeting-advisor-reports.md",
+      "bytes": 5619,
+      "sha256": "4a3fdb87c7b364da727241e6dad21d1314b377e542603d425e4a409b98a7790d",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/report/_src/report/references/group-meeting-advisor-reports.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "research-writing-skills/report/_src/report/source.md",
+      "bytes": 10606,
+      "sha256": "8f95d5de3785c96360db7da6655e88c73eef13a32b202ceb22a561a4414ea01f",
+      "source_locator": "plugins/codex/plugins/research-writing/skills/report/_src/report/source.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "skills/chinese-prose/SKILL.md",
+      "bytes": 22753,
+      "sha256": "8358a5a3a881d77f7ef2fbfa8e6237cd7bef14e610554189c368b17f5ee138a2",
+      "source_locator": "plugins/codex/plugins/writing-style/skills/zh/SKILL.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "skills/chinese-prose/assets/app-facing.svg",
+      "bytes": 314,
+      "sha256": "190eae30252b2cab6622cef59b3c846314ea8ae4b4957cd1f44f252cd0c7c472",
+      "source_locator": "plugins/codex/plugins/writing-style/skills/zh/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "skills/chinese-prose/evals/trigger_queries.json",
+      "bytes": 1462,
+      "sha256": "768d82bdadf310a6a29dfa70f69842305781bfe2f7c49e66db02d9f3b7463e85",
+      "source_locator": "plugins/codex/plugins/writing-style/skills/zh/evals/trigger_queries.json @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "skills/chinese-prose/references/chinese-prose-checklist.md",
+      "bytes": 4668,
+      "sha256": "c0d23054b3f59981edf3f986aa2401aec4fb639b20098714b88b7b93b75290bb",
+      "source_locator": "plugins/codex/plugins/writing-style/skills/zh/references/chinese-prose-checklist.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "skills/chinese-prose/references/group-meeting-chinese-report-prompt.md",
+      "bytes": 4037,
+      "sha256": "c3471cde987b4c78140f4b5f7a19fffb1b840315486a75f425cbd5e6ab85d4fb",
+      "source_locator": "plugins/codex/plugins/writing-style/skills/zh/references/group-meeting-chinese-report-prompt.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "skills/chinese-prose/references/source-notes.md",
+      "bytes": 2253,
+      "sha256": "ff86232d7406a33fafa0bba6ebaaed2416c50ca029436a8983365802fba41d59",
+      "source_locator": "plugins/codex/plugins/writing-style/skills/zh/references/source-notes.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "skills/scientific-prose/SKILL.md",
+      "bytes": 7509,
+      "sha256": "2e5417d2ca461d15005de2c3e238820d6d05d58f834bab4b51fa78990f5dce04",
+      "source_locator": "plugins/codex/plugins/writing-style/skills/sci/SKILL.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "skills/scientific-prose/assets/app-facing.svg",
+      "bytes": 375,
+      "sha256": "69bd6a9842ff495754bcd47faf3a71956055797bafc5265f96a2cd39ce07c223",
+      "source_locator": "plugins/codex/plugins/writing-style/skills/sci/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "skills/scientific-prose/evals/trigger_queries.json",
+      "bytes": 697,
+      "sha256": "ed0579b262304a1a6ab0fac14f11f1b5a39c6229da25cd8a8a5d2ee3a27d934a",
+      "source_locator": "plugins/codex/plugins/writing-style/skills/sci/evals/trigger_queries.json @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "skills/scientific-prose/references/scientific-report-checklist.md",
+      "bytes": 3161,
+      "sha256": "df9ebdcbdb6d92ff48563d25e2ceb270ac4d5aa4b158575fca200f080e00cf55",
+      "source_locator": "plugins/codex/plugins/writing-style/skills/sci/references/scientific-report-checklist.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "skills/scientific-prose/references/source-notes.md",
+      "bytes": 1274,
+      "sha256": "407e0e7ec0123da7300a9f77f3af770addf1cebb5b4dee592df7928f4dd9045e",
+      "source_locator": "plugins/codex/plugins/writing-style/skills/sci/references/source-notes.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "skills/writing-fidelity/SKILL.md",
+      "bytes": 15115,
+      "sha256": "f012b730f95364d5093f16c8c433342121701c5cdcd8b5101a457c4a1e9160a4",
+      "source_locator": "plugins/codex/plugins/writing-style/skills/fidelity/SKILL.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "skills/writing-fidelity/assets/app-facing.svg",
+      "bytes": 405,
+      "sha256": "dc3d6ffae1d0e5dcfe02c9a9bc818f0c58e3301d3767ad81138798260c0b818f",
+      "source_locator": "plugins/codex/plugins/writing-style/skills/fidelity/assets/app-facing.svg @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "skills/writing-fidelity/evals/trigger_queries.json",
+      "bytes": 1076,
+      "sha256": "d1c728d8f6d2a6a6d0f8607f808401921134b1687978e403fa0e402fc04246e6",
+      "source_locator": "plugins/codex/plugins/writing-style/skills/fidelity/evals/trigger_queries.json @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    },
+    {
+      "path": "skills/writing-fidelity/references/failure-summary.md",
+      "bytes": 4293,
+      "sha256": "38e2224c3ec3fa3fecaa44591411a2380295e972927ff60efb83fc1910a46c56",
+      "source_locator": "plugins/codex/plugins/writing-style/skills/fidelity/references/failure-summary.md @ 9e88d7eda1749c09bac0ed97562909a90810ccdb",
+      "source_commit": "9e88d7eda1749c09bac0ed97562909a90810ccdb"
+    }
+  ]
+}
