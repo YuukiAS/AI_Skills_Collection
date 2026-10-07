@@ -482,3 +482,24 @@ STOP_PLANNER_DECISION_REQUIRED = YES
 READY_FOR_USER_REVIEW = NO
 READY_FOR_RELEASE = NO
 ```
+
+
+---
+
+# 20. Gate Q — deterministic / rendered-review ownership integrity
+
+Before accepting a validator/reviewer stack, confirm:
+
+```text
+OBJECTIVE_GATES_IN_DETERMINISTIC_VALIDATOR = YES
+SUBJECTIVE_COMPOSITION_GATES_IN_RENDER_REVIEW = YES
+ARBITRARY_DENSITY_THRESHOLDS_AS_HARD_GATES = NO
+KNOWN_BAD_OBJECTIVE_FAILURES_REJECTED = YES
+ZERO_SURVIVOR_ROOT_CAUSE_REVIEW = PASS | N/A
+```
+
+Page occupancy, bottom blank area and adjacent-page density may be logged as diagnostics. They may become hard gates only when explicitly calibrated to an accepted family baseline or when they protect an objective usability failure.
+
+If a bounded candidate search returns zero survivors because every candidate fails the same aesthetic-density threshold, acceptance stops and the Planner must repair the gate ownership before more production. Do not expand the parameter grid until this review is complete.
+
+A rendered Reviewer may still reject a deterministic PASS candidate for poor whitespace, rhythm, scanability or reader effort.

@@ -1126,3 +1126,75 @@ STAT5060 HW1 is the first mandatory full replay. STAT5060 Final Project must use
 8. **Accepted content, copy, components and visual regions are layered locks.**
 9. **A local repair cannot become a whole-document regeneration.**
 10. **The user is the final decision-maker, never routine QA.**
+
+
+---
+
+# 22. Deterministic versus aesthetic gate ownership
+
+A recurring failure mode is to encode subjective composition goals as rigid deterministic thresholds and then treat the absence of survivors as evidence that the document itself is impossible.
+
+Research Authoring must separate:
+
+## 22.1 Deterministic gates
+
+Use deterministic validation for facts that have one objectively correct result, for example:
+
+- exact visible copy;
+- dates, weights, points and filenames;
+- formulas and links;
+- page count when explicitly hard;
+- block presence/order;
+- semantic-block split/no-split when frozen;
+- protected path and hash checks;
+- clipping/overflow/missing glyph;
+- known-bad regression guards;
+- student/instructor leakage;
+- exact locked-region pixel parity where appropriate.
+
+These may fail closed.
+
+## 22.2 Render-review heuristics
+
+Use rendered review for visual judgments that do not have a universal numeric optimum, including:
+
+- whether whitespace looks intentional;
+- whether a short second page feels calm or wasteful;
+- whether adjacent pages feel balanced enough;
+- whether block spacing feels cramped or too loose;
+- whether one page or two pages reads better when both are structurally valid;
+- whether visual rhythm fits the document family.
+
+Metrics such as occupied-page fraction, bottom-blank fraction or adjacent-page density delta may be recorded as **diagnostics** and review triggers, but must not be hard acceptance gates unless one of the following holds:
+
+1. the threshold is calibrated against an explicitly accepted baseline for the same document family; or
+2. the threshold protects an objective failure state such as clipping, hidden content or unusable form space.
+
+Do not invent an arbitrary density target and then allow it to eliminate every otherwise valid candidate.
+
+## 22.3 Planner response when the search space has zero survivors
+
+If all candidates fail the same visual-density or whitespace threshold:
+
+1. stop;
+2. inspect whether the threshold belongs to deterministic validation or rendered review;
+3. inspect whether the structural archetype, rather than micro-spacing, is the real decision variable;
+4. repair the **authority / validator / reviewer ownership boundary** before expanding the candidate space;
+5. do not continue brute-force spacing search under a contradictory gate.
+
+The next search should operate over meaningful composition alternatives (for example, semantic breakpoint, top-aligned versus deliberately distributed rule blocks, compact versus airy but family-consistent spacing), not arbitrary micro-spacing alone.
+
+## 22.4 Visual proof selection
+
+For a small bounded document repair, prefer:
+
+```text
+frozen content
+-> small set of semantically valid composition archetypes
+-> deterministic rejection of objectively invalid candidates
+-> fresh rendered reviewer selection
+-> optional GPT Work comparison
+-> user sees only already acceptable finalists
+```
+
+This is the document analogue of presentation layout-archetype and golden-page proof. The renderer does not decide the semantic structure, while the deterministic validator does not substitute itself for aesthetic review.
