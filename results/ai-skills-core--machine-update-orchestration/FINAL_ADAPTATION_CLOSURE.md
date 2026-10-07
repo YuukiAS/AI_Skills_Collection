@@ -4,7 +4,7 @@ Task key: `ai-skills-core--machine-update-orchestration`
 
 Date: 2026-09-29
 
-State: `COMPLETE`
+State: `ALL_REQUIRED_CONSUMERS_PASS_PRE_CLOSE`
 
 ## Closure Truth
 
@@ -64,23 +64,6 @@ All listed records are under:
 
 `results/ai-skills-core--machine-update-orchestration/`
 
-## Final Repository and Tracking State
-
-- Product closure: `COMPLETE`.
-- Five required consumers: `PASS`.
-- Repository closure: `COMPLETE`.
-- Resolution commit: `573224edb9b81fc4f53dbc1ce9cc9b719483e8c8`.
-- Issue `#86`: `CLOSED`.
-- Project `AI Skills Maintenance`: `DONE`.
-- Project Area: `ai-skills-core`.
-- Overall result: `PASS`.
-
-README checked: no update required.
-
-```text
-PROJECT_STATUS=DONE
-ISSUE_86=CLOSED
-OVERALL_DONE=YES
-RESOLUTION_COMMIT=573224edb9b81fc4f53dbc1ce9cc9b719483e8c8
-VERSION_BUMP=NONE
-```
+Pre-close state remains `Issue #86 OPEN`, Project `ADAPTING`, and
+`overall_done=false` until the selective main resolution commit, Project
+mutation, Issue closure, and post-close audit are complete.
