@@ -509,6 +509,60 @@ Escalate to major if:
 - page job changes;
 - cross-page root cause appears.
 
+## 6.4 Mandatory historical-feedback resolution ledger
+
+For every major/recovery prebuild Critic, and for every later Critic round after Planner amendments, raw historical feedback must be audited **item by item**. A guard summary is not enough.
+
+The Critic must maintain one cumulative resolution ledger with one row per historical annotation/direct human decision. Each row must contain at least:
+
+```text
+feedback_id
+historical_artifact
+historical_physical_page
+historical_feedback_text
+historical_type_or_batch_type
+historical_lifecycle
+historical_guard_ids
+current_page_id
+current_page_number
+current_component_if_any
+current_evidence_locator
+resolution_state
+resolution_reason
+next_owner
+```
+
+When historical page numbers changed, the row must still retain the old physical page and map it to the current stable PageID/current page number. Do not compare “P12 then” to “P12 now” by number alone.
+
+Allowed resolution states are:
+
+- `UNRESOLVED` — active requirement is not satisfied by current Planner authority;
+- `PARTIAL` — some but not all of the historical requirement is represented;
+- `RESOLVED_IN_SPEC` — current copy/page-plan/guard fully addresses the semantic requirement;
+- `RENDER_PENDING` — specification contains the intended visual/geometric fix, but no current render exists yet; **this is not resolved**;
+- `RESOLVED_IN_RENDER` — exact current rendered artifact has been inspected and the visual/geometric requirement passes;
+- `RETIRED_BY_PAGE_CHANGE` — the historical failure object/page no longer exists because an explicit later human/Planner decision removed, merged, or replaced it; the row must name the replacement PageID or retired object and the authority that permits retirement;
+- `SUPERSEDED` — a later explicit human decision replaces the old requirement; name the superseding feedback ID;
+- `ROUTED_INSTRUCTOR_ONLY` / audience-equivalent — intentionally removed from audience artifact and preserved in the appropriate speaker/instructor artifact;
+- `SOURCE_GAP_UNVERIFIABLE` — a counted historical annotation exists but its original text/page cannot be recovered; never silently mark it resolved.
+
+Rules:
+
+1. `RENDER_PENDING` is an open state. A Critic cannot convert it to PASS before the new rendered artifact is actually reviewed.
+2. Page deletion/merge does not erase history. Use `RETIRED_BY_PAGE_CHANGE` only when explicit authority proves the old failure mode cannot recur in the new structure.
+3. `RESOLVED_IN_SPEC` closes semantic/copy/planning requirements, but does not close visual requirements that need rendering.
+4. Every `UNRESOLVED` or `PARTIAL` row must name the current PageID/page number, historical source/page, exact missing requirement, and the Planner file/field that owns the repair.
+5. Every `RESOLVED_IN_RENDER` row must name the exact candidate/version/render identity reviewed.
+6. Every Critic round updates the same cumulative ledger; it may change only rows whose evidence changed. Do not rebuild history from scratch and do not drop old rows.
+7. The Critic must report counts by resolution state and explicitly answer:
+   - how many historical items are fully closed;
+   - how many remain open;
+   - how many wait for render;
+   - how many were retired by page/structure change;
+   - how many are source gaps.
+8. Broad production is blocked while any required semantic/copy/planning item is `UNRESOLVED` or `PARTIAL`.
+9. Final release is blocked while any mandatory visual item remains `RENDER_PENDING`.
+
 ## 6.4 Authority precedence
 
 \`\`\`text
@@ -748,7 +802,11 @@ Critic must:
 7. check visible-copy boundary;
 8. check layout suitability;
 9. list relevant historical guards;
-10. audit the autonomous Codex Controller.
+10. audit the autonomous Codex Controller;
+11. update the mandatory historical-feedback resolution ledger **one feedback item at a time**;
+12. distinguish `UNRESOLVED`, `PARTIAL`, `RESOLVED_IN_SPEC`, `RENDER_PENDING`, `RESOLVED_IN_RENDER`, `RETIRED_BY_PAGE_CHANGE`, `SUPERSEDED`, audience-routed items, and source gaps;
+13. for every open item, report historical source/page -> current PageID/current page number -> exact missing requirement -> Planner owner;
+14. refuse to count render-dependent historical feedback as resolved before the exact new render is inspected.
 
 If any planned page is REVISE, broad production stays blocked.
 
