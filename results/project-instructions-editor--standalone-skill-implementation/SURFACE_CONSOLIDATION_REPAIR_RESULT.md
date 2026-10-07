@@ -5,7 +5,7 @@ Date: 2026-10-07
 ## Final Source
 
 ```text
-FINAL_SOURCE_COMMIT=4eb3c0422c4fe268a0039416574c26d471725eee
+FINAL_SOURCE_COMMIT=9cdbe8ed712caf3a3a90592cd09c61ac146d9b02
 PIE_SKILL_VERSION=0.1
 STRUCTURAL_CONSOLIDATION_REPAIR=YES
 ```
@@ -31,6 +31,10 @@ translation tables, or fixed section templates.
 - Normal user output should not expose internal preservation labels, semantic
   maps, disposition tables, invariant checklists, or coverage/redundancy review
   unless the user asks for audit evidence.
+- Full-replacement output no longer requires printing internal edit-mode labels;
+  ordinary output may explain in natural language that it is based on the
+  existing setting, starts from an empty setting, or follows an explicit reset
+  only when that matters for user understanding or safety.
 
 ## Focused Tests
 
@@ -48,6 +52,11 @@ Focused fixture:
 ```text
 tests/fixtures/project_instructions_editor/surface_consolidation_repair.json
 ```
+
+These are static/contract tests and repository validation checks. They do not
+constitute a saved real-model normal-entry replay artifact or behavior PASS.
+True normal-entry behavior validation remains the next Server+VPS ChatGPT Web
+fresh-thread acceptance step.
 
 ## Broad Validation
 
@@ -80,14 +89,14 @@ These failures are not repaired in this bounded PIE standalone Skill task.
 WRAPPER_CANDIDATE=YES
 WRAPPER_CANDIDATE_VERSION=0.2.3
 WRAPPER_PACKAGE=private/exports/project-instructions-editor--0.1-closure/project-instructions-editor-v0.1-wrapper-0.2.3-candidate.zip
-WRAPPER_PACKAGE_SHA256=52d37676402c9b42bfffdee28d2c66dd17cac38dfaf25b48d5ab38d666f2b590
+WRAPPER_PACKAGE_SHA256=8073caeb01a0d3ad2501e3a4d6b842a9a5aa4010b951de4d6713469c9709dd1a
 WRAPPER_MANIFEST=private/exports/project-instructions-editor--0.1-closure/project-instructions-editor-v0.1-wrapper-0.2.3-candidate.MANIFEST.json
-WRAPPER_MANIFEST_SHA256=68bc88cfe0b267831c7fa3397140966548ac842b35a01cbce5bfad5308ff9d5b
-PIE_SKILL_TREE_GIT_SHA=76f71354c6168d95698ec550e55d31268c5e1052
+WRAPPER_MANIFEST_SHA256=df096e455a566f103e97d70db4e9284e26e97a06e875f3ddf91e6ab8325af6e3
+PIE_SKILL_TREE_GIT_SHA=64b8682ebfa2d7e9bf584c563ac6bef97c9d3ffc
 ```
 
 The archive was generated from exact source commit
-`4eb3c0422c4fe268a0039416574c26d471725eee`, not from a mutable worktree. It is
+`9cdbe8ed712caf3a3a90592cd09c61ac146d9b02`, not from a mutable worktree. It is
 a ChatGPT Web `skills-only` wrapper candidate package; it does not mutate the
 live ChatGPT wrapper by itself.
 
