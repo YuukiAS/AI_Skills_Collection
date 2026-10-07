@@ -307,3 +307,59 @@ HEADING_FIRST_BODY_ATOMICITY = PASS
 QUESTION_HEADING_BODY_GAP_CONSISTENCY = PASS
 LOCAL_HEADING_SPACING_HACKS = ZERO
 ```
+
+
+## 13. Assessment question-flow rule
+
+For Homework and exam-style handouts, a **major question is not automatically an atomic page block**.
+
+Default classification:
+
+```text
+QUESTION_HEADING + opening context = ATOMIC
+EACH_SUBPART_LABEL + first substantive line = ATOMIC
+MAJOR_QUESTION_BODY = CONTINUABLE
+BETWEEN_SUBPARTS = PREFERRED_LEGAL_BREAKPOINT
+BETWEEN_PARAGRAPHS_INSIDE_LONG_SUBPART = SECONDARY_LEGAL_BREAKPOINT
+```
+
+Do not impose layout rules such as:
+
+- one question per page;
+- two questions per page;
+- start every major question at the top of a page;
+- keep an entire multi-subpart question together
+
+unless there is a reader/pedagogical reason and the resulting composition has been rendered and accepted.
+
+When consecutive questions are short, paginate the **whole question sequence** rather than pairing questions with pages. The preferred sequence is:
+
+```text
+frozen copy
+-> natural continuous flow
+-> semantic orphan/continuation protection
+-> whole-sequence rendered review
+-> only then bounded rhythm tuning
+```
+
+A sparse lower half of a page is a diagnostic trigger to inspect:
+
+1. explicit hard breaks;
+2. stale `Needspace` / keep-together guards;
+3. unnecessary whole-question atomicity;
+4. fixed page/question grouping.
+
+Do not solve sparse pages by adding filler prose, decoration, oversized local gaps, or arbitrary font/margin changes.
+
+If a page break occurs between subparts of the same major question, the next page may begin with the next labelled subpart when the previous subpart ended cleanly and the continuation is unambiguous. If ambiguity remains, use a restrained continuation treatment rather than moving an otherwise valid full question to a new page.
+
+Required:
+
+```text
+FIXED_QUESTION_PER_PAGE_RULE = NONE | EXPLICITLY_JUSTIFIED
+MAJOR_QUESTION_ATOMICITY = CONTINUABLE_BY_DEFAULT
+LEGAL_SUBPART_BREAKPOINTS = DEFINED
+WHOLE_SEQUENCE_PAGE_FLOW_REVIEW = PASS
+SPARSE_PAGE_ROOT_CAUSE = EXPLAINED
+FILLER_ADDED_TO_BALANCE_PAGES = NO
+```
