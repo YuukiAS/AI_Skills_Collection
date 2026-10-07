@@ -226,6 +226,29 @@ candidate_action:
 - Keep low-level delivery implementation in workflow/artifact infrastructure. Research Authoring owns the requirement that a requested finished research document reaches the user as an actual artifact.
 promotion_gate: replay on one formal research-report PDF and one editable/office-style research deliverable; verify that the user can open/save the finished artifact directly without needing a second message asking where the file is.
 
+
+### Student-facing assessment documents need a minimum-sufficient information budget
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 Project Guide annotated-PDF revision, 2026-10-07
+evidence: user annotated the two-page Project Guide candidate with 14 Highlights and 6 StrikeOuts after prior Research Authoring review; repeated feedback removed duplicated deadline language, extra page-policy detail, package-engineering explanation, universal model-selection explanation, redundant AI-policy prose, and unrelated privacy/policy detail while preserving the actual statistical task.
+target layer: student-assessment planning / source-to-reader filtering / annotation handling / QA
+problem:
+- Student-facing assessment artifacts repeatedly accumulate true but unnecessary information because authoring optimizes for completeness of the source bundle instead of minimum information needed for correct student action.
+- The same rule is often repeated in metadata, a date table, and later prose (for example a hard deadline), increasing cognitive load without changing student action.
+- When a user marks text with StrikeOut, later authoring can mistakenly “repair” or paraphrase it instead of treating the deletion itself as a binding reader-facing decision.
+- Detailed implementation/package instructions, grading rationale, edge cases, and internal reasoning can leak into a student Guide merely because they are useful to instructors or QA.
+candidate_action:
+- Add an explicit **minimum-sufficient student information budget** to student-assessment authoring: include a fact only when it changes what the student must do, submit, understand, or avoid.
+- For each student-visible sentence, ask: **If this sentence is removed, can the intended student still complete the assessment correctly?** If yes, default to omission unless the sentence materially improves ambiguity, fairness, or safety.
+- Give each administrative rule one canonical visible home. Do not repeat the same due date, hard-deadline consequence, page limit, file requirement, or policy in metadata, tables, and prose unless the second occurrence serves a genuinely different action.
+- Treat raw PDF annotations as authoritative revision input. **StrikeOut means delete, not paraphrase.** Highlight comments constrain the selected region. A deleted sentence cannot return elsewhere under new wording without an explicit new human decision.
+- Distinguish **statistical task completeness** from **administrative completeness**. Preserve source-emphasized research question, model formulation, statistical inference, analysis, findings, conclusions, references, and required deliverables; aggressively compress implementation and process detail.
+- Do not make student-facing documents explain internal rubric logic, QA mechanics, package engineering, or every exception merely because these are needed by graders or executors.
+- Add a deterministic duplication check for high-salience rules such as due date, hard deadline, page limit, file count, and named required statements. The intended occurrence count should be frozen by the Planner rather than inferred by the renderer.
+- In annotated-document revisions, require a compact annotation ledger with counts by annotation type and an explicit disposition for every Highlight and StrikeOut before rendering.
+promotion_gate: replay on one additional annotated Homework/Project revision and one new student-facing assessment artifact; verify that student action remains complete while duplicate/irrelevant administrative prose decreases and no StrikeOut content recurs.
+
 ## Recently promoted / established
 
 - Advisor-facing reports organize around scientific question and decision, not run/debug chronology.
