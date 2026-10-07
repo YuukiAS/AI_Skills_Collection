@@ -55,12 +55,8 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
             "greenfield",
             "explicit reset",
             "Protected Absence",
-            "Runtime Kernel",
-            "Allowed Durable Meaning Set",
-            "semantic spine",
-            "No-Op And Degradation",
-            "semantic mutation radius",
-            "surface reconstruction radius",
+            "Simple Editing Core",
+            "No-op",
             "FINAL_ROUTE=`SIMPLE_FORMAL_CORE`",
             "ADVANCED_INDEPENDENT_MULTI_CALL_FINALIZATION=`UNSUPPORTED`",
             "CROSS_TURN_FINAL_READER_LAYER_GUARANTEE=`UNSUPPORTED_IN_PIE_0_1`",
@@ -94,18 +90,18 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
     def test_reference_preserves_editor_semantics_without_reader_layer_claim(self) -> None:
         skill_body = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
         contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
+        combined = contract + "\n" + skill_body
 
         required = [
             "live baseline",
-            "protected absence",
+            "Protected Absence",
             "lookup-before-action",
             "Semantic ownership alone is not enough",
-            "durable semantic map",
+            "durable user-facing rule groups",
             "direct Project-resident rule",
             "short locator bridge",
-            "source-only",
+            "canonical-source only",
             "task/thread only",
-            "semantic coverage and redundancy review",
             "mandatory versus optional",
             "authorization boundaries",
             "evidence strength",
@@ -116,7 +112,7 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
             "budget",
         ]
         for phrase in required:
-            self.assertIn(phrase, contract)
+            self.assertIn(phrase, combined)
 
         protected_absence_contract = [
             "omit both the deleted rule and its deletion history",
@@ -136,7 +132,7 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
             "cross-turn final reader-layer guarantee",
         ]
         for phrase in unsupported_runtime_named:
-            self.assertIn(phrase, contract + skill_body)
+            self.assertIn(phrase, combined)
 
         removed_claims = [
             "finalize_project_instructions",
@@ -150,9 +146,47 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
             "Latin-token score",
             "translation dictionary",
         ]
-        combined = contract + skill_body
         for phrase in removed_claims:
             self.assertNotIn(phrase, combined)
+
+    def test_known_good_core_removed_recent_runtime_machinery(self) -> None:
+        skill_body = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+        contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
+        combined = skill_body + "\n" + contract
+
+        for removed_phrase in [
+            "Runtime Kernel",
+            "K1",
+            "K2",
+            "K3",
+            "K4",
+            "K5",
+            "K6",
+            "K7",
+            "Allowed Durable Meaning Set",
+            "bidirectional reconciliation",
+            "coverage direction",
+            "provenance direction",
+            "semantic mutation radius",
+            "surface reconstruction radius",
+            "two-level semantic spine",
+        ]:
+            self.assertNotIn(removed_phrase, combined)
+
+        for retained_behavior in [
+            "identify durable user-facing rule groups",
+            "consolidate duplicate rules",
+            "move volatile detail behind stable source bridges",
+            "preserve semantic force and exact identities",
+            "source headings",
+            "not protected by default",
+            "same normal trigger and user consequence",
+            "A historical-only broad rule",
+            "stays absent",
+        ]:
+            self.assertIn(retained_behavior, combined)
+
+        self.assertLess(len(skill_body.encode("utf-8")), 12000)
 
     def test_surface_consolidation_repair_contract_is_structural_not_mechanical(self) -> None:
         skill_body = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
@@ -161,13 +195,10 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
         fixture = json.loads((FIXTURE_DIR / "surface_consolidation_repair.json").read_text(encoding="utf-8"))
 
         for phrase in [
-            "long-lived semantic map",
-            "same practical trigger and user consequence",
-            "Allowed Durable Meaning Set",
+            "durable user-facing rule groups",
+            "same normal trigger and user consequence",
             "current semantic support",
-            "semantic coverage and redundancy review",
             "source wrapper wording",
-            "descriptive prose",
             "does not guarantee that all future ChatGPT turns",
             "should not expose internal labels",
         ]:
@@ -189,8 +220,6 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
         self.assertTrue(fixture["expected_final_candidate_properties"]["has_no_project_resident_deletion_tombstone"])
         self.assertTrue(fixture["expected_final_candidate_properties"]["does_not_expose_internal_meaning_map_by_default"])
 
-        for non_goal in fixture["non_goals"]:
-            self.assertIn(non_goal, fixture["non_goals"])
         for prohibited_active_mechanism in [
             "Use a Latin-token score",
             "Use an English ratio",
@@ -199,96 +228,75 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
         ]:
             self.assertNotIn(prohibited_active_mechanism, combined)
 
-    def test_semantic_spine_repair_contract_is_structural_and_generic(self) -> None:
+    def test_generic_known_good_structure_regression_is_not_domain_specific(self) -> None:
         skill_body = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
         contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
         combined = skill_body + "\n" + contract
-        fixture = json.loads((FIXTURE_DIR / "semantic_spine_repair.json").read_text(encoding="utf-8"))
+        fixture = json.loads((FIXTURE_DIR / "known_good_generic_structure_regression.json").read_text(encoding="utf-8"))
 
         for phrase in [
-            "two-level semantic spine",
-            "atomic durable meanings",
-            "semantic families",
-            "governed actor or surface",
-            "trigger or phase",
-            "failure consequence",
-            "Structure is not a protected semantic invariant by default",
-            "heading count",
-            "source grouping",
-            "scope dominance",
-            "authorization, safety, privacy",
-            "narrower special-case rule",
-            "Dynamic-Set Abstraction",
-            "currently supported items defined by the",
-            "same trigger and user consequence",
-            "preferred vocabulary",
-            "semantic-spine reconciliation",
+            "source headings",
+            "old section order",
+            "not protected by default",
+            "same normal trigger and user consequence",
+            "stable canonical source owns the current list",
+            "Apply this globally",
+            "A narrower special-case rule",
+            "must not swallow a broader live boundary",
+            "historical-only broad rule",
+            "remains absent",
         ]:
             self.assertIn(phrase, combined)
 
-        expectations = fixture["semantic_spine_expectations"]
-        self.assertIn("governed actor/surface", expectations["family_construction"]["clusters_by"])
         self.assertTrue(fixture["expected_final_candidate_properties"]["keeps_broad_authorization_boundary"])
-        self.assertTrue(fixture["expected_final_candidate_properties"]["does_not_replace_broad_boundary_with_narrow_special_case"])
         self.assertTrue(fixture["expected_final_candidate_properties"]["abstracts_mutable_source_owned_set"])
         self.assertTrue(fixture["expected_final_candidate_properties"]["merges_overlapping_normal_delivery_rules"])
         self.assertTrue(fixture["expected_final_candidate_properties"]["keeps_distinct_closure_trigger_when_needed"])
         self.assertTrue(fixture["expected_final_candidate_properties"]["has_no_project_resident_deletion_tombstone"])
-
-        fixture_text = json.dumps(fixture, ensure_ascii=False)
-        for project_specific_term in ["Server+VPS", "Android", "Windows", "macOS", "iPadOS"]:
-            self.assertNotIn(project_specific_term, fixture_text)
-        self.assertNotIn("nine-section", combined)
-        for prohibited_mechanism in ["Latin-token scan", "blacklist", "translation table", "English ratio"]:
-            self.assertIn(prohibited_mechanism, fixture_text)
-        self.assertNotIn("fixed nine-section template", combined)
-
-    def test_runtime_kernel_refactor_contract_is_closed_world_and_bidirectional(self) -> None:
-        skill_body = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
-        contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
-        combined = skill_body + "\n" + contract
-        fixture = json.loads((FIXTURE_DIR / "runtime_kernel_refactor.json").read_text(encoding="utf-8"))
-
-        for phrase in [
-            "Runtime Kernel",
-            "K1",
-            "K2",
-            "K3",
-            "K4",
-            "K5",
-            "K6",
-            "K7",
-            "Allowed Durable Meaning Set",
-            "semantic mutation radius",
-            "surface reconstruction radius",
-            "bidirectional reconciliation",
-            "coverage direction",
-            "provenance direction",
-            "dynamic-set abstraction",
-            "protected absence wins",
-        ]:
-            self.assertIn(phrase, combined)
-
-        cases = fixture["cases"]
-        self.assertIn("A_semantic_bounded_surface_global", cases)
-        self.assertIn("B_closed_world_no_opportunistic_addition", cases)
-        self.assertIn("C_global_dynamic_set_abstraction", cases)
-        self.assertIn("D_scope_dominance_and_protected_absence", cases)
-        self.assertIn("Old heading count and source order are not protected.", cases["A_semantic_bounded_surface_global"]["expected"])
-        self.assertIn(
-            "The same mutable set does not survive as an enumeration elsewhere.",
-            cases["C_global_dynamic_set_abstraction"]["expected"],
-        )
-        self.assertIn(
-            "The historical-only broad rule is not resurrected; protected absence wins unless current user or authorized source sync re-adopts it.",
-            cases["D_scope_dominance_and_protected_absence"]["historical_broad_live_narrow"]["expected"],
-        )
+        self.assertTrue(fixture["expected_final_candidate_properties"]["does_not_create_unsupported_durable_rules"])
 
         fixture_text = json.dumps(fixture, ensure_ascii=False)
         for project_specific_term in ["Server+VPS", "Android", "Windows", "macOS", "iPadOS", "TOTP"]:
             self.assertNotIn(project_specific_term, fixture_text)
-        for prohibited_mechanism in ["Latin-token scan", "language ratio", "blacklist", "translation dictionary"]:
-            self.assertIn(prohibited_mechanism, fixture_text)
+            self.assertNotIn(project_specific_term, combined)
+        self.assertNotIn("always nine sections", combined)
+        self.assertNotIn("fixed nine-section template", combined)
+
+    def test_server_vps_positive_fixture_captures_known_good_without_generic_template(self) -> None:
+        skill_body = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+        contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
+        combined = skill_body + "\n" + contract
+        fixture = json.loads((FIXTURE_DIR / "server_vps_known_good_positive_regression.json").read_text(encoding="utf-8"))
+
+        self.assertEqual(
+            fixture["positive_reference_families"],
+            [
+                "权威归属",
+                "面向用户的回答",
+                "代理客户端与交付",
+                "客户端实时网络状态与用户操作",
+                "自动验证优先",
+                "权威来源与生产修改",
+                "保守判定与冗余",
+                "完整性与敏感信息",
+                "生产任务结束时",
+            ],
+        )
+        self.assertTrue(fixture["fixture_scope"]["domain_specific_positive_regression"])
+        self.assertFalse(fixture["fixture_scope"]["generic_template"])
+
+        anti_regressions = fixture["anti_regressions"]
+        for expected in [
+            "no_overlapping_normal_response_sections",
+            "no_source_shaped_12_or_13_headings",
+            "no_current_device_or_platform_inventory_as_durable_truth",
+            "no_repeated_canonical_lookup_clauses",
+            "no_unsupported_history_or_best_practice_security_rules",
+        ]:
+            self.assertIn(expected, anti_regressions)
+
+        self.assertNotIn("Server+VPS", combined)
+        self.assertNotIn("nine sections", combined)
 
     def test_default_output_contract_hides_internal_edit_mode_labels(self) -> None:
         skill_body = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")

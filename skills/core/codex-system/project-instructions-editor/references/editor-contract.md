@@ -35,7 +35,7 @@ Use only when the current user clearly authorizes discarding the old Project set
 
 `targeted history` means reading only decision history relevant to the current edit: acceptance, rejection, explicit deletion, repeated correction, durable authority, or temporary status. Missing history should produce honest uncertainty, not broader search by default.
 
-`canonical source` is needed when the requested edit depends on current repository, document, workflow, policy, version, task, or locator facts. If the source is unavailable, block only the claim that depends on it unless that claim governs the whole replacement.
+`canonical source` is needed when the requested edit depends on current repository, document, workflow, policy, version, task, inventory, or locator facts. If the source is unavailable, block only the claim that depends on it unless that claim governs the whole replacement.
 
 `budget` includes current length, candidate length, delta, hard product limit when known, planning budget, remaining margin, and requested headroom. Do not turn a historical planning budget such as 8000 characters into a universal product rule.
 
@@ -49,7 +49,7 @@ For every affected durable rule, decide both:
 Allowed dispositions for the current edit are:
 
 1. direct Project-resident rule;
-2. short Project-resident bridge or trigger plus canonical source locator;
+2. short locator bridge or trigger plus canonical source locator;
 3. canonical-source only;
 4. task/thread only;
 5. another verified effective layer;
@@ -57,190 +57,36 @@ Allowed dispositions for the current edit are:
 
 Semantic ownership alone is not enough to remove a rule from Project settings. Rules about routing, authority, authorization, safety, privacy, distribution, evidence, completion, output contract, and lookup-before-action often need a direct Project subset or bridge even when their details live elsewhere.
 
-## Durable Semantic Spine
+## Known-Good Candidate Construction
 
-For complex edits, compression, synchronization, or full replacement, first form
-a durable semantic map and cluster it into a semantic spine. The spine is internal reasoning, not normal
-user-facing output. It starts with atomic durable meanings from live setting
-clauses, current-request changes, targeted history, and canonical-source facts,
-then clusters them into semantic families before drafting.
-
-This preserves the earlier long-lived semantic map discipline and adds a second
-family-clustering layer before final wording.
-Together those layers form the two-level semantic spine: atomic durable meanings
-first, semantic families second, final wording last.
-
-The spine prevents common failures:
-
-- copying source/history surface labels directly into the Project setting;
-- letting several near-duplicate clauses survive because they came from
-  different sources.
-- keeping a mutable source-owned list as durable Project text.
-- narrowing a broad boundary because a narrower special case overlaps it.
-
-A semantic family is defined by:
-
-- governed actor or surface;
-- trigger or phase;
-- intended behavior or prohibition;
-- owner or authority;
-- failure consequence.
-
-Draft from semantic families, not from source headings, source order, old section
-structure, or repository document layout.
-
-Structure is not a protected semantic invariant by default. Heading names,
-heading count, section order, duplicated rationale, source labels, and source
-grouping may be merged, renamed, or reordered during preservation-sensitive
-cleanup when the protected meanings remain covered.
-
-Each meaning receives one current disposition:
-
-1. direct Project-resident rule;
-2. short locator bridge or trigger plus canonical source locator;
-3. source-only;
-4. task/thread only;
-5. another verified effective layer;
-6. omit or no change.
-
-Disposition is semantic, not phrase matching. It depends on current support,
-effective enforcement, durability, lookup-before-action needs, budget, and
-should-not-change semantics.
-
-### Semantic Mutation Radius And Surface Reconstruction Radius
-
-Bounded edit controls the semantic mutation radius: which long-lived meanings
-may change. It does not automatically constrain the surface reconstruction
-radius. A complete replacement may be globally regrouped, renamed, reordered,
-and redrafted when the old structure is duplicated, source-shaped, or otherwise
-defective, provided the allowed durable meanings remain unchanged except for
-the current authorized edit.
-
-Do not use the live setting as a paragraph-by-paragraph scaffold merely because
-the semantic edit is small. Use it as semantic evidence:
+The known-good editing behavior is intentionally simple:
 
 ```text
-live setting -> allowed durable meanings -> normalized families
--> fresh candidate -> coverage/provenance reconciliation
+live setting + current request + necessary current source facts
+-> identify durable user-facing rule groups
+-> consolidate duplicates
+-> move volatile detail behind stable source bridges
+-> preserve current semantic force
+-> emit clean replacement
 ```
 
-### Allowed Durable Meaning Set
+Use the live setting as semantic evidence, not as a paragraph-by-paragraph scaffold. Source headings, source labels, old section names, source order, duplicated rationale, and document grouping are not protected by default. They may be merged, renamed, reordered, or omitted when the durable meanings remain covered.
 
-For preservation-sensitive review, freeze a closed-world Allowed Durable
-Meaning Set before drafting. It may contain only:
+Group rules by governed actor or surface, trigger or phase, owner or authority, intended behavior or prohibition, and user consequence. Merge clauses with the same normal trigger and user consequence into one primary durable home. Keep a distinct family only when the trigger, governed surface, owner, or consequence is materially different.
 
-1. durable meanings already present in the live setting;
-2. explicit additions, deletions, or corrections in the current user request;
-3. current canonical-source facts needed to resolve an in-scope owner, locator,
-   dynamic fact, or explicitly requested synchronization;
-4. the minimum Project-resident bridge needed so future work performs a required
-   lookup before action.
+Project instructions should grow only when growth corresponds to a real long-lived semantic change or repair. A new or materially changed Project-resident rule, exception, concrete example, enumeration, or current-member list needs current semantic support from at least one of:
 
-The following cannot independently add a durable rule, exception, concrete
-example, enumeration, or hardening clause:
+- the live Project setting;
+- the current request;
+- a current canonical authority in the requested synchronization scope;
+- explicit current re-adoption by the user;
+- a necessary lookup-before-action bridge.
 
-- old candidates;
-- historical generated settings;
-- memory;
-- prior incidents;
-- model best practice;
-- source examples outside the current synchronization need;
-- adjacent topics that appeared in past Project work.
+Do not create durable rules whose only support is stale history, old generated candidates, rejected/deleted history, prior incidents, model best practice, source wrapper wording, task-local commentary, review labels, or incidental source examples. Keep the underlying deleted/rejected rule absent and keep its deletion history out of the final setting unless the current user explicitly asks to preserve that history or prohibition as durable Project state.
 
-History may protect a deletion/rejection, clarify the force/status of a live
-rule, or confirm a current user decision. Historical-only absent content remains
-absent unless the current user re-adopts it or the current authorized source
-synchronization brings it into scope.
+Concrete examples are semantic content. Adding an example list can narrow, broaden, or fossilize a rule, so each example needs the same current support as a durable rule.
 
-Concrete examples are semantic content. Adding an example list can narrow,
-broaden, or fossilize a rule, so each example needs the same current support as
-a durable rule. If an example cannot be mapped to the Allowed Durable Meaning
-Set, omit it.
-
-### Runtime Kernel Details
-
-K1 freezes the Allowed Durable Meaning Set and blocks drafting until the set is
-closed.
-
-K2 normalizes each meaning into the minimal fields needed for rendering:
-governed surface, trigger, behavior/prohibition, authority, breadth, volatility,
-failure consequence, exact identifiers, and disposition.
-
-K3 clusters normalized meanings into semantic families. Families are based on
-practical trigger and user consequence, not source headings or old section
-structure.
-
-K4 applies global transforms before prose: duplicate merge, scope dominance,
-dynamic-set abstraction, volatile-detail relocation, protected absence, and
-exact-identity preservation. A transform fails if the stale equivalent survives
-elsewhere in the candidate.
-
-K5 renders a fresh candidate from semantic families. For Chinese-facing
-settings, ordinary concepts are expressed naturally in Chinese at drafting time;
-exact machine/formal identifiers remain exact. This is not a Latin-token scan,
-blacklist, translation table, percentage score, or fixed template.
-
-K6 performs bidirectional reconciliation:
-
-- coverage direction: each allowed meaning that must remain Project-effective is
-  represented once, safely bridged, or explicitly removed by the current user;
-- provenance direction: every durable rule, exception, concrete example,
-  enumeration, or requirement in the candidate maps back to one allowed meaning.
-
-Unsupported helpful additions are removed, not retained as nice-to-have
-hardening.
-
-K7 delivers only the user-facing conclusion, edit/replacement, and a few key
-reasons unless formal audit evidence is requested.
-
-### Scope Dominance
-
-When two currently allowed rules overlap, compare their semantic scope. A broad
-authorization, safety, privacy, evidence, completion, or fail-closed boundary
-cannot be removed merely because a narrower special-case rule survives.
-
-Retain the broad boundary once at the broadest correct home. Retain a narrower
-rule only when it adds action-specific detail that the broad rule does not
-provide. A client-specific, workflow-specific, or tool-specific authorization
-rule does not replace a general rule that governs more production objects,
-actions, or resources.
-
-Scope dominance operates only inside the Allowed Durable Meaning Set:
-
-- live broad rule + live narrow rule -> broad survives;
-- live narrow rule + historical-only broad rule -> protected absence wins;
-- current user re-adopts broad rule -> broad becomes allowed;
-- current authorized canonical synchronization supports broad rule -> evaluate
-  it within that synchronization scope.
-
-### Dynamic-Set Abstraction
-
-When a client, platform, device, route, inventory, supported-target, or other
-set has mutable membership and a stable canonical source owns the current list,
-Project instructions should preserve coverage and lookup, not the current
-members.
-
-Use a short bridge such as "all currently supported items defined by the
-canonical source" plus the locator and lookup-before-action trigger. Keep a
-concrete enumeration only when the member set itself is a durable user
-constraint, a formal finite machine/protocol/state set, or needed before lookup
-for routing, authorization, safety, or exact identity.
-
-Apply this globally. If one section says to use the canonical source for the
-current supported set, another section may not preserve the same set's current
-members as durable Project state. The abstraction is semantic, not literal
-platform-name matching.
-
-### Trigger and Consequence Merge
-
-Clauses with the same normal trigger and the same user consequence should have
-one primary durable home even when source files split them across sections.
-Keep a distinct family only when the trigger, governed surface, owner, or
-failure consequence is materially different. A formal production-closure report,
-for example, may remain separate from ordinary response behavior because its
-trigger is different.
-
-## Locator Substitution
+## Locator Substitution And Volatile Detail
 
 Move detail out of Project instructions only when all are true:
 
@@ -252,6 +98,29 @@ Move detail out of Project instructions only when all are true:
 - the external source is genuinely the current semantic owner.
 
 The point is maintainable recovery, not pushing all text out of Project instructions.
+
+When a client, platform, device, route, inventory, supported-target, or other set has mutable membership and a stable canonical source owns the current list, Project instructions should preserve coverage and lookup, not current members. Use a short bridge such as "all currently supported items defined by the canonical source" plus the locator and lookup-before-action trigger.
+
+Apply this globally. If one section says to use the canonical source for the current supported set, another section may not preserve the same set's current members as durable Project state. The abstraction is semantic, not literal platform-name matching.
+
+## Scope, Bounded Edit, And Full Rewrite
+
+Bounded edit is the default. It limits the semantic change, not necessarily the surface reconstruction. If the old structure is duplicated, source-shaped, or overloaded, a complete replacement may globally regroup, rename, reorder, and redraft while keeping unrelated valid semantics intact.
+
+Use full rewrite or restructure only when at least one real condition holds:
+
+- the user explicitly requests and authorizes it;
+- local edits cannot resolve a cross-cutting contradiction;
+- copied workflow detail has polluted the setting broadly;
+- multiple scopes are materially imbalanced;
+- required durable semantics cannot fit the budget through local deduplication and locator substitution;
+- source ownership or locator use has systematically drifted or conflicted.
+
+"It would be cleaner" or "the recent topic is important" is not enough. Preservation-sensitive full rewrite also requires a live baseline and enough current facts to preserve affected semantics.
+
+When two currently supported rules overlap, a broad authorization, safety, privacy, evidence, completion, or fail-closed boundary cannot be removed merely because a narrower special-case rule survives. Retain the broad boundary once at the broadest correct home. Retain a narrower rule only when it adds action-specific detail that the broad rule does not provide.
+
+This broad-rule preservation applies to current live or currently authorized meanings. A historical-only broad rule that is absent from the live setting remains absent unless the current user re-adopts it or current authorized source synchronization brings it into scope.
 
 ## Protected Absence
 
@@ -265,65 +134,6 @@ Reintroduce it only when:
 Protected absence does not create a permanent tombstone registry. It is a conservative rule for the current edit.
 
 If a deleted or rejected rule is already absent from the live Project setting, the final long-lived setting should normally omit both the deleted rule and its deletion history. Use the deletion evidence internally to avoid reintroducing the rule, but do not emit `do not restore X`, `X was deleted`, or any equivalent Project-resident tombstone unless the current user explicitly asks to preserve that prohibition or history marker as durable Project state.
-
-## Bounded Edit and Full Rewrite
-
-Bounded edit is the default. Keep unrelated valid semantics intact and make the smallest change that closes the current request.
-
-Use full rewrite or restructure only when at least one real condition holds:
-
-- the user explicitly requests and authorizes it;
-- local edits cannot resolve a cross-cutting contradiction;
-- copied workflow detail has polluted the setting broadly;
-- multiple scopes are materially imbalanced;
-- required durable semantics cannot fit the budget through local deduplication and locator substitution;
-- source ownership or locator use has systematically drifted or conflicted.
-
-"It would be cleaner" or "the recent topic is important" is not enough. Preservation-sensitive full rewrite also requires a live baseline and enough current facts to preserve affected semantics.
-
-## Expansion, Coverage, and Redundancy
-
-Project instructions should grow only when the growth corresponds to a real
-long-lived semantic change or repair. A new or materially changed
-Project-resident rule needs current semantic support from at least one of:
-
-- the live Project setting;
-- the current request;
-- a current canonical authority in the requested synchronization scope;
-- explicit current re-adoption by the user;
-- a necessary lookup-before-action bridge.
-
-Do not create durable rules whose only support is stale history, old generated
-candidates, rejected/deleted history, source wrapper wording, task-local
-commentary, or review/audit labels. Keep the underlying deleted/rejected rule
-absent and keep its deletion history out of the final setting unless the current
-user explicitly asks to preserve that history or prohibition as durable Project
-state.
-
-Before delivering a complete candidate, run final semantic-spine reconciliation,
-including the earlier semantic coverage and redundancy review, against the
-actual candidate text:
-
-- required live/current/canonical meanings remain covered;
-- broader authorization, safety, privacy, evidence, completion, and fail-closed
-  boundaries have not been narrowed by consolidation;
-- mutable source-owned sets are abstracted with the necessary lookup bridge
-  instead of copied as current member lists;
-- protected absence remains absent;
-- unsupported durable rules are absent;
-- repeated clauses with the same trigger and user consequence are consolidated;
-- source headings, source labels, and source grouping did not become final
-  structure merely by inertia;
-- source-owned volatile detail has either a valid locator bridge or is omitted;
-- authorization, safety, privacy, evidence strength, uncertainty, completion
-  claims, exact identifiers, and mandatory/optional force remain unchanged;
-- known hard budget and headroom are still satisfied.
-
-When the target Project calls for Chinese-facing instructions, choose natural
-Chinese terms for ordinary concepts before drafting the family text. Source
-English is evidence, not preferred vocabulary. Preserve exact machine/formal
-identities, but do not use an English-token scan, blacklist, translation table,
-percentage score, or fixed-section template.
 
 ## No-Op Eligibility
 
@@ -352,7 +162,9 @@ Never silently weaken or alter:
 - current user explicit corrections, deletions, rejections, or acceptances;
 - unrelated live scopes.
 
-Exact identifiers include paths, commands, branch names, repository names, versions, state values, fields, model identifiers, and other tokens that need exact matching. Ordinary prose can be edited for the current Project setting, but exact identifiers must remain exact when future work depends on exact spelling.
+Exact identifiers include paths, commands, branch names, repository names, versions, state values, fields, model identifiers, protocol/product names, and other tokens that need exact matching. Ordinary prose can be edited for the current Project setting, but exact identifiers must remain exact when future work depends on exact spelling.
+
+For Chinese-facing Project settings, express ordinary source labels and descriptive prose naturally in Chinese while preserving exact machine/formal identifiers. This is not mechanical language scoring, a banned-term table, a translation table, a percentage metric, or a fixed-section template. If the target Project has no Chinese or natural-language requirement, do not impose one.
 
 ## Runtime Boundary
 
@@ -361,12 +173,6 @@ PIE v0.1 uses `FINAL_ROUTE=SIMPLE_FORMAL_CORE`.
 It runs as an ordinary ChatGPT Web / Project chat Skill. It does not require and must not claim an MCP finalizer, `OPENAI_API_KEY`, external model provider, sibling Skill chain, hosted service, or extra paid API call for normal operation.
 
 PIE v0.1 may produce a clear, concise Project setting for the current edit, including natural Chinese when the current user or Project calls for it. It must not claim to guarantee cross-turn final reader-layer behavior for future chats. C11 evidence remains a preserved failure boundary: advanced multi-call or cross-turn reading-layer finalization is unsupported in PIE v0.1 and belongs to future Clear Writing work.
-
-When the active Project setting or current request calls for Chinese-facing
-Project instructions, the current replacement should express ordinary source
-labels and descriptive prose naturally in Chinese while preserving exact
-machine/formal identifiers. This narrow current-artifact language responsibility
-does not make PIE v0.1 the owner of future cross-turn reader-layer enforcement.
 
 ## Regression Families
 
@@ -379,12 +185,13 @@ Use these families as review coverage, not as a fixed gate count:
 - preservation-sensitive replacement with missing live baseline;
 - greenfield and explicit reset;
 - locator substitution with lookup-before-action requirements;
+- volatile source-owned inventory moved behind a bridge;
 - protected absence under partial history;
 - no-op when the correct owner is a canonical source or already-covered rule;
 - no-op eligibility when a material in-scope defect has a safe bounded repair;
 - should-not-change checks for authorization, safety, evidence strength, exact identifiers, and explicit user deletion/correction.
 
-Do not convert regression examples into mechanical surface-form scoring or fixed layout quotas.
+Do not convert regression examples into banned-word tables, language-percentage metrics, keyword scorers, fixed paragraph counts, fixed heading counts, fixed formula counts, or fixed character-per-section quotas.
 
 ## User Delivery
 
@@ -400,8 +207,4 @@ Missing-input outputs must avoid false-safe full settings. Name only the input t
 
 No-op is valid only when the setting already satisfies the active contract, the remaining difference is cosmetic, or changing Project settings would duplicate, weaken, misplace, overfit, or add semantic risk.
 
-Normal user-facing answers should be concise and should not expose internal
-mode labels, semantic maps, disposition tables, invariant checklists, or
-coverage/redundancy reviews unless the user asks for formal audit evidence. The
-default delivery is a short conclusion, the bounded edit or clean replacement
-when safe, and a few key reasons.
+Normal user-facing answers should be concise and should not expose internal mode labels, semantic maps, disposition tables, invariant checklists, or coverage/redundancy reviews unless the user asks for formal audit evidence. The default delivery is a short conclusion, the bounded edit or clean replacement when safe, and a few key reasons.
