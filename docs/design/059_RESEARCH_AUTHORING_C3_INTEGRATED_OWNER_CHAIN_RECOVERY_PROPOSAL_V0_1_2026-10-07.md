@@ -339,21 +339,31 @@ Canonical `skills/tools/documents-media/pdf/SKILL.md` remains unchanged unless P
 
 The profile notes should be compact and stage-oriented.
 
-For report/manuscript creation or substantial revision：
+For a new manuscript or any substantial manuscript revision, whether or not the user ultimately requests PDF：
 
 ~~~text
-FIRST: Research Authoring core/family owner.
-Before stable handoff: do not load explicit artifact delegates.
-Manuscript source delegate, if needed: explicitly load latex-paper-authoring.
-After stable source/package + handoff: explicitly load render-chinese-math-pdf.
+FIRST: Research Authoring core/paper owner.
+Before stable handoff: do not load artifact delegates merely because the source is LaTeX or the final target is PDF.
+If source/package work is needed: explicitly load latex-paper-authoring in Research Authoring delegate mode.
+Return source/package to the Research Authoring owner.
+If final PDF is requested: after stable source/package + handoff, explicitly load render-chinese-math-pdf.
 After renderer QA: return to Research Authoring scientific QA.
 ~~~
 
-For finalized Markdown/LaTeX render-only：
+For an existing LaTeX source where the main task is compile/debug, template repair, source hygiene, bibliography/build troubleshooting, or existing-source build：
+
+~~~text
+explicitly load latex-paper-authoring
+compile/debug/build is allowed
+Research Authoring rewrite/planning is not required
+~~~
+
+For finalized Markdown/LaTeX where the task is render-only / final-artifact production：
 
 ~~~text
 explicitly load render-chinese-math-pdf immediately
 Research Authoring planning is not required
+latex-paper-authoring is not the owner merely because the source is LaTeX
 ~~~
 
 For generic existing-PDF operations：
@@ -361,6 +371,12 @@ For generic existing-PDF operations：
 ~~~text
 explicitly load pdf
 ~~~
+
+These routes are intentionally distinct：
+
+- existing-LaTeX compile/debug/source-maintenance -> LaTeX delegate direct mode;
+- finalized-source render-only -> canonical renderer direct mode;
+- new/substantial manuscript -> Research Authoring first, optional LaTeX delegate for source/package, renderer only after handoff if PDF is requested.
 
 This profile remains the integrated production surface.
 
@@ -415,7 +431,8 @@ The matrix keeps the frozen user prompts/semantics.
 
 Additional should-not-change checks are folded into existing cases, not new Gate/case families：
 
-- DEV-06/07: also confirm `research-main` can explicitly reach its hidden renderer for finalized-source render-only;
+- DEV-06/07: confirm `research-main` can explicitly reach its hidden renderer for finalized-source render-only;
+- DEV-07 also includes a natural existing-LaTeX compile/debug/template/build/source-hygiene subrun: `latex-paper-authoring` actual read > 0, compile/debug succeeds, Research Authoring does not rewrite the existing paper, generic `pdf` does not own the task, and `render-chinese-math-pdf` does not misclassify source-debug as render-only;
 - DEV-08: add generic existing-PDF manipulation under `research-main` and confirm explicit `pdf` delegation still works;
 - DEV-04/05: exact Skill read order must show Research Authoring owner before any explicit artifact delegate;
 - DEV-05: no direct `pdflatex` bypass.
