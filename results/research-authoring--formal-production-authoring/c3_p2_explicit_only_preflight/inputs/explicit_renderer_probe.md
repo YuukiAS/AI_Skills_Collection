@@ -1,0 +1,1 @@
+Use the project profile normally. The file inputs/finalized_note.md is already-final Markdown. Please render that existing finalized source to PDF and do the ordinary renderer QA for the rendered artifact.

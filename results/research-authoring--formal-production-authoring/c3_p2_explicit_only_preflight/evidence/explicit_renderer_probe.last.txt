@@ -1,0 +1,3 @@
+已生成 [PDF](outputs/finalized_note.pdf)，共 1 页，原 Markdown 未修改。
+
+文字提取、公式保真、字体嵌入及整页视觉检查均通过。编译有两条不影响本文件的宏包提示，已记录在 [QA 记录](outputs/finalized_note.qa.json) 中。
