@@ -9,7 +9,7 @@ evidence through generic invariants plus a separate project adapter.
 
 ## 1. Separation of responsibilities
 
-The runtime has two layers.
+The runtime has two production layers plus a separate evaluation oracle.
 
 ### Generic reusable core
 

@@ -1,6 +1,6 @@
 ---
 task_key: presentations_historical_blackbox_validator_v1
-status: READY
+status: BLOCKED_PENDING_PREBUILD_ORACLE_CRITIC
 controller_mode: true
 task_type: cross_repo_validator_build_and_acceptance
 primary_repository: YuukiAS/AI_Skills_Collection
@@ -72,7 +72,7 @@ PDF_AUDIENCE_ARTIFACT_EDIT_ALLOWED = NO
 RENDER_REPLACEMENT_ALLOWED = NO
 V14_CREATION_ALLOWED = NO
 FROZEN_AUTHORITY_EDIT_ALLOWED = NO
-VALIDATOR_IMPLEMENTATION_ALLOWED = YES
+VALIDATOR_IMPLEMENTATION_ALLOWED = CONDITIONAL_ON_PREBUILD_ORACLE_CRITIC_PASS
 READ_ONLY_HISTORICAL_RENDERING_FOR_TESTS = YES
 ```
 
@@ -162,7 +162,6 @@ scripts/presentation_validation/tutorial01_validator_adapter_v1/
 tests/presentation_validation/tutorial01_public/
 results/tutorial-01-validator-v1/public/
 docs/reviews/2026-27/STAT5060_TUTORIAL_01_VALIDATOR_IMPLEMENTATION_REPORT_V1.md
-results/tutorial-01-validator-v1/oracle_isolation_report.json
 ```
 
 Adapter Producer may not:
