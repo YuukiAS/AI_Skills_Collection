@@ -272,6 +272,29 @@ candidate_action:
 - Do not generalize its information architecture to Homework or other artifact families; reuse the principles and visual calibration, not the exact layout.
 promotion_gate: replay the bounded-size selection on one additional student-facing assessment document and verify that the chosen size is selected by independent rendered review without changing approved copy, margins or page-count semantics.
 
+
+### Human-facing assessment PDFs must pass a rendered-output hygiene gate, not only source-copy review
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 Project final-consolidation Clear Writing review, 2026-10-08
+evidence: the six human-facing Project PDFs passed source-level Clear Writing and semantic audits, but Chromium rendering inserted a current timestamp, candidate filename/title header, and a local `file:///users/a/e/aereinh/...` source path on every page. The English Question Bank also rendered its title twice because document metadata and an H1 both became visible. The Chinese Written Marking Guide still exposed machine-schema fields and malformed mixed-language text despite a source-level language PASS.
+target layer: student-assessment / instructor-assessment rendering / Clear Writing QA / release-readiness
+problem:
+- Source Markdown can be reader-facing while the rendered PDF leaks browser-generated headers/footers, local filesystem paths, timestamps, candidate filenames, URLs, or duplicated metadata.
+- A source-level Clear Writing PASS can miss renderer-added text because that text did not exist in the source.
+- Text-search gates that look only for a small fixed blacklist can PASS while other machine-facing strings remain visible, such as schema field names, enum values, local-path syntax, seeds, or malformed bilingual fragments.
+- Human-facing instructor documents can accidentally include machine grading schema blocks simply because the source bundle contains them.
+candidate_action:
+- Add a **rendered-output hygiene gate** after PDF generation and before rendered-review PASS. Extract text from the final PDF and fail on local/environment leakage such as `file://`, `/users/`, `/overflow/`, `localhost`, temporary build paths, source filenames, candidate filenames, or unintended current date/time headers.
+- For Chromium/browser PDF routes, explicitly disable print headers and footers (for example `displayHeaderFooter=false` or the renderer-equivalent). Never rely on browser defaults.
+- Add a title-occurrence check so YAML/HTML metadata plus visible H1 cannot silently create duplicated document titles.
+- Inspect the top and bottom page margins visually on every page; browser-generated date/title/path/page-number furniture is a P1 release blocker even when body content is correct.
+- Run Clear Writing / reader-facing review on the **rendered text layer as well as the source layer**. Source-copy PASS must not override a rendered artifact containing machine or environment traces.
+- Separate human-facing rubric prose from machine schema. Raw field names, enum dumps, seed strings, local storage paths, repository instructions, and machine-only selection/log structures stay in supporting files unless the human marker genuinely needs them.
+- For bilingual outputs, add a post-render scan for malformed mixed-language artifacts and token-splicing (for example accidental fragments like `状态ment`, `目标ed check`, or untranslated field-name suffixes) rather than checking only a predefined blacklist.
+- Require the final rendered Reviewer to read representative full sentences from each page family, not merely confirm page count, clipping, and a handful of forbidden tokens.
+promotion_gate: replay on one additional student-facing PDF and one instructor-facing rubric/examiner PDF rendered through HTML/Chromium; verify zero local-path/timestamp/header leakage, no duplicate title, and no machine-schema text in the normal human reading flow.
+
 ## Recently promoted / established
 
 - Advisor-facing reports organize around scientific question and decision, not run/debug chronology.
