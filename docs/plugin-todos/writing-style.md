@@ -137,6 +137,26 @@ project-specific context: PDF 的具体研究对象是 one-shot federated medica
 candidate_action: 下一步不再先扩规则，而是把 2026-09-03 人工版作为 readability reference，使用当前 production `writing-style` 对原 PDF 做完整 replay；Reviewer 只比较通用维度：claim/evidence 零漂移、段落重组能力、中文逻辑、公式解释、表格重构、非必要英文清理、未验证事项保留。若 production 输出明显只能做 sentence-local paraphrase，优先检查 `writing-fidelity` 是否过度限制结构级重写，再检查 `chinese-prose` / routing；不要为该项目增加词汇禁表。
 promotion_gate: 当前 `writing-style` 在该真实 replay 上无法同时满足“内容/证据零漂移”和“阅读难度显著下降”，或随后另一个独立真实中文科研材料复现同类问题；若当前 plugin 已经能达到人工 baseline，则不为了制造 diff 修改 production skill。
 
+
+### Reader-facing artifacts from upstream plugins need an automatic Clear Writing handoff before copy freeze
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 Project final human-facing assessment production, 2026-10-08
+evidence: the Project workflow produced Chinese/English Question Bank, examiner-guide and marking-guide copy under Research Authoring, then froze exact copy and sent it to Codex for production. The first human-facing Chinese PDFs contained machine-facing mixed language such as `pre-read`, `PRIMARY_FAMILY_UNCLEAR`, `private log`, malformed token splicing, and schema-like wording even though `chinese-prose` already declares that any reader-facing Chinese Markdown/PDF/report should automatically receive its final pass. The current Marketplace topology keeps `writing-style` and `research-writing` as separate plugins; the released Research Authoring plugin does not bundle or automatically dispatch to Clear Writing, while `research-main` includes the underlying writing skills only when that profile is actually used.
+target layer: writing-style normal routing / cross-plugin handoff / Research Authoring integration
+problem:
+- The skill-level “automatic trigger” is not enough when the skill is not in the active plugin/profile surface. An upstream plugin can author a final reader-facing document without ever invoking Clear Writing.
+- Student-assessment workflow can reach exact-copy freeze before any language-quality pass. Once the Planner/Controller freezes copy and tells the executor not to rewrite, a later Clear Writing trigger is correctly suppressed, so the defect survives into rendering.
+- This means the current contract depends on a human remembering to name Clear Writing in the task prompt, which defeats the intended automatic-trigger behavior.
+candidate_action:
+- Add a cross-plugin **reader-facing language handoff** that occurs before exact-copy freeze for document-producing upstream plugins. Research Authoring should hand stable human-facing copy to writing-style automatically: `writing-fidelity` first, then `chinese-prose` for Chinese/Chinese-reference artifacts or `scientific-prose` for English scientific/technical prose as applicable.
+- Make a successful language-pass receipt a prerequisite for freezing a newly authored human-facing copy surface, unless the user explicitly supplied exact final wording or explicitly opted out of rewriting.
+- If writing-style is not installed/available in a standalone Research Authoring execution, fail closed with a precise companion-plugin blocker rather than silently treating raw Planner/Executor prose as final.
+- Keep the handoff bounded: preserve question IDs, scores, formulas, exact English public questions, citations, dates, paths/tokens that are intentionally protected, and assessment semantics. Clear Writing may improve reader-facing realization only.
+- Add normal-entry integration tests where a user asks Research Authoring to produce a bilingual student/instructor assessment package **without naming Clear Writing**. PASS requires that the Chinese/English human-facing sources automatically receive the appropriate writing-style pass before freeze and that the receipt is bound to the frozen source hash.
+- Add a negative test: a render-only/exact-copy task after freeze must not opportunistically rewrite the document; the language pass belongs upstream of the freeze.
+promotion_gate: replay on one new bilingual assessment artifact and one advisor-facing report initiated through an upstream plugin without an explicit “use Clear Writing” instruction; require automatic handoff, source-bound receipts, zero semantic drift, and no user-discovered Chinglish/machine-prose defects.
+
 ## Do not do
 
 - Do not create detector-evasion or generic humanizer behavior.
