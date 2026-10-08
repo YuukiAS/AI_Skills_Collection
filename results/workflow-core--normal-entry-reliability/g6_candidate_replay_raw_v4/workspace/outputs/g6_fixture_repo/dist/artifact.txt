@@ -1,2 +1,0 @@
-built artifact:
-workflow-core normal entry fixture

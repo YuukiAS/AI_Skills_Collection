@@ -20,6 +20,11 @@ STANDALONE_SKILLS = {
         "display": "Project Thread Handoff",
         "icon": Path("assets/app-facing.svg"),
     },
+    "project-instructions-editor": {
+        "path": Path("skills/core/codex-system/project-instructions-editor"),
+        "display": "Project Instructions Editor",
+        "icon": Path("assets/app-facing.svg"),
+    },
     "render-chinese-math-pdf": {
         "path": Path("skills/tools/documents-media/render-chinese-math-pdf"),
         "display": "Chinese Math PDF",
@@ -34,6 +39,7 @@ STANDALONE_SKILLS = {
 
 EXPECTED_STANDALONE_SKILL_VERSIONS = {
     "project-thread-handoff": "0.2",
+    "project-instructions-editor": "0.1",
     "render-chinese-math-pdf": "0.2",
     "slurm-workflows": "0.4",
 }

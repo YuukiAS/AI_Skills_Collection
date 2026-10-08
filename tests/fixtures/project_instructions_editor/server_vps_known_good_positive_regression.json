@@ -1,0 +1,51 @@
+{
+  "name": "server_vps_known_good_positive_regression",
+  "purpose": "Domain-specific public-safe positive regression fixture for the user-confirmed Server+VPS known-good structure. This fixture checks responsibility aggregation quality for that real case; it is not a generic template.",
+  "fixture_scope": {
+    "domain_specific_positive_regression": true,
+    "generic_template": false,
+    "fresh_final_evidence": false,
+    "development_regression_only": true
+  },
+  "natural_request": "请检查并完善当前 ChatGPT Project 的 instructions。目标是让长期设置清晰、精简、稳定、可维护。自行判断是否缺规则、重复、位置不合理、过度实现细节或错误归属。允许 no-op、局部修改或有限整理，优先做最小必要修改。",
+  "positive_reference_families": [
+    "权威归属",
+    "面向用户的回答",
+    "代理客户端与交付",
+    "客户端实时网络状态与用户操作",
+    "自动验证优先",
+    "权威来源与生产修改",
+    "保守判定与冗余",
+    "完整性与敏感信息",
+    "生产任务结束时"
+  ],
+  "expected_behavior": [
+    "Group durable rules by user-facing responsibility rather than source headings.",
+    "Keep proxy production integrity and server-first behavior together when they share the same user consequence.",
+    "Keep live client-network state and user-action requirements together.",
+    "Keep canonical source and production mutation rules together when they govern the same lookup-before-action flow.",
+    "Express fail-closed and redundancy once instead of repeating them across source-shaped sections.",
+    "Keep completeness and sensitive-information handling as a coherent responsibility.",
+    "Keep formal production-closure behavior distinct when its trigger is distinct.",
+    "Move volatile client/device inventory to the current canonical source bridge.",
+    "Do not add durable security, 2FA, or best-practice examples from history or model preference alone."
+  ],
+  "anti_regressions": [
+    "no_overlapping_normal_response_sections",
+    "no_source_shaped_12_or_13_headings",
+    "no_current_device_or_platform_inventory_as_durable_truth",
+    "no_repeated_canonical_lookup_clauses",
+    "no_unsupported_history_or_best_practice_security_rules"
+  ],
+  "later_safe_fixes_that_must_remain": [
+    "live_setting_precedence",
+    "protected_absence",
+    "no_op_eligibility",
+    "volatile_inventory_to_canonical_bridge",
+    "exact_identifiers",
+    "authorization_privacy_safety_evidence_uncertainty_completion_preservation",
+    "missing_input_honest_degradation",
+    "ordinary_output_hides_internal_mode_labels",
+    "c11_reader_layer_unsupported_boundary"
+  ]
+}

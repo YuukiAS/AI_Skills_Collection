@@ -1,6 +1,6 @@
 {
   "license_counts": {
-    "(missing)": 51,
+    "(missing)": 52,
     "3-clause BSD license": 1,
     "Apache License, Version 2.0": 1,
     "Apache-2.0": 4,
@@ -33,7 +33,7 @@
   "metadata_skill_author_counts": {
     "(missing)": 50,
     "AHK Strategies (ashrafkahoush-ux)": 2,
-    "AI Skills Collection maintainers": 2,
+    "AI Skills Collection maintainers": 3,
     "AI Skills Collection maintainers with recorded upstream sources": 11,
     "BGPT": 1,
     "CardiacNexus maintainers": 2,
@@ -47,18 +47,18 @@
     "external-adapted": 11,
     "local": 7,
     "unknown": 114,
-    "user-authored": 22
+    "user-authored": 23
   },
   "provenance_counts": {
     "external-adapted": 11,
     "local": 7,
     "unknown": 114,
-    "user-authored": 22
+    "user-authored": 23
   },
   "rows_with_license_files_count": 11,
   "rows_with_urls_count": 66,
   "scope": "active_and_non_archived",
-  "skill_count": 154,
+  "skill_count": 155,
   "skills": [
     {
       "license": "",
@@ -131,6 +131,19 @@
         "https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/README.md",
         "https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/README.md"
       ]
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "AI Skills Collection maintainers",
+      "name": "project-instructions-editor",
+      "path": "skills/core/codex-system/project-instructions-editor",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
     },
     {
       "license": "",

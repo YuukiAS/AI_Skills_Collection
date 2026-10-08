@@ -5,9 +5,9 @@ This report records what can be proven from files currently in this repository. 
 ## Summary
 
 - Scope: `active_and_non_archived`
-- Skills audited: 154
+- Skills audited: 155
 - Skills with explicit source fields: 11
-- User-authored skills: 22
+- User-authored skills: 23
 - External adapted skills: 11
 - External vendored skills: 0
 - Generated skills: 0
@@ -23,7 +23,7 @@ This report records what can be proven from files currently in this repository. 
 | external-adapted | 11 |
 | local | 7 |
 | unknown | 114 |
-| user-authored | 22 |
+| user-authored | 23 |
 
 ## User Authored
 
@@ -33,6 +33,7 @@ This report records what can be proven from files currently in this repository. 
 | bridge-kit-maintainer | skills/core/codex-system/bridge-kit-maintainer | user-authored |  |
 | codex-workflow-protocol | skills/core/codex-system/codex-workflow-protocol | user-authored |  |
 | machine-update-orchestrator | skills/core/codex-system/machine-update-orchestrator | user-authored |  |
+| project-instructions-editor | skills/core/codex-system/project-instructions-editor | user-authored |  |
 | cardiac-mri | skills/domains/medical-imaging/cardiac-mri | user-authored |  |
 | medical-imaging-terminology-measurement | skills/domains/medical-imaging/medical-imaging-terminology-measurement | user-authored |  |
 | clinical-guideline-checking | skills/domains/medicine-clinical/clinical-guideline-checking | user-authored |  |

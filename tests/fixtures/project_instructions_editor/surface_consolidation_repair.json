@@ -1,0 +1,81 @@
+{
+  "name": "surface_consolidation_repair",
+  "purpose": "Public-safe fixture for PIE 0.1 structural consolidation: complex live setting, targeted history, and sources must be reduced to durable meanings before a replacement is written.",
+  "natural_request": "请检查并精简这个 ChatGPT Project 的长期 instructions。只修真正需要长期保留的规则，保留现有决定、事实来源和安全边界；不要把仓库里的实现细节、历史记录或临时任务状态都复制进 Project setting。",
+  "live_setting_summary": [
+    "Project uses Chinese-facing Project instructions for normal user-visible rules.",
+    "Current setting already requires reading README.md and AGENTS.md before implementation.",
+    "Current setting forbids claiming completion without current evidence.",
+    "Current setting copies a volatile client inventory and several source labels.",
+    "Current setting contains two clauses with the same semantic effect: preserve accepted user decisions."
+  ],
+  "targeted_history_summary": [
+    "A previous always-publish staging preview rule was explicitly rejected and is absent from the live setting.",
+    "A previous device list was copied into Project instructions, but inventory is now owned by docs/inventory.md.",
+    "The user accepted that docs/security.md owns permission and secret-handling detail."
+  ],
+  "canonical_sources": {
+    "README.md": "Repository overview and setup locator.",
+    "AGENTS.md": "Build/test/workflow detail locator.",
+    "docs/security.md": "Authorization, private data, and secret-handling policy locator.",
+    "docs/inventory.md": "Current client/device inventory locator."
+  },
+  "expected_semantic_dispositions": [
+    {
+      "meaning": "Preserve accepted user decisions.",
+      "disposition": "direct_project_rule",
+      "support": ["live_setting"],
+      "merge_behavior": "Collapse duplicate clauses with the same semantic effect."
+    },
+    {
+      "meaning": "Read repository workflow detail before implementation.",
+      "disposition": "short_locator_bridge",
+      "support": ["live_setting", "canonical_source"],
+      "locator": "AGENTS.md"
+    },
+    {
+      "meaning": "Do not claim completion without current evidence.",
+      "disposition": "direct_project_rule",
+      "support": ["live_setting"]
+    },
+    {
+      "meaning": "Current client/device inventory.",
+      "disposition": "source_only",
+      "support": ["canonical_source"],
+      "locator": "docs/inventory.md"
+    },
+    {
+      "meaning": "Rejected staging preview auto-publish rule.",
+      "disposition": "omit",
+      "support": ["targeted_deleted_or_rejected_history"],
+      "protected_absence": true
+    },
+    {
+      "meaning": "This current cleanup task's temporary status.",
+      "disposition": "task_only",
+      "support": ["current_request"]
+    }
+  ],
+  "expected_final_candidate_properties": {
+    "uses_semantic_meaning_not_source_surface_order": true,
+    "has_no_project_resident_deletion_tombstone": true,
+    "has_no_generic_do_not_restore_meta_rule": true,
+    "does_not_copy_volatile_inventory": true,
+    "keeps_short_locator_bridge_for_inventory_when_needed": true,
+    "does_not_expose_internal_meaning_map_by_default": true,
+    "naturalizes_ordinary_source_labels_for_current_chinese_replacement": true,
+    "preserves_exact_identifiers": [
+      "README.md",
+      "AGENTS.md",
+      "docs/security.md",
+      "docs/inventory.md"
+    ]
+  },
+  "non_goals": [
+    "future cross-turn reader-layer guarantee",
+    "Latin-token scan",
+    "English ratio",
+    "translation dictionary",
+    "fixed section template"
+  ]
+}
