@@ -295,6 +295,27 @@ candidate_action:
 - Require the final rendered Reviewer to read representative full sentences from each page family, not merely confirm page count, clipping, and a handful of forbidden tokens.
 promotion_gate: replay on one additional student-facing PDF and one instructor-facing rubric/examiner PDF rendered through HTML/Chromium; verify zero local-path/timestamp/header leakage, no duplicate title, and no machine-schema text in the normal human reading flow.
 
+
+### Fixed presentation-question banks need applicability-aware selection and question-specific examiner keys
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 Project public question bank + examiner key review, 2026-10-08
+evidence: a public fixed bank correctly grouped questions by model family, but several questions only applied to a subtype or analysis state (for example a GLMM-only link/distribution question, a random-slope-only question, an offset/standardization question, a mixed-HMM/HMLVM extension question, or questions requiring fitted results). The mechanical rotation operated at model-family level only. The internal examiner key also contained templated cross-question and cross-family prose, including at least one mixed-membership answer key that incorrectly described exposure/mediator structure from the mediation chapter.
+target layer: student-assessment / oral-presentation question-bank authoring / examiner-key QA
+problem:
+- A fixed/public bank is not fair merely because selection is mechanical. A mechanically selected question can still be inapplicable to the student's actual submodel, included components, or work-in-progress state.
+- Model-family classification is often too coarse to define the eligible question pool.
+- Template-generated examiner keys can look structurally complete while the expected answer does not actually answer the corresponding public question, or contains copied concepts from another method family.
+candidate_action:
+- Give every question a machine/internal **applicability predicate** before mechanical selection, for example required model subtype, required component, required fitted-result availability, or `ALWAYS_APPLICABLE`.
+- Apply the rule in the order: `identify model family -> filter to applicable questions -> mechanically select within the applicable Q1/Q2 pools`. Never draw first and then improvise a replacement because the question does not fit.
+- The public bank should explain any material applicability condition in reader-facing language when students need it; internal predicates may remain machine-readable.
+- Work-in-progress presentations must always have a predeclared result-independent Q2 fallback pool so lack of final numerical results never creates ad hoc examiner discretion.
+- Require a deterministic cross-check that each examiner-key entry has the same Question ID/text and that its `what this tests` / expected-core content is semantically specific to that exact question.
+- Add a cross-family contamination scan: examiner-key text for one model family must not contain concepts unique to another family unless the public question itself requires that comparison.
+- During independent review, sample every question-key pair, not only the public question wording or source map. A source-fidelity PASS for the public bank does not validate the examiner key.
+promotion_gate: replay on one additional fixed oral/presentation bank with subtype-conditional questions; verify that all selected questions are applicable by construction and that no examiner-key entry contains copied content from another question or model family.
+
 ## Recently promoted / established
 
 - Advisor-facing reports organize around scientific question and decision, not run/debug chronology.
