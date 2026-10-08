@@ -65,3 +65,24 @@ problem:
 project-specific context: the underlying Clear Writing case content and scientific subject matter are private/project-local. The reusable evidence is the unintended size hierarchy, block misclassification, cross-script visual mismatch and the gap between technical render success and coherent typography. This record does not prescribe the future implementation or a single mandatory font/size scheme; those decisions belong to the upcoming Planner/Critic refinement round.
 
 2026-09-25 update: repository `5.2.1` removes the line-shape/tableline typography route from the canonical renderer path by using Pandoc semantic nodes and a declarative formal-note profile with no ordinary-prose downscaling. The broader qualitative typography responsibility remains active through G3-style complete-artifact review, not a one-time mechanical font check.
+
+
+### Formal PDFs produced by upstream plugins need automatic canonical-renderer handoff
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 Project final human-facing assessment production, 2026-10-08
+evidence: Research Authoring/Codex produced formal student and instructor PDFs through Chromium/HTML printing in an earlier Project round even though `render-chinese-math-pdf` already declared `Markdown -> Pandoc AST -> LaTeX -> XeLaTeX -> PDF` as the production route and Chromium as diagnostic-only. The browser PDFs exposed timestamps, source/candidate names and `file:///users/...` paths. After the task explicitly invoked the renderer skill, the same artifact family rendered through Pandoc/XeLaTeX/xdvipdfmx with the expected fonts and no path leakage. Current `research-main` includes the renderer, but the standalone released Research Authoring plugin does not automatically carry or dispatch this companion, and the student-assessment runbook has no renderer handoff gate.
+target layer: render-chinese-math-pdf trigger/routing / cross-plugin artifact production / Research Authoring integration
+problem:
+- The renderer's trigger boundary is only effective when the skill is actually available and routed. An upstream document plugin can directly call a browser/HTML renderer without ever entering the canonical skill.
+- A task-local Codex controller can accidentally become the render router. If it says “make a PDF” but does not name the companion renderer, the executor may choose the easiest local PDF route even when that violates the canonical rendering contract.
+- Detecting Chromium/path leakage after rendering is useful but too late; production-route ownership should be resolved before the first formal PDF is generated.
+candidate_action:
+- Add an automatic **formal-PDF handoff** for upstream document-producing plugins: once semantics/copy are frozen and the deliverable is a formal PDF, delegate mechanics to `render-chinese-math-pdf` without requiring the user or Planner prompt to name the skill.
+- Make the canonical render receipt part of the production gate. A formal PDF cannot become a candidate without a receipt binding source hash, resolved render authority/profile, route, engine, fonts/resources and output hash.
+- If the companion renderer is unavailable, or its XeLaTeX/font/resource probe fails, fail closed with the exact dependency blocker. Do not silently fall back to Chromium/browser printing.
+- Keep browser/Chromium explicitly diagnostic-only. No upstream plugin may treat a browser-generated PDF as the formal deliverable when the canonical renderer applies.
+- Add cross-plugin normal-entry tests starting from Research Authoring/student-assessment requests that ask for a final PDF **without naming the renderer**. PASS requires automatic delegation to `render-chinese-math-pdf`, non-browser producer identity, expected project/venue profile preservation, and full PDF QA.
+- Add routing tests for exact project visual authority: when a course/venue has a frozen header/font/page contract, the automatic handoff must pass that authority into the renderer rather than replacing it with the default formal-note profile.
+promotion_gate: replay on one student-facing assessment handout and one bilingual instructor rubric initiated through an upstream plugin with no explicit renderer instruction; require automatic renderer invocation, canonical receipts, no browser fallback, no local-path/timestamp leakage, and independent all-pages visual PASS.
+
