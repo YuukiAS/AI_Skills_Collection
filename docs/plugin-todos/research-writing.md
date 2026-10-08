@@ -316,6 +316,26 @@ candidate_action:
 - During independent review, sample every question-key pair, not only the public question wording or source map. A source-fidelity PASS for the public bank does not validate the examiner key.
 promotion_gate: replay on one additional fixed oral/presentation bank with subtype-conditional questions; verify that all selected questions are applicable by construction and that no examiner-key entry contains copied content from another question or model family.
 
+
+### Student-assessment PDF production must delegate to the canonical renderer and fail closed on browser fallback
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 Project final-consolidation PDF regression, 2026-10-08
+evidence: Research Authoring produced human-facing assessment PDFs through a Chromium/browser print route even though the repository already had the canonical `render-chinese-math-pdf` companion and Research Authoring's own reporting contract requires delegation to it. The resulting PDFs exposed browser timestamps, source filenames, and `file:///users/...` paths. This duplicated a previously known scientific-PDF failure mode where browser rendering bypassed the declared Pandoc/XeLaTeX production route.
+target layer: student-assessment production / artifact handoff / renderer routing
+problem:
+- Research Authoring can stabilize content correctly yet hand PDF production to an ad hoc browser/HTML path, bypassing the installed renderer skill.
+- Browser/Chromium output may leak environment paths and timestamps, use a different typography engine, and silently diverge from the accepted course/document family.
+- A downstream rendered-review gate is too late if the production route itself violated the declared renderer authority.
+candidate_action:
+- For formal assessment PDFs, bind the production route before rendering: Research Authoring owns semantics; `render-chinese-math-pdf` owns PDF mechanics.
+- Invoke the installed canonical renderer explicitly and record its route/identity receipt. Default production is Pandoc -> LaTeX -> XeLaTeX (or the renderer skill's current canonical route); native TeX follows the renderer's direct-TeX rule.
+- Browser/Chromium rendering is diagnostic only. It must never satisfy the production gate or become an automatic fallback.
+- If the renderer companion is unavailable or its required fonts/TeX dependencies are missing, fail closed with the exact dependency blocker. Do not substitute `wkhtmltopdf`, Chromium print-to-PDF, ad hoc HTML, or a local one-off template and report PASS.
+- Preserve the accepted artifact's paper size, typography family, margins and pagination contract as resolved renderer profile inputs rather than recreating them in a second rendering stack.
+- Add a deterministic producer/engine check to final assessment PDF QA so a browser-generated PDF cannot pass when the frozen route requires the canonical renderer.
+promotion_gate: replay on one bilingual instructor rubric and one student-facing assessment handout; require canonical renderer receipts, non-browser producer identity, no local-path/timestamp leakage, and independent all-pages visual PASS.
+
 ## Recently promoted / established
 
 - Advisor-facing reports organize around scientific question and decision, not run/debug chronology.
