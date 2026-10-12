@@ -6,6 +6,7 @@
 - 规划分支：`planner/clear-writing-cross-surface-v0.1`
 - 完整审查提交：以用户提供的本分支精确提交为准，必须亲自 fetch 后核对存在且实际包含以下 v0.3 文件；不得仅凭当前分支移动指针替代精确审查身份。
 - 追踪：Issue #13
+- 任务标识：`clear-writing--cross-surface-language-layer`
 - 判定范围：**可执行性、真实正常入口、权限、同源包装、验收、角色接手和恢复路径**；不是实现、发布或用户验收。
 
 ## 本次执行前复核的唯一实质范围
@@ -41,6 +42,7 @@
 3. `docs/design/clear-writing/CROSS_SURFACE_LANGUAGE_LAYER_EXECUTION_PLAN_V0_3_2026-10-12.md`
 4. `docs/goals/CLEAR_WRITING_CROSS_SURFACE_LANGUAGE_LAYER_GOAL_V0_3.md`
 5. `docs/operations/prompts/CLEAR_WRITING_CROSS_SURFACE_LANGUAGE_LAYER_KICKOFF_V0_3.md`
+6. `docs/design/clear-writing/CROSS_SURFACE_LANGUAGE_LAYER_EXECUTION_CRITIC_PROMPT_V0_3_2026-10-12.md`（本提示词）
 
 以当前用户认可的架构裁定为已冻结范围：保留 `writing-style` 与 Clear Writing 名称；保持 `chinese-prose`、`scientific-prose`、`scientific-rewrite`、`product-ui-copy`、`writing-fidelity` 不重命名；最多新增 `response-clarity`，只调整它与 `chinese-prose` 的正反触发；保留复杂中文源重写主链；各独立技能实际获得必要保真约束，绝不依赖平台不保证的技能调用链；现有 Frontend Design/Presentations 路由保持；Research Authoring 冻结，PIE 0.2 不实施，PR #100 不重新打开，无额外付费或外部服务。
 
