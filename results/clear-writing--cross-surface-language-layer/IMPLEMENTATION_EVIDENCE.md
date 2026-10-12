@@ -57,6 +57,8 @@ PASS:
 - `python scripts/skills.py validate`
 - `python scripts/build_codex_marketplace.py --validate --path-report`
 - `python -m unittest tests.test_skill_runtime_text_audit tests.test_product_ui_copy_cross_plugin.ProductUiCopyCrossPluginTests.test_marketplace_source_exposes_product_ui_copy_with_release_bump tests.test_codex_marketplace.CodexMarketplaceTests.test_writing_style_exposes_response_clarity_without_renaming_existing_skills tests.test_codex_marketplace.CodexMarketplaceTests.test_repository_config_has_marketplace_plugin_set tests.test_codex_marketplace.CodexMarketplaceTests.test_current_repository_marketplace_paths_fit_windows_budget tests.test_codex_marketplace.CodexMarketplaceTests.test_manifest_is_generated_at_repository_root tests.test_scientific_rewrite.ScientificRewriteHeavyRouteTests.test_writing_style_surface_keeps_existing_scientific_prose_route tests.test_scientific_rewrite.ScientificRewriteHeavyRouteTests.test_routing_text_sends_structural_scientific_rewrite_to_heavy_route tests.test_research_writing_routing`
+- `python scripts/candidate_plugin_replay.py ensure-runtime`
+- `python scripts/candidate_plugin_replay.py replay --plugin writing-style --candidate-commit 01ea04fc --task results/clear-writing--cross-surface-language-layer/replay_task_response_clarity.md --input results/clear-writing--cross-surface-language-layer/replay_input_response_clarity.md`
 
 Environment note:
 
@@ -71,10 +73,10 @@ Both failures preexist this implementation scope and come from extra `docs/plugi
 
 ## G0-G7 Status
 
-- G0 source/generated identity: PARTIAL PASS for Codex source and generated payload. ChatGPT personal Plugin Creator installation was not performed because account mutation remains a separate permission boundary.
-- G1 normal entry and candidate increment: NOT CLAIMED. The implemented skill has trigger tests and generated payload identity, but A/E and B/C ChatGPT matched comparisons require a real authorized personal plugin candidate and controlled Project conditions. Current status is pending human/GPT account-side execution, not product PASS.
-- G2 natural target-language first replies: covered by the `response-clarity` source contract and trigger examples; real full-answer human review remains a later artifact gate.
-- G3 fidelity and machine strings: covered by `response-clarity` independent protection rules and unchanged `writing-fidelity`; real proposition-level review remains a later artifact gate.
+- G0 source/generated identity: PARTIAL PASS for Codex source, generated payload, and candidate replay staging. ChatGPT personal Plugin Creator installation was not performed because account mutation remains a separate permission boundary.
+- G1 normal entry and candidate increment: PARTIAL PASS for Codex candidate replay actual consumption of `writing-style`; NOT CLAIMED for ChatGPT A/E and B/C matched comparisons. Those require a real authorized personal plugin candidate and controlled Project conditions.
+- G2 natural target-language first replies: covered by the `response-clarity` source contract, trigger examples, and the public-safe Codex replay output in `REPLAY_RESPONSE_CLARITY_SMOKE.md`; broader human review remains a later artifact gate.
+- G3 fidelity and machine strings: covered by `response-clarity` independent protection rules, unchanged `writing-fidelity`, and replay output preserving command, branch, status, path, and raw log.
 - G4 existing writing skills: preserved names and artifact ids; targeted regression passed for Chinese document routing, product UI copy, scientific rewrite, scientific prose, and Research Authoring boundary.
 - G5 Frontend Design and Presentations consumers: source integrations were not changed. Existing Product UI Copy and Presentations routes remain available in generated payload; full rendered artifact review remains a later gate.
 - G6 long-session and language-mode behavior: not claimed from local static tests. The new skill explicitly preserves current-message language override and pure-machine negative cases; real multi-turn ChatGPT checks remain later.
