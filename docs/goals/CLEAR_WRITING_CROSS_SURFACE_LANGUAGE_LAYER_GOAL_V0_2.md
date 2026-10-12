@@ -12,7 +12,7 @@
 - Architecture anchor：规划分支 `819f861de7dc626f473390df8a9c42b70d24dd92` 的 v0.1；用户转述独立 Critic 架构阶段 PASS，明确精简范围。**没有可假称为仓库已有的 Critic 评审文件。**
 - Implementation authorization：`NO`，直到独立执行前 Critic 对同一 v0.2 package 返回 `PASS / READY_FOR_CODEX=YES`，且用户实际发送获批 Kickoff。
 
-本 Goal 是未来获批任务的**唯一总体完成合同**。任何单项测试、局部 Review、Codex 执行回执、工具安装或“语言像样了”的主观印象，都不能自行替代以下全体条件。它不创建任务状态机，不改目前已经完成的 PI​​E 0.1，也不将 PR #100 重新开案。
+本 Goal 是未来获批任务的**唯一总体完成合同**。任何单项测试、局部 Review、Codex 执行回执、工具安装或“语言像样了”的主观印象，都不能自行替代以下全体条件。它不创建任务状态机，不改目前已经完成的 PIE 0.1，也不将 PR #100 重新开案。
 
 ## 1. 最终新能力与最小真实作用
 
