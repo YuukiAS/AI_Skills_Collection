@@ -5,6 +5,7 @@
 - 对应执行方案：`CROSS_SURFACE_LANGUAGE_LAYER_EXECUTION_PLAN_V0_2_2026-10-12.md`
 - 对应正式目标：`docs/goals/CLEAR_WRITING_CROSS_SURFACE_LANGUAGE_LAYER_GOAL_V0_2.md`
 - 评估对象：唯一 Clear Writing `writing-style` 生产候选，现有五技能保持原名、唯一新增 `response-clarity`
+- Task key：`clear-writing--cross-surface-language-layer`
 - 研发素材：此前所有 C5–C11、050–055、用户已指出的失败均为**已知回归**，不得重新算作未见；Research Authoring 完全不参与
 - 核心原则：只用 G0–G7 八类能力，不按表面关键词、统计字符数、固定段数或模板增加重复验收；每类要求实际普通入口、真实最终对象与失败定义
 
