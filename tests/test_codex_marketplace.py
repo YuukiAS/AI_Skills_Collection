@@ -187,6 +187,29 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertIn("Update Bridge Kit through canonical ai-bridge delegation.", core["defaultPrompt"])
         self.assertIn("Sync this machine's participating AI Research Stack.", core["defaultPrompt"])
 
+    def test_writing_style_exposes_response_clarity_without_renaming_existing_skills(self) -> None:
+        data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        writing = next(plugin for plugin in data["plugins"] if plugin["name"] == "writing-style")
+        sources = {entry["artifact_id"]: entry["source"] for entry in writing["skills"]}
+
+        self.assertEqual(writing["version"], "0.4")
+        self.assertEqual(
+            sources,
+            {
+                "fidelity": "skills/writing/core/writing-fidelity",
+                "response-clarity": "skills/writing/core/response-clarity",
+                "sci": "skills/writing/core/scientific-prose",
+                "product-ui-copy": "skills/writing/core/product-ui-copy",
+                "scientific-rewrite": "skills/writing/core/scientific-rewrite",
+                "zh": "skills/writing/core/chinese-prose",
+            },
+        )
+        self.assertIn("response clarity", writing["description"])
+        self.assertIn(
+            "Explain this result clearly to the user without changing facts, permissions, commands, paths, or status.",
+            writing["defaultPrompt"],
+        )
+
     def test_ai_skills_core_machine_update_contracts_are_source_authoritative(self) -> None:
         orchestrator = (REPO_ROOT / "skills/core/codex-system/machine-update-orchestrator/SKILL.md").read_text(
             encoding="utf-8"

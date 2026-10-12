@@ -94,6 +94,7 @@ class ProductUiCopyCrossPluginTests(unittest.TestCase):
         self.assertIn("Product UI Copy", writing["description"])
         writing_sources = {skill["artifact_id"]: skill["source"] for skill in writing["skills"]}
         self.assertEqual(writing_sources["product-ui-copy"], "skills/writing/core/product-ui-copy")
+        self.assertEqual(writing_sources["response-clarity"], "skills/writing/core/response-clarity")
 
         frontend = plugins["web-development"]
         self.assertEqual(frontend["version"], "0.4")

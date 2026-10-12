@@ -801,8 +801,11 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
         self.assertIn("skills/writing/core/scientific-prose", skill_sources)
         self.assertIn("skills/writing/core/scientific-rewrite", skill_sources)
         self.assertIn("skills/writing/core/chinese-prose", skill_sources)
+        self.assertIn("skills/writing/core/response-clarity", skill_sources)
         self.assertIn("skills/writing/core/scientific-prose", profile["skills"])
         self.assertIn("skills/writing/core/scientific-rewrite", profile["skills"])
+        self.assertIn("skills/writing/core/response-clarity", profile["skills"])
+        self.assertIn("skills/writing/core/product-ui-copy", profile["skills"])
 
     def test_routing_text_sends_structural_scientific_rewrite_to_heavy_route(self) -> None:
         scientific = (REPO_ROOT / "skills/writing/core/scientific-rewrite/SKILL.md").read_text(encoding="utf-8")
