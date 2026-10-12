@@ -206,6 +206,36 @@ Expected mapping after 056 completion, to verify rather than assume:
 - Actual-Surface capability: PPT/PDF/Beamer or equivalent user-consumed artifact receives format-appropriate opening/render checks.
 - AI Skills Maintainer / production consumption diagnosis: if repo-output/path rules already exist but delivery still escapes them, inspect the real producer/consumer path instead of adding another duplicate rule.
 
+
+### Final delivery must consume domain-owned self-QA before user-ready completion
+status: NEW
+source: Bridge Kit `docs/TODO_LOCAL_AUTONOMOUS_ACCEPTANCE_WORKFLOW.md` closure on 2026-10-12; Lucerna native/UI acceptance failures; Frontend Design producer-self-QA evidence; Presentation and Research Authoring delivery experience
+evidence: Bridge Kit closed its proposed Local Autonomous Acceptance workflow at commit `89fa1e2469cb83a1d5f02e556b00e7bdf97ca750` and explicitly transferred the reusable delivery requirement here instead of creating a fourth Bridge workflow. Existing AI_Skills evidence already shows the same failure class across domains: Frontend Design records that external reviewers/users should confirm quality rather than discover obvious producer-visible P1/P2 defects; presentation production requires rendered-artifact inspection rather than file/build success; research-writing exposes pre-submission acceptance, claim/evidence, citation and final-artifact QA capabilities. The repeated product failure is that process/build/test PASS can still be reported as user-ready before the domain owner has actually inspected the final consumed artifact.
+target layer: workflow-core delivery admission / domain routing / completion semantics.
+problem: Codex can complete implementation or generation, pass mechanical tests, and hand the result to the user while obvious product/artifact defects remain. The user then becomes the first real QA pass. A generic workflow cannot judge UI composition, slide quality, manuscript evidence, statistics or imaging semantics itself, but it must require the correct domain owner to perform that judgment before a user-ready/release-ready claim. Making a new Bridge `local-review` workflow would duplicate orchestration and still lack domain expertise; making every task launch a fresh Reviewer would overburden small work and blur Lite/Reviewed/Control boundaries.
+ownership split:
+- **workflow-core owns delivery admission**: before a final user-ready/release-ready claim, determine whether the task produces a user-consumed artifact/product that requires domain QA, route to the appropriate domain owner, bind acceptance to the exact final candidate, and refuse premature completion when required QA is absent or stale.
+- **domain plugin/skill owns professional judgment**: Frontend Design judges actual UI/native interaction/visual/state quality; Presentations judges rendered slides and deck quality; Research Authoring/Writing judges manuscript/report semantics, evidence, citations and rendered deliverable; other domains own their corresponding professional acceptance criteria.
+- **Bridge Kit owns execution substrate only**: worktree/Git/runtime/authorization/fresh-session/recovery primitives. It does not implement a Local Review workflow or domain-quality reviewer.
+- **Goal/Planner owns assurance level**: when a task genuinely benefits from an additional fresh local Codex Reviewer, the frozen Goal may require one. That is task-specific assurance, not a universal workflow-core or Bridge requirement.
+candidate action:
+- extend normal completion/readiness logic so `PROCESS PASS`, build success, tests, schema/receipt presence or file existence cannot alone produce `USER_READY` / release-ready for an artifact-dependent task;
+- require the applicable domain owner to inspect the **exact final candidate** on the real consumed surface before final delivery; source/artifact changes that affect the reviewed surface invalidate the corresponding prior acceptance;
+- make "user is first QA" an explicit failure: obvious defects discoverable by the producer/domain owner must be resolved before external reviewer/user handoff;
+- route by task/artifact semantics rather than hard-coding one plugin: UI -> Frontend Design; presentation -> Presentations; research manuscript/report -> Research Authoring/Writing; other domains use their own acceptance capability when applicable;
+- keep QA risk-scaled: small non-artifact/docs/backend changes must not be forced into visual/PPT/manuscript gates merely because this rule exists;
+- permit a frozen Goal to require a fresh local Reviewer for higher assurance, but do not create a new default Reviewer loop, watcher, state machine, CLI mode or hard-coded review-pass budget;
+- preserve existing Reviewed/Control semantics: external GPT review and high-risk separated verification remain stronger optional layers, not substitutes for producer/domain self-QA and not mandatory for ordinary delivery.
+promotion gate:
+1. a Lucerna-like UI task with passing tests but visible/interaction defects cannot reach user-ready until the exact final native/actual-surface candidate passes Frontend Design-owned QA;
+2. a Presentation task cannot reach delivery readiness from PPTX/build success alone; the final rendered deck must pass Presentation-owned artifact QA;
+3. a Research Authoring task cannot reach delivery readiness from Markdown/LaTeX compilation alone; the applicable writing/research owner must inspect the final manuscript/report and required evidence/citation/render surfaces;
+4. after an acceptance-relevant source/artifact change, stale prior acceptance cannot be reused for the new candidate;
+5. an ordinary small nonvisual implementation/docs task with no domain-artifact acceptance requirement is not upgraded to a heavy review loop;
+6. a task-level Goal can request one fresh local Reviewer and bind it to the exact candidate, while the same task without that requirement can complete after sufficient domain-owner self-QA;
+7. no new Bridge workflow, workflow-core state machine, watcher/daemon, generic quality scorer or domain-specific quality rules are introduced in workflow-core.
+
+
 ### Reviewed Handoff exact sibling worktree authorization can still be unexecutable under Host sandbox
 status: NEW / POST_056_REFINEMENT
 tracking: #11
