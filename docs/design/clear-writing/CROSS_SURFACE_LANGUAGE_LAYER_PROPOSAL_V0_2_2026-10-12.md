@@ -104,3 +104,19 @@ ChatGPT Project 中比较：安装无短桥、安装加短桥、无候选仅短�
 不得新增外部模型、API 密钥、网络服务、钩子、浏览器扩展、后台 watcher 或自动付费评审。用户隐私与账户设置的修改必须单独守边界；私有测试结果放 `private/exports/` 或用户明确授权的私密位置，公共结果仅保存去敏任务、版本身份与可以公开的结论。失败恢复：停止发布，撤回尚未上线候选，恢复旧个人插件状态、旧 Codex 安装与测试项目指令；不自动改动其他真实 Projects。旧分支/资料不被清理或覆写。
 
 该架构的 **下一步只能是同版完整执行包的独立执行前 Critic 审查**。用户转述的架构 PASS 不等于执行前 PASS，也不授权启动 Executor、创建插件、写入用户设置或发布。
+
+## 8. 当前官方资料与核查边界
+
+本次设计在 2026-10-12 重新核对官方说明。以下资料支持插件可以包含多个技能、技能根据名称/描述和任务相关性被加载、Web/Codex 共享插件目录但能力受当前表面限制，以及 Project 指令覆盖全局个性化：
+
+- OpenAI, *Skills in ChatGPT*: https://help.openai.com/en/articles/20001066-skills-in-chatgpt
+- OpenAI, *Skills – Plugins*: https://developers.openai.com/plugins/concepts/skills
+- OpenAI, *Build skills*: https://developers.openai.com/plugins/build/skills
+- OpenAI, *Plugin architecture*: https://developers.openai.com/plugins/concepts/plugins
+- OpenAI, *Package your plugin*: https://developers.openai.com/plugins/build/plugins
+- OpenAI, *Plugins in ChatGPT*: https://help.openai.com/en/articles/20001256-plugins-in-chatgpt
+- OpenAI, *Projects in ChatGPT*: https://help.openai.com/en/articles/10169521-projects-in-chatgpt
+
+官方支持“技能可包含指令与代码资源”，但**不能由此直接推断个人 ChatGPT Web 的技能运行环境必然具有重型中文重写脚本所需的本地执行能力**。包装预检必须同时审阅其真实依赖和使用表面；正式 Web 端若不能运行某项必要帮助脚本，不得悄悄删除该脚本并宣称六技能全功能成立。应明确记录该表面的能力缺口，返回 Planner 决定是按经审核的可用范围收缩，还是停止该跨表面发行。
+
+这些官方页面不证明插件已经实际安装、每条回答都调用技能或两个技能按确定顺序运行。实际候选增量必须通过 G0–G7 规定的正常使用对照检验。
