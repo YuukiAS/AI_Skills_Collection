@@ -3,6 +3,7 @@
 - 日期：2026-10-12
 - 状态：`ARCHITECTURE_PASS_USER_RELAYED / EXECUTION_PACKAGE_DRAFT`；尚无执行前 Critic PASS
 - 追踪：`YuukiAS/AI_Skills_Collection#13`
+- Task key：`clear-writing--cross-surface-language-layer`
 - 仓库：`YuukiAS/AI_Skills_Collection`
 - 规划分支：`planner/clear-writing-cross-surface-v0.1`
 - 已审架构对象：该分支 `819f861de7dc626f473390df8a9c42b70d24dd92` 的 v0.1 提案、能力矩阵和交接
