@@ -52,6 +52,8 @@ Codex 的 Frontend Design 已在 `skills/tools/frontend/frontend-visual-systems/
 
 用仓库正式 Marketplace 生成和安装候选，从新会话中的普通任务实测六条选择路径与不应触发的负例。优先使用现有 `scripts/candidate_plugin_replay.py` 与已验证的 `ai-bridge plugin-replay` 受控正式入口，先实际核对选项与环境，不自造嵌套 `codex exec`。不能以技能文件存在、主动要求使用插件、读取生成源码或仅运行单元测试替代正式安装行为。所有可发布关键证据绑定相同最终源提交和生成包指纹。
 
+网页表面对复杂脚本有独立资格要求：`scientific-rewrite` 的重度中文重写可能使用 `rewrite_support.py` 一类本地帮助脚本。Plugin Creator 接受一个带代码文件的 ZIP，不等于普通 ChatGPT Web 一定执行这些脚本；必须用真实个人安装和源保真任务检查该表面是否支持。缺乏必要运行条件时，Web 该功能明确标为 `UNSUPPORTED/INCONCLUSIVE`，不得假装全部六项同等能力已在 Web 成立，也不得擅自删改重型流程。若这影响已批准的跨表面产品承诺，停止并返回 Planner/Critic 裁定。
+
 ### ChatGPT 个人 Web
 
 由同一最终候选的**六项技能及必要支持文件**构建一个个人私有 `skills-only` Clear Writing 包。包装使用受支持的 `.codex-plugin/plugin.json`，不含 MCP、外部模型、钩子、账号密钥和服务；展示名 Clear Writing，个人包装分发版本按平台格式，例如 `0.5.0`，中央 `writing-style` 仍使用两段 `0.5`。必须记录最终源提交、各技能及支持文件哈希、包装 ZIP SHA256 和个人插件发行身份，不能因外壳版本不同误称不同语义实现。
