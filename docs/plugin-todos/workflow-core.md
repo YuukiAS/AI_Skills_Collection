@@ -239,7 +239,7 @@ promotion gate:
 
 status: ADDENDUM_TO_EXISTING_CANDIDATE / NOT_NEW_WORKFLOW
 source: Lucerna 01057 治理后续与 2026-10-12 实际产品交付；源仓库 `YuukiAS/Lucerna`，治理基线 `99a1637e4bcb9bb3de54428d244304dea92827fb`
-evidence: 已通过源码测试和独立审查的产品提交 `7c5c82bc51571ff00219cd7d4522af50325e35f1` 仍在 detached 隔离工作树中，报告 `PUSHED=NO`，尚不能等同远端主线集成。Windows「启动应用」实际显示两个名称相同、图标不同的 Lucerna 条目（一项启用、一项禁用）；截图只能证明重复条目存在，不能确定哪一项是残留。Lucerna 当前 `enable_login_startup()` 将 `current_exe()` 写入 `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run` 的 `Lucerna` 值，代码层尚缺正式安装身份校验；重复启动项的具体来源必须在真实机器上逐项取证，不能由这一代码片段直接推断。Lucerna 01055/01056 还反复出现 GPT Work 从 Producer 已持有的证据发现明显 P1/P2，造成用户成为第一线质量检查者。
+evidence: 已通过源码测试和独立审查的产品提交 `7c5c82bc51571ff00219cd7d4522af50325e35f1` 仍在 detached 隔离工作树中，报告 `PUSHED=NO`，尚不能等同远端主线集成。Windows「启动应用」实际显示两个名称相同、图标不同的 Lucerna 条目（一项启用、一项禁用）；截图只能证明重复条目存在，不能确定哪一项是残留。Lucerna 当前 `enable_login_startup()` 将 `current_exe()` 写入 `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` 的 `Lucerna` 值，代码层尚缺正式安装身份校验；重复启动项的具体来源必须在真实机器上逐项取证，不能由这一代码片段直接推断。Lucerna 01055/01056 还反复出现 GPT Work 从 Producer 已持有的证据发现明显 P1/P2，造成用户成为第一线质量检查者。
 
 本项既有的「领域自检与交付准入」扩展为以下**有条件的交付后置条件**，不另设状态机或独立审查产品：
 
