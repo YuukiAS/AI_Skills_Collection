@@ -1,0 +1,16 @@
+{
+  "base_branch": "main",
+  "base_commit": "34e47fe6d0dc06d57ee1e6e37c0ff0f2fdfefc1b",
+  "ci_required": true,
+  "ci_status": "PENDING",
+  "implementation_commit": null,
+  "last_review_decision": null,
+  "max_plan_revisions": 1,
+  "max_review_rounds": 2,
+  "next_action": "RUN_GPT_PLANNER",
+  "plan_revision": 0,
+  "review_round": 0,
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "state": "PLAN_REQUESTED",
+  "task_key": "clear-writing--cross-surface-language-layer"
+}
