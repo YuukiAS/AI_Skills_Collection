@@ -235,6 +235,28 @@ promotion gate:
 6. a task-level Goal can request one fresh local Reviewer and bind it to the exact candidate, while the same task without that requirement can complete after sufficient domain-owner self-QA;
 7. no new Bridge workflow, workflow-core state machine, watcher/daemon, generic quality scorer or domain-specific quality rules are introduced in workflow-core.
 
+#### 2026-10-12 Lucerna 补充：本地完成不等于集成交付，安装副作用也属于交付质量
+
+status: ADDENDUM_TO_EXISTING_CANDIDATE / NOT_NEW_WORKFLOW
+source: Lucerna 01057 治理后续与 2026-10-12 实际产品交付；源仓库 `YuukiAS/Lucerna`，治理基线 `99a1637e4bcb9bb3de54428d244304dea92827fb`
+evidence: 已通过源码测试和独立审查的产品提交 `7c5c82bc51571ff00219cd7d4522af50325e35f1` 仍在 detached 隔离工作树中，报告 `PUSHED=NO`，尚不能等同远端主线集成。Windows「启动应用」实际显示两个名称相同、图标不同的 Lucerna 条目（一项启用、一项禁用）；截图只能证明重复条目存在，不能确定哪一项是残留。Lucerna 当前 `enable_login_startup()` 将 `current_exe()` 写入 `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run` 的 `Lucerna` 值，代码层尚缺正式安装身份校验；重复启动项的具体来源必须在真实机器上逐项取证，不能由这一代码片段直接推断。Lucerna 01055/01056 还反复出现 GPT Work 从 Producer 已持有的证据发现明显 P1/P2，造成用户成为第一线质量检查者。
+
+本项既有的「领域自检与交付准入」扩展为以下**有条件的交付后置条件**，不另设状态机或独立审查产品：
+
+- **明确交付对象和落点。** 区分「本地实现并测试」「目标分支/远端已安全集成」「可安装产物完成」「真实运行环境通过验收」。某一级完成不得冒充下一级；若任务只要求局部实现，可据实结束，但不得宣称已发布、已在用户机器生效。任务明确授权提交/推送时，Executor 对安全集成、精确远端引用核实负责；detached HEAD 或未经发布的孤立 worktree 不是远端交付。Git/worktree 操作的安全性由 Bridge 与仓库策略负责，workflow-core 仅判断效果是否已实现。受权限、远端变化或安全限制无法集成时，保留成果，报告**集成这一项**未完成及合法恢复路线，不能强推、覆盖脏工作、盲目切分支或把整项源码质量判为失败。
+- **安装副作用与回收。** 仅当当前目标涉及安装、升级、卸载、登录启动、快捷方式、托盘/后台实例或本机设置变更时，领域所有者必须检查实际归属、可执行文件身份、用户原有偏好、重复/陈旧注册以及安全清理或回滚；不能只证明安装脚本运行成功。普通无安装副作用的小型代码任务无需全机盘点。已确认归属前不得按显示名称批量删除注册项、杀死同名进程或干预其他应用。对于高权限/不可安全操作的环境，仅报告具体剩余边界，不要求用户替 Codex 做普通清理。
+- **Producer 自检必须有可否证的实际观察。** `P1=0/P2=0`、同上下文自评、编译通过和脚本绿灯都不是自检本身；需提供适配该领域的最终产物/可见路径和有因果性的交互后置条件。外部 GPT Work 若从相同现有证据再次发现普通按钮、状态矛盾或明显布局问题，应归类为 Producer 准入漏检并补对应的局部回归，再决定是否有值得独立产品判断的新问题，不能把 Work 变成循环替代本地 QA 的初级测试员。
+- **区分缺证与产品阻塞，控制用户时间。** 隔离桌面或特定原生环境缺失只阻止依赖该证据的声明，不逆向阻塞已授权、安全且可验证的源码开发与集成。合成数据只在隔离测试中使用；不得反复抢占用户的真实前台实例来填证据空缺。缺陷回归只重测受影响机制，禁止反复构建、截图、换 reviewer 来制造形式上的 PASS。
+
+本补充的验收场景：
+
+1. 已审查并测试通过的 detached-worktree 提交仍未集成：`LOCAL_SOURCE_PASS` 可为真，远端/用户交付仍必须显示未完成；若已授权安全集成，则应由执行者完成或精确记录唯一剩余影响。
+2. Windows 启动应用出现两个同名条目：安装/启动领域先依据路径、注册来源、身份和启用状态调查，保留用户设置，只在精确归属确定后安全清理；不能用「两个条目已关闭」「删除所有 Lucerna」或 UI build PASS 宣称清理成功。
+3. 现有截图已含重复布局、失效按钮或错误聚合：Producer 自检不得仅凭主观零缺陷声明进入正式外部验收；缺少安全原生环境时只能如实保留该表面覆盖缺口，不能用 fixture 顶替。
+4. 后端、文档或单一局部修改没有安装/原生 UI 副作用：既有轻量测试可正常结束，不强制运行安装扫描、原生完整验收或 GPT Work。
+
+职责归属保持原样：workflow-core 管交付声明与路由；Frontend Design 管受影响的 UI/原生视觉和交互质量；Lucerna/Tauri 等产品 owner 管启动项、安装器、单实例与进程生命周期；Bridge Kit 管安全 Git、运行身份及恢复。没有新增通用本机清理 daemon、Review 模式或强制系统升级。
+
 
 ### Reviewed Handoff exact sibling worktree authorization can still be unexecutable under Host sandbox
 status: NEW / POST_056_REFINEMENT
