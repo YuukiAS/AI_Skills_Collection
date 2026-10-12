@@ -29,3 +29,11 @@
 8. Research Authoring 本轮不得修改、迁移或用其废弃包装作为完成证据。PIE 0.2、个人设置写入、全局 Codex 配置、外部凭据、收费调用与插件发布均不属于本轮授权。历史 C5–C11 是开发回归而非未见样本；私有聊天不得写入公共仓库。
 
 请用明确证据检查方向错误、过度复杂、过度简化和真实平台失败风险。每个阻断问题须附对应要求、直接证据、因果风险和最小修复条件；普通命名审美或更多保险不能单独阻断。明确写出本次审查分支的 **精确提交**、提案版本、审查范围、结论 `PASS` 或 `REVISE`，并区分通过架构与批准执行/发布。不要以同一线程冒充 Planner 和 Critic。Critic 不修改本提案或运行 Executor；若需要修订，交还 Planner 给出完整 v0.2，而不是自行批准自己的新设计。
+
+## 跟踪状态与待同步动作
+
+Issue #13 当前正文仍指向已关闭的历史 PR #100；本轮新的设计权威为本分支上的提案及验收矩阵，历史 v0.2 不能代替本轮 Critic。源文件 `docs/plugin-todos/writing-style.md` 已有 `tracking: #13`，无需新建重复 Issue。
+
+当前个人 ChatGPT **没有独立安装的** `writing-style` / Clear Writing，只有别的插件中携带的写作技能；本仓库 `AGENTS.md` 要求每次更新面向读者的 Issue/Project 文案前，实际调用当前安装的 Clear Writing。由于此条件当前无法满足，本 Planner **未修改** Issue #13 正文，也未假装调用成功。待下一具备已安装 Clear Writing 正式调用入口的 AI Skills Maintainer 更新 Issue 进度与新设计锚点；不要求用户手工维护。
+
+当前连接不支持 GitHub Project 字段修改，`AI Skills Maintenance` 的 Issue #13 应在新规划阶段同步：`Status=DOING`、`Area=writing-style`、当前执行锚点=本分支及提交、下一步=独立 Critic 审查。**Project 字段尚未同步**。本轮没有发布、合并、技能源修改、执行启动或个人插件创建。
