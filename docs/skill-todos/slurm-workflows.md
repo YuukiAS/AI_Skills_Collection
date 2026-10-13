@@ -6,6 +6,19 @@ This skill is not one of the central Marketplace plugins, so its real-use failur
 
 ## Open candidates
 
+
+### 受保护作业取消必须取得本人当次确认
+status: NEW
+source: 2026-10-12/13 用户报告真实 H100 interactive allocation 在长 Codex Goal 中被未经本人独立确认的清理操作取消；用户随后指定 Longleaf 的 htzhulab 分区和个人 H100 保护。
+evidence: docs/design/slurm-workflows/SLURM_WORKFLOWS_CANCEL_PROTECTION_PROPOSAL_V0_3_2026-10-13.md；docs/design/slurm-workflows/SLURM_WORKFLOWS_CANCEL_PROTECTION_EXECUTION_PLAN_V0_3_2026-10-13.md；docs/goals/hpc--slurm-cancel-human-confirmation-goal-draft-v0_3.md；docs/design/slurm-workflows/SLURM_WORKFLOWS_CANCEL_PROTECTION_KICKOFF_DRAFT_V0_3_2026-10-13.md；正式技能 0.4 现有替换/竞速决策与 DII/CARE 直接取消路径。
+problem:
+- 原任务许可、旧竞速授权或 Codex 自动审核可能被当成取消已有受保护作业的许可；Skill 只做决策，不能隔离同 UID 直接命令。
+- 需对每个真实集群采用用户指定保护分区与个人加速器保护并集，在可信执行边界取得本人对当次精确作业的确认；没有真实隔离时禁止代理执行取消，不得称已开启强制防护。
+project-specific context: Longleaf 的 htzhulab 和个人 H100 是用户部署选择而非通用源码常量；DII/CARE 是已知待核查消费者；Bridge Kit Host auto_review 不等于本人确认。
+next action: v0.3 设计方向已获用户转交的 Critic PASS，待 execution-ready Critic 独立审查同版 Plan/Goal/Kickoff，之后才可由用户另行授权离线实施。
+tracking issue: PENDING_CLEAR_WRITING — 当前环境不能真实调用已安装 Clear Writing；按维护看板禁止未做该步骤而创建读者可见 Issue。下一具该入口的维护者需创建独立维护 Issue、回填 tracking: #实际编号，并同步 Project DOING；不复用已关闭的 #96。
+
+
 ## Recently promoted
 
 ### Bounded duplicate-race opt-in when no site prohibition is known
