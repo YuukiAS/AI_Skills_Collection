@@ -32,7 +32,7 @@ problem:
 - That was too strict for missing, `UNKNOWN`, `disabled_by_default`, and `explicit_user_opt_in` policy states when no site prohibition is known and the user has explicitly opted in.
 project-specific context: This entry is scoped to public standalone Slurm Workflows behavior and deterministic fake-Slurm/read-only evidence. It does not authorize real `sbatch`, `salloc`, `scancel`, duplicate GPU race execution, weekly GPU enrollment, DII installation/adaptation, Bridge Kit changes, or central plugin topology changes.
 current behavior: Repository `5.4.4` formally ships standalone `slurm-workflows 0.4`. Duplicate race remains off by default; final race authorization requires explicit user/local opt-in, no explicit site prohibition, exactly two distinct candidate routes, full workload/scientific contract identity, hard resource compatibility, and a frozen safe winner/loser cancellation policy. Central Plugins remain `NO_BUMP`; Bridge Kit remains `NO CHANGE`; `REAL_SLURM_MUTATION = NO`.
-promotion gate: CLOSED by product candidate `5a3dc447da2ea429ba2d229b0301c378be9e8018`, GitHub CI run `37187784359`, Final Critic PASS, and formal release commit `06d135d8a6ee62cd41abb40fc5771fcef7f8db25`. Issue #96 remains open for DII consumer adaptation.
+promotion gate: CLOSED by product candidate `5a3dc447da2ea429ba2d229b0301c378be9e8018`, GitHub CI run `37187784359`, Final Critic PASS, and formal release commit `06d135d8a6ee62cd41abb40fc5771fcef7f8db25`. Issue #96 is CLOSED after DII consumer adaptation; its completed 0.4 scope does not close the separate protected-cancellation task.
 
 ### Slurm routing and capacity maintenance closure regression
 status: PROMOTED
