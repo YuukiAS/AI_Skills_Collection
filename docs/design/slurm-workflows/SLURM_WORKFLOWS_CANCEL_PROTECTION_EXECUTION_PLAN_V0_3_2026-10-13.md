@@ -8,6 +8,29 @@
 - 执行分支与工作树：尚未创建；审查及用户授权后才考虑 reviewed/hpc--slurm-cancel-human-confirmation
 - 当前允许写入：本仓库 Plan、Goal 草案、Kickoff 草案及内部技能 TODO，不修改任何生产技能、服务器、真实 Slurm 状态、DII/CARE 源码
 
+## ER-01：冻结执行身份及有界初始化交接（限本次执行任务）
+
+本次执行对象精确绑定仓库 YuukiAS/AI_Skills_Collection、任务键 hpc--slurm-cancel-human-confirmation、分支 reviewed/hpc--slurm-cancel-human-confirmation。方案设计源为 a92dc4729e9c5bd2740c5d1bd967daa40f13e8d3 的 v0.3 提案；上一轮执行包审查提交为 6fcbde22b334e471736debfee4d1d86084e8b270；修订后供 Critic 审查的准确包提交，由本轮三份文件全部提交后给出，不得将旧提交误认为新文件身份。**GitHub 不提供拟执行 Codex 机器的实时仓库绝对路径，本轮不能虚构执行工作树已存在，也不能把仅冻结分支名当作完整执行授权。**
+
+实际读取 Bridge Kit 当前主分支的 templates/reviewed_handoff/README.md 和 ai_bridge_kit/reviewed_handoff.py：新任务正式入口为 ai-bridge reviewed-handoff task bootstrap，仅能作用于**当前核实的仓库根目录**，分支固定派生 reviewed/hpc--slurm-cancel-human-confirmation；唯一同级工作树目录由已核实的绝对主仓库 R 派生为 parent(R)/(basename(R) + "-hpc--slurm-cancel-human-confirmation")。该入口真实创建本地分支、工作树和仅该工作树的首次 REQUEST.md/CURRENT.json，故不属于只读命令。
+
+在任何分支或工作树变更之前，采用如下**最小两段交接**，不得从一份长提示词直接跳过：
+
+1. **只读定位，不启动实现或 bootstrap。** 由用户选择拟执行的既有 Codex 仓库工作目录，最小只读预检取得 pwd -P、git rev-parse --show-toplevel、git remote -v、git status --porcelain、git worktree list --porcelain、本地及 remote tracking 的同名分支存在性、当前 Bridge CLI 实际版本/来源与帮助信息。核实 repository=YuukiAS/AI_Skills_Collection、R 是真实规范仓库根目录、W 由 Bridge 规则唯一得出且未占用/未指向别人目录；回显**确切 R、W、冻结分支及待处理碰撞**。当前用户尚未授权 Codex 对任何目标机器开展该预检；Critic PASS 也不代用户授权。若工作目录未知或不唯一，停止并只请求用户提供/选择一个真实主仓库目录，不猜服务器路径。
+2. **用户当次看见并明确同意确切 R、W、分支及限定首次发布后，才可初始化。** 先按 Host Policy 的安全同步方式 git fetch origin main，并核对同步后的 origin/main 40 位提交及本次审查四份源文件内容身份没有发生实质漂移；若漂移或出现 dirty/unrelated 状态，暂停，不更换工作树。只从真实 R 调用正式 ai-bridge reviewed-handoff task bootstrap，参数必须包含 --task-key hpc--slurm-cancel-human-confirmation、--expected-repo YuukiAS/AI_Skills_Collection、--expected-base-commit 等于**当前同步后** origin/main 的实际 40 位提交和一个仅引用已冻结 Goal 的短 objective。由正式入口内生派生分支/W；失败只允许按 Bridge 本身安全失败/回滚约定处理，不允许手工 git worktree add、强制清理或换目录重试。
+
+**初次非强制发布界限：**本次授权仅允许在新任务工作树中普通提交两份首次元数据 automation/reviewed_handoff/tasks/hpc--slurm-cancel-human-confirmation/{REQUEST.md,CURRENT.json}，核对差异**只有这两份**，然后使用正式 ai-bridge reviewed-handoff task publish-first --task-key hpc--slurm-cancel-human-confirmation --expected-repo YuukiAS/AI_Skills_Collection 进行受限首次远端同名 reviewed 分支创建。它使用内置远端不存在约束和提交内容校验，绝不授予任意 raw push、强推、修改主分支或夹带生产代码。后续若另获离线实施授权，当前已存在且有合法同名 upstream 的任务分支普通非强制发布只按 Host Policy 的现有受限同分支入口执行，不自动扩展到其它分支。任何不符立即停止。
+
+ER-01 **尚未取得真实 R/W，也没有当前用户对该路径/分支创建的生效授权**。因此这次 Kickoff 继续保持不可执行草案；下一步最多为另行授权的只读定位交接，必须拿到精确 R/W 后再冻结可执行初始化/实施交接交给 Critic，不得预先声称 execution-ready PASS 或 READY_FOR_CODEX=YES。此阶段不会创建分支、工作树、Watcher 或安排任务。
+
+## ER-02：危险离线模拟前的系统隔离先决条件（G3 已有验收，不新增 Gate）
+
+任何会模拟 scancel、远端调用、Python/shell 子进程取消、作业数组/批量取消、模拟 signal、终止 salloc/tmux holder 的回放，必须**先对实际将运行被测子进程的同一个执行沙箱**完成可审计的隔离证明，不能只检查 PATH、替换模拟命令、设置 DRY_RUN、引用代码注释或根据提示词承诺。危险回放绝不在普通生产 UID/宿主 shell 中直接运行。
+
+隔离应复用实际可验证的成熟容器、隔离虚拟机或可信离线执行器，不创建新服务。预检必须证明被测进程：没有真实 Slurm 控制器、调度器 API、MUNGE 或 Slurm Unix socket；没有任何生产 SSH 私钥、SSH agent、凭据/令牌、认证环境变量或挂载；没有连接真实服务器的网络出口、主机网络、代理、隧道或继承的可用通信 socket；没有宿主 PID/信号权限、主机进程空间或操作现有 allocation holder 的途径；没有特权模式、宿主控制 socket、宿主敏感目录/GPU/生产作业路径的可写挂载。检查实际隔离配置、挂载、网络/进程命名空间、有效权限及实际执行子进程身份；只能在隔离环境内建立假 Slurm、假远端接口和自建的模拟 holder。既不向生产地址作危险探针，也不调用宿主真实 scancel/kill。
+
+**先取证再运行**：证据完整、范围与即将执行的子进程一致时才允许对应危险回放。任何隔离功能缺失、不确定或执行子进程可能继承真实认证/网络/PID 权限，就停止全部涉及取消、模拟远端、信号或 holder 的危险回放；不通过更换命令格式、移除失败检查、直接改宿主 PATH 或在服务器上“简单试一下”继续。仍可开展不触发模拟取消/信号/网络子进程的纯函数与静态检查，记录 G3 模拟执行部分因隔离不足而未验收，返回 Planner/独立 Critic。G1—G6 六项含义、原始验收标准及 DII/CARE 范围均不改；隔离沙箱 PASS 也不构成真实 Longleaf 执行权限隔离或真实发布 PASS。
+
 ## 一、最重要的交付意义
 
 用户不应通过逐行阅读长 Goal 来发现其中隐藏的取消 H100 命令。受保护作业取消必须由用户本人就当前精确作业再次明确同意；旧任务、历史竞速授权及 Codex 自动审核均不是人类确认。本次设计保持 v0.3，不重新发明架构。
@@ -47,7 +70,7 @@
 
 ## 四、批准后才允许执行的范围与阶段
 
-阶段 A（此次 Codex Goal 仅限该阶段）：在经审查和授权的本仓库任务工作树中，复用 scripts/slurm_routing.py 的既有能力，增加唯一确定性判断与本地保护策略解析、只读目标解析、短确认展示、故障默认拒绝以及可选前置钩子；严格分离判定与实际执行。危险动作全部使用隔离假 Slurm、无生产凭据模拟进程。实现完整负例及正常使用回归，记录安装/权限未证实部分，停止在离线产物和独立实现复核前。不调用真实 sbatch/salloc/srun/scancel、mutating scontrol、kill、tmux 终止、真实 SSH/密钥或服务器部署。
+阶段 A（须先完成 ER-01 的真实路径冻结与本人批准，危险模拟须完成 ER-02 的同一进程隔离证明）：在经审查和授权的本仓库任务工作树中，复用 scripts/slurm_routing.py 的既有能力，增加唯一确定性判断与本地保护策略解析、只读目标解析、短确认展示、故障默认拒绝以及可选前置钩子；严格分离判定与实际执行。危险动作全部使用隔离假 Slurm、无生产凭据模拟进程。实现完整负例及正常使用回归，记录安装/权限未证实部分，停止在离线产物和独立实现复核前。不调用真实 sbatch/salloc/srun/scancel、mutating scontrol、kill、tmux 终止、真实 SSH/密钥或服务器部署。
 
 阶段 B（不在当前 Kickoff 授权内）：在新的 bounded 只读取证批准后，核对每个目标环境的真实 Codex 版本、钩子信任/加载、Slurm 账号、备用认证和 SSH 入口、计算节点权限、interactive holder 归属与私有策略写权限；无法证明硬隔离则不启动代理取消。任何远端凭据、权限、钩子安装、真实危险探针须单独 Critic 与用户许可；不能从 A 自动继续。
 
