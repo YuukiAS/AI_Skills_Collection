@@ -5,12 +5,20 @@
 设计权威：docs/design/slurm-workflows/SLURM_WORKFLOWS_CANCEL_PROTECTION_PROPOSAL_V0_3_2026-10-13.md（设计方向已据用户转交的 Critic PASS 获批）
 执行范围来源：docs/design/slurm-workflows/SLURM_WORKFLOWS_CANCEL_PROTECTION_EXECUTION_PLAN_V0_3_2026-10-13.md
 文档版本：v0.3，待 execution-ready Critic 独立审核
-执行分支：尚未创建；后续依审查与授权按 Reviewed Handoff 合同采用 reviewed/hpc--slurm-cancel-human-confirmation
+执行分支身份：固定为 reviewed/hpc--slurm-cancel-human-confirmation（目前不存在，未获创建授权）；工作树绝对路径在真实 Codex 主仓库根路径取证前未知，严禁自行选定
 授权状态：DRAFT_ONLY。读取此文件、设计 PASS、CI 或 Critic 审查本身均不授权启动。
 
 ## 用户结果
 
 禁止 AI 在长提示词、历史竞速许可、自动审批或钩子失效的情况下主动取消已取得的受保护 Slurm 作业。用户逐集群指定受保护分区，并可另设个人 GPU 保护；二者取并集。Longleaf 的 htzhulab 分区所有 GPU 和用户指定 H100 无论在哪个分区都必须在取消前取得本人当次确认，但通用源码不得写死任何具体站点或 GPU。危险操作不可被确定拦截的环境必须关闭代理取消功能，不能宣称已强制安全。
+
+## ER-01/ER-02 执行前置条件（对实施 Goal 有约束力）
+
+**ER-01：当前不授权执行 Goal、不授权创建本地/远端分支。** 对应 Plan 已冻结仓库 YuukiAS/AI_Skills_Collection、任务键 hpc--slurm-cancel-human-confirmation、唯一目标分支 reviewed/hpc--slurm-cancel-human-confirmation 和本轮四份文件的审查版本身份；但真实执行工作树绝对路径仍未知。下一步必须先由用户指定拟运行 Codex 的仓库目录，在该机器上执行单独授权的只读身份/工作树预检（不改 Git 分支/工作树、不连接 Slurm）。从真实主仓库 R 按 Bridge Kit 规则导出唯一 W，回显 R/W/分支、冲突与源文件匹配结果，用户需对确切 R/W 及有限首次初始化/发布作独立授权。没有这些事实和授权，停止，不启动下述实现任务。
+
+后续正式初始化仅使用 Bridge Kit 当前入口 ai-bridge reviewed-handoff task bootstrap，必须要求目标仓库身份、同步后 origin/main 的精确 40 位提交及唯一派生 W 成立。初次任务提交只能含 REQUEST.md/CURRENT.json 两份任务元数据，首次发布只能走 ai-bridge reviewed-handoff task publish-first，目标为同名 reviewed 分支，禁止夹带本 Goal 实现代码、任意 raw push 或 force；以后普通非强制同分支发布依 Host Policy 已批准的正式入口执行。任何路径、branch、source commit 或元数据不吻合，停止并交回 Planner。当前 Goal 草案和当前 Kickoff 不得被理解为本人已授权上述任一 Git 动作。
+
+**ER-02：危险模拟测试必须先证明系统隔离。** 在执行任何模拟取消/批量取消、SSH/远端子进程调用、Python subprocess/scancel、模拟 kill/signal 或 salloc/tmux holder 终止前，必须为**将真正执行这些动作的同一个进程环境**提交可验证的操作系统层隔离证据：无真实 Slurm 控制器/API/MUNGE/Unix socket，无生产 SSH 密钥/agent/凭据、环境变量及挂载，无真实远端网络出口、主机网络/隧道/继承套接字，无宿主 PID/信号权或能触及已有分配持有者的权限，无特权、宿主管理 socket 或生产工作区写入挂载。使用实际隔离容器/虚拟机/无生产凭据的隔离执行器和内置假 Slurm/假 holder；**PATH 伪装、DRY_RUN、环境变量声明或提示词禁令不算**。隔离不充分时不运行危险模拟，也不改用宿主普通 shell 运行；可继续纯函数和静态检查并如实报告 G3 模拟回放未通过，停在该阻塞，不新增 Gate 或借机请求真实 Slurm 探针。
 
 ## 离线 Executor 必须交付
 
@@ -41,7 +49,7 @@ G1 正确识别站点/目标/保护范围；G2 人工授权不可冒充；G3 真
 
 ## 交接与最终产物
 
-在目标任务工作树内提交所有正式变更及可复现离线测试，生成 task 结果、manifest、实际使用的文件路径/源码身份、消费者待适配清单及明确下一轮审核对象。独立 Reviewer 能直接看源代码、真正执行回放、完整日志和失败证据。未经后续 Critic/用户许可不得集成、对外发布或触碰生产。Central implementation complete 后仍须实际适配 DII/CARE 并按 AI Skills Maintenance Board 才能 DONE。
+仅在 ER-01 真实工作树已获用户授权且 ER-02 相应测试隔离已被核实后，在该确切目标任务工作树内提交所有正式变更及可复现离线测试，生成 task 结果、manifest、实际使用的文件路径/源码身份、消费者待适配清单及明确下一轮审核对象。独立 Reviewer 能直接看源代码、真正执行回放、完整日志和失败证据。未经后续 Critic/用户许可不得集成、对外发布或触碰生产。Central implementation complete 后仍须实际适配 DII/CARE 并按 AI Skills Maintenance Board 才能 DONE。
 
 当前维护事项仍待由具有真实 Clear Writing 入口的维护者创建独立 Issue 并关联技能 TODO；无法创建不得伪造 Issue ID 或要求用户手工维护。
 
