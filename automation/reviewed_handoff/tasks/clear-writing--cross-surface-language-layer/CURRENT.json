@@ -7,10 +7,10 @@
   "last_review_decision": "REVISE",
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "RUN_CODEX_REPAIR",
+  "next_action": "RUN_GPT_PLANNER",
   "plan_revision": 0,
   "review_round": 1,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
-  "state": "REVISE",
+  "state": "NEEDS_GPT_PLANNER",
   "task_key": "clear-writing--cross-surface-language-layer"
 }
