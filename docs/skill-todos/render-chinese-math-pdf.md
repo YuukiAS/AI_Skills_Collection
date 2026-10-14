@@ -86,3 +86,12 @@ candidate_action:
 - Add routing tests for exact project visual authority: when a course/venue has a frozen header/font/page contract, the automatic handoff must pass that authority into the renderer rather than replacing it with the default formal-note profile.
 promotion_gate: replay on one student-facing assessment handout and one bilingual instructor rubric initiated through an upstream plugin with no explicit renderer instruction; require automatic renderer invocation, canonical receipts, no browser fallback, no local-path/timestamp leakage, and independent all-pages visual PASS.
 
+### PDF 渲染完成后未直接交付可另存为的成品
+status: NEW
+source: CAT-TRACE / 2026-10-14 双语方法导读 PDF 真实渲染任务；用户在同一任务中反馈。
+evidence: 用户提供的任务截图显示：助手先报告一份 9 页 A4 PDF 已完成渲染、全页检查与哈希验证，却未在首次完成答复中提供用户可直接另存为的 PDF 成品。用户随后追问“可以另存为的pdf呢？次次问你要了？”，助手才补交文件卡片。此次成品名为 `Unseen_Species_Inference_TRACE_CAT_TRACE_Bilingual.pdf`；截图中的运行路径和源论文内容不纳入公共维护材料。
+problem:
+- 渲染成功和面向用户的文件交付是两件事。仅报告渲染完成、源文件/输出路径、校验值或仓库提交，不等于用户已取得能直接打开、下载或另存为的最终 PDF。
+- 用户明确要求每次 PDF 渲染成功后的最终回复都直接提供实际可获取、可另存为的完整成品文件或经验证可下载的链接，不应再让用户额外追问一次；文件入口必须对应当次验证通过的最终 PDF，不得提供未经核实的路径、失效链接或仅有预览图。
+- 远程服务器或 Slurm 作业中生成的文件若尚无法从对话/交付界面直接取得，应如实说明交付尚未完成，并在授权与数据边界内完成可获取的文件交接；不能把远端绝对路径或已渲染的状态当作已交付。
+project-specific context: CAT-TRACE 的研究内容、这次报告的页数/文件名和远程运行位置只用于定位案例；可复用问题是 PDF 渲染技能的最终成品交付，而不是 Slurm 调度、模型或源 Markdown 的缺陷。
