@@ -60,3 +60,26 @@ Affected plugins:
 ## Remaining Gates
 
 This implementation is ready for CI and independent review. It does not claim final product completion. ChatGPT personal plugin creation, G1 A/E and B/C matched comparisons, D explicit diagnostic, broader artifact-aware review, full Frontend/Presentations rendered artifact review, G7 unseen holdout, and final user acceptance remain downstream gates under the frozen v0.3 plan.
+
+## 2026-10-15 Recovery Status
+
+The statement above that the original implementation was ready for CI has been superseded by the first Reviewer decision and the approved recovery execution.
+
+Completed recovery work:
+
+- froze public-safe fixtures and five complete baseline outputs for `cac70c3bfcce6aeeba9c3e80adfa317235b54ee9` before any production edit or main merge;
+- found RW-WEB-01..04 PASS and RW-WEB-05 FAIL on the original candidate;
+- merged `origin/main@58ee18cd3e68df77c35b314c5cf9b0e83a985423` normally into the same reviewed branch;
+- reproduced the same 4-PASS / 1-FAIL result on synchronized candidate `3212a6a088352dee5e15dc0ee1ffc6a0ac0c8fc4`;
+- made a bounded `response-clarity` repair for semantic stopping and source-consensus versus assistant-recommendation separation;
+- kept source and generated `response-clarity` mirrors identical and added a focused contract regression.
+
+Recovery stopped before full CI because canonical Presentations / Research Writing source and their committed generated payload encode substantively different professional behavior. The approved generator probe would remove 6,242 lines of generated execution and acceptance contracts. That requires domain-owner semantic authority and triggers the frozen `NEEDS_GPT_PLANNER` route.
+
+Evidence:
+
+- baseline: `results/clear-writing--cross-surface-language-layer/web-regression-baseline/cac70c3/`
+- synchronized pre-repair replay: `results/clear-writing--cross-surface-language-layer/web-regression-pre-repair/3212a6a/`
+- blocker: `results/clear-writing--cross-surface-language-layer/GEN_PARITY_SEMANTIC_BLOCKER_2026-10-15.md`
+
+The focused Clear Writing checks pass. Full Marketplace generation check and required GitHub CI do not pass and were not rerun as if the blocker were resolved. Review round 2 remains unconsumed.

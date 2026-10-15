@@ -38,6 +38,21 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
         self.assertIn("Use this skill for ordinary answers to the user", text)
         self.assertIn("pure JSON, YAML, code, commands, raw logs", text)
 
+    def test_response_clarity_stops_at_the_answer_and_separates_source_consensus(self):
+        source = (REPO_ROOT / "skills/writing/core/response-clarity/SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        generated = (
+            REPO_ROOT / "plugins/codex/plugins/writing-style/skills/response-clarity/SKILL.md"
+        ).read_text(encoding="utf-8")
+
+        for text in (source, generated):
+            self.assertIn("When the user's core question has been answered, stop", text)
+            self.assertIn("This is a semantic stopping condition", text)
+            self.assertIn("For multi-source synthesis", text)
+            self.assertIn("Present any assistant recommendation afterward", text)
+            self.assertIn("source consensus", text)
+
     def test_writing_fidelity_fails_unreadable_chinese_final_artifacts(self):
         text = (REPO_ROOT / "skills/writing/core/writing-fidelity/SKILL.md").read_text(encoding="utf-8")
         self.assertIn("classify the deliverable as `qa_failed`", text)

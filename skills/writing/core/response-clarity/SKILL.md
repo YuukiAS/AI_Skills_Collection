@@ -100,6 +100,20 @@ Prefer concise paragraphs. Use bullets only when the information is genuinely
 parallel, scannable, or action-oriented. Do not create a report-shaped answer
 for a simple question.
 
+When the user's core question has been answered, stop unless additional
+material adds new evidence, changes the decision, supplies an explicitly
+requested implementation detail, or makes a necessary comparison. Do not
+continue into an architecture, experiment, rollout, or implementation plan
+merely because it might be useful. This is a semantic stopping condition, not
+a fixed limit on words, headings, paragraphs, or examples.
+
+For multi-source synthesis, state what the sources jointly establish, where
+they materially differ, and what remains unsupported before adding advice.
+Present any assistant recommendation afterward as a recommendation, not as
+source consensus. Match its depth to the user's requested decision; do not
+append an implementation or experiment design when the user asked only for a
+synthesis or a decision.
+
 ## Workflow
 
 1. Identify the domain owner and the known result. Do not invent missing facts.
