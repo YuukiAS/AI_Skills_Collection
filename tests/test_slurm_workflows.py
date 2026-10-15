@@ -289,6 +289,417 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         flexible = helper.bounded_duplicate_race_decision({}, True, flexible_candidates, flexible_workload, cancellation)
         self.assertTrue(flexible["allowed"])
 
+    def test_cancel_g1_exact_targets_private_policy_union_and_unknowns(self) -> None:
+        helper = load_helper()
+        site_a = {"cluster_id": "cluster-a", "cluster_identity_verified": True, "policy": {}}
+        protected_policy = {
+            "cluster_id": "cluster-a",
+            "policy_version": "policy-7",
+            "protected_partitions": ["premium"],
+            "protected_accelerators": ["gpu-premium"],
+            "scope_confirmed_by_human": True,
+        }
+        target = {
+            "job_id": "4101",
+            "cluster_id": "cluster-a",
+            "state": "PENDING",
+            "candidate_partitions": ["ordinary"],
+            "requested_accelerators": ["gpu-standard"],
+            "owner_run_id": "run-current",
+            "cancel_responsibility": True,
+            "facts_verified": True,
+            "ownership_verified": True,
+        }
+
+        unprotected = helper.protected_cancel_decision(
+            site_a,
+            protected_policy,
+            [target],
+            "run-current",
+            target_set_complete=True,
+        )
+        self.assertEqual(unprotected["decision"], "ALLOW_OWNED_UNPROTECTED")
+        self.assertFalse(unprotected["execution_authorized"])
+
+        protected_partition = helper.protected_cancel_decision(
+            site_a,
+            protected_policy,
+            [dict(target, candidate_partitions=["ordinary", "premium"])],
+            "run-current",
+            target_set_complete=True,
+        )
+        self.assertEqual(protected_partition["decision"], "REQUIRE_FRESH_HUMAN")
+        self.assertEqual(protected_partition["protection_matches"][0]["protected_partitions"], ["premium"])
+
+        protected_accelerator = helper.protected_cancel_decision(
+            site_a,
+            protected_policy,
+            [dict(target, requested_accelerators=["gpu-standard", "gpu-premium"])],
+            "run-current",
+            target_set_complete=True,
+        )
+        self.assertEqual(protected_accelerator["decision"], "REQUIRE_FRESH_HUMAN")
+        self.assertEqual(protected_accelerator["protection_matches"][0]["protected_accelerators"], ["gpu-premium"])
+
+        site_b = {"cluster_id": "cluster-b", "cluster_identity_verified": True, "policy": {}}
+        empty_policy_b = {
+            "cluster_id": "cluster-b",
+            "policy_version": "policy-1",
+            "protected_partitions": [],
+            "protected_accelerators": [],
+            "scope_confirmed_by_human": True,
+        }
+        same_partition_other_cluster = helper.protected_cancel_decision(
+            site_b,
+            empty_policy_b,
+            [dict(target, job_id="5101", cluster_id="cluster-b", candidate_partitions=["premium"])],
+            "run-current",
+            target_set_complete=True,
+        )
+        self.assertEqual(same_partition_other_cluster["decision"], "ALLOW_OWNED_UNPROTECTED")
+
+        array_targets = [
+            dict(target, job_id="4200_1"),
+            dict(target, job_id="4200_2"),
+        ]
+        expanded_array = helper.protected_cancel_decision(
+            site_a,
+            protected_policy,
+            array_targets,
+            "run-current",
+            action="cancel_array_elements",
+            target_set_complete=True,
+        )
+        self.assertEqual(expanded_array["decision"], "ALLOW_OWNED_UNPROTECTED")
+        self.assertEqual(expanded_array["target_ids"], ["4200_1", "4200_2"])
+
+        fail_closed_cases = [
+            helper.protected_cancel_decision(site_a, protected_policy, [target], "run-current", target_set_complete=False),
+            helper.protected_cancel_decision(site_a, {}, [target], "run-current", target_set_complete=True),
+            helper.protected_cancel_decision(
+                {"cluster_id": "cluster-a", "cluster_identity_verified": False},
+                protected_policy,
+                [target],
+                "run-current",
+                target_set_complete=True,
+            ),
+            helper.protected_cancel_decision(
+                {"cluster_id": "cluster-a", "cluster_identity_verified": True, "policy": "UNKNOWN"},
+                protected_policy,
+                [target],
+                "run-current",
+                target_set_complete=True,
+            ),
+            helper.protected_cancel_decision(
+                site_a,
+                protected_policy,
+                [{key: value for key, value in target.items() if key != "requested_accelerators"}],
+                "run-current",
+                target_set_complete=True,
+            ),
+            helper.protected_cancel_decision(
+                site_a,
+                protected_policy,
+                [dict(target, job_id="4200_[1-4]")],
+                "run-current",
+                target_set_complete=True,
+            ),
+        ]
+        for decision in fail_closed_cases:
+            self.assertEqual(decision["decision"], "DENY_UNKNOWN_OR_FORBIDDEN")
+
+        prohibited = helper.protected_cancel_decision(
+            {"cluster_id": "cluster-a", "cluster_identity_verified": True, "policy": {"cancel_execution": "forbidden"}},
+            protected_policy,
+            [target],
+            "run-current",
+            target_set_complete=True,
+        )
+        self.assertEqual(prohibited["decision"], "DENY_UNKNOWN_OR_FORBIDDEN")
+        self.assertEqual(prohibited["reason"], "explicit_site_prohibition")
+
+        site_protected = helper.protected_cancel_decision(
+            {
+                "cluster_id": "cluster-a",
+                "cluster_identity_verified": True,
+                "policy": {"protected_partitions": ["ordinary"]},
+            },
+            protected_policy,
+            [target],
+            "run-current",
+            target_set_complete=True,
+        )
+        self.assertEqual(site_protected["decision"], "REQUIRE_FRESH_HUMAN")
+
+        private_fields = {
+            "cancel_policy_version": "policy-7",
+            "cancel_policy_confirmed": "true",
+            "protected_partitions": "premium,priority",
+            "protected_accelerators": "gpu-premium",
+        }
+        parsed_policy = skills.environment_cancel_protection_policy(private_fields, "cluster-a")
+        self.assertEqual(parsed_policy["protected_partitions"], ["premium", "priority"])
+        self.assertEqual(parsed_policy["protected_accelerators"], ["gpu-premium"])
+        self.assertTrue(parsed_policy["scope_confirmed_by_human"])
+        self.assertNotIn("protected_partitions", skills.environment_public_override_policy(private_fields))
+        self.assertNotIn("protected_accelerators", skills.environment_public_override_policy(private_fields))
+
+    def test_cancel_g2_fresh_human_representation_is_exact_and_non_authorizing(self) -> None:
+        helper = load_helper()
+        site = {"cluster_id": "cluster-a", "cluster_identity_verified": True, "policy": {}}
+        policy = {
+            "cluster_id": "cluster-a",
+            "policy_version": "policy-7",
+            "protected_partitions": ["premium"],
+            "protected_accelerators": [],
+            "scope_confirmed_by_human": True,
+        }
+        target = {
+            "job_id": "6101",
+            "cluster_id": "cluster-a",
+            "state": "PENDING",
+            "candidate_partitions": ["premium"],
+            "requested_accelerators": [],
+            "owner_run_id": "run-current",
+            "cancel_responsibility": True,
+            "facts_verified": True,
+            "ownership_verified": True,
+        }
+        request = helper.cancel_confirmation_request(
+            site,
+            policy,
+            [target],
+            "run-current",
+            target_set_complete=True,
+        )
+        self.assertIsNotNone(request)
+        assert request is not None
+        self.assertEqual(request["default_choice"], "retain")
+        self.assertFalse(request["execution_authorized"])
+        self.assertNotIn("scancel", request["message"])
+        self.assertEqual(request["target_facts"][0]["partitions"], ["premium"])
+        self.assertEqual(request["target_facts"][0]["accelerators"], [])
+
+        receipt = {
+            "confirmation_id": "human-channel-confirmation-1",
+            "source": "independent_human_channel",
+            "identity_verified": True,
+            "human_identity": "user-a",
+            "choice": "confirm_cancel_exact_targets",
+            "single_use": True,
+            "consumed": False,
+            "action": "cancel_job",
+            "binding_digest": request["binding_digest"],
+            "target_ids": request["target_ids"],
+            "policy_version": request["policy_version"],
+            "issued_at": "2026-10-15T12:00:00+00:00",
+            "expires_at": "2026-10-15T12:03:00+00:00",
+        }
+        valid = helper.validate_cancel_confirmation(
+            receipt,
+            site,
+            policy,
+            [target],
+            "run-current",
+            expected_human_identity="user-a",
+            now="2026-10-15T12:01:00+00:00",
+            target_set_complete=True,
+        )
+        self.assertTrue(valid["valid"])
+        self.assertFalse(valid["execution_authorized"])
+
+        for source in ("goal", "race_opt_in", "auto_review", "hook", "model_receipt", "scancel_interactive"):
+            with self.subTest(source=source):
+                rejected = helper.validate_cancel_confirmation(
+                    dict(receipt, source=source),
+                    site,
+                    policy,
+                    [target],
+                    "run-current",
+                    expected_human_identity="user-a",
+                    now="2026-10-15T12:01:00+00:00",
+                    target_set_complete=True,
+                )
+                self.assertFalse(rejected["valid"])
+                self.assertEqual(rejected["reason"], "untrusted_confirmation_source")
+
+        expired = helper.validate_cancel_confirmation(
+            receipt,
+            site,
+            policy,
+            [target],
+            "run-current",
+            expected_human_identity="user-a",
+            now="2026-10-15T12:04:00+00:00",
+            target_set_complete=True,
+        )
+        self.assertFalse(expired["valid"])
+        self.assertEqual(expired["reason"], "confirmation_expired_or_not_yet_valid")
+
+        changed_state = helper.validate_cancel_confirmation(
+            receipt,
+            site,
+            policy,
+            [dict(target, state="RUNNING")],
+            "run-current",
+            expected_human_identity="user-a",
+            now="2026-10-15T12:01:00+00:00",
+            target_set_complete=True,
+        )
+        self.assertFalse(changed_state["valid"])
+        self.assertEqual(changed_state["reason"], "target_policy_or_state_changed")
+
+        changed_policy = helper.validate_cancel_confirmation(
+            receipt,
+            site,
+            dict(policy, policy_version="policy-8"),
+            [target],
+            "run-current",
+            expected_human_identity="user-a",
+            now="2026-10-15T12:01:00+00:00",
+            target_set_complete=True,
+        )
+        self.assertFalse(changed_policy["valid"])
+        self.assertEqual(changed_policy["reason"], "target_policy_or_state_changed")
+
+        added_target = helper.validate_cancel_confirmation(
+            receipt,
+            site,
+            policy,
+            [target, dict(target, job_id="6102")],
+            "run-current",
+            expected_human_identity="user-a",
+            now="2026-10-15T12:01:00+00:00",
+            target_set_complete=True,
+        )
+        self.assertFalse(added_target["valid"])
+        self.assertEqual(added_target["reason"], "target_policy_or_state_changed")
+
+        no_cancel = helper.protected_cancel_decision(
+            site,
+            policy,
+            [target],
+            "run-current",
+            action="natural_step_completion",
+            target_set_complete=True,
+        )
+        self.assertIsNone(no_cancel["decision"])
+        self.assertFalse(no_cancel["confirmation_required"])
+        self.assertIsNone(
+            helper.cancel_confirmation_request(
+                site,
+                policy,
+                [target],
+                "run-current",
+                action="natural_step_completion",
+                target_set_complete=True,
+            )
+        )
+
+    def test_cancel_g4_old_jobs_indirect_actions_and_replacement_stay_closed(self) -> None:
+        helper = load_helper()
+        site = {"cluster_id": "cluster-a", "cluster_identity_verified": True, "policy": {}}
+        policy = {
+            "cluster_id": "cluster-a",
+            "policy_version": "policy-1",
+            "protected_partitions": [],
+            "protected_accelerators": [],
+            "scope_confirmed_by_human": True,
+        }
+        old_target = {
+            "job_id": "7101",
+            "cluster_id": "cluster-a",
+            "state": "RUNNING",
+            "partition": "ordinary",
+            "allocated_accelerators": [],
+            "owner_run_id": "older-run",
+            "cancel_responsibility": False,
+            "facts_verified": True,
+            "ownership_verified": True,
+        }
+        for action in (
+            "cancel_job",
+            "cancel_job_set",
+            "cancel_array_elements",
+            "cancel_via_api",
+            "release_allocation",
+            "terminate_allocation_holder",
+        ):
+            with self.subTest(action=action):
+                decision = helper.protected_cancel_decision(
+                    site,
+                    policy,
+                    [old_target],
+                    "run-current",
+                    action=action,
+                    target_set_complete=True,
+                )
+                self.assertEqual(decision["decision"], "REQUIRE_FRESH_HUMAN")
+                self.assertFalse(decision["execution_authorized"])
+
+        unknown_result = helper.bounded_replacement_decision(
+            {"poll_interval_seconds": 300, "replacement_reason": "route_change"},
+            {"state": "PENDING", "inactive_confirmed": False},
+        )
+        self.assertEqual(unknown_result["action"], "fail_closed")
+        self.assertEqual(unknown_result["reason"], "old_job_uncertain")
+
+    def test_cancel_g5_installed_normal_entry_loads_offline_gate(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp) / "project"
+            override = Path(tmp) / "local-overrides.toml"
+            override.write_text(
+                "[sites.third-party]\n"
+                "local_site_id = \"third-party\"\n"
+                "cancel_policy_version = \"policy-1\"\n"
+                "cancel_policy_confirmed = \"true\"\n"
+                "protected_partitions = \"premium\"\n"
+                "protected_accelerators = \"gpu-premium\"\n",
+                encoding="utf-8",
+            )
+            args = argparse.Namespace(
+                site="third-party",
+                target="repo",
+                project=str(project),
+                hostname=None,
+                path=None,
+                local_override=str(override),
+                dry_run=False,
+                json=True,
+            )
+            with mock.patch.dict(os.environ, {"PATH": str(Path(tmp) / "empty-bin")}, clear=False):
+                plan = skills.environment_plan_payload(args)
+                skills.environment_apply_plan(args, plan)
+            installed = skills.environment_target_root(args) / "slurm-workflows"
+            installed_helper = load_helper(installed / "scripts" / "slurm_routing.py")
+            local_data, errors = skills.parse_environment_local_override(override)
+            self.assertEqual(errors, [])
+            private_policy = skills.environment_cancel_protection_policy(local_data["third-party"], "third-party")
+            decision = installed_helper.protected_cancel_decision(
+                {"cluster_id": "third-party", "cluster_identity_verified": True, "policy": {}},
+                private_policy,
+                [
+                    {
+                        "job_id": "8101",
+                        "cluster_id": "third-party",
+                        "state": "PENDING",
+                        "partition": "premium",
+                        "requested_accelerators": ["gpu-standard"],
+                        "owner_run_id": "run-current",
+                        "cancel_responsibility": True,
+                        "facts_verified": True,
+                        "ownership_verified": True,
+                    }
+                ],
+                "run-current",
+                target_set_complete=True,
+            )
+            generated_reference = (installed / "references" / "_generated" / "site-profile.md").read_text(encoding="utf-8")
+        self.assertEqual(decision["decision"], "REQUIRE_FRESH_HUMAN")
+        self.assertFalse(decision["execution_authorized"])
+        self.assertNotIn("premium", generated_reference)
+        self.assertNotIn("gpu-premium", generated_reference)
+
     def test_g5_bounded_monitoring_replacement(self) -> None:
         helper = load_helper()
         self.assertEqual(

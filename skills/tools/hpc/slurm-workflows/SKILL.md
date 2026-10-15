@@ -99,6 +99,18 @@ Treat site-policy plus user-opt-in checks as eligibility only. Final duplicate-r
 
 Do not change data, split, model, endpoint, GPU count, per-candidate walltime, training budget, or other scientific semantics to make a race possible. If a workload requires H100, do not race it on A100 unless the workload contract explicitly says both accelerator types are valid for the same result. If the scheduler or site rejects duplicate submission, fail closed and do not try another command form to bypass that policy.
 
+## Protected cancellation (Stage A)
+
+Treat cancellation as destructive when the agent cancels a job, array element, exact job set or allocation through any command/API path, or intentionally terminates an allocation holder. Natural completion of an independent `srun` step, read-only inspection and monitoring are not cancellation.
+
+Before proposing cancellation, use the deterministic helper to bind a verified cluster identity, the fully expanded exact JobId set, current PENDING/RUNNING state, candidate or actual partition and accelerator facts, current-run ownership, and the private policy version. The private policy is per cluster and takes the union of `protected_partitions`, `protected_accelerators`, and any site prohibition. Missing policy is different from explicit empty protection lists. Unknown cluster, policy, target set, JobId, state, partition, accelerator or ownership fails closed.
+
+The helper has three cancellation classifications: `ALLOW_OWNED_UNPROTECTED`, `REQUIRE_FRESH_HUMAN`, and `DENY_UNKNOWN_OR_FORBIDDEN`. These are policy decisions only. They do not authorize a shell command, Slurm API call, holder signal or remote cancellation. Stage A does not install a trusted cancellation executor or production Hook.
+
+For a protected or older target, create one short request that names the cluster, exact targets, state, partition/accelerator facts and resource or queue-position loss. Default to retain. A long Goal, race opt-in, `auto_review`, Hook response, model-written receipt, `scancel --interactive`, timeout or silence is not human confirmation. Any future receipt representation must come from an independent trusted human channel, be single-use and short-lived, and bind the exact action, target set, policy version and current states. Recheck all facts before execution; a state, target-set or policy change invalidates the representation.
+
+Until a separately reviewed execution boundary proves that the agent cannot bypass the decision through shell, Python, SSH, Slurm API or holder control, do not execute cancellation on the user's behalf. Hand the exact action back to the user through an independent terminal instead, and describe the limitation honestly.
+
 ## Outputs
 
 Return the job script or commands, expected log paths, monitoring commands, stop conditions, and final verification checks. Submission is not completion; completion requires current job state and final output validation.
