@@ -16,7 +16,9 @@
 
 **ER-01：真实执行位置已经只读核实，但实施尚未授权。** 用户选定的主仓库 R 为 /overflow/htzhu/mingcheng_new/AI_Skills_Collection；唯一派生 W 为 /overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-cancel-human-confirmation；唯一执行分支为 reviewed/hpc--slurm-cancel-human-confirmation。只读核实时 R clean、origin 为 GitHub 正式仓库、W/同名 local branch/remote-tracking branch 均不存在，四份 v0.3 文件与已审提交一致。这个事实关闭“未知位置”，但不授予创建或执行权限。
 
-执行开始必须由 execution-ready Critic 把 APPROVED_COMMIT 精确绑定到最终执行包提交。用户之后发送同版批准 Kickoff 时，才允许在 R 中执行 git fetch origin main 并要求同步后的 origin/main == APPROVED_COMMIT；不等则停止。仅在再次核实 R/origin/clean、W 未占用、同名分支仍不存在、批准文件内容一致后，调用正式 Bridge task bootstrap，参数固定为本任务键、正式 repo 和 --expected-base-commit "$APPROVED_COMMIT"。Bridge 只能创建冻结 branch/W 及首份 REQUEST/CURRENT；首次 commit 只能含这两份元数据，首次远端分支只能用 task publish-first。禁止 raw worktree/branch/push、force、改 main、改 remote、夹带实现代码。首次发布以后 Stage A 仍只在同一 W/branch 内执行并遵守 ER-02/G1–G6。
+执行开始必须由 execution-ready Critic 把 APPROVED_COMMIT 精确绑定到最终执行包提交。用户之后发送同版批准 Kickoff 时，才允许在 R 中执行 git fetch origin main 并要求同步后的 origin/main == APPROVED_COMMIT；不等则停止。仅在再次核实 R/origin/clean、W 未占用、同名分支仍不存在、批准文件内容一致后，调用正式 Bridge task bootstrap，参数固定为本任务键、正式 repo 和 --expected-base-commit "$APPROVED_COMMIT"。Bridge 只能创建冻结 branch/W 及首份 REQUEST/CURRENT；首次 commit 只能含这两份元数据，首次远端分支只能用 task publish-first。禁止 raw worktree/branch/push、force、改 main、改 remote、夹带实现代码。
+首次 publish-first 成功以后，任务必须保持 CURRENT.state=PLAN_REQUESTED / RUN_GPT_PLANNER；此时 Executor 仍无权开始 Stage A。正式 GPT Planner 必须读取 REQUEST、已批准的 v0.3 Proposal/Execution Plan/Goal/Kickoff，以及运行时 automation/reviewed_handoff/prompts/PLANNER.md 和 templates/PLAN.md，把既有批准语义冻结成 task-local PLAN.md。新冻结 Plan 必须是 AI_BRIDGE_REVIEWED_PLAN_V2，包含当前模板全部必需章节，并在写 CURRENT 前重新读取自检；自检通过后最后将 CURRENT.state 写为 PLAN_FROZEN。Planner 只做批准方案的 task-local 冻结，不重新设计、不修改 G1–G6、ER-02 或权限边界。
+如果首次发布后没有真实可用的 Planner 交接入口，任务就合法停在 PLAN_REQUESTED，报告等待 Planner；禁止由 Executor 自己写 PLAN.md、改成 PLAN_FROZEN、启动代码实现或宣称自动执行成功。只有远端 task branch 已合法处于 PLAN_FROZEN 后，Watcher/Codex Executor 才能在同一个 W/branch 进入 Stage A；实现完成后再按 Review 协议交独立 Reviewer。
 
 **ER-02：危险模拟测试必须先证明系统隔离。** 在执行任何模拟取消/批量取消、SSH/远端子进程调用、Python subprocess/scancel、模拟 kill/signal 或 salloc/tmux holder 终止前，必须为**将真正执行这些动作的同一个进程环境**提交可验证的操作系统层隔离证据：无真实 Slurm 控制器/API/MUNGE/Unix socket，无生产 SSH 密钥/agent/凭据、环境变量及挂载，无真实远端网络出口、主机网络/隧道/继承套接字，无宿主 PID/信号权或能触及已有分配持有者的权限，无特权、宿主管理 socket 或生产工作区写入挂载。使用实际隔离容器/虚拟机/无生产凭据的隔离执行器和内置假 Slurm/假 holder；**PATH 伪装、DRY_RUN、环境变量声明或提示词禁令不算**。隔离不充分时不运行危险模拟，也不改用宿主普通 shell 运行；可继续纯函数和静态检查并如实报告 G3 模拟回放未通过，停在该阻塞，不新增 Gate 或借机请求真实 Slurm 探针。
 
@@ -49,7 +51,7 @@ G1 正确识别站点/目标/保护范围；G2 人工授权不可冒充；G3 真
 
 ## 交接与最终产物
 
-仅在 ER-01 真实工作树已获用户授权且 ER-02 相应测试隔离已被核实后，在该确切目标任务工作树内提交所有正式变更及可复现离线测试，生成 task 结果、manifest、实际使用的文件路径/源码身份、消费者待适配清单及明确下一轮审核对象。独立 Reviewer 能直接看源代码、真正执行回放、完整日志和失败证据。未经后续 Critic/用户许可不得集成、对外发布或触碰生产。Central implementation complete 后仍须实际适配 DII/CARE 并按 AI Skills Maintenance Board 才能 DONE。
+仅在 ER-01 真实工作树已获用户授权、task-local PLAN.md 已由正式 Planner 合法冻结并使 CURRENT.state=PLAN_FROZEN，且 ER-02 相应测试隔离已被核实后，Codex Executor 才可在该确切目标任务工作树内提交正式 Stage A 变更及可复现离线测试，生成 task 结果、manifest、实际使用的文件路径/源码身份、消费者待适配清单及明确下一轮审核对象。独立 Reviewer 能直接看冻结 PLAN.md、真实源代码、执行回放、完整日志和失败证据。未经后续 Critic/用户许可不得集成、对外发布或触碰生产。Central implementation complete 后仍须实际适配 DII/CARE 并按 AI Skills Maintenance Board 才能 DONE。
 
 当前维护事项仍待由具有真实 Clear Writing 入口的维护者创建独立 Issue 并关联技能 TODO；无法创建不得伪造 Issue ID 或要求用户手工维护。
 
