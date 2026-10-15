@@ -49,10 +49,13 @@ Active Review Context：
 
 请给 PASS 或 REVISE。若 REVISE，只列真正阻断执行的最小 finding，并给 Planner 可直接继续的完整 prompt。
 
-若 PASS，请按 Critic Role Contract 的 execution-ready 要求：
+若 PASS，本轮先回 Planner 做 existing Reviewed Handoff 的唯一一次合法 re-plan freeze，不要直接让 Codex越过 `NEEDS_GPT_PLANNER`。请：
 
 - 明确 `APPROVED_PLAN_PATH`、`APPROVED_GOAL_PATH`、`APPROVED_KICKOFF_PATH`、`APPROVED_COMMIT`;
-- `READY_FOR_CODEX=YES`;
-- 逐字附上你实际审过的 `CLEAR_WRITING_CROSS_SURFACE_RECOVERY_KICKOFF_V0_1_2026-10-15.md` 作为可直接发送给 Codex 的 prompt，不要自己临场改写一个新版本。
+- 明确批准的最小跨 owner recovery boundary；
+- 返回 `NEXT_HANDOFF=PLANNER`；
+- 给 Planner 一段可直接复制的短 prompt，要求其把已批准 recovery package materialize 进 task-local `PLAN.md`，执行 `NEEDS_GPT_PLANNER -> PLAN_FROZEN`，`plan_revision: 0 -> 1`，保持 `review_round=1`，然后由 Planner逐字交付已审过的 Kickoff 给 Codex。
 
-本轮 PASS 只授权 recovery execution，不等于 Clear Writing Web、G7、PIE 0.2 或正式发布 PASS。
+Critic 不修改 `CURRENT.json`，也不要让 Executor 自己冻结 Plan。Planner 完成合法 freeze 后才允许 `READY_FOR_CODEX=YES`。
+
+本轮 PASS 只批准 recovery package，不等于 Clear Writing Web、G7、PIE 0.2 或正式发布 PASS。
