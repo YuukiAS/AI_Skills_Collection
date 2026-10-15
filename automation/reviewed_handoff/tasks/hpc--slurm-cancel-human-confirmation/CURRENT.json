@@ -3,14 +3,14 @@
   "base_commit": "58ee18cd3e68df77c35b314c5cf9b0e83a985423",
   "ci_required": false,
   "ci_status": "NOT_REQUIRED",
-  "implementation_commit": null,
+  "implementation_commit": "acf8bf29681b404a3c107d25ade527ad1dfe0b89",
   "last_review_decision": null,
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "RUN_CODEX_EXECUTOR",
+  "next_action": "WAIT_SCHEDULED_GPT_REVIEW",
   "plan_revision": 0,
   "review_round": 0,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
-  "state": "PLAN_FROZEN",
+  "state": "READY_FOR_GPT_REVIEW",
   "task_key": "hpc--slurm-cancel-human-confirmation"
 }
