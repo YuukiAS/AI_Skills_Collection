@@ -41,10 +41,12 @@
 4. 核对 bootstrap 只创建目标 branch、W 以及首份 automation/reviewed_handoff/tasks/hpc--slurm-cancel-human-confirmation/REQUEST.md / CURRENT.json。首次提交只能包含这两份元数据。
 5. 首次远端分支创建只能走：
    ai-bridge reviewed-handoff task publish-first --task-key hpc--slurm-cancel-human-confirmation --expected-repo YuukiAS/AI_Skills_Collection
-   不允许 raw git push -u、force、其它 remote/branch 或夹带源码。首次发布成功并回读远端身份后，后续阶段 A 普通非强制同分支发布只能使用 Host Policy 已批准的同分支受限入口。
-6. **bootstrap/publish-first 不是代码实现完成条件。** 它们只建立已批准任务身份。随后 Stage A 仅在同一个 W/branch 内执行，且仍受 ER-02 的危险模拟隔离门、G1–G6 以及所有真实 Slurm/远端禁止项约束。
+   不允许 raw git push -u、force、其它 remote/branch 或夹带源码。首次发布成功并回读远端身份后，任务仍必须保持 Bridge Kit 新任务的合法初始状态 CURRENT.state=PLAN_REQUESTED，下一责任方是 GPT Planner；此时严禁 Executor 开始 Stage A。
+6. **正式 Planner 冻结 Review task 的 PLAN.md。** Planner 读取本 task 的 REQUEST.md、当前四份已批准 v0.3 文件，以及运行时 automation/reviewed_handoff/prompts/PLANNER.md 与 templates/PLAN.md，只把已批准的 v0.3 执行方案转写成 task-local automation/reviewed_handoff/tasks/hpc--slurm-cancel-human-confirmation/PLAN.md，不重新设计、不改变 G1–G6、权限边界或 Stage A 范围。新 Plan 必须使用 schema: AI_BRIDGE_REVIEWED_PLAN_V2 并包含当前模板全部必需章节，尤其 Positive completion、Non-substitutable semantics、Out of scope。Planner 写完后必须重新读取并自检，最后才更新 CURRENT.json 为 PLAN_FROZEN。若实际 Planner 交接入口不存在或不可用，任务合法停留在 PLAN_REQUESTED / RUN_GPT_PLANNER，不能由 Executor 代写 PLAN.md、代改 CURRENT 或把等待冒充成功。
+7. **只有 task branch 合法进入 PLAN_FROZEN 后，才允许 Codex Executor 执行 Stage A。** Watcher/Executor 必须读取冻结 PLAN.md，仅在同一个 W/branch 内实现，继续受 ER-02、G1–G6 和所有真实 Slurm/远端禁止项约束。Stage A 完成并形成合法实现交接后才进入独立 Reviewer，不得跳过 Planner 或 Reviewer。
+8. Stage A 后续普通非强制同分支发布只能使用 Host Policy 已批准的同分支受限入口，不自动扩展到其它 branch/remote。
 
-Critic 若批准本轮执行包，应把 APPROVED_COMMIT 精确绑定到本轮最终包提交；用户实际发送 approved Kickoff 才授权上述 Git 初始化 + Stage A 离线实现。设计 PASS、此前只读定位 PASS、Critic 文本本身均不自动授权执行。
+Critic 若批准本轮执行包，应把 APPROVED_COMMIT 精确绑定到本轮最终包提交。用户实际发送 approved Kickoff 只授权：受限初始化/首次发布 → 正式 Planner 依据已批准 v0.3 冻结 task-local PLAN.md → 合法 PLAN_FROZEN 后执行 Stage A → 独立 Reviewer；它不授权 Executor 在 PLAN_REQUESTED 时开始实现。设计 PASS、此前只读定位 PASS、Critic 文本本身均不自动授权执行。
 
 ## ER-02：危险离线模拟前的系统隔离先决条件（G3 已有验收，不新增 Gate）
 
@@ -93,7 +95,7 @@ Critic 若批准本轮执行包，应把 APPROVED_COMMIT 精确绑定到本轮�
 
 ## 四、批准后才允许执行的范围与阶段
 
-阶段 A（须先完成 ER-01 的真实路径冻结与本人批准，危险模拟须完成 ER-02 的同一进程隔离证明）：在经审查和授权的本仓库任务工作树中，复用 scripts/slurm_routing.py 的既有能力，增加唯一确定性判断与本地保护策略解析、只读目标解析、短确认展示、故障默认拒绝以及可选前置钩子；严格分离判定与实际执行。危险动作全部使用隔离假 Slurm、无生产凭据模拟进程。实现完整负例及正常使用回归，记录安装/权限未证实部分，停止在离线产物和独立实现复核前。不调用真实 sbatch/salloc/srun/scancel、mutating scontrol、kill、tmux 终止、真实 SSH/密钥或服务器部署。
+阶段 A（须先完成 ER-01 的真实路径冻结与本人批准、正式 Planner 将 task 从 PLAN_REQUESTED 合法冻结为 PLAN_FROZEN；危险模拟另须完成 ER-02 的同一进程隔离证明）：在经审查和授权的本仓库任务工作树中，复用 scripts/slurm_routing.py 的既有能力，增加唯一确定性判断与本地保护策略解析、只读目标解析、短确认展示、故障默认拒绝以及可选前置钩子；严格分离判定与实际执行。危险动作全部使用隔离假 Slurm、无生产凭据模拟进程。实现完整负例及正常使用回归，记录安装/权限未证实部分，停止在离线产物和独立实现复核前。不调用真实 sbatch/salloc/srun/scancel、mutating scontrol、kill、tmux 终止、真实 SSH/密钥或服务器部署。
 
 阶段 B（不在当前 Kickoff 授权内）：在新的 bounded 只读取证批准后，核对每个目标环境的真实 Codex 版本、钩子信任/加载、Slurm 账号、备用认证和 SSH 入口、计算节点权限、interactive holder 归属与私有策略写权限；无法证明硬隔离则不启动代理取消。任何远端凭据、权限、钩子安装、真实危险探针须单独 Critic 与用户许可；不能从 A 自动继续。
 
