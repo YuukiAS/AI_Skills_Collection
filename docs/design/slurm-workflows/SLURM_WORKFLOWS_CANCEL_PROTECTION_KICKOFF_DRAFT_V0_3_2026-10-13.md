@@ -1,29 +1,33 @@
-# Slurm Workflows v0.3 — Kickoff Draft（ER-01/ER-02 修订，仍不可执行）
+# Slurm Workflows v0.3 — Exact Kickoff Draft（待 execution-ready Critic PASS）
 
-状态：DRAFT_NOT_AUTHORIZED / EXACT_WORKTREE_UNKNOWN / NO_CODEX_STARTED。设计方向 PASS 不代表 execution-ready PASS；本文件供独立 Critic 审查，**当前用户并未授权发送、执行本草案、运行 Codex、创建分支或访问任何服务器**。
+状态：PENDING_EXECUTION_READY_REVIEW / NOT_YET_USER_AUTHORIZED。
 
-目标仓库：YuukiAS/AI_Skills_Collection
-任务键：hpc--slurm-cancel-human-confirmation
-**唯一冻结执行分支**：reviewed/hpc--slurm-cancel-human-confirmation（尚未创建）
-**执行工作树绝对路径**：尚未从实际 Codex 机器取证，严禁猜测。
-设计与执行合同：
-- docs/design/slurm-workflows/SLURM_WORKFLOWS_CANCEL_PROTECTION_PROPOSAL_V0_3_2026-10-13.md
-- docs/design/slurm-workflows/SLURM_WORKFLOWS_CANCEL_PROTECTION_EXECUTION_PLAN_V0_3_2026-10-13.md
-- docs/goals/hpc--slurm-cancel-human-confirmation-goal-draft-v0_3.md
-已审原包提交为 6fcbde22b334e471736debfee4d1d86084e8b270；本次 ER 修订提交需以三份修订文件均发布后的准确 GitHub 提交绑定，不能沿用旧身份。
+当且仅当独立 Critic 对当前同版执行包给出 execution-ready PASS，并在用户发送本段时同时提供准确的 APPROVED_COMMIT，本 Kickoff 才成为当前用户对下述**限定范围**的执行授权。没有 APPROVED_COMMIT、提交不一致、用户未实际发送本段，全部停止。
 
-## 下一步只读定位交接草案（**尚未获用户授权**）
+目标：
+- repo：YuukiAS/AI_Skills_Collection
+- task：hpc--slurm-cancel-human-confirmation
+- 主仓库 R：/overflow/htzhu/mingcheng_new/AI_Skills_Collection
+- 工作树 W：/overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-cancel-human-confirmation
+- branch：reviewed/hpc--slurm-cancel-human-confirmation
+- canonical design：docs/design/slurm-workflows/SLURM_WORKFLOWS_CANCEL_PROTECTION_PROPOSAL_V0_3_2026-10-13.md
+- execution Plan：docs/design/slurm-workflows/SLURM_WORKFLOWS_CANCEL_PROTECTION_EXECUTION_PLAN_V0_3_2026-10-13.md
+- Goal：docs/goals/hpc--slurm-cancel-human-confirmation-goal-draft-v0_3.md
 
-在用户以后明确选定的**既有 AI_Skills_Collection 工作目录**，只读核实 git 主仓库真实绝对路径、仓库和 origin 身份、当前分支/干净程度、工作树列表、同名分支碰撞、Bridge Kit 当前 CLI 入口和四份合同文件身份。将真实主仓库绝对路径 R 与 Bridge Kit 唯一派生的同级工作树 W = parent(R)/(basename(R) + "-hpc--slurm-cancel-human-confirmation") 及固定分支单独简短展示，等待用户针对确切 R/W/branch 同意。
+执行顺序严格如下：
 
-**本交接不得进行 git fetch/pull/branch/worktree、安装、写入、远端发布、测试、模拟取消、真实 Slurm 查询或操作；不得自动继续。** 没有明确真实路径或存在碰撞/工作区不匹配时直接停止，不能由 Codex 改选目录。
+1. 只在 R 中运行。先确认 repo/origin/clean 状态仍与冻结合同一致，然后执行 git fetch origin main。要求 refs/remotes/origin/main == APPROVED_COMMIT；否则立即停止，不创建任何 branch/worktree。
+2. 再确认 W 不存在/未注册、同名 local/remote-tracking branch 不存在，并核对上述三份合同及 Kickoff 在 APPROVED_COMMIT 中与被审版本一致。
+3. 仅使用正式 Bridge 入口初始化：
+   ai-bridge reviewed-handoff task bootstrap --task-key hpc--slurm-cancel-human-confirmation --expected-repo YuukiAS/AI_Skills_Collection --expected-base-commit "$APPROVED_COMMIT" --objective "Implement only approved v0.3 Stage A Slurm cancellation protection; no real Slurm or remote deployment."
+   禁止 raw git branch、git worktree add、切换到别的目录或改 Git 配置作为 fallback。
+4. 核对 bootstrap 只创建固定 branch、W 和本任务首份 REQUEST.md/CURRENT.json。首次 commit 只能包含这两份元数据；首次远端发布只能使用：
+   ai-bridge reviewed-handoff task publish-first --task-key hpc--slurm-cancel-human-confirmation --expected-repo YuukiAS/AI_Skills_Collection
+   禁止 raw push、force、main 修改、其它 branch/remote 或夹带实现代码。
+5. 首次发布完成后，才在 W/固定 branch 实施 Plan/Goal 的 Stage A：通用 slurm-workflows 取消判定、本地私有策略接口、短本人确认表示、可选 Hook 辅助、确定性/纯函数测试、DII/CARE 只读消费者清单和 G1–G6 对应离线证据。后续普通非强制发布只允许同一已授权 branch，使用 Host Policy 当前正式受限入口。
+6. **危险模拟必须先通过 ER-02 的同一进程隔离证明。** 如果运行环境仍可能访问真实 Slurm 控制器/API/MUNGE/socket、生产 SSH key/agent/凭据、真实远端网络/代理/隧道、宿主 PID/信号、现有 salloc/tmux holder、特权宿主控制入口或生产路径写挂载，则不得运行模拟 scancel、SSH/远端取消、Python subprocess 取消、数组/批量取消或 holder signal 测试。只能继续纯函数/静态测试并如实报告 G3 相应部分 BLOCKED_BY_ISOLATION。
+7. 完成 Stage A 后提交任务范围内源码、离线证据和 RESULT，等待独立实现 Review；不得自动进入真实部署、消费者写入或正式发布阶段。
 
-## 实施 Kickoff 的形成条件（不在当前草案中冒充授权）
+绝对禁止：任何真实 sbatch/salloc/srun/scancel、mutating scontrol、真实 kill/pkill/tmux holder 终止；任何 H100 或 Longleaf htzhulab allocation 操作；服务器/Slurm/SSH key/authorized_keys/credential/private override/Codex Host Policy/生产 Hook 修改；DII/CARE 正式源码修改；Bridge Kit 修改；付费实验；新增 daemon/database/control plane；绕过隔离或把 auto_review/长 Goal/历史竞速许可当成本人取消确认。
 
-只有 R/W 经真实取证并由用户单独授权准确目标、初次分支/工作树建立及首次发布，且 execution-ready Critic 复核同版合同后，才能机械准备真正可发送的阶段 A Kickoff。初始化只准复用正式 ai-bridge reviewed-handoff task bootstrap（提交基线必须等于安全同步后 origin/main），首次元数据提交只包含本任务 REQUEST.md 与 CURRENT.json，再通过 ai-bridge reviewed-handoff task publish-first 将同名 reviewed 分支首次发布。不得调用 raw git worktree add/raw push/force，也不得将其他源码混进首次提交。实施工作中已存在任务分支的普通非强制发布仅限同一获授权分支和 Host Policy 受限入口。
-
-阶段 A 若获后续独立批准，仅包括通用 slurm-workflows 源码和隔离离线测试、DII/CARE 只读消费清单以及既定 G1–G6 证据；不新增能力门。**危险模拟运行的绝对前提**：实际被测子进程具有经核实的操作系统隔离，不能访问任何真实 Slurm 控制/API/socket、生产 SSH 凭据/agent、真实远端网络/代理/隧道、宿主 PID/信号、salloc/tmux holder、生产路径或特权控制入口。没有同一进程层面的可核验证据就不运行模拟 scancel、远端调用、Python subprocess、数组批量取消或 holder 信号测试，改为静态/纯函数检查并报告对应部分未通过；单纯 PATH 假命令或 DRY_RUN 不算隔离。
-
-**永久越界禁止：**任何真实 Slurm 提交/取消/释放/重排、H100 或 Longleaf htzhulab allocation 操作、服务器/SSH/凭据/权限变动、生产钩子部署、终止真实 holder、DII/CARE 代码修改、Bridge Kit 修改、付费实验、无人确认下的自动取消、强制发布及自行宣布已实现强制防护。不得从阶段 A 自动进入需要新权限的 B/C。
-
-本文件的内容不应被复制给 Codex 作为已批准实施指令。若必须提供可执行 Kickoff，先冻结经证实的绝对 R/W 和最终文件提交，再接受下一轮独立 Critic 审查及用户针对准确范围的当次授权。
+如果任何步骤发现 scope、repo、commit、R/W、分支、Bridge 入口、隔离能力或授权边界不一致，立即停止并报告精确差异，不自行修复扩大范围。
