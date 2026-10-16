@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -14,6 +15,7 @@ import deck_quality_loop
 
 SCHEMA = "RESEARCH_PRESENTATION_EXISTING_DECK_REVISION_PACKET_V1"
 SUMMARY_SCHEMA = "RESEARCH_PRESENTATION_EXISTING_DECK_REVISION_GATE_V1"
+REPO_ROOT = Path(__file__).resolve().parents[6]
 PASS_STATUSES = {"PASS", "OK", "COMPLETED", "NOT_APPLICABLE"}
 ISSUE_STATUSES = {"REVISE", "BLOCKED", "FAIL", "MISSING", "UNKNOWN"}
 REQUIRED_ENTRY_FIELDS = {
@@ -85,6 +87,108 @@ def _field_present(value: Any) -> bool:
     if isinstance(value, (list, dict, str)):
         return bool(value)
     return True
+
+
+def _artifact_path(root: Path, value: Any) -> Path | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    path = Path(value)
+    return path if path.is_absolute() else root / path
+
+
+def _file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _check_file_binding(
+    record: dict[str, Any],
+    *,
+    root: Path,
+    gate: str,
+    finding_prefix: str,
+    findings: list[dict[str, Any]],
+) -> Path | None:
+    path = _artifact_path(root, record.get("path"))
+    expected = str(record.get("sha256") or "").lower()
+    if path is None or not path.is_file():
+        _add(findings, gate=gate, decision="BLOCKED", finding_id=f"{finding_prefix}_missing", summary=f"bound artifact does not exist: {record.get('path')}")
+        return None
+    if len(expected) != 64 or _file_sha256(path) != expected:
+        _add(findings, gate=gate, decision="BLOCKED", finding_id=f"{finding_prefix}_sha256_mismatch", summary=f"bound artifact hash is missing or stale: {record.get('path')}")
+        return None
+    return path
+
+
+def _check_artifact_identity(packet: dict[str, Any], findings: list[dict[str, Any]], root: Path) -> None:
+    identity = packet.get("deck_identity") or {}
+    if not isinstance(identity, dict):
+        _add(findings, gate="exact_artifact_identity", decision="BLOCKED", finding_id="deck_identity_invalid", summary="deck_identity must be an object")
+        return
+    candidate = str(identity.get("candidate_commit") or "")
+    if not candidate:
+        _add(findings, gate="exact_artifact_identity", decision="BLOCKED", finding_id="candidate_commit_missing", summary="exact candidate commit is required")
+    source = _check_file_binding(
+        {"path": identity.get("source_path"), "sha256": identity.get("source_sha256")},
+        root=root, gate="exact_artifact_identity", finding_prefix="source", findings=findings,
+    )
+    pdf = _check_file_binding(
+        {"path": identity.get("pdf_path"), "sha256": identity.get("pdf_sha256")},
+        root=root, gate="exact_artifact_identity", finding_prefix="final_pdf", findings=findings,
+    )
+    page_images = identity.get("page_images") or []
+    page_count = identity.get("page_count")
+    if not isinstance(page_images, list) or not page_images or page_count != len(page_images):
+        _add(findings, gate="exact_artifact_identity", decision="BLOCKED", finding_id="page_image_set_incomplete", summary="page_images must bind every rendered page and match page_count")
+    else:
+        expected_pages = list(range(1, len(page_images) + 1))
+        actual_pages = [row.get("page") for row in page_images if isinstance(row, dict)]
+        if actual_pages != expected_pages:
+            _add(findings, gate="exact_artifact_identity", decision="BLOCKED", finding_id="page_image_order_invalid", summary="page_images must contain one ordered row for every page")
+        for row in page_images:
+            if isinstance(row, dict):
+                _check_file_binding(row, root=root, gate="exact_artifact_identity", finding_prefix=f"page_{row.get('page')}", findings=findings)
+    contact = identity.get("contact_sheet") or {}
+    if not isinstance(contact, dict):
+        contact = {}
+    _check_file_binding(contact, root=root, gate="exact_artifact_identity", finding_prefix="contact_sheet", findings=findings)
+
+    revision = packet.get("revision_entry") or packet.get("revision_context") or {}
+    if isinstance(revision, dict):
+        baseline = revision.get("reviewer_seen_baseline") or {}
+        rerender = revision.get("rerender") or {}
+        if isinstance(baseline, dict):
+            _check_file_binding(baseline, root=root, gate="exact_artifact_identity", finding_prefix="reviewer_seen_baseline", findings=findings)
+        if isinstance(rerender, dict):
+            rendered_path = _check_file_binding(rerender, root=root, gate="exact_artifact_identity", finding_prefix="rerender", findings=findings)
+            if rendered_path and pdf and rendered_path.resolve() != pdf.resolve():
+                _add(findings, gate="exact_artifact_identity", decision="BLOCKED", finding_id="rerender_final_pdf_mismatch", summary="rerender evidence must bind the exact final PDF")
+
+    review = packet.get("independent_visual_review") or packet.get("visual_review") or {}
+    if not isinstance(review, dict):
+        return
+    if str(review.get("candidate_commit") or "") != candidate:
+        _add(findings, gate="independent_visual_review", decision="BLOCKED", finding_id="review_candidate_stale", summary="independent review is not bound to the exact candidate commit")
+    if str(review.get("artifact_sha256") or "").lower() != str(identity.get("pdf_sha256") or "").lower():
+        _add(findings, gate="independent_visual_review", decision="BLOCKED", finding_id="review_artifact_stale", summary="independent review is not bound to the exact final PDF")
+    trace = {"path": review.get("reviewer_trace_path"), "sha256": review.get("reviewer_trace_sha256")}
+    _check_file_binding(trace, root=root, gate="independent_visual_review", finding_prefix="reviewer_trace", findings=findings)
+    if not review.get("reviewer_run_id"):
+        _add(findings, gate="independent_visual_review", decision="BLOCKED", finding_id="reviewer_run_id_missing", summary="independent review requires a durable reviewer run identity")
+    rows = review.get("page_reviews") or []
+    if not isinstance(rows, list) or len(rows) != len(page_images):
+        _add(findings, gate="independent_visual_review", decision="BLOCKED", finding_id="page_review_rows_incomplete", summary="independent review must contain one row for every rendered page")
+    else:
+        image_hashes = {row.get("page"): row.get("sha256") for row in page_images if isinstance(row, dict)}
+        for index, row in enumerate(rows, start=1):
+            if not isinstance(row, dict) or row.get("page") != index or row.get("image_sha256") != image_hashes.get(index) or _status(row.get("decision")) != "PASS":
+                _add(findings, gate="independent_visual_review", decision="BLOCKED", finding_id=f"page_review_{index}_invalid", summary="page review row is missing, stale, or not PASS")
+    contact_review = review.get("contact_sheet_review") or {}
+    if not isinstance(contact_review, dict) or contact_review.get("sha256") != contact.get("sha256") or _status(contact_review.get("decision")) != "PASS":
+        _add(findings, gate="independent_visual_review", decision="BLOCKED", finding_id="contact_sheet_review_invalid", summary="contact-sheet review is missing, stale, or not PASS")
 
 
 def _check_entry_packet(packet: dict[str, Any], findings: list[dict[str, Any]]) -> None:
@@ -311,10 +415,11 @@ def _check_independent_review(packet: dict[str, Any], findings: list[dict[str, A
         )
 
 
-def evaluate(packet: dict[str, Any]) -> dict[str, Any]:
+def evaluate(packet: dict[str, Any], *, root: Path = REPO_ROOT) -> dict[str, Any]:
     if packet.get("schema") != SCHEMA:
         raise GateError(f"revision packet schema must be {SCHEMA}")
     findings: list[dict[str, Any]] = []
+    _check_artifact_identity(packet, findings, root)
     _check_entry_packet(packet, findings)
     _check_first_use(packet, findings)
     _check_rendered_scientific_qa(packet, findings)
@@ -337,6 +442,7 @@ def evaluate(packet: dict[str, Any]) -> dict[str, Any]:
         "final_decision": decision,
         "required_gates": [
             "reviewer_seen_baseline",
+            "exact_artifact_identity",
             "accepted_element_ledger",
             "targeted_feedback",
             "rerender",
