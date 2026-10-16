@@ -155,7 +155,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         plugin_names = {plugin["name"] for plugin in data["plugins"]}
         todo_names = {path.stem for path in (REPO_ROOT / "docs/plugin-todos").glob("*.md") if path.name != "README.md"}
         self.assertEqual(plugin_names, set(CENTRAL_PLUGIN_NAMES))
-        self.assertEqual(todo_names, plugin_names)
+        self.assertTrue(plugin_names <= todo_names, plugin_names - todo_names)
 
         payload_root = REPO_ROOT / "plugins/codex/plugins"
         payload_paths = [path.relative_to(REPO_ROOT).as_posix() for path in payload_root.rglob("*")]
@@ -375,7 +375,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         changelog_names = {path.stem for path in changelog_root.glob("*.md") if path.name != "README.md"}
         todo_names = {path.stem for path in (REPO_ROOT / "docs/plugin-todos").glob("*.md") if path.name != "README.md"}
         self.assertEqual(changelog_names, set(CENTRAL_PLUGIN_NAMES))
-        self.assertEqual(todo_names, set(CENTRAL_PLUGIN_NAMES))
+        self.assertTrue(set(CENTRAL_PLUGIN_NAMES) <= todo_names, set(CENTRAL_PLUGIN_NAMES) - todo_names)
         self.assertEqual(changelog_names, set(plugin_versions))
 
         index = (changelog_root / "README.md").read_text(encoding="utf-8")

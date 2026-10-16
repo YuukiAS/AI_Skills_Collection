@@ -144,6 +144,12 @@
       "brandColor": "#1D4ED8",
       "composerIcon": "./assets/codex/plugin-icons/research-writing/composer.svg",
       "logo": "./assets/codex/plugin-icons/research-writing/composer.svg",
+      "shared": [
+        {
+          "source": "skills/writing/research/shared",
+          "target": "shared"
+        }
+      ],
       "defaultPrompt": [
         "Write a repo-grounded research report.",
         "Plan this paper workflow.",
