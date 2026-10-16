@@ -86,6 +86,18 @@ OpenAI 当前官方文档确认 `PreToolUse` 可以 deny，但 `permissionDecisi
 
 若任一消费者路径、remote、dirty 状态或现有同名 branch/worktree 不匹配，消费者适配停止；中央候选可继续，但不能宣布整体收口。
 
+### 首次远端发布授权边界
+
+三个 `work/hpc--slurm-cancel-production-closure` 都是新分支。当前 Bridge Kit 的 `ai-bridge host publish-current-branch` 只适用于已经存在同名 upstream 的当前分支，因此 mandatory Reviewer 之前的**第一次远端发布**必须单独冻结授权，而不能假装现有 bounded publisher 已经覆盖。
+
+用户只有在实际发送经 Critic PASS 的同版 Kickoff 后，才授权以下一次性效果：
+
+- AI_Skills_Collection：从精确中央 W 将 `work/hpc--slurm-cancel-production-closure` 普通、非强制地首次发布到同名 `origin/work/hpc--slurm-cancel-production-closure`，并绑定同名 upstream；
+- DII：同上，仅限精确 DII W / origin / 同名 branch；
+- CARE：同上，仅限精确 CARE W / origin / 同名 branch。
+
+每个 repo 最多一次 first publication；只允许当前 task branch -> 同名 `origin` branch。禁止其他 branch、其他 remote、force / force-with-lease、delete、tag、history rewrite、remote mutation。执行前必须重新确认 source commit、repo/origin、clean worktree、lineage、同名 remote branch **不存在**；若 remote branch 已存在、source drift、dirty、lineage 不符或 upstream 已被其他任务占用，fail closed，不覆盖、不收养、不改用另一个分支名。第一次发布成功后，后续同分支普通发布才可使用现有 bounded current-branch publisher。
+
 ## 4. 中央实现范围
 
 在现有 `slurm-workflows` 内新增最小正式安全取消入口；优先作为 `slurm_routing.py` 的 CLI 子命令或同 Skill 小型 executable，不新建顶级产品。
@@ -143,7 +155,15 @@ OpenAI 当前官方文档确认 `PreToolUse` 可以 deny，但 `permissionDecisi
 
 ### CARE
 
-必须修改当前仍可达的直接取消入口，至少：
+CARE 当前取消权威不只在脚本。必须同时适配三类**现行权威表面**，并保持科研语义原样：
+
+1. 根 `AGENTS.md` 当前 routing-race 规则：当一个兼容分区先 RUNNING 时，原规则要求取消仍 PENDING 的 mirror；
+2. `prompts/tasks/20260801_care_target_domain_race_gap_closure_controller.md`：当前 `status: AUTHORIZED`，其调度合同包含 pending lane 的 `scancel`；
+3. `prompts/blueprints/CARE_target_domain_race_gap_closure_20260801.md`：上述 AUTHORIZED task 的调度合同来源，同样规定 interactive takeover 前取消 PENDING queue lane。
+
+这三处只把“直接取消”改为“调用中央 safe-cancel”。`REQUIRE_FRESH_HUMAN` 时必须保留 loser / queued lane，并生成短人工请求；不得 direct `scancel` fallback。**不得改变**模型、loss、split、训练 budget、资源兼容性、lane 顺序、interactive takeover 顺序、candidate gate、原子 claim 或其他科研/调度语义。
+
+同时适配当前仍可达的直接取消实现入口，至少：
 
 - `.agents/skills/slurm-routing-partition/SKILL.md`
 - `scripts/route_B_round04/watch_B1_race.py`
@@ -151,7 +171,9 @@ OpenAI 当前官方文档确认 `PreToolUse` 可以 deny，但 `permissionDecisi
 - `scripts/evaluation/watch_srr_v3_m7_routing.py`
 - `scripts/evaluation/watch_srr_v3_m8_myops_race.py`
 - `scripts/target_domain_gap_closure/monitor_interactive_takeover.py`
-- 若 `results/20260711_srr_v3_m10_complete_mechanism_repair/wave2_partition_race_watcher.py` 仍可作为可执行入口使用，则同样适配；若仅为历史 artifact，则明确标为 historical/non-entry，不能由 production prompt 调用。
+- 若 `results/20260711_srr_v3_m10_complete_mechanism_repair/wave2_partition_race_watcher.py` 仍可从当前 normal entry 执行，则同样适配；若仅为历史 artifact，则记录为 historical/non-entry 并确认当前权威 prompt/script 不再路由到它。
+
+DRAFT prompt、历史 result/commands 记录和其他纯 provenance 文件**不要机械改写**。只有当前权威或当前 normal-entry 可达表面进入适配范围。
 
 消费者不得复制一份中央保护逻辑；只构造精确事实/当前 run identity 并调用最终中央安全入口。返回 `REQUIRE_FRESH_HUMAN` 时必须保留目标并退出/继续监控，不用直接 scancel fallback。
 
@@ -179,30 +201,49 @@ G6：最终候选必须同时具有：
 - 独立 Reviewer。
 然后才可声明“Longleaf 正常 Codex/消费者路径已启用受保护取消防线”。不得声明绝对 OS 不可绕过。
 
-## 8. 版本与集成
+## 8. 生产部署、集成与最终发布顺序
 
-当前 main VERSION=5.4.4。
+当前 main VERSION=5.4.4。**版本提升和正式 release 必须最后发生，不能作为生产验证前置条件。**
 
-如果本 Plan 的中央代码、Longleaf 正常安装、DII/CARE consumer adaptation 和 G1–G6 全部通过：
-- standalone `slurm-workflows`: 0.4 → 0.5；
-- Repository：PATCH；若发布时仍为 5.4.4，则 5.4.5，否则使用当时实际版本的下一 PATCH；
-- 中央 Marketplace Plugins：NO_BUMP；
-- Bridge Kit：NO_CHANGE，除非执行证据证明现有 Host Policy 无法表达 `forbidden scancel`；若出现这种情况停止并回 Planner/Critic，不顺手改 Bridge。
+冻结顺序：
 
-集成顺序：
+1. 中央 / DII / CARE 候选完成并首次发布到三个精确 task branch。
+2. 独立 Reviewer 对三个 exact candidate commit、Host Policy candidate、隔离证据和 G1–G6 进行审查；Reviewer PASS 前禁止任何 Phase 4 生产部署。
+3. Reviewer PASS 后，将**exact reviewed central candidate**通过现有用户级正常安装路径部署到 Longleaf，但此时仍保持 `slurm-workflows 0.4` / repository 当前版本，不 bump、不 release、不改 README/CHANGELOG 为已发布。
+4. 写入并回读 Longleaf 私有保护策略；更新 raw / confirmed `/usr/bin/scancel` Host Policy；只做 read-only production validation。
+5. 集成 exact reviewed DII / CARE consumer candidate，并取得它们正常入口确实消费 central safe-cancel、没有 reachable direct `scancel` fallback 的 durable evidence。
+6. 汇总**同一产品行为候选**的完整 G1–G6 production evidence。若 Reviewer PASS 之后发生任何产品行为、safe-cancel 语义、consumer behavior、Host Policy 行为或保护策略机制的修改，必须冻结新 candidate 并重新独立 Reviewer；不得把行为修改藏在最终 release metadata 中。
+7. 只有步骤 3–6 全部成立后，最后做纯 release closure：
+   - standalone `slurm-workflows`: 0.4 → 0.5；
+   - Repository：PATCH；若发布时仍为 5.4.4，则 5.4.5，否则使用当时实际版本的下一 PATCH；
+   - 中央 Marketplace Plugins：NO_BUMP；
+   - Bridge Kit：NO_CHANGE；
+   - 按仓库政策检查/更新 README、CHANGELOG、版本与正式 release identity。
+8. 最终 release commit 只能包含与已经 Reviewer 通过的产品行为一致的 release/version/docs/generated closure；若这一步需要产品代码或 consumer 行为变化，停止并重新审查。
 
-1. 冻结中央 final candidate。
-2. 消费者分支测试绑定中央 final candidate。
-3. 独立 Reviewer 检查完整跨仓库证据。
-4. 经用户最终批准后集成/发布中央 0.5。
-5. Longleaf 用户级安装 + private policy + Host Policy 更新。
-6. read-only production smoke。
-7. 集成 DII/CARE consumer。
-8. README/CHANGELOG/version/maintenance closure，验证真实远端身份后结束。
+不得先 bump/release 再补 Longleaf、DII/CARE 或 G1–G6 证据。
 
-不得先升级版本再补消费者。
+## 9. Maintenance lifecycle truth
 
-## 9. 恢复与停止
+当前 canonical source `docs/skill-todos/slurm-workflows.md` 仍写着：
+
+`tracking issue: PENDING_CLEAR_WRITING`
+
+因此现在**没有真实独立 tracking Issue，Project lifecycle 尚未同步，不能把本任务称为 ADAPTING 或 DONE**。本轮 Planner 当前运行面也没有可真实调用的 Clear Writing（`writing-style`）入口，所以不创建 Issue、不伪造 Issue number、不伪造 Project mutation。
+
+exact pending mutation：
+
+1. 下一次具有真实 Clear Writing + GitHub Issue/Project mutation 能力的 AI Skills Maintainer，先用 Clear Writing 检查 reader-facing Issue 文案；
+2. 创建独立 maintenance Issue，标题采用自然中文“防止 AI 未经本人确认取消受保护 Slurm 作业”，**不复用已关闭 #96**；
+3. 按当前维护看板应用 `maintenance-track`，语义分类至少保持 `kind:regression`；scope/area 必须与当前 Project 实际字段一致（本项由 AI_Skills owner 跨 AI_Skills/DII/CARE 完成，当前预期 scope 为 `scope:cross-repo`、Area 为 `standalone-skill`，实际写入前仍以当时看板枚举为准）；
+4. 在 `docs/skill-todos/slurm-workflows.md` 将 pending 文本替换为真实 `tracking: #<issue-number>`，不改变 source maturity/status/problem；
+5. tracking 建立后，first substantive tracked execution 为 `DOING`，当前执行锚点绑定本生产收口 Plan/Goal/Kickoff 和 exact branch；
+6. central production implementation complete 而 Longleaf/DII/CARE 任一 required consumer 仍 pending 时，才进入 `ADAPTING`，并冻结 exact consumer identities/locators；
+7. 只有 central + Longleaf + DII + CARE 全部 PASS、durable evidence 完整、Resolution commit 已记录，并真实关闭 tracking Issue 后，才允许 issue-closed workflow 进入 `DONE`。
+
+若最终技术收口时仍没有 Clear Writing 可调用，则**不得伪造 Issue、不得伪造 Project DONE**；最终报告必须输出上述 exact pending mutation，留给下一具合法能力的 maintainer 机械完成，不要求用户手工维护。
+
+## 10. 恢复与停止
 
 - Stage A port 与新 main 冲突：停止，不手工扩大修复。
 - Longleaf private override 不能无损修改：保留原文件，输出 diff，不覆盖。
@@ -212,7 +253,7 @@ G6：最终候选必须同时具有：
 - 生产只读 smoke 发现候选身份/配置不一致：回滚 user-level install 和 Host Policy 到部署前 backup；不碰任何 Slurm job。
 - 不通过“为了验证安全而真的取消一个 H100/htzhulab 作业”。
 
-## 10. 非目标
+## 11. 非目标
 
 - 不新增审批服务、数据库、特权 daemon；
 - 不改变 Slurm/UNC 站点权限模型；
