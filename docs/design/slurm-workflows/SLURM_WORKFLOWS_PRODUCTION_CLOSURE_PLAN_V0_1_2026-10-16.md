@@ -57,10 +57,12 @@ OpenAI 当前官方文档确认 `PreToolUse` 可以 deny，但 `permissionDecisi
 
 ## 3. 冻结执行身份与仓库
 
+本收口阶段不再初始化新的 Reviewed Handoff task。Stage A 的设计、执行包和产品实现已经完成 Planner/Critic/Reviewer 闭环；本轮使用当前用户通过最终 Kickoff 明确授权的普通有界 `work/...` 分支，避免再次制造 `PLAN_REQUESTED` 控制循环。候选完成后仍必须由独立 Reviewer 审完整跨仓库 diff/证据，Reviewer PASS 前不得生产部署。
+
 ### 中央仓库
 
 - repo：`YuukiAS/AI_Skills_Collection`
-- task branch：`reviewed/hpc--slurm-cancel-production-closure`
+- task branch：`work/hpc--slurm-cancel-production-closure`
 - canonical R：`/overflow/htzhu/mingcheng_new/AI_Skills_Collection`
 - derived W：`/overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-cancel-production-closure`
 - base：执行前最新且被 Critic 绑定的 `origin/main`
@@ -71,7 +73,7 @@ OpenAI 当前官方文档确认 `PreToolUse` 可以 deny，但 `permissionDecisi
 此前用户给出的 Longleaf repo root：`/users/a/e/aereinh/Distributed_Imaging_Inference`。执行前必须只读重新核实 repo/origin/clean/branch/worktree；不能仅凭历史路径直接写入。
 
 拟用：
-- branch：`reviewed/hpc--slurm-cancel-production-closure`
+- branch：`work/hpc--slurm-cancel-production-closure`
 - W：`/users/a/e/aereinh/Distributed_Imaging_Inference-hpc--slurm-cancel-production-closure`
 
 ### CARE consumer
@@ -79,7 +81,7 @@ OpenAI 当前官方文档确认 `PreToolUse` 可以 deny，但 `permissionDecisi
 此前用户给出的 Longleaf repo root：`/users/a/e/aereinh/CARE`。执行前必须只读重新核实 repo/origin/clean/branch/worktree。
 
 拟用：
-- branch：`reviewed/hpc--slurm-cancel-production-closure`
+- branch：`work/hpc--slurm-cancel-production-closure`
 - W：`/users/a/e/aereinh/CARE-hpc--slurm-cancel-production-closure`
 
 若任一消费者路径、remote、dirty 状态或现有同名 branch/worktree 不匹配，消费者适配停止；中央候选可继续，但不能宣布整体收口。
