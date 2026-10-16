@@ -99,6 +99,18 @@ Treat site-policy plus user-opt-in checks as eligibility only. Final duplicate-r
 
 Do not change data, split, model, endpoint, GPU count, per-candidate walltime, training budget, or other scientific semantics to make a race possible. If a workload requires H100, do not race it on A100 unless the workload contract explicitly says both accelerator types are valid for the same result. If the scheduler or site rejects duplicate submission, fail closed and do not try another command form to bypass that policy.
 
+## Protected cancellation
+
+Treat cancellation as destructive when the agent cancels a job, array element, exact job set or allocation through any command/API path, or intentionally terminates an allocation holder. Natural completion of an independent `srun` step, read-only inspection and monitoring are not cancellation.
+
+Before proposing cancellation, use the deterministic helper to bind a verified cluster identity, the fully expanded exact JobId set, current PENDING/RUNNING state, candidate or actual partition and accelerator facts, current-run ownership, and the private policy version. The private policy is per cluster and takes the union of `protected_partitions`, `protected_accelerators`, and any site prohibition. Missing policy is different from explicit empty protection lists. Unknown cluster, policy, target set, JobId, state, partition, accelerator or ownership fails closed.
+
+The helper has three cancellation classifications: `ALLOW_OWNED_UNPROTECTED`, `REQUIRE_FRESH_HUMAN`, and `DENY_UNKNOWN_OR_FORBIDDEN`. Use the installed `slurm_routing.py safe-cancel` entry for normal cancellation. It resolves live target facts, applies the private policy, and revalidates the complete binding immediately before it can execute `scancel`. Only an exact, complete current-run target set classified as `ALLOW_OWNED_UNPROTECTED` can execute. Do not call raw `scancel` or create a shell, Python, SSH, API, or holder-control fallback.
+
+For a protected or older target, create one short request that names the cluster, exact targets, state, partition/accelerator facts and resource or queue-position loss. Default to retain. A long Goal, race opt-in, `auto_review`, Hook response, model-written receipt, `scancel --interactive`, timeout or silence is not human confirmation. Any future receipt representation must come from an independent trusted human channel, be single-use and short-lived, and bind the exact action, target set, policy version and current states. Recheck all facts before execution; a state, target-set or policy change invalidates the representation.
+
+`REQUIRE_FRESH_HUMAN` and `DENY_UNKNOWN_OR_FORBIDDEN` never execute cancellation. For a protected or non-current-run target, retain the job and hand the exact request to the user for independent-terminal action. Race opt-in is not cancellation approval. This normal entry protects supported production paths; it is not an OS-level guarantee against arbitrary same-UID code that bypasses the entry.
+
 ## Outputs
 
 Return the job script or commands, expected log paths, monitoring commands, stop conditions, and final verification checks. Submission is not completion; completion requires current job state and final output validation.

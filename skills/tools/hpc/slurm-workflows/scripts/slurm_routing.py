@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import os
+import pwd
 import re
 import shutil
 import subprocess
@@ -42,6 +43,22 @@ RESOURCE_EXACT_KEYS = ("gpus", "gpu_count", "nodes", "ntasks", "tasks", "walltim
 RESOURCE_MINIMUM_KEYS = ("memory_mb", "mem_mb", "mem", "cpus_per_task", "cpus", "cpu_count")
 SUPPORTED_RACE_WINNER_RULES = {"first_running_job"}
 SUPPORTED_RACE_TIE_POLICIES = {"keep_lowest_job_id_cancel_other"}
+CANCEL_ALLOW_OWNED_UNPROTECTED = "ALLOW_OWNED_UNPROTECTED"
+CANCEL_REQUIRE_FRESH_HUMAN = "REQUIRE_FRESH_HUMAN"
+CANCEL_DENY_UNKNOWN_OR_FORBIDDEN = "DENY_UNKNOWN_OR_FORBIDDEN"
+DESTRUCTIVE_CANCEL_ACTIONS = {
+    "cancel_array_elements",
+    "cancel_job",
+    "cancel_job_set",
+    "cancel_via_api",
+    "release_allocation",
+    "terminate_allocation_holder",
+}
+NON_DESTRUCTIVE_ACTIONS = {"monitor", "natural_step_completion", "read_only"}
+CANCELABLE_JOB_STATES = {"PENDING", "RUNNING"}
+SITE_CANCEL_PROHIBITIONS = {"forbidden", "prohibited", "disallowed", "disabled", "no", "false", "never"}
+EXACT_SLURM_JOB_ID_RE = re.compile(r"^[0-9]+(?:_[0-9]+)?(?:\+[0-9]+)?$")
+MAX_CANCEL_CONFIRMATION_TTL_SECONDS = 300
 
 
 SINFO_FIELDS = "%P|%a|%l|%D|%c|%m|%G|%f|%T|%Q"
@@ -69,6 +86,7 @@ SCONTROL_CONFIG_FIELDS = {
     "AccountingStorageType",
 }
 DEFAULT_STATE_PATH = Path.home() / ".config" / "ai-skills" / "slurm-workflows.toml"
+DEFAULT_LOCAL_OVERRIDE_PATH = Path.home() / ".config" / "ai-skills" / "local-overrides.toml"
 STATE_JSON_TABLES = ("accepted_workload_contracts", "capacity_families", "enrollments")
 
 
@@ -474,6 +492,697 @@ def widening_plan(job: dict[str, Any], candidates: list[str], capabilities: dict
     if job.get("replaceable_pending") and capabilities.get("state_safe_cancel_confirmed"):
         return {"action": "replace_pending", "partitions": candidates}
     return {"action": "fail_closed", "reason": "unverified_widening"}
+
+
+def _cancel_string_list(value: Any) -> list[str] | None:
+    if isinstance(value, str):
+        values = [item.strip() for item in value.split(",") if item.strip()]
+    elif isinstance(value, (list, tuple, set)):
+        values = [str(item).strip() for item in value if str(item).strip()]
+    else:
+        return None
+    if any(item.upper() == UNKNOWN for item in values):
+        return None
+    return sorted(set(values))
+
+
+def _cancel_cluster_id(site_context: dict[str, Any]) -> str | None:
+    value = site_context.get("cluster_id") or site_context.get("local_site_id")
+    if not value or str(value).strip().upper() == UNKNOWN:
+        return None
+    return str(value).strip()
+
+
+def _site_forbids_cancel(site_context: dict[str, Any]) -> bool:
+    policy = site_context.get("policy")
+    if not isinstance(policy, dict):
+        return False
+    if policy.get("forbid_agent_cancellation") is True:
+        return True
+    values = {
+        str(policy.get(key) or "").strip().lower()
+        for key in ("cancel_execution", "destructive_release", "job_cancellation")
+        if key in policy
+    }
+    return bool(values & SITE_CANCEL_PROHIBITIONS)
+
+
+def _normalize_cancel_target(target: dict[str, Any]) -> tuple[dict[str, Any] | None, str | None]:
+    if not isinstance(target, dict):
+        return None, "invalid_target"
+    if target.get("facts_verified") is not True:
+        return None, "unverified_target_facts"
+    if target.get("ownership_verified") is not True:
+        return None, "unverified_run_ownership"
+    job_id = str(target.get("job_id") or "").strip()
+    if not EXACT_SLURM_JOB_ID_RE.fullmatch(job_id):
+        return None, "non_exact_job_id"
+    cluster_id = str(target.get("cluster_id") or "").strip()
+    if not cluster_id or cluster_id.upper() == UNKNOWN:
+        return None, "unknown_target_cluster"
+    state = str(target.get("state") or "").strip().upper()
+    if state not in CANCELABLE_JOB_STATES:
+        return None, "unknown_or_non_cancelable_state"
+
+    partition_value = target.get("candidate_partitions") if "candidate_partitions" in target else target.get("partitions")
+    if partition_value is None and "partition" in target:
+        partition_value = [target.get("partition")]
+    partitions = _cancel_string_list(partition_value)
+    if not partitions:
+        return None, "unknown_partition_set"
+
+    accelerator_key = next(
+        (
+            key
+            for key in ("accelerators", "allocated_accelerators", "requested_accelerators", "gpu_type")
+            if key in target
+        ),
+        None,
+    )
+    if accelerator_key is None:
+        return None, "unknown_accelerator_set"
+    accelerator_value = target.get(accelerator_key)
+    if accelerator_key == "gpu_type" and accelerator_value is not None:
+        accelerator_value = [accelerator_value]
+    accelerators = _cancel_string_list(accelerator_value)
+    if accelerators is None:
+        return None, "unknown_accelerator_set"
+
+    owner_run_id = str(target.get("owner_run_id") or "").strip()
+    if not owner_run_id or owner_run_id.upper() == UNKNOWN:
+        return None, "unknown_run_ownership"
+    cancel_responsibility = target.get("cancel_responsibility")
+    if not isinstance(cancel_responsibility, bool):
+        return None, "unknown_cancel_responsibility"
+
+    return {
+        "job_id": job_id,
+        "cluster_id": cluster_id,
+        "state": state,
+        "partitions": partitions,
+        "accelerators": [item.lower() for item in accelerators],
+        "owner_run_id": owner_run_id,
+        "cancel_responsibility": cancel_responsibility,
+        "array_parent_id": str(target.get("array_parent_id") or ""),
+        "heterogeneous_job_id": str(target.get("heterogeneous_job_id") or ""),
+        "dependency": str(target.get("dependency") or ""),
+    }, None
+
+
+def _cancel_binding_digest(
+    cluster_id: str,
+    policy: dict[str, Any],
+    action: str,
+    targets: list[dict[str, Any]],
+) -> str:
+    payload = {
+        "action": action,
+        "cluster_id": cluster_id,
+        "policy": {
+            "policy_version": str(policy["policy_version"]),
+            "protected_accelerators": policy["protected_accelerators"],
+            "protected_partitions": policy["protected_partitions"],
+        },
+        "targets": targets,
+    }
+    encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return "sha256:" + hashlib.sha256(encoded).hexdigest()
+
+
+def protected_cancel_decision(
+    site_context: dict[str, Any],
+    private_policy: dict[str, Any],
+    targets: list[dict[str, Any]],
+    current_run_id: str,
+    *,
+    action: str = "cancel_job",
+    target_set_complete: bool = False,
+) -> dict[str, Any]:
+    """Classify a cancellation request without authorizing or executing it."""
+
+    if action in NON_DESTRUCTIVE_ACTIONS:
+        return {
+            "decision": None,
+            "reason": "no_destructive_cancel_action",
+            "confirmation_required": False,
+            "execution_authorized": False,
+        }
+    if action not in DESTRUCTIVE_CANCEL_ACTIONS:
+        return {
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "unknown_cancel_action",
+            "confirmation_required": False,
+            "execution_authorized": False,
+        }
+    if not current_run_id or str(current_run_id).strip().upper() == UNKNOWN:
+        return {
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "unknown_current_run_identity",
+            "confirmation_required": False,
+            "execution_authorized": False,
+        }
+    current_run_id = str(current_run_id).strip()
+    if not isinstance(site_context, dict) or site_context.get("cluster_identity_verified") is not True:
+        return {
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "unverified_cluster_identity",
+            "confirmation_required": False,
+            "execution_authorized": False,
+        }
+    cluster_id = _cancel_cluster_id(site_context)
+    if not cluster_id:
+        return {
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "unknown_cluster_identity",
+            "confirmation_required": False,
+            "execution_authorized": False,
+        }
+    if "policy" in site_context and not isinstance(site_context.get("policy"), dict):
+        return {
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "invalid_site_policy",
+            "confirmation_required": False,
+            "execution_authorized": False,
+        }
+    if _site_forbids_cancel(site_context):
+        return {
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "explicit_site_prohibition",
+            "confirmation_required": False,
+            "execution_authorized": False,
+        }
+    if not isinstance(private_policy, dict):
+        return {
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "missing_private_policy",
+            "confirmation_required": False,
+            "execution_authorized": False,
+        }
+    required_policy_keys = {
+        "cluster_id",
+        "policy_version",
+        "protected_partitions",
+        "protected_accelerators",
+        "scope_confirmed_by_human",
+    }
+    if not required_policy_keys <= set(private_policy):
+        return {
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "incomplete_private_policy",
+            "confirmation_required": False,
+            "execution_authorized": False,
+        }
+    policy_cluster_id = str(private_policy.get("cluster_id") or "").strip()
+    policy_version = str(private_policy.get("policy_version") or "").strip()
+    protected_partitions = _cancel_string_list(private_policy.get("protected_partitions"))
+    protected_accelerators = _cancel_string_list(private_policy.get("protected_accelerators"))
+    if (
+        not policy_cluster_id
+        or policy_cluster_id != cluster_id
+        or not policy_version
+        or protected_partitions is None
+        or protected_accelerators is None
+    ):
+        return {
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "invalid_or_mismatched_private_policy",
+            "confirmation_required": False,
+            "execution_authorized": False,
+        }
+    if private_policy.get("scope_confirmed_by_human") is not True:
+        return {
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "unconfirmed_private_policy_scope",
+            "confirmation_required": False,
+            "execution_authorized": False,
+        }
+    site_policy = site_context.get("policy") if isinstance(site_context.get("policy"), dict) else {}
+    site_protected_partitions = _cancel_string_list(site_policy.get("protected_partitions", []))
+    site_protected_accelerators = _cancel_string_list(site_policy.get("protected_accelerators", []))
+    if site_protected_partitions is None or site_protected_accelerators is None:
+        return {
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "invalid_site_protection_policy",
+            "confirmation_required": False,
+            "execution_authorized": False,
+        }
+    protected_partitions = sorted(set(protected_partitions) | set(site_protected_partitions))
+    protected_accelerators = sorted(
+        {item.lower() for item in protected_accelerators} | {item.lower() for item in site_protected_accelerators}
+    )
+    if target_set_complete is not True or not isinstance(targets, list) or not targets:
+        return {
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "unexpanded_or_empty_target_set",
+            "confirmation_required": False,
+            "execution_authorized": False,
+        }
+
+    normalized_targets: list[dict[str, Any]] = []
+    for target in targets:
+        normalized, error = _normalize_cancel_target(target)
+        if error:
+            return {
+                "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+                "reason": error,
+                "confirmation_required": False,
+                "execution_authorized": False,
+            }
+        assert normalized is not None
+        if normalized["cluster_id"] != cluster_id:
+            return {
+                "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+                "reason": "cross_cluster_target_set",
+                "confirmation_required": False,
+                "execution_authorized": False,
+            }
+        normalized_targets.append(normalized)
+    normalized_targets.sort(key=lambda item: item["job_id"])
+    target_ids = [item["job_id"] for item in normalized_targets]
+    if len(target_ids) != len(set(target_ids)):
+        return {
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "duplicate_target_id",
+            "confirmation_required": False,
+            "execution_authorized": False,
+        }
+
+    protected_partition_set = set(protected_partitions)
+    protected_accelerator_set = set(protected_accelerators)
+    protected_matches: list[dict[str, Any]] = []
+    old_or_unowned = False
+    for target in normalized_targets:
+        partition_matches = sorted(set(target["partitions"]) & protected_partition_set)
+        accelerator_matches = sorted(set(target["accelerators"]) & protected_accelerator_set)
+        if partition_matches or accelerator_matches:
+            protected_matches.append(
+                {
+                    "job_id": target["job_id"],
+                    "protected_partitions": partition_matches,
+                    "protected_accelerators": accelerator_matches,
+                }
+            )
+        if target["owner_run_id"] != current_run_id or target["cancel_responsibility"] is not True:
+            old_or_unowned = True
+
+    normalized_policy = {
+        "policy_version": policy_version,
+        "protected_partitions": protected_partitions,
+        "protected_accelerators": sorted(protected_accelerator_set),
+    }
+    binding_digest = _cancel_binding_digest(cluster_id, normalized_policy, action, normalized_targets)
+    common = {
+        "cluster_id": cluster_id,
+        "target_ids": target_ids,
+        "target_states": {item["job_id"]: item["state"] for item in normalized_targets},
+        "target_facts": [
+            {
+                "job_id": item["job_id"],
+                "state": item["state"],
+                "partitions": item["partitions"],
+                "accelerators": item["accelerators"],
+            }
+            for item in normalized_targets
+        ],
+        "policy_version": policy_version,
+        "binding_digest": binding_digest,
+        "protection_matches": protected_matches,
+        "execution_authorized": False,
+        "requires_controlled_execution_boundary": True,
+    }
+    if protected_matches:
+        return {
+            **common,
+            "decision": CANCEL_REQUIRE_FRESH_HUMAN,
+            "reason": "protected_target",
+            "confirmation_required": True,
+        }
+    if old_or_unowned:
+        return {
+            **common,
+            "decision": CANCEL_REQUIRE_FRESH_HUMAN,
+            "reason": "not_owned_by_current_run",
+            "confirmation_required": True,
+        }
+    return {
+        **common,
+        "decision": CANCEL_ALLOW_OWNED_UNPROTECTED,
+        "reason": "owned_unprotected_exact_target_set",
+        "confirmation_required": False,
+    }
+
+
+def cancel_confirmation_request(
+    site_context: dict[str, Any],
+    private_policy: dict[str, Any],
+    targets: list[dict[str, Any]],
+    current_run_id: str,
+    *,
+    action: str = "cancel_job",
+    target_set_complete: bool = False,
+) -> dict[str, Any] | None:
+    """Build a short target-bound request, never a human approval receipt."""
+
+    decision = protected_cancel_decision(
+        site_context,
+        private_policy,
+        targets,
+        current_run_id,
+        action=action,
+        target_set_complete=target_set_complete,
+    )
+    if decision.get("decision") != CANCEL_REQUIRE_FRESH_HUMAN:
+        return None
+    target_text = ", ".join(decision["target_ids"])
+    state_text = ", ".join(f"{job_id}={state}" for job_id, state in decision["target_states"].items())
+    resource_text = "; ".join(
+        f"{item['job_id']} partitions={','.join(item['partitions'])} accelerators={','.join(item['accelerators']) or 'none'}"
+        for item in decision["target_facts"]
+    )
+    return {
+        "kind": "slurm-cancel-human-confirmation-request",
+        "cluster_id": decision["cluster_id"],
+        "target_ids": decision["target_ids"],
+        "target_states": decision["target_states"],
+        "target_facts": decision["target_facts"],
+        "policy_version": decision["policy_version"],
+        "binding_digest": decision["binding_digest"],
+        "message": (
+            f"Cancel exact Slurm target(s) {target_text} on {decision['cluster_id']} "
+            f"({state_text}; {resource_text})? Cancellation can lose allocated resources or queue position."
+        ),
+        "choices": ["retain", "confirm_cancel_exact_targets"],
+        "default_choice": "retain",
+        "execution_authorized": False,
+    }
+
+
+def _private_cancel_policy_from_override(path: Path | str, site_id: str, cluster_id: str) -> tuple[dict[str, Any] | None, str | None]:
+    override_path = Path(path).expanduser()
+    if tomllib is None:
+        return None, "tomllib_unavailable"
+    try:
+        parsed = tomllib.loads(override_path.read_text(encoding="utf-8"))
+    except (OSError, tomllib.TOMLDecodeError):
+        return None, "unreadable_local_override"
+    site = dict(parsed.get("sites") or {}).get(site_id)
+    if not isinstance(site, dict):
+        return None, "missing_site_private_policy"
+    configured_site_id = str(site.get("local_site_id") or site_id).strip()
+    if configured_site_id != cluster_id:
+        return None, "private_policy_cluster_mismatch"
+
+    confirmed = site.get("cancel_policy_confirmed")
+    if isinstance(confirmed, str):
+        confirmed = confirmed.strip().lower() == "true"
+    policy = {
+        "cluster_id": cluster_id,
+        "policy_version": str(site.get("cancel_policy_version") or "").strip(),
+        "protected_partitions": site.get("protected_partitions"),
+        "protected_accelerators": site.get("protected_accelerators"),
+        "scope_confirmed_by_human": confirmed is True,
+    }
+    site_policy = {
+        key: site[key]
+        for key in ("forbid_agent_cancellation", "cancel_execution", "destructive_release", "job_cancellation")
+        if key in site
+    }
+    return {"private_policy": policy, "site_policy": site_policy}, None
+
+
+def _accelerators_from_scontrol(record: dict[str, str]) -> list[str] | None:
+    resource_text = " ".join(
+        str(record.get(key) or "")
+        for key in ("Gres", "TresPerNode", "TresPerJob", "ReqTRES", "AllocTRES")
+    )
+    if "gpu" not in resource_text.lower():
+        return []
+    patterns = (
+        r"(?:^|[,/])gpu:([A-Za-z0-9_.-]+)(?::|=)[0-9]+",
+        r"gres/gpu:([A-Za-z0-9_.-]+)=[0-9]+",
+    )
+    values: set[str] = set()
+    for pattern in patterns:
+        values.update(match.lower() for match in re.findall(pattern, resource_text, flags=re.IGNORECASE))
+    return sorted(values) if values else None
+
+
+def _scontrol_job_records(output: str) -> list[dict[str, str]]:
+    return [parse_scontrol_kv(line) for line in output.splitlines() if line.strip()]
+
+
+def _current_os_user() -> str:
+    return pwd.getpwuid(os.geteuid()).pw_name
+
+
+def _live_cancel_target(job_id: str, cluster_id: str, current_run_id: str, owned_job_ids: set[str]) -> tuple[dict[str, Any] | None, str | None]:
+    if not EXACT_SLURM_JOB_ID_RE.fullmatch(job_id):
+        return None, "non_exact_job_id"
+    rc, out, _err = _run(["scontrol", "show", "job", "-o", job_id])
+    if rc != 0:
+        return None, "job_lookup_failed"
+    records = _scontrol_job_records(out)
+    if len(records) != 1 or records[0].get("JobId") != job_id:
+        return None, "job_target_not_exactly_resolved"
+    record = records[0]
+    user_id = str(record.get("UserId") or "").split("(", 1)[0]
+    if not user_id or user_id != _current_os_user():
+        return None, "scheduler_owner_mismatch"
+    state = str(record.get("JobState") or "").split("+", 1)[0].upper()
+    partition = str(record.get("Partition") or "").strip()
+    accelerators = _accelerators_from_scontrol(record)
+    if accelerators is None:
+        return None, "unknown_accelerator_set"
+    array_parent = str(record.get("ArrayJobId") or "").strip()
+    heterogeneous_job = str(record.get("HetJobId") or "").strip()
+    return {
+        "job_id": job_id,
+        "cluster_id": cluster_id,
+        "state": state,
+        "partition": partition,
+        "allocated_accelerators": accelerators,
+        "owner_run_id": current_run_id if job_id in owned_job_ids else "not-current-run",
+        "cancel_responsibility": job_id in owned_job_ids,
+        "facts_verified": True,
+        "ownership_verified": True,
+        "array_parent_id": array_parent,
+        "heterogeneous_job_id": heterogeneous_job,
+        "dependency": str(record.get("Dependency") or ""),
+    }, None
+
+
+def _live_cancel_snapshot(
+    job_ids: list[str],
+    owned_job_ids: list[str],
+    current_run_id: str,
+    site_id: str,
+    local_override: Path | str,
+) -> tuple[dict[str, Any] | None, str | None]:
+    if not job_ids or len(job_ids) != len(set(job_ids)):
+        return None, "empty_or_duplicate_target_set"
+    if len(owned_job_ids) != len(set(owned_job_ids)) or not set(owned_job_ids) <= set(job_ids):
+        return None, "invalid_current_run_ownership_set"
+
+    live = discover_live_site_context()
+    cluster_id = str(live.get("local_site_id") or "").strip()
+    provenance = dict(live.get("fact_provenance") or {})
+    if not cluster_id or provenance.get("cluster_name") != LIVE_KNOWN:
+        return None, "unverified_cluster_identity"
+    policy_bundle, policy_error = _private_cancel_policy_from_override(local_override, site_id, cluster_id)
+    if policy_error:
+        return None, policy_error
+    assert policy_bundle is not None
+    targets: list[dict[str, Any]] = []
+    owned_set = set(owned_job_ids)
+    for job_id in job_ids:
+        target, error = _live_cancel_target(job_id, cluster_id, current_run_id, owned_set)
+        if error:
+            return None, error
+        assert target is not None
+        targets.append(target)
+    action = "cancel_job" if len(targets) == 1 else "cancel_job_set"
+    site_context = {
+        "cluster_id": cluster_id,
+        "cluster_identity_verified": True,
+        "policy": policy_bundle["site_policy"],
+    }
+    decision = protected_cancel_decision(
+        site_context,
+        policy_bundle["private_policy"],
+        targets,
+        current_run_id,
+        action=action,
+        target_set_complete=True,
+    )
+    request = None
+    if decision.get("decision") == CANCEL_REQUIRE_FRESH_HUMAN:
+        request = cancel_confirmation_request(
+            site_context,
+            policy_bundle["private_policy"],
+            targets,
+            current_run_id,
+            action=action,
+            target_set_complete=True,
+        )
+    return {
+        "site_context": site_context,
+        "private_policy": policy_bundle["private_policy"],
+        "targets": targets,
+        "action": action,
+        "decision": decision,
+        "human_request": request,
+    }, None
+
+
+def _cancel_readback(job_ids: list[str]) -> dict[str, str]:
+    states: dict[str, str] = {}
+    for job_id in job_ids:
+        rc, out, _err = _run(["scontrol", "show", "job", "-o", job_id])
+        records = _scontrol_job_records(out) if rc == 0 else []
+        if len(records) == 1 and records[0].get("JobId") == job_id:
+            states[job_id] = str(records[0].get("JobState") or UNKNOWN)
+        else:
+            states[job_id] = "NOT_FOUND_OR_UNREADABLE"
+    return states
+
+
+def safe_cancel_jobs(
+    job_ids: list[str],
+    owned_job_ids: list[str],
+    current_run_id: str,
+    site_id: str,
+    local_override: Path | str = DEFAULT_LOCAL_OVERRIDE_PATH,
+    *,
+    execute: bool = False,
+) -> dict[str, Any]:
+    """Evaluate or execute exact current-run cancellation through the protected gate."""
+
+    snapshot, error = _live_cancel_snapshot(job_ids, owned_job_ids, current_run_id, site_id, local_override)
+    if error:
+        return {
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": error,
+            "executed": False,
+        }
+    assert snapshot is not None
+    decision = snapshot["decision"]
+    result = {
+        **decision,
+        "executed": False,
+        "human_request": snapshot["human_request"],
+    }
+    if decision.get("decision") != CANCEL_ALLOW_OWNED_UNPROTECTED or not execute:
+        return result
+
+    second, second_error = _live_cancel_snapshot(job_ids, owned_job_ids, current_run_id, site_id, local_override)
+    if second_error:
+        return {
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": f"revalidation_failed:{second_error}",
+            "executed": False,
+        }
+    assert second is not None
+    second_decision = second["decision"]
+    if (
+        second_decision.get("decision") != CANCEL_ALLOW_OWNED_UNPROTECTED
+        or second_decision.get("binding_digest") != decision.get("binding_digest")
+    ):
+        return {
+            **second_decision,
+            "reason": "target_policy_or_state_changed",
+            "executed": False,
+            "human_request": second["human_request"],
+        }
+    scancel = shutil.which("scancel")
+    if not scancel or not Path(scancel).is_absolute():
+        return {
+            **second_decision,
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "scancel_executable_unavailable",
+            "executed": False,
+        }
+    rc, _out, err = _run([scancel, *job_ids])
+    if rc != 0:
+        return {
+            **second_decision,
+            "decision": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "scancel_failed",
+            "executed": False,
+            "stderr": err.strip(),
+        }
+    return {
+        **second_decision,
+        "executed": True,
+        "readback_states": _cancel_readback(job_ids),
+    }
+
+
+def validate_cancel_confirmation(
+    confirmation: dict[str, Any],
+    site_context: dict[str, Any],
+    private_policy: dict[str, Any],
+    targets: list[dict[str, Any]],
+    current_run_id: str,
+    *,
+    expected_human_identity: str,
+    now: datetime | str,
+    action: str = "cancel_job",
+    target_set_complete: bool = False,
+) -> dict[str, Any]:
+    """Validate a receipt representation while withholding execution authority."""
+
+    base = {"valid": False, "execution_authorized": False, "requires_trusted_executor": True}
+    if not isinstance(confirmation, dict):
+        return {**base, "reason": "missing_confirmation"}
+    if not str(expected_human_identity or "").strip():
+        return {**base, "reason": "missing_expected_human_identity"}
+    decision = protected_cancel_decision(
+        site_context,
+        private_policy,
+        targets,
+        current_run_id,
+        action=action,
+        target_set_complete=target_set_complete,
+    )
+    if decision.get("decision") != CANCEL_REQUIRE_FRESH_HUMAN:
+        return {**base, "reason": "confirmation_not_applicable"}
+    if confirmation.get("source") != "independent_human_channel" or confirmation.get("identity_verified") is not True:
+        return {**base, "reason": "untrusted_confirmation_source"}
+    if not str(confirmation.get("confirmation_id") or "").strip():
+        return {**base, "reason": "missing_confirmation_id"}
+    if str(confirmation.get("human_identity") or "") != str(expected_human_identity):
+        return {**base, "reason": "human_identity_mismatch"}
+    if confirmation.get("choice") != "confirm_cancel_exact_targets":
+        return {**base, "reason": "cancel_not_confirmed"}
+    if confirmation.get("single_use") is not True or confirmation.get("consumed") is not False:
+        return {**base, "reason": "confirmation_not_fresh_single_use"}
+    if confirmation.get("action") != action:
+        return {**base, "reason": "action_mismatch"}
+    if confirmation.get("binding_digest") != decision["binding_digest"]:
+        return {**base, "reason": "target_policy_or_state_changed"}
+    if list(confirmation.get("target_ids") or []) != decision["target_ids"]:
+        return {**base, "reason": "target_set_changed"}
+    if confirmation.get("policy_version") != decision["policy_version"]:
+        return {**base, "reason": "policy_version_changed"}
+
+    issued_at = _parse_datetime(confirmation.get("issued_at"))
+    expires_at = _parse_datetime(confirmation.get("expires_at"))
+    current_time = _parse_datetime(now)
+    if not issued_at or not expires_at or not current_time:
+        return {**base, "reason": "invalid_confirmation_time"}
+    if not issued_at.tzinfo or not expires_at.tzinfo or not current_time.tzinfo:
+        return {**base, "reason": "confirmation_time_requires_timezone"}
+    ttl = (expires_at - issued_at).total_seconds()
+    if ttl <= 0 or ttl > MAX_CANCEL_CONFIRMATION_TTL_SECONDS:
+        return {**base, "reason": "confirmation_ttl_out_of_bounds"}
+    if current_time < issued_at or current_time >= expires_at:
+        return {**base, "reason": "confirmation_expired_or_not_yet_valid"}
+    return {
+        **base,
+        "valid": True,
+        "reason": "fresh_target_bound_human_representation",
+        "binding_digest": decision["binding_digest"],
+    }
 
 
 def duplicate_race_decision(site_policy: dict[str, Any], user_opt_in: bool) -> dict[str, Any]:
@@ -1062,6 +1771,13 @@ def build_arg_parser() -> argparse.ArgumentParser:
     p.add_argument("--policy-overlay-id")
     p = sub.add_parser("scope-digest", help="Compute a capacity-family enrollment scope digest")
     p.add_argument("family_json", type=Path)
+    p = sub.add_parser("safe-cancel", help="Evaluate or execute exact current-run cancellation through the protected gate")
+    p.add_argument("--job-id", action="append", required=True, dest="job_ids")
+    p.add_argument("--owned-job-id", action="append", required=True, dest="owned_job_ids")
+    p.add_argument("--current-run-id", required=True)
+    p.add_argument("--site-id", required=True)
+    p.add_argument("--local-override", type=Path, default=DEFAULT_LOCAL_OVERRIDE_PATH)
+    p.add_argument("--execute", action="store_true")
     return parser
 
 
@@ -1074,6 +1790,17 @@ def main(argv: list[str] | None = None) -> int:
         family = json.loads(args.family_json.read_text(encoding="utf-8"))
         print(_scope_digest(family))
         return 0
+    if args.command == "safe-cancel":
+        result = safe_cancel_jobs(
+            args.job_ids,
+            args.owned_job_ids,
+            args.current_run_id,
+            args.site_id,
+            args.local_override,
+            execute=args.execute,
+        )
+        print(json.dumps(result, indent=2, sort_keys=True))
+        return 2 if result.get("decision") == CANCEL_DENY_UNKNOWN_OR_FORBIDDEN else 0
     raise SystemExit(f"unknown command: {args.command}")
 
 

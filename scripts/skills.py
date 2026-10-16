@@ -60,10 +60,14 @@ ENVIRONMENT_SKILLS = (
 LOCAL_OVERRIDE_ALLOWED_FIELDS = {
     "account",
     "accelerator_priority",
+    "cancel_policy_version",
+    "cancel_policy_confirmed",
     "local_site_id",
     "policy_overlay_id",
     "partition",
     "partition_priority",
+    "protected_accelerators",
+    "protected_partitions",
     "qos",
     "qos_priority",
     "scratch_root",
@@ -920,6 +924,10 @@ def environment_blank_site_override(site_id: str) -> str:
             'partition = ""',
             'partition_priority = ""',
             'accelerator_priority = ""',
+            'cancel_policy_version = ""',
+            'cancel_policy_confirmed = ""',
+            'protected_partitions = ""',
+            'protected_accelerators = ""',
             'qos = ""',
             'qos_priority = ""',
             'scratch_root = ""',
@@ -946,6 +954,10 @@ def environment_local_override_template(site_id: str | None = None) -> str:
         "# - partition: required when a site does not provide a safe default partition.",
         "# - partition_priority: optional comma-separated fallback order for prompt-guided Slurm routing.",
         "# - accelerator_priority: optional comma-separated accelerator preference among legal routes.",
+        "# - cancel_policy_version: required version label before protected cancellation decisions are enabled.",
+        "# - cancel_policy_confirmed: set to true only after the user confirms this cluster's complete protection scope.",
+        "# - protected_partitions: private comma-separated partitions that always require fresh human confirmation.",
+        "# - protected_accelerators: private comma-separated accelerator types that always require fresh human confirmation.",
         "# - qos: required when jobs need an explicit QoS or queue class.",
         "# - qos_priority: optional comma-separated fallback order for prompt-guided QoS routing.",
         "# - scratch_root: required private writable scratch/work directory; never commit personal paths.",
@@ -1001,6 +1013,22 @@ def environment_public_override_policy(site_fields: dict[str, str]) -> dict[str,
     cancel_policy = str(site_fields.get("race_cancel_policy") or "").strip()
     if cancel_policy:
         policy["race_cancel_policy"] = cancel_policy
+    return policy
+
+
+def environment_cancel_protection_policy(site_fields: dict[str, str], cluster_id: str) -> dict[str, Any]:
+    """Normalize private cancellation protection without adding it to generated public summaries."""
+
+    policy: dict[str, Any] = {
+        "cluster_id": str(cluster_id).strip(),
+        "policy_version": str(site_fields.get("cancel_policy_version") or "").strip(),
+        "scope_confirmed_by_human": str(site_fields.get("cancel_policy_confirmed") or "").strip().lower()
+        in {"1", "true", "yes"},
+    }
+    if "protected_partitions" in site_fields:
+        policy["protected_partitions"] = environment_override_list(site_fields.get("protected_partitions"))
+    if "protected_accelerators" in site_fields:
+        policy["protected_accelerators"] = environment_override_list(site_fields.get("protected_accelerators"))
     return policy
 
 
