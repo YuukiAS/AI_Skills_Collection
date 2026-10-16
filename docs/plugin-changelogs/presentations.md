@@ -4,6 +4,17 @@
 
 No pending released changes.
 
+## 0.4 - 2026-10-15
+
+- Bound the canonical CUHK Beamer route to the packaged TeX Gyre Termes text
+  and math font files discovered through `render-chinese-math-pdf`, and added
+  post-render font inspection so a normal presentation run fails clearly when
+  the expected fonts cannot be used.
+- Strengthened existing-deck acceptance so it verifies the exact candidate,
+  source and rendered artifact identities, page-by-page evidence, contact-sheet
+  review, and an independently produced review trace instead of trusting a
+  self-declared status or missing artifact paths.
+
 ## 0.3 - 2026-09-01
 
 - Tightened Beamer/PDF render routing so YuukiAS/TRACE handoffs preserve the

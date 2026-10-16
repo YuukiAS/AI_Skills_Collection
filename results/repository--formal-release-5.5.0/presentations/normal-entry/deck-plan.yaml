@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "metadata": {
+    "title": "Intensity clipping for 3D lesion segmentation",
+    "audience": "specialist",
+    "mode": "research-group-meeting",
+    "purpose": "group-meeting",
+    "duration_minutes": 5,
+    "language": "en",
+    "template": "exact-cuhk-beamer-source",
+    "output": "tex",
+    "editability": "source-editable"
+  },
+  "research_state": {
+    "belief_update": "Supports replication, not superiority.",
+    "decision_needed": "Approve three-seed replication before architecture changes.",
+    "evidence_quality": "Public-safe synthetic summary; small validation study.",
+    "failures": "Disconnected false positives persist in one motion-corrupted volume under both methods.",
+    "frozen_items": "P01-P05; canonical CUHK shell; supplied source only.",
+    "largest_uncertainty": "No confidence interval or repeated-seed estimate; split dependence.",
+    "new_evidence": "18 validation volumes; six metric values in source.",
+    "next_discriminating_experiment": "Three fixed seeds, pre-registered preprocessing and split policy; uncertainty reporting and separate case audit.",
+    "previous_question": "Does fixed intensity clipping justify replication?",
+    "prior_belief": "No prior belief is supplied.",
+    "stop_items": "No invented evidence, citations, images, or superiority claims.",
+    "successes": "Mean Dice 0.742 to 0.758; small-lesion Dice 0.421 to 0.469; HD95 18.4 to 17.9 mm."
+  },
+  "evidence_board": {
+    "experiment_logs": [
+      {
+        "id": "E1",
+        "type": "source_notes",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md",
+        "provenance": "Study design",
+        "rights": "user-supplied public-safe",
+        "supports": "Study design",
+        "status": "available"
+      }
+    ],
+    "model_diagrams": [
+      {
+        "id": "E5",
+        "type": "source_notes",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md",
+        "provenance": "Question",
+        "rights": "user-supplied public-safe",
+        "supports": "Question",
+        "status": "available"
+      }
+    ],
+    "available_figures": [
+      {
+        "id": "NA-available_figures",
+        "type": "absence_record",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md",
+        "provenance": "Source inventory",
+        "rights": "user-supplied public-safe",
+        "supports": "No such asset supplied or required for this five-page deck.",
+        "status": "not-needed"
+      }
+    ],
+    "medical_images": [
+      {
+        "id": "NA-medical_images",
+        "type": "absence_record",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md",
+        "provenance": "Source inventory",
+        "rights": "user-supplied public-safe",
+        "supports": "No such asset supplied or required for this five-page deck.",
+        "status": "not-needed"
+      }
+    ],
+    "qualitative_examples": [
+      {
+        "id": "E4",
+        "type": "source_notes",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md",
+        "provenance": "Proposed next experiment",
+        "rights": "user-supplied public-safe",
+        "supports": "Proposed next experiment",
+        "status": "available"
+      }
+    ],
+    "missing_evidence": [
+      {
+        "id": "M1",
+        "type": "uncertainty",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md",
+        "provenance": "Failure and uncertainty",
+        "rights": "user-supplied public-safe",
+        "supports": "No confidence interval or repeated-seed estimate; no case image supplied.",
+        "status": "missing"
+      }
+    ],
+    "equations": [
+      {
+        "id": "NA-equations",
+        "type": "absence_record",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md",
+        "provenance": "Source inventory",
+        "rights": "user-supplied public-safe",
+        "supports": "No such asset supplied or required for this five-page deck.",
+        "status": "not-needed"
+      }
+    ],
+    "failed_experiments": [
+      {
+        "id": "E3",
+        "type": "source_notes",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md",
+        "provenance": "Failure and uncertainty",
+        "rights": "user-supplied public-safe",
+        "supports": "Failure and uncertainty",
+        "status": "available"
+      }
+    ],
+    "quantitative_plots": [
+      {
+        "id": "E2",
+        "type": "source_notes",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md",
+        "provenance": "Results",
+        "rights": "user-supplied public-safe",
+        "supports": "Results",
+        "status": "available"
+      }
+    ],
+    "literature_figures_to_redraw": [
+      {
+        "id": "NA-literature_figures_to_redraw",
+        "type": "absence_record",
+        "source": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md",
+        "provenance": "Source inventory",
+        "rights": "user-supplied public-safe",
+        "supports": "No such asset supplied or required for this five-page deck.",
+        "status": "not-needed"
+      }
+    ]
+  },
+  "slides": [
+    {
+      "id": "P01",
+      "title": "Intensity clipping for 3D lesion segmentation",
+      "key_message": "Does fixed intensity clipping justify replication?",
+      "slide_purpose": "Title and decision context",
+      "visual_intent": "Research question and replication decision",
+      "source_anchors": [
+        "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md#Question"
+      ],
+      "page_function": "RESEARCH_UPDATE",
+      "required_evidence": [
+        "E5"
+      ],
+      "source_evidence_ids": [
+        "E5"
+      ],
+      "scientific_objects": [
+        "Research question and replication decision"
+      ],
+      "evidence_status": "available",
+      "layout_rationale": "Canonical title composition",
+      "allowed_fallback": "Line breaks and spacing only; retain all scientific content.",
+      "forbidden_fallback": "No invented data, card layouts, page deletion, or smaller fonts.",
+      "qa_criteria": [
+        "Exact source numbers and limits",
+        "Whole-page readability",
+        "Canonical shell unchanged",
+        "Evidence adjacent to interpretation"
+      ],
+      "positive_visual_ancestor": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/presentations/0.3/shared/templates/cuhk/beamer/source",
+      "typography_floor": "Canonical theme normal body; table large; no page-local shrinking"
+    },
+    {
+      "id": "P02",
+      "title": "A controlled comparison on 18 validation volumes",
+      "key_message": "Same split, architecture, training schedule and post-processing.",
+      "slide_purpose": "Study design and evidence boundary",
+      "visual_intent": "Paired comparison with fixed training conditions and one intended test-time change",
+      "source_anchors": [
+        "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md#Study design"
+      ],
+      "page_function": "EXPERIMENT_DESIGN",
+      "required_evidence": [
+        "E1"
+      ],
+      "source_evidence_ids": [
+        "E1"
+      ],
+      "scientific_objects": [
+        "Paired comparison with fixed training conditions and one intended test-time change"
+      ],
+      "evidence_status": "available",
+      "layout_rationale": "Full-width editable scientific content; interpretation follows its evidence vertically.",
+      "allowed_fallback": "Line breaks and spacing only; retain all scientific content.",
+      "forbidden_fallback": "No invented data, card layouts, page deletion, or smaller fonts.",
+      "qa_criteria": [
+        "Exact source numbers and limits",
+        "Whole-page readability",
+        "Canonical shell unchanged",
+        "Evidence adjacent to interpretation"
+      ],
+      "positive_visual_ancestor": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/presentations/0.3/shared/templates/cuhk/beamer/source",
+      "typography_floor": "Canonical theme normal body; table large; no page-local shrinking"
+    },
+    {
+      "id": "P03",
+      "title": "Observed metrics favor intensity clipping",
+      "key_message": "Mean Dice 0.742 to 0.758; small-lesion Dice 0.421 to 0.469; HD95 18.4 to 17.9 mm.",
+      "slide_purpose": "Quantitative comparison",
+      "visual_intent": "Native editable three-metric comparison table",
+      "source_anchors": [
+        "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md#Results"
+      ],
+      "page_function": "RESULT_FIGURE",
+      "required_evidence": [
+        "E2"
+      ],
+      "source_evidence_ids": [
+        "E2"
+      ],
+      "scientific_objects": [
+        "Native editable three-metric comparison table"
+      ],
+      "evidence_status": "available",
+      "layout_rationale": "Full-width editable scientific content; interpretation follows its evidence vertically.",
+      "allowed_fallback": "Line breaks and spacing only; retain all scientific content.",
+      "forbidden_fallback": "No invented data, card layouts, page deletion, or smaller fonts.",
+      "qa_criteria": [
+        "Exact source numbers and limits",
+        "Whole-page readability",
+        "Canonical shell unchanged",
+        "Evidence adjacent to interpretation"
+      ],
+      "positive_visual_ancestor": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/presentations/0.3/shared/templates/cuhk/beamer/source",
+      "typography_floor": "Canonical theme normal body; table large; no page-local shrinking"
+    },
+    {
+      "id": "P04",
+      "title": "The motion-corrupted case remains unresolved",
+      "key_message": "Supports replication, not superiority.",
+      "slide_purpose": "Failure, uncertainty and interpretation limits",
+      "visual_intent": "Observed failure description and explicit uncertainty limits",
+      "source_anchors": [
+        "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md#Failure and uncertainty"
+      ],
+      "page_function": "FAILURE_CASE",
+      "required_evidence": [
+        "E3"
+      ],
+      "source_evidence_ids": [
+        "E3"
+      ],
+      "scientific_objects": [
+        "Observed failure description and explicit uncertainty limits"
+      ],
+      "evidence_status": "available",
+      "layout_rationale": "Full-width editable scientific content; interpretation follows its evidence vertically.",
+      "allowed_fallback": "Line breaks and spacing only; retain all scientific content.",
+      "forbidden_fallback": "No invented data, card layouts, page deletion, or smaller fonts.",
+      "qa_criteria": [
+        "Exact source numbers and limits",
+        "Whole-page readability",
+        "Canonical shell unchanged",
+        "Evidence adjacent to interpretation"
+      ],
+      "positive_visual_ancestor": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/presentations/0.3/shared/templates/cuhk/beamer/source",
+      "typography_floor": "Canonical theme normal body; table large; no page-local shrinking"
+    },
+    {
+      "id": "P05",
+      "title": "Approve a three-seed replication?",
+      "key_message": "Approve three-seed replication before architecture changes.",
+      "slide_purpose": "Next experiment and decision request",
+      "visual_intent": "Proposed three-seed protocol and approval request",
+      "source_anchors": [
+        "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md#Proposed next experiment; Decision request"
+      ],
+      "page_function": "NEXT_EXPERIMENT",
+      "required_evidence": [
+        "E4"
+      ],
+      "source_evidence_ids": [
+        "E4"
+      ],
+      "scientific_objects": [
+        "Proposed three-seed protocol and approval request"
+      ],
+      "evidence_status": "planned",
+      "layout_rationale": "Full-width editable scientific content; interpretation follows its evidence vertically.",
+      "allowed_fallback": "Line breaks and spacing only; retain all scientific content.",
+      "forbidden_fallback": "No invented data, card layouts, page deletion, or smaller fonts.",
+      "qa_criteria": [
+        "Exact source numbers and limits",
+        "Whole-page readability",
+        "Canonical shell unchanged",
+        "Evidence adjacent to interpretation"
+      ],
+      "positive_visual_ancestor": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/presentations/0.3/shared/templates/cuhk/beamer/source",
+      "typography_floor": "Canonical theme normal body; table large; no page-local shrinking"
+    }
+  ]
+}

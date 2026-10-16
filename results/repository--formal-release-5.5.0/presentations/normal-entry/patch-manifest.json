@@ -1,0 +1,22 @@
+{
+  "candidate_id": "902019a96971a383357228a51f12f2b5777d7c7542e6a0277cfa26aa859eb735",
+  "parent_candidate_id": null,
+  "modified_page_ids": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05"
+  ],
+  "modified_component_ids": [
+    "page bodies and permitted title content"
+  ],
+  "unchanged_locked_components": [
+    "canonical CUHK shell, except required font-path token materialization"
+  ],
+  "addressed_feedback_ids": [],
+  "required_object_relocations": [],
+  "visible_copy_changes": "New deck from supplied source notes",
+  "open_items_after": [],
+  "independent_review": "independent-review.json"
+}

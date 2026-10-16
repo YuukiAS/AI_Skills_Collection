@@ -1,0 +1,33 @@
+{
+  "scope": "Producer deterministic checks; independent review recorded separately",
+  "page_count": 5,
+  "numeric_values_preserved": true,
+  "limitations_preserved": true,
+  "pdf_sha256": "902019a96971a383357228a51f12f2b5777d7c7542e6a0277cfa26aa859eb735",
+  "png_count": 5,
+  "overfull_box_count": 0,
+  "missing_character_count": 0,
+  "font_qa": {
+    "status": "PASS",
+    "command": "/usr/bin/pdffonts",
+    "returncode": 0,
+    "fonts": [
+      "RNSUYY+TeXGyreTermes-Regular-Identity-H",
+      "ARBUPE+TeXGyreTermes-Bold-Identity-H"
+    ],
+    "unexpected": [],
+    "stdout": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nRNSUYY+TeXGyreTermes-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes      9  0\nARBUPE+TeXGyreTermes-Bold-Identity-H CID Type 0C       Identity-H       yes yes yes     16  0\n",
+    "stderr": ""
+  },
+  "plan_validation": {
+    "phase": "final",
+    "errors": [],
+    "validator": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/presentations/0.3/shared/scripts/validate_deck_plan.py"
+  },
+  "warnings": [
+    "Canonical theme package-name warnings only."
+  ],
+  "production_entry_used": false,
+  "route": "Documented native exact CUHK Beamer; production renderer and contact-sheet utilities",
+  "scientific_prose": "Source numbers, limits and proposed/completed distinction preserved; no evidence or citations added"
+}
