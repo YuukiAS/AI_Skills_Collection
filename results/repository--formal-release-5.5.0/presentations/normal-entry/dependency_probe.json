@@ -1,0 +1,93 @@
+{
+  "schema": "RESEARCH_CUHK_STAGE3_BUILD_DEPENDENCY_PROBE_V1",
+  "task_key": "027_research_presentation_executable_cuhk_scientific_layout_system",
+  "commands": {
+    "xelatex": {
+      "available": true,
+      "path": "/usr/bin/xelatex",
+      "source": "PATH"
+    },
+    "lualatex": {
+      "available": true,
+      "path": "/usr/bin/lualatex",
+      "source": "PATH"
+    },
+    "pdflatex": {
+      "available": true,
+      "path": "/usr/bin/pdflatex",
+      "source": "PATH"
+    },
+    "tectonic": {
+      "available": false,
+      "path": null,
+      "source": null
+    },
+    "pdftoppm": {
+      "available": true,
+      "path": "/usr/bin/pdftoppm",
+      "source": "PATH"
+    },
+    "pdfinfo": {
+      "available": true,
+      "path": "/usr/bin/pdfinfo",
+      "source": "PATH"
+    },
+    "pdftotext": {
+      "available": true,
+      "path": "/usr/bin/pdftotext",
+      "source": "PATH"
+    },
+    "pdffonts": {
+      "available": true,
+      "path": "/usr/bin/pdffonts",
+      "source": "PATH"
+    }
+  },
+  "local_render_resources": {
+    "source": "render-chinese-math-pdf probe / host-local render resources",
+    "font_binding": {
+      "status": "READY",
+      "probe": "/users/a/e/aereinh/.agents/skills/tools-documents-media-render-chinese-math-pdf/scripts/probe_pdf_render_env.py",
+      "probe_returncode": 0,
+      "resource_dir": "/users/a/e/aereinh/render_resources/chinese_math_pdf",
+      "fonts": {
+        "texgyretermes_regular": {
+          "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-regular.otf",
+          "available": true,
+          "sha256": "cc3fe7c707b81428d23d54df3eadd9228a2bf6a4d43125d94df56f5f63134659"
+        },
+        "texgyretermes_bold": {
+          "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-bold.otf",
+          "available": true,
+          "sha256": "2fb3e952065fa153c7e4e64e04b98b9d79225739b6025aa3f0f0782d299ff61e"
+        },
+        "texgyretermes_italic": {
+          "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-italic.otf",
+          "available": true,
+          "sha256": "6dd103a1672e50568cd2f8a706ccd48443d44d7d073a59d2286f4e6f746575d6"
+        },
+        "texgyretermes_bolditalic": {
+          "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-bolditalic.otf",
+          "available": true,
+          "sha256": "1bf6af99cb0e26c12951317032d79b96ae009551e59ccf02a5b24f325ecfec87"
+        },
+        "texgyretermes_math": {
+          "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes-math/texgyretermes-math.otf",
+          "available": true,
+          "sha256": "e5ce42b4fe826b7ea4c0874359decf0b294439355c511a4794107a9924e2cd5a"
+        }
+      },
+      "missing": []
+    },
+    "tinytex_bin": "/home/yuukias/.TinyTeX/bin/x86_64-linux",
+    "tinytex_bin_exists": false,
+    "tex_cache_env": {
+      "TEXMFVAR": "/tmp/tex-cache-aereinh/var",
+      "TEXMFCONFIG": "/tmp/tex-cache-aereinh/config",
+      "TEXMFCACHE": "/tmp/tex-cache-aereinh/cache"
+    }
+  },
+  "tex_engine_available": true,
+  "pdf_renderer_available": true,
+  "preferred_route": "latex_to_pdf_to_png"
+}

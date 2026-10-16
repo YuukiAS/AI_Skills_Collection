@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "png_count": 5,
+  "rendered_png": [
+    {
+      "path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/outputs/deck/rendered/slide-1.png",
+      "sha256": "df2ca0032f58d08a6514468405bc862e612104bbf5538a86dc27e5d0708cb977"
+    },
+    {
+      "path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/outputs/deck/rendered/slide-2.png",
+      "sha256": "b0b3f0785cc293f827d37739891779b50bac7a1ba2b3958f67be3b3658f10c80"
+    },
+    {
+      "path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/outputs/deck/rendered/slide-3.png",
+      "sha256": "d75b39b551901e38520030370a25d3d4e8a113d0cba644f5f862a6b7d85dad45"
+    },
+    {
+      "path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/outputs/deck/rendered/slide-4.png",
+      "sha256": "315db780596ebcc7315b0058fd83e5da543bd5e5fe5e5e7999559f4bad22e6d2"
+    },
+    {
+      "path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/outputs/deck/rendered/slide-5.png",
+      "sha256": "d6c0de10335a5357b090b09a4817dd8bb645d0105b6e85f5f53a2fb21a83c00a"
+    }
+  ]
+}
