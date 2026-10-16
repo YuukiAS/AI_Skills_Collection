@@ -28,23 +28,25 @@ The final behavior must be:
 
 ## Frozen repository identities
 
+This closure does not create another Reviewed Handoff task. It uses exact user-authorized bounded `work/...` branches, then an independent Reviewer before production deployment.
+
 Central:
 - repo: `YuukiAS/AI_Skills_Collection`
 - source: exact Critic-approved package commit on `main`
-- task branch: `reviewed/hpc--slurm-cancel-production-closure`
+- task branch: `work/hpc--slurm-cancel-production-closure`
 - R: `/overflow/htzhu/mingcheng_new/AI_Skills_Collection`
 - W: `/overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-cancel-production-closure`
 
 DII candidate locator from prior user-provided Longleaf state:
 - repo: `YuukiAS/Distributed_Imaging_Inference`
 - expected R: `/users/a/e/aereinh/Distributed_Imaging_Inference`
-- task branch: `reviewed/hpc--slurm-cancel-production-closure`
+- task branch: `work/hpc--slurm-cancel-production-closure`
 - expected W: `/users/a/e/aereinh/Distributed_Imaging_Inference-hpc--slurm-cancel-production-closure`
 
 CARE candidate locator from prior user-provided Longleaf state:
 - repo: `YuukiAS/CARE_Challenge`
 - expected R: `/users/a/e/aereinh/CARE`
-- task branch: `reviewed/hpc--slurm-cancel-production-closure`
+- task branch: `work/hpc--slurm-cancel-production-closure`
 - expected W: `/users/a/e/aereinh/CARE-hpc--slurm-cancel-production-closure`
 
 Before any branch/worktree write in a consumer repo, verify the exact existing R, origin, clean state, current `origin/main`, absence of target branch/worktree, and repo identity. A mismatch stops only that consumer and prevents overall DONE.
