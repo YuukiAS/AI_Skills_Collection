@@ -54,10 +54,12 @@ its generic success contract requires a consumption event. This is recorded as
 an expected wrapper diagnostic for the bypass control, not represented as an
 ordinary replay PASS.
 
-No README, repository/plugin version, changelog, personal ChatGPT account,
-paid service, PIE 0.2, G7 holdout, release branch, or new Presentations /
-Research Authoring product design was changed. There is no remaining local
-blocker.
+No root `README.md`, repository/plugin version, changelog, personal ChatGPT
+account, paid service, PIE 0.2, G7 holdout, release branch, or new Presentations
+/ Research Authoring product design was changed by this task. The
+`skills/writing/research/shared/README.md` file in the branch came only from the
+authorized `main@3c3a1a39` source-authority repair; Clear Writing did not author
+or reinterpret it. There is no remaining local blocker.
 
 Required zero-paid GitHub CI also passed on the published handoff commit
 `dcf6acef7972e0a6c6a0fa623140de683c22040d`:
