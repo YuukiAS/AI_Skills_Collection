@@ -4,13 +4,14 @@
   "ci_required": false,
   "ci_status": "NOT_REQUIRED",
   "implementation_commit": "acf8bf29681b404a3c107d25ade527ad1dfe0b89",
-  "last_review_decision": null,
+  "last_review_decision": "PASS",
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "WAIT_SCHEDULED_GPT_REVIEW",
+  "next_action": "PRESENT_FINAL_REPORT",
   "plan_revision": 0,
-  "review_round": 0,
+  "review_round": 1,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
-  "state": "READY_FOR_GPT_REVIEW",
-  "task_key": "hpc--slurm-cancel-human-confirmation"
+  "state": "PASS",
+  "task_key": "hpc--slurm-cancel-human-confirmation",
+  "review_limit_reached": false
 }
