@@ -359,7 +359,8 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertIn("beamer/source/` is the canonical CUHK Beamer template", cuhk_readme)
         self.assertIn("derived scaffolds for non-exact workflows only", cuhk_readme)
         self.assertIn("Preserve the first/title slide layout", cuhk_readme)
-        self.assertIn("Times New Roman Regular, Bold, Italic, and Bold Italic", cuhk_readme)
+        self.assertIn("file-bound TeX Gyre Termes", cuhk_readme)
+        self.assertNotIn("Times New Roman Regular, Bold, Italic, and Bold Italic", cuhk_readme)
         self.assertIn("references/real-world-presentation-guardrails.md", research_skill)
         for required in [
             "Rule Inheritance",
@@ -446,6 +447,11 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertIn(r"\setbeamertemplate{headline}", style_text)
         self.assertIn(r"\includegraphics[height=4.0ex", style_text)
         self.assertIn(r"\insertsectionnavigationhorizontal", style_text)
+        self.assertIn("__AI_SKILLS_FONT_RESOURCE_ROOT__", style_text)
+        self.assertIn("texgyretermes-regular", style_text)
+        self.assertIn("texgyretermes-math", style_text)
+        for forbidden_font in ["Times New Roman", "Liberation", "DejaVu", "Caladea", "Carlito"]:
+            self.assertNotIn(forbidden_font, style_text)
 
         tokens = json.loads((root / "design-tokens.json").read_text(encoding="utf-8"))
         self.assertEqual(tokens["slide"]["width_in"], 13.333)
@@ -1919,6 +1925,36 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(summary["final_decision"], "PASS_REVIEWED")
         self.assertEqual(summary["completion_gate"], "CLOSED")
         self.assertEqual(summary["findings"], [])
+
+    def test_existing_deck_revision_gate_blocks_missing_or_stale_artifacts(self) -> None:
+        packet_path = SHARED / "fixtures/existing_deck_revision/unrelated_pass_revision.json"
+        packet = json.loads(packet_path.read_text(encoding="utf-8"))
+        packet["deck_identity"]["pdf_path"] = "tests/fixtures/presentations/does-not-exist.pdf"
+        packet["deck_identity"]["pdf_sha256"] = "0" * 64
+        summary = existing_revision_gate.evaluate(packet)
+        self.assertEqual(summary["final_decision"], "BLOCKED")
+        ids = {finding["finding_id"] for finding in summary["findings"]}
+        self.assertIn("final_pdf_missing", ids)
+
+        packet = json.loads(packet_path.read_text(encoding="utf-8"))
+        packet["deck_identity"]["page_images"][0]["sha256"] = "0" * 64
+        summary = existing_revision_gate.evaluate(packet)
+        self.assertEqual(summary["final_decision"], "BLOCKED")
+        self.assertIn("page_1_sha256_mismatch", {finding["finding_id"] for finding in summary["findings"]})
+
+    def test_existing_deck_revision_gate_blocks_self_attested_review(self) -> None:
+        packet_path = SHARED / "fixtures/existing_deck_revision/unrelated_pass_revision.json"
+        packet = json.loads(packet_path.read_text(encoding="utf-8"))
+        review = packet["independent_visual_review"]
+        review.pop("reviewer_run_id")
+        review.pop("reviewer_trace_path")
+        review.pop("reviewer_trace_sha256")
+        review["page_reviews"] = []
+        review.pop("contact_sheet_review")
+        summary = existing_revision_gate.evaluate(packet)
+        self.assertEqual(summary["final_decision"], "BLOCKED")
+        ids = {finding["finding_id"] for finding in summary["findings"]}
+        self.assertTrue({"reviewer_run_id_missing", "reviewer_trace_missing", "page_review_rows_incomplete", "contact_sheet_review_invalid"} <= ids)
 
     def test_research_presentation_quality_loop_normalizes_terra_style_findings(self) -> None:
         bundle_path = SHARED / "fixtures/stage4_quality_loop_repair_stress_bundle/bundle.json"

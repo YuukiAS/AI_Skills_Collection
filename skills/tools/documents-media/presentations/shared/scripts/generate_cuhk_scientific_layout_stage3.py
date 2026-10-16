@@ -28,12 +28,16 @@ DEFAULT_OUT = REPO_ROOT / "docs" / "audits" / "research_presentation_cuhk_scient
 SLIDE_W = 16.0
 SLIDE_H = 9.0
 SAFE_REGION = {"x": 0.060, "y": 0.185, "w": 0.880, "h": 0.675}
-LOCAL_RENDER_RESOURCE_DIR = Path("/home/yuukias/render_resources/chinese_math_pdf")
-LOCAL_RENDER_TEXMF = LOCAL_RENDER_RESOURCE_DIR / "texmf"
-LOCAL_FANDOL_DIR = LOCAL_RENDER_TEXMF / "fonts" / "opentype" / "public" / "fandol"
-LOCAL_NOTO_CJK_DIR = LOCAL_RENDER_TEXMF / "fonts" / "opentype" / "public" / "noto-cjk"
-DEFAULT_TIMES_FONT_DIR = LOCAL_RENDER_RESOURCE_DIR / "fonts" / "times"
 LOCAL_TINYTEX_BIN = Path("/home/yuukias/.TinyTeX/bin/x86_64-linux")
+FONT_RESOURCE_TOKEN = "__AI_SKILLS_FONT_RESOURCE_ROOT__"
+REQUIRED_FONT_FILES = {
+    "texgyretermes_regular": Path("fonts/texgyre-termes/texgyretermes-regular.otf"),
+    "texgyretermes_bold": Path("fonts/texgyre-termes/texgyretermes-bold.otf"),
+    "texgyretermes_italic": Path("fonts/texgyre-termes/texgyretermes-italic.otf"),
+    "texgyretermes_bolditalic": Path("fonts/texgyre-termes/texgyretermes-bolditalic.otf"),
+    "texgyretermes_math": Path("fonts/texgyre-termes-math/texgyretermes-math.otf"),
+}
+ALLOWED_PDF_FONT_MARKERS = ("texgyretermes", "texgyretermesmath", "lmmono")
 FORBIDDEN_AUDIENCE_TERMS = [
     "RRL-",
     "SRC-",
@@ -356,43 +360,83 @@ def render_search_path() -> str:
     return os.pathsep.join(part for part in path_parts if part)
 
 
-def times_font_dir() -> Path:
-    override = os.environ.get("AI_SKILLS_TIMES_FONT_DIR")
-    if override:
-        return Path(override).expanduser()
-    return DEFAULT_TIMES_FONT_DIR
+def render_probe_script() -> Path | None:
+    candidates = [
+        REPO_ROOT / "skills/tools/documents-media/render-chinese-math-pdf/scripts/probe_pdf_render_env.py",
+        Path.home() / ".agents/skills/tools-documents-media-render-chinese-math-pdf/scripts/probe_pdf_render_env.py",
+        Path(os.environ.get("CODEX_HOME", "~/.codex")).expanduser()
+        / "skills/tools-documents-media-render-chinese-math-pdf/scripts/probe_pdf_render_env.py",
+    ]
+    return next((path for path in candidates if path.is_file()), None)
 
 
-def write_fontconfig(build_dir: Path) -> dict[str, Any]:
-    fontconfig_dir = build_dir / "fontconfig"
-    fontconfig_dir.mkdir(exist_ok=True)
-    cache_dir = Path("/tmp/fontconfig-cache-027")
-    cache_dir.mkdir(parents=True, exist_ok=True)
-    config = fontconfig_dir / "fonts.conf"
-    times_dir = times_font_dir()
-    config.write_text(
-        "\n".join(
-            [
-                '<?xml version="1.0"?>',
-                '<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">',
-                "<fontconfig>",
-                f"  <dir>{times_dir}</dir>",
-                "  <dir>/usr/share/fonts</dir>",
-                f"  <cachedir>{cache_dir}</cachedir>",
-                "</fontconfig>",
-                "",
-            ]
-        ),
-        encoding="utf-8",
+def font_resource_binding() -> dict[str, Any]:
+    probe = render_probe_script()
+    if probe is None:
+        return {"status": "BLOCKED_MISSING_RENDER_SKILL_PROBE", "resource_dir": None, "fonts": {}}
+    run = subprocess.run(
+        [sys.executable, str(probe), "--root", str(REPO_ROOT), "--pretty"],
+        check=False,
+        capture_output=True,
+        text=True,
     )
+    try:
+        payload = json.loads(run.stdout)
+    except json.JSONDecodeError:
+        payload = {}
+    resource_dir = Path(payload["resource_dir"]) if payload.get("resource_dir") else None
+    fonts = {}
+    missing = []
+    for name, relative in REQUIRED_FONT_FILES.items():
+        path = resource_dir / relative if resource_dir else None
+        available = bool(path and path.is_file())
+        if not available:
+            missing.append(str(path or relative))
+        fonts[name] = {
+            "path": str(path) if path else None,
+            "available": available,
+            "sha256": file_sha(path) if available and path else None,
+        }
     return {
-        "fontconfig_file": str(config.resolve()),
-        "fontconfig_file_repo_path": rel(config),
-        "font_cache_dir": str(cache_dir),
-        "times_font_dir": str(times_dir),
-        "times_font_dir_source": "AI_SKILLS_TIMES_FONT_DIR" if os.environ.get("AI_SKILLS_TIMES_FONT_DIR") else "default_render_resources",
-        "times_font_dir_exists": times_dir.exists(),
-        "times_font_files_present": all((times_dir / name).exists() for name in ["times.ttf", "timesbd.ttf", "timesbi.ttf", "timesi.ttf"]),
+        "status": "READY" if run.returncode == 0 and resource_dir and not missing else "BLOCKED_MISSING_CANONICAL_FONT_RESOURCE",
+        "probe": str(probe),
+        "probe_returncode": run.returncode,
+        "resource_dir": str(resource_dir) if resource_dir else None,
+        "fonts": fonts,
+        "missing": missing,
+    }
+
+
+def materialize_font_binding(build_dir: Path) -> dict[str, Any]:
+    binding = font_resource_binding()
+    if binding["status"] != "READY":
+        return binding
+    style = build_dir / "styles/beamerthemesintef.sty"
+    text = style.read_text(encoding="utf-8")
+    if FONT_RESOURCE_TOKEN not in text:
+        if binding["resource_dir"] in text:
+            return {**binding, "status": "READY", "materialized_style": rel(style), "materialized_style_sha256": file_sha(style)}
+        return {**binding, "status": "BLOCKED_FONT_RESOURCE_TOKEN_MISSING"}
+    style.write_text(text.replace(FONT_RESOURCE_TOKEN, binding["resource_dir"]), encoding="utf-8")
+    return {**binding, "status": "READY", "materialized_style": rel(style), "materialized_style_sha256": file_sha(style)}
+
+
+def pdf_font_qa(pdf: Path) -> dict[str, Any]:
+    command = shutil.which("pdffonts")
+    if not command:
+        return {"status": "BLOCKED_MISSING_PDFFONTS", "command": None, "fonts": [], "unexpected": []}
+    run = subprocess.run([command, str(pdf)], check=False, capture_output=True, text=True)
+    rows = [line for line in run.stdout.splitlines()[2:] if line.strip()]
+    names = [line.split()[0] for line in rows]
+    unexpected = [name for name in names if not any(marker in name.lower() for marker in ALLOWED_PDF_FONT_MARKERS)]
+    return {
+        "status": "PASS" if run.returncode == 0 and not unexpected else "FAIL_UNEXPECTED_PDF_FONT",
+        "command": command,
+        "returncode": run.returncode,
+        "fonts": names,
+        "unexpected": unexpected,
+        "stdout": run.stdout,
+        "stderr": run.stderr,
     }
 
 
@@ -406,12 +450,12 @@ def find_command(command: str) -> dict[str, Any]:
 
 
 def render_skill_probe() -> dict[str, Any]:
-    probe = REPO_ROOT / "skills" / "tools" / "documents-media" / "render-chinese-math-pdf" / "scripts" / "probe_pdf_render_env.py"
-    if not probe.exists():
+    probe = render_probe_script()
+    if probe is None:
         return {
             "schema": "RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1",
             "status": "MISSING_RENDER_SKILL_PROBE",
-            "probe": rel(probe),
+            "probe": None,
         }
     run = subprocess.run(
         [sys.executable, str(probe), "--root", str(REPO_ROOT), "--pretty"],
@@ -426,7 +470,7 @@ def render_skill_probe() -> dict[str, Any]:
     return {
         "schema": "RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1",
         "status": "ok" if run.returncode == 0 else "PROBE_FAILED",
-        "probe": rel(probe),
+        "probe": str(probe),
         "returncode": run.returncode,
         "stderr": run.stderr,
         "payload": payload,
@@ -1484,23 +1528,14 @@ def find_tex_engine() -> dict[str, Any] | None:
 def dependency_probe() -> dict[str, Any]:
     commands = {command: find_command(command) for command in ["xelatex", "lualatex", "pdflatex", "tectonic", "pdftoppm", "pdfinfo", "pdftotext", "pdffonts"]}
     tex_engine_available = any(commands[command]["available"] for command in ["xelatex", "lualatex", "pdflatex", "tectonic"])
+    font_binding = font_resource_binding()
     return {
         "schema": "RESEARCH_CUHK_STAGE3_BUILD_DEPENDENCY_PROBE_V1",
         "task_key": TASK_KEY,
         "commands": commands,
         "local_render_resources": {
             "source": "render-chinese-math-pdf probe / host-local render resources",
-            "resource_dir": str(LOCAL_RENDER_RESOURCE_DIR),
-            "resource_dir_exists": LOCAL_RENDER_RESOURCE_DIR.exists(),
-            "texmf": str(LOCAL_RENDER_TEXMF),
-            "texmf_exists": LOCAL_RENDER_TEXMF.exists(),
-            "fandol_dir": str(LOCAL_FANDOL_DIR),
-            "fandol_dir_exists": LOCAL_FANDOL_DIR.exists(),
-            "noto_cjk_dir": str(LOCAL_NOTO_CJK_DIR),
-            "noto_cjk_dir_exists": LOCAL_NOTO_CJK_DIR.exists(),
-            "times_font_dir": str(times_font_dir()),
-            "times_font_dir_source": "AI_SKILLS_TIMES_FONT_DIR" if os.environ.get("AI_SKILLS_TIMES_FONT_DIR") else "default_render_resources",
-            "times_font_dir_exists": times_font_dir().exists(),
+            "font_binding": font_binding,
             "tinytex_bin": str(LOCAL_TINYTEX_BIN),
             "tinytex_bin_exists": LOCAL_TINYTEX_BIN.exists(),
             "tex_cache_env": tex_cache_env(),
@@ -1514,13 +1549,23 @@ def dependency_probe() -> dict[str, Any]:
 def compile_pdf(build_dir: Path) -> dict[str, Any]:
     engine = find_tex_engine()
     pdf = build_dir / "main.pdf"
-    fontconfig = write_fontconfig(build_dir)
+    font_binding = materialize_font_binding(build_dir)
+    if font_binding.get("status") != "READY":
+        return {
+            "status": font_binding.get("status", "BLOCKED_MISSING_CANONICAL_FONT_RESOURCE"),
+            "engine": engine["command"] if engine else None,
+            "engine_path": engine["path"] if engine else None,
+            "font_binding": font_binding,
+            "pdf": None,
+            "log": None,
+            "message": "Canonical presentation font resource binding is incomplete.",
+        }
     if not engine:
         return {
             "status": "BLOCKED_MISSING_TEX_ENGINE",
             "engine": None,
             "engine_path": None,
-            "fontconfig": fontconfig,
+            "font_binding": font_binding,
             "pdf": None,
             "log": None,
             "message": "No xelatex, lualatex, pdflatex, or tectonic executable is available through PATH.",
@@ -1531,9 +1576,13 @@ def compile_pdf(build_dir: Path) -> dict[str, Any]:
         cmd = [engine["path"], "-interaction=nonstopmode", "-halt-on-error", "main.tex"]
     env = os.environ.copy()
     env["PATH"] = render_search_path()
-    env["FONTCONFIG_FILE"] = fontconfig["fontconfig_file"]
-    env["XDG_CACHE_HOME"] = fontconfig["font_cache_dir"]
-    env["OSFONTDIR"] = fontconfig["times_font_dir"]
+    resource_dir = Path(font_binding["resource_dir"])
+    env["OSFONTDIR"] = os.pathsep.join(
+        [
+            str(resource_dir / "fonts/texgyre-termes"),
+            str(resource_dir / "fonts/texgyre-termes-math"),
+        ]
+    )
     env.update(tex_cache_env())
     runs = []
     pass_count = 1 if engine["command"] == "tectonic" else 2
@@ -1564,7 +1613,7 @@ def compile_pdf(build_dir: Path) -> dict[str, Any]:
                 "engine": engine["command"],
                 "engine_path": engine["path"],
                 "compile_passes": len(runs),
-                "fontconfig": fontconfig,
+                "font_binding": font_binding,
                 "missing_file": missing_latex_file,
                 "pdf": rel(pdf) if pdf.exists() else None,
                 "log": rel(log_path),
@@ -1575,17 +1624,32 @@ def compile_pdf(build_dir: Path) -> dict[str, Any]:
             "engine": engine["command"],
             "engine_path": engine["path"],
             "compile_passes": len(runs),
-            "fontconfig": fontconfig,
+            "font_binding": font_binding,
             "pdf": rel(pdf) if pdf.exists() else None,
             "log": rel(log_path),
             "message": "LaTeX compilation failed.",
+        }
+    font_qa = pdf_font_qa(pdf)
+    if font_qa["status"] != "PASS":
+        return {
+            "status": font_qa["status"],
+            "engine": engine["command"],
+            "engine_path": engine["path"],
+            "compile_passes": len(runs),
+            "font_binding": font_binding,
+            "font_qa": font_qa,
+            "pdf": rel(pdf),
+            "pdf_sha256": file_sha(pdf),
+            "log": rel(log_path),
+            "message": "Rendered PDF contains a font outside the canonical allowlist.",
         }
     return {
         "status": "COMPILED",
         "engine": engine["command"],
         "engine_path": engine["path"],
         "compile_passes": len(runs),
-        "fontconfig": fontconfig,
+        "font_binding": font_binding,
+        "font_qa": font_qa,
         "pdf": rel(pdf),
         "pdf_sha256": file_sha(pdf),
         "log": rel(log_path),

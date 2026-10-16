@@ -15,6 +15,20 @@ candidate action: implement canonical `research-authoring-core`, thin report/pap
 promotion gate: G1-G4 PASS on the same frozen `research-writing 0.3` final candidate, with independent pre-final Critic and independent final Reviewer as defined in the approved 059 plan.
 
 
+### 写给研究者本人的科研学习笔记：技术摘要不能替代推导与理解
+status: NEW
+source: CAT-TRACE / Notion `Modules > C01: 数值内核`；2026-10-14 用户提供三份按时间顺序的完整草稿及三张亲自手写批注的截图。
+evidence: 本次对话内的 C01-A/C01-B 第一、第二、第三版完整文本与手写截图。当前 Notion 页面对应第三版附近的内容；连接无法直接取回原生版本历史，三个早期/中期文本来自用户明确提供，不能再把「无法读取历史」作为不比较的理由。原文和截图是私人研究材料，不复制到中央仓库。
+problem:
+- 写作任务是作者本人学习和日后复习：理解为什么提出一个数学量、它如何从前一步推出来、问题在哪些情形出现、为什么相应表达式或近似有效；不是给导师看的进展报告、执行级方案摘要或版本审查记录。阅读者已具备部分专业背景，不应机械从零铺课，也不能省掉其标注的关键推导。
+- 第一版按「作用—数值问题—三段算法—验证与实现」组织。C01-A 直接给逆 Mills 比率及一、二阶导数结论，C01-B 直接给牛顿方程、Cholesky 用途和拉普拉斯积分公式；相关「为什么」和计算中间环节几乎没有。材料能概括决策，不能帮助作者重建理解。
+- 第二版增加概率/密度定义、极端负尾与对数运算的具体数字、一维牛顿法类比、Mills 比率辨析等，确有进步，但仍直接陈述关键求导结果，跳过 `expm1` 稳定差值的代数变形，未用众数处二阶泰勒展开真正连接拉普拉斯正态近似。增加术语、例子和字数不等于恢复推导链。
+- 第三版首次明确写出复合函数、商法则、梯度泰勒展开和众数处二次展开，实质吸收了用户标注的知识链，不能与前两版笼统算成同等失败。仍可见需要进一步解释的接续点（如为何有 `expm1` 表达式、补偿求和的直觉、相关曲率度量的意义）；「已实现与验证」、测试路径和边界应服从笔记用途，不反过来主导文章。第三版尚无用户明确通过的证据。
+- 用户的手写箭头、公式、例子与边注是理解需求和缺失环节的线索，不是需要逐字贴进稿件的素材，更不应生成「手写笔记指出」这样的元叙事。应先理解这些标记提出了哪些问题，再在正文中自然回答，并保持重要数学推导、符号关系和最终可渲染表达完整。
+- 用户明确要求「写给自己」的材料包含：必要的背景与符号定义、问题为何出现、重要公式的中间推导、相邻步骤的因果与等价变换、能建立直觉的具体例子、相近概念辨析、成立条件及日后易忘之处；组织深度跟随本人手写批注揭示的真实疑问，简单处简明、难点不能跳步。实际质量标准是隔一段时间重读仍能沿笔记重建核心推理，而非字数、覆盖的术语数量或最终公式数量。
+- 用户明确拒绝的写法：只复述最终算法和修订结论；为了看似专业而堆实现路径、测试细节、审查轮次和版本历史；只对公式补一两句定义却省略关键过渡；机械把手写内容归档为「笔记摘录」；每句拆成列表或不必要地压缩推导。第三版的改进必须被真实承认，但仍须检查如从 \(g(-x)=\lambda(-x)-x\) 到 \(x\operatorname{expm1}(\log\lambda(-x)-\log x)\) 这样的必要变形是否能被读者自行理解，不能仅凭写得更长就宣布完成。
+project-specific context: probit 下尾、逆 Mills 比率、单列牛顿法、Cholesky 与拉普拉斯近似只是本次学习笔记的真实例子；它们的具体数学内容不是跨学科固定提纲。这是有逐版文本证据的研究写作反馈；尚未核实三版由正式安装的 Research Authoring 正常入口产生，不能直接称为已发布插件的生产回归。先由后续中央维护者与已有读者任务、表达保真 TODO 去重，再决定是否需要正式能力变更与验收。
+
 ### Formal research reports can be scientifically correct yet still lack a coherent academic document identity
 status: PARTIALLY_PROMOTED_IN_5.2.1
 tracking: #20
@@ -74,6 +88,19 @@ evidence: 内部记录 `YuukiAS/Distributed_Imaging_Inference/docs/research/DII_
 problem: 用户明确指出，内部记录中的“如果DGST后gap仍存在”“最终论文需要怎样的benchmark结构”“明日组会的完整叙事”不能直接变成给老师看的报告。同一资料还包含不同时间的数据划分、已完成实验、老师口头反馈和未完成的新实验。只换标题或翻译英文，会保留错误的文体，也可能把会后结果写进上次会议、把研究者建议写成老师决定。
 observed handling: 本次将上次纪要与未来报告分开；纪要以所供PDF为历史事实来源，老师转述与会后拟定安排另列，不补造参会者、共识或投稿期限。未来报告按科学问题、设计、有限结论、相关方法和待验证问题组织，保留必要数字及比较对象，不搬运执行日志。新结果即使在写作期间入库，也不自动纳入未经复核的科学叙述；预留结果更新位置而不生成假结果或空白图表。原PDF个别图表数字不一致时，在来源说明中保留差异，不替用户暗自统一。
 project-specific context: CARE/M&Ms、91/59与91/30/29、DGST、FedFisher、pFLFE及MICCAI安排是DII内容，不能成为通用写作模板。原文件原本就是内部记录，并非错误地交付的导师报告；本例记录的是文体转换需求和误用风险，未证实调用过当前正式插件，不标记为生产回归。两份草稿尚待用户审阅；本条补充已有候选的真实证据，不改变其推广状态，也不修改插件版本或运行规则。中文措辞层的配套记录见 `writing-style.md` 的“Keep style cleanup downstream of scientific structure”。
+
+
+#### 2026-10-10：DII 导师研究提案把科学论证写成内部工作报告
+feedback_status: NEW
+source: `Distributed_Imaging_Inference` / 2026-10-10 导师科学与算法设计报告的中英文撰写、用户否决与结构性重写。
+evidence: 研究背景与四份原始设计方案见私有仓库 `YuukiAS/Distributed_Imaging_Inference@f5066f5760d707fa85bb326a5716c82026929c25` 的 `docs/notes/gpt/r02/`。本次实际被用户否决的对话附件为 `DII_导师科学与算法设计讨论稿_2026-10-10.md` 及英文翻译 `DII_Advisor_Scientific_and_Algorithm_Design_Discussion_2026-10-10_EN.md`；用户明确认可新的开头样稿后要求全文重写，中英文重写稿分别为 `DII_导师研究提案_重写中文版_2026-10-10.md`、`DII_Advisor_Research_Proposal_Rewritten_English_2026-10-10.md`。这些对话附件不是本中央公开仓库中的可下载文件；以上文件名仅用于定位真实反馈。
+problem:
+- 交付目标是向导师介绍一项**尚处于方法设计阶段的科学研究提案**，初稿却以“研究判断／已有证据与缺口／创新性审计／下一步决策”等内部复盘栏目为主轴。虽然包含方法、文献和数学，导师需要先穿过项目治理与自我评审文本，才知道实际研究问题、前作的关键困难和准备提出的机制。
+- 将内部工作材料整理得更完整、证据边界更审慎，误当成适合导师的叙事；没有先按读者的科学问题安排研究动机、直接前作、方法直觉、数学定义与验证逻辑。大量表格和状态式小标题进一步强化了工作报告风格。
+- 首次生成后又制作忠实英文翻译，造成两种语言同时继承同一套错误的章节架构。**翻译保真不等于篇章结构合格；润色／减少“AI 味”不能补救错误的文档任务定义。**
+- 用户指出的不是某几个术语或句子，而是“如果要向导师介绍这项研究，作者本身不会这样讲”。初稿交付前没有完成这一读者视角的篇章审核；用户不得不亲自指出整体结构失败。
+observed handling: 用户明确认可一段重新起草的提案式样稿，其论证顺序为“真实多中心医学影像问题 → 最近直接前作为什么不足 → 一个具体的方法直觉 → 数学和算法如何运行 → 怎样证明有实际学习价值”，随后要求中文与英文全文按此结构重写，并保留足够详细的公式、基准与科学限制。现有一维实验和 CARE 标签审计仍应保留事实，但按支持相关论点的需要出现，而不是作为正文工作状态目录。
+project-specific context: MOSAiC、NTK-FL、MAP、FedLAP-DP、M&Ms、CARE、中心消息及一阶余项等属于 DII 的研究内容，**不是**通用 Research Authoring 模板。报告由本对话助手起草；未证实调用了正式安装的 Research Authoring production skill，所以本条只记录可复核的真实用户反馈，不直接认定为该插件已发布版本的运行回归，也不改变已有 TODO 状态或插件版本。
 
 ### Meaning-first rewriting should be a reusable transformation pattern
 status: READY_FOR_PROMOTION
@@ -239,6 +266,116 @@ candidate_action:
 - Keep low-level delivery implementation in workflow/artifact infrastructure. Research Authoring owns the requirement that a requested finished research document reaches the user as an actual artifact.
 promotion_gate: replay on one formal research-report PDF and one editable/office-style research deliverable; verify that the user can open/save the finished artifact directly without needing a second message asking where the file is.
 
+
+### Student-facing assessment documents need a minimum-sufficient information budget
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 Project Guide annotated-PDF revision, 2026-10-07
+evidence: user annotated the two-page Project Guide candidate with 14 Highlights and 6 StrikeOuts after prior Research Authoring review; repeated feedback removed duplicated deadline language, extra page-policy detail, package-engineering explanation, universal model-selection explanation, redundant AI-policy prose, and unrelated privacy/policy detail while preserving the actual statistical task.
+target layer: student-assessment planning / source-to-reader filtering / annotation handling / QA
+problem:
+- Student-facing assessment artifacts repeatedly accumulate true but unnecessary information because authoring optimizes for completeness of the source bundle instead of minimum information needed for correct student action.
+- The same rule is often repeated in metadata, a date table, and later prose (for example a hard deadline), increasing cognitive load without changing student action.
+- When a user marks text with StrikeOut, later authoring can mistakenly “repair” or paraphrase it instead of treating the deletion itself as a binding reader-facing decision.
+- Detailed implementation/package instructions, grading rationale, edge cases, and internal reasoning can leak into a student Guide merely because they are useful to instructors or QA.
+candidate_action:
+- Add an explicit **minimum-sufficient student information budget** to student-assessment authoring: include a fact only when it changes what the student must do, submit, understand, or avoid.
+- For each student-visible sentence, ask: **If this sentence is removed, can the intended student still complete the assessment correctly?** If yes, default to omission unless the sentence materially improves ambiguity, fairness, or safety.
+- Give each administrative rule one canonical visible home. Do not repeat the same due date, hard-deadline consequence, page limit, file requirement, or policy in metadata, tables, and prose unless the second occurrence serves a genuinely different action.
+- Treat raw PDF annotations as authoritative revision input. **StrikeOut means delete, not paraphrase.** Highlight comments constrain the selected region. A deleted sentence cannot return elsewhere under new wording without an explicit new human decision.
+- Distinguish **statistical task completeness** from **administrative completeness**. Preserve source-emphasized research question, model formulation, statistical inference, analysis, findings, conclusions, references, and required deliverables; aggressively compress implementation and process detail.
+- Do not make student-facing documents explain internal rubric logic, QA mechanics, package engineering, or every exception merely because these are needed by graders or executors.
+- Add a deterministic duplication check for high-salience rules such as due date, hard deadline, page limit, file count, and named required statements. The intended occurrence count should be frozen by the Planner rather than inferred by the renderer.
+- In annotated-document revisions, require a compact annotation ledger with counts by annotation type and an explicit disposition for every Highlight and StrikeOut before rendering.
+- **Cumulative annotation replay must cross rounds, not only the latest PDF.** Before authoring a new annotated revision, reread every still-active Highlight/StrikeOut from prior rounds, mark supersession explicitly, and verify that a locally correct new edit does not resurrect an older rejected phrase or erase an earlier accepted sentence. A latest-round annotation ledger is insufficient without the cumulative lifecycle view.
+- When the user says a previous version had better wording, recover that exact accepted wording/history before drafting a replacement; do not reconstruct it from memory or let an executor improvise.
+promotion_gate: replay on one additional annotated Homework/Project revision and one new student-facing assessment artifact; verify that student action remains complete while duplicate/irrelevant administrative prose decreases and no StrikeOut content recurs.
+
+
+### Student-assessment typography should allow a bounded rendered size range and preserve successful positive samples
+status: SUCCESS_SAMPLE_ACCEPTED
+tracking: UNASSIGNED
+source: STAT5060 Project Guide V6 12pt user acceptance, 2026-10-07
+evidence: private user-provided `Project-V6-12pt.pdf`, SHA256 `07978fe3cff3565663646e4d4c062df448d715c7ede44d3171e9a2f62cb70296` (2-page A4; not copied into the public repository), plus `YuukiAS/STAT5060-TA/docs/review/STAT5060_PROJECT_GUIDE_USER_ACCEPTANCE_V12.md`. The user explicitly accepted this version as the successful Project Guide baseline after cumulative annotation replay. At 12pt body text, the first page remains dense but readable and the second page has intentional rather than accidental whitespace; the larger body text improves reading comfort without forcing a third page.
+target layer: student-assessment visual planning / positive-baseline registry / rendered review
+problem:
+- A single globally hard-coded body font size is too rigid for short student-facing assessment documents. The visually best size depends on content length, page count, document family, title hierarchy and the amount of natural whitespace.
+- Earlier recovery work showed the opposite failure as well: font-size changes can invalidate pagination controls, so an executor must not freely shrink or enlarge text after seeing the render.
+- A successful artifact can be lost if it is treated only as the latest candidate rather than registered as a positive sample with the characteristics that made it work.
+candidate_action:
+- Allow the Planner to freeze a **bounded typography candidate set** rather than one exact body size when typography is still genuinely open. For a restrained A4 assessment handout, a task may for example permit `11pt / 11.5pt / 12pt`; the exact range is document-family specific, not a universal constant.
+- Hold copy, margins, typeface family, title hierarchy and information architecture fixed while comparing the permitted body sizes. Do not use font-size reduction as a hidden page-count repair.
+- Run deterministic checks first, then let fresh rendered review choose among already-valid size candidates based on legibility, hierarchy, paragraph rhythm, page balance and reading effort. Occupancy/density remains diagnostic rather than a universal hard gate.
+- Any body-size/leading change automatically reopens dependent pagination controls such as `Needspace`, keep-together rules and manual break hints, consistent with the existing non-recurrence amendment.
+- Positive-baseline metadata should record the accepted artifact plus the relevant typography envelope: page size, margins, body size/leading, title sizes, page count and any intentionally accepted whitespace pattern.
+- Treat the STAT5060 Project Guide V6 12pt PDF as a **successful positive sample** for concise postgraduate student-facing assessment guides: short two-page A4 artifact, restrained academic styling, clear title/due-date hierarchy, minimum-sufficient administrative detail, and statistical-task language dominant over policy/process language.
+- Do not generalize its information architecture to Homework or other artifact families; reuse the principles and visual calibration, not the exact layout.
+promotion_gate: replay the bounded-size selection on one additional student-facing assessment document and verify that the chosen size is selected by independent rendered review without changing approved copy, margins or page-count semantics.
+
+
+### Human-facing assessment PDFs must pass a rendered-output hygiene gate, not only source-copy review
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 Project final-consolidation Clear Writing review, 2026-10-08
+evidence: the six human-facing Project PDFs passed source-level Clear Writing and semantic audits, but Chromium rendering inserted a current timestamp, candidate filename/title header, and a local `file:///users/a/e/aereinh/...` source path on every page. The English Question Bank also rendered its title twice because document metadata and an H1 both became visible. The Chinese Written Marking Guide still exposed machine-schema fields and malformed mixed-language text despite a source-level language PASS.
+target layer: student-assessment / instructor-assessment rendering / Clear Writing QA / release-readiness
+problem:
+- Source Markdown can be reader-facing while the rendered PDF leaks browser-generated headers/footers, local filesystem paths, timestamps, candidate filenames, URLs, or duplicated metadata.
+- A source-level Clear Writing PASS can miss renderer-added text because that text did not exist in the source.
+- Text-search gates that look only for a small fixed blacklist can PASS while other machine-facing strings remain visible, such as schema field names, enum values, local-path syntax, seeds, or malformed bilingual fragments.
+- Human-facing instructor documents can accidentally include machine grading schema blocks simply because the source bundle contains them.
+candidate_action:
+- Add a **rendered-output hygiene gate** after PDF generation and before rendered-review PASS. Extract text from the final PDF and fail on local/environment leakage such as `file://`, `/users/`, `/overflow/`, `localhost`, temporary build paths, source filenames, candidate filenames, or unintended current date/time headers.
+- For Chromium/browser PDF routes, explicitly disable print headers and footers (for example `displayHeaderFooter=false` or the renderer-equivalent). Never rely on browser defaults.
+- Add a title-occurrence check so YAML/HTML metadata plus visible H1 cannot silently create duplicated document titles.
+- Inspect the top and bottom page margins visually on every page; browser-generated date/title/path/page-number furniture is a P1 release blocker even when body content is correct.
+- Run Clear Writing / reader-facing review on the **rendered text layer as well as the source layer**. Source-copy PASS must not override a rendered artifact containing machine or environment traces.
+- Separate human-facing rubric prose from machine schema. Raw field names, enum dumps, seed strings, local storage paths, repository instructions, and machine-only selection/log structures stay in supporting files unless the human marker genuinely needs them.
+- For bilingual outputs, add a post-render scan for malformed mixed-language artifacts and token-splicing (for example accidental fragments like `状态ment`, `目标ed check`, or untranslated field-name suffixes) rather than checking only a predefined blacklist.
+- Require the final rendered Reviewer to read representative full sentences from each page family, not merely confirm page count, clipping, and a handful of forbidden tokens.
+promotion_gate: replay on one additional student-facing PDF and one instructor-facing rubric/examiner PDF rendered through HTML/Chromium; verify zero local-path/timestamp/header leakage, no duplicate title, and no machine-schema text in the normal human reading flow.
+
+
+### Fixed presentation-question banks need applicability-aware selection and question-specific examiner keys
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 Project public question bank + examiner key review, 2026-10-08
+evidence: a public fixed bank correctly grouped questions by model family, but several questions only applied to a subtype or analysis state (for example a GLMM-only link/distribution question, a random-slope-only question, an offset/standardization question, a mixed-HMM/HMLVM extension question, or questions requiring fitted results). The mechanical rotation operated at model-family level only. The internal examiner key also contained templated cross-question and cross-family prose, including at least one mixed-membership answer key that incorrectly described exposure/mediator structure from the mediation chapter.
+target layer: student-assessment / oral-presentation question-bank authoring / examiner-key QA
+problem:
+- A fixed/public bank is not fair merely because selection is mechanical. A mechanically selected question can still be inapplicable to the student's actual submodel, included components, or work-in-progress state.
+- Model-family classification is often too coarse to define the eligible question pool.
+- Template-generated examiner keys can look structurally complete while the expected answer does not actually answer the corresponding public question, or contains copied concepts from another method family.
+candidate_action:
+- Give every question a machine/internal **applicability predicate** before mechanical selection, for example required model subtype, required component, required fitted-result availability, or `ALWAYS_APPLICABLE`.
+- Apply the rule in the order: `identify model family -> filter to applicable questions -> mechanically select within the applicable Q1/Q2 pools`. Never draw first and then improvise a replacement because the question does not fit.
+- The public bank should explain any material applicability condition in reader-facing language when students need it; internal predicates may remain machine-readable.
+- Work-in-progress presentations must always have a predeclared result-independent Q2 fallback pool so lack of final numerical results never creates ad hoc examiner discretion.
+- Require a deterministic cross-check that each examiner-key entry has the same Question ID/text and that its `what this tests` / expected-core content is semantically specific to that exact question.
+- Add a cross-family contamination scan: examiner-key text for one model family must not contain concepts unique to another family unless the public question itself requires that comparison.
+- During independent review, sample every question-key pair, not only the public question wording or source map. A source-fidelity PASS for the public bank does not validate the examiner key.
+promotion_gate: replay on one additional fixed oral/presentation bank with subtype-conditional questions; verify that all selected questions are applicable by construction and that no examiner-key entry contains copied content from another question or model family.
+
+
+### Student-assessment PDF production must delegate to the canonical renderer and fail closed on browser fallback
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 Project final-consolidation PDF regression, 2026-10-08
+evidence: Research Authoring produced human-facing assessment PDFs through a Chromium/browser print route even though the repository already had the canonical `render-chinese-math-pdf` companion and Research Authoring's own reporting contract requires delegation to it. The resulting PDFs exposed browser timestamps, source filenames, and `file:///users/...` paths. This duplicated a previously known scientific-PDF failure mode where browser rendering bypassed the declared Pandoc/XeLaTeX production route.
+target layer: student-assessment production / artifact handoff / renderer routing
+problem:
+- Research Authoring can stabilize content correctly yet hand PDF production to an ad hoc browser/HTML path, bypassing the installed renderer skill.
+- Browser/Chromium output may leak environment paths and timestamps, use a different typography engine, and silently diverge from the accepted course/document family.
+- A downstream rendered-review gate is too late if the production route itself violated the declared renderer authority.
+candidate_action:
+- For formal assessment PDFs, bind the production route before rendering: Research Authoring owns semantics; `render-chinese-math-pdf` owns PDF mechanics.
+- Invoke the installed canonical renderer explicitly and record its route/identity receipt. Default production is Pandoc -> LaTeX -> XeLaTeX (or the renderer skill's current canonical route); native TeX follows the renderer's direct-TeX rule.
+- Browser/Chromium rendering is diagnostic only. It must never satisfy the production gate or become an automatic fallback.
+- If the renderer companion is unavailable or its required fonts/TeX dependencies are missing, fail closed with the exact dependency blocker. Do not substitute `wkhtmltopdf`, Chromium print-to-PDF, ad hoc HTML, or a local one-off template and report PASS.
+- Preserve the accepted artifact's paper size, typography family, margins and pagination contract as resolved renderer profile inputs rather than recreating them in a second rendering stack.
+- Add a deterministic producer/engine check to final assessment PDF QA so a browser-generated PDF cannot pass when the frozen route requires the canonical renderer.
+promotion_gate: replay on one bilingual instructor rubric and one student-facing assessment handout; require canonical renderer receipts, non-browser producer identity, no local-path/timestamp leakage, and independent all-pages visual PASS.
+
 ## Recently promoted / established
 
 - Advisor-facing reports organize around scientific question and decision, not run/debug chronology.
@@ -254,3 +391,26 @@ promotion_gate: replay on one formal research-report PDF and one editable/office
 - Do not move repo execution logs into advisor-facing prose just because they are easy to retrieve.
 - Do not equate source fidelity with preserving source organization, headings or internal experiment vocabulary.
 - Do not make an advisor learn project-internal tokens before they can understand the scientific argument.
+
+### Frozen assessment artifacts regress under bounded edits: HW1 full release and Final Project guide
+status: NEW
+source: `YuukiAS/STAT5060-TA` / STAT5060 2026–27 HW1 five-artifact student/instructor/final-review release, user feedback 2026-10-08
+evidence:
+- The user identified `STAT5060_HW1_Solution_R_Annotated.pdf` as the already acceptable seven-page R-route solution baseline and repeatedly instructed the executor not to damage correctly accepted content or presentation.
+- In the executor's quoted incident acknowledgment, Codex stated that it regenerated the whole solution through the Markdown/render route, expanded the R solution from seven to nine pages, and put the unapproved result in `final-release/`. This is a user-supplied incident account and executor acknowledgment; the exact input/output PDF bytes, hashes, branch commit and actual renderer diff have not been independently verified for this TODO intake.
+- The bounded requests concerned the solution header/meta text and student-style alignment, Q2(b) indentation and bullet formatting, and producing downloadable R and Python solution PDFs; several header/meta features had already been correct in the accepted annotated baseline.
+- Further primary user-provided timeline (2026-10-08, 19:08–21:35): the final bounded repair Goal explicitly prohibited changing six-question student wording, hints, or marks. The user then authorized only the Q2(b) student/instructor alignment and Poisson/negative-binomial bullet formatting, again saying other frozen material must not change. The 19:44 executor summary reported the student PDF had changed for Q2(b), but did not disclose removed hints. At 21:19–21:24 Codex acknowledged that it had **deliberately filtered `\\hwHint{...}` from the student TeX** when deriving a release student PDF from the hint candidate, misapplying an earlier context-local "remove hint" instruction meant for the instructor-answer layout. It acknowledged propagating the no-Hint output through release/Blackboard packaging despite subsequent explicit preservation instructions. At 21:26–21:35 Codex also acknowledged replacing two previously accepted seven-page instructor solutions with nine-page re-renders; its final search claimed no complete set of five correct existing files could be found. All of these execution details are user-supplied transcript and executor statements; the live worktree files/diffs and exhaustive local repository search have not been independently accessed.
+- Scope nuance: the original 19:08 Goal **did permit modest, justified semantic-pagination changes** to instructor solutions (seven pages was not a universal hard limit), and the subsequent Q2(b) reformatting was authorized. Thus page-count change alone is not a sufficient failure test. The regression is the reported degraded full-page composition, missing positive-baseline comparison, and promotion of an unaccepted candidate. By contrast, removing six student Hints is a substantive scope violation under an explicit content freeze, not a permissible consequence of Q2(b) layout work.
+- Failure propagation: the 19:44 numerical/semantic-PASS self-report, subsequent student-ZIP contents/openability checks, and SHA256 release manifests did not establish content parity with accepted source/artifacts. Hashes attest to the packaged bytes, not that the right user-approved bytes were selected. A package-only edit reused a prior no-Hint student PDF and incorrect instructor PDFs. Any investigation must inspect (1) student-source derivation/filter steps and exact Hint text/placement parity, (2) accepted R/Python solution source and whole-document render deltas, (3) candidate-to-`final-release/` selection and promotion guards, and (4) whether declared Research Authoring contracts were actually consumed by the Codex execution entry. Do not mistake the lack of committed remote artifacts for proof of deletion: the transcript repeatedly states these products were not pushed.
+- Additional user-supplied chronological excerpt (2026-10-08, 17:47–19:04): at 17:47 the user requested the solution header say only `Solution`, and the executor reported both R/Python PDFs corrected; at 17:48 the user issued a separate tightly scoped **student-package** polishing/repackaging request that expressly prohibited instructor-solution changes; at 18:06 the user identified missing visual alignment with the student PDF (italic year/term and heading spacing), and the executor reported another R/Python solution repair; at 18:15 the user had to ask it to resume the student-package request; at 19:04 the executor reported the rebuilt student ZIP and smoke-result fields. The 18:06 user instruction explicitly allowed that bounded instructor-header repair despite the 17:48 student-package exclusion; **do not falsely classify the 18:06 repair alone as unauthorized instructor-solution editing**. The 19:04 PASS fields are executor claims, not independent rendered/diff evidence. This excerpt by itself does not show the subsequent seven-to-nine-page change; that claim comes from the separately supplied executor incident acknowledgment above.
+problem:
+- Second real-use failure, 2026-10-08 Final Project: the user reports that a previously accepted two-page student Project Guide became three pages after a change limited to submission filenames. The supplied `STAT5060_Final_Project.pdf` was directly inspected: it is an A4 three-page PDF, with only the short introduction to further AI/academic-honesty guidance and two guidance links on its third page. The accepted two-page Project Guide positive sample had already been recorded under `Student-assessment typography should allow a bounded rendered size range and preserve successful positive samples`; this new three-page artifact and its user-reported trigger show that accepted page composition can regress again under a tiny text delta. The source-level causal diff against the accepted two-page PDF was not accessible in this intake; do not assert that changing the filenames alone definitively caused the spill without comparing those exact candidates.
+- Third related case: the user reports that accepted HW1 student handout pagination drifted from three to four pages after narrow formatting work, and the user had to supply precise Q4(a)/Q4(b) page placements and layout guard diagnoses to recover the three-page arrangement. A subsequent executor self-report said three pages were restored. This is a user-supplied run report rather than independently inspected final corrected bytes.
+- Explicit user capability requirement: **one ordinary natural-language edit request must automatically activate an existing-artifact preservation gate**, without requiring the user to restate page count, style, history, prior accepted locks, or checking instructions every time. Baseline authority must be recovered from actual accepted source + artifact, not from whichever generated PDF is newest. The normal production/edit entry must derive the minimal authorized delta, compare before/after semantic content and rendered layout, and reject unintended page-count changes, overflow, style drift, missing Hints, changed formulas/figures and unrelated-file mutations. Do not make a universal hard page count: distinguish a rename/layout-neutral edit from an explicitly authorized restructuring, and escalate substantive dependent reflow to independent review rather than auto-restyling.
+- Enforcement boundary: **a gate merely mentioned in instructions, produced as a self-reported PASS field, or run only during optional final QA is not sufficient**. Verify the actual normal consumer, immutable accepted baseline location, candidate-only editing, independently enforced before/after checks and controlled release promotion. Packaging-only operations must preserve all unrelated artifact bytes. If the verifier, accepted baseline or comparison is unavailable, keep the prior accepted release intact and fail closed; do not make the user reconstruct history or paginate pages manually. Prefer extending existing Research Authoring / assessment consumer and renderer/QA tools, not another policy layer, long ledger, or new top-level plugin. Share the pattern with Presentations/software only after separately confirming their native render/behavior checks.
+- Full five-artifact release-set failure, as described in the user's 21:31–21:35 transcript and the executor's last inventory (not independently verified against the local worktree): (1) `STAT5060_HW1.pdf`: current `final-release/` omitted all six accepted Hints; a separately generated with-Hints recovery candidate existed but was not the accepted production baseline. (2) `STAT5060_HW1_STUDENT_PACKAGE.zip`: the executor found a plausibly correct latest polished resource ZIP; this **does not compensate** for the broken handout, solutions or bundle. (3) `STAT5060_HW1_Solution_R.pdf` and (4) `STAT5060_HW1_Solution_Python.pdf`: previously accepted seven-page visual baseline was replaced by unsatisfactory nine-page full re-renders; the earlier seven-page V4 copies reportedly still contained the superseded `Instructor Solution` header/extra meta lines, so those copies were not an exact five-artifact-ready final set either. (5) `STAT5060_HW1_FINAL_RELEASE_REVIEW_BUNDLE_V5.zip`: packaged the no-Hint student PDF and both nine-page solutions, so the review bundle inherited invalid component identity. The executor's own final inventory concluded `ALL_5_CORRECT_EXIST_IN_REPO = NO` for the exact existing-files-only search, not that all historical files were irrecoverably erased.
+- The user repeatedly protected **both audiences and the complete release set**: student question wording/Hints/marks were frozen, R/Python answer content and already-good academic style were to survive bounded fixes, and packaging-only meant selecting and verifying correct existing artifacts rather than regenerating their bodies. The user ultimately forbade any new generation and demanded discovery of five independently correct existing files, demonstrating that preserving trustworthy approved outputs and maintaining exact release-set integrity—not just fixing one Hint or one page count—was the unmet product requirement.
+- The failure occurred *after repeated explicit user instructions to preserve already-good material*. The executor treated a narrow repair as authority for full-document reflow, lost the accepted page-flow/visual baseline, and promoted an unaccepted candidate to the release directory. The user then had to discover regressions by inspecting the artifact.
+- This failure class is **already explicitly covered** by the active Research Authoring student-assessment contracts: `student-assessment-delivery-closure-amendment-v1.md` §§4, 9–11 (positive baseline, bounded changes, user-review budget, incident mode, closure); `student-assessment-cumulative-acceptance-contract.md` Gates I, N, O, S (change allowlist, zero unrelated source/render changes, monotonic revision, full final-candidate regression, unmarked-content preservation); and `student-assessment-hw1-nonrecurrence-amendment-v1.md` §§11–12 (incident escalation and user-facing review protection).
+- Therefore do not add another synonymous "do not change accepted content" policy and do not assume the mere existence of rules proves they were consumed. A central maintainer must establish which actual HW1 executor entry loaded the active contracts, what baseline identity and permitted edit scope reached the renderer, why unrelated pagination was not caught or escalated, and how an unaccepted artifact reached `final-release/`. Distinguish an intentionally necessary full-source compilation from an **unauthorized change to the full rendered artifact**.
+project-specific context: the original seven-page layout, R/Python route names, Q2(b) list details, header wording and local `final-release/` structure belong to STAT5060 HW1. Seven pages is an accepted *case-specific baseline*, not a universal page-count rule for research/assessment PDFs. This raw feedback does not modify the ongoing 059 frozen implementation plan, approve a new plugin design, or claim a verified fix.

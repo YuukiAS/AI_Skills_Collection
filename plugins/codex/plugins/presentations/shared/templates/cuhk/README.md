@@ -19,10 +19,10 @@ Title slide lock:
 
 Font requirements:
 
-- The source theme uses `\setmainfont{Times New Roman}`, `\setsansfont{Times New Roman}`, and `\setmonofont{Times New Roman}`.
-- A build host must provide Times New Roman Regular, Bold, Italic, and Bold Italic. On Windows these are usually `C:\Windows\Fonts\times.ttf`, `C:\Windows\Fonts\timesbd.ttf`, `C:\Windows\Fonts\timesi.ttf`, and `C:\Windows\Fonts\timesbi.ttf`.
-- No font files were present in the CUHK zip. Do not commit Times New Roman files to this repo unless redistribution rights are explicitly confirmed.
-- For private server deployment, install the fonts on the server or ship them as a private, non-versioned deployment asset and update the server font cache before compiling.
+- The source theme uses the canonical Presentations font policy: file-bound TeX Gyre Termes for Latin text, TeX Gyre Termes Math for mathematics, and Latin Modern Mono for code.
+- `__AI_SKILLS_FONT_RESOURCE_ROOT__` is a build-time placeholder. The production entry resolves it from the installed `render-chinese-math-pdf` resource probe before XeLaTeX runs.
+- The resource bundle must contain all four TeX Gyre Termes faces and TeX Gyre Termes Math. The production entry fails with the exact missing path when that bundle is incomplete.
+- The build never searches host fonts or substitutes Times New Roman, Liberation, DejaVu, Caladea, or Carlito.
 
 ## Validation
 
@@ -31,7 +31,7 @@ Repository tests verify that the CUHK payload contains the required Beamer sourc
 Full render validation requires a host with:
 
 - XeLaTeX and the Beamer dependencies used by `beamer/source/main.tex`, including `tcolorbox`.
-- Times New Roman Regular, Bold, Italic, and Bold Italic, or an explicitly accepted private deployment substitute.
+- The fixed font files declared by `shared/font-policy.md` in the resolved `render-chinese-math-pdf` resource bundle.
 - `python-pptx` when rebuilding `pptx/cuhk-reference-deck.pptx` from `pptx/build_reference_deck.py`.
 
 If TeX has to create user formats on a read-only home filesystem, set `TEXMFVAR` and `TEXMFCONFIG` to writable local cache directories before compiling.

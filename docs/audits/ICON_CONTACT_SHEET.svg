@@ -75,10 +75,13 @@
 <image href="../../skills/science/communication/project-thread-handoff/assets/app-facing.svg" x="16" y="780" width="56" height="56"/>
 <image href="../../skills/science/communication/project-thread-handoff/assets/app-facing.svg" x="80" y="788" width="40" height="40"/>
 <text x="16" y="858" font-size="10" font-family="Arial, sans-serif" fill="#111827">project-thread-handoff</text>
-<image href="../../skills/tools/documents-media/render-chinese-math-pdf/assets/app-facing.svg" x="224" y="780" width="56" height="56"/>
-<image href="../../skills/tools/documents-media/render-chinese-math-pdf/assets/app-facing.svg" x="288" y="788" width="40" height="40"/>
-<text x="224" y="858" font-size="10" font-family="Arial, sans-serif" fill="#111827">render-chinese-math-pdf</text>
-<image href="../../skills/tools/hpc/slurm-workflows/assets/slurm-workflows.svg" x="432" y="780" width="56" height="56"/>
-<image href="../../skills/tools/hpc/slurm-workflows/assets/slurm-workflows.svg" x="496" y="788" width="40" height="40"/>
-<text x="432" y="858" font-size="10" font-family="Arial, sans-serif" fill="#111827">slurm-workflows</text>
+<image href="../../skills/core/codex-system/project-instructions-editor/assets/app-facing.svg" x="176" y="780" width="56" height="56"/>
+<image href="../../skills/core/codex-system/project-instructions-editor/assets/app-facing.svg" x="240" y="788" width="40" height="40"/>
+<text x="176" y="858" font-size="10" font-family="Arial, sans-serif" fill="#111827">project-instructions-editor</text>
+<image href="../../skills/tools/documents-media/render-chinese-math-pdf/assets/app-facing.svg" x="336" y="780" width="56" height="56"/>
+<image href="../../skills/tools/documents-media/render-chinese-math-pdf/assets/app-facing.svg" x="400" y="788" width="40" height="40"/>
+<text x="336" y="858" font-size="10" font-family="Arial, sans-serif" fill="#111827">render-chinese-math-pdf</text>
+<image href="../../skills/tools/hpc/slurm-workflows/assets/slurm-workflows.svg" x="496" y="780" width="56" height="56"/>
+<image href="../../skills/tools/hpc/slurm-workflows/assets/slurm-workflows.svg" x="560" y="788" width="40" height="40"/>
+<text x="496" y="858" font-size="10" font-family="Arial, sans-serif" fill="#111827">slurm-workflows</text>
 </svg>

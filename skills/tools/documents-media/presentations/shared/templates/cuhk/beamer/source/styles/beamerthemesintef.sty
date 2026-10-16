@@ -25,16 +25,13 @@
 
 \RequirePackage{etoolbox}
 \RequirePackage{fontspec}
+\RequirePackage{unicode-math}
 \RequirePackage{parskip}
 \RequirePackage{tikz}
 
 % Force 16:9 aspect ratio
 \RequirePackage{geometry}
 \geometry{paperwidth=20cm,paperheight=11cm}
-
-% Caladea is a Cambria clone, Carlito a Calibri clone
-\RequirePackage{caladea,carlito}
-\renewcommand{\familydefault}{\sfdefault}
 
 \RequirePackage{graphicx,sintefcolor}
 
@@ -319,9 +316,26 @@
 \usecolortheme{dolphin}
 \usefonttheme{professionalfonts}
 \renewcommand{\familydefault}{\rmdefault}
-\setmainfont{Times New Roman}
-\setsansfont{Times New Roman}
-\setmonofont{Times New Roman}
+\setmainfont[
+  Path=__AI_SKILLS_FONT_RESOURCE_ROOT__/fonts/texgyre-termes/,
+  Extension=.otf,
+  UprightFont=texgyretermes-regular,
+  BoldFont=texgyretermes-bold,
+  ItalicFont=texgyretermes-italic,
+  BoldItalicFont=texgyretermes-bolditalic
+]{texgyretermes-regular}
+\setsansfont[
+  Path=__AI_SKILLS_FONT_RESOURCE_ROOT__/fonts/texgyre-termes/,
+  Extension=.otf,
+  UprightFont=texgyretermes-regular,
+  BoldFont=texgyretermes-bold,
+  ItalicFont=texgyretermes-italic,
+  BoldItalicFont=texgyretermes-bolditalic
+]{texgyretermes-regular}
+\setmathfont[
+  Path=__AI_SKILLS_FONT_RESOURCE_ROOT__/fonts/texgyre-termes-math/,
+  Extension=.otf
+]{texgyretermes-math}
 \usefonttheme[onlymath]{serif}
 \setbeamercolor{subsection in head/foot}{parent=palette secondary}
 \setbeamercolor{title}{fg=maincolor}

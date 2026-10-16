@@ -33,6 +33,7 @@ This report records what can be proven from files currently in this repository. 
 | bridge-kit-maintainer | skills/core/codex-system/bridge-kit-maintainer | user-authored |  |
 | codex-workflow-protocol | skills/core/codex-system/codex-workflow-protocol | user-authored |  |
 | machine-update-orchestrator | skills/core/codex-system/machine-update-orchestrator | user-authored |  |
+| project-instructions-editor | skills/core/codex-system/project-instructions-editor | user-authored |  |
 | cardiac-mri | skills/domains/medical-imaging/cardiac-mri | user-authored |  |
 | medical-imaging-terminology-measurement | skills/domains/medical-imaging/medical-imaging-terminology-measurement | user-authored |  |
 | clinical-guideline-checking | skills/domains/medicine-clinical/clinical-guideline-checking | user-authored |  |

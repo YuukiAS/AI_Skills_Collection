@@ -323,10 +323,39 @@ evidence: equivalent high-level states were presented with inconsistent containe
 problem: A product cannot use background fills, pills, borders and bare labels arbitrarily for sibling status semantics. The inconsistency makes visual weight reflect implementation history instead of meaning and makes the interface look assembled component-by-component rather than designed as one system.
 project-specific context: Lucerna's Installed, Normal, Checking, Ready and other labels are project-specific. The reusable issue is to freeze status-component families by semantic role and severity, then require sibling-state comparison during full-screen review.
 
+### Sensitive form lifecycle and contract-backed capability acceptance
+status: NEW
+source: Lucerna 01056r1 full-product GPT Work failure, 2026-10-06
+target layer: Frontend Design product-state QA / secure setup flows / external-provider acceptance
+evidence: `YuukiAS/Lucerna@b010e7dfe6d879ee72c50e66b78a4b9d09b9668f`, user-provided native screenshots, and `results/01056r1_full_product_repair` review evidence
+problem: A visually mature desktop surface still passed Producer review while sensitive setup drafts survived Cancel/Hide/surface switching, provider capability closure outran real configured/error evidence, frozen section order drifted in production, one status icon carried several unrelated meanings, and external API parsing relied on heuristic field searching despite a published structured schema. These are not project-specific styling preferences; they are recurring frontend/product acceptance gaps at the boundary between UI state, provider contracts, and secure forms.
+candidate_action:
+- Treat sensitive form drafts as ephemeral state. On Cancel, Hide, management-surface switch, successful save, and failed save, clear secret/token/seed/recovery-key drafts unless an explicit product requirement says otherwise.
+- For forms that persist both secure secret material and ordinary metadata/config, require transactional or compensating semantics; frontend acceptance must include partial-failure behavior rather than only success.
+- For external providers, require a canonical-schema fixture derived from the published API/owner contract plus configured-normal, partial, auth-failure, and provider-error states before capability closure.
+- Do not accept setup UI + parser skeleton as `implemented`; require an explicit capability depth matrix covering backend/runtime, real contract path, user entrypoint, state/error semantics, actions/boundaries, and evidence.
+- Compare rendered section order/grouping/disclosure directly against the frozen design authority; implementation may not silently reorder the information architecture because each component looks acceptable in isolation.
+- Add a semantic-icon matrix to sibling-state review. `online`, `checking`, `stale`, `unknown`, `needs setup`, and `needs sign-in` should remain visually distinguishable without relying on color alone.
+- Require actionability truth: a known-unavailable backend must not expose an enabled primary action that deterministically fails.
+- For identity/presence UIs, distinguish multiple roles that share the same hostname/display name and minimize raw infrastructure identifiers in default/external-review surfaces.
+promotion_gate: validate on Lucerna repair plus one independent secure/provider-heavy product before promoting the exact checklist. The core draft-lifecycle and design-authority drift checks are strong candidates for the next Frontend Design production release.
 ## Watch boundaries
 
 - One product's visual taste is project-local unless repeated or explicitly adopted as a long-term cross-project preference.
 - Runtime bugs belong to the app/repo or build capability, not automatically to this plugin.
+
+additional evidence (2026-10-06, Lucerna 01056r2): the next candidate fixed frontend Cancel/management-switch cleanup but GPT Work still found that tray-toggle, light-dismiss and outside-click native hide paths bypassed that JavaScript cleanup. The same review also found capability matrices overstating setup/preflight surfaces as operational completion, a Tailnet provider hard-coding a developer-machine Workstation alias instead of reusing canonical discovery, and external-review PNGs tracking real private repo/account/infrastructure metadata. This strengthens the candidate in four generic directions:
+- sensitive draft lifecycle must bind to native window lifecycle, not only button handlers;
+- provider/capability acceptance must require portable discovery and operational depth, not setup/parser presence;
+- cross-provider aggregation must preserve checking/presence-only/partial truth rather than gate it away by `LIVE` status;
+- external review evidence needs privacy minimization as a first-class acceptance artifact distinct from local real-live validation.
+
+additional evidence (2026-10-06, Lucerna 01056r2 review): after frontend Cancel/surface-switch cleanup was added, native tray-toggle/light-dismiss/outside-click still bypassed the JavaScript scrub path; controlled-state coverage still bypassed the production aggregate; a `Tailnet devices` status label conflated local backend connectivity with fleet/device presence; and the external review pack tracked private repo/account/infrastructure metadata despite no literal secret leak. Generic implications:
+- sensitive lifecycle acceptance must include every native window-hide cause and reopen-after-hide verification;
+- controlled-state QA must start from provider/component inputs and exercise the production aggregate/presentation chain;
+- status labels need scope/denominator truth (control plane vs device fleet vs host presence vs full health);
+- privacy-safe external evidence is a separate deliverable from local real-live validation, not merely a token/OTP redaction pass;
+- action-ledger/evidence artifacts require referential integrity and mechanical reconciliation with actual rendered controls.
 
 ### Product UI copy needs an explicit Frontend Design content-architecture contract
 status: NEW

@@ -1,8 +1,12 @@
 # project-instructions-editor — Long-Term TODO
 
-Maintenance inbox for a candidate standalone support skill for editing ChatGPT Project instructions.
+Maintenance inbox for the standalone support skill for editing ChatGPT Project instructions.
 
-No production skill or Plugin is created by this file. This inbox records real failures first; architecture, packaging, release route and acceptance gates remain for later Planner/Critic work.
+The v0.1 release scope is a Project-instructions editor: create, update, compress, synchronize, restructure, or reset long-lived ChatGPT Project instructions while protecting live-setting semantics, accepted/deleted/rejected decisions, canonical sources, authorization/privacy/safety/evidence boundaries, exact identifiers, and finite budgets.
+
+C11 reader-layer failure remains valid evidence, not a PASS. PIE v0.1 does not own cross-turn final reader-layer guarantees such as ensuring every future Project answer stays naturally Chinese or free of unnecessary English. That future capability is tracked under Clear Writing (#13); a later PIE v0.2 may add only a thin handoff/bridge after Clear Writing owns the capability.
+
+This inbox records real failures and follow-up scope. It does not create a second runtime contract beyond the standalone skill source.
 
 tracking: #93
 

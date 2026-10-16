@@ -6,17 +6,17 @@ Updated date: 2026-09-29
 ## Current Board State
 
 - Tracking Issue: `#86`
-- Project Status: `DONE`
+- Project Status: `ADAPTING`
 - Area: `ai-skills-core`
-- Resolution commit: `573224edb9b81fc4f53dbc1ce9cc9b719483e8c8`
-- AI_Skills current `main` at final evidence authoring: `573224edb9b81fc4f53dbc1ce9cc9b719483e8c8`
+- Resolution commit: not assigned for final closure yet
+- AI_Skills current `main`: `85d4b2acd990654e8439c1c0dd007493360fa82b`
 - AI_Skills formal `release`: `a7028195f3e97d32d51c32ef8c87f658f92048e5`
 - Current formal repository version: `5.4.0`
 - Bridge current `main`: `5a640ec02a20106c778a35ba94eb2164d2b91537`
 - Bridge formal `release`: `9dad0ba4bfa54e251f345091c5151ae991251ec9`
 - Bridge formal version: `0.9.3`
 - Closure freeze: `FINAL_CLOSURE_FREEZE.json`
-- Overall DONE: `YES`
+- Overall DONE: `NO`
 
 This matrix tracks the final closure freeze batch. It is not a runtime registry,
 machine controller, daemon, watcher, database, or source of truth for Codex
@@ -86,25 +86,25 @@ Bridge identities equal to the closure freeze, the recorded direct fresh
 session, and an empty `ai-skills-core` production/version diff from frozen
 release to current main.
 
-## Closure Boundary
+## DONE Guard
 
-Product closure, all five required-consumer adaptations, repository closure,
-and GitHub Project closure are complete. Issue `#86` has reader-facing Chinese
-copy processed through installed `writing-style 0.4`; it is now closed. Project
-`AI Skills Maintenance` is `DONE`.
+Do not close Issue `#86` and do not set Project Status `DONE` until:
+
+```text
+exactly five required consumers current or freeze-equivalent PASS under FINAL_CLOSURE_FREEZE
++ durable evidence complete
++ clean final aggregate evidence from latest main
++ Issue #86 reader-facing copy updated through Clear Writing
++ Project Status DONE and Resolution commit synchronized
++ Issue #86 closed
+```
 
 ## Next Handoff
 
 ```text
 NEXT_REQUIRED_CONSUMER=NONE
 ALL_REQUIRED_CONSUMERS_PASS=YES
-PROJECT_STATUS=DONE
-ISSUE_86=CLOSED
-PRODUCT_CLOSURE=COMPLETE
-REPO_CLOSURE=COMPLETE
-PROJECT_AREA=ai-skills-core
-RESOLUTION_COMMIT=573224edb9b81fc4f53dbc1ce9cc9b719483e8c8
-README_CHECKED=NO_UPDATE_REQUIRED
-VERSION_BUMP=NONE
-OVERALL_DONE=YES
+PROJECT_STATUS=ADAPTING
+ISSUE_86_OPEN=YES
+OVERALL_DONE=NO
 ```

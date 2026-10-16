@@ -477,6 +477,7 @@ def render_specs(bundle: dict[str, Any], specs: list[dict[str, Any]], out_dir: P
         layouts = [stage3.resolve_layout(spec) for spec in specs]
         (build_dir / "scientific_layouts.tex").write_text(stage3.scientific_layout_macros(), encoding="utf-8")
         (build_dir / "main.tex").write_text(build_main_tex(bundle, specs, layouts, asset_map), encoding="utf-8")
+        font_binding = stage3.materialize_font_binding(build_dir)
         render_input_identity = build_render_input_identity(build_dir)
         dependency_probe = stage3.dependency_probe()
         render_probe = stage3.render_skill_probe()
@@ -490,6 +491,7 @@ def render_specs(bundle: dict[str, Any], specs: list[dict[str, Any]], out_dir: P
         "build_dir": build_dir,
         "layouts": layouts,
         "render_input_identity": render_input_identity,
+        "font_binding": font_binding,
         "dependency_probe": dependency_probe,
         "render_probe": render_probe,
         "compile_status": compile_status,

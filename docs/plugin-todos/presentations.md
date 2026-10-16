@@ -258,10 +258,17 @@ promotion_gate: replay where a weak/answer-fed reviewer fails calibration while 
 status: NEW
 tracking: #56
 source: STAT5060 Tutorial 1 V4–V7; repeated recurrence of already-rejected patterns
-evidence: after prior PASS claims, later candidates reintroduced previously rejected behaviour including answer-mapping assessment slides, first-use violations, AI-like source wording, oversized diagram elements, cramped code stacks and weak closing frames.
+evidence: after prior PASS claims, later candidates reintroduced previously rejected behaviour including answer-mapping assessment slides, first-use violations, AI-like source wording, oversized diagram elements, cramped code stacks and weak closing frames. STAT5060 Tutorial 1 now has a canonical cumulative human-feedback ledger recovering 193 student-deck annotation objects across the 2026-09-29 to 2026-10-06 review history, plus separate instructor-pack annotations. The 2026-10-06 V07 human rejection again found earlier complaints had returned despite repeated executor/GPT/evidence PASS: rate/offset remained under-explained, large blank regions remained while teaching content was missing, student-facing `Prerequisite:`/API plumbing reappeared, and orphan prose returned below code blocks.
 problem: Current revision workflows can treat the latest candidate as a fresh deck and forget that a human already rejected specific visible patterns. A human rejection must be higher authority than any earlier executor/reviewer PASS. Every rejection should produce a persistent regression-guard ledger that later candidates must check explicitly; a candidate cannot pass merely because the original page changed enough that the old finding no longer matches by line number.
 candidate_action: Store semantic regression guards such as “no answer scaffold”, “no first-use before introduction”, “no low-contrast header”, “no internal QA language”, rather than page-number-only fixes. On every later round, report ABSENT/PRESENT against the full final render.
 promotion_gate: at least one replay where the guard ledger catches a regression that ordinary changed-page review misses.
+
+### Teaching decks need a pedagogical-sufficiency gate before mechanical evidence closure
+status: NEW
+source: STAT5060 Tutorial 1 cumulative human feedback, 2026-09-29 through 2026-10-06
+evidence: `YuukiAS/STAT5060-TA` now maintains `docs/authoring/2026-27/STAT5060_TUTORIAL_01_HUMAN_FEEDBACK_MASTER_LEDGER.md`, recovering 193 student-deck feedback objects. The latest V07 human rejection occurred after the deck had spent several rounds on release-evidence closure. The user still found that the rate/offset page gave formulas/results without enough mechanism, large body areas were left unused while the concept remained under-explained, `Prerequisite:` and package/API details occupied student-facing space, and post-code prose on Bayesian pages had no clear body/caption/note role.
+problem: Presentation QA can optimize hashes, geometry, whitespace percentages and evidence schemas while failing the more important question: does the audience understand why the method is needed, what changes mathematically, and how to interpret the result? For teaching decks, empty space is not automatically a virtue when a core idea is still incomplete. Conversely, filling space with prerequisites, backend notes, API caveats or author-facing workflow prose is not pedagogical content. A first-introduction slide can therefore be mechanically clean and still be a teaching failure.
+project-specific context: The exact rate/offset example, page numbers, package names and STAT5060 course sequence are project-specific. The reusable issue is that teaching-presentation production needs a pedagogical-sufficiency check, visible-text role discipline, and cumulative human-feedback regression memory before mechanical release evidence is allowed to dominate the workflow.
 
 ### Independent presentation review needs role separation, verdict isolation and role-scoped closure
 status: NEW
@@ -495,6 +502,155 @@ candidate_action:
 - `\tiny` remains forbidden for normal code; body/table/caption roles keep their own independent size tokens.
 promotion_gate: paired R/Python and a dense research-code fixture both remain readable at 1920x1080 with fixed scriptsize code, while injected tiny/clipped code fails.
 
+### Whitespace QA must use archetype-aware hard gates and cannot be waived by free-text reasons
+status: NEW
+tracking: #35
+source: STAT5060 Tutorial 1 Rich v2 final rereview, 2026-10-05
+evidence: reviewed candidate `bda8d2c68d86041da746026b32bf6e0217977f92`, PDF SHA256 `b267917df179aa5a50ff341a7a71343a13bbb15525f4754bb298f02678890c78`. Executor evidence used `usable_body_bbox=[80,135,1840,990]`, which still included the frame-title region, and then cleared >25% bottom-gap pages P14/P16/P22/P30/P31/P36 using free-text `intentional_whitespace_reason`. Independent rereview using a post-title body region found seven ordinary content pages over the frozen 25% hard threshold: P14/P16/P22/P28/P30/P31/P36.
+problem: A whitespace metric can look quantitative while still being semantically wrong if its body region includes fixed chrome or if ordinary content pages can self-exempt with arbitrary prose. Requirement ledgers can also falsely PASS if they summarize composition requirements rather than enumerate every frozen page-level repair.
+candidate_action:
+- Derive the usable body from template chrome boundaries: below the rendered frame-title region and above the footer rule/source/navigation area. Do not use a single hard-coded top coordinate that includes the frame title.
+- Separate page archetype from free-text rationale. Hard-threshold exemptions must come from a frozen archetype allowlist (e.g. title, section-divider, closing); an executor-written `intentional_whitespace_reason` must never waive an ordinary-content hard gate.
+- Ordinary content pages over the hard gap threshold fail automatically. Pages over the soft threshold require primary-object scale + visual-balance review; the executor cannot clear the trigger by narrative alone.
+- Store both metric geometry and the detected chrome geometry in evidence so independent review can reproduce the denominator.
+- Requirement ledger completeness must be machine-checkable against the frozen requirement IDs: no grouped summary row may silently omit page-level composition repairs.
+- Cross-gate consistency: if whitespace metrics, requirement ledger, annotation closure, and page review disagree, overall release QA must be REVISE.
+promotion_gate: replay the STAT5060 candidate so P14/P16/P22/P28/P30/P31/P36 fail automatically and title/closing pages remain valid exceptions; then pass a repaired candidate plus an unrelated deck using the same archetype-aware rule.
+
+### Teaching code/reference slides need runnable-context and PDF-copyability QA
+status: NEW
+tracking: #35
+source: STAT5060 Tutorial 1 student-deck V05 human review, 2026-10-05
+evidence: V04 showed package names and partial snippets but omitted imports, data-object creation, complete model calls, posterior extraction/predictive calls, and honest backend disclosure. The final PDF text layer also converted straight code quotes into typographic quotes on several code pages, so visually plausible code could not be copied and executed.
+problem: A teaching presentation can look technically sophisticated while failing its practical teaching job if code is shown as fragments rather than a runnable workflow. Source-level syntax correctness is not enough; the final rendered PDF must preserve copyable code text.
+candidate_action:
+- Treat code/reference slides as a distinct teaching artifact role: prerequisites -> complete call -> relevant output/extraction -> interpretation.
+- Require imports/data objects before use; do not show an object that has not been created.
+- Require the package call actually used for the claimed statistical task, including package-specific parameterisation differences and any shared backend.
+- Require final-PDF code extraction QA: ASCII quotes/operators/underscores preserved, zero curly quotes in code, syntax parse/smoke checks, and visible result/meaning on the page.
+- A software-name matrix or API-name list does not satisfy software teaching when the page job is “how to fit/check this model”.
+promotion_gate: replay STAT5060 V04 so the fragmentary brms/PyMC/code pages and curly-quote PDF fail; pass V05-style complete syntax pages plus one unrelated teaching deck.
+
+### Column layout is for peer comparison; sequential reasoning must use a vertical reading path
+status: NEW
+tracking: #35
+source: STAT5060 Tutorial 1 V04 annotations plus CAT-TRACE v8/v9 layout evidence, 2026-10-05
+evidence: V04 repeatedly forced sequential explanations into side-by-side regions: relative-logit weights vs normalization, condition/marginal diagrams, blocked-Gibbs -> MH-within-Gibbs, and HMC/NUTS stages. CAT-TRACE had already shown that learn -> prior -> update became clearer after changing from columns to a vertical sequence, while genuinely peer objects remained successful in columns.
+problem: “There is horizontal space” is not a valid reason to use columns. Columns imply simultaneous peer status and invite wide meaningless gutters when the content is actually causal, temporal, inferential or prerequisite-ordered.
+candidate_action:
+- Before composing a multi-column slide, record the semantic relation: PEER_COMPARE or SEQUENTIAL_DEPENDENCY.
+- Allow columns only for peer objects with comparable roles and matching anchors (e.g. R vs Python, ordinary model vs GLMM).
+- Use vertical/stacked flow when object B depends on A, one denominator/formula governs the next step, or the explanation has a natural prerequisite order.
+- QA must inspect actual nearest-object gutter, top/formula/code alignment and lower-edge balance; declared column widths alone are insufficient.
+- If one column becomes mostly a label while the other carries the explanation, collapse to a single vertical reading path.
+promotion_gate: same fixture set must reject sequential content placed in columns and retain peer-comparison columns without false positives.
+
+### Semantic proximity must be a release gate, not sacrificed to whitespace metrics
+status: NEW
+tracking: #35
+source: STAT5060 Tutorial 1 V04/V05 human review, 2026-10-05
+evidence: prior repairs reduced bottom whitespace by pushing conclusions toward the lower page, which separated interpretation from the table/figure/formula it explained. Pages could satisfy a bottom-gap threshold while becoming harder to read. STAT5060 Tutorial 1 Student Deck V06 reproduced the failure on P18 and P35: both satisfied the lower-body whitespace gate, while whole-slide review still showed a large internal gap splitting one semantic group. The generated `semantic_proximity.json` only measured whole-body centre distance from the slide-body centre and therefore returned PASS without measuring evidence-to-interpretation or block-to-follow-up distance.
+problem: Whitespace occupancy and semantic grouping are different constraints. A page can be “full” and still be badly composed if evidence and its interpretation are visually far apart.
+candidate_action:
+- Define semantic groups before layout: evidence object + interpretation/conclusion.
+- Measure or review evidence-to-interpretation proximity in addition to bottom gap.
+- Ordinary figure/table interpretation should normally stay near the object; do not use vfill to separate items that belong to one semantic group.
+- Permit stretch glue only between independently meaningful groups.
+- Release QA must fail pages where a conclusion is moved away from its evidence merely to satisfy whitespace thresholds.
+promotion_gate: replay known STAT5060 pages where bottom-gap passed but evidence/interpretation proximity failed, then pass repaired layouts and an unrelated sparse slide.
+
+### Connector geometry needs a minimum visible shaft and boundary-to-boundary contract
+status: NEW
+tracking: #39
+source: STAT5060 Tutorial 1 V04 arrows plus CAT-TRACE v7-v9 diagram fixes, 2026-10-05
+evidence: STAT5060 V04 simulation/HMC/GLMM diagrams contained arrows that were too short, detached-looking or visually crowded. CAT-TRACE independently established the same failure mode and converged on boundary-clipped edges with about 8–10 mm visible shaft where space permits.
+problem: A connector can be syntactically present and collision-free yet still fail visually if it is too short to read as a relationship, starts/ends inside a node, or is compressed until arrowheads/labels collide.
+candidate_action:
+- Default connector rule: node-boundary to node-boundary; no overlap with text/formula/border/other connectors.
+- At 1920x1080, target at least about 36 px / 8 mm visible shaft; peer-row arrows should use comparable visible lengths.
+- Relation labels require stable clearance from the shaft.
+- Do not use arbitrary shorten values that create detached arrows.
+- If the available width cannot support readable connectors, switch to a numbered vertical sequence instead of keeping miniature arrows.
+- Add rendered connector-length/collision evidence to final QA; source styles alone do not prove acceptability.
+promotion_gate: failed short-arrow fixtures must be rejected; repaired peer-flow and vertical-fallback fixtures pass across CUHK and course-standard skins.
+
+### Footer alignment must be regression-tested after every theme/font/page-count change
+status: NEW
+tracking: #98
+source: STAT5060 Tutorial 1 V04 human review, 2026-10-05
+evidence: footer alignment regressed after earlier accepted rounds even though the footer structure, navigation groups and page count had previously passed review. The user again observed native action buttons visually misaligned relative to source credit/page number.
+problem: Footer acceptance is being treated as a one-time template fact, but font, theme, total-page count and nearby layout changes can move optical alignment. Structural presence of the right controls does not guarantee a mature footer.
+candidate_action:
+- Treat footer as shared-core chrome consumed by CUHK/course-standard skins rather than duplicate project-local implementations.
+- After any theme/font/page-count change, rerun footer crops on title, code, figure, dense-model, assessment and closing pages.
+- Check source/page-number baseline, native action-group optical centre, action-to-page-number horizontal gap, exact approved action set and collisions.
+- Prior footer PASS must be invalidated when a dependency affecting geometry changes.
+promotion_gate: an injected vertical/button offset must fail the shared fixture; both adapters pass the same footer-core geometry with skin-only differences.
+
+### Question vertical-rule geometry must follow the rendered text box
+status: NEW
+tracking: #32
+source: STAT5060 Tutorial 1 V04 annotation A004, 2026-10-05
+evidence: the Question macro was present and stylistically consistent, yet the accent rule extended above the first question line and read as a misplaced decoration.
+problem: Macro presence and colour-role consistency do not guarantee correct rendered geometry.
+candidate_action:
+- Bind rule top/bottom to the actual rendered label+question text box.
+- At release scale, allow at most about 1 px optical overshoot.
+- Rule must not extend into title, previous object, or following object.
+- Multi-line Question blocks and full-width Questions require dedicated regression fixtures.
+promotion_gate: the V04-style overshooting rule fails; one-line and multi-line Question fixtures pass in both skins.
+
+### QA evidence artifacts must be self-validating, page-index aligned, and hash-bound
+status: NEW
+tracking: #36
+source: STAT5060 Tutorial 1 Student Deck V05 independent review, 2026-10-06
+evidence: V05 had a 46-page PDF, but `page_review.md` contained only 45 rows, labeled the actual title page as “Tutorial overview”, shifted every later title by one page, and omitted P46. `requirement_ledger.md` was only a summary paragraph. Six supposed representative footer crops were the exact same 637-byte Git blob. Column/semantic/connector evidence files contained prose or page names rather than frozen metrics. The artifact manifest named an evidence directory but did not bind its Git tree. V06 then showed that a nominal evidence-integrity checker can still self-certify bad evidence: the requirement ledger hard-coded its own integrity requirement as PASS; RGB `Image.getbbox()` would accept an all-white crop as nonblank; no malformed fixture proved fail-closed behaviour; and the recorded evidence payload/tree identities disagreed with the committed evidence root. V07 attempted to repair these checks but exposed a second-order regression: the eight “negative fixtures” were small fixture-specific dictionaries evaluated by a separate `rejects()` switch instead of being passed through production validators; `V07-32-evidence-integrity` remained hard-coded `True`; the production blank-crop check still used RGB `Image.getbbox()`; the connector audit false-passed P34/P36, which have no diagram connectors, by treating dark-blue text pixels as connector evidence; and final tree/payload identities were still placeholders or internally contradictory. A subsequent V07 evidence-only repair still failed independent rereview: the shared page-review validator did not validate per-page title identity and the bad-title fixture needed a fixture-local rescue check; the identity validator was exercised by the tampered fixture but not by the real production closure; the canonical payload hash used `str(Path)` and was therefore OS-path-separator dependent across Linux/Windows; and the V01–V06 preservation ledger only proved V06. This is further evidence that negative fixtures and identity checks must exercise the same production validation path and that evidence hashes must use platform-canonical relative paths.
+problem: Presentation QA evidence can currently look complete by filename while being internally inconsistent, off-by-one, blank/duplicated, or unrelated to the reviewed artifact.
+candidate_action:
+- Add an evidence-integrity preflight that validates page-review row count == PDF page count and matches every row title to text extracted from the same final PDF.
+- Require requirement IDs and one row per frozen requirement; prose-only ledgers are invalid.
+- Bind each crop to source page/render hash; reject blank crops, wrong dimensions, and duplicate crop hashes where distinct pages are expected.
+- Require numeric/schema fields for column alignment, semantic proximity, connector shaft/collision, footer baseline/optical/gap checks.
+- Record PDF/source/theme hashes plus evidence-root Git tree SHA in the artifact manifest.
+- Cross-evidence contradictions automatically force REVISE.
+promotion_gate: replay STAT5060 V05 so the 45/46 page-review mismatch, six duplicate footer crops, prose-only ledger, and metric-free audits all fail before independent review.
+
+### Reviewer capability limits need NOT_VERIFIED semantics, not false artifact failures
+status: NEW
+tracking: #36
+source: STAT5060 Tutorial 1 Student Deck V05 GPT Work review and independent binary recheck, 2026-10-06
+evidence: GPT Work returned `CODE_COPYABILITY = FAIL` only because its connector could not materialize the final PDF bytes. A second reviewer received the exact uploaded binary, independently ran `pdftotext -layout`, reproduced the expected PDF SHA256, found zero curly quotation marks and zero replacement characters, and confirmed ASCII quoted code across all code pages.
+problem: Review tooling limitations are currently conflated with defects in the artifact. This produces false FAIL findings and makes it impossible to distinguish “bad PDF” from “reviewer could not independently verify the PDF”.
+candidate_action:
+- Review status vocabulary must distinguish PASS / REVISE(artifact defect) / NOT_INDEPENDENTLY_VERIFIED(capability or evidence access missing).
+- A mandatory gate that is NOT_INDEPENDENTLY_VERIFIED still blocks release, but must not be reported as a demonstrated content/layout defect.
+- Binary-only gates should record the exact artifact hash and extraction capability used by each reviewer.
+promotion_gate: a fixture with inaccessible bytes produces NOT_INDEPENDENTLY_VERIFIED; the same artifact supplied as bytes is independently extracted and can PASS without changing the artifact.
+
+### Template/core references must pin exact provenance instead of saying “current CUHK”
+status: NEW
+tracking: #98
+source: STAT5060 Tutorial footer regressions during course-standard/CUHK parity work, 2026-10-06
+evidence: project specifications referred to the “accepted/current CUHK footer core” while the central CUHK template continued to evolve. A later repository state can therefore point at different footer primitives than the ones used when the project contract was frozen.
+problem: Cross-template parity is not reproducible if a project says “match current template” without commit/blob identity. Later maintenance can silently change the reference under an already-frozen deck.
+candidate_action:
+- Every template-derived frozen contract must record template repo, commit, source path and source blob/hash.
+- Runtime/executor should verify the pinned identity before copying or comparing a shared primitive.
+- Newer template revisions require an explicit migration decision, not silent substitution during a bounded deck repair.
+promotion_gate: a deck frozen against template identity A rejects silent use of later identity B; an explicit migration updates the recorded provenance and reruns affected chrome regression tests.
+
+### Short Question/label blocks need a no-awkward-hyphenation render gate
+status: NEW
+tracking: #32
+source: STAT5060 Tutorial 1 Student Deck V05 P30, 2026-10-06
+evidence: the short Question “Do the priors put substantial mass...” rendered `substan-` / `tial` despite ample room for a cleaner line break. Source text and semantic macro were correct, so source-level QA missed the visible language defect.
+problem: Automatic TeX hyphenation inside short questions, labels and takeaways can make otherwise correct slide language look mechanical and harder to read.
+candidate_action:
+- Question/Answer/Takeaway/Example semantic primitives should strongly discourage automatic word hyphenation.
+- Final render QA flags discretionary hyphens in short audience-facing semantic blocks and prefers clean phrase-level line breaks.
+- Do not globally disable scientific hyphenation in long prose; scope the rule to short semantic blocks or explicitly authored labels.
+promotion_gate: the V05 P30 fixture fails; a clean non-hyphenated reflow passes without changing the sentence.
+
 真实项目 thread 新增时只需要最小格式：
 
 ```text
@@ -559,6 +715,24 @@ target layer: writing/qa
 problem: slides 仍可能出现内部流程词、模板化对比句、面向作者而不是面向听众的说法。
 candidate_action: 真实失败出现后再决定应该改 `research-presentations`、`scientific-prose`，还是两者的交接；不要重复造一套写作规则。
 promotion_gate: 多个独立英文科研 slide 的真实证据。
+
+### Cumulative human-feedback memory and teaching-deck authoring authority
+status: NEW
+source: STAT5060 Tutorial 1 repeated human rejection, 2026-09-29 through 2026-10-06
+evidence: the course project recovered 193 student-deck feedback objects across multiple annotated/rejected versions. A later candidate still reintroduced previously rejected under-explanation, software-plumbing prose, weak whitespace use and orphan visible text after executor/GPT/evidence PASS. Detailed generic requirements are frozen in `docs/design/PRESENTATIONS_CUMULATIVE_HUMAN_FEEDBACK_AND_TEACHING_DECK_AUTHORING_TODO_2026-10-06.md`.
+problem: existing-deck revision currently lacks a first-class cumulative human-feedback memory, exact-copy authoring lock, pedagogical-sufficiency gate and review ordering that prevents mechanical evidence work from outranking audience quality.
+candidate_action:
+- Implement the P0 gates in the dedicated TODO before claiming the presentation workflow can safely own long-running teaching-deck revision.
+- Reuse existing human-rejection/regression, natural-language, semantic-proximity and evidence-integrity work rather than creating parallel systems.
+promotion_gate: historical STAT5060 replay must preserve all active human semantic guards across page/version changes and block executor prose invention.
+
+
+### Final acceptance controller should be extracted as a generic core with project adapters
+status: NEW
+source: STAT5060 Tutorial 01 V14 production-validator hardening, 2026-10-08
+evidence: `YuukiAS/STAT5060-TA@tutorial`; frozen V14 candidate commit `ec4dc9bdceb27bd1a49e8c23fe4c321bb9e03692`; validator closure work through `10ecad75816695ce8ed1b4c4304dd1f19e8a4d9c`; project-local controller `scripts/presentation_validation/tutorial01_validator_adapter_v1/production_controller.py`; canonical exact-candidate review package `results/tutorial-01-v14/gpt-work-final-review/`. The central repo already has `docs/frozen/PRESENTATIONS_VALIDATOR_V1_FROZEN_SPEC_2026-10-06.md` and a generic `validator_v1` implementation candidate, so this feedback should converge with that runtime rather than create a parallel validator.
+problem: The latest real use shows that the reusable capability is broader than a reviewer prompt or a collection of local QA scripts. A production presentation acceptance controller needs one exact-candidate chain that binds immutable source/PDF/page-render/contact-sheet identity, clean rebuild/reproducibility, authority conformance, protected-object and numerical/source checks, historical regression replay, oracle/reviewer isolation, canonical independent-review packaging, fail-closed review-result ingestion, and final acceptance aggregation. The STAT5060 hardening also shows why this should be split into a generic core plus project/deck adapters instead of copying the course controller wholesale. The generic core should own candidate identity, reproducibility, review transport/package contracts, isolation, historical-regression interfaces, result ingestion, and acceptance-state semantics; a project adapter should supply deck-specific PageIDs, visible-copy authority parsing, protected-object contracts, numerical checks, and historical-corpus mapping. Extraction should extend/converge the existing `validator_v1` and Presentation independent-review contracts, not replace them with a second framework.
+project-specific context: `T01-*` PageIDs, the 38-page Tutorial sequence, exact-copy V1/V2/V3 course authorities, the P26 `beta_width_c` posterior check, the 515-row Tutorial historical review corpus, course assessment wording, and all STAT5060-specific thresholds/fixtures remain in `YuukiAS/STAT5060-TA`. Only the reusable interfaces, trust boundaries, package/ingestion protocol, historical-regression semantics, and acceptance controller belong in the central Presentations plugin. Before promotion, the extracted core should preserve the final human-accepted STAT5060 behavior through an adapter and also pass at least one unrelated real deck so Tutorial-specific assumptions are not mistaken for generic presentation rules.
 
 ## Current real-use focus
 

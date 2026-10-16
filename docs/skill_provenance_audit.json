@@ -33,7 +33,7 @@
   "metadata_skill_author_counts": {
     "(missing)": 51,
     "AHK Strategies (ashrafkahoush-ux)": 2,
-    "AI Skills Collection maintainers": 2,
+    "AI Skills Collection maintainers": 3,
     "AI Skills Collection maintainers with recorded upstream sources": 11,
     "BGPT": 1,
     "CardiacNexus maintainers": 2,
@@ -131,6 +131,19 @@
         "https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/README.md",
         "https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/README.md"
       ]
+    },
+    {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "AI Skills Collection maintainers",
+      "name": "project-instructions-editor",
+      "path": "skills/core/codex-system/project-instructions-editor",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
     },
     {
       "license": "",

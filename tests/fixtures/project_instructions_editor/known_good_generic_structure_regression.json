@@ -1,0 +1,47 @@
+{
+  "name": "known_good_generic_structure_regression",
+  "purpose": "Generic structural fixture for PIE 0.1 known-good restoration: compact durable responsibility grouping without K1-K7 machinery or source-shaped scaffolding.",
+  "natural_request": "请把这个 ChatGPT Project 的长期 instructions 整理成可以直接替换的完整版本。只做当前必要的长期规则整理；保留已有授权、隐私、安全、证据和事实来源边界；把易变细节放回权威来源；不要顺手增加历史事故、最佳实践或示例清单。",
+  "live_setting_summary": [
+    "Three duplicated answer-delivery sections govern the same normal trigger: conclusion first, user action next, evidence after that.",
+    "One distinct closure-report rule applies only when formally closing a delivery task.",
+    "A broad production authorization boundary is live: all production mutations require explicit current-task authorization for object, purpose, and scope.",
+    "A narrower client-channel rule is also live and has the same authorization consequence.",
+    "The same mutable supported integration set appears in two live sections, while docs/current-integrations.md owns membership.",
+    "Live setting preserves privacy, current-evidence, fail-closed, uncertainty, and exact-identity requirements."
+  ],
+  "targeted_history_summary": [
+    "A historical authentication incident is mentioned but is not in the live setting.",
+    "A historical-only broad rule absent from the live setting is mentioned for contrast.",
+    "A previous auto-send-beta-summary rule was explicitly rejected and is absent from the live setting."
+  ],
+  "canonical_sources": {
+    "README.md": "Repository overview and project scope locator.",
+    "docs/current-integrations.md": "Current supported integration inventory locator.",
+    "docs/operations-policy.md": "Production mutation, authorization, privacy, safety, and fail-closed procedure locator."
+  },
+  "expected_final_candidate_properties": {
+    "keeps_broad_authorization_boundary": true,
+    "does_not_replace_broad_boundary_with_narrow_special_case": true,
+    "abstracts_mutable_source_owned_set": true,
+    "keeps_lookup_bridge_to_canonical_owner": true,
+    "merges_overlapping_normal_delivery_rules": true,
+    "keeps_distinct_closure_trigger_when_needed": true,
+    "does_not_mirror_source_headings_or_order": true,
+    "preserves_privacy_safety_evidence_fail_closed_uncertainty": true,
+    "preserves_exact_identities": true,
+    "has_no_project_resident_deletion_tombstone": true,
+    "does_not_create_unsupported_durable_rules": true
+  },
+  "forbidden_test_shortcuts": [
+    "fixed section count",
+    "exact final wording",
+    "domain-specific branch",
+    "platform-name special casing",
+    "credential-method special casing",
+    "Latin-token scan",
+    "language ratio",
+    "blacklist",
+    "translation dictionary"
+  ]
+}
