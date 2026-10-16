@@ -2,10 +2,69 @@
 
 Task: `clear-writing--cross-surface-language-layer`
 Branch: `reviewed/clear-writing--cross-surface-language-layer`
-Implementation commit: `cac70c3bfcce6aeeba9c3e80adfa317235b54ee9`
+Implementation commit: `c9ccd80ab428aa1b7c8679bef089f082f8fcf05f`
 State transition: `PLAN_FROZEN / RUN_CODEX_EXECUTOR` -> `WAITING_FOR_CI / ci_status=PENDING`
 
-## Summary
+## 2026-10-16 Post-parity Execution
+
+The approved `response-clarity` repair was preserved while a normal non-force
+merge incorporated `main@3c3a1a393dd99c40dc641d6b1abc478f14e65a19` and its
+source-authority / generated-parity repair. The merge had no conflicts and did
+not add another Clear Writing product change.
+
+The merged candidate passed RW-WEB-01..05. RW-WEB-05 now presents source
+consensus and material differences before a clearly labeled assistant
+recommendation, then stops without expanding into an architecture or experiment
+plan. RW-WEB-03 remains a positive control and preserves its analogy, both
+scenarios, causal explanation, and uncertainty boundaries.
+
+All four frozen should-not-change families also passed: complete contracts stay
+complete; genuinely branched processes keep useful structure; pure JSON remains
+byte-exact and bypasses `writing-style`; and official names plus exact machine
+strings remain unchanged.
+
+Current evidence:
+
+- known-regression outputs and verdicts:
+  `results/clear-writing--cross-surface-language-layer/web-regression-post-repair/245d2f3/`;
+- should-not-change fixtures:
+  `results/clear-writing--cross-surface-language-layer/should-not-change-fixtures/v1/`;
+- should-not-change outputs and verdicts:
+  `results/clear-writing--cross-surface-language-layer/should-not-change/245d2f3/`.
+
+Current local verification is PASS:
+
+- 10 focused response-clarity and existing-route tests;
+- `python3 -B scripts/skills.py validate` (`156` active skills, `18` profiles);
+- source/generated `response-clarity` byte identity, with SHA-256
+  `c3d3f9f10ddb1d709f000de8ae670785314fe67a14cd53f4c86985d0980fbe10`;
+- `python3 -B scripts/build_codex_marketplace.py --write --validate --check --path-report`;
+- a second `--validate --check --path-report` run, clean and idempotent;
+- full `python3 -B -m unittest discover -s tests`: `342 / 342 PASS`;
+- `git diff --check`.
+
+The first full-test attempt ran under a read-only sandbox and had two write
+permission failures in tracked generated probes. The unchanged command passed
+all 342 tests with the reviewed worktree's authorized normal write access and
+left no tracked diff.
+
+The pure-JSON control produced exact output and intentionally did not consume a
+`writing-style` skill. The candidate replay wrapper therefore exited 1 because
+its generic success contract requires a consumption event. This is recorded as
+an expected wrapper diagnostic for the bypass control, not represented as an
+ordinary replay PASS.
+
+No README, repository/plugin version, changelog, personal ChatGPT account,
+paid service, PIE 0.2, G7 holdout, release branch, or new Presentations /
+Research Authoring product design was changed. There is no remaining local
+blocker. The task now waits for required zero-paid GitHub CI before a second
+independent Reviewer can run.
+
+This evidence closes known regressions and local repository gates only. It does
+not prove ChatGPT Web automatic selection, G1 A/E or B/C matched comparisons,
+the D explicit-call diagnostic, G7 fresh generalization, or formal release.
+
+## Original Implementation Summary (Historical)
 
 Implemented the bounded v0.3 source change for Clear Writing:
 
@@ -18,13 +77,13 @@ Implemented the bounded v0.3 source change for Clear Writing:
 
 No README, repository version, plugin version, changelog, Research Authoring source, Frontend Design source, Presentations source, workflow-core source, Bridge Kit, paid API, Project setting, or personal ChatGPT account state was modified.
 
-## Evidence
+## Original Evidence
 
 - Source/generated identity and G0-G7 notes: `results/clear-writing--cross-surface-language-layer/IMPLEMENTATION_EVIDENCE.md`
 - ChatGPT private candidate manifest: `results/clear-writing--cross-surface-language-layer/CHATGPT_PRIVATE_PLUGIN_CANDIDATE_MANIFEST.md`
 - Codex candidate replay smoke: `results/clear-writing--cross-surface-language-layer/REPLAY_RESPONSE_CLARITY_SMOKE.md`
 
-## Verification
+## Original Verification
 
 PASS:
 
@@ -35,7 +94,7 @@ PASS:
 - `python scripts/candidate_plugin_replay.py replay --plugin writing-style --candidate-commit 01ea04fc --task results/clear-writing--cross-surface-language-layer/replay_task_response_clarity.md --input results/clear-writing--cross-surface-language-layer/replay_input_response_clarity.md`
 - `git diff --check`
 
-Known non-blocking validation limits:
+Historical validation limits from the original candidate (superseded above):
 
 - `pytest` is not installed in the active Python environment, so tests were run with `unittest`.
 - Full `python scripts/build_codex_marketplace.py --check` reports preexisting non-`writing-style` generated drift under `presentations` and `research-writing`. Those generated changes were intentionally not committed because Research Authoring and Presentations are frozen for this task.
@@ -61,7 +120,7 @@ Affected plugins:
 
 This implementation is ready for CI and independent review. It does not claim final product completion. ChatGPT personal plugin creation, G1 A/E and B/C matched comparisons, D explicit diagnostic, broader artifact-aware review, full Frontend/Presentations rendered artifact review, G7 unseen holdout, and final user acceptance remain downstream gates under the frozen v0.3 plan.
 
-## 2026-10-15 Recovery Status
+## 2026-10-15 Recovery Status (Historical, Superseded)
 
 The statement above that the original implementation was ready for CI has been superseded by the first Reviewer decision and the approved recovery execution.
 

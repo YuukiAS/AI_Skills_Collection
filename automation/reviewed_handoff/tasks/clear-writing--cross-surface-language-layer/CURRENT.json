@@ -3,14 +3,14 @@
   "base_commit": "34e47fe6d0dc06d57ee1e6e37c0ff0f2fdfefc1b",
   "ci_required": true,
   "ci_status": "PENDING",
-  "implementation_commit": "0284bb264b56a218a60deb4dfbe56fb66f6b1e6e",
+  "implementation_commit": "c9ccd80ab428aa1b7c8679bef089f082f8fcf05f",
   "last_review_decision": "REVISE",
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "RUN_CODEX_EXECUTOR",
+  "next_action": "WAIT_FOR_CI",
   "plan_revision": 1,
   "review_round": 1,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
-  "state": "PLAN_FROZEN",
+  "state": "WAITING_FOR_CI",
   "task_key": "clear-writing--cross-surface-language-layer"
 }
