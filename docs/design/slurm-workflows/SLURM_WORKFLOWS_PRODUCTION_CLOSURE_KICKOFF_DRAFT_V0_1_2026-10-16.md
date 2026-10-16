@@ -43,6 +43,14 @@ If any expected repo/source has advanced or the path/branch/worktree is occupied
 
 The user authorizes creation of exactly the three listed `work/hpc--slurm-cancel-production-closure` branches/worktrees and no other branch topology changes. No force/reset/clean/stash/rebase.
 
+The same approved Kickoff also explicitly authorizes **one first remote publication per exact task branch** after its candidate commit is ready and before mandatory Reviewer handoff:
+
+- from AI Skills exact W: one ordinary non-force `git push --set-upstream origin work/hpc--slurm-cancel-production-closure`;
+- from DII exact W: the same command, only to that repo's `origin`;
+- from CARE exact W: the same command, only to that repo's `origin`.
+
+Each is authorized once solely to create the same-name remote candidate branch and bind upstream. Before each command, verify current repo/origin, exact branch, clean worktree, source lineage and that `origin/work/hpc--slurm-cancel-production-closure` does not already exist. If it exists, source has drifted, worktree is dirty, lineage differs, or another remote/branch would be affected, STOP. No other remote publication, branch, force/force-with-lease, delete, tag, history rewrite or remote mutation is authorized. After first publication, use the existing bounded current-branch publisher for subsequent ordinary same-branch updates.
+
 ## Phase 1 — build candidate only, no production deployment
 
 AI Skills:
@@ -61,9 +69,12 @@ DII:
 - no direct protected cancellation.
 
 CARE:
-- adapt the exact direct-cancel consumer paths listed in the Plan to safe-cancel;
+- adapt all current authority surfaces named in the Plan, including root `AGENTS.md`, the `status: AUTHORIZED` `prompts/tasks/20260801_care_target_domain_race_gap_closure_controller.md`, and its scheduling source `prompts/blueprints/CARE_target_domain_race_gap_closure_20260801.md`;
+- adapt the exact reachable direct-cancel implementation paths listed in the Plan to safe-cancel;
+- for `REQUIRE_FRESH_HUMAN`, retain the loser / queued lane and emit the short human request;
 - no direct `scancel` fallback;
-- preserve existing scientific/routing state machines.
+- do not alter model/loss/split, training budget, resource compatibility, lane order, interactive takeover order, candidate gates, atomic claims, or other scientific semantics;
+- do not mechanically edit DRAFT prompts, historical result/command logs or provenance-only artifacts.
 
 Do not modify Longleaf private config or Host Policy in Phase 1.
 
@@ -88,6 +99,8 @@ Freeze exact AI/DII/CARE candidate SHAs and produce a compact cross-repo evidenc
 
 ## Phase 3 — mandatory independent Reviewer wait
 
+Before Reviewer handoff, use only the one-time same-name first-publication authority above for any exact task branch that still has no remote upstream. Publish the frozen candidate commits needed for review; publication itself does not authorize production deployment.
+
 STOP after candidate publication.
 
 Do not deploy or integrate main yet.
@@ -98,31 +111,45 @@ If Reviewer is not PASS, only repair its bounded findings. No production deploym
 
 ## Phase 4 — conditional production deployment after Reviewer PASS
 
-This original user-approved Kickoff also authorizes the following actions **only after the user returns with a valid independent Reviewer PASS for the frozen candidate**. A new architecture approval is not required if scope is unchanged.
+This original user-approved Kickoff also authorizes the following actions **only after the user returns with a valid independent Reviewer PASS bound to the exact frozen central/DII/CARE candidate commits**. Do not bump or release versions yet.
 
-1. Back up only the Longleaf user-level AI Skills install/config and the current Longleaf_Codex Host Policy/rules files to be changed.
-2. Integrate/release the exact reviewed central candidate according to repository policy:
-   - slurm-workflows 0.4 -> 0.5;
-   - repository PATCH from actual release-time version;
-   - central Plugins NO_BUMP;
-   - Bridge Kit NO_CHANGE.
-3. Install exact released candidate through existing user-level AI Skills normal install path.
-4. Read-only detect the real Longleaf cluster identity, then update only its section in `~/.config/ai-skills/local-overrides.toml`, preserving all unrelated content:
+1. Back up only the Longleaf user-level AI Skills install/config and current Longleaf_Codex Host Policy/rules files that will be changed. Never print secrets.
+2. Deploy the **exact reviewed central candidate** through the existing user-level AI Skills normal install path while leaving repository/slurm-workflows version, README release claims and CHANGELOG release identity unchanged.
+3. Read-only detect the real Longleaf cluster identity, then update only its section in `~/.config/ai-skills/local-overrides.toml`, preserving all unrelated content:
    - `cancel_policy_version = "2026-10-16-v1"`
    - `cancel_policy_confirmed = true`
    - `protected_partitions = "htzhulab"`
    - `protected_accelerators = "H100"`
-5. Update only current Longleaf_Codex execpolicy/Host Policy so direct `scancel` and confirmed `/usr/bin/scancel` resolution are `forbidden`, while the exact central safe-cancel executable is permitted and existing read-only Slurm commands remain unchanged.
-6. Do not deploy a new production Hook unless the existing configuration already requires it.
-7. Run read-only production validation only:
+4. Update only current Longleaf_Codex execpolicy/Host Policy so direct `scancel` and confirmed `/usr/bin/scancel` resolution are `forbidden`, while the exact central safe-cancel executable is permitted and existing read-only Slurm commands remain unchanged.
+5. Do not deploy a new production Hook unless the existing configuration already requires it.
+6. Run read-only production validation only:
    - raw scancel policy evaluation => forbidden;
    - absolute `/usr/bin/scancel` => forbidden;
-   - installed skill identity => exact released candidate;
+   - installed central candidate identity => exact reviewed candidate;
    - private policy readback => htzhulab + H100;
-   - safe-cancel protected evaluation => REQUIRE_FRESH_HUMAN and no execution, using read-only real target facts only if safely available; otherwise use offline fixture.
-8. Integrate DII/CARE exact reviewed consumer commits using normal non-force integration.
-9. Verify current consumers contain no reachable direct `scancel` fallback.
-10. Complete version/README/CHANGELOG/maintenance closure only after all above evidence is true.
+   - safe-cancel protected evaluation => REQUIRE_FRESH_HUMAN and no execution, using bounded read-only real target facts only if safely available; otherwise use offline fixture.
+7. Integrate the exact reviewed DII/CARE consumer commits using their normal non-force integration process and obtain normal-entry evidence that all current authority/consumer surfaces route cancellation through central safe-cancel with no reachable direct `scancel` fallback.
+8. Assemble complete G1–G6 production evidence for the same behavior candidate.
+9. If any product behavior, safe-cancel logic, consumer behavior, Host Policy behavior or protection mechanism changes after Reviewer PASS, STOP, freeze new candidate commits and obtain another independent Reviewer PASS before release. Do not hide behavior changes in release metadata.
+
+Never cancel, signal, release, requeue, suspend, kill a real holder, or submit a test job for validation.
+
+## Phase 5 — final release / maintenance closure
+
+Only after Phase 4 proves Longleaf normal-entry protection, DII/CARE consumer integration and complete G1–G6 production evidence may release/version metadata change:
+
+1. `slurm-workflows` 0.4 -> 0.5.
+2. Repository -> next PATCH from the actual release-time version; if still 5.4.4, 5.4.5.
+3. Central Marketplace Plugins remain NO_BUMP.
+4. Bridge Kit remains NO_CHANGE.
+5. Check/update README, CHANGELOG, generated/version surfaces and formal release identity according to repository policy.
+6. This release closure must not change product behavior. Any behavior change routes back to independent Reviewer before release.
+
+Maintenance lifecycle truth:
+- current `docs/skill-todos/slurm-workflows.md` still has `tracking issue: PENDING_CLEAR_WRITING`; no real tracking Issue/Project state exists, so do not claim ADAPTING or DONE yet;
+- if a real Clear Writing-capable AI Skills Maintainer is available, first invoke it on Issue copy, create a dedicated maintenance Issue (do not reuse #96), write real `tracking: #N`, set first substantive tracked execution to DOING, then ADAPTING only when central is complete and required Longleaf/DII/CARE consumers remain;
+- DONE requires all central/Longleaf/DII/CARE evidence, durable Resolution commit and actual Issue close;
+- if Clear Writing is still unavailable, do not fabricate Issue/Project status. Record the exact pending mutation for the next capable maintainer; do not ask the user to maintain it manually.
 
 ## Permanent prohibitions for this Kickoff
 
