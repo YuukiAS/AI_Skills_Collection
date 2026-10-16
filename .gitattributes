@@ -1,0 +1,10 @@
+# These canonical Markdown mirrors preserve intentional hard-break bytes from the accepted generated runtime.
+skills/tools/documents-media/presentations/shared/authoring-production-workflow.md whitespace=-trailing-space
+skills/tools/documents-media/presentations/shared/chatgpt-web-authoring-contract.md whitespace=-trailing-space
+skills/tools/documents-media/presentations/shared/pre-execution-cumulative-acceptance-contract.md whitespace=-trailing-space
+skills/tools/documents-media/presentations/shared/presentation-end-to-end-pre-execution-runbook.md whitespace=-trailing-space
+skills/writing/research/shared/student-assessment-cumulative-acceptance-contract.md whitespace=-trailing-space
+skills/writing/research/shared/student-assessment-delivery-closure-amendment-v1.md whitespace=-trailing-space
+skills/writing/research/shared/student-assessment-end-to-end-pre-execution-runbook.md whitespace=-trailing-space
+skills/writing/research/shared/student-assessment-hw1-nonrecurrence-amendment-v1.md whitespace=-trailing-space
+skills/writing/research/shared/student-assessment-semantic-pagination-amendment-v1.md whitespace=-trailing-space

@@ -8,7 +8,7 @@ requires_network: false
 writes_files: true
 executes_code: false
 secrets_needed:
-last_reviewed: 2026-07-13
+last_reviewed: 2026-10-06
 profile_tags:
   - presentations
 recommended_scope: project
@@ -38,17 +38,27 @@ answer/request -> problem or opportunity -> evidence and impact -> plan -> resou
 
 ## Workflow
 
-1. Clarify the decision, audience, time limit, and required output format.
-2. Produce `deck-plan.yaml` for non-trivial decks.
-3. Keep each slide tied to one decision-relevant message.
-4. Use the CUHK default visual system only when no company, client, course, or event template is specified.
-5. Apply the shared writing handoff before final deck creation: Chinese slide text gets `writing-fidelity` plus `chinese-prose`; English scientific slide prose can use `scientific-prose` when the deck includes research evidence.
-6. Route editable deck creation to official Presentation/Slides and keep visual QA evidence.
+0. Before any non-trivial presentation work, read `../../shared/presentation-end-to-end-pre-execution-runbook.md` in full, then read `../../shared/pre-execution-cumulative-acceptance-contract.md` and derive task classification, Critic requirement, history scope, freeze state, locks, and round allowlist.
+1. Read and apply `../../shared/authoring-production-workflow.md` for every non-trivial deck. ChatGPT/Planner owns audience, narrative, page jobs, visible copy, layout semantics and locks; Codex owns production and autonomous Producer/Reviewer repair loops.
+2. Clarify the decision, audience, time limit, and required output format.
+3. Produce `deck-plan.yaml` for non-trivial decks and keep each slide tied to one decision-relevant message.
+4. For materially new visual systems, prove shared components and a small representative golden-page pack before building the complete deck. The user must not receive the first visual prototype as a full deck.
+5. Use the CUHK default visual system only when no company, client, course, or event template is specified.
+6. Apply the shared writing handoff before final deck creation: Chinese slide text gets `writing-fidelity` plus `chinese-prose`; English scientific slide prose can use `scientific-prose` when the deck includes research evidence.
+7. For non-trivial production or revision, freeze an authority bundle and explicit round allowlist, then apply `../../shared/anti-shortcut-production-contract.md`. The executor must produce a proof-carrying patch manifest and may not turn a local repair into a full-deck rewrite, add unapproved visible prose, delete required content to solve layout pressure, or alter validation rules.
+8. Route editable deck creation to official Presentation/Slides and keep visual QA evidence. Apply `../../shared/independent-review-contract.md`: the Codex Parent Controller must coordinate fresh Producer and fresh read-only Reviewer contexts inside one Goal; the user must not relay intermediate completion blocks or act as first QA.
+9. Existing-deck revisions must converge monotonically: open issues shrink, accepted/locked slides and components grow, and unrelated changes remain zero. A recurrence of an accepted issue triggers root-cause repair of the shared primitive, authority, or detector rather than another broad candidate.
+10. Final delivery still requires one complete whole-deck regression even when intermediate user review is delta-only.
 
 ## References
 
+- `../../shared/presentation-end-to-end-pre-execution-runbook.md`
+- `../../shared/pre-execution-cumulative-acceptance-contract.md`
+- `../../shared/authoring-production-workflow.md`
 - `../../shared/deck-plan.schema.json`
 - `../../shared/template-routing.md`
 - `../../shared/ppt-skill-routing.md`
 - `../../shared/source-fidelity.md`
 - `../../shared/visual-qa.md`
+- `../../shared/anti-shortcut-production-contract.md`
+- `../../shared/independent-review-contract.md`

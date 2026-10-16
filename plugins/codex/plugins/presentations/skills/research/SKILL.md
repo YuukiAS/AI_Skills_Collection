@@ -78,6 +78,8 @@ Do not expose internal labels such as `belief_update`, `evidence_quality`, `rout
 
 When revising an existing rendered deck from user, advisor, reviewer, or visual-review feedback, treat the cited problem as a regression constraint for every later version. Keep stable semantic PageIDs, page ancestry, feedback lifecycle, layered locks, and an explicit round allowlist. Produce the proof-carrying patch manifest required by `../../shared/anti-shortcut-production-contract.md`.
 
+Keep an `accepted_element_ledger` in the working notes or deck plan when feedback is targeted: record which slides/components were accepted, which can only be locally adjusted, and which may be restructured.
+
 A local correction does not authorize a global redesign, removal of accepted structures, semantic compression, or restoration of a previously rejected layout. Compare the revised render against the version the reviewer actually saw. Unrelated source or render changes are failures, not items to justify afterward.
 
 Each accepted round must make open feedback shrink and human locks grow. If the same closed guard reappears, or open issues do not decrease, do not produce another broad candidate: perform a root-cause review of the shared primitive, source authority, copy freeze, or detector coverage.
