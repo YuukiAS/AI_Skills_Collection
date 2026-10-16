@@ -73,6 +73,21 @@ problem:
 desired behavior: 对复杂科研解释，优先使用连贯自然段；一段处理一个完整问题或推理单元。必要时保留少量标题和一个比较表，但不要把普通说明拆成列表式、卡片式或逐句换行。长答案可以详细，但视觉节奏应紧凑、连续。
 boundary: DII、(t_v(z))、FedFisher、Dice 等属于项目内容，不进入通用规则。Clear Writing 只吸收“段落应按语义单元而非句子切分、标题/公式独立展示需要真实阅读价值、整篇纵向阅读成本需要验收”的通用问题。本例未证明正式 Clear Writing production path 已被调用，故记录为真实用户反馈，不作为插件运行回归或发布证据。
 
+#### 2026-10-16：DII 融合方案评估仍存在过度断行与非必要英文
+feedback_status: NEW
+source: `Distributed_Imaging_Inference` 融合方案评估 Markdown；用户于 2026-10-16 明确要求“处理这份 markdown 里的非必要换行和英文”，并指定 `philosophy` 这类普通概念应改成中文，同时要求把原稿作为 Clear Writing negative sample。
+evidence:
+- 用户提供的原稿共 595 行。内容和数学论证已经基本完整，但大量相邻句子各自单独成段；同一个因果链会连续出现“一句判断 → 空行 → 一句解释 → 空行 → 下一句”，导致页面被人为拉长。
+- 中文正文持续混用 `decoder`、`loss`、`memory`、`optimizer`、`objective`、`audit`、`held-out validation`、`inclusion probability`、`penalty`、`regularizer`、`philosophy`、`surrogate`、`trade-off`、`dataset compression`、`feature coreset`、`rare pathology`、`optimal allocation` 等普通技术或逻辑词。它们在当前语境中并不承担正式专名、代码、检索定位或逐字核对作用，可以直接用自然中文表达。
+- 同一文档也包含确有保留价值的英文/缩写，如 `GPT-5.6 Pro`、`GPT-6 Pro`、`GPT Work`、`HAMP`、`DII`、`PSMR`、`MFAC`、`M&Ms`、`CARE`、`Dice`、`Transformer`、`U-Net`、`JPEG`、`Markdown` 以及数学变量。问题不是“出现英文”，而是没有逐项判断英文是否真的有当前阅读价值。
+problem:
+- **语义连续却视觉碎片化**：相邻句子共同完成一个解释单元时，应优先组成自然段；不能把“每句话都能独立理解”误当成“每句话都应该独立成段”。这与前一条 DII 过度断行反馈相互印证。
+- **普通技术词不应靠英文制造精确感**：当中文译法不会妨碍复制、搜索、执行或精确核对时，应直接中文化。保留 `philosophy`、`memory`、`audit` 之类词不会增加科学精度，只会增加语言切换和阅读成本。
+- **专名与普通概念必须分开处理**：不能把“减少非必要英文”实现成全局翻译。正式模型/方法名、稳定缩写、公式符号和文件格式仍需保留；普通概念则不应因为来源文档使用英文就机械继承。
+- **清理必须保持内容保真**：本例的修复范围应限于合并非必要断行、中文化非必要英文和删除无读者价值的内部来源残片，不应趁机改变数学结论、公式、比较关系、方法选择或实验建议。
+desired behavior: 对中文或中文主导的科研解释，在最终输出前做一次整篇阅读层检查：按语义单元合并段落；逐项审查保留的英文是否承担正式专名、机器字符串、检索定位或逐字核对作用；若没有，就用自然中文替换。长回答仍可保留必要标题、公式、引文和列表，但不能让这些结构退化成逐句分页。
+boundary: DII、HAMP、PSMR、MFAC、M&Ms、CARE 及该文档的数学判断属于项目内容，不进入通用写作规则。当前样本是用户确认的真实负例；尚未证明正式安装的 Clear Writing production path 已处理过该文本，因此不作为插件运行回归或发布失败证据。
+
 #### 2026-10-15：DII 方法解释成为可复用的 Clear Writing 正例
 feedback_status: NEW
 source: `Distributed_Imaging_Inference` / 用户阅读导师研究提案 PDF 后，要求“用人话解释我们到底要做什么、是否真的比 FedFisher 更有意义、是否真正受导师三个想法启发，以及应该怎样读方法”；用户随后明确反馈“我很喜欢你这个回答”，并要求作为 Clear Writing 正例记录。
