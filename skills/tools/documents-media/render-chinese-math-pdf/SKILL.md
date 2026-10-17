@@ -2,14 +2,14 @@
 name: render-chinese-math-pdf
 description: Render and validate Chinese or mixed Chinese/English mathematical Markdown/LaTeX as PDF. Use for CJK text, Unicode math, equations, tables, Pandoc/XeLaTeX, TeX font/cache failures, citation cleanup, or readable PDF QA.
 status: active
-version: "0.2"
+version: "0.3"
 provenance: user-authored
 trusted: false
 requires_network: false
 writes_files: true
 executes_code: true
 secrets_needed:
-last_reviewed: 2026-09-01
+last_reviewed: 2026-10-15
 profile_tags:
 recommended_scope: global
 icon_small: assets/app-facing.svg
@@ -117,6 +117,35 @@ python scripts/render_scientific_pdf.py input.md output.pdf --root <project-root
 9. Treat the task as incomplete if Chinese glyphs, formulas, table layout, or
    text extraction fail.
 
+## Final PDF Delivery
+
+Rendering and delivery are separate completion conditions. A renderer receipt
+with `status=complete` proves only that the PDF was produced and passed the
+recorded render checks. It does not prove that the user received the file.
+
+After render QA succeeds:
+
+1. Resolve the final PDF to an absolute path and verify that it is the same
+   QA-passed output recorded by the render receipt or command. Confirm that it
+   is a readable, non-empty regular file. Record its size and, when needed to
+   disambiguate candidates, its SHA-256 digest.
+2. In the first completion response, lead with the current host's native file
+   entry for that exact PDF. In Codex clients that support local file links, use
+   a descriptive Markdown link whose target is the verified absolute PDF path,
+   for example `[final-report.pdf](/absolute/path/final-report.pdf)`. The user
+   must not have to ask a second time for the PDF.
+3. Keep paths, receipts, hashes, render logs, and preview images as supporting
+   evidence. None of them substitutes for the final PDF file entry.
+4. Do not invent a `sandbox:` URL, upload the PDF to a public or third-party
+   service, or move private material across a new boundary to manufacture a
+   download link.
+
+If the verified PDF is missing or unreadable, or the current host cannot expose
+it through a legal file entry, do not claim delivery. State that PDF rendering
+may have succeeded but user file delivery is incomplete, name the failed check,
+and give the smallest truthful recovery step. A server path alone is diagnostic
+information and must not be presented as a delivered file.
+
 ## Route and Profile Identity
 
 For every render, record the effective route/profile identity. At minimum this
@@ -143,15 +172,21 @@ Pandoc + XeLaTeX render.
 
 ## Completion States
 
-- `complete`: PDF rendered through Pandoc + XeLaTeX and passed command,
+- Renderer `complete`: PDF rendered through Pandoc + XeLaTeX and passed command,
   page-count, font, text-extraction, and complete-document visual checks using
-  all pages or all declared high-risk pages for the request.
+  all pages or all declared high-risk pages for the request. This preserves the
+  existing receipt meaning and is not user-delivery completion.
 - `partial_complete`: PDF rendered, but non-critical warnings or limited QA
   remain and are reported with next steps.
 - `blocked_missing_dependency`: no safe Pandoc + XeLaTeX route exists; report
   the missing command/package/font and attempted route.
 - `qa_failed`: a PDF was produced but readability, glyphs, pagination, or text
   extraction failed.
+
+For a user request whose deliverable is the PDF file, claim overall completion
+only when renderer `complete` and first-response delivery of the same verified
+PDF both succeed. Otherwise report the renderer state and delivery state
+separately.
 
 ## References
 
