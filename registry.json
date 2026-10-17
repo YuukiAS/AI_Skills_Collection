@@ -1,6 +1,6 @@
 {
-  "version": "5.4.4",
-  "generated_at": "2026-10-08T04:12:28+00:00",
+  "version": "5.4.5",
+  "generated_at": "2026-10-17T08:39:44+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
   "skill_count": 155,
@@ -4030,7 +4030,7 @@
       "writes_files": true,
       "executes_code": false,
       "secrets_needed": [],
-      "last_reviewed": "2026-07-13",
+      "last_reviewed": "2026-10-06",
       "profile_tags": [
         "presentations"
       ],
@@ -4345,7 +4345,7 @@
       "writes_files": true,
       "executes_code": true,
       "secrets_needed": [],
-      "last_reviewed": "2026-09-01",
+      "last_reviewed": "2026-10-15",
       "profile_tags": [],
       "recommended_scope": "global",
       "selectors": [
@@ -4384,7 +4384,7 @@
       "writes_files": true,
       "executes_code": false,
       "secrets_needed": [],
-      "last_reviewed": "2026-07-28",
+      "last_reviewed": "2026-10-06",
       "profile_tags": [
         "presentations",
         "research-writing"

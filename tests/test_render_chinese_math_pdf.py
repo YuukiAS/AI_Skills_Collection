@@ -18,6 +18,8 @@ QA_PATH = SKILL_ROOT / "scripts/validate_pdf_layout.py"
 HEADER_PATH = SKILL_ROOT / "scripts/build_chinese_math_header.py"
 ORCHESTRATOR_PATH = SKILL_ROOT / "scripts/render_scientific_pdf.py"
 SKILLS_CLI_PATH = REPO_ROOT / "scripts/skills.py"
+SKILL_PATH = SKILL_ROOT / "SKILL.md"
+CHECKLIST_PATH = SKILL_ROOT / "references/checklists.md"
 
 
 def load_module(path: Path, name: str):
@@ -75,6 +77,38 @@ class RenderChineseMathPdfTests(unittest.TestCase):
                     offenders.append(str(path.relative_to(REPO_ROOT)))
                     break
         self.assertEqual([], offenders)
+
+    def test_first_response_delivery_contract_is_explicit(self) -> None:
+        skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
+        checklist = " ".join(CHECKLIST_PATH.read_text(encoding="utf-8").split())
+
+        for phrase in [
+            "first completion response",
+            "same verified PDF",
+            "verified absolute PDF path",
+            "user file delivery is incomplete",
+            "must not have to ask a second time",
+        ]:
+            self.assertIn(phrase, skill)
+
+        for phrase in [
+            "first completion response",
+            "same output that passed QA",
+            "verified absolute PDF path",
+            "user file delivery is incomplete",
+            "renderer status from user-delivery status",
+        ]:
+            self.assertIn(phrase, checklist)
+
+    def test_delivery_contract_rejects_fake_or_substitute_entries(self) -> None:
+        skill = SKILL_PATH.read_text(encoding="utf-8")
+        checklist = CHECKLIST_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("does not prove that the user received the file", skill)
+        self.assertIn("Do not invent a `sandbox:` URL", skill)
+        self.assertIn("A server path alone", skill)
+        self.assertIn("preview", checklist)
+        self.assertIn("queued-open state", checklist)
 
     def test_project_local_resource_precedes_environment_and_overrides(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -48,10 +48,29 @@
 - Long paths, metric names, and method names are retained only where useful and
   do not overflow the page.
 
+## Final File Delivery
+
+- Resolve the final PDF to an absolute path and confirm it is the same output
+  that passed QA, not a preview, baseline probe, stale candidate, or receipt.
+- Immediately before responding, confirm the final PDF is a readable,
+  non-empty regular file. Record its size and use a hash when candidate identity
+  would otherwise be ambiguous.
+- In the first completion response, lead with the current host's native file
+  entry for that exact PDF. For a Codex local file link, use a descriptive
+  Markdown label and the verified absolute PDF path.
+- Confirm that the response exposes the PDF file itself. A server path, hash,
+  receipt, build log, PNG preview, queued-open state, or later follow-up does not
+  count as delivery.
+- If no legal file entry can be produced, explicitly report that user file
+  delivery is incomplete. State the failed check and the smallest truthful
+  recovery step; do not invent a `sandbox:` URL or upload to a new service.
+
 ## Final Report
 
-- Source path and output PDF path.
+- Lead with the final PDF's real file entry when delivery succeeded.
+- Source path, verified output PDF path, file size, and any identity hash used.
 - Exact render command and any environment variables used.
 - Page count, text/font QA evidence, and first-page preview PNG path.
-- Missing dependencies, warnings, or partial-completion caveats.
+- Separate renderer status from user-delivery status, including missing
+  dependencies, failed delivery checks, warnings, or partial-completion caveats.
 - Next stronger route if the current route failed.

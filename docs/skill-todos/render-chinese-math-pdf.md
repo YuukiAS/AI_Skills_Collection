@@ -87,7 +87,8 @@ candidate_action:
 promotion_gate: replay on one student-facing assessment handout and one bilingual instructor rubric initiated through an upstream plugin with no explicit renderer instruction; require automatic renderer invocation, canonical receipts, no browser fallback, no local-path/timestamp leakage, and independent all-pages visual PASS.
 
 ### PDF 渲染完成后未直接交付可另存为的成品
-status: NEW
+status: PROMOTED_IN_5.4.5
+tracking: #101
 source: CAT-TRACE / 2026-10-14 双语方法导读 PDF 真实渲染任务；用户在同一任务中反馈。
 evidence: 用户提供的任务截图显示：助手先报告一份 9 页 A4 PDF 已完成渲染、全页检查与哈希验证，却未在首次完成答复中提供用户可直接另存为的 PDF 成品。用户随后追问“可以另存为的pdf呢？次次问你要了？”，助手才补交文件卡片。此次成品名为 `Unseen_Species_Inference_TRACE_CAT_TRACE_Bilingual.pdf`；截图中的运行路径和源论文内容不纳入公共维护材料。
 problem:
