@@ -3,7 +3,8 @@
 日期：2026-10-17  
 task：hpc--slurm-cancel-production-closure  
 owner：YuukiAS/AI_Skills_Collection standalone slurm-workflows  
-source：main@db948045acc816323799cf86974bd92ce9bba22a  
+source revision read：main@11013e1caaaee4293d6249dfdc2a85351302c226  
+external source identities at R1 revision：DII main@747829b957b19e8fcffa6bd5f1bb7ae62ae11f6f；CARE main@75a40e454de43b64e59a0b0b438ff57ef2bb8345；Bridge Kit main@24b703235a7e6a583653c59d560c809304cf6db3  
 阶段：架构纠偏设计；EXECUTION_NOT_AUTHORIZED
 
 旧 Phase 3 候选全部标记为 REJECTED_NOT_DEPLOYABLE：
@@ -114,6 +115,70 @@ Codex normal entry 必须禁止直接调用这个 human-confirm command；用户
 CHAT_HUMAN_CONFIRMATION = BLOCKED_BY_CODEX_HUMAN_ORIGIN_SIGNAL
 
 不得把 UserPromptSubmit 冒充实现。
+
+
+### 3.1 V1-R1：确认后由谁完成取消
+
+本轮比较了两个现实选择：
+
+A. 保持原 v1：独立 shell confirmation command **只确认、不取消**；consumer 后续再次调用普通 scancel，guard 重查 target/partition、一次性消费 confirmation，再执行 exact scancel。
+
+B. 让独立 shell confirmation command 在重查 target/partition 后直接执行这次取消。
+
+选择 **A，保持原 Proposal 架构不变**。
+
+原因：
+
+- B 会把 Slurm mutation 权限并入 human-confirm adapter，使“证明 fresh human event”和“执行 scheduler mutation”两个职责重新耦合；这不是关闭当前 blocker 所必需。
+- 部分 CARE consumer 在取消后还有业务控制流。例如 interactive takeover 在 queue job 真正 CANCELLED 后才允许启动 interactive lane。即使 confirmation command 自己取消，consumer 仍需要继续观察状态并恢复业务流程，所以 B 并没有消除 consumer outcome contract。
+- A 只需要让消费者正确理解普通 scancel 的最小结果：**exit 0 才表示 guard 已经实际调用真实 scancel 并且该调用成功返回；非 0 表示本次没有成功执行 cancellation，consumer 不得把目标标记 cancelled，也不得结束本应继续监控的 cancellation branch。** consumer 不需要知道 protected partition、challenge、confirmation 或 pending-challenge 状态。
+
+因此 v1 的 authoritative fresh-human flow 仍为：
+
+protected ordinary scancel -> guard 首次 block + challenge -> 用户独立 shell confirmation（只确认） -> consumer 的正常监控/有界重试再次发出同一 ordinary scancel intent -> guard 重查 JobId/Partition -> 原子消费 confirmation -> exact /usr/bin/scancel。
+
+### 3.2 极小 consumer outcome contract
+
+中央 guard / compatibility shim 对 consumer 的稳定接口只有：
+
+- **exit 0**：这一调用已经实际到达真实 scancel，且 scancel 成功返回；consumer 可以进入它原来“取消请求已提交成功”之后的既有状态机。
+- **nonzero**：这一调用没有成功执行 cancellation（包括 fresh-human confirmation 尚未完成、target/partition 变化、challenge 无效、解析失败或真实 scancel 失败）；consumer 必须保留 target，不得把它记录为 cancelled，不得把 cancellation branch 当作成功完成。
+- 用户可见的 challenge / reason 可以写 stdout/stderr 或结构化日志，但 consumer 不解析这些保护语义。
+- 对 nonzero，consumer 只做它原本业务上合理的继续监控 / 有界重试；是否 protected、是否已确认、challenge 是否可消费全部仍由中央 guard 决定。
+
+这不是第二套保护逻辑，而是普通进程对“子命令成功/未成功”的基本控制流语义。
+
+### 3.3 CARE 当前四个 blocker consumer 的最小控制流修复
+
+本轮实际读取 CARE main@75a40e454de43b64e59a0b0b438ff57ef2bb8345。
+
+1. scripts/route_B_round04/watch_B1_race.py
+   - 当前在调用 scancel 后无条件把 partition 加入 cancelled。
+   - 最小修复：只有 returncode == 0 才加入 cancelled；nonzero 时记录本次未取消并保持该 partition 可在下一轮 poll 再次尝试。
+   - 外层 while 本来就在持续轮询，因此无需新增 retry subsystem、timer 或保护逻辑。
+
+2. scripts/evaluation/watch_srr_v3_m7_routing.py
+   - 当前检测 winner 后调用 scancel，随后无条件 return 0。
+   - 最小修复：只有 scancel returncode == 0 才走现有 return 0；nonzero 时记录“cancel not executed / continue monitoring”，进入现有 for-loop 下一轮。
+   - 不增加 challenge 解析，也不增加新的状态机。
+
+3. scripts/evaluation/watch_srr_v3_m8_myops_race.py
+   - 当前调用 scancel 后立即 return。
+   - 最小修复：只有 code == 0 才 return；nonzero 时记录未执行取消并继续现有 check loop。
+   - winner/loser 判定、both-running 语义、poll cadence 均不改变。
+
+4. scripts/target_domain_gap_closure/monitor_interactive_takeover.py
+   - 当前调用 scancel 后立即进入最多 60 次 sacct CANCELLED 等待；若 guard 首次 block，这条路径会等待后 return 2，无法自然等到后续确认。
+   - 最小修复：先检查 cancel.returncode。只有 == 0 才进入原有 sacct CANCELLED 确认和后续 launch_m1；nonzero 时记录“cancellation not executed”，不进入 CANCELLED accounting wait、不启动 takeover，直接回到现有 outer poll。
+   - 这样用户确认后，下一轮 outer poll 仍看到 queue job PENDING，会自然再次调用 ordinary scancel；guard 此时重新解析并消费 confirmation。
+
+5. scripts/evaluation/watch_care_srr_cascade_formal_race.py
+   - 当前主循环本来每个 interval 都重新 evaluate_once；只要 loser 仍 PENDING，下一轮会自然再次调用 cancel_if_pending。
+   - 因此不需要控制流重构。
+   - 仅要求结果日志保持真实：returncode == 0 才可记录 cancellation request 已成功提交；nonzero 记录未执行/待重试，不得把 action 文案写成已经成功取消。主 decision 在 active target 仍存在时继续 NEEDS_MONITOR。
+
+这些修改不会让 CARE 知道 protected partition 或 challenge。所有 watcher 仍然只发普通 scancel intent；只是停止把“子命令没有执行取消”误当作取消成功。
+
 
 ## 4. 薄 scancel guard
 
@@ -231,22 +296,28 @@ PreToolUse 仅作为辅助层：
 
 消费者不判断 partition 是否受保护、是否已经二次确认、challenge 是否新鲜、auto-review 是否算用户、confirmation 是否可消费。
 
-DII / CARE 目标是继续 ordinary cancellation intent，并让 executable resolution 自动进入中央 guard。
+DII / CARE 目标仍是 ordinary cancellation intent 自动进入中央 guard；**但 PATH shim 并不意味着所有 watcher 可以零代码修改。consumer 必须遵守第 3.2 节的最小 outcome contract：只有 guard/scancel exit 0 才能按取消成功路径推进；nonzero 必须保留 target 并继续原有监控/有界重试。**
+
+当前 source identity：
+
+- DII current main：747829b957b19e8fcffa6bd5f1bb7ae62ae11f6f。
+- CARE current main：75a40e454de43b64e59a0b0b438ff57ef2bb8345。
 
 当前代码事实：
 
-- DII current main 没有发现 direct absolute scancel / subprocess cancellation；主要影响是 standing race contract 与安装的 Slurm Skill。
-- CARE current main 的 watch_B1_race.py、watch_care_srr_cascade_formal_race.py、watch_srr_v3_m7_routing.py、watch_srr_v3_m8_myops_race.py、monitor_interactive_takeover.py 使用 bare scancel，适合由 PATH shim 收敛。
+- DII 当前主线没有发现 direct absolute scancel / subprocess cancellation；主要影响仍是 standing race contract、安装的 Slurm Skill 和最终 launcher executable resolution。
+- CARE current main 的 watch_B1_race.py、watch_care_srr_cascade_formal_race.py、watch_srr_v3_m7_routing.py、watch_srr_v3_m8_myops_race.py、monitor_interactive_takeover.py 使用 bare scancel，适合由 PATH shim 收敛；其中四个 watcher 需要第 3.3 节的极小 success/non-success 控制流修复，cascade formal race 只需保证日志语义真实。
 
 消费者适配顺序：
 
 1. 先证明各 normal launcher 下 command -v scancel / Python shutil.which("scancel") 都解析到 guard shim。
-2. 若成立，不改 watcher 业务代码。
-3. 若某入口解析不到 guard，只改该 launcher / executable resolution。
-4. 若出现 hardcoded absolute scancel / SSH / Slurm API，再做最小替换，使它调用中央 guard。
-5. 不再保留 CARE scripts/ops/slurm_safe_cancel.py 这种复制 current-run / 三态逻辑的 adapter。
+2. 对 CARE 四个一次调用后会误结束/误标记的 watcher，应用第 3.3 节的最小 return-code 控制流修复。
+3. cascade formal race 保留现有轮询重入，只修必要的结果语义，不创建新的保护状态机。
+4. 若某入口解析不到 guard，只改该 launcher / executable resolution。
+5. 若出现 hardcoded absolute scancel / SSH / Slurm API，再做最小替换，使它调用中央 guard。
+6. 不再保留 CARE scripts/ops/slurm_safe_cancel.py 这种复制 current-run / 三态逻辑的 adapter。
 
-CARE 当前授权 task/blueprint 和 AGENTS 的科学/调度合同仍可以写“取消 pending loser”；中央运行环境负责决定这次 ordinary scancel 是否要二次确认。无需在每份科学 prompt 里重复保护分区规则。
+CARE 当前授权 task/blueprint 和 AGENTS 的科学/调度合同仍可以写“取消 pending loser”；中央运行环境负责决定这次 ordinary scancel 是否要二次确认。无需在每份科学 prompt 里重复 protected partition / challenge 规则。
 
 ## 7. 旧候选代码处置
 
@@ -287,8 +358,10 @@ DII/CARE 旧候选中围绕 central safe-cancel 三态的 AGENTS / consumer 文�
 | PreToolUse only | FAIL：不是本人确认 transport | Python 内 subprocess 可绕 | FAIL | 低 | 拒绝 |
 | UserPromptSubmit + PreToolUse | 无法证明 human origin；官方 hook contract 缺 origin | subprocess 仍需 guard | challenge 可防提前文本，但不是 human-proof | 中 | 拒绝作为 production authority |
 | scancel guard only | 能按 partition 阻断，但不能证明新本人动作 | 能覆盖通过 guard 的 subprocess | 没有独立 confirmer 就不够 | 低 | 不完整 |
-| guard + trusted fresh-human adapter + PreToolUse | PASS；当前 adapter=独立 user shell，未来可换 human-origin hook | consumer 路径统一进 guard | PASS，PreToolUse 只是辅助 | 低 | 推荐 |
+| guard + trusted fresh-human adapter + PreToolUse | PASS；当前 adapter=独立 user shell，未来可换 human-origin hook | consumer 路径统一进 guard；少数 watcher 仅修 exit-code 重入 | PASS，PreToolUse 只是辅助 | 低 | 推荐 |
 | 旧复杂 safe-cancel | 非需求维度过多，receipt 仍不等于 fresh human provenance | consumers 复制逻辑 | 复杂且偏离产品要求 | 高 | 拒绝 |
+
+另比较了“独立 shell confirmation command 直接在重查后执行 cancellation”。它能消除 guard 的一次 re-entry，但会把 fresh-human adapter 与 Slurm mutation 耦合，而且 CARE takeover 等消费者仍需要继续业务控制流，因此没有比第 3.2/3.3 节的最小 outcome contract 更小。本 Proposal 不采用它。
 
 如果 OpenAI 后续增加稳定 HumanPromptSubmit 或 UserPromptSubmit.origin=human，第五方案的 trusted adapter 可以直接改为聊天消息：
 
@@ -314,7 +387,7 @@ DII/CARE 旧候选中围绕 central safe-cancel 三态的 AGENTS / consumer 文�
 - auto-review 不写 confirmation state；
 - assistant/model 文本不能调用独立 user confirmer；
 - challenge 必须在第一次 block 后生成；
-- 用户独立 shell 确认后，guard 才可继续；
+- 用户独立 shell 确认后，confirmation command 只确认、不取消；consumer 下一次 ordinary scancel 才由 guard 重查后继续；
 - one-time consume，replay 拒绝；
 - target / partition 改变，旧 challenge 失效。
 
@@ -326,6 +399,8 @@ chat-only 版本 Gate B 当前必须 FAIL/BLOCKED，直到存在稳定 human-ori
 - exact guard executable 可用；
 - DII/CARE 每个当前 normal automatic consumer 的 executable resolution 实际指向 guard；
 - Python watcher 的 bare scancel 在隔离 replay 中真实进入 guard；
+- B1/M7/M8/takeover 在 guard nonzero 时不误标记 cancelled、不提前结束，并能通过现有 poll 自然再次调用；cascade formal race 保持既有轮询重入；
+- 用户确认后下一次 ordinary scancel 能消费 challenge 并只执行一次；
 - 没有当前可达 absolute / SSH / API bypass；
 - user independent shell 的系统 scancel 不被 Codex Host Policy 破坏。
 
@@ -346,7 +421,8 @@ Regression bank 固定包含用户这次事故和以上 protected/non-protected/
 
 - 在已验证的 Codex normal entry 和当前自动 consumers 中，protected partition 的 exact cancellation 第一次不会执行；
 - 旧 Goal / race opt-in / auto-review / model text 不产生 protected confirmation；
-- 当前 deployable mode 只有独立 human confirmation adapter 能使 challenge 进入 confirmed；
+- 当前 deployable mode 只有独立 human confirmation adapter 能使 challenge 进入 confirmed；该 command 本身不执行取消；
+- consumer 对 guard nonzero 保留目标并继续既有监控/有界重试，使确认后自然发生下一次 guard 调用；
 - challenge 只能消费一次，target / partition 变化失效；
 - non-protected partition 不新增第二确认；
 - DII/CARE 不拥有第二套 protection logic。
