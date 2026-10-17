@@ -1,0 +1,16 @@
+{
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "task_key": "clear-writing--scientific-explanation-readability-repair",
+  "state": "PLAN_REQUESTED",
+  "review_round": 0,
+  "max_review_rounds": 2,
+  "plan_revision": 0,
+  "max_plan_revisions": 1,
+  "base_commit": "4eaa6481ee7202779286e65f6f832bbb235f6916",
+  "base_branch": "reviewed/clear-writing--cross-surface-language-layer",
+  "implementation_commit": null,
+  "ci_required": true,
+  "ci_status": "PENDING",
+  "last_review_decision": null,
+  "next_action": "RUN_GPT_PLANNER"
+}
