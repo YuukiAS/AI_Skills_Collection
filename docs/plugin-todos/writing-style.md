@@ -88,6 +88,14 @@ problem:
 desired behavior: 对中文或中文主导的科研解释，在最终输出前做一次整篇阅读层检查：按语义单元合并段落；逐项审查保留的英文是否承担正式专名、机器字符串、检索定位或逐字核对作用；若没有，就用自然中文替换。长回答仍可保留必要标题、公式、引文和列表，但不能让这些结构退化成逐句分页。
 boundary: DII、HAMP、PSMR、MFAC、M&Ms、CARE 及该文档的数学判断属于项目内容，不进入通用写作规则。当前样本是用户确认的真实负例；尚未证明正式安装的 Clear Writing production path 已处理过该文本，因此不作为插件运行回归或发布失败证据。
 
+2026-10-17 follow-up：与 DSFedMed / D3S2 比较时再次退回英文概念堆叠。用户先要求“说人话”，助手上一条回答却在中文科研解释中重新大量使用 `patient structure`、`hierarchical multi-fidelity allocation`、`downstream reuse`、`independent high-fidelity audit`、`patient coreset`、`spatial-only memory`、`memory artifact`、`benchmark`、`feature memory` 等普通英文组合来承担核心论证。用户随即指出“又开始非必要英文了”，并要求作为 Clear Writing negative example 记录。
+
+新增问题：
+- 即使正式方法名如 DSFedMed、D3S2、HAMP 需要保留，**围绕这些方法解释创新点时的普通概念仍应使用自然中文**。例如“患者结构”“患者—空间两层多保真分配”“后续任务复用”“独立高保真审计”“患者核心集”“仅空间层方案”“压缩记忆造成的假象”等都能准确表达，不需要英文短语。
+- 不能因为正在比较国际论文，就把英文论文中的抽象短语直接搬进中文解释。来源语言不构成保留英文的理由。
+- 对用户已经连续要求“说人话、减少非必要英文”的项目，普通 Web 回复仍然反复回退到英文术语栈，说明这不是一次偶发措辞问题，而是**最终输出前缺少整篇语言层复查**。
+- 正确修复不是把所有英文逐字翻译，而是保留正式方法/模型名和必要检索身份，把“我们到底比别人多做了什么”重新写成自然中文因果关系。
+
 #### 2026-10-15：DII 方法解释成为可复用的 Clear Writing 正例
 feedback_status: NEW
 source: `Distributed_Imaging_Inference` / 用户阅读导师研究提案 PDF 后，要求“用人话解释我们到底要做什么、是否真的比 FedFisher 更有意义、是否真正受导师三个想法启发，以及应该怎样读方法”；用户随后明确反馈“我很喜欢你这个回答”，并要求作为 Clear Writing 正例记录。
