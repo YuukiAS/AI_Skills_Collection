@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "clear-writing--every-response-invocation-policy",
-  "state": "PLAN_FROZEN",
+  "state": "EXECUTING",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -12,5 +12,5 @@
   "ci_required": false,
   "ci_status": "NOT_REQUIRED",
   "last_review_decision": null,
-  "next_action": "RUN_GPT_CRITIC_EXECUTION_READY_REVIEW"
+  "next_action": "ROUTE_TO_GPT_PLANNER_FOR_EXECUTION_PACKAGE_REVISION"
 }
