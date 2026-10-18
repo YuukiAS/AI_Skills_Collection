@@ -1,0 +1,42 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "/usr/bin/bash -c 'set -eu; target=$1; expected=$2; actual=$(/usr/bin/sha256sum -- \"$target\"); actual=${actual%% *}; [ \"$actual\" = \"$expected\" ] || exit 78; shift 2; exec \"$target\" \"$@\"' slurm-protected-cancel /users/a/e/aereinh/CARE/.codex/slurm-protected-cancel-private/bin/slurm-protected-cancel-binder 5808f8620fd5aff981e32c15a140833e3cdeaca615d39e02f074b55172ad73fd",
+            "statusMessage": "Verifying protected Slurm cancellation",
+            "timeout": 15,
+            "type": "command"
+          }
+        ],
+        "matcher": "^request_user_input$"
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "command": "/usr/bin/bash -c 'set -eu; target=$1; expected=$2; actual=$(/usr/bin/sha256sum -- \"$target\"); actual=${actual%% *}; [ \"$actual\" = \"$expected\" ] || exit 78; shift 2; exec /usr/bin/python3 \"$target\" \"$@\"' slurm-protected-cancel /users/a/e/aereinh/CARE/.codex/hooks/slurm-protected-cancel-session dc48faf031313757e5f628abc91ca9b2d6668551e9c4af77aaabeb681b0ff73d",
+            "statusMessage": "Closing protected-cancel session authority",
+            "timeout": 10,
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "/usr/bin/bash -c 'set -eu; target=$1; expected=$2; actual=$(/usr/bin/sha256sum -- \"$target\"); actual=${actual%% *}; [ \"$actual\" = \"$expected\" ] || exit 78; shift 2; exec /usr/bin/python3 \"$target\" \"$@\"' slurm-protected-cancel /users/a/e/aereinh/CARE/.codex/hooks/slurm-protected-cancel-session dc48faf031313757e5f628abc91ca9b2d6668551e9c4af77aaabeb681b0ff73d",
+            "statusMessage": "Preparing protected-cancel session authority",
+            "timeout": 10,
+            "type": "command"
+          }
+        ],
+        "matcher": "startup|resume|clear"
+      }
+    ]
+  }
+}
