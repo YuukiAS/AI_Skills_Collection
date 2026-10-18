@@ -3,7 +3,7 @@
 日期：2026-10-18
 task：hpc--slurm-cancel-production-closure
 owner：YuukiAS/AI_Skills_Collection standalone skill slurm-workflows
-source main：9c284187e16164199933bb458fb1604ac6f733ff
+source main at this revision：97f60dd87d65732388090235b2bdbc478a2e6222
 supersedes execution package：38a76797439c6b29098aade7539270cbc51e8836
 status：ARCHITECTURE_NARROW_REVISION / CRITIC_REQUIRED / NO_IMPLEMENTATION
 
@@ -134,23 +134,40 @@ Codex core 自己的 project config / hook / rules discovery 是 host-side，继
 
 .codex/slurm-protected-cancel-private/
 
-其中包含运行时生成的：
+其中包含：
 
+- bin/slurm-protected-cancel-binder
 - capability.key
+- runtime.json
 - consumed/
 - optional audit metadata
 
-要求：
+这里的 **authority binder executable/source 本身也属于 private authority material**，不能继续放在普通中央安装路径。
 
-- capability.key 为随机 256-bit；
-- mode 0600；
-- 不提交 Git；
-- 不写入日志、Prompt、tool output；
-- 只允许 host-side hook runtime 读取；
-- ordinary Codex tool shell 因 explicit .codex deny 无法读取、复制、覆盖、删除或 chmod；
-- auto_review approval 不能解除 explicit deny。
+冻结要求：
 
-生产安装/候选 setup 负责生成 key；它不是用户操作步骤。
+- binder 是 exact reviewed candidate 的固定构建产物；候选 setup 在 locked runtime session 启动前把它复制到上述 private bin 路径；
+- binder 文件至少 owner-only executable/readable，private directory 为 owner-only；
+- capability.key 为随机 256-bit，mode 0600；
+- binder/capability/runtime/consumed 全部不提交 Git，不写入 Prompt、tool output 或普通日志；
+- ordinary Codex tool shell 因 explicit .codex deny 无法读取、复制、覆盖、删除、chmod 或替换 binder 与 authority material；
+- auto_review approved-command escalation 不能解除 explicit deny；
+- **不得依赖 project Hook declaration hash 自动覆盖 binder 内容**。
+
+为把 Hook trust 与 external binder 内容真正绑定，trusted PostToolUse Hook declaration 必须冻结：
+
+1. private binder 的 canonical absolute path；
+2. exact reviewed binder SHA-256；
+3. host-side pre-exec integrity check。
+
+Hook command 在执行 binder 前，必须使用 trusted host absolute executable（例如平台实际核实后的 /usr/bin/sha256sum 或等价成熟工具）计算 private binder digest；digest 与 Hook declaration 中冻结的 expected SHA-256 不一致时立即 fail closed，绝不运行 binder。
+
+因此：
+- hooks.json / config 中的 trusted declaration hash绑定“binder absolute path + expected binder digest + invocation shape”；
+- private explicit deny阻止 model修改 binder内容；
+- binder digest check阻止外部内容漂移在 Hook declaration仍 Trusted时被静默执行。
+
+生产安装/候选 setup负责生成 capability、复制 reviewed binder并写 runtime.json；这些都不是用户操作步骤。
 
 ## 4. guard 第一次 block
 
@@ -235,24 +252,44 @@ matcher 仍只为：
 
 ### 7.1 direct binder invocation
 
-binder 可执行程序本身可以位于中央安装路径，但它在执行任何 Slurm 动作前必须读取：
+authority binder **只允许从 private denied absolute path 执行**：
+
+.codex/slurm-protected-cancel-private/bin/slurm-protected-cancel-binder
+
+不存在另一个可供 normal Codex shell直接调用的“authority mode”中央 CLI。
+
+trusted Hook 先核对该文件的 frozen SHA-256，再执行它。binder随后在任何 Slurm动作前读取：
 
 .codex/slurm-protected-cancel-private/capability.key
 
 ordinary Codex shell处于 explicit .codex deny sandbox：
 
-- 直接运行 binder也读不到 key；
-- 复制 binder源码后运行仍读不到 key；
-- 自己重写等价 Python也读不到 key；
-- fabricated PostToolUse JSON也无法通过 capability boundary。
+- 无法读取或执行 private binder path；
+- 无法读取 binder源码后复制到可写位置；
+- 无法替换 binder再等 trusted Hook执行；
+- fabricated PostToolUse JSON即使喂给另一份自写程序，也没有 private capability；
+- 直接运行中央普通 guard不具备 authority mode，因此不能代替 private binder。
 
-因此 binder 必须把“无法读取 capability.key”视为硬失败，并在读取 key 之前绝不调用 Slurm。
+因此 binder 必须把以下任一情况视为硬失败，并在任何 Slurm query/mutation前退出非零：
+
+- private binder pre-exec digest mismatch；
+- private capability.key 不可读；
+- runtime.json 不可读或内容不匹配；
+- Hook session / question identity 不匹配。
 
 ### 7.2 direct state edit
 
-private consumed ledger 位于同一 explicit denied .codex subtree。
+private runtime.json、capability.key 与 consumed ledger 位于同一 explicit denied .codex subtree。
+
+runtime.json 还冻结本次部署允许 binder调用的 trusted host executables：
+- canonical absolute scontrol path；
+- canonical absolute scancel path。
+
+这些路径由 trusted candidate/setup在进入 locked runtime前只读解析和验证，必须是 workspace外、非当前 ordinary Codex tool可写的真实 host executable。binder运行时只使用这些绝对路径，禁止通过 PATH、shell alias、function或相对路径解析 Slurm命令。
 
 normal shell / auto_review escalation不能：
+- 修改、替换或读取 private binder；
+- 修改 runtime.json 中的 trusted executable binding；
 - 写 consumed；
 - 删除 consumed；
 - 回滚 consumed；
@@ -261,7 +298,7 @@ normal shell / auto_review escalation不能：
 
 ### 7.3 修改 hooks.json / config / rules
 
-v2.1 runtime profile deny 整个 project .codex，而不是只 deny private 子目录。
+v2.1 初始候选 runtime profile deny 整个 project .codex，而不是只 deny private 子目录。这样不仅保护 capability/binder，也防止当前 locked session直接改写决定 authority path 的 config/hooks/rules。
 
 因此当前 runtime session中的普通 shell也不能通过：
 - 修改 hooks.json 指向恶意 hook；
@@ -359,18 +396,23 @@ protected cancel
 2. binder可读取 private capability.key；
 3. normal Codex shell读不到 key；
 4. apply_patch / Python / symlink alias / direct binder / copied binder / fabricated JSON全部不能得到 authority；
-5. auto_review批准的 escalated command仍不能越过 explicit .codex deny；
-6. hooks.json / config / rules在locked runtime session不可由普通 shell修改；
-7. binder重新 resolve exact Job/Partition/op后才允许 fake exact mutation；
-8. consumed ledger one-time；
-9. duplicate PostToolUse / replay / target-change均不 mutation。
+5. normal shell不能读取、替换或执行 private authority binder，且无法改写 runtime.json 的 trusted Slurm absolute paths；
+6. Hook pre-exec digest check能拒绝任何与 reviewed SHA-256不一致的 private binder；
+7. binder只调用 runtime.json冻结的 trusted absolute scontrol/scancel，完全不使用 model-controlled PATH；
+8. auto_review批准的 escalated command仍不能越过 explicit .codex deny；
+9. hooks.json / config / rules在locked runtime session不可由普通 shell修改；
+10. binder重新 resolve exact Job/Partition/op后才允许 fake exact mutation；
+11. consumed ledger one-time；
+12. duplicate PostToolUse / replay / target-change均不 mutation。
 
 ### Gate C：consumer/runtime coverage
 
 更新为：
 - CARE/DII protected blocker传播给 interactive root；
 - user确认后 binder直接完成 exact cancellation；
-- consumer resume只观察/继续业务，不再消费 confirmation。
+- consumer resume只观察/继续业务，不再消费 confirmation；
+- **should-not-change 回归**：locked project permission profile启用后，普通必要开发行为仍可正常完成，至少覆盖 repo内正常 `git status --short`、普通 read-only Git identity/diff 检查，以及各仓库与本任务相关、原本不依赖读取 project .codex 的代表性测试；
+- 如果 explicit deny整个 project .codex 确实造成上述正常开发入口的真实退化，本轮不能由 Executor临场放宽。返回 Planner做**最小 deny surface 收缩**，同时必须继续保护 authority binder/private material和决定authority path的配置，且仍不得新增第五Gate。
 
 ### Gate D：target integrity / claim truth
 
@@ -390,8 +432,10 @@ protected cancel
 
 必须专门测试：
 
-- hook host can access fake private capability area；
-- sandboxed normal tool cannot；
+- hook host can access fake private authority area，包括binder/runtime/capability/consumed；
+- sandboxed normal tool不能读取或修改private binder/runtime/capability；
+- private binder被离线篡改后，trusted Hook declaration中的expected SHA-256使pre-exec check拒绝执行；
+- model-controlled PATH中放置伪造scontrol/scancel时，binder仍只调用runtime.json冻结的trusted absolute paths；
 - approved/auto-reviewed escalation仍不能；
 - confirmed hook直接调用 fake scancel一次；
 - duplicate hook不再次调用。
@@ -461,7 +505,9 @@ NOT_EXECUTABLE / REVISE_PENDING
 
 并加入：
 - explicit locked .codex permission profile
-- private capability.key / consumed ledger
+- private authority binder + capability.key + runtime.json + consumed ledger
+- Hook declaration绑定private binder absolute path + expected SHA-256
+- binder绑定trusted absolute scontrol/scancel
 - PostToolUse direct exact execution owner
 - CARE/DII confirm-after resume semantics
 
@@ -489,6 +535,8 @@ OpenAI Codex reviewed：
   - 直接测试approved command对metadata write和explicit .codex/private deny。
 - codex-rs/hooks/src/engine/command_runner.rs
   - command hook由host Command直接spawn，无普通tool sandbox wrapper。
+- codex-rs/hooks/src/engine/discovery.rs
+  - non-plugin project Hook trust hash绑定normalized Hook declaration；external command target文件内容不会自动成为Hook content hash，所以v2.1不能依赖Hook declaration hash保护外部binder内容。
 - codex-rs/core/src/hook_runtime.rs
   - 明确“Hooks run on the host”。
 - codex-rs/core/src/tools/registry.rs
