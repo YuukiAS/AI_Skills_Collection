@@ -1,0 +1,17 @@
+{
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "task_key": "presentations--ci-missing-render-contract-repair",
+  "state": "AWAIT_HUMAN_DECISION",
+  "review_round": 1,
+  "max_review_rounds": 2,
+  "plan_revision": 0,
+  "max_plan_revisions": 1,
+  "base_commit": "38a76797439c6b29098aade7539270cbc51e8836",
+  "base_branch": "main",
+  "implementation_commit": "bb74e18f44428a12f1fea11b98bf30c10af94040",
+  "ci_required": true,
+  "ci_status": "PASS",
+  "last_review_decision": "PASS",
+  "human_gate_reason": "PASS",
+  "next_action": "PRESENT_FINAL_REPORT"
+}

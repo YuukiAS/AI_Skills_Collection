@@ -9,6 +9,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 from zipfile import ZipFile
 
 
@@ -20,6 +21,7 @@ import markdown_to_deck_plan  # noqa: E402
 import validate_deck_plan  # noqa: E402
 import generate_cuhk_scientific_layout_stage3 as stage3  # noqa: E402
 import generate_research_presentation_production_entry as production_entry  # noqa: E402
+import validate_cuhk_scientific_layout_stage3 as stage3_validator  # noqa: E402
 import validate_research_presentation_production_entry as production_validator  # noqa: E402
 import validate_existing_deck_revision_entry as existing_revision_gate  # noqa: E402
 import deck_quality_loop  # noqa: E402
@@ -942,6 +944,67 @@ class PresentationSharedTests(unittest.TestCase):
         for marker in forbidden_markers:
             self.assertNotIn(marker, source_text)
 
+    def test_stage3_compile_dependency_precedence(self) -> None:
+        missing_fonts = {
+            "status": "BLOCKED_MISSING_CANONICAL_FONT_RESOURCE",
+            "resource_dir": None,
+            "fonts": {},
+            "missing": ["fonts/texgyre-termes/texgyretermes-regular.otf"],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            build_dir = Path(tmp)
+            with (
+                mock.patch.object(stage3, "find_tex_engine", return_value=None),
+                mock.patch.object(stage3, "font_resource_binding", return_value=missing_fonts),
+                mock.patch.object(stage3, "materialize_font_binding") as materialize,
+            ):
+                status = stage3.compile_pdf(build_dir)
+
+            self.assertEqual(status["status"], "BLOCKED_MISSING_TEX_ENGINE")
+            self.assertEqual(status["font_binding"], missing_fonts)
+            materialize.assert_not_called()
+
+            engine = {"command": "xelatex", "path": "/test/bin/xelatex"}
+            with (
+                mock.patch.object(stage3, "find_tex_engine", return_value=engine),
+                mock.patch.object(stage3, "materialize_font_binding", return_value=missing_fonts),
+            ):
+                status = stage3.compile_pdf(build_dir)
+
+            self.assertEqual(status["status"], "BLOCKED_MISSING_CANONICAL_FONT_RESOURCE")
+            self.assertEqual(status["engine"], "xelatex")
+            self.assertEqual(status["font_binding"], missing_fonts)
+
+    def test_missing_render_allowlists_accept_only_environmental_states(self) -> None:
+        failed_probe = {"status": "PROBE_FAILED"}
+        validators = [stage3_validator, production_validator]
+        for validator in validators:
+            with self.subTest(validator=validator.__name__):
+                for status in ["BLOCKED_MISSING_TEX_ENGINE", "BLOCKED_MISSING_CANONICAL_FONT_RESOURCE"]:
+                    render_status = {"status": status}
+                    self.assertTrue(
+                        validator.render_probe_status_allowed(
+                            failed_probe,
+                            render_status,
+                            allow_missing_render=True,
+                        )
+                    )
+                    self.assertFalse(
+                        validator.render_probe_status_allowed(
+                            failed_probe,
+                            render_status,
+                            allow_missing_render=False,
+                        )
+                    )
+
+                self.assertFalse(
+                    validator.render_probe_status_allowed(
+                        failed_probe,
+                        {"status": "BLOCKED_FONT_RESOURCE_TOKEN_MISSING"},
+                        allow_missing_render=True,
+                    )
+                )
+
     def test_cuhk_scientific_layout_stage3_contract(self) -> None:
         generator = SHARED / "scripts/generate_cuhk_scientific_layout_stage3.py"
         validator = SHARED / "scripts/validate_cuhk_scientific_layout_stage3.py"
@@ -1086,7 +1149,10 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(dependency_probe["schema"], "RESEARCH_CUHK_STAGE3_BUILD_DEPENDENCY_PROBE_V1")
             self.assertIn("pdftoppm", dependency_probe["commands"])
             if dependency_probe["tex_engine_available"]:
-                self.assertIn(manifest["compile_status"]["status"], {"COMPILED", "BLOCKED_MISSING_TEX_PACKAGE"})
+                self.assertIn(
+                    manifest["compile_status"]["status"],
+                    {"COMPILED", "BLOCKED_MISSING_TEX_PACKAGE", "BLOCKED_MISSING_CANONICAL_FONT_RESOURCE"},
+                )
             else:
                 self.assertEqual(manifest["compile_status"]["status"], "BLOCKED_MISSING_TEX_ENGINE")
             if manifest["compile_status"]["status"] == "BLOCKED_MISSING_TEX_PACKAGE":
@@ -1138,8 +1204,14 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertNotIn(forbidden, tex)
             plugin_generator = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/generate_cuhk_scientific_layout_stage3.py"
             plugin_validator = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_cuhk_scientific_layout_stage3.py"
+            production_validator_source = SHARED / "scripts/validate_research_presentation_production_entry.py"
+            plugin_production_validator = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_research_presentation_production_entry.py"
             self.assertEqual(generator.read_text(encoding="utf-8"), plugin_generator.read_text(encoding="utf-8"))
             self.assertEqual(validator.read_text(encoding="utf-8"), plugin_validator.read_text(encoding="utf-8"))
+            self.assertEqual(
+                production_validator_source.read_text(encoding="utf-8"),
+                plugin_production_validator.read_text(encoding="utf-8"),
+            )
 
             strict = subprocess.run(
                 [
@@ -1163,42 +1235,44 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertIn(manifest["render_status"]["status"], strict.stderr + strict.stdout)
                 self.assertNotEqual(manifest["mechanical_qa"]["status"], "MECHANICAL_PASS")
 
-            manifest["render_status"] = {"status": "BLOCKED_MISSING_TEX_ENGINE", "png_count": 0, "rendered_png": []}
             manifest["mechanical_qa"]["status"] = "BLOCKED_RENDER_QA"
-            (generated / "BUILD_MANIFEST.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
             render_probe = json.loads((generated / "render_chinese_math_pdf_probe.json").read_text(encoding="utf-8"))
             render_probe["status"] = "PROBE_FAILED"
             (generated / "render_chinese_math_pdf_probe.json").write_text(json.dumps(render_probe, indent=2) + "\n", encoding="utf-8")
-            missing_render_validation = subprocess.run(
-                [
-                    sys.executable,
-                    str(validator),
-                    "--out-dir",
-                    str(generated),
-                    "--allow-missing-render",
-                    "--task-key",
-                    "030_stage3_visual_recovery",
-                ],
-                check=False,
-                capture_output=True,
-                text=True,
-            )
-            self.assertEqual(missing_render_validation.returncode, 0, missing_render_validation.stderr + missing_render_validation.stdout)
-            strict_missing_render = subprocess.run(
-                [
-                    sys.executable,
-                    str(validator),
-                    "--out-dir",
-                    str(generated),
-                    "--task-key",
-                    "030_stage3_visual_recovery",
-                ],
-                check=False,
-                capture_output=True,
-                text=True,
-            )
-            self.assertNotEqual(strict_missing_render.returncode, 0)
-            self.assertIn("render-chinese-math-pdf probe failed", strict_missing_render.stderr + strict_missing_render.stdout)
+            for status in ["BLOCKED_MISSING_TEX_ENGINE", "BLOCKED_MISSING_CANONICAL_FONT_RESOURCE"]:
+                with self.subTest(status=status):
+                    manifest["render_status"] = {"status": status, "png_count": 0, "rendered_png": []}
+                    (generated / "BUILD_MANIFEST.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+                    missing_render_validation = subprocess.run(
+                        [
+                            sys.executable,
+                            str(validator),
+                            "--out-dir",
+                            str(generated),
+                            "--allow-missing-render",
+                            "--task-key",
+                            "030_stage3_visual_recovery",
+                        ],
+                        check=False,
+                        capture_output=True,
+                        text=True,
+                    )
+                    self.assertEqual(missing_render_validation.returncode, 0, missing_render_validation.stderr + missing_render_validation.stdout)
+                    strict_missing_render = subprocess.run(
+                        [
+                            sys.executable,
+                            str(validator),
+                            "--out-dir",
+                            str(generated),
+                            "--task-key",
+                            "030_stage3_visual_recovery",
+                        ],
+                        check=False,
+                        capture_output=True,
+                        text=True,
+                    )
+                    self.assertNotEqual(strict_missing_render.returncode, 0)
+                    self.assertIn("render-chinese-math-pdf probe failed", strict_missing_render.stderr + strict_missing_render.stdout)
 
     def test_production_validator_accepts_generic_source_declared_storylines(self) -> None:
         cases = [
@@ -1270,15 +1344,17 @@ class PresentationSharedTests(unittest.TestCase):
             write_synthetic_production_contract(out_dir, workstreams)
             manifest_path = out_dir / "BUILD_MANIFEST.json"
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-            manifest["render_status"] = {"status": "BLOCKED_MISSING_TEX_ENGINE", "png_count": 0, "rendered_png": []}
-            manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
             probe_path = out_dir / "render_chinese_math_pdf_probe.json"
             probe = json.loads(probe_path.read_text(encoding="utf-8"))
             probe["status"] = "PROBE_FAILED"
             probe_path.write_text(json.dumps(probe, indent=2) + "\n", encoding="utf-8")
-            self.assertEqual(production_validator.validate(out_dir, allow_missing_render=True), [])
-            strict_errors = production_validator.validate(out_dir, allow_missing_render=False)
-            self.assertTrue(any("render probe failed" in error for error in strict_errors), strict_errors)
+            for status in ["BLOCKED_MISSING_TEX_ENGINE", "BLOCKED_MISSING_CANONICAL_FONT_RESOURCE"]:
+                with self.subTest(status=status):
+                    manifest["render_status"] = {"status": status, "png_count": 0, "rendered_png": []}
+                    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+                    self.assertEqual(production_validator.validate(out_dir, allow_missing_render=True), [])
+                    strict_errors = production_validator.validate(out_dir, allow_missing_render=False)
+                    self.assertTrue(any("render probe failed" in error for error in strict_errors), strict_errors)
 
     def test_production_validator_keeps_strict_generic_gates(self) -> None:
         base_workstreams = [
