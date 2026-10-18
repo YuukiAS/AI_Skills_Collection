@@ -49,7 +49,7 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation
 ## Phase 0 — capability probe first
 
 1. 对三个 R 只读核实 repo/origin/clean/source/target branch/target W/remote branch。任何 drift、dirty、collision、lineage mismatch 停止对应 repo，整体不得继续声称 ready。
-2. 仅创建上述三个 exact branch/worktree。不得创建其它 branch，不改 main，不 reset/clean/stash/rebase/force。
+2. Phase 0 先只创建 AI Skills 的 exact branch/worktree；DII/CARE 在 probe PASS 前只做只读 preflight，不创建其 branch/worktree。不得创建其它 branch，不改 main，不 reset/clean/stash/rebase/force。
 3. 在 AI Skills W 先只准备 harmless probe：
    - .codex/config.toml：仅启用 features.default_mode_request_user_input=true；
    - .codex/hooks.json：仅注册 PostToolUse matcher ^request_user_input$ 的 harmless probe logger；
@@ -78,6 +78,8 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation
 
 ## Phase 1 — product candidate
 
+Phase 0 PASS 后，才创建 DII/CARE 冻结的 exact branch/worktree。
+
 AI Skills：
 
 - 实现 thin ai-slurm-scancel guard；
@@ -88,6 +90,7 @@ AI Skills：
 - tiny synchronous PostToolUse binder；
 - binder 只接受 exact canonical “确认取消”；
 - binder 自己绝不执行 Slurm mutation；
+- ordinary Codex normal shell 即使知道 question id、state path、record format，也不能通过直接 binder invocation、直接改写 state 或伪造 question/answer artifact 产生 guard 可接受的 confirmed authority；该 anti-forgery regression 不通过就停止回 Planner；
 - automation-only scancel shim；
 - project-local .codex/config.toml / hooks.json / rules/slurm-protected-cancel.rules candidate；
 - raw scancel、/usr/bin/scancel、direct binder 在 Codex normal entry forbidden；
