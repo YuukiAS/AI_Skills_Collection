@@ -283,8 +283,7 @@ def _remove_obsolete(destination: Path) -> None:
 
 def write_rendered(rendered: dict[str, Any], destination: Path, *, install: bool) -> None:
     destination = destination.expanduser().resolve()
-    if install:
-        _remove_obsolete(destination)
+    _remove_obsolete(destination)
     private_prefix = str(PRIVATE_REL) + "/"
     for relative, content in rendered["files"].items():
         target = destination / relative
