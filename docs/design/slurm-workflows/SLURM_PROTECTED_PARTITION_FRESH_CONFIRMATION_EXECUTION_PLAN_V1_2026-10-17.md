@@ -6,9 +6,9 @@ owner：YuukiAS/AI_Skills_Collection standalone skill slurm-workflows
 approved Proposal：docs/design/slurm-workflows/SLURM_PROTECTED_PARTITION_FRESH_CONFIRMATION_PROPOSAL_V1_2026-10-17.md
 approved Proposal commit：12fd741a7fb8290ec53027db206fddc5df11fb21
 approved Proposal blob：eddcf4881020518841730e77e8db85b591513a79
-package source main：adb06823b95c45e5e12ac1258ca73ebf8f1846d3
-Repository version：5.4.4
-状态：EXECUTION_READY_REVIEW_PENDING / NO_IMPLEMENTATION_AUTHORITY / NO_SLURM_MUTATION
+execution-package revision base main：06648df4f2951766c257e19ee035e141a8a1ceb3
+Repository version baseline：5.4.5
+状态：EXECUTION_PACKAGE / AUTHORIZED_ONLY_AFTER_CRITIC_PASS_AND_USER_SEND / PHASE_0_TO_3_ONLY
 
 ## 1. 冻结产品语义
 
@@ -73,9 +73,7 @@ Bridge Kit source 本任务 NO_CHANGE。
 
 ## 3. branch/worktree 与远端发布
 
-当前用户没有授权实施。
-
-用户以后实际发送 Critic PASS 的同版 Kickoff，才允许：
+本 Plan 的授权语义是条件式的：Critic PASS 本身不执行；只有用户本人在 PASS 后实际发送同版 approved Kickoff，才授权 Phase 0–3。满足该条件后允许：
 
 1. 创建上节三个 exact branch / sibling worktree。
 2. 不改 main，不允许 force、force-with-lease、reset、clean、stash、rebase、remote mutation。
