@@ -260,9 +260,11 @@ execute 前再次 scontrol show job -o，必要时 bounded squeue -j cross-check
 - bounded expiry；
 - consumed 不复活；
 - target/Partition/operation 变化失效；
-- 没有 generic CLI 能把 pending 直接改 confirmed。
+- confirmed authority 不能只是一个普通 Codex shell 可直接改写的布尔字段或纯文本；
+- direct binder executable 被 Codex project rules 禁止只是第一层，仍必须有回归证明：普通 Codex normal shell 即使知道 question id、state 路径和文件格式，也不能制造一个 guard 会接受的 confirmed authority；
+- 如果在当前平台边界内无法证明这点，Phase 1 必须停止回 Planner，不得以“同 UID 无法绝对隔离”为理由降级接受伪造路径。
 
-它不是数据库、长期授权或跨机器 service。
+它不是数据库、长期授权或跨机器 service。实现可以利用当前 Codex 已有的 request_user_input / PostToolUse 可信事件证据完成绑定，但不得新增 daemon/broker/MCP server 或把确认权交给普通 shell。
 
 ### 5.3 native question contract
 
@@ -416,6 +418,7 @@ codex exec 当前不支持 native request_user_input。
 - initial Goal、assistant text、auto_review、UserPromptSubmit、subagent 都不能 confirm；
 - empty/timeout/retain/wrong question/expired 不 confirm；
 - canonical “确认取消”才 pending -> confirmed；
+- ordinary Codex normal shell 直接调用 binder、改写 state、伪造 question/answer 文件都不能产生 guard 可接受的 confirmed authority；
 - confirmed 后 next ordinary scancel re-resolve 后最多执行一次；
 - replay / target / Partition / operation change 拒绝。
 
@@ -466,8 +469,9 @@ Phase 0 live chat probe不涉及 Slurm，允许在真实 Longleaf Codex Desktop�
 ### Phase 0：capability probe
 
 由 approved Kickoff 授权：
-- 创建三个新 task worktree/branch；
-- 仅 AI Skills worktree 先准备 harmless project-local feature/hook probe；
+- 先只创建 AI Skills 新 task worktree/branch；
+- 对 DII/CARE 只做 source/branch/worktree 的只读 preflight，Phase 0 PASS 前不创建其 worktree；
+- AI Skills worktree 先准备 harmless project-local feature/hook probe；
 - 执行真实 Desktop chat probe；
 - headless negative probe。
 
@@ -476,6 +480,7 @@ Phase 0 FAIL => STOP / Planner。
 ### Phase 1：candidate implementation
 
 只在 Phase 0 PASS 后继续：
+- 再创建 DII/CARE 冻结的 exact task branch/worktree；
 - central guard/pending/binder/private field/shim；
 - AI Skills/DII/CARE project-local config/hook/rules；
 - DII/CARE consumer minimal transport fixes。
