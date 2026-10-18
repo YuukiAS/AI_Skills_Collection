@@ -1,7 +1,7 @@
 # ChatGPT Web 协作回归记录：2026-10 九类问题
 
 日期：2026-10-17  
-状态：Planner 合同完善方案 v0.1 已准备，待独立 Critic 审查  
+状态：Planner / Critic 合同完善方案 v0.2 已按 Critic B1/B2 修订，待独立 Critic 复核  
 主要适用层：AI Research Stack Project setting、Planner 角色合同、Critic 角色合同  
 非默认 owner：`workflow-core`、具体领域 Plugin/Skill、Bridge Kit
 
@@ -90,7 +90,7 @@
 
 本文件只冻结问题，不预先冻结解决架构。
 
-当前设计方案：`docs/design/chatgpt-web-collaboration/PLANNER_CRITIC_CONTRACT_REFINEMENT_V0_1_2026-10-17.md`。
+当前设计方案：`docs/design/chatgpt-web-collaboration/PLANNER_CRITIC_CONTRACT_REFINEMENT_V0_2_2026-10-18.md`。v0.2 只修正用户侧角色模型与 Codex 前置依赖语义；其他已通过设计点保持不动。
 
 后续应优先检查和修改：
 
