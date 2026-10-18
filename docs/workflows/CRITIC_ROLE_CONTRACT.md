@@ -1,8 +1,8 @@
 # Critic 线程工作约定
 
-版本：1.5
+版本：1.6
 
-日期：2026-10-18
+日期：2026-10-19
 
 配套文件：`docs/workflows/PLANNER_ROLE_CONTRACT.md`
 
@@ -152,11 +152,13 @@ Critic 还必须审 gate lifecycle：新 regression 是否被归入正确既有 
 
 这个检查只约束 Codex 开始实质执行前的依赖，不要求整个后续工作流已经结束。若既有 Bridge Kit、Reviewed Handoff、Control 或其他明确重型工作流原本规定实现完成后由 Reviewer、Terra、Verifier 等继续后置审查，该审查无需在 kickoff 前完成，也不构成 blocker。不得因此新增 execution segment、角色、状态机或 review protocol。
 
-Kickoff 不是普通摘要，而是用户准备直接发给 Codex 的执行指令。Critic 必须检查它是否忠实引用 approved Proposal/Goal、是否绑定正确 plugin/task/branch/worktree、是否包含与当前任务相称的 bounded authorization envelope、是否错误扩大数据/provider/credential/费用/live-global/destructive scope。若 Kickoff 需要实质修改，结论应是 REVISE；Critic 不得在 PASS 后自己重新设计一份新 prompt。
+Kickoff Draft 是 execution-ready 审查的**执行范围与授权来源**，不等于 PASS 后要全文展示给用户的 Codex handoff。Critic 必须检查它是否忠实引用 approved Proposal/Goal、是否绑定正确 plugin/task/branch/worktree、是否包含与当前任务相称的 bounded authorization envelope、是否错误扩大数据/provider/credential/费用/live-global/destructive scope。若其执行语义需要实质修改，结论应是 REVISE；Critic 不得在 PASS 后改变 scope。
 
-用户尚未明确授权的高影响边界不能由 Planner/Critic 代签。approved Kickoff 可以把“用户若发送本 prompt，即明确授权以下 bounded scope”写清楚；只有用户实际把它发送给 Codex 时，才成为 current-user authorization。这样可以减少 Auto-review 对已明确范围的重复拦截，同时保留真正新增风险时的审批。
+Kickoff Draft 可以包含批准前生命周期元数据，例如 `DRAFT`、`NOT_AUTHORIZED`、"仅在 Critic PASS 后执行"、review locator、blocker closure 或历史状态。这些内容用于仓库审查和防误执行，**不得在 execution-ready PASS 后机械复制进用户真正要发送给 Codex 的 handoff**。
 
-execution-ready PASS 的回复必须附上已审过的 Kickoff **逐字正文**，并标注：
+用户尚未明确授权的高影响边界不能由 Planner/Critic 代签。PASS 后的短 Codex handoff 只有在用户实际发送给 Codex 时，才成为 current-user instruction / authorization。handoff 只可以表达冻结 package 已经批准的 bounded scope；若新增 provider、数据、凭据位置、费用、live-global target、destructive risk 或其他实质范围，必须 REVISE/重新授权。
+
+execution-ready PASS 的回复必须输出一个**简短、可直接发送给 Codex 的 handoff**，而不是全文重贴 Kickoff Draft。默认结构是：
 
 ```text
 APPROVED_PROPOSAL_PATH=
@@ -164,12 +166,17 @@ APPROVED_GOAL_PATH=
 APPROVED_KICKOFF_PATH=
 APPROVED_COMMIT=
 READY_FOR_CODEX=YES
-=== APPROVED CODEX KICKOFF BEGIN ===
-<verbatim approved kickoff>
-=== APPROVED CODEX KICKOFF END ===
+NEXT_HANDOFF=CODEX
+=== COPY TO CODEX BEGIN ===
+<简短用户执行入口：当前任务/阶段 + approved locators + 必要执行定位/当前授权 + stop condition>
+=== COPY TO CODEX END ===
 ```
 
-不得把“我根据 PASS 再写一个更完整的 prompt”当作同一被审对象。若只是路径/commit locator 等非语义字段在提交后需要机械更新，可以原样替换 locator 并明确说明；任何范围、授权、Gate、恢复或产品语义变化都必须重新 REVISE/复审。
+用户可见 handoff 应优先引用冻结 Proposal/Goal/Critic review/Kickoff source，而不是复制其正文。不得把 `DRAFT ONLY` / `NOT_AUTHORIZED`、"等待 Critic PASS"、"只有用户发送后才执行"、审查历史、内部状态字段、完整 Plan/Goal、blocker closure 或其他批准前控制面说明放入 `COPY TO CODEX`。
+
+若某个精确高影响 effect 必须在当前用户消息中明示才构成授权，handoff 可以只展开该 effect identity 和边界；其余已冻结内容继续引用 approved source。若无法在不猜测、不删失必要授权、不改变 scope 的情况下生成短 handoff，则 execution-ready 结论必须 REVISE，由 Planner 先修 Kickoff Draft 的执行语义/授权表达。
+
+历史 task-specific prompt 中的"逐字返回/逐字输出 approved Kickoff"不得覆盖本条。此类旧要求只解释为**保持 approved scope 不漂移**，不能解释为把内部 artifact 全文展示给用户。短 handoff 是冻结包的用户阅读层渲染，不是新的 Proposal/Goal/Kickoff 设计。
 
 ### 6.2 Critic 回复必须自动生成下一角色 prompt
 
@@ -202,7 +209,7 @@ NEXT_HANDOFF=PLANNER
 
 如果本轮是**设计阶段 PASS，但仍需要 Planner 把已通过设计整理成 execution package**，同样必须输出 `NEXT_HANDOFF=PLANNER` 和具体 Planner prompt；不要只说“现在可以写 Plan”。
 
-如果本轮是 **execution-ready PASS**，则不再回 Planner，按 6.1 逐字输出 approved Codex kickoff，此时 `NEXT_HANDOFF=CODEX`。
+如果本轮是 **execution-ready PASS**，则不再回 Planner，按 6.1 输出简短、可直接发送的 `COPY TO CODEX` handoff，此时 `NEXT_HANDOFF=CODEX`；不得全文复制 Kickoff Draft。
 
 如果是 implementation 中的 pre-final Critic PASS，且 frozen Goal 已明确下一步可以由 Executor/Codex继续且不改变 scope，则可输出一个只引用 approved Goal/current evidence 的 bounded resume prompt；若下一步需要改变架构、acceptance、预算、授权或 recovery semantics，则仍必须回 Planner，不得由 Critic自行设计。
 
