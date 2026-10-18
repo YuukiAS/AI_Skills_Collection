@@ -118,7 +118,9 @@ Trusted project .codex/config.toml must:
 - select locked profile extending :workspace
 - explicitly deny project .codex to ordinary Codex tool execution
 
-Do not change Bridge source or user-level CODEX_HOME config.
+Do not change Bridge source or ordinary user-level CODEX_HOME settings.
+
+The only Phase 0–3 user-level CODEX_HOME side effect authorized by this Goal is the user personally trusting exact task Hook key/current_hash values through the official Codex Hook trust UI. That official UI writes `hooks.state.<key>.trusted_hash` into the current Codex identity's user `$CODEX_HOME/config.toml`. Executor must never edit that file directly or alter unrelated fields.
 
 ### 3.2 Probe authority material
 
@@ -158,6 +160,28 @@ Required evidence:
 - PostToolUse gets exact input/response/session/turn/tool-use ids
 - unanswered request resolves empty
 - empty never triggers authority action
+- no Slurm or production config is touched, except the bounded official Hook trust UI side effect below if trust is required
+
+Before asking the user to trust any probe/candidate Hook, freeze and show in evidence:
+- current Codex identity / CODEX_HOME locator
+- project root / task branch
+- exact Hook source
+- exact stable Hook key
+- exact current_hash
+- pre-trust exact key state from official readback
+
+The user may trust only that exact key/current_hash through the official Codex Hook trust UI.
+
+After trust:
+- hooks/list must show Trusted for that exact hash
+- official config readback must show the corresponding hooks.state trusted_hash effect
+- Executor must not directly write user config
+
+Probe/candidate Hook trust retention:
+- exact task Hook trust may remain through Phase 3 if needed for replay
+- once the Hook declaration disappears or changes, the old hash is inert and cannot trust the new declaration
+- cleanup/revoke may use only the official Codex Hook trust management entry
+- if the current official UI has no revoke/remove action, retain and report the inert exact key/hash; never manually edit user config or use generic config/batchWrite to simulate cleanup
 
 If Executor cannot display the fresh Desktop chat itself:
 
@@ -165,7 +189,7 @@ PROBE_READY_FOR_USER_CHAT
 
 Only ask the user to:
 - open one new Longleaf_Codex chat on exact W
-- if the exact reviewed probe Hooks require trust, trust only the current-hash-matching Hooks
+- if the exact reviewed probe Hooks require trust, trust only the exact key/current_hash values frozen in evidence; this official UI action writes the corresponding user-level hooks.state trust record
 - answer the harmless test once and leave the second request unanswered
 
 Do not ask for a terminal.
@@ -535,6 +559,21 @@ Freeze candidate before review.
 
 Publish each exact v2.1 task branch at most once, ordinary non-force, same-name origin, only when remote absent.
 
+Before Reviewer handoff, use the exact final candidate binder digest and the same reviewed setup generator to render production Hook identities for all three canonical roots offline only. Do not write production files or activate production Hooks.
+
+Freeze for each canonical production root:
+- exact candidate commit
+- canonical root
+- canonical private binder absolute path
+- final binder SHA-256
+- exact production SessionStart Hook declaration
+- exact production PostToolUse Hook declaration
+- exact production stable Hook keys/current_hashes
+- expected runtime.json canonical root/digest/trusted absolute Slurm binding
+- production project config/rules declaration identity
+
+Candidate worktree Hook hashes are not production Hook hashes.
+
 Reviewer must inspect:
 - Proposal v2.1
 - Plan/Goal v2.1
@@ -543,7 +582,8 @@ Reviewer must inspect:
 - Gate A-D
 - isolated fake evidence
 - private binder/content integrity
-- Hook trust
+- candidate Hook trust
+- all three offline production-rendered Hook declarations, keys, current_hashes, canonical roots, binder paths and digests
 - absolute Slurm executable binding
 - should-not-change regression
 - rollback
@@ -555,7 +595,11 @@ Reviewer PASS before any production activation.
 
 This Goal does not authorize production activation.
 
-After exact Reviewer PASS, a separate short user authorization bound to exact reviewed candidate commits may permit only:
+After exact Reviewer PASS, a separate short user authorization must bind both:
+- exact reviewed AI Skills/DII/CARE candidate commits
+- exact Reviewer-frozen production Hook keys/current_hashes, canonical roots, private binder paths and binder digests
+
+Only that authorization may permit:
 
 - backup task-owned user-local install/private override/project runtime metadata
 - exact reviewed central install
@@ -565,11 +609,15 @@ After exact Reviewer PASS, a separate short user authorization bound to exact re
 - exact reviewed project hooks/rules/config
 - exact reviewed automation PATH integration
 - exact reviewed consumer integration
-- user trust only exact Hook hashes if Codex requires Hook trust
+- after production setup writes canonical project files, read back actual hooks/list key/current_hash for each canonical root and require exact equality with the Reviewer-frozen production values
+- only after that equality check, user may trust those exact production Hook hashes through the official Codex Hook trust UI
+- this official UI trust write is the only allowed production user-level hooks.state config side effect; Executor never edits user config directly
 - read-only production validation
 - no real Slurm cancellation test
 
-No Bridge source/user-level CODEX_HOME/global rules/user-level Hook modification.
+No Bridge source, ordinary user-level CODEX_HOME setting, global rule, or user-level Hook declaration modification.
+
+Exception: user-personally-triggered official Hook trust UI may write only the exact reviewed `hooks.state.<key>.trusted_hash` records described above.
 
 ## 15. Rollback
 
@@ -585,7 +633,7 @@ Rollback restores:
 - prior automation PATH integration
 - prior consumer commit state
 
-If Hook trust must be removed, use official Hook trust management.
+Hook trust cleanup/rollback may use only the official Codex Hook trust management entry for the exact task key/hash. Executor must not directly edit user config. If the current official UI exposes no revoke/remove action, make the project Hook declaration inactive/removed by normal project rollback so the retained hash is inert, record the exact retained key/hash, and do not claim the trust record was deleted.
 
 Rollback never:
 - cancels/requeues/signals/releases Slurm
@@ -651,7 +699,10 @@ If Clear Writing/Project capability is still unavailable at technical closure, e
 - execpolicy prompt/auto_review as human proof
 - MCP server/database/daemon/broker
 - fifth Gate
-- production Bridge source/global CODEX_HOME modification
+- production Bridge source/global CODEX_HOME modification except the user-triggered official exact Hook trust records described above
+- direct Executor edits to user-level $CODEX_HOME/config.toml
+- trusting candidate-worktree Hook hashes as production identities
+- production setup whose actual hooks/list current_hash differs from the Reviewer-frozen production hash
 - real Slurm cancellation/signal/requeue/release/test allocation
 - paid model/API
 - same-UID hard-isolation claim
