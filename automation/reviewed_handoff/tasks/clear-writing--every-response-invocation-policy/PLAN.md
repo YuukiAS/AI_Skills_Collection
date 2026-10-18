@@ -4,288 +4,579 @@ task_key: clear-writing--every-response-invocation-policy
 decision: PLAN_FROZEN
 ---
 
-# Clear Writing Web Gate execution Plan v0.2
+# Clear Writing Web Gate execution Plan v0.3
 
-Date: 2026-10-18
-Status: FROZEN_FOR_EXECUTION_READY_CRITIC_REVIEW
+Date: 2026-10-18  
+Status: FROZEN_FOR_EXECUTION_READY_REREVIEW
 
-Authority:
-- proposal: `docs/design/clear-writing/CLEAR_WRITING_EVERY_RESPONSE_INVOCATION_POLICY_PROPOSAL_V0_2_2026-10-18.md@1f905d294c3c2e5b0951c9d5e818c285d236cef7`
-- proposal Critic PASS: `docs/design/clear-writing/CLEAR_WRITING_EVERY_RESPONSE_INVOCATION_POLICY_CRITIC_REVIEW_V0_2_2026-10-18.md@50e09a2dc68a097ef21e0cf245f7951eb9d06f89`
-- frozen production candidate: `fd7a1578a5042a46a55c5b638f6d550655b1096b`
-- prior repo/Codex product PASS terminal: `fd0ad0603309fae52b3af0f9f7cdd7f31adea4b4`
-- tracking: Issue #13
-- maintenance companion: `ai-skills-core`
-- domain owner: `writing-style`
-- execution protocol owner: `workflow-core`
+- Repository: `YuukiAS/AI_Skills_Collection`
+- Source/evidence branch:
+  `reviewed/clear-writing--scientific-explanation-readability-repair`
+- Task: `clear-writing--every-response-invocation-policy`
+- Approved invocation-policy proposal:
+  `docs/design/clear-writing/CLEAR_WRITING_EVERY_RESPONSE_INVOCATION_POLICY_PROPOSAL_V0_2_2026-10-18.md@1f905d294c3c2e5b0951c9d5e818c285d236cef7`
+- Proposal Critic PASS:
+  `docs/design/clear-writing/CLEAR_WRITING_EVERY_RESPONSE_INVOCATION_POLICY_CRITIC_REVIEW_V0_2_2026-10-18.md@50e09a2dc68a097ef21e0cf245f7951eb9d06f89`
+- Prior execution package: `35c28d5ee695d20bcfcc37ee919d60545cae34bb`
+- Frozen production candidate:
+  `fd7a1578a5042a46a55c5b638f6d550655b1096b`
+- Prior repo/Codex product PASS terminal:
+  `fd0ad0603309fae52b3af0f9f7cdd7f31adea4b4`
+- Tracking: Issue #13
+- Maintenance companion: `ai-skills-core`
+- Domain owner: `writing-style`
+- Execution protocol owner: `workflow-core`
+- Plan revision: `1 / 1`
+- CI: `NOT_REQUIRED` for this evidence-only Web Gate task.
 
 ## Objective and value
 
-Validate the approved invocation policy on real ChatGPT Web without modifying the already-PASS production candidate.
+Validate the already-approved invocation-policy v0.2 on real ChatGPT Web
+without modifying the already-PASS Clear Writing production candidate.
 
-The product claim under test is intentionally narrow:
+This v0.3 package closes only five execution-readiness defects:
 
-- natural-language and mixed final responses in a participating Project follow the Project-level Clear Writing policy;
-- pure exact-only machine/verbatim requests are activation exemptions;
-- W1 proves Project-policy behavior reliability, not plugin causality;
-- W2 is the only release-critical matched gate for plugin incremental value unless the surface itself exposes stronger direct load evidence;
-- W3 is diagnostic only.
+1. fail closed against Reviewed Handoff watcher/Codex execution before
+   execution-ready PASS + user Kickoff;
+2. freeze exact test-only Web candidate materialization and post-create parity;
+3. prove W2 matched-environment feasibility before any candidate/Project
+   mutation or model request;
+4. make every frozen execution contract read-only after execution-ready PASS;
+5. freeze W2 opaque arm labels and a genuinely blind first-pass review packet.
 
-A Project instruction, a model self-report or an attractive answer cannot substitute for the frozen Web evidence.
+The invocation-policy itself is unchanged.
 
 ## Frozen decisions
 
-### Production and architecture
+### A. Production and architecture remain immutable
 
-The six-skill Clear Writing architecture and candidate `fd7a1578...` are frozen. This task cannot edit any production skill, routing, Marketplace/profile payload, Research Authoring, Presentations, PIE or Mica.
+The six-skill architecture and production candidate `fd7a1578...` remain
+frozen. This task cannot modify any production Skill, routing, Marketplace
+payload, profile, Research Authoring, Presentations, PIE or Mica.
 
-If W0 reveals a real product defect, stop and return to Planner/Critic. Do not repair production inside this Web Gate.
+If W0 exposes a real production defect, stop and return to Planner -> Critic.
+Do not repair it inside the Web Gate.
 
-### Project bridge exact bytes
+### B. Project bridge exact bytes
 
-All Project-policy test conditions must use exactly these UTF-8 bytes:
+Every Project-policy condition must use exactly these UTF-8 bytes:
 
 ```text
 对每条面向用户的自然语言最终回答，以及自然语言与机器内容混合的最终回答，如果当前 Clear Writing 可用，则使用其最合适的现有写作能力；纯 JSON、YAML、代码、命令、原始日志、逐字引用或其他要求精确机器输出的请求不为此强制调用 Clear Writing，直接保持精确原样。不要模拟、重建或复制 Clear Writing 内部规则。
 ```
 
-Before live testing, record this text and its SHA-256 in the freeze manifest. W2 Treatment and Control must use identical bytes.
+Record these exact bytes and SHA-256 before live testing. W2 Treatment and
+Control must use byte-identical text.
 
-### W0 — invocation-policy safety
+### C. Pre-kickoff watcher fail-closed latch
 
-W0-A tests natural-language and mixed responses. PASS requires appropriate existing sibling behavior, exact preservation of embedded machine payloads, no mechanical shortening of necessary long answers, and preservation of complete executable prompts/contracts and genuinely branched procedures.
+This task does **not** use Reviewed Handoff watcher/Codex as its Web Gate
+execution transport.
 
-W0-B tests pure exact-only output after explicit Clear Writing plugin-level selection when the surface permits it. Without concrete Skill-load evidence the maximum claim is:
+The task-local Plan is frozen, but `CURRENT.state` intentionally remains a
+non-watcher state, `NEEDS_GPT_PLANNER`, while waiting for execution-ready
+Critic re-review and the user's later approved Kickoff.
+
+This uses the existing Bridge state machine; no new state/schema is added.
+
+The task must not return to `PLAN_FROZEN` until all of the following are true:
+
+1. execution-ready Critic PASS exists for this exact v0.3 package;
+2. the user sends the exact approved Kickoff;
+3. the exact target + branch watcher lifecycle has been inspected;
+4. no active watcher/Executor event remains for that exact target + branch;
+5. `W2_MATCHED_ENVIRONMENT_PREFLIGHT=PASS`.
+
+Watcher lifecycle inspection/stop follows the current Bridge Kit contract in
+`CLEAR_WRITING_W2_MATCHED_ENVIRONMENT_PREFLIGHT_V0_3_2026-10-18.md`.
+
+After those conditions pass, the manual Web execution transport may use the
+existing legal Reviewed Handoff transitions
+`NEEDS_GPT_PLANNER -> PLAN_FROZEN -> EXECUTING` while the exact branch watcher
+is confirmed stopped. No watcher may be started/restarted for that target +
+branch during manual Web execution.
+
+If watcher inactivity cannot be proven, no live ChatGPT mutation is allowed.
+
+### D. W2 matched-environment preflight is gate zero
+
+Before:
+
+- Web candidate creation/installation;
+- test Project creation/modification;
+- Project instruction writes;
+- the first model prompt;
+
+run the read-only contract:
+
+`docs/design/clear-writing/CLEAR_WRITING_W2_MATCHED_ENVIRONMENT_PREFLIGHT_V0_3_2026-10-18.md`
+
+It must prove, in the current real ChatGPT surface and authorization envelope:
+
+- same account/workspace boundary;
+- same surface/model/visible effort mode;
+- byte-identical Project bridge;
+- candidate availability/consumption can be the only material arm difference;
+- no account/subscription/workspace/role/permission mutation;
+- no repeated global plugin install/uninstall;
+- no cross-arm history access;
+- Project memory is project-only or an explicitly equivalent isolation
+  mechanism.
+
+"Same memory mode" is not enough if that mode may expose cross-Project history.
+
+If any required matched condition cannot be proven:
+
+`W2=INCONCLUSIVE`
+
+and the **entire live batch stops before candidate creation, Project creation,
+W0, W1, W2 and W3**.
+
+This is the single frozen answer for preflight INCONCLUSIVE. W3 never rescues
+it.
+
+### E. Exact Web test candidate materialization
+
+The only candidate setup contract is:
+
+`docs/design/clear-writing/CLEAR_WRITING_WEB_TEST_CANDIDATE_MATERIALIZATION_V0_3_2026-10-18.md`
+
+Source authority is only:
+
+`fd7a1578a5042a46a55c5b638f6d550655b1096b`
+
+The archive must be deterministically built from the exact six Clear Writing
+source Skills and required support files, with source/generated parity,
+per-file SHA-256 and archive SHA-256 recorded before Plugin Creator mutation.
+
+Only after preflight PASS may the executor create **at most one PRIVATE**
+Clear Writing test candidate.
+
+After creation, record the returned:
+
+- `plugin_id`;
+- `release_id`;
+- `current_release_id`;
+- `latest_release_id` when exposed;
+- version;
+- scope;
+- discoverability.
+
+Before W0, re-read the actual Web release using Plugin Creator metadata, file
+listing/read and complete archive retrieval, and prove byte/source parity with
+the frozen package.
+
+If parity or identity cannot be proven, stop before W0. Do not test an
+approximate candidate.
+
+Do not update/delete/replace Research Authoring, Project Instructions Editor,
+Project Thread Handoff or any other plugin.
+
+If W0/W1/W2 FAIL or W2 becomes INCONCLUSIVE after candidate creation, retain the
+single test candidate **unchanged and PRIVATE**. This package does not authorize
+uninstall, deletion, update, publication, permission changes or replacement.
+Later cleanup requires separate explicit user authorization.
+
+### F. W0 — invocation-policy safety
+
+W0 begins only after preflight and candidate parity PASS.
+
+W0-A tests natural-language/mixed safety across ordinary explanation, complex
+scientific explanation, multi-index objects, necessary long answers,
+one-turn English override, complete executable prompt/contract, genuine
+branching, mixed exact payload and exact identities.
+
+W0-B explicitly selects Clear Writing at plugin level for pure exact-only
+stress. Without concrete Skill-load evidence the maximum claim remains:
 
 `PLUGIN_SELECTION_DOES_NOT_CONTAMINATE_EXACT_OUTPUT`
 
-For exact-only tasks the assistant message content must equal the frozen target payload exactly, with no preface, Markdown fence, explanation or reformatting unless the target itself contains it.
+Exact assistant output must equal the frozen target payload exactly.
 
-Any release-critical W0 failure stops W1/W2.
+Any release-critical W0 failure stops W1/W2. The private candidate is retained
+unchanged.
 
-### W1 — Project-policy behavior reliability
+### G. W1 — Project-policy behavior reliability
 
-W1 starts only after W0 PASS and uses disposable test Project context. The user must not manually invoke Clear Writing on each turn.
+W1 runs only after W0 PASS.
 
-The only formal W1 claim is:
+Its only formal claim is:
 
 `PROJECT_POLICY_BEHAVIOR_RELIABILITY`
 
-W1 must test ordinary -> exact exemption -> ordinary recovery, Chinese -> one-turn English -> Chinese recovery, short -> necessary long answer, explanation -> complete executable prompt/contract -> ordinary response, sibling route -> unrelated ordinary response, and mixed -> exact-only -> ordinary response.
+W1 uses the frozen bridge without manual per-turn `@Clear Writing` and tests
+multi-turn exact exemption/recovery, language override/recovery, short/long
+behavior, complete executable prompt preservation and sibling route switching.
 
-Record invocation/load evidence if the surface actually exposes it. In its absence, model self-report and output style cannot prove plugin loading.
+Invocation/load evidence is recorded only when the surface exposes it. Model
+self-report or output style cannot prove loading.
 
-W1 PASS does not prove plugin causality.
+W1 PASS does not prove plugin causality. W1 FAIL stops W2.
 
-### W2 — strict matched plugin increment
+### H. W2 — strict matched plugin increment
 
-W2 starts only after W0 and W1 PASS.
+W2 runs only after W0 and W1 PASS and only under the environment already proven
+eligible by gate-zero preflight.
 
-Before the first W2 prompt, freeze:
+Treatment and Control must remain strictly matched on:
 
-- Treatment and Control Project-setting exact bytes;
-- ChatGPT surface;
-- model identity and any exposed effort mode;
-- actual Web Clear Writing candidate identity;
-- Project memory mode;
-- conversation-isolation structure;
-- task set and task-order policy;
+- Project-setting exact bytes;
+- account/workspace boundary;
+- surface/model/effort;
+- Project memory/isolation;
+- pre-frozen tasks;
+- task-order policy;
 - pair-order policy;
 - attempt budget;
-- rubric and evaluation procedure;
-- Reviewer input;
-- stop condition.
+- rubric/evaluation;
+- fresh isolated conversation contexts.
 
-Treatment and Control must use identical Project-setting bytes, the same surface/model, the same pre-frozen tasks/order/budget/rubric/evaluation, fresh isolated conversation contexts, and no cross-arm access to outputs or Project history.
-
-If Projects are used, both must use the same frozen memory mode and a structure that prevents cross-arm contamination.
+No arm may read the other arm's Project/chat/output history.
 
 The only material difference may be:
 
 `Clear Writing candidate availability / consumption`
 
-Control must not copy Clear Writing Skill prose, imitate Treatment after seeing it, or receive rules derived from Treatment.
+Control cannot copy Skill prose, imitate Treatment or receive Treatment-derived
+rules.
 
-If the product surface cannot legally establish that matched condition:
+If strict matching ceases to hold at any point:
 
 `W2=INCONCLUSIVE`
 
-and release stops. Any known-confounded alternative is `DIAGNOSTIC_ONLY`.
+and release stops. W3 is **not run** after W2 INCONCLUSIVE.
 
-No broad account change may be silently used to manufacture a matched condition. If the required availability difference cannot be achieved inside the reviewed test envelope, stop rather than weakening W2.
+A known-confounded fallback is `DIAGNOSTIC_ONLY` and cannot replace W2.
 
-### W2 frozen scoring rule
+### I. W2 frozen scoring rule
 
-Use the pre-frozen paired task bank with one output per task/arm.
+The previously accepted rule is unchanged:
 
-Hard failures include semantic/factual drift, changed exact machine payload, violated language override, incomplete executable prompt/contract, or materially wrong sibling ownership.
+- P01-P07 are reader-facing preference pairs;
+- P08 is a multi-turn hard control and is not counted in the preference
+  threshold;
+- Treatment preferred for contract-relevant reasons on at least 4/7;
+- Control preferred on at most 1/7;
+- other tasks may tie;
+- Treatment has zero hard failures;
+- exact/mixed protection does not regress.
 
-For the seven reader-facing paired tasks:
+Hard failures include factual/semantic drift, changed exact payload, language
+override violation, incomplete executable prompt/contract and materially wrong
+sibling ownership.
 
-- Treatment must be independently preferred for contract-relevant reasons on at least 4 of 7;
-- Control may be preferred on at most 1 of 7;
-- remaining tasks may tie;
-- Treatment must have zero hard failures;
-- exact/mixed protection controls must not regress.
+One valid output per task/arm. No quality retry.
 
-Initial scoring uses arm-neutral labels A/B. Reveal arm identity only after judgments are frozen.
+### J. W2 genuinely blind first-pass packet
 
-Failure to meet this rule means plugin incremental value is not proven. The rubric cannot change after outputs are seen.
+Opaque arm labels and Treatment/Control mapping were frozen before any Web
+output in:
 
-### W3 — no-bridge diagnostic
+`docs/design/clear-writing/CLEAR_WRITING_W2_REVEAL_MAP_V0_3_2026-10-18.json`
 
-W3 runs only after W2 concludes. It measures discoverability/fallback behavior and is non-release-critical. It cannot rescue W2.
+The Task Bank exposes only the opaque labels, not their arm mapping.
 
-### Fresh G7 reservation
+The initial preference Reviewer must be a **fresh independent thread that has
+not read the reveal map**. Therefore the execution-ready Critic that reviews
+this package/reveal map is ineligible to serve later as the W2 blind preference
+Reviewer.
+
+The initial blind packet may contain only:
+
+- exact task id;
+- exact prompt;
+- opaque output label 1 + raw output;
+- opaque output label 2 + raw output;
+- frozen preference/hard-failure rubric.
+
+It must omit:
+
+- execution order;
+- timestamps;
+- Treatment/Control Project names;
+- plugin/candidate identity;
+- invocation/load evidence;
+- account/workspace locator;
+- any metadata that permits inference from pair order.
+
+Per-task verdict and reason must be fully frozen before the Reviewer is allowed
+to read the reveal map or process/identity metadata.
+
+Only after reveal may the causal summary be formed.
+
+### K. W3 — diagnostic only
+
+W3 uses no Project bridge and no manual Clear Writing invocation.
+
+Frozen reachability:
+
+- W2 PASS -> W3 may run;
+- W2 FAIL -> W3 may run for diagnostic value;
+- W2 INCONCLUSIVE -> W3 is not run.
+
+W3 is non-release-critical and can never rescue W2.
+
+### L. Fresh G7 reservation only
 
 G7 is not executable under this package.
 
-Only after W0/W1/W2 satisfy the release-critical conditions may Planner freeze a separate G7 batch. That later freeze must bind production candidate, actual Web candidate identity, Project bridge bytes, surface/model, Project memory mode, isolation policy, attempt budget, fresh task set, task order, W0/W1/W2 rubric, Reviewer input and stop condition.
+Only after W0/W1/W2 release-critical PASS may Planner create a separate frozen
+G7 package. That future package must bind production candidate, actual Web
+candidate/release identity, Project bridge bytes, surface/model, Project memory,
+conversation isolation, attempt budget, fresh task set, task order,
+W0/W1/W2 rubric, Reviewer input and stop condition.
 
-KR-WEB-01..09, old controls, every W0/W1/W2 task and every debug/diagnostic sample seen during this work are permanently excluded from G7 fresh evidence.
+KR-WEB-01..09, prior controls, W0/W1/W2/W3, preflight diagnostics and every
+debug/recovery sample seen before G7 freeze are permanently excluded.
 
 ## Positive completion
 
-This task has a successful path only when:
+A successful Web Gate path requires:
 
-1. W0 PASS;
-2. W1 `PROJECT_POLICY_BEHAVIOR_RELIABILITY=PASS`;
-3. W2 strict matched comparison PASS and plugin incremental value is proven;
-4. W3 diagnostic result is recorded honestly;
-5. all identities, inputs, outputs, attempts and evidence are preserved;
-6. an independent Reviewer reads the actual Web outputs and evidence.
+1. watcher fail-closed preconditions PASS;
+2. `W2_MATCHED_ENVIRONMENT_PREFLIGHT=PASS`;
+3. exact PRIVATE candidate materialization + post-create parity PASS;
+4. W0 PASS;
+5. W1 `PROJECT_POLICY_BEHAVIOR_RELIABILITY=PASS`;
+6. W2 strict matched plugin increment PASS;
+7. W3 diagnostic recorded;
+8. complete raw evidence and attempt records;
+9. independent final review of actual Web evidence.
 
-A successful result only permits Planner to prepare a separate fresh-G7 freeze. It does not authorize release or rollout to the real Project setting.
+Success only permits Planner to prepare a later G7 freeze. It does not authorize
+real Project rollout, release or production changes.
+
+An INCONCLUSIVE path is also a truthful terminal product-evaluation outcome for
+this batch; it does not become PASS.
 
 ## Non-substitutable semantics
 
-- Pure exact-only output is an activation exemption, not proof of a global Clear Writing bypass coordinator.
+- Pure exact-only output is an activation exemption.
 - W1 reliability is not plugin causality.
-- W2 must be truly matched or be `INCONCLUSIVE`.
-- Model self-report never proves Skill/plugin consumption.
-- Clear Writing selection does not justify changing protected machine payloads.
-- Existing sibling ownership remains unchanged.
-- A poor model answer is evidence and cannot be retried until it wins.
-- No development sample can later be relabeled G7 fresh.
-- No gate claim may exceed its actual evidence.
+- W2 must be strictly matched or INCONCLUSIVE.
+- Default/cross-Project memory is not acceptable isolation.
+- Model self-report never proves plugin/Skill consumption.
+- The Web candidate must be byte/source-bound to `fd7a1578...`.
+- No second/replacement candidate may be created under this package.
+- Failure does not authorize candidate cleanup/mutation.
+- The W2 first-pass Reviewer must remain blind to arm identity and order metadata.
+- Poor model output is evidence and cannot be rerun to win.
+- Frozen contracts cannot be edited during execution.
+- No Gate claim may exceed actual evidence.
 
 ## Implementation / execution scope
 
-Repository writes are limited to task control/evidence under:
+After execution-ready PASS, the following are **read-only** for the entire
+execution:
 
-- `automation/reviewed_handoff/tasks/clear-writing--every-response-invocation-policy/`;
-- `docs/goals/`;
-- `docs/operations/prompts/`;
-- `docs/design/clear-writing/CLEAR_WRITING_WEB_GATE_TASK_BANK_V0_2_2026-10-18.md`;
-- `results/clear-writing--every-response-invocation-policy/`;
-- Issue #13 tracking text.
+- approved proposal v0.2 and its Critic review;
+- `REQUEST.md`;
+- this `PLAN.md`;
+- Canonical Goal v0.3;
+- Kickoff v0.3;
+- Project bridge bytes;
+- Task Bank v0.3;
+- W2 matched-environment preflight contract;
+- Web test candidate materialization contract;
+- W2 reveal map;
+- pair/task order;
+- attempt budget;
+- rubric;
+- scoring thresholds;
+- stop/recovery conditions.
 
-No production source edits are allowed.
+Execution may write only:
+
+- `results/clear-writing--every-response-invocation-policy/**`;
+- existing Reviewed Handoff executor-owned `CURRENT` fields through legal
+  transitions;
+- necessary Issue #13 tracking copy.
+
+No execution write is allowed under `docs/goals/`,
+`docs/operations/prompts/`, `docs/design/clear-writing/`, `skills/`,
+`plugins/`, profiles, Marketplace source or other production areas.
+
+If a frozen contract needs to change:
+
+**stop -> Planner -> independent Critic**.
+
+Do not edit in place and continue.
 
 ## Account / Project / plugin authorization boundary
 
-This planning turn authorizes no live ChatGPT mutation.
+This planning/revision turn authorizes **zero live ChatGPT mutation**.
 
-Only after an independent Critic gives execution-ready PASS to this exact Plan/Goal/Kickoff package and the user explicitly sends the approved kickoff may the execution thread perform or request the reviewed test-only setup.
+Only after execution-ready Critic PASS and the user sends the exact approved
+Kickoff may the manual Web execution thread begin the read-only watcher/W2
+preflight.
 
-The reviewed setup may create disposable empty test Projects/chats, place the exact frozen bridge text in those disposable Projects, freeze the same Project memory mode where the product exposes such a control, and inspect the actual Clear Writing candidate identity/availability.
+After preflight PASS, the reviewed live envelope allows only:
 
-Any platform confirmation needed to make the exact reviewed **test candidate** available remains a user-visible action at execution time. The package does not authorize changes to the user's real AI Research Stack Project, global custom instructions, plugin permissions, unrelated chats/files, subscription/account identity, public release state or any broader plugin set.
+- creation of at most one PRIVATE Clear Writing test candidate from the frozen
+  deterministic archive;
+- read-back verification of that candidate's exact release;
+- disposable empty test Projects/chats;
+- frozen bridge bytes in those disposable Projects;
+- the matched Project-only/equivalent memory isolation proven at preflight;
+- the per-gate model requests in the frozen Task Bank;
+- public-safe evidence preservation.
 
-The package also does not authorize repeated candidate availability toggling merely to force W2 to become matched. If strict W2 cannot be established without operations outside this envelope, record `W2=INCONCLUSIVE` and stop.
+Not authorized:
+
+- real AI Research Stack Project setting edits;
+- global custom-instruction edits;
+- other plugin create/update/delete/uninstall;
+- Clear Writing replacement candidate;
+- Clear Writing permission changes;
+- repeated global plugin install/uninstall;
+- account/workspace/subscription/role/permission changes;
+- deleting/overwriting user chats/files;
+- public/unlisted release;
+- G7;
+- PIE/Mica/Research Authoring/Presentations.
+
+Any operation outside this envelope requires stop and new explicit review/user
+authorization.
 
 ## Evidence preservation
 
-Frozen public-safe inputs live in:
+Frozen public-safe inputs:
 
-`docs/design/clear-writing/CLEAR_WRITING_WEB_GATE_TASK_BANK_V0_2_2026-10-18.md`
+`docs/design/clear-writing/CLEAR_WRITING_WEB_GATE_TASK_BANK_V0_3_2026-10-18.md`
 
-Execution evidence must be written under:
+Execution evidence root:
 
-`results/clear-writing--every-response-invocation-policy/web-gate-v0.2/`
+`results/clear-writing--every-response-invocation-policy/web-gate-v0.3/`
 
-Required artifacts:
+Required evidence:
 
+- `preflight/W2_MATCHED_ENVIRONMENT_PREFLIGHT.md`
 - `FREEZE_MANIFEST.json`
 - `PROJECT_BRIDGE.txt`
-- W0 full inputs/raw outputs/run manifest/verdicts
-- W1 full turn-by-turn sequences/run manifest/verdicts
-- W2 arm-separated raw outputs, frozen pair manifest, blinded review, reveal map and causal verdict
-- W3 diagnostic inputs/outputs/verdict
+- candidate archive/file manifest + post-create release parity record
+- W0 full prompts/raw outputs/run manifests/verdicts
+- W1 full turn-by-turn outputs/run manifest/verdicts
+- W2 arm-separated raw execution evidence
+- W2 sanitized blind packet
+- W2 blind Reviewer verdict/reasons
+- reveal record + causal summary
+- W3 evidence when reachable
+- attempt/retry log
 - `FINAL_REVIEW_INPUT_MANIFEST.md`
 - `RESULT.md`
 
-Each run records at minimum gate/task/turn id, timestamp, surface/model label, Project memory mode, bridge SHA, frozen production commit, actual Web candidate identity or `UNOBSERVABLE`, opaque isolation id, attempt number, prompt SHA-256, response SHA-256, direct invocation/load evidence when available, and exact-output comparison when applicable.
+Each model run records gate/task/turn, timestamp, surface/model, Project memory
+mode, bridge hash, production candidate, actual Web plugin/release identity,
+opaque conversation isolation id, attempt number, prompt SHA, response SHA,
+load evidence when exposed and exact comparison when applicable.
 
-Do not store account IDs, credentials, private chat URLs or unrelated Project content. Public-safe full outputs may be committed. UI screenshots containing private account information belong only in `private/exports/`; repository evidence records a sanitized description/hash when needed.
+The **blind packet** deliberately strips timing/order/identity metadata before
+being given to the W2 preference Reviewer.
+
+Do not store account IDs, credentials, private chat URLs or unrelated Project
+content. Account/private UI screenshots go only to
+`private/exports/clear-writing--every-response-invocation-policy/`; public
+evidence contains sanitized description/hash only.
 
 ## Attempt / retry policy
 
-Default: exactly one model answer per frozen task/turn/arm.
+Default: exactly one valid model answer per frozen task/turn/arm.
 
-One technical retry is allowed only when the original attempt produced no usable model answer because of an infrastructure failure. Preserve the failed-attempt record.
+One infrastructure-only retry is permitted only when the original attempt
+produced no usable model answer due to transport/service interruption. Preserve
+the failed attempt and reason.
 
-A low-quality or failing answer is not an infrastructure failure and cannot be retried.
+A bad, ugly, wrong, incomplete or plugin-failing answer is a real result and
+cannot be retried.
 
 ## Stop / recovery
 
-Stop and return to Planner if:
+Stop immediately and return to Planner when:
 
+- watcher inactivity cannot be proven;
+- W2 preflight is INCONCLUSIVE;
+- exact candidate package/release parity fails;
+- unexpected plugin scope/discoverability/identity appears;
 - W0 release-critical safety fails;
 - W1 behavior reliability fails;
-- frozen identity cannot be established;
-- memory/isolation cannot prevent cross-arm contamination;
-- W2 strict matched availability cannot be established;
-- requested setup exceeds the reviewed account/project/plugin envelope;
+- W2 strict matching ceases to hold;
+- cross-arm memory contamination is possible;
+- a requested operation exceeds the account/Project/plugin envelope;
 - surface/model/candidate identity changes mid-batch;
-- evaluation rules would need to change after outputs are seen.
+- frozen rubric/contract would need modification after outputs are seen.
 
-Do not create a successor automatically.
+No successor is created automatically.
 
-After infrastructure-only interruption, resume from the first unanswered frozen task only if every frozen identity remains unchanged. Otherwise invalidate the partial batch and return to Planner before restarting.
+If a failure occurs after the private test candidate exists, retain it unchanged
+and private.
+
+After infrastructure-only interruption, resume from the first unanswered frozen
+task only when every frozen identity and matched condition remains unchanged.
+Otherwise invalidate the partial batch and return to Planner.
 
 ## Acceptance and regression gates
 
-| Gate | Required result | Release effect |
+| Gate | Required result | Effect |
 |---|---|---|
+| Preflight | strict matched environment PASS | blocker before all live mutation |
+| Candidate | deterministic source/archive/Web-release parity PASS | blocker before W0 |
 | W0 | natural/mixed safety + explicit-selection exact stress PASS | blocker |
 | W1 | `PROJECT_POLICY_BEHAVIOR_RELIABILITY=PASS` | blocker |
 | W2 | strict matched plugin increment PASS | blocker; INCONCLUSIVE stops |
-| W3 | diagnostic result recorded | non-blocking |
-| G7 | separate later frozen fresh batch | not executable here |
+| W3 | diagnostic only after W2 PASS/FAIL | non-blocking |
+| G7 | separate later frozen batch | forbidden here |
 
-Existing KR-WEB-01..09 and four prior should-not-change controls remain historical known evidence and do not substitute for current Web behavior.
+Existing KR-WEB-01..09 and historical controls remain known evidence only.
 
 ## Final independent review input
 
-The Reviewer must receive:
+The final product Reviewer receives:
 
-1. this Plan, the matching Goal and approved Kickoff;
-2. proposal v0.2 and its Critic PASS;
-3. `FREEZE_MANIFEST.json`;
-4. exact bridge bytes/hash;
-5. actual Web candidate identity evidence;
-6. every W0 raw output and exact comparison;
-7. every W1 turn-by-turn output and behavior verdict;
-8. both W2 arms with arm identity hidden for first-pass scoring;
-9. frozen W2 rubric, blinded judgments, reveal map and causal verdict;
-10. W3 diagnostic evidence;
-11. attempt/retry log;
-12. executor `RESULT.md`.
+1. this frozen Plan, Goal and approved Kickoff;
+2. approved proposal v0.2 and proposal Critic PASS;
+3. preflight evidence;
+4. candidate source/archive/Web-release parity evidence;
+5. freeze manifest and bridge bytes/hash;
+6. W0 full raw outputs/exact comparisons;
+7. W1 full multi-turn outputs;
+8. W2 raw arm evidence;
+9. the **already-frozen blind Reviewer judgments**;
+10. reveal map/reveal record and causal summary;
+11. W3 diagnostic evidence when reachable;
+12. attempts/retries;
+13. executor `RESULT.md`.
 
-The Reviewer separately decides PROCESS / IDENTITY, W0 PRODUCT SAFETY, W1 PROJECT_POLICY_BEHAVIOR_RELIABILITY, W2 PLUGIN_INCREMENT and W3 diagnostic finding. The Reviewer cannot convert W1 into plugin causality, rescue a confounded W2 or authorize G7 unless W0/W1/W2 meet the frozen criteria.
+The W2 initial preference review must be performed earlier by a fresh blind
+Reviewer that has not read the reveal map. The execution-ready Critic that
+reviews this package cannot serve as that blind Reviewer.
+
+The final causal Reviewer separately judges:
+
+- PROCESS / IDENTITY;
+- candidate parity;
+- W0 PRODUCT SAFETY;
+- W1 PROJECT_POLICY_BEHAVIOR_RELIABILITY;
+- W2 PLUGIN_INCREMENT PASS / FAIL / INCONCLUSIVE;
+- W3 diagnostic, if reachable.
+
+No Reviewer may convert W1 into plugin causality, rescue confounded W2 or
+authorize G7 unless W0/W1/W2 meet the frozen release-critical criteria.
 
 ## Natural-language usage / routing expectations
 
-If the gates later succeed, the intended normal experience is:
+If later Gates succeed, normal Project behavior is intended to be:
 
-- ordinary and mixed reader-facing answers in a participating Project follow the Project-level Clear Writing policy;
-- pure exact-only machine requests remain untouched without forcing a writing Skill;
-- the user does not manually invoke Clear Writing on every normal turn;
-- sibling writing responsibilities remain task-appropriate.
+- ordinary and mixed reader-facing responses use the Project-level Clear
+  Writing policy;
+- pure exact-only requests remain activation exemptions;
+- the user does not manually invoke Clear Writing every normal turn;
+- sibling writing responsibilities remain appropriate.
 
 This Plan does not claim those behaviors are already verified.
 
 ## Out of scope
 
-Production edits, real Project rollout, broad account/plugin mutation, paid external review, G7 execution, user acceptance, release/version bump, PIE, Mica, Research Authoring, Presentations, and any new skill/router/state machine/finalizer are out of scope.
+Production edits, real Project rollout, global account/plugin mutation, candidate
+cleanup, paid external model review, G7 execution, user acceptance,
+release/version bump, PIE, Mica, Research Authoring, Presentations and any new
+skill/router/state machine/finalizer remain out of scope.
