@@ -1,5 +1,50 @@
 # Protected-partition chat confirmation candidate result
 
+## Global user-level migration (authoritative update)
+
+This section supersedes the project-local Hook identities and status below.
+The retained older sections are historical review evidence only.
+
+```text
+TASK = hpc--slurm-cancel-production-closure
+AI_SKILLS_GLOBAL_HOOK_PRODUCT_COMMIT = da5e88bb6c1fb94e0cf66dd1d8409e9ab9fcf2c0
+DII_GLOBAL_HOOK_CONSUMER_COMMIT = 6e8f06cb9384198a0e3003d55c6f43aa3726a523
+CARE_GLOBAL_HOOK_CONSUMER_COMMIT = e5db8aac5926ea63eedae951f1fda1ac74e1b33a
+HOOK_SHA256 = 1e9e42cff1f0af369f58dd4bb3045ae62b786b530eade34ee89cd704c5b595a4
+HOOK_PATH = /users/a/e/aereinh/.codex/slurm-protected-cancel/slurm-hook-1e9e42cff1f0af369f58dd4bb3045ae62b786b530eade34ee89cd704c5b595a4.py
+PRE_TOOL_USE_KEY = /users/a/e/aereinh/.codex/config.toml:pre_tool_use:0:0
+PRE_TOOL_USE_CURRENT_HASH = sha256:9512ae5ea7aaf8cb31ccf450b9238819ea9d779b792a18c8313091af2368ba93
+POST_TOOL_USE_KEY = /users/a/e/aereinh/.codex/config.toml:post_tool_use:0:0
+POST_TOOL_USE_CURRENT_HASH = sha256:684065821e26c04f04273d4e90f8c70b05a37c40fa5761d664bdec3e1508620c
+HOOK_SOURCE = USER_CONFIG
+PROTECTED_CANCEL_PARTITIONS = ["htzhulab"]
+PROJECT_LOCAL_HOOKS = REMOVED_FROM_ALL_THREE_CANDIDATES
+WRAPPER_SHIM_PATH_INTERCEPTION = REMOVED
+PRODUCTION_TRUST = PENDING_SINGLE_GLOBAL_USER_ACTION
+REAL_SLURM_COMMAND_THIS_REPAIR = NO
+REAL_SLURM_MUTATION_THIS_REPAIR = NO
+ACCIDENTAL_REAL_SLURM_COMMAND_HISTORY = scancel 9101
+ACCIDENTAL_REAL_SLURM_MUTATION_HISTORY = UNKNOWN
+```
+
+The active render is
+`global-production-render/`. The older `production-render/` directory is
+explicitly obsolete and is retained only to preserve prior review evidence.
+The new Hook runtime and policy are user-local under the active
+`$CODEX_HOME`, so AI Skills, DII, and CARE share the same declaration keys,
+current hashes, protected policy, and consumed replay ledger.
+
+Validation for this migration:
+
+- `python -B -m unittest tests.test_slurm_protected_cancel tests.test_slurm_workflows`: 28 passed.
+- `python -B -m unittest discover -s tests`: 357 passed.
+- `python -B scripts/skills.py validate`: PASS.
+- `python -B scripts/skills.py audit --all`: PASS.
+- Marketplace write/validate/check/path-report: PASS.
+- DII protected-cancel normal entry: 3 passed.
+- CARE cancellation propagation: 11 passed.
+- All scheduler and cancellation behavior tests used task-owned fake executables.
+
 ## Status
 
 ```text
