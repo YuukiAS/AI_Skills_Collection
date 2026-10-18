@@ -31,4 +31,3 @@ The fixed baseline-receipt sentence did not appear consistently in the reset and
 - `G4_FINAL_LIVE=PASS_USER_ACCEPTED_WEB_ARTIFACTS`
 - `IMPLICIT_INVOCATION=NOT_TESTED_NOT_REQUIRED`
 - `ADDITIONAL_MODEL_REPLAY=NOT_RUN`
-
