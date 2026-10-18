@@ -53,6 +53,27 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
             self.assertIn("Present any assistant recommendation afterward", text)
             self.assertIn("source consensus", text)
 
+    def test_response_clarity_groups_reasoning_units_and_builds_reader_models(self):
+        source = (REPO_ROOT / "skills/writing/core/response-clarity/SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        generated = (
+            REPO_ROOT / "plugins/codex/plugins/writing-style/skills/response-clarity/SKILL.md"
+        ).read_text(encoding="utf-8")
+
+        for text in (source, generated):
+            normalized = " ".join(text.split())
+            self.assertIn("complete semantic or reasoning units", normalized)
+            self.assertIn("read the whole answer for fragmentation", normalized)
+            self.assertIn("do not enforce fixed counts", normalized)
+            self.assertIn("Long answers may remain detailed", normalized)
+            self.assertIn(
+                "unfamiliar scientific method, term, or mathematical object", normalized
+            )
+            self.assertIn("For multi-index notation", normalized)
+            self.assertIn("the definition is missing", normalized)
+            self.assertIn("Do not guess a scientific meaning", normalized)
+
     def test_writing_fidelity_fails_unreadable_chinese_final_artifacts(self):
         text = (REPO_ROOT / "skills/writing/core/writing-fidelity/SKILL.md").read_text(encoding="utf-8")
         self.assertIn("classify the deliverable as `qa_failed`", text)

@@ -100,6 +100,38 @@ Prefer concise paragraphs. Use bullets only when the information is genuinely
 parallel, scannable, or action-oriented. Do not create a report-shaped answer
 for a simple question.
 
+Build paragraphs around complete semantic or reasoning units, not individual
+sentences. When adjacent sentences define one object, explain one causal chain,
+complete one local comparison or derivation, or attach a conclusion to its
+direct caveat, keep them together unless separating them gives the reader real
+navigation or comparison value. Use headings, lists, and display math when they
+clarify genuine structure; do not isolate a short definition, one-step formula,
+or its immediate interpretation merely to make the answer look structured.
+
+Before finalizing a complex explanation, read the whole answer for
+fragmentation. Reorganize repeated single-sentence paragraphs, headings that
+contain only a passing point, and formulas detached from their local meaning.
+Make that judgment from the argument's structure; do not enforce fixed counts
+for words, lines, paragraphs, headings, formulas, or examples. Long answers may
+remain detailed when the comparison, derivation, evidence boundary, or
+uncertainty genuinely needs that depth.
+
+When an unfamiliar scientific method, term, or mathematical object first
+appears and the context has not already established it, build a reader model
+from known facts before asking the formal name, notation, or formula to carry
+the explanation. State what kind of object it is, its level or unit, whether it
+is observed, given, estimated, or sought when that status is known, why it is
+needed here, and what later calculation, judgment, or step uses it. For
+multi-index notation, explain each new index role or point back to an earlier
+definition that already does so.
+
+This reader model must not add domain claims. If the source or domain owner
+does not define an object's type, level, index roles, status, or use, say that
+the definition is missing or ask for it. Do not guess a scientific meaning and
+then present the guess as settled explanation. Preserve the exact formal term,
+symbol, formula, and any supported uncertainty after the natural-language
+orientation.
+
 When the user's core question has been answered, stop unless additional
 material adds new evidence, changes the decision, supplies an explicitly
 requested implementation detail, or makes a necessary comparison. Do not
@@ -126,7 +158,9 @@ synthesis or a decision.
    opening.
 6. Remove unnecessary English and internal process labels from reader-facing
    prose while preserving exact identifiers.
-7. Check that the final answer still matches the actual result and the user's
+7. For complex explanations, check the whole answer for fragmented reasoning
+   and for unfamiliar objects whose first use lacks a supported reader model.
+8. Check that the final answer still matches the actual result and the user's
    latest instruction.
 
 ## Red Flags
@@ -138,6 +172,10 @@ synthesis or a decision.
 - Ordinary English words are left in a Chinese answer merely because the source
   material was English.
 - A pure machine-output request is paraphrased or decorated.
+- One continuous explanation becomes a chain of single-sentence paragraphs,
+  low-value headings, or short formulas detached from their interpretation.
+- An unfamiliar scientific object or multi-index symbol appears before the
+  reader knows its supported level, role, or downstream use.
 - A document/report/README task stays here instead of going to `chinese-prose`
   or `scientific-rewrite`.
 - Product interface copy stays here instead of going to `product-ui-copy`.
