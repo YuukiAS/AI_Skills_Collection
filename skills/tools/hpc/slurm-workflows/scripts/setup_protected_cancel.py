@@ -14,6 +14,7 @@ from typing import Any
 
 
 PRIVATE_DIR = "slurm-protected-cancel"
+HOOKS_DIR = "hooks"
 RUNTIME_NAME = "runtime.json"
 POLICY_NAME = "policy.toml"
 RULES_REL = Path("rules/slurm-protected-cancel.rules")
@@ -21,8 +22,12 @@ DECLARATION_START = "# ai-skills-slurm-protected-cancel:declarations:start"
 DECLARATION_END = "# ai-skills-slurm-protected-cancel:declarations:end"
 PERMISSIONS_START = "# ai-skills-slurm-protected-cancel:permissions:start"
 PERMISSIONS_END = "# ai-skills-slurm-protected-cancel:permissions:end"
-PROFILE = "slurm-protected-cancel-global"
-HOOK_EVENT_KEYS = {"PostToolUse": "post_tool_use", "PreToolUse": "pre_tool_use"}
+LEGACY_PROFILES = {"slurm-chat-guard", "slurm-protected-cancel-global"}
+HOOK_EVENT_KEYS = {
+    "PermissionRequest": "permission_request",
+    "PostToolUse": "post_tool_use",
+    "PreToolUse": "pre_tool_use",
+}
 
 
 def _sha256_bytes(value: bytes) -> str:
@@ -59,12 +64,21 @@ def _hooks_document(hook_path: Path, hook_digest: str) -> dict[str, Any]:
     command = _hash_checked_command(hook_path, hook_digest)
     return {
         "PreToolUse": [{
-            "matcher": "^(Bash|shell_command|exec_command)$",
+            "matcher": "^Bash$",
             "hooks": [{
                 "type": "command",
                 "command": command,
                 "timeout": 15,
                 "statusMessage": "Checking Slurm cancellation policy",
+            }],
+        }],
+        "PermissionRequest": [{
+            "matcher": "^Bash$",
+            "hooks": [{
+                "type": "command",
+                "command": command,
+                "timeout": 15,
+                "statusMessage": "Enforcing protected Slurm cancellation",
             }],
         }],
         "PostToolUse": [{
@@ -121,10 +135,17 @@ def _normalized_hook_hash(event_name: str, group: dict[str, Any], handler: dict[
     return "sha256:" + _sha256_bytes(encoded)
 
 
-def _rules_text(scancel_paths: list[Path], private_root: Path) -> str:
-    patterns = ["scancel", *[str(path) for path in sorted(set(scancel_paths), key=str)], str(private_root)]
+def _rules_text(scancel_paths: list[Path]) -> str:
+    patterns = ["scancel", *[str(path) for path in sorted(set(scancel_paths), key=str)]]
     return "\n".join(
-        [f"prefix_rule(pattern=[{_toml_string(pattern)}], decision=\"forbidden\")" for pattern in patterns]
+        [
+            "prefix_rule("
+            f"pattern=[{_toml_string(pattern)}], "
+            'decision="prompt", '
+            'justification="Slurm cancellation must pass the normal approval boundary."'
+            ")"
+            for pattern in patterns
+        ]
         + [""]
     )
 
@@ -148,7 +169,7 @@ def render_global_contract(
     hook_source = (skill_scripts / "slurm_cancel_hook.py").read_bytes()
     hook_digest = _sha256_bytes(hook_source)
     private_root = codex_home / PRIVATE_DIR
-    hook_path = private_root / f"slurm-hook-{hook_digest}.py"
+    hook_path = private_root / HOOKS_DIR / f"slurm-protected-cancel-{hook_digest}.py"
     policy_path = private_root / POLICY_NAME
     partitions = sorted({value.strip() for value in protected_partitions if value.strip()})
     if not partitions:
@@ -156,7 +177,7 @@ def render_global_contract(
     policy = _policy_text(partitions)
     hooks = _hooks_document(hook_path, hook_digest)
     runtime = {
-        "schema_version": 3,
+        "schema_version": 4,
         "codex_home": str(codex_home),
         "hook_path": str(hook_path),
         "hook_sha256": hook_digest,
@@ -171,10 +192,10 @@ def render_global_contract(
         "operation": "ordinary_cancel",
     }
     files = {
-        f"{PRIVATE_DIR}/{hook_path.name}": hook_source,
+        str(Path(PRIVATE_DIR) / HOOKS_DIR / hook_path.name): hook_source,
         f"{PRIVATE_DIR}/{POLICY_NAME}": policy,
         f"{PRIVATE_DIR}/{RUNTIME_NAME}": (json.dumps(runtime, indent=2, sort_keys=True) + "\n").encode(),
-        str(RULES_REL): _rules_text([scancel_invocation, scancel_realpath], private_root).encode(),
+        str(RULES_REL): _rules_text([scancel_invocation, scancel_realpath]).encode(),
     }
     source_path = codex_home / "config.toml"
     hook_keys: dict[str, str] = {}
@@ -187,7 +208,7 @@ def render_global_contract(
         "files": files,
         "hooks": hooks,
         "manifest": {
-            "schema_version": 3,
+            "schema_version": 4,
             "codex_home": str(codex_home),
             "hook_path": str(hook_path),
             "hook_sha256": hook_digest,
@@ -195,7 +216,7 @@ def render_global_contract(
             "protected_cancel_partitions": partitions,
             "scontrol_path": str(scontrol_realpath),
             "scancel_path": str(scancel_realpath),
-            "scancel_denied_paths": [str(path) for path in sorted({scancel_invocation, scancel_realpath}, key=str)],
+            "scancel_prompt_paths": [str(path) for path in sorted({scancel_invocation, scancel_realpath}, key=str)],
             "hook_source_path": str(source_path),
             "hook_keys": hook_keys,
             "hook_current_hashes": hook_hashes,
@@ -209,19 +230,38 @@ def _strip_block(text: str, start: str, end: str) -> str:
     return pattern.sub("\n", text)
 
 
+def _strip_permission_profile(text: str, profile: str) -> str:
+    lines = text.splitlines(keepends=True)
+    output: list[str] = []
+    skipping = False
+    header = re.compile(r"^\[permissions\.([^\.\]]+)(?:\.[^\]]+)?\]\s*$")
+    for line in lines:
+        table = header.match(line.strip())
+        if table:
+            skipping = table.group(1) == profile
+        elif skipping and line.lstrip().startswith("["):
+            skipping = False
+        if not skipping:
+            output.append(line)
+    return "".join(output)
+
+
 def update_user_config_text(original: str, rendered: dict[str, Any]) -> str:
     text = _strip_block(original, DECLARATION_START, DECLARATION_END)
     text = _strip_block(text, PERMISSIONS_START, PERMISSIONS_END)
-    if re.search(r"(?m)^default_permissions\s*=", text):
-        raise ValueError("existing default_permissions is not task-owned")
-    if re.search(rf"(?m)^\[permissions\.{re.escape(PROFILE)}(?:\.|\])", text):
-        raise ValueError("existing global protected-cancel permission profile is not task-owned")
+    for profile in LEGACY_PROFILES:
+        text = _strip_permission_profile(text, profile)
+    text = re.sub(
+        r'(?m)^default_permissions\s*=\s*["\'](?:slurm-chat-guard|slurm-protected-cancel-global)["\']\s*\n?',
+        "",
+        text,
+    )
 
     hooks = rendered["hooks"]
     declarations = "\n".join([
         DECLARATION_START,
-        f'default_permissions = "{PROFILE}"',
         f"hooks.PreToolUse = {_event_toml(hooks['PreToolUse'])}",
+        f"hooks.PermissionRequest = {_event_toml(hooks['PermissionRequest'])}",
         f"hooks.PostToolUse = {_event_toml(hooks['PostToolUse'])}",
         DECLARATION_END,
         "",
@@ -246,20 +286,7 @@ def update_user_config_text(original: str, rendered: dict[str, Any]) -> str:
         body += "hooks = true\n"
     text = text[: features.start("body")] + body + text[features.end("body") :]
 
-    manifest = rendered["manifest"]
-    private_root = Path(manifest["hook_path"]).parent
-    denies = [Path(value) for value in manifest["scancel_denied_paths"]] + [private_root]
-    permissions = [
-        PERMISSIONS_START,
-        f"[permissions.{PROFILE}]",
-        'extends = ":workspace"',
-        "",
-        f"[permissions.{PROFILE}.filesystem]",
-        *[f"{_toml_string(str(path))} = \"deny\"" for path in sorted(set(denies), key=str)],
-        PERMISSIONS_END,
-        "",
-    ]
-    return text.rstrip() + "\n\n" + "\n".join(permissions)
+    return text.rstrip() + "\n"
 
 
 def _write(path: Path, content: bytes, mode: int) -> None:
@@ -280,14 +307,21 @@ def _write(path: Path, content: bytes, mode: int) -> None:
 def write_rendered(rendered: dict[str, Any], destination: Path, *, install: bool) -> None:
     destination = destination.expanduser().resolve()
     for relative, content in rendered["files"].items():
-        mode = 0o700 if Path(relative).name.startswith("slurm-hook-") else 0o600
+        mode = 0o700 if Path(relative).name.startswith("slurm-protected-cancel-") else 0o600
         _write(destination / relative, content, mode)
     if install:
         private_root = destination / PRIVATE_DIR
-        for directory in (private_root, private_root / "consumed", private_root / "audit"):
+        for directory in (
+            private_root,
+            private_root / HOOKS_DIR,
+            private_root / "consumed",
+            private_root / "audit",
+        ):
             directory.mkdir(parents=True, exist_ok=True)
             os.chmod(directory, 0o700)
-        for stale in private_root.glob("slurm-hook-*.py"):
+        stale_hooks = list(private_root.glob("slurm-hook-*.py"))
+        stale_hooks.extend((private_root / HOOKS_DIR).glob("slurm-protected-cancel-*.py"))
+        for stale in stale_hooks:
             if stale != Path(rendered["manifest"]["hook_path"]):
                 stale.unlink()
         config_path = destination / "config.toml"

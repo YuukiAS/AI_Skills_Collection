@@ -54,6 +54,17 @@ def _deny(reason: str) -> int:
     )
 
 
+def _permission_deny(reason: str) -> int:
+    return _emit(
+        {
+            "hookSpecificOutput": {
+                "hookEventName": "PermissionRequest",
+                "decision": {"behavior": "deny", "message": reason},
+            }
+        }
+    )
+
+
 def _post_result(status: str, reason: str, **extra: Any) -> int:
     return _emit({"protected_cancel": status, "reason": reason, **extra})
 
@@ -68,11 +79,14 @@ def _private_path_ok(path: Path, *, directory: bool = False) -> bool:
 
 
 def _load_runtime(hook_path: Path) -> tuple[Path, dict[str, Any]]:
-    private_root = hook_path.parent
+    hook_dir = hook_path.parent
+    private_root = hook_dir.parent
     runtime_path = private_root / "runtime.json"
     policy_path = private_root / "policy.toml"
     if not (
         _private_path_ok(private_root, directory=True)
+        and hook_dir.name == "hooks"
+        and _private_path_ok(hook_dir, directory=True)
         and _private_path_ok(hook_path)
         and _private_path_ok(runtime_path)
         and _private_path_ok(policy_path)
@@ -81,13 +95,13 @@ def _load_runtime(hook_path: Path) -> tuple[Path, dict[str, Any]]:
     runtime = json.loads(runtime_path.read_text(encoding="utf-8"))
     if not isinstance(runtime, dict):
         raise ValueError("runtime_not_object")
-    if runtime.get("schema_version") != 3 or runtime.get("codex_home") != str(private_root.parent):
+    if runtime.get("schema_version") != 4 or runtime.get("codex_home") != str(private_root.parent):
         raise ValueError("runtime_identity_mismatch")
     hook_digest = _sha256(hook_path)
     if (
         runtime.get("hook_path") != str(hook_path)
         or runtime.get("hook_sha256") != hook_digest
-        or hook_path.name != f"slurm-hook-{hook_digest}.py"
+        or hook_path.name != f"slurm-protected-cancel-{hook_digest}.py"
     ):
         raise ValueError("runtime_hook_mismatch")
     if runtime.get("operation") != OPERATION:
@@ -157,11 +171,9 @@ def _resolve_targets(runtime: dict[str, Any], job_ids: list[str]) -> list[dict[s
 
 def _question_id_for_targets(targets: list[dict[str, str]]) -> str:
     identity = [{"job_id": target["job_id"], "partition": target["partition"]} for target in targets]
-    payload: dict[str, Any]
     if len(identity) == 1:
-        payload = {**identity[0], "operation": OPERATION}
-    else:
-        payload = {"operation": OPERATION, "targets": identity}
+        return f"slurm-protected-cancel:{identity[0]['job_id']}"
+    payload = {"operation": OPERATION, "targets": identity}
     encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return "slurm-protected-cancel:" + hashlib.sha256(encoded).hexdigest()
 
@@ -244,6 +256,26 @@ def _event_cwd_valid(event: dict[str, Any]) -> bool:
     return cwd.is_absolute() and cwd.is_dir()
 
 
+def _protected_reason(targets: list[dict[str, str]]) -> str:
+    question = _question_for_targets(targets)
+    payload = {
+        "status": "NEEDS_INTERACTIVE_CHAT_CONFIRMATION",
+        "operation": OPERATION,
+        "targets": targets,
+        "request_user_input": {"questions": [question]},
+        "mutation_count": 0,
+    }
+    if len(targets) == 1:
+        target = targets[0]
+        prefix = (
+            "NEEDS_INTERACTIVE_CHAT_CONFIRMATION "
+            f"job_id={target['job_id']} partition={target['partition']} "
+        )
+    else:
+        prefix = f"NEEDS_INTERACTIVE_CHAT_CONFIRMATION target_count={len(targets)} "
+    return prefix + json.dumps(payload, ensure_ascii=False, sort_keys=True)
+
+
 def _pre_tool_use(event: dict[str, Any], runtime: dict[str, Any]) -> int:
     if event.get("tool_name") != "Bash":
         return _emit({})
@@ -261,44 +293,29 @@ def _pre_tool_use(event: dict[str, Any], runtime: dict[str, Any]) -> int:
         return _deny("SLURM_CANCEL_DENIED reason=target_resolution_failed")
     protected = set(runtime["protected_cancel_partitions"])
     if any(target["partition"] in protected for target in targets):
-        question = _question_for_targets(targets)
-        reason = {
-            "status": "NEEDS_INTERACTIVE_CHAT_CONFIRMATION",
-            "operation": OPERATION,
-            "targets": targets,
-            "request_user_input": {"questions": [question]},
-            "mutation_count": 0,
-        }
-        return _deny("NEEDS_INTERACTIVE_CHAT_CONFIRMATION " + json.dumps(reason, ensure_ascii=False, sort_keys=True))
-    current = _resolve_targets(runtime, job_ids)
-    if current != targets:
-        return _deny("SLURM_CANCEL_DENIED reason=target_or_state_changed")
-    clean_env = {key: value for key, value in os.environ.items() if not key.startswith("SCANCEL_")}
-    try:
-        cancelled = subprocess.run(
-            [runtime["scancel_path"], *job_ids],
-            check=False,
-            capture_output=True,
-            text=True,
-            timeout=10,
-            env=clean_env,
-        )
-    except (OSError, subprocess.TimeoutExpired):
-        return _deny("SLURM_CANCEL_DENIED reason=host_scancel_failed")
-    if cancelled.returncode != 0:
-        return _deny(f"SLURM_CANCEL_DENIED reason=host_scancel_failed returncode={cancelled.returncode}")
-    rendered = ",".join(job_ids)
-    harmless = f"printf '%s\\n' {shlex.quote('SCANCEL_COMPLETED_BY_HOST_HOOK jobs=' + rendered)}"
-    return _emit(
-        {
-            "hookSpecificOutput": {
-                "hookEventName": "PreToolUse",
-                "permissionDecision": "allow",
-                "permissionDecisionReason": "cancellation completed by trusted Host Hook",
-                "updatedInput": {"command": harmless},
-            }
-        }
-    )
+        return _deny(_protected_reason(targets))
+    return _emit({})
+
+
+def _permission_request(event: dict[str, Any], runtime: dict[str, Any]) -> int:
+    if event.get("tool_name") != "Bash":
+        return _emit({})
+    tool_input = event.get("tool_input")
+    command = tool_input.get("command") if isinstance(tool_input, dict) else None
+    job_ids, error = _parse_cancel_command(command, runtime)
+    if error:
+        return _permission_deny(f"SLURM_CANCEL_DENIED reason={error}")
+    if job_ids is None:
+        return _emit({})
+    if not _event_cwd_valid(event):
+        return _permission_deny("SLURM_CANCEL_DENIED reason=invalid_cwd")
+    targets = _resolve_targets(runtime, job_ids)
+    if targets is None:
+        return _permission_deny("SLURM_CANCEL_DENIED reason=target_resolution_failed")
+    protected = set(runtime["protected_cancel_partitions"])
+    if any(target["partition"] in protected for target in targets):
+        return _permission_deny(_protected_reason(targets))
+    return _emit({})
 
 
 def _response_object(value: Any) -> dict[str, Any]:
@@ -397,15 +414,20 @@ def main() -> int:
     try:
         event = json.load(sys.stdin)
     except (json.JSONDecodeError, OSError):
-        return _deny("SLURM_CANCEL_DENIED reason=invalid_hook_json")
+        print("SLURM_CANCEL_DENIED reason=invalid_hook_json", file=sys.stderr)
+        return 2
     try:
         private_root, runtime = _load_runtime(hook_path)
     except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
         if event.get("hook_event_name") == "PreToolUse":
             return _deny(f"SLURM_CANCEL_DENIED reason={error}")
+        if event.get("hook_event_name") == "PermissionRequest":
+            return _permission_deny(f"SLURM_CANCEL_DENIED reason={error}")
         return _post_result("denied", str(error))
     if event.get("hook_event_name") == "PreToolUse":
         return _pre_tool_use(event, runtime)
+    if event.get("hook_event_name") == "PermissionRequest":
+        return _permission_request(event, runtime)
     if event.get("hook_event_name") == "PostToolUse":
         return _post_tool_use(event, private_root, runtime)
     return _post_result("ignored", "wrong_hook_event")

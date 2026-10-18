@@ -1,3 +1,0 @@
-prefix_rule(pattern=["scancel"], decision="forbidden")
-prefix_rule(pattern=["/usr/bin/scancel"], decision="forbidden")
-prefix_rule(pattern=["/users/a/e/aereinh/.codex/slurm-protected-cancel"], decision="forbidden")
