@@ -4,7 +4,7 @@
   "state": "NEEDS_GPT_PLANNER",
   "review_round": 0,
   "max_review_rounds": 2,
-  "plan_revision": 0,
+  "plan_revision": 1,
   "max_plan_revisions": 1,
   "base_commit": "50e09a2dc68a097ef21e0cf245f7951eb9d06f89",
   "base_branch": "reviewed/clear-writing--scientific-explanation-readability-repair",
@@ -12,5 +12,5 @@
   "ci_required": false,
   "ci_status": "NOT_REQUIRED",
   "last_review_decision": null,
-  "next_action": "REVISE_EXECUTION_PACKAGE_V0_3"
+  "next_action": "RUN_GPT_CRITIC_EXECUTION_READY_REREVIEW_V0_3"
 }
