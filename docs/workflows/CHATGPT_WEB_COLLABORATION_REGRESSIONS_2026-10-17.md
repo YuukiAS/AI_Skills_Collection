@@ -1,4 +1,4 @@
-# ChatGPT Web 协作回归记录：2026-10 九类问题
+# ChatGPT Web 协作回归记录：2026-10 十类问题
 
 日期：2026-10-17  
 状态：Planner / Critic 合同完善方案 v0.2 已按 Critic B1/B2 修订，待独立 Critic 复核  
@@ -77,6 +77,20 @@
 
 这些例子不意味着所有任务都必须有邮件、Slurm hook 或固定实现。通用要求是：PASS 必须让用户真正理解重要批准内容，而不是要求用户重新阅读大量内部材料。
 
+### 10. 批准前 Kickoff 控制面泄漏到批准后 Codex handoff
+
+真实失败表明，execution-ready PASS 之后如果仍机械全文复制 frozen Kickoff artifact，会把 `DRAFT ONLY`、`NOT_AUTHORIZED`、"仅在 Critic PASS 后执行"、审查历史、blocker closure 和其他批准前控制面文本重新塞回用户真正要发给 Codex 的提示词。即使 Project setting 已要求 Codex handoff 简短、只指向当前批准任务，只要中央 Critic 合同仍要求 verbatim Kickoff，这个失败就可以在全新 thread 中复现。
+
+正确职责边界是：
+
+- Kickoff Draft 是 execution-ready 审查的冻结执行范围与授权来源，可以保留内部生命周期元数据；
+- execution-ready PASS 后的用户 Codex handoff 是该冻结包的**用户阅读层渲染**，不是 artifact 全文；
+- handoff 只保留任务、approved locators、必要执行定位/当前授权和停止条件；
+- 历史 task-specific prompt 中的"逐字输出 approved Kickoff"只能解释为 scope 不得漂移，不能覆盖中央用户侧 handoff 规则；
+- 如果无法在不猜测、不遗漏必要授权、不改变 scope 的情况下生成短 handoff，应在 PASS 前 REVISE，而不是把内部 artifact 整份交给用户。
+
+本问题的 canonical owner 是 Planner / Critic Role Contract；Project setting 已经有正确的短 handoff 顶层原则，不应继续堆同义规则。具体 Kickoff artifact 只负责保存其任务自己的冻结执行语义，Bridge Kit 不是默认 owner。
+
 ## 用户侧影响
 
 这些问题共同造成四类直接损失：
@@ -88,9 +102,9 @@
 
 ## 后续设计边界
 
-本文件只冻结问题，不预先冻结解决架构。
+本文件记录问题与已经形成的长期行为边界，不要求每个历史任务重写冻结 artifact。
 
-当前设计方案：`docs/design/chatgpt-web-collaboration/PLANNER_CRITIC_CONTRACT_REFINEMENT_V0_2_2026-10-18.md`。v0.2 只修正用户侧角色模型与 Codex 前置依赖语义；其他已通过设计点保持不动。
+当前角色合同已经推进到 1.6：在 1.5 的用户侧角色模型与 Codex 前置依赖语义基础上，新增批准后短 Codex handoff 规则，明确禁止把批准前 Kickoff 控制面全文泄漏到用户执行入口。
 
 后续应优先检查和修改：
 
