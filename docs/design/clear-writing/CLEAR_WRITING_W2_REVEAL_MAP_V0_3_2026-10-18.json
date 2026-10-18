@@ -1,0 +1,121 @@
+{
+  "schema": "CLEAR_WRITING_W2_REVEAL_MAP_V1",
+  "task_key": "clear-writing--every-response-invocation-policy",
+  "version": "v0.3",
+  "frozen_before_any_web_output": true,
+  "reviewer_blinding_rule": "The initial W2 preference reviewer must be a fresh independent thread that has not read this reveal map. It receives only task id, exact prompt, two opaque output labels, and the frozen rubric. Reveal is allowed only after all per-task verdicts and reasons are frozen.",
+  "pairs": {
+    "W2-P01": {
+      "execution_order": [
+        "CONTROL",
+        "TREATMENT"
+      ],
+      "opaque_labels": [
+        "P01-LYNX",
+        "P01-EMBER"
+      ],
+      "mapping": {
+        "TREATMENT": "P01-LYNX",
+        "CONTROL": "P01-EMBER"
+      }
+    },
+    "W2-P02": {
+      "execution_order": [
+        "TREATMENT",
+        "CONTROL"
+      ],
+      "opaque_labels": [
+        "P02-QUARTZ",
+        "P02-MICA"
+      ],
+      "mapping": {
+        "TREATMENT": "P02-MICA",
+        "CONTROL": "P02-QUARTZ"
+      }
+    },
+    "W2-P03": {
+      "execution_order": [
+        "CONTROL",
+        "TREATMENT"
+      ],
+      "opaque_labels": [
+        "P03-FERN",
+        "P03-ORBIT"
+      ],
+      "mapping": {
+        "TREATMENT": "P03-ORBIT",
+        "CONTROL": "P03-FERN"
+      }
+    },
+    "W2-P04": {
+      "execution_order": [
+        "TREATMENT",
+        "CONTROL"
+      ],
+      "opaque_labels": [
+        "P04-VALE",
+        "P04-NIMBUS"
+      ],
+      "mapping": {
+        "TREATMENT": "P04-VALE",
+        "CONTROL": "P04-NIMBUS"
+      }
+    },
+    "W2-P05": {
+      "execution_order": [
+        "CONTROL",
+        "TREATMENT"
+      ],
+      "opaque_labels": [
+        "P05-CEDAR",
+        "P05-ION"
+      ],
+      "mapping": {
+        "TREATMENT": "P05-CEDAR",
+        "CONTROL": "P05-ION"
+      }
+    },
+    "W2-P06": {
+      "execution_order": [
+        "TREATMENT",
+        "CONTROL"
+      ],
+      "opaque_labels": [
+        "P06-SABLE",
+        "P06-KITE"
+      ],
+      "mapping": {
+        "TREATMENT": "P06-KITE",
+        "CONTROL": "P06-SABLE"
+      }
+    },
+    "W2-P07": {
+      "execution_order": [
+        "CONTROL",
+        "TREATMENT"
+      ],
+      "opaque_labels": [
+        "P07-RUNE",
+        "P07-DELTA"
+      ],
+      "mapping": {
+        "TREATMENT": "P07-RUNE",
+        "CONTROL": "P07-DELTA"
+      }
+    },
+    "W2-P08": {
+      "execution_order": [
+        "TREATMENT",
+        "CONTROL"
+      ],
+      "opaque_labels": [
+        "P08-IVY",
+        "P08-AXIS"
+      ],
+      "mapping": {
+        "TREATMENT": "P08-AXIS",
+        "CONTROL": "P08-IVY"
+      }
+    }
+  }
+}
