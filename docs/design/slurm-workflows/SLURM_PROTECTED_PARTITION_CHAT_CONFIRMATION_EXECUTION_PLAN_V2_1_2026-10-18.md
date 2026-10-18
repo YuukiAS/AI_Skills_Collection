@@ -121,9 +121,9 @@ OpenAI Codex reviewed main：
 8c076942cb70fba8e5c4732c23f1faabc4aed484
 
 Bridge Kit reviewed main：
-d4b694673501d4933eca5cd68394c740c0cb823d
+6dc54a6d8f25e50e48d81853b347844d960fd613
 
-Bridge 相比上一轮只新增 `docs/design/bridge_kit_planner_critic_governance_layer_correction_proposal_v0.1_2026-10-18.md`，没有 Host Policy / Hook / approvals runtime 变化。本任务：
+Bridge 从上一冻结点继续前进，但变化仅涉及 0.11.0 recovery execution package 文档和 Planner/Critic governance review 文档，没有 Host Policy / Hook / approvals runtime 变化。本任务：
 Bridge Kit source = NO_CHANGE。
 
 执行包准备时三个新的 v2.1 remote task branch 均不存在。
