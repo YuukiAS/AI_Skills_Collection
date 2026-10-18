@@ -62,6 +62,7 @@ def render_probe_status_allowed(render_probe: dict[str, Any], render_status: dic
         "BLOCKED_MISSING_TEX_ENGINE",
         "BLOCKED_MISSING_TEX_PACKAGE",
         "BLOCKED_MISSING_PDF_RENDERER",
+        "BLOCKED_MISSING_CANONICAL_FONT_RESOURCE",
     }
 
 
