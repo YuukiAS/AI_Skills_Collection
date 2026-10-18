@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "clear-writing--every-response-invocation-policy",
-  "state": "NEEDS_GPT_PLANNER",
+  "state": "AWAIT_HUMAN_DECISION",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 1,
@@ -12,5 +12,6 @@
   "ci_required": false,
   "ci_status": "NOT_REQUIRED",
   "last_review_decision": null,
-  "next_action": "RUN_GPT_CRITIC_EXECUTION_READY_REREVIEW_V0_3"
+  "next_action": "USE_MANUAL_WEB_GATE_V0_4_AFTER_EXECUTION_READY_PASS",
+  "human_gate_reason": "PLANNER_DECISION"
 }
