@@ -39,7 +39,7 @@ STANDALONE_SKILLS = {
 
 EXPECTED_STANDALONE_SKILL_VERSIONS = {
     "project-thread-handoff": "0.2",
-    "project-instructions-editor": "0.1",
+    "project-instructions-editor": "0.2",
     "render-chinese-math-pdf": "0.3",
     "slurm-workflows": "0.4",
 }

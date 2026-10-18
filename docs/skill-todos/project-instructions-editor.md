@@ -754,3 +754,24 @@ Parallel plugin development is therefore allowed to continue; PIE only requires 
 READY_FOR_RELEASE=NO
 NEXT_HANDOFF=CRITIC
 \`\`\`
+
+
+## 2026-10-18 v0.2 baseline and reviewable-diff increment
+
+status: IN_PROGRESS
+
+tracking: #102
+
+Project Instructions Editor v0.2 is a bounded increment over the accepted 0.1 editor contract:
+
+- require the user-supplied complete current Project setting before any analysis or edit; return the frozen exact request when it is missing or visibly partial;
+- treat an explicitly empty setting as a complete greenfield baseline;
+- require the current baseline for explicit reset while removing only old-setting semantic-preservation obligations;
+- for every real modification, return a human-readable Markdown preview and the complete clean final setting from the same baseline and semantic delta, satisfying `E(B)=C`;
+- preserve the 0.1 protected-absence, no-op, ownership/enforcement, locator, budget, semantic-invariant, and final-consistency contracts.
+
+The implementation task does not update the live personal wrapper, does not mutate a real Project setting, does not establish final live G1/G4 acceptance, and does not advance repository `VERSION` or the formal `release` ref.
+
+Execution anchor:
+
+`reviewed/project-instructions-editor--0.2-baseline-diff-contract`
