@@ -312,6 +312,56 @@ trusted project SessionStart Hook：
 - 用户只需在Desktop中确认当前 exact hook declaration；
 - hook current hash与candidate evidence必须一致，否则不得要求用户trust。
 
+### 6.1 Hook trust 的唯一 user-level config 副作用
+
+当前 Codex 官方 Hook trust UI 的真实行为已经冻结为 execution fact：
+
+- TUI `write_hook_trusts` 调用 `config/batchWrite`；
+- 写入 key 为 `hooks.state` 下 exact Hook key 的 `trusted_hash=current_hash`；
+- 请求使用 `file_path=None`；
+- app-server ConfigManager 将 `None` 解析为 user config path，即当前 Codex identity 的 `$CODEX_HOME/config.toml`。
+
+因此，**用户本人在官方 Hook trust UI 点击 trust 是真实的 user-level config side effect**，不能再描述为“无 user-level config 修改”。
+
+当前 approved Kickoff 对 Phase 0–3 只授权这一种 user-level config effect：
+
+1. 仅由用户本人通过官方 Codex Hook trust UI完成；
+2. 仅写入当前 task 所需、已经由 `hooks/list` 冻结的 exact `hook key + current_hash` trust record；
+3. Executor在提示用户 trust 前必须输出/保存非secret evidence：
+   - Codex identity / `CODEX_HOME` locator；
+   - project root / task branch；
+   - Hook source；
+   - exact hook key；
+   - exact current_hash；
+   - trust status = Untrusted 或 Modified；
+   - 当前 user config 中该 exact key 的 pre-trust 状态（存在/不存在及旧 hash，如可通过正式 config read取得）；
+4. 用户完成官方 UI trust 后，Executor用 `hooks/list` 和正式 config read只读核对：
+   - exact key；
+   - trusted_hash == frozen current_hash；
+   - Hook status == Trusted；
+   - 其它 user config字段未因本任务被Executor直接编辑；
+5. Executor**不得直接编辑** `$CODEX_HOME/config.toml`、不得直接调用通用 config writer伪造 trust、不得修改其它 `hooks.state` key；
+6. auto_review不能执行或替代这个用户 Hook trust动作。
+
+#### Probe/candidate trust retention 与 rollback
+
+每一个通过官方 UI 写入的 trust record都要进入 task evidence，至少记录 exact key/hash、用途（probe/candidate）、写入阶段和 pre-trust状态。
+
+冻结 retention：
+
+- Phase 0 probe Hook若后续仍用于同一 task 的 capability replay，可保留 exact trust record至 Phase 3 Reviewer package冻结；
+- probe Hook被删除、声明改变或worktree弃用后，旧 `trusted_hash` 因 current_hash不再匹配而不得授权新的/修改Hook；记录为 inert stale trust，不得拿它信任production Hook；
+- candidate worktree Hook trust同理只绑定该 worktree declaration/current_hash。
+
+cleanup / rollback **只能使用 Codex 官方 Hook trust管理入口**：
+- 若当前官方 UI/Hook management surface提供 disable/remove/revoke，对 exact task key使用该入口并readback；
+- 若当前版本没有可用的官方 revoke/remove 动作，不得手工编辑 user config，也不得让Executor直接 `config/batchWrite` 清 trust；删除/停用对应project Hook declaration使旧记录保持 inert，并报告：
+  `HOOK_TRUST_RETENTION=INERT_RECORD`
+  + exact key/hash +原因；
+- 不得把“UI trust写入 user config”隐藏在 rollback外，也不得宣称不存在user-level side effect。
+
+除上述 official Hook trust UI 对 exact task trust record的写入外，Phase 0–3继续禁止其它 user-level `$CODEX_HOME/config.toml` 修改。
+
 ## 7. thin guard：只负责first block
 
 central ai-slurm-scancel仍保持薄职责：
@@ -484,7 +534,8 @@ DII/CARE只读preflight。
 - Project config高于Bridge user-level false；
 - active permission profile=slurm-chat-guard；
 - .codex explicit deny实际加载；
-- Bridge user-level config未修改。
+- Bridge-managed user-level policy字段未修改；
+- 若probe Hook需要用户trust，唯一允许的 user-level变化是第6.1节所述 official Hook trust UI 写入 exact `hooks.state.<key>.trusted_hash`；必须记录pre/post readback。
 
 ### 11.2 Desktop native interaction probe
 
@@ -506,7 +557,7 @@ STOP at PROBE_READY_FOR_USER_CHAT。
 
 用户唯一最小动作：
 - 在Longleaf_Codex打开exact W的新chat；
-- 若平台显示exact project Hook trust screen，只trust与evidence current hash一致的probe hooks；
+- 若平台显示exact project Hook trust screen，只trust evidence 中 exact hook key + current_hash 完全匹配的probe Hooks；该动作会通过官方UI写入当前 `$CODEX_HOME/config.toml` 的对应 `hooks.state` trust record，属于本Kickoff明确授权的bounded side effect；
 - 发送指定harmless probe prompt并完成一次“确认测试”，另一次不回答以观察empty。
 
 不得要求用户开terminal。
@@ -757,6 +808,42 @@ Phase 0 PASS、Phase 1完成后：
 
 每个candidate branch第一次发布按第3节授权。
 
+### 18.1 Phase 3 production Hook identity rendering
+
+Candidate worktree W 与正式 canonical repo root R 的 absolute path不同，而 v2.1 Hook declaration绑定 private binder absolute path + binder digest。因此：
+
+**candidate worktree Hook current_hash 绝不能替代 production Hook current_hash。**
+
+Phase 3 Reviewer package必须在不写任何production文件、不激活任何production Hook的前提下，由 exact reviewed setup generator针对三个冻结canonical production roots离线渲染 production identity：
+
+AI Skills canonical R：
+`/overflow/htzhu/mingcheng_new/AI_Skills_Collection`
+
+DII canonical R：
+`/users/a/e/aereinh/Distributed_Imaging_Inference`
+
+CARE canonical R：
+`/users/a/e/aereinh/CARE`
+
+每个repo必须冻结：
+
+- exact candidate commit；
+- canonical production root；
+- exact final candidate binder SHA-256；
+- canonical private binder absolute path：
+  `<canonical-root>/.codex/slurm-protected-cancel-private/bin/slurm-protected-cancel-binder`；
+- exact production SessionStart Hook declaration；
+- exact production PostToolUse Hook declaration；
+- 每个production Hook的 exact stable key / current_hash；
+- expected runtime.json canonical root / binder digest / trusted absolute Slurm executable locator contract；
+- production project config/rules declaration identity。
+
+这些 production-rendered artifacts 只进入Reviewer evidence；Phase 3不得写canonical R、不得创建private capability、不得trust production Hook。
+
+生成过程必须使用与production setup相同的 exact generator和final candidate binder digest。任何“手写一份近似production Hook”不算证据。
+
+Reviewer必须实际审上述production-rendered declarations/hashes，并明确它们与candidate W Hook hashes不同但语义/生成器一致。
+
 Reviewer必须实际审：
 
 - approved Proposal v2.1；
@@ -766,7 +853,8 @@ Reviewer必须实际审：
 - Gate A-D；
 - isolated fake evidence；
 - private binder digest/path/runtime binding；
-- Hook trust evidence；
+- candidate Hook trust evidence；
+- 三仓production-rendered Hook declarations / stable keys / current hashes / canonical roots / binder paths / binder digests；
 - should-not-change regression；
 - rollback；
 - production activation proposal。
@@ -778,7 +866,11 @@ NO PRODUCTION DEPLOYMENT。
 
 当前Implementation Kickoff不授权Phase 4。
 
-Reviewer PASS后，用户必须发送第二条短、独立、绑定exact reviewed三仓candidate commits的production authorization。
+Reviewer PASS后，用户必须发送第二条短、独立的production authorization，并同时绑定：
+- exact reviewed AI Skills/DII/CARE candidate commits；
+- exact reviewed三仓production Hook stable keys/current_hashes；
+- exact canonical roots；
+- exact private binder paths + final binder digests。
 
 其最大范围仅允许：
 
@@ -794,15 +886,19 @@ Reviewer PASS后，用户必须发送第二条短、独立、绑定exact reviewe
   - runtime.json trusted absolute executable binding；
   - capability lifecycle；
   - automation PATH shim；
-- 若Desktop提示新/修改Hook trust，只允许用户trust与reviewed current hash一致的exact hooks；
+- production setup写入canonical project files后，**在任何Hook trust前**必须用 `hooks/list` 对每个canonical root readback实际 stable key/current_hash；actual current_hash必须与Phase 3 Reviewer冻结production值完全一致，否则STOP -> Planner/Critic，禁止trust；
+- 若Desktop提示新/修改Hook trust，只允许用户通过官方Codex Hook trust UI trust第二条production authorization绑定的 exact production key/current_hash；这是Phase 4唯一允许的Hook-trust user-level config副作用；
+- Executor不得直接编辑user config或用candidate worktree hash替代production hash；
 - read-only production validation；
 - exact reviewed DII/CARE integration。
 
 不修改：
 - Bridge source；
-- user-level $CODEX_HOME/config.toml；
-- ai-bridge-global.rules；
-- user-level hooks。
+- user-level `$CODEX_HOME/config.toml` 的任何普通配置字段；
+- `ai-bridge-global.rules`；
+- user-level Hook declarations。
+
+唯一例外是：用户本人通过官方Hook trust UI为第二条production authorization绑定的 exact production Hook key/current_hash写入 `hooks.state` trust record。Executor不得直接写。
 
 绝不使用真实Slurm cancellation作为production smoke。
 
@@ -813,7 +909,9 @@ Reviewer PASS后，用户必须发送第二条短、独立、绑定exact reviewe
 未production前：
 - 删除/弃用task worktrees/branches；
 - 恢复/删除task-local .codex probe/runtime private material；
-- 不存在production side effect。
+- project-local candidate files不构成production deployment；
+- **但Hook trust UI可能已对user-level `$CODEX_HOME/config.toml` 写入 exact `hooks.state` trust record，这是真实side effect**；
+- cleanup/retention严格按第6.1节：只走官方Hook trust管理入口；如果当前UI没有revoke/remove，则不手工改config，保留inert trust record并报告exact key/hash。
 
 ### production rollback
 
@@ -825,7 +923,7 @@ Reviewer PASS后，用户必须发送第二条短、独立、绑定exact reviewe
 - automation PATH integration；
 - consumer commits。
 
-Hook trust state若需要撤销，使用Codex正式Hook trust管理入口；不得手工篡改不明user config。
+Hook trust state若需要撤销，只使用Codex正式Hook trust管理入口并核对exact key/hash；不得手工编辑user config，也不得由Executor直接用通用config writer伪造cleanup。若当前正式入口没有revoke/remove能力，则通过移除/恢复project Hook declaration使记录inert，并明确报告保留记录，不能声称已删除。
 
 不执行Slurm mutation。
 不改MUNGE/SSH/Unix identity。
@@ -893,6 +991,11 @@ tracking issue: PENDING_CLEAR_WRITING
 - model PATH能影响binder的scontrol/scancel；
 - Modified Hook仍可不经真实trust运行；
 - bypass_hook_trust无法保持false；
+- official Hook trust UI 的 exact key/hash 或 user-config写入目标无法readback确认；
+- 需要Executor直接编辑user-level `$CODEX_HOME/config.toml` 才能完成Hook trust；
+- Phase 3无法为三个canonical production roots用exact generator离线冻结production Hook declarations/current hashes；
+- production setup实际 `hooks/list` current_hash与Reviewer冻结production hash不一致；
+- candidate worktree Hook hash被尝试当作production Hook hash；
 - request_user_input/ PostToolUse live probe失败；
 - CARE blocker无法返回interactive supervisor；
 -需要terminal confirmer、MCP、database/daemon/broker、新Unix identity、H100/current-run/old三态；
