@@ -1,18 +1,18 @@
-# Project Instructions Editor ChatGPT Plugin Update Handoff
+# Project Instructions Editor ChatGPT Plugin Wrapper
 
-Purpose: update the existing `skills-only` ChatGPT personal Plugin wrapper for
-Project Instructions Editor. The wrapper is a distribution shell only; the
-standalone Skill remains the capability source.
+The existing PRIVATE / USER-scope `skills-only` ChatGPT personal Plugin is a
+distribution shell for the standalone Project Instructions Editor Skill. The
+standalone Skill remains the only capability source.
 
-Source commit: `47f3a2d9caec295955040d90cfb19c0f4d3bf7a8`
+## Current identity
 
-Skill source:
+- Accepted Skill candidate: `f0e41f49b46be1a3b9f3c499cb580066f694b031`
+- Main integration commit: `55b8d93d8f9a0f120ac7100b2af75caf9a2182a0`
+- Standalone Skill version: `0.2`
+- PRIVATE / USER wrapper version: `0.2.8`
+- Wrapper status: updated and verified through real ChatGPT Web acceptance
 
-```text
-skills/core/codex-system/project-instructions-editor/
-```
-
-Files to copy into the wrapper Skill payload:
+The wrapper payload contains exactly:
 
 ```text
 SKILL.md
@@ -22,29 +22,29 @@ evals/trigger_queries.json
 references/editor-contract.md
 ```
 
-Identity:
+Canonical source:
 
 ```text
-Skill version: 0.1
-Skill tree Git SHA: 48ea5f53132a10a38b966e0ee5ade73dd2db57f3
-SKILL.md blob: b9aa8c3468294ed8196208588c7a2f52e2171171
-Icon blob: 3f9db7f1d98308d53d45fe249c324da23d02de21
-SKILL.md SHA-256: 2289dd487604699a123b362853754964b360d8af62e8f72b7751a4349a10706f
-Icon SHA-256: 8b75cb827af0f02eb05e7cf1d133c5f0d0fb0c09950a4ae1f28a54111f1b10aa
+skills/core/codex-system/project-instructions-editor/
 ```
 
-Wrapper version:
+Runtime file identities:
 
-- Change only if the existing wrapper release process requires a package
-  version bump for replacing its embedded Skill payload.
-- Do not change the standalone Skill version; it remains `0.1`.
+```text
+SKILL.md: caa3c99ef6e09742cd04f247cdff20af23970391
+agents/openai.yaml: 1473d6ad6db11eb7619be7608abd524015912e69
+assets/app-facing.svg: 3f9db7f1d98308d53d45fe249c324da23d02de21
+evals/trigger_queries.json: 5cb66e82b062e4f679360e7b7017d55ef3e69f7d
+references/editor-contract.md: 49af7c39f13d929d9ba2f4bedf2d59460a30a91f
+```
 
-Runtime boundary:
+## Boundary
 
-- Normal use must work in ordinary ChatGPT Web / Project chat.
-- No MCP finalizer, `OPENAI_API_KEY`, hosted service, sibling-Skill chain,
-  external model provider, or paid API call is part of PIE v0.1.
-- PIE v0.1 edits long-lived ChatGPT Project instructions. It does not guarantee
-  cross-turn final reader-layer behavior for all future answers.
+Normal use works in ordinary ChatGPT Web / Project chat. The wrapper adds no
+MCP finalizer, `OPENAI_API_KEY`, hosted service, sibling-Skill chain, external
+model provider, or paid API call. Project Instructions Editor v0.2 does not
+claim automatic implicit invocation or a cross-turn final reader-layer
+guarantee.
 
-C11 reader-layer failure preserved; not reclassified as PASS.
+The C11 reader-layer failure remains historical failure evidence and is not
+reclassified as PASS.

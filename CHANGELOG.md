@@ -2,27 +2,27 @@
 
 ## Unreleased
 
-Project Instructions Editor v0.2 has completed real ChatGPT Web acceptance and
-is ready for integration on `main` ahead of the next formal repository release.
-It requires the user-supplied complete current Project setting before editing
-and returns both a readable Markdown change preview and a complete clean final
-setting for every real modification.
+No unreleased changes.
 
-Repository bump decision: NONE
-Reason: this implementation task prepares and reviews the standalone Skill
-candidate without advancing the repository version or formal `release` ref.
-The repository bump for a future formal release will be decided at release
-preflight against the then-current `origin/release` baseline.
+## 5.5.0 - 2026-10-18
 
-Current task release ref mutation: NO
+Repository `5.5.0` formally adds Project Instructions Editor v0.2, giving
+AI Skills Collection its first released workflow for creating, editing,
+compressing, synchronizing, restructuring, and explicitly resetting long-lived
+ChatGPT Project instructions.
+
+Repository bump decision: MINOR
+Reason: the formal repository release gains a new user capability that was not
+available in `5.4.5`: editing long-lived ChatGPT Project instructions from the
+user-supplied complete current setting with a reviewable change preview and a
+complete clean result.
 
 Affected standalone skills:
-- `project-instructions-editor`: `0.1` -> `0.2` candidate
-  Reason: Project Instructions Editor now stops at an exact baseline request
-  when the complete current setting is absent. An explicitly empty setting is
-  a valid greenfield baseline, while explicit reset still records the supplied
-  baseline as provenance. Real edits derive the preview and clean final from
-  the same baseline and semantic delta.
+- `project-instructions-editor`: NEW -> `0.2`
+  Reason: this is the Skill's first formal repository release. Version `0.2`
+  requires the complete current Project setting before editing and derives the
+  readable Markdown preview and clean final setting from the same baseline and
+  semantic change.
 
 Affected central plugins:
 - all central plugins: NO_BUMP
@@ -40,29 +40,27 @@ Unchanged standalone skill versions: `project-thread-handoff 0.2`,
 
 Changed repository behavior:
 
-- Project Instructions Editor remains the standalone editor for creating,
-  editing, compressing, synchronizing, restructuring, and explicitly resetting
-  long-lived ChatGPT Project instructions.
-- A complete current setting supplied by the user is the sole current baseline;
-  Project context, Memory, history, repository files, partial instructions,
-  summaries, and stale candidates cannot reconstruct it.
+- A complete current setting supplied by the user is the sole current
+  baseline. Project context, Memory, history, repository files, partial
+  instructions, summaries, and stale candidates cannot reconstruct it.
+- An explicitly empty setting is a valid greenfield baseline. Explicit reset
+  still requires the supplied baseline but does not preserve the old setting's
+  semantics.
 - Every real edit returns a readable Markdown preview and a complete clean
-  result from the same baseline and semantic delta. No-op creates neither a
-  fake diff nor a duplicate final setting.
-- Existing protected absence, no-op eligibility, source ownership, locator,
-  authorization, privacy, safety, evidence, exact-identifier, budget, and final
-  consistency contracts remain in force.
-- Project Instructions Editor v0.2 does not claim a cross-turn reader-layer
-  guarantee. C11 reader-layer failure evidence remains historical failure
-  evidence and is not reclassified as PASS.
-- This candidate adds no Clear Writing runtime dependency, external finalizer,
-  extra model, paid API, service, database, ledger, or runtime diff helper.
-- The existing PRIVATE / USER wrapper was updated to `0.2.8`. Explicit Web use
-  passed missing-baseline, add, delete, replace, reset, greenfield, and no-op
-  acceptance. Automatic implicit invocation was not tested and is not required
-  by this acceptance. The fixed baseline-receipt sentence was not stable on
-  every reset/greenfield display; the user accepted that presentation difference
-  because baseline provenance and the resulting edits remained correct.
+  result from the same baseline and semantic change. No-op returns neither a
+  fabricated diff nor a duplicate final setting.
+- Existing protected absence, source ownership, locator, authorization,
+  privacy, safety, evidence, exact-identifier, budget, and final-consistency
+  contracts remain in force.
+- The existing PRIVATE / USER ChatGPT wrapper remains version `0.2.8` and is a
+  distribution entry rather than a second source of truth.
+- Real ChatGPT Web acceptance passed explicit missing-baseline, add, delete,
+  replace, reset, greenfield, and no-op use. Automatic implicit invocation was
+  not tested and is not claimed.
+- Version `0.2` does not claim a cross-turn reader-layer guarantee and adds no
+  Clear Writing runtime dependency, sibling-Skill chain, external finalizer,
+  additional model, paid API, hosting service, database, ledger, or runtime
+  diff helper.
 
 ## 5.4.5 - 2026-10-17
 
