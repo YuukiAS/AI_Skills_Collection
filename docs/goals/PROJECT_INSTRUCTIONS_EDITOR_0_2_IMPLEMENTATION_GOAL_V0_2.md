@@ -1,6 +1,7 @@
 # Goal — Project Instructions Editor 0.2 Bounded Implementation v0.2
 
 Status: DRAFT_FOR_EXECUTION_READY_CRITIC_REVIEW  
+READY_FOR_CODEX: NO  
 Task key: `project-instructions-editor--0.2-baseline-diff-contract`  
 Canonical Plan: `docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_0_2_IMPLEMENTATION_PLAN_V0_2_2026-10-18.md`  
 Supersedes: `PROJECT_INSTRUCTIONS_EDITOR_0_2_IMPLEMENTATION_GOAL_V0_1.md`  
