@@ -214,9 +214,11 @@ def render_contract(
     site_id: str,
     local_override: Path,
     protected_partitions: list[str],
+    runtime_skill_scripts: Path | None = None,
 ) -> dict[str, Any]:
     project_root = project_root.expanduser().resolve()
     skill_scripts = skill_scripts.expanduser().resolve()
+    runtime_skill_scripts = (runtime_skill_scripts or skill_scripts).expanduser().resolve()
     scontrol = _absolute_executable(scontrol, project_root)
     scancel = _absolute_executable(scancel, project_root)
     binder_source, session_source = _read_sources(skill_scripts)
@@ -224,7 +226,7 @@ def render_contract(
     session_digest = _sha256_bytes(session_source)
     private_binder = project_root / PRIVATE_REL / "bin/slurm-protected-cancel-binder"
     session_path = project_root / SESSION_REL
-    routing_helper = skill_scripts / "slurm_routing.py"
+    routing_helper = runtime_skill_scripts / "slurm_routing.py"
     if not routing_helper.is_file():
         raise ValueError(f"missing routing helper: {routing_helper}")
     partitions = sorted({value.strip() for value in protected_partitions if value.strip()})
@@ -328,6 +330,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--project-root", type=Path, required=True)
     parser.add_argument("--skill-scripts", type=Path, default=_source_dir())
+    parser.add_argument(
+        "--runtime-skill-scripts",
+        type=Path,
+        help="Production/runtime locator for slurm_routing.py; source bytes still come from --skill-scripts",
+    )
     parser.add_argument("--scontrol", type=Path, required=True)
     parser.add_argument("--scancel", type=Path, required=True)
     parser.add_argument("--site-id", required=True)
@@ -349,6 +356,7 @@ def main(argv: list[str] | None = None) -> int:
         args.site_id,
         args.local_override,
         args.protected_partitions,
+        args.runtime_skill_scripts,
     )
     destination = args.project_root if args.install else args.render_output
     assert destination is not None

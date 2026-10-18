@@ -426,6 +426,9 @@ class SessionAndSetupTests(unittest.TestCase):
             project.mkdir()
             scontrol = executable(root / "host/scontrol")
             scancel = executable(root / "host/scancel")
+            runtime_scripts = root / "production-install/scripts"
+            runtime_scripts.mkdir(parents=True)
+            (runtime_scripts / "slurm_routing.py").write_text("# production locator\n", encoding="utf-8")
             rendered = setup.render_contract(
                 project,
                 SCRIPTS,
@@ -434,6 +437,7 @@ class SessionAndSetupTests(unittest.TestCase):
                 "longleaf",
                 root / "local-overrides.toml",
                 ["htzhulab"],
+                runtime_scripts,
             )
             files = rendered["files"]
             config = tomllib.loads(files[".codex/config.toml"].decode())
@@ -471,6 +475,9 @@ class SessionAndSetupTests(unittest.TestCase):
             rules = files[".codex/rules/slurm-protected-cancel.rules"].decode()
             self.assertIn('pattern=["scancel"]', rules)
             self.assertIn('pattern=["/usr/bin/scancel"]', rules)
+            shim = files[".codex/automation-bin/scancel"].decode()
+            self.assertIn(str(runtime_scripts / "slurm_routing.py"), shim)
+            self.assertNotIn(str(SCRIPTS / "slurm_routing.py"), shim)
 
             render_output = root / "rendered"
             setup.write_rendered(rendered, render_output, install=False)
