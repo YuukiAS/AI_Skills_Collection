@@ -6,7 +6,7 @@ Branch: `reviewed/clear-writing--scientific-explanation-readability-repair`
 
 Implementation commit: `fd7a1578a5042a46a55c5b638f6d550655b1096b`
 
-State transition: `PLAN_FROZEN / RUN_CODEX_EXECUTOR` -> `WAITING_FOR_CI / ci_status=PENDING` -> `NEEDS_GPT_PLANNER / ci_status=FAIL`
+State transition: `PLAN_FROZEN / RUN_CODEX_EXECUTOR` -> `WAITING_FOR_CI / ci_status=PENDING` -> external Presentations unblock -> `READY_FOR_GPT_REVIEW / ci_status=PASS`
 
 ## Implementation
 
@@ -81,12 +81,19 @@ Affected plugins:
 
 ## Required CI Result
 
-Required zero-paid GitHub CI run `39097236717` failed in the main `codex-marketplace` job while running the full repository tests. The three failures are all Presentations render probes reporting missing TeX/canonical-font resources; both editable-install jobs and Windows sparse checkout passed. Exact evidence is preserved in `CI_FAILURE_39097236717.md`.
+The prior required CI failure `39097236717` was independently attributed to a Presentations missing-render portability regression outside Clear Writing. That bounded repair was implemented at `bb74e18f44428a12f1fea11b98bf30c10af94040`, independently reviewed PASS at `02886fdbd19464df4a5265057e12163d4a4b8609`, and integrated to `main`.
 
-This task cannot change Presentations/rendering behavior, CI resource setup or those tests under the frozen Plan. The unchanged CI was not rerun. `CURRENT` therefore moves to `NEEDS_GPT_PLANNER / ci_status=FAIL`, preserving `review_round=0`, `plan_revision=0`, the implementation and all replay evidence.
+The current Clear Writing reviewed branch then consumed repaired main without changing Clear Writing production semantics. Required GitHub CI run `39109965934` completed successfully on branch head `03dadfb75eba3e609b10411f8177c13644f5683f`:
+
+- `codex-marketplace`: PASS;
+- Linux editable-install smoke: PASS;
+- Windows editable-install smoke: PASS;
+- Windows sparse checkout: PASS.
+
+The CI-trigger draft PR was closed unmerged after the run; it existed only to invoke the repository's existing pull-request CI trigger. The Clear Writing implementation remains `fd7a1578a5042a46a55c5b638f6d550655b1096b`.
 
 ## Remaining Gates
 
-Planner must assign and bound the external CI remediation before this branch can return to required CI. CI PASS remains mandatory before independent Reviewer handoff, and the Reviewer must read all nine final outputs rather than only this summary.
+Repository/Codex known-regression repair and required CI are now ready for independent Clear Writing review. The Reviewer must read all nine final regression outputs and the four should-not-change outputs rather than relying only on this summary.
 
-Maximum claim scope remains the frozen repo/Codex known-regression repair; ChatGPT Web automatic selection, G7 fresh evidence, PIE 0.2, personal account mutation and formal release remain unclaimed.
+A Reviewer PASS at this stage still has a narrow claim scope: it does not prove ChatGPT Web automatic selection, A/E or B/C matched comparisons, fresh G7 generalization, user acceptance, or formal release. Those remain the next frozen product gates after repo/Codex candidate review.
