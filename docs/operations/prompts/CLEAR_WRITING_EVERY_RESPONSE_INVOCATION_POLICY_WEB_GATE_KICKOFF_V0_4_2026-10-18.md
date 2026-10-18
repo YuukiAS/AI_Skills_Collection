@@ -44,22 +44,27 @@ Project creation/edit 或 W0/W1/W2/W3。
 这些对象 execution-ready PASS 后全部只读。任何 frozen contract 想改：
 立即停止 -> Planner -> independent Critic。
 
-## 1. 不再修改 Reviewed Handoff CURRENT
+## 1. Reviewed Handoff machine transport 已合法终止
 
-当前 machine state：
+当前 machine state 必须保持：
 
 ```text
-CURRENT.state=NEEDS_GPT_PLANNER
+CURRENT.state=AWAIT_HUMAN_DECISION
+human_gate_reason=PLANNER_DECISION
 plan_revision=1
 max_plan_revisions=1
 ci_status=NOT_REQUIRED
 ```
 
-这是已经耗尽 plan-revision budget 的 inert control-plane state。
+该终态已通过 current Bridge Kit 的现有合法路径从耗尽 revision budget 的
+`NEEDS_GPT_PLANNER` 进入，并且已有 task-local `FINAL_REPORT.md`。
+
+这只终止 exhausted Reviewed Handoff transport，不表示 Clear Writing Web
+Gate 已完成。
 
 本次 manual Web execution：
 
-- 不执行 `NEEDS_GPT_PLANNER -> PLAN_FROZEN`；
+- 不 re-arm `PLAN_FROZEN`；
 - 不 raw edit CURRENT；
 - 不 reset/increase revision budget；
 - 不新增 state/schema；
@@ -68,7 +73,7 @@ ci_status=NOT_REQUIRED
 - 不改变 CURRENT.review_round；
 - 不使用 watcher/Codex Executor执行 Web Gate。
 
-CURRENT 在整个 manual Web batch 中保持不变。
+CURRENT 在整个 manual Web batch 中保持该 terminal state 不变。
 
 ## 2. 任何 live mutation 前先证明 watcher inactive
 
