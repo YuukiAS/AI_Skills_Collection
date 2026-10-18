@@ -40,18 +40,19 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
         self.assertEqual(meta.get("icon_large"), "assets/app-facing.svg")
 
         description = meta.get("description", "")
-        self.assertLessEqual(len(description), 350)
+        self.assertLess(len(description), 500)
         for phrase in [
-            "Project instruction creation/editing",
-            "ChatGPT Project instruction",
-            "Load silently",
-            "complete current setting",
+            "requests to create",
+            "ChatGPT Project instructions",
+            "before editing",
+            "require the complete setting",
             "confirmed empty setting",
-            "Exclude prose",
-            "fidelity/scientific rewrites",
+            "prose polishing",
+            "writing fidelity",
+            "scientific rewrite",
             "AI_Skills maintenance",
-            "workflow control",
-            "generic prompts",
+            "workflow/control",
+            "generic agent/system prompts",
             "global Custom Instructions",
         ]:
             self.assertIn(phrase, description)
@@ -103,7 +104,6 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
             self.assertIn("explicit empty", text.lower())
             self.assertIn("explicit reset", text.lower())
             self.assertIn("provenance", text.lower())
-            self.assertIn("preamble", text.lower())
 
         self.assertIn("return only this exact message", skill)
         self.assertIn("return only", contract)

@@ -1,6 +1,6 @@
 {
   "version": "5.4.5",
-  "generated_at": "2026-10-18T07:41:43+00:00",
+  "generated_at": "2026-10-18T11:53:51+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
   "skill_count": 155,
@@ -384,7 +384,7 @@
       "subcategory": "codex-system",
       "slug": "project-instructions-editor",
       "install_selector": "core/codex-system/project-instructions-editor",
-      "description": "Use for ChatGPT Project instruction creation/editing: compression, sync, restructure, reset. Load silently: without complete current setting or confirmed empty setting, return only the frozen baseline request. Exclude prose, fidelity/scientific rewrites, AI_Skills maintenance, workflow control, generic prompts, and global Custom Instructions.",
+      "description": "Use for requests to create, update, compress, sync, restructure, or reset ChatGPT Project instructions; before editing, require the complete setting or a confirmed empty setting. Exclude prose polishing, writing fidelity, scientific rewrite, AI_Skills maintenance, workflow/control, generic agent/system prompts, and global Custom Instructions.",
       "status": "active",
       "provenance": "user-authored",
       "source_repo_url": "",
