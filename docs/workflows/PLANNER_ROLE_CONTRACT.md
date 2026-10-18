@@ -1,8 +1,8 @@
 # Planner 线程工作约定
 
-版本：1.5
+版本：1.6
 
-日期：2026-10-18
+日期：2026-10-19
 
 配套文件：`docs/workflows/CRITIC_ROLE_CONTRACT.md`
 
@@ -206,9 +206,23 @@ NEXT_HANDOFF=CRITIC
 
 1. **Proposal / Plan**：为什么这样做、架构、Capability Gates、验收、恢复与 non-goals；
 2. **Canonical Goal**：Executor 必须完成的完整 bounded contract；
-3. **Kickoff Draft**：用户可以直接复制到 Codex 的短 prompt，只引用批准后的 Goal/Plan，不重新设计架构。
+3. **Kickoff Draft**：供 execution-ready Critic 审查的执行范围与授权来源。它必须足够清楚，使 PASS 后可以从同一冻结包渲染出一个简短、可直接发送给 Codex 的用户入口；Kickoff Draft 本身不等于最终用户可见 handoff。
 
-三者必须可用 path + version/commit 唯一绑定。Critic PASS 后不得由 Planner 或 Critic临场改写出一个语义不同的新 Goal/Kickoff；若执行包任何实质语义需要变化，应回到 REVISE/复审。
+三者必须可用 path + version/commit 唯一绑定。Critic PASS 后不得由 Planner 或 Critic临场改写出一个语义不同的新 Goal/Kickoff；若执行包任何实质语义需要变化，应回到 REVISE/复审。**从已批准冻结包生成简短 Codex handoff 只是用户阅读层渲染，不算语义改写。**
+
+Kickoff Draft 可以保存审查阶段需要的生命周期元数据，例如 `DRAFT`、`NOT_AUTHORIZED`、"仅在 Critic PASS 后执行"、review locator 或历史状态；但这类文字必须与真正的执行范围分层，不能依赖它们作为 Codex 执行语义。新的 Kickoff Draft 不得要求 Critic 在 PASS 后把整个文件逐字复制给用户，也不得把"逐字输出全文"当作防止 scope drift 的机制。防止 scope drift 依靠冻结 package locator、Critic 审查和授权边界本身。
+
+PASS 后面向用户的 Codex handoff 默认使用自然中文、简短、可直接发送，只保留当前执行真正需要的内容：
+
+- 当前任务/阶段；
+- approved Proposal/Plan、Goal、Critic review、Kickoff source 的必要 path + commit locator；
+- 当前执行所需的 exact branch/worktree 等定位（只有确实相关时）；
+- 必须由当前用户消息显式表达的 bounded authorization；已经冻结但不需要重新展开的范围直接引用 approved Kickoff source；
+- 明确停止条件或返回条件。
+
+不得把 Proposal/Plan/Kickoff 全文、`DRAFT ONLY` / `NOT_AUTHORIZED`、"等待 Critic PASS"、"用户发送后才授权"、审查历史、blocker closure、内部状态字段或其他批准前控制面说明重新塞回批准后的 Codex handoff。只有缺少某个精确 effect identity 会导致授权不成立时，才在短 handoff 中展开该 effect；不能为了"完整"复制整份内部合同。
+
+若现有 task-specific review prompt 或历史 Kickoff 写着"逐字返回/逐字输出 approved Kickoff"，最新本角色合同优先：该要求只解释为**保持已审 scope 不漂移**，不能解释为向用户全文复制内部 artifact。
 
 任何 Codex handoff / Kickoff 在送 Critic 做 execution-ready review 前，都必须确认：Codex 开始当前批准的实质执行之前，不再存在未完成的 Planner 决策、Critic 审查或用户必要产品/授权选择。Codex 收到 kickoff 后应能直接进入批准范围内的实质执行；正常的 source read、环境确认和安全 preflight 可以作为执行开始的一部分，但只能验证已经冻结的条件，不能承担“先 probe 再发现还缺关键设计、审查或用户选择”的职责。
 
@@ -231,7 +245,7 @@ production install / live-global side effect / restoration boundary（如涉及�
 
 Critic 对 Proposal + Goal + Kickoff Draft 同版 PASS 后，Planner 本轮设计职责即结束；无需为了“再生成一次 prompt”重新工作。除非 Executor 后续暴露需要改变架构、范围、关键验收、预算/授权或恢复路线的实质问题，才重新进入 Planner。
 
-批准后仍给短中文交接：明确 Active Design Context、Proposal/Goal/Critic review 路径和 approved kickoff 版本。不要把长期 roadmap 塞进 Executor 指令。已有固定规则引用 source，不能每轮重新猜 cache、身份、安装路线。
+批准后给用户的必须是**短 Codex handoff**，而不是把 Kickoff Draft artifact 整份重贴。handoff 明确当前任务、Proposal/Goal/Critic review/Kickoff source locator、approved commit、必要的执行定位与授权边界、停止条件即可；已有固定规则引用 source。不要把长期 roadmap、批准前状态、审查说明或仓库内部防误执行文本塞进 Executor 指令。
 
 可追踪文件使用现有 `docs/design/<topic>/`、`docs/goals/` 或 `results/<task_key>/`；敏感/大文件在 repo 内 `private/exports/`。审查记录由 Critic 负责原始结论；Planner 可以忠实归档用户转交的全文并注明来源，不能代签 PASS。提交需交接的文件后核对远端；报告 commit 放提交后的回复，不要求文件自含自身 commit。
 
