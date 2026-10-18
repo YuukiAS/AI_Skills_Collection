@@ -28,6 +28,35 @@ EXECUTION_PACKAGE / AUTHORIZED_ONLY_AFTER_CRITIC_PASS_AND_USER_SEND / PHASE_0_TO
 
 不得复活旧 Kickoff、terminal confirmer、persisted-confirmed-token 或“下一 ordinary scancel 消费确认”语义。
 
+## 0.1 Phase 0 recovery：candidate runtime 改为 standalone clone
+
+上一 execution-ready package `c3879065c782f1b0a03107a927bb3176a8788d02` 已获 PASS，但实际 Phase 0 运行得到：
+
+- PHASE_0_PREFLIGHT=PASS
+- PHASE_0_CAPABILITY=FAIL
+- PRODUCT_IMPLEMENTATION=NOT_STARTED
+- REAL_SLURM_COMMANDS=NONE
+- REAL_SLURM_MUTATION=NO
+
+失败原因已经由当前 OpenAI Codex `codex-rs/config/src/loader/mod.rs` 直接证实：
+
+- linked Git worktree 中，worktree-local project config仍可加载；
+- 但 Hook discovery 会把 worktree-local Hook declaration替换为root/canonical checkout对应 `.codex`；
+- regular standalone checkout中 `checkout_root == repo_root`，不会触发该root-checkout Hook override。
+
+因此本 recovery **只修改候选运行拓扑**：
+
+linked worktree
+→ standalone Git clone
+
+其它 approved Proposal v2.1、authority boundary、Gate A-D、Hook trust、production Hook identity、version/release contract全部不变。
+
+本 recovery 的 AI Skills candidate source **仍是上一 approved package commit**：
+
+`c3879065c782f1b0a03107a927bb3176a8788d02`
+
+当前 main 后续无关提交不得进入candidate代码。
+
 ## 1. 完成后新增的真实能力
 
 Longleaf private policy：
@@ -65,105 +94,197 @@ ordinary scancel exact JobId
 - database / daemon / broker
 - fifth Capability Gate
 
-## 2. 冻结 source identities 与全新 execution identities
+## 2. 冻结 source identities 与 standalone candidate clone identities
 
 ### AI_Skills_Collection
 
-下一 execution-ready Critic 必须将 APPROVED_COMMIT 绑定到最终 v2.1 execution package commit 本身。
-
-执行时：
-- fetch/read exact APPROVED_COMMIT；
-- origin/main 必须仍能定位该 commit；
-- 若 main 后续只前进无关文档，不允许静默把新内容吸进当前 candidate；
-- branch 必须从 APPROVED_COMMIT 创建；
-- 若 slurm-workflows / workflow contract / relevant .codex semantics 已在 main 发生实质变化，STOP -> Planner。
+canonical checkout（只读、不作为candidate runtime）：
 
 R：
 /overflow/htzhu/mingcheng_new/AI_Skills_Collection
 
+candidate source：
+c3879065c782f1b0a03107a927bb3176a8788d02
+
 branch：
 work/hpc--slurm-protected-partition-chat-confirmation-v2-1
 
-W：
+standalone candidate clone：
+
+C：
+/overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-protected-partition-chat-confirmation-v2-1-standalone-clone
+
+上一失败 linked-worktree path：
+
 /overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-protected-partition-chat-confirmation-v2-1
+
+该旧path不得复用、不得要求清理。
 
 ### DII
 
-frozen source：
-747829b957b19e8fcffa6bd5f1bb7ae62ae11f6f
+canonical checkout（只读）：
 
 R：
 /users/a/e/aereinh/Distributed_Imaging_Inference
 
+frozen source：
+747829b957b19e8fcffa6bd5f1bb7ae62ae11f6f
+
 branch：
 work/hpc--slurm-protected-partition-chat-confirmation-v2-1
 
-W：
+standalone candidate clone：
+
+C：
+/users/a/e/aereinh/Distributed_Imaging_Inference-hpc--slurm-protected-partition-chat-confirmation-v2-1-standalone-clone
+
+上一失败 linked-worktree path：
+
 /users/a/e/aereinh/Distributed_Imaging_Inference-hpc--slurm-protected-partition-chat-confirmation-v2-1
+
+不得复用或清理。
 
 ### CARE
 
-frozen source：
-75a40e454de43b64e59a0b0b438ff57ef2bb8345
+canonical checkout（只读）：
 
 R：
 /users/a/e/aereinh/CARE
 
+frozen source：
+75a40e454de43b64e59a0b0b438ff57ef2bb8345
+
 branch：
 work/hpc--slurm-protected-partition-chat-confirmation-v2-1
 
-W：
+standalone candidate clone：
+
+C：
+/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1-standalone-clone
+
+上一失败 linked-worktree path：
+
 /users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
+
+不得复用或清理。
 
 ### 平台 source
 
-OpenAI Codex reviewed main：
+OpenAI Codex reviewed source：
 8c076942cb70fba8e5c4732c23f1faabc4aed484
 
-Bridge Kit reviewed main：
-6dc54a6d8f25e50e48d81853b347844d960fd613
+Bridge Kit source继续只作平台参考，NO_CHANGE。
 
-Bridge 从上一冻结点继续前进，但变化仅涉及 0.11.0 recovery execution package 文档和 Planner/Critic governance review 文档，没有 Host Policy / Hook / approvals runtime 变化。本任务：
-Bridge Kit source = NO_CHANGE。
+### canonical checkout hard boundary
 
-执行包准备时三个新的 v2.1 remote task branch 均不存在。
-
-## 3. branch/worktree 与首次远端发布
-
-Critic PASS 本身不创建任何 branch。
-
-只有用户本人实际发送 approved Kickoff 后：
-
-Phase 0：
-- 只创建 AI Skills exact v2.1 branch/worktree；
-- DII/CARE 只读 preflight，不创建 worktree。
-
-Phase 0 PASS 后：
-- 才创建 DII/CARE exact v2.1 branch/worktree。
-
-每个 repo 创建前必须验证：
-- exact repo root；
-- origin identity；
-- clean source；
-- frozen source commit；
-- target local branch 不存在；
-- target W 不存在；
-- same-name remote branch 不存在。
-
-任何 drift / dirty / collision / lineage mismatch fail closed。
-
-候选完成后、独立 Reviewer handoff 前，每个 exact task branch最多授权一次普通非强制同名首次发布：
-
-git push --set-upstream origin work/hpc--slurm-protected-partition-chat-confirmation-v2-1
+三个 canonical R 在 Phase 0–3 **完全只读**：
 
 禁止：
-- 其它 branch / remote
-- force / force-with-lease
-- delete / tag
+- 写文件
+- 写 canonical `.codex`
+- git checkout/switch
+- git stash
+- git reset
+- git clean
+- git restore
+- git worktree add/remove
+- canonical repo内branch创建
+- canonical repo内fetch/pull等会修改 `.git` 状态的同步动作
+
+允许的canonical读取仅用于：
+- `git remote get-url origin`
+- `git rev-parse`
+- `git status --short`
+- 读取 AGENTS/规则/source identity
+- 记录pre-existing dirty状态
+
+pre-existing dirty或其它checkout一律不清理；只记录，不作为本task修改。
+
+## 3. standalone clone / branch 与首次远端发布
+
+Critic PASS本身不创建任何clone/branch。
+
+只有用户本人实际发送approved Kickoff后：
+
+### Phase 0：只创建AI Skills standalone clone
+
+1. 只读读取canonical R的exact origin URL；不得在R执行fetch/pull或任何Git mutation。
+2. 验证AI Skills C path不存在。
+3. 从exact origin创建独立standalone clone C；必须是独立Git checkout，不是linked worktree。
+4. 在C中定位exact candidate source：
+   `c3879065c782f1b0a03107a927bb3176a8788d02`
+5. 在C中从该exact source创建branch：
+   `work/hpc--slurm-protected-partition-chat-confirmation-v2-1`
+6. 不吸收clone时remote当前main的新内容。
+
+standalone identity必须直接证明：
+
+- `C/.git` 是该clone自己的Git目录，不是指向其它checkout的linked-worktree gitfile；
+- `git -C C rev-parse --show-toplevel` 精确等于C；
+- `git -C C rev-parse --git-common-dir` 解析到C自己的 `.git`；
+- branch base/merge-base精确绑定frozen source；
+- candidate root不存在对canonical R的worktree linkage。
+
+然后才准备clone-local `.codex`。
+
+### Phase 0 Hook discovery hard proof
+
+在任何Desktop probe之前，必须先用正式 `hooks/list` 或等价官方入口证明：
+
+- cwd/root = exact AI Skills C；
+- discovered project Hook source path位于：
+  `<C>/.codex/...`
+- Hook source **不位于** canonical：
+  `/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.codex/...`
+- clone-local Hook declaration/current_hash就是实际加载对象。
+
+若 `hooks/list` 仍发现canonical/root-checkout Hook，或未发现exact clone-local Hook：
+
+`PHASE_0_CAPABILITY=FAIL`
+→ STOP -> Planner
+
+绝不向canonical checkout写probe Hook作为兜底。
+
+### Phase 0 PASS后：创建DII/CARE standalone clones
+
+DII/CARE分别重复同一机制：
+
+- canonical R只读取得origin；
+- exact C path必须不存在；
+- standalone clone；
+- exact frozen source checkout；
+- 在clone内创建相同task branch；
+- `.git`必须clone-local；
+- show-toplevel必须等于C；
+- hooks/list必须发现C-local Hook，不得发现canonical R-local Hook。
+
+任何失败都STOP。
+
+### candidate publication
+
+candidate branch存在于standalone clone C中。
+
+候选完成、独立Reviewer handoff前，每个exact task branch最多授权一次普通非强制同名首次发布：
+
+`git push --set-upstream origin work/hpc--slurm-protected-partition-chat-confirmation-v2-1`
+
+仅在：
+- exact clone origin正确；
+- branch lineage正确；
+- clone clean；
+- same-name remote branch不存在
+
+时允许。
+
+禁止：
+- canonical checkout push
+- 其它branch/remote
+- force/force-with-lease
+- delete/tag
 - history rewrite
 - raw main push
 
-首次发布后普通同分支更新使用现有 bounded current-branch publisher。
+首次发布后同branch后续publication走已有bounded current-branch publisher，执行cwd仍为standalone candidate clone。
 
 ## 4. locked project permission profile
 
@@ -350,8 +471,8 @@ trusted project SessionStart Hook：
 冻结 retention：
 
 - Phase 0 probe Hook若后续仍用于同一 task 的 capability replay，可保留 exact trust record至 Phase 3 Reviewer package冻结；
-- probe Hook被删除、声明改变或worktree弃用后，旧 `trusted_hash` 因 current_hash不再匹配而不得授权新的/修改Hook；记录为 inert stale trust，不得拿它信任production Hook；
-- candidate worktree Hook trust同理只绑定该 worktree declaration/current_hash。
+- probe Hook被删除、声明改变或candidate clone弃用后，旧 `trusted_hash` 因 current_hash不再匹配而不得授权新的/修改Hook；记录为 inert stale trust，不得拿它信任production Hook；
+- candidate clone Hook trust同理只绑定该 worktree declaration/current_hash。
 
 cleanup / rollback **只能使用 Codex 官方 Hook trust管理入口**：
 - 若当前官方 UI/Hook management surface提供 disable/remove/revoke，对 exact task key使用该入口并readback；
@@ -510,11 +631,11 @@ locked fresh runtime session中普通tool不能修改project .codex：
 
 Phase 0先于产品实现。
 
-只创建AI Skills v2.1 worktree。
+只创建AI Skills v2.1 standalone candidate clone C。
 
 DII/CARE只读preflight。
 
-在AI Skills W中准备harmless probe版本：
+在AI Skills standalone clone C中准备harmless probe版本：
 
 - project .codex/config.toml：
   - default_mode_request_user_input=true；
@@ -539,7 +660,7 @@ DII/CARE只读preflight。
 
 ### 11.2 Desktop native interaction probe
 
-fresh Longleaf Codex Desktop root chat，cwd=W。
+fresh Longleaf Codex Desktop root chat，cwd=AI Skills C。
 
 harmless request_user_input：
 “这是聊天确认能力测试。请选择‘确认测试’或‘取消测试’。”
@@ -556,7 +677,7 @@ harmless request_user_input：
 STOP at PROBE_READY_FOR_USER_CHAT。
 
 用户唯一最小动作：
-- 在Longleaf_Codex打开exact W的新chat；
+- 在Longleaf_Codex打开exact AI Skills C的新chat；
 - 若平台显示exact project Hook trust screen，只trust evidence 中 exact hook key + current_hash 完全匹配的probe Hooks；该动作会通过官方UI写入当前 `$CODEX_HOME/config.toml` 的对应 `hooks.state` trust record，属于本Kickoff明确授权的bounded side effect；
 - 发送指定harmless probe prompt并完成一次“确认测试”，另一次不回答以观察empty。
 
@@ -612,7 +733,7 @@ STOP -> Planner。
 
 只有Phase 0 PASS后：
 
-1. 创建DII/CARE exact v2.1 branch/worktree。
+1. 创建DII/CARE exact v2.1 standalone candidate clones并在各clone内创建冻结task branch。
 2. AI Skills实现：
    - central thin guard；
    - private config field protected_cancel_partitions；
@@ -810,9 +931,9 @@ Phase 0 PASS、Phase 1完成后：
 
 ### 18.1 Phase 3 production Hook identity rendering
 
-Candidate worktree W 与正式 canonical repo root R 的 absolute path不同，而 v2.1 Hook declaration绑定 private binder absolute path + binder digest。因此：
+Candidate standalone clone C 与正式 canonical repo root R 的 absolute path不同，而 v2.1 Hook declaration绑定 private binder absolute path + binder digest。因此：
 
-**candidate worktree Hook current_hash 绝不能替代 production Hook current_hash。**
+**candidate clone Hook current_hash 绝不能替代 production Hook current_hash。**
 
 Phase 3 Reviewer package必须在不写任何production文件、不激活任何production Hook的前提下，由 exact reviewed setup generator针对三个冻结canonical production roots离线渲染 production identity：
 
@@ -842,7 +963,7 @@ CARE canonical R：
 
 生成过程必须使用与production setup相同的 exact generator和final candidate binder digest。任何“手写一份近似production Hook”不算证据。
 
-Reviewer必须实际审上述production-rendered declarations/hashes，并明确它们与candidate W Hook hashes不同但语义/生成器一致。
+Reviewer必须实际审上述production-rendered declarations/hashes，并明确它们与candidate clone Hook hashes不同但语义/生成器一致。
 
 Reviewer必须实际审：
 
@@ -907,8 +1028,9 @@ Reviewer PASS后，用户必须发送第二条短、独立的production authoriz
 ### candidate/probe rollback
 
 未production前：
-- 删除/弃用task worktrees/branches；
-- 恢复/删除task-local .codex probe/runtime private material；
+- 删除/弃用task standalone candidate clones/branches；
+- 恢复/删除standalone clone内task-local .codex probe/runtime private material；
+- canonical R保持完全不动，不需要也不允许为本task做stash/reset/clean/checkout；
 - project-local candidate files不构成production deployment；
 - **但Hook trust UI可能已对user-level `$CODEX_HOME/config.toml` 写入 exact `hooks.state` trust record，这是真实side effect**；
 - cleanup/retention严格按第6.1节：只走官方Hook trust管理入口；如果当前UI没有revoke/remove，则不手工改config，保留inert trust record并报告exact key/hash。
@@ -981,7 +1103,10 @@ tracking issue: PENDING_CLEAR_WRITING
 - approved Proposal blob != 26760ae8bb0a19809f1048436fa14aba0bb4e49a；
 - AI execution package commit无法定位；
 - DII/CARE source drift；
-- target branch/worktree collision；
+- standalone clone path已存在或target branch/remote branch collision；
+- standalone clone的 .git / show-toplevel / git-common-dir 证明其不是独立checkout；
+- hooks/list仍把candidate clone Hook替换为canonical/root-checkout Hook；
+- 任何步骤要求向canonical checkout .codex写probe/candidate Hook；
 - Project config不能安全启用default_mode_request_user_input；
 - full .codex explicit deny在normal Git/status/test产生真实不可接受退化；
 - explicit deny在auto_review escalation后失效；
@@ -995,7 +1120,7 @@ tracking issue: PENDING_CLEAR_WRITING
 - 需要Executor直接编辑user-level `$CODEX_HOME/config.toml` 才能完成Hook trust；
 - Phase 3无法为三个canonical production roots用exact generator离线冻结production Hook declarations/current hashes；
 - production setup实际 `hooks/list` current_hash与Reviewer冻结production hash不一致；
-- candidate worktree Hook hash被尝试当作production Hook hash；
+- candidate clone Hook hash被尝试当作production Hook hash；
 - request_user_input/ PostToolUse live probe失败；
 - CARE blocker无法返回interactive supervisor；
 -需要terminal confirmer、MCP、database/daemon/broker、新Unix identity、H100/current-run/old三态；
