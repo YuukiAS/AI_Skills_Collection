@@ -7,6 +7,8 @@ Critic PASS 本身不执行任何动作。只有独立 Critic 对最终 v2.1 pac
 
 本 Kickoff 不授权 production activation，也不授权任何真实 Slurm mutation。
 
+Phase 0–3 唯一允许的 user-level `$CODEX_HOME/config.toml` 副作用是：**用户本人通过官方 Codex Hook trust UI**，为本 task 已冻结的 exact Hook key/current_hash 写入对应 `hooks.state.<key>.trusted_hash`。Executor 不得直接编辑 user config，不得修改其它 user-level 字段。
+
 Task：
 hpc--slurm-cancel-production-closure
 
@@ -72,7 +74,27 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
 4. Phase 0 不得调用任何 Slurm command，包括 read-only Slurm。
    它只验证 Codex chat / Hook / permission / anti-tamper primitive。
 
-5. 使用 fresh Longleaf Codex Desktop interactive root chat on exact AI Skills W 验证：
+5. 在任何 Hook trust 动作前冻结并记录：
+   - current Codex identity / CODEX_HOME locator
+   - exact project root / task branch
+   - exact Hook source
+   - exact stable Hook key
+   - exact current_hash
+   - trust status
+   - pre-trust exact hooks.state key state（通过正式 readback，可取得则记录旧 hash）
+
+6. 如果 Desktop 要求 Hook trust：
+   - 只允许用户本人通过官方 Codex Hook trust UI trust上述 exact key/current_hash；
+   - 不允许 Executor 直接编辑 `$CODEX_HOME/config.toml`；
+   - 不允许 Executor 直接调用通用 config writer伪造 trust；
+   - 用户 UI trust 后必须用 `hooks/list` + 正式 config readback证明：
+     - exact Hook status=Trusted
+     - exact trusted_hash == frozen current_hash
+     - 本 task 未直接修改其它 user config 字段。
+
+   这一步是真实 user-level config side effect，已由本 Kickoff 明确授权。
+
+7. 使用 fresh Longleaf Codex Desktop interactive root chat on exact AI Skills W 验证：
    - native request_user_input 在 Default mode 实际可用
    - UI 显示 harmless question
    - 用户显式“确认测试”返回 dedicated response
@@ -80,19 +102,19 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
    - 第二轮不回答得到 empty answers
    - empty answers不触发任何authority action
 
-6. 如果 Executor 无法自行创建并展示 fresh Desktop chat，停止于：
+8. 如果 Executor 无法自行创建并展示 fresh Desktop chat，停止于：
 
    PROBE_READY_FOR_USER_CHAT
 
    只要求用户：
    - 在 Longleaf_Codex 打开 exact W 的新 chat
-   - 若显示 Hook trust，只 trust evidence 中 current hash 完全匹配的 probe Hooks
+   - 若显示 Hook trust，只 trust evidence 中 exact key + current_hash 完全匹配的 probe Hooks
    - 发送 harmless probe prompt
    - 完成一次“确认测试”，另一次不回答
 
    不要求用户打开 terminal。
 
-7. authority-boundary probe必须证明：
+9. authority-boundary probe必须证明：
    - trusted Host Hook可访问 fake private area
    - ordinary shell/Python/apply_patch/absolute/symlink path均被 explicit .codex deny
    - auto_review-approved escalation仍不能访问 private area
@@ -102,19 +124,28 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
    - fake private binder digest mismatch => no execution
    - model-controlled PATH 中伪造 scontrol/scancel 不影响 runtime.json frozen absolute-path resolution
 
-8. should-not-change regression必须证明：
-   - git status --short 正常
-   - read-only git diff/rev-parse/remote identity正常
-   - representative normal AI Skills tests正常
+10. Hook trust retention / rollback：
+    - exact probe/candidate Hook trust record可以保留到 Phase 3 Reviewer package冻结，以支持同task replay；
+    - Hook声明删除/改变后，旧trusted_hash只能作为 inert stale record，不能trust新hash；
+    - cleanup/revoke只使用Codex官方Hook trust管理入口；
+    - 如果当前官方UI没有revoke/remove，禁止手工编辑user config，记录：
+      HOOK_TRUST_RETENTION=INERT_RECORD
+      + exact key/hash + reason；
+    - 不得声称未发生user-level side effect或已删除实际上仍保留的record。
 
-   如果 full .codex deny造成真实正常入口退化：
-   STOP -> Planner。
-   Executor不得自行缩窄deny。
+11. should-not-change regression必须证明：
+    - git status --short 正常
+    - read-only git diff/rev-parse/remote identity正常
+    - representative normal AI Skills tests正常
 
-9. 无 Slurm地确认：
-   HEADLESS_PROTECTED_CANCEL=NEEDS_INTERACTIVE_CHAT_CONFIRMATION
+    如果 full .codex deny造成真实正常入口退化：
+    STOP -> Planner。
+    Executor不得自行缩窄deny。
 
-10. Phase 0 任一关键项 FAIL：
+12. 无 Slurm地确认：
+    HEADLESS_PROTECTED_CANCEL=NEEDS_INTERACTIVE_CHAT_CONFIRMATION
+
+13. Phase 0 任一关键项 FAIL：
     立即 STOP -> Planner。
     不得 fallback terminal confirmer、UserPromptSubmit、auto_review、approval prompt、MCP、daemon/database/broker 或 Bridge global config。
 
@@ -122,9 +153,9 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
 
 ## Phase 1 — product candidate
 
-11. Phase 0 PASS 后才创建 DII/CARE exact v2.1 branch/worktree。
+14. Phase 0 PASS 后才创建 DII/CARE exact v2.1 branch/worktree。
 
-12. AI Skills 实现 exact Proposal v2.1：
+15. AI Skills 实现 exact Proposal v2.1：
     - thin central guard
     - protected_cancel_partitions
     - reviewed binder source
@@ -141,7 +172,7 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
     - project config/hooks/rules
     - automation-only scancel shim
 
-13. Hook declaration必须冻结：
+16. Hook declaration必须冻结：
     - canonical absolute private binder path
     - exact reviewed binder SHA-256
     - invocation shape
@@ -149,7 +180,7 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
     Host Hook执行binder前必须使用 trusted absolute hashing executable验证digest。
     mismatch => no binder / no Slurm。
 
-14. runtime.json必须冻结并验证：
+17. runtime.json必须冻结并验证：
     - canonical project root
     - binder SHA-256
     - canonical absolute scontrol
@@ -157,7 +188,7 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
 
     binder禁止PATH lookup、alias、function或relative Slurm path。
 
-15. ordinary Codex normal entry必须无法：
+18. ordinary Codex normal entry必须无法：
     - read/modify/execute/copy private binder
     - read capability
     - modify runtime.json
@@ -166,7 +197,7 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
     - bypass via direct binder/copied binder/fabricated JSON
     - bypass via auto_review escalation
 
-16. DII只做：
+19. DII只做：
     - exact central candidate integration
     - project config/hooks/rules
     - automation PATH/launcher resolution
@@ -174,7 +205,7 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
 
     不复制protected policy/authority logic。
 
-17. CARE只做 chat-blocker transport：
+20. CARE只做 chat-blocker transport：
     - B1 nonzero不加入cancelled，传播并结束当前attempt
     - M7 nonzero传播
     - M8 nonzero传播
@@ -186,7 +217,7 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
 
 ## Phase 2 — validation
 
-18. 先跑 deterministic tests：
+21. 跑 deterministic tests：
     - config compile/origin
     - Hook discovery/trust
     - explicit deny
@@ -198,7 +229,7 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
     - headless fail closed
     - git/status/test should-not-change
 
-19. 任何会实际执行 fake scancel/subprocess destructive path 的验证，只能在真正隔离 fake Slurm 环境：
+22. 任何会实际执行 fake scancel/subprocess destructive path 的验证，只能在真正隔离 fake Slurm 环境：
 
     - network disabled
     - isolated PID namespace
@@ -213,7 +244,7 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
 
     不得改用真实 Longleaf。
 
-20. 完整 Gate 只能有：
+23. 完整 Gate 只能有：
     Gate A：partition routing
     Gate B：native fresh chat confirmation + authority boundary
     Gate C：consumer/runtime coverage + should-not-change
@@ -221,7 +252,7 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
 
     不得新增 Gate E。
 
-21. 绝不执行真实：
+24. 绝不执行真实：
     - sbatch
     - salloc
     - srun
@@ -234,9 +265,34 @@ W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
 
 ## Phase 3 — candidate publication and independent Reviewer handoff
 
-22. 冻结 AI Skills/DII/CARE exact candidate commits和完整 evidence。
+25. 冻结 AI Skills/DII/CARE exact candidate commits和完整 evidence。
 
-23. 每个 exact task branch最多允许一次普通、非强制、同名 first publication：
+26. 使用 exact final candidate binder digest + exact reviewed setup generator，对三个 canonical production roots离线渲染 production Hook identities；不得写production文件、不得创建production private runtime material、不得激活production Hook。
+
+canonical roots：
+
+- AI Skills:
+  /overflow/htzhu/mingcheng_new/AI_Skills_Collection
+- DII:
+  /users/a/e/aereinh/Distributed_Imaging_Inference
+- CARE:
+  /users/a/e/aereinh/CARE
+
+每个production root必须冻结：
+
+- exact candidate commit
+- canonical production root
+- canonical private binder absolute path
+- final binder SHA-256
+- exact production SessionStart Hook declaration
+- exact production PostToolUse Hook declaration
+- exact production stable Hook keys/current_hashes
+- expected runtime.json canonical root/digest/trusted absolute Slurm binding
+- production project config/rules declaration identity
+
+candidate worktree Hook key/hash不得替代production Hook identity。
+
+27. 每个 exact task branch最多允许一次普通、非强制、同名 first publication：
 
 git push --set-upstream origin work/hpc--slurm-protected-partition-chat-confirmation-v2-1
 
@@ -250,17 +306,21 @@ git push --set-upstream origin work/hpc--slurm-protected-partition-chat-confirma
 
 首次发布后，同分支后续 publication只能走已有 bounded current-branch publisher。
 
-24. 发布后立即停止并输出：
+28. 发布后立即停止并输出：
     - 三仓 exact candidate commits
     - Phase 0 live Desktop/authority probe
     - Gate A-D evidence
     - isolation status
     - exact private binder SHA-256 / absolute path contract
-    - exact Hook current hashes/trust status
+    - candidate worktree exact Hook keys/current hashes/trust status
+    - 三仓offline production-rendered Hook declarations/stable keys/current hashes/canonical roots/private binder paths/binder digests
     - exact trusted absolute scontrol/scancel bindings
     - should-not-change regression
+    - Hook trust user-level side-effect inventory / retained inert records
     - rollback
     - independent Reviewer prompt
+
+Reviewer必须实际审production-rendered Hook identities。Phase 3不得拿candidate worktree Hook hash代替production hash。
 
 ## 本 Kickoff 不授权
 
@@ -272,12 +332,22 @@ git push --set-upstream origin work/hpc--slurm-protected-partition-chat-confirma
 - main integration
 - release/version bump
 - Bridge source modification
-- user-level $CODEX_HOME/config.toml
+- Executor直接编辑 user-level $CODEX_HOME/config.toml
+- 除用户通过官方Hook trust UI为本task exact frozen key/current_hash写入hooks.state外的其它user-level config修改
 - ai-bridge-global.rules
-- user-level Hooks
+- user-level Hook declarations
 - paid model/API
 - any real Slurm mutation
 
 Phase 3 independent Reviewer PASS 后仍不得自动部署。
 
-production activation必须等用户第二条短、独立、绑定 exact reviewed AI Skills/DII/CARE commits 的授权。
+production activation必须等用户第二条短、独立授权，并同时绑定：
+
+- exact reviewed AI Skills/DII/CARE commits
+- Reviewer冻结的三仓production Hook stable keys/current_hashes
+- canonical roots
+- private binder absolute paths + final binder digests
+
+production setup真正写入canonical project files后，必须先用 hooks/list readback actual production current_hash并与Reviewer冻结值完全一致；不一致立即STOP，禁止trust。
+
+只有完全一致时，用户才可通过官方 Codex Hook trust UI trust这些 exact production hashes。该UI trust write是production阶段唯一允许的user-level hooks.state config副作用；Executor不得直接写user config。
