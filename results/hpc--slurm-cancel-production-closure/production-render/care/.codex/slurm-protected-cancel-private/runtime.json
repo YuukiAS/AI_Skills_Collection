@@ -1,18 +1,18 @@
 {
-  "active_session_id": null,
-  "active_session_started_at": null,
-  "binder_path": "/users/a/e/aereinh/CARE/.codex/slurm-protected-cancel-private/bin/slurm-protected-cancel-binder",
-  "binder_sha256": "5808f8620fd5aff981e32c15a140833e3cdeaca615d39e02f074b55172ad73fd",
-  "local_override": "/users/a/e/aereinh/.config/ai-skills/local-overrides.toml",
+  "hook_path": "/users/a/e/aereinh/CARE/.codex/slurm-protected-cancel-private/slurm-cancel-hook",
+  "hook_sha256": "fdb6505bc5bb914fda936419ac0d7321ed376201f9c431b7b50669bc6bf00e84",
+  "local_override": "/tmp/hpc-prod-care-policy.toml",
   "operation": "ordinary_cancel",
   "project_root": "/users/a/e/aereinh/CARE",
   "protected_cancel_partitions": [
     "htzhulab"
   ],
+  "scancel_invocation_path": "/usr/bin/scancel",
   "scancel_path": "/usr/bin/scancel",
-  "schema_version": 1,
+  "scancel_path_realpath": "/usr/bin/scancel",
+  "schema_version": 2,
+  "scontrol_invocation_path": "/usr/bin/scontrol",
   "scontrol_path": "/usr/bin/scontrol",
-  "session_hook_path": "/users/a/e/aereinh/CARE/.codex/hooks/slurm-protected-cancel-session",
-  "session_hook_sha256": "dc48faf031313757e5f628abc91ca9b2d6668551e9c4af77aaabeb681b0ff73d",
-  "site_id": "local"
+  "scontrol_path_realpath": "/usr/bin/scontrol",
+  "site_id": "longleaf"
 }

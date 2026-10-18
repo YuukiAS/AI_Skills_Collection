@@ -1,0 +1,15 @@
+{
+  "codex_home": "/users/a/e/aereinh/.codex",
+  "hook_path": "/users/a/e/aereinh/.codex/slurm-protected-cancel/slurm-hook-1e9e42cff1f0af369f58dd4bb3045ae62b786b530eade34ee89cd704c5b595a4.py",
+  "hook_sha256": "1e9e42cff1f0af369f58dd4bb3045ae62b786b530eade34ee89cd704c5b595a4",
+  "operation": "ordinary_cancel",
+  "policy_path": "/users/a/e/aereinh/.codex/slurm-protected-cancel/policy.toml",
+  "policy_sha256": "761dd0ccbb9f18318a766802703de2cc1d34da51d287e61fd3facf46f90f3a31",
+  "scancel_invocation_path": "/usr/bin/scancel",
+  "scancel_path": "/usr/bin/scancel",
+  "scancel_path_realpath": "/usr/bin/scancel",
+  "schema_version": 3,
+  "scontrol_invocation_path": "/usr/bin/scontrol",
+  "scontrol_path": "/usr/bin/scontrol",
+  "scontrol_path_realpath": "/usr/bin/scontrol"
+}

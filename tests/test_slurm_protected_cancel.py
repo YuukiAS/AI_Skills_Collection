@@ -38,12 +38,15 @@ class HostHookFixture:
         self.root = root
         self.project = root / "project"
         self.project.mkdir()
-        self.private = self.project / ".codex/slurm-protected-cancel-private"
+        self.codex_home = root / "codex-home"
+        self.private = self.codex_home / "slurm-protected-cancel"
         self.private.mkdir(parents=True, mode=0o700)
         self.consumed = self.private / "consumed"
         self.consumed.mkdir(mode=0o700)
-        self.hook = self.private / "slurm-cancel-hook"
-        self.hook.write_bytes((SCRIPTS / "slurm_cancel_hook.py").read_bytes())
+        hook_source = (SCRIPTS / "slurm_cancel_hook.py").read_bytes()
+        hook_digest = hashlib.sha256(hook_source).hexdigest()
+        self.hook = self.private / f"slurm-hook-{hook_digest}.py"
+        self.hook.write_bytes(hook_source)
         self.hook.chmod(0o700)
         self.state = root / "scheduler-state.json"
         self.set_jobs(jobs)
@@ -73,20 +76,22 @@ class HostHookFixture:
             f"with open({str(self.mutations)!r}, 'a', encoding='utf-8') as stream:\n"
             "    stream.write(json.dumps(sys.argv[1:]) + '\\n')\n",
         )
+        policy = self.private / "policy.toml"
+        policy.write_text('protected_cancel_partitions = ["htzhulab"]\n', encoding="utf-8")
+        policy.chmod(0o600)
         runtime = {
-            "schema_version": 2,
-            "project_root": str(self.project),
+            "schema_version": 3,
+            "codex_home": str(self.codex_home),
             "hook_path": str(self.hook),
-            "hook_sha256": hashlib.sha256(self.hook.read_bytes()).hexdigest(),
+            "hook_sha256": hook_digest,
+            "policy_path": str(policy),
+            "policy_sha256": hashlib.sha256(policy.read_bytes()).hexdigest(),
             "scontrol_path": str(self.scontrol),
             "scontrol_path_realpath": str(self.scontrol.resolve()),
             "scontrol_invocation_path": str(self.scontrol),
             "scancel_path": str(self.scancel),
             "scancel_path_realpath": str(self.scancel.resolve()),
             "scancel_invocation_path": str(self.scancel),
-            "site_id": "fixture",
-            "local_override": str(root / "unused.toml"),
-            "protected_cancel_partitions": ["htzhulab"],
             "operation": "ordinary_cancel",
         }
         self.runtime = self.private / "runtime.json"
@@ -283,66 +288,102 @@ class TestHostHook(unittest.TestCase):
             self.assertEqual(payload["hookSpecificOutput"]["permissionDecision"], "deny")
             self.assertEqual(fixture.mutation_argvs(), [])
 
+    def test_same_global_hook_operates_from_distinct_repository_cwds(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = HostHookFixture(Path(temp), {"9101": {"partition": "htzhulab", "state": "PENDING"}})
+            other_repo = fixture.root / "other-repository"
+            other_repo.mkdir()
+            event = {
+                "hook_event_name": "PreToolUse",
+                "tool_name": "Bash",
+                "tool_input": {"command": "scancel 9101"},
+                "cwd": str(other_repo),
+                "session_id": "session-2",
+                "turn_id": "turn-2",
+                "tool_use_id": "tool-pre-2",
+            }
+            _, payload = fixture.invoke(event)
+            self.assertEqual(payload["hookSpecificOutput"]["permissionDecision"], "deny")
+            self.assertEqual(protected_question(payload)["question"], "Job 9101 当前位于受保护分区 htzhulab。确认取消这个 Job 吗？")
+            self.assertEqual(fixture.mutation_argvs(), [])
+
 
 class TestSetupContract(unittest.TestCase):
-    def test_render_has_only_pre_and_post_hooks_and_independent_denies(self) -> None:
+    def test_render_has_one_user_level_pre_and_post_hook_identity(self) -> None:
         setup = load_module("setup_protected_cancel_v3", SCRIPTS / "setup_protected_cancel.py")
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            project = root / "project"
-            project.mkdir()
+            codex_home = root / "codex-home"
+            codex_home.mkdir()
+            codex_home.chmod(0o700)
             host = root / "host"
             scontrol = executable(host / "scontrol", "#!/bin/sh\nexit 0\n")
             scancel_real = executable(host / "scancel-real", "#!/bin/sh\nexit 0\n")
             scancel_link = host / "scancel"
             scancel_link.symlink_to(scancel_real.name)
-            rendered = setup.render_contract(
-                project,
+            rendered = setup.render_global_contract(
+                codex_home,
                 SCRIPTS,
                 scontrol,
                 scancel_link,
-                "longleaf",
-                root / "local-overrides.toml",
                 ["htzhulab"],
             )
             files = rendered["files"]
-            self.assertNotIn(".codex/automation-bin/scancel", files)
-            self.assertNotIn(".codex/hooks/slurm-protected-cancel-session", files)
-            self.assertNotIn(".codex/slurm-protected-cancel-private/capability.key", files)
-            self.assertNotIn(".codex/slurm-protected-cancel-private/bin/slurm-protected-cancel-binder", files)
-            hooks = json.loads(files[".codex/hooks.json"])
-            self.assertEqual(set(hooks["hooks"]), {"PreToolUse", "PostToolUse"})
-            self.assertEqual(hooks["hooks"]["PreToolUse"][0]["matcher"], "^(Bash|shell_command|exec_command)$")
-            config = tomllib.loads(files[".codex/config.toml"].decode())
-            filesystem = config["permissions"]["slurm-chat-guard"]["filesystem"]
-            self.assertEqual(filesystem[":workspace_roots"][".codex"], "deny")
+            self.assertFalse(any("automation-bin" in name for name in files))
+            self.assertFalse(any("capability.key" in name for name in files))
+            self.assertEqual(set(rendered["hooks"]), {"PreToolUse", "PostToolUse"})
+            self.assertEqual(rendered["hooks"]["PreToolUse"][0]["matcher"], "^(Bash|shell_command|exec_command)$")
+            config_text = setup.update_user_config_text(
+                "[features]\ndefault_mode_request_user_input = false\n\n[hooks.state]\n",
+                rendered,
+            )
+            config = tomllib.loads(config_text)
+            self.assertTrue(config["features"]["default_mode_request_user_input"])
+            self.assertEqual(set(config["hooks"]) - {"state"}, {"PreToolUse", "PostToolUse"})
+            filesystem = config["permissions"]["slurm-protected-cancel-global"]["filesystem"]
             self.assertEqual(filesystem[str(scancel_link.absolute())], "deny")
             self.assertEqual(filesystem[str(scancel_real.resolve())], "deny")
-            self.assertNotIn(".codex/automation-bin", filesystem[":workspace_roots"])
-            rules = files[".codex/rules/slurm-protected-cancel.rules"].decode()
+            self.assertEqual(filesystem[str(codex_home / "slurm-protected-cancel")], "deny")
+            manifest = rendered["manifest"]
+            self.assertEqual(
+                manifest["hook_keys"],
+                {
+                    "post_tool_use": f"{codex_home / 'config.toml'}:post_tool_use:0:0",
+                    "pre_tool_use": f"{codex_home / 'config.toml'}:pre_tool_use:0:0",
+                },
+            )
+            self.assertFalse(any("project" in value for value in manifest["hook_keys"].values()))
+            rules = files["rules/slurm-protected-cancel.rules"].decode()
             self.assertIn('pattern=["scancel"]', rules)
             self.assertIn(json.dumps(str(scancel_link.absolute())), rules)
             self.assertIn(json.dumps(str(scancel_real.resolve())), rules)
 
-    def test_install_removes_obsolete_wrapper_capability_and_session_files(self) -> None:
+    def test_install_writes_content_addressed_private_runtime_and_preserves_hook_state(self) -> None:
         setup = load_module("setup_protected_cancel_install", SCRIPTS / "setup_protected_cancel.py")
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            project = root / "project"
-            project.mkdir()
-            for relative in setup.OBSOLETE_RELS:
-                path = project / relative
-                path.parent.mkdir(parents=True, exist_ok=True)
-                path.write_text("obsolete", encoding="utf-8")
+            codex_home = root / "codex-home"
+            codex_home.mkdir()
+            (codex_home / "config.toml").write_text(
+                '[features]\ndefault_mode_request_user_input = false\n\n'
+                '[hooks.state."existing:key"]\nenabled = false\n',
+                encoding="utf-8",
+            )
             scontrol = executable(root / "host/scontrol", "#!/bin/sh\nexit 0\n")
             scancel = executable(root / "host/scancel", "#!/bin/sh\nexit 0\n")
-            rendered = setup.render_contract(
-                project, SCRIPTS, scontrol, scancel, "longleaf", root / "local.toml", ["htzhulab"]
+            rendered = setup.render_global_contract(
+                codex_home, SCRIPTS, scontrol, scancel, ["htzhulab"]
             )
-            setup.write_rendered(rendered, project, install=True)
-            for relative in setup.OBSOLETE_RELS:
-                self.assertFalse((project / relative).exists(), relative)
-            self.assertTrue((project / setup.HOOK_REL).is_file())
+            setup.write_rendered(rendered, codex_home, install=True)
+            hook = Path(rendered["manifest"]["hook_path"])
+            self.assertTrue(hook.is_file())
+            self.assertIn(rendered["manifest"]["hook_sha256"], hook.name)
+            config = tomllib.loads((codex_home / "config.toml").read_text(encoding="utf-8"))
+            self.assertFalse(config["hooks"]["state"]["existing:key"]["enabled"])
+            self.assertEqual(
+                tomllib.loads((codex_home / setup.PRIVATE_DIR / setup.POLICY_NAME).read_text()),
+                {"protected_cancel_partitions": ["htzhulab"]},
+            )
 
     def test_filesystem_deny_blocks_absolute_and_python_child_when_hook_is_missing_or_broken(self) -> None:
         codex = shutil.which("codex")
@@ -352,30 +393,41 @@ class TestSetupContract(unittest.TestCase):
             root = Path(temp)
             project = root / "project"
             project.mkdir()
+            codex_home = root / "codex-home"
+            codex_home.mkdir()
+            codex_home.chmod(0o700)
+            sqlite_home = root / "codex-sqlite"
+            sqlite_home.mkdir(mode=0o700)
+            (codex_home / "app-server-control").mkdir(mode=0o700)
+            (codex_home / "config.toml").write_text(
+                "[features]\ndefault_mode_request_user_input = false\n",
+                encoding="utf-8",
+            )
             scontrol = executable(root / "fake-host/scontrol", "#!/bin/sh\nexit 1\n")
             marker = root / "fallback-called"
             scancel = executable(root / "fake-host/scancel", f"#!/bin/sh\nprintf called > {marker}\n")
-            rendered = setup.render_contract(
-                project, SCRIPTS, scontrol, scancel, "fixture", root / "local.toml", ["htzhulab"]
+            rendered = setup.render_global_contract(
+                codex_home, SCRIPTS, scontrol, scancel, ["htzhulab"]
             )
-            setup.write_rendered(rendered, project, install=True)
+            setup.write_rendered(rendered, codex_home, install=True)
             profile = (
-                'permissions.slurm-chat-guard={extends=":workspace",filesystem={'
+                'permissions.slurm-protected-cancel-global={extends=":workspace",filesystem={'
                 + json.dumps(str(scancel))
-                + '="deny",":workspace_roots"={".codex"="deny"}}}'
+                + '="deny"}}'
             )
 
             def sandbox(*command: str) -> subprocess.CompletedProcess[str]:
+                clean_env = {key: value for key, value in os.environ.items() if not key.startswith("CODEX_")}
                 return subprocess.run(
                     [
                         str(codex),
                         "-c",
-                        'default_permissions="slurm-chat-guard"',
+                        'default_permissions="slurm-protected-cancel-global"',
                         "-c",
                         profile,
                         "sandbox",
                         "-P",
-                        "slurm-chat-guard",
+                        "slurm-protected-cancel-global",
                         "-C",
                         str(project),
                         *command,
@@ -384,6 +436,13 @@ class TestSetupContract(unittest.TestCase):
                     capture_output=True,
                     check=False,
                     timeout=30,
+                    env={
+                        **clean_env,
+                        "HOME": str(root),
+                        "CODEX_HOME": str(codex_home),
+                        "CODEX_SQLITE_HOME": str(sqlite_home),
+                        "CODEX_SQLITE_SESSION_SLUG": "protected-cancel-test",
+                    },
                 )
 
             direct = sandbox(str(scancel), "9101")
@@ -404,7 +463,7 @@ class TestSetupContract(unittest.TestCase):
             self.assertEqual(child.returncode, 0, child.stderr)
             self.assertFalse(marker.exists())
 
-            hook_path = project / setup.HOOK_REL
+            hook_path = Path(rendered["manifest"]["hook_path"])
             hook_path.write_text("malformed hook", encoding="utf-8")
             hook_path.chmod(0o700)
             broken = sandbox(str(scancel), "9101")

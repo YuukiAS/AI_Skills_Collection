@@ -1,3 +1,3 @@
 prefix_rule(pattern=["scancel"], decision="forbidden")
 prefix_rule(pattern=["/usr/bin/scancel"], decision="forbidden")
-prefix_rule(pattern=["/users/a/e/aereinh/CARE/.codex/slurm-protected-cancel-private/bin/slurm-protected-cancel-binder"], decision="forbidden")
+prefix_rule(pattern=["/users/a/e/aereinh/CARE/.codex/slurm-protected-cancel-private/slurm-cancel-hook"], decision="forbidden")

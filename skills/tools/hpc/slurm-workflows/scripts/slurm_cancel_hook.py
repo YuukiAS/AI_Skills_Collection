@@ -13,6 +13,7 @@ import shlex
 import stat
 import subprocess
 import sys
+import tomllib
 from typing import Any
 
 
@@ -66,35 +67,45 @@ def _private_path_ok(path: Path, *, directory: bool = False) -> bool:
     return metadata.st_uid == os.geteuid() and expected_type(metadata.st_mode) and metadata.st_mode & 0o077 == 0
 
 
-def _load_runtime(hook_path: Path) -> tuple[Path, Path, dict[str, Any]]:
+def _load_runtime(hook_path: Path) -> tuple[Path, dict[str, Any]]:
     private_root = hook_path.parent
-    project_root = private_root.parents[1]
     runtime_path = private_root / "runtime.json"
+    policy_path = private_root / "policy.toml"
     if not (
         _private_path_ok(private_root, directory=True)
         and _private_path_ok(hook_path)
         and _private_path_ok(runtime_path)
+        and _private_path_ok(policy_path)
     ):
         raise ValueError("private_runtime_permissions_invalid")
     runtime = json.loads(runtime_path.read_text(encoding="utf-8"))
     if not isinstance(runtime, dict):
         raise ValueError("runtime_not_object")
-    if runtime.get("schema_version") != 2 or runtime.get("project_root") != str(project_root):
+    if runtime.get("schema_version") != 3 or runtime.get("codex_home") != str(private_root.parent):
         raise ValueError("runtime_identity_mismatch")
-    if runtime.get("hook_path") != str(hook_path) or runtime.get("hook_sha256") != _sha256(hook_path):
+    hook_digest = _sha256(hook_path)
+    if (
+        runtime.get("hook_path") != str(hook_path)
+        or runtime.get("hook_sha256") != hook_digest
+        or hook_path.name != f"slurm-hook-{hook_digest}.py"
+    ):
         raise ValueError("runtime_hook_mismatch")
     if runtime.get("operation") != OPERATION:
         raise ValueError("runtime_operation_mismatch")
-    protected = runtime.get("protected_cancel_partitions")
+    if runtime.get("policy_path") != str(policy_path) or runtime.get("policy_sha256") != _sha256(policy_path):
+        raise ValueError("runtime_policy_identity_mismatch")
+    policy = tomllib.loads(policy_path.read_text(encoding="utf-8"))
+    protected = policy.get("protected_cancel_partitions")
     if not isinstance(protected, list) or not protected or not all(isinstance(value, str) and value for value in protected):
         raise ValueError("runtime_policy_invalid")
+    runtime["protected_cancel_partitions"] = protected
     for name in ("scontrol_path", "scancel_path"):
         path = Path(str(runtime.get(name) or ""))
-        if not path.is_absolute() or project_root in path.parents or not path.is_file() or not os.access(path, os.X_OK):
+        if not path.is_absolute() or private_root.parent in path.parents or not path.is_file() or not os.access(path, os.X_OK):
             raise ValueError(f"runtime_{name}_invalid")
         if str(path.resolve(strict=True)) != str(runtime.get(f"{name}_realpath")):
             raise ValueError(f"runtime_{name}_identity_mismatch")
-    return private_root, project_root, runtime
+    return private_root, runtime
 
 
 def _parse_scontrol(output: str, expected_job_id: str) -> dict[str, str] | None:
@@ -228,7 +239,12 @@ def _parse_cancel_command(command: Any, runtime: dict[str, Any]) -> tuple[list[s
     return job_ids, None
 
 
-def _pre_tool_use(event: dict[str, Any], project_root: Path, runtime: dict[str, Any]) -> int:
+def _event_cwd_valid(event: dict[str, Any]) -> bool:
+    cwd = Path(str(event.get("cwd") or ""))
+    return cwd.is_absolute() and cwd.is_dir()
+
+
+def _pre_tool_use(event: dict[str, Any], runtime: dict[str, Any]) -> int:
     if event.get("tool_name") != "Bash":
         return _emit({})
     tool_input = event.get("tool_input")
@@ -238,11 +254,8 @@ def _pre_tool_use(event: dict[str, Any], project_root: Path, runtime: dict[str, 
         return _deny(f"SLURM_CANCEL_DENIED reason={error}")
     if job_ids is None:
         return _emit({})
-    try:
-        if Path(str(event.get("cwd") or "")).resolve() != project_root:
-            return _deny("SLURM_CANCEL_DENIED reason=wrong_project")
-    except OSError:
-        return _deny("SLURM_CANCEL_DENIED reason=wrong_project")
+    if not _event_cwd_valid(event):
+        return _deny("SLURM_CANCEL_DENIED reason=invalid_cwd")
     targets = _resolve_targets(runtime, job_ids)
     if targets is None:
         return _deny("SLURM_CANCEL_DENIED reason=target_resolution_failed")
@@ -296,16 +309,13 @@ def _response_object(value: Any) -> dict[str, Any]:
     return value
 
 
-def _post_tool_use(event: dict[str, Any], private_root: Path, project_root: Path, runtime: dict[str, Any]) -> int:
+def _post_tool_use(event: dict[str, Any], private_root: Path, runtime: dict[str, Any]) -> int:
     if event.get("tool_name") != "request_user_input":
         return _post_result("ignored", "wrong_tool")
     if event.get("agent_id") is not None or event.get("agent_type") is not None:
         return _post_result("denied", "not_root_interactive_session")
-    try:
-        if Path(str(event.get("cwd") or "")).resolve() != project_root:
-            return _post_result("denied", "wrong_project")
-    except OSError:
-        return _post_result("denied", "wrong_project")
+    if not _event_cwd_valid(event):
+        return _post_result("denied", "invalid_cwd")
     identifiers: dict[str, str] = {}
     for name in ("session_id", "turn_id", "tool_use_id"):
         value = event.get(name)
@@ -389,15 +399,15 @@ def main() -> int:
     except (json.JSONDecodeError, OSError):
         return _deny("SLURM_CANCEL_DENIED reason=invalid_hook_json")
     try:
-        private_root, project_root, runtime = _load_runtime(hook_path)
+        private_root, runtime = _load_runtime(hook_path)
     except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
         if event.get("hook_event_name") == "PreToolUse":
             return _deny(f"SLURM_CANCEL_DENIED reason={error}")
         return _post_result("denied", str(error))
     if event.get("hook_event_name") == "PreToolUse":
-        return _pre_tool_use(event, project_root, runtime)
+        return _pre_tool_use(event, runtime)
     if event.get("hook_event_name") == "PostToolUse":
-        return _post_tool_use(event, private_root, project_root, runtime)
+        return _post_tool_use(event, private_root, runtime)
     return _post_result("ignored", "wrong_hook_event")
 
 

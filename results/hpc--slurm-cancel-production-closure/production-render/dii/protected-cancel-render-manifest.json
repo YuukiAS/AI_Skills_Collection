@@ -1,33 +1,39 @@
 {
-  "binder_path": "/users/a/e/aereinh/Distributed_Imaging_Inference/.codex/slurm-protected-cancel-private/bin/slurm-protected-cancel-binder",
-  "binder_sha256": "5808f8620fd5aff981e32c15a140833e3cdeaca615d39e02f074b55172ad73fd",
   "file_sha256": {
-    ".codex/automation-bin/scancel": "7793aa65698825df2eb42aff066077bf3bf07890a9ca4849a3440b5f0a93599e",
-    ".codex/config.toml": "9ad97b103129e83e4930e37e1549b878d45a915c2f8daefed02ed03580578266",
-    ".codex/hooks.json": "e9beba7e402a2b340af4240345d5b10d7c9f9ca9f8f310668d0ba9624ae487bf",
-    ".codex/hooks/slurm-protected-cancel-session": "dc48faf031313757e5f628abc91ca9b2d6668551e9c4af77aaabeb681b0ff73d",
-    ".codex/rules/slurm-protected-cancel.rules": "8954a1dd641f24dd5f620cfebcc3d48f80227a59c49e41015d1bdba1bde402da",
-    ".codex/slurm-protected-cancel-private/bin/slurm-protected-cancel-binder": "5808f8620fd5aff981e32c15a140833e3cdeaca615d39e02f074b55172ad73fd",
-    ".codex/slurm-protected-cancel-private/runtime.json": "93dd79863a417eda1a95c556d31797806ce1e382965b6cbf8713cdca55d8be2d"
+    ".codex/config.toml": "0d39818c4ca1ac229b2e03a2a5b704844bdd1d1d236b3de837471a4e9787928b",
+    ".codex/hooks.json": "c50952b56fbf25cf8c6d3538c8308573e6ee8f603ae15e746d0ad84e6cfe81ce",
+    ".codex/rules/slurm-protected-cancel.rules": "1e841232f65331292cd3bb5c45c81766a0aa3d98f1c9b66bde9a4dcc17d3d4a8",
+    ".codex/slurm-protected-cancel-private/runtime.json": "d63bb0f9f32ae48e6c038de3df87c0f28c2576a64e75c41fc877ce39a5c4fabf",
+    ".codex/slurm-protected-cancel-private/slurm-cancel-hook": "fdb6505bc5bb914fda936419ac0d7321ed376201f9c431b7b50669bc6bf00e84"
   },
   "hook_current_hashes": {
-    "post_tool_use": "sha256:32077858013d08dffc5bf05e615821815f99d0eda2d5a15e8277b644dd1cf8df",
-    "session_end": "sha256:0ff974e5ee8b544385fd802be9f7cb6dada7db30a63a479363035fb48ee379dc",
-    "session_start": "sha256:59fe59db5999f04121c16fc0dd07e500549516eea736a4a2b7b83d213188b454"
+    "post_tool_use": "sha256:02a66e8c424f54bd0c692a9c222e10e10f469f009b9c0e8f0cd9af4e06ba2d25",
+    "pre_tool_use": "sha256:697993c2f6d8f9313a83ed26db0f18bc21c2ff4938e2ad57797fff386c696668"
   },
   "hook_keys": {
     "post_tool_use": "/users/a/e/aereinh/Distributed_Imaging_Inference/.codex/hooks.json:post_tool_use:0:0",
-    "session_end": "/users/a/e/aereinh/Distributed_Imaging_Inference/.codex/hooks.json:session_end:0:0",
-    "session_start": "/users/a/e/aereinh/Distributed_Imaging_Inference/.codex/hooks.json:session_start:0:0"
+    "pre_tool_use": "/users/a/e/aereinh/Distributed_Imaging_Inference/.codex/hooks.json:pre_tool_use:0:0"
   },
+  "hook_path": "/users/a/e/aereinh/Distributed_Imaging_Inference/.codex/slurm-protected-cancel-private/slurm-cancel-hook",
+  "hook_sha256": "fdb6505bc5bb914fda936419ac0d7321ed376201f9c431b7b50669bc6bf00e84",
   "hook_source_path": "/users/a/e/aereinh/Distributed_Imaging_Inference/.codex/hooks.json",
+  "obsolete_paths_removed": [
+    ".codex/automation-bin/scancel",
+    ".codex/hooks/slurm-protected-cancel-session",
+    ".codex/hooks/session_start_probe.py",
+    ".codex/slurm-protected-cancel-private/bin/slurm-protected-cancel-binder",
+    ".codex/slurm-protected-cancel-private/capability.key"
+  ],
   "project_root": "/users/a/e/aereinh/Distributed_Imaging_Inference",
   "protected_cancel_partitions": [
     "htzhulab"
   ],
+  "scancel_denied_paths": [
+    "/usr/bin/scancel"
+  ],
+  "scancel_invocation_path": "/usr/bin/scancel",
   "scancel_path": "/usr/bin/scancel",
-  "schema_version": 1,
-  "scontrol_path": "/usr/bin/scontrol",
-  "session_hook_path": "/users/a/e/aereinh/Distributed_Imaging_Inference/.codex/hooks/slurm-protected-cancel-session",
-  "session_hook_sha256": "dc48faf031313757e5f628abc91ca9b2d6668551e9c4af77aaabeb681b0ff73d"
+  "schema_version": 2,
+  "scontrol_invocation_path": "/usr/bin/scontrol",
+  "scontrol_path": "/usr/bin/scontrol"
 }

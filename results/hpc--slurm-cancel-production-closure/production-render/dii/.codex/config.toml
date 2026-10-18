@@ -8,5 +8,8 @@ hooks = true
 [permissions.slurm-chat-guard]
 extends = ":workspace"
 
+[permissions.slurm-chat-guard.filesystem]
+"/usr/bin/scancel" = "deny"
+
 [permissions.slurm-chat-guard.filesystem.":workspace_roots"]
 ".codex" = "deny"

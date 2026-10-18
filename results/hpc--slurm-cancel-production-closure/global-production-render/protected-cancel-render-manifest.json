@@ -1,0 +1,30 @@
+{
+  "codex_home": "/users/a/e/aereinh/.codex",
+  "file_sha256": {
+    "rules/slurm-protected-cancel.rules": "3a943ff85aff7d4a4fd0fcb8a1e8fa5b4f7b6c9ede75b30c74d10eadfd07ff9c",
+    "slurm-protected-cancel/policy.toml": "761dd0ccbb9f18318a766802703de2cc1d34da51d287e61fd3facf46f90f3a31",
+    "slurm-protected-cancel/runtime.json": "fbd9af476d532a142934821d366831d1e6dce06130c8d017f0c8ea4ebf064a7b",
+    "slurm-protected-cancel/slurm-hook-1e9e42cff1f0af369f58dd4bb3045ae62b786b530eade34ee89cd704c5b595a4.py": "1e9e42cff1f0af369f58dd4bb3045ae62b786b530eade34ee89cd704c5b595a4"
+  },
+  "hook_current_hashes": {
+    "post_tool_use": "sha256:684065821e26c04f04273d4e90f8c70b05a37c40fa5761d664bdec3e1508620c",
+    "pre_tool_use": "sha256:9512ae5ea7aaf8cb31ccf450b9238819ea9d779b792a18c8313091af2368ba93"
+  },
+  "hook_keys": {
+    "post_tool_use": "/users/a/e/aereinh/.codex/config.toml:post_tool_use:0:0",
+    "pre_tool_use": "/users/a/e/aereinh/.codex/config.toml:pre_tool_use:0:0"
+  },
+  "hook_path": "/users/a/e/aereinh/.codex/slurm-protected-cancel/slurm-hook-1e9e42cff1f0af369f58dd4bb3045ae62b786b530eade34ee89cd704c5b595a4.py",
+  "hook_sha256": "1e9e42cff1f0af369f58dd4bb3045ae62b786b530eade34ee89cd704c5b595a4",
+  "hook_source_path": "/users/a/e/aereinh/.codex/config.toml",
+  "policy_path": "/users/a/e/aereinh/.codex/slurm-protected-cancel/policy.toml",
+  "protected_cancel_partitions": [
+    "htzhulab"
+  ],
+  "scancel_denied_paths": [
+    "/usr/bin/scancel"
+  ],
+  "scancel_path": "/usr/bin/scancel",
+  "schema_version": 3,
+  "scontrol_path": "/usr/bin/scontrol"
+}

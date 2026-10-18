@@ -1,8 +1,0 @@
-#!/usr/bin/bash
-set -eu
-exec /usr/bin/python3 '/overflow/htzhu/mingcheng_new/AI_Skills_Collection/skills/tools/hpc/slurm-workflows/scripts/slurm_routing.py' guard-cancel \
-  --site-id 'local' \
-  --local-override '/users/a/e/aereinh/.config/ai-skills/local-overrides.toml' \
-  --scontrol '/usr/bin/scontrol' \
-  --scancel '/usr/bin/scancel' \
-  -- "$@"

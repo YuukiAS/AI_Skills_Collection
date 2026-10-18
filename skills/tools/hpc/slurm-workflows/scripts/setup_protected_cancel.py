@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render or install the project-local protected-cancel Host Hook contract."""
+"""Render or install the user-level protected-cancel Host Hook contract."""
 
 from __future__ import annotations
 
@@ -8,28 +8,21 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import shlex
-import shutil
 from typing import Any
 
 
-PRIVATE_REL = Path(".codex/slurm-protected-cancel-private")
-HOOK_REL = PRIVATE_REL / "slurm-cancel-hook"
-HOOKS_REL = Path(".codex/hooks.json")
-CONFIG_REL = Path(".codex/config.toml")
-RULES_REL = Path(".codex/rules/slurm-protected-cancel.rules")
-OBSOLETE_RELS = (
-    Path(".codex/automation-bin/scancel"),
-    Path(".codex/hooks/slurm-protected-cancel-session"),
-    Path(".codex/hooks/session_start_probe.py"),
-    PRIVATE_REL / "bin/slurm-protected-cancel-binder",
-    PRIVATE_REL / "capability.key",
-)
-
-HOOK_EVENT_KEYS = {
-    "PostToolUse": "post_tool_use",
-    "PreToolUse": "pre_tool_use",
-}
+PRIVATE_DIR = "slurm-protected-cancel"
+RUNTIME_NAME = "runtime.json"
+POLICY_NAME = "policy.toml"
+RULES_REL = Path("rules/slurm-protected-cancel.rules")
+DECLARATION_START = "# ai-skills-slurm-protected-cancel:declarations:start"
+DECLARATION_END = "# ai-skills-slurm-protected-cancel:declarations:end"
+PERMISSIONS_START = "# ai-skills-slurm-protected-cancel:permissions:start"
+PERMISSIONS_END = "# ai-skills-slurm-protected-cancel:permissions:end"
+PROFILE = "slurm-protected-cancel-global"
+HOOK_EVENT_KEYS = {"PostToolUse": "post_tool_use", "PreToolUse": "pre_tool_use"}
 
 
 def _sha256_bytes(value: bytes) -> str:
@@ -40,17 +33,14 @@ def _source_dir() -> Path:
     return Path(__file__).resolve().parent
 
 
-def _executable_identity(path: Path, project_root: Path) -> tuple[Path, Path]:
+def _executable_identity(path: Path, codex_home: Path) -> tuple[Path, Path]:
     invocation = path.expanduser().absolute()
     resolved = invocation.resolve(strict=True)
-    if not invocation.is_absolute() or not resolved.is_file() or not os.access(resolved, os.X_OK):
+    if not resolved.is_file() or not os.access(resolved, os.X_OK):
         raise ValueError(f"not an executable file: {path}")
     for candidate in (invocation, resolved):
-        try:
-            candidate.relative_to(project_root)
-        except ValueError:
-            continue
-        raise ValueError(f"trusted executable must be outside project root: {candidate}")
+        if candidate == codex_home or codex_home in candidate.parents:
+            raise ValueError(f"trusted executable must be outside CODEX_HOME: {candidate}")
     return invocation, resolved
 
 
@@ -65,185 +55,211 @@ def _hash_checked_command(script: Path, digest: str) -> str:
     )
 
 
-def _config_text(scancel_paths: list[Path]) -> str:
-    absolute_denies = "\n".join(
-        f'{json.dumps(str(path))} = "deny"' for path in sorted(set(scancel_paths), key=str)
-    )
-    return f"""default_permissions = \"slurm-chat-guard\"
-bypass_hook_trust = false
-
-[features]
-default_mode_request_user_input = true
-hooks = true
-
-[permissions.slurm-chat-guard]
-extends = \":workspace\"
-
-[permissions.slurm-chat-guard.filesystem]
-{absolute_denies}
-
-[permissions.slurm-chat-guard.filesystem.\":workspace_roots\"]
-\".codex\" = \"deny\"
-"""
-
-
-def _rules_text(scancel_paths: list[Path], private_hook: Path) -> str:
-    patterns = ["scancel", *[str(path) for path in sorted(set(scancel_paths), key=str)], str(private_hook)]
-    return "\n".join(
-        [f"prefix_rule(pattern=[{json.dumps(pattern)}], decision=\"forbidden\")" for pattern in patterns]
-        + [""]
-    )
-
-
-def _hooks_document(
-    hook_path: Path,
-    hook_digest: str,
-) -> dict[str, Any]:
-    hook_command = _hash_checked_command(hook_path, hook_digest)
+def _hooks_document(hook_path: Path, hook_digest: str) -> dict[str, Any]:
+    command = _hash_checked_command(hook_path, hook_digest)
     return {
-        "hooks": {
-            "PreToolUse": [
-                {
-                    "matcher": "^(Bash|shell_command|exec_command)$",
-                    "hooks": [
-                        {
-                            "type": "command",
-                            "command": hook_command,
-                            "timeout": 15,
-                            "statusMessage": "Checking Slurm cancellation policy",
-                        }
-                    ],
-                }
-            ],
-            "PostToolUse": [
-                {
-                    "matcher": "^request_user_input$",
-                    "hooks": [
-                        {
-                            "type": "command",
-                            "command": hook_command,
-                            "timeout": 15,
-                            "statusMessage": "Verifying protected Slurm cancellation",
-                        }
-                    ],
-                }
-            ],
-        }
+        "PreToolUse": [{
+            "matcher": "^(Bash|shell_command|exec_command)$",
+            "hooks": [{
+                "type": "command",
+                "command": command,
+                "timeout": 15,
+                "statusMessage": "Checking Slurm cancellation policy",
+            }],
+        }],
+        "PostToolUse": [{
+            "matcher": "^request_user_input$",
+            "hooks": [{
+                "type": "command",
+                "command": command,
+                "timeout": 15,
+                "statusMessage": "Verifying protected Slurm cancellation",
+            }],
+        }],
     }
 
 
-def _normalized_hook_hash(event_name: str, group: dict[str, Any], handler: dict[str, Any]) -> str:
-    """Match Codex's normalized project-Hook currentHash identity."""
+def _toml_string(value: str) -> str:
+    return json.dumps(value, ensure_ascii=False)
 
-    timeout = max(int(handler.get("timeout", 600)), 1)
-    normalized_handler: dict[str, Any] = {
+
+def _handler_toml(handler: dict[str, Any]) -> str:
+    fields = [
+        f"type = {_toml_string(handler['type'])}",
+        f"command = {_toml_string(handler['command'])}",
+        f"timeout = {int(handler['timeout'])}",
+        f"statusMessage = {_toml_string(handler['statusMessage'])}",
+    ]
+    return "{ " + ", ".join(fields) + " }"
+
+
+def _event_toml(groups: list[dict[str, Any]]) -> str:
+    rendered = []
+    for group in groups:
+        handlers = ", ".join(_handler_toml(handler) for handler in group["hooks"])
+        rendered.append(
+            "{ matcher = " + _toml_string(group["matcher"]) + ", hooks = [" + handlers + "] }"
+        )
+    return "[" + ", ".join(rendered) + "]"
+
+
+def _normalized_hook_hash(event_name: str, group: dict[str, Any], handler: dict[str, Any]) -> str:
+    normalized_handler = {
         "type": "command",
         "command": handler["command"],
-        "timeout": timeout,
+        "timeout": max(int(handler.get("timeout", 600)), 1),
         "async": bool(handler.get("async", False)),
     }
     if handler.get("statusMessage") is not None:
         normalized_handler["statusMessage"] = handler["statusMessage"]
-    if handler.get("additionalContextLimit") not in (None, 2500):
-        normalized_handler["additionalContextLimit"] = int(handler["additionalContextLimit"])
     identity: dict[str, Any] = {
         "event_name": HOOK_EVENT_KEYS[event_name],
         "hooks": [normalized_handler],
+        "matcher": group["matcher"],
     }
-    if group.get("matcher") is not None:
-        identity["matcher"] = group["matcher"]
-    serialized = json.dumps(identity, ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode("utf-8")
-    return "sha256:" + _sha256_bytes(serialized)
+    encoded = json.dumps(identity, ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode()
+    return "sha256:" + _sha256_bytes(encoded)
 
 
-def _hook_current_hashes(hooks_document: dict[str, Any]) -> dict[str, str]:
-    hashes: dict[str, str] = {}
-    for event_name, groups in hooks_document["hooks"].items():
-        event_key = HOOK_EVENT_KEYS[event_name]
-        for group_index, group in enumerate(groups):
-            for handler_index, handler in enumerate(group["hooks"]):
-                hashes[f"{event_key}:{group_index}:{handler_index}"] = _normalized_hook_hash(
-                    event_name,
-                    group,
-                    handler,
-                )
-    return hashes
+def _rules_text(scancel_paths: list[Path], private_root: Path) -> str:
+    patterns = ["scancel", *[str(path) for path in sorted(set(scancel_paths), key=str)], str(private_root)]
+    return "\n".join(
+        [f"prefix_rule(pattern=[{_toml_string(pattern)}], decision=\"forbidden\")" for pattern in patterns]
+        + [""]
+    )
 
 
-def render_contract(
-    project_root: Path,
+def _policy_text(protected_partitions: list[str]) -> bytes:
+    values = ", ".join(_toml_string(value) for value in protected_partitions)
+    return f"protected_cancel_partitions = [{values}]\n".encode()
+
+
+def render_global_contract(
+    codex_home: Path,
     skill_scripts: Path,
     scontrol: Path,
     scancel: Path,
-    site_id: str,
-    local_override: Path,
     protected_partitions: list[str],
-    runtime_skill_scripts: Path | None = None,
 ) -> dict[str, Any]:
-    project_root = project_root.expanduser().resolve()
+    codex_home = codex_home.expanduser().resolve()
     skill_scripts = skill_scripts.expanduser().resolve()
-    del runtime_skill_scripts
-    scontrol_invocation, scontrol_realpath = _executable_identity(scontrol, project_root)
-    scancel_invocation, scancel_realpath = _executable_identity(scancel, project_root)
+    scontrol_invocation, scontrol_realpath = _executable_identity(scontrol, codex_home)
+    scancel_invocation, scancel_realpath = _executable_identity(scancel, codex_home)
     hook_source = (skill_scripts / "slurm_cancel_hook.py").read_bytes()
     hook_digest = _sha256_bytes(hook_source)
-    private_hook = project_root / HOOK_REL
+    private_root = codex_home / PRIVATE_DIR
+    hook_path = private_root / f"slurm-hook-{hook_digest}.py"
+    policy_path = private_root / POLICY_NAME
     partitions = sorted({value.strip() for value in protected_partitions if value.strip()})
     if not partitions:
         raise ValueError("at least one protected cancellation partition is required")
-    hooks = _hooks_document(private_hook, hook_digest)
+    policy = _policy_text(partitions)
+    hooks = _hooks_document(hook_path, hook_digest)
     runtime = {
-        "schema_version": 2,
-        "project_root": str(project_root),
-        "hook_path": str(private_hook),
+        "schema_version": 3,
+        "codex_home": str(codex_home),
+        "hook_path": str(hook_path),
         "hook_sha256": hook_digest,
+        "policy_path": str(policy_path),
+        "policy_sha256": _sha256_bytes(policy),
         "scontrol_path": str(scontrol_realpath),
         "scontrol_path_realpath": str(scontrol_realpath),
         "scontrol_invocation_path": str(scontrol_invocation),
         "scancel_path": str(scancel_realpath),
         "scancel_path_realpath": str(scancel_realpath),
         "scancel_invocation_path": str(scancel_invocation),
-        "site_id": site_id,
-        "local_override": str(local_override.expanduser().resolve()),
-        "protected_cancel_partitions": partitions,
         "operation": "ordinary_cancel",
     }
-    scancel_paths = [scancel_invocation, scancel_realpath]
-    files: dict[str, bytes] = {
-        str(CONFIG_REL): _config_text(scancel_paths).encode("utf-8"),
-        str(HOOKS_REL): (json.dumps(hooks, indent=2, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8"),
-        str(RULES_REL): _rules_text(scancel_paths, private_hook).encode("utf-8"),
-        str(HOOK_REL): hook_source,
-        str(PRIVATE_REL / "runtime.json"): (json.dumps(runtime, indent=2, sort_keys=True) + "\n").encode("utf-8"),
+    files = {
+        f"{PRIVATE_DIR}/{hook_path.name}": hook_source,
+        f"{PRIVATE_DIR}/{POLICY_NAME}": policy,
+        f"{PRIVATE_DIR}/{RUNTIME_NAME}": (json.dumps(runtime, indent=2, sort_keys=True) + "\n").encode(),
+        str(RULES_REL): _rules_text([scancel_invocation, scancel_realpath], private_root).encode(),
     }
-    hooks_path = project_root / HOOKS_REL
-    hook_keys = {
-        "post_tool_use": f"{hooks_path}:post_tool_use:0:0",
-        "pre_tool_use": f"{hooks_path}:pre_tool_use:0:0",
+    source_path = codex_home / "config.toml"
+    hook_keys: dict[str, str] = {}
+    hook_hashes: dict[str, str] = {}
+    for event_name, groups in hooks.items():
+        suffix = HOOK_EVENT_KEYS[event_name]
+        hook_keys[suffix] = f"{source_path}:{suffix}:0:0"
+        hook_hashes[suffix] = _normalized_hook_hash(event_name, groups[0], groups[0]["hooks"][0])
+    return {
+        "files": files,
+        "hooks": hooks,
+        "manifest": {
+            "schema_version": 3,
+            "codex_home": str(codex_home),
+            "hook_path": str(hook_path),
+            "hook_sha256": hook_digest,
+            "policy_path": str(policy_path),
+            "protected_cancel_partitions": partitions,
+            "scontrol_path": str(scontrol_realpath),
+            "scancel_path": str(scancel_realpath),
+            "scancel_denied_paths": [str(path) for path in sorted({scancel_invocation, scancel_realpath}, key=str)],
+            "hook_source_path": str(source_path),
+            "hook_keys": hook_keys,
+            "hook_current_hashes": hook_hashes,
+            "file_sha256": {name: _sha256_bytes(content) for name, content in sorted(files.items())},
+        },
     }
-    hook_hashes_by_suffix = _hook_current_hashes(hooks)
-    hook_current_hashes = {
-        name: hook_hashes_by_suffix[f"{name}:0:0"]
-        for name in hook_keys
-    }
-    manifest = {
-        "schema_version": 2,
-        "project_root": str(project_root),
-        "hook_path": str(private_hook),
-        "hook_sha256": hook_digest,
-        "scontrol_path": str(scontrol_realpath),
-        "scontrol_invocation_path": str(scontrol_invocation),
-        "scancel_path": str(scancel_realpath),
-        "scancel_invocation_path": str(scancel_invocation),
-        "scancel_denied_paths": [str(path) for path in sorted(set(scancel_paths), key=str)],
-        "protected_cancel_partitions": partitions,
-        "hook_source_path": str(hooks_path),
-        "hook_keys": hook_keys,
-        "hook_current_hashes": hook_current_hashes,
-        "file_sha256": {name: _sha256_bytes(content) for name, content in sorted(files.items())},
-        "obsolete_paths_removed": [str(path) for path in OBSOLETE_RELS],
-    }
-    return {"files": files, "manifest": manifest}
+
+
+def _strip_block(text: str, start: str, end: str) -> str:
+    pattern = re.compile(rf"(?:^|\n){re.escape(start)}\n.*?\n{re.escape(end)}\n?", re.DOTALL)
+    return pattern.sub("\n", text)
+
+
+def update_user_config_text(original: str, rendered: dict[str, Any]) -> str:
+    text = _strip_block(original, DECLARATION_START, DECLARATION_END)
+    text = _strip_block(text, PERMISSIONS_START, PERMISSIONS_END)
+    if re.search(r"(?m)^default_permissions\s*=", text):
+        raise ValueError("existing default_permissions is not task-owned")
+    if re.search(rf"(?m)^\[permissions\.{re.escape(PROFILE)}(?:\.|\])", text):
+        raise ValueError("existing global protected-cancel permission profile is not task-owned")
+
+    hooks = rendered["hooks"]
+    declarations = "\n".join([
+        DECLARATION_START,
+        f'default_permissions = "{PROFILE}"',
+        f"hooks.PreToolUse = {_event_toml(hooks['PreToolUse'])}",
+        f"hooks.PostToolUse = {_event_toml(hooks['PostToolUse'])}",
+        DECLARATION_END,
+        "",
+    ])
+    first_table = re.search(r"(?m)^\[", text)
+    offset = first_table.start() if first_table else len(text)
+    text = text[:offset].rstrip() + "\n\n" + declarations + text[offset:].lstrip()
+
+    features = re.search(r"(?ms)^\[features\]\n(?P<body>.*?)(?=^\[|\Z)", text)
+    if not features:
+        raise ValueError("user config has no [features] table")
+    body = features.group("body")
+    if re.search(r"(?m)^default_mode_request_user_input\s*=", body):
+        body = re.sub(
+            r"(?m)^default_mode_request_user_input\s*=.*$",
+            "default_mode_request_user_input = true",
+            body,
+        )
+    else:
+        body = "default_mode_request_user_input = true\n" + body
+    if not re.search(r"(?m)^hooks\s*=", body):
+        body += "hooks = true\n"
+    text = text[: features.start("body")] + body + text[features.end("body") :]
+
+    manifest = rendered["manifest"]
+    private_root = Path(manifest["hook_path"]).parent
+    denies = [Path(value) for value in manifest["scancel_denied_paths"]] + [private_root]
+    permissions = [
+        PERMISSIONS_START,
+        f"[permissions.{PROFILE}]",
+        'extends = ":workspace"',
+        "",
+        f"[permissions.{PROFILE}.filesystem]",
+        *[f"{_toml_string(str(path))} = \"deny\"" for path in sorted(set(denies), key=str)],
+        PERMISSIONS_END,
+        "",
+    ]
+    return text.rstrip() + "\n\n" + "\n".join(permissions)
 
 
 def _write(path: Path, content: bytes, mode: int) -> None:
@@ -258,63 +274,41 @@ def _write(path: Path, content: bytes, mode: int) -> None:
         os.replace(temporary, path)
         os.chmod(path, mode)
     finally:
-        try:
-            temporary.unlink()
-        except FileNotFoundError:
-            pass
-
-
-def _remove_obsolete(destination: Path) -> None:
-    for relative in OBSOLETE_RELS:
-        try:
-            (destination / relative).unlink()
-        except FileNotFoundError:
-            pass
-    for relative in (Path(".codex/automation-bin"), PRIVATE_REL / "bin"):
-        shutil.rmtree(destination / relative, ignore_errors=True)
-    hook_cache = destination / ".codex/hooks/__pycache__"
-    for stale in hook_cache.glob("session_start_probe.*.pyc"):
-        stale.unlink(missing_ok=True)
-    try:
-        hook_cache.rmdir()
-    except OSError:
-        pass
+        temporary.unlink(missing_ok=True)
 
 
 def write_rendered(rendered: dict[str, Any], destination: Path, *, install: bool) -> None:
     destination = destination.expanduser().resolve()
-    _remove_obsolete(destination)
-    private_prefix = str(PRIVATE_REL) + "/"
     for relative, content in rendered["files"].items():
-        target = destination / relative
-        mode = 0o700 if relative == str(HOOK_REL) else 0o600 if relative.startswith(private_prefix) else 0o644
-        _write(target, content, mode)
+        mode = 0o700 if Path(relative).name.startswith("slurm-hook-") else 0o600
+        _write(destination / relative, content, mode)
     if install:
-        private_root = destination / PRIVATE_REL
+        private_root = destination / PRIVATE_DIR
         for directory in (private_root, private_root / "consumed", private_root / "audit"):
             directory.mkdir(parents=True, exist_ok=True)
             os.chmod(directory, 0o700)
-    if not install:
+        for stale in private_root.glob("slurm-hook-*.py"):
+            if stale != Path(rendered["manifest"]["hook_path"]):
+                stale.unlink()
+        config_path = destination / "config.toml"
+        updated = update_user_config_text(config_path.read_text(encoding="utf-8"), rendered)
+        _write(config_path, updated.encode(), 0o600)
+    else:
+        config = update_user_config_text("[features]\ndefault_mode_request_user_input = false\n", rendered)
+        _write(destination / "config.toml", config.encode(), 0o600)
         _write(
             destination / "protected-cancel-render-manifest.json",
-            (json.dumps(rendered["manifest"], indent=2, sort_keys=True) + "\n").encode("utf-8"),
+            (json.dumps(rendered["manifest"], indent=2, sort_keys=True) + "\n").encode(),
             0o644,
         )
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--project-root", type=Path, required=True)
+    parser.add_argument("--codex-home", type=Path, required=True)
     parser.add_argument("--skill-scripts", type=Path, default=_source_dir())
-    parser.add_argument(
-        "--runtime-skill-scripts",
-        type=Path,
-        help=argparse.SUPPRESS,
-    )
     parser.add_argument("--scontrol", type=Path, required=True)
     parser.add_argument("--scancel", type=Path, required=True)
-    parser.add_argument("--site-id", required=True)
-    parser.add_argument("--local-override", type=Path, required=True)
     parser.add_argument("--protected-partition", action="append", required=True, dest="protected_partitions")
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--install", action="store_true")
@@ -324,17 +318,14 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    rendered = render_contract(
-        args.project_root,
+    rendered = render_global_contract(
+        args.codex_home,
         args.skill_scripts,
         args.scontrol,
         args.scancel,
-        args.site_id,
-        args.local_override,
         args.protected_partitions,
-        args.runtime_skill_scripts,
     )
-    destination = args.project_root if args.install else args.render_output
+    destination = args.codex_home if args.install else args.render_output
     assert destination is not None
     write_rendered(rendered, destination, install=args.install)
     print(json.dumps(rendered["manifest"], indent=2, sort_keys=True))

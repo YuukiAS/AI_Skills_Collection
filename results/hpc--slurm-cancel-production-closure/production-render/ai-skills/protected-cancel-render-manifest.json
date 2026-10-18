@@ -1,33 +1,39 @@
 {
-  "binder_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.codex/slurm-protected-cancel-private/bin/slurm-protected-cancel-binder",
-  "binder_sha256": "5808f8620fd5aff981e32c15a140833e3cdeaca615d39e02f074b55172ad73fd",
   "file_sha256": {
-    ".codex/automation-bin/scancel": "d9a806a97cad6e4272a53aee4c55ac06516a0aefd3ff80e2a3dc5142487d90f4",
-    ".codex/config.toml": "9ad97b103129e83e4930e37e1549b878d45a915c2f8daefed02ed03580578266",
-    ".codex/hooks.json": "d76df2a1fae2099bcb9360ee60c3d784f6fa7713a1656c34e69802aab32a6b31",
-    ".codex/hooks/slurm-protected-cancel-session": "dc48faf031313757e5f628abc91ca9b2d6668551e9c4af77aaabeb681b0ff73d",
-    ".codex/rules/slurm-protected-cancel.rules": "cb8ceeae56d9662ef73adbf0933b106c84bf1201e14645948327d7b7678fd300",
-    ".codex/slurm-protected-cancel-private/bin/slurm-protected-cancel-binder": "5808f8620fd5aff981e32c15a140833e3cdeaca615d39e02f074b55172ad73fd",
-    ".codex/slurm-protected-cancel-private/runtime.json": "293d5c2e290ad6624d95c1dcab5d13544515d2ed0d3766cebdb44e69efefcefd"
+    ".codex/config.toml": "0d39818c4ca1ac229b2e03a2a5b704844bdd1d1d236b3de837471a4e9787928b",
+    ".codex/hooks.json": "758783d4d36263be29bacc1f153dfbba9e59cb9a5d68ca5b42a48d7e24e4c88d",
+    ".codex/rules/slurm-protected-cancel.rules": "d710690234effa675e1d046fc6758a74587fdbb225cefd8f1c3892ef3fd191d8",
+    ".codex/slurm-protected-cancel-private/runtime.json": "5cd239b072b4b503696a3e9fb7a32845287fafaa1e6d39dada01cefe989aab0d",
+    ".codex/slurm-protected-cancel-private/slurm-cancel-hook": "fdb6505bc5bb914fda936419ac0d7321ed376201f9c431b7b50669bc6bf00e84"
   },
   "hook_current_hashes": {
-    "post_tool_use": "sha256:6ce3e138d43141fb6f66b389932d30237d562d16067443a4857c93a0a753e223",
-    "session_end": "sha256:1843575556c6fdaac85bfb3632af34b0b83f5a4c34694cc2929b9d8a0f9655c7",
-    "session_start": "sha256:f8393cee2aeb16ef9349beeb869aedf1a5fa7784f6e2253a29744b080fa72042"
+    "post_tool_use": "sha256:1c30065c54d62d7e677e997900522ec2850e86bcc15b18abaa064a40dd849e24",
+    "pre_tool_use": "sha256:9a454e298d8b26ef74db3ceb169fb78989668ef1cbc9c4cd890c36c86a460bc1"
   },
   "hook_keys": {
     "post_tool_use": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.codex/hooks.json:post_tool_use:0:0",
-    "session_end": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.codex/hooks.json:session_end:0:0",
-    "session_start": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.codex/hooks.json:session_start:0:0"
+    "pre_tool_use": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.codex/hooks.json:pre_tool_use:0:0"
   },
+  "hook_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.codex/slurm-protected-cancel-private/slurm-cancel-hook",
+  "hook_sha256": "fdb6505bc5bb914fda936419ac0d7321ed376201f9c431b7b50669bc6bf00e84",
   "hook_source_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.codex/hooks.json",
+  "obsolete_paths_removed": [
+    ".codex/automation-bin/scancel",
+    ".codex/hooks/slurm-protected-cancel-session",
+    ".codex/hooks/session_start_probe.py",
+    ".codex/slurm-protected-cancel-private/bin/slurm-protected-cancel-binder",
+    ".codex/slurm-protected-cancel-private/capability.key"
+  ],
   "project_root": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection",
   "protected_cancel_partitions": [
     "htzhulab"
   ],
+  "scancel_denied_paths": [
+    "/usr/bin/scancel"
+  ],
+  "scancel_invocation_path": "/usr/bin/scancel",
   "scancel_path": "/usr/bin/scancel",
-  "schema_version": 1,
-  "scontrol_path": "/usr/bin/scontrol",
-  "session_hook_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.codex/hooks/slurm-protected-cancel-session",
-  "session_hook_sha256": "dc48faf031313757e5f628abc91ca9b2d6668551e9c4af77aaabeb681b0ff73d"
+  "schema_version": 2,
+  "scontrol_invocation_path": "/usr/bin/scontrol",
+  "scontrol_path": "/usr/bin/scontrol"
 }
