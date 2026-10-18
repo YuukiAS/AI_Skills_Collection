@@ -36,20 +36,24 @@ Six-skill architecture remains unchanged.
 
 ## Manual Web transport is decoupled from exhausted Reviewed Handoff state
 
-The task's current Reviewed Handoff machine state is:
+The Reviewed Handoff task exhausted its one allowed Plan revision. It has now
+been closed through the existing legal Planner-decision terminal route:
 
-- `CURRENT.state=NEEDS_GPT_PLANNER`
-- `plan_revision=1`
-- `max_plan_revisions=1`
+```text
+CURRENT.state=AWAIT_HUMAN_DECISION
+human_gate_reason=PLANNER_DECISION
+plan_revision=1
+max_plan_revisions=1
+```
 
-That state is intentionally left inert. v0.4 does **not** attempt to transition
-it back to `PLAN_FROZEN`, because the current Bridge Kit correctly rejects that
-transition after the one Plan revision is exhausted.
+The required task-local `FINAL_REPORT.md` records that this terminal state
+closes only the machine transport, not Issue #13 or the Web evaluation.
 
 Therefore:
 
 - `CURRENT.json` is not the execution transport for the Web experiment;
 - no raw CURRENT edit/reset/budget increase is permitted;
+- no re-arm to `PLAN_FROZEN` is attempted;
 - no new state/schema is added;
 - Bridge Kit is not modified;
 - watcher/Codex Executor is not used for Web execution;
@@ -59,8 +63,8 @@ Therefore:
   final-review prompt and evidence manifest, not through a Reviewed Handoff
   state transition.
 
-This is deliberate decoupling of Web evidence transport from the exhausted
-machine workflow, not a bypass of its state graph.
+This is deliberate decoupling through the Bridge Kit's existing legal terminal
+path, not a bypass of its state graph.
 
 ## Canonical v0.4 read-only execution contract
 
@@ -164,7 +168,7 @@ All live evidence goes only under:
 
 `results/clear-writing--every-response-invocation-policy/web-gate-v0.4/`
 
-The exhausted `CURRENT.json` remains unchanged throughout manual Web
+The terminalized `CURRENT.json` remains unchanged throughout manual Web
 execution.
 
 At the end, the execution operator creates the frozen evidence manifest and
