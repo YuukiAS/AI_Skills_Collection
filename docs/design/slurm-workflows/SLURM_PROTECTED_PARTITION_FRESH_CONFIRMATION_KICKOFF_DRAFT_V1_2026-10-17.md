@@ -1,11 +1,14 @@
 # Slurm protected-partition fresh-confirmation — Kickoff Draft v1
 
-状态：DRAFT / EXECUTION_READY_CRITIC_PENDING / DO_NOT_EXECUTE
+状态：EXECUTION_PACKAGE / EFFECTIVE_ONLY_AFTER_CRITIC_PASS_AND_USER_SEND / PHASE_0_TO_3_ONLY
 
-只有独立 Critic 对本执行包给出 PASS，并且用户本人随后实际发送本段，才授权以下候选实现。本 Kickoff 不授权 production Host Policy/private config 部署，也不授权任何真实 Slurm mutation。
+Critic PASS 本身不执行任何动作。只有独立 Critic 对最终 package commit 给出 PASS，并且用户本人随后实际发送本段，才授权以下 Phase 0–3 候选实现。本 Kickoff 始终不授权 production Host Policy/private config 部署，也不授权任何真实 Slurm mutation。
 
 Task：
 hpc--slurm-cancel-production-closure
+
+execution-package revision base main：06648df4f2951766c257e19ee035e141a8a1ceb3
+Repository version baseline：5.4.5
 
 必须先读取：
 - docs/design/slurm-workflows/SLURM_PROTECTED_PARTITION_FRESH_CONFIRMATION_PROPOSAL_V1_2026-10-17.md
@@ -13,7 +16,7 @@ hpc--slurm-cancel-production-closure
 - docs/goals/hpc--slurm-protected-partition-fresh-confirmation-goal-v1.md
 - 各目标 repo 的 AGENTS.md
 
-AI Skills source 必须等于本次 execution-ready Critic 返回的 APPROVED_COMMIT；不等则立即停止。
+下一 execution-ready Critic 必须把 APPROVED_COMMIT 绑定到最终 package commit 本身。用户发送本段开始执行时，AI Skills origin/main 必须精确等于该 APPROVED_COMMIT；不等则立即停止。
 
 冻结执行身份：
 
