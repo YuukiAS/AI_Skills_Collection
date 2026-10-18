@@ -1,8 +1,12 @@
 # project-instructions-editor — Long-Term TODO
 
-Maintenance inbox for a candidate standalone support skill for editing ChatGPT Project instructions.
+Maintenance inbox for the standalone support skill for editing ChatGPT Project instructions.
 
-No production skill or Plugin is created by this file. This inbox records real failures first; architecture, packaging, release route and acceptance gates remain for later Planner/Critic work.
+The v0.1 release scope is a Project-instructions editor: create, update, compress, synchronize, restructure, or reset long-lived ChatGPT Project instructions while protecting live-setting semantics, accepted/deleted/rejected decisions, canonical sources, authorization/privacy/safety/evidence boundaries, exact identifiers, and finite budgets.
+
+C11 reader-layer failure remains valid evidence, not a PASS. PIE v0.1 does not own cross-turn final reader-layer guarantees such as ensuring every future Project answer stays naturally Chinese or free of unnecessary English. That future capability is tracked under Clear Writing (#13); a later PIE v0.2 may add only a thin handoff/bridge after Clear Writing owns the capability.
+
+This inbox records real failures and follow-up scope. It does not create a second runtime contract beyond the standalone skill source.
 
 tracking: #93
 
@@ -648,3 +652,126 @@ FINAL_SERVER_VPS_USER_ACCEPTANCE=PENDING
 READY_FOR_INTEGRATION=NO
 READY_FOR_RELEASE=NO
 \`\`\`
+
+
+## 2026-10-04 final delivery closure planning
+
+Implementation is independently accepted:
+
+- FINAL_CANDIDATE_COMMIT: \`266334ca807640b08605faddbdded7d5a6591aa1\`
+- EVIDENCE_HEAD: \`34428d3db409ffc97aea36cc3776c14f33b94289\`
+- G4 review PASS: \`254e9ea5ca1739dee0689afa13f7a1d34ac4469d\`
+- implementation review PASS: \`ad217bd9d131456ba646fe70367a1b77a7fc912f\`
+
+Current state:
+
+\`\`\`text
+IMPLEMENTATION_OVERALL=PASS
+G1=PASS
+G2=PASS
+G3=PASS
+G4=PASS
+READY_FOR_INTEGRATION=YES
+READY_FOR_RELEASE=NO
+\`\`\`
+
+The user selected the real Server+VPS ChatGPT Project as the one final last-mile consumption acceptance before formal integration/release.
+
+Final-delivery package:
+
+- Plan: \`docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_FINAL_DELIVERY_CLOSURE_PLAN_V0_1_2026-10-04.md\`
+- Goal: \`docs/goals/PROJECT_INSTRUCTIONS_EDITOR_FINAL_DELIVERY_CLOSURE_GOAL_V0_1.md\`
+- Future integration/release Kickoff: \`docs/operations/prompts/PROJECT_INSTRUCTIONS_EDITOR_FINAL_INTEGRATION_RELEASE_KICKOFF_V0_1.md\`
+- Package commit: \`7bbe8d5982b9cd6abdca503ca6b12094976b92c6\`
+
+The earlier Server+VPS acceptance addendum is subsumed by this final-delivery plan for sequencing; its real-user acceptance intent is preserved.
+
+Distribution decision for final acceptance:
+
+- create one PRIVATE / USER-scope / skills-only ChatGPT personal Plugin wrapper around exact C4;
+- canonical source remains the standalone Skill;
+- no central Marketplace Plugin;
+- no MCP;
+- use exact C4 \`assets/app-facing.svg\` for both wrapper root and bundled Skill icon; no icon search/redesign;
+- initial wrapper name \`project-instructions-editor\`, version \`0.1.0\`;
+- future wrapper updates are discovered and applied through Plugin Creator using current release identity, without asking the user to copy Plugin IDs, find icons, or build archives.
+
+The user's exact local integration worktree may contain newer unpushed README wording. Remote README must not be treated as the authoritative integration text until the Executor inspects local \`git status\` and README diffs. Task-owned local README edits must be preserved/reconciled, not silently overwritten.
+
+Planner observed current main \`5.4.3\`; if integration-time main remains on the \`5.4.x\` formal line without overlapping PIE integration, repository target remains \`5.5.0\`. Patch drift within \`5.4.x\` is not by itself a new Planner blocker.
+
+Issue #93 remains \`DOING\` until private-wrapper delivery, Server+VPS acceptance, main integration, formal release advancement, and board closure are all truthful.
+
+\`\`\`text
+FINAL_SERVER_VPS_USER_ACCEPTANCE=PENDING
+READY_FOR_RELEASE=NO
+NEXT_HANDOFF=CRITIC
+\`\`\`
+
+
+## 2026-10-04 final delivery closure v0.2 / FD1
+
+Critic review:
+
+\`docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_FINAL_DELIVERY_CLOSURE_CRITIC_REVIEW_V0_1_2026-10-04.md\`
+
+Critic blocker:
+
+\`\`\`text
+FD1 = final release contract must distinguish formal release baseline drift
+      from unrelated unreleased production drift on main
+\`\`\`
+
+Planner disposition:
+
+\`\`\`text
+FD1=ACCEPT
+\`\`\`
+
+Full v0.2 package:
+
+- Plan: \`docs/design/project-instructions-editor/PROJECT_INSTRUCTIONS_EDITOR_FINAL_DELIVERY_CLOSURE_PLAN_V0_2_2026-10-04.md\`
+- Goal: \`docs/goals/PROJECT_INSTRUCTIONS_EDITOR_FINAL_DELIVERY_CLOSURE_GOAL_V0_2.md\`
+- Kickoff: \`docs/operations/prompts/PROJECT_INSTRUCTIONS_EDITOR_FINAL_INTEGRATION_RELEASE_KICKOFF_V0_2.md\`
+- Package commit: \`0278c53fbb1674081a7085ee1831dc2856c9c179\`
+
+The already-passed wrapper, icon, Server+VPS acceptance, user-burden, local README preservation, and C4 immutability contracts remain unchanged.
+
+New final-release rule:
+
+- \`origin/release\` is the formal release baseline;
+- main \`VERSION=5.4.x\` is not sufficient proof of release cleanliness;
+- final integration/release must classify \`origin/release..origin/main\`;
+- docs/TODO/review/evidence-only non-production drift may continue;
+- unrelated unreleased production/generated/plugin/profile/routing/runtime drift sets \`WAITING_FOR_FORMAL_RELEASE_BASELINE=YES\` and blocks only final integration/release mutation;
+- default recovery is to wait for that other task's own formal release and rerun the same preflight;
+- a compatible formal 5.4.x baseline advance does not require a new Planner round;
+- no ad-hoc cherry-pick, revert, force/rebase, or silent absorption into PIE 5.5.0.
+
+Parallel plugin development is therefore allowed to continue; PIE only requires a clean formal release boundary at the actual release edge.
+
+\`\`\`text
+READY_FOR_RELEASE=NO
+NEXT_HANDOFF=CRITIC
+\`\`\`
+
+
+## 2026-10-18 v0.2 baseline and reviewable-diff increment
+
+status: COMPLETED
+
+tracking: #102
+
+Project Instructions Editor v0.2 is a bounded increment over the accepted 0.1 editor contract:
+
+- require the user-supplied complete current Project setting before any analysis or edit; return the frozen exact request when it is missing or visibly partial;
+- treat an explicitly empty setting as a complete greenfield baseline;
+- require the current baseline for explicit reset while removing only old-setting semantic-preservation obligations;
+- for every real modification, return a human-readable Markdown preview and the complete clean final setting from the same baseline and semantic delta, satisfying `E(B)=C`;
+- preserve the 0.1 protected-absence, no-op, ownership/enforcement, locator, budget, semantic-invariant, and final-consistency contracts.
+
+The existing PRIVATE / USER wrapper is now version `0.2.8`. Real ChatGPT Web acceptance passed explicit missing-baseline, add, delete, replace, reset, greenfield, and no-op use. Automatic implicit invocation was not tested and is not required for this acceptance. The fixed baseline-receipt sentence did not appear consistently in reset and greenfield displays; the user accepted that presentation difference because baseline provenance and edit results remained correct. Repository `VERSION` and the formal `release` ref remain unchanged for later release preflight.
+
+Execution anchor:
+
+`reviewed/project-instructions-editor--0.2-baseline-diff-contract`

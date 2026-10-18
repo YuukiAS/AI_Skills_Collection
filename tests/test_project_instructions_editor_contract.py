@@ -1,0 +1,248 @@
+from __future__ import annotations
+
+import json
+import sys
+import unittest
+import xml.etree.ElementTree as ET
+from difflib import SequenceMatcher
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
+
+from skill_utils import read_frontmatter  # noqa: E402
+
+
+SKILL_DIR = REPO_ROOT / "skills" / "core" / "codex-system" / "project-instructions-editor"
+MISSING_BASELINE_MESSAGE = (
+    "请提供当前完整 Project setting 原文。PIE 不会根据 Project 上下文、Memory、历史聊天、"
+    "仓库文件、部分 instructions 或模型推断重建当前 setting。"
+)
+BASELINE_RECEIPT = "已收到当前完整 Project setting 原文；本轮以该原文作为唯一当前 baseline。"
+
+
+class ProjectInstructionsEditorContractTests(unittest.TestCase):
+    def test_frontmatter_matches_v0_2_editor_scope(self) -> None:
+        meta, body = read_frontmatter(SKILL_DIR / "SKILL.md")
+
+        self.assertEqual(meta.get("name"), "project-instructions-editor")
+        self.assertEqual(meta.get("status"), "active")
+        self.assertEqual(meta.get("version"), "0.2")
+        self.assertEqual(meta.get("provenance"), "user-authored")
+        self.assertIs(meta.get("trusted"), False)
+        self.assertIs(meta.get("requires_network"), False)
+        self.assertIs(meta.get("writes_files"), False)
+        self.assertIs(meta.get("executes_code"), False)
+        self.assertEqual(meta.get("secrets_needed"), [])
+        self.assertEqual(meta.get("recommended_scope"), "global")
+        self.assertEqual(meta.get("icon_small"), "assets/app-facing.svg")
+        self.assertEqual(meta.get("icon_large"), "assets/app-facing.svg")
+
+        description = meta.get("description", "")
+        self.assertLess(len(description), 500)
+        for phrase in [
+            "requests to create",
+            "ChatGPT Project instructions",
+            "before editing",
+            "require the complete setting",
+            "confirmed empty setting",
+            "prose polishing",
+            "writing fidelity",
+            "scientific rewrite",
+            "AI_Skills maintenance",
+            "workflow/control",
+            "generic agent/system prompts",
+            "global Custom Instructions",
+        ]:
+            self.assertIn(phrase, description)
+        self.assertNotIn("even if the live setting is missing", description)
+
+        for phrase in [
+            "preservation-sensitive",
+            "greenfield",
+            "explicit reset",
+            "Protected Absence",
+            "No-op",
+            "FINAL_ROUTE=`SIMPLE_FORMAL_CORE`",
+            "ADVANCED_INDEPENDENT_MULTI_CALL_FINALIZATION=`UNSUPPORTED`",
+        ]:
+            self.assertIn(phrase, body)
+
+    def test_runtime_shape_has_no_runtime_helper(self) -> None:
+        expected_files = {
+            "SKILL.md",
+            "agents/openai.yaml",
+            "references/editor-contract.md",
+            "evals/trigger_queries.json",
+            "assets/app-facing.svg",
+        }
+        actual_files = {
+            path.relative_to(SKILL_DIR).as_posix()
+            for path in SKILL_DIR.rglob("*")
+            if path.is_file()
+        }
+        self.assertEqual(actual_files, expected_files)
+        self.assertFalse((SKILL_DIR / "scripts").exists())
+
+    def test_openai_yaml_keeps_explicit_web_entry_available(self) -> None:
+        text = (SKILL_DIR / "agents" / "openai.yaml").read_text(encoding="utf-8")
+        self.assertIn('display_name: "Project Instructions Editor"', text)
+        self.assertIn("allow_implicit_invocation: true", text)
+        self.assertIn("$project-instructions-editor", text)
+        self.assertIn("complete user-supplied ChatGPT Project settings", text)
+        self.assertIn("readable change preview plus the clean final setting", text)
+        self.assertNotIn("reader-facing output baseline", text)
+
+    def test_complete_baseline_gate_uses_frozen_messages(self) -> None:
+        skill = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+        contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
+
+        for text in [skill, contract]:
+            self.assertIn(MISSING_BASELINE_MESSAGE, text)
+            self.assertIn(BASELINE_RECEIPT, text)
+            self.assertIn("explicit empty", text.lower())
+            self.assertIn("explicit reset", text.lower())
+            self.assertIn("provenance", text.lower())
+
+        self.assertIn("return only this exact message", skill)
+        self.assertIn("return only", contract)
+        self.assertNotIn("even if the live setting is missing", skill)
+        self.assertNotIn("Without that baseline, the safe output is bounded advice", contract)
+
+    def test_preview_and_clean_final_share_one_baseline_and_delta(self) -> None:
+        skill = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+        contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
+        combined = skill + "\n" + contract
+
+        for phrase in [
+            "E(B)=C",
+            "complete clean",
+            "~~旧部分~~**新部分**",
+            "whole sentence, paragraph, or section",
+            "not a second editor",
+            "regenerate `R`, not `C`",
+            "first user-visible line",
+            "insertion-only",
+            "deletion-only",
+            "summary",
+        ]:
+            self.assertIn(phrase, combined)
+
+        self.assertIn("exact baseline receipt; actual Markdown preview `R`; complete clean final `C`", skill)
+        self.assertIn("do not deliver `C` without `R`", contract)
+
+        for forbidden_format in ["Git `+/-`", "diff code block", "machine labels"]:
+            self.assertIn(forbidden_format, combined)
+
+        baseline = "Preserve accepted decisions. Run tests before completion."
+        final = "Preserve accepted decisions. Run current tests before completion."
+        matcher = SequenceMatcher(a=baseline, b=final)
+        rebuilt = "".join(final[j1:j2] for _, _, _, j1, j2 in matcher.get_opcodes())
+        self.assertEqual(rebuilt, final)
+
+    def test_noop_does_not_manufacture_preview_or_duplicate_setting(self) -> None:
+        skill = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+        contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
+
+        self.assertIn("without manufacturing a diff or repeating an identical setting", skill)
+        self.assertIn("without manufacturing a diff or repeating a duplicate clean setting", contract)
+
+    def test_editor_core_semantics_remain_in_contract(self) -> None:
+        skill_body = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+        contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
+        combined = contract + "\n" + skill_body
+
+        required = [
+            "complete user-supplied current setting",
+            "baseline `B`",
+            "Protected Absence",
+            "lookup-before-action",
+            "Semantic ownership alone is not enough",
+            "direct Project-resident rule",
+            "short Project-resident bridge",
+            "canonical-source only",
+            "task/thread only",
+            "mandatory versus optional",
+            "authorization boundaries",
+            "evidence strength",
+            "explicit user deletion/correction",
+            "No-op is valid",
+            "No-op is not eligible",
+            "locator",
+            "budget",
+            "mandatory final replacement pass",
+        ]
+        for phrase in required:
+            self.assertIn(phrase, combined)
+
+        protected_absence_contract = [
+            "omit both the deleted rule and its deletion history",
+            "do not emit `do not restore X`",
+            "Project-resident tombstone",
+            "unless the current user explicitly asks",
+        ]
+        for phrase in protected_absence_contract:
+            self.assertIn(phrase, contract)
+            self.assertIn(phrase, skill_body)
+
+        unsupported_runtime_named = [
+            "MCP finalizer",
+            "OPENAI_API_KEY",
+            "external model provider",
+            "ADVANCED_INDEPENDENT_MULTI_CALL_FINALIZATION=`UNSUPPORTED`",
+        ]
+        for phrase in unsupported_runtime_named:
+            self.assertIn(phrase, combined)
+
+    def test_rejected_later_mechanisms_are_not_runtime_dependencies(self) -> None:
+        skill_body = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+        contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
+        combined = skill_body + "\n" + contract
+
+        for removed_claim in [
+            "finalize_project_instructions",
+            "Stage B",
+            "Stage C",
+            "Reader-Facing Baseline",
+            "reader-facing baseline presence or equivalence",
+            "Server+VPS",
+            "Runtime Kernel",
+            "Allowed Durable Meaning Set",
+            "semantic mutation radius",
+            "surface reconstruction radius",
+            "two-level semantic spine",
+        ]:
+            self.assertNotIn(removed_claim, combined)
+
+    def test_trigger_queries_cover_positive_and_near_miss_boundaries(self) -> None:
+        data = json.loads((SKILL_DIR / "evals" / "trigger_queries.json").read_text(encoding="utf-8"))
+        positives = " ".join(data["positive"])
+        negatives = " ".join(data["negative"] + data["near_miss"])
+
+        for phrase in ["Project instructions", "Compress", "Create initial", "Reset", "Sync"]:
+            self.assertIn(phrase, positives)
+        for phrase in ["not pasted", "setting is empty", "Current complete setting"]:
+            self.assertIn(phrase, positives)
+        for phrase in [
+            "中文",
+            "technical report",
+            "AI_Skills_Collection",
+            "Planner/Critic",
+            "global Custom Instructions",
+        ]:
+            self.assertIn(phrase, negatives)
+
+        self.assertNotIn("reader-facing output baseline", positives)
+        self.assertNotIn("Use project-instructions-editor", positives)
+        self.assertNotIn("$project-instructions-editor", positives)
+
+    def test_icon_is_valid_svg_with_expected_viewbox(self) -> None:
+        icon = SKILL_DIR / "assets" / "app-facing.svg"
+        root = ET.parse(icon).getroot()
+        self.assertEqual(root.tag.rsplit("}", 1)[-1], "svg")
+        self.assertEqual(root.attrib.get("viewBox"), "0 0 64 64")
+
+
+if __name__ == "__main__":
+    unittest.main()

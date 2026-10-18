@@ -4,6 +4,64 @@
 
 No unreleased changes.
 
+## 5.5.0 - 2026-10-18
+
+Repository `5.5.0` formally adds Project Instructions Editor v0.2, giving
+AI Skills Collection its first released workflow for creating, editing,
+compressing, synchronizing, restructuring, and explicitly resetting long-lived
+ChatGPT Project instructions.
+
+Repository bump decision: MINOR
+Reason: the formal repository release gains a new user capability that was not
+available in `5.4.5`: editing long-lived ChatGPT Project instructions from the
+user-supplied complete current setting with a reviewable change preview and a
+complete clean result.
+
+Affected standalone skills:
+- `project-instructions-editor`: NEW -> `0.2`
+  Reason: this is the Skill's first formal repository release. Version `0.2`
+  requires the complete current Project setting before editing and derives the
+  readable Markdown preview and clean final setting from the same baseline and
+  semantic change.
+
+Affected central plugins:
+- all central plugins: NO_BUMP
+  Reason: this release does not change central Marketplace plugin behavior.
+
+Bridge Kit: NO CHANGE.
+
+Unchanged central plugin versions: `workflow-core 0.5`, `ai-skills-core 0.5`,
+`writing-style 0.4`, `research-writing 0.2`, `presentations 0.3`,
+`scientific-visualization 0.1`, `web-development 0.4`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Unchanged standalone skill versions: `project-thread-handoff 0.2`,
+`render-chinese-math-pdf 0.3`, `slurm-workflows 0.4`.
+
+Changed repository behavior:
+
+- A complete current setting supplied by the user is the sole current
+  baseline. Project context, Memory, history, repository files, partial
+  instructions, summaries, and stale candidates cannot reconstruct it.
+- An explicitly empty setting is a valid greenfield baseline. Explicit reset
+  still requires the supplied baseline but does not preserve the old setting's
+  semantics.
+- Every real edit returns a readable Markdown preview and a complete clean
+  result from the same baseline and semantic change. No-op returns neither a
+  fabricated diff nor a duplicate final setting.
+- Existing protected absence, source ownership, locator, authorization,
+  privacy, safety, evidence, exact-identifier, budget, and final-consistency
+  contracts remain in force.
+- The existing PRIVATE / USER ChatGPT wrapper remains version `0.2.8` and is a
+  distribution entry rather than a second source of truth.
+- Real ChatGPT Web acceptance passed explicit missing-baseline, add, delete,
+  replace, reset, greenfield, and no-op use. Automatic implicit invocation was
+  not tested and is not claimed.
+- Version `0.2` does not claim a cross-turn reader-layer guarantee and adds no
+  Clear Writing runtime dependency, sibling-Skill chain, external finalizer,
+  additional model, paid API, hosting service, database, ledger, or runtime
+  diff helper.
+
 ## 5.4.5 - 2026-10-17
 
 Repository `5.4.5` is a compatible patch release for Chinese Math PDF v0.3.
