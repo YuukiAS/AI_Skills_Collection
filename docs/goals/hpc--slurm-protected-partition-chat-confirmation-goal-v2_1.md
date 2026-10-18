@@ -13,7 +13,9 @@ Architecture authority:
 
 Execution authority:
 - docs/design/slurm-workflows/SLURM_PROTECTED_PARTITION_CHAT_CONFIRMATION_EXECUTION_PLAN_V2_1_2026-10-18.md
-- next execution-ready Critic binds APPROVED_COMMIT to the final v2.1 package commit
+- next execution-ready Critic binds APPROVED_COMMIT to the final recovered v2.1 execution-package commit
+- APPROVED_COMMIT is the execution-document authority, not the AI Skills candidate code base
+- AI Skills candidate code base remains frozen at c3879065c782f1b0a03107a927bb3176a8788d02
 - Critic PASS alone executes nothing
 - only the user subsequently sending the exact approved Kickoff authorizes Phase 0–3
 
@@ -67,50 +69,118 @@ Do not implement:
 
 ## 2. Exact execution identities
 
+The runtime topology is standalone clone, not linked worktree.
+
 AI_Skills_Collection
 
+canonical checkout, read-only:
 R=/overflow/htzhu/mingcheng_new/AI_Skills_Collection
-branch=work/hpc--slurm-protected-partition-chat-confirmation-v2-1
-W=/overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-protected-partition-chat-confirmation-v2-1
-base=exact execution-ready Critic APPROVED_COMMIT
+
+candidate source:
+c3879065c782f1b0a03107a927bb3176a8788d02
+
+branch:
+work/hpc--slurm-protected-partition-chat-confirmation-v2-1
+
+standalone candidate clone:
+C=/overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-protected-partition-chat-confirmation-v2-1-standalone-clone
+
+old failed linked-worktree path, never reuse or clean for this task:
+/overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-protected-partition-chat-confirmation-v2-1
 
 DII
 
+canonical checkout, read-only:
 R=/users/a/e/aereinh/Distributed_Imaging_Inference
-branch=work/hpc--slurm-protected-partition-chat-confirmation-v2-1
-W=/users/a/e/aereinh/Distributed_Imaging_Inference-hpc--slurm-protected-partition-chat-confirmation-v2-1
-base=747829b957b19e8fcffa6bd5f1bb7ae62ae11f6f
+
+candidate source:
+747829b957b19e8fcffa6bd5f1bb7ae62ae11f6f
+
+branch:
+work/hpc--slurm-protected-partition-chat-confirmation-v2-1
+
+standalone candidate clone:
+C=/users/a/e/aereinh/Distributed_Imaging_Inference-hpc--slurm-protected-partition-chat-confirmation-v2-1-standalone-clone
+
+old failed linked-worktree path, never reuse or clean:
+/users/a/e/aereinh/Distributed_Imaging_Inference-hpc--slurm-protected-partition-chat-confirmation-v2-1
 
 CARE
 
+canonical checkout, read-only:
 R=/users/a/e/aereinh/CARE
-branch=work/hpc--slurm-protected-partition-chat-confirmation-v2-1
-W=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
-base=75a40e454de43b64e59a0b0b438ff57ef2bb8345
+
+candidate source:
+75a40e454de43b64e59a0b0b438ff57ef2bb8345
+
+branch:
+work/hpc--slurm-protected-partition-chat-confirmation-v2-1
+
+standalone candidate clone:
+C=/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1-standalone-clone
+
+old failed linked-worktree path, never reuse or clean:
+/users/a/e/aereinh/CARE-hpc--slurm-protected-partition-chat-confirmation-v2-1
 
 Platform references:
 
 OpenAI Codex reviewed:
 8c076942cb70fba8e5c4732c23f1faabc4aed484
 
-Bridge Kit reviewed:
-6dc54a6d8f25e50e48d81853b347844d960fd613
-
 Bridge source:
 NO_CHANGE
 
-Every branch/worktree creation requires exact repo/origin/clean/source/absence preflight.
+Canonical R hard boundary:
+
+- never modify canonical files or canonical .codex
+- never stash/reset/clean/restore/checkout/switch in canonical R
+- never create/remove worktrees from canonical R
+- never fetch/pull in canonical R for this task
+- pre-existing dirty/other checkouts are recorded and left alone
+- canonical R may only be read for origin/source/rules/identity
+
+Standalone clone identity must prove:
+- clone path did not exist before task creation
+- C/.git is the clone's own Git directory, not a linked-worktree gitfile
+- git -C C rev-parse --show-toplevel == C
+- git -C C rev-parse --git-common-dir resolves to C/.git
+- branch base is exact frozen candidate source
+- same-name remote branch absent before first publication
 
 ## 3. Phase 0 is mandatory and comes first
 
 Before product implementation:
 
-- create only AI Skills v2.1 worktree
-- keep DII/CARE read-only
-- prepare harmless project-local Codex capability/authority probe
+- create only AI Skills v2.1 standalone candidate clone C from exact source c3879065c782f1b0a03107a927bb3176a8788d02
+- keep all canonical R paths read-only
+- keep DII/CARE at read-only preflight only
+- prepare harmless clone-local Codex capability/authority probe
 - do not touch Slurm
 
-### 3.1 Probe project config
+### 3.1 Standalone clone and Hook discovery proof
+
+Before loading any probe Hook, prove:
+
+- AI Skills C is an independent standalone checkout
+- checkout top-level is exactly C
+- Git common dir is C/.git
+- clone branch starts from c3879065c782f1b0a03107a927bb3176a8788d02
+- canonical R remains untouched
+
+Then create clone-local .codex only inside C.
+
+Formal hooks/list must show:
+- cwd/root = exact C
+- discovered Hook source path under C/.codex
+- no discovered probe Hook source under canonical R/.codex
+- clone-local declaration/current_hash is the actual loaded Hook
+
+If hooks/list still resolves the Hook to canonical/root-checkout .codex:
+STOP -> Planner
+
+Never write a probe Hook into canonical R as fallback.
+
+### 3.2 Probe project config
 
 Trusted project .codex/config.toml must:
 
@@ -122,7 +192,7 @@ Do not change Bridge source or ordinary user-level CODEX_HOME settings.
 
 The only Phase 0–3 user-level CODEX_HOME side effect authorized by this Goal is the user personally trusting exact task Hook key/current_hash values through the official Codex Hook trust UI. That official UI writes `hooks.state.<key>.trusted_hash` into the current Codex identity's user `$CODEX_HOME/config.toml`. Executor must never edit that file directly or alter unrelated fields.
 
-### 3.2 Probe authority material
+### 3.3 Probe authority material
 
 Use a harmless private runtime area:
 
@@ -145,9 +215,9 @@ Prove:
 - fake private binder digest mismatch blocks execution
 - fake PATH scontrol/scancel cannot override runtime.json frozen absolute paths
 
-### 3.3 Live Desktop probe
+### 3.4 Live Desktop probe
 
-Use a fresh Longleaf Codex Desktop root chat on exact AI Skills W.
+Use a fresh Longleaf Codex Desktop root chat on exact AI Skills C.
 
 Native harmless request_user_input:
 
@@ -188,13 +258,13 @@ If Executor cannot display the fresh Desktop chat itself:
 PROBE_READY_FOR_USER_CHAT
 
 Only ask the user to:
-- open one new Longleaf_Codex chat on exact W
+- open one new Longleaf_Codex chat on exact AI Skills C
 - if the exact reviewed probe Hooks require trust, trust only the exact key/current_hash values frozen in evidence; this official UI action writes the corresponding user-level hooks.state trust record
 - answer the harmless test once and leave the second request unanswered
 
 Do not ask for a terminal.
 
-### 3.4 should-not-change probe
+### 3.5 should-not-change probe
 
 Locked profile must preserve:
 - git status --short
@@ -206,7 +276,7 @@ STOP -> Planner
 
 Executor cannot loosen it.
 
-### 3.5 headless negative probe
+### 3.6 headless negative probe
 
 Confirm without Slurm:
 
@@ -376,7 +446,7 @@ Production forbids bypass_hook_trust.
 
 ## 6. DII integration
 
-After Phase 0 PASS create DII v2.1 worktree.
+After Phase 0 PASS create the frozen DII v2.1 standalone candidate clone C and create the task branch inside that clone.
 
 Only:
 - exact central candidate integration
@@ -395,7 +465,7 @@ STOP -> Planner
 
 ## 7. CARE integration
 
-After Phase 0 PASS create CARE v2.1 worktree.
+After Phase 0 PASS create the frozen CARE v2.1 standalone candidate clone C and create the task branch inside that clone.
 
 Consumers only propagate cancellation outcome.
 
@@ -572,12 +642,15 @@ Freeze for each canonical production root:
 - expected runtime.json canonical root/digest/trusted absolute Slurm binding
 - production project config/rules declaration identity
 
-Candidate worktree Hook hashes are not production Hook hashes.
+Candidate clone Hook hashes are not production Hook hashes.
 
 Reviewer must inspect:
 - Proposal v2.1
 - Plan/Goal v2.1
 - three repo diffs
+- standalone clone identity evidence for AI Skills/DII/CARE
+- hooks/list evidence that candidate Hooks are clone-local and not canonical-root Hooks
+- proof canonical checkouts were not mutated by this task
 - live Phase 0 Desktop/authority probe
 - Gate A-D
 - isolated fake evidence
@@ -624,6 +697,11 @@ Exception: user-personally-triggered official Hook trust UI may write only the e
 Before production:
 - backup only task-owned changed surfaces
 - record nonsecret hashes/identities
+
+Candidate/probe recovery before production:
+- discard/delete only the task-owned standalone clone C paths if desired
+- never clean/stash/reset/checkout canonical R
+- old failed linked-worktree paths are not reused or cleanup targets
 
 Rollback restores:
 - prior central install
@@ -699,9 +777,12 @@ If Clear Writing/Project capability is still unavailable at technical closure, e
 - execpolicy prompt/auto_review as human proof
 - MCP server/database/daemon/broker
 - fifth Gate
+- any probe/candidate Hook write into canonical checkout .codex
+- linked-worktree candidate runtime
+- cleanup/reset/stash/checkout of canonical R
 - production Bridge source/global CODEX_HOME modification except the user-triggered official exact Hook trust records described above
 - direct Executor edits to user-level $CODEX_HOME/config.toml
-- trusting candidate-worktree Hook hashes as production identities
+- trusting candidate-clone Hook hashes as production identities
 - production setup whose actual hooks/list current_hash differs from the Reviewer-frozen production hash
 - real Slurm cancellation/signal/requeue/release/test allocation
 - paid model/API
