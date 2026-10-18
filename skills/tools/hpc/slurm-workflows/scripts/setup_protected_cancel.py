@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render or install the project-local protected-cancel runtime contract."""
+"""Render or install the project-local protected-cancel Host Hook contract."""
 
 from __future__ import annotations
 
@@ -9,20 +9,26 @@ import json
 import os
 from pathlib import Path
 import shlex
+import shutil
 from typing import Any
 
 
 PRIVATE_REL = Path(".codex/slurm-protected-cancel-private")
+HOOK_REL = PRIVATE_REL / "slurm-cancel-hook"
 HOOKS_REL = Path(".codex/hooks.json")
 CONFIG_REL = Path(".codex/config.toml")
 RULES_REL = Path(".codex/rules/slurm-protected-cancel.rules")
-SESSION_REL = Path(".codex/hooks/slurm-protected-cancel-session")
-SHIM_REL = Path(".codex/automation-bin/scancel")
+OBSOLETE_RELS = (
+    Path(".codex/automation-bin/scancel"),
+    Path(".codex/hooks/slurm-protected-cancel-session"),
+    Path(".codex/hooks/session_start_probe.py"),
+    PRIVATE_REL / "bin/slurm-protected-cancel-binder",
+    PRIVATE_REL / "capability.key",
+)
 
 HOOK_EVENT_KEYS = {
     "PostToolUse": "post_tool_use",
-    "SessionEnd": "session_end",
-    "SessionStart": "session_start",
+    "PreToolUse": "pre_tool_use",
 }
 
 
@@ -34,38 +40,36 @@ def _source_dir() -> Path:
     return Path(__file__).resolve().parent
 
 
-def _read_sources(skill_scripts: Path) -> tuple[bytes, bytes]:
-    binder = (skill_scripts / "slurm_cancel_binder.py").read_bytes()
-    session = (skill_scripts / "slurm_cancel_session.py").read_bytes()
-    return binder, session
-
-
-def _absolute_executable(path: Path, project_root: Path) -> Path:
-    resolved = path.expanduser().resolve(strict=True)
-    if not resolved.is_absolute() or not resolved.is_file() or not os.access(resolved, os.X_OK):
+def _executable_identity(path: Path, project_root: Path) -> tuple[Path, Path]:
+    invocation = path.expanduser().absolute()
+    resolved = invocation.resolve(strict=True)
+    if not invocation.is_absolute() or not resolved.is_file() or not os.access(resolved, os.X_OK):
         raise ValueError(f"not an executable file: {path}")
-    try:
-        resolved.relative_to(project_root)
-    except ValueError:
-        return resolved
-    raise ValueError(f"trusted executable must be outside project root: {resolved}")
+    for candidate in (invocation, resolved):
+        try:
+            candidate.relative_to(project_root)
+        except ValueError:
+            continue
+        raise ValueError(f"trusted executable must be outside project root: {candidate}")
+    return invocation, resolved
 
 
-def _hash_checked_command(executable: str | None, script: Path, digest: str, *arguments: str) -> str:
-    invocation = 'exec "$target" "$@"'
-    if executable is not None:
-        invocation = f"exec {shlex.quote(executable)} \"$target\" \"$@\""
-    positional = " ".join(shlex.quote(str(value)) for value in (script, digest, *arguments))
+def _hash_checked_command(script: Path, digest: str) -> str:
+    positional = " ".join(shlex.quote(str(value)) for value in (script, digest))
     return (
         "/usr/bin/bash -c 'set -eu; target=$1; expected=$2; "
         "actual=$(/usr/bin/sha256sum -- \"$target\"); actual=${actual%% *}; "
-        "[ \"$actual\" = \"$expected\" ] || exit 78; shift 2; "
-        f"{invocation}' slurm-protected-cancel {positional}"
+        "[ \"$actual\" = \"$expected\" ] || exit 78; "
+        "exec /usr/bin/python3 \"$target\"' slurm-protected-cancel "
+        f"{positional}"
     )
 
 
-def _config_text() -> str:
-    return """default_permissions = \"slurm-chat-guard\"
+def _config_text(scancel_paths: list[Path]) -> str:
+    absolute_denies = "\n".join(
+        f'{json.dumps(str(path))} = "deny"' for path in sorted(set(scancel_paths), key=str)
+    )
+    return f"""default_permissions = \"slurm-chat-guard\"
 bypass_hook_trust = false
 
 [features]
@@ -75,55 +79,40 @@ hooks = true
 [permissions.slurm-chat-guard]
 extends = \":workspace\"
 
+[permissions.slurm-chat-guard.filesystem]
+{absolute_denies}
+
 [permissions.slurm-chat-guard.filesystem.\":workspace_roots\"]
 \".codex\" = \"deny\"
 """
 
 
-def _rules_text(private_binder: Path) -> str:
+def _rules_text(scancel_paths: list[Path], private_hook: Path) -> str:
+    patterns = ["scancel", *[str(path) for path in sorted(set(scancel_paths), key=str)], str(private_hook)]
     return "\n".join(
-        [
-            'prefix_rule(pattern=["scancel"], decision="forbidden")',
-            'prefix_rule(pattern=["/usr/bin/scancel"], decision="forbidden")',
-            f'prefix_rule(pattern=["{private_binder}"], decision="forbidden")',
-            "",
-        ]
+        [f"prefix_rule(pattern=[{json.dumps(pattern)}], decision=\"forbidden\")" for pattern in patterns]
+        + [""]
     )
 
 
 def _hooks_document(
-    session_path: Path,
-    session_digest: str,
-    binder_path: Path,
-    binder_digest: str,
+    hook_path: Path,
+    hook_digest: str,
 ) -> dict[str, Any]:
-    session_command = _hash_checked_command("/usr/bin/python3", session_path, session_digest)
-    binder_command = _hash_checked_command(None, binder_path, binder_digest)
+    hook_command = _hash_checked_command(hook_path, hook_digest)
     return {
         "hooks": {
-            "SessionStart": [
+            "PreToolUse": [
                 {
-                    "matcher": "startup|resume|clear",
+                    "matcher": "^(Bash|shell_command|exec_command)$",
                     "hooks": [
                         {
                             "type": "command",
-                            "command": session_command,
-                            "timeout": 10,
-                            "statusMessage": "Preparing protected-cancel session authority",
+                            "command": hook_command,
+                            "timeout": 15,
+                            "statusMessage": "Checking Slurm cancellation policy",
                         }
                     ],
-                }
-            ],
-            "SessionEnd": [
-                {
-                    "hooks": [
-                        {
-                            "type": "command",
-                            "command": session_command,
-                            "timeout": 10,
-                            "statusMessage": "Closing protected-cancel session authority",
-                        }
-                    ]
                 }
             ],
             "PostToolUse": [
@@ -132,7 +121,7 @@ def _hooks_document(
                     "hooks": [
                         {
                             "type": "command",
-                            "command": binder_command,
+                            "command": hook_command,
                             "timeout": 15,
                             "statusMessage": "Verifying protected Slurm cancellation",
                         }
@@ -146,11 +135,7 @@ def _hooks_document(
 def _normalized_hook_hash(event_name: str, group: dict[str, Any], handler: dict[str, Any]) -> str:
     """Match Codex's normalized project-Hook currentHash identity."""
 
-    timeout = int(handler.get("timeout", 600))
-    if event_name == "SessionEnd":
-        timeout = min(max(timeout, 1), 3)
-    else:
-        timeout = max(timeout, 1)
+    timeout = max(int(handler.get("timeout", 600)), 1)
     normalized_handler: dict[str, Any] = {
         "type": "command",
         "command": handler["command"],
@@ -185,27 +170,6 @@ def _hook_current_hashes(hooks_document: dict[str, Any]) -> dict[str, str]:
     return hashes
 
 
-def _shim_text(
-    routing_helper: Path,
-    site_id: str,
-    local_override: Path,
-    scontrol_path: Path,
-    scancel_path: Path,
-) -> str:
-    values = [routing_helper, local_override, scontrol_path, scancel_path]
-    if any("\n" in str(value) or "'" in str(value) for value in values) or "'" in site_id:
-        raise ValueError("unsupported quote or newline in generated shim path")
-    return f"""#!/usr/bin/bash
-set -eu
-exec /usr/bin/python3 '{routing_helper}' guard-cancel \\
-  --site-id '{site_id}' \\
-  --local-override '{local_override}' \\
-  --scontrol '{scontrol_path}' \\
-  --scancel '{scancel_path}' \\
-  -- "$@"
-"""
-
-
 def render_contract(
     project_root: Path,
     skill_scripts: Path,
@@ -218,51 +182,44 @@ def render_contract(
 ) -> dict[str, Any]:
     project_root = project_root.expanduser().resolve()
     skill_scripts = skill_scripts.expanduser().resolve()
-    runtime_skill_scripts = (runtime_skill_scripts or skill_scripts).expanduser().resolve()
-    scontrol = _absolute_executable(scontrol, project_root)
-    scancel = _absolute_executable(scancel, project_root)
-    binder_source, session_source = _read_sources(skill_scripts)
-    binder_digest = _sha256_bytes(binder_source)
-    session_digest = _sha256_bytes(session_source)
-    private_binder = project_root / PRIVATE_REL / "bin/slurm-protected-cancel-binder"
-    session_path = project_root / SESSION_REL
-    routing_helper = runtime_skill_scripts / "slurm_routing.py"
-    if not routing_helper.is_file():
-        raise ValueError(f"missing routing helper: {routing_helper}")
+    del runtime_skill_scripts
+    scontrol_invocation, scontrol_realpath = _executable_identity(scontrol, project_root)
+    scancel_invocation, scancel_realpath = _executable_identity(scancel, project_root)
+    hook_source = (skill_scripts / "slurm_cancel_hook.py").read_bytes()
+    hook_digest = _sha256_bytes(hook_source)
+    private_hook = project_root / HOOK_REL
     partitions = sorted({value.strip() for value in protected_partitions if value.strip()})
     if not partitions:
         raise ValueError("at least one protected cancellation partition is required")
-    hooks = _hooks_document(session_path, session_digest, private_binder, binder_digest)
+    hooks = _hooks_document(private_hook, hook_digest)
     runtime = {
-        "schema_version": 1,
+        "schema_version": 2,
         "project_root": str(project_root),
-        "binder_path": str(private_binder),
-        "binder_sha256": binder_digest,
-        "session_hook_path": str(session_path),
-        "session_hook_sha256": session_digest,
-        "scontrol_path": str(scontrol),
-        "scancel_path": str(scancel),
+        "hook_path": str(private_hook),
+        "hook_sha256": hook_digest,
+        "scontrol_path": str(scontrol_realpath),
+        "scontrol_path_realpath": str(scontrol_realpath),
+        "scontrol_invocation_path": str(scontrol_invocation),
+        "scancel_path": str(scancel_realpath),
+        "scancel_path_realpath": str(scancel_realpath),
+        "scancel_invocation_path": str(scancel_invocation),
         "site_id": site_id,
         "local_override": str(local_override.expanduser().resolve()),
         "protected_cancel_partitions": partitions,
         "operation": "ordinary_cancel",
-        "active_session_id": None,
-        "active_session_started_at": None,
     }
+    scancel_paths = [scancel_invocation, scancel_realpath]
     files: dict[str, bytes] = {
-        str(CONFIG_REL): _config_text().encode("utf-8"),
+        str(CONFIG_REL): _config_text(scancel_paths).encode("utf-8"),
         str(HOOKS_REL): (json.dumps(hooks, indent=2, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8"),
-        str(RULES_REL): _rules_text(private_binder).encode("utf-8"),
-        str(SESSION_REL): session_source,
-        str(SHIM_REL): _shim_text(routing_helper, site_id, local_override, scontrol, scancel).encode("utf-8"),
-        str(PRIVATE_REL / "bin/slurm-protected-cancel-binder"): binder_source,
+        str(RULES_REL): _rules_text(scancel_paths, private_hook).encode("utf-8"),
+        str(HOOK_REL): hook_source,
         str(PRIVATE_REL / "runtime.json"): (json.dumps(runtime, indent=2, sort_keys=True) + "\n").encode("utf-8"),
     }
     hooks_path = project_root / HOOKS_REL
     hook_keys = {
         "post_tool_use": f"{hooks_path}:post_tool_use:0:0",
-        "session_end": f"{hooks_path}:session_end:0:0",
-        "session_start": f"{hooks_path}:session_start:0:0",
+        "pre_tool_use": f"{hooks_path}:pre_tool_use:0:0",
     }
     hook_hashes_by_suffix = _hook_current_hashes(hooks)
     hook_current_hashes = {
@@ -270,19 +227,21 @@ def render_contract(
         for name in hook_keys
     }
     manifest = {
-        "schema_version": 1,
+        "schema_version": 2,
         "project_root": str(project_root),
-        "binder_path": str(private_binder),
-        "binder_sha256": binder_digest,
-        "session_hook_path": str(session_path),
-        "session_hook_sha256": session_digest,
-        "scontrol_path": str(scontrol),
-        "scancel_path": str(scancel),
+        "hook_path": str(private_hook),
+        "hook_sha256": hook_digest,
+        "scontrol_path": str(scontrol_realpath),
+        "scontrol_invocation_path": str(scontrol_invocation),
+        "scancel_path": str(scancel_realpath),
+        "scancel_invocation_path": str(scancel_invocation),
+        "scancel_denied_paths": [str(path) for path in sorted(set(scancel_paths), key=str)],
         "protected_cancel_partitions": partitions,
         "hook_source_path": str(hooks_path),
         "hook_keys": hook_keys,
         "hook_current_hashes": hook_current_hashes,
         "file_sha256": {name: _sha256_bytes(content) for name, content in sorted(files.items())},
+        "obsolete_paths_removed": [str(path) for path in OBSOLETE_RELS],
     }
     return {"files": files, "manifest": manifest}
 
@@ -305,17 +264,35 @@ def _write(path: Path, content: bytes, mode: int) -> None:
             pass
 
 
+def _remove_obsolete(destination: Path) -> None:
+    for relative in OBSOLETE_RELS:
+        try:
+            (destination / relative).unlink()
+        except FileNotFoundError:
+            pass
+    for relative in (Path(".codex/automation-bin"), PRIVATE_REL / "bin"):
+        shutil.rmtree(destination / relative, ignore_errors=True)
+    hook_cache = destination / ".codex/hooks/__pycache__"
+    for stale in hook_cache.glob("session_start_probe.*.pyc"):
+        stale.unlink(missing_ok=True)
+    try:
+        hook_cache.rmdir()
+    except OSError:
+        pass
+
+
 def write_rendered(rendered: dict[str, Any], destination: Path, *, install: bool) -> None:
     destination = destination.expanduser().resolve()
-    executable = {str(SESSION_REL), str(SHIM_REL), str(PRIVATE_REL / "bin/slurm-protected-cancel-binder")}
+    if install:
+        _remove_obsolete(destination)
     private_prefix = str(PRIVATE_REL) + "/"
     for relative, content in rendered["files"].items():
         target = destination / relative
-        mode = 0o700 if relative in executable else 0o600 if relative.startswith(private_prefix) else 0o644
+        mode = 0o700 if relative == str(HOOK_REL) else 0o600 if relative.startswith(private_prefix) else 0o644
         _write(target, content, mode)
     if install:
         private_root = destination / PRIVATE_REL
-        for directory in (private_root, private_root / "bin", private_root / "consumed", private_root / "audit"):
+        for directory in (private_root, private_root / "consumed", private_root / "audit"):
             directory.mkdir(parents=True, exist_ok=True)
             os.chmod(directory, 0o700)
     if not install:
@@ -333,7 +310,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--runtime-skill-scripts",
         type=Path,
-        help="Production/runtime locator for slurm_routing.py; source bytes still come from --skill-scripts",
+        help=argparse.SUPPRESS,
     )
     parser.add_argument("--scontrol", type=Path, required=True)
     parser.add_argument("--scancel", type=Path, required=True)
