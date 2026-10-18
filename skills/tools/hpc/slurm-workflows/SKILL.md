@@ -99,6 +99,18 @@ Treat site-policy plus user-opt-in checks as eligibility only. Final duplicate-r
 
 Do not change data, split, model, endpoint, GPU count, per-candidate walltime, training budget, or other scientific semantics to make a race possible. If a workload requires H100, do not race it on A100 unless the workload contract explicitly says both accelerator types are valid for the same result. If the scheduler or site rejects duplicate submission, fail closed and do not try another command form to bypass that policy.
 
+## Protected cancellation
+
+Treat cancellation as destructive when an agent cancels a job, exact array element or explicit exact job set through any command/API path, or intentionally terminates an allocation holder. Natural completion, read-only inspection and monitoring are not cancellation.
+
+Automation must resolve `scancel` to the reviewed guard shim. The guard accepts only ordinary exact JobIds, resolves each target with `scontrol show job -o`, verifies scheduler ownership and a PENDING/RUNNING state, and reads the private `protected_cancel_partitions` policy. Array parents/ranges, heterogeneous jobs, steps, selectors, federation/cluster switches and non-default signal/batch/full semantics fail closed.
+
+An unprotected exact target keeps the task's existing cancellation authorization and receives no extra confirmation. If any target is on a protected partition, the entire guard invocation performs zero mutation and returns `NEEDS_INTERACTIVE_CHAT_CONFIRMATION` with untrusted request metadata. Only an interactive root Codex chat may show the canonical native question: `Job <id> 当前位于受保护分区 <partition>。确认取消这个 Job 吗？`, with `确认取消` and `保留 Job` as its two options.
+
+Protected mutation authority belongs only to the trusted synchronous `PostToolUse` Host Hook for `^request_user_input$`. Its private binder is copied to `.codex/slurm-protected-cancel-private/`, bound by exact path and SHA-256 in the Hook declaration, and protected with the project `.codex` deny profile. Before one exact absolute-path `scancel`, the binder validates root-session capability, the canonical dedicated response, one-time identifiers, runtime identity, exact JobId/Partition/operation, a fresh absolute-path `scontrol` re-resolution, current protected status and an atomic consumed reservation.
+
+Empty, timed-out, retained, free-text or mismatched answers do not cancel. A Goal, old race opt-in, assistant text, `auto_review`, UserPromptSubmit, subagent message, fabricated JSON, persisted confirmation token or later shell invocation never grants protected cancellation authority. Headless execution fails closed and requires an interactive root chat. This normal entry protects the reviewed Codex/consumer paths; it is not an OS-level guarantee against arbitrary same-UID code that bypasses the entry.
+
 ## Outputs
 
 Return the job script or commands, expected log paths, monitoring commands, stop conditions, and final verification checks. Submission is not completion; completion requires current job state and final output validation.

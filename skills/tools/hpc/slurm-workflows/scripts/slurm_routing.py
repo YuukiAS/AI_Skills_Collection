@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import os
+import pwd
 import re
 import shutil
 import subprocess
@@ -42,6 +43,14 @@ RESOURCE_EXACT_KEYS = ("gpus", "gpu_count", "nodes", "ntasks", "tasks", "walltim
 RESOURCE_MINIMUM_KEYS = ("memory_mb", "mem_mb", "mem", "cpus_per_task", "cpus", "cpu_count")
 SUPPORTED_RACE_WINNER_RULES = {"first_running_job"}
 SUPPORTED_RACE_TIE_POLICIES = {"keep_lowest_job_id_cancel_other"}
+CANCEL_DENY_UNKNOWN_OR_FORBIDDEN = "DENY_UNKNOWN_OR_FORBIDDEN"
+CANCELABLE_JOB_STATES = {"PENDING", "RUNNING"}
+SITE_CANCEL_PROHIBITIONS = {"forbidden", "prohibited", "disallowed", "disabled", "no", "false", "never"}
+EXACT_SLURM_JOB_ID_RE = re.compile(r"^[0-9]+(?:_[0-9]+)?$")
+V21_CANCEL_OPERATION = "ordinary_cancel"
+V21_CANCEL_NEEDS_CHAT = "NEEDS_INTERACTIVE_CHAT_CONFIRMATION"
+V21_CANCEL_EXECUTED = "EXECUTED_UNPROTECTED_CANCEL"
+V21_CANCEL_METADATA_TRUST = "UNTRUSTED_REQUEST_METADATA"
 
 
 SINFO_FIELDS = "%P|%a|%l|%D|%c|%m|%G|%f|%T|%Q"
@@ -474,6 +483,215 @@ def widening_plan(job: dict[str, Any], candidates: list[str], capabilities: dict
     if job.get("replaceable_pending") and capabilities.get("state_safe_cancel_confirmed"):
         return {"action": "replace_pending", "partitions": candidates}
     return {"action": "fail_closed", "reason": "unverified_widening"}
+
+
+def _cancel_string_list(value: Any) -> list[str] | None:
+    if isinstance(value, str):
+        values = [item.strip() for item in value.split(",") if item.strip()]
+    elif isinstance(value, (list, tuple, set)):
+        values = [str(item).strip() for item in value if str(item).strip()]
+    else:
+        return None
+    if any(item.upper() == UNKNOWN for item in values):
+        return None
+    return sorted(set(values))
+
+
+def _scontrol_job_records(output: str) -> list[dict[str, str]]:
+    return [parse_scontrol_kv(line) for line in output.splitlines() if line.strip()]
+
+
+def _current_os_user() -> str:
+    return pwd.getpwuid(os.geteuid()).pw_name
+
+
+def _protected_cancel_question_id(job_id: str, partition: str) -> str:
+    payload = {
+        "job_id": job_id,
+        "operation": V21_CANCEL_OPERATION,
+        "partition": partition,
+    }
+    encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return "slurm_protected_cancel_" + hashlib.sha256(encoded).hexdigest()
+
+
+def _protected_cancel_question(job_id: str, partition: str) -> dict[str, Any]:
+    return {
+        "id": _protected_cancel_question_id(job_id, partition),
+        "header": "确认取消",
+        "question": f"Job {job_id} 当前位于受保护分区 {partition}。确认取消这个 Job 吗？",
+        "options": [
+            {
+                "label": "确认取消",
+                "description": "取消这个 exact Job；确认后由受信 Host Hook 重新核验并执行一次。",
+            },
+            {"label": "保留 Job", "description": "保留 Job，不执行取消。"},
+        ],
+    }
+
+
+def _v21_private_policy(path: Path | str, site_id: str) -> tuple[dict[str, Any] | None, str | None]:
+    override_path = Path(path).expanduser()
+    if tomllib is None:
+        return None, "tomllib_unavailable"
+    try:
+        parsed = tomllib.loads(override_path.read_text(encoding="utf-8"))
+    except (OSError, tomllib.TOMLDecodeError):
+        return None, "unreadable_local_override"
+    site = dict(parsed.get("sites") or {}).get(site_id)
+    if not isinstance(site, dict):
+        return None, "missing_site_private_policy"
+    if "protected_cancel_partitions" not in site:
+        return None, "missing_protected_cancel_partitions"
+    protected = _cancel_string_list(site.get("protected_cancel_partitions"))
+    if protected is None:
+        return None, "invalid_protected_cancel_partitions"
+    prohibitions = {
+        str(site.get(key) or "").strip().lower()
+        for key in ("cancel_execution", "destructive_release", "job_cancellation")
+        if key in site
+    }
+    if site.get("forbid_agent_cancellation") is True or prohibitions & SITE_CANCEL_PROHIBITIONS:
+        return None, "explicit_site_prohibition"
+    return {"protected_cancel_partitions": protected}, None
+
+
+def _run_absolute(executable: Path | str, arguments: list[str]) -> tuple[int, str, str]:
+    path = Path(executable)
+    if not path.is_absolute() or not path.is_file() or not os.access(path, os.X_OK):
+        return 127, "", "trusted absolute executable unavailable"
+    try:
+        completed = subprocess.run(
+            [str(path), *arguments],
+            text=True,
+            capture_output=True,
+            timeout=10,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired) as error:
+        return 126, "", type(error).__name__
+    return completed.returncode, completed.stdout, completed.stderr
+
+
+def _v21_live_target(job_id: str, scontrol: Path | str) -> tuple[dict[str, str] | None, str | None]:
+    if not EXACT_SLURM_JOB_ID_RE.fullmatch(job_id):
+        return None, "non_exact_job_id"
+    rc, output, _error = _run_absolute(scontrol, ["show", "job", "-o", job_id])
+    if rc != 0:
+        return None, "job_lookup_failed"
+    records = _scontrol_job_records(output)
+    if len(records) != 1 or records[0].get("JobId") != job_id:
+        return None, "job_target_not_exactly_resolved"
+    record = records[0]
+    if str(record.get("HetJobId") or "") not in {"", "(null)"}:
+        return None, "heterogeneous_job_not_supported"
+    array_parent = str(record.get("ArrayJobId") or "")
+    if array_parent not in {"", "(null)"} and "_" not in job_id:
+        return None, "array_parent_not_supported"
+    user_id = str(record.get("UserId") or "").split("(", 1)[0]
+    if not user_id or user_id != _current_os_user():
+        return None, "scheduler_owner_mismatch"
+    state = str(record.get("JobState") or "").split("+", 1)[0].upper()
+    partition = str(record.get("Partition") or "").strip()
+    if state not in CANCELABLE_JOB_STATES:
+        return None, "unknown_or_non_cancelable_state"
+    if not partition or partition.upper() == UNKNOWN:
+        return None, "unknown_partition"
+    return {"job_id": job_id, "partition": partition, "state": state}, None
+
+
+def guard_cancel_jobs(
+    job_ids: list[str],
+    site_id: str,
+    local_override: Path | str,
+    scontrol: Path | str,
+    scancel: Path | str,
+) -> dict[str, Any]:
+    """Route exact ordinary cancellation; protected targets never mutate here."""
+
+    if not job_ids or len(job_ids) != len(set(job_ids)):
+        return {"status": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN, "reason": "empty_or_duplicate_target_set", "mutation_count": 0}
+    policy, policy_error = _v21_private_policy(local_override, site_id)
+    if policy_error:
+        return {"status": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN, "reason": policy_error, "mutation_count": 0}
+    assert policy is not None
+    targets: list[dict[str, str]] = []
+    for job_id in job_ids:
+        target, target_error = _v21_live_target(job_id, scontrol)
+        if target_error:
+            return {"status": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN, "reason": target_error, "mutation_count": 0}
+        assert target is not None
+        targets.append(target)
+    protected_set = set(policy["protected_cancel_partitions"])
+    protected_targets = [target for target in targets if target["partition"] in protected_set]
+    if protected_targets:
+        requests = []
+        for target in protected_targets:
+            question = _protected_cancel_question(target["job_id"], target["partition"])
+            requests.append(
+                {
+                    "status": V21_CANCEL_NEEDS_CHAT,
+                    "metadata_trust": V21_CANCEL_METADATA_TRUST,
+                    "job_id": target["job_id"],
+                    "partition": target["partition"],
+                    "operation": V21_CANCEL_OPERATION,
+                    "question_id": question["id"],
+                    "request_user_input": {"questions": [question]},
+                }
+            )
+        return {
+            "status": V21_CANCEL_NEEDS_CHAT,
+            "reason": "protected_partition",
+            "metadata_trust": V21_CANCEL_METADATA_TRUST,
+            "operation": V21_CANCEL_OPERATION,
+            "targets": targets,
+            "human_requests": requests,
+            "mutation_count": 0,
+        }
+
+    first_digest = hashlib.sha256(
+        json.dumps(targets, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    second_targets: list[dict[str, str]] = []
+    for job_id in job_ids:
+        target, target_error = _v21_live_target(job_id, scontrol)
+        if target_error:
+            return {"status": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN, "reason": "revalidation_failed", "mutation_count": 0}
+        assert target is not None
+        second_targets.append(target)
+    second_digest = hashlib.sha256(
+        json.dumps(second_targets, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    if first_digest != second_digest:
+        return {"status": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN, "reason": "target_or_state_changed", "mutation_count": 0}
+    scancel_path = Path(scancel)
+    if not scancel_path.is_absolute() or not scancel_path.is_file() or not os.access(scancel_path, os.X_OK):
+        return {"status": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN, "reason": "trusted_scancel_unavailable", "mutation_count": 0}
+    clean_env = {key: value for key, value in os.environ.items() if not key.startswith("SCANCEL_")}
+    try:
+        completed = subprocess.run(
+            [str(scancel_path), *job_ids],
+            text=True,
+            capture_output=True,
+            timeout=10,
+            check=False,
+            env=clean_env,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return {"status": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN, "reason": "scancel_failed", "mutation_count": 0}
+    if completed.returncode != 0:
+        return {
+            "status": CANCEL_DENY_UNKNOWN_OR_FORBIDDEN,
+            "reason": "scancel_failed",
+            "returncode": completed.returncode,
+            "mutation_count": 0,
+        }
+    return {
+        "status": V21_CANCEL_EXECUTED,
+        "reason": "unprotected_exact_target_set",
+        "targets": second_targets,
+        "mutation_count": 1,
+    }
 
 
 def duplicate_race_decision(site_policy: dict[str, Any], user_opt_in: bool) -> dict[str, Any]:
@@ -1062,6 +1280,12 @@ def build_arg_parser() -> argparse.ArgumentParser:
     p.add_argument("--policy-overlay-id")
     p = sub.add_parser("scope-digest", help="Compute a capacity-family enrollment scope digest")
     p.add_argument("family_json", type=Path)
+    p = sub.add_parser("guard-cancel", help="Route exact ordinary scancel through protected-partition policy")
+    p.add_argument("--site-id", required=True)
+    p.add_argument("--local-override", type=Path, required=True)
+    p.add_argument("--scontrol", type=Path, required=True)
+    p.add_argument("--scancel", type=Path, required=True)
+    p.add_argument("job_ids", nargs="+")
     return parser
 
 
@@ -1074,6 +1298,20 @@ def main(argv: list[str] | None = None) -> int:
         family = json.loads(args.family_json.read_text(encoding="utf-8"))
         print(_scope_digest(family))
         return 0
+    if args.command == "guard-cancel":
+        result = guard_cancel_jobs(
+            args.job_ids,
+            args.site_id,
+            args.local_override,
+            args.scontrol,
+            args.scancel,
+        )
+        print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
+        if result.get("status") == V21_CANCEL_EXECUTED:
+            return 0
+        if result.get("status") == V21_CANCEL_NEEDS_CHAT:
+            return 75
+        return 2
     raise SystemExit(f"unknown command: {args.command}")
 
 

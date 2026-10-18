@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+set -eu
+exec /usr/bin/python3 '/overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-protected-partition-chat-confirmation-v2-1-standalone-clone/skills/tools/hpc/slurm-workflows/scripts/slurm_routing.py' guard-cancel \
+  --site-id 'candidate-offline' \
+  --local-override '/tmp/hpc--slurm-cancel-production-closure-candidate-policy.toml' \
+  --scontrol '/usr/bin/scontrol' \
+  --scancel '/usr/bin/scancel' \
+  -- "$@"
