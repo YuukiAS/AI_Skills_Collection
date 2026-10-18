@@ -93,7 +93,7 @@ Before any branch/worktree creation, verify exact repo root, origin, clean state
 
 ## 3. Phase 0 must happen first
 
-No product implementation before Phase 0 PASS.
+No product implementation before Phase 0 PASS. Phase 0 creates only the AI Skills task worktree; DII/CARE remain read-only preflight targets until probe PASS.
 
 ### 3.1 Probe-only project config
 
@@ -160,6 +160,8 @@ Do not fallback to terminal confirmer, UserPromptSubmit, MCP server, or approval
 
 ## 4. Central candidate after Phase 0 PASS
 
+Only after Phase 0 PASS may the frozen DII and CARE task branches/worktrees be created.
+
 Implement inside existing slurm-workflows:
 
 ### thin guard
@@ -208,7 +210,7 @@ Fields only:
 - pending/confirmed/consumed
 - confirmation session/turn/tool-use ids
 
-No generic CLI can set confirmed.
+Confirmed authority must not be a plain shell-writable boolean/text record. Direct binder invocation is forbidden in Codex project rules, and regression must additionally prove that ordinary Codex normal shell cannot forge a guard-acceptable confirmation by editing state or fabricating question/answer artifacts. If this cannot be proven with current Codex primitives, stop and return Planner; do not weaken the requirement.
 
 ### native question
 
