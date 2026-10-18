@@ -17,6 +17,8 @@ It does not own ordinary prose polishing, generic system prompts, global Custom 
 
 After a request is routed to this skill, do not analyze, compress, edit, restructure, synchronize, or reset Project instructions until the user supplies the complete current Project setting verbatim in the current task. Project context, Memory, history, repository files, partial instructions, summaries, stale candidates, and model reconstruction cannot substitute for that baseline.
 
+Apply this gate without announcing skill selection, explaining the gate, or adding any preamble to the user-visible response.
+
 If the complete current setting is absent or visibly partial, return only:
 
 `请提供当前完整 Project setting 原文。PIE 不会根据 Project 上下文、Memory、历史聊天、仓库文件、部分 instructions 或模型推断重建当前 setting。`

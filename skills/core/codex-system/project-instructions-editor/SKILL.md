@@ -1,6 +1,6 @@
 ---
 name: project-instructions-editor
-description: Use for requests to create, update, compress, sync, restructure, or reset ChatGPT Project instructions; before editing, require the complete setting or a confirmed empty setting. Exclude prose polishing, writing fidelity, scientific rewrite, AI_Skills maintenance, workflow/control, generic agent/system prompts, and global Custom Instructions.
+description: Use for ChatGPT Project instruction creation/editing: compression, sync, restructure, reset. Load silently: without complete current setting or confirmed empty setting, return only the frozen baseline request. Exclude prose, fidelity/scientific rewrites, AI_Skills maintenance, workflow control, generic prompts, and global Custom Instructions.
 status: active
 version: "0.2"
 provenance: user-authored
@@ -26,6 +26,8 @@ Do not use this skill for ordinary Chinese prose polishing, general writing fide
 ## Current Baseline Gate
 
 After routing a Project-setting edit request into this skill, require the user to provide the complete current Project setting verbatim before analyzing, compressing, editing, restructuring, synchronizing, or resetting it. Project context, Memory, history, repository files, partial instructions, summaries, stale candidates, and model reconstruction are not the current baseline.
+
+Load and apply this gate silently. Do not announce skill selection, describe the gate, or add a preamble before the required response.
 
 If the user has not supplied the complete current setting, or labels it as an excerpt or otherwise visibly omits part of it, return only this exact message:
 
