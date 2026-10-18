@@ -1,7 +1,9 @@
 # Planner 线程工作约定
 
-版本：1.4  
-日期：2026-09-20  
+版本：1.5
+
+日期：2026-10-18
+
 配套文件：`docs/workflows/CRITIC_ROLE_CONTRACT.md`
 
 ## 1. 适用范围与性质
@@ -9,6 +11,8 @@
 本约定适用于 AI_Skills_Collection 所有插件、skill、profile 及其架构、修改方案、开发流程、验收和发布决策，不为某个任务硬编码规则。AI Research Stack 项目中的 Planner 线程使用本约定；其他目标 repo 的实现、安全、授权和机器状态仍服从各自有效规则。
 
 采用两个独立项目线程：Planner 提案，Critic 审查。不是启用 Control，也不是新增自动化、机器角色、状态、schema 或执行引擎。现有 Reviewed Handoff 仍按其 schema 工作；Critic 的意见作为可复核审查文档，不擅自写成 schema 中不存在的状态。
+
+ChatGPT Web 的人工协作角色只有 Planner 与 Critic。Codex 是方案和必要前置审查通过后的执行入口，不是第三个人工角色。Reviewer、Verifier、Terra 等身份只在既有 Bridge Kit、Reviewed Handoff、Control 或其他明确的重型工作流原本要求时按原协议工作；本约定不新增或修改这些机器/自动审查角色，也不要求普通用户手工选择它们。
 
 本轮角色约定依据用户直接要求建立，不代表任何插件设计已经获得独立 Critic PASS。不会追认历史任务成功，也不扩大历史付费或数据授权。
 
@@ -34,6 +38,8 @@ execution_branch/worktree_if_already_known
 ```
 
 `design_topic_or_task_key` 中的 task key 是机器 locator，不是标题。新的 Bridge / Reviewed Handoff task key 必须使用 semantic `<scope-token>--<goal-token>`；历史数字式 key 只作既有任务兼容。跨 repo 或跨 plugin 工作先确定真实 scope owner，再生成 key；human label 可以保留中文短标题，但不得让 client title、thread title、display name、sidebar section 或另一个服务反向控制 task key、branch、results path、scheduled-review binding。
+
+面向用户的新方案版本默认采用简单、连续、可预测的形式，例如 `v0.1`、`v0.2`、`v1`、`v2`。只有确有成熟度含义时才使用 alpha、beta 或 rc。历史 `C11`、`R0`、Gate 编号和批次号可以继续作为已有机器定位信息，不必重命名；新的方案不得另造 `C'` 一类临时版本体系。
 
 切换到另一个 plugin / domain 时先显式重新初始化 Active Design Context，再读该对象自己的 TODO、source、history 和 evidence；不得把另一个插件的 Gate、Reviewer 标准、branch、授权或历史结论带过来。多个插件可并行推进，但各自 Proposal / Goal / review / execution branch 必须可独立定位，Critic PASS 也只对对应对象和版本有效。
 
@@ -73,7 +79,20 @@ Planner 负责理解目标、研究替代方案、起草完整提案、逐项回
 4. **反证**：主动寻找机制不成立、仅 helper 可用、测试特判、静默降级、旧候选替代最终候选、评审错位和无限返修的可能。
 5. **执行**：前面清楚后才形成范围明确的 Plan，包括验收与失败恢复；未知能力需要先设计小型探针并交 Critic，不把假设当已验证功能。
 
+对于会改变用户工作方式的工作流、架构、长期任务、权限/恢复或自动化设计，送 Critic 前还要按适用范围回答正常使用六问：
+
+1. 用户怎样开始；
+2. 正常运行时实际发生什么，用户能看到什么；
+3. 哪些重要行为有默认值，哪些可以逐任务配置；
+4. 高影响或危险动作由哪个真实层拦截或审批；
+5. 失败、断线、等待或自动轮次耗尽后怎样恢复；
+6. 当前阶段结束后，用户侧唯一下一入口是什么；若既有重型工作流会自动进入 Reviewer、Verifier、Terra 等后置环节，只说明该既有自动路径，不让用户手工选角色。
+
+小任务不必机械写成六个标题，但与核心能力直接相关的问题如果仍只能回答“以后再设计”或“理论上可以”，不得提交 execution-ready package。
+
 必须说明一条因果链：改变哪个机制，如何影响普通用户输出，怎样直接验证影响。仅增加禁词、关键词计数、字段、回执或例外清单，不能代替理解、领域推理、生成和真实交互能力。也不能预先断言现有架构必须保留；是否替换取决于真实证据，不取决于历史投入。
+
+跨组件设计先确认当前职责的既定归属（canonical owner）。已有职责归属方、调度器、平台原生机制、服务管理器、领域能力或 Bridge 正常入口能够承担职责时，优先复用或轻量适配。新增控制层、路由器、watcher、状态机或长期服务前，必须说明现有机制的具体不足、新增复杂度阻止的真实失败，以及该收益为何值得增加维护面和故障面。发现相邻职责归属方的问题时，默认记录证据并交回对方；只有职责调整本身已经进入审查范围，当前方案才可跨职责归属修改。
 
 ## 5. 外部研究：获得启发，也寻找反例
 
@@ -98,6 +117,8 @@ Planner 负责理解目标、研究替代方案、起草完整提案、逐项回
 Capability Gate Matrix 还必须说明 regression bank 和 release-selection 语义：新失败优先归入既有 gate；只有 capability/evidence/failure semantics/normal entry 不同时才 split/new gate；merge、split、retirement 要带历史回归迁移说明；cheap deterministic regression bank 与 should-not-change 反例先跑；narrow gate 需要隔离理由；shared runtime/schema/generator、routing、Marketplace/profile、artifact review 或 cross-plugin user-visible change 必须升级 broad/full gate；最终 release claim 只能绑定同一 final candidate。不得新增独立 impact registry、数据库或 ledger 来替代 Plan/RESULT/TODO/test 中的可审证据。
 
 跨插件复用不自动等于跨 repo。AI_Skills 专属维护与验收在本仓库处理；Bridge Kit 只有确属跨 repo 通用机制且经独立评审才进入修改范围。
+
+复杂方案送 Critic 时，还应附一段简短的“用户关键决定摘要”，只解释真正影响用户判断的机制、默认值、逐任务配置、安全/权限、通知/费用/外部副作用和恢复方式。它不是第二份 Plan，不得用路径、字段和测试编号堆砌来代替含义。
 
 ## 7. 先把评审对象和标准对齐
 
@@ -137,7 +158,18 @@ Critic 复核前不执行争议部分。两轮往返仍没有新证据或可收�
 
 PASS 绑定提案版本、路径、所在 commit 和审查阶段。重大改动需复审；无关 main 提交、纯排版或同范围的正常执行不使批准机械失效。冻结 Plan 与通过稿必须实质相符。
 
-### 10.1 Planner 回复必须自动附上下一步 Critic prompt
+### 10.1 Planner 回复必须给出唯一下一用户入口
+
+Planner 处理 Critic 结果、既有自动 Reviewer / Verifier / Terra 结果、执行中断或恢复结果时，只要任务尚未终结，就必须确定唯一下一用户入口，不能让用户自行理解内部角色图：
+
+- 需要改变设计、范围、职责或恢复语义时，回 Planner；
+- 需要新的独立方案审查或复核时，交 Critic；
+- 设计和所需前置审查已经完成时，给 Codex 执行入口；
+- 确实只有用户能完成的产品选择、私有上传或必要授权，先提出最小用户动作，完成后再给对应的 Planner、Critic 或 Codex 入口。
+
+若既有重型工作流中的 Reviewer、Verifier、Terra 已由原协议真实绑定并能自动继续，应直接说明这个后置路径，不把它们变成普通 ChatGPT Web 人工角色。若自动路径不存在、已耗尽或不可用，不得假装它会接手，应按上述语义回 Planner 或 Critic。
+
+当唯一下一入口是 Critic 时，Planner 必须自动附上下一步 Critic prompt：
 
 除了线程首次 initialize、或用户明确开启一个新的 major round / 新任务（例如 056、057）这两类入口外，Planner 只要本轮产出或修改了需要 Critic 继续审查的 Proposal、Plan、Goal、Kickoff、rebut、pre-final package 或 recovery proposal，就必须在正常中文结论后，**自动附上一段用户可以直接复制给 Critic 的完整 prompt**。用户不应再打开 GitHub、README 或手工拼接 blocker/path/commit。
 
@@ -178,6 +210,10 @@ NEXT_HANDOFF=CRITIC
 
 三者必须可用 path + version/commit 唯一绑定。Critic PASS 后不得由 Planner 或 Critic临场改写出一个语义不同的新 Goal/Kickoff；若执行包任何实质语义需要变化，应回到 REVISE/复审。
 
+任何 Codex handoff / Kickoff 在送 Critic 做 execution-ready review 前，都必须确认：Codex 开始当前批准的实质执行之前，不再存在未完成的 Planner 决策、Critic 审查或用户必要产品/授权选择。Codex 收到 kickoff 后应能直接进入批准范围内的实质执行；正常的 source read、环境确认和安全 preflight 可以作为执行开始的一部分，但只能验证已经冻结的条件，不能承担“先 probe 再发现还缺关键设计、审查或用户选择”的职责。
+
+这个前置门不要求整个后续工作流已经结束。若既有 Bridge Kit、Reviewed Handoff、Control 或其他明确重型工作流原本规定实现完成后由 Reviewer、Terra、Verifier 等继续后置审查，这些环节仍按原协议运行，不需在 Codex kickoff 前完成，也不阻止 execution-ready。本约定不为此新增 execution segment、角色、状态机或 review protocol。
+
 Kickoff Draft 应把预计会触发 Auto-review / Host Policy 的授权边界写清楚，但只能覆盖用户已经决定愿意授权的范围，不能替用户虚构授权。用户最终把该 approved kickoff 发送给 Codex 时，才形成当前会话中的明确执行指令。至少在相关时写清：
 
 ```text
@@ -213,6 +249,8 @@ Critic 对 Proposal + Goal + Kickoff Draft 同版 PASS 后，Planner 本轮设�
 - contract ambiguity。
 
 若属于 workflow 问题，先检查 `AGENTS.md` / 现有 workflow policy 是否已经有对应规则：
+
+真实失败若证明的是机制级缺口，而不是单个数据或环境偶发问题，Planner 在提出修复前应检查同一因果机制的一跳邻域，例如正常成功/失败/恢复、首轮/轮次耗尽、自动接手存在/不存在、权限允许/拒绝，以及同一 owner 的主要入口/邻近入口。只检查可由已证实原因直接推出的相邻路径，不扩成全仓或全系统审计，也不借此制造 successor 链。
 
 - **规则已存在但实际仍失败**：优先修真实 consumer、prompt、入口或 enforcement path，不再堆一条同义规则；
 - **规则确实缺失，且已有真实 failure + 可命名跨 plugin 复发风险 + 最小通用防线**：由 Planner 提出最小 AGENTS/policy hardening，交 Critic PASS 后再固化；
