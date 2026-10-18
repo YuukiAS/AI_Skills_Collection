@@ -1,7 +1,7 @@
 {
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
   "task_key": "clear-writing--scientific-explanation-readability-repair",
-  "state": "NEEDS_GPT_PLANNER",
+  "state": "WAITING_FOR_CI",
   "review_round": 0,
   "max_review_rounds": 2,
   "plan_revision": 0,
@@ -10,7 +10,7 @@
   "base_branch": "reviewed/clear-writing--cross-surface-language-layer",
   "implementation_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
   "ci_required": true,
-  "ci_status": "FAIL",
+  "ci_status": "PENDING",
   "last_review_decision": null,
-  "next_action": "RUN_GPT_PLANNER"
+  "next_action": "WAIT_FOR_CI"
 }
