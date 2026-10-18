@@ -122,8 +122,15 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
             "whole sentence, paragraph, or section",
             "not a second editor",
             "regenerate `R`, not `C`",
+            "first user-visible line",
+            "insertion-only",
+            "deletion-only",
+            "summary",
         ]:
             self.assertIn(phrase, combined)
+
+        self.assertIn("exact baseline receipt; actual Markdown preview `R`; complete clean final `C`", skill)
+        self.assertIn("do not deliver `C` without `R`", contract)
 
         for forbidden_format in ["Git `+/-`", "diff code block", "machine labels"]:
             self.assertIn(forbidden_format, combined)

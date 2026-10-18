@@ -154,13 +154,17 @@ For every real modification, use one truth chain:
 5. render the human-readable Markdown preview `R` from `E`;
 6. verify `E(B)=C`, then deliver `R` followed by the complete clean `C`.
 
+Once any complete `B` is accepted, the exact baseline receipt must be the first user-visible line. For a real change, the delivery order is: exact receipt, actual Markdown preview `R`, then complete clean `C`. Do not put analysis or a summary before the receipt, do not deliver `C` without `R`, and do not use a prose summary as a substitute for the preview.
+
 For a small change, default to inline Markdown such as `原文~~旧部分~~**新部分**原文`. When inline marks would make a broad change harder to review, raise the preview granularity to a whole sentence, paragraph, or section. Do not use Git `+/-`, a diff code block, or machine labels such as `删除` and `新增`.
+
+The preview must contain the actual changed text. For insertion-only edits, bold the inserted text with enough unchanged context to show placement. For deletion-only edits, strike the removed text. For replacements, strike the old text and bold the replacement at a readable granularity. A separate change summary is optional and cannot satisfy this requirement by itself.
 
 The preview shows the semantic edit already made; it is not a second editor. Every deletion in `R` must exist in `B`, every addition must exist in `C`, every material `B` to `C` change must be represented, and unchanged semantics must remain unchanged. Text found only in history, Memory, an old candidate, or another source must not appear as a phantom deletion from `B`.
 
 If `R` and `C` disagree, keep the semantically checked `C` and regenerate `R`. Do not maintain a persistent ledger, AST, runtime diff service, helper script, or second state machine for this check.
 
-For no-op, follow the existing no-op contract: explain why no change is needed without manufacturing a diff or repeating a duplicate clean setting.
+For no-op, give the exact baseline receipt and then follow the existing no-op contract: explain why no change is needed without manufacturing a diff or repeating a duplicate clean setting.
 
 ## Mandatory Final Replacement Pass
 

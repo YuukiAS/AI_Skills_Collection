@@ -164,12 +164,15 @@ ADVANCED_INDEPENDENT_MULTI_CALL_FINALIZATION=`UNSUPPORTED`.
 
 Deliver proportionally:
 
+- After accepting any complete baseline `B`, make the exact baseline receipt the first user-visible line. Do not put analysis, a mode label, or a summary before it.
+- For a real change, deliver in this order: exact baseline receipt; actual Markdown preview `R`; complete clean final `C`. A change summary may follow the preview, but it never substitutes for `R`, and `C` must not be delivered without `R`.
+- `R` must show the actual changed text with Markdown marks, not merely describe that text changed. For insertion-only edits, bold the inserted text with enough unchanged context to place it. For deletion-only edits, strike the removed text. For replacements, strike the old text and bold the replacement at a readable granularity.
 - For every real change, give a human-readable Markdown preview followed by the complete clean final Project setting. The preview and clean final must represent one delta `E` over one user-supplied baseline `B`, with `E(B)=C`.
 - For a small bounded edit, default to inline `原文~~旧部分~~**新部分**原文`, then give short reasons, key unchanged semantics, length/delta when available, and the complete clean final setting.
 - For a medium edit, also explain scope impact, locator/bridge substitutions, effective enforcement, balance, and budget margin when relevant.
 - For a large replacement, raise the preview granularity to whole sentences, paragraphs, or sections when inline marks would reduce readability. Do not use Git `+/-`, a diff code block, or machine labels such as `删除` / `新增`.
 - For a full replacement, explain why bounded edit is insufficient or why greenfield/reset applies, major placement changes, direct rules/bridges, preserved invariants, budget change, and the complete clean replacement. Mention the mode in natural language only when it materially affects user understanding or safety; do not print internal mode labels unless a formal audit explicitly requests them.
 - For a missing baseline, return only the exact Current Baseline Gate message. For other missing inputs after baseline acceptance, name only the evidence that blocks the affected claim and avoid offloading repo/source lookup that you can do yourself.
-- For no-op, say that the Project setting should not change, identify the correct owner, locator, already-covered rule, or semantic risk, and explain why no material in-scope defect is safely repairable; do not manufacture a preview or repeat an identical setting.
+- For no-op, give the exact baseline receipt, then say that the Project setting should not change, identify the correct owner, locator, already-covered rule, or semantic risk, and explain why no material in-scope defect is safely repairable; do not manufacture a preview or repeat an identical setting.
 
 Never present a blacklist, English ratio, fixed character percentage, paragraph count, heading count, formula count, or keyword score as the quality decision.
