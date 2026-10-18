@@ -1,0 +1,25 @@
+{
+  "schema": "AI_BRIDGE_PLUGIN_REPLAY_RESULT_V1",
+  "task_key": "clear-writing--scientific-explanation-readability-repair",
+  "replay_status": "COMPLETED",
+  "production_plugin": {
+    "id": "ai-skills-core@yuukias-ai-skills",
+    "version": "0.5",
+    "status": "installed_enabled",
+    "invocation": "PASS"
+  },
+  "maintenance_preflight": "PASS",
+  "reviewed_task_implementation": "NOT_EXECUTED_IN_REPLAY",
+  "repository_snapshot_present": false,
+  "workflow_state_mutated": false,
+  "recommended_next_action": "RUN_CODEX_EXECUTOR",
+  "artifact": "AI_SKILLS_MAINTENANCE_PREFLIGHT.md",
+  "claims": {
+    "production_maintenance_preflight": true,
+    "source_change": false,
+    "regression_pass": false,
+    "ci_pass": false,
+    "reviewer_pass": false,
+    "release_pass": false
+  }
+}
