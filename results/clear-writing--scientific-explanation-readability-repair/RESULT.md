@@ -6,7 +6,7 @@ Branch: `reviewed/clear-writing--scientific-explanation-readability-repair`
 
 Implementation commit: `fd7a1578a5042a46a55c5b638f6d550655b1096b`
 
-State transition: `PLAN_FROZEN / RUN_CODEX_EXECUTOR` -> `WAITING_FOR_CI / ci_status=PENDING`
+State transition: `PLAN_FROZEN / RUN_CODEX_EXECUTOR` -> `WAITING_FOR_CI / ci_status=PENDING` -> `NEEDS_GPT_PLANNER / ci_status=FAIL`
 
 ## Implementation
 
@@ -79,8 +79,14 @@ Affected plugins:
 - `presentations`: NO_BUMP
   Reason: Presentations product behavior is unchanged.
 
+## Required CI Result
+
+Required zero-paid GitHub CI run `39097236717` failed in the main `codex-marketplace` job while running the full repository tests. The three failures are all Presentations render probes reporting missing TeX/canonical-font resources; both editable-install jobs and Windows sparse checkout passed. Exact evidence is preserved in `CI_FAILURE_39097236717.md`.
+
+This task cannot change Presentations/rendering behavior, CI resource setup or those tests under the frozen Plan. The unchanged CI was not rerun. `CURRENT` therefore moves to `NEEDS_GPT_PLANNER / ci_status=FAIL`, preserving `review_round=0`, `plan_revision=0`, the implementation and all replay evidence.
+
 ## Remaining Gates
 
-The local candidate is ready for required zero-paid GitHub CI. CI PASS is required before independent Reviewer handoff. `review_round` remains `0`; local PASS does not consume a review round or prove final product completion.
+Planner must assign and bound the external CI remediation before this branch can return to required CI. CI PASS remains mandatory before independent Reviewer handoff, and the Reviewer must read all nine final outputs rather than only this summary.
 
-The independent Reviewer must read all nine final outputs, not only this summary. Maximum claim scope remains the frozen repo/Codex known-regression repair; ChatGPT Web automatic selection, G7 fresh evidence, PIE 0.2, personal account mutation and formal release remain unclaimed.
+Maximum claim scope remains the frozen repo/Codex known-regression repair; ChatGPT Web automatic selection, G7 fresh evidence, PIE 0.2, personal account mutation and formal release remain unclaimed.
