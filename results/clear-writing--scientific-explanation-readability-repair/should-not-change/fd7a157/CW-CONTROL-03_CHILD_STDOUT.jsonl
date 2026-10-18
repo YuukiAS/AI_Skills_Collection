@@ -1,0 +1,6 @@
+{"type":"thread.started","thread_id":"01a14d3b-1d80-7c33-95f1-721ac8627270"}
+{"type":"turn.started"}
+{"type":"item.started","item":{"id":"item_0","type":"command_execution","command":"/usr/bin/bash -lc 'cat inputs/01-CW-CONTROL-03_INPUT.md'","aggregated_output":"","exit_code":null,"status":"in_progress"}}
+{"type":"item.completed","item":{"id":"item_0","type":"command_execution","command":"/usr/bin/bash -lc 'cat inputs/01-CW-CONTROL-03_INPUT.md'","aggregated_output":"{\"task\":\"clear-writing--cross-surface-language-layer\",\"state\":\"WAITING_FOR_CI\",\"ci_status\":\"PENDING\",\"retry\":0,\"exact\":true}\n","exit_code":0,"status":"completed"}}
+{"type":"item.completed","item":{"id":"item_1","type":"agent_message","text":"{\"task\":\"clear-writing--cross-surface-language-layer\",\"state\":\"WAITING_FOR_CI\",\"ci_status\":\"PENDING\",\"retry\":0,\"exact\":true}"}}
+{"type":"turn.completed","usage":{"input_tokens":57372,"cached_input_tokens":39936,"cache_write_input_tokens":0,"output_tokens":77,"reasoning_output_tokens":0}}

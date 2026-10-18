@@ -1,0 +1,49 @@
+{
+  "actual_consumption": {
+    "event_type": "item.started",
+    "line_index": 4,
+    "proven": true
+  },
+  "actual_consumption_by_plugin": {
+    "writing-style": {
+      "event_type": "item.started",
+      "line_index": 4,
+      "proven": true
+    }
+  },
+  "add_payload": {
+    "authPolicy": "ON_INSTALL",
+    "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.4",
+    "marketplaceName": "ai-skills-candidate",
+    "name": "writing-style",
+    "pluginId": "writing-style@ai-skills-candidate",
+    "version": "0.4"
+  },
+  "candidate_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+  "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.4",
+  "plugin_id": "writing-style@ai-skills-candidate",
+  "plugins": [
+    {
+      "actual_consumption": {
+        "event_type": "item.started",
+        "line_index": 4,
+        "proven": true
+      },
+      "add_payload": {
+        "authPolicy": "ON_INSTALL",
+        "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.4",
+        "marketplaceName": "ai-skills-candidate",
+        "name": "writing-style",
+        "pluginId": "writing-style@ai-skills-candidate",
+        "version": "0.4"
+      },
+      "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.4",
+      "name": "writing-style",
+      "plugin_id": "writing-style@ai-skills-candidate"
+    }
+  ],
+  "runtime_version": "codex-cli 0.153.4",
+  "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261018T041719Z-3752797/child.stderr",
+  "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261018T041719Z-3752797/child.stdout.jsonl",
+  "writable_dirs": []
+}
