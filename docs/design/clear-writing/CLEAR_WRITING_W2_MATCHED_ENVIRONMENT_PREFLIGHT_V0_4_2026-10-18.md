@@ -18,15 +18,19 @@ No partial/pass-with-caveat state exists.
 
 At preflight start:
 
-- task `CURRENT.state` must still be non-executor-owned
-  `NEEDS_GPT_PLANNER`;
+- the exhausted Reviewed Handoff task must remain terminalized at
+  `CURRENT.state=AWAIT_HUMAN_DECISION` with
+  `human_gate_reason=PLANNER_DECISION`;
+- `plan_revision` must remain `1` and `max_plan_revisions` must remain
+  `1`;
+- no attempt to re-arm `PLAN_FROZEN` may have occurred;
 - execution-ready Critic PASS for package v0.4 must exist;
 - the user must have sent the exact approved v0.4 Kickoff;
 - the source/evidence branch must still be
   `reviewed/clear-writing--scientific-explanation-readability-repair`;
 - no live Project/plugin mutation from this task may already have occurred.
 
-If any item is false, stop.
+If any item is false, stop. The preflight must not repair or mutate CURRENT.
 
 ## 2. Watcher fail-closed check
 
