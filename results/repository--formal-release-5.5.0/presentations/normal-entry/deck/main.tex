@@ -1,0 +1,82 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{amsfonts,amsmath,amssymb,booktabs}
+\makeatletter
+\def\input@path{{styles/}}
+\makeatother
+\usetheme{sintef}
+\titlebackground*{assets/background}
+\setbeameroption{hide notes}
+\title{Intensity clipping for\\3D lesion segmentation}
+\subtitle{Does the observed improvement justify a larger replicated study?}
+\author{Research update}
+\institute{Public-safe synthetic evaluation summary}
+\date{}
+\begin{document}
+% P01: canonical locked title shell
+\maketitle
+\section{Study design}
+% P02
+\begin{frame}{A controlled comparison on 18 validation volumes}
+\textbf{Same baseline and candidate setup}
+\begin{itemize}
+\item Split, model architecture, training schedule and post-processing.
+\end{itemize}
+\vspace{0.6em}
+\textbf{Only intended difference}
+\begin{itemize}
+\item Test-time intensity clipping at the 1st and 99th percentiles.
+\end{itemize}
+\vspace{0.8em}
+Public-safe synthetic evaluation summary prepared for release acceptance.\\[0.5em]
+This is a small validation study, not a final benchmark or clinical claim.
+\end{frame}
+\section{Quantitative comparison}
+% P03
+\begin{frame}{Observed metrics favor intensity clipping}
+\begin{center}
+\large
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{lrr}
+\toprule
+Metric & Baseline & Intensity clipping \\
+\midrule
+Mean Dice & 0.742 & 0.758 \\
+Small-lesion Dice & 0.421 & 0.469 \\
+HD95 & 18.4 mm & 17.9 mm \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.6em}
+The result supports replication, not a superiority claim.\\[0.4em]
+No confidence interval or repeated-seed estimate is available.
+\end{frame}
+\section{Failure and uncertainty}
+% P04
+\begin{frame}{The motion-corrupted case remains unresolved}
+\textbf{Observed failure}
+\par\medskip
+One motion-corrupted volume still has disconnected false positives under both methods.
+\par\bigskip
+\textbf{Interpretation limits}
+\begin{itemize}
+\item No confidence interval or repeated-seed estimate is available.
+\item The observed improvement may depend on this small split.
+\end{itemize}
+\medskip
+The result supports replication, not a superiority claim.
+\end{frame}
+\section{Next experiment}
+% P05
+\begin{frame}{Approve a three-seed replication?}
+\textbf{Proposed next experiment}
+\begin{enumerate}
+\item Repeat the comparison across three fixed seeds.
+\item Pre-register the same preprocessing and split policy.
+\item Report uncertainty for mean Dice, small-lesion Dice and HD95.
+\item Audit the motion-corrupted case separately instead of excluding it.
+\end{enumerate}
+\vspace{0.8em}
+\textbf{Decision request}\\[0.3em]
+Approve the three-seed replication before changing the model architecture.
+\end{frame}
+\end{document}

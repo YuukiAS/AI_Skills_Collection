@@ -1,0 +1,126 @@
+{
+  "candidate_version": "initial",
+  "pdf_path": "deck/main.pdf",
+  "pdf_sha256": "902019a96971a383357228a51f12f2b5777d7c7542e6a0277cfa26aa859eb735",
+  "tex_path": "deck/main.tex",
+  "tex_sha256": "182741939a67e4a23e0ebb4e20df1e533175172f76495d2dfe4e307676bfbeaf",
+  "page_count": 5,
+  "render_engine": "XeLaTeX; pdftoppm",
+  "render_settings": "Exact canonical CUHK theme; 16:9; PNG 160 dpi",
+  "source_sha256": "fb36713b86f8a4e72fd5feb52439d389ff3bf47b9c7cd5771fde867297cfb016",
+  "plan_sha256": "91ec1cfe581390109e9e5bf599c8694477f7b2e4d65f559a9256b35bc90809f4",
+  "contact_sheet_path": "deck_contact_sheet.png",
+  "contact_sheet_sha256": "99ceb1efe626b908278644ff0770e622e17708126f64073d331ff439af032c2a",
+  "pages": [
+    {
+      "page_id": "P01",
+      "physical_page": 1,
+      "page_job": "Title and decision context",
+      "png_path": "deck/rendered/slide-1.png",
+      "png_sha256": "df2ca0032f58d08a6514468405bc862e612104bbf5538a86dc27e5d0708cb977",
+      "pdf_sha256": "902019a96971a383357228a51f12f2b5777d7c7542e6a0277cfa26aa859eb735",
+      "source_anchors": [
+        "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md#Question"
+      ],
+      "required_objects": [
+        "Research question and replication decision"
+      ],
+      "review_checks": [
+        "Copy fidelity and scientific limits",
+        "Reading path and primary-object scale",
+        "Projection readability; clipping and overlap",
+        "Evidence-interpretation proximity",
+        "Canonical header, footer and title shell"
+      ],
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "page_id": "P02",
+      "physical_page": 2,
+      "page_job": "Study design and evidence boundary",
+      "png_path": "deck/rendered/slide-2.png",
+      "png_sha256": "b0b3f0785cc293f827d37739891779b50bac7a1ba2b3958f67be3b3658f10c80",
+      "pdf_sha256": "902019a96971a383357228a51f12f2b5777d7c7542e6a0277cfa26aa859eb735",
+      "source_anchors": [
+        "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md#Study design"
+      ],
+      "required_objects": [
+        "Paired comparison with fixed training conditions and one intended test-time change"
+      ],
+      "review_checks": [
+        "Copy fidelity and scientific limits",
+        "Reading path and primary-object scale",
+        "Projection readability; clipping and overlap",
+        "Evidence-interpretation proximity",
+        "Canonical header, footer and title shell"
+      ],
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "page_id": "P03",
+      "physical_page": 3,
+      "page_job": "Quantitative comparison",
+      "png_path": "deck/rendered/slide-3.png",
+      "png_sha256": "d75b39b551901e38520030370a25d3d4e8a113d0cba644f5f862a6b7d85dad45",
+      "pdf_sha256": "902019a96971a383357228a51f12f2b5777d7c7542e6a0277cfa26aa859eb735",
+      "source_anchors": [
+        "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md#Results"
+      ],
+      "required_objects": [
+        "Native editable three-metric comparison table"
+      ],
+      "review_checks": [
+        "Copy fidelity and scientific limits",
+        "Reading path and primary-object scale",
+        "Projection readability; clipping and overlap",
+        "Evidence-interpretation proximity",
+        "Canonical header, footer and title shell"
+      ],
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "page_id": "P04",
+      "physical_page": 4,
+      "page_job": "Failure, uncertainty and interpretation limits",
+      "png_path": "deck/rendered/slide-4.png",
+      "png_sha256": "315db780596ebcc7315b0058fd83e5da543bd5e5fe5e5e7999559f4bad22e6d2",
+      "pdf_sha256": "902019a96971a383357228a51f12f2b5777d7c7542e6a0277cfa26aa859eb735",
+      "source_anchors": [
+        "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md#Failure and uncertainty"
+      ],
+      "required_objects": [
+        "Observed failure description and explicit uncertainty limits"
+      ],
+      "review_checks": [
+        "Copy fidelity and scientific limits",
+        "Reading path and primary-object scale",
+        "Projection readability; clipping and overlap",
+        "Evidence-interpretation proximity",
+        "Canonical header, footer and title shell"
+      ],
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "page_id": "P05",
+      "physical_page": 5,
+      "page_job": "Next experiment and decision request",
+      "png_path": "deck/rendered/slide-5.png",
+      "png_sha256": "d6c0de10335a5357b090b09a4817dd8bb645d0105b6e85f5f53a2fb21a83c00a",
+      "pdf_sha256": "902019a96971a383357228a51f12f2b5777d7c7542e6a0277cfa26aa859eb735",
+      "source_anchors": [
+        "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261016T032732Z-3421124/workspace/inputs/01-PRESENTATIONS_PUBLIC_SOURCE.md#Proposed next experiment; Decision request"
+      ],
+      "required_objects": [
+        "Proposed three-seed protocol and approval request"
+      ],
+      "review_checks": [
+        "Copy fidelity and scientific limits",
+        "Reading path and primary-object scale",
+        "Projection readability; clipping and overlap",
+        "Evidence-interpretation proximity",
+        "Canonical header, footer and title shell"
+      ],
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "task_classification": "NEW_SMALL",
+  "source_sha256": "fb36713b86f8a4e72fd5feb52439d389ff3bf47b9c7cd5771fde867297cfb016",
+  "page_ids": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05"
+  ],
+  "critic_required": false,
+  "gpt_work_required": false,
+  "locked_components": [
+    "canonical CUHK shell"
+  ],
+  "round_allowlist": "One initial candidate and at most one source-faithful repair after independent findings",
+  "route": "research-presentations native exact CUHK Beamer",
+  "production_entry_applicability": "One-call entry has no generic native table or prose failure layout; specialized experiment renderer emits fixed clustered-study pictograms. Native Beamer route selected to preserve source semantics.",
+  "visible_copy_sha256": "182741939a67e4a23e0ebb4e20df1e533175172f76495d2dfe4e307676bfbeaf",
+  "scientific_prose_pass": "Source-faithful wording; no statistical significance, clinical or superiority claim added."
+}

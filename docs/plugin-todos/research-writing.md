@@ -92,6 +92,28 @@ problem:
 observed handling: 用户明确认可一段重新起草的提案式样稿，其论证顺序为“真实多中心医学影像问题 → 最近直接前作为什么不足 → 一个具体的方法直觉 → 数学和算法如何运行 → 怎样证明有实际学习价值”，随后要求中文与英文全文按此结构重写，并保留足够详细的公式、基准与科学限制。现有一维实验和 CARE 标签审计仍应保留事实，但按支持相关论点的需要出现，而不是作为正文工作状态目录。
 project-specific context: MOSAiC、NTK-FL、MAP、FedLAP-DP、M&Ms、CARE、中心消息及一阶余项等属于 DII 的研究内容，**不是**通用 Research Authoring 模板。报告由本对话助手起草；未证实调用了正式安装的 Research Authoring production skill，所以本条只记录可复核的真实用户反馈，不直接认定为该插件已发布版本的运行回归，也不改变已有 TODO 状态或插件版本。
 
+
+#### 2026-10-17：导师稿即使科学正确且结构合理，仍可能因“第一眼看不出为什么值得用”而失败
+feedback_status: NEW
+priority: VERY_HIGH
+source: \`Distributed_Imaging_Inference\` / HAMP advisor proposal reviewed directly by advisor on 2026-10-17.
+evidence: 当前 DII 正式导师 PDF 已经经过前一轮 reader-first 重构：不再按内部实验日志组织，方法、数学、前作和实验计划都基本完整；但导师反馈仍明确认为“还不足以和别人 communicate”。导师提出的核心要求包括：必须有一张图，让一个对 foundation model、segmentation 等几乎不了解的读者（例如普通 radiologist）也能立即理解“这东西为什么好”；必须抓住读者心理，回答“为什么我要花精力用这个，而不是已有方法”；与其给长篇方案，不如真正写成一篇自己主导的短 baseline paper，大约四页，让第一作者能够用最少篇幅把问题、方法和价值讲清楚。
+problem:
+- **reader-first 仍然不等于 value-first。** 现有规则已经要求按“科学问题 → 方法直觉 → 数学 → 验证”重构，但仍可能默认读者愿意投入时间理解研究。真实导师反馈表明，面对导师、reviewer、临床合作者或跨领域读者，第一层任务不是“把方法讲完整”，而是先让读者在几十秒内知道：现有流程哪里痛、这个方法带来什么具体新能力、为什么值得继续看。
+- **没有中心图时，复杂方法很难形成共同心智模型。** 长段落可以精确，但临床或跨领域读者不会先读完方法再决定它是否重要。图不是装饰或方法流程的事后摘要，而应承担首要沟通任务：在不了解项目内部术语的情况下，展示当前工作流的负担、 proposed capability、以及使用者最终得到什么。
+- **作者视角容易高估术语前提。** 即使 “foundation model”“segmentation”“feature interface”“audit” 对作者很自然，普通 radiologist 或相邻领域 reviewer 未必愿意先学习这些概念。面向跨领域读者时，文档必须先用场景和结果说明价值，再决定哪些技术词值得出现。
+- **“与前作不同”不能替代“为什么值得用”。** 文献定位表和 novelty list 只能回答方法学边界，不能回答采用动机。Research Authoring 应强制增加用户价值问题：如果我是目标用户，为什么要改变现有流程、承担实现/验证成本来使用这个方法？如果答案只剩“方法更一般、更统计、更可复用”，说明仍未形成可传播价值主张。
+- **长篇 proposal 不是所有研究阶段的最佳载体。** 当核心想法已经形成但仍需获得导师/合作者兴趣时，4 页左右的 paper-like baseline manuscript 可能比 10+ 页完整研究计划更有效：一张主图、一段问题、一段现有方法为什么不足、一个最小方法定义、一个最关键实验设计或结果位置、一个清楚的贡献/边界。完整数学、审计、消融和执行细节可以放补充材料或内部文档。
+- **“第一作者能自己讲出来”是重要验收标准。** 正式研究稿不能只是信息齐全；作者本人应能脱离文档，用主图和几分钟口头叙述解释：谁现在遇到什么问题、为什么已有方案不方便、我们给了什么、为什么这会改变使用者的选择、怎样最直接证明它有用。
+candidate_action:
+- 对 advisor-facing proposal、short paper、reviewer-facing introduction 增加一个 **zero-context value test**：假设读者是相关医学/科学专业人士，但不了解当前方法栈。只给标题、摘要首段和主图，读者是否能回答“问题是什么、现有做法为什么麻烦、作者给了什么、我为什么可能愿意用”。
+- 在复杂方法第一次对外沟通时，优先设计一张**价值主图**，再写正文。图的第一层表达应是使用场景和能力变化，不是内部算法模块。技术细节可以作为第二层或图中小插图。
+- 强制区分三种文档：内部完整研究计划、面向导师/合作者的短研究提案、接近投稿的短 paper。不要把前者压缩排版后冒充后两者。
+- 对 4 页左右的短 paper，建议按信息价值组织而不是平均分配章节：第 1 页必须完成问题 + 场景 + 主图 + 方法一句话；第 2 页给最小必要方法和与直接前作的关键区别；第 3 页给最能决定价值的实验 / 预期验证；第 4 页给限制、适用边界和结论。具体页数不是硬模板，但“前一页就能让人决定是否继续读”是硬验收。
+- Research Authoring 最终 QA 增加：**如果删除 80% 技术细节，核心价值是否仍然清楚？主图是否能独立讲故事？正文是否回答了‘为什么使用者愿意换方法’，而不仅是‘我们和别人哪里不同’？**
+- 对跨领域临床读者，避免把术语教学当开场。先描述其熟悉的流程、重复工作、失败风险或决策痛点，再引入方法名称。
+boundary: DII、HAMP、具体 foundation model / segmentation 内容、导师原话和四页 paper 的具体科学材料属于项目证据，不进入通用模板。可迁移的是：**value-first communication、zero-context reader、figure-first mental model、adoption motivation、short paper as a distinct artifact、first-author oral explainability**。本条来自导师对真实 advisor PDF 的直接反馈，权重高于仅由助手自评形成的写作偏好；但它不意味着所有研究报告都必须四页，也不意味着所有正式论文都应减少数学细节。
+
 ### Meaning-first rewriting should be a reusable transformation pattern
 status: READY_FOR_PROMOTION
 tracking: #23

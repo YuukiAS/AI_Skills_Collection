@@ -35,7 +35,7 @@ Unchanged central plugin versions: `workflow-core 0.5`, `ai-skills-core 0.5`,
 `statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
 
 Unchanged standalone skill versions: `project-thread-handoff 0.2`,
-`render-chinese-math-pdf 0.2`, `slurm-workflows 0.4`.
+`render-chinese-math-pdf 0.3`, `slurm-workflows 0.4`.
 
 Changed repository behavior:
 
@@ -56,6 +56,46 @@ Changed repository behavior:
   owned by Clear Writing work, not by this v0.1 release.
 - The standalone icon, registry, catalog, provenance, README, and focused
   tests now include Project Instructions Editor v0.1.
+
+## 5.4.5 - 2026-10-17
+
+Repository `5.4.5` is a compatible patch release for Chinese Math PDF v0.3.
+Completed PDF requests now provide the same verified final PDF in the first
+completion response through the host's real file entry.
+
+Repository bump decision: PATCH
+Reason: this release improves an existing standalone PDF capability without
+adding a new repository-level user task or changing the repository contract.
+
+Affected standalone skills:
+- `render-chinese-math-pdf`: `0.2` -> `0.3`
+  Reason: after the existing Pandoc/XeLaTeX renderer and PDF QA succeed, the
+  first completion response must provide the verified final PDF itself. If the
+  host cannot legally expose that file, delivery remains incomplete rather than
+  being represented by a path, receipt, hash, preview, or fabricated link.
+
+Affected central plugins:
+- all central plugins: NO_BUMP
+  Reason: this release does not change central Marketplace plugin behavior.
+
+Bridge Kit: NO CHANGE.
+
+Unchanged central plugin versions: `workflow-core 0.5`, `ai-skills-core 0.5`,
+`writing-style 0.4`, `research-writing 0.2`, `presentations 0.3`,
+`scientific-visualization 0.1`, `web-development 0.4`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Unchanged standalone skill versions: `project-thread-handoff 0.2`,
+`slurm-workflows 0.4`.
+
+Changed repository behavior:
+
+- Chinese Math PDF keeps the existing Pandoc/XeLaTeX renderer, formulas,
+  fonts, templates, profiles, receipts, and PDF QA.
+- Rendering success and file delivery are separate completion conditions. The
+  first completion response leads with the same QA-passed PDF file entry; when
+  no legal file entry is available, the response states that delivery is not
+  complete and gives the smallest truthful recovery step.
 
 ## 5.4.4 - 2026-10-04
 

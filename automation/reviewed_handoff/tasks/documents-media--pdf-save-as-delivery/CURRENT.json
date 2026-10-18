@@ -1,0 +1,16 @@
+{
+  "base_branch": "main",
+  "base_commit": "1c59199f88c7527f2bd853e606f20146134fda47",
+  "ci_required": false,
+  "ci_status": "NOT_REQUIRED",
+  "implementation_commit": "5c92bf4f599d378ff68444b0fa85f5d56bbbd628",
+  "last_review_decision": "PASS",
+  "max_plan_revisions": 1,
+  "max_review_rounds": 2,
+  "next_action": "RUN_PDF_ONLY_5_4_5_RELEASE_ISOLATION_CRITIC",
+  "plan_revision": 1,
+  "review_round": 2,
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "state": "PASS",
+  "task_key": "documents-media--pdf-save-as-delivery"
+}
