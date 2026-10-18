@@ -2,7 +2,7 @@
 
 Task: hpc--slurm-cancel-production-closure
 
-Status: DRAFT / EXECUTION_NOT_AUTHORIZED
+Status: EXECUTION_PACKAGE / AUTHORIZED_ONLY_AFTER_CRITIC_PASS_AND_USER_SEND / PHASE_0_TO_3_ONLY
 
 Architecture authority:
 - docs/design/slurm-workflows/SLURM_PROTECTED_PARTITION_FRESH_CONFIRMATION_PROPOSAL_V1_2026-10-17.md
@@ -11,7 +11,9 @@ Architecture authority:
 
 Execution authority:
 - docs/design/slurm-workflows/SLURM_PROTECTED_PARTITION_FRESH_CONFIRMATION_EXECUTION_PLAN_V1_2026-10-17.md
-- This Goal becomes executable only after independent execution-ready Critic PASS and the user sends the exact approved Kickoff.
+- execution-package revision base main: 06648df4f2951766c257e19ee035e141a8a1ceb3
+- Repository version baseline: 5.4.5
+- Next execution-ready Critic must bind APPROVED_COMMIT to the final package commit. Critic PASS alone does not execute anything; Phase 0–3 is authorized only when the user subsequently sends the exact approved Kickoff.
 
 ## 1. Product result
 
@@ -321,7 +323,7 @@ Implementation candidate:
 
 After reviewed production activation + DII/CARE integration + complete Gate A-D:
 - slurm-workflows 0.4 -> 0.5
-- Repository next PATCH at actual release time
+- Repository release-time next PATCH; if the actual release-time version is still 5.4.5, the next PATCH is 5.4.6
 - central Plugins NO_BUMP
 - Bridge Kit NO_CHANGE
 - README/CHANGELOG/version/generated release closure last
