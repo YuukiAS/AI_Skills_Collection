@@ -1549,6 +1549,17 @@ def dependency_probe() -> dict[str, Any]:
 def compile_pdf(build_dir: Path) -> dict[str, Any]:
     engine = find_tex_engine()
     pdf = build_dir / "main.pdf"
+    if not engine:
+        font_binding = font_resource_binding()
+        return {
+            "status": "BLOCKED_MISSING_TEX_ENGINE",
+            "engine": None,
+            "engine_path": None,
+            "font_binding": font_binding,
+            "pdf": None,
+            "log": None,
+            "message": "No xelatex, lualatex, pdflatex, or tectonic executable is available through PATH.",
+        }
     font_binding = materialize_font_binding(build_dir)
     if font_binding.get("status") != "READY":
         return {
@@ -1559,16 +1570,6 @@ def compile_pdf(build_dir: Path) -> dict[str, Any]:
             "pdf": None,
             "log": None,
             "message": "Canonical presentation font resource binding is incomplete.",
-        }
-    if not engine:
-        return {
-            "status": "BLOCKED_MISSING_TEX_ENGINE",
-            "engine": None,
-            "engine_path": None,
-            "font_binding": font_binding,
-            "pdf": None,
-            "log": None,
-            "message": "No xelatex, lualatex, pdflatex, or tectonic executable is available through PATH.",
         }
     if engine["command"] == "tectonic":
         cmd = [engine["path"], "main.tex"]
