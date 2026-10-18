@@ -2,10 +2,11 @@
 
 ## Unreleased
 
-Project Instructions Editor v0.2 is an implementation candidate for the next
-formal repository release. It requires the user-supplied complete current
-Project setting before editing and returns both a readable Markdown change
-preview and a complete clean final setting for every real modification.
+Project Instructions Editor v0.2 has completed real ChatGPT Web acceptance and
+is ready for integration on `main` ahead of the next formal repository release.
+It requires the user-supplied complete current Project setting before editing
+and returns both a readable Markdown change preview and a complete clean final
+setting for every real modification.
 
 Repository bump decision: NONE
 Reason: this implementation task prepares and reviews the standalone Skill
@@ -56,6 +57,12 @@ Changed repository behavior:
   evidence and is not reclassified as PASS.
 - This candidate adds no Clear Writing runtime dependency, external finalizer,
   extra model, paid API, service, database, ledger, or runtime diff helper.
+- The existing PRIVATE / USER wrapper was updated to `0.2.8`. Explicit Web use
+  passed missing-baseline, add, delete, replace, reset, greenfield, and no-op
+  acceptance. Automatic implicit invocation was not tested and is not required
+  by this acceptance. The fixed baseline-receipt sentence was not stable on
+  every reset/greenfield display; the user accepted that presentation difference
+  because baseline provenance and the resulting edits remained correct.
 
 ## 5.4.5 - 2026-10-17
 
