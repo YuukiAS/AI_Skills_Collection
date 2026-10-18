@@ -451,6 +451,18 @@ class SessionAndSetupTests(unittest.TestCase):
             self.assertIn(str(project / setup.PRIVATE_REL / "bin/slurm-protected-cancel-binder"), command)
             self.assertIn(rendered["manifest"]["binder_sha256"], command)
             self.assertIn("/usr/bin/sha256sum", command)
+            hashes = rendered["manifest"]["hook_current_hashes"]
+            self.assertEqual(set(hashes), {"post_tool_use", "session_end", "session_start"})
+            self.assertTrue(all(value.startswith("sha256:") and len(value) == 71 for value in hashes.values()))
+            self.assertNotEqual(hashes["session_start"], hashes["session_end"])
+            self.assertEqual(
+                setup._normalized_hook_hash(
+                    "SessionEnd",
+                    {"hooks": [{"type": "command", "command": "echo fixed", "timeout": 10}]},
+                    {"type": "command", "command": "echo fixed", "timeout": 10},
+                ),
+                "sha256:8991b928d4f8dd22193cb0ee3be87e870876b1334c521e7c4293cd64c6f9c5e7",
+            )
             runtime = json.loads(files[str(setup.PRIVATE_REL / "runtime.json")])
             self.assertEqual(runtime["project_root"], str(project))
             self.assertEqual(runtime["scontrol_path"], str(scontrol))

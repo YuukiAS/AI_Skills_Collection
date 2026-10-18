@@ -19,6 +19,12 @@ RULES_REL = Path(".codex/rules/slurm-protected-cancel.rules")
 SESSION_REL = Path(".codex/hooks/slurm-protected-cancel-session")
 SHIM_REL = Path(".codex/automation-bin/scancel")
 
+HOOK_EVENT_KEYS = {
+    "PostToolUse": "post_tool_use",
+    "SessionEnd": "session_end",
+    "SessionStart": "session_start",
+}
+
 
 def _sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
@@ -137,6 +143,48 @@ def _hooks_document(
     }
 
 
+def _normalized_hook_hash(event_name: str, group: dict[str, Any], handler: dict[str, Any]) -> str:
+    """Match Codex's normalized project-Hook currentHash identity."""
+
+    timeout = int(handler.get("timeout", 600))
+    if event_name == "SessionEnd":
+        timeout = min(max(timeout, 1), 3)
+    else:
+        timeout = max(timeout, 1)
+    normalized_handler: dict[str, Any] = {
+        "type": "command",
+        "command": handler["command"],
+        "timeout": timeout,
+        "async": bool(handler.get("async", False)),
+    }
+    if handler.get("statusMessage") is not None:
+        normalized_handler["statusMessage"] = handler["statusMessage"]
+    if handler.get("additionalContextLimit") not in (None, 2500):
+        normalized_handler["additionalContextLimit"] = int(handler["additionalContextLimit"])
+    identity: dict[str, Any] = {
+        "event_name": HOOK_EVENT_KEYS[event_name],
+        "hooks": [normalized_handler],
+    }
+    if group.get("matcher") is not None:
+        identity["matcher"] = group["matcher"]
+    serialized = json.dumps(identity, ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode("utf-8")
+    return "sha256:" + _sha256_bytes(serialized)
+
+
+def _hook_current_hashes(hooks_document: dict[str, Any]) -> dict[str, str]:
+    hashes: dict[str, str] = {}
+    for event_name, groups in hooks_document["hooks"].items():
+        event_key = HOOK_EVENT_KEYS[event_name]
+        for group_index, group in enumerate(groups):
+            for handler_index, handler in enumerate(group["hooks"]):
+                hashes[f"{event_key}:{group_index}:{handler_index}"] = _normalized_hook_hash(
+                    event_name,
+                    group,
+                    handler,
+                )
+    return hashes
+
+
 def _shim_text(
     routing_helper: Path,
     site_id: str,
@@ -214,6 +262,11 @@ def render_contract(
         "session_end": f"{hooks_path}:session_end:0:0",
         "session_start": f"{hooks_path}:session_start:0:0",
     }
+    hook_hashes_by_suffix = _hook_current_hashes(hooks)
+    hook_current_hashes = {
+        name: hook_hashes_by_suffix[f"{name}:0:0"]
+        for name in hook_keys
+    }
     manifest = {
         "schema_version": 1,
         "project_root": str(project_root),
@@ -226,6 +279,7 @@ def render_contract(
         "protected_cancel_partitions": partitions,
         "hook_source_path": str(hooks_path),
         "hook_keys": hook_keys,
+        "hook_current_hashes": hook_current_hashes,
         "file_sha256": {name: _sha256_bytes(content) for name, content in sorted(files.items())},
     }
     return {"files": files, "manifest": manifest}
