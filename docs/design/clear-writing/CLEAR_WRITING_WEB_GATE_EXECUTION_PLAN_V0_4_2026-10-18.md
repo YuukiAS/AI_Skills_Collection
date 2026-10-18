@@ -44,20 +44,27 @@ Production and the six-skill architecture remain unchanged.
 
 ### 2.1 Existing machine state is intentionally inert
 
-The existing Reviewed Handoff task currently has:
+The existing Reviewed Handoff task exhausted its one allowed Plan revision at:
 
 ```text
-CURRENT.state=NEEDS_GPT_PLANNER
 plan_revision=1
 max_plan_revisions=1
-ci_required=false
-ci_status=NOT_REQUIRED
 ```
 
-Current Bridge Kit does not treat `NEEDS_GPT_PLANNER` as watcher-eligible.
+v0.4 therefore closes the machine transport through the current Bridge Kit's
+existing legal Planner-decision terminal path:
 
-The one allowed plan revision is exhausted. Therefore v0.4 **does not attempt**
-to return this machine task to `PLAN_FROZEN`.
+```text
+NEEDS_GPT_PLANNER -> AWAIT_HUMAN_DECISION
+human_gate_reason=PLANNER_DECISION
+```
+
+The required task-local `FINAL_REPORT.md` is present. This terminalizes only
+the exhausted Reviewed Handoff transport; it does not close Issue #13 or the
+manual Web evaluation.
+
+`AWAIT_HUMAN_DECISION` is not watcher-eligible. The machine task is now
+deliberately inert and is never re-armed by this package.
 
 Specifically, v0.4 forbids:
 
@@ -70,7 +77,8 @@ Specifically, v0.4 forbids:
 - starting watcher/Codex to execute the Web Gate;
 - pretending the manual Web evaluation is a Reviewed Handoff Executor event.
 
-The existing `CURRENT.json` remains unchanged throughout Web execution.
+After the legal terminalization above, the existing `CURRENT.json` remains
+unchanged throughout Web execution.
 
 ### 2.2 Manual canonical Web handoff is the execution transport
 
@@ -103,12 +111,14 @@ The exact branch watcher must remain stopped for the entire manual Web Gate.
 
 The manual Web Gate may start only when all are true:
 
-1. independent execution-ready Critic PASS for this exact v0.4 package;
-2. user explicitly sends the exact approved v0.4 Kickoff;
-3. exact target+branch watcher inactivity is proven;
-4. read-only W2 matched-environment preflight v0.4 returns PASS.
+1. the machine task remains
+   `AWAIT_HUMAN_DECISION / PLANNER_DECISION`;
+2. independent execution-ready Critic PASS exists for this exact v0.4 package;
+3. user explicitly sends the exact approved v0.4 Kickoff;
+4. exact target+branch watcher inactivity is proven;
+5. read-only W2 matched-environment preflight v0.4 returns PASS.
 
-No `CURRENT` transition is part of this start condition.
+No further `CURRENT` transition is part of this start condition.
 
 ### 2.5 Legal reviewer handoff after Web evidence
 
@@ -123,7 +133,7 @@ This manual review does **not** create `REVIEW_1.md`, does not alter
 `CURRENT.review_round`, and does not pretend to be a machine Reviewed Handoff
 review transaction.
 
-The existing exhausted `CURRENT` stays unchanged.
+The terminalized `CURRENT` stays unchanged.
 
 The final Critic's review artifact is stored as ordinary task evidence under:
 
