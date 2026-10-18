@@ -6,7 +6,7 @@ Branch: `reviewed/presentations--ci-missing-render-contract-repair`
 
 Implementation commit: `bb74e18f44428a12f1fea11b98bf30c10af94040`
 
-State transition: `PLAN_FROZEN / RUN_CODEX_EXECUTOR` -> `WAITING_FOR_CI / ci_status=PENDING`
+State transition: `PLAN_FROZEN / RUN_CODEX_EXECUTOR` -> `WAITING_FOR_CI / ci_status=PENDING` -> `READY_FOR_GPT_REVIEW / ci_status=PASS`
 
 ## Repair
 
@@ -54,6 +54,17 @@ Affected plugins:
 - `workflow-core`: NO_BUMP
   Reason: execution protocol source and runtime are unchanged.
 
-## Remaining Gates
+## Required CI
 
-Required zero-paid GitHub CI must pass on the published exact candidate before independent Reviewer handoff. `review_round` remains `0`; local PASS does not prove final completion or Presentations release readiness.
+Required zero-paid GitHub Actions run `39108825156` passed on published branch head `e89b0fffffd9d8c65472d5d017dd56a0adf74ccd`. All four jobs passed:
+
+- `codex-marketplace`;
+- `editable-install-smoke (ubuntu-latest)`;
+- `editable-install-smoke (windows-latest)`;
+- `windows-sparse-checkout`.
+
+The `codex-marketplace` job passed the full test suite on a GitHub-hosted runner without installing private canonical font resources or a production TeX stack. It also passed Marketplace generation, validation, path reporting, freshness, skill validation, skill audit and generated-file cleanliness.
+
+## Remaining Gate
+
+The exact candidate is ready for independent GPT Reviewer handoff. `review_round` remains `0`; CI PASS does not by itself prove final completion or Presentations release readiness.
