@@ -754,3 +754,24 @@ Parallel plugin development is therefore allowed to continue; PIE only requires 
 READY_FOR_RELEASE=NO
 NEXT_HANDOFF=CRITIC
 \`\`\`
+
+
+## 2026-10-18 v0.2 baseline and reviewable-diff increment
+
+status: COMPLETED
+
+tracking: #102
+
+Project Instructions Editor v0.2 is a bounded increment over the accepted 0.1 editor contract:
+
+- require the user-supplied complete current Project setting before any analysis or edit; return the frozen exact request when it is missing or visibly partial;
+- treat an explicitly empty setting as a complete greenfield baseline;
+- require the current baseline for explicit reset while removing only old-setting semantic-preservation obligations;
+- for every real modification, return a human-readable Markdown preview and the complete clean final setting from the same baseline and semantic delta, satisfying `E(B)=C`;
+- preserve the 0.1 protected-absence, no-op, ownership/enforcement, locator, budget, semantic-invariant, and final-consistency contracts.
+
+The existing PRIVATE / USER wrapper is now version `0.2.8`. Real ChatGPT Web acceptance passed explicit missing-baseline, add, delete, replace, reset, greenfield, and no-op use. Automatic implicit invocation was not tested and is not required for this acceptance. The fixed baseline-receipt sentence did not appear consistently in reset and greenfield displays; the user accepted that presentation difference because baseline provenance and edit results remained correct. Repository `VERSION` and the formal `release` ref remain unchanged for later release preflight.
+
+Execution anchor:
+
+`reviewed/project-instructions-editor--0.2-baseline-diff-contract`

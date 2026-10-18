@@ -1,15 +1,15 @@
 ---
 name: project-instructions-editor
-description: Use when the user explicitly asks to create, update, compress, sync, restructure, or reset long-lived ChatGPT Project instructions, even if the live setting is missing; do not use for ordinary prose, writing fidelity, scientific rewrite, AI_Skills maintenance, workflow/control, generic agent/system prompts, or global Custom Instructions.
+description: Use for requests to create, update, compress, sync, restructure, or reset ChatGPT Project instructions; before editing, require the complete setting or a confirmed empty setting. Exclude prose polishing, writing fidelity, scientific rewrite, AI_Skills maintenance, workflow/control, generic agent/system prompts, and global Custom Instructions.
 status: active
-version: "0.1"
+version: "0.2"
 provenance: user-authored
 trusted: false
 requires_network: false
 writes_files: false
 executes_code: false
 secrets_needed: []
-last_reviewed: 2026-10-02
+last_reviewed: 2026-10-18
 profile_tags: []
 recommended_scope: global
 icon_small: assets/app-facing.svg
@@ -23,13 +23,27 @@ Use this skill when the user wants to create, edit, compress, synchronize, or re
 
 Do not use this skill for ordinary Chinese prose polishing, general writing fidelity, scientific or technical document restructuring, AI_Skills_Collection repository maintenance, complex workflow control, generic system or agent prompt optimization, or global Custom Instructions editing.
 
+## Current Baseline Gate
+
+After routing a Project-setting edit request into this skill, require the user to provide the complete current Project setting verbatim before analyzing, compressing, editing, restructuring, synchronizing, or resetting it. Project context, Memory, history, repository files, partial instructions, summaries, stale candidates, and model reconstruction are not the current baseline.
+
+If the user has not supplied the complete current setting, or labels it as an excerpt or otherwise visibly omits part of it, return only this exact message:
+
+`请提供当前完整 Project setting 原文。PIE 不会根据 Project 上下文、Memory、历史聊天、仓库文件、部分 instructions 或模型推断重建当前 setting。`
+
+When the user supplies the complete setting, acknowledge it exactly before editing:
+
+`已收到当前完整 Project setting 原文；本轮以该原文作为唯一当前 baseline。`
+
+An explicit statement that the current setting is empty is a complete greenfield baseline. An explicit reset still requires the complete current baseline; reset removes only the obligation to preserve its old Project-setting semantics.
+
 ## Edit Mode
 
 Classify the request before drafting:
 
-- `preservation-sensitive`: an existing Project setting is in force and the user has not explicitly discarded unrelated existing semantics. Use the live Project setting as the baseline for any full replacement, deletion, compression, or global reorganization. If the live setting is missing or incomplete, do not claim a safe full replacement.
-- `greenfield`: the Project instructions are confirmed empty or absent. You may draft a complete initial setting, but do not claim to preserve old Project-setting semantics.
-- `explicit reset`: the current user clearly authorizes discarding the old Project setting and rebuilding from zero. This removes only the Project-setting preservation obligation; system, workspace, repository, safety, privacy, and current user requirements still apply.
+- `preservation-sensitive`: an existing Project setting is in force and the user has not explicitly discarded unrelated existing semantics. Use the complete user-supplied current setting as the baseline for any full replacement, deletion, compression, or global reorganization.
+- `greenfield`: the user explicitly confirms that the current Project setting is empty. Treat that explicit empty value as the complete baseline. You may draft a complete initial setting, but do not claim to preserve old Project-setting semantics.
+- `explicit reset`: the current user supplies the complete current setting and clearly authorizes discarding its old Project-setting semantics and rebuilding from zero. This removes only the Project-setting preservation obligation; the supplied baseline remains the provenance anchor, and system, workspace, repository, safety, privacy, and current user requirements still apply.
 
 If the mode changes what can be safely preserved and the available context does not decide it, ask the smallest useful clarification.
 
@@ -37,7 +51,7 @@ If the mode changes what can be safely preserved and the available context does 
 
 Always anchor the edit in the current user request. It defines the requested addition, deletion, correction, compression, synchronization, reset, and authorized scope.
 
-Use the live Project setting when preservation-sensitive editing could rewrite, delete, compress, or rebalance existing instructions. A stale repo candidate, old reference, or summary is evidence only; it is not the live baseline.
+Use only the complete current Project setting supplied by the user in this task as baseline `B`. A stale repo candidate, old reference, Project context, Memory, history, partial excerpt, or summary is evidence only; it is not `B`.
 
 Retrieve only relevant Project history: explicit acceptance, deletion, rejection, repeated correction, durable authority decisions, and requirements marked temporary. Missing history does not justify exhaustive audit or invented certainty.
 
@@ -47,17 +61,18 @@ Respect the actual instruction budget when known. Track current length, candidat
 
 ## Reasoning Sequence
 
-1. Identify the requested Project-instruction change and authorized scope.
-2. Classify the edit mode.
-3. Compare live setting, relevant history, canonical sources, and budget only as far as needed for the current edit.
+1. Identify whether the request is a Project-instruction edit, then apply the Current Baseline Gate before any edit analysis.
+2. Accept the complete user-supplied baseline `B`, issue the exact baseline receipt, and classify the edit mode.
+3. Compare `B`, relevant history, canonical sources, and budget only as far as needed for the current edit.
 4. For each affected durable rule, decide semantic ownership and effective enforcement placement separately.
 5. Prefer bounded edit when it closes the request without weakening unrelated semantics.
 6. Use full rewrite only when explicitly authorized or when bounded edits cannot resolve a real cross-scope contradiction, pervasive copied detail, material scope imbalance, budget impossibility, or systematic source/locator drift.
 7. Preserve semantic invariants: mandatory versus optional force, trigger conditions, authority, permission, safety, privacy, distribution, evidence strength, role ownership, uncertainty, current-versus-future status, exact identifiers, and explicit user corrections or deletions.
 8. Before returning no-op, run the no-op eligibility check against the live Project setting itself.
-9. For any complete replacement, draft directly in the ordinary ChatGPT Web / Project chat runtime and run the mandatory final replacement pass on the actual replacement text before delivery.
-10. If required live baseline, authority, budget, or source evidence is missing, degrade honestly with bounded advice, a clause, or a request for the missing input; do not invent an external finalizer, service, or independent verifier.
-11. Deliver only what the current chat can support: a complete replacement when the Skill can preserve the relevant semantics, or an explicit partial/degraded result when it cannot.
+9. Draft the clean candidate `C` from `B`, then run the mandatory final replacement pass on the actual candidate text before preparing the preview.
+10. Derive the completed semantic delta `E` from the same `B` and `C`, then render a human-readable Markdown preview `R`; verify that applying `E` to `B` yields exactly `C` (`E(B)=C`). If the preview disagrees, regenerate `R`, not `C`.
+11. If required authority, budget, or source evidence is still missing after `B` is accepted, degrade only the affected claim with bounded advice or an explicit limitation; do not invent an external finalizer, service, or independent verifier.
+12. For a real change, deliver `R` and the complete clean `C`. For no-op, explain why no change is needed without manufacturing a diff or repeating an identical setting.
 
 Read [references/editor-contract.md](references/editor-contract.md) when the edit involves compression, full replacement, locator substitution, partial history, multiple Project scopes, missing live settings, or evidence for a release/review gate.
 
@@ -85,7 +100,7 @@ Appropriate Project-resident repetition may still be kept when it improves effec
 
 ## Protected Absence
 
-When history is missing or partial, keep absent any durable rule that is not in the live baseline and appears only in an old candidate, reference, summary, or historical generated setting. Reintroduce it only when the current user explicitly re-adopts it or the current task explicitly synchronizes a named canonical source whose current content and authority support the rule.
+When history is missing or partial, keep absent any durable rule that is not in the user-supplied baseline `B` and appears only in an old candidate, reference, summary, or historical generated setting. Reintroduce it only when the current user explicitly re-adopts it or the current task explicitly synchronizes a named canonical source whose current content and authority support the rule.
 
 When a rule was deleted or rejected and is absent from the live Project setting, use that evidence only to protect the current edit. The final long-lived Project setting should omit both the deleted rule and its deletion history; do not emit `do not restore X`, `X was deleted`, or equivalent Project-resident tombstones unless the current user explicitly asks to keep that prohibition or history marker as a durable rule.
 
@@ -139,7 +154,7 @@ The old C10 helper-composition route and the C11 external finalizer route are no
 
 Complete replacements are drafted and checked by the Skill itself in the current chat, using the edit-mode, ownership, protected-absence, no-op eligibility, exact-identity, authorization, privacy, safety, evidence, budget, and final-candidate consistency rules above. The final replacement pass is mandatory, but it is an in-skill semantic consistency review, not a call to a registered app or sibling Skill.
 
-If the current chat lacks enough live baseline, canonical-source evidence, budget facts, or authority to safely emit a complete replacement, degrade explicitly with bounded advice, a clause, or a request for the missing input. Do not claim that an independent multi-call finalization or raw-source verifier has run.
+If the complete user-supplied baseline is missing, stop with the exact Current Baseline Gate message. After `B` is accepted, missing canonical-source evidence, budget facts, or authority may still require an explicit bounded limitation on the affected claim. Do not claim that an independent multi-call finalization or raw-source verifier has run.
 
 ADVANCED_INDEPENDENT_MULTI_CALL_FINALIZATION=`UNSUPPORTED`.
 
@@ -147,10 +162,15 @@ ADVANCED_INDEPENDENT_MULTI_CALL_FINALIZATION=`UNSUPPORTED`.
 
 Deliver proportionally:
 
-- For a small bounded edit, give the concise decision, exact additions/deletions/replacements, short reasons, key unchanged semantics, length/delta when available, and a clean full setting only when safe.
+- After accepting any complete baseline `B`, make the exact baseline receipt the first user-visible line. Do not put analysis, a mode label, or a summary before it.
+- For a real change, deliver in this order: exact baseline receipt; actual Markdown preview `R`; complete clean final `C`. A change summary may follow the preview, but it never substitutes for `R`, and `C` must not be delivered without `R`.
+- `R` must show the actual changed text with Markdown marks, not merely describe that text changed. For insertion-only edits, bold the inserted text with enough unchanged context to place it. For deletion-only edits, strike the removed text. For replacements, strike the old text and bold the replacement at a readable granularity.
+- For every real change, give a human-readable Markdown preview followed by the complete clean final Project setting. The preview and clean final must represent one delta `E` over one user-supplied baseline `B`, with `E(B)=C`.
+- For a small bounded edit, default to inline `原文~~旧部分~~**新部分**原文`, then give short reasons, key unchanged semantics, length/delta when available, and the complete clean final setting.
 - For a medium edit, also explain scope impact, locator/bridge substitutions, effective enforcement, balance, and budget margin when relevant.
-- For a full replacement, state the edit mode, why bounded edit is insufficient or why greenfield/reset applies, major placement changes, direct rules/bridges, preserved invariants, budget change, and the complete clean replacement.
-- For missing inputs, provide only safe bounded advice or clauses, name the single missing input that truly blocks a full replacement, and avoid offloading repo/source lookup that you can do yourself.
-- For no-op, say that the Project setting should not change, identify the correct owner, locator, already-covered rule, or semantic risk, and explain why no material in-scope defect is safely repairable.
+- For a large replacement, raise the preview granularity to whole sentences, paragraphs, or sections when inline marks would reduce readability. Do not use Git `+/-`, a diff code block, or machine labels such as `删除` / `新增`.
+- For a full replacement, explain why bounded edit is insufficient or why greenfield/reset applies, major placement changes, direct rules/bridges, preserved invariants, budget change, and the complete clean replacement. Mention the mode in natural language only when it materially affects user understanding or safety; do not print internal mode labels unless a formal audit explicitly requests them.
+- For a missing baseline, return only the exact Current Baseline Gate message. For other missing inputs after baseline acceptance, name only the evidence that blocks the affected claim and avoid offloading repo/source lookup that you can do yourself.
+- For no-op, give the exact baseline receipt, then say that the Project setting should not change, identify the correct owner, locator, already-covered rule, or semantic risk, and explain why no material in-scope defect is safely repairable; do not manufacture a preview or repeat an identical setting.
 
 Never present a blacklist, English ratio, fixed character percentage, paragraph count, heading count, formula count, or keyword score as the quality decision.

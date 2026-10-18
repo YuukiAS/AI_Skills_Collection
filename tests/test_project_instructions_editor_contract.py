@@ -4,6 +4,7 @@ import json
 import sys
 import unittest
 import xml.etree.ElementTree as ET
+from difflib import SequenceMatcher
 from pathlib import Path
 
 
@@ -14,15 +15,20 @@ from skill_utils import read_frontmatter  # noqa: E402
 
 
 SKILL_DIR = REPO_ROOT / "skills" / "core" / "codex-system" / "project-instructions-editor"
+MISSING_BASELINE_MESSAGE = (
+    "请提供当前完整 Project setting 原文。PIE 不会根据 Project 上下文、Memory、历史聊天、"
+    "仓库文件、部分 instructions 或模型推断重建当前 setting。"
+)
+BASELINE_RECEIPT = "已收到当前完整 Project setting 原文；本轮以该原文作为唯一当前 baseline。"
 
 
 class ProjectInstructionsEditorContractTests(unittest.TestCase):
-    def test_frontmatter_matches_v0_1_editor_scope(self) -> None:
+    def test_frontmatter_matches_v0_2_editor_scope(self) -> None:
         meta, body = read_frontmatter(SKILL_DIR / "SKILL.md")
 
         self.assertEqual(meta.get("name"), "project-instructions-editor")
         self.assertEqual(meta.get("status"), "active")
-        self.assertEqual(meta.get("version"), "0.1")
+        self.assertEqual(meta.get("version"), "0.2")
         self.assertEqual(meta.get("provenance"), "user-authored")
         self.assertIs(meta.get("trusted"), False)
         self.assertIs(meta.get("requires_network"), False)
@@ -34,12 +40,14 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
         self.assertEqual(meta.get("icon_large"), "assets/app-facing.svg")
 
         description = meta.get("description", "")
-        self.assertLess(len(description), 350)
+        self.assertLess(len(description), 500)
         for phrase in [
-            "explicitly asks",
+            "requests to create",
             "ChatGPT Project instructions",
-            "live setting is missing",
-            "ordinary prose",
+            "before editing",
+            "require the complete setting",
+            "confirmed empty setting",
+            "prose polishing",
             "writing fidelity",
             "scientific rewrite",
             "AI_Skills maintenance",
@@ -48,6 +56,7 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
             "global Custom Instructions",
         ]:
             self.assertIn(phrase, description)
+        self.assertNotIn("even if the live setting is missing", description)
 
         for phrase in [
             "preservation-sensitive",
@@ -60,7 +69,7 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
         ]:
             self.assertIn(phrase, body)
 
-    def test_runtime_shape_is_exact_historical_runtime_subtree(self) -> None:
+    def test_runtime_shape_has_no_runtime_helper(self) -> None:
         expected_files = {
             "SKILL.md",
             "agents/openai.yaml",
@@ -81,8 +90,63 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
         self.assertIn('display_name: "Project Instructions Editor"', text)
         self.assertIn("allow_implicit_invocation: true", text)
         self.assertIn("$project-instructions-editor", text)
-        self.assertIn("Edits only for explicit ChatGPT Project instructions baselines", text)
+        self.assertIn("complete user-supplied ChatGPT Project settings", text)
+        self.assertIn("readable change preview plus the clean final setting", text)
         self.assertNotIn("reader-facing output baseline", text)
+
+    def test_complete_baseline_gate_uses_frozen_messages(self) -> None:
+        skill = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+        contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
+
+        for text in [skill, contract]:
+            self.assertIn(MISSING_BASELINE_MESSAGE, text)
+            self.assertIn(BASELINE_RECEIPT, text)
+            self.assertIn("explicit empty", text.lower())
+            self.assertIn("explicit reset", text.lower())
+            self.assertIn("provenance", text.lower())
+
+        self.assertIn("return only this exact message", skill)
+        self.assertIn("return only", contract)
+        self.assertNotIn("even if the live setting is missing", skill)
+        self.assertNotIn("Without that baseline, the safe output is bounded advice", contract)
+
+    def test_preview_and_clean_final_share_one_baseline_and_delta(self) -> None:
+        skill = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+        contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
+        combined = skill + "\n" + contract
+
+        for phrase in [
+            "E(B)=C",
+            "complete clean",
+            "~~旧部分~~**新部分**",
+            "whole sentence, paragraph, or section",
+            "not a second editor",
+            "regenerate `R`, not `C`",
+            "first user-visible line",
+            "insertion-only",
+            "deletion-only",
+            "summary",
+        ]:
+            self.assertIn(phrase, combined)
+
+        self.assertIn("exact baseline receipt; actual Markdown preview `R`; complete clean final `C`", skill)
+        self.assertIn("do not deliver `C` without `R`", contract)
+
+        for forbidden_format in ["Git `+/-`", "diff code block", "machine labels"]:
+            self.assertIn(forbidden_format, combined)
+
+        baseline = "Preserve accepted decisions. Run tests before completion."
+        final = "Preserve accepted decisions. Run current tests before completion."
+        matcher = SequenceMatcher(a=baseline, b=final)
+        rebuilt = "".join(final[j1:j2] for _, _, _, j1, j2 in matcher.get_opcodes())
+        self.assertEqual(rebuilt, final)
+
+    def test_noop_does_not_manufacture_preview_or_duplicate_setting(self) -> None:
+        skill = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+        contract = (SKILL_DIR / "references" / "editor-contract.md").read_text(encoding="utf-8")
+
+        self.assertIn("without manufacturing a diff or repeating an identical setting", skill)
+        self.assertIn("without manufacturing a diff or repeating a duplicate clean setting", contract)
 
     def test_editor_core_semantics_remain_in_contract(self) -> None:
         skill_body = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
@@ -90,8 +154,8 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
         combined = contract + "\n" + skill_body
 
         required = [
-            "live baseline",
-            "live Project setting",
+            "complete user-supplied current setting",
+            "baseline `B`",
             "Protected Absence",
             "lookup-before-action",
             "Semantic ownership alone is not enough",
@@ -107,7 +171,7 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
             "No-op is not eligible",
             "locator",
             "budget",
-            "Without that baseline",
+            "mandatory final replacement pass",
         ]
         for phrase in required:
             self.assertIn(phrase, combined)
@@ -157,6 +221,8 @@ class ProjectInstructionsEditorContractTests(unittest.TestCase):
         negatives = " ".join(data["negative"] + data["near_miss"])
 
         for phrase in ["Project instructions", "Compress", "Create initial", "Reset", "Sync"]:
+            self.assertIn(phrase, positives)
+        for phrase in ["not pasted", "setting is empty", "Current complete setting"]:
             self.assertIn(phrase, positives)
         for phrase in [
             "中文",

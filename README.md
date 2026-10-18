@@ -11,7 +11,7 @@ Repository / CLI release: `5.4.5`
 |  |  |
 |---|---|
 | <img src="./skills/science/communication/project-thread-handoff/assets/app-facing.svg" width="40" alt="Project Thread Handoff 图标"> | <strong>Project Thread Handoff</strong><br><code>project-thread-handoff</code> · v`0.2`<br>用于长期项目聊天的上下文交接与续接：既支持当前长对话主动交接，也支持旧对话已满后，在同一个 ChatGPT Project 的新对话里做有来源约束的语义恢复。 |
-| <img src="./skills/core/codex-system/project-instructions-editor/assets/app-facing.svg" width="40" alt="Project Instructions Editor 图标"> | <strong>Project Instructions Editor</strong><br><code>project-instructions-editor</code> · v`0.1`<br>用于创建、修改、压缩、同步和重构长期 ChatGPT Project instructions，并在编辑时保护现有决定、事实来源和权限/安全/证据边界。 |
+| <img src="./skills/core/codex-system/project-instructions-editor/assets/app-facing.svg" width="40" alt="Project Instructions Editor 图标"> | <strong>Project Instructions Editor</strong><br><code>project-instructions-editor</code> · v`0.2`<br>用于创建、修改、压缩、同步和重构长期 ChatGPT Project instructions。编辑前会先取得当前设置的完整原文；实际修改时，会同时给出易读的修改预览和可直接替换的完整结果，并保护已有决定、事实来源以及授权、安全和证据边界。 |
 | <img src="./skills/tools/documents-media/render-chinese-math-pdf/assets/app-facing.svg" width="40" alt="Chinese Math PDF 图标"> | <strong>Chinese Math PDF</strong><br><code>render-chinese-math-pdf</code> · v`0.3`<br>可可靠渲染并检查中文或中英混排数学 PDF，并在首次完成回复中直接提供可另存为最终成品的 PDF。 |
 | <img src="./skills/tools/hpc/slurm-workflows/assets/slurm-workflows.svg" width="40" alt="Slurm Workflows 图标"> | <strong>Slurm Workflows</strong><br><code>slurm-workflows</code> · v`0.4`<br>用于 Slurm/HPC 集群任务的可移植规划、路由、监控、诊断和可复用容量管理。 |
 
