@@ -1,0 +1,97 @@
+{
+  "schema": "CLEAR_WRITING_GPT_PRIVATE_WRAPPER_TRANSPORT_V1",
+  "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+  "generated_plugin_tree_sha": "a3b6842c8a870b455ca725e425bc1fbf9b336fc9",
+  "zip_sha256": "0aaccc3cdf1ea3a42271f3dedf574e3033c3ae04448f6dae17add927b8ef3a1d",
+  "zip_size_bytes": 68858,
+  "base64_sha256": "7c54291ba3840a4b8e03386a2d48593489cf518560a839eb555f7b24f91da027",
+  "part_count": 16,
+  "part_size_limit": 6000,
+  "parts": [
+    {
+      "filename": "part-000.b64",
+      "sha256": "ec7cb55c7870c843e7ff9a7cd7aead9e1372ee4f54c6f7e4ab36c205913dfcc9",
+      "size_chars": 6000
+    },
+    {
+      "filename": "part-001.b64",
+      "sha256": "f4e1b02e50fdff805ae07edf0da86ae2b66f9e40ad47ad4f80554b215ce9d4d9",
+      "size_chars": 6000
+    },
+    {
+      "filename": "part-002.b64",
+      "sha256": "fa5b7ba1796776a1a77cb7e187a4fc32f97438bfaf9a90d8eaeeba2b8e982bcb",
+      "size_chars": 6000
+    },
+    {
+      "filename": "part-003.b64",
+      "sha256": "9d0e88101444e3ed1de07835937e0194ad09e6a768dd286a0d8c183d07e17df9",
+      "size_chars": 6000
+    },
+    {
+      "filename": "part-004.b64",
+      "sha256": "6d709f5a6561ada22b7e6108c9d5c64fc418f8f383b85d85746340f506b22593",
+      "size_chars": 6000
+    },
+    {
+      "filename": "part-005.b64",
+      "sha256": "d774c69a9b2272d3a9e0dd879edcf87ee05092506a71eb07f5a73d4096a16da4",
+      "size_chars": 6000
+    },
+    {
+      "filename": "part-006.b64",
+      "sha256": "2604fc685c5f7bda35d10efd9530fc65bacc90d2492d43123446472373b21192",
+      "size_chars": 6000
+    },
+    {
+      "filename": "part-007.b64",
+      "sha256": "f14cadfec27d3ad2f64e50a6728e40e6a5f3eea6e8ebc903000a6eacc74192b9",
+      "size_chars": 6000
+    },
+    {
+      "filename": "part-008.b64",
+      "sha256": "11b9dab1a37d1c78a1054403cbb97aa889b49b6adc02ce41535aea79407a8735",
+      "size_chars": 6000
+    },
+    {
+      "filename": "part-009.b64",
+      "sha256": "bacd0d674e96c92fe65e02444e427baeaa0db38536c3443b7317d2e585dbfd1f",
+      "size_chars": 6000
+    },
+    {
+      "filename": "part-010.b64",
+      "sha256": "17fec3a1880df7b166e5c516e2560e0549985318d3788034ec6d11e453ac50b4",
+      "size_chars": 6000
+    },
+    {
+      "filename": "part-011.b64",
+      "sha256": "2b8aa42510f39bf01490e23ac81467be6f13b96c1ce11d68853fcb65a89203c9",
+      "size_chars": 6000
+    },
+    {
+      "filename": "part-012.b64",
+      "sha256": "8c38a7a0860675b20653abec17c0b85734fbcae2765a79716eecc68f554d4331",
+      "size_chars": 6000
+    },
+    {
+      "filename": "part-013.b64",
+      "sha256": "c16235a22897da8233cbac61226b4c4edc39bd3a2c153ba6a3bdb3b2e987453d",
+      "size_chars": 6000
+    },
+    {
+      "filename": "part-014.b64",
+      "sha256": "7136f68de910339dda52594ebe6358822a616dca5c74322d741af5750709152a",
+      "size_chars": 6000
+    },
+    {
+      "filename": "part-015.b64",
+      "sha256": "769cf46f08947ed4128b3b4ce2cad23fbd8255c8702a97a9356c0ef29c93d86b",
+      "size_chars": 1812
+    }
+  ],
+  "plugin_name": "writing-style",
+  "display_name": "Clear Writing",
+  "plugin_version": "0.4",
+  "purpose": "CHATGPT_PRIVATE_TEST_WRAPPER",
+  "release_status": "NOT_RELEASED"
+}
