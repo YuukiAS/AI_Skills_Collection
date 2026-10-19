@@ -329,6 +329,16 @@ class TestGlobalSetup(unittest.TestCase):
             self.assertTrue(parsed["features"]["default_mode_request_user_input"])
             self.assertEqual(set(parsed["hooks"]), {"PreToolUse", "PermissionRequest", "PostToolUse"})
 
+            trusted = 'sha256:' + 'a' * 64
+            with_state = updated.replace(
+                self.setup.DECLARATION_END,
+                '[hooks.state]\n\n[hooks.state."unrelated:stop:0:0"]\n'
+                f'trusted_hash = "{trusted}"\n\n{self.setup.DECLARATION_END}',
+            )
+            rerendered = self.setup.update_user_config_text(with_state, rendered)
+            reparsed = tomllib.loads(rerendered)
+            self.assertEqual(reparsed["hooks"]["state"]["unrelated:stop:0:0"]["trusted_hash"], trusted)
+
     def test_hash_checked_launcher_runs_with_the_frozen_compatible_python(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             fixture = HostHookFixture(Path(temp), {})

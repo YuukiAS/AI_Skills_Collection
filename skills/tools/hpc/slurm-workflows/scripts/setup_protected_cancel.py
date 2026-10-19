@@ -240,6 +240,21 @@ def _strip_block(text: str, start: str, end: str) -> str:
     return pattern.sub("\n", text)
 
 
+def _take_hook_state(text: str) -> tuple[str, str]:
+    lines = text.splitlines(keepends=True)
+    start = next((index for index, line in enumerate(lines) if line.strip() == "[hooks.state]"), None)
+    if start is None:
+        return text, ""
+    end = start + 1
+    while end < len(lines):
+        stripped = lines[end].strip()
+        if stripped == DECLARATION_END or (stripped.startswith("[") and not stripped.startswith("[hooks.state")):
+            break
+        end += 1
+    state = "".join(lines[start:end]).strip()
+    return "".join(lines[:start] + lines[end:]), state
+
+
 def _strip_permission_profile(text: str, profile: str) -> str:
     lines = text.splitlines(keepends=True)
     output: list[str] = []
@@ -257,7 +272,8 @@ def _strip_permission_profile(text: str, profile: str) -> str:
 
 
 def update_user_config_text(original: str, rendered: dict[str, Any]) -> str:
-    text = _strip_block(original, DECLARATION_START, DECLARATION_END)
+    text, hook_state = _take_hook_state(original)
+    text = _strip_block(text, DECLARATION_START, DECLARATION_END)
     text = _strip_block(text, PERMISSIONS_START, PERMISSIONS_END)
     for profile in LEGACY_PROFILES:
         text = _strip_permission_profile(text, profile)
@@ -275,6 +291,8 @@ def update_user_config_text(original: str, rendered: dict[str, Any]) -> str:
         f"hooks.PostToolUse = {_event_toml(hooks['PostToolUse'])}",
         DECLARATION_END,
         "",
+        hook_state,
+        "" if hook_state else "",
     ])
     first_table = re.search(r"(?m)^\[", text)
     offset = first_table.start() if first_table else len(text)
