@@ -34,7 +34,7 @@ When and only when an independent Critic gives execution-ready PASS and the user
 
 - canonical Longleaf repo root R: `/overflow/htzhu/mingcheng_new/AI_Skills_Collection`
 - task branch: `reviewed/hpc--slurm-cancel-production-closure`
-- task worktree W: `/overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-cancel-production-closure-v3`
+- task worktree W: `/overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-cancel-production-closure`
 - task key: `hpc--slurm-cancel-production-closure`
 
 Before any branch/worktree mutation, Codex must re-resolve R, origin, clean/ownership state, current `origin/main`, branch absence and worktree-path absence. If R is not the canonical repo, the exact branch/path is already occupied, or current main has semantic drift in the approved surface, stop before mutation and return to Planner/Critic. Do not invent a second clone, alternate branch, `/tmp` fallback or successor task.
