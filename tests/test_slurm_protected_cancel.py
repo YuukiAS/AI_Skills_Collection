@@ -159,6 +159,25 @@ class TestG1PortableAtomicInstallation(unittest.TestCase):
             without_declaration = SETUP._strip_block(config, SETUP.DECLARATION_START, SETUP.DECLARATION_END)
             self.assertEqual(without_declaration, fixture.original_config)
 
+    def test_cli_reports_fresh_session_boundary_without_runtime_identity_change(self):
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = PortableFixture(Path(temp))
+            destination = fixture.root / "rendered"
+            completed = subprocess.run(
+                [sys.executable, str(SCRIPTS / "setup_protected_cancel.py"),
+                 "--codex-home", str(fixture.codex_home),
+                 "--scontrol", str(fixture.scontrol), "--scancel", str(fixture.scancel),
+                 "--protected-partition", "protected-lab", "--render-output", str(destination)],
+                capture_output=True, text=True, check=True,
+            )
+            manifest = json.loads(completed.stdout)
+            self.assertIs(manifest["fresh_session_required"], True)
+            self.assertIn("fresh Codex/Desktop thread", manifest["next_action"])
+            self.assertIn("hooks/list alone does not prove", manifest["next_action"])
+            self.assertEqual(manifest["file_sha256"], fixture.rendered["manifest"]["file_sha256"])
+            exported = json.loads((destination / "protected-cancel-render-manifest.json").read_text())
+            self.assertEqual(exported, manifest)
+
     def test_upgrade_preserves_replay_state_and_recoverable_backup(self):
         with tempfile.TemporaryDirectory() as temp:
             fixture = PortableFixture(Path(temp))

@@ -294,6 +294,8 @@ def render_global_contract(
         hook_hashes[suffix] = _normalized_hook_hash(event_name, groups[0], groups[0]["hooks"][0])
     return {"files": files, "hooks": hooks, "manifest": {
         "schema_version": 5, "codex_home": str(codex_home), "hook_sha256": runtime["hook_sha256"],
+        "fresh_session_required": True,
+        "next_action": "After installation and any required Hook trust, start a fresh Codex/Desktop thread and verify its actual Hook events before cancellation. hooks/list alone does not prove an existing session reloaded its Hooks.",
         "policy_sha256": runtime["policy_sha256"], "python_path": str(python_path), "protected_cancel_partitions": partitions,
         "runtime_environment_keys": sorted(environment), "scancel_path": str(scancel_realpath), "scontrol_path": str(scontrol_realpath),
         "supervisor_path": str(supervisor_path), "supervisor_sha256": supervisor_digest, "hook_source_path": str(source_path),

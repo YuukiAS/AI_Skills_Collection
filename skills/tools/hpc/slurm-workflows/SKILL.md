@@ -109,6 +109,8 @@ Install or render the private runtime with `scripts/setup_protected_cancel.py`. 
 
 The installer stages and qualifies the exact candidate before atomically replacing the task-owned private directory, writes `config.toml` last, preserves a recoverable private backup, and changes only the protected-cancel declaration block. Existing Hook trust, permission rules, unrelated configuration, and other Hooks stay unchanged. Treat an ambiguous result after possible `scancel` invocation as consumed and reconcile it read-only; never retry it automatically.
 
+After installing Hook declarations or changing their trust, start a fresh Codex/Desktop thread using the same `CODEX_HOME`. An existing session can retain its previous Hook snapshot; `hooks/list` reads configuration and is not proof that the execution session reloaded it. Before cancelling any Job, verify the fresh thread's actual Hook started/completed events and that the harmless ordinary `scancel --help` command is denied before its process starts.
+
 ## Outputs
 
 Return the job script or commands, expected log paths, monitoring commands, stop conditions, and final verification checks. Submission is not completion; completion requires current job state and final output validation.
