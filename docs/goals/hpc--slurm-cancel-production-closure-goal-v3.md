@@ -71,7 +71,7 @@ Intended execution identity:
 
 - R: `/overflow/htzhu/mingcheng_new/AI_Skills_Collection`
 - branch: `reviewed/hpc--slurm-cancel-production-closure`
-- W: `/overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-cancel-production-closure-v3`
+- W: `/overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-cancel-production-closure`
 
 Before mutation, reverify R/origin/clean state/current `origin/main`/branch absence/worktree-path absence. Material semantic drift or identity conflict returns to Planner/Critic before branch/worktree creation. No alternate path or branch is authorized.
 
