@@ -148,4 +148,7 @@ Slurm Workflows 的事故表明，受保护取消的判断逻辑存在，不等�
 - `results/chatgpt-web--pass-integrity/STAT5060_VALIDATOR_FRESH_CRITIC_REGRESSION_2026-10-20.md`
 - `results/chatgpt-web--pass-integrity/FINAL_CLOSURE_2026-10-20.md`
 
+未来复杂 Critic 的可复用优质审查示例与方法总结见：
+- `docs/workflows/CHATGPT_WEB_CRITIC_GOOD_REVIEW_EXAMPLES_2026-10-20.md`
+
 本治理候选据此记为 `CANDIDATE_ACCEPTED`。未来若 Critic 又退化为只复述方案、只关旧 blocker、只看 schema/测试/映射数量，或仍需用户追问才能暴露核心空白，应视为治理回归并重新执行审查，而不是接受其结论。
