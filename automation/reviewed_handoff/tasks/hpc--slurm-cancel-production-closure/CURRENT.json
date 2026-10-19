@@ -11,6 +11,6 @@
   "plan_revision": 0,
   "review_round": 0,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
-  "state": "PLAN_FROZEN",
+  "state": "EXECUTING",
   "task_key": "hpc--slurm-cancel-production-closure"
 }

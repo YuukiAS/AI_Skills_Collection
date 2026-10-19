@@ -99,6 +99,16 @@ Treat site-policy plus user-opt-in checks as eligibility only. Final duplicate-r
 
 Do not change data, split, model, endpoint, GPU count, per-candidate walltime, training budget, or other scientific semantics to make a race possible. If a workload requires H100, do not race it on A100 unless the workload contract explicitly says both accelerator types are valid for the same result. If the scheduler or site rejects duplicate submission, fail closed and do not try another command form to bypass that policy.
 
+## Protected cancellation
+
+When the machine has installed the user-level protected-cancel contract, keep cancellation on the ordinary Codex `scancel` entry. Do not substitute a wrapper, PATH shim, terminal confirmation, daemon, or project-local Hook.
+
+The installed contract applies one global `PreToolUse` / `PermissionRequest` / `PostToolUse` boundary across working directories. For an exact Job in a configured protected partition, the first `scancel` is denied before launch and the current root chat must present exactly `确认取消` and `保留 Job`. Only a fresh `确认取消` for the exact question may trigger one re-resolution and one cancellation. Retain, timeout, other text, changed identity/partition/owner/state, replay, duplicate, subagent, or headless context performs no protected mutation.
+
+Install or render the private runtime with `scripts/setup_protected_cancel.py`. Production installation must use a separately qualified Python 3.9+ interpreter in the final minimal environment; `--hook-python` is an explicit machine-local override, while `--runtime-env KEY=VALUE` accepts only loader variables. The declaration binds the supervisor SHA256 and converts missing runtime, loader/127, nonzero exit, signal, timeout, corrupt identity, empty output, and invalid output into a valid event-specific deny. Private policy and runtime identity are JSON under `$CODEX_HOME/slurm-protected-cancel/`; public source must not contain site partitions, machine paths, accounts, or loader values.
+
+The installer stages and qualifies the exact candidate before atomically replacing the task-owned private directory, writes `config.toml` last, preserves a recoverable private backup, and changes only the protected-cancel declaration block. Existing Hook trust, permission rules, unrelated configuration, and other Hooks stay unchanged. Treat an ambiguous result after possible `scancel` invocation as consumed and reconcile it read-only; never retry it automatically.
+
 ## Outputs
 
 Return the job script or commands, expected log paths, monitoring commands, stop conditions, and final verification checks. Submission is not completion; completion requires current job state and final output validation.
