@@ -205,13 +205,16 @@ def _question_for_targets(targets: list[dict[str, str]]) -> dict[str, Any]:
         "header": QUESTION_HEADER,
         "question": question,
         "options": _expected_options(len(targets)),
-        "isOther": False,
-        "isSecret": False,
     }
 
 
 def _targets_from_question(question: Dict[str, Any]) -> Optional[List[Dict[str, str]]]:
-    if set(question) != {"id", "header", "question", "options", "isOther", "isSecret"}:
+    canonical_keys = {"id", "header", "question", "options"}
+    keys = set(question)
+    if keys == canonical_keys | {"isOther", "isSecret"}:
+        if question["isOther"] is not True or question["isSecret"] is not False:
+            return None
+    elif keys != canonical_keys:
         return None
     text = question.get("question")
     if not isinstance(text, str):
@@ -232,7 +235,8 @@ def _targets_from_question(question: Dict[str, Any]) -> Optional[List[Dict[str, 
     else:
         return None
     expected = _question_for_targets(targets)
-    return targets if question == expected else None
+    canonical = {key: question[key] for key in canonical_keys}
+    return targets if canonical == expected else None
 
 
 def _parse_cancel_command(command: Any, runtime: Dict[str, Any]) -> Tuple[Optional[List[str]], Optional[str]]:
@@ -393,8 +397,10 @@ def _post_tool_use(event: dict[str, Any], private_root: Path, runtime: dict[str,
         return _post_result("denied", "invalid_tool_response")
     answers = response.get("answers")
     answer = answers.get(question_id) if isinstance(answers, dict) else None
+    if isinstance(answer, dict) and answer.get("answers") == [RETAIN_LABEL]:
+        return _post_result("retained", "user_retained", mutation_count=0)
     if not isinstance(answer, dict) or answer.get("answers") != [CONFIRM_LABEL]:
-        return _post_result("denied", "not_explicit_confirmation")
+        return _post_result("denied", "not_explicit_confirmation", mutation_count=0)
     current = _resolve_targets(runtime, [target["job_id"] for target in targets])
     if current is None:
         return _post_result("denied", "target_resolution_failed")
@@ -429,6 +435,14 @@ def _post_tool_use(event: dict[str, Any], private_root: Path, runtime: dict[str,
         stream.write("\n")
         stream.flush()
         os.fsync(stream.fileno())
+    # The durable one-shot reservation precedes the final scheduler read.
+    # Drift consumes this identity without ever invoking scancel.
+    rechecked = _resolve_targets(runtime, [target["job_id"] for target in current])
+    if rechecked != current:
+        reservation["status"] = "pre_invocation_failed"
+        reservation["reason"] = "target_changed_after_reservation"
+        _replace_json(reservation_path, reservation)
+        return _post_result("denied", "target_changed_after_reservation", mutation_count=0)
     try:
         cancelled = subprocess.run(
             [runtime["scancel_path"], *[target["job_id"] for target in current]],

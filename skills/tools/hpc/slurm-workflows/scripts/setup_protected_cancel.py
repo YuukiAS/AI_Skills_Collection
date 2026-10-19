@@ -164,7 +164,8 @@ if event in ("PreToolUse","PermissionRequest"):
         decision=output.get("decision")
         if not isinstance(decision,dict) or decision.get("behavior") != "deny" or not isinstance(decision.get("message"),str): raise SystemExit(6)
 else:
-    if value.get("protected_cancel") not in ("ignored","denied","executed","ambiguous"): raise SystemExit(7)
+    if value.get("protected_cancel") not in ("ignored","denied","retained","executed","ambiguous"): raise SystemExit(7)
+    if value.get("protected_cancel") == "retained" and (type(value.get("mutation_count")) is not int or value["mutation_count"] != 0): raise SystemExit(7)
 '''
     lines = [
         "#!/usr/bin/bash", "set -u", "umask 077", "EVENT=${1-}",

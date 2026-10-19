@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+import io
 import json
 import os
 from pathlib import Path
@@ -11,6 +12,8 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stdout
+from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -26,6 +29,7 @@ def load_module(name: str, path: Path):
 
 
 SETUP = load_module("setup_protected_cancel", SCRIPTS / "setup_protected_cancel.py")
+HOOK = load_module("slurm_cancel_hook", SCRIPTS / "slurm_cancel_hook.py")
 
 
 def executable(path: Path, text: str) -> Path:
@@ -328,8 +332,130 @@ class TestG3ProtectedCancelSemantics(unittest.TestCase):
                 question = protected_question(payload, event)
                 self.assertEqual(question["id"], "slurm-protected-cancel:9101")
                 self.assertEqual([item["label"] for item in question["options"]], ["确认取消", "保留 Job"])
-                self.assertFalse(question["isOther"])
+                self.assertEqual(set(question), {"id", "header", "question", "options"})
             self.assertEqual(fixture.mutation_argvs(), [])
+
+    def test_canonical_and_platform_normalized_question_shapes(self):
+        targets = [{"job_id": "5001", "partition": "protected-lab"}]
+        question = HOOK._question_for_targets(targets)
+        self.assertEqual(set(question), {"id", "header", "question", "options"})
+        self.assertEqual(HOOK._targets_from_question(question), targets)
+        normalized = {**question, "isOther": True, "isSecret": False}
+        self.assertEqual(HOOK._targets_from_question(normalized), targets)
+        self.assertEqual(normalized["isOther"], True)  # Parsing must not mutate input.
+        invalid = [
+            {**normalized, "isOther": False},
+            {**normalized, "isSecret": True},
+            {**normalized, "isOther": 1},
+            {**normalized, "isSecret": 0},
+            {**normalized, "unexpected": "field"},
+            {**question, "unexpected": "field"},
+            {**question, "isOther": True},
+            {**question, "question": "different question"},
+            {**question, "id": "different-id"},
+            {**question, "options": list(reversed(question["options"]))},
+        ]
+        for changed in invalid:
+            with self.subTest(question=changed):
+                self.assertIsNone(HOOK._targets_from_question(changed))
+
+    def test_retain_is_explicit_without_cancellation_reservation(self):
+        for normalized in (False, True):
+            with self.subTest(normalized=normalized), tempfile.TemporaryDirectory() as temp:
+                fixture = PortableFixture(Path(temp), {"5001": {"partition": "protected-lab", "state": "PENDING"}})
+                _, first = fixture.pre("scancel 5001")
+                question = protected_question(first)
+                if normalized:
+                    question.update(isOther=True, isSecret=False)
+                _, retained = fixture.post(question, {"answers": {question["id"]: {"answers": ["保留 Job"]}}})
+                self.assertEqual(retained, {"protected_cancel": "retained", "reason": "user_retained", "mutation_count": 0})
+                self.assertEqual(fixture.mutation_argvs(), [])
+                self.assertEqual(list((fixture.private / "consumed").glob("*.json")), [])
+
+    def test_other_free_text_empty_or_malformed_answers_never_reserve(self):
+        answers = (["Other"], ["任意自由输入"], ["确认取消", "Other"], [], None, "确认取消")
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = PortableFixture(Path(temp), {"5001": {"partition": "protected-lab", "state": "PENDING"}})
+            _, first = fixture.pre("scancel 5001")
+            question = {**protected_question(first), "isOther": True, "isSecret": False}
+            for answer in answers:
+                with self.subTest(answer=answer):
+                    _, denied = fixture.post(question, {"answers": {question["id"]: {"answers": answer}}})
+                    self.assertEqual(denied["protected_cancel"], "denied")
+                    self.assertEqual(denied["mutation_count"], 0)
+                    self.assertEqual(fixture.mutation_argvs(), [])
+                    self.assertEqual(list((fixture.private / "consumed").glob("*.json")), [])
+
+    def test_normalized_confirmation_executes_once_and_replay_is_denied(self):
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = PortableFixture(Path(temp), {"5001": {"partition": "protected-lab", "state": "PENDING"}})
+            _, first = fixture.pre("scancel 5001")
+            question = {**protected_question(first), "isOther": True, "isSecret": False}
+            answer = {"answers": {question["id"]: {"answers": ["确认取消"]}}}
+            _, confirmed = fixture.post(question, answer)
+            self.assertEqual(confirmed["protected_cancel"], "executed")
+            _, replay = fixture.post(question, answer)
+            self.assertEqual(replay["reason"], "replayed_or_duplicate_confirmation")
+            self.assertEqual(fixture.mutation_argvs(), [["5001"]])
+
+    def test_reservation_precedes_final_resolution_and_one_exact_cancel(self):
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = PortableFixture(Path(temp), {"5001": {"partition": "protected-lab", "state": "PENDING"}})
+            _, first = fixture.pre("scancel 5001")
+            question = protected_question(first)
+            private, runtime = HOOK._load_runtime(fixture.hook)
+            observed = []
+            original_resolve, original_run = HOOK._resolve_targets, subprocess.run
+
+            def resolve(runtime, job_ids):
+                reservations = list((private / "consumed").glob("*.json"))
+                observed.append(("resolve", bool(reservations)))
+                return original_resolve(runtime, job_ids)
+
+            def run(argv, **kwargs):
+                if argv[0] == str(fixture.scancel):
+                    reservations = list((private / "consumed").glob("*.json"))
+                    self.assertEqual(len(reservations), 1)
+                    self.assertEqual(json.loads(reservations[0].read_text())["status"], "reserved")
+                    self.assertEqual(observed[-1], ("resolve", True))
+                    self.assertEqual(argv, [str(fixture.scancel), "5001"])
+                    observed.append(("cancel", True))
+                return original_run(argv, **kwargs)
+
+            event = {
+                "tool_name": "request_user_input", "cwd": str(fixture.project),
+                "session_id": "session-1", "turn_id": "turn-2", "tool_use_id": "tool-answer-1",
+                "tool_input": {"questions": [question]},
+                "tool_response": {"answers": {question["id"]: {"answers": ["确认取消"]}}},
+            }
+            with patch.object(HOOK, "_resolve_targets", side_effect=resolve), \
+                    patch.object(HOOK.subprocess, "run", side_effect=run), redirect_stdout(io.StringIO()) as output:
+                HOOK._post_tool_use(event, private, runtime)
+            self.assertEqual(json.loads(output.getvalue())["protected_cancel"], "executed")
+            self.assertEqual(observed, [("resolve", False), ("resolve", True), ("cancel", True)])
+            self.assertEqual(fixture.mutation_argvs(), [["5001"]])
+
+    def test_target_drift_after_reservation_consumes_without_cancel(self):
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = PortableFixture(Path(temp), {"5001": {"partition": "protected-lab", "state": "PENDING"}})
+            _, first = fixture.pre("scancel 5001")
+            question = protected_question(first)
+            private, runtime = HOOK._load_runtime(fixture.hook)
+            current = [{"job_id": "5001", "partition": "protected-lab", "state": "PENDING"}]
+            event = {
+                "tool_name": "request_user_input", "cwd": str(fixture.project),
+                "session_id": "session-1", "turn_id": "turn-2", "tool_use_id": "tool-answer-1",
+                "tool_input": {"questions": [question]},
+                "tool_response": {"answers": {question["id"]: {"answers": ["确认取消"]}}},
+            }
+            with patch.object(HOOK, "_resolve_targets", side_effect=[current, None]), redirect_stdout(io.StringIO()) as output:
+                HOOK._post_tool_use(event, private, runtime)
+            self.assertEqual(json.loads(output.getvalue())["reason"], "target_changed_after_reservation")
+            self.assertEqual(fixture.mutation_argvs(), [])
+            reservation = next((private / "consumed").glob("*.json"))
+            self.assertEqual(json.loads(reservation.read_text())["status"], "pre_invocation_failed")
+            _, replay = fixture.post(question, event["tool_response"])
+            self.assertEqual(replay["reason"], "replayed_or_duplicate_confirmation")
 
     def test_retain_and_non_confirmation_never_mutate(self):
         responses = [
