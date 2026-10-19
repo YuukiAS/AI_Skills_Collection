@@ -33,7 +33,7 @@ CENTRAL_PLUGIN_NAMES = [
 EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
     "workflow-core": "0.5",
     "ai-skills-core": "0.5",
-    "writing-style": "0.4",
+    "writing-style": "0.5",
     "research-writing": "0.2",
     "presentations": "0.4",
     "web-development": "0.4",
@@ -187,6 +187,29 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertIn("Update Bridge Kit through canonical ai-bridge delegation.", core["defaultPrompt"])
         self.assertIn("Sync this machine's participating AI Research Stack.", core["defaultPrompt"])
 
+    def test_writing_style_exposes_response_clarity_without_renaming_existing_skills(self) -> None:
+        data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
+        writing = next(plugin for plugin in data["plugins"] if plugin["name"] == "writing-style")
+        sources = {entry["artifact_id"]: entry["source"] for entry in writing["skills"]}
+
+        self.assertEqual(writing["version"], "0.5")
+        self.assertEqual(
+            sources,
+            {
+                "fidelity": "skills/writing/core/writing-fidelity",
+                "response-clarity": "skills/writing/core/response-clarity",
+                "sci": "skills/writing/core/scientific-prose",
+                "product-ui-copy": "skills/writing/core/product-ui-copy",
+                "scientific-rewrite": "skills/writing/core/scientific-rewrite",
+                "zh": "skills/writing/core/chinese-prose",
+            },
+        )
+        self.assertIn("response clarity", writing["description"])
+        self.assertIn(
+            "Explain this result clearly to the user without changing facts, permissions, commands, paths, or status.",
+            writing["defaultPrompt"],
+        )
+
     def test_ai_skills_core_machine_update_contracts_are_source_authoritative(self) -> None:
         orchestrator = (REPO_ROOT / "skills/core/codex-system/machine-update-orchestrator/SKILL.md").read_text(
             encoding="utf-8"
@@ -290,7 +313,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         registry = json.loads((REPO_ROOT / "registry.json").read_text(encoding="utf-8"))
         config = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
-        readme_match = re.search(r"Repository / CLI release: `([^`]+)`", readme)
+        readme_match = re.search(r"仓库和 CLI 的发布版本：`([^`]+)`", readme)
         self.assertIsNotNone(readme_match)
 
         self.assertRegex(version, REPOSITORY_SEMVER_RE)
@@ -369,7 +392,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
         repo_version = (REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
-        self.assertIn(f"Repository / CLI release: `{repo_version}`", readme)
+        self.assertIn(f"仓库和 CLI 的发布版本：`{repo_version}`", readme)
 
         plugins = config["plugins"]
         self.assertEqual([plugin["name"] for plugin in plugins], CENTRAL_PLUGIN_NAMES)

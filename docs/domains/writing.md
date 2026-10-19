@@ -1,6 +1,6 @@
 # writing
 
-Active skills: 18
+Active skills: 19
 
 ## Install
 
@@ -27,7 +27,7 @@ Complete domain installs are supported. If an audit reports high description len
 ## Skills
 
 - `academic-paper-writer-pro` (`skills/writing/research/academic-paper-writer-pro`): 学术论文排版、OCR恢复、DOCX/Markdown整理和模板化交付工作流。用于扫描 PDF、DOC/DOCX、Markdown 到 Word/PDF 的结构修复、断点恢复、参考文献整理和最终文件验收；内容写作、审稿和事实保真应路由到 research-writing 与 writing-fidelity。
-- `chinese-prose` (`skills/writing/core/chinese-prose`): 中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和长文“说人话”终审。任何中文 Markdown/PDF/报告/README/面向读者的文档型中文内容都应自动触发本 skill，用于普通中文润色、中文为主、降低 AI 味/翻译腔/模板腔/宣传腔，并保护事实、数字、术语、命令、引用、实验结果和证据边界。产品界面标签、按钮、状态、帮助、信任/隐私披露和 locale-specific UI microcopy 应路由到 product-ui-copy。
+- `chinese-prose` (`skills/writing/core/chinese-prose`): 中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和长文“说人话”终审。任何中文 Markdown/PDF/报告/README/面向读者的文档型中文内容都应自动触发本 skill，用于普通中文润色、中文为主、降低 AI 味/翻译腔/模板腔/宣传腔，并保护事实、数字、术语、命令、引用、实验结果和证据边界。普通聊天解释、诊断结论、进度/完成汇报和行动建议应路由到 response-clarity；产品界面标签、按钮、状态、帮助、信任/隐私披露和 locale-specific UI microcopy 应路由到 product-ui-copy。
 - `citation-verification` (`skills/writing/research/citation-verification`): Verify academic citations, references, BibTeX entries, DOI/PMID metadata, citation claims, and figure/table evidence before manuscript submission, review response, or report delivery. Use when citation existence or claim support matters more than citation formatting alone.
 - `latex-paper-authoring` (`skills/writing/research/latex-paper-authoring`): Author, organize, repair, and prepare LaTeX research papers for arXiv, Overleaf, conference templates, or journal submission. Use when manuscript structure, LaTeX source hygiene, compilation, figures, bibliography, or template cleanup is central.
 - `literature-review` (`skills/writing/research/literature-review`): Synthesize scholarly literature and create single-paper evidence cards. Use for systematic/scoping/narrative reviews, related work, paper精读, paper cards, claim-evidence extraction, method maps, thematic synthesis, and research-gap analysis. Route quick lookup, DOI/claim checks, BibTeX, and Zotero to citation skills.
@@ -38,6 +38,7 @@ Complete domain installs are supported. If an audit reports high description len
 - `product-ui-copy` (`skills/writing/core/product-ui-copy`): Natural product-interface microcopy for labels, CTAs, states, help text, onboarding, settings, trust/privacy disclosures, landing-page interface copy, and locale-specific UI wording under frozen product meaning. Use for browser extension, web, desktop/WebView, mobile, and app surfaces after product semantics and UI role are known.
 - `research-grants` (`skills/writing/research/research-grants`): Write competitive research proposals for NSF, NIH, DOE, DARPA, and Taiwan NSTC. Agency-specific formatting, review criteria, budget preparation, broader impacts, significance statements, innovation narratives, and compliance with submission requirements.
 - `research-reporting` (`skills/writing/research/research-reporting`): Create repo-grounded research reports, milestone summaries, experiment reviews, technical notes, advisor/group-meeting reports, and result retrospectives from project evidence. Use for report semantics even when the final deliverable is a formal PDF; rendering mechanics belong to companion document skills.
+- `response-clarity` (`skills/writing/core/response-clarity`): Clear ordinary user-facing explanations, conclusions, diagnostics, advice, progress updates, and task-result summaries after domain reasoning. Use for normal ChatGPT/Codex replies that should be natural in the current target language, lead with the human meaning, reduce unnecessary English/process noise, and preserve exact technical strings.
 - `scholar-evaluation` (`skills/writing/research/scholar-evaluation`): Quantitatively evaluate scholarly work with a fixed rubric or ScholarEval-style dimensions. Use for rubric assessment, benchmarked quality scoring, numbered ratings, and dimension-by-dimension evaluation. Route ordinary reviewer-style critique to peer-review and prose revision to scientific-writing.
 - `scientific-prose` (`skills/writing/core/scientific-prose`): English scientific report writing and revision pass. Use for research reports, progress reports, figure-heavy PDFs, manuscripts, rebuttals, technical summaries, and slide text that must keep evidence, uncertainty, captions, and conclusions scientifically defensible without AI-sounding or defensive/self-undermining prose.
 - `scientific-rewrite` (`skills/writing/core/scientific-rewrite`): Source-faithful structural rewrite route for existing Chinese or Chinese-dominant scientific/technical material when users ask to reorganize it into clearer Chinese while preserving facts, numbers, formulas, citations, comparisons, conditions, limitations, paths, and exact details.
