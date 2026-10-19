@@ -2,7 +2,8 @@
 
 Task: `hpc--slurm-cancel-production-closure`
 Approved package: `e84be726d6a7aaefe62d27c7fd2a0410e7f1498b`
-Current implementation candidate: `8f8d29f78dfc0f39c7043580e8ea06bcc7e436a4`
+Original implementation candidate: `8f8d29f78dfc0f39c7043580e8ea06bcc7e436a4`
+Current implementation candidate: `a8765b97b69c319304cb51dbd271d57ed8492c34`
 
 This file records process and runtime evidence only. It does not claim G4, independent Reviewer PASS, G5, release, or task completion.
 
@@ -49,3 +50,13 @@ This file records process and runtime evidence only. It does not claim G4, indep
 - Transaction staging/rollback temporary paths were absent after restoration.
 
 G4 failed. Independent implementation review, G5, and release were not started.
+
+## Bounded session-snapshot recovery
+
+The historical outcome above is preserved. The subsequent user-authorized A/B experiment directly established a stale session Hook snapshot: the original Desktop thread continued running its previous declaration while a new thread on the same backend consumed the final runtime. See `SESSION_AB_EVIDENCE.md` for thread, turn, command and Hook run identities.
+
+The original candidate was reinstalled with identical Hook/supervisor/runtime/policy bytes. User trust was completed normally. A minimal installer-output/Skill clarification now requires a fresh session and actual Hook-event verification; it changed no installed enforcement bytes. The new candidate is `a8765b97b69c319304cb51dbd271d57ed8492c34`, with 39 focused and existing Slurm tests passing.
+
+The new candidate's fresh-thread `scancel --help` completed its Hook run as `blocked` with `SLURM_CANCEL_DENIED reason=unsupported_scancel_target_or_option`; underlying command-start count was zero. The harmless portion of G4 now passes.
+
+The single CPU-only/no-GPU submission attempt was rejected with `QOSMinGRES` and returned no JobId. Read-only policy evidence shows both QoS values permitted in `htzhulab` require `MinTRES=gres/gpu=1`. No test Job was created, no Job was mutated, and retain/confirm acceptance was not run. This is the frozen resource-contract stop condition; independent implementation review, G5 and release remain unstarted. The successfully verified installed Hook was retained.
