@@ -28,15 +28,25 @@ PROCESS PASS is limited to the checks above. Full PRODUCT / ARTIFACT PASS is not
 
 The single authorized CPU-only/no-GPU `htzhulab` submission attempt returned `QOSMinGRES` and no JobId. Read-only policy evidence proves that both allowed partition QoS values require `MinTRES=gres/gpu=1`. Exact-name scheduler lookup returned no Job. No retry, GPU allocation, alternate partition, cancellation, or other Job mutation occurred.
 
-This is the approved plan's explicit stop condition: the real test Job cannot be created within the frozen low-impact resource contract. The successfully verified live Hook is retained. The same task requires a decision resolving this concrete resource-contract conflict before real acceptance can proceed; Executor has not changed that contract or proposed an architecture replacement.
+This was the original plan's explicit resource stop condition. The user subsequently approved resource amendment v3.1 and Planner froze revision 1. That resource blocker is resolved; its historical evidence is retained, not rewritten.
+
+## Plan revision 1 continuation
+
+Planner commits `c11dc034001512dc8660648f9709ad9948103273` and `00bead37571634e6af5ad5eba85a261cece60a3c` were fast-forwarded on the same task branch. The candidate is unchanged. Read-only resource qualification, including one successful official `sbatch --test-only` that created no Job, preceded exactly one actual held/future submission. Test Job **5693449** is owned by the current user in `htzhulab`, requests one GPU and CPU, memory `1M`, time one minute, remains `PENDING / JobHeldUser`, has no allocated node, and has EligibleTime 25 hours after submission.
+
+The fresh Desktop thread's first ordinary `scancel 5693449` was blocked by native PreToolUse with zero command launch and zero mutation. Execution then stopped before presenting the required native question: the Hook requires an exact six-key question with `isOther=false` and `isSecret=false`, whereas the exposed native schema permits only four keys; exact 0.160.1 source also normalizes `is_other=true`. No question was called, no user answer was fabricated, no unsupported field-dropping adaptation was attempted, and no second cancellation request was issued. The retain acceptance therefore failed before a real answer; confirmation was not run.
+
+Full direct evidence and source locators: `AMENDED_G4_EVIDENCE.md`. This is the user's substantial-product-change stop condition, not a recurrence of the resolved snapshot or GPU fixture issue. No product change, new plan revision, replacement Job, Hook reinstall/trust, or alternate architecture was attempted. Job 5693449 remains safely held pending explicit recovery direction. Independent review, G5 and formal release remain incomplete.
 
 Repository bump decision: NONE at this incomplete checkpoint.
 Reason: no formal release is authorized before G4, independent review and G5.
 Affected standalone Skill: `slurm-workflows`: NO_BUMP yet; approved release bump remains pending.
 Affected central Marketplace plugins: all NO_BUMP.
 
-`TEST_JOB_ID=NONE`
-`KEEP_TEST=NOT_RUN`
+`TEST_JOB_ID=5693449`
+`G4=FAIL`
+`KEEP_TEST=FAIL`
 `CONFIRM_CANCEL_TEST=NOT_RUN`
+`EXACT_CANCEL_COUNT=0`
 `OTHER_JOB_MUTATION=NO`
 `NEXT_ACTION=RETURN_TO_PLANNER`
