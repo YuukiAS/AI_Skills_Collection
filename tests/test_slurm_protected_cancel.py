@@ -42,13 +42,13 @@ class PortableFixture:
         self.project.mkdir()
         self.codex_home = root / "codex-home"
         self.codex_home.mkdir(mode=0o700)
-        (self.codex_home / "config.toml").write_text(
+        self.original_config = (
             '[features]\ndefault_mode_request_user_input = true\nhooks = true\n\n'
             '[permissions.keep-me]\nextends = ":workspace"\n\n'
             '[hooks.state]\n\n[hooks.state."unrelated:stop:0:0"]\n'
-            'trusted_hash = "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"\n',
-            encoding="utf-8"
+            'trusted_hash = "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"\n'
         )
+        (self.codex_home / "config.toml").write_text(self.original_config, encoding="utf-8")
         self.state = root / "scheduler-state.json"
         self.set_jobs(jobs or {})
         self.mutations = root / "mutations.jsonl"
@@ -156,6 +156,8 @@ class TestG1PortableAtomicInstallation(unittest.TestCase):
             self.assertIn(fixture.rendered["manifest"]["supervisor_sha256"], config)
             self.assertIn("default_mode_request_user_input = true", config)
             self.assertFalse((fixture.codex_home / "rules/slurm-protected-cancel.rules").exists())
+            without_declaration = SETUP._strip_block(config, SETUP.DECLARATION_START, SETUP.DECLARATION_END)
+            self.assertEqual(without_declaration, fixture.original_config)
 
     def test_upgrade_preserves_replay_state_and_recoverable_backup(self):
         with tempfile.TemporaryDirectory() as temp:

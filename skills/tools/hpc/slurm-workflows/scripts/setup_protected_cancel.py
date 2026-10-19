@@ -303,8 +303,10 @@ def render_global_contract(
 
 
 def _strip_block(text: str, start: str, end: str) -> str:
-    pattern = re.compile(r"(?:^|\n){}\n.*?\n{}\n?".format(re.escape(start), re.escape(end)), re.DOTALL)
-    return pattern.sub("\n", text)
+    pattern = re.compile(
+        r"(?ms)^{}\n.*?^{}(?:\n|\Z)".format(re.escape(start), re.escape(end))
+    )
+    return pattern.sub("", text)
 
 
 def _take_hook_state(text: str) -> Tuple[str, str]:
@@ -338,16 +340,26 @@ def _strip_permission_profile(text: str, profile: str) -> str:
 
 
 def update_user_config_text(original: str, rendered: Mapping[str, Any]) -> str:
-    text = _strip_block(original, DECLARATION_START, DECLARATION_END)
     hooks = rendered["hooks"]
     declarations = "\n".join([
         DECLARATION_START, "hooks.PreToolUse = {}".format(_event_toml(hooks["PreToolUse"])),
         "hooks.PermissionRequest = {}".format(_event_toml(hooks["PermissionRequest"])),
         "hooks.PostToolUse = {}".format(_event_toml(hooks["PostToolUse"])), DECLARATION_END, "",
     ])
-    first_table = re.search(r"(?m)^\[", text)
-    offset = first_table.start() if first_table else len(text)
-    text = text[:offset].rstrip() + "\n\n" + declarations + text[offset:].lstrip()
+    pattern = re.compile(
+        r"(?ms)^{}\n.*?^{}(?:\n|\Z)".format(
+            re.escape(DECLARATION_START), re.escape(DECLARATION_END)
+        )
+    )
+    existing = pattern.search(original)
+    if existing:
+        text = original[:existing.start()] + declarations + original[existing.end():]
+    else:
+        first_table = re.search(r"(?m)^\[", original)
+        offset = first_table.start() if first_table else len(original)
+        prefix = original[:offset]
+        separator = "" if not prefix or prefix.endswith("\n") else "\n"
+        text = prefix + separator + declarations + original[offset:]
     features = re.search(r"(?ms)^\[features\]\n(?P<body>.*?)(?=^\[|\Z)", text)
     if not features:
         raise ValueError("user config has no [features] table")
@@ -356,7 +368,7 @@ def update_user_config_text(original: str, rendered: Mapping[str, Any]) -> str:
         raise ValueError("default_mode_request_user_input must already be true")
     if not re.search(r"(?m)^hooks\s*=\s*true\s*$", body):
         raise ValueError("hooks feature must already be true")
-    return text.rstrip() + "\n"
+    return text
 
 
 def _write(path: Path, content: bytes, mode: int) -> None:
