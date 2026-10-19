@@ -45,7 +45,7 @@ The same final candidate must prove all of the following:
 1. portable installation and atomic activation without blindly binding installer `sys.executable`;
 2. deterministic fail-closed infrastructure behavior plus one real Codex Hook normal-entry fault injection yielding valid deny and Bash launch count zero;
 3. protected/unprotected behavior, retain/confirm/replay/race safety and full existing Slurm should-not-change regression;
-4. Longleaf production normal entry: harmless `scancel --help` deny-before-process followed by exactly one CPU-only, no-GPU, future-BeginTime `htzhulab` Job retained once and confirmed/cancelled once, with no other Job mutation;
+4. Longleaf production normal entry: harmless `scancel --help` deny-before-process followed by exactly one held, future-dated, pending `htzhulab` Job that requests only the site-required minimum `gres/gpu=1`; the same exact Job is retained once and then confirmed/cancelled once before it can become eligible to run, with no allocated node and no other Job mutation;
 5. independent implementation review and formal release/install identity aligned to the same candidate.
 
 The maximum claim is enforcement through supported normal Codex execution entries plus explicitly adapted consumers. It does not claim same-UID operating-system isolation and does not restrict the user's ordinary SSH terminal.
@@ -105,7 +105,7 @@ Fake scheduler coverage must include protected/unprotected exact targets and set
 
 ### G4 — Longleaf production normal entry
 
-The final candidate must deny harmless `scancel --help` before the real process starts. Then create exactly one minimal CPU-only, no-GPU `htzhulab` Job with BeginTime at least four hours ahead; retain it once, verify it remains pending, confirm once, re-resolve and cancel that exact Job once, verify terminal cancellation and zero unrelated Job mutation.
+The final candidate must deny harmless `scancel --help` before the real process starts. Then, under the independently approved `SLURM_PROTECTED_CANCEL_G4_RESOURCE_AMENDMENT_V3_1_2026-10-20.md`, create exactly one minimal pending `htzhulab` Job using one currently authorized QoS discovered read-only, the site-required minimum `gres/gpu=1`, one CPU, minimum legal memory, `--hold`, a BeginTime at least 24 hours ahead, and a harmless payload. Do not release it and do not request an explicit H100 unless the site rejects generic one-GPU GRES and an exact type is strictly required to satisfy the same minimum policy. Immediately after submission, continue only if read-only inspection proves exactly one JobId, current owner, `partition=htzhulab`, `state=PENDING`, no allocated node, and hold/future protection; otherwise stop and create no replacement Job. Use that same exact Job for the retain interaction, verify it remains pending, then use the confirm interaction, re-resolve and cancel it exactly once, verify terminal cancellation and zero unrelated Job mutation.
 
 ### G5 — Formal release identity
 
@@ -127,5 +127,5 @@ Development-local tests precede final GitHub integration/release CI; full CI is 
 - Wrapper/shim/PATH interception, Direct mode, model-catalog changes, Codex patches, daemon/broker/database or a successor task.
 - Public Longleaf paths, `htzhulab`, loader paths, accounts, secrets or machine policy.
 - DII/CARE changes without new direct source evidence.
-- More than one real Slurm test Job, GPU/H100 allocation, or mutation of any pre-existing Job.
+- More than one real Slurm test Job, any release or execution of the G4 test Job, GPU computation, explicit H100 request except the amendment's strict site-required fallback, or mutation of any pre-existing Job.
 - New gates, generalized OS-level enforcement, unrelated Hook/config/trust changes, or unrelated repository cleanup.
