@@ -25,27 +25,27 @@ This file records process and runtime evidence only. It does not claim G4, indep
 - The unique underlying Bash marker remained absent; observed Bash launch count was zero.
 - No Slurm command or Job was used by this probe.
 
-## Controlled Longleaf installation
+## Controlled Longleaf installation and rollback
 
 - Live declaration source: `/users/a/e/aereinh/.codex/config.toml`.
 - Task-owned runtime root: `/users/a/e/aereinh/.codex/slurm-protected-cancel/`.
 - Selected production interpreter: `/usr/bin/python3.9` in the sanitized environment; no loader override was required.
 - Bytes outside the protected-cancel declaration block remained identical before and after installation: SHA256 `29c85eaf8b89c9b092cf721c0b0436cd5d703c4c569c5e3fe86ac57ad93c4179`.
-- A recoverable pre-v3 config/runtime backup exists inside the task-owned runtime backup directory.
+- A recoverable pre-v3 config/runtime backup was created inside the task-owned runtime backup directory and used for the required rollback after the harmless probe failed.
 - Installed identities:
   - supervisor SHA256: `4764d2d3a55328debce6c2037522d7a2332be6cc8efa01d19d8f91f406ae2117`
   - Hook SHA256: `74275496861a63d20beb8c55b17ec279217cdb3625d17321d24cc0a25b62ebe3`
   - runtime JSON SHA256: `684166063c419425019d2416bad64080d90aea0da75f96803337d2c02e1a9927`
   - policy JSON SHA256: `7afd293c43d5c186f051d52b5665793930a9909d562a634a919a0a86c1825735`
-- Fresh official `hooks/list` sees the same enabled user-level `PreToolUse`, `PermissionRequest`, and `PostToolUse` declarations from the worktree, canonical repository, and `/tmp`, with the expected matchers and no load errors.
+- Before the probe, fresh official `hooks/list` saw the same enabled user-level `PreToolUse`, `PermissionRequest`, and `PostToolUse` declarations from the worktree, canonical repository, and `/tmp`, with the expected matchers, `trustStatus=trusted`, and no load warnings or errors.
 
-## Current human gate
+## Harmless production probe outcome
 
-The final declaration bytes differ from the previously trusted candidate, so fresh `hooks/list` currently reports all three declarations as `modified`. Existing trust state was preserved and was not rewritten or bypassed for production. The user must explicitly trust the final three declarations before the harmless production `scancel --help` probe.
+- After the user explicitly completed trust, the normal Desktop nested shell entry ran exactly `scancel --help` from the approved worktree.
+- The command was not blocked by the protected-cancel `PreToolUse` Hook. It exited zero and printed the real Slurm `scancel` help text.
+- This is the explicit G4 failure condition: the real process started even though all three declarations were loaded and trusted in the same current `CODEX_HOME`.
+- Per the frozen execution plan, no Slurm test Job was created and no existing Job was touched.
+- The installed v3 candidate was rolled back using the installation-time backup. The restored `/users/a/e/aereinh/.codex/config.toml` SHA256 is `279c473dc419d5878201ba8bf66a3265ced7988cf63f2aa1a3dc7c428ed34e6f`, exactly matching the pre-v3 backup, and the previous private runtime file set and modes were restored.
+- Transaction staging/rollback temporary paths were absent after restoration.
 
-Until that happens:
-
-- `scancel --help` has not been run against the live final candidate;
-- no Slurm test Job has been created;
-- no Slurm Job has been mutated;
-- G4, independent implementation review, G5, and release remain pending.
+G4 failed. Independent implementation review, G5, and release were not started.
