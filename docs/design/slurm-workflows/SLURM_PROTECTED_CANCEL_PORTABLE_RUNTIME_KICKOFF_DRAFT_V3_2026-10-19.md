@@ -29,7 +29,7 @@ After approval, use exactly:
 - branch:
   `reviewed/hpc--slurm-cancel-production-closure`
 - worktree W:
-  `/overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-cancel-production-closure-v3`
+  `/overflow/htzhu/mingcheng_new/AI_Skills_Collection-hpc--slurm-cancel-production-closure`
 - task key:
   `hpc--slurm-cancel-production-closure`
 
