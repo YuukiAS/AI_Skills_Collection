@@ -1,0 +1,16 @@
+{
+  "base_branch": "main",
+  "base_commit": "9740a593c1622bce61401c8215c621f8cdb7d93a",
+  "ci_required": true,
+  "ci_status": "PENDING",
+  "implementation_commit": null,
+  "last_review_decision": null,
+  "max_plan_revisions": 1,
+  "max_review_rounds": 2,
+  "next_action": "RUN_GPT_PLANNER",
+  "plan_revision": 0,
+  "review_round": 0,
+  "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
+  "state": "PLAN_REQUESTED",
+  "task_key": "hpc--slurm-cancel-production-closure"
+}
