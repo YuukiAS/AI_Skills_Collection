@@ -1,7 +1,7 @@
 # ChatGPT Web 协作回归记录：2026-10 十类问题
 
 日期：2026-10-17  
-状态：Planner / Critic 合同完善方案 v0.2 已按 Critic B1/B2 修订，待独立 Critic 复核  
+状态：原十类历史问题保留；PASS integrity v0.3 中央合同与 Project setting 候选已形成，候选尚未由用户替换，独立实现后检查和新鲜场景验证待完成
 主要适用层：AI Research Stack Project setting、Planner 角色合同、Critic 角色合同  
 非默认 owner：`workflow-core`、具体领域 Plugin/Skill、Bridge Kit
 
@@ -115,3 +115,19 @@
 只有当进一步取证证明某个问题属于具体运行实现，才进入 Bridge Kit、某个领域 Plugin/Skill 或其他 canonical owner。
 
 当前不计划为了这九类问题新增顶级 Plugin、Skill、工作流、数据库、watcher、daemon、状态机或统一控制层；也不默认要求 `workflow-core` 承担 ChatGPT Web 项目协作规则。
+
+## 2026-10-19：PASS 可信度新增事故与中央合同收口
+
+Bridge Kit 的用户追问暴露出三个相连缺口：机器级共享 Notifier 被退成每仓库邮箱配置；Persistent Run 与 Notifier 虽分别存在，关键调用却未接通；预计完成时间可以长期保持 `UNKNOWN`，以保守输出掩盖正向能力没有发生。问题不是缺少一个字段，而是批准前没有把完整用户承诺、正常入口的跨组件成功链和正向结果一起审透。
+
+Slurm Workflows 的事故表明，受保护取消的判断逻辑存在，不等于正式 Codex Hook 的 Python/runtime 启动失败时危险底层动作已被阻断。安全承诺必须从正常入口直接验证最关键的失败链，不能用组件单测或“设计为 fail-closed”代替实际阻断证据。
+
+本轮长期边界归属中央 Planner、Critic 与 Capability Gate 合同，而不把这两起事故的治理责任下沉给 Bridge Kit、Slurm 或 `workflow-core`：
+
+1. 首个正式 Proposal 保留稳定用户承诺；中间设计审查只给 `PROCEED / REVISE`，唯一 Critic 级 `PASS` 只能在完整 execution-ready 审查并与 `READY_FOR_CODEX=YES` 同时出现。最终审查重新看完整承诺和执行包，不被旧 blocker 清单缩窄。
+2. Gate 要从正常入口看到核心正向行为、跨组件完整成功链和按风险选择的关键失败链；`UNKNOWN`、fallback、未配置、fail-closed 或各组件单独通过不能冒充整体能力。检查数量由承诺和风险决定，不造全故障矩阵。
+3. 每轮 Planner/Critic 先给一屏独立可读的自然中文摘要，再给精确机器交接；Clear Writing 只检查用户摘要的表达，不改写机器块。
+4. 冻结范围内的漏接、配置、runtime/loader、测试/CI 和 Gate 失败默认 `RETURN_TO_CODEX`，继续同一任务；只有用户承诺、架构 owner、权限、验收或恢复语义必须变化才回 Planner，旧批准不覆盖新语义。
+5. 实现后最终评估前的独立安全门仍在，但结论为 `PROCEED_TO_FINAL_EVALUATION / REVISE`，不再产生第二个 Critic 级 `PASS`；最终候选接受与正式发布分别如实说明，不造新持久状态。
+
+本文件只记录历史事故和合同层的防复发边界，不声称 Bridge/Slurm 产品运行实现已经修复，也不声称 Project setting 候选已在 ChatGPT Web 生效。本轮不新增第三个人工角色、数据库、watcher、daemon、ledger 或状态机。
