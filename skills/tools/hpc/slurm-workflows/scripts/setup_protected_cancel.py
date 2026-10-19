@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import re
 import shlex
+import sys
 from typing import Any
 
 
@@ -49,19 +50,26 @@ def _executable_identity(path: Path, codex_home: Path) -> tuple[Path, Path]:
     return invocation, resolved
 
 
-def _hash_checked_command(script: Path, digest: str) -> str:
-    positional = " ".join(shlex.quote(str(value)) for value in (script, digest))
+def _python_executable(codex_home: Path) -> Path:
+    if sys.version_info < (3, 11):
+        raise ValueError("protected-cancel Hook requires Python 3.11 or newer")
+    _, resolved = _executable_identity(Path(sys.executable), codex_home)
+    return resolved
+
+
+def _hash_checked_command(script: Path, digest: str, python_path: Path) -> str:
+    positional = " ".join(shlex.quote(str(value)) for value in (script, digest, python_path))
     return (
-        "/usr/bin/bash -c 'set -eu; target=$1; expected=$2; "
+        "/usr/bin/bash -c 'set -eu; target=$1; expected=$2; python=$3; "
         "actual=$(/usr/bin/sha256sum -- \"$target\"); actual=${actual%% *}; "
         "[ \"$actual\" = \"$expected\" ] || exit 78; "
-        "exec /usr/bin/python3 \"$target\"' slurm-protected-cancel "
+        "exec \"$python\" \"$target\"' slurm-protected-cancel "
         f"{positional}"
     )
 
 
-def _hooks_document(hook_path: Path, hook_digest: str) -> dict[str, Any]:
-    command = _hash_checked_command(hook_path, hook_digest)
+def _hooks_document(hook_path: Path, hook_digest: str, python_path: Path) -> dict[str, Any]:
+    command = _hash_checked_command(hook_path, hook_digest, python_path)
     return {
         "PreToolUse": [{
             "matcher": "^Bash$",
@@ -166,6 +174,7 @@ def render_global_contract(
     skill_scripts = skill_scripts.expanduser().resolve()
     scontrol_invocation, scontrol_realpath = _executable_identity(scontrol, codex_home)
     scancel_invocation, scancel_realpath = _executable_identity(scancel, codex_home)
+    python_path = _python_executable(codex_home)
     hook_source = (skill_scripts / "slurm_cancel_hook.py").read_bytes()
     hook_digest = _sha256_bytes(hook_source)
     private_root = codex_home / PRIVATE_DIR
@@ -175,7 +184,7 @@ def render_global_contract(
     if not partitions:
         raise ValueError("at least one protected cancellation partition is required")
     policy = _policy_text(partitions)
-    hooks = _hooks_document(hook_path, hook_digest)
+    hooks = _hooks_document(hook_path, hook_digest, python_path)
     runtime = {
         "schema_version": 4,
         "codex_home": str(codex_home),
@@ -213,6 +222,7 @@ def render_global_contract(
             "hook_path": str(hook_path),
             "hook_sha256": hook_digest,
             "policy_path": str(policy_path),
+            "python_path": str(python_path),
             "protected_cancel_partitions": partitions,
             "scontrol_path": str(scontrol_realpath),
             "scancel_path": str(scancel_realpath),

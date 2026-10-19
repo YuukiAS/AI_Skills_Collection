@@ -309,6 +309,11 @@ class TestGlobalSetup(unittest.TestCase):
             manifest = rendered["manifest"]
             self.assertEqual(len(manifest["hook_keys"]), 3)
             self.assertIn("/hooks/slurm-protected-cancel-", manifest["hook_path"])
+            self.assertEqual(manifest["python_path"], str(Path(sys.executable).resolve()))
+            for groups in rendered["hooks"].values():
+                command = groups[0]["hooks"][0]["command"]
+                self.assertIn(str(Path(sys.executable).resolve()), command)
+                self.assertNotIn("exec /usr/bin/python3", command)
             original = (
                 'default_permissions = "slurm-chat-guard"\n'
                 '[features]\ndefault_mode_request_user_input = false\nhooks = true\n\n'
@@ -323,6 +328,27 @@ class TestGlobalSetup(unittest.TestCase):
             self.assertIn("keep-me", parsed["permissions"])
             self.assertTrue(parsed["features"]["default_mode_request_user_input"])
             self.assertEqual(set(parsed["hooks"]), {"PreToolUse", "PermissionRequest", "PostToolUse"})
+
+    def test_hash_checked_launcher_runs_with_the_frozen_compatible_python(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = HostHookFixture(Path(temp), {})
+            digest = hashlib.sha256(fixture.hook.read_bytes()).hexdigest()
+            command = self.setup._hash_checked_command(
+                fixture.hook,
+                digest,
+                Path(sys.executable).resolve(),
+            )
+            completed = subprocess.run(
+                command,
+                shell=True,
+                input=json.dumps(fixture.shell_event("PreToolUse", "printf harmless")),
+                text=True,
+                capture_output=True,
+                check=False,
+                timeout=10,
+            )
+            self.assertEqual(completed.returncode, 0, completed.stderr)
+            self.assertEqual(json.loads(completed.stdout), {})
 
     def test_install_has_no_wrapper_shim_or_path_interception(self) -> None:
         source = (SCRIPTS / "setup_protected_cancel.py").read_text(encoding="utf-8")
