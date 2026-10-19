@@ -8,9 +8,13 @@ target_repo=YuukiAS/AI_Skills_Collection
 target_plugin_or_domain=ChatGPT Web collaboration governance / Planner-Critic / Capability Gate
 design_topic_or_task_key=chatgpt-web--pass-integrity
 source_branch_or_ref=work/chatgpt-web--pass-integrity
+package_commit=ce8bc133987547e354af5e5c1213a7984a9ad3db
+package_design_base=main@9740a593c1622bce61401c8215c621f8cdb7d93a
 review_stage=EXECUTION_READY_REVIEW_V0_3
 
-审查对象必须全部来自同一个 package commit：
+审查对象必须全部从 exact package commit
+`ce8bc133987547e354af5e5c1213a7984a9ad3db`
+读取：
 
 - `docs/workflows/CHATGPT_WEB_PASS_INTEGRITY_PROPOSAL_V0_3_2026-10-19.md`
 - `docs/workflows/CHATGPT_WEB_PASS_INTEGRITY_EXECUTION_PLAN_V0_3_2026-10-19.md`
@@ -19,7 +23,7 @@ review_stage=EXECUTION_READY_REVIEW_V0_3
 - `docs/project-settings/AI_RESEARCH_STACK_PASS_INTEGRITY_PROJECT_SETTING_DELTA_V0_3_2026-10-19.md`
 - `docs/workflows/CHATGPT_WEB_PASS_INTEGRITY_REGRESSION_CLOSURE_PLAN_V0_3_2026-10-19.md`
 
-先读取最新 main 的 AGENTS、Planner/Critic Role Contract、Plugin Capability Gate Policy、AI Skills Maintenance Board、当前已生效 Project setting 快照，再读取上述完整 package。自行核实 package commit，不使用提示词替代源文件。
+先读取最新 main 的 AGENTS、Planner/Critic Role Contract、Plugin Capability Gate Policy、AI Skills Maintenance Board、当前已生效 Project setting 快照，再读取上述完整 package。若 main 已前进，只把真正会改变本执行包正确性的新增事实带入审查，不因无关 main 提交机械失效。
 
 ## 本轮唯一允许的 Critic verdict
 
@@ -77,18 +81,18 @@ review_stage=EXECUTION_READY_REVIEW_V0_3
 
 ## PASS 后短 Codex handoff
 
-若且仅若 PASS：
+若且仅若 PASS，必须使用 exact locators：
 
 ```text
-APPROVED_PROPOSAL_PATH=...
-APPROVED_PLAN_PATH=...
-APPROVED_GOAL_PATH=...
-APPROVED_KICKOFF_PATH=...
-APPROVED_COMMIT=<exact package commit>
+APPROVED_PROPOSAL_PATH=docs/workflows/CHATGPT_WEB_PASS_INTEGRITY_PROPOSAL_V0_3_2026-10-19.md
+APPROVED_PLAN_PATH=docs/workflows/CHATGPT_WEB_PASS_INTEGRITY_EXECUTION_PLAN_V0_3_2026-10-19.md
+APPROVED_GOAL_PATH=docs/goals/chatgpt-web--pass-integrity-goal-v0.3.md
+APPROVED_KICKOFF_PATH=docs/workflows/CHATGPT_WEB_PASS_INTEGRITY_KICKOFF_DRAFT_V0_3_2026-10-19.md
+APPROVED_COMMIT=ce8bc133987547e354af5e5c1213a7984a9ad3db
 READY_FOR_CODEX=YES
 NEXT_HANDOFF=CODEX
 === COPY TO CODEX BEGIN ===
-<简短中文：同一 task，在 approved package commit 上实施三份中央合同、Project setting clean candidate 和 regression closure；允许普通 add/commit/non-force push；禁止 live Project setting、产品代码、release、force/destructive Git；普通实现失败自行修，只有冻结语义变化才停回 Planner。>
+执行同一任务 chatgpt-web--pass-integrity。严格读取上述 approved package commit，并按 Goal/Plan 修改三份中央合同、生成 Project setting clean candidate、追加 regression closure。允许 task-owned add/commit 和普通 non-force push；禁止修改 live Project setting、Bridge/Slurm/Delivery Assurance/workflow-core/Clear Writing 产品代码、正式 release 或 force/destructive Git。普通实现失败在同一 Codex task 内修复；只有冻结用户承诺、架构、权限、验收或恢复语义必须变化时才停止并回 Planner。
 === COPY TO CODEX END ===
 ```
 
