@@ -9,14 +9,14 @@ This skill is not one of the central Marketplace plugins, so its real-use failur
 
 ### 受保护作业取消必须取得本人当次确认
 status: NEW
-source: 2026-10-12/13 用户报告真实 H100 interactive allocation 在长 Codex Goal 中被未经本人独立确认的清理操作取消；用户随后指定 Longleaf 的 htzhulab 分区和个人 H100 保护。
-evidence: docs/design/slurm-workflows/SLURM_WORKFLOWS_CANCEL_PROTECTION_PROPOSAL_V0_3_2026-10-13.md；docs/design/slurm-workflows/SLURM_WORKFLOWS_CANCEL_PROTECTION_EXECUTION_PLAN_V0_3_2026-10-13.md；docs/goals/hpc--slurm-cancel-human-confirmation-goal-draft-v0_3.md；docs/design/slurm-workflows/SLURM_WORKFLOWS_CANCEL_PROTECTION_KICKOFF_DRAFT_V0_3_2026-10-13.md；正式技能 0.4 现有替换/竞速决策与 DII/CARE 直接取消路径。
+source: 2026-10-12/13 用户报告真实 H100 interactive allocation 在长 Codex Goal 中被未经本人独立确认的清理操作取消；2026-10-19 已唯一定位当前候选漏拦根因为 Hook 启动 Python 的动态库环境失配导致进程退出 127，而 nested Bash PreToolUse 本身已真实触发。
+evidence: docs/design/slurm-workflows/SLURM_PROTECTED_CANCEL_PORTABLE_RUNTIME_PROPOSAL_V3_2026-10-19.md；docs/design/slurm-workflows/SLURM_PROTECTED_CANCEL_PORTABLE_RUNTIME_EXECUTION_PLAN_V3_2026-10-19.md；docs/goals/hpc--slurm-cancel-production-closure-goal-v3.md；docs/design/slurm-workflows/SLURM_PROTECTED_CANCEL_PORTABLE_RUNTIME_KICKOFF_DRAFT_V3_2026-10-19.md；历史失败候选 work/hpc--slurm-protected-partition-chat-confirmation-v2-1@1b8df2c1f2b93de1605d571f5125cd4aaa99fd20 仅作选择性移植/回归来源。
 problem:
-- 原任务许可、旧竞速授权或 Codex 自动审核可能被当成取消已有受保护作业的许可；Skill 只做决策，不能隔离同 UID 直接命令。
-- 需对每个真实集群采用用户指定保护分区与个人加速器保护并集，在可信执行边界取得本人对当次精确作业的确认；没有真实隔离时禁止代理执行取消，不得称已开启强制防护。
-project-specific context: Longleaf 的 htzhulab 和个人 H100 是用户部署选择而非通用源码常量；DII/CARE 是已知待核查消费者；Bridge Kit Host auto_review 不等于本人确认。
-next action: v0.3 设计方向已获用户转交的 Critic PASS，待 execution-ready Critic 独立审查同版 Plan/Goal/Kickoff，之后才可由用户另行授权离线实施。
-tracking issue: PENDING_CLEAR_WRITING — 当前环境不能真实调用已安装 Clear Writing；按维护看板禁止未做该步骤而创建读者可见 Issue。下一具该入口的维护者需创建独立维护 Issue、回填 tracking: #实际编号，并同步 Project DOING；不复用已关闭的 #96。
+- 受保护作业的取消必须在 Codex 正常执行边界取得当前根交互线程中用户对 exact Job 的当次确认；旧任务许可、竞速授权、自动批准或历史确认不能替代。
+- 当前已确认 user-level Hook 是正确强制边界，但安装器把安装时 sys.executable 直接冻结为生产 Hook Python；当 app-server 环境无法启动该解释器时，Codex 会把普通 Hook process failure 当作非阻断并继续执行原 Bash。正式修复必须同时解决可移植 runtime 资格验证和 Hook 基础设施故障时的 fail-closed 行为。
+project-specific context: Longleaf 的 htzhulab 是机器私有策略，不得写入公共 Skill；公共实现不得使用 scancel wrapper、PATH interception、Direct-mode override 或 Codex patch。当前默认分支检索未发现 DII/CARE 活跃生产源码直接执行 scancel，故 v3 默认两者 NO CHANGE。
+next action: Proposal v3 已获独立 Critic 设计 PASS；v3 Proposal/Execution Plan/Goal/Kickoff 已写入 main，下一步只做同版 execution-ready Critic review。只有该 review 给 READY_FOR_CODEX=YES 且用户随后发送批准 handoff，才进入实现。
+tracking issue: PENDING_CLEAR_WRITING_AND_PROJECT_MUTATION — 当前 Planner surface 不能同时满足 reader-facing Issue 创建前的真实 Clear Writing 调用与 GitHub Project mutation。下一具两项能力的维护入口应为同一 task 创建/绑定一个 maintenance-track Issue，分类 kind:new-capability / scope:standalone-skill / area:standalone-skill，Project Status=DOING、Area=standalone-skill，并回填 tracking: #实际编号；不复用已关闭 #96，不要求用户手工维护。
 
 
 ## Recently promoted
