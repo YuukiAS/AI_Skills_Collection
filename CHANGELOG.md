@@ -4,6 +4,60 @@
 
 No unreleased changes.
 
+## 5.5.1 - 2026-10-19
+
+Repository `5.5.1` is a compatible patch release for Clear Writing `0.5`.
+Clear Writing now provides a dedicated route for ordinary explanations,
+diagnostics, progress updates, and task-result summaries while preserving exact
+technical strings and protected meaning.
+
+Repository bump decision: PATCH
+Reason: this release improves an existing central plugin within the current
+collection contract and does not add a repository-level task or breaking
+change.
+
+Affected central plugins:
+- `writing-style`: `0.4` -> `0.5`
+  Reason: the completed response-clarity refinement changes user-visible
+  writing behavior and has passed its frozen product, regression, and review
+  gates.
+- all other central plugins: NO_BUMP
+
+Standalone skills: NO_BUMP.
+
+Bridge Kit: NO CHANGE.
+
+Maturity: NO CHANGE.
+
+Unchanged central plugin versions: `workflow-core 0.5`, `ai-skills-core 0.5`,
+`research-writing 0.2`, `presentations 0.3`, `scientific-visualization 0.1`,
+`web-development 0.4`, `statistical-modeling 0.1`, `bioinformatics 0.1`,
+`medical-imaging 0.1`.
+
+Unchanged standalone skill versions: `project-thread-handoff 0.2`,
+`project-instructions-editor 0.2`, `render-chinese-math-pdf 0.3`,
+`slurm-workflows 0.4`.
+
+Changed repository behavior:
+
+- Clear Writing adds `response-clarity` for ordinary user-facing explanations,
+  conclusions, diagnostics, advice, progress updates, and task-result
+  summaries after the relevant domain work.
+- Complex scientific explanations use complete semantic or reasoning units and
+  introduce unfamiliar methods, terms, and mathematical objects with a
+  source-supported reader model before formal notation. Missing definitions
+  remain explicit rather than being guessed.
+- Pure JSON, YAML, code, commands, raw logs, verbatim text, and exact machine
+  output remain exempt from the natural-language route.
+- The `codex-writing-style` profile now matches the approved six-skill exposure,
+  adding `response-clarity` and the already released `product-ui-copy` to the
+  profile. This release does not change Product UI Copy behavior.
+- Real ChatGPT Web closure passed four final answers. This release does not
+  claim that Clear Writing is loaded on every turn or that a matched causal
+  increment has been proved.
+
+See the [writing-style changelog](docs/plugin-changelogs/writing-style.md).
+
 ## 5.5.0 - 2026-10-18
 
 Repository `5.5.0` formally adds Project Instructions Editor v0.2, giving

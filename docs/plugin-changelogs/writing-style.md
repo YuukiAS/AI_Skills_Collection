@@ -4,6 +4,38 @@
 
 No pending released changes.
 
+## 0.5 - 2026-10-19
+
+Before:
+
+- Clear Writing had no dedicated route for ordinary explanations, diagnostics,
+  progress updates, or task-result summaries after domain reasoning.
+- Complex scientific explanations could fragment one reasoning unit across
+  many short paragraphs or introduce unfamiliar multi-index objects before the
+  reader knew what they represented.
+- The `codex-writing-style` profile did not expose the complete approved set of
+  six writing skills.
+
+After:
+
+- Added `response-clarity` for ordinary user-facing explanations, conclusions,
+  diagnostics, advice, progress updates, and task-result summaries while
+  preserving exact technical strings, facts, permissions, commands, paths,
+  status, and other protected meaning.
+- Complex scientific explanations now group complete semantic or reasoning
+  units and introduce unfamiliar methods, terms, and mathematical objects with
+  a source-supported reader model before formal terminology or formulas.
+  Missing definitions are stated explicitly instead of guessed.
+- Pure JSON, YAML, code, commands, raw logs, verbatim text, and exact machine
+  output remain exempt from this natural-language route.
+- The `codex-writing-style` profile now matches the approved six-skill
+  exposure. The profile adds `response-clarity` and the already released
+  `product-ui-copy`; this does not change or revalidate Product UI Copy's
+  professional behavior.
+- Final real ChatGPT Web closure passed four answers. This release does not
+  claim `PLUGIN_LOADED_EVERY_TURN=PASS`, guaranteed background loading on every
+  turn, or a proved matched causal increment.
+
 ## 0.4 - 2026-09-29
 
 Before:

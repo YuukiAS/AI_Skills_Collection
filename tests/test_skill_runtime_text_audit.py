@@ -22,6 +22,58 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
         text = (REPO_ROOT / "plugins/codex/plugins/writing-style/skills/zh/SKILL.md").read_text(encoding="utf-8")
         self.assertIn("任何中文 Markdown/PDF/报告/README/面向读者的文档型中文内容都应自动触发", text)
 
+    def test_response_clarity_owns_ordinary_explanations_not_documents_or_machine_output(self):
+        text = (REPO_ROOT / "skills/writing/core/response-clarity/SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("ordinary answers to the user", text)
+        self.assertIn("after the relevant domain work", text)
+        self.assertIn("Route formal Chinese documents", text)
+        self.assertIn("Do not use this skill for pure JSON", text)
+        self.assertIn("Preserve", text)
+        self.assertIn("permission/authorization boundaries", text)
+
+    def test_generated_plugin_exposes_response_clarity_route(self):
+        text = (
+            REPO_ROOT / "plugins/codex/plugins/writing-style/skills/response-clarity/SKILL.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("Use this skill for ordinary answers to the user", text)
+        self.assertIn("pure JSON, YAML, code, commands, raw logs", text)
+
+    def test_response_clarity_stops_at_the_answer_and_separates_source_consensus(self):
+        source = (REPO_ROOT / "skills/writing/core/response-clarity/SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        generated = (
+            REPO_ROOT / "plugins/codex/plugins/writing-style/skills/response-clarity/SKILL.md"
+        ).read_text(encoding="utf-8")
+
+        for text in (source, generated):
+            self.assertIn("When the user's core question has been answered, stop", text)
+            self.assertIn("This is a semantic stopping condition", text)
+            self.assertIn("For multi-source synthesis", text)
+            self.assertIn("Present any assistant recommendation afterward", text)
+            self.assertIn("source consensus", text)
+
+    def test_response_clarity_groups_reasoning_units_and_builds_reader_models(self):
+        source = (REPO_ROOT / "skills/writing/core/response-clarity/SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        generated = (
+            REPO_ROOT / "plugins/codex/plugins/writing-style/skills/response-clarity/SKILL.md"
+        ).read_text(encoding="utf-8")
+
+        for text in (source, generated):
+            normalized = " ".join(text.split())
+            self.assertIn("complete semantic or reasoning units", normalized)
+            self.assertIn("read the whole answer for fragmentation", normalized)
+            self.assertIn("do not enforce fixed counts", normalized)
+            self.assertIn("Long answers may remain detailed", normalized)
+            self.assertIn(
+                "unfamiliar scientific method, term, or mathematical object", normalized
+            )
+            self.assertIn("For multi-index notation", normalized)
+            self.assertIn("the definition is missing", normalized)
+            self.assertIn("Do not guess a scientific meaning", normalized)
+
     def test_writing_fidelity_fails_unreadable_chinese_final_artifacts(self):
         text = (REPO_ROOT / "skills/writing/core/writing-fidelity/SKILL.md").read_text(encoding="utf-8")
         self.assertIn("classify the deliverable as `qa_failed`", text)
@@ -38,6 +90,7 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
         self.assertIn("detector evasion", fidelity)
 
         self.assertIn("正文优先用连贯段落", chinese)
+        self.assertIn("应交给 `response-clarity`", chinese)
         self.assertIn("不要为了显得结构化把每句话拆成 bullet", chinese)
         self.assertIn("是否保留英文靠语义判断，不靠禁词表", chinese)
         self.assertIn("不能为了自然而改掉证据边界", chinese)
