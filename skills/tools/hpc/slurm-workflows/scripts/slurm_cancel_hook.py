@@ -9,14 +9,18 @@ import os
 from pathlib import Path
 import pwd
 import re
+import secrets
 import shlex
 import stat
 import subprocess
 import sys
+import time
 from typing import Any, Optional, Tuple, List, Dict
 
 
 OPERATION = "ordinary_cancel"
+PROBE_COMMAND = "printf '__SLURM_PROTECTED_CANCEL_CARD_PROBE__\\n'"
+PENDING_TTL = 900
 CONFIRM_LABEL = "确认取消"
 RETAIN_LABEL = "保留 Job"
 QUESTION_HEADER = "取消受保护作业"
@@ -297,6 +301,58 @@ def _event_cwd_valid(event: dict[str, Any]) -> bool:
     return cwd.is_absolute() and cwd.is_dir()
 
 
+def _pending_identity(event: dict[str, Any]) -> dict[str, str]:
+    identity = {}
+    for name in ("session_id", "turn_id", "tool_use_id"):
+        value = event.get(name)
+        if not isinstance(value, str) or not TOKEN_RE.fullmatch(value):
+            raise ValueError("invalid_" + name)
+        identity[name] = value
+    return identity
+
+
+def _pending_path(private: Path, identity: dict[str, str]) -> Path:
+    key = hashlib.sha256("\0".join(identity[name] for name in ("session_id", "turn_id", "tool_use_id")).encode()).hexdigest()
+    return private / "pending" / (key + ".json")
+
+
+def _create_pending(private: Path, event: dict[str, Any], targets, *, probe=False) -> None:
+    # Only this command Hook receives the complete raw event. The MCP handler
+    # independently checks the concrete thread identity before reading this.
+    if "agent_id" in event or "agent_type" in event:
+        raise ValueError("explicit_subagent_context")
+    identity = _pending_identity(event)
+    directory = private / "pending"
+    directory.mkdir(mode=0o700, exist_ok=True)
+    if directory.is_symlink() or not _private_path_ok(directory, directory=True):
+        raise ValueError("pending_permissions_invalid")
+    now = time.time()
+    record = {**identity, "nonce": secrets.token_hex(32), "state": "pending",
+              "operation": "ui_probe" if probe else OPERATION,
+              "job_ids": sorted(target["job_id"] for target in (targets or [])),
+              "targets": sorted(targets or [], key=lambda target: target["job_id"]),
+              "owner": pwd.getpwuid(os.geteuid()).pw_name,
+              "cwd": event["cwd"], "created_at": now, "expires_at": now + PENDING_TTL}
+    path = _pending_path(private, identity)
+    # Publish complete bytes atomically without overwriting an earlier event.
+    temporary = directory / ("." + secrets.token_hex(16) + ".tmp")
+    try:
+        descriptor = os.open(str(temporary), os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        with os.fdopen(descriptor, "w", encoding="utf-8") as stream:
+            json.dump(record, stream, sort_keys=True)
+            stream.write("\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.link(str(temporary), str(path))
+        descriptor = os.open(str(directory), os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(descriptor)
+        finally:
+            os.close(descriptor)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
 def _protected_reason(targets: list[dict[str, str]]) -> str:
     question = _question_for_targets(targets)
     payload = {
@@ -317,11 +373,19 @@ def _protected_reason(targets: list[dict[str, str]]) -> str:
     return prefix + json.dumps(payload, ensure_ascii=False, sort_keys=True)
 
 
-def _pre_tool_use(event: dict[str, Any], runtime: dict[str, Any]) -> int:
+def _pre_tool_use(event: dict[str, Any], runtime: dict[str, Any], private_root: Optional[Path] = None) -> int:
     if event.get("tool_name") != "Bash":
         return _emit({})
     tool_input = event.get("tool_input")
     command = tool_input.get("command") if isinstance(tool_input, dict) else None
+    if command == PROBE_COMMAND:
+        try:
+            if private_root is None or not _event_cwd_valid(event):
+                raise ValueError("invalid_probe_context")
+            _create_pending(private_root, event, [], probe=True)
+        except (OSError, ValueError) as error:
+            return _deny("SLURM_CANCEL_DENIED reason=" + str(error))
+        return _deny("SLURM_PROTECTED_CANCEL_UI_PROBE no_shell_or_scheduler_operation")
     job_ids, error = _parse_cancel_command(command, runtime)
     if error:
         return _deny(f"SLURM_CANCEL_DENIED reason={error}")
@@ -334,6 +398,12 @@ def _pre_tool_use(event: dict[str, Any], runtime: dict[str, Any]) -> int:
         return _deny("SLURM_CANCEL_DENIED reason=target_resolution_failed")
     protected = set(runtime["protected_cancel_partitions"])
     if any(target["partition"] in protected for target in targets):
+        try:
+            if private_root is None:
+                raise ValueError("pending_runtime_missing")
+            _create_pending(private_root, event, targets)
+        except (OSError, ValueError) as error:
+            return _deny("SLURM_CANCEL_DENIED reason=" + str(error))
         return _deny(_protected_reason(targets))
     return _emit({})
 
@@ -490,7 +560,7 @@ def main() -> int:
             return _permission_deny(f"SLURM_CANCEL_DENIED reason={error}")
         return _post_result("denied", str(error))
     if event.get("hook_event_name") == "PreToolUse":
-        return _pre_tool_use(event, runtime)
+        return _pre_tool_use(event, runtime, private_root)
     if event.get("hook_event_name") == "PermissionRequest":
         return _permission_request(event, runtime)
     if event.get("hook_event_name") == "PostToolUse":

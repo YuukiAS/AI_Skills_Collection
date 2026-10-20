@@ -3,6 +3,9 @@ from __future__ import annotations
 import asyncio
 import json
 import hashlib
+import io
+import time
+from contextlib import redirect_stdout
 from pathlib import Path
 import subprocess
 import sys
@@ -25,10 +28,16 @@ def result_data(result):
 
 
 class TestMcpProtectedCancel(unittest.IsolatedAsyncioTestCase):
+    def prepare(self, fixture, event):
+        _, runtime = HOOK._load_runtime(fixture.hook)
+        with redirect_stdout(io.StringIO()):
+            HOOK._pre_tool_use(event, runtime, fixture.private)
+
     async def invoke(self, fixture, response, command="scancel 5001", **extra):
         private, runtime = MCP.guard._load_runtime(fixture.hook)
         event = fixture.shell_event("PreToolUse", command)
         event.update(extra)
+        self.prepare(fixture, event)
         async def elicit(message, schema):
             self.assertEqual(schema, MCP.DECISION_SCHEMA)
             if isinstance(response, Exception):
@@ -87,7 +96,7 @@ class TestMcpProtectedCancel(unittest.IsolatedAsyncioTestCase):
                 return original_resolve(runtime, job_ids)
             with patch.object(MCP.guard, "_resolve_targets", side_effect=resolve):
                 result = await self.invoke(fixture, {"action": "accept", "content": {"decision": "confirm"}})
-            self.assertEqual(observations, [False, False, True])
+            self.assertEqual(observations, [False, False, True, True])
             self.assertEqual(result_data(result)["mutation_count"], 1)
             self.assertEqual(fixture.mutation_argvs(), [["5001"]])
             reservation = json.loads(next((fixture.private / "consumed").glob("*.json")).read_text())
@@ -96,7 +105,7 @@ class TestMcpProtectedCancel(unittest.IsolatedAsyncioTestCase):
             self.assertLess(records["reserved"]["time_ns"], records["final_resolved"]["time_ns"])
             self.assertLess(records["final_resolved"]["time_ns"], records["invocation_intent"]["time_ns"])
             self.assertTrue(MCP.possible_invocation(fixture.private, fixture.shell_event("PreToolUse", "scancel 5001")))
-            with self.assertRaises(FileExistsError):
+            with self.assertRaisesRegex(ValueError, "consumed"):
                 await self.invoke(fixture, {"action": "accept", "content": {"decision": "confirm"}})
             self.assertEqual(fixture.mutation_argvs(), [["5001"]])
 
@@ -111,6 +120,7 @@ class TestMcpProtectedCancel(unittest.IsolatedAsyncioTestCase):
                     fixture.set_jobs(changed)
                     return {"action": "accept", "content": {"decision": "confirm"}}
                 event = fixture.shell_event("PreToolUse", "scancel 5001")
+                self.prepare(fixture, event)
                 result = await MCP.handle(event, {"threadId": "session-1"}, private, runtime, elicit)
                 self.assertEqual(result_data(result)["mutation_count"], 0)
                 self.assertEqual(fixture.mutation_argvs(), [])
@@ -160,6 +170,107 @@ class TestMcpProtectedCancel(unittest.IsolatedAsyncioTestCase):
                 result = await self.invoke(fixture, None, command, tool_use_id="unsupported-" + str(index))
                 self.assertEqual(result["hookSpecificOutput"]["permissionDecision"], "deny")
                 self.assertEqual(fixture.mutation_argvs(), [])
+
+    async def test_root_missing_optional_fields_and_real_guard_pending(self):
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = self.fixture(Path(temp))
+            event = fixture.shell_event("PreToolUse", "scancel 5001")
+            self.assertNotIn("agent_id", event)
+            self.assertNotIn("agent_type", event)
+            completed, result = fixture.invoke_supervisor("PreToolUse", event)
+            self.assertEqual(completed.returncode, 0)
+            self.assertEqual(result["hookSpecificOutput"]["permissionDecision"], "deny")
+            path = HOOK._pending_path(fixture.private, HOOK._pending_identity(event))
+            record = json.loads(path.read_text())
+            self.assertRegex(record["nonce"], r"^[0-9a-f]{64}$")
+            self.assertEqual(record["state"], "pending")
+            self.assertEqual(record["job_ids"], ["5001"])
+            self.assertEqual(record["operation"], HOOK.OPERATION)
+            self.assertLess(record["created_at"], record["expires_at"])
+            _, runtime = MCP.guard._load_runtime(fixture.hook)
+            requested = []
+            async def elicit(message, schema):
+                requested.append(schema)
+                return {"action": "accept", "content": {"decision": "retain"}}
+            result = await MCP.handle(event, {"threadId": "session-1"}, fixture.private, runtime, elicit)
+            self.assertEqual(len(requested), 1)
+            self.assertEqual(result_data(result)["protected_cancel"], "retained")
+            self.assertEqual(json.loads(path.read_text())["state"], "retained")
+            self.assertEqual(fixture.mutation_argvs(), [])
+            self.assertEqual(list((fixture.private / "consumed").glob("*.json")), [])
+
+    async def test_explicit_subagent_never_creates_pending(self):
+        for field in ("agent_id", "agent_type"):
+            with self.subTest(field=field), tempfile.TemporaryDirectory() as temp:
+                fixture = self.fixture(Path(temp))
+                event = {**fixture.shell_event("PreToolUse", "scancel 5001"), field: "child"}
+                completed, result = fixture.invoke_supervisor("PreToolUse", event)
+                self.assertEqual(completed.returncode, 0)
+                self.assertEqual(result["hookSpecificOutput"]["permissionDecision"], "deny")
+                self.assertEqual(list((fixture.private / "pending").glob("*.json")), [])
+                self.assertEqual(fixture.mutation_argvs(), [])
+
+    async def test_parallel_mcp_early_arrival_waits_for_exact_command_pending(self):
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = self.fixture(Path(temp))
+            event = fixture.shell_event("PreToolUse", MCP.PROBE_COMMAND)
+            _, runtime = MCP.guard._load_runtime(fixture.hook)
+            requested = []
+            async def elicit(message, schema):
+                requested.append(True)
+                return {"action": "accept", "content": {"decision": "confirm"}}
+            async def command_hook():
+                await asyncio.sleep(0.04)
+                self.prepare(fixture, event)
+            with patch.object(MCP.guard, "_resolve_targets", side_effect=AssertionError("probe must not query scheduler")):
+                result, _ = await asyncio.gather(
+                    MCP.handle(event, {"threadId": "session-1"}, fixture.private, runtime, elicit), command_hook())
+            self.assertEqual(requested, [True])
+            self.assertEqual(result_data(result)["protected_cancel"], "probe_completed")
+            self.assertEqual(fixture.mutation_argvs(), [])
+            self.assertEqual(list((fixture.private / "consumed").glob("*.json")), [])
+
+    async def test_missing_mismatched_expired_or_replayed_pending_never_elicits(self):
+        cases = ["missing", "session_id", "turn_id", "tool_use_id", "targets", "job_ids", "owner", "operation", "expired", "consumed", "nonce"]
+        for change in cases:
+            with self.subTest(change=change), tempfile.TemporaryDirectory() as temp:
+                fixture = self.fixture(Path(temp))
+                event = fixture.shell_event("PreToolUse", "scancel 5001")
+                _, runtime = MCP.guard._load_runtime(fixture.hook)
+                self.prepare(fixture, event)
+                path = HOOK._pending_path(fixture.private, HOOK._pending_identity(event))
+                record = json.loads(path.read_text())
+                if change == "missing": path.unlink()
+                else:
+                    if change in ("session_id", "turn_id", "tool_use_id", "owner", "operation", "nonce"): record[change] = "wrong"
+                    elif change == "targets": record[change][0]["job_id"] = "5002"
+                    elif change == "job_ids": record[change] = ["5002"]
+                    elif change == "expired": record.update(created_at=time.time()-20, expires_at=time.time()-1)
+                    else: record["state"] = "consumed"
+                    path.write_text(json.dumps(record))
+                async def forbidden(*args): self.fail("must not elicit without exact live pending")
+                with patch.object(MCP, "PENDING_WAIT_SECONDS", 0.06):
+                    started = time.monotonic()
+                    with self.assertRaises(ValueError):
+                        await MCP.handle(event, {"threadId": "session-1"}, fixture.private, runtime, forbidden)
+                    self.assertLess(time.monotonic()-started, 0.5)
+                self.assertEqual(fixture.mutation_argvs(), [])
+                self.assertEqual(list((fixture.private / "consumed").glob("*.json")), [])
+
+    async def test_malformed_or_wrong_call_identity_never_consumes_pending(self):
+        for key in ("session_id", "turn_id", "tool_use_id"):
+            for value in (None, "", "bad/id", "different"):
+                with self.subTest(key=key, value=value), tempfile.TemporaryDirectory() as temp:
+                    fixture = self.fixture(Path(temp))
+                    event = fixture.shell_event("PreToolUse", MCP.PROBE_COMMAND)
+                    self.prepare(fixture, event)
+                    _, runtime = MCP.guard._load_runtime(fixture.hook)
+                    async def forbidden(*args): self.fail("must not elicit")
+                    with patch.object(MCP, "PENDING_WAIT_SECONDS", 0.01):
+                        with self.assertRaises(ValueError):
+                            await MCP.handle({**event, key: value}, {"threadId": "session-1"}, fixture.private, runtime, forbidden)
+                    self.assertEqual(fixture.mutation_argvs(), [])
+                    self.assertEqual(list((fixture.private / "consumed").glob("*.json")), [])
 
 
 class TestMcpInstaller(unittest.TestCase):
@@ -245,6 +356,14 @@ class TestMcpInstaller(unittest.TestCase):
             self.assertNotIn("PostToolUse", parsed["hooks"])
             handler = parsed["hooks"]["PreToolUse"][0]["hooks"][1]
             self.assertEqual(handler["input"]["event"]["session_id"], "${session_id}")
+            # Actual root events omit both optional fields. Expansion must not
+            # depend on either field, and must still reach the MCP handler.
+            event = fixture.shell_event("PreToolUse", MCP.PROBE_COMMAND)
+            template = handler["input"]["event"]
+            self.assertNotIn("agent_id", template)
+            self.assertNotIn("agent_type", template)
+            expanded = {key: event[value[2:-1]] for key, value in template.items()}
+            self.assertEqual(expanded, event)
             self.assertNotIn("threadId", handler["input"])
             self.assertEqual(SETUP.update_user_config_text(updated, new), updated)
 

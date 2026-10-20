@@ -317,7 +317,7 @@ def render_global_contract(
                         "hook_sha256": runtime["hook_sha256"],
                         "runtime_sha256": _sha256_bytes(runtime_bytes), "policy_sha256": runtime["policy_sha256"]}
         files[str(Path(PRIVATE_DIR) / "mcp_identity.json")] = (json.dumps(mcp_identity, sort_keys=True) + "\n").encode()
-        fields = ("session_id", "turn_id", "tool_use_id", "tool_name", "tool_input", "cwd", "hook_event_name", "agent_id", "agent_type")
+        fields = ("session_id", "turn_id", "tool_use_id", "tool_name", "tool_input", "cwd", "hook_event_name")
         hooks["PreToolUse"][0]["hooks"].append({
             "type": "mcp_tool", "server": MCP_SERVER, "tool": "slurm_protected_cancel", "timeout": 900,
             "statusMessage": "Confirm protected Slurm cancellation",
@@ -457,12 +457,12 @@ def _write_private_files(rendered: Mapping[str, Any], destination: Path) -> None
         if relative.startswith(prefix):
             name = relative[len(prefix):]
             _write(destination / name, content, 0o700 if name == SUPERVISOR_NAME else 0o600)
-    for name in ("consumed", "audit", "backups"):
+    for name in ("consumed", "audit", "pending", "backups"):
         path = destination / name; path.mkdir(mode=0o700, exist_ok=True); os.chmod(str(path), 0o700)
 
 
 def _copy_one_time_state(source: Path, destination: Path) -> None:
-    for directory in ("consumed", "audit"):
+    for directory in ("consumed", "audit", "pending"):
         source_dir = source / directory
         destination_dir = destination / directory
         if not source_dir.is_dir() or source_dir.is_symlink():

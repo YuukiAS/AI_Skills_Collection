@@ -525,6 +525,7 @@ class TestG3ProtectedCancelSemantics(unittest.TestCase):
             for index in range(4):
                 cwd = root / "repo-{}".format(index); cwd.mkdir()
                 event = fixture.shell_event("PreToolUse", "scancel 9101"); event["cwd"] = str(cwd)
+                event["tool_use_id"] += "-cwd-" + str(index)
                 _, payload = fixture.invoke_supervisor("PreToolUse", event)
                 self.assertIn("NEEDS_INTERACTIVE_CHAT_CONFIRMATION", denial_reason(payload))
 

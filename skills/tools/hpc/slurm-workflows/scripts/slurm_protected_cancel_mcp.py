@@ -12,6 +12,7 @@ import importlib.metadata
 import importlib.util
 import json
 import os
+import pwd
 import re
 import stat
 from pathlib import Path
@@ -39,6 +40,8 @@ guard = None
 GUARD_LOADED_SHA256 = None
 SERVER_LOADED_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
 TOKEN_RE = re.compile(r"^[A-Za-z0-9._:-]{1,256}$")
+PENDING_WAIT_SECONDS = 2.0
+PENDING_POLL_SECONDS = 0.025
 
 
 def private_file_ok(path: Path) -> bool:
@@ -131,8 +134,6 @@ def validate_context(event: Any, metadata: Any) -> dict[str, str]:
         raise ValueError("invalid_hook_context")
     if event.get("hook_event_name") != "PreToolUse" or event.get("tool_name") != "Bash":
         raise ValueError("wrong_hook_event")
-    if event.get("agent_id") is not None or event.get("agent_type") is not None:
-        raise ValueError("not_root_interactive_session")
     identity = {}
     for name in ("session_id", "turn_id", "tool_use_id"):
         value = event.get(name)
@@ -141,9 +142,46 @@ def validate_context(event: Any, metadata: Any) -> dict[str, str]:
         identity[name] = value
     if metadata.get("threadId") != identity["session_id"]:
         raise ValueError("owning_thread_mismatch")
+    # These fields are deliberately absent from the input template. Their
+    # absence is not root evidence; the host-injected concrete thread ID is.
+    if event.get("agent_id") is not None or event.get("agent_type") is not None:
+        raise ValueError("not_root_interactive_session")
     if not guard._event_cwd_valid(event):
         raise ValueError("invalid_cwd")
     return identity
+
+
+async def matching_pending(private: Path, event: dict, identity: dict, targets, probe: bool):
+    path = guard._pending_path(private, identity)
+    deadline = time.monotonic() + PENDING_WAIT_SECONDS
+    while not path.exists():
+        if time.monotonic() >= deadline:
+            raise ValueError("matching_pending_timeout")
+        await asyncio.sleep(min(PENDING_POLL_SECONDS, max(0, deadline - time.monotonic())))
+    if (path.is_symlink() or path.parent.is_symlink()
+            or not guard._private_path_ok(path.parent, directory=True)
+            or not guard._private_path_ok(path)):
+        raise ValueError("pending_permissions_invalid")
+    record = json.loads(path.read_text(encoding="utf-8"))
+    expected_targets = sorted(targets or [], key=lambda target: target["job_id"])
+    expected = {**identity, "operation": "ui_probe" if probe else guard.OPERATION,
+                "targets": expected_targets, "job_ids": sorted(target["job_id"] for target in expected_targets),
+                "cwd": event["cwd"], "owner": pwd.getpwuid(os.geteuid()).pw_name, "state": "pending"}
+    if not isinstance(record, dict) or any(record.get(key) != value for key, value in expected.items()):
+        raise ValueError("pending_identity_mismatch_or_consumed")
+    nonce = record.get("nonce")
+    if not isinstance(nonce, str) or not re.fullmatch(r"[0-9a-f]{64}", nonce):
+        raise ValueError("pending_nonce_invalid")
+    created, expires = record.get("created_at"), record.get("expires_at")
+    now = time.time()
+    if (type(created) not in (int, float) or type(expires) not in (int, float)
+            or not created <= now < expires or not 0 < expires - created <= guard.PENDING_TTL):
+        raise ValueError("pending_expired_or_invalid_lifetime")
+    return path, record
+
+
+def close_pending(path: Path, record: dict, state: str) -> None:
+    guard._replace_json(path, {**record, "state": state, "closed_at": time.time()})
 
 
 def possible_invocation(private: Path, event: Any) -> bool:
@@ -158,7 +196,7 @@ def possible_invocation(private: Path, event: Any) -> bool:
 
 
 def execute_confirmed(private: Path, runtime: dict, identity: dict,
-                      before: list[dict[str, str]], check_identity=None) -> dict:
+                      before: list[dict[str, str]], check_identity=None, pending=None) -> dict:
     """Reuse guard resolution/identity and reserve before the last scheduler read."""
     job_ids = [target["job_id"] for target in before]
     current = guard._resolve_targets(runtime, job_ids)
@@ -174,6 +212,8 @@ def execute_confirmed(private: Path, runtime: dict, identity: dict,
         return block("denied", "consumed_permissions_invalid")
     reservation = {**identity, "question_id": question_id, "targets": current,
                    "operation": guard.OPERATION, "status": "reserved"}
+    if pending is not None:
+        reservation["pending_nonce"] = pending["nonce"]
     path = directory / (reservation_id + ".json")
     try:
         fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
@@ -219,9 +259,12 @@ def execute_confirmed(private: Path, runtime: dict, identity: dict,
         reservation.update(status="ambiguous", reconciliation=guard._reconciliation_snapshot(runtime, current))
         guard._replace_json(path, reservation)
         return block("ambiguous", "scancel_timeout_after_possible_invocation", mutation_count=None)
-    reservation.update(status="completed" if completed.returncode == 0 else "ambiguous", returncode=completed.returncode)
+    reconciliation = guard._reconciliation_snapshot(runtime, current)
+    reservation.update(status="completed" if completed.returncode == 0 else "ambiguous",
+                       returncode=completed.returncode, reconciliation=reconciliation)
     guard._replace_json(path, reservation)
     audit(private, identity, "invocation_returned", returncode=completed.returncode, targets=current)
+    audit(private, identity, "reconciled", targets=reconciliation)
     return block("executed" if completed.returncode == 0 else "ambiguous", "confirmed", mutation_count=1, job_ids=job_ids)
 
 
@@ -237,12 +280,13 @@ async def handle(event: dict, metadata: dict, private: Path, runtime: dict, elic
         if job_ids is None:
             return {}
     if not probe:
-        targets = guard._resolve_targets(runtime, job_ids)
+        targets = guard._resolve_targets(runtime, sorted(job_ids))
         if targets is None:
             return block("denied", "target_resolution_failed")
         if not any(item["partition"] in runtime["protected_cancel_partitions"] for item in targets):
             return {}
     identity = validate_context(event, metadata)
+    pending_path, pending = await matching_pending(private, event, identity, targets, probe)
     audit(private, identity, "elicitation_requested", probe=probe, targets=targets, schema=DECISION_SCHEMA,
           command=command, metadata_thread_id=metadata["threadId"])
     message = ("确认组件无害验证；任何选择均不会取消 Job 或执行命令。" if probe else
@@ -251,6 +295,7 @@ async def handle(event: dict, metadata: dict, private: Path, runtime: dict, elic
         response = await asyncio.wait_for(elicit(message, DECISION_SCHEMA), timeout=600)
     except Exception as error:
         audit(private, identity, "elicitation_failed", error=type(error).__name__, probe=probe)
+        close_pending(pending_path, pending, "closed")
         return block("denied", "elicitation_failed")
     if hasattr(response, "model_dump"):
         response = response.model_dump(by_alias=True, exclude_none=True)
@@ -259,15 +304,26 @@ async def handle(event: dict, metadata: dict, private: Path, runtime: dict, elic
             or not isinstance(response.get("content"), dict)
             or set(response["content"]) != {"decision"}
             or response["content"]["decision"] not in ("confirm", "retain")):
+        close_pending(pending_path, pending, "closed")
         return block("denied", "not_explicit_confirmation")
     if probe:
+        close_pending(pending_path, pending, "closed")
         return block("probe_completed", "no_scheduler_or_shell_operation")
     if response["content"]["decision"] == "retain":
+        close_pending(pending_path, pending, "retained")
         audit(private, identity, "retained", targets=targets, mutation_count=0)
         return block("retained", "user_retained")
-    if check_identity is not None:
-        check_identity()
-    result = execute_confirmed(private, runtime, identity, targets, check_identity)
+    try:
+        _, live_pending = await matching_pending(private, event, identity, targets, probe)
+        if live_pending != pending:
+            raise ValueError("pending_changed_during_confirmation")
+        if check_identity is not None:
+            check_identity()
+    except Exception:
+        close_pending(pending_path, pending, "invalidated")
+        raise
+    result = execute_confirmed(private, runtime, identity, targets, check_identity, pending)
+    close_pending(pending_path, pending, "consumed")
     audit(private, identity, "result", result=result)
     return result
 
