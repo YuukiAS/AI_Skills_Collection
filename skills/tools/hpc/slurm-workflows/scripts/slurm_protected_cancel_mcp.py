@@ -12,6 +12,8 @@ import importlib.metadata
 import importlib.util
 import json
 import os
+import re
+import stat
 from pathlib import Path
 import subprocess
 import sys
@@ -33,13 +35,35 @@ DECISION_SCHEMA = {
 }
 TOOL_NAME = "slurm_protected_cancel"
 ROOT = Path(__file__).resolve().parent
-_spec = importlib.util.spec_from_file_location("protected_cancel_guard", ROOT / "slurm_cancel_hook.py")
-assert _spec is not None and _spec.loader is not None
-guard = importlib.util.module_from_spec(_spec)
-_guard_source = (ROOT / "slurm_cancel_hook.py").read_bytes()
-GUARD_LOADED_SHA256 = hashlib.sha256(_guard_source).hexdigest()
-exec(compile(_guard_source, str(ROOT / "slurm_cancel_hook.py"), "exec"), guard.__dict__)
+guard = None
+GUARD_LOADED_SHA256 = None
 SERVER_LOADED_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+TOKEN_RE = re.compile(r"^[A-Za-z0-9._:-]{1,256}$")
+
+
+def private_file_ok(path: Path) -> bool:
+    metadata = path.stat()
+    return metadata.st_uid == os.geteuid() and stat.S_ISREG(metadata.st_mode) and metadata.st_mode & 0o077 == 0
+
+
+def load_guard(expected_digest: str):
+    """Do not execute even a guard's top-level code before trusted hash check."""
+    global guard, GUARD_LOADED_SHA256
+    path = ROOT / "slurm_cancel_hook.py"
+    if not private_file_ok(path):
+        raise ValueError("guard_permissions_invalid")
+    source = path.read_bytes()
+    if hashlib.sha256(source).hexdigest() != expected_digest:
+        raise ValueError("frozen_hook_sha256_mismatch")
+    if guard is None:
+        spec = importlib.util.spec_from_file_location("protected_cancel_guard", path)
+        assert spec is not None
+        module = importlib.util.module_from_spec(spec)
+        exec(compile(source, str(path), "exec"), module.__dict__)
+        guard, GUARD_LOADED_SHA256 = module, expected_digest
+    if GUARD_LOADED_SHA256 != expected_digest:
+        raise ValueError("loaded_guard_identity_mismatch")
+    return guard
 
 
 def pinned_runtime(expected: dict) -> tuple[Path, dict]:
@@ -48,18 +72,19 @@ def pinned_runtime(expected: dict) -> tuple[Path, dict]:
              "runtime_sha256": "runtime.json", "policy_sha256": "policy.json"}
     if not isinstance(expected, dict) or set(expected) != {*names, "sdk_version"} or expected["sdk_version"] != "1.30.0":
         raise ValueError("invalid_trusted_runtime_identity")
-    if expected["hook_sha256"] != GUARD_LOADED_SHA256 or expected["server_sha256"] != SERVER_LOADED_SHA256:
+    if expected["server_sha256"] != SERVER_LOADED_SHA256:
         raise ValueError("loaded_code_identity_mismatch")
     snapshots = {}
     for key, name in names.items():
         path = ROOT / name
-        if not guard._private_path_ok(path):
+        if not private_file_ok(path):
             raise ValueError("runtime_permissions_invalid")
         content = path.read_bytes()
         if hashlib.sha256(content).hexdigest() != expected[key]:
             raise ValueError("frozen_" + key + "_mismatch")
         snapshots[key] = content
-    private, runtime = guard._load_runtime(ROOT / "slurm_cancel_hook.py")
+    verified_guard = load_guard(expected["hook_sha256"])
+    private, runtime = verified_guard._load_runtime(ROOT / "slurm_cancel_hook.py")
     effective = dict(runtime)
     protected = effective.pop("protected_cancel_partitions")
     if effective != json.loads(snapshots["runtime_sha256"]) or protected != json.loads(snapshots["policy_sha256"])["protected_cancel_partitions"]:
@@ -126,7 +151,7 @@ def possible_invocation(private: Path, event: Any) -> bool:
     if not isinstance(event, dict):
         return False
     values = [event.get(key) for key in ("session_id", "turn_id", "tool_use_id")]
-    if not all(isinstance(value, str) and guard.TOKEN_RE.fullmatch(value) for value in values):
+    if not all(isinstance(value, str) and TOKEN_RE.fullmatch(value) for value in values):
         return False
     key = hashlib.sha256("\0".join(values).encode()).hexdigest()
     return (private / "audit" / (key + ".invocation_intent.json")).exists()
@@ -254,14 +279,13 @@ async def main() -> None:
 
     private = ROOT
     identity_path = ROOT / "mcp_identity.json"
-    if not guard._private_path_ok(identity_path):
+    if not private_file_ok(identity_path):
         raise ValueError("mcp_identity_permissions_invalid")
     identity = json.loads(identity_path.read_text(encoding="utf-8"))
-    if guard._sha256(Path(__file__).resolve()) != identity["server_sha256"]:
+    if hashlib.sha256(Path(__file__).read_bytes()).hexdigest() != identity["server_sha256"]:
         raise ValueError("mcp_server_identity_mismatch")
     if importlib.metadata.version("mcp") != "1.30.0":
         raise ValueError("mcp_sdk_version_mismatch")
-    pinned_runtime(identity)
     if sys.argv[1:] == ["--check"]:
         print(json.dumps({"sdk_version": identity["sdk_version"], "server_sha256": identity["server_sha256"]}))
         return

@@ -14,6 +14,10 @@ from unittest.mock import patch
 from test_slurm_protected_cancel import HOOK, SETUP, SCRIPTS, PortableFixture, load_module
 
 MCP = load_module("slurm_protected_cancel_mcp", SCRIPTS / "slurm_protected_cancel_mcp.py")
+# Tests explicitly pin the known source fixture; production only loads a guard
+# after receiving the trusted Hook's expected identity.
+with patch.object(MCP, "private_file_ok", return_value=True):
+    MCP.load_guard(hashlib.sha256((SCRIPTS / "slurm_cancel_hook.py").read_bytes()).hexdigest())
 
 
 def result_data(result):
@@ -159,6 +163,24 @@ class TestMcpProtectedCancel(unittest.IsolatedAsyncioTestCase):
 
 
 class TestMcpInstaller(unittest.TestCase):
+    def test_tampered_guard_top_level_never_executes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = PortableFixture(Path(temp))
+            server = fixture.private / SETUP.MCP_NAME
+            server.write_bytes((SCRIPTS / SETUP.MCP_NAME).read_bytes())
+            server.chmod(0o600)
+            expected = {key: hashlib.sha256((fixture.private / name).read_bytes()).hexdigest()
+                        for key, name in {"server_sha256": SETUP.MCP_NAME, "hook_sha256": "slurm_cancel_hook.py",
+                                          "runtime_sha256": "runtime.json", "policy_sha256": "policy.json"}.items()}
+            expected["sdk_version"] = "1.30.0"
+            marker = fixture.root / "must-not-exist"
+            fixture.hook.write_text("from pathlib import Path\nPath(" + repr(str(marker)) + ").touch()\n")
+            isolated = load_module("tampered_guard_mcp_probe", server)
+            self.assertFalse(marker.exists())
+            with self.assertRaisesRegex(ValueError, "frozen_hook_sha256_mismatch"):
+                isolated.pinned_runtime(expected)
+            self.assertFalse(marker.exists())
+
     def test_frozen_runtime_policy_and_loaded_code_identity(self):
         for drift in ("runtime", "policy", "guard"):
             with self.subTest(drift=drift), tempfile.TemporaryDirectory() as temp:
