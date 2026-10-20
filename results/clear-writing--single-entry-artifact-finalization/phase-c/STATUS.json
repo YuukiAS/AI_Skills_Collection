@@ -1,22 +1,32 @@
 {
-  "schema": "CLEAR_WRITING_06_PHASE_C_STATUS_V1",
-  "status": "BLOCKED_BEFORE_LIVE_MUTATION",
+  "schema": "CLEAR_WRITING_06_PHASE_C_STATUS_V2",
+  "status": "RETURN_TO_ORIGINAL_CODEX_BOUNDED_REPAIR",
+  "root_cause": "EXECUTION_READINESS_PRECHECK_MISSED_REAL_ARCHIVE_INTERFACE_AND_FRESH_WEB_ACTOR_CAPABILITY",
   "p0_account_readback": "PASS",
-  "blocker_classes": [
-    "LIVE_ARCHIVE_FORMAT_AND_MATERIALIZATION",
-    "NO_FRESH_CHATGPT_WEB_EXPLICIT_PLUGIN_SELECTION_ACTION"
-  ],
-  "frozen_candidate_commit": "079bd7987bb33d624d244feb415327d5cf2343d8",
-  "approved_package_commit": "d7b810d194ead881303aaca9c2e4f1d59a97c1f1",
-  "writing_style_live_version": "0.5.0",
+  "live_personal_plugin_version": "0.5.0",
   "personal_plugin_mutated": false,
   "restore_required": false,
+  "frozen_wrapper_sha256": "e4c451841583cb6e1ae4212f8d8559b93ef4272f66d687d3f6762f6114a73dc6",
+  "archive_findings": {
+    "actual_export_format": "tar.gz",
+    "builder_currently_accepts_baseline_zip_only": true,
+    "format_compatibility_fix_owner": "ORIGINAL_CODEX_TASK",
+    "actual_archive_byte_materialization_in_current_planner_surface": "UNPROVEN"
+  },
+  "web_gate_findings": {
+    "fresh_chat_normal_entry_exists_for_user": true,
+    "current_planner_can_programmatically_create_and_control_fresh_chat": false,
+    "same_surface_for_archive_and_web_gates_required": false,
+    "phase_c_execution_responsibility_amendment_required": true
+  },
   "gates": {
     "G1": "NOT_RUN",
     "G2": "NOT_RUN",
     "G3": "NOT_RUN",
     "G4": "NOT_RUN",
-    "G5": "NOT_RUN"
+    "G5": "NOT_RUN",
+    "G6": "NOT_SELECTED"
   },
-  "next_action": "Resume the same approved Phase C task only on a surface that can materialize the live/candidate archives and execute genuine fresh ChatGPT Web GPT-5.6 Sol explicit-selection gates."
+  "next_handoff": "ORIGINAL_CODEX_TASK",
+  "next_action": "Apply bounded ZIP/tar.gz prepare-restore compatibility repair without changing wrapper payload; then return to Planner for candidate rebind and Critic review of Phase C execution-owner amendment."
 }
