@@ -32,6 +32,7 @@ def reserve_attempt(path: Path, record: dict) -> None:
 
 
 def collect_artifacts() -> None:
+    (HERE / "outputs").mkdir(parents=True, exist_ok=True)
     records = []
     for record_path in sorted((HERE / "runs").glob("*.json")):
         record = json.loads(record_path.read_text())

@@ -149,11 +149,11 @@ def validate_references(files: dict[str, bytes]) -> None:
         route = PurePosixPath(name).parts[4]
         base = f"{ROUTE_ROOT}/{route}"
         inline_links = re.compile(r"\]\(([^\s)]+)(?:\s+[^)]*)?\)")
-        definitions = re.compile(r"^ {0,3}\[[^\]]+\]:\s*<?([^\s>]+)>?.*$", re.MULTILINE)
+        definitions = re.compile(r"^ {0,3}\[(?!\^)[^\]]+\]:\s*<?([^\s>]+)>?.*$", re.MULTILINE)
         targets = [match.group(1) for match in inline_links.finditer(text)]
         targets += [match.group(1) for match in definitions.finditer(text)]
         for target in targets:
-            target = target.split("#", 1)[0]
+            target = target.removeprefix("<").removesuffix(">").split("#", 1)[0]
             if not target or ":" in target or target.startswith("/"):
                 continue
             resolved = posixpath.normpath(f"{PurePosixPath(name).parent}/{target}")

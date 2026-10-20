@@ -111,6 +111,33 @@ class ClearWritingChatGPTWrapperTests(unittest.TestCase):
         with self.assertRaisesRegex(builder.BuildError, "missing linked support"):
             self.build()
 
+    def test_angle_link_and_footnote_are_valid_markdown(self) -> None:
+        root = self.root / "skills/writing/core/writing-fidelity/references"
+        path = root / "failure-summary.md"
+        path.write_bytes(path.read_bytes() + b"\n[appendix](<appendix.md>)\n\n[^note]: This is explanatory prose\n")
+        (root / "appendix.md").write_text("Appendix")
+        self.build()
+
+    def test_collect_only_creates_missing_output_directory(self) -> None:
+        script = REPO_ROOT / "results/clear-writing--single-entry-artifact-finalization/known-regression/run_local_replays.py"
+        spec = importlib.util.spec_from_file_location("cw06_collect_replay", script)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        here = Path(self.temp.name) / "collect"
+        durable = Path(self.temp.name) / "durable"
+        (here / "runs").mkdir(parents=True)
+        for index in range(13):
+            case = f"CASE-{index:02d}"
+            (here / "runs" / f"{case}.json").write_text(json.dumps({"case": case}))
+            output = durable / case / "replay/outputs"
+            output.mkdir(parents=True)
+            (output / "last-message.txt").write_text("[answer](outputs/answer.md)")
+            (output / "answer.md").write_text("Actual artifact")
+        self.assertFalse((here / "outputs").exists())
+        with mock.patch.object(module, "HERE", here), mock.patch.object(module, "DURABLE", durable):
+            module.collect_artifacts()
+        self.assertEqual(len(list((here / "outputs").glob("*_OUTPUT.md"))), 13)
+
     def test_replay_interruption_cannot_silently_launch_a_second_attempt(self) -> None:
         script = REPO_ROOT / "results/clear-writing--single-entry-artifact-finalization/known-regression/run_local_replays.py"
         spec = importlib.util.spec_from_file_location("cw06_local_replay", script)
