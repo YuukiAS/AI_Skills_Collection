@@ -4,6 +4,35 @@
 
 No pending released changes.
 
+## 0.6 - Candidate (Not Released)
+
+This entry describes the isolated candidate, not a formal release. The formal
+channel remains 0.5 until the required ChatGPT Web gates and final full-artifact
+review pass.
+
+Before:
+
+- The Personal Plugin exposed six sibling Skills without a single owner for
+  all reader-facing deliverables in one request.
+
+Candidate changes:
+
+- A ChatGPT-only `clear-writing` entry identifies each requested object,
+  selects the existing writing routes, reviews a complete candidate before an
+  authorized GitHub text-file write, and checks the complete readback against
+  that candidate before reporting finalization.
+- A deterministic wrapper builder projects the six canonical routes into
+  references, with only the two approved package-local path replacements.
+- Codex Marketplace and `codex-writing-style` retain the six direct routes.
+  The professional route source remains unchanged.
+- Forward-restore packaging preserves the saved 0.5.0 behavior and constructs
+  tool-valid, non-overlapping upload/deletion sets at Personal Plugin 0.6.1.
+
+Candidate implementation and packaging checks do not establish Web routing or
+artifact quality. G1-G6 and the independent complete-artifact review remain
+required before release. External-finalization claims are limited to GitHub
+UTF-8 repository text files through the existing host connector.
+
 ## 0.5 - 2026-10-19
 
 Before:

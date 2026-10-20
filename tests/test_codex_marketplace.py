@@ -33,7 +33,7 @@ CENTRAL_PLUGIN_NAMES = [
 EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
     "workflow-core": "0.5",
     "ai-skills-core": "0.5",
-    "writing-style": "0.5",
+    "writing-style": "0.6",
     "research-writing": "0.2",
     "presentations": "0.4",
     "web-development": "0.4",
@@ -192,7 +192,7 @@ class CodexMarketplaceTests(unittest.TestCase):
         writing = next(plugin for plugin in data["plugins"] if plugin["name"] == "writing-style")
         sources = {entry["artifact_id"]: entry["source"] for entry in writing["skills"]}
 
-        self.assertEqual(writing["version"], "0.5")
+        self.assertEqual(writing["version"], "0.6")
         self.assertEqual(
             sources,
             {

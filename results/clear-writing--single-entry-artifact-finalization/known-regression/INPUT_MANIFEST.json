@@ -1,0 +1,162 @@
+{
+  "classification": "KNOWN_REGRESSION_NOT_FRESH",
+  "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+  "files": [
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/should-not-change-fixtures/v1/CW-CONTROL-01_INPUT.md",
+      "file": "CW-CONTROL-01_INPUT.md",
+      "sha256": "ea4b20c20668ea0a6beaf2435bccf3e73d8786a8af813fd06fd3d9edf046f9d4"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/should-not-change-fixtures/v1/CW-CONTROL-01_TASK.md",
+      "file": "CW-CONTROL-01_TASK.md",
+      "sha256": "aca45406c7025d67fcdd8735fefedcab09419d5989e37ba9892019f77d9e5b82"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/should-not-change-fixtures/v1/CW-CONTROL-02_INPUT.md",
+      "file": "CW-CONTROL-02_INPUT.md",
+      "sha256": "d0e6d3e6f98383ce3efbdadc54ddb436e577b398858526b94e1a6e7a2fbbaf41"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/should-not-change-fixtures/v1/CW-CONTROL-02_TASK.md",
+      "file": "CW-CONTROL-02_TASK.md",
+      "sha256": "c4b36186901886ddf6f7757f03a62b143d3a4f6ae0ce3bc35eb8a808af40ed4b"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/should-not-change-fixtures/v1/CW-CONTROL-03_INPUT.md",
+      "file": "CW-CONTROL-03_INPUT.md",
+      "sha256": "da6b04042afd7f89ee9326bea2e74cd97467bf5e462d616097a2deacd72e7350"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/should-not-change-fixtures/v1/CW-CONTROL-03_TASK.md",
+      "file": "CW-CONTROL-03_TASK.md",
+      "sha256": "b6233e5466f1c82742ef4703a6ff34a2fdade8ed49c6108103330167b9bf4f75"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/should-not-change-fixtures/v1/CW-CONTROL-04_INPUT.md",
+      "file": "CW-CONTROL-04_INPUT.md",
+      "sha256": "682562536230a8f20e2189f4986a7329f29e523a2ff6a6dcf372d9ca7747ed20"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/should-not-change-fixtures/v1/CW-CONTROL-04_TASK.md",
+      "file": "CW-CONTROL-04_TASK.md",
+      "sha256": "6346234e8814b0085f0f2a378a0b3b6b53971f6b414100021d811e637792cca2"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/web-regression-fixtures/v1/RW-WEB-01_INPUT.md",
+      "file": "RW-WEB-01_INPUT.md",
+      "sha256": "7227e027a73b03eb9288edf1e8b00e1c3aa7f2b3a167d5e6c83911174028ec15"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/web-regression-fixtures/v1/RW-WEB-01_TASK.md",
+      "file": "RW-WEB-01_TASK.md",
+      "sha256": "2ae60b5e0f5dd2db49aaebc665e62b4fe6a90d5eb1256627601d7ca933d99f88"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/web-regression-fixtures/v1/RW-WEB-02_INPUT.md",
+      "file": "RW-WEB-02_INPUT.md",
+      "sha256": "7361ab550ba5b585e4de8f63f5eacfa30a420ceaecc01058f218a636b3225d4f"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/web-regression-fixtures/v1/RW-WEB-02_TASK.md",
+      "file": "RW-WEB-02_TASK.md",
+      "sha256": "15e7608cb398925a012334cbf51a8e1a5383f1e852de124ebeac1f05e229fc77"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/web-regression-fixtures/v1/RW-WEB-03_INPUT.md",
+      "file": "RW-WEB-03_INPUT.md",
+      "sha256": "c02849b3de097b6791f4fce80c944f24f015ed0fd4c0357922bbf9537e87358a"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/web-regression-fixtures/v1/RW-WEB-03_TASK.md",
+      "file": "RW-WEB-03_TASK.md",
+      "sha256": "c3501fa3a43adb5ddebd1c6c0ae21f6417a85a7c315d7721e44a0f2b01d20e71"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/web-regression-fixtures/v1/RW-WEB-04_INPUT.md",
+      "file": "RW-WEB-04_INPUT.md",
+      "sha256": "4f9ac4dfd59de04c8dfbd237d750bd5b729e24b40dbdff6d5af3d067e52a577c"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/web-regression-fixtures/v1/RW-WEB-04_TASK.md",
+      "file": "RW-WEB-04_TASK.md",
+      "sha256": "afd3773efa500db1fceaac128ed611a9ac3b9a62964921bd3132b232a45b4123"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/web-regression-fixtures/v1/RW-WEB-05_INPUT.md",
+      "file": "RW-WEB-05_INPUT.md",
+      "sha256": "60779bd8726e9bf525710f1f9c1658e3898bbf9f95bf03121a8eb5b585ec56c1"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--cross-surface-language-layer/web-regression-fixtures/v1/RW-WEB-05_TASK.md",
+      "file": "RW-WEB-05_TASK.md",
+      "sha256": "7bce90908de7651f4af08c38cefd2b96d2ce2302ffc175d2099a401f253dbdaa"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--scientific-explanation-readability-repair/web-regression-fixtures/v2/KR-WEB-06_INPUT.md",
+      "file": "KR-WEB-06_INPUT.md",
+      "sha256": "495d9ee7a4dc2b5aacd730c66c231efaaa5f1e0f30b3bdef2a9d2b827824a225"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--scientific-explanation-readability-repair/web-regression-fixtures/v2/KR-WEB-06_TASK.md",
+      "file": "KR-WEB-06_TASK.md",
+      "sha256": "95d2eb05a40076c16d08eb5ed57d359a59ea68c0fb131db38e4f56947eea7c27"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--scientific-explanation-readability-repair/web-regression-fixtures/v2/KR-WEB-07_INPUT.md",
+      "file": "KR-WEB-07_INPUT.md",
+      "sha256": "008e52829a1865650fd3916d58e83bd440b49f2c6883dfc609a09e7ba8e99dcf"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--scientific-explanation-readability-repair/web-regression-fixtures/v2/KR-WEB-07_TASK.md",
+      "file": "KR-WEB-07_TASK.md",
+      "sha256": "3df2d7e94a210f0c8a3c639ff8dc056748710b983fb87a1623e0421cee994935"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--scientific-explanation-readability-repair/web-regression-fixtures/v2/KR-WEB-08_INPUT.md",
+      "file": "KR-WEB-08_INPUT.md",
+      "sha256": "0ecb6701b657522662c9fc402c40ddf59f875232c2057039d30e7afab1220ed0"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--scientific-explanation-readability-repair/web-regression-fixtures/v2/KR-WEB-08_TASK.md",
+      "file": "KR-WEB-08_TASK.md",
+      "sha256": "ec47993242d501a6cea45c41876203c10667339af4ecd48c938f7c3da8b01361"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--scientific-explanation-readability-repair/web-regression-fixtures/v2/KR-WEB-09_INPUT.md",
+      "file": "KR-WEB-09_INPUT.md",
+      "sha256": "5f206a2fb4afbc9ce2c505a32803e1e0ef16fa5b8e9b13cc653a007d8c9965cc"
+    },
+    {
+      "source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+      "source_path": "results/clear-writing--scientific-explanation-readability-repair/web-regression-fixtures/v2/KR-WEB-09_TASK.md",
+      "file": "KR-WEB-09_TASK.md",
+      "sha256": "19bd3c6979c87e2beefd6ad328c3fab73fc9d35a07d2e0ec5ff57c4e02518d06"
+    }
+  ]
+}

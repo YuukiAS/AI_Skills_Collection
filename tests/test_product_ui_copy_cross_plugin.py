@@ -90,7 +90,7 @@ class ProductUiCopyCrossPluginTests(unittest.TestCase):
         plugins = {plugin["name"]: plugin for plugin in config["plugins"]}
 
         writing = plugins["writing-style"]
-        self.assertEqual(writing["version"], "0.5")
+        self.assertEqual(writing["version"], "0.6")
         self.assertIn("Product UI Copy", writing["description"])
         writing_sources = {skill["artifact_id"]: skill["source"] for skill in writing["skills"]}
         self.assertEqual(writing_sources["product-ui-copy"], "skills/writing/core/product-ui-copy")
