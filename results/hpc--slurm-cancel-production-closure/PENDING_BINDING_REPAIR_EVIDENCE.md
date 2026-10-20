@@ -23,6 +23,8 @@ One existing cross-cwd fixture reused the same tool-use identity for four distin
 
 ## Runtime checkpoint
 
+Frozen implementation: `10f10017129bd59f2611885ecb24a080e80b3272`. This subsequent control checkpoint changes no implementation bytes. Installation must compare each installed runtime source against this Git object and preserve every existing native trust value. After the authorized atomic installation, the next dependent action is native re-trust of exactly the three task-owned handlers, followed by a refreshed normal root session and the harmless sentinel; do not request real cancellation first.
+
 No real Job was read or mutated during this repair. No cancellation reservation for Job 5693449 was created. Native trust, the new candidate's harmless normal-entry card, retain/confirm on the single existing Job, G4, full regression/CI, independent final review, G5, version/release and formal installation remain subsequent gates. No completion or release PASS is claimed here.
 
 README: no change required. No version or changelog bump is made at this pre-G4 checkpoint.
