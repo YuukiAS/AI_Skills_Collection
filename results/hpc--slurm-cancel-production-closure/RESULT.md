@@ -1,7 +1,7 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: hpc--slurm-cancel-production-closure
-implementation_commit: a8765b97b69c319304cb51dbd271d57ed8492c34
+implementation_commit: 57837a90125fafa4faf4368f55cb9a3c42bb1cd9
 ---
 
 # Codex Result
@@ -43,10 +43,33 @@ Reason: no formal release is authorized before G4, independent review and G5.
 Affected standalone Skill: `slurm-workflows`: NO_BUMP yet; approved release bump remains pending.
 Affected central Marketplace plugins: all NO_BUMP.
 
+## Executor implementation repair (same Plan revision)
+
+Planner recovery commit `70fb0e5612834a99c7675af76a24aa7587267a05` classified the native question incompatibility as an ordinary implementation bug and restored `PLAN_FROZEN`, revision 1. No Plan edit, additional revision, successor, architecture investigation or second Job is part of this repair.
+
+New implementation candidate: `57837a90125fafa4faf4368f55cb9a3c42bb1cd9`.
+
+- Model-facing questions contain exactly `id/header/question/options`.
+- Parsing accepts either that canonical shape or exactly six keys with strict `isOther=true/isSecret=false`; altered values, extra fields and altered semantic contents fail closed.
+- Exact retain answers return explicit `retained`, `mutation_count=0`, with no cancellation reservation; free text, Other, empty or malformed answers never authorize cancellation.
+- Supervisor validation accepts only zero-mutation retained results.
+- Confirmation preserves one-shot reservation and performs a final exact scheduler re-resolution after the durable reservation, before the single scancel; drift consumes the identity without mutation.
+- Focused protected-cancel regression: 30 tests PASS. Full Slurm regression: 45 tests PASS. Full repository suite: 377 tests PASS under the permitted writable exact-worktree context. Skill validation/audit and Marketplace validation/freshness PASS. Initial attempts with the old Python or read-only W are not reported as product passes; no unrelated source was changed to address those environment constraints.
+- Existing Job 5693449 was read-only verified PENDING/JobHeldUser, Priority 0, unallocated and future-dated before repair. No Slurm mutation occurred during implementation/testing.
+
+The exact candidate was installed atomically at epoch nanoseconds `1792429481505610261`, with backup `/users/a/e/aereinh/.codex/slurm-protected-cancel/backups/pre-v3-20261019T170441Z`. Bytes outside the protected-cancel declaration block were verified unchanged (SHA256 `80c640afd58434ebd4584ba460ee746d1f2b23fbdc1b8ebda7d3e928a0676006`). Installed source hashes match the frozen commit. Hook/supervisor/runtime hashes changed as expected; no trust state was rewritten by Executor.
+
+The old execution session now correctly fails closed against the changed external runtime identity. No shell command is retried through an alternate executor. New trust and a genuinely fresh execution thread are required before further shell verification or Job interactions. The candidate source commit exists locally; publishing it and committing the updated control/evidence files remain pending that normal-entry boundary.
+
+New-candidate trust, fresh-thread harmless/retain/confirm evidence, final CI, independent review, G5 and release remain separate required acceptance steps. Earlier candidate runtime PASS is not relabeled as new-candidate PASS.
+
+The user subsequently completed native trust. A genuinely new root Desktop thread on the same backend and USERS CODEX_HOME then proved this new candidate's ordinary `scancel --help` deny: native PreToolUse started/completed as blocked, dispatcher deny, no underlying command launch. See `NATIVE_SCHEMA_REPAIR_EVIDENCE.md` for exact thread/turn/call identities. Retain/confirm still require actual user selections and are not counted as passed.
+
 `TEST_JOB_ID=5693449`
-`G4=FAIL`
-`KEEP_TEST=FAIL`
+`QUESTION_SCHEMA_FIX=PASS`
+`G4_HARMLESS_PROBE=PASS`
+`KEEP_TEST=NOT_RUN_FOR_NEW_CANDIDATE`
 `CONFIRM_CANCEL_TEST=NOT_RUN`
 `EXACT_CANCEL_COUNT=0`
 `OTHER_JOB_MUTATION=NO`
-`NEXT_ACTION=RETURN_TO_PLANNER`
+`NEXT_ACTION=CONTINUE_AFTER_NATIVE_TRUST_IN_FRESH_SESSION`
