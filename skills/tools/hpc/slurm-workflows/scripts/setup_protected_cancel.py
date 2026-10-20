@@ -23,6 +23,10 @@ HOOK_NAME = "slurm_cancel_hook.py"
 SUPERVISOR_NAME = "slurm_cancel_supervisor.sh"
 RUNTIME_NAME = "runtime.json"
 POLICY_NAME = "policy.json"
+MCP_NAME = "slurm_protected_cancel_mcp.py"
+MCP_SERVER = "slurm-protected-cancel"
+MCP_START = "# ai-skills-slurm-protected-cancel:mcp:start"
+MCP_END = "# ai-skills-slurm-protected-cancel:mcp:end"
 RULES_REL = Path("rules/slurm-protected-cancel.rules")
 DECLARATION_START = "# ai-skills-slurm-protected-cancel:declarations:start"
 DECLARATION_END = "# ai-skills-slurm-protected-cancel:declarations:end"
@@ -223,6 +227,14 @@ def _toml_string(value: str) -> str:
 
 
 def _handler_toml(handler: Mapping[str, Any]) -> str:
+    if handler["type"] == "mcp_tool":
+        def value_toml(value):
+            if isinstance(value, dict):
+                return "{ " + ", ".join(_toml_string(key) + " = " + value_toml(item) for key, item in value.items()) + " }"
+            if isinstance(value, str):
+                return _toml_string(value)
+            return str(value)
+        return value_toml(handler)
     fields = ["type = {}".format(_toml_string(str(handler["type"]))), "command = {}".format(_toml_string(str(handler["command"]))), "timeout = {}".format(int(handler["timeout"])), "statusMessage = {}".format(_toml_string(str(handler["statusMessage"])))]
     return "{ " + ", ".join(fields) + " }"
 
@@ -253,6 +265,8 @@ def render_global_contract(
     codex_home: Path, skill_scripts: Path, scontrol: Path, scancel: Path,
     protected_partitions: List[str], hook_python: Optional[Path] = None,
     runtime_env: Optional[Mapping[str, str]] = None,
+    mcp_python: Optional[Path] = None,
+    mcp_runtime_env: Optional[Mapping[str, str]] = None,
 ) -> Dict[str, Any]:
     codex_home = codex_home.expanduser().resolve()
     skill_scripts = skill_scripts.expanduser().resolve()
@@ -286,6 +300,38 @@ def render_global_contract(
         str(Path(PRIVATE_DIR) / POLICY_NAME): policy,
         str(RULES_REL): _rules_text([scancel_invocation, scancel_realpath]).encode("utf-8"),
     }
+    mcp_config = None
+    if mcp_python is not None:
+        invocation, _ = _executable_identity(mcp_python, codex_home)
+        mcp_environment = _runtime_environment(mcp_runtime_env or {})
+        qualified = subprocess.run(
+            [str(invocation), "-I", "-c", "import importlib.metadata;from mcp.server import Server;from mcp.server.session import ServerSession;assert hasattr(ServerSession,'elicit_form');print(importlib.metadata.version('mcp'))"],
+            capture_output=True, text=True, check=False, timeout=15, env=mcp_environment,
+        )
+        if qualified.returncode != 0 or qualified.stdout.strip() != "1.30.0":
+            raise ValueError("MCP SDK 1.30.0 runtime qualification failed")
+        mcp_source = (skill_scripts / MCP_NAME).read_bytes()
+        mcp_digest = _sha256_bytes(mcp_source)
+        files[str(Path(PRIVATE_DIR) / MCP_NAME)] = mcp_source
+        files[str(Path(PRIVATE_DIR) / "mcp_identity.json")] = (json.dumps({"server_sha256": mcp_digest, "sdk_version": "1.30.0"}, sort_keys=True) + "\n").encode()
+        fields = ("session_id", "turn_id", "tool_use_id", "tool_name", "tool_input", "cwd", "hook_event_name", "agent_id", "agent_type")
+        hooks["PreToolUse"][0]["hooks"].append({
+            "type": "mcp_tool", "server": MCP_SERVER, "tool": "slurm_protected_cancel", "timeout": 900,
+            "statusMessage": "Confirm protected Slurm cancellation",
+            "input": {"event": {key: "${" + key + "}" for key in fields}, "server_sha256": mcp_digest},
+        })
+        # Latest user authority (attachment section 4, line 247) explicitly
+        # retires THIS product's request_user_input binder. This dictionary
+        # contains only handlers rendered by _hooks_document above, never the
+        # user's other Hook declarations. Their bytes and trust stay outside
+        # the owned declaration markers and are not edited.
+        del hooks["PostToolUse"]
+        mcp_config = {
+            "command": str(tools["env"]),
+            "args": ["-i"] + [key + "=" + value for key, value in sorted(mcp_environment.items())]
+                    + [str(invocation), "-I", "-B", str(private_root / MCP_NAME)],
+            "startup_timeout_sec": 20, "tool_timeout_sec": 900,
+        }
     source_path = codex_home / "config.toml"
     hook_keys = {}
     hook_hashes = {}
@@ -293,14 +339,17 @@ def render_global_contract(
         suffix = HOOK_EVENT_KEYS[event_name]
         hook_keys[suffix] = "{}:{}:0:0".format(source_path, suffix)
         hook_hashes[suffix] = _normalized_hook_hash(event_name, groups[0], groups[0]["hooks"][0])
-    return {"files": files, "hooks": hooks, "manifest": {
+    return {"files": files, "hooks": hooks, "mcp_config": mcp_config, "manifest": {
         "schema_version": 5, "codex_home": str(codex_home), "hook_sha256": runtime["hook_sha256"],
-        "fresh_session_required": True,
-        "next_action": "After installation and any required Hook trust, start a fresh Codex/Desktop thread and verify its actual Hook events before cancellation. hooks/list alone does not prove an existing session reloaded its Hooks.",
+        "fresh_session_required": not bool(mcp_config),
+        "client_reload_required": bool(mcp_config),
+        "next_action": ("Review only the new MCP Hook in the native Hooks interface, apply the supported client reload, and verify actual current-chat Hook/elicitation events before cancellation." if mcp_config else "After installation and any required Hook trust, start a fresh Codex/Desktop thread and verify its actual Hook events before cancellation. hooks/list alone does not prove an existing session reloaded its Hooks."),
         "policy_sha256": runtime["policy_sha256"], "python_path": str(python_path), "protected_cancel_partitions": partitions,
         "runtime_environment_keys": sorted(environment), "scancel_path": str(scancel_realpath), "scontrol_path": str(scontrol_realpath),
         "supervisor_path": str(supervisor_path), "supervisor_sha256": supervisor_digest, "hook_source_path": str(source_path),
         "hook_keys": hook_keys, "hook_current_hashes": hook_hashes,
+        "confirmation_transport": "mcp_elicitation" if mcp_config else "legacy_fixture",
+        "mcp_server": MCP_SERVER if mcp_config else None,
         "file_sha256": {name: _sha256_bytes(content) for name, content in sorted(files.items())},
     }}
 
@@ -347,7 +396,7 @@ def update_user_config_text(original: str, rendered: Mapping[str, Any]) -> str:
     declarations = "\n".join([
         DECLARATION_START, "hooks.PreToolUse = {}".format(_event_toml(hooks["PreToolUse"])),
         "hooks.PermissionRequest = {}".format(_event_toml(hooks["PermissionRequest"])),
-        "hooks.PostToolUse = {}".format(_event_toml(hooks["PostToolUse"])), DECLARATION_END, "",
+        *(["hooks.PostToolUse = {}".format(_event_toml(hooks["PostToolUse"]))] if "PostToolUse" in hooks else []), DECLARATION_END, "",
     ])
     pattern = re.compile(
         r"(?ms)^{}\n.*?^{}(?:\n|\Z)".format(
@@ -367,10 +416,21 @@ def update_user_config_text(original: str, rendered: Mapping[str, Any]) -> str:
     if not features:
         raise ValueError("user config has no [features] table")
     body = features.group("body")
-    if not re.search(r"(?m)^default_mode_request_user_input\s*=\s*true\s*$", body):
+    if not rendered.get("mcp_config") and not re.search(r"(?m)^default_mode_request_user_input\s*=\s*true\s*$", body):
         raise ValueError("default_mode_request_user_input must already be true")
     if not re.search(r"(?m)^hooks\s*=\s*true\s*$", body):
         raise ValueError("hooks feature must already be true")
+    if rendered.get("mcp_config"):
+        text = _strip_block(text, MCP_START, MCP_END)
+        if re.search(r'(?m)^\[mcp_servers\.(?:"slurm-protected-cancel"|slurm-protected-cancel)\]', text):
+            raise ValueError("unowned protected-cancel MCP server declaration")
+        mcp = rendered["mcp_config"]
+        text += ("" if text.endswith("\n") else "\n") + "\n".join([
+            MCP_START, '[mcp_servers."' + MCP_SERVER + '"]',
+            "command = " + _toml_string(mcp["command"]),
+            "args = [" + ", ".join(_toml_string(item) for item in mcp["args"]) + "]",
+            "startup_timeout_sec = 20", "tool_timeout_sec = 900", MCP_END, "",
+        ])
     return text
 
 
@@ -420,6 +480,16 @@ def _qualify_staged_contract(rendered: Mapping[str, Any], staged_private: Path) 
     except json.JSONDecodeError as error: raise ValueError("staged supervisor returned invalid JSON") from error
     if completed.returncode != 0 or payload != {}:
         raise ValueError("staged candidate qualification failed: rc={} payload={!r}".format(completed.returncode, payload))
+    if rendered.get("mcp_config"):
+        mcp = rendered["mcp_config"]
+        args = list(mcp["args"])
+        args[-1] = str(staged_private / MCP_NAME)
+        completed = subprocess.run([mcp["command"], *args, "--check"], capture_output=True, text=True, check=False, timeout=20)
+        if completed.returncode != 0:
+            raise ValueError("staged MCP runtime qualification failed")
+        identity = json.loads(completed.stdout)
+        if identity.get("server_sha256") != _sha256_bytes(rendered["files"][str(Path(PRIVATE_DIR) / MCP_NAME)]):
+            raise ValueError("staged MCP server identity mismatch")
 
 
 def write_rendered(rendered: Mapping[str, Any], destination: Path, install: bool = False) -> None:
@@ -473,6 +543,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--scancel", type=Path, required=True)
     parser.add_argument("--protected-partition", action="append", required=True, dest="protected_partitions")
     parser.add_argument("--hook-python", type=Path)
+    parser.add_argument("--mcp-python", type=Path)
+    parser.add_argument("--mcp-runtime-env", action="append", default=[])
     parser.add_argument("--runtime-env", action="append", default=[])
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--install", action="store_true")
@@ -482,7 +554,9 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Optional[List[str]] = None) -> int:
     args = build_parser().parse_args(argv)
-    rendered = render_global_contract(args.codex_home, args.skill_scripts, args.scontrol, args.scancel, args.protected_partitions, hook_python=args.hook_python, runtime_env=_parse_runtime_env(args.runtime_env))
+    if args.install and args.mcp_python is None:
+        raise ValueError("production installation requires --mcp-python with qualified MCP SDK 1.30.0")
+    rendered = render_global_contract(args.codex_home, args.skill_scripts, args.scontrol, args.scancel, args.protected_partitions, hook_python=args.hook_python, runtime_env=_parse_runtime_env(args.runtime_env), mcp_python=args.mcp_python, mcp_runtime_env=_parse_runtime_env(args.mcp_runtime_env))
     destination = args.codex_home if args.install else args.render_output
     assert destination is not None
     write_rendered(rendered, destination, install=args.install)
