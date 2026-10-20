@@ -1,5 +1,7 @@
 # P0: isolate unrelated Bash from Slurm runtime failure
 
+Frozen implementation candidate: `3e81802ab0251d3bf31ec2d808d4e3273505b2f6`. Subsequent control/evidence checkpoints must not change its runtime source bytes. Resume from this task's CURRENT, normal reload and the required native trust gate; never create another Job.
+
 This continues the existing task and preserves root/pending implementation `10f10017129bd59f2611885ecb24a080e80b3272`. No Slurm routing, confirmation protocol/UI, Codex, Bridge Kit, DII, CARE, or unrelated Hook is changed.
 
 ## Repair and deterministic evidence
