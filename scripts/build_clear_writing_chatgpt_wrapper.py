@@ -148,21 +148,27 @@ def validate_references(files: dict[str, bytes]) -> None:
         text = data.decode("utf-8")
         route = PurePosixPath(name).parts[4]
         base = f"{ROUTE_ROOT}/{route}"
-        references = re.findall(
-            r"(?<![A-Za-z0-9_./-])((?:references|assets|scripts)/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+)", text
-        )
-        for relative in references:
-            if route == "scientific-rewrite" and relative == "scripts/run_fedfisher.sh":
-                continue  # The frozen Plan identifies this literal as a user-project example.
-            if f"{base}/{relative}" not in files:
-                raise BuildError(f"missing route support: {name}: {relative}")
-        for target in re.findall(r"\]\(([^\s)]+)(?:\s+[^)]*)?\)", text):
+        inline_links = re.compile(r"\]\(([^\s)]+)(?:\s+[^)]*)?\)")
+        definitions = re.compile(r"^ {0,3}\[[^\]]+\]:\s*<?([^\s>]+)>?.*$", re.MULTILINE)
+        targets = [match.group(1) for match in inline_links.finditer(text)]
+        targets += [match.group(1) for match in definitions.finditer(text)]
+        for target in targets:
             target = target.split("#", 1)[0]
             if not target or ":" in target or target.startswith("/"):
                 continue
             resolved = posixpath.normpath(f"{PurePosixPath(name).parent}/{target}")
             if resolved not in files:
                 raise BuildError(f"missing linked support: {name}: {target}")
+        # Markdown destinations are file-relative; do not also resolve them at the route root.
+        remaining = definitions.sub("", inline_links.sub("", text))
+        references = re.findall(
+            r"(?<![A-Za-z0-9_./-])((?:references|assets|scripts)/[A-Za-z0-9_./-]+\.[A-Za-z0-9]+)", remaining
+        )
+        for relative in references:
+            if route == "scientific-rewrite" and relative == "scripts/run_fedfisher.sh":
+                continue  # The frozen Plan identifies this literal as a user-project example.
+            if f"{base}/{relative}" not in files:
+                raise BuildError(f"missing route support: {name}: {relative}")
 
 
 def validate_package(files: dict[str, bytes], version: str) -> None:

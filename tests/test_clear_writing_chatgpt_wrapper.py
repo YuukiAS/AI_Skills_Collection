@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import io
+import importlib.util
 import json
 from pathlib import Path
 import shutil
@@ -88,13 +89,40 @@ class ClearWritingChatGPTWrapperTests(unittest.TestCase):
             path = self.root / "skills/writing/core/writing-fidelity/SKILL.md"
             original = path.read_bytes()
             path.write_bytes(original + b"\n" + reference)
-            with self.assertRaisesRegex(builder.BuildError, "missing route support"):
+            with self.assertRaisesRegex(builder.BuildError, "missing (route|linked) support"):
                 self.build()
             path.write_bytes(original)
         support = self.root / "skills/writing/core/writing-fidelity/references/failure-summary.md"
         support.write_bytes(support.read_bytes() + b"\n[details](absent.md)\n")
         with self.assertRaisesRegex(builder.BuildError, "missing linked support"):
             self.build()
+
+    def test_nested_link_uses_containing_support_directory(self) -> None:
+        root = self.root / "skills/writing/core/writing-fidelity/references"
+        path = root / "failure-summary.md"
+        path.write_bytes(path.read_bytes() + b"\n[detail](references/nested.md)\n")
+        (root / "references").mkdir()
+        (root / "references/nested.md").write_text("Nested support")
+        self.build()
+
+    def test_reference_style_link_target_is_checked(self) -> None:
+        path = self.root / "skills/writing/core/writing-fidelity/references/failure-summary.md"
+        path.write_bytes(path.read_bytes() + b"\n[appendix][details]\n\n[details]: absent.md\n")
+        with self.assertRaisesRegex(builder.BuildError, "missing linked support"):
+            self.build()
+
+    def test_replay_interruption_cannot_silently_launch_a_second_attempt(self) -> None:
+        script = REPO_ROOT / "results/clear-writing--single-entry-artifact-finalization/known-regression/run_local_replays.py"
+        spec = importlib.util.spec_from_file_location("cw06_local_replay", script)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        with mock.patch.object(module, "HERE", Path(self.temp.name) / "replays"):
+            with mock.patch.object(module.subprocess, "run", side_effect=RuntimeError("interruption")) as call:
+                with self.assertRaisesRegex(RuntimeError, "interruption"):
+                    module.replay("CASE", "FIXTURE", "commit", "archive-hash")
+                with self.assertRaises(FileExistsError):
+                    module.replay("CASE", "FIXTURE", "commit", "archive-hash")
+                self.assertEqual(call.call_count, 1)
 
     def test_two_raw_builds_and_all_zip_headers_are_identical(self) -> None:
         files, receipt = self.build()

@@ -8,8 +8,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import hashlib
 import json
 from pathlib import Path
+import re
 import shutil
 import subprocess
+import sys
 
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -23,10 +25,46 @@ def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def reserve_attempt(path: Path, record: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("x", encoding="utf-8") as output:
+        output.write(json.dumps({**record, "status": "reserved_before_request"}, indent=2) + "\n")
+
+
+def collect_artifacts() -> None:
+    records = []
+    for record_path in sorted((HERE / "runs").glob("*.json")):
+        record = json.loads(record_path.read_text())
+        output = DURABLE / record["case"] / "replay/outputs"
+        message = (output / "last-message.txt").read_bytes()
+        candidates = []
+        for link in re.findall(r"\[[^\]]+\]\(([^)]+)\)", message.decode()):
+            relative = link.split("/outputs/", 1)[-1] if "/outputs/" in link else link.removeprefix("outputs/")
+            path = (output / relative).resolve()
+            if path.is_relative_to(output.resolve()) and path.is_file():
+                candidates.append(path)
+        candidates = list(dict.fromkeys(candidates))
+        if len(candidates) != 1:
+            raise RuntimeError(f"Inspect actual artifact mapping for {record['case']}: {candidates}")
+        artifact = candidates[0].read_bytes()
+        record["chat_receipt_sha256"] = digest(message)
+        record["artifact_relative_path"] = candidates[0].relative_to(output).as_posix()
+        record["output_sha256"] = digest(artifact)
+        (HERE / "outputs" / f"{record['case']}_OUTPUT.md").write_bytes(artifact)
+        record_path.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n")
+        records.append(record)
+    if len(records) != 13:
+        raise RuntimeError("all thirteen actual artifact outputs are required")
+    (HERE / "RUNS.json").write_text(json.dumps(records, indent=2) + "\n")
+    print("Collected 13 actual artifact files, independently of chat completion receipts.")
+
+
 def replay(case: str, fixture: str, source_commit: str, archive_sha256: str) -> dict:
     record_path = HERE / "runs" / f"{case}.json"
-    if record_path.exists():
-        raise RuntimeError(f"attempt already recorded; inspect before any retry: {case}")
+    record = {"case": case, "fixture": fixture, "source_commit": source_commit,
+              "wrapper_archive_sha256": archive_sha256,
+              "evidence_class": "LOCAL_WRAPPER_SOURCE_REPLAY_NOT_WEB_GATE", "attempt": 1}
+    reserve_attempt(record_path, record)
     task_path = HERE / "tasks" / f"{case}.md"
     task_path.parent.mkdir(parents=True, exist_ok=True)
     task_path.write_text(
@@ -55,21 +93,14 @@ def replay(case: str, fixture: str, source_commit: str, archive_sha256: str) -> 
     private.mkdir(parents=True, exist_ok=True)
     (private / "wrapper.stdout").write_text(completed.stdout)
     (private / "wrapper.stderr").write_text(completed.stderr)
-    record = {"case": case, "fixture": fixture, "source_commit": source_commit,
-              "wrapper_archive_sha256": archive_sha256,
-              "evidence_class": "LOCAL_WRAPPER_SOURCE_REPLAY_NOT_WEB_GATE",
-              "attempt": 1, "exit_code": completed.returncode}
+    record["exit_code"] = completed.returncode
     try:
         receipt = json.loads(completed.stdout)
         run_dir = Path(receipt["run_dir"])
         shutil.copytree(run_dir, private / "replay", dirs_exist_ok=True)
         record.update({"run_id": receipt["run_id"], "status": receipt["status"]})
         if completed.returncode == 0 and receipt["status"] == "completed":
-            answer = Path(receipt["last_message_path"]).read_bytes()
-            out = HERE / "outputs" / f"{case}_OUTPUT.md"
-            out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_bytes(answer)
-            record["output_sha256"] = digest(answer)
+            record["chat_receipt_sha256"] = digest(Path(receipt["last_message_path"]).read_bytes())
     except (KeyError, ValueError, OSError) as error:
         record["receipt_error"] = str(error)
     record_path.parent.mkdir(parents=True, exist_ok=True)
@@ -95,9 +126,14 @@ def main() -> None:
             records.append(result)
             print(json.dumps(result, ensure_ascii=False), flush=True)
     (HERE / "RUNS.json").write_text(json.dumps(sorted(records, key=lambda r: r["case"]), indent=2) + "\n")
-    if any(record["exit_code"] or "output_sha256" not in record for record in records):
+    if any(record["exit_code"] or "chat_receipt_sha256" not in record for record in records):
         raise SystemExit("At least one replay did not complete; inspect evidence before retrying.")
+    (HERE / "outputs").mkdir(exist_ok=True)
+    collect_artifacts()
 
 
 if __name__ == "__main__":
-    main()
+    if sys.argv[1:] == ["--collect-only"]:
+        collect_artifacts()
+    else:
+        main()
