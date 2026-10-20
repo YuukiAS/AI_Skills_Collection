@@ -1,0 +1,8 @@
+{
+  "run_id": "20261020T042115Z-991078cc5ed3",
+  "status": "completed",
+  "plugin": "writing-style@yuukias-ai-skills",
+  "reviewed_copy_sha256": "31073f5c6c0b8c9fcd74622f082a015fe1c1dff72ee5d57deedb6c1bafbfb2be",
+  "evidence_class": "ACTUAL_INSTALLED_CLEAR_WRITING_ISSUE_COPY_REVIEW",
+  "durable_path": "private/exports/clear-writing--single-entry-artifact-finalization/issue-review/20261020T042115Z-991078cc5ed3"
+}

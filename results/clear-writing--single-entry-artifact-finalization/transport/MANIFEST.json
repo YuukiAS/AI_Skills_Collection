@@ -1,0 +1,206 @@
+{
+  "schema": "CLEAR_WRITING_PRIVATE_WRAPPER_TRANSPORT_V1",
+  "source_commit": "079bd7987bb33d624d244feb415327d5cf2343d8",
+  "zip_sha256": "e4c451841583cb6e1ae4212f8d8559b93ef4272f66d687d3f6762f6114a73dc6",
+  "zip_size_bytes": 170866,
+  "base64_sha256": "2c6af7320f1eb36a6dc276715da6cbe505a08bbd46806ef83a0e82584967222f",
+  "part_count": 38,
+  "part_size_limit": 6000,
+  "parts": [
+    {
+      "filename": "part-000.b64",
+      "sha256": "a1c3344698183b45b7ec214828555e9a9e5bc94eeb57670b34d1cc757d3765b7",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-001.b64",
+      "sha256": "726ba7aee79e9aac757bf0cf139be2b7765a411880f0090bc1c40287af6d492d",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-002.b64",
+      "sha256": "7e077d39c633f085ebaa533ad7d0c19d70e65748eec2435011d6ca0624bb2232",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-003.b64",
+      "sha256": "9397a41e9ac4a5d2f4c06ce65f2fca682004ef8d0f5f091e124b16aed976be0a",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-004.b64",
+      "sha256": "978a100bc4531aeebab3b0b0a48d06bf6a6dc318af4d6b315bfc3c46a6f48d7c",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-005.b64",
+      "sha256": "edc2f1281d81193958671393f95c1f814db465fabfc9c332e301810d3668ae14",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-006.b64",
+      "sha256": "bca372141a59370528cd6754cc4cac173e716a793baf34857959fccefe0bd6b2",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-007.b64",
+      "sha256": "5cb5691152edf3c16cbe2e4ad75cb6b2c72c7aae00e03b94167ef9168e45fea0",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-008.b64",
+      "sha256": "1bca46d51057145913ef88d3f20b6e89093deb810446362e725ecebdf47f52c8",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-009.b64",
+      "sha256": "7a6c13c71a1bbf6dc79a50b37ccc612778f0841454f8ca6a3f33b305d7c98e68",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-010.b64",
+      "sha256": "a8fa22f6f6382c853c530276c42d9166d6c062183415e3b6d66a059f54e5e9e7",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-011.b64",
+      "sha256": "47aaa40027177dda40e84b90237ab08324588f78e3f6733c84920a43af8a7348",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-012.b64",
+      "sha256": "2e1500a98ff25622c1d322d626dafc64f88f3cd10b943f09ac837dde80254c70",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-013.b64",
+      "sha256": "14ea88d6e32f4b3377b21b63b29c8ad0ba87dd56f3fc77b4d0c535dc15ddacdf",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-014.b64",
+      "sha256": "bbc1810a38f87d432570d5e73d68810a62abcd140af948f79921d341ff791fa8",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-015.b64",
+      "sha256": "c8e1e47912cd1f14c5054a2e5a0a63baad0458a32e769b78d7b63b451e2b1eaa",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-016.b64",
+      "sha256": "6f23c16debb2da9a4e3cdac6bd443742384bff179006f056f25426daa8b56470",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-017.b64",
+      "sha256": "db08c185fcd501a682edc975faaadda4e80043b71c5fd149d89591725a66f3c1",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-018.b64",
+      "sha256": "1e2d7911842f2134e829a6631ca40bf2a72026fa856e3f575af143ded9d4d735",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-019.b64",
+      "sha256": "6d60d542cbae1f7296ba90117eceb0128fb82ee9b92ef832ebccc211adac36d6",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-020.b64",
+      "sha256": "15d2574a9031bb504fdbe65a31c8fd0d2318a67d8300af22d5eb62d0ea86fbb7",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-021.b64",
+      "sha256": "b40d404d17e9ef9f7b019cbe354126ffefa2fcfd777df48a4c52b2c89751df68",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-022.b64",
+      "sha256": "7412bc07d0f1419fac0eb91b1de8f88ba6b73a9445320e25508a4c3f4e53a2d2",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-023.b64",
+      "sha256": "40834ca053cd88fec7fdf34af8de0b44f39fac9d008a05eb9a72b30277b92dbf",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-024.b64",
+      "sha256": "815138da63b0f92831ab95ec095fba27de950813a2f588c4b4f5c66e7834c676",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-025.b64",
+      "sha256": "1fe97eeb856a96e15ac44de8294f4a45d37958e6e633bb915663923a5bdeb0a9",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-026.b64",
+      "sha256": "bc029de46377232beb8d904eb75849afe458579996aebdea6198f591c80f25cf",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-027.b64",
+      "sha256": "657837dd2ec5fdb55bf54fffbf5066a47fd548ada40e7d5fc41decde9a783678",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-028.b64",
+      "sha256": "0585efec55b98cea1df2f290216c3eb993ea950fe7b6420bb48e4eb480f7904c",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-029.b64",
+      "sha256": "0597f1cf521d150df306b7c7117291571fc429892325bd4de668a6c8817ee6ff",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-030.b64",
+      "sha256": "b8d0a53485f9cc725b5d36a35b76a16b29ac9053666c47455f1b1e8137ab952d",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-031.b64",
+      "sha256": "08862aae7ba14e03864e37ce2d5923220895134ac4c396e1a058735c565eae29",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-032.b64",
+      "sha256": "5bf0b093795a2066ca4f4f9103564747810066b40e16c8a7ee3230310d56ba81",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-033.b64",
+      "sha256": "143a9b68f351876bcf3405571c04207c0ea56b7790413088625bee2270d1b53c",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-034.b64",
+      "sha256": "88ab1159952450bcdeaa925382d0a2be9e9800a46dcc6ddac4daa399d6ae77ed",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-035.b64",
+      "sha256": "cbbe156149f1c14dbe55b959e86089f81a61157ff7719d8b9ed60e6e51dca67f",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-036.b64",
+      "sha256": "44ff5efcc2487340861d4608023a00af6b6d733f3f751e7d2c7e71cdf71eec4f",
+      "size_bytes": 6000
+    },
+    {
+      "filename": "part-037.b64",
+      "sha256": "dc1483d0281851a462c481ae498d5816410329a589d341bc92b0483b634a97ae",
+      "size_bytes": 5824
+    }
+  ],
+  "plugin_name": "writing-style",
+  "display_name": "Clear Writing",
+  "plugin_version": "0.6.0",
+  "purpose": "EXISTING_CHATGPT_PRIVATE_PLUGIN_CANDIDATE_UPDATE",
+  "release_status": "NOT_RELEASED"
+}

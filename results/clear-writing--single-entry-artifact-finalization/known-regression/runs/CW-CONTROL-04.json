@@ -1,0 +1,14 @@
+{
+  "case": "CW-CONTROL-04",
+  "fixture": "CW-CONTROL-04",
+  "source_commit": "f86c4d0d3374a57cd27da1cee74f210c50e18150",
+  "wrapper_archive_sha256": "e4c451841583cb6e1ae4212f8d8559b93ef4272f66d687d3f6762f6114a73dc6",
+  "evidence_class": "LOCAL_WRAPPER_SOURCE_REPLAY_NOT_WEB_GATE",
+  "attempt": 1,
+  "exit_code": 0,
+  "run_id": "20261020T040843Z-02e038d324e6",
+  "status": "completed",
+  "output_sha256": "fe7edea490061ec535bd5d9b3098ca3aba84adaaf087cd0d861da16b0e57cd8f",
+  "chat_receipt_sha256": "08e4e20b280e5695837b46943625f0da45ca577cadc6ec1b38f7ec77ccc01f83",
+  "artifact_relative_path": "answer.md"
+}

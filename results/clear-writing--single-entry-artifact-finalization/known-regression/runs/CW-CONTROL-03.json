@@ -1,0 +1,14 @@
+{
+  "case": "CW-CONTROL-03",
+  "fixture": "CW-CONTROL-03",
+  "source_commit": "f86c4d0d3374a57cd27da1cee74f210c50e18150",
+  "wrapper_archive_sha256": "e4c451841583cb6e1ae4212f8d8559b93ef4272f66d687d3f6762f6114a73dc6",
+  "evidence_class": "LOCAL_WRAPPER_SOURCE_REPLAY_NOT_WEB_GATE",
+  "attempt": 1,
+  "exit_code": 0,
+  "run_id": "20261020T040835Z-5decef51875a",
+  "status": "completed",
+  "output_sha256": "da6b04042afd7f89ee9326bea2e74cd97467bf5e462d616097a2deacd72e7350",
+  "chat_receipt_sha256": "e3d7521a66e8511ca1508608c0b891cc79f71ee1d03d89d2f52d647ac60edab1",
+  "artifact_relative_path": "CW-CONTROL-03_RESULT.json"
+}

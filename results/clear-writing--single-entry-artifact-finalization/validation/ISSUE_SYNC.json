@@ -1,0 +1,14 @@
+{
+  "issue": 13,
+  "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/13",
+  "state": "OPEN",
+  "body_sha256": "9a6a02eeaece0f2f257da02c46b74a47f713c15011cb79c86c599349311591b9",
+  "reviewed_current_copy_sha256": "31073f5c6c0b8c9fcd74622f082a015fe1c1dff72ee5d57deedb6c1bafbfb2be",
+  "preserved_previous_body_sha256": "3f047213cb6309458da0a5e0fb05dac179fc639fe6d98986135b4b303fde8d56",
+  "language_review_run": "20261020T042115Z-991078cc5ed3",
+  "readback_exact": true,
+  "lifecycle": "DOING",
+  "area": "writing-style",
+  "resolution_commit": null,
+  "next_owner": "existing ChatGPT Planner / Runbook Phase C"
+}

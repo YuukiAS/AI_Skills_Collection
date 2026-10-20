@@ -1,0 +1,32 @@
+{
+  "source": "approved Plan v0.2 section 6",
+  "required_baseline_version": "0.5.0",
+  "delete_paths": [
+    ".codex-plugin/assets/composer.svg",
+    ".codex-plugin/assets/logo.svg",
+    "skills/fidelity/SKILL.md",
+    "skills/fidelity/assets/app-facing.svg",
+    "skills/fidelity/evals/trigger_queries.json",
+    "skills/fidelity/references/failure-summary.md",
+    "skills/product-ui-copy/SKILL.md",
+    "skills/product-ui-copy/assets/app-facing.svg",
+    "skills/product-ui-copy/evals/trigger_queries.json",
+    "skills/response-clarity/SKILL.md",
+    "skills/response-clarity/assets/app-facing.svg",
+    "skills/response-clarity/evals/trigger_queries.json",
+    "skills/sci/SKILL.md",
+    "skills/sci/assets/app-facing.svg",
+    "skills/sci/evals/trigger_queries.json",
+    "skills/sci/references/scientific-report-checklist.md",
+    "skills/sci/references/source-notes.md",
+    "skills/scientific-rewrite/SKILL.md",
+    "skills/scientific-rewrite/assets/app-facing.svg",
+    "skills/scientific-rewrite/scripts/rewrite_support.py",
+    "skills/zh/SKILL.md",
+    "skills/zh/assets/app-facing.svg",
+    "skills/zh/evals/trigger_queries.json",
+    "skills/zh/references/chinese-prose-checklist.md",
+    "skills/zh/references/group-meeting-chinese-report-prompt.md",
+    "skills/zh/references/source-notes.md"
+  ]
+}

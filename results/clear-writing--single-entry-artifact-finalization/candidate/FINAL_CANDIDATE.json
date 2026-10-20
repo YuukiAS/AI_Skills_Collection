@@ -1,0 +1,263 @@
+{
+  "schema": "CLEAR_WRITING_06_FINAL_CANDIDATE_V1",
+  "source_commit": "079bd7987bb33d624d244feb415327d5cf2343d8",
+  "writing_style_version": "0.6",
+  "personal_wrapper_version": "0.6.0",
+  "wrapper_archive_sha256": "e4c451841583cb6e1ae4212f8d8559b93ef4272f66d687d3f6762f6114a73dc6",
+  "route_projection_rule_version": "CW06_ROUTE_PROJECTION_V1",
+  "zip_spec_version": "CW06_DETERMINISTIC_ZIP_V1",
+  "build_receipt_sha256": "9a1dcfa1ea1becfd93bb3787b4f7dba32ba50fb3290ac8bbefcb71c1739ca8d8",
+  "codex_writing_style_tree_sha": "92ed32b5ba8c033c431aa5a911885bedc8d7286c",
+  "profile_sha256": "25863b13c787251a4df5ec400a5657aecb0b5565ddff2cdd6ed85da913577bed",
+  "gate_rule_version": "CW06-v0.1",
+  "implementation_review_sha256": "08a17538ad0aed216c6381dd25b67406a0a4e3d7a04a6a9531b49ace4c3ae029",
+  "required_ci_run_id": 39368960081,
+  "candidate_defining_files": [
+    {
+      "path": "README.md",
+      "sha256": "a57d5a3d29962db84bfd88cb3bb5bef6dcd0e69a1cae932a56cc78a51b418dfa"
+    },
+    {
+      "path": "assets/codex/plugin-icons/writing-style/composer.svg",
+      "sha256": "ddd7a6edee8baaae8a5a6212c754fe501e61e5cb0754f522b175127f11f2923a"
+    },
+    {
+      "path": "assets/codex/plugin-icons/writing-style/source.json",
+      "sha256": "74a7b23604051255157607e8507ef17e3fcf5225c7f1ca444d403952c7546121"
+    },
+    {
+      "path": "docs/plugin-changelogs/writing-style.md",
+      "sha256": "a8ebd4b0e3206ce6f4fe3e1af4a9e6e679f6739c4d75426b0da47724a79aa4ec"
+    },
+    {
+      "path": "docs/provenance/WRITING_SKILL_REPOS_2026_07_28.md",
+      "sha256": "fff303832232548866834a9df2a6f3135d601a57b1716ad188e5e0b72a1da81b"
+    },
+    {
+      "path": "packaging/chatgpt/writing-style/clear-writing/SKILL.md",
+      "sha256": "a122ef491328eace66b05df6ba155be4153ef76e3008924dad1f5a0acb920856"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/.codex-plugin/assets/composer.svg",
+      "sha256": "ddd7a6edee8baaae8a5a6212c754fe501e61e5cb0754f522b175127f11f2923a"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/.codex-plugin/assets/logo.svg",
+      "sha256": "ddd7a6edee8baaae8a5a6212c754fe501e61e5cb0754f522b175127f11f2923a"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/.codex-plugin/plugin.json",
+      "sha256": "137082a7f36dbac835963ec4b59a9926f94f3c5ab1e5e3cf94734b613daf989f"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/fidelity/SKILL.md",
+      "sha256": "f012b730f95364d5093f16c8c433342121701c5cdcd8b5101a457c4a1e9160a4"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/fidelity/assets/app-facing.svg",
+      "sha256": "dc3d6ffae1d0e5dcfe02c9a9bc818f0c58e3301d3767ad81138798260c0b818f"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/fidelity/evals/trigger_queries.json",
+      "sha256": "d1c728d8f6d2a6a6d0f8607f808401921134b1687978e403fa0e402fc04246e6"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/fidelity/references/failure-summary.md",
+      "sha256": "38e2224c3ec3fa3fecaa44591411a2380295e972927ff60efb83fc1910a46c56"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/product-ui-copy/SKILL.md",
+      "sha256": "ed8165a808854b919758e862231f637d7aded3b6fcf25895c5d1b166509b48c6"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/product-ui-copy/assets/app-facing.svg",
+      "sha256": "dc3d6ffae1d0e5dcfe02c9a9bc818f0c58e3301d3767ad81138798260c0b818f"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/product-ui-copy/evals/trigger_queries.json",
+      "sha256": "7286161dbe35523d13b1bef709cbfe9addc5624e757ddb62571a7d2ad5e3355d"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/response-clarity/SKILL.md",
+      "sha256": "c5f4dc45e13bfc86d40d8eb55311cbd2fd05a51f9b912d20e93d8075288e2836"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/response-clarity/assets/app-facing.svg",
+      "sha256": "190eae30252b2cab6622cef59b3c846314ea8ae4b4957cd1f44f252cd0c7c472"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/response-clarity/evals/trigger_queries.json",
+      "sha256": "3b2399b4022f556d79957412678581229a4bfbea63fa670b4b2e7635ae195327"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/sci/SKILL.md",
+      "sha256": "2e5417d2ca461d15005de2c3e238820d6d05d58f834bab4b51fa78990f5dce04"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/sci/assets/app-facing.svg",
+      "sha256": "69bd6a9842ff495754bcd47faf3a71956055797bafc5265f96a2cd39ce07c223"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/sci/evals/trigger_queries.json",
+      "sha256": "ed0579b262304a1a6ab0fac14f11f1b5a39c6229da25cd8a8a5d2ee3a27d934a"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/sci/references/scientific-report-checklist.md",
+      "sha256": "df9ebdcbdb6d92ff48563d25e2ceb270ac4d5aa4b158575fca200f080e00cf55"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/sci/references/source-notes.md",
+      "sha256": "407e0e7ec0123da7300a9f77f3af770addf1cebb5b4dee592df7928f4dd9045e"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/SKILL.md",
+      "sha256": "5919ec2d11cb810415020151393aa2e70feafd8cc72d3580c9f3e4de7effb404"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/assets/app-facing.svg",
+      "sha256": "0e7f6ae65bc9bf96216a89a2350fdcce6b5d7d3fd4697cc9c61e01248375d9ce"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/scripts/rewrite_support.py",
+      "sha256": "76bce3dbac9e81822fa312ab3df8b8af4ea50d1216e3904247d892283efa0e0f"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/zh/SKILL.md",
+      "sha256": "377c6d21bb023f1b52c35b7824f06b463ae113ff568008ce5c2f9cf58261beae"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/zh/assets/app-facing.svg",
+      "sha256": "190eae30252b2cab6622cef59b3c846314ea8ae4b4957cd1f44f252cd0c7c472"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/zh/evals/trigger_queries.json",
+      "sha256": "768d82bdadf310a6a29dfa70f69842305781bfe2f7c49e66db02d9f3b7463e85"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/zh/references/chinese-prose-checklist.md",
+      "sha256": "c0d23054b3f59981edf3f986aa2401aec4fb639b20098714b88b7b93b75290bb"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/zh/references/group-meeting-chinese-report-prompt.md",
+      "sha256": "c3471cde987b4c78140f4b5f7a19fffb1b840315486a75f425cbd5e6ab85d4fb"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/zh/references/source-notes.md",
+      "sha256": "ff86232d7406a33fafa0bba6ebaaed2416c50ca029436a8983365802fba41d59"
+    },
+    {
+      "path": "profiles/codex-writing-style.json",
+      "sha256": "25863b13c787251a4df5ec400a5657aecb0b5565ddff2cdd6ed85da913577bed"
+    },
+    {
+      "path": "scripts/build_clear_writing_chatgpt_wrapper.py",
+      "sha256": "7ee12a1b88c758b0c09f874e2ed89eca51256bc8cb40806b969854fe1788fd4a"
+    },
+    {
+      "path": "scripts/codex_marketplace_config.json",
+      "sha256": "9a7c74f75241705b755679b417dce171f059130d13339cbbdd72e663f8154e9d"
+    },
+    {
+      "path": "skills/writing/core/chinese-prose/SKILL.md",
+      "sha256": "377c6d21bb023f1b52c35b7824f06b463ae113ff568008ce5c2f9cf58261beae"
+    },
+    {
+      "path": "skills/writing/core/chinese-prose/TODO.md",
+      "sha256": "a46f8566940c510398a474455f427b86a7ebecf17c25a901f63abeeefe108e69"
+    },
+    {
+      "path": "skills/writing/core/chinese-prose/assets/app-facing.svg",
+      "sha256": "190eae30252b2cab6622cef59b3c846314ea8ae4b4957cd1f44f252cd0c7c472"
+    },
+    {
+      "path": "skills/writing/core/chinese-prose/evals/trigger_queries.json",
+      "sha256": "768d82bdadf310a6a29dfa70f69842305781bfe2f7c49e66db02d9f3b7463e85"
+    },
+    {
+      "path": "skills/writing/core/chinese-prose/references/chinese-prose-checklist.md",
+      "sha256": "c0d23054b3f59981edf3f986aa2401aec4fb639b20098714b88b7b93b75290bb"
+    },
+    {
+      "path": "skills/writing/core/chinese-prose/references/group-meeting-chinese-report-prompt.md",
+      "sha256": "c3471cde987b4c78140f4b5f7a19fffb1b840315486a75f425cbd5e6ab85d4fb"
+    },
+    {
+      "path": "skills/writing/core/chinese-prose/references/source-notes.md",
+      "sha256": "ff86232d7406a33fafa0bba6ebaaed2416c50ca029436a8983365802fba41d59"
+    },
+    {
+      "path": "skills/writing/core/product-ui-copy/SKILL.md",
+      "sha256": "ed8165a808854b919758e862231f637d7aded3b6fcf25895c5d1b166509b48c6"
+    },
+    {
+      "path": "skills/writing/core/product-ui-copy/assets/app-facing.svg",
+      "sha256": "dc3d6ffae1d0e5dcfe02c9a9bc818f0c58e3301d3767ad81138798260c0b818f"
+    },
+    {
+      "path": "skills/writing/core/product-ui-copy/evals/trigger_queries.json",
+      "sha256": "7286161dbe35523d13b1bef709cbfe9addc5624e757ddb62571a7d2ad5e3355d"
+    },
+    {
+      "path": "skills/writing/core/response-clarity/SKILL.md",
+      "sha256": "c5f4dc45e13bfc86d40d8eb55311cbd2fd05a51f9b912d20e93d8075288e2836"
+    },
+    {
+      "path": "skills/writing/core/response-clarity/assets/app-facing.svg",
+      "sha256": "190eae30252b2cab6622cef59b3c846314ea8ae4b4957cd1f44f252cd0c7c472"
+    },
+    {
+      "path": "skills/writing/core/response-clarity/evals/trigger_queries.json",
+      "sha256": "3b2399b4022f556d79957412678581229a4bfbea63fa670b4b2e7635ae195327"
+    },
+    {
+      "path": "skills/writing/core/scientific-prose/SKILL.md",
+      "sha256": "2e5417d2ca461d15005de2c3e238820d6d05d58f834bab4b51fa78990f5dce04"
+    },
+    {
+      "path": "skills/writing/core/scientific-prose/assets/app-facing.svg",
+      "sha256": "69bd6a9842ff495754bcd47faf3a71956055797bafc5265f96a2cd39ce07c223"
+    },
+    {
+      "path": "skills/writing/core/scientific-prose/evals/trigger_queries.json",
+      "sha256": "ed0579b262304a1a6ab0fac14f11f1b5a39c6229da25cd8a8a5d2ee3a27d934a"
+    },
+    {
+      "path": "skills/writing/core/scientific-prose/references/scientific-report-checklist.md",
+      "sha256": "df9ebdcbdb6d92ff48563d25e2ceb270ac4d5aa4b158575fca200f080e00cf55"
+    },
+    {
+      "path": "skills/writing/core/scientific-prose/references/source-notes.md",
+      "sha256": "407e0e7ec0123da7300a9f77f3af770addf1cebb5b4dee592df7928f4dd9045e"
+    },
+    {
+      "path": "skills/writing/core/scientific-rewrite/SKILL.md",
+      "sha256": "5919ec2d11cb810415020151393aa2e70feafd8cc72d3580c9f3e4de7effb404"
+    },
+    {
+      "path": "skills/writing/core/scientific-rewrite/assets/app-facing.svg",
+      "sha256": "0e7f6ae65bc9bf96216a89a2350fdcce6b5d7d3fd4697cc9c61e01248375d9ce"
+    },
+    {
+      "path": "skills/writing/core/scientific-rewrite/scripts/rewrite_support.py",
+      "sha256": "76bce3dbac9e81822fa312ab3df8b8af4ea50d1216e3904247d892283efa0e0f"
+    },
+    {
+      "path": "skills/writing/core/writing-fidelity/SKILL.md",
+      "sha256": "f012b730f95364d5093f16c8c433342121701c5cdcd8b5101a457c4a1e9160a4"
+    },
+    {
+      "path": "skills/writing/core/writing-fidelity/assets/app-facing.svg",
+      "sha256": "dc3d6ffae1d0e5dcfe02c9a9bc818f0c58e3301d3767ad81138798260c0b818f"
+    },
+    {
+      "path": "skills/writing/core/writing-fidelity/evals/trigger_queries.json",
+      "sha256": "d1c728d8f6d2a6a6d0f8607f808401921134b1687978e403fa0e402fc04246e6"
+    },
+    {
+      "path": "skills/writing/core/writing-fidelity/references/failure-summary.md",
+      "sha256": "38e2224c3ec3fa3fecaa44591411a2380295e972927ff60efb83fc1910a46c56"
+    }
+  ],
+  "release_status": "NOT_RELEASED",
+  "live_gates": "NOT_RUN"
+}

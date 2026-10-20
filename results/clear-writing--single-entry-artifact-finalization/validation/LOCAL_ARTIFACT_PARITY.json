@@ -1,0 +1,21 @@
+{
+  "source_commit": "079bd7987bb33d624d244feb415327d5cf2343d8",
+  "fixture_source_commit": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+  "fixtures_verified": 26,
+  "outputs_verified": 13,
+  "exact_controls": [
+    {
+      "case": "CW-CONTROL-01",
+      "bytes": 318,
+      "sha256": "ea4b20c20668ea0a6beaf2435bccf3e73d8786a8af813fd06fd3d9edf046f9d4",
+      "byte_identical": true
+    },
+    {
+      "case": "CW-CONTROL-03",
+      "bytes": 125,
+      "sha256": "da6b04042afd7f89ee9326bea2e74cd97467bf5e462d616097a2deacd72e7350",
+      "byte_identical": true
+    }
+  ],
+  "scope": "hash/source/exact-byte validation only; qualitative review is separate"
+}

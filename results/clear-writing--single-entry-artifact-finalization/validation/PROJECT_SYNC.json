@@ -1,0 +1,15 @@
+{
+  "issue": {
+    "number": 13,
+    "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/13",
+    "state": "OPEN"
+  },
+  "fields": {
+    "Title": "\u8ba9 Clear Writing \u6210\u4e3a\u8de8 Project \u7684\u6700\u7ec8\u7528\u6237\u9605\u8bfb\u5c42",
+    "Status": "DOING",
+    "Area": "writing-style"
+  },
+  "status": "SYNCED",
+  "current_execution_anchor": "079bd7987bb33d624d244feb415327d5cf2343d8",
+  "next_action_locator": "results/clear-writing--single-entry-artifact-finalization/PHASE_C_HANDOFF.md"
+}

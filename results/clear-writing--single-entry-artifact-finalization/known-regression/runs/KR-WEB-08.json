@@ -1,0 +1,14 @@
+{
+  "case": "KR-WEB-08",
+  "fixture": "KR-WEB-08",
+  "source_commit": "f86c4d0d3374a57cd27da1cee74f210c50e18150",
+  "wrapper_archive_sha256": "e4c451841583cb6e1ae4212f8d8559b93ef4272f66d687d3f6762f6114a73dc6",
+  "evidence_class": "LOCAL_WRAPPER_SOURCE_REPLAY_NOT_WEB_GATE",
+  "attempt": 1,
+  "exit_code": 0,
+  "run_id": "20261020T040553Z-67f44bcf2b59",
+  "status": "completed",
+  "output_sha256": "4e2bbc1e76848ba7439746c079291d0675157836eb37737984d5742b4cdcdd68",
+  "chat_receipt_sha256": "02e57fcdb380faeaa7e8f82a12c52433c329abc2a59507596ff3a2a5774d3384",
+  "artifact_relative_path": "KR-WEB-08_answer.md"
+}

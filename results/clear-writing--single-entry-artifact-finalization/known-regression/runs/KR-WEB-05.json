@@ -1,0 +1,14 @@
+{
+  "case": "KR-WEB-05",
+  "fixture": "RW-WEB-05",
+  "source_commit": "f86c4d0d3374a57cd27da1cee74f210c50e18150",
+  "wrapper_archive_sha256": "e4c451841583cb6e1ae4212f8d8559b93ef4272f66d687d3f6762f6114a73dc6",
+  "evidence_class": "LOCAL_WRAPPER_SOURCE_REPLAY_NOT_WEB_GATE",
+  "attempt": 1,
+  "exit_code": 0,
+  "run_id": "20261020T040405Z-29e2dddab3bc",
+  "status": "completed",
+  "output_sha256": "760d19fdcec180482ce4366d410314d3f3d5ee8d2dce16fe57f8c0f881790ff7",
+  "chat_receipt_sha256": "410df09c8f9b9f604e5bb0a210c86afde77baa085fe7bca37eb86c5ea99aeb1c",
+  "artifact_relative_path": "RW-WEB-05_ANSWER.md"
+}

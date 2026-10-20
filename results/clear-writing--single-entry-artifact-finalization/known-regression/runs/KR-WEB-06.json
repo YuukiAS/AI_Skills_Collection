@@ -1,0 +1,14 @@
+{
+  "case": "KR-WEB-06",
+  "fixture": "KR-WEB-06",
+  "source_commit": "f86c4d0d3374a57cd27da1cee74f210c50e18150",
+  "wrapper_archive_sha256": "e4c451841583cb6e1ae4212f8d8559b93ef4272f66d687d3f6762f6114a73dc6",
+  "evidence_class": "LOCAL_WRAPPER_SOURCE_REPLAY_NOT_WEB_GATE",
+  "attempt": 1,
+  "exit_code": 0,
+  "run_id": "20261020T040458Z-9c240e9fce7e",
+  "status": "completed",
+  "output_sha256": "d2ba847c84ce85272e1359d88289e7ac621e7ba56340544a12ce1e1241087814",
+  "chat_receipt_sha256": "651d3d33d9ab0e2cabe73ba1f8ba4f1914ef6abf367b69e4115968f1db3d5609",
+  "artifact_relative_path": "KR-WEB-06_校准流程说明.md"
+}
