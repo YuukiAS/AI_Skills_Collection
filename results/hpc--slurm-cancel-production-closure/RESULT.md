@@ -12,6 +12,8 @@ Latest direct user authority replaces request-user-input cancellation transport 
 
 `FINAL_CANDIDATE_PRE_TRUST=ac6a380c00b416ef7a5c4c46591fd0cfe9b6770a`.
 
+Current stop: native trust of the exact new handler passed, but the current-chat harmless vertical probe returned actual Bash stdout without a form or installed MCP audit entry, despite successful supported config reload and a connected MCP server. `MCP_VERTICAL_EVIDENCE.md` records direct observations and their limits. Per the user's explicit stop condition, no alternate architecture or further real-Job step was attempted. The installed trusted candidate is retained, not rolled back. `KEEP_TEST=NOT_RUN`, `CONFIRM_CANCEL_TEST=NOT_RUN`, `EXACT_CANCEL_COUNT=0`, `COMPLETE=NO`.
+
 - Original command guard source, supervisor, runtime, policy, declarations and trust hashes remain identical. The production route removes only this product's old PostToolUse answer binder, preserving unrelated config and all trust state.
 - Official MCP SDK 1.30.0 is in a durable machine-local environment, not `/tmp`. Real SDK stdio/fake-Slurm elicitation transport smoke passed; this is NOT a Desktop card PASS.
 - Focused original/new regression passed; latest new MCP regression is 14 tests PASS, covering strict two-option enum, retain/close/malformed zero mutation, ownership/thread binding, reservation ordering, drift/replay, unprotected behavior, runtime/policy digests, and rejection of altered guard top-level code before any side effect.
