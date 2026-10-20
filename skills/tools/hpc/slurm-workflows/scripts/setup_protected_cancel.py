@@ -261,6 +261,62 @@ def _rules_text(scancel_paths: List[Path]) -> str:
     return "\n".join(["prefix_rule(pattern=[{}], decision=\"prompt\", justification=\"Slurm cancellation must pass the normal approval boundary.\")".format(_toml_string(pattern)) for pattern in patterns] + [""])
 
 
+def _scope_prefilter_command(command, event_name, python_path, environment, tools):
+    """Keep unrelated Bash outside every mutable Slurm identity check.
+
+    The entire small parser is frozen in the declaration. A stale declaration
+    still classifies scope before invoking its stale supervisor/hash binding.
+    """
+    import shlex
+    program = r'''
+import json,shlex,subprocess,sys
+event_name=sys.argv[2]
+def deny():
+    if event_name == 'PreToolUse':
+        output={'hookEventName':event_name,'permissionDecision':'deny','permissionDecisionReason':'SLURM_CANCEL_DENIED reason=hook_runtime_failure'}
+    else:
+        output={'hookEventName':event_name,'decision':{'behavior':'deny','message':'SLURM_CANCEL_DENIED reason=hook_runtime_failure'}}
+    print(json.dumps({'hookSpecificOutput':output}))
+try:
+    event=json.load(sys.stdin)
+    if not isinstance(event,dict):
+        raise ValueError('invalid event')
+    if event.get('tool_name') != 'Bash':
+        print('{}');sys.exit(0)
+    tool_input=event.get('tool_input')
+    command=tool_input.get('command') if isinstance(tool_input,dict) else None
+    if not isinstance(command,str):
+        raise ValueError('invalid command')
+    tokens=shlex.split(command)
+    if ('scancel' not in command and not any('scancel' in token for token in tokens)
+            and '__SLURM_PROTECTED_CANCEL_CARD_PROBE__' not in command):
+        print('{}');sys.exit(0)
+except Exception:
+    deny();sys.exit(0)
+try:
+    result=subprocess.run([sys.argv[3],'-c',sys.argv[1]],input=json.dumps(event),text=True,capture_output=True,timeout=14)
+    output=json.loads(result.stdout)
+    if result.returncode != 0 or not isinstance(output,dict):
+        raise ValueError('invalid supervisor output')
+    print(json.dumps(output))
+except Exception:
+    deny()
+'''
+    argv = [str(tools['timeout']), '--signal=TERM', '--kill-after=1', '13', str(tools['env']), '-i']
+    argv += [key + '=' + value for key, value in sorted(environment.items())]
+    argv += [str(python_path), '-I', '-c', program, command, event_name, str(tools['bash'])]
+    if event_name == 'PreToolUse':
+        output = {'hookEventName':event_name, 'permissionDecision':'deny',
+                  'permissionDecisionReason':'SLURM_CANCEL_DENIED reason=scope_prefilter_failure'}
+    else:
+        output = {'hookEventName':event_name, 'decision':{'behavior':'deny',
+                  'message':'SLURM_CANCEL_DENIED reason=scope_prefilter_failure'}}
+    fallback = json.dumps({'hookSpecificOutput':output}, separators=(',', ':'))
+    shell = 'fallback=$1; shift; if output=$("$@") && [ -n "$output" ]; then printf \'%s\\n\' "$output"; else printf \'%s\\n\' "$fallback"; fi'
+    return ' '.join(shlex.quote(value) for value in [str(tools['bash']), '-c', shell,
+                                                   'slurm-scope-prefilter', fallback, *argv])
+
+
 def render_global_contract(
     codex_home: Path, skill_scripts: Path, scontrol: Path, scancel: Path,
     protected_partitions: List[str], hook_python: Optional[Path] = None,
@@ -274,6 +330,10 @@ def render_global_contract(
     scancel_invocation, scancel_realpath = _executable_identity(scancel, codex_home)
     environment = _runtime_environment(runtime_env or {})
     python_path = _qualify_python(codex_home, hook_python, environment)
+    # The declaration's scope parser must survive changes to the private
+    # guard interpreter and its loader environment.
+    scope_environment = _runtime_environment({})
+    scope_python = _qualify_python(codex_home, _system_executable('python3', codex_home), scope_environment)
     tools = {name: _system_executable(name, codex_home) for name in ("bash", "cat", "env", "sha256sum", "timeout")}
     hook_source = (skill_scripts / HOOK_NAME).read_bytes()
     partitions = sorted({value.strip() for value in protected_partitions if value.strip()})
@@ -293,6 +353,10 @@ def render_global_contract(
     private_root = codex_home / PRIVATE_DIR
     supervisor_path = private_root / SUPERVISOR_NAME
     hooks = _hooks_document(supervisor_path, supervisor_digest, tools)
+    for event_name in ('PreToolUse', 'PermissionRequest'):
+        handler = hooks[event_name][0]['hooks'][0]
+        handler['command'] = _scope_prefilter_command(
+            handler['command'], event_name, scope_python, scope_environment, tools)
     files = {
         str(Path(PRIVATE_DIR) / HOOK_NAME): hook_source,
         str(Path(PRIVATE_DIR) / SUPERVISOR_NAME): supervisor,

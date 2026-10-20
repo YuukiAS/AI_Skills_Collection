@@ -14,6 +14,7 @@ import json
 import os
 import pwd
 import re
+import shlex
 import stat
 from pathlib import Path
 import subprocess
@@ -42,6 +43,24 @@ SERVER_LOADED_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
 TOKEN_RE = re.compile(r"^[A-Za-z0-9._:-]{1,256}$")
 PENDING_WAIT_SECONDS = 2.0
 PENDING_POLL_SECONDS = 0.025
+
+
+def definitely_unrelated(event: Any) -> bool:
+    """Scope must be decided before touching mutable Slurm runtime identity."""
+    if not isinstance(event, dict):
+        return False
+    if event.get('tool_name') != 'Bash':
+        return True
+    tool_input = event.get('tool_input')
+    command = tool_input.get('command') if isinstance(tool_input, dict) else None
+    if not isinstance(command, str):
+        return False
+    try:
+        tokens = shlex.split(command)
+    except ValueError:
+        return False
+    return ('scancel' not in command and not any('scancel' in token for token in tokens)
+            and '__SLURM_PROTECTED_CANCEL_CARD_PROBE__' not in command)
 
 
 def private_file_ok(path: Path) -> bool:
@@ -362,6 +381,8 @@ async def main() -> None:
         try:
             if name != TOOL_NAME or set(arguments) != {"event", "expected_identity"}:
                 raise ValueError("invalid_tool_input")
+            if definitely_unrelated(arguments['event']):
+                return [types.TextContent(type='text', text='{}')]
             expected = arguments["expected_identity"]
             private, runtime = pinned_runtime(expected)
             ctx = server.request_context

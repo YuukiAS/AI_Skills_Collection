@@ -101,6 +101,8 @@ Do not change data, split, model, endpoint, GPU count, per-candidate walltime, t
 
 ## Protected cancellation
 
+Failure isolation is part of this boundary. The command declarations contain a stable scope parser using a separately qualified system Python and a minimal environment. Before checking any mutable Slurm supervisor, runtime or policy identity, definitely unrelated Bash returns `{}`. Possible `scancel` tokens, paths, escaped/quoted spellings, and the harmless sentinel retain strict fail-closed handling. The parallel MCP handler also returns for unrelated commands before private runtime validation. After installation, use normal `config/batchWrite` with no edits and `reloadUserConfig=true` to refresh all loaded tasks, including unrelated projects; opening only a new Slurm chat is insufficient recovery for older declarations.
+
 When the machine has installed the user-level protected-cancel contract, keep cancellation on the ordinary Codex `scancel` entry. Do not substitute a wrapper, PATH shim, terminal confirmation, daemon, or project-local Hook.
 
 The installed contract applies a global `PreToolUse` / `PermissionRequest` boundary across working directories. The existing trusted command supervisor and a trusted `mcp_tool` handler match the same Bash `PreToolUse` event. The command guard always denies the original protected `scancel`; the MCP handler uses a local stdio MCP server to display a required single-select form in the owning root chat. Its only options are `确认取消` and `保留 Job`, with no Other or free-text alternative. Do not call `request_user_input` for cancellation authorization, and do not transport an answer through another chat. The old request-user-input `PostToolUse` binder is not installed by the production MCP route.

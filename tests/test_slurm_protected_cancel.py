@@ -133,6 +133,88 @@ def protected_question(payload, event_name="PreToolUse"):
     return json.loads(reason[marker:])["request_user_input"]["questions"][0]
 
 
+class TestStaleSessionScopeIsolation(unittest.TestCase):
+    def test_private_guard_interpreter_failure_cannot_break_unrelated_bash(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            private_python = executable(root / 'fake-host/hook-python',
+                '#!/bin/sh\nexec /usr/bin/python3 "$@"\n')
+            fixture = PortableFixture(root, python_path=private_python)
+            declaration = fixture.rendered['hooks']['PreToolUse'][0]['hooks'][0]['command']
+            private_python.write_text('#!/bin/sh\nexit 127\n')
+            for command in ('git status --short', 'ls', 'python --version', 'printf harmless', 'scancel 12345'):
+                result = subprocess.run(declaration, shell=True,
+                    input=json.dumps(fixture.shell_event('PreToolUse', command)),
+                    capture_output=True, text=True, timeout=15)
+                self.assertEqual(result.returncode, 0)
+                payload = json.loads(result.stdout)
+                if command.startswith('scancel'):
+                    self.assertEqual(payload['hookSpecificOutput']['permissionDecision'], 'deny')
+                else:
+                    self.assertEqual(payload, {})
+            self.assertEqual(fixture.mutation_argvs(), [])
+
+    def test_stale_declaration_isolates_unrelated_bash_before_mutable_checks(self):
+        unrelated = ('git status --short', 'ls', 'python --version', 'printf harmless')
+        protected = ('scancel 12345', '/usr/bin/scancel 12345', 'scancel --help',
+                     'true && scancel 12345', 'python -c "scancel 12345"',
+                     r's\cancel 12345', "s'cancel' 12345",
+                     HOOK.PROBE_COMMAND)
+        for damaged in ('slurm_cancel_supervisor.sh', 'slurm_cancel_hook.py', 'runtime.json', 'policy.json'):
+            with self.subTest(damaged=damaged), tempfile.TemporaryDirectory() as temp:
+                fixture = PortableFixture(Path(temp))
+                # Capture the session-owned declaration, then change the
+                # installed runtime beneath it without regenerating identity.
+                declarations = {event: fixture.rendered['hooks'][event][0]['hooks'][0]['command']
+                                for event in ('PreToolUse', 'PermissionRequest')}
+                path = fixture.private / damaged
+                path.write_text(path.read_text() + '\n# updated runtime identity\n')
+                for event, declaration in declarations.items():
+                    for command in unrelated + protected:
+                        with self.subTest(event=event, command=command):
+                            result = subprocess.run(declaration, shell=True,
+                                input=json.dumps(fixture.shell_event(event, command)),
+                                capture_output=True, text=True, timeout=15)
+                            self.assertEqual(result.returncode, 0, result.stderr)
+                            payload = json.loads(result.stdout)
+                            if command in unrelated:
+                                self.assertEqual(payload, {})
+                                self.assertNotIn('SLURM_CANCEL_DENIED', result.stdout)
+                            else:
+                                output = payload['hookSpecificOutput']
+                                decision = (output['permissionDecision'] if event == 'PreToolUse'
+                                            else output['decision']['behavior'])
+                                self.assertEqual(decision, 'deny')
+                            self.assertEqual(fixture.mutation_argvs(), [])
+
+    def test_non_bash_never_enters_stale_runtime(self):
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = PortableFixture(Path(temp))
+            declaration = fixture.rendered['hooks']['PreToolUse'][0]['hooks'][0]['command']
+            fixture.supervisor.unlink()
+            event = fixture.shell_event('PreToolUse', 'scancel 12345')
+            event['tool_name'] = 'Read'
+            result = subprocess.run(declaration, shell=True, input=json.dumps(event),
+                                    capture_output=True, text=True, timeout=15)
+            self.assertEqual(result.returncode, 0)
+            self.assertEqual(json.loads(result.stdout), {})
+            self.assertEqual(fixture.mutation_argvs(), [])
+
+    def test_prefilter_startup_failure_still_blocks_possible_cancellation(self):
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = PortableFixture(Path(temp))
+            tools = {name: Path('/usr/bin') / name for name in ('bash','env','timeout')}
+            _, runtime = HOOK._load_runtime(fixture.hook)
+            declaration = SETUP._scope_prefilter_command('exit 0', 'PreToolUse',
+                fixture.root / 'missing-python', runtime['environment'], tools)
+            result = subprocess.run(declaration, shell=True,
+                input=json.dumps(fixture.shell_event('PreToolUse', 'scancel 12345')),
+                capture_output=True, text=True, timeout=15)
+            self.assertEqual(result.returncode, 0)
+            self.assertEqual(json.loads(result.stdout)['hookSpecificOutput']['permissionDecision'], 'deny')
+            self.assertEqual(fixture.mutation_argvs(), [])
+
+
 class TestG1PortableAtomicInstallation(unittest.TestCase):
     def test_render_selects_qualified_python_and_three_global_hooks(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -308,7 +390,7 @@ class TestG2FailClosedSupervisor(unittest.TestCase):
                 command = fixture.rendered["hooks"]["PreToolUse"][0]["hooks"][0]["command"]
                 if mutation == "missing": fixture.supervisor.unlink()
                 else: fixture.supervisor.write_text("#!/bin/sh\nprintf bad\n", encoding="utf-8"); fixture.supervisor.chmod(0o700)
-                completed = subprocess.run(command, shell=True, input=json.dumps(fixture.shell_event("PreToolUse", "printf harmless")), text=True, capture_output=True, check=False)
+                completed = subprocess.run(command, shell=True, input=json.dumps(fixture.shell_event("PreToolUse", "scancel 12345")), text=True, capture_output=True, check=False)
                 payload = json.loads(completed.stdout)
                 self.assertEqual(completed.returncode, 0)
                 self.assertEqual(payload["hookSpecificOutput"]["permissionDecision"], "deny")

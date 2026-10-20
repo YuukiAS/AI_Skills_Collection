@@ -274,6 +274,14 @@ class TestMcpProtectedCancel(unittest.IsolatedAsyncioTestCase):
 
 
 class TestMcpInstaller(unittest.TestCase):
+    def test_unrelated_mcp_scope_is_independent_of_runtime_identity(self):
+        for command in ('git status --short', 'ls', 'python --version', 'printf harmless'):
+            self.assertTrue(MCP.definitely_unrelated({'tool_name':'Bash', 'tool_input':{'command':command}}))
+        for command in ('scancel 12345', '/usr/bin/scancel 12345', 'scancel --help',
+                        'true && scancel 12345', r's\cancel 12345', "s'cancel' 12345", MCP.PROBE_COMMAND):
+            self.assertFalse(MCP.definitely_unrelated({'tool_name':'Bash', 'tool_input':{'command':command}}))
+        self.assertFalse(MCP.definitely_unrelated({'tool_name':'Bash'}))
+
     def test_tampered_guard_top_level_never_executes(self):
         with tempfile.TemporaryDirectory() as temp:
             fixture = PortableFixture(Path(temp))
