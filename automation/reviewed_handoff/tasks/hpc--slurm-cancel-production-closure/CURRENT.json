@@ -3,7 +3,7 @@
   "base_commit": "9740a593c1622bce61401c8215c621f8cdb7d93a",
   "ci_required": true,
   "ci_status": "PENDING",
-  "implementation_commit": "57837a90125fafa4faf4368f55cb9a3c42bb1cd9",
+  "implementation_commit": "ac6a380c00b416ef7a5c4c46591fd0cfe9b6770a",
   "last_review_decision": null,
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
