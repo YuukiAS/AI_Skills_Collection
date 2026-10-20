@@ -68,5 +68,6 @@ The first real form was confirmed. No live retain/held-Job acceptance occurred o
 - Registry generation compared with committed registry after excluding the generation timestamp: identical, 155 skills.
 - All seven installed manifest files and all four frozen source/rule files checked byte-identical after cancellation.
 - Initial full repository run: 401 tests, two read-only fixture-write failures. The authorized writable rerun passed all 401 tests in 125.821 seconds without product changes. The failed sandbox run and successful writable run are retained separately.
+- [GitHub CI run 39434396011](https://github.com/YuukiAS/AI_Skills_Collection/actions/runs/39434396011): all four jobs passed on control head `cce71cba1290be8ab714034051e6c9d6b8d2b4d6`, with frozen runtime bytes. This includes Marketplace checks and Linux/Windows install/sparse-checkout smoke; it does not substitute for G4, independent final acceptance or formal main/release installation.
 
 Logs are retained under the same canonical private task directory with `post-confirm-` names. No product runtime, policy, Hook declaration, README, version, or unrelated skill/plugin was changed during this acceptance attempt.
