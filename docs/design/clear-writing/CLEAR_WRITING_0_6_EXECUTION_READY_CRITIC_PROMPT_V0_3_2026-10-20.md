@@ -1,171 +1,218 @@
-# Clear Writing 0.6 — execution-ready Critic final re-review prompt v0.3
+# Clear Writing 0.6 revised execution-ready review — Critic prompt v0.3
 
-本轮修复的是最终 Critic 入口，不重新设计 Clear Writing 0.6 产品。
+你继续担任本任务的**原独立 Critic**。这是同一 Clear Writing 0.6 task 的正式语义修订，不是新版本、新任务或大规模架构研究。
 
-上一版 package：
+用户发送本 prompt 时会同时给出一个 exact `PACKAGE_COMMIT`。从该 exact commit 审查，不从 mutable branch head猜。
 
-`d7b810d194ead881303aaca9c2e4f1d59a97c1f1`
-
-上一版 task-specific Critic prompt 错误地把最终 execution-ready 审查缩成只复核四个 blocker，并且 PASS 输出停在 `NEXT_HANDOFF=USER_AUTHORIZATION`，没有按最新 Critic Role Contract 1.7 重新审完整执行包并直接交付短 Codex handoff。该旧 prompt 不再作为本轮审查合同。
-
-## 1. Active Review Context
+## Active Review Context
 
 ```text
 target_repo = YuukiAS/AI_Skills_Collection
-target_plugin = writing-style / Clear Writing
-task_key = clear-writing--single-entry-artifact-finalization
-branch = design/clear-writing--single-entry-artifact-finalization
-approved_proposal = 3eefc626b86566113125a06fc6046a2bec1eafb2
-base_v0_2_package = d7b810d194ead881303aaca9c2e4f1d59a97c1f1
-review_stage = EXECUTION_READY_FINAL_REVIEW_V0_3
+target_plugin_or_domain = writing-style / Clear Writing
+design_topic_or_task_key = clear-writing--single-entry-artifact-finalization
+source_branch_or_ref = design/clear-writing--single-entry-artifact-finalization
+tracking_issue = YuukiAS/AI_Skills_Collection#13
+review_stage = REVISED_EXECUTION_READY_REVIEW_V0_3
+previous_approved_proposal = 3eefc626b86566113125a06fc6046a2bec1eafb2
+previous_execution_ready_package = d7b810d194ead881303aaca9c2e4f1d59a97c1f1
+historical_candidate = 079bd7987bb33d624d244feb415327d5cf2343d8
+new_regression_intake = results/clear-writing--single-entry-artifact-finalization/CHAT_RESPONSE_CONTENT_SELECTION_PLANNER_INTAKE_2026-10-20.md@2b4d74bd5acfafbb4473f669d80a3a48cd53b8c5
 ```
 
-用户会提供：
+## 1. 必读来源
 
-`PACKAGE_COMMIT=<exact current branch commit>`
-
-从该 exact commit 读取：
-
-1. `docs/design/clear-writing/CLEAR_WRITING_0_6_EXECUTION_READY_PLAN_V0_2_2026-10-20.md`
-2. `docs/goals/CLEAR_WRITING_0_6_SINGLE_ENTRY_ARTIFACT_FINALIZATION_GOAL_V0_2_2026-10-20.md`
-3. `docs/design/clear-writing/CLEAR_WRITING_0_6_GATE_EXECUTION_RUNBOOK_V0_2_2026-10-20.md`
-4. `docs/operations/prompts/CLEAR_WRITING_0_6_KICKOFF_DRAFT_V0_2_2026-10-20.md`
-5. 本文件。
-
-核对 `base_v0_2_package..PACKAGE_COMMIT`：除新增本 v0.3 Critic prompt 外，Proposal、Plan、Goal、Runbook、Kickoff 和产品设计不得发生漂移。若发生其他变化，先判断是否改变冻结语义；改变则 REVISE。
-
-## 2. 强制读取与优先级
-
-先读取最新 `AI_Skills_Collection/main`：
+先实际读取最新 `main`：
 
 - `AGENTS.md`
 - `docs/workflows/PLANNER_ROLE_CONTRACT.md`
 - `docs/workflows/CRITIC_ROLE_CONTRACT.md`
 - `docs/workflows/PLUGIN_CAPABILITY_GATE_POLICY.md`
-- `docs/project-settings/AI_RESEARCH_STACK_PROJECT_INSTRUCTIONS_SNAPSHOT_2026-10-19.md`
-- 维护看板、版本规则和 `writing-style` 当前 TODO。
+- `docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md`
+- `docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md`
+- `docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md`
+- `docs/plugin-todos/writing-style.md`
+- `docs/design/READER_FACING_COMMUNICATION_PLUGIN_BOUNDARIES.md`
 
-最新中央角色合同优先于旧 task-specific prompt。最终 execution-ready 审查不得被缩成旧 blocker closure；必须重新核对完整用户承诺、完整执行包、正常成功链、关键失败链、恢复和授权边界。
+然后从用户给出的 exact `PACKAGE_COMMIT` 读取：
 
-## 3. 完整产品承诺复核
+1. `docs/design/clear-writing/CLEAR_WRITING_0_6_CHAT_RESPONSE_CONTENT_SELECTION_PROPOSAL_V0_2_2026-10-20.md`
+2. `docs/design/clear-writing/CLEAR_WRITING_0_6_EXECUTION_READY_PLAN_V0_3_2026-10-20.md`
+3. `docs/goals/CLEAR_WRITING_0_6_SINGLE_ENTRY_ARTIFACT_FINALIZATION_GOAL_V0_3_2026-10-20.md`
+4. `docs/design/clear-writing/CLEAR_WRITING_0_6_GATE_EXECUTION_RUNBOOK_V0_3_2026-10-20.md`
+5. `docs/operations/prompts/CLEAR_WRITING_0_6_KICKOFF_DRAFT_V0_3_2026-10-20.md`
+6. `results/clear-writing--single-entry-artifact-finalization/PLANNER_REVISION_STATUS_2026-10-20.json`
 
-独立确认以下内容已经闭合，不能只复核上一轮四个 finding：
+并重新读取：
 
-1. ChatGPT Personal Plugin 只有一个顶层 `clear-writing` 入口；六项 canonical writing capability 仍由唯一 source 投影，Codex 六项直接入口保持不变。
-2. 0.6 的外部产物最终化正式声明只覆盖：用户显式选择 Clear Writing 后，通过 GitHub connector 处理 UTF-8 repository text file；不得外推成所有插件、所有写入或所有外部 surface 的全局强制拦截。
-3. G3 必须真实证明：
+- old wrapper `packaging/chatgpt/writing-style/clear-writing/SKILL.md@079bd798...`
+- current `skills/writing/core/response-clarity/SKILL.md`
+- current `skills/writing/core/writing-fidelity/SKILL.md`
+- Phase C root cause / recovery amendment
+- Issue #13当前正文与最新评论。
+
+只用OpenAI官方当前资料核实skills-only plugin边界；不得把Skill写成不可绕过send hook。
+
+## 2. 首先判断：本次语义修订是否必要且放在正确层
+
+独立判断：
+
+- production regression是否已证明 `response-clarity` loaded后仍会发生；
+-现有 `response-clarity` 是否已经包含结论先行、内部噪声降低、停止条件等规则；
+-问题是否更像“evidence pool -> user content selection”而非单纯措辞问题；
+-唯一 `clear-writing` wrapper 是否是最小、正确的 CHAT_RESPONSE content-selection owner；
+-这是否与domain owner的“科研/统计 evidence selection”发生冲突。
+
+若 Planner只是换一种说法重复 `response-clarity`，REVISE。
+
+## 3. 比较三种路线
+
+必须明确评价：
+
+1. only `response-clarity`；
+2. only whole-response self-check；
+3. wrapper pre-route reader-value selection + existing response-clarity/fidelity。
+
+检查Planner选择第3条是否真的更接近失败点、blast radius更小，而不是为了保留既有架构强行解释。
+
+## 4. 检查 CHAT_RESPONSE_READER_VALUE_SELECTION_V1
+
+必须确认它：
+
+- 先从user prompt确定问题、reply type、detail和action；
+-允许domain analysis读取全部证据；
+-正文纳入使用reader-value语义条件；
+-明确“详细”不是“列完所有audit”；
+-明确用户点名的算法/公式/复现细节有reader value；
+-`writing-fidelity`只保护selected content，不强迫展示全部background；
+- whole-response check同时防噪声和防遗漏；
+-无固定字数/标题/英文比例/禁词；
+-不创建持久schema/ledger；
+-不冒充send-time hook。
+
+若它实际会系统性压短科研/数学/工程答案，REVISE。
+
+## 5. 检查旧候选失效和版本关系
+
+确认：
+
+- `079bd798...` 被正确降为历史实现基线；
+- previous execution-ready PASS不再覆盖新版semantic；
+-正式Personal Plugin仍是0.5.0；
+-仍是同一 `writing-style 0.6`，不是0.7；
+- Issue #13继续复用；
+- #73/#49 pending不被清除。
+
+## 6. 检查 Phase C 协调
+
+必须把两个问题分开审：
+
+### archive compatibility
+
+- tar.gz是真实Plugin Creator upstream格式；
+- ZIP-only reader是普通实现bug；
+-新版implementation把archive fix和wrapper semantic change放入同一个新candidate；
+-避免两个Codex线程各自冻结candidate。
+
+### execution owner
+
+- archive/mutation和fresh Web gate不再被强迫在一个tool surface；
+- Phase C-A mutation前必须真实materialize账户0.5 archive bytes并生成restore；
+- fresh Web UI若无自动控制能力，明确user-only动作；
+- user只负责UI，不负责设计prompt、判Gate、整理证据或restore；
+- terminal Web failure仍能回到同一个restore owner。
+
+若执行职责仍依赖“理论上某surface可以”，REVISE。
+
+## 7. 检查Gate是否证明新能力而不过重
+
+不得新增顶层Gate。
+
+重点看G2：
+
+- G1-B simple smoke保留；
+- T1 Bridge 0.11.1为known regression；
+- T9 Phase C为known regression；
+- T8保留深度正控制；
+- T2-T7旧route覆盖保留。
+
+判断这是否比“继续增加十几个回归”更有针对性。
+
+Bridge T1必须基于真实：
 
 ```text
-fresh ChatGPT Web conversation
-→ explicit Clear Writing selection
-→ fetch_file 读取目标全文并保存目标 identity
-→ Clear Writing 形成唯一完整终审 candidate 及 identity/hash
-→ 写入前再次读取并确认目标未漂移
-→ update_file 写入同一完整 candidate
-→ 记录 returned commit/content identity
-→ fetch_file 回读实际 repo 文件
-→ readback 与 candidate 完全一致
-→ 独立阅读全文做保真与可读性审查
+YuukiAS/GPT_Codex_AI_Bridge_Kit
+ba9013b9fbbd242e51b09f9d09291f417df17652
+README.md / QUICKSTART.md / CHANGELOG.md / AGENTS.md
 ```
 
-缺全文读取、缺完整 candidate、只输出 diff、只改局部、缺写前 identity 检查、缺写入、缺回读、回读不等于 candidate、或只检查聊天回复，G3 必须 FAIL。
+Phase C T9必须基于真实停止报告。
 
-这个合同已经足以证明“显式 Clear Writing 正常入口写入的 repo 文件就是该次终审 candidate”。不要自行新增 `create_blob`、MCP、App、写入网关或平台级全局拦截；除非当前包事实上无法满足上述已冻结产品声明，并给出精确矛盾证据。
+独立定性review必须读取exact user prompt + source + full final response。
 
-4. G1–G6 各自证明的能力、顺序、同一 final candidate、known regression 与唯一 fresh G6 已闭合；G4/G6 无循环；G6 失败不能换题。
-5. 包装投影、deterministic ZIP、Personal Plugin overlay/update、恢复集合、0.5 baseline 保存、forward restore 和 terminal failure 行为已闭合。
-6. 模型、attempt、retry、stop、版本、Issue #13、README/changelog/release 边界已闭合。
-7. Codex 不需要自行决定产品声明、外部 surface、包装、Gate、失败恢复、版本或权限边界；只剩普通实现细节和执行时真实验证。
+G3/G4/G5/G6不得被降低。Bridge/Phase C不得冒充G6 fresh。
 
-## 4. 上一轮四个 blocker 的优先复核
+## 8. 检查实现范围是否留给Codex关键决定
 
-完整复核基础上，再重点确认：
+若Codex还需要决定以下任一项，则REVISE：
 
-- `CW06-ER01`：`CW06_ROUTE_PROJECTION_V1` 的两项 transform、support/provenance parity、helper 可运行性和 fail-closed。
-- `CW06-ER05`：G4/G6 无循环，G2-T3 source delivery 固定为唯一 repo/ref/path。
-- `CW06-ER08`：`CW06_DETERMINISTIC_ZIP_V1` 是唯一 raw ZIP identity。
-- `CW06-ER09`：Plugin Creator 当前 overlay/delete/version 现实、两个 restore set、完整 forward restore 和 infrastructure-blocked recovery。
+- content-selection owner；
+- reader-value inclusion semantics；
+-是否修改canonical response-clarity；
+- old candidate是否仍可发布；
+- archive bug与wrapper change是否同candidate；
+- Phase C-A/B responsibility；
+- user-only Web动作；
+- Gate replacement；
+-版本/release语义；
+- terminal failure restore。
 
-这四项是优先检查，不是最终审查范围上限。
+普通措辞、代码实现细节和测试实现可以留给Codex。
 
-## 5. 用户问题与范围纪律
+## 9. 禁止事项
 
-用户要求解释“怎么工作”“怎么验收”“如何保证写入 repo 的文件经过 Clear Writing”时，先依据已批准包用自然中文回答当前机制。
+本轮 Critic 不得：
 
-不要把解释请求自动升级为新产品需求；不要为了显得更严格临场增加 `create_blob`、MCP、App、daemon、database、state machine 或全局写入拦截。只有解释过程发现当前包与冻结用户承诺存在真实矛盾，才可 REVISE，并给出精确证据和最小修订。
+-修改repo/Issue/Project；
+-启动Codex；
+-更新Personal Plugin；
+-运行G1-G6；
+-创建G3 branch；
+-调用付费模型；
+-把旧PASS自动延续到新package。
 
-## 6. Verdict
+## 10. 结论
 
-只能给：
+这是新版完整 execution-ready package。若所有产品/恢复/验收/执行职责都已经冻结，可以直接给新的唯一 execution-ready：
 
 ```text
-PASS
+DECISION=PASS
 READY_FOR_CODEX=YES
 ```
 
-或：
+否则：
 
 ```text
-REVISE
+DECISION=REVISE
 READY_FOR_CODEX=NO
 ```
 
-PASS 仅在完整执行包和完整用户承诺均已闭合时允许。它不是 implementation/Gate/release PASS，也不代替用户授权。
+若REVISE，只阻塞真实缺口，使用稳定finding ID `CW06-R3-xx`，并附一份可直接回Planner的最小返修prompt；不要重新设计已通过的单入口/GitHub finalization架构。
 
-## 7. PASS 的用户可见输出
-
-PASS 回复必须严格分两层。
-
-### 第一层：一屏中文说明
-
-必须直接说明：
-
-- 这次批准的产品架构到底是什么；
-- 单入口、六项能力和 GitHub 文件最终化怎样工作；
-- G3 如何证明 repo 最终文件就是 Clear Writing 终审 candidate；
-- G1–G6 分别证明什么；
-- 失败后何时停止、何时恢复 0.5；
-- 当前仍未证明什么；
-- 用户下一步只需发送哪一段给 Codex。
-
-不得用 finding、路径、哈希或 Gate 编号堆砌代替解释。
-
-### 第二层：短 Codex handoff
-
-必须直接输出可复制的短 handoff，不得停在 `NEXT_HANDOFF=USER_AUTHORIZATION`，不得全文复制 Kickoff Draft，也不得把批准前的 `DRAFT / NOT_AUTHORIZED / 等待 PASS` 控制面带入用户执行入口。
-
-固定结构：
+若PASS，必须输出：
 
 ```text
-APPROVED_PROPOSAL_PATH=docs/design/clear-writing/CLEAR_WRITING_0_6_SINGLE_ENTRY_ARTIFACT_FINALIZATION_PROPOSAL_V0_1_2026-10-20.md
-APPROVED_PLAN_PATH=docs/design/clear-writing/CLEAR_WRITING_0_6_EXECUTION_READY_PLAN_V0_2_2026-10-20.md
-APPROVED_GOAL_PATH=docs/goals/CLEAR_WRITING_0_6_SINGLE_ENTRY_ARTIFACT_FINALIZATION_GOAL_V0_2_2026-10-20.md
-APPROVED_RUNBOOK_PATH=docs/design/clear-writing/CLEAR_WRITING_0_6_GATE_EXECUTION_RUNBOOK_V0_2_2026-10-20.md
-APPROVED_KICKOFF_PATH=docs/operations/prompts/CLEAR_WRITING_0_6_KICKOFF_DRAFT_V0_2_2026-10-20.md
-APPROVED_COMMIT=<exact PACKAGE_COMMIT>
+DECISION=PASS
 READY_FOR_CODEX=YES
-NEXT_HANDOFF=CODEX
-=== COPY TO CODEX BEGIN ===
-执行同一任务 `clear-writing--single-entry-artifact-finalization`。严格读取上述 approved package，在批准范围内实现 Clear Writing 0.6，完成 repository implementation、独立实现审查、final candidate freeze、现有 USER/PRIVATE Personal Plugin 更新、G1–G6、完整产物审查和 release closure。允许 task-owned add/commit 与普通 non-force push；不得修改 Project setting、其他插件产品、Bridge Kit，或新增 MCP/App/后台服务/数据库/状态机。普通实现、测试、运行时或冻结 Gate 失败在同一任务内修复；只有用户承诺、架构、外部 surface、权限、Gate 成功定义或恢复语义必须改变时才停止并回 Planner。任何批准包规定的 terminal failure 按 Runbook 停止并执行恢复；全部 required Gate 和最终完整产物审查通过前，不得宣称 0.6 完成或发布。
-=== COPY TO CODEX END ===
+TARGET_REPO=YuukiAS/AI_Skills_Collection
+TARGET_PLUGIN=writing-style
+TASK_KEY=clear-writing--single-entry-artifact-finalization
+APPROVED_PACKAGE_COMMIT=<用户消息中的 exact PACKAGE_COMMIT>
+APPROVED_PROPOSAL=docs/design/clear-writing/CLEAR_WRITING_0_6_CHAT_RESPONSE_CONTENT_SELECTION_PROPOSAL_V0_2_2026-10-20.md
+APPROVED_PLAN=docs/design/clear-writing/CLEAR_WRITING_0_6_EXECUTION_READY_PLAN_V0_3_2026-10-20.md
+APPROVED_GOAL=docs/goals/CLEAR_WRITING_0_6_SINGLE_ENTRY_ARTIFACT_FINALIZATION_GOAL_V0_3_2026-10-20.md
+APPROVED_RUNBOOK=docs/design/clear-writing/CLEAR_WRITING_0_6_GATE_EXECUTION_RUNBOOK_V0_3_2026-10-20.md
+APPROVED_KICKOFF_DRAFT=docs/operations/prompts/CLEAR_WRITING_0_6_KICKOFF_DRAFT_V0_3_2026-10-20.md
+NEXT_HANDOFF=USER_AUTHORIZATION
 ```
 
-若短 handoff 无法在不猜测、不丢授权、不改变 scope 的情况下生成，必须 REVISE，不能把完整 Kickoff Draft 倒给用户。
-
-## 8. REVISE 输出
-
-先用一屏中文说明真正问题和用户影响，再给稳定 blocker、最小关闭条件及完整 Planner prompt。
-
-不得重新设计已经通过且未被真实证据推翻的部分。
-
-## 9. 禁止
-
-本轮不得：
-
-- 实施或修改产品代码；
-- 更新 Personal Plugin；
-- 创建 G3 branch；
-- 运行 G1–G6；
-- 调用付费模型；
-- 修改 Project setting；
-- 把 PASS 当成用户尚未发送的执行授权。
+并明确：PASS只批准新版implementation入口；不是implementation/Gate/release PASS，也不授权用户发送Kickoff前的任何production mutation。

@@ -1,0 +1,18 @@
+{
+  "schema": "CLEAR_WRITING_06_PLANNER_REVISION_STATUS_V1",
+  "task": "clear-writing--single-entry-artifact-finalization",
+  "lifecycle": "DOING",
+  "reason": "NEW_PRODUCTION_REGRESSION_REQUIRES_CHAT_RESPONSE_CONTENT_SELECTION_SEMANTIC_REVISION",
+  "previous_execution_ready_package": "d7b810d194ead881303aaca9c2e4f1d59a97c1f1",
+  "historical_candidate": "079bd7987bb33d624d244feb415327d5cf2343d8",
+  "historical_candidate_status": "SUPERSEDED_FOR_RELEASE_RETAINED_AS_BASELINE",
+  "live_personal_plugin_version": "0.5.0",
+  "live_personal_plugin_mutated_by_revision": false,
+  "phase_c_live_mutation": "PAUSED",
+  "archive_compatibility_repair": "INTEGRATE_IN_NEXT_SINGLE_CANDIDATE_AFTER_CRITIC",
+  "web_gate_execution_owner": "FRESH_CHAT_UI_ACTION_USER_IF_NO_AUTOMATED_UI_SURFACE; PLANNER_OWNS_PROMPTS_ADJUDICATION_EVIDENCE_AND_RESTORE",
+  "revised_product_behavior": "CHAT_RESPONSE_READER_VALUE_SELECTION_V1",
+  "top_level_gates": "CW06-G1..G6_UNCHANGED",
+  "next_handoff": "INDEPENDENT_CRITIC",
+  "resolution_commit": null
+}
