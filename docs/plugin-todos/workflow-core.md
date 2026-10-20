@@ -209,6 +209,7 @@ Expected mapping after 056 completion, to verify rather than assume:
 
 ### Final delivery must consume domain-owned self-QA before user-ready completion
 status: NEW
+tracking: #107
 source: Bridge Kit `docs/TODO_LOCAL_AUTONOMOUS_ACCEPTANCE_WORKFLOW.md` closure on 2026-10-12; Lucerna native/UI acceptance failures; Frontend Design producer-self-QA evidence; Presentation and Research Authoring delivery experience
 evidence: Bridge Kit closed its proposed Local Autonomous Acceptance workflow at commit `89fa1e2469cb83a1d5f02e556b00e7bdf97ca750` and explicitly transferred the reusable delivery requirement here instead of creating a fourth Bridge workflow. Existing AI_Skills evidence already shows the same failure class across domains: Frontend Design records that external reviewers/users should confirm quality rather than discover obvious producer-visible P1/P2 defects; presentation production requires rendered-artifact inspection rather than file/build success; research-writing exposes pre-submission acceptance, claim/evidence, citation and final-artifact QA capabilities. The repeated product failure is that process/build/test PASS can still be reported as user-ready before the domain owner has actually inspected the final consumed artifact.
 target layer: workflow-core delivery admission / domain routing / completion semantics.
