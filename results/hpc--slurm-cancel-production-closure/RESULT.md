@@ -1,10 +1,28 @@
 ---
 schema: AI_BRIDGE_REVIEWED_RESULT_V1
 task_key: hpc--slurm-cancel-production-closure
-implementation_commit: ac6a380c00b416ef7a5c4c46591fd0cfe9b6770a
+implementation_commit: 3e81802ab0251d3bf31ec2d808d4e3273505b2f6
 ---
 
 # Codex Result
+
+## Current live confirmation checkpoint — 2026-10-20
+
+Frozen implementation: `3e81802ab0251d3bf31ec2d808d4e3273505b2f6`. The older checkpoints below are historical and do not describe the current installed implementation or Job state.
+
+The three task-owned handlers are natively trusted with matching current/trusted hashes and no load errors. The supported empty-edit config reload completed. Actual `git status --short` in the canonical checkout exited 0; actual `scancel --help` was denied by PreToolUse before process launch.
+
+The user's next exact cancellation request reached the normal Hook-to-MCP path in the same root chat. The required two-option form returned canonical `confirm`. Root metadata matched the Hook session identity; the exact pending identity was consumed. The durable reservation preceded final re-resolution and the single frozen `/usr/bin/scancel` invocation, which returned 0. Independent `scontrol` and `sacct` inspection proved Job 5693449 terminally CANCELLED with zero elapsed runtime and zero allocated nodes. Only this Job appears in the single invocation intent; no other Job was mutated by the task.
+
+`HOOK_TO_MCP_ELICITATION=PASS`, `CONFIRM_CANCEL_TEST=PASS`, `EXACT_CANCEL_COUNT=1`, `OTHER_JOB_MUTATION=NO`.
+
+The first live form was confirmed rather than retained. Therefore `KEEP_TEST=NOT_RUN`, `G4=INCOMPLETE`, and `COMPLETE=NO`. The Job is already terminal: do not retry cancellation, request a second cancellation, or create a replacement Job. Deterministic retain tests are not substituted for the required live retain acceptance. Formal release remains gated by the missing live acceptance evidence.
+
+Same-candidate post-confirm checks: focused protected-cancel tests **54 PASS**; full Slurm tests **69 PASS**; full repository tests **401 PASS** in 125.821 seconds; Skill validation/audit, Marketplace validation/freshness and registry consistency PASS. The first full repository run had two read-only fixture-write failures; the authorized writable rerun passed without any product source change. Runtime source and installed bytes remain identical to the frozen candidate. Remote CI, independent final review, G5 and release are not yet claimed.
+
+Repository bump decision: NONE at this incomplete acceptance checkpoint. Reason: the frozen live retain gate is missing, so formal release is not admissible. Affected standalone Skill: `slurm-workflows`: NO_BUMP yet; the authorized single compatible release bump remains pending. Central plugin versions are unchanged.
+
+Durable private audit snapshot and hashes: `private/exports/hpc--slurm-cancel-production-closure/post-confirm-20261020/receipt.json` in the canonical checkout. See `LIVE_CONFIRMATION_EVIDENCE.md` for the exact observed sequence and evidence limits. README unchanged; no release/version bump at this checkpoint.
 
 ## Current MCP implementation checkpoint (supersedes earlier execution surface)
 
