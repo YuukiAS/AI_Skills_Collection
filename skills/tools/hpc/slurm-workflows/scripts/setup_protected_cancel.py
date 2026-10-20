@@ -313,12 +313,15 @@ def render_global_contract(
         mcp_source = (skill_scripts / MCP_NAME).read_bytes()
         mcp_digest = _sha256_bytes(mcp_source)
         files[str(Path(PRIVATE_DIR) / MCP_NAME)] = mcp_source
-        files[str(Path(PRIVATE_DIR) / "mcp_identity.json")] = (json.dumps({"server_sha256": mcp_digest, "sdk_version": "1.30.0"}, sort_keys=True) + "\n").encode()
+        mcp_identity = {"server_sha256": mcp_digest, "sdk_version": "1.30.0",
+                        "hook_sha256": runtime["hook_sha256"],
+                        "runtime_sha256": _sha256_bytes(runtime_bytes), "policy_sha256": runtime["policy_sha256"]}
+        files[str(Path(PRIVATE_DIR) / "mcp_identity.json")] = (json.dumps(mcp_identity, sort_keys=True) + "\n").encode()
         fields = ("session_id", "turn_id", "tool_use_id", "tool_name", "tool_input", "cwd", "hook_event_name", "agent_id", "agent_type")
         hooks["PreToolUse"][0]["hooks"].append({
             "type": "mcp_tool", "server": MCP_SERVER, "tool": "slurm_protected_cancel", "timeout": 900,
             "statusMessage": "Confirm protected Slurm cancellation",
-            "input": {"event": {key: "${" + key + "}" for key in fields}, "server_sha256": mcp_digest},
+            "input": {"event": {key: "${" + key + "}" for key in fields}, "expected_identity": mcp_identity},
         })
         # Latest user authority (attachment section 4, line 247) explicitly
         # retires THIS product's request_user_input binder. This dictionary

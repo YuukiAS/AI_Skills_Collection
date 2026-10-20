@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import hashlib
 from pathlib import Path
 import subprocess
 import sys
@@ -144,6 +145,7 @@ class TestMcpProtectedCancel(unittest.IsolatedAsyncioTestCase):
                 self.fail("must not elicit")
             event = fixture.shell_event("PreToolUse", "scancel 5001")
             self.assertEqual(await MCP.handle(event, {"threadId": "session-1"}, private, runtime, forbidden), {})
+            self.assertEqual(await MCP.handle({**event, "agent_id": "child"}, {}, private, runtime, forbidden), {})
             unrelated = {"tool_input": {"command": "printf harmless"}, "agent_id": "child"}
             self.assertEqual(await MCP.handle(unrelated, {}, private, runtime, forbidden), {})
 
@@ -157,6 +159,38 @@ class TestMcpProtectedCancel(unittest.IsolatedAsyncioTestCase):
 
 
 class TestMcpInstaller(unittest.TestCase):
+    def test_frozen_runtime_policy_and_loaded_code_identity(self):
+        for drift in ("runtime", "policy", "guard"):
+            with self.subTest(drift=drift), tempfile.TemporaryDirectory() as temp:
+                fixture = PortableFixture(Path(temp))
+                source = (SCRIPTS / SETUP.MCP_NAME).read_bytes()
+                server = fixture.private / SETUP.MCP_NAME
+                server.write_bytes(source)
+                server.chmod(0o600)
+                def digest(name):
+                    return hashlib.sha256((fixture.private / name).read_bytes()).hexdigest()
+                expected = {"server_sha256": digest(SETUP.MCP_NAME), "hook_sha256": digest("slurm_cancel_hook.py"),
+                            "runtime_sha256": digest("runtime.json"), "policy_sha256": digest("policy.json"), "sdk_version": "1.30.0"}
+                with patch.object(MCP, "ROOT", fixture.private):
+                    MCP.pinned_runtime(expected)
+                    if drift == "runtime":
+                        path = fixture.private / "runtime.json"
+                        runtime = json.loads(path.read_text())
+                        runtime.update(scancel_path=str(fixture.scontrol), scancel_path_realpath=str(fixture.scontrol))
+                        path.write_text(json.dumps(runtime))
+                    elif drift == "policy":
+                        path = fixture.private / "policy.json"
+                        path.write_text(json.dumps({"protected_cancel_partitions": ["different-protected"]}))
+                        runtime_path = fixture.private / "runtime.json"
+                        runtime = json.loads(runtime_path.read_text())
+                        runtime["policy_sha256"] = digest("policy.json")
+                        runtime_path.write_text(json.dumps(runtime))
+                    else:
+                        (fixture.private / "slurm_cancel_hook.py").write_text("# altered code\n")
+                    with self.assertRaisesRegex(ValueError, "frozen_.*_mismatch"):
+                        MCP.pinned_runtime(expected)
+                    self.assertEqual(fixture.mutation_argvs(), [])
+
     def render(self, fixture):
         real = subprocess.run
         def run(argv, **kwargs):

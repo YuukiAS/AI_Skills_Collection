@@ -36,7 +36,38 @@ ROOT = Path(__file__).resolve().parent
 _spec = importlib.util.spec_from_file_location("protected_cancel_guard", ROOT / "slurm_cancel_hook.py")
 assert _spec is not None and _spec.loader is not None
 guard = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(guard)
+_guard_source = (ROOT / "slurm_cancel_hook.py").read_bytes()
+GUARD_LOADED_SHA256 = hashlib.sha256(_guard_source).hexdigest()
+exec(compile(_guard_source, str(ROOT / "slurm_cancel_hook.py"), "exec"), guard.__dict__)
+SERVER_LOADED_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+
+
+def pinned_runtime(expected: dict) -> tuple[Path, dict]:
+    """Pin actual loaded/effective bytes to the trusted Hook, not local config."""
+    names = {"server_sha256": Path(__file__).name, "hook_sha256": "slurm_cancel_hook.py",
+             "runtime_sha256": "runtime.json", "policy_sha256": "policy.json"}
+    if not isinstance(expected, dict) or set(expected) != {*names, "sdk_version"} or expected["sdk_version"] != "1.30.0":
+        raise ValueError("invalid_trusted_runtime_identity")
+    if expected["hook_sha256"] != GUARD_LOADED_SHA256 or expected["server_sha256"] != SERVER_LOADED_SHA256:
+        raise ValueError("loaded_code_identity_mismatch")
+    snapshots = {}
+    for key, name in names.items():
+        path = ROOT / name
+        if not guard._private_path_ok(path):
+            raise ValueError("runtime_permissions_invalid")
+        content = path.read_bytes()
+        if hashlib.sha256(content).hexdigest() != expected[key]:
+            raise ValueError("frozen_" + key + "_mismatch")
+        snapshots[key] = content
+    private, runtime = guard._load_runtime(ROOT / "slurm_cancel_hook.py")
+    effective = dict(runtime)
+    protected = effective.pop("protected_cancel_partitions")
+    if effective != json.loads(snapshots["runtime_sha256"]) or protected != json.loads(snapshots["policy_sha256"])["protected_cancel_partitions"]:
+        raise ValueError("effective_runtime_identity_mismatch")
+    for key, name in names.items():
+        if (ROOT / name).read_bytes() != snapshots[key]:
+            raise ValueError("runtime_changed_while_loading")
+    return private, runtime
 
 
 def block(status: str, reason: str, **extra: Any) -> dict:
@@ -102,7 +133,7 @@ def possible_invocation(private: Path, event: Any) -> bool:
 
 
 def execute_confirmed(private: Path, runtime: dict, identity: dict,
-                      before: list[dict[str, str]]) -> dict:
+                      before: list[dict[str, str]], check_identity=None) -> dict:
     """Reuse guard resolution/identity and reserve before the last scheduler read."""
     job_ids = [target["job_id"] for target in before]
     current = guard._resolve_targets(runtime, job_ids)
@@ -140,6 +171,13 @@ def execute_confirmed(private: Path, runtime: dict, identity: dict,
         guard._replace_json(path, reservation)
         return block("denied", "target_changed_after_reservation")
     audit(private, identity, "final_resolved", targets=rechecked)
+    if check_identity is not None:
+        try:
+            check_identity()
+        except Exception:
+            reservation.update(status="pre_invocation_failed", reason="runtime_identity_changed")
+            guard._replace_json(path, reservation)
+            return block("denied", "runtime_identity_changed")
     try:
         # Durable intent is recorded before the only possible invocation. An
         # interruption from this point is consumed and must never be retried.
@@ -162,7 +200,7 @@ def execute_confirmed(private: Path, runtime: dict, identity: dict,
     return block("executed" if completed.returncode == 0 else "ambiguous", "confirmed", mutation_count=1, job_ids=job_ids)
 
 
-async def handle(event: dict, metadata: dict, private: Path, runtime: dict, elicit) -> dict:
+async def handle(event: dict, metadata: dict, private: Path, runtime: dict, elicit, check_identity=None) -> dict:
     tool_input = event.get("tool_input") if isinstance(event, dict) else None
     command = tool_input.get("command") if isinstance(tool_input, dict) else None
     probe = command == PROBE_COMMAND
@@ -173,13 +211,13 @@ async def handle(event: dict, metadata: dict, private: Path, runtime: dict, elic
             return block("denied", error)
         if job_ids is None:
             return {}
-    identity = validate_context(event, metadata)
     if not probe:
         targets = guard._resolve_targets(runtime, job_ids)
         if targets is None:
             return block("denied", "target_resolution_failed")
         if not any(item["partition"] in runtime["protected_cancel_partitions"] for item in targets):
             return {}
+    identity = validate_context(event, metadata)
     audit(private, identity, "elicitation_requested", probe=probe, targets=targets, schema=DECISION_SCHEMA,
           command=command, metadata_thread_id=metadata["threadId"])
     message = ("确认组件无害验证；任何选择均不会取消 Job 或执行命令。" if probe else
@@ -202,7 +240,9 @@ async def handle(event: dict, metadata: dict, private: Path, runtime: dict, elic
     if response["content"]["decision"] == "retain":
         audit(private, identity, "retained", targets=targets, mutation_count=0)
         return block("retained", "user_retained")
-    result = execute_confirmed(private, runtime, identity, targets)
+    if check_identity is not None:
+        check_identity()
+    result = execute_confirmed(private, runtime, identity, targets, check_identity)
     audit(private, identity, "result", result=result)
     return result
 
@@ -212,15 +252,16 @@ async def main() -> None:
     from mcp.server.stdio import stdio_server
     from mcp import types
 
-    private, runtime = guard._load_runtime(ROOT / "slurm_cancel_hook.py")
+    private = ROOT
     identity_path = ROOT / "mcp_identity.json"
     if not guard._private_path_ok(identity_path):
         raise ValueError("mcp_identity_permissions_invalid")
     identity = json.loads(identity_path.read_text(encoding="utf-8"))
     if guard._sha256(Path(__file__).resolve()) != identity["server_sha256"]:
         raise ValueError("mcp_server_identity_mismatch")
-    if importlib.metadata.version("mcp") != identity["sdk_version"]:
+    if importlib.metadata.version("mcp") != "1.30.0":
         raise ValueError("mcp_sdk_version_mismatch")
+    pinned_runtime(identity)
     if sys.argv[1:] == ["--check"]:
         print(json.dumps({"sdk_version": identity["sdk_version"], "server_sha256": identity["server_sha256"]}))
         return
@@ -231,22 +272,24 @@ async def main() -> None:
         return [types.Tool(name=TOOL_NAME,
             description="Trusted PreToolUse Hook: confirm exact protected Slurm cancellation in the owning chat; retain/close never cancels.",
             inputSchema={"type": "object", "properties": {
-                "event": {"type": "object"}, "server_sha256": {"type": "string"},
-            }, "required": ["event", "server_sha256"], "additionalProperties": False},
+                "event": {"type": "object"}, "expected_identity": {"type": "object"},
+            }, "required": ["event", "expected_identity"], "additionalProperties": False},
             annotations=types.ToolAnnotations(readOnlyHint=False, destructiveHint=True, idempotentHint=False, openWorldHint=False))]
 
     @server.call_tool()
     async def call_tool(name, arguments):
+        private = ROOT
         try:
-            if name != TOOL_NAME or set(arguments) != {"event", "server_sha256"}:
+            if name != TOOL_NAME or set(arguments) != {"event", "expected_identity"}:
                 raise ValueError("invalid_tool_input")
-            if arguments["server_sha256"] != identity["server_sha256"]:
-                raise ValueError("trusted_hook_identity_mismatch")
+            expected = arguments["expected_identity"]
+            private, runtime = pinned_runtime(expected)
             ctx = server.request_context
             meta = ctx.meta.model_dump(by_alias=True) if hasattr(ctx.meta, "model_dump") else ctx.meta
             async def elicit(message, schema):
                 return await ctx.session.elicit_form(message, schema, related_request_id=ctx.request_id)
-            result = await handle(arguments["event"], meta, private, runtime, elicit)
+            result = await handle(arguments["event"], meta, private, runtime, elicit,
+                                  lambda: pinned_runtime(expected))
         except Exception as error:
             ambiguous = possible_invocation(private, arguments.get("event") if isinstance(arguments, dict) else None)
             result = block("ambiguous" if ambiguous else "denied", type(error).__name__ + ":" + str(error),
