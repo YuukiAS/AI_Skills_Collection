@@ -6,6 +6,14 @@ implementation_commit: 3e81802ab0251d3bf31ec2d808d4e3273505b2f6
 
 # Codex Result
 
+## Current authorized replacement checkpoint — 2026-10-21
+
+The user explicitly authorized exactly one replacement held/future Job to complete the missing live retain-then-confirm sequence. It was submitted once as **6028303**, using the unchanged approved one-CPU, 1M-memory, one-minute, generic one-GPU request with hold and BeginTime 25 hours ahead. Immediate readback proved current ownership, `htzhulab`, `PENDING / JobHeldUser`, zero runtime and no allocated node. No third Job is authorized; Job 5693449 must not be mutated again.
+
+Runtime/source bytes and native trust remain unchanged from `3e81802ab0251d3bf31ec2d808d4e3273505b2f6`. Existing same-runtime tests, validation/audit, Marketplace and candidate CI evidence is retained without rerunning the full suite as a live-acceptance prerequisite. See `REPLACEMENT_G4_EVIDENCE.md` and the durable canonical private submission intent for the exact resource contract and returned JobId.
+
+`G4_REPLACEMENT_JOB_ID=6028303`, `REPLACEMENT_SUBMISSION_COUNT=1`, `REPLACEMENT_EXACT_CANCEL_COUNT=0`, `KEEP_TEST=NOT_RUN`, `REPLACEMENT_CONFIRM_TEST=NOT_RUN`, `G4=INCOMPLETE`, `COMPLETE=NO`. Next action is the first user cancellation request for 6028303 and the real retain selection. Do not create another Job or assume either live choice has occurred. Earlier no-replacement statements below describe prior checkpoints, not the user's current authorization.
+
 ## Current live confirmation checkpoint — 2026-10-20
 
 Frozen implementation: `3e81802ab0251d3bf31ec2d808d4e3273505b2f6`. The older checkpoints below are historical and do not describe the current installed implementation or Job state.
