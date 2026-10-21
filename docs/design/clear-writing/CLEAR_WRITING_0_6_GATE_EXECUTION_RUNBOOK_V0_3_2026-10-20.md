@@ -403,3 +403,73 @@ live mutation后terminal product fail或bounded infra path耗尽：
 -只看第一屏；
 -只看Skill load receipt；
 -只看local replay。
+
+## 16. 2026-10-21 绑定的正常使用补充验收（G1–G6不扩顶层）
+
+### G2-T8-A：CAT-TRACE理解路径的真实科研解释
+
+单独fresh ChatGPT Web会话，型号`GPT-5.6 Sol`，用户显式选择正式Clear Writing、使用本候选release，一次模型答案；仅无模型答案的基础设施故障可原输入重试一次。私有来源：
+
+```text
+repo=YuukiAS/CAT-TRACE
+ref=0d829fb17c458a076a15ec51893e917960107c21
+path=docs/model/catalog_aware/CAT_TRACE_ZERO_SLOT_SECTION_5_READER_EXPLANATION_20261021.md
+```
+
+冻结的自然用户提示词：
+
+```text
+请通过已连接的GitHub读取这个文件的完整正文，再解释给一个尚未理解这部分推导的研究生：
+
+repo = YuukiAS/CAT-TRACE
+ref = 0d829fb17c458a076a15ec51893e917960107c21
+path = docs/model/catalog_aware/CAT_TRACE_ZERO_SLOT_SECTION_5_READER_EXPLANATION_20261021.md
+
+我想弄明白：既然最大值分布已经知道，为什么还要求分位数？为什么再引入一个标准正态变量？这些步骤到底使后续积分容易在哪里？请用必要的具体概率或调查地点例子让我先建立直觉，再讲清每个符号、公式关系和适用假设；保留分位数求根的计算成本、数值误差与尚未证明的效率结论。不要只复述原文标题，更不要为了简短删掉解释。
+```
+
+独立评审看源全文、提示词和最终聊天全文，判断是否真正解释了“为什么要这样做”、变量与数学关系、条件限制和计算代价；不能错误宣传从n维积分降到一维，也不能把辅助变量当生态新参数。CAT是已见正向参照，不是fresh G6，不因机械出现公式/例子就PASS。私有原文与涉及研究细节的完整输出仅放在权限匹配、独立Reviewer实际可读的受限位置；如果审查者取不到全文，停止而非将全文发到公开仓库。
+
+### G2-T8-B：保持原v0.3 T8必要长答
+
+v0.3 `T8 — necessary long answer` 中多站点传感器的**冻结原始提示词和判据完全保留**，作为T8-B另一条正常Web输出；两条各有一次尝试，不混合答案，不新增顶层Gate。G2-T1 Bridge工程回归及T9 Phase C交接回归不变；原24章节全文缺失的证据边界不能靠这次同类新问题掩盖。
+
+### G3-A：原Reader Guide完整编辑与双交付
+
+原v0.3第10节及v0.2冻结`10.1-10.3`的源提交、Gate分支、目标路径和原提示词不变。必须实际完整读取→正确的长技术文件保真/结构重写/中文终审路线→**写前有完整候选并分别完成事实和读者质量检查**→原expected-blob写入→全文回读一致；独立Reviewer实际核对原始用户问题、源全文、候选全文、仓库最终全文与聊天全文。仅hash相符但文档不可读或聊天仍为审计报告，G3-A FAIL。
+
+### G3-B：同一GitHub受控分支的新文件非覆盖创建
+
+仅在G3-A真实PASS后运行；使用同一个正式0.6插件release、一个新的显式选择Clear Writing的Web会话，不另增G7。固定来源仍为Reader Guide原始文件 `YuukiAS/AI_Research_Toolkit@0ff0f43f3b04286273490e4c4870975f4aa7a7f8`。目标仅限：
+
+```text
+repo=YuukiAS/AI_Research_Toolkit
+branch=gate/clear-writing-0.6-reader-guide-regression
+path=docs/research/software-production/16_THREE_RUN_SYNTHESIS_AND_DELIVERY_ASSURANCE_20261015/CW06_NEW_READER_INTRO.md
+```
+
+正式运行前必须确认目标文件不存在，branch就是已批准的G3测试分支；存在即`G3_PRECONDITION_BLOCKED`，不得覆盖、换名、强推或另建新分支。
+
+冻结提示词：
+
+```text
+请先通过已连接的GitHub读取以下原始Reader Guide全文，再根据这份真实材料在我指定的测试分支创建一份全新的中文入门说明：
+
+repo = YuukiAS/AI_Research_Toolkit
+source_ref = 0ff0f43f3b04286273490e4c4870975f4aa7a7f8
+source_path = docs/research/software-production/16_THREE_RUN_SYNTHESIS_AND_DELIVERY_ASSURANCE_20261015/DELIVERY_ASSURANCE_V0_4_READER_GUIDE_20261019.md
+target_branch = gate/clear-writing-0.6-reader-guide-regression
+target_path = docs/research/software-production/16_THREE_RUN_SYNTHESIS_AND_DELIVERY_ASSURANCE_20261015/CW06_NEW_READER_INTRO.md
+
+这份新文件面向第一次了解这个方案的普通研发读者。请独立讲清楚它解决什么问题、正常怎么使用、主要机制是什么、当前真正完成了什么、还缺什么。不要修改原文件，也不能编造功能或用内部审计流水充正文。
+
+写入前必须形成整篇终审候选，并检查内容保真和中文读者质量；写前再次确认目标不存在及分支没有意外漂移。只使用非覆盖的GitHub创建文件操作。写入后重新读取同一文件全文，确认就是被审查过的候选。聊天里另用自然中文说明创建内容和实际验证状态。
+```
+
+核对实际`create_file`、写前目标不存在、写前分支HEAD和创建提交parent一致、目标repo/branch/path、写前完整候选与最终仓库全文逐字一致。由于普通`create_file`没有自动提供branch HEAD比较并替代审阅的事务承诺，若目标身份意外漂移/无法核对/创建被拒绝，必须停止并报告未验证；不能谎称原编辑Gate证明了新建能力。独立Reviewer还必须判定新文件完整正文与聊天完整回复各自的真实性、连贯性和读者价值。
+
+G3只有A与B两个子任务都合格才PASS；G4保真输入须包含G2-T8-A/B及G3-A/B各自的完整source/candidate/final。字节一致和文本质量分别审核；长中文正式文件绝不使用CHAT_RESPONSE精简逻辑删除必要源信息。
+
+### 失败、费用、候选与最终可信声明
+
+所有新增子任务仍使用同一候选、同一model、每项一次产品答案、基础设施无答案最多一次同输入重试、产品失败不reroll。它们不是fresh G6；G6仍待G1-G5真实PASS后由原Critic冻结。保存来源身份、完整答案及完整文稿的独立定性审查；私有研究输出不得未经授权写到公开证据路径。任一聊天或文件严重退化、漏证据/重要限制、GitHub写前候选未全文审校或回读失败，相关G2/G3 FAIL，按原Phase C恢复，中央0.6不得发布。质量声明只能绑定已经观察到的实际运行，不以一次成功声称长期故障率已足够低。

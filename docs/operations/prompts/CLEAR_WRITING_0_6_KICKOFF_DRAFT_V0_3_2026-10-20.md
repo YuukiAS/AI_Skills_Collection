@@ -104,3 +104,11 @@ IMPLEMENTATION_REVIEW=PASS|REVISE
 LIVE_PERSONAL_PLUGIN_MUTATED=NO
 NEXT_HANDOFF=PLANNER
 ```
+
+## 本轮用户追加的同版实现边界（仅在新版Critic PASS及用户发送Kickoff后生效）
+
+在`CHAT_RESPONSE_READER_VALUE_SELECTION_V1`基础上，按CAT-TRACE真实解释与Bridge失败的对照记录，优化**读者理解所需概念、例子、变量/公式和限制**的进入时机，而不是增加禁词/长度规定。只在现有`clear-writing`包装入口内完成，不改六个专业route源码，也不复制私有CAT资料进入插件。正式写作源的模型与实际用户问法要保持分离。
+
+同一个用户请求涉及GitHub UTF-8文本时，源全文/正式写作路线/完整候选的事实及读者质量检查与聊天答复的处理必须**独立完成**。按新批准合同支持已存在文件expected-blob修改和受控新文件的非覆盖`create_file`及全文回读；缺读者质量或保真不能仅凭文件写入成功报完成。保持G3-A Reader Guide真实修改与聊天，新增G3-B受控新建文件与聊天，仍在同一个G3，不新建Gate或其他外部surface。
+
+实现阶段同时合并已经移交原Codex的安全tar.gz归档兼容修复；新版正式候选只有一个，旧`079bd798...`不再可安装。G2-T8-A CAT科研解释与T8-B原传感器深度控制必须防止修成机械短答。具体输入、Gate顺序、发布和恢复边界只按同一提交的v0.3 Plan/Runbook；正式Personal Plugin在Phase C-A真实归档字节与恢复准备完全证明前不能更新。

@@ -1,0 +1,23 @@
+{
+  "schema": "CLEAR_WRITING_06_PLANNER_REVISION_STATUS_V3",
+  "task": "clear-writing--single-entry-artifact-finalization",
+  "approved_original_package": "d7b810d194ead881303aaca9c2e4f1d59a97c1f1",
+  "historical_candidate": "079bd7987bb33d624d244feb415327d5cf2343d8",
+  "historical_candidate_release_eligible": false,
+  "live_plugin_expected": "writing-style 0.5.0, USER/PRIVATE",
+  "live_mutation_authorized_at_this_stage": false,
+  "scope": "same 0.6 candidate plan (chat reader-selection + GitHub existing/new UTF-8 file full review + archive restore + Phase C executor split)",
+  "new_positive_evidence": "CAT-TRACE four 2026-10-21 files @0d829fb17c458a076a15ec51893e917960107c21 (known)",
+  "negative_evidence": "Bridge 0.11.1 Issue #13 reports; original full 1128-line reply not independently available",
+  "gates": "CW06-G1..G6; G2-T8 CAT positive plus original depth; G3-A edit plus G3-B create, both chat+GitHub final",
+  "old_candidate_invalidated": true,
+  "pending": "independent execution-ready Critic review, no implementation, no live Personal Plugin update",
+  "issue": 13,
+  "issue_status": "DOING",
+  "project_pending_mutation": {
+    "status": "DOING",
+    "area": "writing-style",
+    "execution_anchor": "<latest package commit set after write>",
+    "resolution_commit": null
+  }
+}
