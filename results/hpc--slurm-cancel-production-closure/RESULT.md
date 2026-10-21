@@ -6,6 +6,12 @@ implementation_commit: 3e81802ab0251d3bf31ec2d808d4e3273505b2f6
 
 # Codex Result
 
+## Current revised acceptance — 2026-10-21
+
+The current user explicitly waives the live held-Job retain requirement once real native retain mapping and same-candidate deterministic retain integration pass. The renewed harmless native form actually returned `{"action":"accept","content":{"decision":"retain"}}`; its request and closed UI-only pending record had no Job targets. All cancellation-reservation and invocation-intent file hashes were unchanged before/after. No scheduler or Job was accessed by the probe and no runtime/Hook/trust change was made.
+
+`LIVE_JOB_RETAIN_TEST=WAIVED_BY_CURRENT_USER`, `LIVE_RETAIN_UI_MAPPING=PASS`, `DETERMINISTIC_RETAIN_PATH=PASS`, `LIVE_CONFIRM_PATH=PASS`, `OTHER_JOB_MUTATION=NO`, `G4_REVISED_ACCEPTANCE=PASS`. Historical `KEEP_TEST=NOT_RUN` stays unchanged. See `REVISED_G4_ACCEPTANCE.md` for the exact response and combined evidence. Earlier incomplete live-Job-retain checkpoints below remain historical; they do not override the current user's revised acceptance contract. No further Job creation, queries, mutation or real cancellation is authorized. Proceed to independent review and release closure without new human interaction, preserving frozen runtime `3e81802ab0251d3bf31ec2d808d4e3273505b2f6`.
+
 ## Current authorized replacement checkpoint — 2026-10-21
 
 The user explicitly authorized exactly one replacement held/future Job to complete the missing live retain-then-confirm sequence. It was submitted once as **6028303**, using the unchanged approved one-CPU, 1M-memory, one-minute, generic one-GPU request with hold and BeginTime 25 hours ahead. Immediate readback proved current ownership, `htzhulab`, `PENDING / JobHeldUser`, zero runtime and no allocated node. No third Job is authorized; Job 5693449 must not be mutated again.
