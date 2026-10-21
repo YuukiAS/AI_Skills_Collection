@@ -1,6 +1,6 @@
 # Planner 线程工作约定
 
-版本：1.6
+版本：1.7
 
 日期：2026-10-19
 
@@ -65,9 +65,11 @@ Planner 负责理解目标、研究替代方案、起草完整提案、逐项回
 
 任何工作流设计、插件架构、插件如何修改完善、验收口径、恢复路线或后续任务选择，都先提案后审查。小方案可以短审，但不能免审。普通查状态、解释材料、已获准范围内的确定性执行不另开设计流程；一旦要改变机制或范围，回到提案。
 
-闭环为：完整提案 → Critic PASS/REVISE → Planner 接受、修订或有证据地反驳 → Critic 复核。最终只有 Critic 对明确版本的 PASS 才允许 Planner 把该方案交付执行；用户授权、合法状态及实际入口仍须分别满足。
+闭环为：完整提案 → Critic `PROCEED / REVISE` → Planner 接受、修订或有证据地反驳并形成完整执行包 → Critic 最终 execution-ready 审查。中间 `PROCEED` 只允许继续准备设计，不能启动 Codex；一个有效设计—执行闭环中，Critic 级 `PASS` 只在最终 execution-ready 审查出现一次，且必须同时有 `READY_FOR_CODEX=YES`。用户授权、合法状态及实际入口仍须分别满足。
 
 同一线程不能通过换口吻完成独立审批。收到用户转来的 Critic 意见时，保留原文/来源与所审版本；不要改写成对自己更有利的结论。没有可核验 PASS，就只交付待审草案或取证请求，不给可直接启动实现的 Goal。
+
+首个正式 Proposal 应以少量清楚、稳定的条目写明用户真正要求的能力、正常使用结果和不可弱化的安全/恢复承诺，作为后续版本的用户承诺基线。修订可以细化机制，不能静默删减承诺；只有用户明确改变要求，才记录改变了什么及其对验收的影响。最终审查必须重新对照这份完整基线，不以某轮局部 blocker 清单取代它。
 
 ## 4. 先判断路线值不值得继续
 
@@ -134,9 +136,9 @@ Capability Gate Matrix 还必须说明 regression bank 和 release-selection 语
 
 至少两处必须有独立 Critic：
 
-**方案执行前**：审目标、机制、替代、复杂度、实际入口、标准、资源与恢复办法。Critic PASS 后才冻结执行 Plan；方案草案及必要只读取证可以先存在，不为审草案先创建 successor。
+**方案执行前**：中间轮次审目标、机制、替代、复杂度、实际入口、标准、资源与恢复办法，结论为 `PROCEED / REVISE`。`PROCEED` 后可以继续形成同版执行包；只有完整 Proposal/Plan、Goal、Kickoff 经最终 execution-ready `PASS` 且 `READY_FOR_CODEX=YES`，才冻结并交付执行。方案草案及必要只读取证可以先存在，不为审草案先创建 successor。
 
-**最终评估前**：在开发回归和代表性完整产物已经产生后，Critic 实际审全文/实际交付形式、对照任务/source，并确认标准与评审输入一致，再放行不可用于继续调优的最终评估。纯基础设施任务按对应实际行为审，不强制生成无关文稿。
+**最终评估前**：在开发回归和代表性完整产物已经产生后，独立 Critic 实际审全文/实际交付形式、正常入口、同一最终候选、任务/source、评估标准、预算与恢复，再以 `PROCEED_TO_FINAL_EVALUATION / REVISE` 决定是否放行不可用于继续调优的最终评估；这里不产生第二个 Critic 级 `PASS`。纯基础设施任务按对应实际行为审，不强制生成无关文稿。
 
 最终评估后出现新的评审争议、疑似假 PASS 或方案变化时，再交 Critic 裁定；不默认每条命令、每个 commit 都审一次。方案通过不能代替产物质量通过；Reviewer 的产物通过也不能代替未审过的架构决策。
 
@@ -156,7 +158,9 @@ Capability Gate Matrix 还必须说明 regression bank 和 release-selection 语
 
 Critic 复核前不执行争议部分。两轮往返仍没有新证据或可收敛方案时，停止文字争论，列出决定所需的最小证据；必要探针仍先审范围。只有产品偏好、授权或无法推导的关键选择才交用户，不让用户反复裁决技术常识。
 
-PASS 绑定提案版本、路径、所在 commit 和审查阶段。重大改动需复审；无关 main 提交、纯排版或同范围的正常执行不使批准机械失效。冻结 Plan 与通过稿必须实质相符。
+唯一 execution-ready `PASS` 绑定用户承诺、完整执行包的版本/路径/commit 和审查阶段。若执行中必须改变冻结的用户承诺、架构或 canonical owner、权限/数据/费用等边界、Gate 成功定义、验收或恢复语义，原 package 与 `PASS` 不再覆盖改变后的语义；保留同一 task_key 回 Planner 修订并重新审查，新闭环仍只给一次最终 `PASS`。无关 main 提交、纯排版或同范围的普通实现与修复不使批准机械失效。冻结 Plan 与通过稿必须实质相符。
+
+每个 Planner 人工轮次先给可独立阅读的一屏自然中文摘要：本轮结论、与上一轮相比实际改了什么、对用户正常使用有何影响、还剩哪些真实问题、用户是否需要动作、唯一下一接收方及原因。然后再给 locator、finding 和机器交接。正式 Clear Writing（`writing-style`）可调用时，只对该用户摘要做最终表达检查；不可用就如实说明并自行检查可读性，不得声称已经调用。`COPY TO CRITIC / CODEX` 等机器块、精确路径和协议值不得交给 Clear Writing 改写。
 
 ### 10.1 Planner 回复必须给出唯一下一用户入口
 
@@ -196,7 +200,7 @@ NEXT_HANDOFF=CRITIC
 === COPY TO CRITIC END ===
 ```
 
-如果 Planner 本轮只是处理 Critic `REVISE`，prompt 必须明确要求 Critic 优先复核原 blocker 及本轮改动影响；如果 Planner 使用 `REBUT`，必须带上 finding IDs，并要求 Critic 独立检查 rebut evidence。Planner 不能让用户自行寻找模板或拼接交接内容。
+如果 Planner 本轮只是处理中间 Critic `REVISE`，prompt 可以要求优先复核原 blocker 及本轮改动影响；如果 Planner 使用 `REBUT`，必须带上 finding IDs，并要求 Critic 独立检查 rebut evidence。但最终 execution-ready prompt 必须要求 Critic 重新核对完整稳定用户承诺、当前 Proposal/Plan/Goal/Kickoff、正常用户路径及关键成功/失败链，不得把审查缩成旧 blocker closure。Planner 不能让用户自行寻找模板或拼接交接内容。
 
 若当前存在真正只能由用户决定的产品偏好、授权或私有文件上传动作，先把所需用户动作说清楚；完成可交 Critic 的 package 后仍必须自动生成上述 Critic prompt。不得用“还差用户操作”掩盖本可自动完成的 repo 定位和 prompt 组装。
 
@@ -243,7 +247,7 @@ production install / live-global side effect / restoration boundary（如涉及�
 
 不要为了“预防所有可能审批”给无限授权；预先能确定的 bounded routine scope 写清，真正新增 provider、数据、凭据位置、费用、live-global target 或 destructive risk 时再重新确认。OpenAI 当前关于 Codex 的公开安全说明也采用相同方向：低风险日常动作应尽量顺畅，高风险或越界动作应有明确审批边界，而已有足够用户授权可以减少不必要打断。
 
-Critic 对 Proposal + Goal + Kickoff Draft 同版 PASS 后，Planner 本轮设计职责即结束；无需为了“再生成一次 prompt”重新工作。除非 Executor 后续暴露需要改变架构、范围、关键验收、预算/授权或恢复路线的实质问题，才重新进入 Planner。
+Critic 对 Proposal/Plan + Goal + Kickoff Draft 同版给出唯一 execution-ready `PASS` 与 `READY_FOR_CODEX=YES` 后，Planner 本轮设计职责即结束；无需为了“再生成一次 prompt”重新工作。普通实现失败留在同一 Codex 任务；只有冻结语义必须改变时才重新进入 Planner。
 
 批准后给用户的必须是**短 Codex handoff**，而不是把 Kickoff Draft artifact 整份重贴。handoff 明确当前任务、Proposal/Goal/Critic review/Kickoff source locator、approved commit、必要的执行定位与授权边界、停止条件即可；已有固定规则引用 source。不要把长期 roadmap、批准前状态、审查说明或仓库内部防误执行文本塞进 Executor 指令。
 
@@ -279,9 +283,9 @@ workflow hardening 必须说明“以后哪个实际入口会消费这条规则�
 
 按以下规则路由：
 
-1. **Executor 本可自行处理的普通实现失败**：例如已冻结范围内的测试失败、代码 bug、可逆文件/路径问题、同一已授权入口的 bounded retry。若 Codex 只是过早停下来问用户，Planner 直接给一个最小 `Codex resume/repair prompt`，要求按原 Goal 继续；不交 Critic，不扩大 scope。
+1. **Executor 本可自行处理的普通实现失败**：例如已冻结范围内的漏实现、调用链未接通、配置 scope、runtime/PATH/loader、测试/CI 或已冻结 Gate 失败，以及代码 bug、可逆文件/路径问题、同一已授权入口的 bounded retry。默认 `RETURN_TO_CODEX`，在同一 task 内按原 Goal 修复；若 Codex 只是过早停下来问用户，Planner 直接给一个最小 `Codex resume/repair prompt`，不交 Critic，不扩大 scope。
 2. **环境/工具故障但合同不变**：例如暂时 CI、render、network、已授权 provider 的基础设施故障。Planner 先判断现有恢复路径；若属于 frozen recovery contract，直接给 Codex recovery/resume prompt；若恢复机制本身需要新设计，再转 Critic。
-3. **需要改变架构、scope、Capability Gate、acceptance/rubric、预算、provider/data/credential、授权边界、不可逆 side effect 或 recovery semantics**：Planner 必须形成明确 amendment/recovery proposal，交 Critic `PASS/REVISE`；Critic PASS 后按其 contract 输出 approved Codex prompt。
+3. **需要改变冻结语义**：若必须改变用户承诺、架构/canonical owner、scope、Capability Gate 成功定义、acceptance/rubric、预算、provider/data/credential、授权边界、不可逆 side effect 或 recovery semantics，原批准不覆盖新语义；保持同一 task_key，Planner 形成明确 amendment/recovery proposal，先经中间 `PROCEED / REVISE`，最终重新完成唯一 execution-ready `PASS` 与 `READY_FOR_CODEX=YES` 后才可交 Codex。
 4. **Reviewer/Terra finding、评分标准越权、source-vs-product 归因、contract ambiguity 等争议**：先由 Planner 做 failure attribution 和建议，不由 Codex自行决定；再交 Critic独立裁定。裁定如果不改变 frozen execution contract，可由 Critic/Planner按现有批准范围给 Codex resume prompt；若改变合同则走第 3 项。
 5. **真正需要用户本人动作**：例如新 private upload、新 provider/credential、费用扩大、产品偏好或高影响授权。Planner 只向用户提出最小必要动作；完成后自动附可直接给 Codex 的下一 prompt，不能让用户自己重新拼接上下文。
 

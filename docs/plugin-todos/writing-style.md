@@ -155,6 +155,24 @@ problem:
 regression use: 该样本在 ChatGPT Web 正式验收前已经暴露，因此只能进入 `response-clarity` / G5 的 known regression bank，不能以后再冒充 G7 unseen/fresh holdout。
 project-specific context: AI Research Stack、Bridge、CARE、Lucerna 及三份报告的具体架构结论属于项目内容，不进入通用写作规则；通用规则只保留“结论后的信息增量、来源共识与助手建议分层、普通综合回答不要自动膨胀为内部方案文档、Project 设置是否真实约束普通回复”这些可迁移失败模式。
 
+#### 2026-10-20 follow-up：已证明 response-clarity 加载后仍发生整篇失控
+feedback_status: NEW
+source: Bridge Kit 0.11.1 完成汇报线程；用户在同一消息中手动选择 Clear Writing，并随后明确指出最终回答仍有 24 个编号章节、超长纵向结构和大量对判断无帮助的内部实现细节。
+evidence:
+- 当前线程的真实工具轨迹在最终答复生成前实际读取了 installed `writing-style/response-clarity` 与 `writing-style/writing-fidelity`，因此本例不再属于“无法证明 Clear Writing 技能是否加载”的旧证据级别。现有观测仍不能证明 ChatGPT UI 中手动选择的 app id 与技能加载之间的内部平台路由链，也不能观察模型内部每一步如何消费规则；但可以证明对应 production skill 内容已经进入本次生成上下文。
+- 同一线程同时存在用户/Project 层的中文、结论先行、降低阅读负担、避免内部状态和不必要英文等明确约束；最终回复仍把“说服用户产品确实完成”误实现成逐项重述 architecture/gate/evidence。
+- 典型无价值展开包括“没有 daemon / 数据库 / 第二状态机 / 长期 Codex session / app-server progress thread / watcher hierarchy”等负面实现清单。它们对架构审查曾有价值，但对当前用户判断“是否完成、正常怎么用、还剩什么”没有新的决策信息；一句“Persistent Run 只负责断线存活，不引入新的常驻控制层”即可保留必要含义。
+root-cause evidence:
+- 本例首先排除“完全没有加载 response-clarity”这一归因；技能已读取但没有形成可靠的整篇最终输出约束。
+- 现有 `response-clarity` 已明确要求结论先行、减少内部流程噪声、整篇检查碎片化，并规定核心问题回答后如果后续材料不增加新证据/改变决策就停止。因此当前失败不是简单缺少“少用列表/少写内部词”规则。
+- 更符合证据的失败机制是：内容选择阶段把 repository audit 中“证明判断成立所需的内部证据”误当成“用户必须看到的正文”，随后没有可靠的 whole-response final pass 把已无信息增量的 architecture/evidence 展开删除或下沉。当前 normal skill load 是 advisory context，不等于存在一个独立、强制、可观测的最终产物审校阶段。
+repair target:
+- 不新增禁词表、固定长度、固定章节数或 Bridge 专用特判；也不把项目技术事实写进通用规则。
+- AI_Skills Planner 应先判断应修的是 `response-clarity` 的 whole-response application/normal-entry acceptance，还是 ChatGPT plugin routing/finalization 的消费可靠性；只有能证明 production source 缺口时才修改 skill 文本。
+- 回归必须使用同类“复杂技术完成汇报/综合判断”正常入口：给足真实架构和验收事实，同时要求详细说明；PASS 不是单纯变短，而是第一屏回答完成状态、架构主线、正常使用和真实剩余项，技术证据只保留能改变信任判断的部分。必须证明完整最终回复改善，而不是只检查局部句子或字符串。
+- 本例是已知 regression，不能作为后续 unseen holdout；它应与 2026-10-15 的“综合回答膨胀成方案文档”合并维护，而不是新增重复顶层规则。
+boundary: Bridge Kit 的具体模块、Gate、SHA、Notifier/Persistent 实现属于本次产品事实，只用于重放输入，不进入通用 Clear Writing 产品规则。当前线程可以证明 skill load，但不能观察 ChatGPT 平台内部 app-selector → skill-router 的专有调用日志；如需证明手动选择本身的路由链，必须由 ChatGPT/plugin runtime 可观测面或正式 normal-entry replay 提供。
+
 ### 任何 README.md 修改都必须经过 Clear Writing 检查
 status: PROMOTED
 tracking: #12
@@ -178,6 +196,7 @@ status: READY_FOR_PROMOTION_AFTER_050
 tracking: #13
 source: 050 Deep Research rewrite failures + Distributed Imaging report v2 + CAT-TRACE presentation reviews + cross-plugin boundary audit, 2026-09-05
 evidence: `docs/design/READER_FACING_COMMUNICATION_PLUGIN_BOUNDARIES.md`; task 050 smoke/replay evidence; `docs/plugin-todos/research-writing.md`; `docs/plugin-todos/presentations.md`
+release evidence (2026-10-19): Clear Writing `0.5` / repository `5.5.1` formally released at `fd79c4be54fc50bd66d9a51bbc1e681f361f6a77` and integrated into main at `57c5a2c8124752587688475b3ebc09c198d35186`. The user confirmed the existing USER / PRIVATE ChatGPT plugin is `0.5.0`, with all 27 files read back and compared against the formal generated payload, no drift beyond version normalization `0.5 -> 0.5.0`. This completes the bounded release, not this item's broader promotion gate. Required statistical result/caption adaptation remains pending in `docs/plugin-todos/statistical-modeling.md`, heading `Delegate reader-facing wording without giving away statistical semantics`, tracking `#73`; scientific-visualization caption/annotation adaptation remains pending in `docs/plugin-todos/scientific-visualization.md`, heading `Delegate captions/annotations without giving away visual semantics`, tracking `#49`. Keep the original promotion gate and source maturity unchanged until those handoffs and the remaining required evidence are satisfied. Release closure evidence: `results/clear-writing--release-closure/STAGE_B_CLOSURE.md`.
 target layer: routing/language/fidelity
 problem: the old `Writing Style` display name undersold the product and was easy to confuse with `research-writing`. The current display-name decision is now settled as `Clear Writing`, while the canonical plugin slug remains `writing-style` and no slug migration is planned in this cleanup. The remaining capability TODO is broader and still unresolved: make this plugin the reusable content-preserving reader-facing language layer that can be called by research reports, presentations, statistical analysis, scientific visualization, medical imaging, bioinformatics and other domain plugins for captions, conclusions, table/figure wording, slide copy, technical explanations and long source-faithful rewrites. It must improve clarity without taking ownership of domain semantics.
 candidate action:

@@ -1,7 +1,7 @@
 # Plugin Capability Gate Policy
 
-版本：1.1  
-日期：2026-09-20  
+版本：1.2
+日期：2026-10-19
 适用范围：AI_Skills_Collection 所有中央 plugin / skill / profile 的正式能力 refinement、release 与 maturity 判断。
 
 ## 1. 核心原则
@@ -9,6 +9,10 @@
 正式插件不能因为“读了很多资料、接入很多资源、tests/CI 通过、生成了很多 evidence”就算完成。Planner 必须先把插件声称提供的用户能力拆成一组可观察、可失败、可独立验收的 capability gates；Critic 必须审查这些 gates 是否足够、是否重复、是否可以被 proxy PASS 钻空子。
 
 Gate 不是固定模板，也不要求所有插件有相同数量。不同插件应按真实用户任务和最可能失败方式设计自己的 gate。Gate 数量以覆盖必要能力为准，不以“越多越稳”为目标。
+
+对于产品明确承诺会发生的核心行为，至少一个由同一最终候选从正常用户入口运行的场景，必须直接观察到该正向行为。`UNKNOWN`、未配置、fallback 或 fail-closed 可以证明相应保守边界，却不能成为这项正向能力的唯一证据。若承诺跨多个组件，至少一个场景还须从正常入口走通完整成功链；各组件分别通过测试，不能推断它们已在用户路径中接通。
+
+若承诺包含安全阻断、fail-closed 或恢复语义，应按真实风险选择最关键且能代表已见事故的边界失败，从正常入口直接证明危险下游动作没有发生，或约定恢复确实成立。检查数量取决于风险和承诺，不构造全故障矩阵。例如共享机器通知、持久运行与预计完成时间是一条用户承诺时，须看到运行任务实际调用共享通知并产生有效正向结果，不能只看到各组件存在或预计时间长期为 `UNKNOWN`；若正式 Hook 的运行时无法启动，须直接证明危险操作被阻断，不能只测试 Hook 内部的取消判断。这些只是解释证据义务，不给中央 Gate 硬编码 Bridge 或 Slurm 实现。
 
 ## 1.1 Gate lifecycle 与回归归属
 
@@ -82,6 +86,7 @@ Critic 在执行前必须独立回答：
 - 是否漏掉了 normal entry、完整 artifact、should-not-change、复杂任务或真实 production behavior？
 - 是否用 tests、schema、关键词、资源数量、receipt、synthetic fixture 或“吃进很多资料”冒充用户能力？
 - gate 是否可被 test-specific hardcode、静默 fallback、换低质输出、只跑最好一次等方式钻空子？
+- 方案中的 gate 是否要求已声明的正向能力在最终候选的正常入口真正发生、跨组件承诺走通完整成功链，并直接验证高风险失败时危险下游动作不发生或恢复成立？发布判断时，这些要求是否已由实际证据满足？
 - Reviewer/Terra 是否真的能访问 gate 所需 source/artifact/render，并且评分标准来自冻结合同？
 - fresh/paid gate 是否放得太早，导致首次真正定性审查发生在不可恢复的最后一步？
 - 所有必须发布的 gate 是否最终由同一个 final candidate 直接通过？

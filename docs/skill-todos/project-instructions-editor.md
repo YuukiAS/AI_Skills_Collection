@@ -80,6 +80,35 @@ problem:
 project-specific context: AI Research Stack and the workflow-core 0.4/0.5 comparison were the regression environment. The reusable requirement is a Project-instruction editor that reasons over live Project state + relevant history + canonical repo context under a finite budget, rather than a generic Chinese rewriter or blacklist-driven linter.
 
 
+### Repo AGENTS authority can drift and must be maintained as a bounded projection
+status: NEW
+tracking: #108
+source: Delivery Assurance v0.4 seven-consumer architecture review, 2026-10-19 to 2026-10-20
+evidence: `YuukiAS/AI_Research_Toolkit` Delivery Assurance v0.4 froze a recurring cross-repo failure class: root/nested `AGENTS.md` can drift from canonical project contracts, duplicate detailed workflow text, preserve stale locators or milestone semantics, or be weakened during cleanup so required validation no longer runs. The current standalone Project Instructions Editor 0.2 edits ChatGPT Project settings only and does not own repository `AGENTS.md` maintenance.
+problem:
+- Projects need a reusable way to maintain root/nested `AGENTS.md` as a short durable projection of canonical ownership, normal-entry routing, permission/safety/privacy boundaries, required acceptance locators and should-not-change rules.
+- Project/domain owners must retain semantic authority; an editor must not invent product/scientific rules, choose between conflicting authorities, or weaken a domain minimum merely to reduce instruction size.
+- Maintenance should be automatically triggered by first adoption, authority/normal-entry/adapter/claim-owner changes, locator moves, root/nested conflicts, real failures showing that an existing rule was not consumed, or instruction duplication/bloat. Ordinary local bug fixes or one new regression should not rewrite AGENTS.
+- A repo-AGENTS editing path must use the exact current root/nested files (or explicit ABSENT state), canonical authority set, current adapter and frozen task delta. It must not reconstruct live rules from Memory, stale candidates or old chat.
+- Changes must remain reviewable: bounded edit by default, explicit preview, complete clean candidate, authority map and coverage report. Nested scopes cannot silently weaken root/domain/safety minimums.
+- Delivery Assurance consumers need omission mutations proving that deleting a required Gate locator, consumed target, nested scope or mandatory force causes the normal entry to reject user-ready completion.
+project-specific context: Lucerna, Bobbio, Mica, SeminarArc, Asteria, CUHK_Date and CARE provide evidence and first consumers; their exact paths, milestones and domain rules remain project-local.
+target layer: standalone Skill `project-instructions-editor` compatibility extension; proposed version 0.3 repo-AGENTS mode.
+candidate action:
+- preserve Project Instructions Editor 0.2 Project-setting behavior unchanged;
+- add a repo-AGENTS mode with explicit current root/nested baseline acquisition;
+- produce a human-readable change preview, complete clean AGENTS candidate, authority map and coverage report;
+- keep semantic authority with project/domain owners and return unresolved authority conflicts instead of choosing one;
+- integrate with Delivery Assurance only through frozen `da/1` authority/AGENTS identity fields; no registry, database, watcher or sync daemon;
+- validate on at least two real repositories with materially different AGENTS structures before release.
+promotion gate:
+1. the same final PIE candidate preserves all 0.2 Project-setting baseline/diff/protected-absence behavior;
+2. repo-AGENTS mode refuses stale/partial baseline and conflicting authority rather than guessing;
+3. an Asteria-like root AGENTS update preserves fixed-entry/review/safety boundaries while removing only justified duplication;
+4. a SeminarArc-like root + project-skill/device-policy case preserves nested/project-specific authority without copying the full device manual;
+5. mutation tests prove deleting required DA routing/authority cannot yield a user-ready result;
+6. no central AGENTS registry/database/watcher/state machine is introduced.
+
 ## Reference snapshots for future design/evaluation
 
 These are user-provided real Project-instruction snapshots retained as evidence for the future standalone skill. They are examples for comparison, not canonical workflow contracts and not instructions to copy verbatim into other Projects.

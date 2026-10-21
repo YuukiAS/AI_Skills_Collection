@@ -1,7 +1,7 @@
 # ChatGPT Web 协作回归记录：2026-10 十类问题
 
 日期：2026-10-17  
-状态：Planner / Critic 合同完善方案 v0.2 已按 Critic B1/B2 修订，待独立 Critic 复核  
+状态：原十类历史问题保留；Planner/Critic 1.7、Capability Gate Policy 1.2 与 2026-10-19 Project setting 已生效；两项复杂真实回归已完成，PASS integrity 治理候选已接受
 主要适用层：AI Research Stack Project setting、Planner 角色合同、Critic 角色合同  
 非默认 owner：`workflow-core`、具体领域 Plugin/Skill、Bridge Kit
 
@@ -115,3 +115,40 @@
 只有当进一步取证证明某个问题属于具体运行实现，才进入 Bridge Kit、某个领域 Plugin/Skill 或其他 canonical owner。
 
 当前不计划为了这九类问题新增顶级 Plugin、Skill、工作流、数据库、watcher、daemon、状态机或统一控制层；也不默认要求 `workflow-core` 承担 ChatGPT Web 项目协作规则。
+
+## 2026-10-19：PASS 可信度新增事故与中央合同收口
+
+Bridge Kit 的用户追问暴露出三个相连缺口：机器级共享 Notifier 被退成每仓库邮箱配置；Persistent Run 与 Notifier 虽分别存在，关键调用却未接通；预计完成时间可以长期保持 `UNKNOWN`，以保守输出掩盖正向能力没有发生。问题不是缺少一个字段，而是批准前没有把完整用户承诺、正常入口的跨组件成功链和正向结果一起审透。
+
+Slurm Workflows 的事故表明，受保护取消的判断逻辑存在，不等于正式 Codex Hook 的 Python/runtime 启动失败时危险底层动作已被阻断。安全承诺必须从正常入口直接验证最关键的失败链，不能用组件单测或“设计为 fail-closed”代替实际阻断证据。
+
+本轮长期边界归属中央 Planner、Critic 与 Capability Gate 合同，而不把这两起事故的治理责任下沉给 Bridge Kit、Slurm 或 `workflow-core`：
+
+1. 首个正式 Proposal 保留稳定用户承诺；中间设计审查只给 `PROCEED / REVISE`，唯一 Critic 级 `PASS` 只能在完整 execution-ready 审查并与 `READY_FOR_CODEX=YES` 同时出现。最终审查重新看完整承诺和执行包，不被旧 blocker 清单缩窄。
+2. Gate 要从正常入口看到核心正向行为、跨组件完整成功链和按风险选择的关键失败链；`UNKNOWN`、fallback、未配置、fail-closed 或各组件单独通过不能冒充整体能力。检查数量由承诺和风险决定，不造全故障矩阵。
+3. 每轮 Planner/Critic 先给一屏独立可读的自然中文摘要，再给精确机器交接；Clear Writing 只检查用户摘要的表达，不改写机器块。
+4. 冻结范围内的漏接、配置、runtime/loader、测试/CI 和 Gate 失败默认 `RETURN_TO_CODEX`，继续同一任务；只有用户承诺、架构 owner、权限、验收或恢复语义必须变化才回 Planner，旧批准不覆盖新语义。
+5. 实现后最终评估前的独立安全门仍在，但结论为 `PROCEED_TO_FINAL_EVALUATION / REVISE`，不再产生第二个 Critic 级 `PASS`；最终候选接受与正式发布分别如实说明，不造新持久状态。
+
+本文件只记录历史事故和合同层的防复发边界，不声称 Bridge/Slurm 产品运行实现已经修复。2026-10-19 Project setting 已由用户手动替换并记录为当前生效快照。本轮不新增第三个人工角色、数据库、watcher、daemon、ledger 或状态机。
+
+## 2026-10-20：两项复杂真实回归完成
+
+最终新鲜回归选择了两个用户明确不信任其既有“冻结/通过”结论的复杂任务：
+
+1. Delivery Assurance 七仓架构；
+2. STAT5060 Validator Architecture 与后续 GPT Work 实施提示词。
+
+两个独立 Critic 均返回 `REVISE`，并分别发现了此前未充分闭合的真实问题。Delivery Assurance 审查发现七仓正式覆盖不足、adapter 可遗漏降级、authority locator 漂移、DA-G10–DA-G15 仍过粗，以及逐仓声明上限未冻结；STAT5060 审查发现“有 owner”不等于语义强制链完整、现有 handoff 不是安全 GPT Work 执行包、历史三页 Guide 实际可恢复，以及若干关键正反控制仍未物化。
+
+这两个结果支持本治理任务的目标：复杂设计不能因为历史 PASS、文件存在、映射数量完整、测试通过或“DESIGN FROZEN”就被批准；Critic 应重新读取当前事实、完整用户承诺、正常成功链、跨组件连接、风险匹配失败链与实际执行入口，并把可恢复缺口转换为具体 closure/recovery 工作。用户不应再靠自然追问承担第二次架构审计。
+
+详细记录：
+- `results/chatgpt-web--pass-integrity/DELIVERY_ASSURANCE_FRESH_CRITIC_REGRESSION_2026-10-20.md`
+- `results/chatgpt-web--pass-integrity/STAT5060_VALIDATOR_FRESH_CRITIC_REGRESSION_2026-10-20.md`
+- `results/chatgpt-web--pass-integrity/FINAL_CLOSURE_2026-10-20.md`
+
+未来复杂 Critic 的可复用优质审查示例与方法总结见：
+- `docs/workflows/CHATGPT_WEB_CRITIC_GOOD_REVIEW_EXAMPLES_2026-10-20.md`
+
+本治理候选据此记为 `CANDIDATE_ACCEPTED`。未来若 Critic 又退化为只复述方案、只关旧 blocker、只看 schema/测试/映射数量，或仍需用户追问才能暴露核心空白，应视为治理回归并重新执行审查，而不是接受其结论。

@@ -1,9 +1,9 @@
 {
-  "version": "5.5.0",
-  "generated_at": "2026-10-18T13:29:43+00:00",
+  "version": "5.5.1",
+  "generated_at": "2026-10-19T15:12:55+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
-  "skill_count": 155,
+  "skill_count": 156,
   "selectors": {
     "domains": [
       "ai-ml",
@@ -5946,7 +5946,7 @@
       "subcategory": "core",
       "slug": "chinese-prose",
       "install_selector": "writing/core/chinese-prose",
-      "description": "中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和长文“说人话”终审。任何中文 Markdown/PDF/报告/README/面向读者的文档型中文内容都应自动触发本 skill，用于普通中文润色、中文为主、降低 AI 味/翻译腔/模板腔/宣传腔，并保护事实、数字、术语、命令、引用、实验结果和证据边界。产品界面标签、按钮、状态、帮助、信任/隐私披露和 locale-specific UI microcopy 应路由到 product-ui-copy。",
+      "description": "中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和长文“说人话”终审。任何中文 Markdown/PDF/报告/README/面向读者的文档型中文内容都应自动触发本 skill，用于普通中文润色、中文为主、降低 AI 味/翻译腔/模板腔/宣传腔，并保护事实、数字、术语、命令、引用、实验结果和证据边界。普通聊天解释、诊断结论、进度/完成汇报和行动建议应路由到 response-clarity；产品界面标签、按钮、状态、帮助、信任/隐私披露和 locale-specific UI microcopy 应路由到 product-ui-copy。",
       "status": "active",
       "provenance": "local",
       "source_repo_url": "",
@@ -6016,6 +6016,48 @@
         "writing-core-product-ui-copy",
         "writing/core/product-ui-copy",
         "writing/product-ui-copy"
+      ]
+    },
+    {
+      "id": "writing.writing.response-clarity",
+      "name": "response-clarity",
+      "path": "skills/writing/core/response-clarity",
+      "flat_name": "writing-core-response-clarity",
+      "scope": "writing",
+      "domain": "writing",
+      "category": "core",
+      "subcategory": "core",
+      "slug": "response-clarity",
+      "install_selector": "writing/core/response-clarity",
+      "description": "Clear ordinary user-facing explanations, conclusions, diagnostics, advice, progress updates, and task-result summaries after domain reasoning. Use for normal ChatGPT/Codex replies that should be natural in the current target language, lead with the human meaning, reduce unnecessary English/process noise, and preserve exact technical strings.",
+      "status": "active",
+      "provenance": "user-authored",
+      "source_repo_url": "",
+      "source_path": "",
+      "source_ref": "",
+      "source_imported_at": "",
+      "source_license": "",
+      "source_note": "",
+      "source_skills": [],
+      "trusted": false,
+      "requires_network": false,
+      "writes_files": false,
+      "executes_code": false,
+      "secrets_needed": [],
+      "last_reviewed": "2026-10-12",
+      "profile_tags": [
+        "writing",
+        "global"
+      ],
+      "recommended_scope": "global",
+      "selectors": [
+        "response-clarity",
+        "reusable/writing/response-clarity",
+        "skills/reusable/writing/response-clarity",
+        "skills/writing/core/response-clarity",
+        "writing-core-response-clarity",
+        "writing/core/response-clarity",
+        "writing/response-clarity"
       ]
     },
     {

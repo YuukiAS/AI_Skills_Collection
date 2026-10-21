@@ -1,0 +1,28 @@
+{
+  "positive": [
+    "我刚跑完测试，帮我用中文给用户解释结果和下一步，不要像日志。",
+    "读完这些英文报错后，先告诉我真正的问题是什么，命令和路径要保留。",
+    "把这段任务完成汇报改成自然中文，保留 commit、branch 和测试名。",
+    "服务器返回了这些状态码，帮我用人能懂的话说明影响和建议。",
+    "请总结这次代码修改的结果，先说结论，再给必要证据。"
+  ],
+  "indirect": [
+    "继续执行，顺便把状态告诉我。",
+    "这个失败对我有什么影响？",
+    "我只想知道现在能不能交给 reviewer。",
+    "用中文说清楚为什么这个任务还不能算完成。"
+  ],
+  "near_miss": [
+    "给这个项目写中文 README，第一屏要说清楚用途。",
+    "把这份中文科研报告重写成自然中文，公式和引用不能丢。",
+    "优化这个按钮、空状态和权限提示的中文 UI 文案。",
+    "Polish this English figure caption for a paper."
+  ],
+  "negative": [
+    "Return exactly this JSON and nothing else.",
+    "Show me the raw log without explanation.",
+    "Translate this paragraph word for word.",
+    "Change the code so the CLI prints this exact string."
+  ],
+  "notes": "Use for ordinary human-facing response explanations after domain reasoning. Do not use for formal documents, UI microcopy, source-faithful long rewrites, or pure machine output."
+}
