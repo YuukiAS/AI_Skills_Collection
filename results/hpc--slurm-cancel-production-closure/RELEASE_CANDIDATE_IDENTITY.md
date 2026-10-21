@@ -22,7 +22,7 @@ Bridge Kit, DII, CARE and other tasks: NO CHANGE.
 Release metadata: Repository 5.5.1 -> 5.5.2, based on the freshly read formal
 main. setup.py reads VERSION; registry/catalog are regenerated from source.
 The only Slurm SKILL.md delta from the frozen candidate is its version field.
-The release-baseline test changes only its two expected release values.
+The two release-baseline tests change only their three expected release values.
 
 Runtime SHA256 (unchanged from the frozen candidate):
 
@@ -42,3 +42,10 @@ Existing same-runtime focused 54, full Slurm 69, full repository 401 and CI
 39434396011 remain valid. Final release CI is a separate required run on the
 merged release candidate; it is PENDING at this checkpoint. G5 and formal
 installation are not yet claimed. Maintenance tracking: #109.
+
+The first merged release CI, run `39639003443` on `b567479a`, ran 406 tests
+and found one stale repository-version expectation in the central icon test
+(`5.5.1` versus `5.5.2`). The correction updates only that expected release
+value; no icon, plugin, source behavior or frozen Slurm runtime changes.
+This failed run is not counted as final CI PASS. A new exact candidate run
+must pass after this release-metadata test correction.
