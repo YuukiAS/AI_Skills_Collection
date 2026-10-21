@@ -2,15 +2,15 @@
   "base_branch": "main",
   "base_commit": "9740a593c1622bce61401c8215c621f8cdb7d93a",
   "ci_required": true,
-  "ci_status": "PASS",
+  "ci_status": "PENDING",
   "implementation_commit": "3e81802ab0251d3bf31ec2d808d4e3273505b2f6",
   "last_review_decision": null,
   "max_plan_revisions": 1,
   "max_review_rounds": 2,
-  "next_action": "RUN_CODEX_EXECUTOR",
+  "next_action": "PUBLISH_AND_WAIT_FOR_CI",
   "plan_revision": 1,
   "review_round": 0,
   "schema": "AI_BRIDGE_REVIEWED_CURRENT_V1",
-  "state": "EXECUTING",
+  "state": "WAITING_FOR_CI",
   "task_key": "hpc--slurm-cancel-production-closure"
 }

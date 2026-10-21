@@ -4,6 +4,62 @@
 
 No unreleased changes.
 
+## 5.5.2 - 2026-10-21
+
+Repository `5.5.2` is a compatible patch release for standalone Slurm
+Workflows `0.5`. Protected cancellation now requires fresh human confirmation
+in the current root Codex chat's native two-choice card.
+
+Repository bump decision: PATCH
+Reason: this release improves the existing standalone Slurm workflow without
+changing the collection's installation contract or adding a central plugin.
+
+Affected standalone skills:
+- `slurm-workflows`: `0.4` -> `0.5`
+  Reason: protected cancellation now binds a fresh native human decision to
+  the exact root invocation and resolved targets, with fail-closed execution
+  and unrelated-shell failure isolation.
+
+Affected central plugins:
+- all central plugins: NO_BUMP
+
+Unchanged central plugin versions: `workflow-core 0.5`, `ai-skills-core 0.5`,
+`writing-style 0.5`, `research-writing 0.2`, `presentations 0.4`,
+`scientific-visualization 0.1`, `web-development 0.4`,
+`statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
+
+Unchanged standalone skill versions: `project-thread-handoff 0.2`,
+`project-instructions-editor 0.2`, `render-chinese-math-pdf 0.3`.
+
+Bridge Kit, DII and CARE: NO CHANGE. Maturity: NO CHANGE.
+
+Changed repository behavior:
+
+- The current root chat displays a required native single-select card with
+  `确认取消` and `保留 Job`, using standard MCP `elicitation/create`.
+  Historical approval, descendant threads and unattended execution cannot
+  replace the current human decision.
+- Retain closes the pending confirmation without a cancellation reservation
+  or scheduler mutation. Confirm re-resolves the exact targets, writes a
+  durable one-shot reservation, rechecks the scheduler and invokes the frozen
+  absolute executable once, without automatic retries.
+- A stable scope prefilter lets unrelated Bash commands and other projects
+  pass before mutable Slurm runtime validation. Possible cancellation commands
+  remain fail closed. Already loaded threads can refresh through the normal
+  config reload instead of inheriting stale runtime identities.
+- Portable runtime qualification, atomic installation and unchanged native
+  trust preserve the protected execution boundary. No executable wrapper,
+  PATH interception or Codex patch is introduced.
+
+Acceptance distinguishes actual native retain UI mapping and deterministic
+retain integration from live Job retain, which the current user explicitly
+waived. The historical live Job retain result remains `NOT_RUN`; two exact
+live confirm paths and zero other-Job mutation were independently reviewed.
+
+See [Slurm Workflows](skills/tools/hpc/slurm-workflows/SKILL.md),
+[revised acceptance](results/hpc--slurm-cancel-production-closure/REVISED_G4_ACCEPTANCE.md)
+and the [maintenance entry](docs/skill-todos/slurm-workflows.md).
+
 ## 5.5.1 - 2026-10-19
 
 Repository `5.5.1` is a compatible patch release for Clear Writing `0.5`.
