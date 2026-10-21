@@ -6,6 +6,24 @@ implementation_commit: 3e81802ab0251d3bf31ec2d808d4e3273505b2f6
 
 # Codex Result
 
+## Formal release closure — 2026-10-21
+
+Repository 5.5.2 / standalone Slurm Workflows 0.5 is formally published on
+`release` at `f4517798a73adf29d3484306d60845488739f1fc`, also integrated into
+main. Final exact-candidate CI 39639471530 passed all four jobs, including
+406 repository tests. Independent final implementation review and formal
+source/install identity closure passed. The frozen runtime remains byte-identical
+to `3e81802ab0251d3bf31ec2d808d4e3273505b2f6`; configuration, trust and all
+durable cancellation records are unchanged. Normal reload, actual ordinary
+git status and blocked-before-process help verification passed after installation.
+
+`G4_REVISED_ACCEPTANCE=PASS`, `G5=PASS`, `FORMAL_INSTALL_VERIFIED=YES`.
+Historical `KEEP_TEST=NOT_RUN` remains unchanged under the user's express
+live-Job-retain waiver. No further Job queries, Job mutation or real cancellation
+occurred. See `FINAL_RELEASE_CLOSURE.md` for exact identities, truthful gate
+boundaries, final CI, independent review and durable receipt locators. Older
+incomplete checkpoints below remain historical, not current blockers.
+
 ## Current revised acceptance — 2026-10-21
 
 The current user explicitly waives the live held-Job retain requirement once real native retain mapping and same-candidate deterministic retain integration pass. The renewed harmless native form actually returned `{"action":"accept","content":{"decision":"retain"}}`; its request and closed UI-only pending record had no Job targets. All cancellation-reservation and invocation-intent file hashes were unchanged before/after. No scheduler or Job was accessed by the probe and no runtime/Hook/trust change was made.
