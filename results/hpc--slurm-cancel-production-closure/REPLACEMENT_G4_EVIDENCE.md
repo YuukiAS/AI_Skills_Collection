@@ -40,6 +40,8 @@ The scheduler timestamps are site-local. BeginTime is 25 hours after submission.
 
 Durable private intent: canonical-checkout `private/exports/hpc--slurm-cancel-production-closure/replacement-g4-submission-intent.json`. It records the returned JobId and submission count one. Never submit another Job when resuming this checkpoint.
 
+Initial pre-request checkpoint (superseded by the actual response below):
+
 ```text
 ORIGINAL_CONFIRM_JOB_ID=5693449
 ORIGINAL_CONFIRM_PATH=PASS
@@ -55,4 +57,40 @@ G4=INCOMPLETE
 COMPLETE=NO
 ```
 
-Next action: wait for the user's first exact cancellation request for 6028303 in this root chat, then use the unchanged normal Hook-to-MCP entry. The expected first choice is retain. Verify retained pending state, zero reservation and zero cancellation before requesting the second exact cancellation message. Do not self-simulate either user request or choice. After successful retain, the same Job is the sole permitted confirmation target.
+## Actual first native response and terminal verification
+
+The user sent the exact cancellation request for 6028303. The ordinary tool attempt remained blocked; the trusted MCP handler issued the same required two-option form. Its actual wire response was:
+
+```json
+{"action":"accept","content":{"decision":"confirm"}}
+```
+
+No `retain` response was received. The executor cannot independently observe the physical client click and does not infer it from the user's earlier stated intent. The expected retain assertion failed against the actual response and consumed pending state; it is not a successful keep test.
+
+Audit identity: `b0432e985742d5653897c17a320954a1792256aa15a7a48e65b76818151e2e1f`.
+Root session/metadata thread: `01a1572b-d446-7fa3-94cf-95f978b0efde`.
+Turn: `01a15db8-b5c3-7c32-af1d-2580f77b455c`.
+Tool use: `exec-c68d38e7-c52d-425e-b311-6154dc239215`.
+
+The real confirm response consumed the exact pending identity and created one durable reservation. Exact final re-resolution, one frozen invocation, return code 0 and reconciliation were recorded. Direct read-only `scontrol` and independent `sacct` both verified Job 6028303 terminally CANCELLED, with elapsed/runtime zero, AllocNodes=0 and no assigned node. No second cancellation attempt was made.
+
+The complete private audit/pending/reservation snapshot and hashes are durable in canonical-checkout `private/exports/hpc--slurm-cancel-production-closure/replacement-g4-confirm-20261021/`. The submission intent was atomically updated to terminal cancellation, retaining submission count one and forbidding further Jobs.
+
+Current truthful status:
+
+```text
+ORIGINAL_CONFIRM_JOB_ID=5693449
+ORIGINAL_CONFIRM_PATH=PASS
+G4_REPLACEMENT_JOB_ID=6028303
+REPLACEMENT_SUBMISSION_COUNT=1
+KEEP_TEST=NOT_RUN
+REPLACEMENT_CONFIRM_TEST=PASS
+REPLACEMENT_EXACT_CANCEL_COUNT=1
+REPLACEMENT_JOB_TERMINALLY_CANCELLED=YES
+NODE_ALLOCATED=NO
+OTHER_JOB_MUTATION=NO
+G4=INCOMPLETE_KEEP_NOT_RUN
+COMPLETE=NO
+```
+
+The product audit contains exactly one invocation for each of the two authorized JobIds and no other target. Neither Job may be mutated again. A third Job is explicitly forbidden. Do not request another cancellation, simulate retain, substitute deterministic tests for the missing live acceptance, change frozen product code, or silently waive the release gate. Independent final acceptance, main integration, version closure and formal release remain gated by the missing live retain evidence.
