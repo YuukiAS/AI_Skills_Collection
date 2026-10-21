@@ -1,17 +1,20 @@
 {
   "schema": "CLEAR_WRITING_06_PHASE_C_STATUS_V2",
-  "status": "RETURN_TO_ORIGINAL_CODEX_BOUNDED_REPAIR",
+  "status": "BLOCKED_BEFORE_LIVE_MUTATION",
   "root_cause": "EXECUTION_READINESS_PRECHECK_MISSED_REAL_ARCHIVE_INTERFACE_AND_FRESH_WEB_ACTOR_CAPABILITY",
   "p0_account_readback": "PASS",
   "live_personal_plugin_version": "0.5.0",
   "personal_plugin_mutated": false,
   "restore_required": false,
   "frozen_wrapper_sha256": "e4c451841583cb6e1ae4212f8d8559b93ef4272f66d687d3f6762f6114a73dc6",
+  "frozen_wrapper_hash_is_historical_only": true,
+  "historical_candidate_release_eligible": false,
   "archive_findings": {
     "actual_export_format": "tar.gz",
     "builder_currently_accepts_baseline_zip_only": true,
     "format_compatibility_fix_owner": "ORIGINAL_CODEX_TASK",
-    "actual_archive_byte_materialization_in_current_planner_surface": "UNPROVEN"
+    "actual_archive_byte_materialization_in_current_planner_surface": "UNPROVEN",
+    "latest_readonly_download_attempt": "2026-10-22 export metadata obtained; container network connection failed; no bytes or restore proof claimed"
   },
   "web_gate_findings": {
     "fresh_chat_normal_entry_exists_for_user": true,
@@ -19,14 +22,9 @@
     "same_surface_for_archive_and_web_gates_required": false,
     "phase_c_execution_responsibility_amendment_required": true
   },
-  "gates": {
-    "G1": "NOT_RUN",
-    "G2": "NOT_RUN",
-    "G3": "NOT_RUN",
-    "G4": "NOT_RUN",
-    "G5": "NOT_RUN",
-    "G6": "NOT_SELECTED"
-  },
-  "next_handoff": "ORIGINAL_CODEX_TASK",
-  "next_action": "Apply bounded ZIP/tar.gz prepare-restore compatibility repair without changing wrapper payload; then return to Planner for candidate rebind and Critic review of Phase C execution-owner amendment."
+  "gates": {"G1": "NOT_RUN", "G2": "NOT_RUN", "G3": "NOT_RUN", "G4": "NOT_RUN", "G5": "NOT_RUN", "G6": "NOT_SELECTED"},
+  "previous_next_handoff": "ORIGINAL_CODEX_TASK",
+  "next_handoff": "INDEPENDENT_CRITIC",
+  "current_planner_plan": "docs/design/clear-writing/CLEAR_WRITING_0_6_PRODUCT_AND_EXECUTION_PLAN_V0_4_2026-10-22.md",
+  "next_action": "Review same-task v0.4 shared canonical writing and final-delivery package. Do not install the old candidate or freeze an archive-only repair as the revised 0.6 release. Existing isolated archive work may be integrated after approval into the same new candidate. No running external Codex task was controlled or cancelled by this Planner round."
 }
