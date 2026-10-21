@@ -15,9 +15,19 @@
   "issue": 13,
   "issue_status": "DOING",
   "project_pending_mutation": {
+    "issue": "#13",
     "status": "DOING",
     "area": "writing-style",
-    "execution_anchor": "<latest package commit set after write>",
+    "execution_anchor": "exact next package commit in user-facing handoff",
+    "next_action": "Original independent Critic execution-ready review of same 0.6 package with reader-question causal bridge",
     "resolution_commit": null
-  }
+  },
+  "latest_planner_amendment": "2026-10-22 reader-question causal bridge and compact portable exemplar in unique wrapper",
+  "latest_planner_amendment_scope": "Same Clear Writing 0.6; same task and six G1-G6 gates, no implementation",
+  "current_installed_version": "writing-style 0.5.0 USER PRIVATE (verified before review)",
+  "package_commit_source": "exact GitHub commit in Critic handoff; do not infer from old plan",
+  "current_execution_anchor": "exact new package commit supplied to independent Critic",
+  "next_handoff": "INDEPENDENT_CRITIC",
+  "release_candidate_0_6": "NONE_PENDING_NEW_IMPLEMENTATION",
+  "production_mutation_current_round": false
 }
