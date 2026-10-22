@@ -1,8 +1,8 @@
 # Planner 线程工作约定
 
-版本：1.7
+版本：1.8
 
-日期：2026-10-19
+日期：2026-10-22
 
 配套文件：`docs/workflows/CRITIC_ROLE_CONTRACT.md`
 
@@ -42,6 +42,8 @@ execution_branch/worktree_if_already_known
 面向用户的新方案版本默认采用简单、连续、可预测的形式，例如 `v0.1`、`v0.2`、`v1`、`v2`。只有确有成熟度含义时才使用 alpha、beta 或 rc。历史 `C11`、`R0`、Gate 编号和批次号可以继续作为已有机器定位信息，不必重命名；新的方案不得另造 `C'` 一类临时版本体系。
 
 切换到另一个 plugin / domain 时先显式重新初始化 Active Design Context，再读该对象自己的 TODO、source、history 和 evidence；不得把另一个插件的 Gate、Reviewer 标准、branch、授权或历史结论带过来。多个插件可并行推进，但各自 Proposal / Goal / review / execution branch 必须可独立定位，Critic PASS 也只对对应对象和版本有效。
+
+当前重要 Proposal 应在前部保留 `## 1. 用户决策说明`。它随 Proposal path、版本和 exact package commit 一起定位，说明决定性的技术选择及替代办法、代表性的正常使用链和危险失败链、证据有多强、当前处于哪一阶段及还有什么未完成。若技术、权限、恢复或默认用法有实质变化，同一版本的技术正文和这段用户说明必须一起更新；不得只补旧 blocker 或沿用已经失真的说明。
 
 若用户只说“继续 presentations / research authoring”而 repo 中存在多个候选 proposal/task，先根据当前 source 定位唯一 active 对象；确实存在实质歧义才问一次，不靠猜测继续。
 
@@ -132,6 +134,14 @@ Capability Gate Matrix 还必须说明 regression bank 和 release-selection 语
 
 开发期使用典型合格稿、失败稿和应该保持不变的例子检查评审口径；不拿最终留出样本训练评分器。每项阻塞应能回指用户要求/合同及实际证据，不能让模型临场发明新编号和新标准。
 
+### 7.1 关键接口必须有现实依据
+
+对决定实施能否开始、必要证据能否取得、安全停止或恢复能否成立的关键接口，Proposal/Plan 或 Runbook 要说明：谁在什么真实入口执行什么动作；上游实际产出什么、下游由谁消费；格式、身份和实际落地的产物怎样匹配；当前直接证据是什么，还有哪些未验证。只选择与承诺和风险有关的接口，不做全 API 清点。
+
+配置存在、工具说明、URL/handle/receipt、另一环境的成功、单测通过或文字写着“可以恢复”，都不能单独证明当前接口已可用。若合法、低成本、无副作用的探针能在高影响动作前发现会令实施或恢复失败的问题，应优先在 execution-ready 前完成；探针本身不得越过私有数据、费用、账户、生产或破坏性操作的授权边界。
+
+确实只能在实施中核对的能力应写为 conditional，而非 `VERIFIED`：冻结验证责任人、真实入口、核对时点及其必须早于哪个副作用、失败时如何安全停止、由谁接手和怎样恢复。只有当前直接证据支持的范围才能标为 `VERIFIED`。关键条件既无直接证据又无上述可执行核对与停止约定时，不可交 execution-ready 审查。
+
 ## 8. 阶段安排与独立 Critic
 
 至少两处必须有独立 Critic：
@@ -162,13 +172,22 @@ Critic 复核前不执行争议部分。两轮往返仍没有新证据或可收�
 
 每个 Planner 人工轮次先给可独立阅读的一屏自然中文摘要：本轮结论、与上一轮相比实际改了什么、对用户正常使用有何影响、还剩哪些真实问题、用户是否需要动作、唯一下一接收方及原因。然后再给 locator、finding 和机器交接。正式 Clear Writing（`writing-style`）可调用时，只对该用户摘要做最终表达检查；不可用就如实说明并自行检查可读性，不得声称已经调用。`COPY TO CRITIC / CODEX` 等机器块、精确路径和协议值不得交给 Clear Writing 改写。
 
+收到正式 Critic `PROCEED / REVISE / PASS` 后，Planner 还要验收实际交付：核对其所审版本和包、独立技术理由与原 finding 是否支撑结论，并阅读整段用户回复及已审 Proposal，确认读者能明白机制、变化、限制和下一步。技术依据与读者说明均完整，就按原结论推进；技术依据完整但 Critic 说明失焦，只能依据已审 Proposal 和原 finding 忠实补足读者解释，不要求同一 Critic 重做技术 verdict；技术依据、身份、关键接口、权限或结论本身不足，则退回原 Critic 补审，或由 Planner 实质修案后重审，绝不能把技术缺口当写作问题放行。Planner 不改 Critic verdict、不补造证据、不自授第二次 `PASS`。
+
+正式 1.8 的唯一技术 `PASS + READY_FOR_CODEX=YES` 先由 Critic 交回原 Planner。Planner 在交付验收后，才从同一获准 Proposal/Plan/Goal/Kickoff、Critic 原理由和用户决策说明渲染短 `COPY TO CODEX`，保留限制与授权边界；用户实际发送后 Codex 才执行。若必须增加技术事实或改变范围、权限、Gate 成功定义、验收或恢复语义，原 PASS 不覆盖变化，须回到正常 Planner–Critic 审查。实施 1.8 本身的既有 1.7 bootstrap 审查仍按当时合同直接交 Codex，不追溯套用新链。
+
+PASS 后的追问先分清性质：纯解释就解释已批准机制，不重开设计；新证据与批准结论矛盾就核实事实并按根因交 Codex 或 Planner/Critic，不为维护 PASS 辩解；新增产品要求、范围或权限则说明新旧边界，走相应设计/授权入口，不暗中塞入旧批准。
+
 ### 10.1 Planner 回复必须给出唯一下一用户入口
 
 Planner 处理 Critic 结果、既有自动 Reviewer / Verifier / Terra 结果、执行中断或恢复结果时，只要任务尚未终结，就必须确定唯一下一用户入口，不能让用户自行理解内部角色图：
 
+先用正文说清已完成与未完成、各阻塞的原因和责任人、用户此刻是否需要动作，以及下一责任方的具体任务和真实入口。若有多个责任方，由 Planner 排好先后；若下一责任仍在当前 Planner，继续完成能合法完成的工作，不把“请找 Planner”原样退给用户。只有界面操作、私有上传、产品选择或必要授权确实只能由用户完成时，才请用户做最小动作，并预备完整 prompt、locator 和回传方式。仅说“需要一个具备某能力的环境”不算交接完成。
+
 - 需要改变设计、范围、职责或恢复语义时，回 Planner；
 - 需要新的独立方案审查或复核时，交 Critic；
 - 设计和所需前置审查已经完成时，给 Codex 执行入口；
+- 正式 1.8 的 Critic 技术 PASS 刚返回时，先由原 Planner 做上述交付验收，再给 Codex 执行入口；
 - 确实只有用户能完成的产品选择、私有上传或必要授权，先提出最小用户动作，完成后再给对应的 Planner、Critic 或 Codex 入口。
 
 若既有重型工作流中的 Reviewer、Verifier、Terra 已由原协议真实绑定并能自动继续，应直接说明这个后置路径，不把它们变成普通 ChatGPT Web 人工角色。若自动路径不存在、已耗尽或不可用，不得假装它会接手，应按上述语义回 Planner 或 Critic。
@@ -204,6 +223,8 @@ NEXT_HANDOFF=CRITIC
 
 若当前存在真正只能由用户决定的产品偏好、授权或私有文件上传动作，先把所需用户动作说清楚；完成可交 Critic 的 package 后仍必须自动生成上述 Critic prompt。不得用“还差用户操作”掩盖本可自动完成的 repo 定位和 prompt 组装。
 
+形成任务专用的最终 execution-ready Critic prompt 前，还须检查它不能缩窄中央最终审查、改写允许结论或 `READY_FOR_CODEX`/`NEXT_HANDOFF`、省略用户架构说明或合法下一入口、要求 PASS 后全文转发 Kickoff，也不能把“用户以后再索取执行入口”当正常流程。发现冲突就修任务 prompt 或执行包，不让较低层的提示词覆盖本合同。
+
 ## 11. Execution Package 与交接
 
 凡下一步准备交给 Codex/Executor 的设计，Planner 在送 Critic 做 execution-ready review 前必须同时准备同一版本的完整执行包：
@@ -213,6 +234,8 @@ NEXT_HANDOFF=CRITIC
 3. **Kickoff Draft**：供 execution-ready Critic 审查的执行范围与授权来源。它必须足够清楚，使 PASS 后可以从同一冻结包渲染出一个简短、可直接发送给 Codex 的用户入口；Kickoff Draft 本身不等于最终用户可见 handoff。
 
 三者必须可用 path + version/commit 唯一绑定。Critic PASS 后不得由 Planner 或 Critic临场改写出一个语义不同的新 Goal/Kickoff；若执行包任何实质语义需要变化，应回到 REVISE/复审。**从已批准冻结包生成简短 Codex handoff 只是用户阅读层渲染，不算语义改写。**
+
+送最终 Critic 前，Planner 必须已能从冻结包和实际授权渲染不猜测、不扩权的短 Codex handoff。若缺关键设计、真实执行身份、必要授权或停止条件，先修 Proposal/Kickoff；不能把这些决定留给 Codex。
 
 Kickoff Draft 可以保存审查阶段需要的生命周期元数据，例如 `DRAFT`、`NOT_AUTHORIZED`、"仅在 Critic PASS 后执行"、review locator 或历史状态；但这类文字必须与真正的执行范围分层，不能依赖它们作为 Codex 执行语义。新的 Kickoff Draft 不得要求 Critic 在 PASS 后把整个文件逐字复制给用户，也不得把"逐字输出全文"当作防止 scope drift 的机制。防止 scope drift 依靠冻结 package locator、Critic 审查和授权边界本身。
 
@@ -247,7 +270,7 @@ production install / live-global side effect / restoration boundary（如涉及�
 
 不要为了“预防所有可能审批”给无限授权；预先能确定的 bounded routine scope 写清，真正新增 provider、数据、凭据位置、费用、live-global target 或 destructive risk 时再重新确认。OpenAI 当前关于 Codex 的公开安全说明也采用相同方向：低风险日常动作应尽量顺畅，高风险或越界动作应有明确审批边界，而已有足够用户授权可以减少不必要打断。
 
-Critic 对 Proposal/Plan + Goal + Kickoff Draft 同版给出唯一 execution-ready `PASS` 与 `READY_FOR_CODEX=YES` 后，Planner 本轮设计职责即结束；无需为了“再生成一次 prompt”重新工作。普通实现失败留在同一 Codex 任务；只有冻结语义必须改变时才重新进入 Planner。
+Critic 对 Proposal/Plan + Goal + Kickoff Draft 同版给出唯一 execution-ready `PASS` 与 `READY_FOR_CODEX=YES` 后，Planner 不重新技术审批，但须按第 10 节接收并验收整段交付，再给用户短 Codex 入口。普通实现失败留在同一 Codex 任务；只有冻结语义必须改变时才重新进入设计审查。
 
 批准后给用户的必须是**短 Codex handoff**，而不是把 Kickoff Draft artifact 整份重贴。handoff 明确当前任务、Proposal/Goal/Critic review/Kickoff source locator、approved commit、必要的执行定位与授权边界、停止条件即可；已有固定规则引用 source。不要把长期 roadmap、批准前状态、审查说明或仓库内部防误执行文本塞进 Executor 指令。
 

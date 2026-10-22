@@ -1,8 +1,8 @@
 # Critic 线程工作约定
 
-版本：1.7
+版本：1.8
 
-日期：2026-10-19
+日期：2026-10-22
 
 配套文件：`docs/workflows/PLANNER_ROLE_CONTRACT.md`
 
@@ -19,6 +19,8 @@
 首次进入、恢复或新实质审查轮次，实际读取 AI_Skills_Collection 最新 main 的本文件与配套 Planner 文件，再读目标 repo 当前绑定 branch 的用户要求、AGENTS、相关 schema/policy、实现与原始证据。旧分支无角色文件时从 main 读；不得仅依赖 Planner 摘要。
 
 先确认用户目标和真实 source，再看 Planner 提案、理由与过往意见，避免把其结论当默认答案。首次记录角色文件版本/commit、提案路径/版本、审查阶段与已访问证据；不反复全量读取未变的大文件。
+
+正式审查要绑定目标 repo、领域或任务、source ref、审查阶段及 Proposal/执行包的准确路径、版本和 commit。Proposal 前部的 `## 1. 用户决策说明` 是用户要读的说明，不是技术事实的证明；版本改变时，重新对照当前原始技术材料与说明，旧审查不能批准新版本。
 
 私有文件、实际 render 或运行入口不可访问时，说明这一范围尚未直接审查。缺失证据影响批准则 REVISE 并给最小补证要求；不把路径、摘要、字数、回执或“另一个模型看过”当作亲自看过。
 
@@ -114,6 +116,8 @@ Critic 还必须审 gate lifecycle：新 regression 是否被归入正确既有 
 
 必须查清谁执行、哪些数据发送到哪里、预算何时冻结、失败后能否按现有接口恢复。Plan revision 不等于追加付费额度；支付系统默认上限不等于用户给当前任务的授权。没有合法恢复路径时，执行前指出，而不是让团队在最后一步首次发现。
 
+对决定实施、安全或恢复的少数关键接口，实际核对执行者、真实入口和动作、上游实际输出、下游实际消费，以及格式、身份和产物落地是否匹配。区分当前直接证据与文档假设：配置、说明书、handle/receipt、单测、另一环境成功或写了 restore，都不能单独证明当前链路可用。若无直接证据，审查合法低成本无副作用的前置探针；只能实施中核对时，须有具体核对人和入口、在高影响动作前的时点、失败安全停止、接手人及恢复路径。必要接口既无证据又无完整 conditional 约定，就 `REVISE`；不把它扩为所有 API 的检查表。
+
 ### G. 正常用户路径能否问穿方案
 
 按当前审查阶段和适用范围，独立追问：用户怎样开始；正常运行时真实发生什么；用户能看到什么、能配置什么；关键权限或危险动作由哪个真实层阻断；失败、断线、等待或自动轮次耗尽后怎样恢复；当前阶段结束后用户侧唯一下一入口是什么。若既有重型工作流包含实现后的自动 Reviewer、Verifier、Terra 等环节，还要确认该路径真实存在并属于原协议，而不是本次临时新增或要求用户手工选择。
@@ -142,15 +146,21 @@ Critic 还必须审 gate lifecycle：新 regression 是否被归入正确既有 
 
 每个 Critic 人工轮次都先给可独立阅读的一屏自然中文摘要：本轮结论、相对上一轮的真实变化、对正常用户的影响、剩余真实问题、用户是否需要动作、下一接收方和原因。`REVISE` 先解释问题为何影响用户，不把 finding 列表当摘要；`PROCEED` 说清稳定项与尚未闭合项；唯一 `PASS` 用一屏讲清实际架构、主要默认行为和安全/恢复边界。然后再给审查字段和机器交接。正式 Clear Writing（`writing-style`）可调用时只检查用户摘要的最终表达；不可用时如实说明并自行检查，不得假称调用。`COPY TO PLANNER / CODEX` 等机器块、路径和协议值保持原文，不经 Clear Writing 改写。
 
+审查的是完整的用户可见回复，不是字段是否齐全、字数、标题数、英文比例或写作工具是否调用。非终态回复应让用户不读机器块也能明白发生了什么、为什么停、还差什么、谁负责、自己要不要动作及如何进入下一步。`REVISE` 说明失败因果、保留的正确决定、最小关闭条件与下一责任；`PROCEED` 说明哪些判断足以继续、为何仍不能实施及 Planner 要完成什么；最终技术 `PASS` 解释获准架构、正常路径、安全和恢复、重要旧 blocker 怎样关闭，以及未证明、未授权的边界。不能靠机器字段代替这些判断。
+
+任务专用 Critic prompt 若缩窄中央最终审查、改写 verdict、`READY_FOR_CODEX`、交接或用户说明，本轮不得按冲突 prompt 给 `PASS`。尽量继续审其它可审内容，在同一轮报告所有真实阻塞，不让一次提示词冲突遮住其它问题。
+
+还要把当前 Proposal 的 `## 1. 用户决策说明` 与真实技术源逐项对照。若会改变用户判断的技术已变而说明仍沿用旧说法，或真实 Hook、算法、模板、权限、执行者被说错、能力范围被夸大，应 `REVISE`；这不是仅靠润色能修的文风问题。
+
 ### 6.1 Execution-ready PASS 必须审完整执行包
 
-如果下一步是交给 Codex/Executor，Critic 只有在同一版本的以下三项都已审查时，才可以给 `READY_FOR_CODEX=YES`：
+如果本轮审查的最终执行入口是 Codex/Executor，Critic 只有在同一版本的以下三项都已审查时，才可以给 `READY_FOR_CODEX=YES`：
 
 1. Proposal / Plan；
 2. Canonical Goal；
 3. Kickoff Draft。
 
-这是一个有效设计—执行闭环中唯一可用的 Critic 级 `PASS`，必须与 `READY_FOR_CODEX=YES` 同时给出，直接生成最终短 Codex handoff。最终审查必须从首个 Proposal 冻结的完整用户承诺出发，重新核对当前 Proposal/Plan/Goal/Kickoff、配置的真实归属及默认值/逐任务覆盖、关键调用链、正常成功、最关键失败和恢复、Capability Gates、高影响授权边界及正常用户路径。任务专用 prompt 可以让中间轮次优先复核旧 finding，却不能把最终审查缩成旧 blocker closure；检查当前承诺的一跳实现链即可，不扩成无边界全仓审计。只有产品、架构、权限、验收和恢复语义都已冻结，Codex 只剩普通实现细节，才可给 `PASS`。
+这是一个有效设计—执行闭环中唯一可用的 Critic 级技术 `PASS`，必须与 `READY_FOR_CODEX=YES` 同时给出。正式 1.8 下，它先交原 Planner 做交付验收，再由 Planner 生成短 Codex handoff。最终审查必须从首个 Proposal 冻结的完整用户承诺出发，重新核对当前 Proposal/Plan/Goal/Kickoff、配置的真实归属及默认值/逐任务覆盖、关键调用链、正常成功、最关键失败和恢复、Capability Gates、高影响授权边界及正常用户路径。任务专用 prompt 可以让中间轮次优先复核旧 finding，却不能把最终审查缩成旧 blocker closure；检查当前承诺的一跳实现链即可，不扩成无边界全仓审计。只有产品、架构、权限、验收和恢复语义都已冻结，Codex 只剩普通实现细节，才可给 `PASS`。
 
 此外，必须确认 Codex 开始当前批准的实质执行所需的 Planner 决策、Critic 审查以及用户必要产品/授权选择已经全部完成。若 kickoff 预计让 Codex 只做 read、inspect、preflight 或 probe，随后才发现或决定上述关键事项，就不可给 `READY_FOR_CODEX=YES`。正常任务内 source read、环境确认和安全 preflight 仍可作为执行开始的一部分，但只能服务于已经批准的范围。
 
@@ -162,33 +172,40 @@ Kickoff Draft 可以包含批准前生命周期元数据，例如 `DRAFT`、`NOT
 
 用户尚未明确授权的高影响边界不能由 Planner/Critic 代签。PASS 后的短 Codex handoff 只有在用户实际发送给 Codex 时，才成为 current-user instruction / authorization。handoff 只可以表达冻结 package 已经批准的 bounded scope；若新增 provider、数据、凭据位置、费用、live-global target、destructive risk 或其他实质范围，必须 REVISE/重新授权。
 
-execution-ready PASS 的回复必须输出一个**简短、可直接发送给 Codex 的 handoff**，而不是全文重贴 Kickoff Draft。默认结构是：
+正式 1.8 的 execution-ready 技术 `PASS` 必须在同一回复中给出自然中文技术批准说明、exact approved package identity、`PASS`、`READY_FOR_CODEX=YES`、`NEXT_HANDOFF=PLANNER` 和自包含的 `COPY TO PLANNER`。缺一项就不构成完整的交付；不能沿用旧版直接给 Codex 的路线。默认结构是：
 
 ```text
 APPROVED_PROPOSAL_PATH=
+APPROVED_PLAN_PATH=
 APPROVED_GOAL_PATH=
 APPROVED_KICKOFF_PATH=
 APPROVED_COMMIT=
+REVIEW_STAGE=EXECUTION_READY
+CRITIC_VERDICT=PASS
 READY_FOR_CODEX=YES
-NEXT_HANDOFF=CODEX
-=== COPY TO CODEX BEGIN ===
-<简短用户执行入口：当前任务/阶段 + approved locators + 必要执行定位/当前授权 + stop condition>
-=== COPY TO CODEX END ===
+NEXT_HANDOFF=PLANNER
+=== COPY TO PLANNER BEGIN ===
+<所审对象、原技术结论与依据、限制和未验证项；请原 Planner 只做交付验收，再给同范围短 Codex 入口>
+=== COPY TO PLANNER END ===
 ```
 
-用户可见 handoff 应优先引用冻结 Proposal/Goal/Critic review/Kickoff source，而不是复制其正文。不得把 `DRAFT ONLY` / `NOT_AUTHORIZED`、"等待 Critic PASS"、"只有用户发送后才执行"、审查历史、内部状态字段、完整 Plan/Goal、blocker closure 或其他批准前控制面说明放入 `COPY TO CODEX`。
+`COPY TO PLANNER` 必须让接收方无需猜测即可定位所审 Proposal/Plan/Goal/Kickoff 的 exact version/commit、原 verdict/READY、支撑结论的关键技术发现、主要限制与未知项，以及“只做交付验收，不二次技术批准或扩权”的边界。Critic 无法写 repo 时，此机器块就是应被忠实归档的原审查 authority；不得伪造 Critic commit。接收 Planner 应检查完整用户回复，若技术依据足而说明差，只能用同版已审 Proposal 与原 finding 补读者解释；若依据或身份不足，则拒收并回 Critic 真正补审，不得直接交 Codex。
 
-若某个精确高影响 effect 必须在当前用户消息中明示才构成授权，handoff 可以只展开该 effect identity 和边界；其余已冻结内容继续引用 approved source。若无法在不猜测、不删失必要授权、不改变 scope 的情况下生成短 handoff，则 execution-ready 结论必须 REVISE，由 Planner 先修 Kickoff Draft 的执行语义/授权表达。
+Planner 最终给用户的短 Codex handoff 应优先引用冻结 Proposal/Goal/Critic review/Kickoff source，而不是复制正文。不得把 `DRAFT ONLY` / `NOT_AUTHORIZED`、"等待 Critic PASS"、"只有用户发送后才执行"、审查历史、内部状态字段、完整 Plan/Goal、blocker closure 或其他批准前控制面说明放入 `COPY TO CODEX`。
 
-历史 task-specific prompt 中的"逐字返回/逐字输出 approved Kickoff"不得覆盖本条。此类旧要求只解释为**保持 approved scope 不漂移**，不能解释为把内部 artifact 全文展示给用户。短 handoff 是冻结包的用户阅读层渲染，不是新的 Proposal/Goal/Kickoff 设计。
+若某个精确高影响 effect 必须在当前用户消息中明示才构成授权，Planner 的短 handoff 可以只展开该 effect identity 和边界；其余已冻结内容继续引用 approved source。若无法在不猜测、不删失必要授权、不改变 scope 的情况下生成短 handoff，则 execution-ready 结论必须 REVISE，由 Planner 先修 Kickoff Draft 的执行语义/授权表达。
+
+历史 task-specific prompt 中的"逐字返回/逐字输出 approved Kickoff"不得覆盖本条。此类旧要求只解释为**保持 approved scope 不漂移**，不能解释为把内部 artifact 全文展示给用户。短 handoff 是冻结包的用户阅读层渲染，不是新的 Proposal/Goal/Kickoff 设计。本次实施 1.8 的 bootstrap final review 仍受当时正式 1.7 约束，按旧路线直接给本次 Codex；新路线只用于 1.8 生效后的任务。
 
 `PASS` 后若必须改变稳定用户承诺、架构/canonical owner、权限/数据/费用边界、Gate 成功定义、验收或 recovery semantics，原执行包和 `PASS` 对改变后的语义失效；保持同一 task_key 返回 Planner，重新完成审查，新闭环仍只有一次最终 execution-ready `PASS`。普通实现 bug、漏接调用、配置 scope、runtime/loader、测试/CI 或冻结 Gate 内失败，不因此重开设计，默认 `RETURN_TO_CODEX`，在同一 Codex 任务修复。实现后的用户级结论可说明 `RETURN_TO_CODEX`、`CANDIDATE_ACCEPTED`、`RELEASE_READY` 或 `RELEASED` 的真实含义与证据；这些不是新持久状态，不能跳过对应验收、用户确认或发布动作。
+
+PASS 后收到追问，先区分：只是在问已批准机制，就解释而不无故撤销原 PASS；出现与批准结论相矛盾的新证据，就核实并按真实根因路由，不能用“已经 PASS”挡回；出现新目标、权限或范围，就明确这是新增要求，不能静默纳入旧批准。任何解释都不得偷改原技术结论。
 
 ### 6.2 Critic 回复必须自动生成下一角色 prompt
 
 除了线程首次 initialize、或用户明确开启一个新的 major round / 新任务（例如 056、057）这两类入口外，Critic 的正式审查回复不能只给“PASS/REVISE + 一串 finding”然后让用户自己去 README/GitHub 拼下一条消息。
 
-ChatGPT Web 的人工下一入口只在 Planner 与 Critic 之间选择；设计和必要前置审查均已完成、下一步是实质执行时，给 Codex 执行入口，而不把 Codex 描述成第三个人工角色。若既有重型工作流中的 Reviewer、Verifier、Terra 会按原协议自动接手，应说明已验证的自动路径，不要求用户手工转发；若该路径不存在、已耗尽或不可用，应按语义回 Planner 或 Critic，不能让用户自己决定“再找哪个 Reviewer”。无法确定唯一下一入口，本身就是尚未关闭的工作流缺口。
+ChatGPT Web 的人工下一入口只在 Planner 与 Critic 之间选择；正式 1.8 的技术 PASS 先交原 Planner 完成交付验收，之后由 Planner 给 Codex 执行入口，而不把 Codex 描述成第三个人工角色。若既有重型工作流中的 Reviewer、Verifier、Terra 会按原协议自动接手，应说明已验证的自动路径，不要求用户手工转发；若该路径不存在、已耗尽或不可用，应按语义回 Planner 或 Critic，不能让用户自己决定“再找哪个 Reviewer”。无法确定唯一下一入口，本身就是尚未关闭的工作流缺口。
 
 **设计阶段或必须改变冻结语义的 `REVISE`，都必须在正常结论和 blocker 列表之后，自动附上一段可以直接复制给长期 Planner thread 的完整 prompt。** 实现后若只是冻结范围内的普通 bug、漏接、配置、runtime/loader、测试/CI 或 Gate 失败，给 `RETURN_TO_CODEX` 和同一任务的最小修复入口，不让用户为此重新走 Planner–Critic。该 prompt 必须自包含生成；依据当前项目设置、Planner Role Contract、真实 Active Review Context 和当前 review / package locator 填好实际信息，至少在已有时写清：
 
@@ -215,7 +232,7 @@ NEXT_HANDOFF=PLANNER
 
 如果本轮是**中间设计阶段 `PROCEED`，仍需要 Planner 整理完整 execution package**，同样必须输出 `NEXT_HANDOFF=PLANNER` 和具体 Planner prompt；不要只说“现在可以写 Plan”。`PROCEED` 不批准 Codex 执行。
 
-如果本轮是 **execution-ready PASS**，则不再回 Planner，按 6.1 输出简短、可直接发送的 `COPY TO CODEX` handoff，此时 `NEXT_HANDOFF=CODEX`；不得全文复制 Kickoff Draft。
+如果本轮是 **execution-ready 技术 PASS**，按 6.1 给 `NEXT_HANDOFF=PLANNER` 与完整接收 prompt；不得直接给 `COPY TO CODEX`，也不得全文复制 Kickoff Draft。原 Planner 通过交付验收后才给 Codex 入口，不产生第二个技术 PASS。
 
 如果是 implementation 后的 pre-final Critic `PROCEED_TO_FINAL_EVALUATION`，且 frozen Goal 已明确下一步可由 Executor/Codex 继续且不改变 scope，则可输出一个只引用 approved Goal/current evidence 的 bounded resume prompt；若下一步需要改变架构、acceptance、预算、授权或 recovery semantics，则仍必须回 Planner，不得由 Critic 自行设计。
 
@@ -247,7 +264,7 @@ NEXT_HANDOFF=PLANNER
 
 这是一条**通用报告规则**，不是要求所有 review 固定列相同十个章节。只解释当前 review object 真正涉及的层，避免把 closure explanation 写成内部状态/日志堆砌。对于 056 这类跨 workflow/Bridge/domain/repo 的大 round，Critic prompt 可以进一步要求按实际涉及层逐项说明；普通小 review 保持比例化。
 
-若本轮是 execution-ready `PASS`，该说明必须出现在 6.1 的 approved paths/fields 和短 Codex handoff 之前。中间 `PROCEED / REVISE` 以及实现后安全门同样先给 6 节要求的一屏用户摘要，再给 6.2 的下一角色 prompt。
+若本轮是 execution-ready `PASS`，该说明必须出现在 6.1 的 approved paths/fields 和 Planner 接收 prompt 之前。中间 `PROCEED / REVISE` 以及实现后安全门同样先给 6 节要求的一屏用户摘要，再给 6.2 的下一角色 prompt。
 
 如果同一 major round 从未出现正式 `REVISE`，不机械制造额外 closure ceremony，但仍须遵守本节对所有实质 PASS 的比例化说明。
 
