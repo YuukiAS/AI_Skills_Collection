@@ -73,6 +73,8 @@ AI Research Stack Project setting：现有条款已触发两份角色合同和�
 
 **已见错误回归**：从用户提供的真实坏 Critic PASS、Slurm Wrapper/Hook/MCP 实施更迭、Bridge 机器共享通知错误设计、Phase C 无实际下一入口中抽取相应场景。检查用户能否理解原问题与新技术、每一 verdict 是否解释理由、下一接收方是否发现并修正坏交付；不单凭关键词或字数判分。
 
+**用户部分认可的具体表达参考**：`results/chatgpt-web--pass-integrity/USER_PARTIALLY_ACCEPTED_MULTIROUND_EXPLANATION_2026-10-22.md` 保存当前用户点名的完整 Slurm 多轮说明。它只获得“起码稍微符合”反馈，是用于分析解释因果结构和核对是否遗漏机制名称的**开发参考**，不是完整的质量金标准或未见测试。该文本应提供给独立评审理解用户阅读要求，**不预先塞进生成线程的任务 prompt**，否则无法证明生成者在普通任务中自主完成解释。领域差异需要自行理解，不套固定段落。
+
 **受控连续返修**：在真实或隔离安全方案中进行不少于一轮实质技术变化的 `Planner → Critic REVISE → Planner 修订 → Critic 复核`，期间下一轮仅传准确版本和自然任务，不附“请说人话/要有 Hook 名”的提示。核对用户决策说明随技术修改、独立审查没有缩成旧 finding、正常回复仍能说清当前总体架构。
 
 **最终 PASS 交接**：冻结真实可形成 execution-ready PASS 的方案；Critic 独立作正确判定后必须先回 Planner，Planner 分类检查、必要时补正常解释，再给 Codex 入口。若 Critic 实际 REVISE 不可造假 PASS 或换样本。额外一次机械转发的真实耗时/用户可读结果需记录，若增加明显无意义往返则 Critic 应要求更轻的等价设计。
