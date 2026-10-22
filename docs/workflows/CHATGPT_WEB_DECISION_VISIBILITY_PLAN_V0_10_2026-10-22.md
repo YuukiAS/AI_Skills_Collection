@@ -32,7 +32,7 @@ v0.9 只是改变“写说明的时间和位置”，没有接收方义务；错
 
 **§6：每个 verdict 都有用户能理解的真实理由。** `REVISE` 必须说失败如何损害使用、保留哪些正确部分、最小修复；`PROCEED` 必须说哪些设计已足以继续和为什么还不是可以执行；最终 `PASS` 需要解释确切批准的架构、关键历史阻塞关闭、当前可执行与未验证范围。读者正文不堆 status/commit/finding 编号。
 
-**§6.1 / §6.2：改变最终 PASS 的唯一下一入口。** `PROCEED/REVISE` 仍 `COPY TO PLANNER`；唯一技术 `PASS + READY_FOR_CODEX=YES` 仍只能由 Critic 产生，但此时写 `NEXT_HANDOFF=PLANNER_FOR_DELIVERY_ACCEPTANCE` 及短 `COPY TO PLANNER`，而不是直接给最终 `COPY TO CODEX`。这不是新增长期机器状态，仅是一次明确的人工接收目的。原 Planner核对后才发正式 Codex 入口；用户不能把 Critic 的临场独立回复直接误当已检查的执行提示词。
+**§6.1 / §6.2：改变最终 PASS 的唯一下一入口。** `PROCEED/REVISE` 仍 `COPY TO PLANNER`；唯一技术 `PASS + READY_FOR_CODEX=YES` 仍只能由 Critic 产生，但此时仍用现有 `NEXT_HANDOFF=PLANNER` 及短 `COPY TO PLANNER`，正文注明此步只为最终读者交付接收；不发明新的机器状态/枚举，而不是直接给最终 `COPY TO CODEX`。这不是新增长期机器状态，仅是一次明确的人工接收目的。原 Planner核对后才发正式 Codex 入口；用户不能把 Critic 的临场独立回复直接误当已检查的执行提示词。
 
 **§6.3：批准内容必须能逐轮对照。** 包含本任务所有影响决定的技术及代表性流程；有前轮 `REVISE` 时说明真实关闭情况、未变范围与剩余风险。可直接引用经过专业审查的同版用户机制正文，但 Critic 必须有独立结论，不能粘贴 Planner 正文代替判断。少量内部元数据与可复制机器交接分层。
 
