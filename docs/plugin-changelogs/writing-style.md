@@ -17,16 +17,25 @@ Before:
 
 Candidate changes:
 
-- A ChatGPT-only `clear-writing` entry identifies each requested object,
-  selects the existing writing routes, reviews a complete candidate before an
-  authorized GitHub text-file write, and checks the complete readback against
-  that candidate before reporting finalization.
+- A ChatGPT-only `clear-writing` entry identifies each requested object and
+  selects the shared writing routes; it does not maintain separate ordinary
+  answer or file-delivery rules.
+- Canonical Response Clarity selects supported content and reader dependencies
+  before drafting, then re-reads the full candidate against the user's actual
+  question and repairs it. Both hosts consume this workflow without shortening
+  necessary derivations, audits, comparisons or uncertainty.
+- Writing Fidelity owns full-source coverage, the exact reviewed candidate,
+  safe authorized existing/new GitHub file delivery and actual full readback.
+  Chinese Prose reviews the whole Chinese candidate; Scientific Rewrite keeps
+  its complete meaning/planning/realization/helper route.
 - A deterministic wrapper builder projects the six canonical routes into
   references, with only the two approved package-local path replacements.
-- Codex Marketplace and `codex-writing-style` retain the six direct routes.
-  The professional route source remains unchanged.
+- Codex Marketplace and `codex-writing-style` retain the six direct routes and
+  consume the same updated canonical semantics as the Personal wrapper.
 - Forward-restore packaging preserves the saved 0.5.0 behavior and constructs
   tool-valid, non-overlapping upload/deletion sets at Personal Plugin 0.6.1.
+  Its safe archive reader accepts ZIP and genuine gzip-compressed tar without
+  extracting paths or accepting links, traversal or unexpected legacy files.
 
 Candidate implementation and packaging checks do not establish Web routing or
 artifact quality. G1-G6 and the independent complete-artifact review remain

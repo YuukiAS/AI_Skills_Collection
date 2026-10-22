@@ -1,13 +1,17 @@
 from __future__ import annotations
 
+import gzip
 import io
 import importlib.util
 import json
 from pathlib import Path
 import shutil
+import stat
 import sys
+import tarfile
 import tempfile
 import unittest
+import warnings
 import zipfile
 from unittest import mock
 
@@ -35,6 +39,35 @@ class ClearWritingChatGPTWrapperTests(unittest.TestCase):
 
     def build(self) -> tuple[dict, dict]:
         return builder.build_payload(self.root, "0.6")
+
+    def baseline(self) -> dict[str, bytes]:
+        candidate, _ = self.build()
+        compat = json.loads(candidate[".codex-plugin/plugin.json"])
+        compat["version"] = "0.5.0"
+        files = {path: b"original behavior\x00\xff" for path in builder.OLD_DELETE_PATHS}
+        files[".codex-plugin/plugin.json"] = builder.json_bytes(compat)
+        self.assertEqual(len(files), 27)
+        return files
+
+    def archive(self, files: dict[str, bytes], format: str, directories: tuple[str, ...] = ()) -> Path:
+        path = Path(self.temp.name) / f"input.{format}"
+        if format == "zip":
+            with zipfile.ZipFile(path, "w") as archive:
+                for name in directories:
+                    archive.writestr(name + "/", b"")
+                for name, data in files.items():
+                    archive.writestr(name, data)
+        else:
+            with tarfile.open(path, "w:gz") as archive:
+                for name in directories:
+                    entry = tarfile.TarInfo(name)
+                    entry.type = tarfile.DIRTYPE
+                    archive.addfile(entry)
+                for name, data in files.items():
+                    entry = tarfile.TarInfo(name)
+                    entry.size = len(data)
+                    archive.addfile(entry, io.BytesIO(data))
+        return path
 
     def test_single_entry_roots_and_no_old_runtime_or_maintenance(self) -> None:
         files, receipt = self.build()
@@ -231,10 +264,7 @@ class ClearWritingChatGPTWrapperTests(unittest.TestCase):
 
     def test_restore_tool_sets_keep_root_manifest_out_of_delete_paths(self) -> None:
         candidate, _ = self.build()
-        compat = json.loads((REPO_ROOT / "plugins/codex/plugins/writing-style/.codex-plugin/plugin.json").read_text())
-        compat["version"] = "0.5.0"
-        baseline = {path: b"original behavior" for path in builder.OLD_DELETE_PATHS}
-        baseline[".codex-plugin/plugin.json"] = builder.json_bytes(compat)
+        baseline = self.baseline()
         restored, all_only, tool = builder.restore_payload(baseline, candidate)
         only = set(candidate) - set(baseline)
         self.assertEqual(set(all_only["all_06_only_paths"]), only)
@@ -254,13 +284,212 @@ class ClearWritingChatGPTWrapperTests(unittest.TestCase):
         with self.assertRaisesRegex(builder.BuildError, "file set"):
             builder.restore_payload(drifted, candidate)
 
-    def test_archive_traversal_symlink_and_duplicates_are_rejected(self) -> None:
+    def test_zip_tar_gz_and_tgz_baselines_are_byte_equivalent(self) -> None:
+        baseline = self.baseline()
+        for format in ("zip", "tar.gz", "tgz"):
+            with self.subTest(format=format):
+                path = self.archive(baseline, format)
+                self.assertEqual(builder.read_archive(path), baseline)
+                self.assertEqual(builder.read_zip(path), baseline)
+                # Content, not the supplied suffix, determines the format.
+                renamed = path.with_name("misnamed.tar.gz" if format == "zip" else "misnamed.zip")
+                shutil.copyfile(path, renamed)
+                self.assertEqual(builder.read_archive(renamed), baseline)
+
+    def test_safe_directories_are_ignored_without_extraction(self) -> None:
+        files = {"assets/nested/icon.svg": b"icon", "empty.txt": b""}
+        for format in ("zip", "tar.gz", "tgz"):
+            with self.subTest(format=format):
+                path = self.archive(files, format, ("assets", "assets/nested", "empty"))
+                with mock.patch.object(zipfile.ZipFile, "extract", side_effect=AssertionError("no extraction")), \
+                        mock.patch.object(zipfile.ZipFile, "extractall", side_effect=AssertionError("no extraction")), \
+                        mock.patch.object(tarfile.TarFile, "extract", side_effect=AssertionError("no extraction")), \
+                        mock.patch.object(tarfile.TarFile, "extractall", side_effect=AssertionError("no extraction")):
+                    self.assertEqual(builder.read_archive(path), files)
+        # An explicit directory after its child is still safe, not a duplicate.
+        path = Path(self.temp.name) / "late-directory.zip"
+        with zipfile.ZipFile(path, "w") as archive:
+            archive.writestr("assets/icon.svg", b"icon")
+            archive.writestr("assets/", b"")
+        self.assertEqual(builder.read_archive(path), {"assets/icon.svg": b"icon"})
+
+    def test_unsafe_file_and_directory_paths_are_rejected_in_all_formats(self) -> None:
+        names = ("../outside", "/absolute", "a\\b", "a/../b", "C:/drive", "C:relative",
+                 "assets/*", "assets/**", "file?.md", "file[0].md", ".", "a/./b", "a//b")
+        for format in ("zip", "tar.gz", "tgz"):
+            for name in names:
+                for directory in (False, True):
+                    with self.subTest(format=format, name=name, directory=directory):
+                        path = self.archive({} if directory else {name: b"unsafe"}, format,
+                                            (name,) if directory else ())
+                        with self.assertRaises(builder.BuildError):
+                            builder.read_archive(path)
+
+    def test_zip_special_member_types_and_nul_names_are_rejected(self) -> None:
         path = Path(self.temp.name) / "untrusted.zip"
-        for name in ("../outside", "/absolute", "dir/", "a\\b", "a/../b", "assets/*", "assets/**", "file?.md"):
-            with zipfile.ZipFile(path, "w") as archive:
-                archive.writestr(name, "unsafe")
-            with self.assertRaises(builder.BuildError):
-                builder.read_zip(path)
+        for kind in (stat.S_IFLNK, stat.S_IFCHR, stat.S_IFBLK, stat.S_IFIFO, stat.S_IFSOCK):
+            for directory in (False, True):
+                with self.subTest(kind=kind, directory=directory):
+                    entry = zipfile.ZipInfo("unsafe/" if directory else "unsafe")
+                    entry.create_system = 3
+                    entry.external_attr = (kind | 0o777) << 16
+                    with zipfile.ZipFile(path, "w") as archive:
+                        archive.writestr(entry, b"")
+                    with self.assertRaisesRegex(builder.BuildError, "unsafe ZIP member"):
+                        builder.read_archive(path)
+        raw = builder.deterministic_zip({"nulXname": b"payload"})
+        path.write_bytes(raw.replace(b"nulXname", b"nul\x00name"))
+        with self.assertRaisesRegex(builder.BuildError, "unsafe ZIP member"):
+            builder.read_archive(path)
+
+    def test_zip_directory_metadata_is_checked_before_ignoring(self) -> None:
+        path = Path(self.temp.name) / "directory.zip"
+        for kind, name, data, safe in (
+            (stat.S_IFDIR, "directory", b"", True),
+            (stat.S_IFREG, "directory/", b"", False),
+            (stat.S_IFDIR, "directory/", b"hidden payload", False),
+        ):
+            with self.subTest(kind=kind, name=name, safe=safe):
+                entry = zipfile.ZipInfo(name)
+                entry.create_system = 3
+                entry.external_attr = (kind | 0o755) << 16
+                with zipfile.ZipFile(path, "w") as archive:
+                    archive.writestr(entry, data)
+                if safe:
+                    self.assertEqual(builder.read_archive(path), {})
+                else:
+                    with self.assertRaises(builder.BuildError):
+                        builder.read_archive(path)
+
+    def test_tar_links_devices_fifo_and_unknown_types_are_rejected(self) -> None:
+        path = Path(self.temp.name) / "untrusted.tgz"
+        for kind in (tarfile.SYMTYPE, tarfile.LNKTYPE, tarfile.CHRTYPE, tarfile.BLKTYPE,
+                     tarfile.FIFOTYPE, tarfile.CONTTYPE, tarfile.GNUTYPE_SPARSE, b"?"):
+            with self.subTest(kind=kind):
+                entry = tarfile.TarInfo("unsafe")
+                entry.type = kind
+                entry.linkname = "target"
+                with tarfile.open(path, "w:gz") as archive:
+                    archive.addfile(entry)
+                with self.assertRaises(builder.BuildError):
+                    builder.read_archive(path)
+
+    def test_duplicate_and_file_directory_conflicts_are_rejected(self) -> None:
+        cases = (
+            (("same", False), ("same", False)),
+            (("same", True), ("same", True)),
+            (("same", True), ("same", False)),
+            (("same", False), ("same", True)),
+            (("parent", False), ("parent/child", False)),
+            (("parent/child", False), ("parent", False)),
+            (("parent", False), ("parent/child", True)),
+            (("parent/child", True), ("parent", False)),
+        )
+        for format in ("zip", "tar.gz", "tgz"):
+            for members in cases:
+                with self.subTest(format=format, members=members):
+                    path = Path(self.temp.name) / f"conflicts.{format}"
+                    with warnings.catch_warnings():
+                        warnings.simplefilter("ignore", UserWarning)
+                        if format == "zip":
+                            with zipfile.ZipFile(path, "w") as archive:
+                                for name, directory in members:
+                                    archive.writestr(name + "/" if directory else name, b"")
+                        else:
+                            with tarfile.open(path, "w:gz") as archive:
+                                for name, directory in members:
+                                    entry = tarfile.TarInfo(name)
+                                    entry.type = tarfile.DIRTYPE if directory else tarfile.REGTYPE
+                                    archive.addfile(entry)
+                    with self.assertRaisesRegex(builder.BuildError, "duplicate|file/directory conflict"):
+                        builder.read_archive(path)
+
+    def test_non_zip_and_non_gzip_tar_fail_closed(self) -> None:
+        path = Path(self.temp.name) / "untrusted.tar.gz"
+        for mode in ("w", "w:bz2", "w:xz"):
+            with self.subTest(mode=mode):
+                with tarfile.open(path, mode) as archive:
+                    archive.addfile(tarfile.TarInfo("plain.txt"))
+                with self.assertRaises(builder.BuildError):
+                    builder.read_archive(path)
+        for data in (b"", b"not an archive", b"PK\x03\x04broken", b"\x1f\x8bbroken"):
+            path.write_bytes(data)
+            with self.subTest(data=data), self.assertRaises(builder.BuildError):
+                builder.read_archive(path)
+
+    def test_corrupt_zip_and_gzip_streams_raise_build_error(self) -> None:
+        path = Path(self.temp.name) / "corrupt.archive"
+        path.write_bytes(builder.deterministic_zip({"file.txt": b"payload"}).replace(b"payload", b"damaged"))
+        with self.assertRaisesRegex(builder.BuildError, "cannot read ZIP or gzip tar"):
+            builder.read_archive(path)
+        # Valid gzip header followed by an invalid DEFLATE block.
+        path.write_bytes(b"\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x07")
+        with self.assertRaisesRegex(builder.BuildError, "cannot read ZIP or gzip tar"):
+            builder.read_archive(path)
+
+    def assert_invalid_gzip_trailer_rejected(self, offset: int | None) -> None:
+        files = {"file.txt": b"payload"}
+        for format in ("tar.gz", "tgz"):
+            with self.subTest(format=format):
+                path = self.archive(files, format)
+                self.assertEqual(builder.read_archive(path), files)
+                data = bytearray(path.read_bytes())
+                if offset is None:
+                    del data[-8:]
+                else:
+                    data[offset] ^= 1
+                with self.assertRaises((EOFError, gzip.BadGzipFile)):
+                    gzip.decompress(data)
+                path.write_bytes(data)
+                with self.assertRaisesRegex(builder.BuildError, "cannot read ZIP or gzip tar"):
+                    builder.read_archive(path)
+
+    def test_gzip_missing_trailer_is_rejected(self) -> None:
+        self.assert_invalid_gzip_trailer_rejected(None)
+
+    def test_gzip_bad_crc_is_rejected(self) -> None:
+        self.assert_invalid_gzip_trailer_rejected(-8)
+
+    def test_gzip_wrong_isize_is_rejected(self) -> None:
+        self.assert_invalid_gzip_trailer_rejected(-4)
+
+    def test_archive_restore_rejects_unexpected_and_missing_baseline_files(self) -> None:
+        candidate, _ = self.build()
+        baseline = self.baseline()
+        missing = dict(baseline)
+        del missing[builder.OLD_DELETE_PATHS[0]]
+        for format in ("zip", "tar.gz", "tgz"):
+            for drifted in ({**baseline, "unexpected.txt": b"drift"}, missing):
+                with self.subTest(format=format, files=len(drifted)):
+                    path = self.archive(drifted, format)
+                    with self.assertRaisesRegex(builder.BuildError, "file set"):
+                        builder.restore_payload(builder.read_archive(path), candidate)
+
+    def test_cli_prepare_restore_is_equivalent_for_all_input_formats(self) -> None:
+        baseline = self.baseline()
+        candidate, _ = self.build()
+        expected, only06, deletes = builder.restore_payload(baseline, candidate)
+        archives = {}
+        for label, files in (("baseline", baseline), ("candidate", candidate)):
+            for format in ("zip", "tar.gz", "tgz"):
+                path = self.archive(files, format, ("assets", "skills", "unused"))
+                saved = path.with_name(f"{label}.{format}")
+                shutil.copyfile(path, saved)
+                archives[label, format] = saved
+        for baseline_format in ("zip", "tar.gz", "tgz"):
+            for candidate_format in ("zip", "tar.gz", "tgz"):
+                with self.subTest(baseline=baseline_format, candidate=candidate_format):
+                    output = Path(self.temp.name) / f"restore-{baseline_format}-{candidate_format}"
+                    package, archive, receipts = output / "package", output / "restore.zip", output / "receipts"
+                    self.assertEqual(builder.main([
+                        "prepare-restore", "--baseline-archive", str(archives["baseline", baseline_format]),
+                        "--candidate-archive", str(archives["candidate", candidate_format]),
+                        "--output-root", str(package), "--archive", str(archive), "--receipt-dir", str(receipts),
+                    ]), 0)
+                    self.assertEqual(builder.output_files(package), expected)
+                    self.assertEqual(archive.read_bytes(), builder.deterministic_zip(expected))
+                    self.assertEqual((receipts / "RESTORE_06_ONLY_PATHS.json").read_bytes(), builder.json_bytes(only06))
+                    self.assertEqual((receipts / "RESTORE_DELETE_PATHS.json").read_bytes(), builder.json_bytes(deletes))
 
     def test_glob_cannot_enter_restore_upload_or_delete_sets(self) -> None:
         files, _ = self.build()

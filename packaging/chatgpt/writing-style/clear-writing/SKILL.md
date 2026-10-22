@@ -61,50 +61,20 @@ according to that route. Resolve this command path against the plugin root. If
 the host cannot execute the required helper or finish a required route stage,
 report the incomplete route; do not silently skip it and claim completion.
 
-## Bind A GitHub Document To Its Final Candidate
+## Use The Shared Final Delivery Contract
 
-The supported external-finalization surface is a GitHub repository UTF-8 text
-file through the host's already connected GitHub tools. Tool names can vary;
-use the existing `fetch_file` and `update_file` operations or their host-provided
-equivalents with the same source, identity, and expected-blob checks. This Skill
-does not provide a connector, authorization, transaction, or unbypassable hook.
-Other surfaces may receive a complete candidate, but this version's GitHub
-evidence does not establish finalization support for them.
+For document delivery, actually read and apply
+`references/routes/writing-fidelity/references/final-delivery.md` alongside
+the selected routes. It owns complete-source coverage, full reviewed
+candidate identity, authorized existing-file update or non-overwriting
+creation, and full readback plus actual saved-document review. This entry
+does not maintain a second version of those rules or of ordinary-answer
+content selection; the latter lives in Response Clarity's Workflow.
 
-For each authorized GitHub edit:
-
-1. Fetch the complete UTF-8 source and its current blob SHA from the exact
-   repository, writable branch, and path. Read every part if the response is
-   paginated or truncated; an excerpt, summary, old chat, or cached version
-   cannot stand in for the source. If complete source cannot be obtained,
-   stop that object as `TARGET_SOURCE_INCOMPLETE`; do not invent replacement
-   text and do not write.
-2. Bind the target to repository + writable branch + path + blob SHA. Respect
-   the user's edit scope and existing tool authorization. Do not write to a
-   different repository, branch, or path to get around missing permission.
-3. Apply all selected routes to the whole required document. Produce the
-   complete final-review candidate before any external write. Compute its
-   SHA-256 over the exact UTF-8 bytes that will be written. A proposed diff or
-   the chat explanation is not this candidate. If the required full-document
-   review or candidate hash cannot be completed, withhold the external write.
-4. Immediately before writing, fetch the same branch/path again and compare
-   the current blob SHA with the bound SHA. On a difference, stop as
-   `TARGET_IDENTITY_DRIFT`; do not overwrite the new content or silently
-   rebase the old candidate.
-5. Update that exact branch/path with the complete reviewed candidate and the
-   bound current blob SHA as the expected source version. Do not fall back to
-   an unconditional overwrite. Save the returned commit SHA and content SHA.
-   A denied or failed update is `ARTIFACT_NOT_WRITTEN`; the candidate may be
-   returned, but the target must not be described as changed.
-6. Fetch the same branch/path immediately after the successful update.
-   Compare the returned blob SHA with the update's content SHA, and compare
-   the complete returned UTF-8 bytes with the reviewed candidate. Confirm the
-   repository, branch, and path are unchanged. If readback is unavailable or
-   either comparison fails, report `ARTIFACT_FINALIZATION_UNVERIFIED`.
-7. Only a successful complete read -> reviewed candidate -> expected-blob
-   write -> matching readback permits `ARTIFACT_FINALIZED` for that object.
-   Keep the source, candidate identity, update result, and full readback
-   accessible for artifact review; hashes alone do not establish prose quality.
+Apply the shared contract separately to each document. A local file does not
+prove GitHub delivery. Missing full source, route/helper access, write access,
+or readback cannot be hidden by a polished chat explanation. This plugin
+provides no connector, permission, transaction service, or unbypassable hook.
 
 ## Finish Each Object Truthfully
 

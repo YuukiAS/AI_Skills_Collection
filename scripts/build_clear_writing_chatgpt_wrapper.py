@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import io
 import json
@@ -11,7 +12,9 @@ from pathlib import Path, PurePosixPath
 import posixpath
 import re
 import stat
+import tarfile
 import zipfile
+import zlib
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -70,7 +73,7 @@ def json_bytes(value: object) -> bytes:
 
 def safe_path(name: str) -> None:
     path = PurePosixPath(name)
-    if (not name or path.is_absolute() or ".." in path.parts or "\\" in name or ":" in name
+    if (not path.parts or path.is_absolute() or ".." in path.parts or "\\" in name or ":" in name or "\x00" in name
             or any(character in name for character in "*?[]")):
         raise BuildError(f"unsafe package path: {name}")
     if name != path.as_posix() or name.endswith("/"):
@@ -94,15 +97,65 @@ def deterministic_zip(files: dict[str, bytes]) -> bytes:
     return buffer.getvalue()
 
 
-def read_zip(path: Path) -> dict[str, bytes]:
+def read_archive(path: Path) -> dict[str, bytes]:
     files: dict[str, bytes] = {}
-    with zipfile.ZipFile(path) as archive:
-        for entry in archive.infolist():
-            safe_path(entry.filename)
-            if entry.filename in files or stat.S_ISLNK(entry.external_attr >> 16):
-                raise BuildError(f"duplicate or symlink entry: {entry.filename}")
-            files[entry.filename] = archive.read(entry)
+    seen: set[str] = set()
+    directories: set[str] = set()
+
+    def member_path(name: str, is_directory: bool) -> str:
+        name = name.removesuffix("/") if is_directory else name
+        safe_path(name)
+        if name in seen:
+            raise BuildError(f"duplicate or file/directory conflict: {name}")
+        parents = {parent.as_posix() for parent in PurePosixPath(name).parents if parent.parts}
+        if parents & files.keys() or (not is_directory and name in directories):
+            raise BuildError(f"file/directory conflict: {name}")
+        seen.add(name)
+        directories.update(parents)
+        if is_directory:
+            directories.add(name)
+        return name
+
+    try:
+        if zipfile.is_zipfile(path):
+            with zipfile.ZipFile(path) as archive:
+                for entry in archive.infolist():
+                    kind = stat.S_IFMT(entry.external_attr >> 16)
+                    is_directory = entry.is_dir() or kind == stat.S_IFDIR or bool(entry.external_attr & 0x10)
+                    if (kind not in (0, stat.S_IFREG, stat.S_IFDIR)
+                            or (is_directory and (kind == stat.S_IFREG or entry.file_size))
+                            or entry.orig_filename != entry.filename):
+                        raise BuildError(f"unsafe ZIP member type or name: {entry.orig_filename}")
+                    name = member_path(entry.filename, is_directory)
+                    if not is_directory:
+                        files[name] = archive.read(entry)
+        else:
+            with gzip.open(path, "rb") as gzip_stream, tarfile.open(fileobj=gzip_stream, mode="r:") as archive:
+                for entry in archive:
+                    if entry.type not in (tarfile.REGTYPE, tarfile.AREGTYPE, tarfile.DIRTYPE) or entry.issparse():
+                        raise BuildError(f"unsafe tar member type: {entry.name}")
+                    is_directory = entry.isdir()
+                    if is_directory and entry.size:
+                        raise BuildError(f"nonempty tar directory: {entry.name}")
+                    name = member_path(entry.name, is_directory)
+                    if not is_directory:
+                        stream = archive.extractfile(entry)
+                        if stream is None:
+                            raise BuildError(f"unreadable tar member: {entry.name}")
+                        with stream:
+                            files[name] = stream.read()
+                # Tar traversal can stop before gzip validates its CRC and size trailer.
+                while gzip_stream.read(1024 * 1024):
+                    pass
+    except (OSError, EOFError, tarfile.TarError, zipfile.BadZipFile, zlib.error,
+            RuntimeError, NotImplementedError) as error:
+        raise BuildError(f"cannot read ZIP or gzip tar archive: {error}") from error
     return files
+
+
+def read_zip(path: Path) -> dict[str, bytes]:
+    """Keep the original reader entry point for existing callers."""
+    return read_archive(path)
 
 
 def source_bytes(root: Path, relative: str) -> bytes:
@@ -356,7 +409,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         if args.command == "prepare-restore":
-            files, only06, deletes = restore_payload(read_zip(args.baseline_archive), read_zip(args.candidate_archive))
+            files, only06, deletes = restore_payload(read_archive(args.baseline_archive), read_archive(args.candidate_archive))
             write_output(files, args.output_root, args.archive)
             args.receipt_dir.mkdir(parents=True, exist_ok=True)
             (args.receipt_dir / "RESTORE_06_ONLY_PATHS.json").write_bytes(json_bytes(only06))

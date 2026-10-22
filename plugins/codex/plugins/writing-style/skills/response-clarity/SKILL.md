@@ -18,15 +18,16 @@ icon_large: assets/app-facing.svg
 ---
 # Response Clarity
 
-Use this skill for ordinary answers to the user after the relevant domain work
-has already been done. It improves the explanation layer: conclusions,
-diagnostic summaries, advice, progress updates, handoff notes, and task-result
-reports that are meant for a person to read.
+Use this skill to select, organize, write, and revise ordinary answers from
+supported domain work: explanations, comparisons, advice, progress updates,
+handoffs, and task-result reports. Start with the user's question and the
+reader's understanding needs before drafting, not with a prewritten result
+whose wording alone can be polished.
 
 This skill does not discover facts, decide architecture, make scientific
 claims, rewrite source documents, write product UI copy, or edit machine
-protocols. It makes the already-known result easier to understand while
-preserving protected meaning.
+protocols. Domain owners establish facts and decisions; this skill owns which
+supported material belongs in the answer and how the reader can understand it.
 
 ## Use When
 
@@ -148,20 +149,69 @@ synthesis or a decision.
 
 ## Workflow
 
-1. Identify the domain owner and the known result. Do not invent missing facts.
-2. Mark protected strings and protected meaning before rewriting the response.
-3. Decide the reply type: conclusion, diagnostic, advice, progress update,
-   completion report, blocker, or handoff.
-4. Put the human-readable conclusion first.
-5. Move logs, paths, branch names, commands, hashes, issue ids, and state
-   values into evidence or next-action sentences instead of making them the
-   opening.
-6. Remove unnecessary English and internal process labels from reader-facing
-   prose while preserving exact identifiers.
-7. For complex explanations, check the whole answer for fragmented reasoning
-   and for unfamiliar objects whose first use lacks a supported reader model.
-8. Check that the final answer still matches the actual result and the user's
-   latest instruction.
+1. Read the latest user question. Identify the questions to answer, audience,
+   target language, requested depth and output type, and any actual action or
+   verbatim output required. A short status and a full proof require different
+   depths; neither inherits its length from how much material was inspected.
+2. Separate the evidence pool from the answer's content. Keep domain-verified
+   facts available for reasoning, but select for the answer only what answers
+   the question, establishes a necessary mechanism or mathematical intuition,
+   affects confidence/completion/risk, supports action or reproduction, or is
+   explicitly requested. Preserve protected meaning and exact strings. Do not
+   invent missing facts, authorization, or a next owner; workflow/domain
+   authorities decide those, not this writing pass.
+3. Arrange reader questions and dependencies before writing. For each major
+   meaning unit, know which reader question it answers and what must already
+   be understood. Introduce unfamiliar objects at their supported level before
+   using their names, indices, formulas, or consequences. Use supported
+   examples or clearly labeled hypothetical quantities when they aid a causal
+   or mathematical explanation. Do not impose a fixed paragraph template or
+   invent a story for a simple status.
+4. Generate the complete answer in that understanding order. Lead with the
+   human meaning; place exact evidence where it supports the explanation.
+   Keep connected reasoning together and use real comparisons, steps, tables,
+   formulas, or machine blocks when they have value. A user-requested detailed
+   audit, proof, or executable prompt retains its necessary evidence and depth.
+5. Re-read the original question and the actual complete candidate as two
+   separate review objects. Do not merely repeat the drafting checklist or
+   assume that a planned component was actually explained. Locate the answer
+   to each user question; check first-use definitions, causal/mathematical
+   connections, important caveats, and the exact remaining action/owner when
+   one is established. Read across the whole answer for fragmentation.
+6. Examine each substantial passage for reader value. If it only inventories
+   inspected components, rejected options, checks, or history without changing
+   understanding, judgment, or action, remove/merge it or move it to the
+   explicitly requested detailed audit. Do not remove necessary comparisons,
+   derivations, reproducibility details, limitations, or uncertainty merely
+   to shorten the answer.
+7. Actually repair the complete candidate: supply supported missing reasoning,
+   reorganize a broken dependency, replace ordinary unnecessary English, or
+   remove low-value repetition. Preserve facts and exact payloads; refer a
+   source contradiction back to its owner instead of inventing a resolution.
+   After substantive repairs, re-read the affected whole answer against the
+   original question, not just its first screen or changed words.
+8. Deliver that revised answer, not a statement that review happened or a long
+   self-rating table. This is the same host model editing its own complete
+   text, without another conversation, model, service, persistent plan, or
+   per-answer human approval. It is not independent review or an unbypassable
+   send-time hook; real output quality still has to satisfy the task.
+
+### Small Contrasts
+
+For "Why did the update not take effect?", "checked the cache, resolver,
+registry and four tests" only describes the evidence pool. If the verified
+cause is that the running process still holds the old configuration, explain
+that mechanism and the authorized next action. If the cause is unknown, say
+which conclusion is unsupported rather than making the inventory a diagnosis.
+
+For "Explain how the estimate changes with sample size", do not substitute
+"more data is better" for the requested mechanism. Introduce the estimated
+object and supported assumptions, work through the necessary comparison or
+formula, and retain the conditions under which that intuition can fail.
+
+For "Give the complete audit and exact reproduction commands", those details
+are the requested content, not disposable process noise. Organize them so the
+reader can use them without weakening the audit or changing the commands.
 
 ## Red Flags
 

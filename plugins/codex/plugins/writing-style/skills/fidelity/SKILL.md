@@ -55,6 +55,11 @@ silently satisfy one constraint by violating another.
 
 ## Workflow
 
+Read [Final delivery](references/final-delivery.md) when producing a complete
+document or writing a target file. It owns full-source coverage, reviewed
+candidate identity, safe tool handoff, and actual delivery verification for
+both hosts; a summary, diff, or chat receipt cannot stand in for that artifact.
+
 1. Classify the task: `polish`, `edit`, `rewrite`, `summarize`, `translate`,
    `layout`, `render`, or `source-faithful reconstruction`.
 2. Extract the user's latest corrections as hard constraints. Pay special
@@ -79,11 +84,22 @@ silently satisfy one constraint by violating another.
    designation, and visible headline must match the latest user decision and
    evidence ledger. Do not invent lifecycle labels such as `start <project>` or
    `final <project>` unless the source explicitly defines them.
-7. Finish with precise status and final artifact path. Do not treat reports,
-   previews, audits, or side-by-side candidates as substitutes for the requested
-   final artifact.
-8. For Chinese, Markdown, PDF, slide, or report acceptance, verify readability authority before status: the first visible conclusion must be human-readable, and machine fields, paths, commands, status tokens, and audit trails must support rather than replace the conclusion.
-9. If a Chinese Markdown/PDF/slide/report starts with machine fields, paths, commands, status tokens, audit trails, or mixed English process labels before a readable Chinese judgment, classify the deliverable as `qa_failed` until it is rewritten with a reader-facing conclusion first.
+7. Compare the complete candidate with the complete source and the authorized
+   operation: claims, conditions, negations, uncertainty, numbers, formulas,
+   citations, permissions, and completion state must retain their meaning.
+   Structural rewrites use the content/evidence graph below, not source order
+   as a substitute for coverage. Summaries must be authorized and identified
+   as summaries, never passed off as complete rewrites.
+8. Require the selected style route's full-candidate reader review separately
+   from fidelity. Chinese document quality belongs to `chinese-prose`;
+   ordinary-answer content selection belongs to `response-clarity`. A fidelity
+   checklist, a matching hash, or a model's assertion does not prove either.
+9. Bind delivery to the exact reviewed candidate according to Final delivery.
+   Any substantive revision invalidates that candidate's previous fidelity,
+   reader review, and bound receipts. Re-form the complete candidate and
+   repeat affected checks before writing or calling it final. Finish with the
+   real artifact location and precise status, not a report or preview in its
+   place.
 
 ## Hand Off
 

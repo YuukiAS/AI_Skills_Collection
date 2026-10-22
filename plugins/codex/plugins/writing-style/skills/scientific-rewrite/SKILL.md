@@ -390,3 +390,13 @@ python3 skills/writing/core/scientific-rewrite/scripts/rewrite_support.py valida
 
 This is not product-quality PASS. Human artifact acceptance and the task's
 Reviewed Handoff gates still own reader-facing quality.
+
+For delivery, apply [Final delivery](../writing-fidelity/references/final-delivery.md)
+to the complete assembled, verified candidate. Its target binding and actual
+write/readback checks do not replace any heavy stage above. After a substantive
+repair, reassemble, rerun affected fidelity/helper checks and bind receipts to
+the new final bytes before delivery. Chinese prose reviews the complete
+candidate against the Reader Plan without reintroducing raw-source drafting;
+source-to-final fidelity remains this route's separate audit. If the host
+cannot execute the required helper or consume the full route, stop incomplete
+rather than downgrading to local polishing or calling the document final.

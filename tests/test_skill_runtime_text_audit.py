@@ -24,8 +24,10 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
 
     def test_response_clarity_owns_ordinary_explanations_not_documents_or_machine_output(self):
         text = (REPO_ROOT / "skills/writing/core/response-clarity/SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("ordinary answers to the user", text)
-        self.assertIn("after the relevant domain work", text)
+        self.assertIn("select, organize, write, and revise ordinary answers", text)
+        self.assertIn("supported domain work", text)
+        self.assertIn("before drafting", text)
+        self.assertIn("Domain owners establish facts and decisions", text)
         self.assertIn("Route formal Chinese documents", text)
         self.assertIn("Do not use this skill for pure JSON", text)
         self.assertIn("Preserve", text)
@@ -35,7 +37,9 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
         text = (
             REPO_ROOT / "plugins/codex/plugins/writing-style/skills/response-clarity/SKILL.md"
         ).read_text(encoding="utf-8")
-        self.assertIn("Use this skill for ordinary answers to the user", text)
+        self.assertIn("Use this skill to select, organize, write, and revise ordinary answers", text)
+        self.assertIn("Re-read the original question", text)
+        self.assertIn("Actually repair the complete candidate", text)
         self.assertIn("pure JSON, YAML, code, commands, raw logs", text)
 
     def test_response_clarity_stops_at_the_answer_and_separates_source_consensus(self):
@@ -76,8 +80,14 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
 
     def test_writing_fidelity_fails_unreadable_chinese_final_artifacts(self):
         text = (REPO_ROOT / "skills/writing/core/writing-fidelity/SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("classify the deliverable as `qa_failed`", text)
-        self.assertIn("Chinese Markdown/PDF/slide/report", text)
+        self.assertIn("require", text.lower())
+        self.assertIn("style route's full-candidate reader review separately", text)
+        self.assertIn("from fidelity", text)
+        self.assertIn("Chinese document quality belongs to `chinese-prose`", text)
+        reference = (REPO_ROOT / "skills/writing/core/writing-fidelity/references/final-delivery.md").read_text(encoding="utf-8")
+        self.assertIn("matching\nbytes do not make it a final document", reference)
+        self.assertIn("has not reached final quality", reference)
+        self.assertIn("qa_failed", text)
 
     def test_writing_style_phase_two_boundaries(self):
         fidelity = (REPO_ROOT / "skills/writing/core/writing-fidelity/SKILL.md").read_text(encoding="utf-8")
