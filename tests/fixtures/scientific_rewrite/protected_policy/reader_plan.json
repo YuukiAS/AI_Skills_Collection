@@ -1,0 +1,156 @@
+{
+  "schema": "SCIENTIFIC_REWRITE_READER_PLAN_V1",
+  "bundles": [
+    {
+      "bundle_id": "policy",
+      "owned_meaning_ids": [
+        "m01",
+        "m03",
+        "m04",
+        "m06",
+        "m10",
+        "m11",
+        "m12"
+      ],
+      "purpose": "理解目标、平台限制及职责",
+      "reader_dispositions": [
+        {
+          "meaning_id": "m01",
+          "disposition": "CORE_INLINE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "理解目标、平台限制及职责"
+        },
+        {
+          "meaning_id": "m03",
+          "disposition": "CORE_INLINE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "理解目标、平台限制及职责"
+        },
+        {
+          "meaning_id": "m04",
+          "disposition": "CORE_INLINE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "理解目标、平台限制及职责"
+        },
+        {
+          "meaning_id": "m06",
+          "disposition": "CORE_INLINE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "理解目标、平台限制及职责"
+        },
+        {
+          "meaning_id": "m10",
+          "disposition": "CORE_INLINE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "理解目标、平台限制及职责"
+        },
+        {
+          "meaning_id": "m11",
+          "disposition": "CORE_INLINE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "理解目标、平台限制及职责"
+        },
+        {
+          "meaning_id": "m12",
+          "disposition": "CORE_INLINE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "理解目标、平台限制及职责"
+        }
+      ]
+    },
+    {
+      "bundle_id": "validation",
+      "owned_meaning_ids": [
+        "m05",
+        "m07",
+        "m08",
+        "m09"
+      ],
+      "purpose": "理解测试设计、证据限界及失败恢复",
+      "reader_dispositions": [
+        {
+          "meaning_id": "m05",
+          "disposition": "CORE_INLINE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "理解测试设计、证据限界及失败恢复"
+        },
+        {
+          "meaning_id": "m07",
+          "disposition": "CORE_INLINE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "理解测试设计、证据限界及失败恢复"
+        },
+        {
+          "meaning_id": "m08",
+          "disposition": "CORE_INLINE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "理解测试设计、证据限界及失败恢复"
+        },
+        {
+          "meaning_id": "m09",
+          "disposition": "CORE_INLINE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "理解测试设计、证据限界及失败恢复"
+        }
+      ]
+    },
+    {
+      "bundle_id": "scope",
+      "owned_meaning_ids": [
+        "m02",
+        "m14",
+        "m15",
+        "m13"
+      ],
+      "purpose": "理解既有事实、权限和待复核范围",
+      "reader_dispositions": [
+        {
+          "meaning_id": "m02",
+          "disposition": "CORE_INLINE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "理解既有事实、权限和待复核范围"
+        },
+        {
+          "meaning_id": "m14",
+          "disposition": "CORE_INLINE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "理解既有事实、权限和待复核范围"
+        },
+        {
+          "meaning_id": "m15",
+          "disposition": "CORE_INLINE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "理解既有事实、权限和待复核范围"
+        },
+        {
+          "meaning_id": "m13",
+          "disposition": "CORE_INLINE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "理解既有事实、权限和待复核范围"
+        }
+      ]
+    },
+    {
+      "bundle_id": "identity",
+      "owned_meaning_ids": [
+        "m00"
+      ],
+      "purpose": "定位版本与全部依据",
+      "reader_dispositions": [
+        {
+          "meaning_id": "m00",
+          "disposition": "RELOCATE",
+          "source_role": "提案的技术约束和状态",
+          "reader_reason": "定位版本与全部依据"
+        }
+      ]
+    }
+  ],
+  "bundle_order": [
+    "policy",
+    "validation",
+    "scope",
+    "identity"
+  ],
+  "excluded_source_context_item_ids": []
+}

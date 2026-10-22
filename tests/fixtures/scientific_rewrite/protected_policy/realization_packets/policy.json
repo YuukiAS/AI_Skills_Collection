@@ -1,0 +1,135 @@
+{
+  "schema": "SCIENTIFIC_REWRITE_REALIZATION_PACKET_V1",
+  "bundle_id": "policy",
+  "audience": "普通研发读者",
+  "purpose": "理解目标、平台限制及职责",
+  "meaning_records": [
+    {
+      "meaning_id": "m01",
+      "kind": "technical_policy",
+      "normalized_meaning": "产品策略：Project规定自然语言及混合最终回答使用现有技能；纯精确输出免激活。六技能与已验收候选不动。W1仅证长期行为，W2严格配对证插件增量；不可配对就不确定并停止发布，混杂备选仅诊断。",
+      "source_anchor_ids": [
+        "src-003",
+        "src-004",
+        "src-005",
+        "src-006",
+        "src-007",
+        "src-008",
+        "src-009",
+        "src-010"
+      ],
+      "exact_item_ids": []
+    },
+    {
+      "meaning_id": "m03",
+      "kind": "technical_policy",
+      "normalized_meaning": "平台边界以2026-10-18核对为时点：元信息先可见，相关或直接调用才读全文；自动相关性不是每轮钩子。Project指令局部有效且覆盖全局自定义指令；记忆模式决定历史影响。未发现可依赖的发送前每轮收尾器。策略、激活、消费后行为须分别证明。",
+      "source_anchor_ids": [
+        "src-016",
+        "src-017",
+        "src-018",
+        "src-019",
+        "src-020",
+        "src-021"
+      ],
+      "exact_item_ids": []
+    },
+    {
+      "meaning_id": "m04",
+      "kind": "technical_policy",
+      "normalized_meaning": "职责：Project只定激活策略，不复制规则、替代具体技能选择专业逻辑、改写、模拟未加载插件或声称已加载。现有六技能各司其职；混合解释可改，机器载荷不可动。纯精确输出直接返回，不假称BYPASS_EXACT。显式选插件的精确压力测试只能证不污染，全文加载不可见则不得称加载后旁路；将来可观察具体技能加载可增诊断但不增发布关口。",
+      "source_anchor_ids": [
+        "src-022",
+        "src-023",
+        "src-024",
+        "src-025",
+        "src-026",
+        "src-027",
+        "src-028",
+        "src-029",
+        "src-030",
+        "src-031",
+        "src-032",
+        "src-033",
+        "src-034",
+        "src-035",
+        "src-036",
+        "src-037",
+        "src-038",
+        "src-039",
+        "src-040"
+      ],
+      "exact_item_ids": []
+    },
+    {
+      "meaning_id": "m06",
+      "kind": "technical_policy",
+      "normalized_meaning": "薄桥接仅未来批准后测试包使用：可用时自然或混合最终回答用恰当既有技能，纯机器逐字输出免强制；禁模拟重建复制规则。W2两组桥接字节一致，桥接不代表实现或消费，此次不得写真实设置。",
+      "source_anchor_ids": [
+        "src-106",
+        "src-107",
+        "src-108",
+        "src-109",
+        "src-110",
+        "src-111"
+      ],
+      "exact_item_ids": []
+    },
+    {
+      "meaning_id": "m10",
+      "kind": "technical_policy",
+      "normalized_meaning": "方案比较：拒无桥自动作为主入口、拒纯精确强制调用造成虚假旁路、采Project自然混合加纯精确豁免及既有技能行为、拒混杂备选作为发布证据。",
+      "source_anchor_ids": [
+        "src-145",
+        "src-146",
+        "src-147",
+        "src-148",
+        "src-149",
+        "src-150",
+        "src-151",
+        "src-152",
+        "src-153"
+      ],
+      "exact_item_ids": []
+    },
+    {
+      "meaning_id": "m11",
+      "kind": "technical_policy",
+      "normalized_meaning": "五方面设计检视：目标为阅读收益与机器不损；现实无每轮收尾与回执保证；已比较复制全规则等方案而选严格策略与配对。预防未加载假旁路、文字好假归因、混杂假配对。只在Critic通过后Planner冻结执行包，当前不测，不能构造W2则停发布。",
+      "source_anchor_ids": [
+        "src-154",
+        "src-155",
+        "src-156",
+        "src-157",
+        "src-158",
+        "src-159",
+        "src-160",
+        "src-161",
+        "src-162",
+        "src-163",
+        "src-164",
+        "src-165"
+      ],
+      "exact_item_ids": []
+    },
+    {
+      "meaning_id": "m12",
+      "kind": "technical_policy",
+      "normalized_meaning": "官方资料核对日期2026-10-18，结论未改变三个问题判断；保留Skills in ChatGPT、OpenAI Developers Skills、Plugins in ChatGPT、Projects in ChatGPT的名称及各自自动/直接/元信息/指令/记忆事实；不把三机制混同。",
+      "source_anchor_ids": [
+        "src-166",
+        "src-167",
+        "src-168",
+        "src-169"
+      ],
+      "exact_item_ids": []
+    }
+  ],
+  "modality_preservation": {
+    "preserve_completion_status": true,
+    "preserve_subject_voice": true,
+    "preserve_temporal_status": true,
+    "preserve_epistemic_status": true
+  },
+  "constraints": "保留提案状态、既有验收与未来测试差别；不省略条件、权限、失败及身份；不要按审查时间线组织。"
+}

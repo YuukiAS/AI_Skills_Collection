@@ -1,0 +1,18 @@
+{
+  "schema": "SCIENTIFIC_REWRITE_ROUTE_SELECTION_V1",
+  "selector_owner": "writing-style",
+  "selected_route": "scientific-rewrite",
+  "forced_route": false,
+  "ordinary_user_prompt": true,
+  "prompt_sha256": "f4b3ea1a665857556c68b8de20834f7d7cf878f59b39c08041adad65dfe4514c",
+  "source_sha256": "45766584319e84c3fd20e02da2349a880a4e67fca59024c54cb00fc973759640",
+  "reason_codes": {
+    "check_only": false,
+    "wants_rewrite": true,
+    "has_fidelity_constraints": true,
+    "long_enough": true,
+    "scientific_or_technical": true,
+    "chinese_dominant": true,
+    "english_dominant": true
+  }
+}

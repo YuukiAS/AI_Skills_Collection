@@ -1,0 +1,65 @@
+{
+  "schema": "SCIENTIFIC_REWRITE_REALIZATION_PACKET_V1",
+  "bundle_id": "scope",
+  "audience": "普通研发读者",
+  "purpose": "理解既有事实、权限和待复核范围",
+  "meaning_records": [
+    {
+      "meaning_id": "m02",
+      "kind": "technical_policy",
+      "normalized_meaning": "既有独立验收不重开：流程和产品均通过、KR-WEB-01..09及四组保持不变测试与必需CI通过；response-clarity已明确解释、技能归属、精确字符串与纯机器排除。禁止候选、技能架构、路由状态机、Project账户插件、PIE、Mica、Research Authoring、Presentations改动及Web测试、发布升版。",
+      "source_anchor_ids": [
+        "src-011",
+        "src-012",
+        "src-013",
+        "src-014",
+        "src-015"
+      ],
+      "exact_item_ids": []
+    },
+    {
+      "meaning_id": "m14",
+      "kind": "technical_policy",
+      "normalized_meaning": "本轮禁止清单还包括不创建新tracking Issue，所有候选、设置账户、Web关口、PIE/Mica、其他两插件、技能/路由/状态机、发布升版限制完整保留。",
+      "source_anchor_ids": [
+        "src-177",
+        "src-178"
+      ],
+      "exact_item_ids": []
+    },
+    {
+      "meaning_id": "m15",
+      "kind": "technical_policy",
+      "normalized_meaning": "下一次Critic仅优先核对三问题是否正确关闭以及已认可入口、W0到W3顺序、W3仅诊断、全新G7、六技能及候选不变是否受损；通过后仅允许Planner进入执行包冻结，不授权任何Web执行或真实设置修改。",
+      "source_anchor_ids": [
+        "src-179",
+        "src-180",
+        "src-181",
+        "src-182"
+      ],
+      "exact_item_ids": []
+    },
+    {
+      "meaning_id": "m13",
+      "kind": "technical_policy",
+      "normalized_meaning": "三个问题均仅在提案中接受并关闭，状态ACCEPT / CLOSED IN PROPOSAL：01免激活及精确选择证据限界无协调技能；02行为与因果分属W1/W2；03严格同条件隔离冻结记忆唯一插件差异，不可配对停止发布，诊断不替代且G7身份补齐。",
+      "source_anchor_ids": [
+        "src-170",
+        "src-171",
+        "src-172",
+        "src-173",
+        "src-174",
+        "src-175",
+        "src-176"
+      ],
+      "exact_item_ids": []
+    }
+  ],
+  "modality_preservation": {
+    "preserve_completion_status": true,
+    "preserve_subject_voice": true,
+    "preserve_temporal_status": true,
+    "preserve_epistemic_status": true
+  },
+  "constraints": "保留提案状态、既有验收与未来测试差别；不省略条件、权限、失败及身份；不要按审查时间线组织。"
+}

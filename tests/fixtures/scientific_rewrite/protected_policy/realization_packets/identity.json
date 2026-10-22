@@ -1,0 +1,46 @@
+{
+  "schema": "SCIENTIFIC_REWRITE_REALIZATION_PACKET_V1",
+  "bundle_id": "identity",
+  "audience": "普通研发读者",
+  "purpose": "定位版本与全部依据",
+  "meaning_records": [
+    {
+      "meaning_id": "m00",
+      "kind": "technical_policy",
+      "normalized_meaning": "提案身份：v0.2，日期2026-10-18，待Critic复核；保留主题、分支、前版与评审路径及完整提交、冻结生产候选和已通过实现/产品验收的终态定位。用户要求所有身份保留，置于附录。",
+      "source_anchor_ids": [
+        "src-001",
+        "src-002"
+      ],
+      "exact_item_ids": [
+        "e000",
+        "e001",
+        "e002",
+        "e003",
+        "e004",
+        "e005",
+        "e006",
+        "e007",
+        "e008",
+        "e009",
+        "e010",
+        "e011",
+        "e012",
+        "e013",
+        "e014",
+        "e015",
+        "e016",
+        "e017",
+        "e018",
+        "e019"
+      ]
+    }
+  ],
+  "modality_preservation": {
+    "preserve_completion_status": true,
+    "preserve_subject_voice": true,
+    "preserve_temporal_status": true,
+    "preserve_epistemic_status": true
+  },
+  "constraints": "保留提案状态、既有验收与未来测试差别；不省略条件、权限、失败及身份；不要按审查时间线组织。"
+}

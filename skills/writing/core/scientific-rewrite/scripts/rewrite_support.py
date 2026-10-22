@@ -256,12 +256,65 @@ def find_reader_facing_internal_leakage(text: str) -> list[dict[str, str]]:
     return findings
 
 
-def validate_reader_facing_internal_frame(candidate: str) -> dict[str, Any]:
-    findings = find_reader_facing_internal_leakage(candidate)
+def validate_reader_facing_internal_frame(
+    candidate: str, *, source: str = "", prompt: str = "",
+    meaning_map: dict[str, Any] | None = None,
+    reader_plan: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    # A policy/handoff document can discuss the very identities this lint normally
+    # excludes. Honour the existing preservation contract only with explicit user
+    # protection AND source-backed semantic ownership; never disable a pattern.
+    protected: dict[str, str] = {}
+    explicit = re.search(r"不能丢|不得删|保留|preserv\w*|\bkeep\b", prompt, re.I)
+    subjects = re.search(r"版本|状态|路径|权限|身份|version|status|path|permission|identit", prompt, re.I)
+    if explicit and subjects and meaning_map is not None and reader_plan is not None:
+        anchors = {a["source_anchor_id"]: a for a in meaning_map.get("source_anchors", [])}
+        meanings = {m["meaning_id"]: m for m in meaning_map.get("meanings", [])}
+        exact = reader_facing_exact_items(meaning_map, reader_plan)
+        for bundle in reader_plan.get("bundles", []):
+            for disposition in bundle.get("reader_dispositions", []):
+                if disposition.get("disposition") in {"DROP_WRAPPER", "DROP_IRRELEVANT_TRACE"}:
+                    continue
+                role = disposition.get("source_role", "") + " " + disposition.get("reader_reason", "")
+                if not re.search(r"技术|复现|定位|权限|technical|reproduc|locat|permission", role, re.I):
+                    continue
+                meaning = meanings.get(disposition.get("meaning_id"), {})
+                for anchor_id in meaning.get("source_anchor_ids", []):
+                    anchor = anchors.get(anchor_id)
+                    if not anchor:
+                        continue
+                    text = source[int(anchor["start"]):int(anchor["end"])]
+                    for kind, pattern in READER_FACING_INTERNAL_LEAK_PATTERNS:
+                        # Other patterns include directory prefixes or broad
+                        # phrases; a shared prefix must never authorize a new path.
+                        if kind not in {"commit_sha", "process_review_label"}:
+                            continue
+                        for match in re.finditer(pattern, text):
+                            literal = match.group(0)
+                            # Commit identities additionally need exact-item ownership.
+                            if kind == "commit_sha" and not any(literal in item["literal"] for item in exact):
+                                continue
+                            protected[literal] = anchor_id
+        # The requested source ref is authority supplied by the user, not a new
+        # implementation result. Restrict this to an explicit ref assignment.
+        for match in re.finditer(r"(?m)^\s*ref\s*=\s*`?([0-9a-f]{40})`?\s*$", prompt):
+            protected[match.group(1)] = "user_prompt_source_ref"
+    findings = []
+    retained = []
+    for kind, pattern in READER_FACING_INTERNAL_LEAK_PATTERNS:
+        for match in re.finditer(pattern, candidate):
+            literal = match.group(0)
+            if literal in protected:
+                retained.append({"kind": kind, "literal": literal, "source_authority": protected[literal]})
+            else:
+                findings.append({"kind": kind, "literal": literal})
     if findings:
         kinds = ", ".join(finding["kind"] for finding in findings)
         raise ValidationError("reader-facing internal workflow leakage: " + kinds)
-    return {"ok": True, "internal_workflow_leak_count": 0}
+    result: dict[str, Any] = {"ok": True, "internal_workflow_leak_count": 0}
+    if retained:
+        result["protected_technical_identity_matches"] = retained
+    return result
 
 
 def _strip_code_spans(text: str) -> str:
@@ -839,7 +892,10 @@ def validate_stage_package(
     assembly_result = validate_assembly_packet(assembly_packet)
     semantic_result = validate_semantic_audit(semantic_audit, reader_plan=reader_plan)
     exact_result = verify_exact_items(final_candidate, reader_facing_exact_items(meaning_map, reader_plan))
-    reader_frame_result = validate_reader_facing_internal_frame(final_candidate)
+    reader_frame_result = validate_reader_facing_internal_frame(
+        final_candidate, source=source, prompt=prompt or "",
+        meaning_map=meaning_map, reader_plan=reader_plan,
+    )
     standalone_frame_result = validate_standalone_reader_frame(final_candidate, task_context=prompt or "")
     citation_markup_result = validate_reader_facing_citation_markup(final_candidate, task_context=prompt or "")
     formula_rendering_result = validate_reader_facing_formula_rendering(final_candidate)

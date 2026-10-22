@@ -676,6 +676,68 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
         result = helper.validate_reader_facing_internal_frame(candidate)
         self.assertTrue(result["ok"])
 
+    def test_protected_policy_first_product_validates_without_redrafting(self) -> None:
+        stage = REPO_ROOT / "tests/fixtures/scientific_rewrite/protected_policy"
+        source = (stage / "source.md").read_text()
+        prompt = (stage / "prompt.md").read_text()
+        candidate = (stage / "final_candidate.md").read_text()
+        with self.assertRaisesRegex(helper.ValidationError, "commit_sha,.*process_review_label"):
+            helper.validate_reader_facing_internal_frame(candidate)
+        receipt = helper.validate_stage_package(source, stage, prompt=prompt)
+        retained = receipt["reader_facing_internal_frame"]["protected_technical_identity_matches"]
+        self.assertEqual({item["kind"] for item in retained}, {"commit_sha", "process_review_label"})
+        self.assertIn("user_prompt_source_ref", {item["source_authority"] for item in retained})
+        self.assertEqual(receipt["candidate_sha256"], helper.sha256_text(candidate))
+
+    def test_protected_policy_still_rejects_unowned_or_new_workflow_trace(self) -> None:
+        stage = REPO_ROOT / "tests/fixtures/scientific_rewrite/protected_policy"
+        context = {
+            "source": (stage / "source.md").read_text(),
+            "prompt": (stage / "prompt.md").read_text(),
+            "meaning_map": json.loads((stage / "meaning_map.json").read_text()),
+            "reader_plan": json.loads((stage / "reader_plan.json").read_text()),
+        }
+        candidate = (stage / "final_candidate.md").read_text()
+        for added in ["新提交 " + "a" * 40, "Executor 已经完成执行", "GitHub Actions 已通过"]:
+            with self.subTest(added=added), self.assertRaises(helper.ValidationError):
+                helper.validate_reader_facing_internal_frame(candidate + added, **context)
+        # A source reference without semantic ownership is insufficient.
+        context["reader_plan"] = {"bundles": []}
+        with self.assertRaises(helper.ValidationError):
+            helper.validate_reader_facing_internal_frame(candidate, **context)
+
+    def test_protected_workflow_prefix_cannot_authorize_a_different_path(self) -> None:
+        source = "复现所需状态位于 /repo/.local-runtime/safe/STATE.json。"
+        context = {
+            "source": source, "prompt": "保留路径和身份，不能丢。",
+            "meaning_map": {
+                "source_anchors": [{"source_anchor_id": "s", "start": 0, "end": len(source)}],
+                "meanings": [{"meaning_id": "m", "source_anchor_ids": ["s"]}],
+            },
+            "reader_plan": {"bundles": [{"reader_dispositions": [{
+                "meaning_id": "m", "disposition": "RELOCATE",
+                "source_role": "技术复现定位", "reader_reason": "复现",
+            }]}]},
+        }
+        with self.assertRaises(helper.ValidationError):
+            helper.validate_reader_facing_internal_frame(
+                source + "/repo/.local-runtime/UNOWNED/FINAL_REPORT.json", **context
+            )
+
+    def test_scientific_report_preservation_does_not_allow_execution_debris(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            source, stage, _ = build_valid_stage(Path(tmp))
+            context = {
+                "source": source,
+                "prompt": "保留所有版本、路径、权限，事实不能丢。",
+                "meaning_map": json.loads((stage / "meaning_map.json").read_text()),
+                "reader_plan": json.loads((stage / "reader_plan.json").read_text()),
+            }
+            with self.assertRaisesRegex(helper.ValidationError, "internal workflow leakage"):
+                helper.validate_reader_facing_internal_frame(
+                    "Dice=0.81。本轮 Planner 已审核，commit " + "a" * 40, **context
+                )
+
     def test_source_process_framing_fails_standalone_reader_candidate(self) -> None:
         candidate = (
             "Bloom filter 用 $m$ 位数组和 $k$ 个哈希函数表示集合。"

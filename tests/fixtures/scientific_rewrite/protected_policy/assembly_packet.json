@@ -1,0 +1,23 @@
+{
+  "schema": "SCIENTIFIC_REWRITE_ASSEMBLY_PACKET_V1",
+  "reader_plan_sha256": "6a46566f836dd01e86f943789d2d867c130bd8ecdf4386128d0d540cdd136dd4",
+  "realized_bundle_sha256s": {
+    "part-00.md": "e4d3d0bafe031df34590efa01549506eb5ae5fe24d6be66235da3635778996f9",
+    "part-01.md": "2730bb0955693618762154760d6fb679a9a17ac6d3fe099d0ff5d2b5dda8feee",
+    "part-02.md": "3496fe25960523f00f4fc69b61c7a6f03eee9bac5a8d30932ca95bdb0f449f0b",
+    "part-03.md": "f7ee5c04c128e7da543023da293e59e74c4c7e1b6a7e8899781a41f1e03082a4",
+    "part-04.md": "cd65c45acc91258fa2466d3037e89813832c30b8a312d5d2c5dc4949b5bb44ee",
+    "part-05.md": "74bdf43f67dad071bcf704dc0d1e51cdbc13d4c193e2f80489d4b4bad47bcf01",
+    "part-06.md": "5cd90805ac31a238c44f56834bd83d3eaf6fe94fbed3c46995bb2c90125a6732",
+    "part-07.md": "247a51f958e0636292ff86a00363295dcf578067e214f26ca9cd03d2d5c734f5",
+    "part-08.md": "5c3766c83cfbdaf0c1d2c0ffdae91ac026aff78e63e6f529485b8492393b8a62"
+  },
+  "whole_document_finish": {
+    "document_purpose": "完整中文技术策略提案，非摘要",
+    "reader_entry": "先理解阅读收益与精确输出保护",
+    "section_order_rationale": "目标及平台、分工、方案、验证、失败与权限、定位",
+    "transition_plan": "用证据能力连接调用策略与验收要求",
+    "voice_constraints": "既有事实与未来测试严格区分，保留全部禁止项",
+    "technical_detail_placement": "测试细节随目标，版本和精确路径置附录"
+  }
+}
