@@ -6,7 +6,7 @@
   "goal": "docs/goals/CLEAR_WRITING_0_6_UNIFIED_DELIVERY_GOAL_V0_4_2026-10-22.md",
   "runbook": "docs/design/clear-writing/CLEAR_WRITING_0_6_GATE_RUNBOOK_V0_4_2026-10-22.md",
   "kickoff_draft": "docs/operations/prompts/CLEAR_WRITING_0_6_KICKOFF_DRAFT_V0_4_2026-10-22.md",
-  "critic_prompt": "docs/design/clear-writing/CLEAR_WRITING_0_6_UNIFIED_CRITIC_PROMPT_V0_7_2026-10-22.md",
+  "critic_prompt": "docs/design/clear-writing/CLEAR_WRITING_0_6_UNIFIED_CRITIC_PROMPT_V0_8_2026-10-22.md",
   "package_identity_rule": "Use the exact commit supplied in the next Critic handoff; this file does not self-hash.",
   "supersedes_product_semantics_of": "ca018937b3528b8cc62ace9c02e33c1d5f84fde6",
   "historical_candidate": "079bd7987bb33d624d244feb415327d5cf2343d8",
@@ -20,7 +20,17 @@
   "archive_bytes_materialized_this_round": false,
   "archive_download_attempt": "container network connection failed; signed URL not stored in repository",
   "ownership_delta": "Reader selection/composition in canonical response-clarity, final candidate delivery in writing-fidelity, host wrapper only coordinates objects/routes.",
-  "protected_other_thread_scope": ["Planner/Critic role contracts", "AI Research Stack Project setting"],
+  "protected_other_thread_scope": [
+    "Planner/Critic role contracts",
+    "AI Research Stack Project setting"
+  ],
   "next_handoff": "INDEPENDENT_CRITIC",
-  "project_pending": {"Status": "DOING", "Area": "writing-style", "Resolution commit": null}
+  "project_pending": {
+    "Status": "DOING",
+    "Area": "writing-style",
+    "Resolution commit": null
+  },
+  "reviewer_distinction": "DAILY_GPT_SAME_MODEL_FULL_CANDIDATE_EDITORIAL_CHECK; INDEPENDENT_FINAL_ARTIFACT_REVIEW_ONLY_AT_RELEASE_GATES",
+  "github_prewrite_evidence": "FULL_SOURCE + FULL_CANDIDATE + SEMANTIC_FIDELITY + READER_QUALITY + REPAIR_BEFORE_WRITE",
+  "github_postwrite_evidence": "READBACK_FULL_TEXT + CANDIDATE_IDENTITY + READER_QUALITY; repair within authorized task or report not finalized"
 }

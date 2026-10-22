@@ -11,7 +11,7 @@ tracking = #13
 
 批准后按同一提交的PRODUCT_AND_EXECUTION_PLAN v0.4、UNIFIED_DELIVERY_GOAL v0.4、GATE_RUNBOOK v0.4执行，使用workflow-core + ai-skills-core + writing-style。继续原Codex任务和既有可用实施审查路径，不新开任务/分支，不假设后台路径自动可用。
 
-当前有两类实质工作：在现有canonical专业路线中落实读者内容选择、理解组织、全文审校与最终候选绑定，并让ChatGPT单入口和Codex六直接入口共享；修复prepare-restore的安全ZIP/tar.gz兼容，与上述改变形成同一个新候选。保留原专业保真、重写helper、英文学术与UI边界；不扩成全领域判断器。
+当前有两类实质工作：在现有canonical专业路线中落实读者内容选择、理解组织、**普通GPT同模型写前全篇保真/可读性二阶段通读与必要返修**、最终候选绑定，并让ChatGPT单入口和Codex六直接入口共享；修复prepare-restore的安全ZIP/tar.gz兼容，与上述改变形成同一个新候选。**不得把正式Gate的独立评审偷换成“普通GPT每次自动召唤另一个Reviewer”；日常同模型审校也不得被省略或以技能加载自述冒充。**保留原专业保真、重写helper、英文学术与UI边界；不扩成全领域判断器。
 
 task-owned源码、文档、生成物、测试与证据可按批准范围提交和普通非force发布。不得修改Project setting、Planner/Critic合同、Bridge/Slurm/CAT-TRACE实现或研究事实；不新增MCP/App/额外模型/后台服务/数据库。不得覆盖其它分支或无关并行修改。
 
