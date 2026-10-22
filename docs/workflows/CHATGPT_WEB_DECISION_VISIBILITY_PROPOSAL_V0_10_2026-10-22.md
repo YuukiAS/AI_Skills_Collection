@@ -74,8 +74,8 @@ Critic 自己也必须在本轮 review 的用户前部说明 **为什么** `PROC
 在目前两个人工线程的现有自然交接处增加**接收义务**，不增加第三角色或额外正常循环：
 
 - Critic 收到 Planner 方案时，检查当前用户决策说明**实际存在、可读、与当轮技术一致**；不合格就 `REVISE`，即使机器执行包结构齐全。
-- Planner 收到 Critic 的 `PROCEED/REVISE` 时，先核对 Critic 实际有没有解释结论的用户意义、证据、保留部分、未完成问题和唯一下一入口；若只给状态/流水账，不当作完成的正式交付去推进新方案。由当前 Planner直接生成针对缺失的最小“补足审查交付”提示词，返回原 Critic；不让用户重新教“说人话”。
-- **最终 `PASS` 改为“独立技术批准 → 原 Planner 交付验收 → Codex”**。这是本版对 1.7 §6.1/§6.2 **明确提出修改**的地方：Critic 仍是唯一独立技术裁决者，只它可以给 `PASS`，但 PASS 当轮不给最终 `COPY TO CODEX`；改给可直接转发原 Planner 的短 `COPY TO PLANNER`。Planner 必须从同版已审 Proposal 的用户架构说明与 Critic 原 review 重新读取并核对，负责最后展示**已审的机制正文 + Critic 的独立批准理由/剩余限制**，并渲染短 Codex 入口。Planner 不允许推翻 Critic 技术决定、自授 PASS 或扩权；若发现实质技术矛盾，返回 Critic/必要时重开设计，不能发给 Codex。
+- Planner 收到 Critic 的 `PROCEED/REVISE` 时，先核对 Critic 是否提供了支持判断的真实技术依据、所审身份以及用户能理解的原因和下一步。**只差表达组织、但原审查的具体技术依据充分时，Planner 直接从同版 Proposal 与原 Critic findings 补全面向用户的判断，不要求 Critic 为同一事实反复宣布结论；技术依据缺失、版本错位或结论与原证据矛盾时，才把这份审查作为不完整交付退回原 Critic补正，且不进入下一实质阶段。**这区别于过去连续三次只改提示词长度、技术依据不变的空转。
+- **最终 `PASS` 改为“独立技术批准 → 原 Planner 交付验收 → Codex”**。这是本版对 1.7 §6.1/§6.2 **明确提出修改**的地方：Critic 仍是唯一独立技术裁决者，只它可以给 `PASS`，但 PASS 当轮不给最终 `COPY TO CODEX`；改给可直接转发原 Planner 的短 `COPY TO PLANNER`。Planner 必须从同版已审 Proposal 的用户架构说明与 Critic 原 review 重新读取并核对，负责最后展示**已审的机制正文 + Critic 的独立批准理由/剩余限制**，并渲染短 Codex 入口。**如果 Critic 技术审查正确而回复像流水账，Planner 应忠实恢复受审说明和真实独立理由，而不是要求 Critic 再次原地 PASS；若 Critic 的技术论证或包身份根本不足，则不能靠 Planner 补文案冒充技术批准，必须退回原 Critic。** Planner 不允许推翻 Critic 技术决定、自授 PASS 或扩权。
 
 **额外成本明确披露：只在最终 execution-ready PASS 增加一次原 Planner 接收/交付核对及一次用户机械转发**。中间 PROCEED/REVISE 原本就交 Planner，无额外人工审查环。选择这点成本，是为了避免用户像过往那样收到未解释的 PASS 后直接去 Codex、几天后才从错误 Wrapper 或失效 Hook 发现路线错了。若未来已验证可由现有正常工具自动完成等价交付校验，独立新设计才能替换，不自行假设已自动化。
 
