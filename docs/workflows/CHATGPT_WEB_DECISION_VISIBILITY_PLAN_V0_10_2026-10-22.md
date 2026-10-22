@@ -48,7 +48,7 @@ AI Research Stack Project setting：现有条款已触发两份角色合同和�
 
 **Planner 提交前**：完成现有 Proposal 的“用户决策说明”和对应技术方案、Goal/Kickoff（如该阶段需要），推送后用 GitHub 重新读取相同 ref，确认最新内容属于正确任务。对用户先讲本轮真实变动、最重要技术选择、为什么、剩余问题和送审目的，再附自动生成的短 `COPY TO CRITIC`。
 
-**Critic 审查后**：给自然中文判断和独立证据；在中间阶段给可转发原 Planner 的 prompt，最终技术 PASS 也回原 Planner作一次交付接收。若缺真实完整 review 文件、Critic 不具有 repo write 权限，就让原 Planner接收完整原始审查文本并忠实归档；不让用户手工写 review 文件或查询 GitHub。
+**Critic 审查后**：给自然中文判断和独立证据；在中间阶段给可转发原 Planner 的 prompt，最终技术 PASS 也回原 Planner作一次交付接收。若 Critic 没有 repo 写入权限，不能只报告一个不存在的 review 文件定位。其 `COPY TO PLANNER` 必须自包含原始独立结论、完整实质 finding、给用户看的解释及真实来源定位（允许机器块较长，用户只机械复制），由原 Planner接收后按原文归档。接收 Planner 不能因只有 `PASS` token 就自行补造独立专业审核证据；不让用户手工整理或查询 GitHub。
 
 **Planner 接收时**：判断三种原因，避免无谓多轮：
 1. 已核实完整技术判断且用户正文完整 → 正常推进下一轮 / 最终交付；
