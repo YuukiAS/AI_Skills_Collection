@@ -259,5 +259,9 @@
     }
   ],
   "release_status": "NOT_RELEASED",
-  "live_gates": "NOT_RUN"
+  "live_gates": "NOT_RUN",
+  "historical_only": true,
+  "release_eligible": false,
+  "superseded_by_approved_package": "48c42f89d23ba168e2d2045034a7f7117c2e0448",
+  "current_final_candidate_frozen": false
 }

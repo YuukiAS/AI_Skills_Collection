@@ -1,0 +1,14 @@
+{
+  "issue": {
+    "number": 13,
+    "state": "OPEN",
+    "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/13"
+  },
+  "fields": {
+    "Title": "让 Clear Writing 成为跨 Project 的最终用户阅读层",
+    "Status": "DOING",
+    "Area": "writing-style"
+  },
+  "status": "SYNCED",
+  "mutation_required": false
+}

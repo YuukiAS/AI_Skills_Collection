@@ -1,0 +1,13 @@
+{
+  "issue": 13,
+  "state": "OPEN",
+  "readback_exact": true,
+  "body_sha256": "16d2d2962368ff8394e51334f14c5e199c2839df78de9bf481cd14028625d544",
+  "language_review_run": "20261022T044219Z-33e6d99f032a",
+  "source_commit": "0b4248c7eb2abd4b03a06c97061aa895a556a0e7",
+  "next_owner": "original Planner",
+  "handoff_locator": "results/clear-writing--single-entry-artifact-finalization/v0.4/PLANNER_HANDOFF.md",
+  "lifecycle": "DOING",
+  "Area": "writing-style",
+  "resolution_commit": null
+}

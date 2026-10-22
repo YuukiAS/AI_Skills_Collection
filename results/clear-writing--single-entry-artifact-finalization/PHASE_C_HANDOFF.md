@@ -1,4 +1,8 @@
-# 交接：现有 ChatGPT Planner 继续 Phase C
+# 历史交接：2026-10-20 的 v0.2 候选
+
+> 本文件以下内容只保留历史，不能用于当前 live update。旧 079bd798 候选已失效。
+> 当前唯一批准包为 `48c42f89d23ba168e2d2045034a7f7117c2e0448`；
+> 新实现进度和精确恢复点见 `v0.4/PLANNER_HANDOFF.md`。新版 FINAL_CANDIDATE 尚未冻结。
 
 任务和分支不变：`clear-writing--single-entry-artifact-finalization` /
 `design/clear-writing--single-entry-artifact-finalization`。

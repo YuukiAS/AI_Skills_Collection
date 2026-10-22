@@ -1,5 +1,9 @@
 # Clear Writing 0.6：本地实施与交接
 
+> 以下为 2026-10-20 v0.2 的历史结果，不是当前 v0.4 的通过声明。
+> 唯一批准包已改为 `48c42f89d23ba168e2d2045034a7f7117c2e0448`；
+> 旧候选、旧回归与 CI 不证明新语义。当前结果见 `v0.4/PLANNER_HANDOFF.md` 及该目录验证证据。
+
 任务：`clear-writing--single-entry-artifact-finalization`。
 分支：`design/clear-writing--single-entry-artifact-finalization`。
 批准执行包：`d7b810d194ead881303aaca9c2e4f1d59a97c1f1`。

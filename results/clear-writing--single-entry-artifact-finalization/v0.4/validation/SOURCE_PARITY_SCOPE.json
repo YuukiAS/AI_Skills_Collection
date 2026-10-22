@@ -1,0 +1,33 @@
+{
+  "source_commit": "0b4248c7eb2abd4b03a06c97061aa895a556a0e7",
+  "approved_package": "48c42f89d23ba168e2d2045034a7f7117c2e0448",
+  "changed_paths": [
+    "docs/plugin-changelogs/writing-style.md",
+    "packaging/chatgpt/writing-style/clear-writing/SKILL.md",
+    "plugins/codex/plugins/writing-style/skills/fidelity/SKILL.md",
+    "plugins/codex/plugins/writing-style/skills/fidelity/references/final-delivery.md",
+    "plugins/codex/plugins/writing-style/skills/response-clarity/SKILL.md",
+    "plugins/codex/plugins/writing-style/skills/scientific-rewrite/SKILL.md",
+    "plugins/codex/plugins/writing-style/skills/zh/SKILL.md",
+    "scripts/build_clear_writing_chatgpt_wrapper.py",
+    "skills/writing/core/chinese-prose/SKILL.md",
+    "skills/writing/core/response-clarity/SKILL.md",
+    "skills/writing/core/scientific-rewrite/SKILL.md",
+    "skills/writing/core/writing-fidelity/SKILL.md",
+    "skills/writing/core/writing-fidelity/references/final-delivery.md",
+    "tests/test_clear_writing_chatgpt_wrapper.py",
+    "tests/test_clear_writing_unified_delivery.py",
+    "tests/test_skill_runtime_text_audit.py"
+  ],
+  "wrapper_files": 30,
+  "wrapper_zip_sha256": "978b93115a0f66aab6f7a4cce2f590118ce2f0804d7113b02c3626c3b88cfc00",
+  "wrapper_zip_size_bytes": 182374,
+  "build_receipt_sha256": "6af476b6a03755c59eb1ef07329a3d3afda0247150a3dde620c4df981ed93055",
+  "codex_tree_sha": "f6b2e95a98881a107ecddeec0b59144760fa0252",
+  "archive_reader_source_sha256": "df42236be5e1e799f9440a59311e11c453966cc723d11eccdc7cbec854a57187",
+  "profile_sha256": "25863b13c787251a4df5ec400a5657aecb0b5565ddff2cdd6ed85da913577bed",
+  "parity": "PASS",
+  "scope": "PASS",
+  "final_candidate_frozen": false,
+  "artifact_quality_proven": false
+}

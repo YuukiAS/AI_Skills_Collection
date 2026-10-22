@@ -202,5 +202,8 @@
   "display_name": "Clear Writing",
   "plugin_version": "0.6.0",
   "purpose": "EXISTING_CHATGPT_PRIVATE_PLUGIN_CANDIDATE_UPDATE",
-  "release_status": "NOT_RELEASED"
+  "release_status": "NOT_RELEASED",
+  "historical_only": true,
+  "release_eligible": false,
+  "superseded_by_approved_package": "48c42f89d23ba168e2d2045034a7f7117c2e0448"
 }

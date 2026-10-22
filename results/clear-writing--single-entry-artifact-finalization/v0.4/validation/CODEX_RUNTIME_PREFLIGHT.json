@@ -1,0 +1,17 @@
+{
+  "approved_package": "48c42f89d23ba168e2d2045034a7f7117c2e0448",
+  "task": "clear-writing--single-entry-artifact-finalization",
+  "historical_run": "20261020T040240Z-d4023c2f186e",
+  "historical_log_sha256": "f4e118aa1ca87c6b8ac2cc8c6b2e0dac5cb28fccc5b3d2d1eaed8ac4ab626f2c",
+  "frozen_original_model": "gpt-6.1-sol",
+  "frozen_original_reasoning_effort": "high",
+  "current_user_model_matches_original": true,
+  "web_model": "GPT-5.6 Sol",
+  "candidate_replay_helper_sha256": "aaf621d69a603cb39f8fcf7687dae728fd1fcf71885d63458f828d6eeee6e820",
+  "candidate_replay_ignores_user_config": true,
+  "candidate_replay_model_override_supported": false,
+  "new_candidate_model_requests_sent": 0,
+  "pre_request_model_binding": "NOT_PROVEN_FOR_CANONICAL_CANDIDATE_ENTRY",
+  "production_install_mutated": false,
+  "meaning": "Original model identity is known. Do not substitute a default-model candidate run or source-file replay for installed-candidate G5 evidence."
+}
