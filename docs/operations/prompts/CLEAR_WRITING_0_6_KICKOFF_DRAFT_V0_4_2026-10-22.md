@@ -11,7 +11,7 @@ tracking = #13
 
 批准后按同一提交的PRODUCT_AND_EXECUTION_PLAN v0.4、UNIFIED_DELIVERY_GOAL v0.4、GATE_RUNBOOK v0.4执行，使用workflow-core + ai-skills-core + writing-style。继续原Codex任务和既有可用实施审查路径，不新开任务/分支，不假设后台路径自动可用。
 
-当前有两类实质工作：在现有canonical专业路线中落实读者内容选择、理解组织、**普通GPT同模型写前全篇保真/可读性二阶段通读与必要返修**、最终候选绑定，并让ChatGPT单入口和Codex六直接入口共享；修复prepare-restore的安全ZIP/tar.gz兼容，与上述改变形成同一个新候选。**不得把正式Gate的独立评审偷换成“普通GPT每次自动召唤另一个Reviewer”；日常同模型审校也不得被省略或以技能加载自述冒充。**保留原专业保真、重写helper、英文学术与UI边界；不扩成全领域判断器。
+当前实质范围仍只有同一个0.6修复：**(a)** 改善canonical `response-clarity`的真实生成顺序：按当前用户问题筛选读者内容与解释依赖→完整生成→以原问题重新通读并实际返修；`writing-fidelity`集中保真和最终文本身份，正式文档用原专业全篇路线，GPT写前必须将完成后的候选**全文**作为GitHub工具的`content`并回读实际全文；ChatGPT单入口和Codex原六入口消费相同源。**(b)** 修复既有`prepare-restore`对安全ZIP/tar.gz输入的兼容，与上述行为形成同一新候选。不得新增独立模型/服务/审核器或项目角色；日常GPT“再次审阅”是同模型针对真实候选的编辑阶段，正式Gate才有独立审阅。现有 `scientific-rewrite`重写helper与专业保真边界不能因Web能力不足而静默跳过。
 
 task-owned源码、文档、生成物、测试与证据可按批准范围提交和普通非force发布。不得修改Project setting、Planner/Critic合同、Bridge/Slurm/CAT-TRACE实现或研究事实；不新增MCP/App/额外模型/后台服务/数据库。不得覆盖其它分支或无关并行修改。
 
