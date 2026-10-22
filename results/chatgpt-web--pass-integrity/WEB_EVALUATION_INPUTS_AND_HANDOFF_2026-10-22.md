@@ -13,7 +13,7 @@ GOVERNANCE_CANDIDATE_COMMIT=dcae2eae18729ffd8955ddccecd148a2c1aaaa09
 
 候选 Planner 合同：`https://github.com/YuukiAS/AI_Skills_Collection/blob/dcae2eae18729ffd8955ddccecd148a2c1aaaa09/docs/workflows/PLANNER_ROLE_CONTRACT.md`；候选 Critic 合同：`https://github.com/YuukiAS/AI_Skills_Collection/blob/dcae2eae18729ffd8955ddccecd148a2c1aaaa09/docs/workflows/CRITIC_ROLE_CONTRACT.md`。每条消息都再次绑定所用角色的 exact 1.8 合同；浏览器不能完整读取时，不得凭旧 1.7、聊天记忆或本文件概括继续生成，记录实际读取失败并停止该 case。生成线程**不得**额外拿到本次 case 的评分答案、本文件的其它 case、历史标准 finding、原坏 B 回复、C2 的后续评价或用户部分认可的示例。唯一例外是 C1 必须完整审作为受审对象的 v0.13 包，其中本来就含 Validation Contract；不能删去该文件，也不能把它当作预定 C1 verdict。独立评价者在输出产生后才读取本次评分依据与历史对照。
 
-文件 URL 使用上述 commit 固定内容，不能换成浮动 `main` 或分支链接。评估时核对网页实际能读取全文；只展示链接而未读到内容不算绑定。若需用户在网页手动附文件，Codex先提供 exact commit 的完整文件和逐案清单，不让用户自己从多个版本挑选。不要将下列提示词发送给当前的独立安全审查 Critic；那是另一个门。
+文件 URL 使用上述 commit 固定内容，不能换成浮动 `main` 或分支链接。每案使用不继承正式 1.7 Project instructions 的全新普通 ChatGPT Web 对话；不修改 live Project setting。若实际界面仍注入与候选 1.8 冲突的旧角色指令，或模型未能完整读取 1.8 合同，则停止该案并记录真实能力限制，不宣称候选已绑定。只展示链接而未读到内容不算绑定。若需用户在网页手动附文件，Codex先提供 exact commit 的完整文件和逐案清单，不让用户自己从多个版本挑选。不要将下列提示词发送给当前的独立安全审查 Critic；那是另一个门。
 
 下表是用户预计需要发送的网页消息，不是现在就要执行的清单。A、B、C、C2 各自使用独立 fresh 对话；C 的接收 Planner 是另一独立对话；D 使用一条 Planner 对话和一条独立 Critic 对话，两轮各继续原对话。C2 接收者不能先读 C 的审查结果。E 只做事后独立评价，不额外生成。
 
