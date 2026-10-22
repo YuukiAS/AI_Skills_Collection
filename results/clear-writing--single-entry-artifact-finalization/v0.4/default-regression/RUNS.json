@@ -1,0 +1,1610 @@
+{
+  "source_commit": "157725b909775e169926c449844301e772e50f08",
+  "records": [
+    {
+      "case": "CW-CONTROL-01",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/CW-CONTROL-01/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 4,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 4,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T070907Z-3684501/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T070907Z-3684501/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "fidelity"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/CW-CONTROL-01/files/release-handoff-contract.md",
+          "sha256": "ea4b20c20668ea0a6beaf2435bccf3e73d8786a8af813fd06fd3d9edf046f9d4"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/CW-CONTROL-01/CHAT_FULL.md",
+      "chat_sha256": "22da74417ddab2220dfbee207f6370664e0da41ede8e6f8d9dd54624d20dfab6"
+    },
+    {
+      "case": "CW-CONTROL-02",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/CW-CONTROL-02/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 4,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 4,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T070937Z-3686799/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T070937Z-3686799/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "response-clarity",
+        "zh"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/CW-CONTROL-02/files/import-failure-flow.md",
+          "sha256": "20999553eb64e3e0b897fb6fcb3508a30931ed7792e9b9f272438d309f758815"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/CW-CONTROL-02/CHAT_FULL.md",
+      "chat_sha256": "c554c83c90d980ada499ffbadaa343128b4f862eceb2789e1eab4cfcf94f61a6"
+    },
+    {
+      "case": "CW-CONTROL-03",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 1,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/CW-CONTROL-03/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 3,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 3,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 3,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071019Z-3689167/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071019Z-3689167/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 1,
+      "candidate_skill_reads": [
+        "response-clarity"
+      ],
+      "artifacts": [],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/CW-CONTROL-03/CHAT_FULL.md",
+      "chat_sha256": "2ecd4fc5fe9182321bb420369fac345be7747ef5c38e80ad4c2808cf043000d6"
+    },
+    {
+      "case": "CW-CONTROL-04",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/CW-CONTROL-04/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 4,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 4,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071038Z-3689958/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071038Z-3689958/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "response-clarity"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/CW-CONTROL-04/files/response.txt",
+          "sha256": "534562020f853b994ab3f1703ada72bd461ab3fed83edd79b0e186170120e51e"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/CW-CONTROL-04/CHAT_FULL.md",
+      "chat_sha256": "2cb795b5313057666e2427f270a43081eb522fc29ba440a3a6b7c99916c201c9"
+    },
+    {
+      "case": "KR-WEB-06",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 3,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/KR-WEB-06/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 6,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 6,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 6,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071109Z-3691849/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071109Z-3691849/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 3,
+      "candidate_skill_reads": [
+        "response-clarity",
+        "scientific-rewrite",
+        "zh"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/KR-WEB-06/files/传感器校准流程说明.md",
+          "sha256": "2770aa8cc731fbb2b14612afc731c49deff569e8c4d5cf5b44ee28de357cb25a"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/KR-WEB-06/CHAT_FULL.md",
+      "chat_sha256": "42d7411f72bc0e8800549991d9d1535bb72cca0b9fe15b4222a6b51d9c57c930"
+    },
+    {
+      "case": "KR-WEB-07",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/KR-WEB-07/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 6,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 6,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 6,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071323Z-3701068/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071323Z-3701068/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "response-clarity",
+        "zh"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/KR-WEB-07/files/评估说明.md",
+          "sha256": "1e7cc92576e7234b094b1f29b806c5ef390a7a54067458221a6e6af943ef6e1b"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/KR-WEB-07/CHAT_FULL.md",
+      "chat_sha256": "736092b0228e2122437d45270282771218a4889c20e78f6e08acbd5d4c648640"
+    },
+    {
+      "case": "KR-WEB-08",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 3,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/KR-WEB-08/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 4,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 4,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071412Z-3702843/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071412Z-3702843/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 3,
+      "candidate_skill_reads": [
+        "response-clarity",
+        "zh"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/KR-WEB-08/files/分层模型的三种估计方式.md",
+          "sha256": "819df3578e264f9f5c2d822eb4f331b38b3ff2a3d3f82025a2c481c58efeafcb"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/KR-WEB-08/CHAT_FULL.md",
+      "chat_sha256": "d268bcd8ba157e340fdd761b4820386407002fc4a3a5441d94b8af79a6a9efae"
+    },
+    {
+      "case": "KR-WEB-09",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/KR-WEB-09/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 7,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 7,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 7,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071705Z-3708784/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071705Z-3708784/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "fidelity",
+        "response-clarity",
+        "scientific-rewrite",
+        "zh"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/KR-WEB-09/files/baseline-comparison.md",
+          "sha256": "a2903fa03d90415b59237490aede4e05658a0e98f32c0545be0ea02eb28cce29"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/KR-WEB-09/CHAT_FULL.md",
+      "chat_sha256": "1436faabc4d67e8df19acbadbd2645b57dc986e0f1df14590952aa65379c9de1"
+    },
+    {
+      "case": "RW-WEB-01",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/RW-WEB-01/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 4,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 4,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071856Z-3710923/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071856Z-3710923/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "response-clarity"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/RW-WEB-01/files/回复.txt",
+          "sha256": "8e9484762cb033d2a7eb8915e797f4aaa49b712b2198ee498632b2a7c8bff74d"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/RW-WEB-01/CHAT_FULL.md",
+      "chat_sha256": "731d5ef4371cd0e165d2593a501c6d59dbe5743fb176390a8713ae0434ed65cf"
+    },
+    {
+      "case": "RW-WEB-02",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/RW-WEB-02/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 4,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 4,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071925Z-3713524/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T071925Z-3713524/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "response-clarity"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/RW-WEB-02/files/revised-answer.md",
+          "sha256": "8ac83a748c257129939947d44eda45beeeb189007461d8d6733d2bf2d67073a1"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/RW-WEB-02/CHAT_FULL.md",
+      "chat_sha256": "30778e47cce9ba85de107d9daa5e97f2fcbbe53175f3cea4bb868bd7a8c319c0"
+    },
+    {
+      "case": "RW-WEB-03",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/RW-WEB-03/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 7,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 7,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 7,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T072011Z-3715410/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T072011Z-3715410/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "response-clarity",
+        "zh"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/RW-WEB-03/files/功能开关与回滚.md",
+          "sha256": "8354edae49152c3430b2fc61e5867b6e58a9265f49cea769ede6eef57b0c9903"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/RW-WEB-03/CHAT_FULL.md",
+      "chat_sha256": "1b1eef57214ec191d3e8bb94219b4260ae39b839b80a19bdc55f8a51c6751586"
+    },
+    {
+      "case": "RW-WEB-04",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/RW-WEB-04/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 4,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 4,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T072112Z-3718779/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T072112Z-3718779/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "response-clarity",
+        "zh"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/RW-WEB-04/files/文件导入流程说明.md",
+          "sha256": "4db6a3b2c70a5f48c0f3ad467edab644e209ce91064f6aa1e745cc96d93cb0c0"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/RW-WEB-04/CHAT_FULL.md",
+      "chat_sha256": "4c55281c004218c29be61708ab35c073623bff35edc00d16a2cf752c8e5363fa"
+    },
+    {
+      "case": "RW-WEB-05",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/RW-WEB-05/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 4,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 4,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T072152Z-3721050/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T072152Z-3721050/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "zh"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/RW-WEB-05/files/评审流程建议.md",
+          "sha256": "939a51689b5e8d4d357090f744ea22c7048fd4977a38d352d429c7d5cbe2366c"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/RW-WEB-05/CHAT_FULL.md",
+      "chat_sha256": "06eef4d26820e33f5b3eae75ee281a5243745c0ae2b0f591c7b1a5e4272f53f5"
+    },
+    {
+      "case": "DEV-BRIDGE",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 4,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/DEV-BRIDGE/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 5,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 5,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 5,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T072247Z-3723776/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T072247Z-3723776/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 4,
+      "candidate_skill_reads": [
+        "fidelity",
+        "zh"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-BRIDGE/files/Bridge_Kit_0.11.1_使用与完成状态说明.md",
+          "sha256": "122a8470c64796af85c4f66ca8199ab0fbe08304fdd35e37f1cec3f712458a82"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-BRIDGE/CHAT_FULL.md",
+      "chat_sha256": "1ef45a3e0452db1e6aece8fe7d03333412f8f8365ed6babab69b9e088dd12264"
+    },
+    {
+      "case": "DEV-HANDOFF",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/DEV-HANDOFF/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 4,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 4,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T072756Z-3761695/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T072756Z-3761695/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "response-clarity",
+        "zh"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-HANDOFF/files/phase-c-explanation.md",
+          "sha256": "a513dcf5c2aca48a2b3ce1c395e5dfb106bb3cae6c6a299738d79a95d523e9e7"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-HANDOFF/CHAT_FULL.md",
+      "chat_sha256": "ebd63f5748e81435f210bbb70bb065eca357d61d06acb21c363148e98c11ff43"
+    },
+    {
+      "case": "DEV-LONG-MATH",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/DEV-LONG-MATH/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 5,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 5,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 5,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T072945Z-3774156/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T072945Z-3774156/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "response-clarity",
+        "zh"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-LONG-MATH/files/sensor-explanation.md",
+          "sha256": "8e3f3ec4606b0dd508a391f09f20292c7f90a3b05acbc296b93ddc44d8c0d070"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-LONG-MATH/CHAT_FULL.md",
+      "chat_sha256": "ee1f0faae06b9231d0cc52bb813a5c52504a5eec5371b7da1014daa5ed8fd5a9"
+    },
+    {
+      "case": "DEV-ZH-DOCUMENT",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/DEV-ZH-DOCUMENT/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 5,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 5,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 5,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T070808Z-3683051/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T070808Z-3683051/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "response-clarity",
+        "zh"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-ZH-DOCUMENT/files/当前状态.md",
+          "sha256": "8765b73af72b9efa2fb51dc6a89e4b11c55b8e761204dd2ce839d8e7f04319dc"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-ZH-DOCUMENT/CHAT_FULL.md",
+      "chat_sha256": "3c01ecd2110317098b947aa11fba74e9645cb01f65d32f614f5ae339b00d9802"
+    },
+    {
+      "case": "DEV-STRUCTURAL-DOCUMENT",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 4,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/DEV-STRUCTURAL-DOCUMENT/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 4,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 4,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T073206Z-3785979/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T073206Z-3785979/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 4,
+      "candidate_skill_reads": [
+        "fidelity",
+        "scientific-rewrite",
+        "zh"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-STRUCTURAL-DOCUMENT/files/CLEAR_WRITING_INVOCATION_POLICY_V0_2_ZH.md",
+          "sha256": "9d89035bf311e04bf935ff89a50557cc81f7c6df6c5aa9bb65fb3f9ee835988e"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-STRUCTURAL-DOCUMENT/CHAT_FULL.md",
+      "chat_sha256": "59d3d83cfc8303c4693b24683b18ac33d574f5f10934579064e08d43cea44ea0"
+    },
+    {
+      "case": "DEV-EN-SCIENTIFIC",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/DEV-EN-SCIENTIFIC/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 4,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 4,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T074005Z-3801053/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T074005Z-3801053/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "fidelity",
+        "sci"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-EN-SCIENTIFIC/files/results.md",
+          "sha256": "d0973f08abc5f0bb3d89add476e765a803cb22ca1e4d859f9e1984179123397e"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-EN-SCIENTIFIC/CHAT_FULL.md",
+      "chat_sha256": "c589bdf6ec93051df0f72d85a4bdb4a842ad531eeae78088358c9ced2dd64d98"
+    },
+    {
+      "case": "DEV-UI",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/DEV-UI/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 4,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 4,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T074041Z-3802892/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T074041Z-3802892/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "product-ui-copy"
+      ],
+      "artifacts": [
+        {
+          "path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-UI/files/ui-copy.md",
+          "sha256": "4782ed4c43a6976ad3c7c346dd6e6e2b03f90d97a5266e341cac8bf824ddb0a9"
+        }
+      ],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-UI/CHAT_FULL.md",
+      "chat_sha256": "8065a960af9532b700a25acc9bc076f57b55fdcc25d516c0ee116d77449823af"
+    },
+    {
+      "case": "DEV-EXACT",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 1,
+      "product_messages": 1,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/DEV-EXACT/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "completed_product_turns": 1,
+      "agent_message_count": 1,
+      "exact_only_protection": "PASS; installed, no skill consumption, wrapper exit 1 retained",
+      "candidate_skill_reads": [],
+      "artifacts": [],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-EXACT/CHAT_FULL.md",
+      "chat_sha256": "e6297c49a1f73b2c7ef10369293329a93f65f84eca70d9de6cc1f852aa59943d"
+    },
+    {
+      "case": "DEV-MIXED",
+      "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+      "attempt": 1,
+      "helper_exit": 0,
+      "product_messages": 2,
+      "actual_model": "gpt-6-astra",
+      "actual_reasoning_effort": "None",
+      "runtime_cli": "0.153.4",
+      "explicit_model_arguments": false,
+      "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/DEV-MIXED/attempt-1",
+      "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+      "receipt": {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 6,
+          "proven": true
+        },
+        "actual_consumption_by_plugin": {
+          "writing-style": {
+            "event_type": "item.started",
+            "line_index": 6,
+            "proven": true
+          }
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "plugin_id": "writing-style@ai-skills-candidate",
+        "plugins": [
+          {
+            "actual_consumption": {
+              "event_type": "item.started",
+              "line_index": 6,
+              "proven": true
+            },
+            "add_payload": {
+              "authPolicy": "ON_INSTALL",
+              "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+              "marketplaceName": "ai-skills-candidate",
+              "name": "writing-style",
+              "pluginId": "writing-style@ai-skills-candidate",
+              "version": "0.6"
+            },
+            "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+            "name": "writing-style",
+            "plugin_id": "writing-style@ai-skills-candidate"
+          }
+        ],
+        "runtime_version": "codex-cli 0.153.4",
+        "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T074213Z-3806008/child.stderr",
+        "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T074213Z-3806008/child.stdout.jsonl",
+        "writable_dirs": []
+      },
+      "completed_product_turns": 1,
+      "agent_message_count": 2,
+      "candidate_skill_reads": [
+        "response-clarity"
+      ],
+      "artifacts": [],
+      "chat_path": "results/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/outputs/DEV-MIXED/CHAT_FULL.md",
+      "chat_sha256": "c53428b5b784ed602a6ab6fe0a1bf1b47f9f00248a65cb4ce2f5086bb97933a5"
+    }
+  ],
+  "counting_note": "product_messages is historical field name for agent messages including commentary; each successful case has exactly one completed model turn",
+  "expected_cases": 22,
+  "quality": "SEE_INDEPENDENT_QUALITY_REVIEW"
+}

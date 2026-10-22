@@ -1,13 +1,13 @@
 {
   "task": "clear-writing--single-entry-artifact-finalization",
   "tracking": "#13",
-  "stage": "PLANNER_G5_MODEL_BINDING_AMENDMENT_PENDING_ORIGINAL_CRITIC",
+  "stage": "CODE_IMPLEMENTATION_COMPLETE",
   "plan": "docs/design/clear-writing/CLEAR_WRITING_0_6_PRODUCT_AND_EXECUTION_PLAN_V0_4_2026-10-22.md",
   "goal": "docs/goals/CLEAR_WRITING_0_6_UNIFIED_DELIVERY_GOAL_V0_4_2026-10-22.md",
   "runbook": "docs/design/clear-writing/CLEAR_WRITING_0_6_GATE_RUNBOOK_V0_4_2026-10-22.md",
   "kickoff_draft": "docs/operations/prompts/CLEAR_WRITING_0_6_KICKOFF_DRAFT_V0_4_2026-10-22.md",
   "critic_prompt": "docs/design/clear-writing/CLEAR_WRITING_0_6_CODEX_G5_MODEL_BINDING_CRITIC_PROMPT_V0_1_2026-10-22.md",
-  "package_identity_rule": "Use the exact commit supplied in the next Critic handoff; this file does not self-hash.",
+  "package_identity_rule": "Final product source cee207d3fa83ad4571f94774f3896798d837a5ca; subsequent evidence commits do not change product identity.",
   "supersedes_product_semantics_of": "ca018937b3528b8cc62ace9c02e33c1d5f84fde6",
   "historical_candidate": "079bd7987bb33d624d244feb415327d5cf2343d8",
   "historical_candidate_release_eligible": false,
@@ -24,7 +24,7 @@
     "Planner/Critic role contracts",
     "AI Research Stack Project setting"
   ],
-  "next_handoff": "INDEPENDENT_CRITIC",
+  "next_handoff": "PHASE_C",
   "project_pending": {
     "Status": "DOING",
     "Area": "writing-style",
@@ -37,19 +37,23 @@
   "explicit_failure_source": "EXISTING_0_5_RESPONSE_CLARITY_LATE_KNOWN_RESULT_FLOW_AND_MISSING_PREWRITE_ARTIFACT_QUALITY_ANCHOR",
   "critical_runtime_uncertainty": "NORMAL_GPT_WEB_FULL_ROUTE_HELPER_AND_GITHUB_SELECTION_SAME_CHAT_NOT_YET_DIRECTLY_VERIFIED; PRESERVE_G3_NO_DOWNGRADE",
   "user_decision_required": false,
-  "current_stage": "PLANNER_UNAPPROVED_QUALITY_WORKFLOW_REVISION",
+  "current_stage": "CODE_IMPLEMENTATION_COMPLETE",
   "model_binding_amendment": {
     "historical_model": "gpt-6.1-sol",
     "historical_reasoning_effort": "high",
     "historical_model_required_for_new_codex_g5": false,
-    "codex_model_resolution": "current canonical candidate replay isolated CLI & ChatGPT account usable configuration, frozen before first product answer",
-    "codex_model_proof": "successful same-auth CLI inference needed; catalog or arg parsing not enough",
+    "codex_model_resolution": "fixed repo-local CLI normal default; no model or effort arguments; observed gpt-6-astra / None",
+    "codex_model_proof": "22 first product responses at 157725b9 plus installed final-helper validation at cee207d3",
     "codex_model_same_batch_frozen": true,
     "codex_product_fail_no_model_reroll": true,
     "web_model": "GPT-5.6 Sol (unchanged)",
-    "observed_auth_error": "user-provided HTTP 400, no product answer; infrastructure, not product fail",
+    "observed_auth_error": "historical explicit-model HTTP 400 only; superseded by current user default-entry decision",
     "current_branch_implementation_before_amendment": "2f35ce839a42f81f39cff55f577f44a10206e5a7",
     "product_gates_changed": false,
     "code_changes_current_round": false
-  }
+  },
+  "final_candidate_source": "cee207d3fa83ad4571f94774f3896798d837a5ca",
+  "codex_candidate_replay": "PASS",
+  "implementation_review": "PASS",
+  "phase_c_handoff": "results/clear-writing--single-entry-artifact-finalization/v0.4/PHASE_C_HANDOFF.md"
 }

@@ -1,0 +1,61 @@
+{
+  "candidate_commit": "cee207d3fa83ad4571f94774f3896798d837a5ca",
+  "actual_consumption": {
+    "event_type": "item.started",
+    "line_index": 4,
+    "proven": true
+  },
+  "plugin_id": "writing-style@ai-skills-candidate",
+  "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+  "receipt": {
+    "actual_consumption": {
+      "event_type": "item.started",
+      "line_index": 4,
+      "proven": true
+    },
+    "actual_consumption_by_plugin": {
+      "writing-style": {
+        "event_type": "item.started",
+        "line_index": 4,
+        "proven": true
+      }
+    },
+    "add_payload": {
+      "authPolicy": "ON_INSTALL",
+      "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+      "marketplaceName": "ai-skills-candidate",
+      "name": "writing-style",
+      "pluginId": "writing-style@ai-skills-candidate",
+      "version": "0.6"
+    },
+    "candidate_commit": "cee207d3fa83ad4571f94774f3896798d837a5ca",
+    "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+    "plugin_id": "writing-style@ai-skills-candidate",
+    "plugins": [
+      {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "name": "writing-style",
+        "plugin_id": "writing-style@ai-skills-candidate"
+      }
+    ],
+    "runtime_version": "codex-cli 0.153.4",
+    "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T075813Z-3856429/child.stderr",
+    "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T075813Z-3856429/child.stdout.jsonl",
+    "writable_dirs": []
+  },
+  "durable_raw": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/ISSUE_LANGUAGE_REVIEW_RUN",
+  "scope": "Public Issue progress copy only; separate from 22 development cases; no GitHub mutation by child."
+}

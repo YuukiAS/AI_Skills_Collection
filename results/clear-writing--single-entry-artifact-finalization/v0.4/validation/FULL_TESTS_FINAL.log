@@ -1,0 +1,26 @@
+................................................build failed: source/output/archive/receipt parity failure
+build failed: output contains stale or unrelated files; choose a clean task-owned output directory
+.............................................................................................................wrote /overflow/htzhu/mingcheng_new/AI_Skills_Collection/palette/gallery.html
+wrote /overflow/htzhu/mingcheng_new/AI_Skills_Collection/palette/gallery-index.json
+................................................................................................................................................................................................................................................
+----------------------------------------------------------------------
+Ran 397 tests in 160.720s
+
+OK
+build: PASS archive_sha256=775432e7d98ca975d17cec2c672a72aaabd6d24b9d19d46d07c80bb27e749aa5
+build: PASS archive_sha256=775432e7d98ca975d17cec2c672a72aaabd6d24b9d19d46d07c80bb27e749aa5
+check: PASS archive_sha256=775432e7d98ca975d17cec2c672a72aaabd6d24b9d19d46d07c80bb27e749aa5
+prepare-restore: PASS archive_sha256=696a7410b42a78f8b4a078271c13d49613e729fac21071c8e3ce119deb4b5da4
+prepare-restore: PASS archive_sha256=696a7410b42a78f8b4a078271c13d49613e729fac21071c8e3ce119deb4b5da4
+prepare-restore: PASS archive_sha256=696a7410b42a78f8b4a078271c13d49613e729fac21071c8e3ce119deb4b5da4
+prepare-restore: PASS archive_sha256=696a7410b42a78f8b4a078271c13d49613e729fac21071c8e3ce119deb4b5da4
+prepare-restore: PASS archive_sha256=696a7410b42a78f8b4a078271c13d49613e729fac21071c8e3ce119deb4b5da4
+prepare-restore: PASS archive_sha256=696a7410b42a78f8b4a078271c13d49613e729fac21071c8e3ce119deb4b5da4
+prepare-restore: PASS archive_sha256=696a7410b42a78f8b4a078271c13d49613e729fac21071c8e3ce119deb4b5da4
+prepare-restore: PASS archive_sha256=696a7410b42a78f8b4a078271c13d49613e729fac21071c8e3ce119deb4b5da4
+prepare-restore: PASS archive_sha256=696a7410b42a78f8b4a078271c13d49613e729fac21071c8e3ce119deb4b5da4
+Collected 13 actual artifact files, independently of chat completion receipts.
+created /tmp/tmptudnnxri/local-overrides.toml
+site: cuhk-central-cluster
+next: ai-skills environment doctor --site cuhk-central-cluster --local-override /tmp/tmptudnnxri/local-overrides.toml
+next: ai-skills environment plan --site cuhk-central-cluster --local-override /tmp/tmptudnnxri/local-overrides.toml

@@ -1,0 +1,119 @@
+{
+  "candidate_commit": "2f35ce839a42f81f39cff55f577f44a10206e5a7",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "formal_gates": "NOT_RUN",
+  "product_responses": 0,
+  "cases": [
+    {
+      "case": "CW-CONTROL-01",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "CW-CONTROL-02",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "CW-CONTROL-03",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "CW-CONTROL-04",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "KR-WEB-06",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "KR-WEB-07",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "KR-WEB-08",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "KR-WEB-09",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "RW-WEB-01",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "RW-WEB-02",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "RW-WEB-03",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "RW-WEB-04",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "RW-WEB-05",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "DEV-BRIDGE",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "DEV-HANDOFF",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "DEV-LONG-MATH",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "DEV-ZH-DOCUMENT",
+      "status": "INFRASTRUCTURE_FAILURE_HTTP400_NO_PRODUCT_RESPONSE",
+      "quality": "NOT_ASSESSED_NO_PRODUCT_ARTIFACT"
+    },
+    {
+      "case": "DEV-STRUCTURAL-DOCUMENT",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "DEV-EN-SCIENTIFIC",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "DEV-UI",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "DEV-EXACT",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    },
+    {
+      "case": "DEV-MIXED",
+      "status": "NOT_RUN",
+      "quality": "NOT_RUN"
+    }
+  ]
+}

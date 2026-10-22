@@ -1,0 +1,376 @@
+{
+  "candidate_commit": "2f35ce839a42f81f39cff55f577f44a10206e5a7",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "formal_gates": "NOT_RUN",
+  "policy": "first valid product response retained; no product reroll",
+  "cases": [
+    {
+      "case": "CW-CONTROL-01",
+      "request": "CW-CONTROL-01_TASK.md",
+      "inputs": [
+        "CW-CONTROL-01_INPUT.md"
+      ],
+      "origin": "known-regression/INPUT_MANIFEST.json (unchanged fixture bytes)",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/CW-CONTROL-01.md",
+      "files": [
+        "CW-CONTROL-01_TASK.md",
+        "CW-CONTROL-01_INPUT.md"
+      ],
+      "hashes": {
+        "CW-CONTROL-01_TASK.md": "aca45406c7025d67fcdd8735fefedcab09419d5989e37ba9892019f77d9e5b82",
+        "CW-CONTROL-01_INPUT.md": "ea4b20c20668ea0a6beaf2435bccf3e73d8786a8af813fd06fd3d9edf046f9d4"
+      }
+    },
+    {
+      "case": "CW-CONTROL-02",
+      "request": "CW-CONTROL-02_TASK.md",
+      "inputs": [
+        "CW-CONTROL-02_INPUT.md"
+      ],
+      "origin": "known-regression/INPUT_MANIFEST.json (unchanged fixture bytes)",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/CW-CONTROL-02.md",
+      "files": [
+        "CW-CONTROL-02_TASK.md",
+        "CW-CONTROL-02_INPUT.md"
+      ],
+      "hashes": {
+        "CW-CONTROL-02_TASK.md": "c4b36186901886ddf6f7757f03a62b143d3a4f6ae0ce3bc35eb8a808af40ed4b",
+        "CW-CONTROL-02_INPUT.md": "d0e6d3e6f98383ce3efbdadc54ddb436e577b398858526b94e1a6e7a2fbbaf41"
+      }
+    },
+    {
+      "case": "CW-CONTROL-03",
+      "request": "CW-CONTROL-03_TASK.md",
+      "inputs": [
+        "CW-CONTROL-03_INPUT.md"
+      ],
+      "origin": "known-regression/INPUT_MANIFEST.json (unchanged fixture bytes)",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/CW-CONTROL-03.md",
+      "files": [
+        "CW-CONTROL-03_TASK.md",
+        "CW-CONTROL-03_INPUT.md"
+      ],
+      "hashes": {
+        "CW-CONTROL-03_TASK.md": "b6233e5466f1c82742ef4703a6ff34a2fdade8ed49c6108103330167b9bf4f75",
+        "CW-CONTROL-03_INPUT.md": "da6b04042afd7f89ee9326bea2e74cd97467bf5e462d616097a2deacd72e7350"
+      }
+    },
+    {
+      "case": "CW-CONTROL-04",
+      "request": "CW-CONTROL-04_TASK.md",
+      "inputs": [
+        "CW-CONTROL-04_INPUT.md"
+      ],
+      "origin": "known-regression/INPUT_MANIFEST.json (unchanged fixture bytes)",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/CW-CONTROL-04.md",
+      "files": [
+        "CW-CONTROL-04_TASK.md",
+        "CW-CONTROL-04_INPUT.md"
+      ],
+      "hashes": {
+        "CW-CONTROL-04_TASK.md": "6346234e8814b0085f0f2a378a0b3b6b53971f6b414100021d811e637792cca2",
+        "CW-CONTROL-04_INPUT.md": "682562536230a8f20e2189f4986a7329f29e523a2ff6a6dcf372d9ca7747ed20"
+      }
+    },
+    {
+      "case": "KR-WEB-06",
+      "request": "KR-WEB-06_TASK.md",
+      "inputs": [
+        "KR-WEB-06_INPUT.md"
+      ],
+      "origin": "known-regression/INPUT_MANIFEST.json (unchanged fixture bytes)",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/KR-WEB-06.md",
+      "files": [
+        "KR-WEB-06_TASK.md",
+        "KR-WEB-06_INPUT.md"
+      ],
+      "hashes": {
+        "KR-WEB-06_TASK.md": "95d2eb05a40076c16d08eb5ed57d359a59ea68c0fb131db38e4f56947eea7c27",
+        "KR-WEB-06_INPUT.md": "495d9ee7a4dc2b5aacd730c66c231efaaa5f1e0f30b3bdef2a9d2b827824a225"
+      }
+    },
+    {
+      "case": "KR-WEB-07",
+      "request": "KR-WEB-07_TASK.md",
+      "inputs": [
+        "KR-WEB-07_INPUT.md"
+      ],
+      "origin": "known-regression/INPUT_MANIFEST.json (unchanged fixture bytes)",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/KR-WEB-07.md",
+      "files": [
+        "KR-WEB-07_TASK.md",
+        "KR-WEB-07_INPUT.md"
+      ],
+      "hashes": {
+        "KR-WEB-07_TASK.md": "3df2d7e94a210f0c8a3c639ff8dc056748710b983fb87a1623e0421cee994935",
+        "KR-WEB-07_INPUT.md": "008e52829a1865650fd3916d58e83bd440b49f2c6883dfc609a09e7ba8e99dcf"
+      }
+    },
+    {
+      "case": "KR-WEB-08",
+      "request": "KR-WEB-08_TASK.md",
+      "inputs": [
+        "KR-WEB-08_INPUT.md"
+      ],
+      "origin": "known-regression/INPUT_MANIFEST.json (unchanged fixture bytes)",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/KR-WEB-08.md",
+      "files": [
+        "KR-WEB-08_TASK.md",
+        "KR-WEB-08_INPUT.md"
+      ],
+      "hashes": {
+        "KR-WEB-08_TASK.md": "ec47993242d501a6cea45c41876203c10667339af4ecd48c938f7c3da8b01361",
+        "KR-WEB-08_INPUT.md": "0ecb6701b657522662c9fc402c40ddf59f875232c2057039d30e7afab1220ed0"
+      }
+    },
+    {
+      "case": "KR-WEB-09",
+      "request": "KR-WEB-09_TASK.md",
+      "inputs": [
+        "KR-WEB-09_INPUT.md"
+      ],
+      "origin": "known-regression/INPUT_MANIFEST.json (unchanged fixture bytes)",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/KR-WEB-09.md",
+      "files": [
+        "KR-WEB-09_TASK.md",
+        "KR-WEB-09_INPUT.md"
+      ],
+      "hashes": {
+        "KR-WEB-09_TASK.md": "19bd3c6979c87e2beefd6ad328c3fab73fc9d35a07d2e0ec5ff57c4e02518d06",
+        "KR-WEB-09_INPUT.md": "5f206a2fb4afbc9ce2c505a32803e1e0ef16fa5b8e9b13cc653a007d8c9965cc"
+      }
+    },
+    {
+      "case": "RW-WEB-01",
+      "request": "RW-WEB-01_TASK.md",
+      "inputs": [
+        "RW-WEB-01_INPUT.md"
+      ],
+      "origin": "known-regression/INPUT_MANIFEST.json (unchanged fixture bytes)",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/RW-WEB-01.md",
+      "files": [
+        "RW-WEB-01_TASK.md",
+        "RW-WEB-01_INPUT.md"
+      ],
+      "hashes": {
+        "RW-WEB-01_TASK.md": "2ae60b5e0f5dd2db49aaebc665e62b4fe6a90d5eb1256627601d7ca933d99f88",
+        "RW-WEB-01_INPUT.md": "7227e027a73b03eb9288edf1e8b00e1c3aa7f2b3a167d5e6c83911174028ec15"
+      }
+    },
+    {
+      "case": "RW-WEB-02",
+      "request": "RW-WEB-02_TASK.md",
+      "inputs": [
+        "RW-WEB-02_INPUT.md"
+      ],
+      "origin": "known-regression/INPUT_MANIFEST.json (unchanged fixture bytes)",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/RW-WEB-02.md",
+      "files": [
+        "RW-WEB-02_TASK.md",
+        "RW-WEB-02_INPUT.md"
+      ],
+      "hashes": {
+        "RW-WEB-02_TASK.md": "15e7608cb398925a012334cbf51a8e1a5383f1e852de124ebeac1f05e229fc77",
+        "RW-WEB-02_INPUT.md": "7361ab550ba5b585e4de8f63f5eacfa30a420ceaecc01058f218a636b3225d4f"
+      }
+    },
+    {
+      "case": "RW-WEB-03",
+      "request": "RW-WEB-03_TASK.md",
+      "inputs": [
+        "RW-WEB-03_INPUT.md"
+      ],
+      "origin": "known-regression/INPUT_MANIFEST.json (unchanged fixture bytes)",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/RW-WEB-03.md",
+      "files": [
+        "RW-WEB-03_TASK.md",
+        "RW-WEB-03_INPUT.md"
+      ],
+      "hashes": {
+        "RW-WEB-03_TASK.md": "c3501fa3a43adb5ddebd1c6c0ae21f6417a85a7c315d7721e44a0f2b01d20e71",
+        "RW-WEB-03_INPUT.md": "c02849b3de097b6791f4fce80c944f24f015ed0fd4c0357922bbf9537e87358a"
+      }
+    },
+    {
+      "case": "RW-WEB-04",
+      "request": "RW-WEB-04_TASK.md",
+      "inputs": [
+        "RW-WEB-04_INPUT.md"
+      ],
+      "origin": "known-regression/INPUT_MANIFEST.json (unchanged fixture bytes)",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/RW-WEB-04.md",
+      "files": [
+        "RW-WEB-04_TASK.md",
+        "RW-WEB-04_INPUT.md"
+      ],
+      "hashes": {
+        "RW-WEB-04_TASK.md": "afd3773efa500db1fceaac128ed611a9ac3b9a62964921bd3132b232a45b4123",
+        "RW-WEB-04_INPUT.md": "4f9ac4dfd59de04c8dfbd237d750bd5b729e24b40dbdff6d5af3d067e52a577c"
+      }
+    },
+    {
+      "case": "RW-WEB-05",
+      "request": "RW-WEB-05_TASK.md",
+      "inputs": [
+        "RW-WEB-05_INPUT.md"
+      ],
+      "origin": "known-regression/INPUT_MANIFEST.json (unchanged fixture bytes)",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/RW-WEB-05.md",
+      "files": [
+        "RW-WEB-05_TASK.md",
+        "RW-WEB-05_INPUT.md"
+      ],
+      "hashes": {
+        "RW-WEB-05_TASK.md": "7bce90908de7651f4af08c38cefd2b96d2ce2302ffc175d2099a401f253dbdaa",
+        "RW-WEB-05_INPUT.md": "60779bd8726e9bf525710f1f9c1658e3898bbf9f95bf03121a8eb5b585ec56c1"
+      }
+    },
+    {
+      "case": "DEV-BRIDGE",
+      "request": "DEV-BRIDGE_TASK.md",
+      "inputs": [
+        "BRIDGE_README.md",
+        "BRIDGE_QUICKSTART.md",
+        "BRIDGE_CHANGELOG.md",
+        "BRIDGE_AGENTS.md"
+      ],
+      "origin": "approved v0.2/v0.3 prompts inherited by v0.4; local development only",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/DEV-BRIDGE.md",
+      "files": [
+        "DEV-BRIDGE_TASK.md",
+        "BRIDGE_README.md",
+        "BRIDGE_QUICKSTART.md",
+        "BRIDGE_CHANGELOG.md",
+        "BRIDGE_AGENTS.md"
+      ],
+      "hashes": {
+        "DEV-BRIDGE_TASK.md": "e6226677d4d0d9966c91454c9ea9962246fec4626d4d73952c3823d55b420566",
+        "BRIDGE_README.md": "91c92cefc36b8ba19245473d0443d302b6e850d332fbd88ed6ef5f55d5807500",
+        "BRIDGE_QUICKSTART.md": "05de403ba64929833a70b82871cc88c76441a1ac64f73320b2486ecd8b70c259",
+        "BRIDGE_CHANGELOG.md": "d321cdd668b2ee60b4904d1e641918c9afca1918dd74fb46c276587be321fb8b",
+        "BRIDGE_AGENTS.md": "d45eeccfa75929e1bc2b33e30cb22230cfaee62951099098b37e1efb4b78128c"
+      }
+    },
+    {
+      "case": "DEV-HANDOFF",
+      "request": "DEV-HANDOFF_TASK.md",
+      "inputs": [
+        "DEV-HANDOFF_SOURCE.md"
+      ],
+      "origin": "approved v0.2/v0.3 prompts inherited by v0.4; local development only",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/DEV-HANDOFF.md",
+      "files": [
+        "DEV-HANDOFF_TASK.md",
+        "DEV-HANDOFF_SOURCE.md"
+      ],
+      "hashes": {
+        "DEV-HANDOFF_TASK.md": "18d7210d6138d9d3829b6d7c0f39ad6a69ed27f44a6721e46940e6297cb805f7",
+        "DEV-HANDOFF_SOURCE.md": "60274504e2043fab1c3d522f9e7a7e2db92383836c2c60de70bc1cc3e44c9790"
+      }
+    },
+    {
+      "case": "DEV-LONG-MATH",
+      "request": "DEV-LONG-MATH_TASK.md",
+      "inputs": [],
+      "origin": "approved v0.2/v0.3 prompts inherited by v0.4; local development only",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/DEV-LONG-MATH.md",
+      "files": [
+        "DEV-LONG-MATH_TASK.md"
+      ],
+      "hashes": {
+        "DEV-LONG-MATH_TASK.md": "55df8dd18e46f0cd160a3c19c0942b137b49851461434a6fdb5a1a64e08bbeaa"
+      }
+    },
+    {
+      "case": "DEV-ZH-DOCUMENT",
+      "request": "DEV-ZH-DOCUMENT_TASK.md",
+      "inputs": [],
+      "origin": "approved v0.2/v0.3 prompts inherited by v0.4; local development only",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/DEV-ZH-DOCUMENT.md",
+      "files": [
+        "DEV-ZH-DOCUMENT_TASK.md"
+      ],
+      "hashes": {
+        "DEV-ZH-DOCUMENT_TASK.md": "155b39c4b261014947bc3af18d9454f719a119a1438cac56b7b48441c0216961"
+      }
+    },
+    {
+      "case": "DEV-STRUCTURAL-DOCUMENT",
+      "request": "DEV-STRUCTURAL-DOCUMENT_TASK.md",
+      "inputs": [
+        "DEV-STRUCTURAL-DOCUMENT_SOURCE.md"
+      ],
+      "origin": "approved v0.2/v0.3 prompts inherited by v0.4; local development only",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/DEV-STRUCTURAL-DOCUMENT.md",
+      "files": [
+        "DEV-STRUCTURAL-DOCUMENT_TASK.md",
+        "DEV-STRUCTURAL-DOCUMENT_SOURCE.md"
+      ],
+      "hashes": {
+        "DEV-STRUCTURAL-DOCUMENT_TASK.md": "f4b3ea1a665857556c68b8de20834f7d7cf878f59b39c08041adad65dfe4514c",
+        "DEV-STRUCTURAL-DOCUMENT_SOURCE.md": "45766584319e84c3fd20e02da2349a880a4e67fca59024c54cb00fc973759640"
+      }
+    },
+    {
+      "case": "DEV-EN-SCIENTIFIC",
+      "request": "DEV-EN-SCIENTIFIC_TASK.md",
+      "inputs": [
+        "DEV-EN-SCIENTIFIC_INPUT.md"
+      ],
+      "origin": "approved v0.2/v0.3 prompts inherited by v0.4; local development only",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/DEV-EN-SCIENTIFIC.md",
+      "files": [
+        "DEV-EN-SCIENTIFIC_TASK.md",
+        "DEV-EN-SCIENTIFIC_INPUT.md"
+      ],
+      "hashes": {
+        "DEV-EN-SCIENTIFIC_TASK.md": "a191fcef173d07b512574ed8d2ba729bd2aa8986fc291347a1cf19dfd95db81f",
+        "DEV-EN-SCIENTIFIC_INPUT.md": "6d4ae701e35f7898d874a752d7852c959602efdfc7d31942d1d596f939ae1ed1"
+      }
+    },
+    {
+      "case": "DEV-UI",
+      "request": "DEV-UI_TASK.md",
+      "inputs": [
+        "DEV-UI_INPUT.md"
+      ],
+      "origin": "approved v0.2/v0.3 prompts inherited by v0.4; local development only",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/DEV-UI.md",
+      "files": [
+        "DEV-UI_TASK.md",
+        "DEV-UI_INPUT.md"
+      ],
+      "hashes": {
+        "DEV-UI_TASK.md": "c96bd35195b944972b8496a3e9ca33d440fc6e55d6cc049cdfaf3ca4c28bc1d1",
+        "DEV-UI_INPUT.md": "5691e8aff8524f79f04b6af001c1db894d2a5737d02cfb184d5d0cd09a53e51c"
+      }
+    },
+    {
+      "case": "DEV-EXACT",
+      "request": "DEV-EXACT_TASK.md",
+      "inputs": [],
+      "origin": "approved v0.2/v0.3 prompts inherited by v0.4; local development only",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/DEV-EXACT.md",
+      "files": [
+        "DEV-EXACT_TASK.md"
+      ],
+      "hashes": {
+        "DEV-EXACT_TASK.md": "1e437508920a4a3e86693b2fec7e1cd476736e4dd88b6e1261a1c4d3661bd1d0"
+      }
+    },
+    {
+      "case": "DEV-MIXED",
+      "request": "DEV-MIXED_TASK.md",
+      "inputs": [],
+      "origin": "approved v0.2/v0.3 prompts inherited by v0.4; local development only",
+      "task": "results/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/tasks/DEV-MIXED.md",
+      "files": [
+        "DEV-MIXED_TASK.md"
+      ],
+      "hashes": {
+        "DEV-MIXED_TASK.md": "121a0070270ebd4d026a3a8dcef5163d9a5e64b4b5e68a62b92585653d3dbf15"
+      }
+    }
+  ]
+}

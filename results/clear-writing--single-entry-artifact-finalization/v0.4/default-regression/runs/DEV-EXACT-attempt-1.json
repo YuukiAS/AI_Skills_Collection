@@ -1,0 +1,13 @@
+{
+  "case": "DEV-EXACT",
+  "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+  "attempt": 1,
+  "helper_exit": 1,
+  "product_messages": 1,
+  "actual_model": "gpt-6-astra",
+  "actual_reasoning_effort": "None",
+  "runtime_cli": "0.153.4",
+  "explicit_model_arguments": false,
+  "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/DEV-EXACT/attempt-1",
+  "quality": "PENDING_FULL_ARTIFACT_REVIEW"
+}

@@ -1,0 +1,133 @@
+{
+  "assembly": {
+    "bundle_count": 9,
+    "ok": true
+  },
+  "candidate_sha256": "9d89035bf311e04bf935ff89a50557cc81f7c6df6c5aa9bb65fb3f9ee835988e",
+  "created_at": "2026-10-22T07:54:25Z",
+  "exact_verification": {
+    "exact_item_count": 20,
+    "ok": true
+  },
+  "external_api_call_count": 0,
+  "fixed_size_splitter_used": false,
+  "host_codex_owned_generation": true,
+  "meaning_map": {
+    "exact_item_count": 20,
+    "meaning_count": 16,
+    "ok": true,
+    "source_anchor_count": 182,
+    "source_context_item_count": 0
+  },
+  "paid_generation_used": false,
+  "private_plaintext_committed": false,
+  "reader_facing_citation_markup": {
+    "ok": true,
+    "raw_citation_markup_count": 0
+  },
+  "reader_facing_formula_rendering": {
+    "formula_rendering_issue_count": 0,
+    "ok": true
+  },
+  "reader_facing_internal_frame": {
+    "internal_workflow_leak_count": 0,
+    "ok": true,
+    "protected_technical_identity_matches": [
+      {
+        "kind": "commit_sha",
+        "literal": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+        "source_authority": "src-002"
+      },
+      {
+        "kind": "commit_sha",
+        "literal": "1dbcac9666a0c5f69edf538b25f7d7c89bbb2bac",
+        "source_authority": "src-002"
+      },
+      {
+        "kind": "commit_sha",
+        "literal": "8e01bb693e6b8e6285f1acf0a49a85f3419cd442",
+        "source_authority": "src-002"
+      },
+      {
+        "kind": "commit_sha",
+        "literal": "fd7a1578a5042a46a55c5b638f6d550655b1096b",
+        "source_authority": "src-002"
+      },
+      {
+        "kind": "commit_sha",
+        "literal": "fd0ad0603309fae52b3af0f9f7cdd7f31adea4b4",
+        "source_authority": "src-002"
+      },
+      {
+        "kind": "commit_sha",
+        "literal": "1f905d294c3c2e5b0951c9d5e818c285d236cef7",
+        "source_authority": "user_prompt_source_ref"
+      },
+      {
+        "kind": "process_review_label",
+        "literal": "Planner",
+        "source_authority": "src-182"
+      },
+      {
+        "kind": "process_review_label",
+        "literal": "Reviewer",
+        "source_authority": "src-116"
+      },
+      {
+        "kind": "process_review_label",
+        "literal": "Planner",
+        "source_authority": "src-182"
+      },
+      {
+        "kind": "process_review_label",
+        "literal": "Reviewer",
+        "source_authority": "src-116"
+      },
+      {
+        "kind": "process_review_label",
+        "literal": "Planner",
+        "source_authority": "src-182"
+      },
+      {
+        "kind": "process_review_label",
+        "literal": "Planner",
+        "source_authority": "src-182"
+      },
+      {
+        "kind": "process_review_label",
+        "literal": "Planner",
+        "source_authority": "src-182"
+      }
+    ]
+  },
+  "reader_plan": {
+    "bundle_count": 4,
+    "excluded_source_context_item_count": 0,
+    "ok": true,
+    "owned_meaning_count": 16,
+    "reader_disposition_count": 16
+  },
+  "realization_packet_count": 4,
+  "repair_packet_count": 0,
+  "requires_openai_api_key": false,
+  "route_selection": {
+    "ok": true,
+    "ordinary_user_prompt": true,
+    "selected_route": "scientific-rewrite",
+    "selector_owner": "writing-style"
+  },
+  "runtime": "scientific-rewrite.meaning-realization.v2",
+  "schema": "SCIENTIFIC_REWRITE_HEAVY_ROUTE_RECEIPT_V2",
+  "seed_templates_used_for_realization": false,
+  "semantic_audit": {
+    "finding_count": 0,
+    "ok": true,
+    "reader_disposition_finding_count": 0
+  },
+  "source_copy_fallback_used": false,
+  "source_sha256": "45766584319e84c3fd20e02da2349a880a4e67fca59024c54cb00fc973759640",
+  "standalone_reader_frame": {
+    "ok": true,
+    "source_process_frame_count": 0
+  }
+}

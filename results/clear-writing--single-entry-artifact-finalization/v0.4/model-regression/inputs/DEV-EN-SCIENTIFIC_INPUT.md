@@ -1,0 +1,1 @@
+Our results appear to perhaps suggest that the proposed method may be beneficial, although this should not be over-interpreted. Across three prespecified seeds, the mean Dice increased from 0.781 to 0.794, while HD95 changed from 8.2 mm to 7.9 mm. No external cohort was evaluated.

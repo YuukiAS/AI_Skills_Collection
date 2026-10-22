@@ -1,0 +1,14 @@
+{
+  "source_commit": "cee207d3fa83ad4571f94774f3896798d837a5ca",
+  "full_tests": "397/397 PASS",
+  "test_log_sha256": "70e1378dc7f00121ffeeddbeaa01d2776ce8949e4e2884132c7a1563e25648ce",
+  "full_test_log": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/FULL_TESTS_FINAL_CANDIDATE.log",
+  "ci_run": 39743659101,
+  "source_generated_support_parity": "PASS",
+  "deterministic_zip": "PASS",
+  "all_distribution_files_bound": true,
+  "final_candidate_frozen": true,
+  "implementation_review": "PASS",
+  "product_review": "22/22 PASS (known local development only)",
+  "public_full_test_log": "results/clear-writing--single-entry-artifact-finalization/v0.4/validation/FULL_TESTS_FINAL.log"
+}

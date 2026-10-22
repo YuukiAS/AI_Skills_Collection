@@ -1,0 +1,49 @@
+{
+  "approved_package": "48c42f89d23ba168e2d2045034a7f7117c2e0448",
+  "task": "clear-writing--single-entry-artifact-finalization",
+  "historical_run": "20261020T040240Z-d4023c2f186e",
+  "historical_log_sha256": "f4e118aa1ca87c6b8ac2cc8c6b2e0dac5cb28fccc5b3d2d1eaed8ac4ab626f2c",
+  "frozen_original_model": "gpt-6.1-sol",
+  "frozen_original_reasoning_effort": "high",
+  "current_user_model_matches_original": true,
+  "web_model": "GPT-5.6 Sol",
+  "candidate_replay_helper_sha256": "3fb0e1e56e629c7f2bf3832bc3c165a5e6f3dae845ee4d63c5ecac65f4c2fa53",
+  "candidate_replay_ignores_user_config": true,
+  "candidate_replay_model_override_supported": true,
+  "new_candidate_model_requests_sent": 1,
+  "pre_request_model_binding": "PROVEN_BY_REAL_CHILD_SESSION_CONFIGURED_EVENT",
+  "production_install_mutated": false,
+  "meaning": "Explicit configuration is proven in the real child; inference was rejected. No candidate product/quality PASS or formal Gate evidence.",
+  "implementation_commit": "2f35ce839a42f81f39cff55f577f44a10206e5a7",
+  "pre_request_install_failures": 1,
+  "configured_child_thread_id": "01a1624b-ba36-7600-8dd8-ef32c6242026",
+  "configured_child_model": "gpt-6.1-sol",
+  "configured_child_reasoning_effort": "high",
+  "model_provider": "openai",
+  "runtime_version": "codex-cli 0.153.4",
+  "model_request_result": "HTTP_400_UNSUPPORTED_MODEL_FOR_CHATGPT_ACCOUNT",
+  "model_request_error": "The 'gpt-6.1-sol' model is not supported when using Codex with a ChatGPT account.",
+  "product_responses": 0,
+  "candidate_actual_skill_consumption": false,
+  "candidate_removed_after_failure": true,
+  "production_identity_after": {
+    "plugin_id": "writing-style@yuukias-ai-skills",
+    "version": "0.5",
+    "enabled": true
+  },
+  "full_raw_run": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/DEV-ZH-DOCUMENT/FAILED_CHILD_RUN",
+  "raw_evidence": [
+    {
+      "path": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/DEV-ZH-DOCUMENT/FAILED_CHILD_RUN/child.stdout.jsonl",
+      "sha256": "410aec95eec882f0589b84264e2e671b42c0172db0b1ef80251039dad89b160e"
+    },
+    {
+      "path": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/DEV-ZH-DOCUMENT/FAILED_CHILD_RUN/child.stderr",
+      "sha256": "4a083e82da436dbed3791bf3f62aa3aba7a3585e7e34a2d57eaa02981c4a53e5"
+    },
+    {
+      "path": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/model-regression/DEV-ZH-DOCUMENT/FAILED_CHILD_RUN/plugin-add.json",
+      "sha256": "98ba6ebb6a1d434791220c531ec28d3925790fd9a2412013d9a370d3ececa172"
+    }
+  ]
+}

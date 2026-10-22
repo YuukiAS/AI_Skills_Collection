@@ -1,0 +1,14 @@
+{
+  "candidate_absent": true,
+  "production_snapshot": [
+    {
+      "pluginId": "writing-style@yuukias-ai-skills",
+      "enabled": true,
+      "marketplaceName": "yuukias-ai-skills",
+      "installedPath": null
+    }
+  ],
+  "version": "0.5",
+  "canonical_helper_finally_assertions": "same-name before/after equal after every invocation, including nonzero exact-consumption case",
+  "live_personal_plugin_mutated": false
+}

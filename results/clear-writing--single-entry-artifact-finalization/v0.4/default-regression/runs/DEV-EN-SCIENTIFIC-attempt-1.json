@@ -1,0 +1,62 @@
+{
+  "case": "DEV-EN-SCIENTIFIC",
+  "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+  "attempt": 1,
+  "helper_exit": 0,
+  "product_messages": 2,
+  "actual_model": "gpt-6-astra",
+  "actual_reasoning_effort": "None",
+  "runtime_cli": "0.153.4",
+  "explicit_model_arguments": false,
+  "raw_evidence": "private/exports/clear-writing--single-entry-artifact-finalization/v0.4/default-regression/DEV-EN-SCIENTIFIC/attempt-1",
+  "quality": "PENDING_FULL_ARTIFACT_REVIEW",
+  "receipt": {
+    "actual_consumption": {
+      "event_type": "item.started",
+      "line_index": 4,
+      "proven": true
+    },
+    "actual_consumption_by_plugin": {
+      "writing-style": {
+        "event_type": "item.started",
+        "line_index": 4,
+        "proven": true
+      }
+    },
+    "add_payload": {
+      "authPolicy": "ON_INSTALL",
+      "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+      "marketplaceName": "ai-skills-candidate",
+      "name": "writing-style",
+      "pluginId": "writing-style@ai-skills-candidate",
+      "version": "0.6"
+    },
+    "candidate_commit": "157725b909775e169926c449844301e772e50f08",
+    "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+    "plugin_id": "writing-style@ai-skills-candidate",
+    "plugins": [
+      {
+        "actual_consumption": {
+          "event_type": "item.started",
+          "line_index": 4,
+          "proven": true
+        },
+        "add_payload": {
+          "authPolicy": "ON_INSTALL",
+          "installedPath": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+          "marketplaceName": "ai-skills-candidate",
+          "name": "writing-style",
+          "pluginId": "writing-style@ai-skills-candidate",
+          "version": "0.6"
+        },
+        "installed_path": "/users/a/e/aereinh/.codex/plugins/cache/ai-skills-candidate/writing-style/0.6",
+        "name": "writing-style",
+        "plugin_id": "writing-style@ai-skills-candidate"
+      }
+    ],
+    "runtime_version": "codex-cli 0.153.4",
+    "stderr_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T074005Z-3801053/child.stderr",
+    "stdout_path": "/overflow/htzhu/mingcheng_new/AI_Skills_Collection/.local-runtime/candidate-plugin-replay/runs/20261022T074005Z-3801053/child.stdout.jsonl",
+    "writable_dirs": []
+  }
+}

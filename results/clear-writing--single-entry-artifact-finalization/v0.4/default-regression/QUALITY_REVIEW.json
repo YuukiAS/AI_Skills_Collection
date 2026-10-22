@@ -1,0 +1,38 @@
+{
+  "source_commit": "cee207d3fa83ad4571f94774f3896798d837a5ca",
+  "reviewer": "/root/implementation_review",
+  "implementation_review": "PASS",
+  "cases": {
+    "DEV-ZH-DOCUMENT": "PASS",
+    "CW-CONTROL-01": "PASS",
+    "CW-CONTROL-02": "PASS",
+    "CW-CONTROL-03": "PASS",
+    "CW-CONTROL-04": "PASS",
+    "KR-WEB-06": "PASS",
+    "KR-WEB-07": "PASS",
+    "KR-WEB-08": "PASS",
+    "KR-WEB-09": "PASS",
+    "RW-WEB-01": "PASS",
+    "RW-WEB-02": "PASS",
+    "RW-WEB-03": "PASS",
+    "RW-WEB-04": "PASS",
+    "RW-WEB-05": "PASS",
+    "DEV-BRIDGE": "PASS",
+    "DEV-HANDOFF": "PASS",
+    "DEV-LONG-MATH": "PASS",
+    "DEV-EN-SCIENTIFIC": "PASS",
+    "DEV-UI": "PASS",
+    "DEV-STRUCTURAL-DOCUMENT": "PASS",
+    "DEV-EXACT": "PASS",
+    "DEV-MIXED": "PASS"
+  },
+  "scope": "Known local development cases only; not ChatGPT Web or formal account gates",
+  "evidence_gaps": [
+    "KR-WEB-06: actual file_change and full independently inspected final document exist; cat command completed with exit 0 but JSONL aggregated_output is empty. Do not claim visible full readback body or invisible prewrite review; preserve this gap for formal gate owners.",
+    "RW-WEB-03: independently inspected full document exists; combined write/hash/cat command completed with exit 0 but aggregated_output is empty. Do not invent visible text/hash output or rerun the product.",
+    "DEV-EXACT: first product JSON is exact (86 characters); candidate installed, child turn completed, no Skill consumption. Wrapper exit 1 is retained and is not a generic replay success or loaded-skill bypass claim. Pure exact activation exemption applies.",
+    "DEV-STRUCTURAL-DOCUMENT: first full product quality PASS; historical helper mechanical failure closed by installed cee207d3 native validate-stage success using same original prompt/source/complete stage/first final. No redraft. Both earlier helper failures retained as history."
+  ],
+  "first_product_source": "157725b909775e169926c449844301e772e50f08",
+  "fixed_revalidation_source": "cee207d3fa83ad4571f94774f3896798d837a5ca"
+}

@@ -1,3 +1,23 @@
+# 最终独立实施验收：PASS
+
+最终目标：`cee207d3fa83ad4571f94774f3896798d837a5ca`。本轮独立只读审阅者：`/root/implementation_review`。
+
+审阅者实际读取原问题、完整来源、22 份首次聊天与最终文件，逐项内容质量 PASS；不是依关键词、加载或哈希打分。受影响重路线的原 574 行来源、337 行首次成稿及完整阶段包均已全文审阅，合法技术身份保留、权限/状态/数学及整体组织未见实质缺陷。
+
+独立发现并复核关闭两项真实 helper 缺陷：必要 SHA/角色身份误报，以及 validate-stage 独自去掉提示词末尾换行造成路由哈希不匹配。修复期间发现的目录前缀放行 P2 已收窄并新增负例；当前无剩余代码 finding。实际对最终三文件 CLI 小 diff 和此前完整 15 文件 patch 均已读完。原始 fixture 12 文件逐字比较回执也已读取，未归一化真实来源字节。
+
+审阅者实际核实最终安装运行的完整 17 条事件、installed Skill/helper、原生命令、完整 stdout/stderr、VALIDATION 与 STAGE_RECEIPT：原文件不变，helper exit 0，完整回执可见回读，182 anchors / 16 meanings / 20 exact / 4 realization packets / 9 assembly fragments。首次文稿 SHA-256 9d89035b…不变，未重生成产品。
+
+审阅者实际读取最终完整全仓日志，397 tests / 160.720 s / OK；负例中的 build failed 非测试失败。直接核实最终 CI `39743659101` exact 源四项 success，正式插件 0.5/enabled、无临候选残留。代码与 Codex 本地开发实施验收 **PASS**，无 remaining finding。
+
+身份沿用严格区分：22 首答绑定 157725b9，最终生产差异仅 canonical/generated helper；21 未受影响全文审查沿用，结构首次文稿在 cee207d3 正常安装入口闭合受影响机械链。EXACT 的 wrapper exit 1 和无 Skill 消费不改写为通用回放成功。KR-WEB-06/RW-WEB-03 空聚合日志缺口保留；不签正式 Web、账户恢复、release 或 G6。
+
+另有一次审阅者只读 Python 比对被 PreToolUse 的 `SLURM_CANCEL_DENIED reason=hook_runtime_failure` 拦截，原样重试一次仍失败；未执行、未改 hook。完整 patch 审查和实际原件比较回执随后已读取，未把被拦命令记作通过。
+
+完整质量结论见 `../default-regression/QUALITY_REVIEW.*`，最终分发、候选身份及 Phase C 交接已经独立全文核对通过；42 片实际重建为 185820 bytes，ZIP SHA-256 775432e7…，无剩余 finding。以下保留旧代码审查与入口诊断历史，不覆盖本节当前结论。
+
+---
+
 # 独立实施审查与执行入口诊断
 
 批准包：`48c42f89d23ba168e2d2045034a7f7117c2e0448`。

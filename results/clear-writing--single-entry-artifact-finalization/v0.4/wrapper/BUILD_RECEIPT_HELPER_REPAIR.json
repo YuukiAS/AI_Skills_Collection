@@ -1,0 +1,384 @@
+{
+  "file_allowlist": [
+    ".codex-plugin/plugin.json",
+    "assets/app-facing.svg",
+    "plugin.json",
+    "skills/clear-writing/SKILL.md",
+    "skills/clear-writing/references/routes/chinese-prose/ROUTE.md",
+    "skills/clear-writing/references/routes/chinese-prose/assets/app-facing.svg",
+    "skills/clear-writing/references/routes/chinese-prose/evals/trigger_queries.json",
+    "skills/clear-writing/references/routes/chinese-prose/references/chinese-prose-checklist.md",
+    "skills/clear-writing/references/routes/chinese-prose/references/group-meeting-chinese-report-prompt.md",
+    "skills/clear-writing/references/routes/chinese-prose/references/source-notes.md",
+    "skills/clear-writing/references/routes/product-ui-copy/ROUTE.md",
+    "skills/clear-writing/references/routes/product-ui-copy/assets/app-facing.svg",
+    "skills/clear-writing/references/routes/product-ui-copy/evals/trigger_queries.json",
+    "skills/clear-writing/references/routes/response-clarity/ROUTE.md",
+    "skills/clear-writing/references/routes/response-clarity/assets/app-facing.svg",
+    "skills/clear-writing/references/routes/response-clarity/evals/trigger_queries.json",
+    "skills/clear-writing/references/routes/scientific-prose/ROUTE.md",
+    "skills/clear-writing/references/routes/scientific-prose/assets/app-facing.svg",
+    "skills/clear-writing/references/routes/scientific-prose/evals/trigger_queries.json",
+    "skills/clear-writing/references/routes/scientific-prose/references/provenance/WRITING_SKILL_REPOS_2026_07_28.md",
+    "skills/clear-writing/references/routes/scientific-prose/references/scientific-report-checklist.md",
+    "skills/clear-writing/references/routes/scientific-prose/references/source-notes.md",
+    "skills/clear-writing/references/routes/scientific-rewrite/ROUTE.md",
+    "skills/clear-writing/references/routes/scientific-rewrite/assets/app-facing.svg",
+    "skills/clear-writing/references/routes/scientific-rewrite/scripts/rewrite_support.py",
+    "skills/clear-writing/references/routes/writing-fidelity/ROUTE.md",
+    "skills/clear-writing/references/routes/writing-fidelity/assets/app-facing.svg",
+    "skills/clear-writing/references/routes/writing-fidelity/evals/trigger_queries.json",
+    "skills/clear-writing/references/routes/writing-fidelity/references/failure-summary.md",
+    "skills/clear-writing/references/routes/writing-fidelity/references/final-delivery.md"
+  ],
+  "file_manifest": [
+    {
+      "path": ".codex-plugin/plugin.json",
+      "sha256": "17c321c93b88c5e8db0950efa11853038f47adb16d19e4e2f842cdbe4b209d20",
+      "size_bytes": 1782
+    },
+    {
+      "path": "assets/app-facing.svg",
+      "sha256": "ddd7a6edee8baaae8a5a6212c754fe501e61e5cb0754f522b175127f11f2923a",
+      "size_bytes": 307
+    },
+    {
+      "path": "plugin.json",
+      "sha256": "49744f049e76a7fc29925908aa9add67183a2a41d77a3d08224d2331f80a2826",
+      "size_bytes": 1956
+    },
+    {
+      "path": "skills/clear-writing/SKILL.md",
+      "sha256": "82af7b0d3d74dfce37d264ecc3c23965b786e8e1f8396163dce163c28073199a",
+      "size_bytes": 5875
+    },
+    {
+      "path": "skills/clear-writing/references/routes/chinese-prose/ROUTE.md",
+      "sha256": "6e0a4e88e657a2760ebdf0624e280aa7fdb4e6a94c3ff989f81fb35b86706fe7",
+      "size_bytes": 24525
+    },
+    {
+      "path": "skills/clear-writing/references/routes/chinese-prose/assets/app-facing.svg",
+      "sha256": "190eae30252b2cab6622cef59b3c846314ea8ae4b4957cd1f44f252cd0c7c472",
+      "size_bytes": 314
+    },
+    {
+      "path": "skills/clear-writing/references/routes/chinese-prose/evals/trigger_queries.json",
+      "sha256": "768d82bdadf310a6a29dfa70f69842305781bfe2f7c49e66db02d9f3b7463e85",
+      "size_bytes": 1462
+    },
+    {
+      "path": "skills/clear-writing/references/routes/chinese-prose/references/chinese-prose-checklist.md",
+      "sha256": "c0d23054b3f59981edf3f986aa2401aec4fb639b20098714b88b7b93b75290bb",
+      "size_bytes": 4668
+    },
+    {
+      "path": "skills/clear-writing/references/routes/chinese-prose/references/group-meeting-chinese-report-prompt.md",
+      "sha256": "c3471cde987b4c78140f4b5f7a19fffb1b840315486a75f425cbd5e6ab85d4fb",
+      "size_bytes": 4037
+    },
+    {
+      "path": "skills/clear-writing/references/routes/chinese-prose/references/source-notes.md",
+      "sha256": "ff86232d7406a33fafa0bba6ebaaed2416c50ca029436a8983365802fba41d59",
+      "size_bytes": 2253
+    },
+    {
+      "path": "skills/clear-writing/references/routes/product-ui-copy/ROUTE.md",
+      "sha256": "ed8165a808854b919758e862231f637d7aded3b6fcf25895c5d1b166509b48c6",
+      "size_bytes": 5647
+    },
+    {
+      "path": "skills/clear-writing/references/routes/product-ui-copy/assets/app-facing.svg",
+      "sha256": "dc3d6ffae1d0e5dcfe02c9a9bc818f0c58e3301d3767ad81138798260c0b818f",
+      "size_bytes": 405
+    },
+    {
+      "path": "skills/clear-writing/references/routes/product-ui-copy/evals/trigger_queries.json",
+      "sha256": "7286161dbe35523d13b1bef709cbfe9addc5624e757ddb62571a7d2ad5e3355d",
+      "size_bytes": 1685
+    },
+    {
+      "path": "skills/clear-writing/references/routes/response-clarity/ROUTE.md",
+      "sha256": "b504640fffe8c9587c47d6666a6ffc93b89192745c83c0bdb168dd936ff728ce",
+      "size_bytes": 13001
+    },
+    {
+      "path": "skills/clear-writing/references/routes/response-clarity/assets/app-facing.svg",
+      "sha256": "190eae30252b2cab6622cef59b3c846314ea8ae4b4957cd1f44f252cd0c7c472",
+      "size_bytes": 314
+    },
+    {
+      "path": "skills/clear-writing/references/routes/response-clarity/evals/trigger_queries.json",
+      "sha256": "3b2399b4022f556d79957412678581229a4bfbea63fa670b4b2e7635ae195327",
+      "size_bytes": 1458
+    },
+    {
+      "path": "skills/clear-writing/references/routes/scientific-prose/ROUTE.md",
+      "sha256": "5c966d2b2511c7272c4284042bf34682f03ba404556aa843d9de8c437816305e",
+      "size_bytes": 7571
+    },
+    {
+      "path": "skills/clear-writing/references/routes/scientific-prose/assets/app-facing.svg",
+      "sha256": "69bd6a9842ff495754bcd47faf3a71956055797bafc5265f96a2cd39ce07c223",
+      "size_bytes": 375
+    },
+    {
+      "path": "skills/clear-writing/references/routes/scientific-prose/evals/trigger_queries.json",
+      "sha256": "ed0579b262304a1a6ab0fac14f11f1b5a39c6229da25cd8a8a5d2ee3a27d934a",
+      "size_bytes": 697
+    },
+    {
+      "path": "skills/clear-writing/references/routes/scientific-prose/references/provenance/WRITING_SKILL_REPOS_2026_07_28.md",
+      "sha256": "fff303832232548866834a9df2a6f3135d601a57b1716ad188e5e0b72a1da81b",
+      "size_bytes": 1447
+    },
+    {
+      "path": "skills/clear-writing/references/routes/scientific-prose/references/scientific-report-checklist.md",
+      "sha256": "df9ebdcbdb6d92ff48563d25e2ceb270ac4d5aa4b158575fca200f080e00cf55",
+      "size_bytes": 3161
+    },
+    {
+      "path": "skills/clear-writing/references/routes/scientific-prose/references/source-notes.md",
+      "sha256": "407e0e7ec0123da7300a9f77f3af770addf1cebb5b4dee592df7928f4dd9045e",
+      "size_bytes": 1274
+    },
+    {
+      "path": "skills/clear-writing/references/routes/scientific-rewrite/ROUTE.md",
+      "sha256": "0423aa23b78a9ff82ed8f34f0f75047fae82d34dfa109548091ac0c3a7e7bdcb",
+      "size_bytes": 19560
+    },
+    {
+      "path": "skills/clear-writing/references/routes/scientific-rewrite/assets/app-facing.svg",
+      "sha256": "0e7f6ae65bc9bf96216a89a2350fdcce6b5d7d3fd4697cc9c61e01248375d9ce",
+      "size_bytes": 442
+    },
+    {
+      "path": "skills/clear-writing/references/routes/scientific-rewrite/scripts/rewrite_support.py",
+      "sha256": "c7aa17d390f592c4a3ce4e78fa31c6c9237a5d4821b2e2ea1cf3aa61e41298cb",
+      "size_bytes": 46031
+    },
+    {
+      "path": "skills/clear-writing/references/routes/writing-fidelity/ROUTE.md",
+      "sha256": "430eb4493c2242be715967da06e3bec9355dfffe2363d9f2acd109d5b8af170e",
+      "size_bytes": 15825
+    },
+    {
+      "path": "skills/clear-writing/references/routes/writing-fidelity/assets/app-facing.svg",
+      "sha256": "dc3d6ffae1d0e5dcfe02c9a9bc818f0c58e3301d3767ad81138798260c0b818f",
+      "size_bytes": 405
+    },
+    {
+      "path": "skills/clear-writing/references/routes/writing-fidelity/evals/trigger_queries.json",
+      "sha256": "d1c728d8f6d2a6a6d0f8607f808401921134b1687978e403fa0e402fc04246e6",
+      "size_bytes": 1076
+    },
+    {
+      "path": "skills/clear-writing/references/routes/writing-fidelity/references/failure-summary.md",
+      "sha256": "38e2224c3ec3fa3fecaa44591411a2380295e972927ff60efb83fc1910a46c56",
+      "size_bytes": 4293
+    },
+    {
+      "path": "skills/clear-writing/references/routes/writing-fidelity/references/final-delivery.md",
+      "sha256": "c68366b51af31167a5ab98a39ab209f7d0ad2fcbcaf6eefa3cd9383de978ada2",
+      "size_bytes": 7389
+    }
+  ],
+  "files": [
+    {
+      "generated_path": "skills/clear-writing/SKILL.md",
+      "generated_sha256": "82af7b0d3d74dfce37d264ecc3c23965b786e8e1f8396163dce163c28073199a",
+      "source_path": "packaging/chatgpt/writing-style/clear-writing/SKILL.md",
+      "source_sha256": "82af7b0d3d74dfce37d264ecc3c23965b786e8e1f8396163dce163c28073199a"
+    },
+    {
+      "generated_path": "assets/app-facing.svg",
+      "generated_sha256": "ddd7a6edee8baaae8a5a6212c754fe501e61e5cb0754f522b175127f11f2923a",
+      "source_path": "assets/codex/plugin-icons/writing-style/composer.svg",
+      "source_sha256": "ddd7a6edee8baaae8a5a6212c754fe501e61e5cb0754f522b175127f11f2923a"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/writing-fidelity/ROUTE.md",
+      "generated_sha256": "430eb4493c2242be715967da06e3bec9355dfffe2363d9f2acd109d5b8af170e",
+      "source_path": "skills/writing/core/writing-fidelity/SKILL.md",
+      "source_sha256": "430eb4493c2242be715967da06e3bec9355dfffe2363d9f2acd109d5b8af170e"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/writing-fidelity/references/failure-summary.md",
+      "generated_sha256": "38e2224c3ec3fa3fecaa44591411a2380295e972927ff60efb83fc1910a46c56",
+      "source_path": "skills/writing/core/writing-fidelity/references/failure-summary.md",
+      "source_sha256": "38e2224c3ec3fa3fecaa44591411a2380295e972927ff60efb83fc1910a46c56"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/writing-fidelity/references/final-delivery.md",
+      "generated_sha256": "c68366b51af31167a5ab98a39ab209f7d0ad2fcbcaf6eefa3cd9383de978ada2",
+      "source_path": "skills/writing/core/writing-fidelity/references/final-delivery.md",
+      "source_sha256": "c68366b51af31167a5ab98a39ab209f7d0ad2fcbcaf6eefa3cd9383de978ada2"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/writing-fidelity/assets/app-facing.svg",
+      "generated_sha256": "dc3d6ffae1d0e5dcfe02c9a9bc818f0c58e3301d3767ad81138798260c0b818f",
+      "source_path": "skills/writing/core/writing-fidelity/assets/app-facing.svg",
+      "source_sha256": "dc3d6ffae1d0e5dcfe02c9a9bc818f0c58e3301d3767ad81138798260c0b818f"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/writing-fidelity/evals/trigger_queries.json",
+      "generated_sha256": "d1c728d8f6d2a6a6d0f8607f808401921134b1687978e403fa0e402fc04246e6",
+      "source_path": "skills/writing/core/writing-fidelity/evals/trigger_queries.json",
+      "source_sha256": "d1c728d8f6d2a6a6d0f8607f808401921134b1687978e403fa0e402fc04246e6"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/response-clarity/ROUTE.md",
+      "generated_sha256": "b504640fffe8c9587c47d6666a6ffc93b89192745c83c0bdb168dd936ff728ce",
+      "source_path": "skills/writing/core/response-clarity/SKILL.md",
+      "source_sha256": "b504640fffe8c9587c47d6666a6ffc93b89192745c83c0bdb168dd936ff728ce"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/response-clarity/assets/app-facing.svg",
+      "generated_sha256": "190eae30252b2cab6622cef59b3c846314ea8ae4b4957cd1f44f252cd0c7c472",
+      "source_path": "skills/writing/core/response-clarity/assets/app-facing.svg",
+      "source_sha256": "190eae30252b2cab6622cef59b3c846314ea8ae4b4957cd1f44f252cd0c7c472"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/response-clarity/evals/trigger_queries.json",
+      "generated_sha256": "3b2399b4022f556d79957412678581229a4bfbea63fa670b4b2e7635ae195327",
+      "source_path": "skills/writing/core/response-clarity/evals/trigger_queries.json",
+      "source_sha256": "3b2399b4022f556d79957412678581229a4bfbea63fa670b4b2e7635ae195327"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/product-ui-copy/ROUTE.md",
+      "generated_sha256": "ed8165a808854b919758e862231f637d7aded3b6fcf25895c5d1b166509b48c6",
+      "source_path": "skills/writing/core/product-ui-copy/SKILL.md",
+      "source_sha256": "ed8165a808854b919758e862231f637d7aded3b6fcf25895c5d1b166509b48c6"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/product-ui-copy/assets/app-facing.svg",
+      "generated_sha256": "dc3d6ffae1d0e5dcfe02c9a9bc818f0c58e3301d3767ad81138798260c0b818f",
+      "source_path": "skills/writing/core/product-ui-copy/assets/app-facing.svg",
+      "source_sha256": "dc3d6ffae1d0e5dcfe02c9a9bc818f0c58e3301d3767ad81138798260c0b818f"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/product-ui-copy/evals/trigger_queries.json",
+      "generated_sha256": "7286161dbe35523d13b1bef709cbfe9addc5624e757ddb62571a7d2ad5e3355d",
+      "source_path": "skills/writing/core/product-ui-copy/evals/trigger_queries.json",
+      "source_sha256": "7286161dbe35523d13b1bef709cbfe9addc5624e757ddb62571a7d2ad5e3355d"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/scientific-prose/ROUTE.md",
+      "generated_sha256": "5c966d2b2511c7272c4284042bf34682f03ba404556aa843d9de8c437816305e",
+      "source_path": "skills/writing/core/scientific-prose/SKILL.md",
+      "source_sha256": "2e5417d2ca461d15005de2c3e238820d6d05d58f834bab4b51fa78990f5dce04"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/scientific-prose/references/scientific-report-checklist.md",
+      "generated_sha256": "df9ebdcbdb6d92ff48563d25e2ceb270ac4d5aa4b158575fca200f080e00cf55",
+      "source_path": "skills/writing/core/scientific-prose/references/scientific-report-checklist.md",
+      "source_sha256": "df9ebdcbdb6d92ff48563d25e2ceb270ac4d5aa4b158575fca200f080e00cf55"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/scientific-prose/references/source-notes.md",
+      "generated_sha256": "407e0e7ec0123da7300a9f77f3af770addf1cebb5b4dee592df7928f4dd9045e",
+      "source_path": "skills/writing/core/scientific-prose/references/source-notes.md",
+      "source_sha256": "407e0e7ec0123da7300a9f77f3af770addf1cebb5b4dee592df7928f4dd9045e"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/scientific-prose/assets/app-facing.svg",
+      "generated_sha256": "69bd6a9842ff495754bcd47faf3a71956055797bafc5265f96a2cd39ce07c223",
+      "source_path": "skills/writing/core/scientific-prose/assets/app-facing.svg",
+      "source_sha256": "69bd6a9842ff495754bcd47faf3a71956055797bafc5265f96a2cd39ce07c223"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/scientific-prose/evals/trigger_queries.json",
+      "generated_sha256": "ed0579b262304a1a6ab0fac14f11f1b5a39c6229da25cd8a8a5d2ee3a27d934a",
+      "source_path": "skills/writing/core/scientific-prose/evals/trigger_queries.json",
+      "source_sha256": "ed0579b262304a1a6ab0fac14f11f1b5a39c6229da25cd8a8a5d2ee3a27d934a"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/scientific-rewrite/ROUTE.md",
+      "generated_sha256": "0423aa23b78a9ff82ed8f34f0f75047fae82d34dfa109548091ac0c3a7e7bdcb",
+      "source_path": "skills/writing/core/scientific-rewrite/SKILL.md",
+      "source_sha256": "7ae3594a2af47e97913c6ba9d23b26ee72c9fa743251e16d0636af837a6bce3b"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/scientific-rewrite/scripts/rewrite_support.py",
+      "generated_sha256": "c7aa17d390f592c4a3ce4e78fa31c6c9237a5d4821b2e2ea1cf3aa61e41298cb",
+      "source_path": "skills/writing/core/scientific-rewrite/scripts/rewrite_support.py",
+      "source_sha256": "c7aa17d390f592c4a3ce4e78fa31c6c9237a5d4821b2e2ea1cf3aa61e41298cb"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/scientific-rewrite/assets/app-facing.svg",
+      "generated_sha256": "0e7f6ae65bc9bf96216a89a2350fdcce6b5d7d3fd4697cc9c61e01248375d9ce",
+      "source_path": "skills/writing/core/scientific-rewrite/assets/app-facing.svg",
+      "source_sha256": "0e7f6ae65bc9bf96216a89a2350fdcce6b5d7d3fd4697cc9c61e01248375d9ce"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/chinese-prose/ROUTE.md",
+      "generated_sha256": "6e0a4e88e657a2760ebdf0624e280aa7fdb4e6a94c3ff989f81fb35b86706fe7",
+      "source_path": "skills/writing/core/chinese-prose/SKILL.md",
+      "source_sha256": "6e0a4e88e657a2760ebdf0624e280aa7fdb4e6a94c3ff989f81fb35b86706fe7"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/chinese-prose/references/chinese-prose-checklist.md",
+      "generated_sha256": "c0d23054b3f59981edf3f986aa2401aec4fb639b20098714b88b7b93b75290bb",
+      "source_path": "skills/writing/core/chinese-prose/references/chinese-prose-checklist.md",
+      "source_sha256": "c0d23054b3f59981edf3f986aa2401aec4fb639b20098714b88b7b93b75290bb"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/chinese-prose/references/group-meeting-chinese-report-prompt.md",
+      "generated_sha256": "c3471cde987b4c78140f4b5f7a19fffb1b840315486a75f425cbd5e6ab85d4fb",
+      "source_path": "skills/writing/core/chinese-prose/references/group-meeting-chinese-report-prompt.md",
+      "source_sha256": "c3471cde987b4c78140f4b5f7a19fffb1b840315486a75f425cbd5e6ab85d4fb"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/chinese-prose/references/source-notes.md",
+      "generated_sha256": "ff86232d7406a33fafa0bba6ebaaed2416c50ca029436a8983365802fba41d59",
+      "source_path": "skills/writing/core/chinese-prose/references/source-notes.md",
+      "source_sha256": "ff86232d7406a33fafa0bba6ebaaed2416c50ca029436a8983365802fba41d59"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/chinese-prose/assets/app-facing.svg",
+      "generated_sha256": "190eae30252b2cab6622cef59b3c846314ea8ae4b4957cd1f44f252cd0c7c472",
+      "source_path": "skills/writing/core/chinese-prose/assets/app-facing.svg",
+      "source_sha256": "190eae30252b2cab6622cef59b3c846314ea8ae4b4957cd1f44f252cd0c7c472"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/chinese-prose/evals/trigger_queries.json",
+      "generated_sha256": "768d82bdadf310a6a29dfa70f69842305781bfe2f7c49e66db02d9f3b7463e85",
+      "source_path": "skills/writing/core/chinese-prose/evals/trigger_queries.json",
+      "source_sha256": "768d82bdadf310a6a29dfa70f69842305781bfe2f7c49e66db02d9f3b7463e85"
+    },
+    {
+      "generated_path": "skills/clear-writing/references/routes/scientific-prose/references/provenance/WRITING_SKILL_REPOS_2026_07_28.md",
+      "generated_sha256": "fff303832232548866834a9df2a6f3135d601a57b1716ad188e5e0b72a1da81b",
+      "source_path": "docs/provenance/WRITING_SKILL_REPOS_2026_07_28.md",
+      "source_sha256": "fff303832232548866834a9df2a6f3135d601a57b1716ad188e5e0b72a1da81b"
+    }
+  ],
+  "metadata_source": {
+    "path": "scripts/codex_marketplace_config.json",
+    "sha256": "9a7c74f75241705b755679b417dce171f059130d13339cbbdd72e663f8154e9d"
+  },
+  "personal_wrapper_version": "0.6.0",
+  "plugin_name": "writing-style",
+  "schema": "CLEAR_WRITING_CHATGPT_BUILD_RECEIPT_V1",
+  "support_file_parity": true,
+  "transform_rule_version": "CW06_ROUTE_PROJECTION_V1",
+  "transforms": [
+    {
+      "actual_count": 1,
+      "expected_count": 1,
+      "generated_token": "skills/clear-writing/references/routes/scientific-prose/references/provenance/WRITING_SKILL_REPOS_2026_07_28.md",
+      "source_path": "skills/writing/core/scientific-prose/SKILL.md",
+      "source_token": "docs/provenance/WRITING_SKILL_REPOS_2026_07_28.md"
+    },
+    {
+      "actual_count": 1,
+      "expected_count": 1,
+      "generated_token": "skills/clear-writing/references/routes/scientific-rewrite/scripts/rewrite_support.py",
+      "source_path": "skills/writing/core/scientific-rewrite/SKILL.md",
+      "source_token": "skills/writing/core/scientific-rewrite/scripts/rewrite_support.py"
+    }
+  ],
+  "wrapper_archive_sha256": "f51f0f06844d3a5b36eb2265485c915b1d43287d742edf5d1f35b1a383236552",
+  "writing_style_version": "0.6",
+  "zip_spec_version": "CW06_DETERMINISTIC_ZIP_V1"
+}

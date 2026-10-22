@@ -1,3 +1,11 @@
+# 当前交接：Clear Writing 0.6 代码已完成
+
+唯一新版候选源为 `cee207d3fa83ad4571f94774f3896798d837a5ca`，当前交接与 42 片新分发见 `v0.4/PHASE_C_HANDOFF.md`；当前身份见 `candidate/FINAL_CANDIDATE.json`。
+本轮代码、真实 Codex 回放与独立实施审查完成，下一接收方为原 ChatGPT Planner / Phase C。账户恢复/Web/正式发布尚未验收；正式个人插件未变，G6 未运行。
+以下 v0.2/079bd798 内容只保留历史，不能用于本次安装、验收或发布。
+
+---
+
 # 历史交接：2026-10-20 的 v0.2 候选
 
 > 本文件以下内容只保留历史，不能用于当前 live update。旧 079bd798 候选已失效。

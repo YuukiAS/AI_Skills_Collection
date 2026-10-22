@@ -1,41 +1,41 @@
 {
-  "schema": "CLEAR_WRITING_06_FINAL_CANDIDATE_V1",
-  "source_commit": "079bd7987bb33d624d244feb415327d5cf2343d8",
+  "schema": "CLEAR_WRITING_06_FINAL_CANDIDATE_V2",
+  "source_commit": "cee207d3fa83ad4571f94774f3896798d837a5ca",
+  "approved_product_package": "48c42f89d23ba168e2d2045034a7f7117c2e0448",
+  "model_contract_amendment": "157725b909775e169926c449844301e772e50f08",
+  "model_contract_authority": "v0.4/DEFAULT_ENTRY_AUTHORITY.md",
+  "default_entry_authority_sha256": "b08d5597d37c93f4a498428662e557007cee53df7bfd0440f87eb837f0c151a0",
   "writing_style_version": "0.6",
   "personal_wrapper_version": "0.6.0",
-  "wrapper_archive_sha256": "e4c451841583cb6e1ae4212f8d8559b93ef4272f66d687d3f6762f6114a73dc6",
-  "route_projection_rule_version": "CW06_ROUTE_PROJECTION_V1",
-  "zip_spec_version": "CW06_DETERMINISTIC_ZIP_V1",
-  "build_receipt_sha256": "9a1dcfa1ea1becfd93bb3787b4f7dba32ba50fb3290ac8bbefcb71c1739ca8d8",
-  "codex_writing_style_tree_sha": "92ed32b5ba8c033c431aa5a911885bedc8d7286c",
-  "profile_sha256": "25863b13c787251a4df5ec400a5657aecb0b5565ddff2cdd6ed85da913577bed",
-  "gate_rule_version": "CW06-v0.1",
-  "implementation_review_sha256": "08a17538ad0aed216c6381dd25b67406a0a4e3d7a04a6a9531b49ace4c3ae029",
-  "required_ci_run_id": 39368960081,
-  "candidate_defining_files": [
+  "wrapper_archive_sha256": "775432e7d98ca975d17cec2c672a72aaabd6d24b9d19d46d07c80bb27e749aa5",
+  "wrapper_archive_size_bytes": 185820,
+  "build_receipt": "v0.4/wrapper/BUILD_RECEIPT_FINAL.json",
+  "build_receipt_sha256": "9da5e12e1997af6e7cbe1cb14904e0d6eb8c7b6612fcfb307f5b9344f156b5e7",
+  "transport_manifest": "v0.4/transport/MANIFEST.json",
+  "files": [
     {
-      "path": "README.md",
-      "sha256": "a57d5a3d29962db84bfd88cb3bb5bef6dcd0e69a1cae932a56cc78a51b418dfa"
+      "path": ".agents/plugins/marketplace.json",
+      "sha256": "680595dcf2f96352ff72a38b97d2cb107e5ba33b9818b9f4cc3a07b379c7f2ce"
     },
     {
-      "path": "assets/codex/plugin-icons/writing-style/composer.svg",
-      "sha256": "ddd7a6edee8baaae8a5a6212c754fe501e61e5cb0754f522b175127f11f2923a"
+      "path": "docs/design/clear-writing/CLEAR_WRITING_0_6_GATE_RUNBOOK_V0_4_2026-10-22.md",
+      "sha256": "58ec18f293cf8e67abbcfa1465fadb0f43c4a43f495b91aba665c5eca2f03dd3"
     },
     {
-      "path": "assets/codex/plugin-icons/writing-style/source.json",
-      "sha256": "74a7b23604051255157607e8507ef17e3fcf5225c7f1ca444d403952c7546121"
+      "path": "docs/design/clear-writing/CLEAR_WRITING_0_6_PRODUCT_AND_EXECUTION_PLAN_V0_4_2026-10-22.md",
+      "sha256": "b0d8e8a343ceb358aad43c4621a3fce430291f4a3a5c1aba3a3c7093a16d67da"
     },
     {
-      "path": "docs/plugin-changelogs/writing-style.md",
-      "sha256": "a8ebd4b0e3206ce6f4fe3e1af4a9e6e679f6739c4d75426b0da47724a79aa4ec"
+      "path": "docs/goals/CLEAR_WRITING_0_6_UNIFIED_DELIVERY_GOAL_V0_4_2026-10-22.md",
+      "sha256": "695724b575cf3d865144f72157420c9f990a170756bccd10bc2d5b8e5bb16185"
     },
     {
-      "path": "docs/provenance/WRITING_SKILL_REPOS_2026_07_28.md",
-      "sha256": "fff303832232548866834a9df2a6f3135d601a57b1716ad188e5e0b72a1da81b"
+      "path": "docs/operations/prompts/CLEAR_WRITING_0_6_KICKOFF_DRAFT_V0_4_2026-10-22.md",
+      "sha256": "b01017fac1dfd3d4e33070db405ced3059af6b7e76010c10c021510ac3392901"
     },
     {
       "path": "packaging/chatgpt/writing-style/clear-writing/SKILL.md",
-      "sha256": "a122ef491328eace66b05df6ba155be4153ef76e3008924dad1f5a0acb920856"
+      "sha256": "82af7b0d3d74dfce37d264ecc3c23965b786e8e1f8396163dce163c28073199a"
     },
     {
       "path": "plugins/codex/plugins/writing-style/.codex-plugin/assets/composer.svg",
@@ -51,7 +51,7 @@
     },
     {
       "path": "plugins/codex/plugins/writing-style/skills/fidelity/SKILL.md",
-      "sha256": "f012b730f95364d5093f16c8c433342121701c5cdcd8b5101a457c4a1e9160a4"
+      "sha256": "430eb4493c2242be715967da06e3bec9355dfffe2363d9f2acd109d5b8af170e"
     },
     {
       "path": "plugins/codex/plugins/writing-style/skills/fidelity/assets/app-facing.svg",
@@ -64,6 +64,10 @@
     {
       "path": "plugins/codex/plugins/writing-style/skills/fidelity/references/failure-summary.md",
       "sha256": "38e2224c3ec3fa3fecaa44591411a2380295e972927ff60efb83fc1910a46c56"
+    },
+    {
+      "path": "plugins/codex/plugins/writing-style/skills/fidelity/references/final-delivery.md",
+      "sha256": "c68366b51af31167a5ab98a39ab209f7d0ad2fcbcaf6eefa3cd9383de978ada2"
     },
     {
       "path": "plugins/codex/plugins/writing-style/skills/product-ui-copy/SKILL.md",
@@ -79,7 +83,7 @@
     },
     {
       "path": "plugins/codex/plugins/writing-style/skills/response-clarity/SKILL.md",
-      "sha256": "c5f4dc45e13bfc86d40d8eb55311cbd2fd05a51f9b912d20e93d8075288e2836"
+      "sha256": "b504640fffe8c9587c47d6666a6ffc93b89192745c83c0bdb168dd936ff728ce"
     },
     {
       "path": "plugins/codex/plugins/writing-style/skills/response-clarity/assets/app-facing.svg",
@@ -111,7 +115,7 @@
     },
     {
       "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/SKILL.md",
-      "sha256": "5919ec2d11cb810415020151393aa2e70feafd8cc72d3580c9f3e4de7effb404"
+      "sha256": "7ae3594a2af47e97913c6ba9d23b26ee72c9fa743251e16d0636af837a6bce3b"
     },
     {
       "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/assets/app-facing.svg",
@@ -119,11 +123,11 @@
     },
     {
       "path": "plugins/codex/plugins/writing-style/skills/scientific-rewrite/scripts/rewrite_support.py",
-      "sha256": "76bce3dbac9e81822fa312ab3df8b8af4ea50d1216e3904247d892283efa0e0f"
+      "sha256": "15375c3495d0c24b2ee84ff6ccaa50f13d9a9036cb20d6296ffbaa4b0c1528c3"
     },
     {
       "path": "plugins/codex/plugins/writing-style/skills/zh/SKILL.md",
-      "sha256": "377c6d21bb023f1b52c35b7824f06b463ae113ff568008ce5c2f9cf58261beae"
+      "sha256": "6e0a4e88e657a2760ebdf0624e280aa7fdb4e6a94c3ff989f81fb35b86706fe7"
     },
     {
       "path": "plugins/codex/plugins/writing-style/skills/zh/assets/app-facing.svg",
@@ -151,7 +155,11 @@
     },
     {
       "path": "scripts/build_clear_writing_chatgpt_wrapper.py",
-      "sha256": "7ee12a1b88c758b0c09f874e2ed89eca51256bc8cb40806b969854fe1788fd4a"
+      "sha256": "df42236be5e1e799f9440a59311e11c453966cc723d11eccdc7cbec854a57187"
+    },
+    {
+      "path": "scripts/candidate_plugin_replay.py",
+      "sha256": "3fb0e1e56e629c7f2bf3832bc3c165a5e6f3dae845ee4d63c5ecac65f4c2fa53"
     },
     {
       "path": "scripts/codex_marketplace_config.json",
@@ -159,7 +167,7 @@
     },
     {
       "path": "skills/writing/core/chinese-prose/SKILL.md",
-      "sha256": "377c6d21bb023f1b52c35b7824f06b463ae113ff568008ce5c2f9cf58261beae"
+      "sha256": "6e0a4e88e657a2760ebdf0624e280aa7fdb4e6a94c3ff989f81fb35b86706fe7"
     },
     {
       "path": "skills/writing/core/chinese-prose/TODO.md",
@@ -199,7 +207,7 @@
     },
     {
       "path": "skills/writing/core/response-clarity/SKILL.md",
-      "sha256": "c5f4dc45e13bfc86d40d8eb55311cbd2fd05a51f9b912d20e93d8075288e2836"
+      "sha256": "b504640fffe8c9587c47d6666a6ffc93b89192745c83c0bdb168dd936ff728ce"
     },
     {
       "path": "skills/writing/core/response-clarity/assets/app-facing.svg",
@@ -231,7 +239,7 @@
     },
     {
       "path": "skills/writing/core/scientific-rewrite/SKILL.md",
-      "sha256": "5919ec2d11cb810415020151393aa2e70feafd8cc72d3580c9f3e4de7effb404"
+      "sha256": "7ae3594a2af47e97913c6ba9d23b26ee72c9fa743251e16d0636af837a6bce3b"
     },
     {
       "path": "skills/writing/core/scientific-rewrite/assets/app-facing.svg",
@@ -239,11 +247,11 @@
     },
     {
       "path": "skills/writing/core/scientific-rewrite/scripts/rewrite_support.py",
-      "sha256": "76bce3dbac9e81822fa312ab3df8b8af4ea50d1216e3904247d892283efa0e0f"
+      "sha256": "15375c3495d0c24b2ee84ff6ccaa50f13d9a9036cb20d6296ffbaa4b0c1528c3"
     },
     {
       "path": "skills/writing/core/writing-fidelity/SKILL.md",
-      "sha256": "f012b730f95364d5093f16c8c433342121701c5cdcd8b5101a457c4a1e9160a4"
+      "sha256": "430eb4493c2242be715967da06e3bec9355dfffe2363d9f2acd109d5b8af170e"
     },
     {
       "path": "skills/writing/core/writing-fidelity/assets/app-facing.svg",
@@ -256,12 +264,570 @@
     {
       "path": "skills/writing/core/writing-fidelity/references/failure-summary.md",
       "sha256": "38e2224c3ec3fa3fecaa44591411a2380295e972927ff60efb83fc1910a46c56"
+    },
+    {
+      "path": "skills/writing/core/writing-fidelity/references/final-delivery.md",
+      "sha256": "c68366b51af31167a5ab98a39ab209f7d0ad2fcbcaf6eefa3cd9383de978ada2"
+    },
+    {
+      "path": "tests/fixtures/056_product_delivery_discipline_gates.json",
+      "sha256": "765745f3b872aa10dab3cbe10eac66b08d9e6e7a80cde721197e87e244f45ce4"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/build_ai_bridge_visual_inputs.py",
+      "sha256": "30f6974cbf4217878fc17b14ed20695f1eaffbcf59f0cbb573ac8f1f9ae9acba"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/generate_medical_imaging_group_meeting_benchmark.py",
+      "sha256": "e5fec7fbdb6d0746d51101665768d45f233947fc9d319e6744e7462c024ef2d7"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/review_medical_imaging_group_meeting_benchmark.py",
+      "sha256": "c19e27ae817b6884a8586fb2f2d4fa91b4d9fa126413ad416bc2b722efea102c"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/EVIDENCE_MANIFEST.json",
+      "sha256": "1cf313e1c61f918bd93572d7de72a55a045e8e27f725b0503b0cd5922fbf124c"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/MECHANICAL_VISUAL_REVIEW.json",
+      "sha256": "d11af2956614ca9fad0d84d2ba09da3612420932ecc6fd260b16d16f6952d075"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/RENDER_STATUS.json",
+      "sha256": "b375091504a5873062b7f0cf5c436a07ca1e50e31682d5ef866e39b1d8aff9d3"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/center_a_shift.png",
+      "sha256": "06eefae0e4e727701a01c3153c6ba5b6eaf55f609ac4d71b64da38400ae0fa06"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/center_b_shift.png",
+      "sha256": "1a892f645e3546835231f09c1b51729defb012100ef93e3a62d139e794160311"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/center_c_shift.png",
+      "sha256": "3626bde9ba5f533c7093f4047549752e93af2ca18712367586099a4e277280f7"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+      "sha256": "9c196b9f214495095402d579b524e77c30144a3831aa065ecb990e964960440f"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_gt.png",
+      "sha256": "70fe06d3c80ba25484ceaf0484820fea0ab6378d0852d64deda972d175d7dbaf"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_input.png",
+      "sha256": "dbb133c18d2b0879cb193be19034ba6cfeeeb2b35876d506ca1af2faaed745e5"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
+      "sha256": "41ed6a894559333c82a5bc2e2885528060684a40ffd7de2e4e725eba982c5c7a"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/slide1_input.png",
+      "sha256": "f9af6fabd2e9d1d4a975c0ad5c000fdae52bd0e9cfad69c60a84b7a4f5cd77a8"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/slide1_overlay.png",
+      "sha256": "74a0c58d4eba7ea971038071d7966a33ee89658342fe11b8721d453602eef498"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/slide3_endpoint_disagreement.png",
+      "sha256": "a32918a3a7c060230d7ad8463198972f0e6a2af33334ece1943615416efd0de5"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/slide5_lesion_size_recall.png",
+      "sha256": "94583eb58ee51466a4417668768070a763b352046c91752384d9ca4d1e95e04d"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/expected_render/slide-1.png",
+      "sha256": "edcafbc47b3fa98aa7303a79950c2fc86e8ffdd13cfb073478a31429414f5ca7"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/expected_render/slide-2.png",
+      "sha256": "cdd51a9916ec773e2c876b9a69e9ac676643b8643844892014231fb7b8c98a00"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/expected_render/slide-3.png",
+      "sha256": "9af0f7e098b48dfd7c8dfabb1c2c8ad31f809579e054688d5cea51c4c38d44e4"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/expected_render/slide-4.png",
+      "sha256": "a143082374c3974eb90525b48876d0c0a312bf633654bb2a622b30cde7346e0f"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/expected_render/slide-5.png",
+      "sha256": "7f32f4540873269b8ab7f256afa1b53c25dbaeca91f7673f73559b732efb8ddf"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/medical_imaging_group_meeting_benchmark.pptx",
+      "sha256": "9b03e65b1c54d9c6d441b78b34e9f11cefa975416395b30adfbe92748d0e1663"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/pdf/medical_imaging_group_meeting_benchmark.pdf",
+      "sha256": "729dc24c9a832f65b7301873d3e8f89b819634f52e4a8f4cb825915b55fd33a4"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/reference_design_audit.json",
+      "sha256": "a0548485cf850e95f62d63ab5471f16804887668c27bada6a3e80b9791e4323b"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-1.png",
+      "sha256": "edcafbc47b3fa98aa7303a79950c2fc86e8ffdd13cfb073478a31429414f5ca7"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-2.png",
+      "sha256": "cdd51a9916ec773e2c876b9a69e9ac676643b8643844892014231fb7b8c98a00"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-3.png",
+      "sha256": "9af0f7e098b48dfd7c8dfabb1c2c8ad31f809579e054688d5cea51c4c38d44e4"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-4.png",
+      "sha256": "a143082374c3974eb90525b48876d0c0a312bf633654bb2a622b30cde7346e0f"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/rendered/slide-5.png",
+      "sha256": "7f32f4540873269b8ab7f256afa1b53c25dbaeca91f7673f73559b732efb8ddf"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/simulation/case_metrics.json",
+      "sha256": "bab6bc852530bb2fb05d2242bceaf812c4c8644d712e241e77580b2aedbdf8c9"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/simulation/center_summary.csv",
+      "sha256": "65d9a5cb9c2345faa9543e57a05e824fc6d9bbaac84751b39ce794375a3280b4"
+    },
+    {
+      "path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/simulation/summary.json",
+      "sha256": "7020272e487d2720cff4787fc50be426880d71447dad5d963634d591b0903a48"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/build_ai_bridge_visual_inputs.py",
+      "sha256": "98931a8d4c11d786544bf489f3451fcdcf5b68edb567880440acf7bf71c078cc"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/build_visual_review_packet.py",
+      "sha256": "df0a3b4d75aafd0bfd2de2116115f6b328583c4b4d98bbc20e4baddf20404d76"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/build_visual_review_pages.py",
+      "sha256": "570cde15fec0a93372b765d6bd3e88001fb2f33a70f0484ceff208f8251aef44"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/expected_render/slide-1.png",
+      "sha256": "6ea97abb12e6bde629421731fa1ba0fd4b22650aeb0b8d9d6ce3ad370d523d4b"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/expected_render/slide-2.png",
+      "sha256": "8b118fb4d926eaac90cafbb9e3a2729416e5fd60fdfe759ded0237b7a86ca6f6"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/expected_render/slide-3.png",
+      "sha256": "21d002f3756646098d2ec53fa5ce6542ee1c9db4afe5e7481c94df064b3ff116"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/expected_render/slide-4.png",
+      "sha256": "77c025dbe17ea5c48b03cb9db2052e496f6bc2cdc28b9d9d76771d2ff21aa92e"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/generate_research_group_meeting_regression.py",
+      "sha256": "d0036309baaf995c188cc6de49280c098f5f8b01bef82c81245ef18cb01ea6e6"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/review_research_group_meeting_regression.py",
+      "sha256": "a58d4bc5f10070f4b82ef9f8e66784a6cc0a65dc3d2eb0eb01f8114262cf27c0"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/EVIDENCE_MANIFEST.json",
+      "sha256": "b5db3786d5cb4ac13d1264d103beb9d030efe27f7bedb8a7356ae4489353ec1e"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/MECHANICAL_VISUAL_REVIEW.json",
+      "sha256": "b23635dd4569e0cc63610fd91e2b566a963505e1ad8a998717f48ca318502752"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/RENDER_STATUS.json",
+      "sha256": "e94cc1c38bd3e04d26c8c31a17baf41eb17b18adcb2eda2b15c9fba70fcd5702"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/expected_render/slide-1.png",
+      "sha256": "6ea97abb12e6bde629421731fa1ba0fd4b22650aeb0b8d9d6ce3ad370d523d4b"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/expected_render/slide-2.png",
+      "sha256": "8b118fb4d926eaac90cafbb9e3a2729416e5fd60fdfe759ded0237b7a86ca6f6"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/expected_render/slide-3.png",
+      "sha256": "21d002f3756646098d2ec53fa5ce6542ee1c9db4afe5e7481c94df064b3ff116"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/expected_render/slide-4.png",
+      "sha256": "77c025dbe17ea5c48b03cb9db2052e496f6bc2cdc28b9d9d76771d2ff21aa92e"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/pdf/research_group_meeting_regression.pdf",
+      "sha256": "5aa989a8d471ed7a9c842f04e9f2d1f0f45a404f48c9f6db03a969bbb6588959"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-1.png",
+      "sha256": "6ea97abb12e6bde629421731fa1ba0fd4b22650aeb0b8d9d6ce3ad370d523d4b"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-2.png",
+      "sha256": "8b118fb4d926eaac90cafbb9e3a2729416e5fd60fdfe759ded0237b7a86ca6f6"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-3.png",
+      "sha256": "21d002f3756646098d2ec53fa5ce6542ee1c9db4afe5e7481c94df064b3ff116"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/rendered/slide-4.png",
+      "sha256": "77c025dbe17ea5c48b03cb9db2052e496f6bc2cdc28b9d9d76771d2ff21aa92e"
+    },
+    {
+      "path": "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source/research_group_meeting_regression.pptx",
+      "sha256": "a6ed6fe02c8a6ff54db248fd2f5e9426ccd0644a07f7e61ae0906d163cebc348"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/build_ai_bridge_visual_inputs.py",
+      "sha256": "ca244f0cef59503efeca74aef15ab21bd99d43de0241c90fe59d0c606f2e07da"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/generate_statistical_method_group_meeting_benchmark.py",
+      "sha256": "4f229a062fd021b02fa49e9528eab0155de52af8cf438067c61e7ac6bf0f6a67"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/review_statistical_method_group_meeting_benchmark.py",
+      "sha256": "59e26791ee99901778a7f2465013d9e23ca1530507aefa579a8c7a6218ced77e"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/EVIDENCE_MANIFEST.json",
+      "sha256": "1ae31810f697558c8831219e56180b6a89e8fc04ab24212ec451b0486c27b1f0"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/MECHANICAL_VISUAL_REVIEW.json",
+      "sha256": "63963e6ff8d8ff0a77c41967c42f58df22df204d9b06f519856ed49df01d6d4d"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/RENDER_STATUS.json",
+      "sha256": "09ba2a78c7bc35d24866ad5b94a1e11118cb82a5a9653aa5d228def8084fe210"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/coverage_by_icc.png",
+      "sha256": "cc8f7bda54555299944de1663e9620e8e579eb1e2697eee0395fe3db3c354857"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/slide1_components.png",
+      "sha256": "4a0640baf38be3900ad8c7800372627cc09957bbc82d1e4d5bd39502a34abea0"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/slide1_dgp.png",
+      "sha256": "74f4dde765ba5b42bd795089a8e87dc7335f838b3035f313080ac2d2841bc4e5"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/slide1_icc.png",
+      "sha256": "06b4afb9484575d63933cbbfb7a801e9fc759e6883e0562e8708e49ed8a108da"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/slide2_naive.png",
+      "sha256": "89552d8a5495fb3fbb6c3bd45314da31a64f19ab15f0dda906a7c19133230936"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/slide2_sandwich.png",
+      "sha256": "27f6b029b789f7a4b6bbe98d3819bb004c4dea2fbf625ec6a0d3ff46c84cd72f"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/small_g_negative_result.png",
+      "sha256": "69b2c66637554bd9fb44c319cbdeab52037906aadd1e49a145dae657c5252e8b"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/expected_render/slide-1.png",
+      "sha256": "5193c27de468a38b8aa4284474262a1d4dcaea09d89d1cf0f8d0c62ad7dc7117"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/expected_render/slide-2.png",
+      "sha256": "4fd2da3db5be4eb45054855621ceef5addb26361f24b3ecca9fc99624d490406"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/expected_render/slide-3.png",
+      "sha256": "c7f08151deca50d477e73779f4fcd8b6b2b2b8e6d4d9ca876c9302d4d87d60c2"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/expected_render/slide-4.png",
+      "sha256": "9b0dd1ba796eb26f47ed08c5b0868fdcb549d14804def9cd5129df00984837a1"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/expected_render/slide-5.png",
+      "sha256": "d9dbfdc696e9ab0582dbdc3593436a740f77ef381685778639470caef0a76821"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/pdf/statistical_method_group_meeting_benchmark.pdf",
+      "sha256": "0f496e39284811fbe0c07b52ec3f4a398eb004976c6c91d5f67e615e074140cf"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/reference_design_audit.json",
+      "sha256": "e9d279bec967edf30a6b3af2988b12b469c03de75ed2176bd92a7dfcc0b4cfd0"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/contact-sheet.png",
+      "sha256": "22d4fef39271ae8e760aa4e8759b41340610fed2c11cf68eb7860d059d8a80a6"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-1.png",
+      "sha256": "5193c27de468a38b8aa4284474262a1d4dcaea09d89d1cf0f8d0c62ad7dc7117"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-2.png",
+      "sha256": "4fd2da3db5be4eb45054855621ceef5addb26361f24b3ecca9fc99624d490406"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-3.png",
+      "sha256": "c7f08151deca50d477e73779f4fcd8b6b2b2b8e6d4d9ca876c9302d4d87d60c2"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-4.png",
+      "sha256": "9b0dd1ba796eb26f47ed08c5b0868fdcb549d14804def9cd5129df00984837a1"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-5.png",
+      "sha256": "d9dbfdc696e9ab0582dbdc3593436a740f77ef381685778639470caef0a76821"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/simulation/simulation_summary.csv",
+      "sha256": "65d5f53db6af2a35f2ea9a41ab14b2a3868b7b9aef69e7268f60263dfe93c21c"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/simulation/simulation_summary.json",
+      "sha256": "e8ac5e5ecd5aee768df9510f3e22148827aa11c4f2b45437d259c8e2f5f90f94"
+    },
+    {
+      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/statistical_method_group_meeting_benchmark.pptx",
+      "sha256": "d3f3eccf64244209021924e0f5fc063219702ef9cf59d5c614f49d3cd497876d"
+    },
+    {
+      "path": "tests/fixtures/project_instructions_editor/known_good_generic_structure_regression.json",
+      "sha256": "a3012fb83fe2a4ddcc8401268cae90a165f7ad54fffde74f09bdd016bc6f5704"
+    },
+    {
+      "path": "tests/fixtures/project_instructions_editor/server_vps_known_good_positive_regression.json",
+      "sha256": "c3fa57ff393fd6a6d17dd207bda67d1341694d011d60991175ba6819e57113a1"
+    },
+    {
+      "path": "tests/fixtures/project_instructions_editor/surface_consolidation_repair.json",
+      "sha256": "a663945485b4b34f74958df744b44c4e8a8a8eb8cfc555d4f1fba460f948c5b4"
+    },
+    {
+      "path": "tests/fixtures/project_thread_handoff/g3_regressions.json",
+      "sha256": "68e6e386ebd3485d50b54de3718e15adf8f684b2af9c7c31c3b5cc113be8057c"
+    },
+    {
+      "path": "tests/fixtures/scientific_rewrite/protected_policy/assembly_packet.json",
+      "sha256": "83fc59870e28edd2638ed084112569284b3b98a10d3f0044731e234560990c7b"
+    },
+    {
+      "path": "tests/fixtures/scientific_rewrite/protected_policy/final_candidate.md",
+      "sha256": "9d89035bf311e04bf935ff89a50557cc81f7c6df6c5aa9bb65fb3f9ee835988e"
+    },
+    {
+      "path": "tests/fixtures/scientific_rewrite/protected_policy/meaning_map.json",
+      "sha256": "61f2038342affd24b073f9ae73ff8c2e27bfee9cbea2f39a948273062cd47eb7"
+    },
+    {
+      "path": "tests/fixtures/scientific_rewrite/protected_policy/prompt.md",
+      "sha256": "f4b3ea1a665857556c68b8de20834f7d7cf878f59b39c08041adad65dfe4514c"
+    },
+    {
+      "path": "tests/fixtures/scientific_rewrite/protected_policy/reader_plan.json",
+      "sha256": "6a46566f836dd01e86f943789d2d867c130bd8ecdf4386128d0d540cdd136dd4"
+    },
+    {
+      "path": "tests/fixtures/scientific_rewrite/protected_policy/realization_packets/identity.json",
+      "sha256": "cdf91e00ffcffb484900e1467f02c2750d55f27412b28d4924d179b6db5b9f02"
+    },
+    {
+      "path": "tests/fixtures/scientific_rewrite/protected_policy/realization_packets/policy.json",
+      "sha256": "abfe1159a79daba7677929d9d8f85f3ecd83452cd77b561756fa92b044f6698f"
+    },
+    {
+      "path": "tests/fixtures/scientific_rewrite/protected_policy/realization_packets/scope.json",
+      "sha256": "e226abd508760669d9b1c54a1e53522b2c049c8c0fdd08854b1e21b65075feb2"
+    },
+    {
+      "path": "tests/fixtures/scientific_rewrite/protected_policy/realization_packets/validation.json",
+      "sha256": "081e0a2dcbc174107aafbfd5fcc2eded81d45681b311539388286589316ccf08"
+    },
+    {
+      "path": "tests/fixtures/scientific_rewrite/protected_policy/route_selection.json",
+      "sha256": "3ac26cb48058e2101d37cb9e056243eef401361e9b7c8670457a1ab78df0cd65"
+    },
+    {
+      "path": "tests/fixtures/scientific_rewrite/protected_policy/semantic_audit.json",
+      "sha256": "093a4c24b554105c00799741b739b1c7af3f3e7ba6f5748673b42f706afffe80"
+    },
+    {
+      "path": "tests/fixtures/scientific_rewrite/protected_policy/source.md",
+      "sha256": "45766584319e84c3fd20e02da2349a880a4e67fca59024c54cb00fc973759640"
+    },
+    {
+      "path": "tests/test_056_product_delivery_discipline_gates.py",
+      "sha256": "80f973b577a36477e47122fa8659d9e690eb455c966c3cef7694b15de053908e"
+    },
+    {
+      "path": "tests/test_candidate_plugin_replay.py",
+      "sha256": "b706edb7add7455866171a1c12b7c961cb1a77bce26f859450588e2b9046d885"
+    },
+    {
+      "path": "tests/test_central_plugin_icon_assets.py",
+      "sha256": "3c10ff4092a97506d61df61b6051f44ec087b3e2ee4ae2c94ba9166842d8582a"
+    },
+    {
+      "path": "tests/test_clear_writing_chatgpt_wrapper.py",
+      "sha256": "5728477daa0b60daa3c3bc17c356dc61598aa84ff462dc15d268aa2145073a62"
+    },
+    {
+      "path": "tests/test_clear_writing_unified_delivery.py",
+      "sha256": "dcca4363c53008097b3ab381aef8537af0a9b7c1de740f37ae8cfec950a9a906"
+    },
+    {
+      "path": "tests/test_codex_marketplace.py",
+      "sha256": "e2ea73a40512c3ebc739d31f469a882ebcadf89dac4d431ad1b46e9ebd79391c"
+    },
+    {
+      "path": "tests/test_frontend_design_production_consolidation.py",
+      "sha256": "17134dfb03b13e74bdac3bec7a06d1b5b61db30eaefcef7c33141cf5733ff21f"
+    },
+    {
+      "path": "tests/test_icon_audit.py",
+      "sha256": "0b227220be790d8ea79b8528a86db96a5540f8b6484aeed85a11082f3e9c728c"
+    },
+    {
+      "path": "tests/test_maintenance_board_issue_metadata.py",
+      "sha256": "f6a60ce7eeec6c45acedfe7cb35bb202179fa071ef9b61d4f30f029e88f2a700"
+    },
+    {
+      "path": "tests/test_paid_review_workflows.py",
+      "sha256": "6701a57ffe2dbc4264759511750fbd0bc5dc9bfaaf69e59e9e1b9925e2203d50"
+    },
+    {
+      "path": "tests/test_palette_workflows.py",
+      "sha256": "7e0f0c744226a222ca1df5c624a04f05f71988bd1fafcd0322206a2d37b0d4dd"
+    },
+    {
+      "path": "tests/test_presentations.py",
+      "sha256": "042b80065c57f4741330a61d9a01110835ada84e8d39f266ab037c2bb81db835"
+    },
+    {
+      "path": "tests/test_product_ui_copy_cross_plugin.py",
+      "sha256": "2dd12d9c07284d3a846ec99d1ad8eb0f2303f73003b64343d3077433b9fa6cc4"
+    },
+    {
+      "path": "tests/test_project_instructions_editor_contract.py",
+      "sha256": "8c8ac51ddf3b25e35069a669d7d06948f44d72288c6b7a25dcae411076294e3e"
+    },
+    {
+      "path": "tests/test_project_thread_handoff_contract.py",
+      "sha256": "948a6da6b191e0092783f75440f2acdf5cf5956452cfc9f1a159a2c02a6ce85f"
+    },
+    {
+      "path": "tests/test_render_chinese_math_pdf.py",
+      "sha256": "4f064740bbf1a14d2b3c2652897a02a6909307b735ae82489a8a834b7b0c515b"
+    },
+    {
+      "path": "tests/test_research_writing_routing.py",
+      "sha256": "a207bb62b5187194bdc5723616fda050ebe3883bd07f5fcda001e181849bdb4b"
+    },
+    {
+      "path": "tests/test_reviewed_handoff_prompt_contract.py",
+      "sha256": "996715f2eab56670c33c33c2f77bbe3a5f087906cc58130c856f81a9be4bd774"
+    },
+    {
+      "path": "tests/test_reviewed_handoff_visual_target.py",
+      "sha256": "509a8ab46fa527c57809be7fc60bd6a21f773c3a8a6e4c22f58af2444bcfff10"
+    },
+    {
+      "path": "tests/test_scientific_rewrite.py",
+      "sha256": "345bb023bda14b9c728c61874abe7e4299f6f33e37ccbd0bc8253b1af87a6507"
+    },
+    {
+      "path": "tests/test_server_installation_smoke.py",
+      "sha256": "b4239d2ead8f6bbb046740931c4d419c844bad8e131350539376fe2e9868484c"
+    },
+    {
+      "path": "tests/test_skill_intake_adapter.py",
+      "sha256": "604af7ff62debf291cf75e3ef879ff65245b6a6ef4db58ce74ba9978c3648cd0"
+    },
+    {
+      "path": "tests/test_skill_provenance.py",
+      "sha256": "b7a1a31f84e599cc14ddbce39026dc720239f6cfc86cc2f10d31b0c70bd1abec"
+    },
+    {
+      "path": "tests/test_skill_runtime_text_audit.py",
+      "sha256": "57319a37d8da9a410381fe7d5ce413b5283bdfa6a6d32eb008eba9dc97f224ec"
+    },
+    {
+      "path": "tests/test_skill_update.py",
+      "sha256": "cc6b7a127df00ddc47e5b6343f4009208bfaf8b116d527c2e3a8903aa2ed3641"
+    },
+    {
+      "path": "tests/test_slurm_workflows.py",
+      "sha256": "d1024c983963524a1645c8e1b60eb08f489dd497129ada1b573acf6fe9487075"
+    },
+    {
+      "path": "tests/test_standalone_skill_baselines.py",
+      "sha256": "005611f2cf75faf2f300ef01cfb00cd3562213e024570bdcdfad1ba8d3649ae1"
+    },
+    {
+      "path": "tests/test_workflow_core_normal_entry_reliability.py",
+      "sha256": "9c95c5555ba1fa77437fc12cd479aaaab75f0d51ab622154004f3be9687e854f"
+    },
+    {
+      "path": "tests/test_workflow_core_reviewed_handoff_routing.py",
+      "sha256": "8ffd05774f57ce5e483887a9b338c9ee511b5174ef7aacfcc88f3c538ce2c4ce"
     }
   ],
+  "transform_rule_version": "CW06_ROUTE_PROJECTION_V1",
+  "zip_spec_version": "CW06_DETERMINISTIC_ZIP_V1",
+  "reader_value_contract": "CHAT_RESPONSE_READER_VALUE_SELECTION_V1",
+  "gate_rule_version": "CW06-v0.4",
+  "archive_reader_sha256": "df42236be5e1e799f9440a59311e11c453966cc723d11eccdc7cbec854a57187",
+  "runtime": {
+    "cli": "0.153.4",
+    "actual_model": "gpt-6-astra",
+    "actual_reasoning_effort": "None",
+    "explicit_model_arguments": false,
+    "ignore_user_config": true
+  },
+  "codex_candidate_replay": "PASS",
+  "known_regressions": "18/18 PASS",
+  "should_not_change": "4/4 PASS",
+  "replay_lineage": {
+    "first_product_source": "157725b909775e169926c449844301e772e50f08",
+    "first_product_cases": 22,
+    "generic_replay_successes": 21,
+    "exact_only_protection": "PASS; wrapper exit 1 and no skill consumption retained",
+    "unaffected_product_evidence_carried_forward": 21,
+    "production_delta": [
+      "plugins/codex/plugins/writing-style/skills/scientific-rewrite/scripts/rewrite_support.py",
+      "skills/writing/core/scientific-rewrite/scripts/rewrite_support.py"
+    ],
+    "affected_fixed_product_revalidation_source": "cee207d3fa83ad4571f94774f3896798d837a5ca",
+    "affected_revalidation": "v0.4/helper-revalidation/RESULT.json",
+    "first_product_redrafted": false
+  },
+  "implementation_review": "PASS",
+  "code_implementation": "COMPLETE",
+  "current_final_candidate_frozen": true,
   "release_status": "NOT_RELEASED",
   "live_gates": "NOT_RUN",
-  "historical_only": true,
+  "web_gates_run": false,
+  "historical_only": false,
+  "live_personal_plugin_mutated": false,
+  "next_handoff": "PHASE_C",
   "release_eligible": false,
-  "superseded_by_approved_package": "48c42f89d23ba168e2d2045034a7f7117c2e0448",
-  "current_final_candidate_frozen": false
+  "meaning": "Code and Codex candidate accepted; account backup/restore, Web gates and formal release remain separate."
 }
