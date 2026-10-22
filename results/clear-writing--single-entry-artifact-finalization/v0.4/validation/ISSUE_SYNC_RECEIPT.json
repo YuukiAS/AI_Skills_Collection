@@ -1,0 +1,18 @@
+{
+  "issue": "https://github.com/YuukiAS/AI_Skills_Collection/issues/13",
+  "updated_at": "2026-10-22T08:02:33Z",
+  "body_sha256": "b45450930652b7bb1108ef3e9798b084f40bfbe5e08b441bf430138c98ce2c35",
+  "full_readback_equal": true,
+  "state": "OPEN",
+  "project_fields": {
+    "Title": "让 Clear Writing 成为跨 Project 的最终用户阅读层",
+    "Status": "DOING",
+    "Area": "writing-style"
+  },
+  "project_mutation_required": false,
+  "source_commit": "cee207d3fa83ad4571f94774f3896798d837a5ca",
+  "published_evidence_commit": "76983f6e4143bd63a99ca513842ed499823298f6",
+  "actual_installed_clear_writing_review": "validation/ISSUE_LANGUAGE_REPLAY.json",
+  "history_preserved": true,
+  "next_handoff": "PHASE_C"
+}
