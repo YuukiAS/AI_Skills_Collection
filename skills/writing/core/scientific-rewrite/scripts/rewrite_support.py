@@ -933,7 +933,7 @@ def validate_stage_package(
 
 def command_validate_stage(args: argparse.Namespace) -> None:
     source = Path(args.source).read_text(encoding="utf-8")
-    prompt = Path(args.prompt).read_text(encoding="utf-8").rstrip("\n") if args.prompt else None
+    prompt = Path(args.prompt).read_text(encoding="utf-8") if args.prompt else None
     receipt = validate_stage_package(
         source,
         Path(args.stage_dir),

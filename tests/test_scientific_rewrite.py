@@ -205,7 +205,9 @@ def build_valid_stage(root: Path) -> tuple[str, Path, dict]:
     write_json(stage_dir / "assembly_packet.json", assembly_packet)
     write_json(stage_dir / "semantic_audit.json", semantic_audit)
     (stage_dir / "final_candidate.md").write_text(final_candidate + "\n", encoding="utf-8")
-    (root / "prompt.md").write_text(prompt + "\n", encoding="utf-8")
+    # Store exactly the bytes classified above. The frozen real-policy fixture
+    # separately covers a prompt that genuinely includes a trailing newline.
+    (root / "prompt.md").write_text(prompt, encoding="utf-8")
     return source, stage_dir, meaning_map
 
 
@@ -705,6 +707,23 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
         context["reader_plan"] = {"bundles": []}
         with self.assertRaises(helper.ValidationError):
             helper.validate_reader_facing_internal_frame(candidate, **context)
+
+    def test_stage_cli_preserves_exact_prompt_bytes_and_rejects_changed_prompt(self) -> None:
+        stage = REPO_ROOT / "tests/fixtures/scientific_rewrite/protected_policy"
+        with tempfile.TemporaryDirectory() as tmp:
+            receipt = Path(tmp) / "receipt.json"
+            command = [sys.executable, str(HELPER_PATH), "validate-stage", "--source", str(stage / "source.md"),
+                       "--prompt", str(stage / "prompt.md"), "--stage-dir", str(stage), "--receipt", str(receipt)]
+            result = subprocess.run(command, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(json.loads(receipt.read_text())["candidate_sha256"],
+                             helper.sha256_text((stage / "final_candidate.md").read_text()))
+            changed = Path(tmp) / "changed-prompt.md"
+            changed.write_text((stage / "prompt.md").read_text() + "changed\n")
+            command[command.index("--prompt") + 1] = str(changed)
+            result = subprocess.run(command, capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("route selection prompt hash mismatch", result.stderr)
 
     def test_protected_workflow_prefix_cannot_authorize_a_different_path(self) -> None:
         source = "复现所需状态位于 /repo/.local-runtime/safe/STATE.json。"
