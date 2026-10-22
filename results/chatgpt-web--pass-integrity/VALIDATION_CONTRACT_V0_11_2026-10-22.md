@@ -28,7 +28,7 @@
 
 ## 5. D：真实技术更替下的连续多轮
 
-用只读历史源 `docs/design/slurm-workflows/SLURM_PROTECTED_PARTITION_CHAT_CONFIRMATION_PROPOSAL_V2_2026-10-18.md`、`...PROPOSAL_V2_1_2026-10-18.md`、`docs/design/slurm-workflows/SLURM_PROTECTED_CANCEL_PORTABLE_RUNTIME_PROPOSAL_V3_2026-10-19.md` 及当前正式 `skills/tools/hpc/slurm-workflows/SKILL.md` 和正式发布证据。历史 v2 涉及 `request_user_input/PostToolUse`，正式 0.5 使用 `PreToolUse/PermissionRequest` 与并行 `mcp_tool`，绝不把部分认可的“Wrapper→Hook”教学例子冒充实际完整历史。
+用只读历史源 `docs/design/slurm-workflows/SLURM_PROTECTED_PARTITION_CHAT_CONFIRMATION_PROPOSAL_V2_2026-10-18.md`、`docs/design/slurm-workflows/SLURM_PROTECTED_PARTITION_CHAT_CONFIRMATION_PROPOSAL_V2_1_2026-10-18.md`、`docs/design/slurm-workflows/SLURM_PROTECTED_CANCEL_PORTABLE_RUNTIME_PROPOSAL_V3_2026-10-19.md` 及当前正式 `skills/tools/hpc/slurm-workflows/SKILL.md` 和正式发布证据。历史 v2 涉及 `request_user_input/PostToolUse`，正式 0.5 使用 `PreToolUse/PermissionRequest` 与并行 `mcp_tool`，绝不把部分认可的“Wrapper→Hook”教学例子冒充实际完整历史。
 
 至少观察一次技术实质变化后的 `Planner → Critic REVISE → Planner 更新同版技术和用户说明 → Critic 复核`。首轮可为候选合同绑定身份；后续只传普通任务与真实 review/source locator，不再附“必须说人话、具体写哪些 Hook”的答案清单。不修改 Slurm，不实际 `scancel`。若真实材料不支持制造的 REVISE，就保留未达成结论，不伪造历史或改题挑赢家。完整用户正文必须保留当前有效机制、前轮变化、仍未证明的故障和 verdict 原因。
 
