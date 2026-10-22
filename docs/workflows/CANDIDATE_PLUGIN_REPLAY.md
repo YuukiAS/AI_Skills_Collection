@@ -22,7 +22,14 @@ python3 scripts/candidate_plugin_replay.py replay \
   --input <repo-local-input-file>
 ```
 
-Repeat `--input` when a task needs multiple files.
+Repeat `--input` when a task needs multiple files. When the frozen task binds a
+model and reasoning effort, pass `--model <model>` and
+`--reasoning-effort <effort>`. These map to the pinned CLI's `--model` and
+`-c model_reasoning_effort=...`; `--ignore-user-config` remains in place.
+Omitting both preserves the existing invocation and default behavior. The
+receipt records explicit requests and the launched command, not a claim that
+the service honored them. Verify actual child runtime evidence before
+accepting a model binding; a requested value alone is not proof.
 
 Current compatibility pin:
 

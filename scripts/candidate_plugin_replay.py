@@ -647,6 +647,8 @@ def run_child_exec(
     stdout_path: Path,
     stderr_path: Path,
     writable_dirs: list[Path] | None = None,
+    model: str | None = None,
+    reasoning_effort: str | None = None,
     timeout_seconds: float = DEFAULT_CHILD_TIMEOUT_SECONDS,
     terminate_grace_seconds: float = DEFAULT_CHILD_TERMINATE_GRACE_SECONDS,
 ) -> CommandResult:
@@ -658,6 +660,10 @@ def run_child_exec(
         "--json",
         *codex_config_args(marketplace_root),
     ]
+    if model is not None:
+        args.extend(["--model", model])
+    if reasoning_effort is not None:
+        args.extend(["-c", f"model_reasoning_effort={json.dumps(reasoning_effort)}"])
     for one_plugin_id in plugin_ids:
         args.extend(
             [
@@ -740,8 +746,14 @@ def run_replay(
     task_arg: str,
     input_args: list[str],
     writable_dir_args: list[str] | None = None,
+    *,
+    model: str | None = None,
+    reasoning_effort: str | None = None,
 ) -> dict[str, Any]:
-    return run_replay_multi(root, [plugin], candidate_commit, task_arg, input_args, writable_dir_args, legacy_single=True)
+    return run_replay_multi(
+        root, [plugin], candidate_commit, task_arg, input_args, writable_dir_args,
+        legacy_single=True, model=model, reasoning_effort=reasoning_effort,
+    )
 
 
 def run_replay_multi(
@@ -753,6 +765,8 @@ def run_replay_multi(
     writable_dir_args: list[str] | None = None,
     *,
     legacy_single: bool = False,
+    model: str | None = None,
+    reasoning_effort: str | None = None,
 ) -> dict[str, Any]:
     runtime = ensure_runtime_available(root)
     paths = runtime_paths(root)
@@ -803,6 +817,8 @@ def run_replay_multi(
                     stdout_path=stdout_path,
                     stderr_path=stderr_path,
                     writable_dirs=writable_dirs,
+                    model=model,
+                    reasoning_effort=reasoning_effort,
                 )
                 if not stdout_path.exists():
                     stdout_path.write_text(child.stdout, encoding="utf-8")
@@ -848,6 +864,11 @@ def run_replay_multi(
                     "stderr_path": str(stderr_path),
                     "writable_dirs": [str(path) for path in writable_dirs],
                 }
+                if model is not None or reasoning_effort is not None:
+                    result["requested_model_config"] = {
+                        "model": model, "reasoning_effort": reasoning_effort,
+                    }
+                    result["child_command"] = list(child.args)
                 if legacy_single and len(plugin_results) == 1:
                     single = plugin_results[0]
                     result.update(
@@ -889,6 +910,8 @@ def build_parser() -> argparse.ArgumentParser:
     replay.add_argument("--task", required=True)
     replay.add_argument("--input", action="append", default=[], required=True)
     replay.add_argument("--writable-dir", action="append", default=[])
+    replay.add_argument("--model", help="explicit child model; user config remains ignored")
+    replay.add_argument("--reasoning-effort", help="explicit child model_reasoning_effort")
     return parser
 
 
@@ -900,9 +923,11 @@ def main(argv: list[str] | None = None) -> int:
             result = ensure_runtime(root)
         elif args.command == "replay":
             if len(args.plugin) == 1:
-                result = run_replay(root, args.plugin[0], args.candidate_commit, args.task, args.input, args.writable_dir)
+                result = run_replay(root, args.plugin[0], args.candidate_commit, args.task, args.input, args.writable_dir,
+                                    model=args.model, reasoning_effort=args.reasoning_effort)
             else:
-                result = run_replay_multi(root, args.plugin, args.candidate_commit, args.task, args.input, args.writable_dir)
+                result = run_replay_multi(root, args.plugin, args.candidate_commit, args.task, args.input, args.writable_dir,
+                                          model=args.model, reasoning_effort=args.reasoning_effort)
         else:
             raise ReplayError(f"unknown command: {args.command}")
     except ReplayError as exc:

@@ -534,6 +534,62 @@ class ReplayMechanismTests(unittest.TestCase):
             self.assertEqual(stdout_path.read_text(encoding="utf-8"), "stdout line\n")
             self.assertEqual(stderr_path.read_text(encoding="utf-8"), "stderr line\n")
 
+    def test_explicit_model_binding_preserves_default_child_command(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            workspace = root / "workspace"
+            output = workspace / "outputs"
+            output.mkdir(parents=True)
+            codex = self.make_executable(
+                root,
+                "#!/usr/bin/env python3\n"
+                "import json, sys\n"
+                "sys.stdin.read()\n"
+                "print(json.dumps(sys.argv[1:]))\n",
+            )
+            def invoke(**config):
+                return replay.run_child_exec(
+                    codex, root / "marketplace", "writing-style@ai-skills-candidate",
+                    workspace, output, "prompt", stdout_path=root / "stdout",
+                    stderr_path=root / "stderr", timeout_seconds=5, **config,
+                )
+
+            default = json.loads(invoke().stdout)
+            self.assertEqual(default, [
+                "exec", "--ignore-user-config", "--json",
+                *replay.codex_config_args(root / "marketplace"),
+                "-c", "plugins.writing-style@ai-skills-candidate.enabled=true",
+                "-s", "workspace-write", "-C", str(workspace),
+                "--add-dir", str(output), "--skip-git-repo-check", "--ephemeral", "-",
+            ])
+            for config, additions in [
+                ({"model": "gpt-6.1-sol"}, ["--model", "gpt-6.1-sol"]),
+                ({"reasoning_effort": "high"}, ["-c", 'model_reasoning_effort="high"']),
+                ({"model": "gpt-6.1-sol", "reasoning_effort": "high"},
+                 ["--model", "gpt-6.1-sol", "-c", 'model_reasoning_effort="high"']),
+            ]:
+                with self.subTest(config=config):
+                    bound = json.loads(invoke(**config).stdout)
+                    offset = default.index("plugins.writing-style@ai-skills-candidate.enabled=true") - 1
+                    self.assertEqual(bound, default[:offset] + additions + default[offset:])
+
+    def test_model_binding_is_forwarded_from_cli_for_single_and_multi_plugin(self) -> None:
+        base = ["replay", "--plugin", "writing-style", "--candidate-commit", "abc",
+                "--task", "task.md", "--input", "input.md"]
+        for extra, target in [([], "run_replay"), (["--plugin", "research-writing"], "run_replay_multi")]:
+            with self.subTest(target=target), mock.patch.object(replay, target, return_value={}) as run_mock:
+                with mock.patch("sys.stdout", new_callable=io.StringIO):
+                    self.assertEqual(replay.main(base + extra + ["--model", "gpt-6.1-sol",
+                                                               "--reasoning-effort", "high"]), 0)
+                self.assertEqual(run_mock.call_args.kwargs, {"model": "gpt-6.1-sol", "reasoning_effort": "high"})
+
+    def test_single_replay_forwards_binding_to_shared_implementation(self) -> None:
+        with mock.patch.object(replay, "run_replay_multi", return_value={}) as shared:
+            replay.run_replay(Path("/repo"), "writing-style", "abc", "task.md", ["input.md"],
+                              model="gpt-6.1-sol", reasoning_effort="high")
+        self.assertEqual(shared.call_args.kwargs,
+                         {"legacy_single": True, "model": "gpt-6.1-sol", "reasoning_effort": "high"})
+
     def test_child_exec_timeout_preserves_streams_and_kills_process_group(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
