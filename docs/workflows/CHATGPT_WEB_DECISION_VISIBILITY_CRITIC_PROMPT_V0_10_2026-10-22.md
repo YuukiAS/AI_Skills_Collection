@@ -83,6 +83,6 @@ PACKAGE_COMMIT=<用户复制本提示词时另行提供准确 v0.10 commit>
 
 本轮设计阶段只能 `PROCEED / REVISE`，下一个接收方仍为当前 Planner。结尾自动给完整 `NEXT_HANDOFF=PLANNER` 和 `COPY TO PLANNER`，填准审查提交、finding、用户需了解的修订及阶段，不能要求用户找路径、补文字或自己解释意见。
 
-如果当前审查无法向 repo 写 review，用户转发的完整 Critic 原文就是交接依据；Planner 可按实际来源如实归档，不能假称 Critic 已提交文件。本轮绝不提供 `COPY TO CODEX` 或 `READY_FOR_CODEX=YES`。
+如果当前审查无法向 repo 写 review，`COPY TO PLANNER` 必须包含本轮实际独立结论、完整实质 finding、自然中文原因与关键证据/来源身份，不能只引用一个未创建的 review 文件；机器块可以较长，用户只负责整体复制。原 Planner再如实归档，不能冒称 Critic 已提交 review commit。本轮绝不提供 `COPY TO CODEX` 或 `READY_FOR_CODEX=YES`。
 
 本轮只读，不改 repo、Project setting、正式角色文件或任何产品源码；不运行付费模型、不操作真实账户/Slurm、不建立新的后台执行器。
