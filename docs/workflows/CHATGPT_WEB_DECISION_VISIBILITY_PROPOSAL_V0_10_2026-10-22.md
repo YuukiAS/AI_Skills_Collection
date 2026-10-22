@@ -96,7 +96,7 @@ Critic 自己也必须在本轮 review 的用户前部说明 **为什么** `PROC
 
 既有 GitHub commit/branch/文件就是权威定位，不新增自定义签名或 state schema。每轮：
 - Planner 形成完整新 Proposal 和当前用户说明，提交并读回；交 Critic 的提示词包含准确任务、review 阶段、相关路径和不可变版本；
-- Critic 独立核对相同版本，回复有自己的结论、用户解释和稳定 findings。当前连接如只能只读，完整回复即原始审查记录，由接收 Planner 忠实归档；不假称自己写了 review commit；
+- Critic 独立核对相同版本，回复有自己的结论、用户解释和稳定 findings。当前连接如只能只读，必须把技术结论、完整实质 finding 和读者说明以可直接复制的自包含交接材料传给原 Planner，由后者忠实归档；不得只留下一个不存在的 review 路径，也不得要求用户整理审查原文；
 - 下一 Planner 先核对收到的 Critic review 所审版本与当前方案一致、是否真正解释了结论，再决定修订或最后交 Codex；
 - Codex 入口开始前按现有仓库/Bridge 的正常权限和证据规则检查当前批准对象和相应用户授权，不把用户短提示词、聊天里孤立的 PASS 或旧 Review 当实质权限。此步只声称可由实际普通入口验证的身份检查，不说有浏览器级不可绕过拦截。
 
