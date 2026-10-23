@@ -146,6 +146,16 @@ candidate_action:
 - 对跨领域临床读者，避免把术语教学当开场。先描述其熟悉的流程、重复工作、失败风险或决策痛点，再引入方法名称。
 boundary: DII、HAMP、具体 foundation model / segmentation 内容、导师原话和四页 paper 的具体科学材料属于项目证据，不进入通用模板。可迁移的是：**value-first communication、zero-context reader、figure-first mental model、adoption motivation、short paper as a distinct artifact、first-author oral explainability**。本条来自导师对真实 advisor PDF 的直接反馈，权重高于仅由助手自评形成的写作偏好；但它不意味着所有研究报告都必须四页，也不意味着所有正式论文都应减少数学细节。
 
+#### 2026-10-23：连续研究路线复盘缺少“科学需求—额外学习能力”的决策解释
+
+feedback_status: NEW
+source: `YuukiAS/Distributed_Imaging_Inference` / 多轮分布式影像学习研究复盘、三模型科学问题审查与研究方向重新收敛（2026-10-23）。
+evidence: 项目正式来源包括 `docs/plans/2026-09-22_auditable_shared_risk_evidence/22_THREE_DAY_SCIENTIFIC_POSTMORTEM_AND_DECISION_2026-09-25.md`、`docs/results/SUPERVISOR_BRIDGE_LAYER_A_RESULT_2026-09-18.md`、`RESEARCH_FOUNDATIONS.md` 和 2026-10-23 第三轮问题证据汇总；用户直接反馈指出此前答复把十项候选机械模板化，自评、重复解释和防御性限定过多，讲“更丰富的统计信息”却无法说明医院计算什么、服务器怎样学习及其必要性。
+problem: 即使已有事实、公式和直接前作，科研决策汇报仍可能误将“数值上恢复目标”“风险信号可稳定测量”“真正改善模型训练”“改善科学或临床终点”合成一个方法成功结论；在连续多次算法转向之后仅列出新候选，不解释最初任务、已测过的简单方法、为何转向及为什么当前建议继续研究问题而非再写算法。研究内容本身已经分清时，叙事层仍可能用无信息量的自我评估、反复澄清和统一候选模板掩盖具体机制与决定性缺口。
+project-specific context: MOSAiC、ODAL、COLA、CARE、M&Ms、HAMP、PGFM、CPPM、具体 Dice、医院与日期均属于 DII 研究证据，不能进入通用 Research Authoring 模板。这是对实际回答和研究文稿的用户反馈，未证实由当前正式 research-reporting 插件生成，不判为生产回归。
+observed handling: 当前 DII 已以真实实验记录恢复完整研究沿革，区分局部信息表达保真、独立患者间统计稳定、能否改变训练、是否改善医学目标；未来导师报告应直接说出研究原问题、每轮尝试回答了什么、最强反例和当前科学决定，只有与结论相关的实验进正文。对于候选方法，须用目标受众可以理解的计算—传输—更新机制说明新信息究竟增加了什么，相同信息条件下普通梯度/校准/强算法足够时应明确写出。
+boundary: 属于 research-reporting 的科研证据组织与读者决策叙事；通用措辞修订仍由 Clear Writing 负责。先并入现有 #22 的研究汇报反馈，留给 AI Skills 维护流程评估是否需新增正式通用规则及实际回放；不在项目 thread 直接修改 production SKILL、版本或路由。
+
 ### Meaning-first rewriting should be a reusable transformation pattern
 status: READY_FOR_PROMOTION
 tracking: #23
