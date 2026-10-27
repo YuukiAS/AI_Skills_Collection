@@ -4,15 +4,6 @@ Canonical maintenance inbox for the `ai-skills-core` plugin and repository-maint
 
 ## Open candidates
 
-### Reader-facing artifacts still lack a generic content-restraint / whitespace owner
-status: NEW
-source: repeated user feedback across DII Notion, generated images and product/UI artifacts, 2026-10-27
-evidence: `YuukiAS/AI_Research_Toolkit` branch `research/complex-system-showcase-20261026-r2-comparison`, `docs/history/notion/distributed-imaging-inference-version-history-2026-10-24-to-2026-10-27.md`
-problem: Multiple artifact types can be technically correct yet still feel obviously over-authored: extra explanatory text, labels, guidance, metadata or decorative structure are added after the user already has enough information to understand or act. Existing owners cover parts of the problem (Clear Writing for prose, product-ui-copy for UI copy, presentations/research-writing for domain authoring, renderers for layout), but no current owner is explicitly responsible for the cross-artifact decision “what should be visible at all, at what granularity, and when should the artifact stop explaining and leave space.” The failure appears in Notion pages, images/visual artifacts and UI, so it should not be reduced to a DII-specific writing rule.
-project-specific context: DII page history and the user’s current Notion cleanup are evidence only. Do not encode DII sections, prompts or research workflow as a generic rule.
-next maintenance question: decide whether this belongs in an existing artifact/content-authoring layer, a future artifact-rendering capability, or a small shared contract consumed by domain renderers. Do not implement a new plugin or skill until overlap with Clear Writing, product-ui-copy, research-writing, presentations, scientific visualization and web-development has been audited.
-
-
 ### 已有规则仍失效时，先核实实际调用并去重沉淀
 status: PROMOTED
 source: 2026-09-14 Bobbio / Lucerna / Mica / SeminarArc 跨项目开发反馈；用户要求以后开发不再反复依赖人工提醒，并询问是否自动沉淀 repo-specific TODO
