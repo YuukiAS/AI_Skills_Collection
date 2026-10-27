@@ -6,13 +6,21 @@ Future standalone capability for deciding what a reader-facing artifact should v
 
 ### Cross-artifact content restraint and whitespace
 status: NEW
-source: repeated user feedback across DII Notion, generated images and product/UI artifacts, 2026-10-27
-evidence: `YuukiAS/AI_Research_Toolkit` branch `research/complex-system-showcase-20261026-r2-comparison`, `docs/history/notion/distributed-imaging-inference-version-history-2026-10-24-to-2026-10-27.md`
+source: repeated user feedback across DII Notion, generated images and product/UI artifacts; CAT-TRACE Numerical Atlas full-copy audit and user acceptance, 2026-10-27
+evidence: `YuukiAS/AI_Research_Toolkit` branch `research/complex-system-showcase-20261026-r2-comparison`, `docs/history/notion/distributed-imaging-inference-version-history-2026-10-24-to-2026-10-27.md`; `YuukiAS/CAT-TRACE` branch `feat/numerical-atlas-20261023`, commits `f9ff1b8c530ad8dd749bb0b1396cdd41c0303108` and `cb5d1907fc24b1923c8f6a9e6dcbae5a92b40ed1`, `apps/numerical-atlas/docs/copy-audit/COPY_AUDIT_20261027.md`
 problem: Different artifact types repeatedly become over-authored even when the underlying content is correct. The model adds explanatory text, labels, guidance, metadata, sections or decorative structure after the user already has enough information to understand or act. The missing capability is not ordinary prose polishing or low-level rendering; it is deciding what should be visible at all, at what granularity, and when the artifact should stop explaining and leave space.
 scope examples: Notion/project pages, UI, generated visual artifacts, documents and presentations where content selection and visual restraint matter before final rendering.
 boundary: Clear Writing owns prose quality; product-ui-copy owns interface wording; research-writing owns research-document semantics; presentations and visualization own their domain composition; renderers own faithful layout. This future capability should not silently absorb those responsibilities.
-project-specific context: DII page history and current Notion cleanup are evidence only. Do not encode DII sections, prompts or research workflow as generic behavior.
+project-specific context: DII page history and current Notion cleanup are evidence only. CAT-TRACE method identities, formulas, accepted-versus-candidate method boundaries and unpublished-data boundary are also project-specific. Do not encode either project's sections, terminology or research workflow as generic behavior.
 next research step: audit overlap with existing authoring, UI, presentation, visualization and rendering skills; determine whether this becomes one standalone skill, a shared pre-render contract, or a small capability consumed by artifact-producing skills. Do not implement production behavior until that ownership study is complete.
+
+#### Accepted real-use evidence: CAT-TRACE Numerical Atlas
+
+A rendered-state inventory covered 11 routes plus desktop, mobile, filtering, selection, expansion and primary interaction states. It found 420 unique baseline copy units. The final checklist contained 423 disposition rows: 360 `KEEP`, 52 `REVISE` and 11 `DELETE`; the accepted render contained 403 unique visible copy units.
+
+The useful evidence was not a universal word-count target. The repair removed repeated process guidance, duplicated status, rigid field headings, unsupported interaction claims and reader-facing internal framing while retaining formulas, method identity, failure conditions, privacy boundaries and the distinction between adopted and candidate research methods. User review was performed against both the live website and the complete sentence-level disposition table rather than an implementation summary alone.
+
+The final user correction also exposed a boundary between content admission and wording. The literal translation `primitive` -> `原语` had entered the Chinese UI even though the concrete objects were `log1p` and `expm1`. The accepted wording used `稳定计算` for the control and `数值稳定函数` for the explanation. This terminology repair belongs to product copy and domain naming; artifact-level judgment should decide whether the text deserves space, then hand surviving wording to the appropriate owner instead of preserving a poor sentence merely because its underlying fact is relevant.
 
 
 ## Preliminary concept sketch — Artifact Director / artifact-level editorial judgment
@@ -272,4 +280,3 @@ A future implementation should be tested on whether it can:
 - avoid both failure modes: over-authored artifacts and over-minimal artifacts that leave the user unable to resume work.
 
 The DII Notion case is evidence for this distinction, not a Notion-specific specification. Formal architecture research should test the same judgment across other artifact classes before deciding ownership or implementation.
-
