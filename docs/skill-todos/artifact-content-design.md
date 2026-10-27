@@ -161,3 +161,115 @@ Before promotion, investigate at least:
 - which mature editorial/design systems or existing repositories provide reusable concepts instead of rebuilding a lower-quality framework from scratch.
 
 Again, this section is only a starting hypothesis. It may be substantially revised or fully replaced after overlap analysis and formal architecture review.
+
+## Additional research note — human-operational information is valid artifact content
+
+**Status of this section: PRELIMINARY ONLY.** This extends the concept above with a concrete lesson from the DII Notion history study. Notion is only one evidence case; the principle should be researched across project workbenches, documents, dashboards, UI, presentations, READMEs and other reader-facing artifacts.
+
+### Do not confuse workflow content with machine-only content
+
+A previous overcorrection treated AI workflow information as something that should automatically disappear from a human-facing workspace. That boundary is wrong.
+
+Workflow information may be exactly what the user needs to understand or operate a long-lived project. If the user may return months later and needs to know which actor does the next step, which prompt or tool to open, what prior results are inputs, what condition advances the work, or when to stop iterating and start validation, that information has earned visible space.
+
+The useful distinction to research is therefore not:
+
+```text
+human content vs AI workflow content
+```
+
+but closer to:
+
+```text
+human-operational semantics vs machine execution mechanics
+```
+
+Examples of human-operational semantics that may deserve direct visibility:
+
+- current direction, current stage and next meaningful action;
+- which person, model, tool or task should receive the next step;
+- which prompt, document, view or control the user should open;
+- which prior results are needed before continuing;
+- the minimum sequence of stages needed to resume a workflow correctly;
+- transition conditions such as "move to validation once the proposal is concrete enough";
+- stop conditions such as "continue review only after new evidence or a substantive mechanism change";
+- current candidates, key decisions and the few historical judgments that still change present choices.
+
+Examples of machine execution mechanics that usually should not consume visible space unless the human explicitly needs them:
+
+- run IDs, task IDs and internal identity strings;
+- branches, commit SHAs and pinning mechanics;
+- WRITE_CHECK / HANDOFF / receipt plumbing;
+- exact revision-storage conventions;
+- internal provenance or recovery metadata;
+- implementation details whose only purpose is to keep agents synchronized.
+
+The general design question is: **what is the minimum visible information that lets the intended human understand, decide or continue correctly?**
+
+### Four visibility outcomes before wording or rendering
+
+The earlier KEEP / COMPRESS / DEMOTE / REMOVE vocabulary should be tested with a more explicit information-sufficiency lens:
+
+1. **DIRECT** — show the information where the user is already looking because it changes immediate understanding, choice or action.
+2. **COMPRESS** — the information matters, but only the operational or decision-relevant core should remain visible.
+3. **LINK / DEMOTE** — the detail is legitimate and may need inspection, but the artifact only needs a short result or link to the full source.
+4. **REMOVE** — deleting it causes no meaningful loss of understanding, judgment or operation.
+
+This is not a rigid schema proposal; it is a useful decision test to study. The important behavior is that "important" does not imply "show in full."
+
+### Information sufficiency and the stop-explaining rule
+
+A recurring failure is that a model continues explaining after the artifact already contains enough information.
+
+For each visible block, ask:
+
+1. If this sentence or element is removed, does the user lose understanding, judgment or operating ability?
+2. What is the minimum granularity needed to preserve that ability?
+3. Has the point already been made by the heading, previous sentence, diagram, table or control?
+4. Does the next sentence add a genuinely new fact, decision or action?
+5. If not, stop.
+
+The desired artifact may therefore contain deliberate whitespace after a complete instruction or conclusion. A mature artifact should not add "this means...", "this helps avoid...", defensive disclaimers, repeated summaries or examples merely because more explanation is possible.
+
+### Current state should replace stale control information
+
+For long-lived project artifacts, visible control information should usually behave like a maintained workbench rather than an append-only log.
+
+When the active stage changes:
+
+- replace the old "what to do now" with the new one;
+- keep an old workflow visible only if the user is likely to return to it as a meaningful historical object;
+- otherwise retain the detailed history in the durable source and expose a link only when useful.
+
+The same principle applies beyond Notion: dashboards, project READMEs, status pages and product workspaces should privilege current operational truth over accumulated historical narration.
+
+### Subpages and secondary surfaces should earn their existence
+
+Create a subpage, appendix, details panel or secondary view only when the content forms a coherent object that the user is likely to revisit on its own.
+
+Do not create hierarchy merely because:
+
+- the content is long;
+- a workflow has many stages;
+- history exists;
+- every artifact type "should" have the same sections;
+- a model wants somewhere to put information it does not know how to delete.
+
+The alternative may simply be to compress the content, link the canonical source, or omit it.
+
+### Research implication for the future capability
+
+Artifact content design should therefore treat **operability for the human reader** as a first-class admission criterion alongside comprehension and decision support.
+
+A future implementation should be tested on whether it can:
+
+- preserve concise but essential operational instructions;
+- remove machine-only execution mechanics from the visible layer;
+- compress long workflow contracts into the few steps the human actually needs;
+- stop explaining after information sufficiency is reached;
+- distinguish current state from historical detail;
+- prefer a canonical-source link over duplicated detail when the user does not need the full text in place;
+- avoid both failure modes: over-authored artifacts and over-minimal artifacts that leave the user unable to resume work.
+
+The DII Notion case is evidence for this distinction, not a Notion-specific specification. Formal architecture research should test the same judgment across other artifact classes before deciding ownership or implementation.
+
