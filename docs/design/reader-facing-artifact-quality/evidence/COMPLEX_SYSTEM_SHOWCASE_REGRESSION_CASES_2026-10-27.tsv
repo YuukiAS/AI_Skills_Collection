@@ -1,0 +1,27 @@
+CASE_ID	CONTEXT	ORIGINAL	ERROR_TYPE	DISPOSITION	REVISED	WHY	OWNER
+CS-001	GPT-6 hero title	交付验收怎样工作	report-style self-definition	REWRITE	交付前，谁检查什么	Lead with the reader's decision task.	Clear Writing
+CS-002	GPT-5.6 hero title	一次交付怎样完成验收、返修和复验	over-complete title	REWRITE	失败怎样回到原任务	Keep the distinctive question; move the full process into the diagram.	Clear Writing
+CS-003	component inspector	为什么需要 / 接收什么 / 交给谁 / 去掉以后 / 目前情况	forced template	MERGE	One summary plus 0–3 object-specific facts	Field completeness is not reader value.	Artifact Curation
+CS-004	component inspector	为什么存在 / 需要什么 / 交出什么 / 谁接收 / 少了会怎样 / 当前状态	forced template	MERGE	One summary plus 0–3 object-specific facts	The same schema does not fit actors, artifacts and optional capabilities.	Artifact Curation
+CS-005	component field	去掉以后	invented completeness	DELETE	Delete the field; retain a concrete risk only when real.	A template should not manufacture hypothetical consequences.	Artifact Curation
+CS-006	component field	少了会怎样	invented completeness	DELETE	Delete; merge necessary meaning into the summary.	The field is redundant on most nodes.	Artifact Curation
+CS-007	page meta-copy	以下是按方案推演的三种结果，采用同一个 Lucerna 状态修复任务。	redundant meta explanation	DELETE	Delete	The controls and headings already establish the scenarios.	Artifact Curation
+CS-008	case note	最后一行是本原型构造的旧功能回归情境。	redundant counterexample label	DELETE	Delete	The row and path name already communicate regression.	Artifact Curation
+CS-009	architecture comparison	four-column three-route comparison	research process in product layer	RELOCATE	Keep one choice rationale; collapse rejected routes.	Useful evidence, wrong primary layer.	Artifact Curation
+CS-010	old effort estimate	three parallel estimate blocks	secondary evidence in primary layer	RELOCATE	Collapse under 旧方案估算	Preserve range nesting and non-budget caveat.	Artifact Curation + Writing Fidelity
+CS-011	implementation state	header + hero + badges + details + evidence + footer	semantic repetition	MERGE	One primary status; local copies add only new boundaries.	Repeated reassurance makes the whole page feel generated.	Artifact Curation
+CS-012	evidence section	four parallel disclosures about source, old research, feedback and validator risk	page-level repetition	MERGE	已有事实 + 还没证明的关键接线	Two disclosures preserve the decision boundary.	Artifact Curation
+CS-013	edge inspector	payload / trigger / consumer / success / gap	over-complete edge schema	MERGE	传递 / 接收与用途 / 当前	The graph already shows direction and sequence.	Artifact Curation
+CS-014	edge field	何时发生	low information gain	DELETE	Delete; merge a real precondition into receiver/use.	Most values merely paraphrase the edge action.	Artifact Curation
+CS-015	dynamic failure step	multi-actor paragraph restating the full architecture	state over-explanation	REWRITE	失败包含版本、证据和差异，由 Bridge Kit 送回同一个 Codex 任务。	A step should describe the current action and evidence change.	Clear Writing
+CS-016	status badge	已有；DA 接线待证	internal status packaging	REWRITE	已有，接线待证	Retain the boundary; remove the internal prefix.	Clear Writing
+CS-017	mobile architecture	1,710px full relation graph	desktop structure scaled to mobile	RELOCATE	Five-step path plus component entry points	Responsive curation changes reading priority.	Frontend Design + Artifact Curation
+CS-018	mobile architecture	existing current-path list	useful mobile task structure	KEEP	Keep; shorten subtitles	Do not replace a working mobile structure only for visual parity.	Frontend Design
+CS-019	component name	Delivery Assurance / Bridge Kit / workflow-core	necessary identifier	KEEP	Keep exact names	Naturalness is not authority to rename real components.	Writing Fidelity
+CS-020	evidence boundary	旧截图不能成为新版本证据	necessary risk boundary	KEEP	Keep near artifact/delivery judgment	Text reduction must not remove version identity.	Writing Fidelity
+CS-021	legacy protection	新用例通过，但旧入口失效；当前版本不能交付。	necessary failure condition	KEEP	Keep	This is a core delivery mechanism, not negative-tone noise.	Writing Fidelity
+CS-022	Clear Writing boundary	不替前端决定文本是否该出现，也不替项目改变结论。	capability boundary	KEEP	不替前端决定文字是否该出现。	Compress the sentence, preserve ownership.	Clear Writing
+CS-023	whole-page plain-text read	individually acceptable sections repeat one fact across the page	AI-report accumulation	MERGE	Run semantic de-duplication, then read all visible text continuously.	Line-level quality cannot certify the whole page.	Artifact Curation + Clear Writing
+CS-024	optional slots	every slot receives heading, explanation, state and source	completion-by-filling	DELETE	Allow one-sentence components, closed disclosures and whitespace.	Whitespace is hierarchy, not missing content.	Artifact Curation + Frontend Design
+CS-025	case card labels	历史事实 / 验收反例 / 旧功能保护	consulting-slide parallel labels	DELETE	Keep the three fact titles only.	The labels add no distinction beyond the titles.	Artifact Curation
+CS-026	protected delivery meaning	candidate identity, actual/expected result, failure destination, known unknowns	fidelity risk	KEEP	Preserve through every merge, relocation and rewrite.	Curation and naturalness must not weaken the contract.	Writing Fidelity
