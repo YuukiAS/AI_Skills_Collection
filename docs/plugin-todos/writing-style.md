@@ -33,6 +33,33 @@ project-specific context: CAT-TRACE 的具体 ((\alpha,\beta))、8 个 future sa
 
 
 
+
+### 2026-10-28：heatmap 解释跳过坐标轴与视觉编码，读者无法先建立“图在扫描什么”
+
+status: NEW
+source: CAT-TRACE `zero_slot_laplace_regime_map` 的 ChatGPT Web 解释；用户指出“heatmap 轴也不讲清楚都不知道在干嘛”，并显式调用 Clear Writing
+evidence:
+- **失败版本 1：先讲公式与结论，坐标轴定义出现太晚。** 回答先解释 anonymous zero-slot、(I_g)、(m_g\log I_g) 和 accumulated error，再进入 heatmap；读者需要先处理一整段模型对象，仍不知道图的横轴和纵轴具体扫了什么。
+- **失败版本 2：自我纠正时反而删掉必要的轴解释。** 回答压缩成“左图是误差地图，越深错得越多”，随后直接说“随着 (n) 和 (gamma_g) 增大，问题越来越严重”，却没有先明确：横轴 (n) 是训练中的 sampling units 数量；纵轴 (gamma_g) 是该 open-tail group 的 richness/intensity 参数；每个格子对应一个固定的 ((n,gamma_g)) 组合；颜色编码的是该组合下 1000 个 anonymous zero slots 累积后的 Laplace-vs-reference absolute log-likelihood error。
+- **读图顺序失败**：用户看到 heatmap 时，首先需要知道“横着变什么、竖着变什么、一个格子是什么、颜色是什么”，而不是先听“系统性失败”“不是 cherry-picked”或“必须换算法”的结论。缺失这四个视觉对象定义后，后面的科研判断没有落点。
+
+problem:
+- **视觉对象没有先建立 reader model**：解释图表时，只讲数学对象还不够；必须把数学对象绑定到实际视觉元素。横轴、纵轴、颜色、点/线/格子各自代表什么，应在分析结论之前完成。
+- **过度压缩会删掉必要信息**：Clear Writing 不能把“简洁”理解为删除轴解释。对图表，轴与编码定义是最低限度的信息，不属于可省略的细节。
+- **结论先于读图机制**：直接说“误差随 n 和 gamma 增大”“一大片区域失效”，要求读者先相信结论，却还不知道如何从图上看到这个结论。
+- **术语必须落到当前图中**：例如 (n) 应直接解释为“训练中有多少个 sampling units”，(gamma_g) 应解释为“这个 open-tail group 的 richness/intensity 参数”，而不能只保留符号名。
+
+desired behavior / acceptance:
+- 解释 heatmap 时，默认先按以下顺序建立视觉语义：**横轴是什么 → 纵轴是什么 → 每个格子是什么 → 颜色是什么**。
+- 若有特殊标记，再解释标记：例如白圈是哪一个参数组合、等高线代表什么。
+- 若有第二 panel，再单独说明它是第一 panel 的哪个 slice / projection，以及为什么需要它。
+- 只有读者已经能独立指出“图上任意一个位置代表什么”之后，才总结趋势和科学结论。
+- 对专家受众可以简短，但不能省略视觉编码。所谓简短应该是“每个对象一句话”，而不是跳过对象。
+- 回归检查：给一张二维科研 heatmap，单次回答后用户应能准确回答五个问题：横轴是什么、纵轴是什么、一个格子是什么、颜色是什么、作者从图里看到了什么。任一问题仍需追问，判为解释失败。
+
+project-specific context: CAT-TRACE 的 (n)、(gamma_g)、(p_g=m_g=1000)、48-cell grid 和 Laplace 数值诊断只作为真实负例。通用规则针对 heatmap / contour / parameter-scan / error-surface 等科研图的视觉语义解释顺序。
+
+
 ### 2026-10-26：DII 22题报告连续两次中文返修仍有术语障碍与整篇模板腔
 status: NEW
 source: 2026-10-26 `Distributed_Imaging_Inference` 第八轮科研问题排序报告的连续两次中文返修；用户先要求“照着 Clear Writing 彻底重写”，后又明确指出“缺如是什么东西”“SIMEX 又是啥”“读完自己不审核的”，继续要求用自然中文并去掉没有读者价值的模型归属。
