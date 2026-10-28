@@ -110,7 +110,7 @@ Y_j\to h_j(\theta_j)\to\widehat\theta_j\to H_j\to N(\widehat\theta_j,H_j^{-1}).
 - 对公式密集笔记，优先用稳定、简单的 native Notion blocks；不为了视觉装饰使用复杂嵌套结构。
 
 **Rule 4 — use Notion-native authoring syntax conservatively**
-- 写入前读取当前 Notion-flavored Markdown 规范；inline math 使用 $...$，display math 使用独立 $ 块。
+- 写入前读取当前 Notion-flavored Markdown 规范；inline math 使用单美元定界，display math 使用独立的双美元定界块。
 - 不把另一种 Markdown/LaTeX 语法（如 \(...\)）假定为 Notion 会正确渲染；也不要混用可能被保存成 literal text 的 HTML/XML heading 写法，除非规范明确支持且已验证。
 - 变量名、heading、table、mention 等结构写完后应从远端重新读取，确认保存后的 canonical text 仍符合预期。
 - 若一个页面经过多轮局部 search/replace 后出现结构不可信的迹象，**停止继续 patch**；创建干净重建页往往比继续修旧 block 更安全。旧页可以明确标记 backup，而不是继续与正式页同名。
