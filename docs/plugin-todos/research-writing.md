@@ -50,6 +50,42 @@ reader/task: 有统计学基础、正在深入理解自己研究方法的作者�
 - **私人全文定位：**作者批准把上述两节的原回答（仅把对话界面数字卡片改排为 Markdown 表格）存于私有仓库 `YuukiAS/CAT-TRACE/docs/model/catalog_aware/CAT_TRACE_ZERO_SLOT_SECTIONS_3_4_READER_EXPLANATIONS_20261021.md`。该路径是私人证据定位；不可从中央公开仓库复制原文、构建公开镜像或公开附件。
 - **用户反馈状态：**这些自然过渡属于被认可的正面写作案例；它只支持“这样的解释更易于个人科研学习”，不是一个固定标题模板，也不是 Research Authoring 已发布功能的自动化验证。
 
+**2026-10-28 follow-up — two additional failures in a self-study numerical-methods note:**
+
+本次反馈来自同一私人 CAT-TRACE 项目的 Notion 学习页《CAT-TRACE 数值方法地图：从 bigMVP 到匿名零槽位》。用户要求页面帮助本人复习 numerical analysis、bigMVP 与当前模型计算。以下只记录可泛化的写作失败，不复制私人页面全文或截图。
+
+**Failure A — citation/link substitution for explanation**
+- 第一版出现类似“你在某课程页学过节点与正交多项式的关系；某代码页记录了 Golub–Welsch”的句子，但正文没有真正解释这条关系。读者若想知道“为什么 Gaussian quadrature 节点是正交多项式的根、Jacobi 矩阵怎样产生节点和权重”，仍被迫在多个 Notion 页面之间来回跳转。
+- 这类写法表面上“有来源、有引用”，实际上把核心教学责任外包给引用。**引用应证明来源或提供进一步阅读，不应成为理解当前文档所必需的缺失段落。**
+- 对个人科研学习笔记，凡是正文依赖的概念关系、推导桥梁或算法机制，都应在当前文档中给出足够解释；外链只负责 provenance、扩展细节或原始材料定位。
+- 验收问题应是：**隐藏所有链接后，读者是否仍能理解这一节的核心论证？** 若不能，正文仍不自洽。
+
+**Failure B — symbols and reading order were not audited after drafting**
+- 修订版虽然加入了更多公式，但仍出现“新符号第一次出现没有当场定义”的问题，例如 quadrature 公式中的节点数、节点、权重，以及 posterior/Laplace 段落中的参数向量、Hessian、共享超参数等，需要读者自行从上下文猜测。
+- 更严重的是，页面开头一度出现“先找到后验众数、再用 Hessian 构造近似”的解释，排在参数向量和 likelihood 的定义之前。单句都正确，但**阅读顺序错误会让局部正确内容仍然不可读**。
+- 仅有 notation table 也不够。对学习型技术文档，关键符号应在**首次实际使用处**就近解释；尤其是一个公式中新出现的每个非显然对象，都应说明“它是什么、维度/角色是什么、为什么此处需要它”。
+- 同时要区分容易撞名的对象，例如连续积分权函数与离散 quadrature weight、不同章节重复使用的 \(L\)、\(U\)、\(H\) 等。作者自己知道上下文，不代表隔几个月后的读者还能自动补全。
+
+**应推广的交付前检查：**
+1. **First-use notation audit**：从头顺读，记录每个数学符号第一次出现的位置；若首次出现时无法用当前位置理解含义，就补定义或调整顺序。
+2. **Equation role audit**：每个重要公式后至少能回答“这行在算什么、输入是什么、输出是什么、为什么下一步需要它”；不能只给公式和名称。
+3. **Reader-order audit**：不能先解释“怎么计算”再定义“计算对象是什么”。变量、目标、方法、结果的先后必须符合读者实际建立理解的顺序。
+4. **Link-independence audit**：暂时忽略所有外链 / cross-reference，确认主文仍能独立完成核心解释。
+5. **Cold reread**：完成稿后以“几个月没看过项目的作者本人”视角从头读一次，而不是只检查 Markdown、公式是否存在或段落是否覆盖主题。
+
+**本次返工后的正向模式：**例如不再只写
+\[
+\int f(t)\,dt\approx\sum_{\ell=1}^{K}w_\ell f(t_\ell),
+\]
+而是在公式附近立即说明 \(K\) 是节点数、\(t_\ell\) 是实际评估被积函数的位置、\(w_\ell\) 是该节点代表的面积权重，并继续解释“不同求积法的核心差别就是节点怎样选、权重怎样选、误差怎样判断”。同理，在 Newton–Laplace 链条中先定义物种参数向量与 likelihood，再定义 posterior log-kernel、mode、Hessian，最后才写
+\[
+Y_j\to h_j(\theta_j)\to\widehat\theta_j\to H_j\to N(\widehat\theta_j,H_j^{-1}).
+\]
+这类顺序比单纯增加公式数量更重要。
+
+**feedback_status:** USER_REPORTED_FAILURE / REVISED_AFTER_SECOND_PASS。该案例说明现有“推导链完整”规则还需要补充**self-contained explanation、first-use symbol hygiene 和 post-draft cold-read**三项验收；不应把“有引用”“公式都写了”“主题覆盖了”误判为学习笔记已经可读。
+
+
 
 ### Formal research reports can be scientifically correct yet still lack a coherent academic document identity
 status: PARTIALLY_PROMOTED_IN_5.2.1
