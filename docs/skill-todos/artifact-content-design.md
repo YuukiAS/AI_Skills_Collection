@@ -23,6 +23,38 @@ The useful evidence was not a universal word-count target. The repair removed re
 The final user correction also exposed a boundary between content admission and wording. The literal translation `primitive` -> `原语` had entered the Chinese UI even though the concrete objects were `log1p` and `expm1`. The accepted wording used `稳定计算` for the control and `数值稳定函数` for the explanation. This terminology repair belongs to product copy and domain naming; artifact-level judgment should decide whether the text deserves space, then hand surviving wording to the appropriate owner instead of preserving a poor sentence merely because its underlying fact is relevant.
 
 
+
+### Accepted real-use evidence: expert scientific figures should remove redundant defensive disclaimers
+
+status: NEW
+source: CAT-TRACE advisor-facing group-meeting figures, 2026-10-28
+evidence: `YuukiAS/CAT-TRACE` results under `results/group-meeting-core-progress-20261028/`; user review of the final predictive-calibration and zero-slot numerical figures
+problem: A scientifically correct figure can still be weakened by adding defensive caveats that merely repeat information already encoded in the title, subtitle, axes, or surrounding oral narrative. In expert-facing research communication, these lines can make the artifact look as though it is written for an inexperienced reader or for a hostile reviewer rather than for a knowledgeable advisor. The defect is not wording quality and not plotting accuracy; it is incorrect visible-content admission.
+
+Concrete CAT-TRACE case:
+
+- Figure 1 already stated `360 synthetic columns; 64 supplied parameter draws; 20,000 future replicates per column`. The footer `Validation conditional on supplied parameter draws; not fitted-model recovery.` was factually correct but redundant for the intended advisor audience and should be removed from the figure.
+- Figure 2 already stated `Deterministic scan with p_g = m_g = 1000 and q = 0`. The footer `Fixed-parameter numerical diagnostic; not fitted ecological data.` was likewise factually correct but redundant and should be removed.
+- By contrast, the in-figure note `Production integrator not yet selected` should remain. It communicates a live research-state boundary that materially changes interpretation of the result: the failure of ordinary local Laplace has been demonstrated, but the replacement method has not yet been chosen.
+
+General lesson to research:
+
+- Do not treat every epistemic caveat as automatically deserving visible space.
+- If the artifact already makes the evidence type obvious through title/subtitle/axes, and the audience is expert, repeating `not fitted data`, `not recovery`, `not real-world evidence`, or similar defensive language may be artifact clutter.
+- Preserve a limitation when removing it would cause a reasonable expert to misunderstand the scientific state, scope, or decision boundary.
+- Remove or demote a limitation when it only restates what the artifact already visibly establishes and adds no new interpretive constraint.
+- The decision belongs to artifact-level editorial judgment before rendering; Clear Writing may improve surviving wording, but it should not be asked to polish text that should not be visible.
+- Final review must inspect the actual rendered figure and ask whether each caveat earns its visual cost at the intended audience level.
+
+Candidate preflight question:
+
+> If this caveat disappears, would a competent member of the intended audience make a materially different scientific inference from the artifact?
+
+If no, default to REMOVE or move the boundary to oral narration/caption/notes rather than keeping it permanently inside the figure.
+
+This case should be used in future Artifact Director / artifact-content-design evaluation because it distinguishes **necessary research-state boundaries** from **defensive disclaimer debris** without weakening scientific honesty.
+
+
 ## Preliminary concept sketch — Artifact Director / artifact-level editorial judgment
 
 **Status of this section: PRELIMINARY ONLY.** This is an early working hypothesis captured before formal architecture research. It is deliberately non-binding: future Planner/Critic work may revise individual parts, choose a different ownership model, rename the capability, split it across existing domains, or reject and replace this concept entirely. Nothing below authorizes production implementation.
