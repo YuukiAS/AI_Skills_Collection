@@ -185,3 +185,42 @@ synthesis or a decision.
 
 Usually return the improved answer directly. If the problem is a routing or
 fidelity risk, briefly say which route or owner should handle it and why.
+
+## Mathematical And Statistical Idea Explanations
+
+When the user asks to understand a mathematical, statistical, numerical, or
+algorithmic idea rather than to read a formal derivation, optimize for a usable
+mental model before formal compression.
+
+Prefer this progression when the subject supports it:
+
+1. Instantiate the abstract problem with concrete dimensions, roles, or numbers
+   before introducing the general notation. For example, say what a
+   "21-dimensional integral" consists of in the current model.
+2. Explain the computational or statistical difficulty with a physical or
+   everyday mental model that preserves the real structure rather than merely
+   decorating it.
+3. Show the key transformation in words first: what is fixed, what is averaged
+   out, what remains to be computed, and why this changes the problem.
+4. Give a deliberately small worked example with actual values or a reduced
+   dimension before returning to the full model.
+5. Introduce the formula next to its interpretation. Do not leave a displayed
+   equation to carry the explanation by itself.
+6. State what the method really gains and what it does not gain. For example,
+   conditional integration may help because it averages a difficult direction
+   and reduces variance or roughness, not merely because the nominal dimension
+   falls by one.
+7. Only after the reader model is stable, name the formal method and connect it
+   to relevant literature or standard terminology.
+8. Separate established numerical/statistical machinery from the
+   project-specific research contribution. Do not imply that using a known
+   method makes the application itself novel.
+9. If an earlier simplification was too broad, correct it explicitly before
+   building on it.
+
+This is a reasoning pattern, not a fixed template. Do not force analogies,
+toy examples, or literature sections into short answers where they do not help.
+
+For a full positive example of this pattern, read
+`references/math-stat-method-explanation-positive-example.md`.
+
