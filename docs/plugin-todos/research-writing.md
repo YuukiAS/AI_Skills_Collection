@@ -85,6 +85,64 @@ Y_j\to h_j(\theta_j)\to\widehat\theta_j\to H_j\to N(\widehat\theta_j,H_j^{-1}).
 
 **feedback_status:** USER_REPORTED_FAILURE / REVISED_AFTER_SECOND_PASS。该案例说明现有“推导链完整”规则还需要补充**self-contained explanation、first-use symbol hygiene 和 post-draft cold-read**三项验收；不应把“有引用”“公式都写了”“主题覆盖了”误判为学习笔记已经可读。
 
+**2026-10-28 Notion-specific follow-up — author-facing research notes need a separate production/QA contract**
+
+本轮继续在同一私人 CAT-TRACE Notion 学习页上发生多次返工。这里记录的不是数学内容，而是 **Research Authoring 将“写给作者本人长期复习的科研笔记”交付到 Notion 时**应遵守的页面级规则。
+
+**Observed uncertainty — do not overclaim the root cause**
+- 用户在 Notion App 截图中看到标题、公式和正文块串台，例如上一节公式后突然接入下一节标题或旧块内容；连接器 fetch 返回的线性文本一度看起来顺序正常。随后用户查看网页端时又认为页面“好像倒是好了”。
+- 因此不能把这次现象直接定性为“Notion block 已损坏”或“Notion App 一定有 bug”。可能涉及客户端渲染/缓存，也可能涉及多轮局部 block mutation 后的结构差异；现有证据不足以判定根因。
+- **可泛化要求：**Research Authoring 不应把 connector read-back 当成最终视觉成品的充分证明；当用户提供实际 UI 截图时，截图中的阅读体验优先作为用户可见事实处理，同时把“内容结构正确”与“客户端显示正确”分开判断。
+
+**Rule 1 — Notion page is the reading artifact, not a storage dump**
+- 面向作者自己的 Notion 学习页，目标是打开一页即可复习，不是把多个课程页、论文页和代码页做成跳转目录。
+- 页面正文必须自足：核心定义、符号、推导关系、算法输入/输出和关键例子都在当前页；链接只承担 provenance 和进一步复习。
+- Notion 的优势是可导航、可折叠、可持续更新；不能反过来用大量 cross-link 逃避正文解释。
+
+**Rule 2 — design the heading tree before writing blocks**
+- 先确定少量顶层 section，再把方法挂到相应父节。例如“数值积分基础 → Gaussian quadrature 家族 → Laplace → CAT-TRACE 匿名积分候选 → 优化/线性代数 → 数值误差 → Monte Carlo/MCMC → 总表 → 来源”。
+- 不允许每出现一个算法就直接升级成新的顶层标题，否则 TOC 变成算法清单，读者看不出概念关系。
+- 交付前必须检查最终 TOC，而不是只检查正文文本：顶层编号连续；子节只挂在所属父节；总结表和来源位于末尾；不存在旧标题残留或重复编号。
+
+**Rule 3 — block locality: one block must belong to one conceptual section**
+- 公式的引导句、公式本身、符号解释和该公式的结论应相邻，不能让一段公式在视觉上落到下一节标题下面。
+- 每一节结束时应有清楚的逻辑闭合，再进入下一节；尤其避免“上一节最后半句 → 下一节标题 → 上一节剩余公式”这种读者完全无法恢复的顺序。
+- 对公式密集笔记，优先用稳定、简单的 native Notion blocks；不为了视觉装饰使用复杂嵌套结构。
+
+**Rule 4 — use Notion-native authoring syntax conservatively**
+- 写入前读取当前 Notion-flavored Markdown 规范；inline math 使用 $...$，display math 使用独立 $ 块。
+- 不把另一种 Markdown/LaTeX 语法（如 \(...\)）假定为 Notion 会正确渲染；也不要混用可能被保存成 literal text 的 HTML/XML heading 写法，除非规范明确支持且已验证。
+- 变量名、heading、table、mention 等结构写完后应从远端重新读取，确认保存后的 canonical text 仍符合预期。
+- 若一个页面经过多轮局部 search/replace 后出现结构不可信的迹象，**停止继续 patch**；创建干净重建页往往比继续修旧 block 更安全。旧页可以明确标记 backup，而不是继续与正式页同名。
+
+**Rule 5 — distinguish authoring QA from client-rendering QA**
+- Research Authoring 自身至少负责：
+  1. 内容是否自足；
+  2. heading/TOC 是否逻辑正确；
+  3. 符号首次出现是否定义；
+  4. 公式块是否属于正确 section；
+  5. 页面远端 canonical content 是否无残留旧块。
+- 客户端最终视觉（Notion desktop/mobile/web 的缓存、排版或渲染差异）属于另一层事实。若只有 connector，无权声称“用户 App 中一定显示正确”。
+- 当用户报告“网页端正常、App 异常”时，应明确记录为 **cross-client display discrepancy, root cause unconfirmed**，而不是继续重写科学内容来猜测修复。
+
+**Rule 6 — final acceptance for author-facing Notion notes**
+交付前至少完成以下六项：
+1. **Cold read**：从第一页顺读到末尾，不能依赖作者刚写完时的短期记忆补上下文。
+2. **TOC audit**：只看目录也能理解全页结构。
+3. **First-use notation audit**：新符号第一次出现就解释。
+4. **Block-boundary audit**：随机抽查每个 section 的开头和结尾，确认没有跨节串台。
+5. **Link-independence audit**：隐藏外链后仍可读懂。
+6. **Rendered-client caveat**：connector read-back 只能证明保存内容；若无法查看用户实际客户端，不能把它冒充视觉验收。
+
+**Positive lesson from the eventual rebuild**
+- 当多轮 patch 已经让“到底是哪一版 block 在显示”变得不可靠时，从零新建干净页面、远端读取核对、再将旧页明确改名为 backup，是比继续增量修复更稳健的恢复路径。
+- 这不是要求每次修改都新建页面；只有当页面结构可信度已经丢失、用户连续看到 block/TOC 串台时才应采用。
+- 对长期科研笔记，**可读性、稳定性和以后能复习**优先于保留每一次编辑历史在同一页面里。
+
+**target layer:** Research Authoring 的 Notion-facing personal/research-notes workflow + artifact QA；不要把这些规则错误推广到论文正文、PDF 排版或所有 Notion 页面。
+**feedback_status:** USER_REPORTED_REPEATED_FAILURE / REBUILT_CLEAN_PAGE / CLIENT_RENDERING_ROOT_CAUSE_UNCONFIRMED。
+
+
 
 
 ### Formal research reports can be scientifically correct yet still lack a coherent academic document identity
