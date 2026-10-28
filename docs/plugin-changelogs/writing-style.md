@@ -2,7 +2,9 @@
 
 ## Unreleased
 
-No pending released changes.
+- Added a user-confirmed positive example for mathematical/statistical method explanations to `response-clarity`.
+- The route now explicitly prefers concrete problem setup -> mental model -> small worked example -> formula -> real gain/boundary -> literature connection for complex method explanations when that structure helps.
+- The example is guidance, not a rigid answer template; short questions should remain short and domain facts still come from the relevant domain owner.
 
 ## 0.5 - 2026-10-19
 
