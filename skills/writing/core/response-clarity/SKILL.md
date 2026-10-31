@@ -224,3 +224,7 @@ toy examples, or literature sections into short answers where they do not help.
 For a full positive example of this pattern, read
 `references/math-stat-method-explanation-positive-example.md`.
 
+For a user-confirmed example of turning a long technical audit into a short,
+decision-ready explanation without losing the real evidence boundary, read
+`references/karabiner-audit-human-decision-positive-example.md`.
+
