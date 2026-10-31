@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added a user-confirmed positive example for compressing long technical audits into decision-ready explanations without dumping rule IDs or forcing low-risk reversible choices back onto the user.
 - Added a user-confirmed positive example for mathematical/statistical method explanations to `response-clarity`.
 - The route now explicitly prefers concrete problem setup -> mental model -> small worked example -> formula -> real gain/boundary -> literature connection for complex method explanations when that structure helps.
 - The example is guidance, not a rigid answer template; short questions should remain short and domain facts still come from the relevant domain owner.
