@@ -5,6 +5,37 @@ Canonical maintenance inbox for the `writing-style` plugin.
 ## Incoming real-use feedback
 
 
+### 2026-10-31：BWG baseline 复盘即使显式调用 Clear Writing，仍写成冗长审计报告，用户需要连续两次纠偏
+
+status: NEW  
+source: Server+VPS / `Clash_Profile` 的 BWG production baseline、Mac mini Shadowrocket 与 Google 不稳定复盘。用户要求模型把 baseline 自带问题、baseline 后实际改动数量、以及当前 Google 不稳定的最可能来源讲清楚。
+
+evidence:
+- **第一轮，未显式调用 Clear Writing。** 回答虽然查到了关键事实——baseline 后 canonical repo 没有新的代码提交、Mac mini 当时没有完成真机验收、后续主要增加的是导入辅助文件——但输出被组织成大段审计式说明，混入 commit 数量、文件数、代码片段、表格、内部状态和多个并列嫌疑。用户没有得到一个低负担的“baseline 到底坏在哪、后来到底改了什么、现在最该怀疑什么”的答案。
+- **第二轮，用户明确调用了 `$clear-writing`，原话为“组织语言重新回答”。这是本案例中明确的 Clear Writing invocation。** 模型随后实际读取了 `response-clarity` 与 `writing-fidelity`，但最终回答仍然保留大量标题、重复解释、代码块和内部字段；“baseline 后 0 个 canonical commit”“Mac mini 未真机验收”“后续只是导入辅助”被多次换角度重述。用户直接反馈：“你觉得你讲清楚了吗? 人愿意看吗?”
+- **第三轮，在用户再次明确批评后才真正压缩。** 回答才收敛为几个自然段：baseline 的两个核心缺陷；baseline 后生产配置基本没再改；当前优先怀疑 Mac mini 本地订阅绑定 / `ROUTE-MODE` / DNS，而不是服务器。这说明前两轮并非缺事实，而是没有把已有事实加工成读者愿意看的结论。
+- 本案例尤其重要，因为第二轮不是“插件没被调用”，而是**已经明确调用并读取 Clear Writing 后仍然失败**。因此不能只把问题归因于 normal-entry routing；还必须检查 skill 的实际消费方式、停止条件和回归验收是否足以阻止“事实正确但像审计报告”的输出。
+
+problem:
+- **没有按用户的三个真实问题组织答案。** 用户需要的是：baseline 有什么问题；后面到底改了多少；现在 Google 不稳定最可能是什么。回答却按仓库历史、提交、导入方式、DNS、路由等内部调查维度展开，迫使用户自己重新归类。
+- **结论虽然出现，但没有真正收敛。** “Mac mini 未真机验收”和“baseline 后 0 个新提交”已经足以大幅压缩后文；模型仍然继续从多个角度重复相同结论。
+- **Clear Writing 被当成语言润色，而不是信息裁决。** 第二轮已经读取 `response-clarity`，但仍保留大量“技术上有证据、读者当前不需要”的内容。结果是语言更顺，却没有降低判断负担。
+- **内部证据与读者正文没有分层。** commit、文件数量、状态值、代码块和 release 时间线可以作为必要证据，但不应和主结论处在同一视觉层级。
+- **停止条件失效。** 当“baseline 未真机验收 + 后续 0 个 canonical commit + 当前优先查客户端绑定”已经回答用户问题后，模型仍继续展开实现细节，导致答案越来越像事故审计。
+- **用户再次承担了编辑和压缩工作。** 显式调用 Clear Writing 后，用户仍需再问“人愿意看吗”，说明插件不能只证明“被调用”，还必须证明最终读者负担实际下降。
+
+desired behavior / acceptance:
+- 面对“复盘 baseline / 后续改了什么 / 现在最可能哪里坏”这类问题，第一段直接给综合判断，不按调查过程展开。
+- 主体最多围绕用户真正要区分的三件事组织：**baseline 自带缺陷；baseline 后真实变化；当前故障判断。** 技术证据只放在各自结论后，且只保留会改变判断的证据。
+- 如果一个事实已经足以排除一大类可能性，例如“baseline 后 canonical repo 0 个新提交”，后文不得继续用多段文字重复证明“不是后面又改坏了一轮”。
+- commit SHA、文件数、状态字段、代码片段只在它们对当前判断不可替代时保留；默认不要让 reader-facing answer 看起来像 release audit。
+- **显式调用 Clear Writing 的回归验收不能只检查 skill 是否被读取。** 必须检查最终回答是否显著降低：标题数量、重复结论、内部流程字段、代码块数量，以及用户需要自行归纳的程度。
+- 回归标准：读者看完第一屏应能直接回答——**baseline 最大的问题是什么；baseline 后到底有没有大改；现在最该查哪里。** 如果还需要继续向下读大量证据才能知道这三个答案，判为失败。
+- 当用户已经明确说“组织语言”“人愿意看吗”，下一轮必须重组信息结构，不得只做措辞级压缩或保留原报告骨架。
+
+project-specific context: BWG、Mac mini、Shadowrocket、Google、具体 IP、release、commit 与订阅格式仅作为真实回归背景。通用问题是：复杂技术复盘已经得到正确事实后，Clear Writing 没有把调查结构转换成读者问题结构；尤其是在用户**明确调用 Clear Writing** 后仍然输出冗长、重复、审计化答案。
+
+
 ### 2026-10-31：用户明确表示“还是没讲清楚”后，模型继续换句式重复同一抽象解释
 
 status: NEW  
