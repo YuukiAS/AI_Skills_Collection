@@ -1,5 +1,7 @@
 # Human Response — 新插件立项种子
 
+> Active candidate TODO: [TODO.md](TODO.md)
+
 - 日期：2026-10-30
 - 状态：NEW / 独立插件候选
 - 暂定插件 slug：`human-response`
