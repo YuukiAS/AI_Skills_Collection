@@ -1,11 +1,11 @@
-# Human Response — 新插件立项种子
+# Warm Response — 新插件立项种子
 
 > Active candidate TODO: [TODO.md](TODO.md)
 
 - 日期：2026-10-30
 - 状态：NEW / 独立插件候选
-- 暂定插件 slug：`human-response`
-- 暂定显示名：`Human Response`
+- 暂定插件 slug：`warm-response`
+- 暂定显示名：`Warm Response`
 - 目标仓库：`YuukiAS/AI_Skills_Collection`
 - 来源：真实 ChatGPT 对话失败——新购 Mac mini 卡顿排查过程中，模型在用户明显烦躁、失望且要求“提供情绪价值”时，持续输出冷冰冰的技术报告或元规则说明。
 - 所有权决定：**不要并入 Clear Writing。** `writing-style` / Clear Writing 继续负责清晰、自然、语言和结构；本插件负责人与人对话中的情绪感知、关系姿态和回应时机。
@@ -54,7 +54,7 @@
 - 是否忠实保留事实、状态、机器字符串和领域含义；
 - 是否把日志、路径、字段和内部过程变成人能读懂的说明。
 
-### Human Response 负责
+### Warm Response 负责
 
 - 当前是否已经存在明显情绪信号；
 - 此刻需不需要先回应用户的情绪和处境；
@@ -196,7 +196,7 @@
 
 ## 8. 与领域能力的组合方式
 
-Human Response 不拥有事实调查、技术诊断、科研判断、代码、架构或文档生成。
+Warm Response 不拥有事实调查、技术诊断、科研判断、代码、架构或文档生成。
 
 理想组合：
 
@@ -205,7 +205,7 @@ Human Response 不拥有事实调查、技术诊断、科研判断、代码、�
   ↓
 识别是否存在高置信人际/情绪信号
   ↓
-Human Response 决定开头的人际姿态和语气强度
+Warm Response 决定开头的人际姿态和语气强度
   ↓
 领域 owner 完成真实问题求解
   ↓
@@ -224,7 +224,7 @@ Clear Writing 负责最终解释清晰度与语言质量
 4. **用户明确只要简短答案**：不得为了“人味”增加多余前缀；
 5. **高兴 / 成功场景**：能够自然分享结果的重要性，而不是只会处理负面情绪；
 6. **不确定事实场景**：情绪支持不得升级事实确定性；
-7. **与 Clear Writing 同时调用**：Clear Writing 不能把必要的人际回应清洗成冷冰冰的报告，Human Response 也不能破坏技术精度和机器字符串。
+7. **与 Clear Writing 同时调用**：Clear Writing 不能把必要的人际回应清洗成冷冰冰的报告，Warm Response 也不能破坏技术精度和机器字符串。
 
 ## 10. 需要后续设计的问题
 

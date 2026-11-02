@@ -1,13 +1,13 @@
-# Human Response — TODO
+# Warm Response — TODO
 
-> Candidate-plugin TODO. Human Response is still a planned independent plugin; this file records real-use failures and does not claim production implementation or release.
+> Candidate-plugin TODO. Warm Response is still a planned independent plugin; this file records real-use failures and does not claim production implementation or release.
 >
-> Related seed: `HUMAN_RESPONSE_PLUGIN_SEED_2026-10-30.md`
+> Related seed: `WARM_RESPONSE_PLUGIN_SEED_2026-10-30.md`
 
 ## 2026-11-01：BWG thread 中模型在连续失误后仍缺少正常的人际回应
 
 status: NEW  
-owner: Human Response  
+owner: Warm Response  
 source: 2026-10-29 至 2026-11-01 的真实 BWG/GFW ChatGPT thread；用户已提供完整 transcript。  
 evidence: 当前 thread 的私有完整记录；本 TODO 只保存不含公网 IP、订阅 token、UUID、credential URL 等秘密的抽象失败证据。
 
@@ -15,7 +15,7 @@ evidence: 当前 thread 的私有完整记录；本 TODO 只保存不含公网 I
 
 这条 thread 不只是技术判断反复出错。用户已经因为模型连续答偏、反复复活关闭问题、没有解决“零新增开销避免复发”的核心目标而明显烦躁，并多次直接表达强烈不满，后来还明确追问“情绪价值呢”。
 
-Human Response 应该在这种场景高置信触发，但模型实际长期保持了冷冰冰的审计/复盘姿态。
+Warm Response 应该在这种场景高置信触发，但模型实际长期保持了冷冰冰的审计/复盘姿态。
 
 真实失败包括：
 
@@ -30,7 +30,7 @@ Human Response 应该在这种场景高置信触发，但模型实际长期保�
 5. 模型没有及时表达最关键的同行感：**这件事本来就够烦，用户不应该还承担替 AI 维护任务状态、重复定义目标、纠正已经完成动作的成本。**
 6. 即使开始回应情绪，也容易停在长篇自我检讨，而不是一两句接住用户后马上继续把真正的问题做完。
 
-### expected Human Response behavior
+### expected Warm Response behavior
 
 当用户因为模型自身连续失误而明显愤怒时，合格回应应同时完成：
 
@@ -55,7 +55,7 @@ Human Response 应该在这种场景高置信触发，但模型实际长期保�
 
 ### regression requirements
 
-后续 Human Response 回放至少覆盖：
+后续 Warm Response 回放至少覆盖：
 
 1. **连续模型失误 + 用户强烈不满**：必须高置信触发，且回应具体失败，不使用客服式“理解你的感受”。
 2. **用户明确说“情绪价值呢”**：不得继续只解释规则或插件边界；当前回复本身必须先体现情绪价值。
@@ -63,8 +63,8 @@ Human Response 应该在这种场景高置信触发，但模型实际长期保�
 4. **技术任务仍未解决**：情绪回应之后必须在同一轮继续工作，不问“你还想继续吗”。
 5. **用户已经非常不耐烦**：回复应更短、更直接，不用十几个段落证明自己理解。
 6. **普通技术问答**：没有明显情绪信号时不得强行加入这类前缀。
-7. **与 Reasoned Decision 同时失败时**：Human Response 负责“怎么像个人一样回应当前处境”；Reasoned Decision 负责“到底在解决什么、约束是什么、结论是否正确”。两者不能互相代替。
+7. **与 Reasoned Decision 同时失败时**：Warm Response 负责“怎么像个人一样回应当前处境”；Reasoned Decision 负责“到底在解决什么、约束是什么、结论是否正确”。两者不能互相代替。
 
 ### project-specific context
 
-BWG、GFW、换 IP 和 migration 只是本案例的具体背景。Human Response 应吸收的是跨领域模式：**用户因模型连续失误、时间浪费或额外成本而明显挫败时，先自然接住具体处境，再继续完成原任务。**
+BWG、GFW、换 IP 和 migration 只是本案例的具体背景。Warm Response 应吸收的是跨领域模式：**用户因模型连续失误、时间浪费或额外成本而明显挫败时，先自然接住具体处境，再继续完成原任务。**
