@@ -9,7 +9,7 @@
 status: NEW  
 owner: Warm Response  
 source: 2026-10-29 至 2026-11-01 的真实 BWG/GFW ChatGPT thread；用户已提供完整 transcript。  
-evidence: 当前 thread 的私有完整记录；本 TODO 只保存不含公网 IP、订阅 token、UUID、credential URL 等秘密的抽象失败证据。
+evidence: [完整原始对话证据](evidence/BWG_GFW_thread_full_history_2026-10-29_to_2026-11-01.md)；公开仓库版本仅将用户真实公网 IP 统一替换为 `[REDACTED_PUBLIC_IP]`，其余对话保持原样。
 
 ### problem
 
