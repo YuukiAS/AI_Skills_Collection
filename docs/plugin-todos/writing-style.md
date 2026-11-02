@@ -5,6 +5,36 @@ Canonical maintenance inbox for the `writing-style` plugin.
 ## Incoming real-use feedback
 
 
+### 2026-11-03：用户只问“下一步先做什么”，回答却用否定式依赖分析开场，第一句话即失去阅读兴趣
+
+status: NEW  
+source: Design Assurance / Asteria Blueprint 下一步顺序讨论。用户问“先把 Design Assurance 做了？做插件？等 Asteria Blueprint 做完？”；模型已经查清真实仓库状态，但回答第一句写成“下一步不是‘先把 Design Assurance 插件写出来’，也不是‘等 Asteria Blueprint 做完’。正确顺序是……”，随后继续解释循环依赖、阶段关系和并行条件。用户明确反馈：“第一句话就没兴趣看了”，并显式调用 Clear Writing 要求重写。
+
+evidence:
+- 旧回答其实已经得到足够明确的结论：先冻结 Design Assurance 的权威设计合同；Asteria Blueprint 当前继续做候选裁决；合同冻结后，Design Assurance Plugin 核心实现与 Asteria Blueprint 可并行推进。
+- 但答案没有把这个结论直接放在第一句，而是先用“不是 A，也不是 B”的排除式句型和“正确顺序是”元叙述开场，让用户先处理模型的纠错过程，而不是直接得到行动建议。
+- 后文继续展开“循环依赖”“合同冻结后分叉”“Grill Me 的职责”“Blueprint 现在继续做什么”等多个章节。内容大体正确，但用户当前只想知道下一步和先后顺序，阅读负担明显超过问题本身。
+- 这类失败不是事实错误，而是**结论没有被加工成读者当前需要的行动顺序**。模型把后台依赖分析原样带到了前台。
+
+negative example:
+> “下一步不是‘先把 Design Assurance 插件写出来’，也不是‘等 Asteria Blueprint 做完’。正确顺序是：先冻结 Design Assurance 的权威设计合同，然后 Design Assurance 核心实现和 Asteria Blueprint 可以并行推进，最后再接起来。”
+
+problem:
+- **第一句先否定两个错误选项，而不是直接给行动。** 用户问“下一步做什么”，首句应直接回答“先冻结 Design Assurance 设计”，不需要先听模型排除什么。
+- **把后台推理当成前台结构。** “循环依赖”“谁等谁”“为什么不能先做某个 schema”是形成判断所需的分析，不应该占据第一屏。
+- **动作层级没有压缩。** 用户真正需要的顺序只有三步：Design Assurance 设计冻结；Blueprint 继续裁决且不等；冻结后两边并行实现。旧回答却拆成多个章节和大量边界说明。
+- **显式调用 Clear Writing 的核心要求不是润色句子，而是重新选择信息。** 正确重写必须删掉不会改变当前行动的解释，把“下一步”放到第一句。
+
+desired behavior / acceptance:
+- 对“下一步做什么 / 先后顺序是什么”这类问题，第一句直接给唯一动作，不用“不是……也不是……”“正确顺序是……”等元叙述铺垫。
+- 本案例的合格开头应类似：**“下一步先冻结 Design Assurance 的设计；Asteria Blueprint 同时继续做候选裁决，不用等它做完。”**
+- 后续只补会改变执行顺序的理由：Blueprint 的 domain model 依赖 Design Assurance contract；但视觉/交互裁决不依赖，可以继续。
+- 若用户还问 Grill Me，再用一段说明它只是 Design Assurance 的按需澄清工具，不扩写外部生态或完整产品职责史。
+- 全文应让用户在第一屏直接知道：现在做什么、Blueprint 是否要等、什么时候开始写 Plugin。若还需要从多个标题中自己提炼顺序，判为失败。
+
+project-specific context: Design Assurance、Asteria Blueprint、Grill Me 是本次真实案例。通用问题是：复杂依赖已经分析清楚后，普通用户只问“下一步”，回答仍以排除式论证和后台依赖结构开场，导致正确结论失去可读性。
+
+
 ### 2026-11-01：技术判断正确，但回答把“关系是什么”写成“为什么不能替代”的长篇论证
 
 status: NEW  
