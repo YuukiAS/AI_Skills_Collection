@@ -658,3 +658,19 @@ candidate_action:
 - Do not build AI-detector evasion or a generic humanizer.
 boundary: Frontend Design decides whether/where/how much to say and owns rendered hierarchy; the writing layer realizes natural language after UI role and product meaning are frozen.
 promotion_gate: do not implement this as an isolated Clear Writing patch while Frontend Design remains an unstable upstream owner. First establish a usable Frontend Design baseline; then run one cross-plugin Planner/Critic task that freezes ownership, routing, handoff schema and shared evaluation before implementation.
+
+additional evidence (2026-11-03, Project Atlas A/B pre-implementation review):
+- Project Atlas showed that line-level legality is insufficient. After a complete first copy review, a second independent pass still found 72 additional A revisions and 25 B revisions. Surviving examples included `只显示已经准备好、现在必须由本人完成的事项`, `可由本人调整`, `TA 本人逾期`, and `是否需要你处理还没有确认`. These strings were semantically defensible but still sounded like internal policy or model prose rather than mature personal-product copy.
+- The same case also exposed state-semantics drift. “没有需要你处理的事情”, “是否需要你处理未知”, “以后可能需要但条件未准备好”, and “现在已经准备好需要你处理” are four different product states. Naturalness must never collapse or swap them.
+- Internal workflow language also survived literal translation attempts: `foundation`, `validator`, `candidate`, `执行器`, `验收`, and similar process nouns must be realized as the concrete user-facing state/action when that meaning belongs on screen, not merely translated into a different internal noun.
+- This review happened before Codex implementation only because the user explicitly forced repeated inspection. The desired production contract is the opposite: the writing capability must finish its work before the candidate is presented to the user.
+
+required production behavior to add to this TODO:
+- Treat Product UI Copy as part of the **pre-delivery production path**. Frontend Design supplies the complete surface context; Product UI Copy returns final wording before the design is declared ready. The user is not the normal language QA stage.
+- Add explicit regression coverage for four state families: **none / unknown / not-ready-yet / ready-now**. The output must preserve which state is true and express each naturally in the target locale.
+- Prefer direct personal-product language when the surface belongs to one known user. Avoid bureaucratic third-person/self-reference such as `本人` when ordinary `你` or omission is more natural and does not change meaning.
+- Convert internal process descriptions to the underlying reality, not to prettier process jargon. For example, the target behavior is closer to “修正已经发现的检查问题” than “收口验证器”, and closer to “两个版本还没有完成实际运行检查” than “候选待补证”.
+- The page-level rhythm pass is **mandatory before handoff**, not an optional final polish. Read the rendered screen as one product: repeated pronouns, repeated reassurance, audit-like headings, policy voice, duplicated status, and individually acceptable but collectively mechanical copy must block delivery.
+- When a string should not exist on the surface, do not polish it. Return a content-architecture escalation to Frontend Design so the element can be deleted/merged/demoted before delivery.
+- If a post-delivery review finds a substantial batch of basic naturalness defects, treat that as a failure of the pre-delivery Product UI Copy pass and add the abstracted failure patterns to regression. Do not normalize repeated user-driven rewrite rounds as successful production.
+

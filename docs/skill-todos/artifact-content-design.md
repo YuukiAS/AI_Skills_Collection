@@ -24,6 +24,34 @@ The final user correction also exposed a boundary between content admission and 
 
 
 
+
+### Accepted real-use evidence: Project Atlas — content admission must finish before first delivery
+
+status: NEW
+source: Project Atlas A/B user-visible content review, 2026-11-03
+evidence: `YuukiAS/Project_Atlas` branches `prototype/atlas-a` and `prototype/atlas-b`; first complete reviews at commits `086801e26543f2932233657b5682a460d4aec9eb` and `52d07fbea43addf5292d6fba6cc111d6cdadb88a`; independent follow-up revisions at `a9d4fd4e5e5f1db9a49fee187b9b04e14cb5fe7b` and `2b534c63c648e71f1bf3bd1160804c61b13437e1`.
+problem: Two visually mature Project Atlas candidates reached review with large amounts of content that should have been decided before delivery. The first full inventory classified A as 2174 ACCEPT / 472 REVISE / 36 REJECT and B as 203 ACCEPT / 139 REVISE / 39 REJECT. An independent follow-up still found 72 additional A revisions and 25 B revisions. The user therefore had to act as the first effective whole-product editor even though content admission and wording should have been completed before the candidates were presented.
+
+The strongest evidence was not wording-only:
+- B listed future DII, Mica and Lucerna decisions under “需要我” before those actions were ready. The correct artifact decision was REMOVE, not better phrasing.
+- A/B exposed maintenance/source-process concepts such as source freshness, candidate identity and internal validation language that did not deserve primary user attention.
+- Removing rejected “需要我” rows left a large empty region in B until the follow-up review also repaired the composition. Content deletion therefore changes layout and must feed back into the artifact producer.
+- Repeated rendered occurrences inflated the review count. A future capability should distinguish **unique semantic content identities** from repeated DOM/theme/view occurrences: editorial judgment happens on the semantic unit, while rendering verification proves every occurrence uses the approved unit.
+
+General lesson:
+- Content admission is a **pre-delivery gate**. A reader-facing artifact should not be declared ready and then rely on the user to discover dozens of blocks that should be removed, demoted or rewritten.
+- Artifact Content Design should complete KEEP/COMPRESS/DEMOTE/REMOVE decisions before final wording and rendering. Surviving UI text then goes to Product UI Copy; the artifact producer consumes the returned wording and re-renders the whole surface.
+- The final artifact review remains necessary, but its normal job is to catch integration/layout leakage, not to perform another large editorial rewrite. If it finds a substantial batch of content-admission defects, the upstream pass failed.
+- User acceptance should evaluate the finished artifact’s usefulness, taste and direction. Requiring the user to repeatedly identify internal process language or unnecessary blocks is evidence that the artifact was delivered too early.
+
+Candidate acceptance question to add:
+
+> Before this artifact is shown as ready, has every visible semantic unit already earned its place, received its final reader-facing wording, and been re-checked in the actual rendered composition?
+
+If no, the artifact is still in production, not ready for user acceptance.
+
+
+
 ### Accepted real-use evidence: expert scientific figures should remove redundant defensive disclaimers
 
 status: NEW
