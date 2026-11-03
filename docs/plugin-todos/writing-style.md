@@ -660,6 +660,8 @@ boundary: Frontend Design decides whether/where/how much to say and owns rendere
 promotion_gate: do not implement this as an isolated Clear Writing patch while Frontend Design remains an unstable upstream owner. First establish a usable Frontend Design baseline; then run one cross-plugin Planner/Critic task that freezes ownership, routing, handoff schema and shared evaluation before implementation.
 
 additional evidence (2026-11-03, Project Atlas A/B pre-implementation review):
+complete itemized evidence: `docs/design/product-ui-copy/evidence/PROJECT_ATLAS_COPY_REVIEW_HISTORY_2026-11-03.md` — preserves every Atlas A/B first-round REVISE/REJECT row, every second-round changed row, and every third-round independent finding with exact before/after text.
+
 - Project Atlas showed that line-level legality is insufficient. After a complete first copy review, a second independent pass still found 72 additional A revisions and 25 B revisions. Surviving examples included `只显示已经准备好、现在必须由本人完成的事项`, `可由本人调整`, `TA 本人逾期`, and `是否需要你处理还没有确认`. These strings were semantically defensible but still sounded like internal policy or model prose rather than mature personal-product copy.
 - The same case also exposed state-semantics drift. “没有需要你处理的事情”, “是否需要你处理未知”, “以后可能需要但条件未准备好”, and “现在已经准备好需要你处理” are four different product states. Naturalness must never collapse or swap them.
 - Internal workflow language also survived literal translation attempts: `foundation`, `validator`, `candidate`, `执行器`, `验收`, and similar process nouns must be realized as the concrete user-facing state/action when that meaning belongs on screen, not merely translated into a different internal noun.

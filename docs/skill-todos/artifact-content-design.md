@@ -26,6 +26,8 @@ The final user correction also exposed a boundary between content admission and 
 
 
 ### Accepted real-use evidence: Project Atlas — content admission must finish before first delivery
+complete itemized evidence: `docs/design/product-ui-copy/evidence/PROJECT_ATLAS_COPY_REVIEW_HISTORY_2026-11-03.md` — preserves every Atlas A/B first-round REVISE/REJECT row, every second-round changed row, and every third-round independent finding with exact before/after text.
+
 
 status: NEW
 source: Project Atlas A/B user-visible content review, 2026-11-03
