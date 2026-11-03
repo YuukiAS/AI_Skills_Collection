@@ -804,3 +804,25 @@ The existing PRIVATE / USER wrapper is now version `0.2.8`. Real ChatGPT Web acc
 Execution anchor:
 
 `reviewed/project-instructions-editor--0.2-baseline-diff-contract`
+
+
+### Private wrapper may provide an optional user-owned instruction-configuration locator
+status: NEW
+source: real user configuration-management workflow, 2026-11-03
+problem:
+- The user now maintains a private `YuukiAS/AI_Instruction_Configuration` repository containing confirmed ChatGPT global customization, confirmed Project-setting snapshots, Codex user-level AGENTS, and an index of repository-local AGENTS locations.
+- Public PIE must remain generic and must not hard-code this private repository, user identity, or any private path.
+- The existing PRIVATE / USER-scope ChatGPT Plugin wrapper needs a future optional configuration-source locator so a personal deployment can tell PIE where the user's versioned instruction configuration lives.
+- When such a locator is available and the connected GitHub identity has access, PIE may use the private repository as auxiliary evidence and snapshot discovery instead of requiring the user to repeatedly locate old archived configuration manually.
+- A confirmed repository snapshot must not silently become stronger evidence than the actual live surface. For Project-setting edits, a current user-supplied complete setting remains the strongest current baseline under PIE 0.2. A future wrapper-assisted route may treat a `confirmed-live-snapshot` as the last user-confirmed live value, but must mark it stale immediately when the user says the live setting was changed outside the managed workflow.
+- The private repository can provide Project-to-repository mappings and global preference context, but project/domain facts remain owned by their canonical project repositories.
+- Credentials, GitHub tokens, private keys, or raw connector secrets must never be bundled into PIE or its wrapper; the locator contains identity/path metadata only, while actual access remains delegated to the connected GitHub capability.
+candidate action:
+- after the current PIE 0.3 AGENTS work is resolved, design a small optional personal-wrapper configuration contract for external instruction-configuration sources;
+- keep the standalone public Skill behavior unchanged when no private locator is present;
+- add regression coverage proving that public PIE works without the private repository, inaccessible private sources fail gracefully, and stale snapshots cannot impersonate a newer live setting;
+- update the PRIVATE / USER wrapper packaging only after the generic contract is independently reviewed.
+boundary:
+- do not implement this by hard-coding `YuukiAS/AI_Instruction_Configuration` into public PIE;
+- do not turn the private repository into a required registry, database, watcher, daemon, or automatic cross-repository synchronization service;
+- do not weaken the existing PIE 0.2 complete-current-baseline contract before an explicitly reviewed successor contract exists.
