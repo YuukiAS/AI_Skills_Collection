@@ -283,6 +283,35 @@ promotion gate:
 5. workflow-core normal entry consumes the helper and does not silently fall back to `/tmp`, current dirty checkout, or another branch;
 6. if Host/platform policy fundamentally cannot expose a safe sanctioned path, report `UNSUPPORTED_WITH_EVIDENCE` before implementation rather than re-asking the same approval.
 
+
+### Design Assurance 在要求用户运行执行包前，必须给出可审阅的“关键变化与落实点”
+
+status: NEW  
+source: Asteria Blueprint 视觉设计收敛，2026-11-03。用户在连续收到低质量视觉候选后明确要求：不能只给一个长 prompt 或声称“已经加强”，必须在每次准备让用户运行 GPT Work / Pro / Codex 前，先列出本轮真正改变了什么、这些变化具体落实在哪里，让用户能够据此判断这次执行包是否值得信任。  
+evidence: Asteria Blueprint 已完成三份独立 Deep Research，均找到 20+ 个直接相关成熟参考，但早期制作任务没有把研究消费变成硬约束，最终仍产出 React Flow demo 感、大片空白、小字、默认蓝/绿、机器状态泄漏和弱动效的视觉候选。只有在后续 prompt 明确列出并落实以下变化后，用户才认为“至少有东西可以看着判断信任度”：真实参考截图先取得并进入 Figma；上一版失败作为负控制；先锁视觉目标再制作；字体/色板不被旧 token 机械锁死；用户可见文案在制作前逐句 ACCEPT / REVISE / REJECT；动效作为真实 Gate；最终与成熟参考并排 QA；单次只做一个核心 surface，不能靠额外功能抵消核心视觉失败。相关执行证据位于 `YuukiAS/Asteria-Blueprint` 的 `design/visual-adoption-contract-20261103` / `prototype/figma-system-architecture-20261103-work`。  
+problem: Design Assurance 当前如果只把最终 Proposal / prompt / handoff 直接交给用户，用户很难判断“这轮到底吸收了哪些失败、哪些研究结论真正变成了不可绕过的执行约束、哪些旧问题仍可能复发”。这会造成两个坏结果：一是用户只能重新通读长 prompt 才能发现关键变化；二是 Agent 可以在文字上声称“参考了研究/加强了 QA”，但实际执行合同仍允许同类失败。对于高成本、多轮、需要用户投入时间的设计任务，这种不可审阅性本身会消耗信任和用户时间。
+
+project-specific context: Asteria Blueprint 的 LikeC4 / IcePanel / Dagster / DataHub、Figma、React Flow、字体、色板、文案和动效只是本次真实回归样例，不应被硬编码成 Design Assurance 的通用规则。可复用要求是：**在让用户启动下一执行者之前，把上一轮失败如何转化为本轮可执行约束，以短、可审阅、可定位的方式明确展示。**
+
+candidate action:
+- Design Assurance 的每次实质执行包在“可运行”前生成一个简短的 **关键变化与落实点** 摘要，面向用户阅读，不替代完整 Proposal / Goal / prompt；
+- 只列真正改变执行结果的项目，默认约 5–10 条，不复制完整 prompt，也不罗列路径/字段噪声；
+- 每条至少回答：**之前什么会失败 → 这轮具体改了什么 → 落实到哪个执行约束/证据/Gate → 现在能防什么 → 仍然不能证明什么**；
+- 若本轮消费了 Deep Research、用户反馈、失败样本或成熟外部实现，必须说明这些输入是“仅参考”还是已经变成 hard requirement / runtime dependency / negative control / acceptance gate；禁止用“已参考”“已加强”代替实际消费关系；
+- 如果关键变化只是文字承诺、没有进入实际 prompt / Figma / Plan / runtime /验收条件，必须显式标为**尚未落实**，不得把它列成可信度提升；
+- 用户指出过的同类失败，应作为 regression / negative control 显式对应到本轮变化；不能只说“已优化”；
+- 摘要必须在要求用户启动 GPT Work / Pro / Codex **之前**出现，让用户先判断执行包是否值得运行；
+- 用户视觉/专业质量已经明确 REJECT 的 producer 自评必须失效，不能在摘要里继续引用旧 READY/PASS 作为可信度依据；
+- 对普通小改动不机械生成长摘要；只有实质设计 round、昂贵执行、用户明确要求可信度说明、或存在前轮重大失败时触发。
+
+promotion gate:
+1. 用 Asteria Blueprint 视觉失败作为回归：新执行包在启动 Work 前能直接列出真实参考捕获、负控制、视觉目标锁定、文案审计、动效 Gate、并排 QA、单-surface scope 等关键变化，并能定位到实际合同，而不是只说“prompt 加强了”；
+2. 换到非 UI 的复杂设计任务时，同一机制仍能自然表达“失败 → 改动 → 落实 → 可验证效果 → 未证明边界”，不会硬编码视觉术语；
+3. 如果 Deep Research 只存在报告而没有被执行包消费，摘要必须明确显示“尚未落实”，不能让用户误以为研究已经影响实现；
+4. 执行包没有实质变化时，不允许制造一份看似很长的变化摘要来增加虚假可信度；
+5. 用户不需要重读完整 prompt 就能判断：这轮与上一轮相比到底哪里不同、为什么值得或不值得运行；
+6. 该机制不新增数据库、状态机、审查角色或第二套 Plan，只作为 Design Assurance / workflow-core 的用户可审阅执行摘要层。
+
 ## Do not do
 
 - Do not duplicate Bridge Kit core Reviewed Handoff implementation in this repo.
