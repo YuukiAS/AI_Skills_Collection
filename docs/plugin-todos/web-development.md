@@ -394,3 +394,11 @@ required production behavior to add to this TODO:
 - User review after this gate should focus on product preference, taste and direction. It must not be required to discover basic phrases such as “本人”, “执行器”, “foundation”, “validator”, or premature “需要我” items.
 
 
+
+
+### Frontend Design 必须先从专业用户真实任务建模，再决定视觉语法；跨领域产品要通过专业迁移检验
+status: NEW
+source: Asteria Blueprint 多轮视觉方向失败与 2026-11-03 用户反馈
+evidence: Asteria Blueprint 已连续经历多轮 Deep Research、真实成熟产品参考、Figma 视觉方向和 Product Design ideation。候选从早期 React Flow demo 感提升到更精致的浅色/深色系统图，但用户仍明确拒绝：每个 block 被刻意配 SVG、节点形状为“有设计感”而变化、永久关系标签和 bottom summary bar 形成模板感、glow/流体区域看似有语义却无法解释。进一步对照 CAT-TRACE 和 Mica 后发现，根因不是单个视觉 token 或缺少 whole-screen polish，而是视觉设计仍从“架构图应该长什么样”出发，没有先建模统计/数值研究者、CS/软件工程师实际需要完成的专业任务。CAT-TRACE 真正需要数学目标、近似/误差、采样/积分、oracle、claim/evidence、FreezeScope；Mica 真正需要 browser/extension actor、DOM lifecycle、event/message、selector/callback、fail-open、runtime evidence。把两者都压成同一种 node-card graph 会同时损失专业语义和产品辨识度。
+problem: Frontend Design 现有 P0-P4、whole-screen visual direction、canonical design authority、whole-product taste gate 已能防止明显随意的页面和实现漂移，但还不足以保证“视觉方向本身源自专业工作”。对于科研、工程、医学、生信、统计等专业产品，一个画面可以在普通 UI 审美上漂亮、完整、通过组件/动效/whole-product taste 检查，却仍然让领域专业人士觉得“这不是我的工作方式”。如果系统先选定通用 UI archetype（dashboard、node graph、cards、generic IDE）再把领域内容塞进去，之后再精修图标、颜色、motion 也无法补回丢失的专业任务结构。
+project-specific context: Asteria Blueprint 的 CAT-TRACE、Mica、semantic lenses、Research Systems Workbench、是否使用 SVG/节点形状只是本次真实案例。可复用缺口是：复杂专业产品在 P1 visual direction 前，需要先确认核心用户的真实任务、领域对象、证据/失败/完成语义，以及同一交互语法能否迁移到产品承诺覆盖的不同专业场景；最终视觉质量既要通过设计师视角，也要通过目标领域 professional 的“这符合我真实工作方式”判断。该反馈不否定已推广的 whole-screen visual direction / taste gate，而是暴露其更上游的专业任务建模与跨领域迁移缺口。
