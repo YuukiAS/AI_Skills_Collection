@@ -172,4 +172,4 @@ Phase A 下一机械动作：
 1. Blueprint 生成静态 contact sheet；
 2. 两份历史 PDF 生成精选关键页静态 page pack；
 3. 核对 Mac mini 上 Claude 可直接读取所有静态证据；
-4. 收敛 Claude Stage 1 的最终必读清单。
+4. 收敛 Claude Stage 1 的最终必读清单。\n\n机械执行入口：`CODEX_PHASE_A_STATIC_EVIDENCE_PREP_20261104.md`。该任务只生成本地 contact sheet、priority 静态图、16 个指定 PDF 页和 manifest；严禁启动 Obsidian/浏览器/Figma，严禁修改产品仓库。
