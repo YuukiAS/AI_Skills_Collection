@@ -76,6 +76,48 @@ Atlas 原始历史 PDF：
 
 不能凭当前总结补造用户态度。
 
+## 二点五、先判断这轮属于“产品前史”还是“目标产品本体”
+
+每一轮开始前，Codex必须先回答：这个版本当时是不是已经在做今天要恢复的目标产品。
+
+### PREHISTORY_INHERITANCE
+
+适用于原始 Asteria、Asteria 2.0、rc.19、Asteria Next 等作为 Asteria Blueprint 前史的版本，以及其它明显属于目标产品形成之前的探索。
+
+这类轮次的目的不是重新验收旧 UI。Codex必须先根据原始 PDF 和后续历史自己总结：
+
+- 这个版本贡献了什么后来 Blueprint 仍可能需要的核心产品构想；
+- 哪些只是当时旧宿主、旧侧栏、旧控件、旧布局的实现细节；
+- 后来的 Blueprint / Next 有没有继承、改坏或丢失这些构想；
+- 哪些具体画面最能证明这些继承资产。
+
+除非某个旧 UI 细节后来直接演化成 Blueprint 的关键能力，否则不得问用户“旧侧栏好不好读”“追踪开关打开后是否清楚”“旧按钮位置是否合适”之类问题。
+
+用户不负责从旧图里自己总结产品血统。Codex必须先给出自己的候选继承结论，再让用户只判断：
+
+“这些候选继承项里，哪些确实值得后续 Blueprint 保留、哪些不要、哪些不确定。”
+
+### TARGET_PRODUCT_REVIEW
+
+适用于已经明确属于 Asteria Blueprint 本体、Asteria Atlas 本体或直接决定当前目标产品结构的版本。
+
+这时才可以细看具体工作面、机制表达、graph / detail职责、实现绑定、证据、返回行为、信息密度和视觉层级。
+
+即使进入 TARGET_PRODUCT_REVIEW，也不能把用户变成旧版 QA。只讨论会影响未来目标产品的局部，不讨论已经没有继承价值的旧实现细节。
+
+每轮 ledger 新增：
+
+`REVIEW_MODE = PREHISTORY_INHERITANCE | TARGET_PRODUCT_REVIEW`
+
+并新增：
+
+- `INHERITABLE_PRODUCT_IDEAS`：Codex根据原始历史提出的候选继承构想；
+- `OBSOLETE_UI_DETAILS`：明确不需要用户重新验收的旧实现细节；
+- `LATER_INHERITANCE_OR_LOSS`：后续如何继承、改坏或丢失；
+- `USER_SCOPE`：本轮真正需要用户判断的最多 1–3 个候选继承点。
+
+用户永远不需要替 Codex总结“这版是什么、为什么重要、后来发生了什么”。
+
 ## 三、初筛只有三档，而且只是“审阅优先级”
 
 ### DEEP_REVIEW
@@ -167,15 +209,13 @@ Atlas ARCHIVE_ONLY 候选：
 
 生成一个临时 montage PNG，左上角清楚标 version id，不改变原图。然后用 macOS `open` 打开图片或 montage，让用户实际看到。不要启动浏览器。
 
-图片打开后，Codex 的文字说明必须保持简短自然段，只回答四件事：这一轮为什么值得看；当时这个版本要解决什么；用户当时明确说了哪些好/不好；后续有没有把好的部分丢掉或把反馈改错。不得先写新的设计方案。
+图片打开后，Codex 的文字说明必须保持简短自然段。若 REVIEW_MODE=PREHISTORY_INHERITANCE，先回答：这一轮在产品血统里是什么位置；它贡献了哪些后来 Blueprint/Atlas 仍可能需要的核心构想；哪些只是旧 UI 细节；后续如何继承、改坏或丢失。若 REVIEW_MODE=TARGET_PRODUCT_REVIEW，再回答：这一轮为什么值得看；当时目标是什么；用户当时明确说了哪些好/不好；后续有没有把好的部分丢掉或把反馈改错。不得先写新的设计方案。
 
 历史反馈必须给 PDF 页码。可以短引用户原话，但不能用后来的 Pro 总结冒充当时反馈。
 
-最后给一个非常短的“Codex 初步判断”，只允许说具体局部，例如：
+最后给一个非常短的“Codex 初步判断”。前史轮次必须写成候选继承项，例如：“我目前认为值得给 Blueprint 继承的，是选中对象后的关系高亮和上下文保持；右侧旧侧栏布局属于旧 UI，不建议让你重新验收。”目标产品本体轮次才使用类似“实现台局部 = CANDIDATE_KEEP；整屏密度 = REPAIR”。
 
-“我目前建议：实现台局部 = CANDIDATE_KEEP；整屏密度 = REPAIR；模板 IDE 语言 = REJECT。”
-
-这不是用户决定。
+这不是用户决定。Codex随后只问用户对这些候选继承项/候选局部的直观判断，不要求用户自己总结版本意义。
 
 然后停止，等用户看图后自然回答。
 
@@ -254,7 +294,7 @@ DEEP_REVIEW 历史线审完后，Codex可以根据已经记录的用户决定生
 
 ## 十、第一轮怎么开始
 
-第一次 orientation 完成后，默认先从 Blueprint 的早期历史按时间顺序推进，但对明显 QUICK_SCAN / ARCHIVE_ONLY 版本不要拖长。
+第一次 orientation 完成后，默认从 Blueprint 的产品血统开始，但原始 Asteria / Asteria 2.0 / rc.19 等前史必须作为 PREHISTORY_INHERITANCE 审阅，不得逐项做旧 UI QA。必要时可把连续前史版本合并成一个“继承构想”轮次，只要所有 version id、对应 PDF 页和原图都保留可追源。进入真正的 Asteria Next / Blueprint 产品设计后，再提高到 TARGET_PRODUCT_REVIEW 的审阅粒度。
 
 当进入第一个真正 DEEP_REVIEW 的历史族时，务必提示用户：
 
