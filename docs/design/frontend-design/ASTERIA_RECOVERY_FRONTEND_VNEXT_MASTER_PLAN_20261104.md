@@ -27,21 +27,22 @@
 
 完成门：Claude 不再需要全仓扫描或重新研究；历史证据、候选保留项、未决问题和可直接打开的视觉入口可用。
 
-### Phase B — GPT 收敛 + 用户最小审阅 Gate
+### Phase B — 可核验压缩 + 用户最小审阅 Gate
 Claude 此时仍不介入。
 
-GPT 使用两轮 Pro、Phase A 静态证据包和历史用户反馈完成最后一次廉价压缩：
-1. 把 36 个 Blueprint 与 12 个 Atlas 历史版本按“真正不同的设计思想/局部资产”合并成少量审阅组，不让用户逐个重看全部版本；
-2. 每组只指出值得看的局部、历史失败、可能保留资产和真实截图入口；
-3. 汇总真正仍未解决、会改变产品结构的少量问题，并去掉历史已经回答的问题；
-4. 明确区分 GPT 的候选判断与用户确认。
+Phase B 的压缩只负责降低阅读量，不拥有新的产品裁决权。36 个 Blueprint 与 12 个 Atlas 历史版本继续保留为完整底表；压缩层必须满足“全量映射、零遗漏、可展开、可追源、判断稳定”。
 
-用户只需要：
-- 对少量审阅组做局部 KEEP / REPAIR / REJECT / UNSURE；
-- 回答真正改变产品方向的少量取舍；
-- 决定先推进哪个项目。
+具体合同：
+1. 48 个历史条目每一个都必须映射到且只映射到一个审阅组，生成覆盖表；不得因为“看起来重复”而从底表消失。
+2. 每个审阅组必须列出其包含的全部 version id、原始截图/PDF 页、历史 verdict、两轮 Pro 的相关判断；压缩文字只是索引，原始证据始终可展开。
+3. 每个“可能保留”判断必须指向具体局部和来源证据，不能写成整版 KEEP；用户裁决仍为 OPEN。
+4. 压缩完成后必须做 coverage audit：48/48 映射、优先历史资产均有来源、历史已明确回答的问题没有重新包装成用户问题。
+5. 用户质疑不能直接触发结论改变。若 GPT 修改某个分组、候选判断或推荐，必须记录 CHANGE_REASON，而且只能是：新增证据、发现来源冲突、发现原压缩错误、或用户作出新的明确决定。
+6. 全量底表永久保留，因此任何压缩错误都可回退，不需要重新考古。
 
-完成门：形成每个项目的最小 design brief、已确认 KEEP/REJECT、OPEN 决策和 Claude 需要看的极小证据集合。
+用户只需要看压缩后的少量审阅组，并对具体局部给出 KEEP / REPAIR / REJECT / UNSURE；真正会改变产品结构的少量取舍才需要用户回答。
+
+完成门：coverage audit 通过；用户能够从任一压缩结论一跳回到原图/原页；形成最小 design brief、已确认局部资产、OPEN 决策和 Claude 只需读取的极小证据集合。
 
 ### Phase C — Claude 首次正式设计介入
 这是 Claude 第一次介入的正确位置。
@@ -183,3 +184,13 @@ Phase A 下一机械动作：
 2. 两份历史 PDF 生成精选关键页静态 page pack；
 3. 核对 Mac mini 上 Claude 可直接读取所有静态证据；
 4. 收敛 Claude Stage 1 的最终必读清单。\n\n机械执行入口：`CODEX_PHASE_A_STATIC_EVIDENCE_PREP_20261104.md`。该任务只生成本地 contact sheet、priority 静态图、16 个指定 PDF 页和 manifest；严禁启动 Obsidian/浏览器/Figma，严禁修改产品仓库。\n\nPhase A 静态包已报告 PASS：Blueprint priority 17/17、Atlas priority 9/9、两侧 PDF 关键页 8/8、两份 Pro 摘要 2/2，无 blocker；Blueprint 第 23 版原图继续明确为不可恢复。\n\nPhase A 静态证据准备已完成。原 `CLAUDE_STAGE1_FINAL_STATIC_EVIDENCE_PROMPT_20261104.md` 因仍要求 Claude 重做历史诊断、与节省 API 的目标冲突，现已废弃，不得执行。下一阶段为 Phase B：GPT 收敛 + 用户最小审阅。Claude 只在 Phase C 首次正式设计时介入。
+
+
+## 8. Roadmap change discipline
+
+用户质疑、追问或表达不满本身不是修改 Roadmap 的证据。后续任何路线变化都必须写明：
+- OLD_DECISION：原结论；
+- NEW_EVIDENCE：新增事实、来源冲突、发现的推理错误，或用户新的明确决定；
+- CHANGE：因此改变的具体部分。
+
+如果没有 NEW_EVIDENCE，则保持原 Roadmap，不因对话压力改口。
