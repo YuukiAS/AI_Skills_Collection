@@ -676,3 +676,26 @@ required production behavior to add to this TODO:
 - When a string should not exist on the surface, do not polish it. Return a content-architecture escalation to Frontend Design so the element can be deleted/merged/demoted before delivery.
 - If a post-delivery review finds a substantial batch of basic naturalness defects, treat that as a failure of the pre-delivery Product UI Copy pass and add the abstracted failure patterns to regression. Do not normalize repeated user-driven rewrite rounds as successful production.
 
+
+
+### 2026-11-04：复杂路线讨论被 Markdown 层级、重复状态和反复改口放大阅读负担
+status: NEW
+source: Asteria Blueprint / Atlas 恢复路线、Frontend Design vNext 与 Claude 使用顺序讨论，2026-11-04
+target layer: Clear Writing / response structure / complex planning communication
+evidence:
+- 用户已经多次明确要求“段落化讲重点”，但回答仍反复使用长标题、表格、状态块、编号列表和多层 Markdown，把一个本应一句话串联的流程拆成大量视觉层级。
+- 同一核心信息被连续几轮重新包装：先讲“持续演进”，再讲“Phase A/B/C”，再讲 Claude 何时介入；每次路线修正都重新输出大块结构，用户需要重新扫描整篇才能判断到底变了什么。
+- 用户明确反馈“以后所有非段落回答我都不看”“流程图直接一句话”“md 每次这样我不累吗，看都看半天”。此前回答即使内容部分正确，也因结构本身增加了认知成本。
+- 更严重的是，格式膨胀掩盖了真正的决策变化：例如 Claude 是否应该先做历史诊断，实际只需要一句话说明“旧方案重复消费 Phase A，因此 Claude 延后到用户确认后直接做设计”，却被多层 roadmap 解释淹没。
+problem:
+- Clear Writing 不能把“信息完整”误解成“结构越多越清楚”。复杂任务中，过多标题、表格、状态块和并列清单会迫使用户做二次整合。
+- 当用户已经给出明确阅读偏好（自然段、先结论、流程一句话）时，继续输出列表化/表格化长答案属于生产失败，不是风格差异。
+- 对长期项目，回答还容易重复已经冻结的背景和旧结论，导致每一轮都像重新开会。真正需要的是只说“当前在哪、这轮新增了什么、下一步谁做”。
+candidate_action:
+- 对复杂路线/复盘/方案讨论，默认先用连续自然段说明核心判断、当前阶段和下一动作；只有真实存在并列比较、字段核对或机器交付时才使用列表/表格。
+- 流程优先压成一句自然语言链路，例如“GPT/Codex 压缩证据 → 用户确认 → Claude 设计 → Design Assurance → Codex 实现 → Claude 返修”，除非用户主动要求流程图。
+- 若用户已明确要求段落化，后续同主题回答默认禁止表格、长编号列表、状态块和多级标题；不能在每轮重新解释整个 roadmap。
+- 每轮回答只突出相对上一轮的增量：当前阶段、真正变化、为什么变化、下一步。已经冻结的背景通过一句引用式概括即可，不重新展开。
+- 当路线发生修正时，明确指出“旧判断是什么 / 新证据是什么 / 因此改了什么”。不能用重新写一篇更长方案掩盖判断漂移。
+- 用户追问或质疑本身不能成为改结论的理由；若结论改变，必须指出新增事实、矛盾或推理错误。
+promotion_gate: 在下一次真实复杂项目路线讨论中，用户明确要求段落化后，生产回答能够连续多轮保持自然段、低重复、增量式说明，并让用户无需重读整份 roadmap 就能知道“现在在哪、发生了什么变化、下一步谁做”。若仍因结构膨胀或重复背景被用户要求重写，则继续视为未解决。
