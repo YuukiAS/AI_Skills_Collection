@@ -151,3 +151,25 @@ Frontend Design vNext 也不等待两个 Asteria 全部完成。完成第一个�
 - 哪些历史版本/局部正式 KEEP：OPEN，等待用户审阅。
 - 每个项目需要一个还是两个 Claude 候选：OPEN。
 - Claude 是否在 Stage 2 直接产出可运行 design spike、还是先静态关键状态：建议优先可运行 spike，但待 Stage 1 能力探测与用户确认。
+
+
+## 7. Phase A 当前执行状态
+
+状态：ACTIVE（2026-11-04）
+
+已经落地的 Phase A 文件：
+- `PHASE_A_EVIDENCE_PACK_AND_REVIEW_QUEUE_20261104.md`：36 个 Blueprint + 12 个 Atlas 全量 OPEN 审阅队列、优先审阅层、静态证据入口和 Claude 输入约束；
+- `DESIGN_ASSURANCE_CLAUDE_ROLE_DECISION_20261104.md`：Design Assurance 的具体步骤，以及 Claude / GPT Astra 共用的 Frontend Product & Visual Design Specialist 槽位。
+
+新增硬约束：
+- Claude 不负责启动 Obsidian、浏览器、Figma 或网页预览来理解历史；
+- Claude 不负责机械截图、录屏、构建、PDF 批量渲染或全仓搜索；
+- 这些工作由 GPT/Codex 在 Phase A / 实施验收阶段提前准备成静态证据；
+- 对重要前端任务，当前生产策略要求 Claude 至少真实承担一次设计 pass；Claude不可用时由 GPT Astra 替代同一 specialist 角色；
+- 用户对历史资产的最终裁决必须保持 OPEN，模型只能提供候选保留/修复/拒绝意见。
+
+Phase A 下一机械动作：
+1. Blueprint 生成静态 contact sheet；
+2. 两份历史 PDF 生成精选关键页静态 page pack；
+3. 核对 Mac mini 上 Claude 可直接读取所有静态证据；
+4. 收敛 Claude Stage 1 的最终必读清单。
