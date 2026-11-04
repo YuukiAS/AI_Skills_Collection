@@ -13,6 +13,15 @@ boundary: the detailed desktop-native, icon-registry, whole-product taste, and F
 
 ## Open candidates
 
+### 用户反馈误升级为整体重设计，已接受成果不能稳定继承
+status: NEW
+source: Asteria Blueprint 36 版 / Asteria Atlas 12 版历史失败复盘及两位 GPT Pro 独立分析，2026-11-04
+evidence: `YuukiAS/Asteria-Blueprint@archive/asteria-blueprint-version-gallery-20261103`，`YuukiAS/Asteria-Atlas@archive/atlas-visual-history`；本任务的 [有边界实现合同](../design/frontend-design/FEEDBACK_CONTINUITY_IMPLEMENTATION_CONTRACT_20261104.md)
+problem: Frontend Design 已有 coordinator-first、S1/S2/S3、P0–P4、真实界面证据和制作方自检，但现有正常入口仍可能把局部反馈解释为整体重设计，未绑定用户原话、现有候选、局部已认可行为、修复范围与回滚证据。模型更换或会话切换时正确成果尤其容易丢失。Atlas V06→V07 删除无意义边却变成七个无关系分类入口，测试后来保护错误目标；Blueprint 局部认可的实现台被后续模板化方向弱化。
+project-specific context: Blueprint 的机制、源码绑定和 Atlas 的论文关系、Obsidian 宿主属于项目事实，不应硬编码成通用组件；跨项目问题是反馈路由、保留项/回滚与真实目标一致性。
+maintenance boundary: 此问题优先按已有 S1–S3 / F-A–F-D 的**执行回归**处理。复用 `workflow-core` 的真实验收、保护已接受行为和停止重试，不新增第二套工作流或 Planner–Critic；按 `AGENTS.md` 使用 `workflow-core + ai-skills-core + web-development` 完成 bounded plugin refinement。正式 source、生成层、真实回放及发布均尚未实施，本条不是完成声明。
+next verification: 使用合同中的 Atlas V06→V07、Blueprint 实现台、Obsidian 真机 FAIL、CSS 小修、明确重设计、跨模型交接等场景，证明只改已授权范围、不丢已认可能力、真实界面证据与该候选一致。
+
 ### Production icon sourcing and icon-registry discipline
 status: SUPERSEDED
 tracking: #55
