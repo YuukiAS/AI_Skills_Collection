@@ -27,35 +27,45 @@
 
 完成门：Claude 不再需要全仓扫描或重新研究；历史证据、候选保留项、未决问题和可直接打开的视觉入口可用。
 
-### Phase B — Claude Stage 1：独立视觉/产品诊断
+### Phase B — GPT 收敛 + 用户最小审阅 Gate
+Claude 此时仍不介入。
+
+GPT 使用两轮 Pro、Phase A 静态证据包和历史用户反馈完成最后一次廉价压缩：
+1. 把 36 个 Blueprint 与 12 个 Atlas 历史版本按“真正不同的设计思想/局部资产”合并成少量审阅组，不让用户逐个重看全部版本；
+2. 每组只指出值得看的局部、历史失败、可能保留资产和真实截图入口；
+3. 汇总真正仍未解决、会改变产品结构的少量问题，并去掉历史已经回答的问题；
+4. 明确区分 GPT 的候选判断与用户确认。
+
+用户只需要：
+- 对少量审阅组做局部 KEEP / REPAIR / REJECT / UNSURE；
+- 回答真正改变产品方向的少量取舍；
+- 决定先推进哪个项目。
+
+完成门：形成每个项目的最小 design brief、已确认 KEEP/REJECT、OPEN 决策和 Claude 需要看的极小证据集合。
+
+### Phase C — Claude 首次正式设计介入
 这是 Claude 第一次介入的正确位置。
 
-为什么不是更早：更早会把昂贵额度浪费在仓库搜索、PDF定位和重复研究。  
-为什么不是更晚：如果用户先把所有产品选择都定完，Claude 只剩执行角色，失去其独立视觉/产品判断价值。
+为什么不是更早：历史诊断、版本筛选、PDF阅读和资料整理已经由两轮 Pro + GPT/Codex 完成；让 Claude 重做会重复消耗昂贵上下文。
+为什么不是更晚：在具体视觉/产品方向还没有完成前介入，Claude 仍能贡献独立的前端审美、空间组织和产品设计判断，而不是只做美化。
 
-Claude 只做：
-1. 亲自读取两份原始 PDF 的关键原文与关键视觉页、历史图库和少量必要 Deep Research 原文。
-2. 在看 GPT Pro 最终结论前先形成自己的诊断。
-3. 对历史版本提出 CANDIDATE_KEEP / CANDIDATE_REPAIR / REJECT 建议，但不得替用户升级为 ACCEPTED。
-4. 识别 Blueprint / Atlas 真正尚未决定、会改变信息架构或视觉方向的问题。
-5. 最后提出数量克制的用户问题后停止。
-6. 探测当前 Claude Code / 中转的图片读取、官方 frontend-design Skill 等必要能力；不安装 Skill 大全，不做完整设计，不写产品代码。
+Claude 只读取：
+- 用户已确认的最小 design brief；
+- KEEP / REPAIR / REJECT / OPEN；
+- 每个项目 3–6 张真正决定方向的静态截图或 PDF 页；
+- 必要的真实内容/数据样例；
+- 一页以内的失败约束摘要。
 
-完成门：用户拿到“Claude 独立判断 + 历史候选资产 + 少量真正未决问题”。
+Claude 不读取完整 438 页 PDF，不重读 36+12 全历史，不打开 Obsidian/浏览器/Figma，不重跑研究。
 
-### Phase C — 用户设计收敛 Gate
-这是本计划中用户必须集中介入的一次主要阶段。
+Claude 的任务：
+1. 对用户已确认的产品目标做一次真实前端产品/视觉设计 pass；
+2. 必要时指出当前 brief 中仍存在的一处关键冲突，但不得重新开启全历史诊断；
+3. 为一次只处理的一个项目提出 1–2 个真正不同的窄范围设计方向/关键场景；
+4. 允许使用官方 frontend-design Skill；
+5. 输出足够让用户比较信息组织、图形职责、密度、上下文连续性和视觉质量的结果。
 
-用户需要决定的只有三类：
-1. 历史资产：哪些局部明确 KEEP、哪些允许重做、哪些彻底不要；可以逐版本查看，但模型不得先替用户冻结。
-2. 高影响产品取舍：例如 graph/非 graph 边界、信息密度、全局上下文保留、机制/论文详情的主要阅读方式等；只讨论 Claude 与两轮 Pro 都认为会改变整体设计的事项。
-3. 本轮制作策略：先做 Blueprint 还是 Atlas、是否需要一还是两个候选、Claude 设计 spike 的范围。
-
-用户不需要决定字体数值、每个组件样式、普通布局细节、实现技术和机械 QA。
-
-这些确认写回本文件的 Decision Log，并在进入具体项目时写入该项目自己的 canonical design baseline。
-
-### Phase D — Claude Stage 2：小范围可运行设计 spike
+### Phase D — 用户选择 + Claude 设计冻结
 一次只处理用户选择的一个项目。
 
 Claude 使用真实内容做 1–2 个真正不同的窄范围方向，优先是可运行关键状态/关键任务链，而不是长篇视觉规范；允许使用官方 frontend-design Skill。候选必须让用户能直接比较信息组织、图形职责、密度、上下文连续性和视觉质量。
@@ -130,8 +140,8 @@ Frontend Design vNext 也不等待两个 Asteria 全部完成。完成第一个�
 不现在连续问几十个问题。
 
 - Phase A：无需用户决定产品方向。
-- Phase B 结束：集中确认历史 KEEP/REJECT 与少量高影响产品取舍。
-- Phase D：从 1–2 个真实候选中选方向。
+- Phase B：集中确认少量历史 KEEP/REPAIR/REJECT 与高影响产品取舍。
+- Phase D：从 Claude 的 1–2 个真实候选中选方向并冻结。
 - Phase F：最终接受成品。
 
 其余可由模型/工具自行推进，只有出现新的结构级冲突才重新询问。
@@ -142,7 +152,7 @@ Frontend Design vNext 也不等待两个 Asteria 全部完成。完成第一个�
 2. 不开始 Claude full redesign。
 3. 先用两轮 Pro + 现有历史图库完成 Phase A：用户审阅队列、Open Decisions、Claude Stage 1 最终合并输入。
 4. 同时只冻结 Design Assurance 的权威 contract 和 Frontend Design vNext requirements；不等待完整插件实现。
-5. Phase A 完成即进入 Claude Stage 1；Claude 的结果直接进入 Phase C，而不是再开一轮 GPT 研究。
+5. Phase A 完成后先进入 Phase B 的 GPT 收敛 + 用户最小审阅；只有形成最小 design brief 后才调用 Claude。
 
 ## Decision Log
 
@@ -172,4 +182,4 @@ Phase A 下一机械动作：
 1. Blueprint 生成静态 contact sheet；
 2. 两份历史 PDF 生成精选关键页静态 page pack；
 3. 核对 Mac mini 上 Claude 可直接读取所有静态证据；
-4. 收敛 Claude Stage 1 的最终必读清单。\n\n机械执行入口：`CODEX_PHASE_A_STATIC_EVIDENCE_PREP_20261104.md`。该任务只生成本地 contact sheet、priority 静态图、16 个指定 PDF 页和 manifest；严禁启动 Obsidian/浏览器/Figma，严禁修改产品仓库。\n\nPhase A 静态包已报告 PASS：Blueprint priority 17/17、Atlas priority 9/9、两侧 PDF 关键页 8/8、两份 Pro 摘要 2/2，无 blocker；Blueprint 第 23 版原图继续明确为不可恢复。\n\nPhase A 最终语义收敛已完成。Claude Stage 1 唯一正式入口：`CLAUDE_STAGE1_FINAL_STATIC_EVIDENCE_PROMPT_20261104.md`。下一阶段为 Phase B，不再追加第三轮 Pro 或新的 Phase A 研究。
+4. 收敛 Claude Stage 1 的最终必读清单。\n\n机械执行入口：`CODEX_PHASE_A_STATIC_EVIDENCE_PREP_20261104.md`。该任务只生成本地 contact sheet、priority 静态图、16 个指定 PDF 页和 manifest；严禁启动 Obsidian/浏览器/Figma，严禁修改产品仓库。\n\nPhase A 静态包已报告 PASS：Blueprint priority 17/17、Atlas priority 9/9、两侧 PDF 关键页 8/8、两份 Pro 摘要 2/2，无 blocker；Blueprint 第 23 版原图继续明确为不可恢复。\n\nPhase A 静态证据准备已完成。原 `CLAUDE_STAGE1_FINAL_STATIC_EVIDENCE_PROMPT_20261104.md` 因仍要求 Claude 重做历史诊断、与节省 API 的目标冲突，现已废弃，不得执行。下一阶段为 Phase B：GPT 收敛 + 用户最小审阅。Claude 只在 Phase C 首次正式设计时介入。
