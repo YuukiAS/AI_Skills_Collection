@@ -1,3 +1,15 @@
+# DEPRECATED — DO NOT RUN
+
+该提示词已于 2026-11-04 废弃。原因：它仍要求 Claude 重做大范围历史诊断，与 Phase A 已完成的 GPT Pro / Codex 证据压缩及“Claude 只用于高价值前端设计判断”的成本目标冲突。
+
+当前唯一权威路线请读取：
+
+`docs/design/frontend-design/ASTERIA_RECOVERY_FRONTEND_VNEXT_MASTER_PLAN_20261104.md`
+
+Claude 的首次正式介入已移动到 Phase C：用户完成 Phase B 的最小历史资产与产品取舍确认后，Claude 只读取极小设计包并进行真实前端产品/视觉设计。
+
+---
+
 # Claude Stage 1 Final：Asteria 双项目独立视觉/产品诊断
 
 RUN_ID=claude-stage1-final-static-evidence-20261104
