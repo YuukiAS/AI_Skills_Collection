@@ -50,36 +50,9 @@ Delivery Assurance
 
 ## 1. 当前架构裁决
 
-这里必须区分**三层责任架构**和**Reasoned Decision 插件内部 skill**。2026-10-26 已经收敛过的整体方向不是“两层”，而是：
+Reasoned Decision 是三层可靠性生命周期的**第一层插件**。它自身不是“三层”，也不应该为了凑层数再新增第三个内部 skill。
 
-1. **Reasoned Decision / 原 Reasoned Design**
-   - 负责判断本身是否站得住，以及在当前约束下应该采用什么完整方案；
-   - 内部只需要两个核心 skill：**Judgment Integrity** 与 **Solution Design**。
-
-2. **Artifact Curation / 当前 `artifact-content-design` 方向**
-   - 负责一个面向用户的产物到底应该出现哪些内容、哪些元素不该出现、什么信息应该删除或留白；
-   - 文本、图片、按钮、卡片、图表、幻灯片等“是否应该存在”属于这一层，而不是 Reasoned Decision 的判断逻辑。
-
-3. **Delivery Assurance**
-   - 负责“最后交付的东西是不是真的满足已经决定的目标”；
-   - 防止降级实现、旧功能回退、虚假完成、局部 PASS 冒充整体交付，以及验收义务遗漏。
-
-这三个责任层不是三个都塞进 Reasoned Decision 插件，也不是三个新的 skill。它们各自解决不同失败阶段：
-
-```text
-Reasoned Decision
-  判断对不对、方案该选什么
-        ↓
-Artifact Curation
-  产物里到底该有什么、不该有什么
-        ↓
-Delivery Assurance
-  最终交付有没有真的做到、有没有退化
-```
-
-`workflow-core` 仍只负责识别任务需要哪些能力、组织执行与验证，不替代这三层的专业责任；Bridge Kit 只负责运行、权限、身份、钩子和恢复。
-
-Reasoned Decision 自身是一个**独立插件**，不是 standalone skill，也不应该被塞进 `workflow-core`。插件内部第一版只保留两个真正不同职责的 skill：
+插件内部第一版只保留两个真正不同职责的 skill：
 
 1. **Judgment Integrity**
    - 负责“到底该怎么判断”；
@@ -93,7 +66,9 @@ Reasoned Decision 自身是一个**独立插件**，不是 standalone skill，�
 
 不新增第三个 `search-first` skill，不新增 `decision-continuity` skill，也不新增默认 council skill。
 
-“先查现成方案”是 Solution Design 的一个条件触发参考流程；“跨轮改口审计”是 Judgment Integrity 的核心机制。它们不各自长成新的顶级能力。
+“先查现成方案”是 Solution Design 的条件触发参考流程；“跨轮改口审计”是 Judgment Integrity 的核心机制。它们不各自长成新的顶级能力。
+
+更复杂的多轮架构收敛、独立盲区调查、实施就绪和 Architecture Freeze 交给第二层 **Design Assurance**；冻结后的真实交付、防降级与防回归交给第三层 **Delivery Assurance**。Artifact Curation 与 Clear Writing 是横切能力，不拿来填充三层生命周期。
 
 ## 2. 为什么不能归 workflow-core
 
@@ -116,22 +91,26 @@ Reasoned Decision 解决的是不同问题：
 1. workflow-core 会开始承担购买、账户、基础设施策略、产品路线等通用判断，职责过宽；
 2. “执行机制”和“判断质量”混在一起，用户以后很难知道一次失败究竟是 domain facts、decision synthesis 还是 execution workflow 的问题。
 
-因此正确协作是：
+因此正确协作不是 Reasoned Decision 直接吞掉后续阶段，而是：
 
 ```text
 domain facts / project evidence
         ↓
 Reasoned Decision
   Judgment Integrity
+  Solution Design
         ↓
-  Solution Design（需要方案时）
+[复杂设计才进入]
+Design Assurance
+  并行研究 / 盲区检查 / Implementation Readiness / Architecture Freeze
         ↓
-workflow-core（需要复杂执行时）
+workflow-core / Codex 执行冻结方案
         ↓
-writing-style（最后的表达层）
+Delivery Assurance
+  真实最终候选 / 防降级 / 防回归 / 交付声明
 ```
 
-Warm Response 可以在用户因连续失败明显受挫时并行触发，但不参与改变技术判断。
+Artifact Curation、Clear Writing 与领域插件按实际任务横切介入；Warm Response 可以在用户因连续失败明显受挫时并行触发，但不参与改变技术判断。
 
 ## 3. 插件到底负责什么
 
