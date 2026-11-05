@@ -1,9 +1,63 @@
-# Asteria Recovery + Frontend Design vNext：单一执行主线
+# Asteria Recovery + Frontend Design vNext：唯一执行总控
 
-日期：2026-11-04  
-状态：DRAFT MASTER PLAN — 用于收敛，不新增框架  
+日期：2026-11-04；最后状态更新：2026-11-05  
+状态：ACTIVE CONTROL PLANE — PHASE_B_COMPLETE / PHASE_C_HANDOFF_PENDING  
 记录位置：本文件是跨 Asteria / Frontend Design / Design Assurance 的唯一总执行记录；产品设计事实仍留在各产品仓库，插件事实仍留在 AI_Skills_Collection。  
 原则：不新建 Notion 路线图、不新增 Planner/Critic 系统、不等待所有基础设施完成才继续 Asteria。
+
+## 使用规则：这份文件是唯一总控
+
+从 2026-11-05 起，本文件不是参考资料，而是 Asteria Blueprint / Atlas 恢复、Frontend Design vNext 与 Design Assurance 协作的唯一执行总控。
+
+后续每一次 ChatGPT / Codex / Claude / Work 参与本项目，在给出新的判断、计划、提示词、实现建议或阶段结论之前，都必须先重新读取本文件，至少核对：
+- 当前阶段；
+- 已冻结决定；
+- 当前证据来源；
+- 当前唯一 NEXT_ACTION；
+- 明确禁止重新打开的旧问题。
+
+任何新的高影响决定、阶段完成、路线变化或用户明确裁决，都必须回写本文件；不能只留在聊天记录、临时提示词、Codex 本地 ledger 或其它派生文档里。
+
+派生文件可以保存证据和细节，但它们不能与本文件并列成为第二套路线图。本文件只引用必要证据，并把对后续执行真正有约束力的结论吸收进来。
+
+如果本文件的 CURRENT_STATE 与实际执行结果冲突，先停止下一阶段，更新本文件后再继续。不得依赖模型“记得上次聊过什么”来补齐状态。
+
+
+
+## CURRENT_STATE — 2026-11-05
+
+Phase A：COMPLETE。静态证据包、历史入口和审阅材料已准备完成。
+
+Phase B：COMPLETE。Blueprint + Atlas 历史审阅已完成，覆盖 48/48 条目，无遗漏。当前已知交接结论：
+- Blueprint 已留下明确的交互与产品继承要求；
+- Atlas 尚无整体通过的设计方案，只保留有限 theme 认可与可继续评估的原生插件底座；
+- 产品设计和实现均尚未完成；
+- Claude 尚未启动；
+- 尚未制作新 UI。
+
+Phase B 的完整结论目前保存在 Mac mini 本地：
+`/Users/yuukias/Code/Asteria-Phase-A-Evidence/PHASE_B_REVIEW_CONCLUSIONS_20261105.md`
+
+这份本地结论尚未进入 GitHub，因此当前控制面仍有一个明确缺口：**在进入 Phase C 之前，必须把 Phase B 中对未来设计有约束力的结论同步进本文件；不能只在本地结论文件里保留。**
+
+### 当前唯一 NEXT_ACTION
+
+先同步并压缩 `PHASE_B_REVIEW_CONCLUSIONS_20261105.md` 中真正具有执行约束力的内容到本文件，形成：
+- Blueprint 已确认继承项；
+- Blueprint 明确禁止复活项；
+- Blueprint 仍 OPEN 的关键问题；
+- Atlas 已确认局部；
+- Atlas 明确否定方向；
+- Atlas 仍 OPEN 的关键问题；
+- 两个项目各自进入 Phase C 时 Claude/Codex 必须读取的最小证据集合。
+
+在这一步完成并写回本文件之前：
+- 不启动 Claude；
+- 不做新 UI；
+- 不进入 production implementation；
+- 不重新做历史审阅；
+- 不新建另一份总路线图。
+
 
 ## 0. 已冻结的事实
 
@@ -150,11 +204,9 @@ Frontend Design vNext 也不等待两个 Asteria 全部完成。完成第一个�
 
 ## 6. 当前立即动作
 
-1. 不再开第三轮 Pro。
-2. 不开始 Claude full redesign。
-3. 先用两轮 Pro + 现有历史图库完成 Phase A：用户审阅队列、Open Decisions、Claude Stage 1 最终合并输入。
-4. 同时只冻结 Design Assurance 的权威 contract 和 Frontend Design vNext requirements；不等待完整插件实现。
-5. Phase A 完成后先进入 Phase B 的 GPT 收敛 + 用户最小审阅；只有形成最小 design brief 后才调用 Claude。
+当前不再执行 Phase A / Phase B。唯一动作是把 2026-11-05 的 Phase B 完整交接结论同步进本文件并冻结 Phase C 输入。
+
+只有同步完成后，才允许决定 Blueprint / Atlas 哪个先进入 Claude 正式设计、以及 Claude 的最小输入包。
 
 ## Decision Log
 
@@ -195,3 +247,22 @@ Phase A 下一机械动作：
 - CHANGE：因此改变的具体部分。
 
 如果没有 NEW_EVIDENCE，则保持原 Roadmap，不因对话压力改口。
+
+
+## 9. 最新状态日志
+
+### 2026-11-05 — Phase B completed
+
+NEW_EVIDENCE：
+- Codex 报告 Blueprint + Atlas 历史审阅完成；
+- 48/48 条目覆盖，无遗漏；
+- 本地生成 `PHASE_B_REVIEW_CONCLUSIONS_20261105.md`；
+- Blueprint 已形成明确交互要求；
+- Atlas 没有整体通过方案，仅有有限 theme 认可与可评估原生插件底座；
+- Claude 未启动，新 UI 未制作。
+
+CHANGE：
+- Phase B 状态改为 COMPLETE；
+- Phase C 暂不启动；
+- 先把本地 Phase B 结论中有执行约束力的内容同步进本文件；
+- 本文件升级为唯一执行总控，后续每次回答和每个模型任务都必须先读取并围绕它继续。
