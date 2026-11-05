@@ -266,3 +266,28 @@ CHANGE：
 - Phase C 暂不启动；
 - 先把本地 Phase B 结论中有执行约束力的内容同步进本文件；
 - 本文件升级为唯一执行总控，后续每次回答和每个模型任务都必须先读取并围绕它继续。
+
+
+## REUSE_AUDIT — 2026-11-05
+
+本节记录“已有研究与公开轮子到底是否存在”，防止后续执行者重新造轮子或把“研究未被消费”误判成“没有研究”。
+
+### Blueprint
+
+已验证：Blueprint 并不缺 Deep Research。既有研究至少包括 `YuukiAS/AI_Research_Toolkit@main:docs/research/complex-system-showcase-20261026/` 的独立设计研究及其多轮结果，以及后续 architecture-evolution / Asteria Next 收敛研究。现有维护记录明确写明：Blueprint 已完成三份独立 Deep Research，均找到 20+ 个直接相关成熟参考。
+
+这些研究和后续工具调查已经明确涉及可复用成熟方案，包括 LikeC4、IcePanel、Dagster、DataHub、Structurizr、React Flow / D3 / ELK，以及专业文档与交互系统案例。失败不能再解释为“GitHub 上没有轮子”；真正问题是研究结果没有稳定转成后续制作必须消费的视觉/交互资产、语义模型和验收约束，导致实现反复退化成普通 React Flow demo、dashboard、卡片、步骤页或 IDE 模板。
+
+### Atlas
+
+已验证：Atlas 有正式科学内容 Deep Research 基线，当前入口为 `YuukiAS/Asteria-Atlas@main:sources/dii/DEEP_RESEARCH_BASELINE_ZH.md`，并有 `prompts/DII_ATLAS_MVP_PRO_ZH.md` 消费该基线；更完整的方法协议与历史 seed 位于 `YuukiAS/Distributed_Imaging_Inference@research/dii-literature-map-20261027`。Atlas 同时已有可继续复用的原生 Obsidian 插件工程底座，而不是必须从零实现宿主。
+
+截至本次审计，尚未在用户仓库中找到一份与 Blueprint 的 complex-system-showcase 研究同等级、专门系统调查 Atlas 前端/Obsidian 视觉案例与公开 GitHub 插件轮子并形成完整 prompt + result 的独立研究。2026-11-04 双项目工具调查覆盖了 Obsidian CLI、frontend-design、Figma、Playwright 等，但没有证据表明它已经系统消费 Breadcrumbs、Dataview、Graph Analysis 等 Atlas 相关公开机制。此项属于真实研究缺口，但不能与 Atlas 的科学内容 Deep Research 混为一谈。
+
+### Frontend Design Skill
+
+已验证存在官方 frontend-design Skill / Claude Code 插件，既有 Asteria 工具调查已将其列为可优先使用的设计能力。Skill 能帮助避免模板化前端、建立有意图的排版/色彩/布局/动效，但不能替代产品语义、科学关系设计、真实宿主验证，也不能自动保证外部公开轮子被真正复用。
+
+### 后续硬约束
+
+进入任何新设计之前，执行者必须先区分三件事：已有研究结论、已有可复用工程/公开轮子、仍然真实缺失的研究。禁止把“没有消费既有研究”重新解释成“需要再做一轮同范围研究”。若要补 Atlas 的外部设计/插件参考，只允许做针对当前缺口的窄研究，并把可复用机制直接映射到设计输入，而不是再生成一份孤立参考报告。
