@@ -7,9 +7,36 @@ Production status: NOT IMPLEMENTED
 
 ## 1. 当前架构裁决
 
-Reasoned Decision 应该是一个**独立插件**，不是 standalone skill，也不应该被塞进 `workflow-core` 变成一个内部 skill。
+这里必须区分**三层责任架构**和**Reasoned Decision 插件内部 skill**。2026-10-26 已经收敛过的整体方向不是“两层”，而是：
 
-第一版插件只保留两个真正不同职责的 skill：
+1. **Reasoned Decision / 原 Reasoned Design**
+   - 负责判断本身是否站得住，以及在当前约束下应该采用什么完整方案；
+   - 内部只需要两个核心 skill：**Judgment Integrity** 与 **Solution Design**。
+
+2. **Artifact Curation / 当前 `artifact-content-design` 方向**
+   - 负责一个面向用户的产物到底应该出现哪些内容、哪些元素不该出现、什么信息应该删除或留白；
+   - 文本、图片、按钮、卡片、图表、幻灯片等“是否应该存在”属于这一层，而不是 Reasoned Decision 的判断逻辑。
+
+3. **Delivery Assurance**
+   - 负责“最后交付的东西是不是真的满足已经决定的目标”；
+   - 防止降级实现、旧功能回退、虚假完成、局部 PASS 冒充整体交付，以及验收义务遗漏。
+
+这三个责任层不是三个都塞进 Reasoned Decision 插件，也不是三个新的 skill。它们各自解决不同失败阶段：
+
+```text
+Reasoned Decision
+  判断对不对、方案该选什么
+        ↓
+Artifact Curation
+  产物里到底该有什么、不该有什么
+        ↓
+Delivery Assurance
+  最终交付有没有真的做到、有没有退化
+```
+
+`workflow-core` 仍只负责识别任务需要哪些能力、组织执行与验证，不替代这三层的专业责任；Bridge Kit 只负责运行、权限、身份、钩子和恢复。
+
+Reasoned Decision 自身是一个**独立插件**，不是 standalone skill，也不应该被塞进 `workflow-core`。插件内部第一版只保留两个真正不同职责的 skill：
 
 1. **Judgment Integrity**
    - 负责“到底该怎么判断”；
