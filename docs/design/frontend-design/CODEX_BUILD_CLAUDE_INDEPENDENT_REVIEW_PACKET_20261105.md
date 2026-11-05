@@ -95,6 +95,82 @@ CORE 只允许包含：
 7. **核心→补充阅读索引**  
    这是本次最重要的结构。
 
+
+8. **两个“待 Claude 审查的候选方案”——必须放进 CORE**
+   
+   Claude 网页端看不到 GitHub，因此以下两个构思不能只留在仓库，也不能只在用户发给 Claude 的提示词里用几句话概括。它们本身就是本轮要让 Claude独立评估的对象。
+   
+   这两节必须明确标记：
+   
+   `PROPOSAL_UNDER_REVIEW — NOT ACCEPTED / NOT PRODUCTION`
+   
+   不得写成已经确定的正确流程。
+
+   ### 8A. Frontend Design vNext 候选构思
+   
+   CORE 用约 2–4 页，把以下内容用自然中文忠实呈现，足以让 Claude不访问 GitHub也能理解并评价：
+   
+   - 当前基线：现有 Frontend Design v0.4 已经有 P0–P4、F-A–F-D、S1/S2/S3、真实宿主验收等能力；本轮不是从零重建插件。
+   - 当前暴露的问题：已有产品收到用户反馈后，模型会把局部问题扩大为整体重设计；已认可局部无法稳定跨模型/跨会话继承；静态 PASS 可能保护错误目标。
+   - vNext 当前候选新增机制：
+     1. **首次设计先做真实任务建模**：先明确用户任务、对象、关系、必须同时可见的信息，再选择视觉隐喻；
+     2. **关键场景先行**：全量实现前，先用真实数据做 1–2 个可见/可操作关键场景，让用户判断产品组织和视觉方向；
+     3. **设计连续性 / 反馈返修**：从准确 candidate + 用户原话出发，明确 `KEEP / REPAIR / UNTOUCHED / OPEN / ROLLBACK`；继续复用 S1/S2/S3，局部反馈不能自动升级成整体重设计；
+     4. **真实证据晋升**：设计基线只能由同 commit、真实宿主、真实任务链证据晋升；build/test/旧截图/静态图不能单独证明新候选更好；
+     5. **跨模型连续性**：设计真相保存在 repo 的 canonical design reference，而不是某个模型聊天记忆；Claude / Astra / GPT / Codex 换人时继续同一基线；
+     6. **模型按能力调用**：确定性小修交 Codex，普通设计判断可由较低成本模型处理，高熵空间/视觉/产品问题才调用 Claude 或 Astra，复杂科学/架构才触发 Pro，独立验收按风险触发。
+   - 当前状态必须注明：这是候选 vNext / feedback-continuity 设计合同和机械原型，**尚未证明它能稳定解决 Asteria，也尚未正式成为成功的生产方案**。
+   - 让 Claude重点评价：
+     - 哪些机制真的解决历史失败；
+     - 哪些属于不必要流程；
+     - 哪些还缺；
+     - 是否应该继续救现有 Frontend Design，还是换思路；
+     - Claude / Astra / GPT / Codex 在其中如何分工才合理。
+   
+   CORE 必须给出以下完整来源在 Supplement 的精确页码：
+   - `FEEDBACK_CONTINUITY_IMPLEMENTATION_CONTRACT_20261104.md`
+   - Master Plan 中 Frontend Design vNext 相关段落
+   - 如必要，现有 v0.4 的最小能力说明
+   
+   ### 8B. Design Assurance 候选构思
+   
+   CORE 用约 2–4 页把当前候选 Design Assurance 讲清楚，Claude必须能在不访问 GitHub的情况下评价“这层到底有没有必要”。
+   
+   必须介绍当前候选 8 步链路：
+   
+   1. 任务分级 / 判断是否需要进入复杂设计保证；
+   2. 事实恢复：仓库、文档、现有实现和外部事实优先自行核查；
+   3. 暴露真正会改变产品/架构/失败恢复/权限/成本的未决问题；
+   4. 专业设计波次：整体设计负责人 + 按需 specialist（科学/数学、架构、前端产品与视觉等）；
+   5. 收敛唯一推荐方案，明确保留项、放弃项、OPEN 项及理由；
+   6. Implementation Readiness：检查 Codex 是否仍需猜核心行为，任务/对象/关系/机制/失败路径/验收/回滚是否足够明确；
+   7. Architecture Freeze：重大 OPEN 关闭后形成唯一实施权威；
+   8. Asteria Blueprint 映射 / Codex handoff：实施后如出现反证或关键空洞，再开 revision。
+   
+   同时说明当前候选角色设想，但必须标为“待 Claude 审查”：
+   
+   - Claude 当前被设想为前端产品与视觉 specialist，主要出现在专业设计波次和真实实现后的高价值视觉返修；
+   - Codex 负责确定性实现、测试、截图和机械工作；
+   - GPT Pro/Astra 等可承担其它设计/科学/架构角色；
+   - Claude 不应自我做最终 Design Assurance PASS；
+   - Design Assurance 的意图是“复杂设计到实施前冻结”，不是再造一个视觉设计插件。
+   
+   必须要求 Claude评价：
+   
+   - 这 8 步里哪些确实有必要；
+   - 哪些只是 GPT 失败后堆出来的流程；
+   - 是否应简化为一个更薄的“设计冻结 / Implementation Readiness”检查；
+   - Claude应该在哪一步出现；
+   - GPT Astra能否替代同一 specialist 槽位；
+   - 如果整个 Design Assurance 删除，会不会反而更好；
+   - 如果保留，最小形态是什么。
+   
+   CORE 必须给出完整来源在 Supplement 的精确页码：
+   - `DESIGN_ASSURANCE_CLAUDE_ROLE_DECISION_20261104.md`
+   - Master Plan 中 Design Assurance / Phase E / 模型角色相关段落
+   
+   **这两个小节是候选设计说明，不是 GPT 后验“正确答案”。** Claude必须被明确邀请挑战、删减、否定或重构它们。
+
 ### B. SUPPLEMENT：完整 sourcebook
 
 保留文件名：
@@ -299,6 +375,14 @@ CORE 只从这里抽取真正影响未来产品的少量用户原话，并指向
 Claude自己判断这个 Skill 是否有用。
 
 ## 10. Supplement 的排序
+
+除了历史证据，Supplement 还必须收入下面两个**完整候选方案原文**，并标记 `PROPOSAL_UNDER_REVIEW`，让 Claude需要时能从 CORE 的简版说明回到原始设计文件：
+
+- `YuukiAS/AI_Skills_Collection@design/frontend-feedback-continuity-20261104:docs/design/frontend-design/FEEDBACK_CONTINUITY_IMPLEMENTATION_CONTRACT_20261104.md`
+- `YuukiAS/AI_Skills_Collection@design/frontend-feedback-continuity-20261104:docs/design/frontend-design/DESIGN_ASSURANCE_CLAUDE_ROLE_DECISION_20261104.md`
+- Master Plan 只抽取与 Frontend Design vNext / Design Assurance 当前候选直接有关的必要段落；不要把其它 GPT 后验根因判断一起带入。
+
+这些方案必须与“历史事实证据”视觉上分开，明确告诉 Claude：**它们是需要你评价的方案，不是证据包要求你接受的结论。**
 
 建议顺序：
 
