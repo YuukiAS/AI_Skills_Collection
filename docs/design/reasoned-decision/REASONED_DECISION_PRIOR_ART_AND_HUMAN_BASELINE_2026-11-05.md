@@ -1,8 +1,8 @@
 # Reasoned Decision：既有 Pro 结论、待补缺口与人类问题解决基线
 
-Status: design note / amendment candidate  
+Status: INCORPORATED_IN_CANONICAL_ARCHITECTURE  
 Date: 2026-11-05  
-Scope: Reasoned Decision only  
+Scope: supporting evidence for Reasoned Decision only  
 Not in scope: 新增独立 `search-first` skill、重做 Design Assurance、重做 Delivery Assurance
 
 ## 0. 为什么需要这份文档
@@ -25,7 +25,7 @@ Reasoned Decision 当前真正需要解决的，不是“再想一套更漂亮�
 - `docs/design/reasoned-decision/evidence/EDGE_WINDOWS_DECISION_FAILURE_2026-11-05.md`
 - `docs/skill-todos/reasoned-decision.md`
 
-本文件不是新的 skill 设计，也不是对上述材料的替代；它是下一轮修订 Reasoned Decision 时的收敛依据。
+本文件不是新的 skill 设计，也不是竞争架构。其结论已经并入 `REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md`；后续实现和审查以该权威架构为准，本文件只保留推导依据与人类行为基线。
 
 ---
 
