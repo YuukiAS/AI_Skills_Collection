@@ -4,7 +4,8 @@
 
 这里记录的是 **plugin 自己的问题**。如果用户在 TRACE、CARE、Distributed Imaging 或其他真实项目里调用某个 plugin，发现 plugin 的输出、路由、返修、检查或工作方式有问题，应该直接把这次真实问题记到对应的 `docs/plugin-todos/<plugin>.md`，不要先在项目 repo 再维护一份“插件问题清单”。
 
-- `reasoned-decision.md` — planned dedicated Reasoned Decision plugin；当前设计已收敛但尚未生产实现\n- `workflow-core.md`
+- `reasoned-decision.md` — planned dedicated Reasoned Decision plugin；当前设计已收敛但尚未生产实现
+- `workflow-core.md`
 - `ai-skills-core.md`
 - `writing-style.md`
 - `research-writing.md`
