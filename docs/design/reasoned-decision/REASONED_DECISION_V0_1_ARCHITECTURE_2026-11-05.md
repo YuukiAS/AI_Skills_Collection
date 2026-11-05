@@ -1,4 +1,4 @@
-# Reasoned Decision v0.2 插件架构候选
+# Reasoned Decision v0.1 插件架构候选
 
 Status: design candidate  
 Date: 2026-11-05  
