@@ -1,6 +1,13 @@
-# reasoned-decision — Long-Term TODO
+# reasoned-decision — Historical Seed
 
-Future standalone capability for evidence-backed decisions where the user needs a concrete choice under uncertainty, not a generic pros/cons list.
+status: SUPERSEDED_BY_WORKFLOW_CORE_CANDIDATE
+
+This file preserves the original positive-use evidence and early capability seed. It is **not** an active standalone-skill proposal anymore. The current architecture decision is to place Reasoned Decision inside the existing `workflow-core` plugin, without adding a new Marketplace plugin or standalone skill.
+
+Current design:
+- [Reasoned Decision v0.1 architecture](../design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md)
+- [Windows Edge real negative example](../design/reasoned-decision/evidence/EDGE_WINDOWS_DECISION_FAILURE_2026-11-05.md)
+
 
 ## Open candidates
 
@@ -12,7 +19,7 @@ problem: High-stakes practical decisions are often answered too conservatively o
 scope examples: product/account/platform choices, software/service selection, migration choices, infrastructure strategy, purchasing, workflow/tool choice, and other reversible or semi-reversible decisions where current external evidence materially changes the answer.
 boundary: This capability does not replace domain experts, legal/medical/financial specialists, or research methods. It owns decision synthesis: evidence weighting, uncertainty handling, option elimination, recommendation, and stop/go criteria. Domain plugins remain responsible for domain facts.
 project-specific context: The Claude/Persona case below is evidence only. Do not encode Anthropic-specific KYC rules, supported regions, Chinese passport behavior, HKID behavior, or any single forum's claims as generic decision rules.
-next research step: study overlap with web research, research-writing, product recommendations and future reasoned-design work. Determine whether this should become a standalone skill or a shared decision layer consumed by multiple plugins. Do not implement production behavior until ownership is settled.
+next research step: ownership is now narrowed to `workflow-core`. Before production implementation, independently review trigger precision, overlap with W2/W3/W4/W5, prior-art routing, cross-turn Decision Delta behavior, and the real regression set. Do not create a standalone skill or new plugin.
 
 ## Accepted real-use evidence: Claude Pro / Persona KYC three-way decision
 
