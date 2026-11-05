@@ -4,6 +4,12 @@ status: SUPERSEDED_BY_REASONED_DECISION_PLUGIN_ARCHITECTURE
 
 This file preserves the original positive-use evidence and early capability seed. It is **not** an active standalone-skill proposal anymore. The current architecture direction is a dedicated **Reasoned Decision plugin** with a small number of internal skills; do not turn `reasoned-decision` itself into a standalone skill or fold the whole capability into `workflow-core`.
 
+Current frozen architecture:
+- responsibilities: `Task State Integrity → Judgment Integrity → Solution Design`;
+- runtime spine: clarify goal/current reality → discover existing solution space → judge mature routes → Adopt/Compose/Extend → Build only for proven residual gap → real validation → freeze unless a valid Decision Delta appears;
+- governing relation: human problem-solving flow is the spine; prior-art/reuse/Gap Proof/Decision Delta/regressions are guardrails;
+- do not create a standalone `search-first` skill.
+
 Current design:
 - [Reasoned Decision v0.1 architecture](../design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md)
 - [Windows Edge real negative example](../design/reasoned-decision/evidence/EDGE_WINDOWS_DECISION_FAILURE_2026-11-05.md)
