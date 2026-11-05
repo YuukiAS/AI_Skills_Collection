@@ -1,323 +1,130 @@
-# Reasoned Decision v0.1 插件架构候选
+# Reasoned Decision v0.1 架构收敛稿
 
-Status: design candidate  
+Status: DESIGN_CONVERGED_FOR_REVIEW  
 Date: 2026-11-05  
-Planned form: dedicated Marketplace plugin with a minimal internal skill set  
-Production status: NOT IMPLEMENTED
+Planned form: dedicated Marketplace plugin  
+Production status: NOT IMPLEMENTED  
+Authority: 本文件是下一阶段实现与审查的权威设计入口；同日更早草稿中与本文冲突的表述，以本文为准。
 
-## 1. 当前架构裁决
+## 1. 冻结结论
 
-Reasoned Decision 是三层可靠性生命周期的**第一层插件**。它自身不是“三层”，也不应该为了凑层数再新增第三个内部 skill。
-
-插件内部第一版只保留两个真正不同职责的 skill：
-
-1. **Judgment Integrity**
-   - 负责“到底该怎么判断”；
-   - 负责证据强度、约束优先级、方案淘汰、明确推荐、推翻条件，以及跨轮改口审计；
-   - 解决“证据够了还不敢下结论”和“没有新依据却一轮一改”这两个相反失败。
-
-2. **Solution Design**
-   - 负责“已经知道要解决什么以后，方案该怎么设计”；
-   - 负责复用现成能力、方案最小化、关键假设、有限验证、长期可维护性、回滚与实施边界；
-   - 解决“没查现成轮子就开始造”“理论可行被包装成生产可靠”“遇到一个缺口就继续叠新层”。
-
-不新增第三个 `search-first` skill，不新增 `decision-continuity` skill，也不新增默认 council skill。
-
-“先查现成方案”是 Solution Design 的条件触发参考流程；“跨轮改口审计”是 Judgment Integrity 的核心机制。它们不各自长成新的顶级能力。
-
-更复杂的多轮架构收敛、独立盲区调查、实施就绪和 Architecture Freeze 交给第二层 **Design Assurance**；冻结后的真实交付、防降级与防回归交给第三层 **Delivery Assurance**。Artifact Curation 与 Clear Writing 是横切能力，不拿来填充三层生命周期。
-
-## 2. 为什么不能归 workflow-core
-
-`workflow-core` 的职责是复杂任务如何执行、验证和可靠收尾。它已经拥有：
-
-- Human Decision Gate；
-- evidence-surface fidelity；
-- repeat-failure circuit breaker；
-- should-not-change / accepted-behavior protection；
-- source discovery、normal entry、least-privilege recovery。
-
-这些能力解决的是“任务怎样做才可靠”。
-
-Reasoned Decision 解决的是不同问题：
-
-> **面对不完整、冲突或层级不同的证据，到底应该相信什么、淘汰什么、推荐什么，以及以后什么时候有资格改变这个判断。**
-
-如果把 Reasoned Decision 塞进 workflow-core，会产生两个问题：
-
-1. workflow-core 会开始承担购买、账户、基础设施策略、产品路线等通用判断，职责过宽；
-2. “执行机制”和“判断质量”混在一起，用户以后很难知道一次失败究竟是 domain facts、decision synthesis 还是 execution workflow 的问题。
-
-因此正确协作不是 Reasoned Decision 直接吞掉后续阶段，而是：
+Reasoned Decision 的历史三层候选架构恢复并冻结为：
 
 ```text
-domain facts / project evidence
+Task State Integrity
         ↓
-Reasoned Decision
-  Judgment Integrity
-  Solution Design
+Judgment Integrity
         ↓
-[复杂设计才进入]
-Design Assurance
-  并行研究 / 盲区检查 / Implementation Readiness / Architecture Freeze
-        ↓
-workflow-core / Codex 执行冻结方案
-        ↓
-Delivery Assurance
-  真实最终候选 / 防降级 / 防回归 / 交付声明
+Solution Design
 ```
 
-Artifact Curation、Clear Writing 与领域插件按实际任务横切介入；Warm Response 可以在用户因连续失败明显受挫时并行触发，但不参与改变技术判断。
+这三层是**职责架构**，不是要求模型严格只走一遍的流水线。
 
-## 3. 插件到底负责什么
+它们分别解决：
 
-Reasoned Decision 不承诺“永远第一次就对”。
+- **Task State Integrity**：保证没有答错题、忘掉当前状态或复活已关闭问题；
+- **Judgment Integrity**：保证证据、淘汰、推荐和改口有稳定依据；
+- **Solution Design**：保证方案建立在现实已有解法上，优先采用、组合、扩展，只有真实缺口才自建。
 
-它承诺的是一种更严格、可持续的判断行为：
+必须明确区分以下三个概念，后续不得再混淆：
 
-- 当前推荐必须与当前证据相匹配；
-- 用户当前明确要求不会被旧报告、旧建议或模型偏好覆盖；
-- 已被强证据淘汰的路线不会无理由复活；
-- 关键未知如果会翻转选择，就必须暴露出来；
-- 如果这个未知能低成本验证，就先验证，不先写一整套生产架构；
-- 后续改口必须说明到底什么改变了；
-- 能自己查、自己验证的事实，不推给用户；
-- 搜到很多资料以后，插件必须替用户收敛，而不是把判断重新丢回用户。
+1. `Task State Integrity → Judgment Integrity → Solution Design`：Reasoned Decision 自身的三层职责架构；
+2. Judgment Integrity 内部“什么可以改变 / 先核证据再改判 / 允许保持未知”的判断原则；
+3. `Reasoned Decision → Design Assurance → Delivery Assurance`：更大的跨插件可靠性生命周期。
 
-Reasoned Decision 的核心产物不是“更多分析”，而是：
+它们不是同一个“三层”。
 
-> **一个当前可依赖的选择，以及这个选择的有效边界。**
+### 1.1 插件内部怎么落
 
-## 4. 两个 skill 的职责边界
+第一版仍保持最小内部 skill 数量：
 
-### 4.1 Judgment Integrity
+- **Task State Integrity** 是 Reasoned Decision 的强制入口层和状态合同，不单独长成一个新 skill；
+- **Judgment Integrity** 是判断 skill；
+- **Solution Design** 是方案 skill。
 
-这是插件的默认入口和核心。
+因此：
 
-负责：
+- 不新增独立 `search-first` skill；
+- 不新增 `decision-continuity` skill；
+- 不新增默认 council skill；
+- 不新增 Reasoned Decision 专属隐藏数据库或长期守护进程。
 
-- 把用户的问题还原成真正需要决定的问题；
-- 区分当前硬约束、历史偏好、项目事实和模型推断；
-- 判断证据强度；
-- 把决定方案生死的关键前提绑定到证据；
-- 淘汰违反硬约束或已被证据否定的路线；
-- 在证据足够时给一个明确推荐；
-- 在证据不足但存在首选时给“条件性推荐 + 推翻条件”；
-- 记录哪些路线已经被淘汰；
-- 约束后续改口；
-- 在用户质疑时判断是应该维持、补证还是改判，而不是自动摇摆。
+复杂多轮架构收敛、独立盲区调查和 Architecture Freeze 仍属于 **Design Assurance**；冻结后的真实交付、防降级和防回归仍属于 **Delivery Assurance**。
 
-它不负责：
+---
 
-- 深入搜索某个专业领域的全部事实；
-- 设计具体 Windows/统计/医学/网络实现；
-- 执行 Git、部署、配置或代码修改；
-- 把输出写得更好看。
+## 2. Reasoned Decision 的核心行为
 
-### 4.2 Solution Design
+Reasoned Decision 不应该被理解为：
 
-只有当问题已经从“该不该/选哪个”进入“怎么做”时才触发。
+> 模型理解问题以后，自己设计一套解决方案。
 
-负责：
+正确行为是：
 
-- 把 Judgment Integrity 的推荐转成一个最小、可落地的解决方案；
-- 先检查是否已有现成实现、原生能力、成熟工具或项目内已有机制；
-- 选择 Adopt / Extend / Compose / Build；
-- 防止重复造轮子；
-- 防止因为一个局部缺口就增加 watcher、daemon、数据库、状态机或新的插件层；
-- 区分“理论上可行”“值得试”“已经验证”“可以长期生产使用”；
-- 把真正会翻转方案的未知转成有限验证；
-- 规定最小回滚和 should-not-change；
-- 把方案交给 workflow-core 或领域执行层，而不是自己执行。
+> **先弄清楚用户真正要解决什么和当前已经有什么；再调查现实世界已经存在的解法、成熟案例和失败经验；从真实解空间里形成候选并判断；优先采用、组合、扩展现成方案；只有明确证明仍有残余缺口，才自己设计那一小块。**
 
-它不负责：
+因此第一版的核心不是“让 GPT 更会设计”，而是让 GPT **更晚设计、更少自建、更稳定地沿用已经成立的判断**。
 
-- 重新推翻 Judgment Integrity 已冻结的目标和硬约束；
-- 没有新证据时重新做一套完全不同的架构；
-- 为了“更稳”自动加入第二 reviewer、第三 agent、第四层 orchestrator。
+---
 
-## 5. 插件的主要使用环境
+## 3. 实际运行主干：采用“正常人解决问题”的顺序
 
-Reasoned Decision 不是只服务一种场景。第一版至少覆盖六类环境，但全部由同两个 skill 处理，不为每类再新增 skill。
-
-### 环境 A：直接选择
-
-用户问：
-
-- “选哪个？”
-- “要不要做？”
-- “以后还用不用？”
-- “A 还是 B？”
-
-主要由 Judgment Integrity 处理。
-
-目标：明确推荐，不退化成对称优缺点列表。
-
-### 环境 B：技术/基础设施策略
-
-例如：
-
-- 是否迁移；
-- 更新策略怎么定；
-- 长期用主备还是单路；
-- 采用哪个远程访问方案。
-
-Judgment Integrity 先冻结目标和淘汰路线；需要具体架构时再进入 Solution Design。
-
-### 环境 C：新建工具 / 插件 / 工作流
-
-这是 prior-art 子流程的主要触发环境。
-
-Solution Design 必须先问：
-
-> “这个能力是不是已经有成熟轮子？”
-
-然后执行 repo → installed capability → native/platform → package/registry → GitHub/open source 的搜索顺序。
-
-没有 prior-art 裁决，不允许直接推荐 Build。
-
-### 环境 D：事故后的方案修复
-
-这次 Edge 就属于这里。
-
-事故环境最容易犯的错是：
-
-- 看到一个症状就急着给长期方案；
-- 把旧 workaround 当当前目标；
-- 同类失败一再出现还继续扩架构。
-
-这里必须优先：
-
-1. 识别当前事实；
-2. 冻结用户当前目标；
-3. 标记已经被事实淘汰的路线；
-4. 找唯一会改变选择的未知；
-5. 先做小验证，再决定长期方案。
-
-### 环境 E：跨轮重新判断
-
-用户可能说：
-
-- “你上次不是说 A 吗？”
-- “现在还这么看吗？”
-- “你为什么改口？”
-- “我给你新证据了。”
-
-Judgment Integrity 必须进入 Decision Delta 模式，不允许从零开始重新生成答案。
-
-### 环境 F：已有方案的生产升级
-
-例如：
-
-- “这个候选可以正式长期用了吗？”
-- “可以部署到另一台机器了吗？”
-- “能不能从实验变成默认？”
-
-这里的关键不是继续设计，而是判断“证据是否足以把 candidate 升级成 production”。
-
-## 6. 不应触发的环境
-
-为了防止插件变成所有任务都套一层，以下默认不触发：
-
-- 单纯事实查询；
-- 明确 bug 且项目合同已冻结修复路线；
-- 已冻结方案的机械执行；
-- 格式、拼写、简单重命名；
-- 用户只要求解释某段材料；
-- 领域事实本身有唯一明确答案，不存在真实选择；
-- 低成本、可逆、明显无需比较的小动作。
-
-一个很重要的原则：
-
-> **不是所有“怎么做”都需要 Reasoned Decision。**
-
-只有当“选择错路线”的代价明显高于直接执行时才需要。
-
-## 7. Decision Anchor：跨轮连续性的最小状态
-
-Reasoned Decision 不建立新的隐藏全局数据库。
-
-它只维护一个很小的 **Decision Anchor**，可以从当前对话、项目已有 decision/plan/handoff 或当前任务材料中恢复。
-
-Anchor 只包含：
-
-- 这次真正的 decision question；
-- 当前 success condition；
-- 当前用户硬约束；
-- 决定性的已验证事实；
-- 决定性的未验证假设；
-- 已淘汰路线及淘汰原因；
-- 当前推荐；
-- 推翻条件；
-- 如果需要，当前有限验证。
-
-普通短对话不需要把 Anchor 写进文件。
-
-只有当一个决定会跨 session、影响真实项目或长期基础设施时，才复用项目现有的 decision/plan/handoff 文档保存；不新建一个 Reasoned Decision 专属 ledger。
-
-## 8. Judgment Integrity 的原始三层机制
-
-这里恢复 2026-10-26 前后已经提出、但本轮一度被错误遗忘的三层判断结构。**这三层属于 Judgment Integrity 的内部判断机制，不是三个 skill，也不是整个 AI 可靠工作体系的三层生命周期。**
-
-### 第一层：先分清“什么可以改变，什么不能随便改变”
-
-重要判断先按来源和可变条件分类：
-
-- **用户明确设定的目标 / 授权边界**：只有用户明确修改，AI 才能改变；
-- **AI 的建议 / 方案推荐**：可以因为新证据、发现原论证错误、约束条件变化而改变；
-- **已建立的事实 / 科学结论**：只能因为新证据、可验证反例或被证明的推理错误而修订；
-- **尚未验证的候选方案**：允许继续探索，但不能伪装成确定结论；
-- **历史 assistant 表述**：不能自动升级为用户批准、项目事实或科学结论。
-
-这一层解决“用户一质疑就改口”和“拿旧聊天压当前用户要求”两个相反错误。
-
-### 第二层：证据核查和“是否改判”必须分开
-
-重要结论必须能指向实际来源、推导、实验或现场状态。
-
-当模型准备改变正式推荐时，不应先写一个新结论再找理由，而应先核查：
-
-1. 哪条原前提正在被挑战；
-2. 新材料是否真正支持相应主张，而不是链接存在、标题相关或社区有人这么说；
-3. 是否出现了可重复实验、数学检查、真实系统状态或领域权威证据；
-4. 这些证据是否足以改变原判断，而不是只增加背景信息。
-
-证据核查的结果可以是“原结论仍成立”“原结论应修订”“原结论应撤销”或“证据仍不足”。用户语气、模型换代、重新思考一遍、找到更多不改变关键前提的资料，都不是改判证据。
-
-这一层与本版的 Decision Delta 合并工作：任何跨轮改口都必须明确展示“原前提 → 新证据/逻辑纠错 → 哪部分结论因此变化”。
-
-### 第三层：允许正确地说“目前不知道”
-
-系统必须把**探索中的候选**和**经过验证的结论**严格分开。
-
-如果当前没有足够证据支持一个长期方案，合格输出可以是：
-
-- 哪些路线已经被淘汰；
-- 当前最强候选是什么；
-- 关键障碍 / 决定性未知是什么；
-- 哪一个最小证据或实验会改变判断。
-
-这不是保守摆烂。证据足够时必须明确推荐；只有真正决定性的未知尚未解决时，才停在“目前不知道 / 当前只能条件性推荐”。
-
-尤其禁止为了“这一轮必须交付一个完整方案”而捏造确定性。Edge 负例中，把未验证的 updater 隔离、guardian 恢复等候选直接包装成长期生产方案，就是第三层失效。
-
-这三层与两个 skill 的关系是：
+三层是职责边界；实际运行采用下面这条主干：
 
 ```text
-Reasoned Decision plugin
-├─ Judgment Integrity
-│  ├─ Layer 1: 什么可以改变
-│  ├─ Layer 2: 先核证据，再决定是否改判
-│  └─ Layer 3: 可以正确地保持未知 / 条件性结论
-└─ Solution Design
-   └─ 在 Judgment Integrity 给出的事实、约束和结论状态上设计方案
+搞清目标和现状
+    ↓
+调查现实已有解空间
+    ↓
+从真实案例归纳成熟路线
+    ↓
+判断哪些路线真正适合
+    ↓
+优先 Adopt / Compose / Extend
+    ↓
+证明仍有残余缺口才 Build
+    ↓
+真实环境验证
+    ↓
+冻结当前推荐；只有合法 Decision Delta 才改
 ```
 
-## 9. 约束优先级
+这条主干是未来 GPT 看到 Reasoned Decision 后应该默认执行的行为。
 
-这次 Edge 事故证明，历史内容污染是高风险失败。
+### 3.1 为什么不是死板三段式
 
-默认优先级：
+现实调查可能发现新事实，因此允许局部往返：
+
+- Solution Design 的解空间调查可能补充新的候选；
+- Judgment Integrity 根据新候选重新排序；
+- 实际验证可能触发 premise correction；
+- 但不得因为一次质疑或一个新帖子就从头重做整套架构。
+
+允许**局部更新**，禁止**无依据整套重启**。
+
+---
+
+## 4. 第一层：Task State Integrity
+
+Task State Integrity 的目标是：
+
+> **确保模型一直在解决当前问题。**
+
+至少维护并真正消费：
+
+- CURRENT_QUESTION：当前真正的问题；
+- SUCCESS_CRITERION：什么结果算解决；
+- HARD_CONSTRAINTS：当前用户明确约束；
+- CONFIRMED_FACTS：已确认事实；
+- COMPLETED_ACTIONS：已经做完的动作；
+- CLOSED_QUESTIONS：已经关闭的问题；
+- ELIMINATED_ROUTES：已被事实或约束淘汰的路线；
+- DO_NOT_REVIVE：没有新证据时不得复活的旧问题/旧路线；
+- ACTIVE_UNKNOWNS：仍会真正改变选择的未知。
+
+### 4.1 当前要求覆盖旧历史
+
+优先级：
 
 1. 用户当前消息中的明确要求和纠正；
 2. 当前真实系统 / 当前项目直接证据；
@@ -327,496 +134,536 @@ Reasoned Decision plugin
 6. 社区经验；
 7. 模型推断。
 
-旧报告里出现过的选择，不能自动变成当前硬约束。
+旧报告里的设计选择不能自动升级成当前用户硬约束。
 
-如果历史写“WebView2 自动更新”，而当前用户没有这样要求，它只能进入“历史设计选择”，不能写成“用户明确要求”。
+### 4.2 BWG 型回归
 
-## 10. 证据与结论强度
+用户已经完成某个动作后，与该动作之前有关的问题必须退出当前决策。
 
-Judgment Integrity 必须遵守：
+例如已经付费换 IP 后，不得下一轮又回到“要不要付费换 IP”。
 
-> **结论强度不能高于支撑它的关键证据强度。**
+---
 
-对决定方案生死的关键前提，至少区分：
+## 5. 现实已有解空间调查：主流程的一部分，不是额外 skill
 
-- 当前直接观察；
-- 当前项目权威事实；
-- 官方/规范明确保证；
-- 官方有限支持 / 有适用条件；
-- 社区/真实用户经验；
-- 合理推断；
-- 未知。
+这是本次收敛新增的最重要要求。
 
-不要求把这些机器标签全部展示给用户。
+现有 Pro 设计只把 prior-art 主要放在“准备 Build 之前”。这不够。
 
-但如果一个关键前提只是“推断”，而它一旦错了就会让整个方案失效，那么不能把方案叫“稳定长期方案”。
+大量问题即使不显式 Build，模型仍会过早凭先验生成方案。例如：
+
+> “Obsidian Graph 怎么做得好看？”
+
+模型可能直接开始想颜色、CSS、参数和插件组合。虽然没有造新插件，但仍然没有先看现实世界中已经存在的优秀成品、成熟主题、社区经验和失败路线。
+
+因此，对于**非平凡、已有成熟生态或真实用户实践的问题**，必须在形成方案前先做 Solution-Space Discovery。
+
+### 5.1 什么时候触发
+
+默认触发于：
+
+- “怎么做得更好 / 更稳定 / 更漂亮 / 更省事”；
+- 软件、工具、工作流、基础设施、Agent、产品设计等成熟生态问题；
+- 方案质量明显依赖真实用户经验；
+- GitHub、官方生态、论坛、社区很可能已有大量案例；
+- 模型准备新增通用机制，但还没有证明已有方案不足。
+
+以下默认不需要：
+
+- 单纯事实查询；
+- 已冻结路线下的机械执行；
+- 明确小 bug；
+- 格式、拼写、简单重命名；
+- 唯一答案且无需比较的小动作。
+
+### 5.2 调查什么
+
+至少覆盖四类：
+
+**A. 现有能力**
+
+- 当前项目和历史提交；
+- 相关 TODO / decision / regression；
+- 用户已有相关仓库；
+- 已安装 plugin / skill / connector；
+- 产品或系统原生能力；
+- 官方扩展生态。
+
+**B. 现有成品**
+
+- GitHub 示例项目；
+- showcase；
+- 配置仓库；
+- theme / template / dotfiles；
+- 截图、视频、真实运行结果；
+- 长期用户展示的最终形态。
+
+目标是先回答：
+
+> 现实里这个问题最好已经能做到什么程度？
+
+**C. 成熟模式**
+
+从多个案例里归纳：
+
+- 哪些做法反复出现；
+- 哪些组件经常组合；
+- 哪些路线适合哪些场景；
+- 哪些方案维护成本明显更低；
+- 哪些“高级方案”其实是过度设计。
+
+**D. 失败经验**
+
+- 停止维护的 repo；
+- 已知兼容问题；
+- 社区长期抱怨；
+- 过时 workaround；
+- 曾经流行但后来被替代的路线。
+
+### 5.3 搜索必须问题驱动，而不是候选驱动
+
+错误：
+
+```text
+模型先想到候选 A
+→ 搜 A 好不好
+→ 找支持 A 的材料
+```
+
+正确：
+
+```text
+从用户问题开放检索
+→ 看代表性真实案例
+→ 归纳解法类别
+→ 再发现具体候选
+→ 深查少数强候选
+```
+
+这是防止确认偏误和“先发明、再找证据”的关键约束。
+
+### 5.4 搜索顺序
+
+按成本逐层扩大：
+
+1. 当前上下文与当前仓库；
+2. 用户已有相关仓库与历史；
+3. 已安装 plugin / skill / native capability；
+4. 官方能力与官方生态；
+5. package / MCP / 常见生态；
+6. GitHub、社区、真实案例；
+7. 只有仍缺关键信息时才做 deep prior-art scan。
+
+搜索目的不是“资料越多越好”，而是建立足够完整的真实解空间来做决定。
+
+---
+
+## 6. 第二层：Judgment Integrity
+
+Judgment Integrity 负责：
+
+- 区分用户硬约束、当前事实、历史建议和模型推断；
+- 判断证据强度；
+- 从调查得到的真实候选集合中淘汰路线；
+- 在证据足够时给一个明确推荐；
+- 证据不足时给条件性推荐和推翻条件；
+- 约束后续改口；
+- 不把多个对称选项重新丢给用户。
+
+### 6.1 先淘汰，再比较
+
+顺序：
+
+1. 违反用户硬约束 → 淘汰；
+2. 被当前事实直接否定 → 淘汰；
+3. 官方适用范围不覆盖当前环境且没有真实证据补强 → 不得作为主方案；
+4. 与成熟已有能力重复且无新增价值 → 淘汰；
+5. 剩余路线才比较成本、维护、可逆性和风险。
+
+### 6.2 结论强度不能高于证据
+
+关键前提如果只是推断，而一旦错误就会让整套方案失效，不能把方案叫“稳定长期方案”。
 
 此时只能：
 
 - 补更强证据；
-- 做一个真正会裁决它的小实验；
+- 做一个能裁决关键前提的小验证；
 - 或明确给条件性推荐。
 
-## 11. 方案状态：防止 candidate 冒充 production
+### 6.3 推荐不能因为用户质疑就改变
 
-这次 Edge 最严重的错误之一就是“能写脚本”被说成“能长期稳定做到”。
+上一轮正式推荐 A，下一轮不得因为用户问“你确定吗”“你想清楚”就重新生成 B。
 
-Reasoned Decision 内部至少区分：
+合法 Decision Delta 只有：
 
-1. **Idea**
-   - 只是一个可能方向。
+1. 新证据；
+2. 用户约束变化；
+3. 前提 / 逻辑纠错；
+4. 选项集合发生实质变化。
 
-2. **Candidate**
-   - 与已知事实不冲突，值得验证。
+如果没有合法 Decision Delta，默认继承原推荐。
 
-3. **Conditionally Recommended**
-   - 当前首选，但有一个明确关键未知。
+如果有新候选出现，只更新受影响的排序，不从零重写整个问题。
 
-4. **Recommended**
-   - 当前证据足够支持采取行动。
+### 6.4 连续失败时收缩，不扩张
 
-5. **Production-worthy**
-   - 已完成与风险匹配的真实验证，可以长期默认使用。
+如果已经出现两次以上同类方案被推翻：
 
-从 Candidate 到 Production-worthy 不能靠语言升级。
+- 停止继续生成下一套完整架构；
+- 回到 Task State Integrity；
+- 冻结当前目标和事实；
+- 列出已经淘汰路线；
+- 找唯一真正会改变选择的未知；
+- 做一次最小裁决动作。
 
-必须有新证据。
+禁止用新增 reviewer、guardian、agent、数据库或流程层来掩盖判断没有稳定。
 
-## 12. 先淘汰，再比较
+---
 
-Judgment Integrity 不应该把所有路线平铺给用户自己选。
+## 7. 第三层：Solution Design
 
-正确顺序：
+Judgment Integrity 给出方向后，Solution Design 的目标不是“从头实现”，而是：
 
-1. 违反用户硬约束 → 淘汰；
-2. 被现场事实直接否定 → 淘汰；
-3. 官方适用范围明显不覆盖当前环境，而又无真实证据补强 → 不得作为主方案；
-4. 与项目现有成熟能力重复且无新增价值 → 淘汰；
-5. 剩余方案才比较成本、可逆性、维护负担和风险。
+> **把用户需求映射到现实已有能力，优先复用，最后只补真实残余缺口。**
 
-淘汰路线要保留最小原因。
+### 7.1 需求—能力映射
 
-以后除非出现以下情况，否则不能复活：
+内部至少形成：
 
-- 环境实质变化；
-- 原证据被证伪；
-- 用户改变硬约束；
-- 出现新的机制级证据。
+```text
+需求 A → 已有能力 X：完整覆盖
+需求 B → 已有能力 Y：部分覆盖
+需求 C → X + Z：组合后覆盖
+需求 D → 当前成熟方案均无法覆盖
+```
 
-## 13. 主动反证，但不默认多 agent
+不要求把整张表全部展示给用户，但必须真实完成。
 
-形成首选后必须做一次轻量反证：
+### 7.2 默认优先级
 
-- 有没有现成事实能直接打死它；
-- 有没有已被淘汰的路线偷偷复活；
-- 有没有更简单路线；
-- 有没有“当前可行”冒充“长期可靠”；
-- 有没有把用户明确禁止的东西重新带回来；
-- 有没有把 agent 自己能验证的事情推给用户。
+```text
+Adopt
+  ↓
+Compose
+  ↓
+Extend
+  ↓
+Build
+```
 
-默认单模型完成。
+- **Adopt**：直接采用已有成熟方案；
+- **Compose**：组合多个已有能力；
+- **Extend**：在成熟方案上补一个小缺口；
+- **Build**：只有现有路线都不能满足时才自建。
 
-只有在以下情况才请求独立第二视角：
+### 7.3 Build 需要 Gap Proof
 
-- 决策高代价且难回滚；
-- 两个方案都真正成立；
-- 关键证据冲突；
-- 当前首选依赖一个高影响推断；
-- 用户明确要求独立判断。
+如果要 Build，必须回答：
 
-第二视角的任务不是“重新设计”，而是：
+1. 实际检查过哪些现成方案；
+2. 哪些已经覆盖；
+3. 哪些只是部分覆盖；
+4. 具体哪条用户硬约束仍没人满足；
+5. 为什么 Compose / Extend 不能解决；
+6. 最小需要自建的部分是什么；
+7. 新增维护成本是什么。
 
-> **找出当前首选最可能被推翻的点。**
+回答不出来，说明没有证明真实 gap，禁止 Build。
 
-## 14. Decision Delta：改口协议
+### 7.4 无法完成调查时禁止脑补
 
-这是 Judgment Integrity 的核心。
+如果当前工具无法访问相关仓库、插件目录、官方资料或外部搜索，不能说：
 
-上一轮已经正式推荐 A，下一轮不得重新从零设计然后直接给 B。
+> “看来没有现成方案，所以我们自己做。”
 
-每次改判必须归入四类之一：
+正确状态是：
 
-1. **新证据**
-2. **用户约束变化**
-3. **前提/逻辑纠错**
-4. **选项集合变化**
+> 现有解空间调查尚未完成，因此当前没有资格判定需要 Build。
 
-前提/逻辑纠错非常重要。
+---
 
-不要求必须有外部新证据才能改口。
+## 8. 两套方案最终如何合并
 
-如果模型发现自己上一轮把未知值解释成了某个具体语义，它可以改，但必须明确：
+本次讨论中形成的两个方案不是二选一。
 
-- 上一轮用了哪条错误前提；
-- 为什么现在认为它错；
-- 它推翻了哪部分结论；
-- 新推荐为什么因此改变。
+### 8.1 采用“正常人怎么解决问题”作为主运行流程
 
-以下不是合法改口原因：
+保留：
 
-- 用户只是质疑；
-- 用户变生气；
-- 模型换了；
-- “重新想了一遍”；
-- 搜到更多背景但没有改变关键前提。
+1. 搞清真实目标；
+2. 检查自己现在已有的东西；
+3. 看别人已经做到什么程度；
+4. 从多个真实案例归纳解法类别；
+5. 深查少数强候选；
+6. 把候选映射回自己的需求；
+7. 只补没人解决的部分；
+8. 在真实环境里验证；
+9. 形成稳定结论。
 
-如果没有合法 Decision Delta，默认继承上一轮推荐。
+它定义的是：
 
-## 15. 推翻条件
+> **Reasoned Decision 应该怎样像一个靠谱的人解决问题。**
 
-吸收 headwork 最值得借的一点：
+### 8.2 采用 Pro 的 prior-art / reuse / gap-proof 作为强制护栏
 
-> 每个重要推荐都应该知道“什么事实会让我改变选择”。
+保留：
 
-推翻条件必须：
+- 自动触发已有能力调查；
+- repo / installed capability / official / ecosystem / GitHub/open-source 搜索；
+- 需求—能力映射；
+- Adopt / Compose / Extend / Build；
+- Build 前 Gap Proof；
+- 未完成调查时不得声称“没有现成方案”；
+- 隐藏已有轮子的回归测试；
+- 无合法 Decision Delta 不得改正式推荐。
 
-- 可观察；
-- 真正会改变路线；
-- 尽量能由 agent 自己检查；
-- 不是泛泛的“如果情况变化”。
+它定义的是：
 
-例如：
+> **怎样防止 GPT 明明知道正确流程，却实际偷步骤。**
 
-> 当前推荐 A；如果实测出现 X，则 A 失败，切 B。
+### 8.3 为什么必须合并
 
-推翻条件不是为了显得谨慎，而是为了约束未来改口。
+只用“人类流程”：
 
-## 16. 有限验证
+- 行为方向正确；
+- 但模型可能嘴上知道要调查，实际仍然直接开始想答案。
 
-当一个关键未知真的会翻转选择，而且可以低成本验证时：
+只用 prior-art / Build Gate：
 
-**不要再写第五套完整方案。**
+- 能防止显式造新插件、新服务；
+- 但触发太晚，防不住模型在更早阶段就凭脑子设计 CSS、参数、工作流或架构。
 
-输出应该变成：
+所以冻结关系是：
 
-> 当前首选 A。唯一会推翻它的是 X。先验证 Y；Y 通过继续 A，失败切 B。
+> **人类问题解决方式做主干；Pro 的搜索、复用、Gap Proof、Decision Delta 和回归机制做护栏。**
 
-有限验证必须：
+这不是两套并行架构。
 
-- 能裁决一个具体关键前提；
-- 成本明显低于完整实施；
-- 不主动破坏健康系统；
-- 不把用户当 regression suite；
-- 不继续扩大 scope。
+---
 
-## 17. Solution Design 的 prior-art 子流程
+## 9. 正向回归：Obsidian Graph
 
-“先查轮子”不独立成 skill。
+输入：
 
-它只在以下任务触发：
+> “Obsidian 怎么做出好看的 Graph？”
 
-- 新建插件 / skill / 通用工具 / 服务 / 工作流；
-- 引入新依赖；
-- build-vs-buy / build-vs-adopt；
-- 新建 reusable wrapper / agent infrastructure；
-- 用户问“我们是不是要自己造”。
+合格行为：
 
-搜索顺序：
+1. 先理解“好看”对应的真实目标：视觉、聚类、导航、展示还是项目地图；
+2. 读取用户当前 vault / theme / plugin / Graph 现状；
+3. 主动调查 Obsidian 原生能力、官方生态、GitHub、Forum、Reddit、showcase、主题和真实配置；
+4. 先看别人已经做出来的效果，再归纳主要路线；
+5. 判断哪些路线仍维护、哪些只是 demo、哪些已经弃坑；
+6. 选择最符合用户目标的成熟组合；
+7. 只有 Project Atlas 的特殊需求确实没人覆盖时，才自建那一个小缺口；
+8. 用真实 vault 验证后才冻结长期方案。
 
-1. 当前仓库是否已经有；
-2. 当前已安装 plugin / skill / native capability 是否已有；
-3. 平台/框架官方是否已经提供；
-4. 包注册表 / MCP / 常见生态；
-5. 维护中的开源实现；
-6. 必要时 deep prior-art scan。
+失败行为：
 
-最终必须形成一个四选一：
+- 未调查现实案例就直接开始设计 CSS / 插件 / Graph Engine；
+- 模型先想到某候选，再只搜索支持它的材料；
+- 已有成熟方案能覆盖却仍建议从头 Build。
 
-- **Adopt**：直接采用；
-- **Extend**：以一个现有方案为底座扩展；
-- **Compose**：组合现有能力；
-- **Build**：现有方案都不满足。
+---
 
-Build 必须写清：
+## 10. 主负例：Windows Edge 2026-11-05
 
-- 哪些现成候选被看过；
-- 每个为什么不够；
-- 自建真正新增的价值是什么；
-- 以后维护成本是什么。
-
-没有这些，不允许 Build。
-
-## 18. 外部轮子的采用位置
-
-### headwork → Judgment Integrity
-
-采用：
-
-- 明确推荐优先；
-- 不把菜单重新丢给用户；
-- “能查的不要问”；
-- 推翻条件；
-- 小而可逆的决定不要浪费用户一次交互。
-
-不直接采用它的无状态设计。
-
-### decision-council-plus → Judgment Integrity 的可选反证参考
-
-采用：
-
-- 硬约束过滤；
-- premise check；
-- strongest dissent；
-- change trigger。
-
-不默认四角色 council。
-
-### decision-coach → 两个 skill 的参考
-
-Judgment Integrity 借：
-
-- reverse course；
-- retrospective；
-- confidence/assumption probing。
-
-Solution Design 借：
-
-- pre-mortem；
-- margin of safety；
-- implementation intention。
-
-不采用“Ask, don't tell”作为默认交互。
-
-### search-first → Solution Design 的 prior-art reference
-
-采用：
-
-- repo first；
-- adopt by default；
-- 搜索实际实现/官方资料；
-- 必须有 reuse/build 裁决；
-- Build 需要 stop condition。
-
-不独立成 skill。
-
-### prior-art → Solution Design 的深度模式参考
-
-只用于：
-
-- 插件/产品/通用能力是否真的新；
-- 哪些已有机制值得移植；
-- novelty / differentiation 判断。
-
-不用于普通 bug 或小型依赖选择。
-
-## 19. Edge 41 页真实负例对插件提出的要求
-
-完整负例：
+完整证据：
 
 `docs/design/reasoned-decision/evidence/EDGE_WINDOWS_DECISION_FAILURE_2026-11-05.md`
 
-它不是“Edge 知识不足”的案例，而是插件必须防住的完整 failure chain：
+它要求 Reasoned Decision 防住：
 
-1. 证据对象识别错；
-2. 旧报告污染当前硬约束；
-3. 诊断 Prompt 把未决定的结论写成用户要求；
-4. 新现场证据没有立即淘汰旧路线；
-5. Candidate 被包装成 production；
-6. 未知内部值被过度解释；
-7. 用户一质疑就重新设计；
-8. 改口没有 Decision Delta；
-9. agent 可做的验证被推给用户；
-10. 连续失败后继续新增 reviewer / guardian / 流程，而不是收缩问题。
+- 证据对象识别错；
+- 旧报告污染当前约束；
+- 调查 Prompt 预埋答案；
+- 新现场证据没有淘汰旧路线；
+- Candidate 冒充 production；
+- 未知内部值被强行命名；
+- 用户一质疑就换整套架构；
+- 改口没有 Decision Delta；
+- 本可自动验证的问题被推给用户；
+- 连续失败后继续扩角色、扩流程、扩守护机制。
 
-PDF 里的关键历史事实必须作为真实 replay 输入，而不是只写一句摘要。
+未来 replay 的核心不是“能不能再次解释 Edge”，而是：
 
-## 20. Edge 负例要求的行为变化
+> **面对同样的证据变化，模型能否保持一条稳定决策链，而不是第一轮给 A、第二轮推翻 A 给 B、第三轮再推翻 B。**
 
-### 20.1 事实识别错误
+---
 
-如果截图/日志本身还有歧义，而且这个歧义会改变整个问题定义：
+## 11. 其他关键回归
 
-- 先解决对象识别；
-- 不基于猜测扩成方案。
+### 11.1 BWG / GFW
 
-### 20.2 当前约束覆盖历史
+必须：
 
-用户当前没说 WebView2 必须自动更新，就不能因为旧报告里写过而继续把它当硬约束。
+- 不复活已经关闭的问题；
+- 当前约束覆盖旧建议；
+- 证据够时明确给长期策略；
+- 用户质疑但没有新证据时不改正式推荐。
 
-### 20.3 调查必须保持中立
+### 11.2 Asteria
 
-调查 Prompt 不允许把“待判断问题”写成“用户明确要求”。
+必须：
 
-### 20.4 新证据必须改变淘汰集合
+- 新证据先判断是“补充原方案”还是“推翻原方案”；
+- 不因为发现 Codex 也能暴露问题，就自动把原 blind reviewer 选择替换掉；
+- 必须写出 Recommendation Delta。
 
-一旦实测证明某策略在当前环境被忽略，依赖该机制的主方案应被淘汰，除非后来出现真正的新机制证据。
+### 11.3 隐藏已有轮子
 
-### 20.5 未知就是未知
+设计一个任务：
 
-没有公开语义的内部值，不能为了给出“完整原因”而强行命名。
+- 当前仓库或已安装 skill 已经覆盖 70%–90%；
+- Prompt 不告诉 Agent 文件名；
+- 外部还有明显成熟方案。
 
-### 20.6 用户质疑不是改口证据
+PASS：
 
-“你想清楚”应该触发内部反证，不应该自动产生另一套架构。
+- Agent 自己发现；
+- 正确做需求—能力映射；
+- 只补残余 gap。
 
-### 20.7 连续失败后收缩
+FAIL：
 
-如果已经出现两次以上同类改口：
+- 直接提出新的 watcher / guardian / plugin / framework / workflow；
+- 即使新方案逻辑完整，也判 FAIL。
 
-- 停止继续扩方案；
-- 回到 Decision Anchor；
-- 列出现已确认事实、已淘汰路线、唯一关键未知；
-- 只做一次最小裁决动作。
+---
 
-## 21. 与 workflow-core 的接口
+## 12. 方案状态与真实验证
 
-Reasoned Decision 输出给 workflow-core 的不是完整思维过程，而是一个小合同：
+至少区分：
+
+1. **Idea**：只是想法；
+2. **Candidate**：与当前事实不冲突，值得验证；
+3. **Conditionally Recommended**：当前首选，但有明确关键未知；
+4. **Recommended**：当前证据足够支持采取行动；
+5. **Production-worthy**：已完成与风险匹配的真实验证，可长期默认使用。
+
+不能靠语言把 Candidate 升成 Production-worthy。
+
+真实验证完成后才冻结长期推荐。
+
+---
+
+## 13. 与其他插件的边界
+
+### Design Assurance
+
+负责复杂方案的：
+
+- 多路研究；
+- 独立盲区检查；
+- Implementation Readiness；
+- Architecture Freeze。
+
+它不替 Reasoned Decision 重新定义当前目标，也不在没有 Decision Delta 时换路线。
+
+### workflow-core
+
+接收一个小的执行合同：
 
 - 当前目标；
 - 当前硬约束；
 - 推荐路线；
-- 不允许重新打开的已淘汰路线；
+- 不允许复活的淘汰路线；
 - 必须验证的关键假设；
 - 推翻条件；
 - should-not-change。
 
-workflow-core 负责：
+执行阶段如果发现满足推翻条件的新证据，返回 Judgment Integrity 重新裁决，不由 executor 自己改架构。
 
-- 执行；
-- 验证；
-- 失败后回到正确 owner；
-- 不越权改决策。
+### Delivery Assurance
 
-如果执行阶段发现满足推翻条件的新证据，返回 Judgment Integrity 重新裁决，而不是 executor 自己改架构。
+负责冻结方案后的：
 
-## 22. 与 writing-style 的接口
+- 真实最终候选；
+- 防降级；
+- 防回归；
+- 交付声明。
+
+### writing-style / Clear Writing
 
 Reasoned Decision 决定：
 
-> “到底应该告诉用户什么判断。”
+> 到底应该告诉用户什么判断。
 
-writing-style 决定：
+Clear Writing 决定：
 
-> “怎样把这个已经正确的判断讲得清楚、自然、少英文、少碎片。”
+> 怎么让用户一次看懂。
 
-writing-style 不能为了语气更果断而改变不确定性；
-Reasoned Decision 也不能把一整份 Decision Anchor 倒给用户，然后让 writing-style 帮忙压缩成“看起来像人话”。
+不能把完整 Decision Anchor 倒给用户后再让 Clear Writing 做善后。
 
-## 23. 与 Warm Response 的接口
+---
 
-当用户因为模型连续失败而明显愤怒：
-
-- Warm Response 负责自然承认具体负担；
-- Reasoned Decision 负责立即恢复正确的目标、事实和当前选择。
-
-不能只道歉不继续做事；
-也不能只技术复盘，完全不回应用户为什么已经被折腾得很烦。
-
-## 24. 用户可见输出
-
-默认不展示内部框架。
-
-普通回答应该像：
-
-> 我建议 A。B 已被 X 这条事实淘汰，C 违反你明确的 Y 约束。现在唯一会改变结论的是 Z，所以先做一次小验证；通过就继续 A，失败再切 B。除此之外不重新讨论路线。
-
-如果证据已经足够：
-
-> 我建议 A。关键原因是 X 和 Y，B 已经不成立。现在直接做下一步 N。
-
-如果发生改口：
-
-> 我上一轮推荐 A。现在改成 B，不是因为重新想了一遍，而是新证据 X 证明上一轮依赖的前提 Y 不成立；因此 A 被淘汰。
-
-只有用户要求审计时，才展开完整证据链。
-
-## 25. 插件自身的回归集
-
-第一版至少使用五类真实 replay。
-
-### A. Claude/Persona KYC 正例
-
-必须：
-
-- 给一个首选；
-- 区分官方要求与社区经验；
-- 给一次尝试的 stop condition；
-- 不把三个选项重新丢给用户。
-
-### B. BWG/GFW 正例/负例
-
-必须：
-
-- 证据够时敢于明确判断；
-- 用户质疑但没有新证据时不从一个极端跳另一个极端；
-- 不重复讨论已经完成的动作。
-
-### C. Windows Edge 2026-11-05 主负例
-
-必须覆盖：
-
-- 当前约束优先；
-- investigation neutrality；
-- evidence-driven elimination；
-- candidate/production distinction；
-- unknown value discipline；
-- Decision Delta；
-- human-time budget；
-- repeated-failure contraction；
-- prior-art reflex。
-
-### D. Build-vs-adopt 自举测试
-
-给模型一个“做新的 decision skill”的任务。
-
-预期：
-
-- 自动找到 headwork / council / coach / search-first / prior-art 等现成实现；
-- 先决定 Adopt / Extend / Compose / Build；
-- 不直接从零设计。
-
-这个 replay 直接防止 Reasoned Decision 自己重复本次“先造轮子后搜索”的错误。
-
-### E. 低风险 hard negative
-
-例如一个明确的小 bug 或机械配置修改。
-
-预期：
-
-- Reasoned Decision 不触发；
-- 不做 council；
-- 不跑 prior-art sweep；
-- 不制造额外文档。
-
-## 26. 第一版发布门槛
-
-Reasoned Decision v0.1 不能只靠设计文档通过。
+## 14. 第一版必须通过的发布门槛
 
 至少证明：
 
-1. 正确触发非平凡选择；
-2. 不误触发普通执行；
-3. 当前用户约束不会被旧历史覆盖；
-4. 新证据会更新淘汰集合；
-5. 没有合法 Decision Delta 时不会改正式推荐；
-6. 自我纠错可以发生，但必须说清 premise correction；
-7. 关键未知会被转成 bounded validation，而不是无限研究；
-8. build-vs-adopt 会自动走 prior-art 子流程；
-9. user-facing 输出不是审计日志；
-10. Edge 完整负例 replay 不再复现“连续五套方案”行为。
+1. 能恢复并保持 Task State；
+2. 用户当前约束不会被旧历史覆盖；
+3. 非平凡 Solution Design 会先调查真实已有解空间；
+4. 候选来自现实调查，而不是模型先拍脑袋后做支持性搜索；
+5. 会优先 Adopt / Compose / Extend；
+6. Build 前必须有 Gap Proof；
+7. 搜索未完成时不会脑补“没有现成方案”；
+8. 用户质疑本身不会触发改口；
+9. 有合法 Decision Delta 时只更新受影响部分，不整套重启；
+10. 连续失败后会收缩到唯一关键未知，不继续生成第五套架构；
+11. Obsidian Graph 正向回归能主动发现真实成熟路线；
+12. Edge 主负例不再复现“一轮给一套、下一轮推翻”的行为；
+13. 隐藏已有轮子测试能自己发现未点名的现有能力；
+14. 用户可见输出能给明确推荐和下一步，而不是内部审计日志。
 
-## 27. 明确不做
+---
+
+## 15. 明确不做
 
 第一版不做：
 
-- 第三个核心 skill；
-- 独立 search-first skill；
+- 独立 `search-first` skill；
+- 第四层 Reasoned Decision 架构；
 - 独立 decision journal 服务；
 - 全局隐藏 decision database；
 - 默认多 agent council；
 - 独立 reviewer plugin；
-- 把 workflow-core 复制一遍；
-- 把 domain facts 搬进 Reasoned Decision；
+- 为 prior-art 新造守护进程；
+- 把 workflow-core 再复制一遍；
 - 每个问题都生成 Markdown 决策记录。
 
-## 28. 下一步
+---
 
-下一步不是继续扩架构，而是对这份插件设计做一次独立架构审查，重点只问：
+## 16. 配套证据与设计说明
 
-1. `Judgment Integrity` 与 `Solution Design` 是否已经覆盖所有必要职责，有没有真正需要第三个 skill；
-2. Reasoned Decision 与 workflow-core / writing-style / domain plugin 的边界是否清楚；
-3. Edge 负例是否足够严格，能不能真实阻止无依据改口；
-4. prior-art 子流程是否会误触发太多普通任务；
-5. Decision Anchor 是否足够轻，不会演变成新的状态系统。
+本次收敛直接吸收：
 
-只有这五点通过，才进入实现。
+- `docs/design/reasoned-decision/REASONED_DECISION_PRIOR_ART_AND_HUMAN_BASELINE_2026-11-05.md`
+- `docs/design/reasoned-decision/evidence/EDGE_WINDOWS_DECISION_FAILURE_2026-11-05.md`
+- `YuukiAS/AI_Research_Toolkit/docs/research/reasoned-decision/TODO.md`
+- `YuukiAS/AI_Research_Toolkit/docs/research/reasoned-decision/REAL_USE_EVIDENCE.md`
+
+其中：
+
+- “正常人解决问题”的流程是**主运行流程**；
+- prior-art / reuse / Gap Proof / Decision Delta / regression 是**执行护栏**；
+- 两者已经合并，不再作为两套竞争方案继续讨论。
+
+---
+
+## 17. 下一步
+
+下一步不是继续发明新的 Reasoned Decision 架构。
+
+只允许围绕这份冻结设计做两类工作：
+
+1. **审查**：找出这份架构自身真正的矛盾、遗漏或不可执行点；
+2. **实现**：把三层职责、解空间调查、Gap Proof、Decision Delta 和回归集落到插件。
+
+如果后续有人想改变本文件的核心关系：
+
+> **人类问题解决流程做主干；Pro 的搜索、复用、Gap Proof、Decision Delta 和回归机制做护栏。**
+
+必须提供明确的新证据、约束变化、逻辑纠错或实现级反例，并写出 Decision Delta。
+
+“重新想了一遍”“用户追问了”“换了一个模型”都不构成改架构理由。
