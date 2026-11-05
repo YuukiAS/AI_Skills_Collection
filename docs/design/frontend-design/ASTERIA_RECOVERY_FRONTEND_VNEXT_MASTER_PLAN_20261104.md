@@ -335,3 +335,17 @@ NEW_EVIDENCE：
 CHANGE：
 - 这些建议被纳入 Frontend Design vNext 的独立审查输入；
 - 当前不自动视为最终生产合同，后续收敛 vNext 时逐条决定直接吸收、与现有机制合并或去重。
+
+
+### 2026-11-05 — Claude frontend/Asteria workflow dialogue preserved verbatim
+
+NEW_EVIDENCE：
+- 用户提供一段后续 Claude 对话，内容直接覆盖 Asteria Blueprint / Atlas 是否推倒重来、GPT 角色边界、Frontend Design vNext、Design Assurance、Claude Code 任务边界、插件与产品是否并行推进等问题；
+- 原始对话已逐字保存于 `docs/design/frontend-design/CLAUDE_ASTERIA_FRONTEND_WORKFLOW_DIALOGUE_RAW_20261105.md`，不由 GPT 压缩或改写；
+- 该对话提出的路线判断与五条 Frontend Design 建议属于新的独立协作证据，后续收敛时应回读原文，而不是只读二手总结；
+- 对话本身也形成明确的沟通风格对照：直接回答“保留什么、扔什么、谁做什么、下一步做什么”，比此前固定审计结构更符合用户阅读需求。
+
+CHANGE：
+- 将该原始对话加入 Frontend Design vNext / Design Assurance / Asteria 后续收敛的必查证据；
+- 不自动把 Claude 全部建议冻结为最终方案，仍由用户决定哪些正式采纳；
+- 后续相关回答优先采用自然、直接、面向决策的人话表达，避免先搭流程框架再回答用户问题。
