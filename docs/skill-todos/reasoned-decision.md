@@ -2,7 +2,7 @@
 
 status: SUPERSEDED_BY_WORKFLOW_CORE_CANDIDATE
 
-This file preserves the original positive-use evidence and early capability seed. It is **not** an active standalone-skill proposal anymore. The current architecture decision is to place Reasoned Decision inside the existing `workflow-core` plugin, without adding a new Marketplace plugin or standalone skill.
+This file preserves the original positive-use evidence and early capability seed. It is **not** an active standalone-skill proposal anymore. The current architecture direction is a dedicated **Reasoned Decision plugin** with a small number of internal skills; do not turn `reasoned-decision` itself into a standalone skill or fold the whole capability into `workflow-core`.
 
 Current design:
 - [Reasoned Decision v0.1 architecture](../design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md)
@@ -19,7 +19,7 @@ problem: High-stakes practical decisions are often answered too conservatively o
 scope examples: product/account/platform choices, software/service selection, migration choices, infrastructure strategy, purchasing, workflow/tool choice, and other reversible or semi-reversible decisions where current external evidence materially changes the answer.
 boundary: This capability does not replace domain experts, legal/medical/financial specialists, or research methods. It owns decision synthesis: evidence weighting, uncertainty handling, option elimination, recommendation, and stop/go criteria. Domain plugins remain responsible for domain facts.
 project-specific context: The Claude/Persona case below is evidence only. Do not encode Anthropic-specific KYC rules, supported regions, Chinese passport behavior, HKID behavior, or any single forum's claims as generic decision rules.
-next research step: ownership is now narrowed to `workflow-core`. Before production implementation, independently review trigger precision, overlap with W2/W3/W4/W5, prior-art routing, cross-turn Decision Delta behavior, and the real regression set. Do not create a standalone skill or new plugin.
+next research step: refine the dedicated Reasoned Decision plugin architecture, keeping the internal skill set minimal and reviewing overlap with workflow-core, domain plugins, writing-style, prior-art/search-first methods, cross-turn Decision Delta behavior, and the real regression set. Do not create a standalone `reasoned-decision` skill or proliferate helper skills.
 
 ## Accepted real-use evidence: Claude Pro / Persona KYC three-way decision
 
