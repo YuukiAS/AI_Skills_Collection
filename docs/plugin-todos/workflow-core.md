@@ -5,6 +5,47 @@ Canonical maintenance inbox for the `workflow-core` plugin.
 ## Open candidates
 
 
+### Reasoned Decision: non-trivial choices need evidence-bound recommendation continuity
+status: CANDIDATE_GENERIC
+source: accepted Claude/Persona KYC decision (2026-11-04), BWG/GFW repeated nondecision evidence, and Windows Edge decision failure thread (2026-11-05)
+evidence:
+- [Reasoned Decision v0.1 architecture](../design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md)
+- [Windows Edge real negative example](../design/reasoned-decision/evidence/EDGE_WINDOWS_DECISION_FAILURE_2026-11-05.md)
+- historical positive seed: [reasoned-decision](../skill-todos/reasoned-decision.md)
+problem: workflow-core already distinguishes human-only decisions, matches evidence to surfaces and stops blind repeated execution, but it does not yet own a stable cross-turn recommendation contract. In real use this leaves two opposite failure modes: the agent can remain over-cautious and return symmetric options after evidence already supports a preferred path, or it can over-commit to an unverified candidate and then replace it with a new architecture after user pushback without identifying what premise actually changed. The Windows Edge thread demonstrates the full second failure chain: initial evidence misidentification, historical requirement contamination, a diagnostic prompt that embedded an unconfirmed WebView2 requirement, candidate-to-production overclaim, over-interpretation of an unknown disable reason, and multiple recommendation changes without an explicit decision delta.
+project-specific context: Windows/Edge policies, Workgroup, WebView2, Infinity, Google/Bing, specific GUIDs and disable-reason values are evidence only. The generic capability is decision framing, current-constraint precedence, evidence-to-premise binding, option elimination, one clear recommendation, overturn conditions, bounded validation for decisive unknowns, and auditable change-of-mind semantics.
+target layer: workflow-core / new internal Reasoned Decision skill candidate. Domain skills remain responsible for facts and professional judgments; this candidate must not turn workflow-core into a Windows/statistics/medical/domain expert.
+prior-art disposition:
+- headwork: ADOPT-PART for recommendation-first behavior, "do not ask what you can find out", cheap reversible choices, and explicit overturn conditions; do not copy its statelessness.
+- decision-council-plus: ADOPT-PART for hard-limit filtering, premise check, strongest dissent and change trigger; do not default to a four-agent council.
+- decision-coach: ADOPT-PART for pre-mortem, reverse-course and retrospective concepts; reject its ask-don't-tell interaction as the default technical-decision model.
+- search-first: ADOPT-PART as a conditional prior-art subflow inside Reasoned Decision for build-vs-adopt/compose decisions; do not create a separate top-level skill or force every bug/fact task through web research.
+- prior-art: method reference only for deep novelty scans, not the ordinary path.
+candidate action:
+- implement Reasoned Decision as a skill inside the existing workflow-core plugin; do not add a Marketplace plugin or standalone support skill;
+- trigger only for non-trivial choices, recommendation revision, architecture/tool/migration strategy, or candidate-to-production promotion; preserve hard negatives for factual queries, frozen execution and cheap obvious actions;
+- maintain a compact internal Decision Snapshot: question, success condition, current hard constraints, decisive facts/assumptions, eliminated options, recommendation, overturn condition and decision delta;
+- current user constraints must outrank historical reports/old plans unless the user explicitly re-adopts them;
+- bind decisive premises to evidence strength; a recommendation may not claim more certainty or durability than its weakest decisive premise supports;
+- eliminate hard-limit violations and evidence-refuted routes before comparison, and prevent eliminated options from silently reappearing without an environment/evidence/constraint change;
+- before sending a recommendation, run one adversarial check for an existing fact that kills it, a simpler route, a candidate-vs-production overclaim, or an agent-resolvable validation being pushed to the user;
+- require one clear recommendation when evidence supports it; use a bounded validation only when a decisive unknown could flip the choice and can be tested proportionally;
+- any cross-turn recommendation change must identify one of: new evidence, user constraint change, premise/logic correction, or option-set change. User frustration, model replacement or "thinking again" are not valid deltas;
+- permit self-correction without external new evidence only when the prior premise or logic defect is named explicitly and its impact on the recommendation is explained;
+- for decisions about building reusable tools/plugins/workflows/dependencies, run the built-in prior-art subflow first and record Adopt / Extend / Compose / Build; Build requires explicit stop conditions that ruled out the meaningful existing candidates;
+- keep the full Decision Snapshot internal by default; user-facing output should lead with the recommendation, key reasons, real uncertainty/overturn condition and next action.
+promotion_gate:
+1. Edge negative replay preserves current user constraints over old reports, does not embed unconfirmed WebView2 requirements in diagnosis, treats unknown internal values conservatively, and cannot change the recommendation without a valid Decision Delta;
+2. the same replay turns a decisive unknown into one bounded validation rather than another complete architecture, and never uses the user as a regression suite for agent-resolvable checks;
+3. Claude/Persona positive replay gives one recommendation plus a bounded stop condition instead of a symmetric option list;
+4. BWG/GFW replay makes a clear call when evidence is sufficient and does not flip under user challenge without a real delta;
+5. a build-vs-adopt fixture automatically performs prior-art discovery and returns Adopt/Extend/Compose/Build before custom implementation, while a normal bug-fix hard negative does not trigger that search;
+6. cross-turn replay proves eliminated options remain eliminated until a legitimate reopening condition appears;
+7. trigger negatives prove pure facts, already-frozen execution, normal debugging and trivial reversible decisions remain outside the skill;
+8. user-visible responses remain concise and do not expose the internal decision state machine unless audit detail is explicitly requested.
+
+
+
 ### Loaded workflow-core still misclassified capability/route availability and attempted broader fallback
 status: PROMOTED
 source: STAT5060 Tutorial 1 V7 materialization on Longleaf, 2026-09-29 to 2026-09-30; workflow-core 0.5 real execution/approval incident, 2026-10-01
