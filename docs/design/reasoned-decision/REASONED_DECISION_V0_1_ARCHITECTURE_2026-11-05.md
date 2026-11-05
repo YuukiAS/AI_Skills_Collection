@@ -5,6 +5,49 @@ Date: 2026-11-05
 Planned form: dedicated Marketplace plugin with a minimal internal skill set  
 Production status: NOT IMPLEMENTED
 
+## 0. 先恢复已有的三层可靠性架构
+
+本文件只设计第一层 **Reasoned Decision**，不能把它的内部两个 skill 误写成整个系统只有“两层”。
+
+截至当前已有架构输入，复杂任务的可靠性生命周期是三个独立责任层：
+
+1. **Reasoned Decision**
+   - 解决单个关键判断与取舍；
+   - 回答“现在根据这些事实和约束，到底应该选什么”；
+   - 内部由 `Judgment Integrity` 与 `Solution Design` 两个核心 skill 组成。
+
+2. **Design Assurance**
+   - 解决复杂系统/产品设计从开放构思到实施前冻结；
+   - 负责任务分级、并行设计/研究、独立盲区检查、关键事实探针、Implementation Readiness、Architecture Freeze 与唯一下一步；
+   - 可以调用 Reasoned Decision 处理某一个具体判断，但不能被 Reasoned Decision 吞并。
+
+3. **Delivery Assurance**
+   - 解决冻结方案实施以后“最终交付是否真的做到”；
+   - 负责验收义务、旧功能保护、防降级、防退化、真实最终候选证据与交付声明；
+   - 不能反过来替代前两层重新设计产品目标。
+
+这三层的关系是：
+
+```text
+Reasoned Decision
+  单个关键判断 / 取舍
+        ↓
+Design Assurance
+  复杂方案完整性 / 实施就绪 / Architecture Freeze
+        ↓
+Delivery Assurance
+  实施后的真实交付 / 防降级 / 防回归
+```
+
+另外还有横切能力：
+
+- **Artifact Curation / artifact-content-design**：决定用户可见产物里什么元素应该存在、删除、合并、迁移或留白；
+- **Clear Writing / writing-style**：把已经正确的判断和内容自然、清楚地表达给用户；
+- **workflow-core**：发现/组合所需能力、组织执行和验证，不拥有三层中的专业判断；
+- **Bridge Kit**：只负责运行、权限、身份、钩子和恢复基础设施。
+
+因此，本轮对 Reasoned Decision 的改进必须保持一个边界：**把单个判断做稳，不把复杂设计冻结和最终交付保证都吸进自己。**
+
 ## 1. 当前架构裁决
 
 这里必须区分**三层责任架构**和**Reasoned Decision 插件内部 skill**。2026-10-26 已经收敛过的整体方向不是“两层”，而是：
