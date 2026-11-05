@@ -1,6 +1,6 @@
 # reasoned-decision — Historical Seed
 
-status: SUPERSEDED_BY_WORKFLOW_CORE_CANDIDATE
+status: SUPERSEDED_BY_REASONED_DECISION_PLUGIN_ARCHITECTURE
 
 This file preserves the original positive-use evidence and early capability seed. It is **not** an active standalone-skill proposal anymore. The current architecture direction is a dedicated **Reasoned Decision plugin** with a small number of internal skills; do not turn `reasoned-decision` itself into a standalone skill or fold the whole capability into `workflow-core`.
 
