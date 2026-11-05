@@ -1,7 +1,7 @@
 # Asteria Recovery + Frontend Design vNext：唯一执行总控
 
 日期：2026-11-04；最后状态更新：2026-11-05  
-状态：ACTIVE CONTROL PLANE — PHASE_B_COMPLETE / PHASE_C_HANDOFF_PENDING  
+状态：ACTIVE CONTROL PLANE — PHASE_B_COMPLETE / CLAUDE_INDEPENDENT_ADJUDICATION_PENDING  
 记录位置：本文件是跨 Asteria / Frontend Design / Design Assurance 的唯一总执行记录；产品设计事实仍留在各产品仓库，插件事实仍留在 AI_Skills_Collection。  
 原则：不新建 Notion 路线图、不新增 Planner/Critic 系统、不等待所有基础设施完成才继续 Asteria。
 
@@ -42,7 +42,11 @@ Phase B 的完整结论目前保存在 Mac mini 本地：
 
 ### 当前唯一 NEXT_ACTION
 
-先同步并压缩 `PHASE_B_REVIEW_CONCLUSIONS_20261105.md` 中真正具有执行约束力的内容到本文件，形成：
+用户新增明确决定：在进入 Phase C 正式设计前，先生成一份单文件、自包含的 Claude 独立裁决证据包，由网页 Claude 独立判断既有 Deep Research、公开 GitHub 轮子、Frontend Design Skill、失败原因与后续可行性。该裁决不等于 Phase C 设计，不允许 Claude 在这一 Gate 直接开始新 UI。
+
+Codex 正式任务：`docs/design/frontend-design/CODEX_BUILD_CLAUDE_INDEPENDENT_REVIEW_PACKET_20261105.md`。
+
+证据包完成并取得 Claude 独立结论后，再同步并压缩 `PHASE_B_REVIEW_CONCLUSIONS_20261105.md` 中真正具有执行约束力的内容到本文件，形成：
 - Blueprint 已确认继承项；
 - Blueprint 明确禁止复活项；
 - Blueprint 仍 OPEN 的关键问题；
@@ -291,3 +295,20 @@ CHANGE：
 ### 后续硬约束
 
 进入任何新设计之前，执行者必须先区分三件事：已有研究结论、已有可复用工程/公开轮子、仍然真实缺失的研究。禁止把“没有消费既有研究”重新解释成“需要再做一轮同范围研究”。若要补 Atlas 的外部设计/插件参考，只允许做针对当前缺口的窄研究，并把可复用机制直接映射到设计输入，而不是再生成一份孤立参考报告。
+
+
+### 2026-11-05 — Claude independent adjudication gate added
+
+OLD_DECISION：
+- Phase B 完成后，先同步 Phase B 结论，再进入 Phase C。
+
+NEW_EVIDENCE / USER_DECISION：
+- 用户明确表示不接受 GPT 对“已有 Deep Research 是否充分、GitHub 是否已有可复用轮子、Frontend Design Skill 是否存在且有用、GPT 失败是否源于未消费研究”的单方面结论；
+- 用户要求把两份原始项目对话、全部相关 Deep Research prompt/result、必要历史与工具/Skill 研究打包成单一 PDF，交给网页 Claude 独立裁决。
+
+CHANGE：
+- Phase C 正式设计继续暂停；
+- 新增一次 Claude 独立裁决 Gate；
+- Codex 只做证据工程，不替 Claude 下结论；
+- Claude 独立裁决完成后，结论才允许进入本总控并影响 Phase C；
+- 本 Gate 不允许启动新 UI 或 production implementation。
