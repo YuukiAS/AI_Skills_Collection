@@ -323,3 +323,15 @@ CHANGE：
 - 不自动把 Claude 的结论写成冻结路线，等待用户收敛；
 - 后续 Claude 提示词不再默认使用固定十项审计报告结构；保留问题本身，改用自然段和人话表达；
 - Phase C 继续暂停，直到用户明确接受/修正本轮裁决并更新总控。
+
+
+### 2026-11-05 — Claude Code frontend-design recommendations recorded
+
+NEW_EVIDENCE：
+- 用户提供 Claude Code 对 Frontend Design 后续改进的五条建议，并要求原样记录；
+- 原文已写入 `FEEDBACK_CONTINUITY_IMPLEMENTATION_CONTRACT_20261104.md` 的“Claude Code 对 Frontend Design 的五条建议”小节；
+- 五条分别涉及：研究必须落到具体选型、用户反馈形成保留/禁止清单、先做一屏可交互真实内容、只认真实浏览器/Obsidian 画面、局部反馈不得自动升级为整体换向且重复否决两次后停止自动返修。
+
+CHANGE：
+- 这些建议被纳入 Frontend Design vNext 的独立审查输入；
+- 当前不自动视为最终生产合同，后续收敛 vNext 时逐条决定直接吸收、与现有机制合并或去重。
