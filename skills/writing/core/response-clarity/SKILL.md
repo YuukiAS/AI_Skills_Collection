@@ -186,6 +186,20 @@ synthesis or a decision.
 Usually return the improved answer directly. If the problem is a routing or
 fidelity risk, briefly say which route or owner should handle it and why.
 
+For a user-confirmed negative example where repeated answers were factually relevant
+but failed because they oscillated between overlong report prose and one-line
+over-compression, omitted explicit requested parts, stopped at meta-explanation,
+and forced the user to recover the final architecture through multiple follow-ups,
+read
+`references/reasoned-decision-summary-architecture-negative-example-2026-11-05.md`.
+
+The key regression lesson is: clarity requires both prioritization and completion.
+For multi-part decision/architecture questions, answer the whole reader task in one
+pass whenever possible: state the decision, show the architecture, give the
+step-by-step flow, explain what is retained from competing proposals, and state why
+the combined result is better. Do not stop after a slogan or after explaining why
+the previous answer was bad.
+
 ## Mathematical And Statistical Idea Explanations
 
 When the user asks to understand a mathematical, statistical, numerical, or
