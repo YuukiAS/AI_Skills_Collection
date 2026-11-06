@@ -23,3 +23,11 @@ source: PC+Server+VPS / iTerm2 SSH 异常断开后残留 mouse reporting 真实�
 evidence: `docs/design/reasoned-decision/evidence/ITERM2_SSH_MOUSE_REPORTING_DECISION_FAILURE_2026-11-06.md`; https://iterm2.com/documentation-preferences-profiles-terminal.html ; https://iterm2.com/feature-reporting/ ; https://iterm2.com/documentation-tmux-integration.html ; https://iterm2.com/documentation-shell-integration.html
 problem: Agent 正确识别 SSH/tmux/TUI 异常结束后 iTerm2 mouse reporting 状态残留这一故障族，却在没有完成当前 iTerm2 原生 Profile 能力调查时，直接把本地 zsh `precmd` 中发送 DECRST 1000/1002/1003/1006 的 hook 升级为长期推荐。继续开放式调查后发现 iTerm2 已提供 `Restrict mouse reporting to alternate screen mode`，它能在保留 tmux/TUI alternate-screen mouse reporting 的同时，把普通 shell prompt 排除在 mouse report 注入之外。新证据构成合法 Decision Delta：原生设置应先作为 Adopt 方案验证，zsh hook 只能降级为原生方案不足时的 Extend fallback。该案例要求插件把“当前产品版本的原生设置/恢复能力”明确纳入成熟产品问题的早期 Solution-Space Discovery，并要求 fallback 有明确升级条件，避免把用户不需要维护的 workaround 提前固化。
 project-specific context: MX Master 3S、Mac mini、当前 iTerm2 Profile、Longleaf 和具体 SGR 坐标串只属于本案例。通用规则应是：成熟产品先查原生能力；逻辑可行的 workaround 在原生能力未调查完前不能升级为推荐；修局部状态不能顺手关闭用户仍需要的正常能力；用户拒绝主动破坏健康系统时使用无损验证。
+
+## 2026-11-07：连续追着局部症状换方案，导致“能不能实现整体体验”一直没有被真正回答
+status: NEW
+source: PC+Server+VPS / Legion Y9000P 通过 UU Remote 操作 Mac mini 的键盘体验对齐
+evidence: `docs/design/reasoned-decision/evidence/UU_REMOTE_KARABINER_DECISION_FAILURE_2026-11-07.md`
+problem: 用户真正要的是“Legion 远控 Mac mini 时，键盘体验尽量与直接使用 Mac mini 上的 Dell Windows 键盘一致，同时不把现有 Karabiner 搞成两套难维护配置”。Agent 前几轮却依次把问题缩成 ChatGPT 的 `Ctrl+Enter`、建议 UU 全局 `Ctrl -> Command`、再转向“只开 CGEventTap fallback”，每轮都抓住了一个局部机制，却没有先冻结整体成功标准，也没有在连续方案被新事实推翻后收缩到唯一关键未知。用户因此必须不断补充 `Ctrl+A`、Terminal 语义和“我要和实体操作一样”的要求，最后显式要求按 Reasoned Decision 重做。重新读取 Local Compute canonical、调查 Karabiner 原生能力和设备身份限制后，才收敛为“优先复用现有 Windows 键盘语义，只解决 UU 输入如何进入同一处理体系以及无设备身份的残余差距”，并正确把它保持为待现场验证的候选，而不是已经完成的长期方案。该案例要求 Reasoned Decision 在非平凡故障中把用户的整体体验目标当作 Task State，而不是让最新症状接管问题；连续两次路线被推翻后必须停止继续生成完整新方案，先找唯一真正改变选择的未知；成熟产品和已有 canonical 必须先做能力映射，再决定 Extend；用户可见结论必须先回答“能不能做到、能做到多接近、为什么、还差什么验证”，不能用实现细节代替决策。
+project-specific context: Legion Y9000P、UU Remote、Mac mini、Dell/Xiaomi VID/PID、ChatGPT bundle、具体 Karabiner 规则、CGEventTap 和未来可能采用的会话检测方式都属于本案例技术背景。中央插件应吸收的是“整体成功标准优先于局部症状、连续失败后收缩关键未知、先复用当前 canonical/原生能力、候选状态不能冒充 production、最终回答必须让用户直接知道能否实现及边界”这些通用判断行为。
+
