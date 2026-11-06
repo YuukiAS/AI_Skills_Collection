@@ -137,3 +137,30 @@ Purpose: Reasoned Decision 真实负例。本文记录判断过程为什么反�
 - “只打开 Karabiner CGEventTap fallback”也不足以证明完整体验一致。
 - 当前最有希望的方向是复用现有 Karabiner Windows 语义，让远控输入进入同一处理体系，并只补远控输入缺少实体设备身份造成的残余差距。
 - 在 fallback 捕获和稳定 UU 会话信号完成真实验证前，该方向仍是候选，不得报告为已经解决。
+
+## 2026-11-07 follow-up：在宣布 BLOCKED 前漏查了已经存在的 UU 会话检测实现
+
+后续执行又暴露了同一类问题。
+
+Codex 已经实测确认：启用临时 CGEventTap 捕获后，Legion 经 UU 的 `Ctrl+A` 可以进入 Karabiner 并命中现有规则。这证明“UU 输入完全进不了 Karabiner”已经被淘汰。
+
+随后 Codex 发现 CGEventTap 事件在 Karabiner 16.3.0 和当前上游都会以 `device_id(0)` 进入规则匹配，无法保留真实物理来源。这个事实本身成立，但 Codex 立即把 Goal 标为“阻塞”，并多次要求用户断开/重连 UU、继续按键探测，以寻找“来源”。
+
+这里再次把“不能区分每个事件来自哪一把键盘”误当成了“不能完成用户目标”。用户当前真实场景是：人在广州，通过 Legion 的 UU 会话操作香港 Mac mini；当前连接本身就是唯一可用的人机入口。要求断开会直接破坏当前操作路径，而且并不能恢复 CGEventTap 已经丢失的设备身份。
+
+更重要的是，开放式现实解空间调查很快找到已有开源项目 `aoyamashou/UUyc-companion`。该项目已经在 macOS 被控端实现 UU 真实会话检测，不需要用户断开连接：
+
+- `UUMonitor.overlayPresent()` 通过 `CGWindowListCopyWindowInfo` 检查屏幕上是否存在 owner 为 `UURemoteServer` 的覆盖窗口；
+- `UUReader.readControllers()` 通过 macOS Accessibility API 读取 UU 主界面，在表格行中查找“远程控制”标记并取得当前控制端设备名；
+- `UUConnectionState` 将两类信号合并，并使用短防抖判断 connected / disconnected；
+- 项目 UI 能直接显示“等待其它设备连接中”或“某设备已连接”。
+
+因此，“Mac 端无法可靠知道 UU 是否正在被控”并不是已经证明的 blocker。至少存在一个现实、已实现、可检查源码的检测路线，应先在当前 Mac mini 上验证和最小复用，再决定是否需要自建。
+
+这次 follow-up 对 Reasoned Decision 的新增要求是：
+
+1. **BLOCKED 也是一个需要 Gap Proof 的结论。** 发现底层限制后，不能直接把整个 Goal 标阻塞；必须先证明该限制确实击中了用户成功标准，而且现实生态中没有旁路。
+2. **不要把实现内部要求升级成用户要求。** 用户需要“远控时获得与实体 Windows 键盘近似一致的体验”，并没有要求 Karabiner 必须为每个 CGEventTap 事件恢复硬件 VID/PID。
+3. **当前操作通道本身属于 Task State。** 当用户正在通过唯一远控链路与 Agent 交互时，默认不得要求断开该链路做诊断，除非已证明没有无损替代。
+4. **连续失败后应扩大现实解空间，而不是扩大用户探测负担。** 本案应该先查 UU 生态、GitHub、现成 companion/monitor，再决定是否需要用户提供新输入。
+
