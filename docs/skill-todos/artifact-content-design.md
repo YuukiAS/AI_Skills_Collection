@@ -85,6 +85,20 @@ If no, default to REMOVE or move the boundary to oral narration/caption/notes ra
 This case should be used in future Artifact Director / artifact-content-design evaluation because it distinguishes **necessary research-state boundaries** from **defensive disclaimer debris** without weakening scientific honesty.
 
 
+### External candidate techniques: UI clutter restraint prompts
+
+status: NEW
+source: V2EX thread `GPT 的设计品味令人遗憾。` (2026-11-06), https://www.v2ex.com/t/1254844; user-supplied screenshot, 2026-11-07
+evidence: the thread records two lightweight methods proposed for reducing GPT-generated interface clutter; the user is collecting additional examples and does not yet want these promoted into production rules.
+problem: GPT-generated interfaces often add secondary labels, explanatory microcopy, warnings, floating guidance, repeated descriptions or decorative text after the layout already communicates enough. This is directly relevant to Artifact Content Design because the failure is deciding what deserves visible space, not merely rewriting the prose.
+
+Candidate methods to retain for later comparison:
+
+1. **Layout-first subtraction prompt.** Exact prompt from the thread: `Avoid unnecessary secondary labels and descriptions. Let the layout do the explaining.` The useful hypothesis is that the model should first use grouping, position, alignment and visual hierarchy to express relationships instead of adding another explanatory label.
+2. **Necessary-copy gate.** Keep UI copy only when it helps the user understand, judge or complete an action; remove repeated explanation and decorative text. The expanded version shown in the supplied screenshot adds an important safety boundary: simplification must not remove necessary field labels, business meaning, quantities/units, action conditions, status/error feedback, irreversible-consequence warnings or accessibility names, and should normally stay within the UI being changed rather than trigger an unrelated whole-product rewrite.
+
+Current disposition: **evidence intake only**. Do not treat either phrasing as a validated universal rule yet. Future examples should test when the short layout-first prompt is sufficient, when the explicit necessary-copy gate is more reliable, what each one wrongly removes, and whether either duplicates an existing Artifact Content Design principle rather than adding a new one.
+
 ## Preliminary concept sketch — Artifact Director / artifact-level editorial judgment
 
 **Status of this section: PRELIMINARY ONLY.** This is an early working hypothesis captured before formal architecture research. It is deliberately non-binding: future Planner/Critic work may revise individual parts, choose a different ownership model, rename the capability, split it across existing domains, or reject and replace this concept entirely. Nothing below authorizes production implementation.
