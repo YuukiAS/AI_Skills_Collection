@@ -31,3 +31,9 @@ evidence: `docs/design/reasoned-decision/evidence/UU_REMOTE_KARABINER_DECISION_F
 problem: 用户真正要的是“Legion 远控 Mac mini 时，键盘体验尽量与直接使用 Mac mini 上的 Dell Windows 键盘一致，同时不把现有 Karabiner 搞成两套难维护配置”。Agent 前几轮却依次把问题缩成 ChatGPT 的 `Ctrl+Enter`、建议 UU 全局 `Ctrl -> Command`、再转向“只开 CGEventTap fallback”，每轮都抓住了一个局部机制，却没有先冻结整体成功标准，也没有在连续方案被新事实推翻后收缩到唯一关键未知。用户因此必须不断补充 `Ctrl+A`、Terminal 语义和“我要和实体操作一样”的要求，最后显式要求按 Reasoned Decision 重做。重新读取 Local Compute canonical、调查 Karabiner 原生能力和设备身份限制后，才收敛为“优先复用现有 Windows 键盘语义，只解决 UU 输入如何进入同一处理体系以及无设备身份的残余差距”，并正确把它保持为待现场验证的候选，而不是已经完成的长期方案。该案例要求 Reasoned Decision 在非平凡故障中把用户的整体体验目标当作 Task State，而不是让最新症状接管问题；连续两次路线被推翻后必须停止继续生成完整新方案，先找唯一真正改变选择的未知；成熟产品和已有 canonical 必须先做能力映射，再决定 Extend；用户可见结论必须先回答“能不能做到、能做到多接近、为什么、还差什么验证”，不能用实现细节代替决策。
 project-specific context: Legion Y9000P、UU Remote、Mac mini、Dell/Xiaomi VID/PID、ChatGPT bundle、具体 Karabiner 规则、CGEventTap 和未来可能采用的会话检测方式都属于本案例技术背景。中央插件应吸收的是“整体成功标准优先于局部症状、连续失败后收缩关键未知、先复用当前 canonical/原生能力、候选状态不能冒充 production、最终回答必须让用户直接知道能否实现及边界”这些通用判断行为。
 
+
+### 2026-11-07 follow-up：多入口任务先形成“场景 → 期望行为”矩阵，再决定自动化方式
+status: NEW
+source: 同一 UU Remote + Karabiner 案例的后续正向收敛
+evidence: docs/design/reasoned-decision/evidence/UU_REMOTE_KARABINER_DECISION_FAILURE_2026-11-07.md
+problem: 在主键位方案已经通过验证后，Agent 一度把“Karabiner 重启后恢复 UU 模式”理解成单一持久状态问题，先后考虑手工开关、永久开启和 LaunchAgent 恢复。用户继续说明自己会从 Legion、ThinkPad、MacBook Neo、Universal Control 和本地实体键盘多种入口操作同一台 Mac mini 后，才暴露出真正的长期成功标准：不同入口需要不同语义。这个新约束构成合法 Decision Delta，推翻的是“永久单一模式”，而不是已经成立的底层输入路径和规则复用。开放式调查又发现现有 UUyc-companion 已能读取当前控制端设备名和平台，因此最终应优先 Compose：Windows 控制端自动进入 Windows 语义，macOS 控制端和 Universal Control 保持 Mac 语义，本地实体键盘继续按设备身份处理。插件应吸收一个通用要求：只要任务涉及多个设备、身份、入口、环境或角色，且自动化行为可能因入口不同而变化，形成方案前必须先构造最小“场景/来源 → 期望行为”矩阵；不要先把一个状态开关固化成全局默认，再让用户用追问补齐遗漏场景。用户本轮还明确反馈按 Reasoned Decision 推进后更容易理解，这可作为 reader-facing judgment stability 的正向证据，但不能替代技术验证。
