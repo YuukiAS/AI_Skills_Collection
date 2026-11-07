@@ -217,3 +217,46 @@ Codex 已经实测确认：启用临时 CGEventTap 捕获后，Legion 经 UU 的
 
 这次用户反馈的核心不是某个技术细节，而是对 Agent 决策稳定性的直接否定：用户已经明确感受到“一问就改口”。这应当作为 Judgment Integrity 的真实回归样本保留。
 
+
+## 2026-11-07 follow-up：补全多控制端成功标准后，Reasoned Decision 开始真正收敛
+
+在 stock Karabiner 方案已经部署后，用户继续追问“为什么 Karabiner 重启后还要手工 enable”“为什么不能永久 enabled”。这次追问带来了一个真正的 Decision Delta，而不是单纯质疑：
+
+- 用户会从 Legion 和 ThinkPad 远控 Mac mini；
+- 用户也会从 MacBook Neo 通过 Universal Control 或 UU 操作 Mac mini；
+- Mac mini 本地还会继续接 Dell / Keychron 等实体 Windows 键盘；
+- 用户希望这几类入口都各自保持自然、正确的键盘习惯，而不是为了修 Windows 远控把 Mac 端体验一起改坏。
+
+这个补充使此前“只要把 UU Windows 模式长期保持开启即可”的候选失效，因为它没有覆盖 MacBook Neo 的 Mac 键盘语义。与此同时，继续让用户手工记住 enable / disable 也不再符合长期生产体验。
+
+重新按 Reasoned Decision 检查后，候选路线被明确区分：
+
+1. 永久关闭：Legion / ThinkPad 经 UU 会回到原始的 macOS Control 语义，淘汰；
+2. 永久开启：Windows 控制端正常，但 MacBook Neo 的软件输入可能被误套 Windows 规则，淘汰为全局默认；
+3. 手工切换：技术可用，但把长期状态管理负担交给用户，不作为生产收尾；
+4. 继续 Build 自定义 Karabiner：没有 Gap Proof，继续淘汰；
+5. 复用现有 UU 控制端信息，按控制端平台自动选择 Windows / Mac 语义：当前最符合完整成功标准。
+
+开放式解空间调查已经找到现实已有实现 aoyamashou/UUyc-companion：
+
+- UUReader.readControllers() 能读取当前控制端设备名；
+- UUReader.readDevices() 能读取设备平台，例如 windows / macos；
+- UUConnectionState 已实现连接、切换控制端和断开防抖。
+
+因此最终候选不需要重新发明远控识别协议，只需最小复用这些现成能力：
+
+- 本地 Dell / Keychron 等实体键盘继续按设备身份走原规则，不依赖远控模式；
+- Legion / ThinkPad 经 UU 控制时，识别为 Windows 控制端，启用现有 UU Windows 规则；
+- MacBook Neo 经 UU 控制时，识别为 macOS 控制端，保持 Mac 键盘语义；
+- MacBook Neo 通过 Universal Control 时没有 UU Windows 控制端，因此不启用 Windows 远控模式；
+- 未知或读取失败时 fail closed，默认保持 Mac 语义，不把未知软件输入冒充 Windows 键盘。
+
+这一轮对 Reasoned Decision 的正向价值很明确：
+
+1. 先补齐完整使用矩阵，再做生命周期设计。如果没有先问清楚“谁会控制谁、每种入口应该是什么体验”，很容易把一个局部状态开关误做成永久机器设置。
+2. 合法 Decision Delta 应该只改变受影响部分。新约束只推翻“永久 Windows 模式/手工开关”这一层，没有推翻已经验证通过的 stock Karabiner、CGEventTap fallback 和 Dell/UU 规则复用。
+3. 现成能力优先于新 Build。已有 UUyc-companion 能提供控制端和平台信息，因此只需要 Extend / Compose，而不是再造新的识别协议或修改 Karabiner。
+4. 最终方案必须能用一句话解释。本案收敛后的读者模型是：“Windows 电脑远控就自动用 Windows 键盘逻辑，MacBook 远控就自动保留 Mac 键盘逻辑，本地实体键盘始终按自身设备规则工作。”用户不需要理解变量、PID、fallback 生命周期才能判断方案是否符合需求。
+5. 用户主观反馈也属于可用性证据。用户明确表示这几轮按 Reasoned Decision 推进后“看着舒服点了”，说明稳定的目标、明确的淘汰理由和只在合法 Delta 下改判，确实降低了多轮协作中的认知负担；但这不能代替技术最优性的真实验证。
+
+这个案例后续应作为 Reasoned Decision 的正向 replay：给出同样的多入口需求时，Agent 应先形成完整场景矩阵，再选择统一方案，不能先做“永久开/关”然后让用户连续追问才发现遗漏控制端。
