@@ -164,3 +164,22 @@ Codex 已经实测确认：启用临时 CGEventTap 捕获后，Legion 经 UU 的
 3. **当前操作通道本身属于 Task State。** 当用户正在通过唯一远控链路与 Agent 交互时，默认不得要求断开该链路做诊断，除非已证明没有无损替代。
 4. **连续失败后应扩大现实解空间，而不是扩大用户探测负担。** 本案应该先查 UU 生态、GitHub、现成 companion/monitor，再决定是否需要用户提供新输入。
 
+## 2026-11-07 follow-up：从“来源识别困难”升级到自编译 Karabiner，属于未经 Gap Proof 的过度设计
+
+后续执行在已经确认 stock Karabiner 的 CGEventTap fallback 能接住 UU 按键后，为了恢复/验证软件事件来源，继续设计了 Karabiner 源码补丁，并把完整上线前置条件升级为：在 Mac mini 安装完整 Xcode 26 或更新版本、配置 Apple Development 证书、构建并签名整套 Karabiner 安装包。
+
+这条路线在技术上可能可行，但没有先证明它是满足用户成功标准所必需的，因此不能升级为主方案。
+
+用户的成功标准仍然是：Legion 经 UU 远控 Mac mini 时获得与本机 Dell Windows 键盘尽量一致的日常体验，同时保持一份清晰、低维护的 Karabiner canonical。用户没有要求恢复每个 CGEventTap 事件的原始硬件身份，也没有要求维护自编译 Karabiner 分叉。
+
+在已有事实下，更小的现实路线仍未被排除：stock Karabiner 已能接收这类事件；物理 Dell/Xiaomi 仍走 HID 路径并保留真实 device id；UU 软件输入走 CGEventTap 的 device_id(0)。如果能可靠识别“当前 UU 被控会话”，就可以仅在该状态下为 device_id(0) 应用现有公共 Windows 语义，并保持实体设备分支不变。即使需要为少量 device_if-only 行为增加变量门控分支，其维护成本也远低于维护自定义 Karabiner 二进制和代码签名链。
+
+因此在要求 Xcode、开发者证书、自定义构建和长期维护分叉之前，必须先完成 Gap Proof：
+
+1. stock Karabiner + UU 会话状态门控是否已经足够覆盖真实成功标准；
+2. device_id(0) 在 UU 会话期间是否会与用户当前机器上的其他软件注入事件产生实际冲突；
+3. 这些冲突是否无法通过现有条件、最小规则分支或自动生成避免；
+4. 只有上述路线真实失败，才有资格把“修改 Karabiner 源码并自签名发行”升级为必要方案。
+
+该 follow-up 进一步说明：Reasoned Decision 不只要防止过早 BLOCK，也要防止为了绕过一个底层限制直接跳到高维护 Build。发现内部能力缺口后，仍必须先走 Adopt / Compose / Extend；Xcode、开发证书、自维护 fork、系统级 helper 等明显增加长期维护面的方案，在没有 Gap Proof 前只能是远端 fallback，不能成为当前执行主线。
+
