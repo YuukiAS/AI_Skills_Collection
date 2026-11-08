@@ -260,3 +260,29 @@ Codex 已经实测确认：启用临时 CGEventTap 捕获后，Legion 经 UU 的
 5. 用户主观反馈也属于可用性证据。用户明确表示这几轮按 Reasoned Decision 推进后“看着舒服点了”，说明稳定的目标、明确的淘汰理由和只在合法 Delta 下改判，确实降低了多轮协作中的认知负担；但这不能代替技术最优性的真实验证。
 
 这个案例后续应作为 Reasoned Decision 的正向 replay：给出同样的多入口需求时，Agent 应先形成完整场景矩阵，再选择统一方案，不能先做“永久开/关”然后让用户连续追问才发现遗漏控制端。
+
+## 2026-11-08 follow-up：已经要求低侵入实现，仍然先走 GUI / 辅助功能，而没有先查无 GUI 数据面
+
+自动切换方案继续推进时又暴露了一个独立的 Reasoned Decision 缺口。目标已经明确为：Mac mini 自动识别当前 UU 控制端平台，Windows 控制端进入 Windows 键盘语义，macOS / Universal Control 保持非 Windows 远控语义，并尽量不增加权限和 GUI 依赖。
+
+Agent 已经知道用户不希望继续堆系统权限，也已经找到 UUyc-companion 作为现实案例，但仍然先沿用了它的 UI 读取路径：辅助功能 API 读取 UU 主窗口；主窗口关闭时再调用“显示主界面”。随后执行线因此准备 GUI helper、LaunchAgent，并向用户请求允许后台显示 UU 主窗口和一次辅助功能授权。
+
+用户再次指出“最好还是不用 GUI，好像可以用代码看”以后，才继续调查 UU 自己的数据面。开放式代码搜索很快找到更小、更符合目标的路径：
+
+- `api.nrd.nie.163.com` 是当前 UU Remote 客户端实际使用的产品 API 域；
+- 现有开源实现直接使用 `GET /api/v1/device/groups/of/my` 读取设备状态；
+- 响应设备记录中的 `participants_info` 已包含当前参与者的设备名、`platform`、`user_join_type`、`controlled_time` 等字段；
+- 因此可以直接判断当前控制端是否为 Windows / macOS，而无需打开 UU 主窗口；
+- 最终 Local Compute 实现复用本机当前 UU 登录身份，只对固定 UU 域执行只读 GET，不输出或持久化 token，不申请辅助功能、屏幕录制、管理员权限，也不再依赖 GUI。
+
+这不是“用户后来改变了偏好”才产生的路线。低侵入、尽量不用 GUI / 新权限从前文已经是明确方向；真正的问题是 Agent 的 Solution-Space Discovery 停在了“已有 companion 怎么做”，没有继续问更基本的问题：**这个状态的真实数据 owner 在哪里，能不能直接从状态源读取，而不是通过界面观察它？**
+
+本 follow-up 应给 Reasoned Decision 增加以下通用护栏：
+
+1. **状态读取优先找数据面，不先找界面。** 对“现在是什么状态 / 谁在连接 / 当前配置是什么”这类只读问题，默认搜索顺序应优先是本地配置、状态文件、缓存数据库、日志、CLI、IPC/socket、官方或客户端实际使用的只读 API；GUI / Accessibility / Computer Use 是后置 fallback。
+2. **GUI 自动化也需要 Gap Proof。** 不是只有 Build、卸载、系统级修改才需要证明必要性。只要方案会新增 TCC 权限、弹窗、窗口焦点、副作用或用户授权，就必须先证明更低侵入的数据面无法满足。
+3. **不要把“现有开源项目这样做”误等于“应该照抄它的最高层实现”。** 真实案例用于发现能力与协议入口，还应继续向下追到 state owner；成熟项目的 UI 层可能只是它自己的产品需求，并不是当前任务的最小必要依赖。
+4. **权限成本必须进入方案排序。** 两条路线都能完成任务时，无新权限、无 GUI、无焦点变化、只读、可 fail-closed 的路径应优先于需要 Accessibility / Screen Recording / System Settings 操作的路径。
+5. **用户已经表达低侵入偏好时，执行合同必须继承这个约束。** 不能嘴上说“优先无权限”，实际 prompt 又先让 Codex 做 GUI helper，等弹出权限请求以后才回头找接口。
+
+这条记录也说明 Reasoned Decision 的 Solution-Space Discovery 不能只回答“现实里有没有现成实现”，还要继续回答“现成实现依赖的最底层事实来源是什么”。本案最终成功路线并没有推翻已经验证的 Karabiner 方案，只把控制端识别从 GUI 观察替换成了更低层、只读、无权限的数据源；这是合法的局部 Solution Delta。
