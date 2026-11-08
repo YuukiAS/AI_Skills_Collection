@@ -37,3 +37,9 @@ status: NEW
 source: 同一 UU Remote + Karabiner 案例的后续正向收敛
 evidence: docs/design/reasoned-decision/evidence/UU_REMOTE_KARABINER_DECISION_FAILURE_2026-11-07.md
 problem: 在主键位方案已经通过验证后，Agent 一度把“Karabiner 重启后恢复 UU 模式”理解成单一持久状态问题，先后考虑手工开关、永久开启和 LaunchAgent 恢复。用户继续说明自己会从 Legion、ThinkPad、MacBook Neo、Universal Control 和本地实体键盘多种入口操作同一台 Mac mini 后，才暴露出真正的长期成功标准：不同入口需要不同语义。这个新约束构成合法 Decision Delta，推翻的是“永久单一模式”，而不是已经成立的底层输入路径和规则复用。开放式调查又发现现有 UUyc-companion 已能读取当前控制端设备名和平台，因此最终应优先 Compose：Windows 控制端自动进入 Windows 语义，macOS 控制端和 Universal Control 保持 Mac 语义，本地实体键盘继续按设备身份处理。插件应吸收一个通用要求：只要任务涉及多个设备、身份、入口、环境或角色，且自动化行为可能因入口不同而变化，形成方案前必须先构造最小“场景/来源 → 期望行为”矩阵；不要先把一个状态开关固化成全局默认，再让用户用追问补齐遗漏场景。用户本轮还明确反馈按 Reasoned Decision 推进后更容易理解，这可作为 reader-facing judgment stability 的正向证据，但不能替代技术验证。
+
+### 2026-11-08 follow-up：只读状态问题先找数据面，GUI / TCC 权限必须有 Gap Proof
+status: NEW
+source: PC+Server+VPS / UU Remote 控制端平台自动识别最终收敛
+evidence: docs/design/reasoned-decision/evidence/UU_REMOTE_KARABINER_DECISION_FAILURE_2026-11-07.md
+problem: 用户已经明确希望低侵入、尽量不用 GUI 和新增权限，Agent 也已经找到 UUyc-companion，却先沿用其 Accessibility + 主窗口读取路线，甚至准备让后台 helper 显示 UU 主界面并请求辅助功能授权。直到用户再次指出“最好不用 GUI、可以用代码看”，Agent 才继续调查 UU 的真实数据面，并找到客户端实际使用的只读设备接口 `GET /api/v1/device/groups/of/my`；响应中的 `participants_info` 已直接包含当前控制端平台和角色，最终因此实现了无 GUI、无 TCC 新权限的自动切换。插件应加入通用搜索优先级：对状态读取、连接识别、当前配置等只读任务，先查配置/状态文件、缓存数据库、日志、CLI、IPC/socket、客户端实际使用的只读 API，再考虑 GUI / Accessibility / Computer Use。GUI 自动化和 TCC 权限同样需要 Gap Proof；“现成开源项目通过 GUI 做”不能停止调查，必须继续追到其底层 state owner。两条路线都可行时，优先无权限、无焦点变化、只读、可 fail-closed 的数据面。用户已经明确低侵入偏好时，这个约束必须进入后续执行 prompt，不能等权限弹窗出现后才回头优化。
