@@ -43,3 +43,11 @@ status: NEW
 source: PC+Server+VPS / UU Remote 控制端平台自动识别最终收敛
 evidence: docs/design/reasoned-decision/evidence/UU_REMOTE_KARABINER_DECISION_FAILURE_2026-11-07.md
 problem: 用户已经明确希望低侵入、尽量不用 GUI 和新增权限，Agent 也已经找到 UUyc-companion，却先沿用其 Accessibility + 主窗口读取路线，甚至准备让后台 helper 显示 UU 主界面并请求辅助功能授权。直到用户再次指出“最好不用 GUI、可以用代码看”，Agent 才继续调查 UU 的真实数据面，并找到客户端实际使用的只读设备接口 `GET /api/v1/device/groups/of/my`；响应中的 `participants_info` 已直接包含当前控制端平台和角色，最终因此实现了无 GUI、无 TCC 新权限的自动切换。插件应加入通用搜索优先级：对状态读取、连接识别、当前配置等只读任务，先查配置/状态文件、缓存数据库、日志、CLI、IPC/socket、客户端实际使用的只读 API，再考虑 GUI / Accessibility / Computer Use。GUI 自动化和 TCC 权限同样需要 Gap Proof；“现成开源项目通过 GUI 做”不能停止调查，必须继续追到其底层 state owner。两条路线都可行时，优先无权限、无焦点变化、只读、可 fail-closed 的数据面。用户已经明确低侵入偏好时，这个约束必须进入后续执行 prompt，不能等权限弹窗出现后才回头优化。
+
+## 2026-11-10：推荐前必须核实会改变排序的对象级规格，不能用类别标签代替真实尺寸
+status: NEW
+source: PC+Server+VPS / Keychron Z6-87 Ultra 长时间办公掌托选型
+evidence: 用户当前商品规格页明确给出 Z6-87 Ultra 约 329×148×42mm；Keychron 官方 Silicone Palm Rest 规格表显示 PR47/PR67 为 327.5×79.5×18mm、PR50 为 365×79.5×18mm；OSHA Computer Workstations / Wrist-Palm Supports 要求掌托与键盘前沿的宽度、高度和坡度匹配
+problem: Agent 已经知道用户要为一把将长期高强度使用的键盘选择掌托，却在没有先核实该具体 Z6-87 Ultra 的真实机身尺寸时，先按“87 键 = 标准 TKL ≈ 360mm”这一类别先验排序候选，并把 365mm 的 Q3/V3 硅胶掌托和 362mm 的 HyperX TKL 提升为强推荐；甚至在关键尺寸仍未知时使用“最终推荐”“不会再改”等过强措辞。用户随后给出的当前商品规格页显示 Z6-87 Ultra 虽有 86 键，但机身宽度只有约 329mm。这个事实直接改变方案排序：此前因“75%”标签被错误排除的 327.5mm Keychron 掌托，反而在物理宽度上最接近真实键盘。这里暴露的不是单纯漏查一个数字，而是对象级关键前提没有进入 Recommendation Gate：当某个可核实规格会直接决定兼容性、人体工学、安全、成本或长期使用体验时，必须先查真实对象规格，再比较候选；类别名、配列名、行业常见尺寸和相邻型号只能用于发现候选，不能替代对象级证据。若关键前提未核实，只能给条件性推荐，不能冻结“最终选择”。
+project-specific context: Z6-87 Ultra、329×148×42mm、PR47/PR67、PR50、HyperX TKL、CHERRY、TOTO、KPTE 都只是本案例对象。中央插件应吸收的是：先识别“会改变排序的关键规格”，优先从当前商品页/官方规格/真实设备获得对象级事实；比较必须按实际物理属性和用户成功标准，而不是按产品类别标签机械映射；关键规格缺失时降低结论强度；一旦新对象级证据出现，只局部重排受影响候选并明确 Decision Delta，不能假装前一轮已经足够核实。
+
