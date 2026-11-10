@@ -1,0 +1,102 @@
+# 第六版：基于第五版 D2 + ELK 布局；角色卡片及标签由同目录 V6 脚本后处理。
+# 内容依据 ASSURANCE_DIAGRAM_SPEC_V6_20261110.md 与 ASSURANCE_PROCESS_V0_1_20261110.md。请用 render_assurance_V6_20261110.py 重建。
+vars: {d2-config: {layout-engine: elk; theme-id: 0; pad: 24}}
+direction: down
+grid-rows: 1
+classes.junction: {style: {fill: "#FFFFFF"; stroke-width: 0; opacity: 0}}
+horizontal-gap: 80
+classes: {
+  high: {style: {fill: "#3730A3"; stroke: "#D1D5DB"; font-color: "#FFFFFF"; font-size: 13}}
+  general: {style: {fill: "#C7D2FE"; stroke: "#D1D5DB"; font-color: "#1E1B4B"; font-size: 13}}
+  exec_high: {style: {fill: "#0F766E"; stroke: "#D1D5DB"; font-color: "#FFFFFF"; font-size: 13}}
+  exec_general: {style: {fill: "#99F6E4"; stroke: "#D1D5DB"; font-color: "#134E4A"; font-size: 13}}
+  user: {style: {fill: "#FCD34D"; stroke: "#D1D5DB"; font-color: "#78350F"; font-size: 13}}
+  plugin: {style: {fill: "#DDD6FE"; stroke: "#D1D5DB"; font-color: "#3B0764"; font-size: 13}}
+  decision: {shape: diamond; style: {fill: "#FFFFFF"; stroke: "#D1D5DB"; font-size: 13}}
+  artifact: {shape: page; style: {fill: "#FFFFFF"; stroke: "#D1D5DB"; font-size: 13}}
+  normal: {style: {stroke: "#4B5563"; stroke-width: 2; font-size: 12}}
+  optional: {style: {stroke: "#4B5563"; stroke-width: 2; font-size: 12; stroke-dash: 5}}
+  back: {style: {stroke: "#DC2626"; stroke-width: 3; font-size: 12}}
+  proposal: {style: {stroke: "#EA580C"; stroke-width: 2; font-size: 12}}
+  revision: {style: {stroke: "#7C3AED"; stroke-width: 2; font-size: 12}}
+  evidence: {style: {stroke: "#9CA3AF"; stroke-width: 2; font-size: 12; stroke-dash: 2}}
+}
+design: "Design Assurance · 设计到冻结" {direction: down; style: {fill: "#F5F7FF"; stroke: "#D1D5DB"; font-size: 20}}
+design.gates: "冻结关卡 · 四项都必跑" {style: {fill: "#F9FAFB"; stroke: "#D1D5DB"; stroke-dash: 5; font-size: 16}}
+handoff: "" {style: {fill: "#FFFFFF"; stroke-width: 0}}
+delivery: "Delivery Assurance · 冻结到交付" {direction: down; style: {fill: "#F0FDFA"; stroke: "#D1D5DB"; font-size: 20}}
+
+design.user: "用户\n提出任务；回答澄清问题；批准冻结" {class: user; width: 340; height: 100}
+design.owner: "D1 设计负责人 · 规划端·专业\n唯一负责人；规定验收语义；审定改变完成标准的修订" {class: high; width: 420; height: 100}
+design.grill: "D1 澄清（Grill Me）· 规划端·专业\n只问用户能定的；能查的自己查；该定的自己定并写理由" {class: high; width: 420; height: 100}
+design.a: "D2 独立设计者 A · 规划端·专业\n交出一份完整 Blueprint" {class: high; width: 340; height: 100}
+design.b: "D3 独立设计者 B · 规划端·专业（可选）\n复杂或高风险时另出一份完整 Blueprint" {class: high; width: 340; height: 100; style.stroke-dash: 5}
+design.reality: "D4 现实核查 · 执行端·普通（可选）\n已有代码或数据时盘点并跑小探针" {class: exec_general; width: 340; height: 100; style.stroke-dash: 5}
+design.merge: "D1 汇总 · 规划端·专业\n收敛成一份 Blueprint，保留被拒方案" {class: high; width: 420; height: 100}
+design.gates.structure: "D5 结构检查 · 执行端·普通\n跑 Blueprint 检查器" {class: exec_general; width: 270; height: 100}
+design.gates.questions: "D6 用户代理追问 · 规划端·普通\n扮演用户逐组件追问，答案不在 Blueprint 里即缺口" {class: general; width: 270; height: 100}
+design.gates.cold: "D7 冷读 · 执行端·普通\n只看 Blueprint，列出开工前还要问的问题" {class: exec_general; width: 270; height: 100}
+design.gates.retell: "D8 读者复述 · 规划端·普通\n每一步交新读者复述，复述不对就重写" {class: general; width: 270; height: 100}
+design.pass: "全部通过？" {class: decision; width: 160; height: 72}
+design.approve: "用户批准冻结？" {class: decision; width: 190; height: 76}
+handoff.contract: "冻结合同 · Blueprint 冻结版本\n能力与声明范围\n正常入口与最终对象\n成功、失败、缺证据的含义\n验收语义与禁止的替代\n不能变差的旧功能" {class: artifact; width: 330; height: 210}
+delivery.owner: "X1 交付负责人 · 规划端·专业\n唯一负责人；只统筹不写代码；审查验收变化\n签发前亲自读最终产物与原始证据；维护候选与证据记录" {class: high; width: 420; height: 100}
+delivery.implement: "X2 实现者 · 执行端·普通\n按冻结合同实现；写验收实现并用正例、坏例、缺证据例校准；申报所有偏离" {class: exec_general; width: 420; height: 100}
+delivery.validator: "X3 独立验收器实现者 · 执行端·专业（按条件）\n科研数值、统计、安全相关，或验收器太弱需换人重写时启用" {class: exec_high; width: 420; height: 100; style.stroke-dash: 5}
+delivery.professional: "X4 专项检查 · 执行端·专业（按条件）\n用现有插件或工具按既定准则逐项检查：版式、文案规范、视觉回归、领域规则；只交证据" {class: exec_high; width: 420; height: 100; style.stroke-dash: 5}
+delivery.judge: "X5 独立裁判 · 规划端·专业（按条件）\n不看实现过程，判断最终产物是否真正满足冻结的验收语义：结论、推导、图表是否成立；只交证据" {class: high; width: 420; height: 100; style.stroke-dash: 5}
+delivery.pass: "校准与验收全部通过？" {class: decision; width: 240; height: 84}
+delivery.accept: "用户（可选）\n只验必须由人判断的部分" {class: user; width: 420; height: 100; style.stroke-dash: 5}
+delivery.done: "已交付" {class: artifact; width: 220; height: 80}
+
+delivery.sign: "X1 签发？" {class: decision; width: 160; height: 72}
+design.user -> design.owner: {class: normal}
+design.owner -> design.grill: {class: normal}
+design.grill -> design.a: {class: normal}
+design.a -> design.merge: {class: normal}
+design.grill -> design.b: {class: optional}
+design.b -> design.merge: {class: optional}
+design.grill -> design.reality: {class: optional}
+design.reality -> design.merge: {class: optional}
+design.merge -> design.gates.structure: {class: normal}
+design.gates.structure -> design.gate_left: {class: normal}
+design.merge -> design.gates.questions: {class: normal}
+design.gates.questions -> design.gate_left: {class: normal}
+design.merge -> design.gates.cold: {class: normal}
+design.gates.cold -> design.gate_right: {class: normal}
+design.merge -> design.gates.retell: {class: normal}
+design.gates.retell -> design.gate_right: {class: normal}
+design.pass -> design.approve: "是" {class: normal}
+design.approve -> handoff.contract: "是" {class: normal}
+design.pass -> design.merge: "否：补缺口" {class: back}
+design.owner -> design.merge: "大改：重新过关卡" {class: back}
+design.owner -> handoff.contract: "小修订：新版本，只重跑结构检查" {class: revision}
+handoff.contract -> delivery.owner: {class: normal}
+delivery.owner -> delivery.implement: {class: normal}
+delivery.implement -> delivery.validator: "按条件" {class: optional}
+delivery.implement -> delivery.check_join: {class: normal}
+delivery.validator -> delivery.check_join: {class: optional}
+delivery.pass -> delivery.professional: "按条件" {class: optional}
+delivery.pass -> delivery.judge: "按条件" {class: optional}
+delivery.professional -> delivery.owner: "只交证据" {class: evidence}
+delivery.judge -> delivery.owner: "只交证据" {class: evidence}
+delivery.validator -> delivery.owner: "验收器提案" {class: proposal}
+delivery.pass -> delivery.implement: "否，属实现问题：返修" {class: back}
+delivery.sign_split -> delivery.accept: {class: optional}
+delivery.sign_split -> delivery.done: {class: normal}
+delivery.accept -> delivery.done: {class: optional}
+delivery.owner -> design.owner: "验收器提案；D1 决定是否采纳" {class: proposal}
+delivery.owner -> design.owner: "退回请求" {class: back}
+design.gate_join: "" {class: junction; width: 1; height: 1}
+delivery.check_join: "" {class: junction; width: 1; height: 1}
+delivery.sign_split: "" {class: junction; width: 1; height: 1}
+design.gate_join -> design.pass: {class: normal}
+delivery.check_join -> delivery.pass: {class: normal}
+delivery.sign -> delivery.sign_split: "是" {class: normal}
+
+# Routing junctions only; no additional role or decision.
+design.gate_left: "" {class: junction; width: 1; height: 1}
+design.gate_left -> design.gate_join: {class: normal}
+design.gate_right: "" {class: junction; width: 1; height: 1}
+design.gate_right -> design.gate_join: {class: normal}
+delivery.pass -> delivery.sign: "是；按条件验收后" {class: normal}
