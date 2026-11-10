@@ -1,0 +1,184 @@
+# 依据 ASSURANCE_DIAGRAM_SPEC_V2_20261109.md；D2 v0.9.0，ELK。
+# 字体：Noto Sans SC。导出命令与字体来源见同目录 RENDER_NOTES_V2_20261109.md。
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 0
+    pad: 40
+  }
+}
+direction: down
+grid-rows: 1
+horizontal-gap: 65
+classes: {
+  plan-high: {style: {fill: "#3730A3"; stroke: "#3730A3"; font-color: "#FFFFFF"; font-size: 28; bold: true}}
+  plan: {style: {fill: "#E0E7FF"; stroke: "#3730A3"; font-color: "#111827"; font-size: 28}}
+  exec-high: {style: {fill: "#0F766E"; stroke: "#0F766E"; font-color: "#FFFFFF"; font-size: 28}}
+  exec: {style: {fill: "#CCFBF1"; stroke: "#0F766E"; font-color: "#111827"; font-size: 28}}
+  user: {style: {fill: "#FDE68A"; stroke: "#92400E"; font-color: "#111827"; font-size: 28}}
+  professional: {style: {fill: "#E5DFEF"; stroke: "#6B5B7B"; font-color: "#111827"; font-size: 28}}
+  artifact: {shape: page; style: {fill: "#F3F4F6"; stroke: "#6B7280"; font-color: "#111827"; font-size: 26}}
+  judgment: {shape: diamond; width: 225; height: 125; style: {fill: "#F3F4F6"; stroke: "#6B7280"; font-color: "#111827"; font-size: 28}}
+  normal: {style: {stroke: "#374151"; stroke-width: 3; font-size: 25}}
+  option: {style: {stroke: "#374151"; stroke-width: 3; stroke-dash: 5; font-size: 25}}
+  back: {style: {stroke: "#DC2626"; stroke-width: 5; font-color: "#B91C1C"; font-size: 26; bold: true}}
+  proposal: {style: {stroke: "#EA580C"; stroke-width: 3; font-color: "#C2410C"; font-size: 25}}
+  evidence: {style: {stroke: "#B4A7C3"; stroke-width: 2; font-color: "#6B5B7B"; font-size: 25}}
+  revision: {style: {stroke: "#7C3AED"; stroke-width: 4; font-color: "#6D28D9"; font-size: 25}}
+}
+
+design: "Design Assurance：设计到冻结" {
+  direction: down
+  style: {fill: "#FFFFFF"; stroke: "#3730A3"; stroke-width: 2; font-size: 32}
+  request: "用户提出任务" {class: user; width: 330; height: 65}
+  owner: "D1 设计负责人\n高 · Claude / GPT 最高档\n沿用\n唯一负责人 · 一个线程用到底\n规定验收器" {class: plan-high; width: 620; height: 210; style.stroke-width: 6}
+  grill: "澄清（Grill Me）\n只问用户能定的；能查的自己查；该定的自己定\n在 D1 线程内" {class: plan-high; width: 760; height: 145}
+  a: "D2 独立设计者 A\n高 · Claude / GPT 最高档\n新开" {class: plan-high; width: 430; height: 130}
+  b: "D3 独立设计者 B（可选）\n高 · Claude / GPT 最高档\n新开" {class: plan-high; width: 430; height: 130; style.stroke-dash: 5}
+  reality: "D4 现实核查（可选）\n执行端·一般 · Codex 高\n新开" {class: exec; width: 440; height: 130; style.stroke-dash: 5}
+  merge: "汇总：合成一份 Blueprint\nD1 收敛，保留被拒方案与理由\n在 D1 线程内" {class: plan-high; width: 630; height: 145}
+  gates: "冻结关卡 · 四项都必跑" {
+    direction: down
+    style: {fill: "#FFFFFF"; stroke: "#6B7280"; stroke-dash: 5; stroke-width: 2; font-size: 27}
+    structure: "D5 结构检查\n执行端·一般 · Codex 高\n沿用" {class: exec; width: 390; height: 130}
+    questions: "D6 用户代理追问\n一般 · GPT 极高\n每次新开" {class: plan; width: 340; height: 130}
+    cold: "D7 冷读\n执行端·一般 · Codex 高\n每次新开" {class: exec; width: 390; height: 130}
+    retell: "D8 读者复述\n一般 · GPT 极高\n每次新开" {class: plan; width: 330; height: 130}
+  }
+  pass: "全部通过？" {class: judgment}
+  approve: "用户批准冻结" {class: user; width: 350; height: 75}
+  request -> owner: {class: normal}
+  owner -> grill: {class: normal}
+  grill -> a: {class: normal}
+  grill -> b: {class: option}
+  grill -> reality: {class: option}
+  a -> merge: {class: normal}
+  b -> merge: {class: option}
+  reality -> merge: {class: option}
+  merge -> gates.structure: {class: normal}
+  merge -> gates.questions: {class: normal}
+  merge -> gates.cold: {class: normal}
+  merge -> gates.retell: {class: normal}
+  gates.structure -> pass: {class: normal}
+  gates.questions -> pass: {class: normal}
+  gates.cold -> pass: {class: normal}
+  gates.retell -> pass: {class: normal}
+  pass -> merge: "否：补缺口" {class: back}
+  pass -> approve: "是" {class: normal}
+  owner -> merge: "大改：重新过关卡" {class: back}
+}
+
+handoff: "" {
+  direction: down
+  style: {fill: "#FFFFFF"; stroke-width: 0}
+  contract: "冻结合同\n＝Blueprint 冻结版本\n\n需求\n拆到底层的设计\n验收器：证明什么\n独立依据·过线标准\n不能退化的清单" {class: artifact; width: 360; height: 360}
+}
+
+delivery: "Delivery Assurance：冻结到交付" {
+  direction: down
+  style: {fill: "#FFFFFF"; stroke: "#0F766E"; stroke-width: 2; font-size: 32}
+  owner: "X1 交付负责人\n高 · Claude / GPT 最高档\n只统筹，不写代码\n唯一负责人 · 一个线程用到底" {class: plan-high; width: 620; height: 180; style.stroke-width: 6}
+  implement: "X2 实现者\n执行端·一般 · Codex 高（数学等用高）\n沿用" {class: exec; width: 670; height: 135}
+  validator: "X3 验收器实现者\n执行端·高 · GPT Work 极高 / Codex 高\n新开\n实现验收器 · 可提案" {class: exec-high; width: 670; height: 175}
+  checks: "" {
+    direction: down
+    style: {fill: "#FFFFFF"; stroke-width: 0}
+    run: "运行冻结验收器" {class: exec-high; width: 360; height: 105}
+    diagnostic: "诊断检查（可选）\nX1、X2、X3 随时可加\n不算验收" {class: exec; width: 430; height: 140; style.stroke-dash: 5}
+    hidden: "隐藏用例（可选）\nX3 保管，实现者看不到" {class: exec-high; width: 440; height: 140; style.stroke-dash: 5}
+  }
+  professional: "X4 专业验收（可选）\n执行端·高或专门插件\n每次新开" {class: professional; width: 620; height: 140; style.stroke-dash: 5}
+  judge: "X5 独立裁判\n高 · Claude / GPT 最高档\n每次新开" {class: plan-high; width: 620; height: 140}
+  pass: "全部通过？" {class: judgment}
+  accept: "用户验收（可选）\n只验必须由人判断的部分" {class: user; width: 490; height: 105; style.stroke-dash: 5}
+  done: "已交付" {class: artifact; width: 300; height: 95}
+  owner -> implement: {class: normal}
+  owner -> validator: {class: normal}
+  implement -> checks.run: {class: normal}
+  validator -> checks.run: {class: normal}
+  validator -> owner: "验收器提案" {class: proposal}
+  implement -> checks.diagnostic: {class: option}
+  validator -> checks.hidden: {class: option}
+  checks.run -> professional: {class: option}
+  checks.run -> judge: {class: normal}
+  checks.diagnostic -> judge: {class: option}
+  checks.hidden -> judge: {class: option}
+  professional -> judge: {class: option}
+  professional -> owner: "只交证据" {class: evidence; style.stroke-dash: 5}
+  judge -> owner: "只交证据" {class: evidence}
+  judge -> pass: {class: normal}
+  pass -> implement: "否，属实现问题：返修" {class: back}
+  pass -> accept: "是" {class: option}
+  pass -> done: "是" {class: normal}
+  accept -> done: {class: option}
+}
+
+design.approve -> handoff.contract: {class: normal; style.stroke-width: 5}
+handoff.contract -> delivery.owner: {class: normal; style.stroke-width: 5}
+delivery.owner -> design.owner: "退回请求\n合同矛盾或缺决定\n新事实推翻设计\n验收器做不到或判据不对\n需要用户才能定的事" {class: back; style.stroke-width: 8}
+delivery.owner -> design.owner: "验收器提案：D1 决定是否采纳" {class: proposal}
+design.owner -> handoff.contract: "小修订：新版本，只重跑结构检查" {class: revision}
+
+legend: "图例" {
+  near: bottom-center
+  grid-rows: 1
+  horizontal-gap: 14
+  style: {fill: "#FFFFFF"; stroke: "#6B7280"; font-size: 27}
+  ph: "高\nClaude / GPT 最高档" {class: plan-high; width: 250; height: 115; style.font-size: 21}
+  p: "一般\nGPT 极高" {class: plan; width: 170; height: 115; style.font-size: 21}
+  eh: "执行端·高" {class: exec-high; width: 190; height: 115; style.font-size: 21}
+  e: "执行端·一般" {class: exec; width: 200; height: 115; style.font-size: 21}
+  u: "用户" {class: user; width: 125; height: 115; style.font-size: 21}
+  pr: "专门插件\n或能力" {class: professional; width: 170; height: 115; style.font-size: 21}
+  doc: "产物" {class: artifact; width: 125; height: 115; style.font-size: 21}
+  gate: "关卡判断" {class: judgment; width: 175; height: 115; style.font-size: 21}
+  required: "实线\n必跑" {
+    direction: right
+    style: {fill: "#FFFFFF"; stroke-width: 0; font-size: 21}
+    a: "" {width: 20; height: 20; style.opacity: 0}
+    b: "" {width: 20; height: 20; style.opacity: 0}
+    a -> b: {class: normal}
+  }
+  optional: "虚线\n可选" {
+    direction: right
+    style: {fill: "#FFFFFF"; stroke-width: 0; font-size: 21}
+    a: "" {width: 20; height: 20; style.opacity: 0}
+    b: "" {width: 20; height: 20; style.opacity: 0}
+    a -> b: {class: option}
+  }
+  normal: "深灰\n正常流程" {
+    direction: right
+    style: {fill: "#FFFFFF"; stroke-width: 0; font-size: 21}
+    a: "" {width: 20; height: 20; style.opacity: 0}
+    b: "" {width: 20; height: 20; style.opacity: 0}
+    a -> b: {class: normal}
+  }
+  back: "红色粗线\n退回或补缺口" {
+    direction: right
+    style: {fill: "#FFFFFF"; stroke-width: 0; font-size: 21}
+    a: "" {width: 20; height: 20; style.opacity: 0}
+    b: "" {width: 20; height: 20; style.opacity: 0}
+    a -> b: {class: back}
+  }
+  proposal: "橙色\n提案（建议权）" {
+    direction: right
+    style: {fill: "#FFFFFF"; stroke-width: 0; font-size: 21}
+    a: "" {width: 20; height: 20; style.opacity: 0}
+    b: "" {width: 20; height: 20; style.opacity: 0}
+    a -> b: {class: proposal}
+  }
+  revision: "紫色\n修订后新版本" {
+    direction: right
+    style: {fill: "#FFFFFF"; stroke-width: 0; font-size: 21}
+    a: "" {width: 20; height: 20; style.opacity: 0}
+    b: "" {width: 20; height: 20; style.opacity: 0}
+    a -> b: {class: revision}
+  }
+  evidence: "浅灰紫细线\n交证据，不接管" {
+    direction: right
+    style: {fill: "#FFFFFF"; stroke-width: 0; font-size: 21}
+    a: "" {width: 20; height: 20; style.opacity: 0}
+    b: "" {width: 20; height: 20; style.opacity: 0}
+    a -> b: {class: evidence}
+  }
+}
