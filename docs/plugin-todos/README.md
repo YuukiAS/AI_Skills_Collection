@@ -5,7 +5,9 @@
 这里记录的是 **plugin 自己的问题**。如果用户在 TRACE、CARE、Distributed Imaging 或其他真实项目里调用某个 plugin，发现 plugin 的输出、路由、返修、检查或工作方式有问题，应该直接把这次真实问题记到对应的 `docs/plugin-todos/<plugin>.md`，不要先在项目 repo 再维护一份“插件问题清单”。
 
 - `reasoned-decision.md` — planned dedicated Reasoned Decision plugin；当前设计已收敛但尚未生产实现
-- `design-assurance.md` — planned dedicated Design Assurance plugin；尚未设计冻结，先固定 Grill Me、Design Assurance、Blueprint 三者位置
+- [Design Assurance](design-assurance.md) — 汇总复杂设计、Grill Me、Blueprint、冻结与返回设计的材料，保留尚未裁定的分歧
+- [Delivery Assurance](delivery-assurance.md) — 汇总真实交付、验收器职责与修改权限、历史审查和 Phase 1 证据
+- [两插件来源索引（2026-11-09）](assurance-sources-20261109.md) — 两仓全部相关分支、文件版本与本地未推送材料
 - `workflow-core.md`
 - `ai-skills-core.md`
 - `writing-style.md`
