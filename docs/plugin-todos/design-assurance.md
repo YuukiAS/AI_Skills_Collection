@@ -1,3 +1,5 @@
+[合并流程草案与流程图](../design/assurance/ASSURANCE_PROCESS_DRAFT_20261109.md)
+
 # Design Assurance — Plugin TODO
 
 用户现在明确要正式做 Design Assurance 和 Delivery Assurance 两个插件。已有材料对基本分工较一致：先澄清真正需要用户决定的问题，再把复杂设计收敛到可实施的冻结方案；Grill Me 是其中的按需澄清步骤，Blueprint 承载设计与证据。尚未统一的是固定双路设计还是按风险调用、Blueprint 是否为必经关卡、冻结前验收要准备到什么程度，以及交付阶段允许补哪些检查程序。另一个研究分支曾建议把决策与设计合为 Reasoned Design，不能悄悄覆盖本轮两个插件的整理目标。下面保留这些差异，不把材料汇总当成新设计批准或生产实现。（[D00](#source-d00)、[D02](#source-d02)、[D04](#source-d04)、[D13](#source-d13)；本轮用户要求）

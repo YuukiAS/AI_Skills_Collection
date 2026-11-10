@@ -1,3 +1,5 @@
+[合并流程草案与流程图](../design/assurance/ASSURANCE_PROCESS_DRAFT_20261109.md)
+
 # Delivery Assurance — Plugin TODO
 
 用户已明确要正式做 Delivery Assurance。材料已经说明要解决什么：让正式交付有当前成品与真实专业证据支撑，保护旧功能，拒绝降级替代，并让失败回到原任务。历史上已有有效的 Stop Hook 探针、`da/1` 接口冻结及后来由用户转交的 `da/2` R3 设计通过；这些都不等于生产插件或七仓接入已完成。尚未统一的是交付判断归 workflow-core 还是独立插件、沿哪代接口实施，以及冻结前后验收器各部分由谁准备和批准。本页集中这些未决点，不选择架构或替用户批准实施。（[V01](#source-v01)、[V02](#source-v02)、[V09](#source-v09)、[V13](#source-v13)；本轮用户要求）
