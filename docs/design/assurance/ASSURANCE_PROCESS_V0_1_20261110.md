@@ -1,4 +1,4 @@
-![Design Assurance 与 Delivery Assurance 流程图 0.1](ASSURANCE_PROCESS_V5_20261110.png)
+![Design Assurance 与 Delivery Assurance 流程图 0.1](ASSURANCE_PROCESS_V6_20261110.png)
 
 # Design Assurance 与 Delivery Assurance：流程 0.1（2026-11-10）
 
