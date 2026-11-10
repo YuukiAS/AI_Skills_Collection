@@ -1,6 +1,6 @@
 # 设计 Design Assurance 与 Delivery Assurance 插件 0.1（独立设计者 B）
 
-当前任务：把一套已经由用户认可的流程（Design Assurance 设计到冻结、Delivery Assurance 冻结到交付）设计成两个可以实现的插件。你是**独立设计者 B**：另有一位独立设计者在别的分支做同样的任务，你们互不参考；设计负责人（Claude）会对比两份设计，收敛成一份，再交 Codex 实现。
+当前任务：把一套已经由用户认可的流程（Design Assurance 设计到冻结、Delivery Assurance 冻结到交付）设计成两个可以实现的插件。你对应流程 0.1 的 **D3 独立设计者 B（通常可选，但本轮已明确启用）**。本轮因插件自身属于复杂且高影响设计，D2 也会在另一分支独立完成同一任务。你们互不参考；设计负责人（Claude）会对比两份设计，收敛成一份，再进入后续冻结与实现。
 
 这是按这套流程本身做的第一次正式试跑，所以你的产出也要遵守它：交出一份完整的 Blueprint，并把需要设计负责人或用户回答的问题集中列出，不要自己猜。
 
@@ -20,7 +20,7 @@
 AI_Skills_Collection（本分支）：
 
 1. `docs/design/assurance/ASSURANCE_PROCESS_V0_1_20261110.md`：**用户认可的流程 0.1，本任务的唯一依据。先完整读。** 其第 9 节是插件必须包含的部分，第 10 节是打包要求，第 11 节说明本任务在流程中的位置。
-2. `docs/design/assurance/ASSURANCE_PROCESS_V3_20261110.png`：流程图（第四版在制作中，内容以文档为准）。
+2. `docs/design/assurance/ASSURANCE_PROCESS_V6_20261110.png`：当前流程 0.1 对应的最新流程图；需要放大查看时同时读取同目录 `ASSURANCE_PROCESS_V6_20261110.svg`。图用于理解完整角色与连线，流程语义以 `ASSURANCE_PROCESS_V0_1_20261110.md` 为准。
 3. `docs/plugin-todos/design-assurance.md`、`docs/plugin-todos/delivery-assurance.md`、`docs/plugin-todos/assurance-sources-20261109.md`：历史材料汇总与来源索引，尤其是验收器归属的历史矛盾。
 4. `AGENTS.md`：本仓库维护规则，正式插件改动要配合 workflow-core 与 ai-skills-core。
 5. `plugins/codex/plugins/workflow-core/` 与 `skills/` 下一两个现有插件或技能：现有插件和 `SKILL.md` 的实际结构。
