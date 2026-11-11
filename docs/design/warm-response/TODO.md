@@ -1,5 +1,12 @@
 # Warm Response — TODO
 
+> **USER_DECISION_2026-11-12 — owner 已改变。**
+>
+> Warm Response 不再进入中央 Plugin / Skill 实现队列；这里保留的条目只作为 ChatGPT 全局协作指令的真实失败与回归证据。后续候选配置由 `YuukiAS/AI_Instruction_Configuration` 管理，不把这些案例并入 Clear Writing，也不为 Codex / GPT Work 强制增加同类回应层。
+>
+> Canonical product-shape decision: `docs/design/SHARED_CAPABILITY_PRODUCT_SHAPE_DECISIONS_2026-11-12.md`.
+
+
 > Candidate-plugin TODO. Warm Response is still a planned independent plugin; this file records real-use failures and does not claim production implementation or release.
 >
 > Related seed: `WARM_RESPONSE_PLUGIN_SEED_2026-10-30.md`
