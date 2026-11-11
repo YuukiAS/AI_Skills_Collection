@@ -156,3 +156,67 @@ npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugi
 ```
 
 按与上一轮相同的正则检查本 JSON 和整份说明，匹配数为零。本轮没有需要 D1 新增裁决的事项；尚待实际读者记录和规定关卡，未宣布设计冻结或插件实现完成。
+
+
+## 续：D7 第 2 轮补定同步（2026-11-11）
+
+已完整读取 D1 提交 `53af663d61284727e6ee9d7dd76a5ce97867a7ec` 中 SPEC 第 6.5 节“semantic_hash 覆盖的范围（D7 第 2 轮后修订）”、第 7.5 节的整份一次签发与签发后撤回、第 1.4 节新增记录种类，以及 MERGE_DECISIONS 第 6 节，并同步到 JSON。没有新增设计选择；前两轮说明保留为历史，本轮规则和检查结果以本节为准。
+
+### 修改的节点与规则
+
+- `freeze`、`revision`、`q-inheritance`、`gates`：删除仅九个合同节点的哈希投影、九节点内错字一律大改、只在其他节点出现即视为遗漏的旧规则，改为完整写入最新第 6.5 节。哈希覆盖全部需求、连接、所有节点的规定定义字段和 `childIds`、验收器定义字段、全部正常走查与失败路径；只排除已指定的进度、运行和出处字段。按 Blueprint 原有顺序组成对象，再以键排序、UTF-8、无多余空白的规范化 JSON 计算 SHA-256，不解析引用或人工抽取“语义片段”。
+- `revision`、`q-inheritance`：保留至多两个既有节点等窄范围条件，将旧的“哈希必须不变”改为第 6.5 节规定的相等或完整继承链核验。哈希变化只说明定义内容变了，不自动等于大改。D1 的小修继承记录包含 `from_semantic_hash`、`to_semantic_hash`、字段级差异、逐条等价理由和新 D5 结果。其余小修限制、前后告知及原读者记录的有效范围不放宽。
+- `dispatch`、`freeze`、`sign`：当前哈希须等于获批值，或从获批值出发沿完整继承链到达当前值。链条断开、任一记录不符合第 5.1 节条件或经过大改记录，都拒绝派发并退回 D1；验收条款和反例同步。首次冻结五步与内容快照、定义哈希、完整文件三个身份的分工继续保留。
+- `sign`：使用本次提交第 7.5 节全文，删去分单元签发许可，0.1 只支持对整个冻结范围一次签发；确需分批交付时，在设计阶段拆成多个各自冻结和签发的任务。十三项签发清单仍保留。
+- `state`、`dispatch`、`sign`、`evidence`：写入签发后复核的两个动作与维持、撤回分支。先登记新事实、暂停对外交付声明，`phase` 从 `delivered` 回 `delivery`，`step=X1-review-release`，暂保留原 `delivery.release_ref`；X1 核对后决定 `upheld` 或 `revoked`。维持则回 `delivered`；撤回则当前签发引用置 `null`、指定证据标 `stale`，进入 `X1-repair`，命中五类设计退回条件才进入 `X1-design-return`。原签发永不改写、永不删除；按正常返修重验后新签发的 `supersedes` 指向被撤回签发。
+- `record-check`：允许记录种类增加 `revocation`，核对 `release_ref` 指向的签发确实存在；验收中增加字段、决定值及引用错误的反例。入口仍只读，不代 X1 决定维持或撤回。
+
+不可变记录路径为 `delivery/revocations/<revocation_id>.json`，字段原样写入：`schema_version:"assurance-revocation/0.1",revocation_id,task_id,release_ref,decision,trigger_ref,evidence_refs,invalidated_evidence,reason,decided_by,decided_at`；`decision` 只取 `upheld` 或 `revoked`。本次没有实际生成这些业务记录，只更新设计。
+
+`q-checker`、`role-X1`、`minimum`、`q-capacity` 只随本轮 D1 来源提交更新引用，没有改变其检查器、交接、冻结前禁实现或容量决定。合并稿依据定位统一更新到本轮提交，其他历史依据和固定检查器提交保持原样。
+
+连接 `c-q-inheritance-to-revision` 同步传递完整继承链及所需字段。新增 `fail-revocation`，检测组件和单步路线均为既有 `sign` 节点；情景直接取自 D1 的“签发后出现可能推翻原签发结论的新事实”，收场照录暂停、维持或撤回的既定流程，配套 `v-fail-revocation` 的反例注入和用户可见结果。未新增角色、分单元状态或额外决策。
+
+当前数量为 54 个节点、14 条需求、48 条连接、4 条正常走查（22 步）、10 条失败路径（21 步及 10 段整体说明）、12 条依据记录。验收器由 63 增至 64，全部仍为 `not-run` 且运行记录为空；`versions: []` 保持不变。
+
+### 受影响的全部复述单位
+
+用固定检查器 `content/readability.ts` 的实际 `readerHash`，与本轮开始时 HEAD 中的 JSON 比较六项读者文字。5 个原有单位的哈希改变，新增撤回路径有 2 个新单位，完整清单如下：
+
+| 复述单位 id | 类型 | 修改或新增内容 |
+| --- | --- | --- |
+| `ws-state` | 正常步骤 | `expectedResult` |
+| `ws-dispatch` | 正常步骤 | `expectedResult` |
+| `wr-contract` | 正常步骤 | `expectedResult`、`onError` |
+| `wr-owner` | 正常步骤 | `exampleData` |
+| `wr-sign` | 正常步骤 | `action`、`expectedResult`、`onError` |
+| `fail-revocation-whole` | 失败路径整体收场 | 新增，六项读者文字均需复述 |
+| `fail-revocation-step-1` | 失败步骤 | 新增，六项读者文字均需复述 |
+
+原有另外 46 个单位的读者文字哈希未变。上述 7 个单位须交新的独立读者复述；不能沿用旧文字通过记录，也没有在本轮合成读者记录。
+
+### 本轮检查与文件身份
+
+检查器工作树保持 `fix/draft-check-tier-20261111`，提交为 `c05edcf51bc93f8be82180fd4ad28a250937f195`。加载已有 `nodejs/24.16.0` 后，离线、在线草稿档各实际运行一次；仅检查器运行时写其既有缓存报告，未修改检查器源码。变量代表用户指定的工作树，实际调用传入 JSON 的绝对路径，公开文件不记录本机路径。
+
+```bash
+module load nodejs/24.16.0
+cd "$BLUEPRINT_WORKTREE/content"
+npx tsx check.mjs --stage draft --offline "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+```
+
+| 本轮检查 | 退出码 | 确定缺口 | 人工解释待审 | 未完成项 |
+| --- | ---: | ---: | ---: | ---: |
+| 离线草稿 | 2 | 0 | 92 | 3 |
+| 在线草稿 | 2 | 0 | 92 | 2 |
+
+离线检查时间为 `2026-11-11T17:57:41.161Z`，未完成项为离线未核实来源、缺 `readability-review.json`、缺 `questions.json`。在线时间为 `2026-11-11T17:58:29.467Z`，只剩这两份读者记录缺失。两次均无确定内容缺口，但退出码 2 仍不能记完整通过；92 项人工解释未当作独立审阅已完成。本轮没有实施或运行插件的哈希核验、签发、维持、撤回逻辑。
+
+新 JSON 的 SHA-256：
+
+```text
+1b2ff929979962afba3019b47126f2405d726c488d5f16bf419e25bb9759aced
+```
+
+本轮只修改 `blueprint.json` 并在本说明追加记录；原规格和裁决文件未改，未 commit、未 push、未切分支。新改动尚无提交号，仅以本轮 HEAD 加路径和上述文件摘要标识，不声称这些改动已写进该提交。公开信息按原正则自查，新 JSON 和整份说明匹配数均为零。没有需要 D1 追加决定的事项，尚待实际读者记录和规定关卡。
