@@ -1,6 +1,6 @@
-# Research presentation TODO candidates — CAT-TRACE v2 review, 2026-08-27
+# Research presentation TODO candidates — a private research project v2 review, 2026-08-27
 
-本文件只记录 **可泛化到其他科研 PPT** 的候选规则，不记录 CAT-TRACE 项目本身的科学决定。它是 `research-presentations/TODO.md` 的补充候选，后续通过正常 reviewed-handoff / consolidation 再决定哪些进入 active skill、shared QA、template primitives 或 regression tests。
+本文件只记录 **可泛化到其他科研 PPT** 的候选规则，不记录 某私有统计研究项目 项目本身的科学决定。它是 `research-presentations/TODO.md` 的补充候选，后续通过正常 reviewed-handoff / consolidation 再决定哪些进入 active skill、shared QA、template primitives 或 regression tests。
 
 ## 1. 统一的文字层级与 sentence case
 
@@ -60,7 +60,7 @@
 - [KEEP_BACKLOG] Metrics 不得只写成逗号分隔术语串，也不推荐 `Metric — explanation` 的长横线列表。优先使用 compact table；指标很少时可用 `Metric ↑/↓ (meaning)` 的括号结构。
 - [KEEP_BACKLOG] 指标方向直接写在 metric label 中，参考 CVPR 等论文常见表格形式，例如 `PSNR ↑`, `SSIM ↑`, `MAE ↓`, `RMSE ↓`。这比额外写“higher is better”更紧凑。
 - [KEEP_BACKLOG] 对 coverage 这类不是单调越高越好的指标，用 target notation，例如 `Coverage -> 95%` / `Coverage ≈ nominal`，不要误写 `↑`。
-- [KEEP_BACKLOG] 多个同类指标不机械重复方向。例如 `Discovery RMSE ↓` 可在同一行/同一 group 下列 `total / catalogue / open-tail` 三个对象。
+- [KEEP_BACKLOG] 多个同类指标不机械重复方向。例如 `RMSE ↓` 可在同一行或同一组下列出不同评价对象。
 - [KEEP_BACKLOG] 推荐 table columns：`Metric | What it checks`。说明必须回答“这个指标对应什么统计性质”，例如 point-prediction error、probability quality、rare-positive ranking、uncertainty calibration，而不是把定义扩写成教科书段落。
 - [KEEP_BACKLOG] 多指标必须各有必要性。若两个 metric 都回答同一问题且不会改变方法判断，应删掉一个。
 
@@ -82,7 +82,7 @@
 - [KEEP_BACKLOG] Main theory coverage map 至少列：problem、formal statement、closest baseline、what is genuinely new、proof status、是否进入主 deck。
 - [KEEP_BACKLOG] 一个统计方法组会若理论是主贡献，主 deck 不应只展示一个孤立 theorem；应覆盖支撑主要 novelty 的 2–4 个 formal guarantees，但简单定义/partition identity 不得包装成 theorem。
 - [KEEP_BACKLOG] 如果 proof 尚未完成，不用 `Proof idea` 填充空间。可以先准确展示 theorem/proposition statement 和 logical relationship，proof 完成后再加入真正可讲的 proof slide。
-- [KEEP_BACKLOG] Theory slide title 可以直接写 formal claim，例如 `Each marked tail has a finite richness limit`，而不是 `Why this matters` / `Theory result 1`。
+- [KEEP_BACKLOG] Theory slide title 可以直接写 formal claim，例如 `The estimator remains stable under the stated assumptions`（合成示例），而不是 `Why this matters` / `Theory result 1`。
 
 ## 11. Discussion question 的生成责任
 

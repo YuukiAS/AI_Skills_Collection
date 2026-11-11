@@ -29,7 +29,7 @@ Recent real-use failures occur at different levels:
 
 - the 050 scientific rewrite can preserve facts but still read like a bilingual research memo when ordinary English abstractions carry the sentence skeleton;
 - a Distributed Imaging advisor report can contain the right experiments yet fail because it narrates execution order and internal labels instead of rebuilding the document around the scientific decision;
-- a CAT-TRACE deck can have individually acceptable sentences and pages yet fail because first-use context, page jobs, adjacent-slide transitions, or whole-deck rhythm are weak.
+- a private research project deck can have individually acceptable sentences and pages yet fail because first-use context, page jobs, adjacent-slide transitions, or whole-deck rhythm are weak.
 
 All three artifacts need “说人话”, but the defect owner is different. A language-layer repair cannot fix a wrong report plan or a wrong slide sequence, and a presentation plugin should not fork a second Chinese-writing rule set.
 

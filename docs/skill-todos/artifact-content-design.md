@@ -13,15 +13,15 @@ Future standalone capability for deciding what a reader-facing artifact should v
 
 ### Cross-artifact content restraint and whitespace
 status: NEW
-source: repeated user feedback across DII Notion, generated images and product/UI artifacts; CAT-TRACE Numerical Atlas full-copy audit and user acceptance, 2026-10-27
-evidence: `YuukiAS/AI_Research_Toolkit` branch `research/complex-system-showcase-20261026-r2-comparison`, `docs/history/notion/distributed-imaging-inference-version-history-2026-10-24-to-2026-10-27.md`; `YuukiAS/CAT-TRACE` branch `feat/numerical-atlas-20261023`, commits `f9ff1b8c530ad8dd749bb0b1396cdd41c0303108` and `cb5d1907fc24b1923c8f6a9e6dcbae5a92b40ed1`, `apps/numerical-atlas/docs/copy-audit/COPY_AUDIT_20261027.md`
+source: repeated user feedback across DII Notion, generated images and product/UI artifacts; a private research project Numerical Atlas full-copy audit and user acceptance, 2026-10-27
+evidence: `YuukiAS/AI_Research_Toolkit` branch `research/complex-system-showcase-20261026-r2-comparison`, `docs/history/notion/distributed-imaging-inference-version-history-2026-10-24-to-2026-10-27.md`; 另一私有项目的界面文案反馈（原始材料留在私有项目仓库，此处不保存）
 problem: Different artifact types repeatedly become over-authored even when the underlying content is correct. The model adds explanatory text, labels, guidance, metadata, sections or decorative structure after the user already has enough information to understand or act. The missing capability is not ordinary prose polishing or low-level rendering; it is deciding what should be visible at all, at what granularity, and when the artifact should stop explaining and leave space.
 scope examples: Notion/project pages, UI, generated visual artifacts, documents and presentations where content selection and visual restraint matter before final rendering.
 boundary: Clear Writing owns prose quality; product-ui-copy owns interface wording; research-writing owns research-document semantics; presentations and visualization own their domain composition; renderers own faithful layout. This future capability should not silently absorb those responsibilities.
-project-specific context: DII page history and current Notion cleanup are evidence only. CAT-TRACE method identities, formulas, accepted-versus-candidate method boundaries and unpublished-data boundary are also project-specific. Do not encode either project's sections, terminology or research workflow as generic behavior.
+project-specific context: DII page history and current Notion cleanup are evidence only. a private research project method identities, formulas, accepted-versus-candidate method boundaries and unpublished-data boundary are also project-specific. Do not encode either project's sections, terminology or research workflow as generic behavior.
 next research step: product shape is now fixed as a shared standalone Skill. Formal design should define the smallest reusable pre-production content-admission contract, the post-render whole-artifact review behavior, and how existing artifact-producing plugins consume it without duplicating domain-specific semantics. Do not implement production behavior until that bounded design and its consumer contract are reviewed.
 
-#### Accepted real-use evidence: CAT-TRACE Numerical Atlas
+#### Accepted real-use evidence: a private research project Numerical Atlas
 
 A rendered-state inventory covered 11 routes plus desktop, mobile, filtering, selection, expansion and primary interaction states. It found 420 unique baseline copy units. The final checklist contained 423 disposition rows: 360 `KEEP`, 52 `REVISE` and 11 `DELETE`; the accepted render contained 403 unique visible copy units.
 
@@ -64,15 +64,11 @@ If no, the artifact is still in production, not ready for user acceptance.
 ### Accepted real-use evidence: expert scientific figures should remove redundant defensive disclaimers
 
 status: NEW
-source: CAT-TRACE advisor-facing group-meeting figures, 2026-10-28
-evidence: `YuukiAS/CAT-TRACE` results under `results/group-meeting-core-progress-20261028/`; user review of the final predictive-calibration and zero-slot numerical figures
+source: a private research project advisor-facing group-meeting figures, 2026-10-28
+evidence: 私有项目图稿的用户反馈；原图留在私有项目仓库，此处不保存
 problem: A scientifically correct figure can still be weakened by adding defensive caveats that merely repeat information already encoded in the title, subtitle, axes, or surrounding oral narrative. In expert-facing research communication, these lines can make the artifact look as though it is written for an inexperienced reader or for a hostile reviewer rather than for a knowledgeable advisor. The defect is not wording quality and not plotting accuracy; it is incorrect visible-content admission.
 
-Concrete CAT-TRACE case:
-
-- Figure 1 already stated `360 synthetic columns; 64 supplied parameter draws; 20,000 future replicates per column`. The footer `Validation conditional on supplied parameter draws; not fitted-model recovery.` was factually correct but redundant for the intended advisor audience and should be removed from the figure.
-- Figure 2 already stated `Deterministic scan with p_g = m_g = 1000 and q = 0`. The footer `Fixed-parameter numerical diagnostic; not fitted ecological data.` was likewise factually correct but redundant and should be removed.
-- By contrast, the in-figure note `Production integrator not yet selected` should remain. It communicates a live research-state boundary that materially changes interpretation of the result: the failure of ordinary local Laplace has been demonstrated, but the replacement method has not yet been chosen.
+公开安全摘要：图题和坐标已经说明的信息，不必再以防御性脚注重复；会改变结论理解的限制则需要保留。原图、具体数值和研究状态留在私有项目仓库，此处不保存。
 
 General lesson to research:
 
@@ -364,12 +360,8 @@ A future implementation should be tested on whether it can:
 
 The DII Notion case is evidence for this distinction, not a Notion-specific specification. Formal architecture research should test the same judgment across other artifact classes before deciding ownership or implementation.
 
-### CAT-TRACE explainer admitted accurate but reader-irrelevant project metadata into the main artifact
+### 私有技术讲解让内部记录挤占了正文
 status: NEW
-source: CAT-TRACE framework explainer user rejection, 2026-11-11
-evidence: exact rejected Markdown preserved at \`docs/provenance/CAT_TRACE_FRAMEWORK_EXPLAINED_ZH_REJECTED_2026-11-11.md\`; source artifact was \`YuukiAS/CAT-TRACE@docs/cat-trace-explainer-20261110\` \`docs/explainer/CAT_TRACE_FRAMEWORK_EXPLAINED_ZH.md\`.
-problem: The first page admitted visible content such as the document's internal purpose statement, authoritative commit, implementation-source branches and a disclaimer that no statistical programs had been rerun. These statements were accurate and useful to the authoring process, but the user had asked for an independently readable technical guide and had not asked to see repository provenance in the reader path. The same over-admission continued later through a large current-function/file table, internal C-stage identifiers and branch-specific failure narratives.
-problem: The artifact also underused higher-value visible structures. The reader needed an immediate complete formulation, a notation table, a prior table and direct comparisons between parallel model components; instead, those facts were dispersed through prose while lower-value traceability metadata consumed prominent space. This is a content-admission failure before it is a wording or rendering failure.
-artifact-content lesson to retain as evidence: Truthful information does not automatically earn main-text space. For a reader-facing technical guide, provenance, file/function locators, branch status and implementation incidents should usually be DEMOTE/LINK/REMOVE unless the reader needs them to understand or act. Conversely, a notation table, prior table, side-by-side component comparison or semantic diagram may deserve VISUALIZE/KEEP because it materially reduces reconstruction effort. The artifact-level pass should decide these visibility outcomes before prose polishing and rendering.
-project-specific context: The CAT-TRACE commit/branch names, C-stage labels and exact model components are local evidence. Artifact Content Design is still a future standalone capability under study, not a released plugin; this entry records real-use evidence in its canonical skill TODO and does not authorize a production implementation.
-
+source: 某私有统计研究项目的技术讲解返修反馈，2026-11-11。
+evidence: 被拒稿件原文留在私有项目仓库，此处不保存。
+problem: 首页先放用途声明、版本依据、代码位置与执行说明，读者真正需要的概念对照和阅读结构却分散在后文。信息准确不代表适合放进正文：正文优先保留帮助读者理解和行动的内容，内部记录移到附录或省略；必要的对照表与语义图应直接帮助阅读。这里只记录内容取舍和版式问题，不保存模型、公式或私有定位，也不授权新的生产实现。

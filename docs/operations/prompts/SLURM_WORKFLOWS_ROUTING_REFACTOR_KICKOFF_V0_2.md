@@ -115,7 +115,7 @@ Ordinary non-force push to the exact reviewed branch is authorized.
 
 After final gates and Critic approval, ordinary non-force integration of the exact reviewed final candidate to `main` is authorized only if main has no relevant conflicting semantic drift. No force push.
 
-Do not modify Longleaf_Bridge, Bridge Kit, CAT-TRACE/CARE product logic, other standalone Skills, or central Plugin topology.
+Do not modify Longleaf_Bridge, Bridge Kit, private-project/CARE product logic, other standalone Skills, or central Plugin topology.
 
 Final report must include:
 

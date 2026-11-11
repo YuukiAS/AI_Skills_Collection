@@ -7,11 +7,11 @@ Canonical maintenance inbox for the `research-writing` plugin.
 
 ### 写给研究者本人的科研学习笔记：技术摘要不能替代推导与理解
 status: NEW
-source: CAT-TRACE / Notion `Modules > C01: 数值内核`；2026-10-14 用户提供三份按时间顺序的完整草稿及三张亲自手写批注的截图。
-evidence: 本次对话内的 C01-A/C01-B 第一、第二、第三版完整文本与手写截图。当前 Notion 页面对应第三版附近的内容；连接无法直接取回原生版本历史，三个早期/中期文本来自用户明确提供，不能再把「无法读取历史」作为不比较的理由。原文和截图是私人研究材料，不复制到中央仓库。
+source: 某私有统计研究项目的 Notion 技术学习页；2026-10-14 用户提供三份按时间顺序的完整草稿及三张亲自手写批注的截图。
+evidence: 本次对话内的 两组技术小节 第一、第二、第三版完整文本与手写截图。当前 Notion 页面对应第三版附近的内容；连接无法直接取回原生版本历史，三个早期/中期文本来自用户明确提供，不能再把「无法读取历史」作为不比较的理由。原文和截图是私人研究材料，不复制到中央仓库。
 problem:
 - 写作任务是作者本人学习和日后复习：理解为什么提出一个数学量、它如何从前一步推出来、问题在哪些情形出现、为什么相应表达式或近似有效；不是给导师看的进展报告、执行级方案摘要或版本审查记录。阅读者已具备部分专业背景，不应机械从零铺课，也不能省掉其标注的关键推导。
-- 第一版按「作用—数值问题—三段算法—验证与实现」组织。C01-A 直接给逆 Mills 比率及一、二阶导数结论，C01-B 直接给牛顿方程、Cholesky 用途和拉普拉斯积分公式；相关「为什么」和计算中间环节几乎没有。材料能概括决策，不能帮助作者重建理解。
+- 第一版按「作用—数值问题—三段算法—验证与实现」组织。第一组技术小节 直接给逆 Mills 比率及一、二阶导数结论，第二组技术小节 直接给牛顿方程、Cholesky 用途和拉普拉斯积分公式；相关「为什么」和计算中间环节几乎没有。材料能概括决策，不能帮助作者重建理解。
 - 第二版增加概率/密度定义、极端负尾与对数运算的具体数字、一维牛顿法类比、Mills 比率辨析等，确有进步，但仍直接陈述关键求导结果，跳过 `expm1` 稳定差值的代数变形，未用众数处二阶泰勒展开真正连接拉普拉斯正态近似。增加术语、例子和字数不等于恢复推导链。
 - 第三版首次明确写出复合函数、商法则、梯度泰勒展开和众数处二次展开，实质吸收了用户标注的知识链，不能与前两版笼统算成同等失败。仍可见需要进一步解释的接续点（如为何有 `expm1` 表达式、补偿求和的直觉、相关曲率度量的意义）；「已实现与验证」、测试路径和边界应服从笔记用途，不反过来主导文章。第三版尚无用户明确通过的证据。
 - 用户的手写箭头、公式、例子与边注是理解需求和缺失环节的线索，不是需要逐字贴进稿件的素材，更不应生成「手写笔记指出」这样的元叙事。应先理解这些标记提出了哪些问题，再在正文中自然回答，并保持重要数学推导、符号关系和最终可渲染表达完整。
@@ -20,39 +20,20 @@ problem:
 project-specific context: probit 下尾、逆 Mills 比率、单列牛顿法、Cholesky 与拉普拉斯近似只是本次学习笔记的真实例子；它们的具体数学内容不是跨学科固定提纲。这是有逐版文本证据的研究写作反馈；尚未核实三版由正式安装的 Research Authoring 正常入口产生，不能直接称为已发布插件的生产回归。先由后续中央维护者与已有读者任务、表达保真 TODO 去重，再决定是否需要正式能力变更与验收。
 
 
-#### 2026-10-21：CAT-TRACE 全零物种积分解释的好坏对照（用户确认可作为写作案例）
+#### 2026-10-21：逐节技术解释的好坏对照
 
 feedback_status: NEW / USER_CONFIRMED_POSITIVE_EXAMPLE
-source: CAT-TRACE 2026-10-20–21 对话；用户上传的《CAT-TRACE 匿名零槽位计算架构导读》PDF 第 3 节；随后就“拉普拉斯近似为什么会漏掉全零列信息”的逐节中文解释。
-evidence: 用户明确反馈新版解释“算是讲清楚这个问题”，并指出“没有你的说明我看不懂原来的第三节”；用户授权将此次回答当作好例子、旧回答当作坏例子。材料属私人项目，中央公开仓库只保留以下最小、去项目数据化的文字片段和写法差异，不复制整个对话、PDF 或截屏。
-reader/task: 有统计学基础、正在深入理解自己研究方法的作者；目标是能重建“为什么需要改变一个积分算法”的因果和数学链，而不是审阅进度、证明/实现状态或只获得摘要。
+source: 某私有统计研究项目的技术学习讨论，2026-10-20–21。
+evidence: 用户确认逐节解释帮助其理解原先读不懂的材料。原回答、公式、数值和截图留在私有项目仓库，此处不保存。
+reader/task: 有专业背景、希望日后能沿笔记重建推理的作者。
 
-**反例（原文档第 3 节的表达模式，内容未必错，但跳步）：**
-> “对于稀有开放尾部的全零列，后验众数通常落在非常负的截距区域。众数附近的列全零似然几乎是 1，曲率也显得‘平静’，于是普通局部拉普拉斯可能估计 \(I_g\approx1\)。”
-> “然而决定 \(1-I_g\) 的是先验与似然中较远的一小片……概率质量。”
+失败写法先堆结论与术语，关键推导只留名称。被认可的写法先解释具体问题，再说明相邻步骤为何成立，最后给出必要的适用边界。章节收尾应自然交代已解决什么，以及为什么需要下一节；不能机械追加“下一节我们将”。读者能否复述推理关系，比长度或公式数量更能说明是否讲清。
 
-为什么读者仍不懂：前一节刚定义概率积分，随即跳到“众数、局部曲率、远尾质量”；没有说明零列在数据上长什么样、为什么截距为负、先验离散度允许什么样的物种、众数附近的正确局部判断与整个积分有何不同，也没有先解释为何单槽位小误差可放大成多列的显著证据。再跟一个技术表述和数值结论，并不能代替这些桥梁。
-
-**正例（本次被用户认可的解释路线，摘取可复用的教学结构）：**
-1. 从“调查 100 个地点，一种潜在真菌一次没出现”开始，让读者先判断这说明截距可能很负。用模型里截距先验的**中心和离散程度**强调：随机物种并不都具有同一个极负截距。
-2. 比较两个具体截距取值：极负截距意味着 100 次全零几乎必然；较不负但仍可能的截距意味着有实质机会被发现。读者先理解“最可能的物种参数”与“按整个参数分布加权的概率”不是一回事，再引入积分 \(\int P(0_n\mid\alpha)p(\alpha)\,d\alpha\)。
-3. 说明单个潜在物种即使约 98.45% 概率全部为零，仍有约 1.55% 概率在样本中出现；在**给定共享参数且列条件独立**的示例下，1000 个这样的潜在物种全零对应约 \(1.63\times10^{-7}\) 的联合概率。于是读者才明白：局部近似若把单列全零概率误当成 1，就会丢掉整个群体对共享稀有程度的约束。
-4. 最后才解释拉普拉斯为什么失败：局部峰值附近或许近似得好，但计算这一特定**边际似然积分**需要远离峰值的小块概率质量；别把此反例直接推广为前人论文的**条件后验近似抽样**也已经出错。
-
-**应推广的写作规则：**面对“个人科研学习笔记”，优先回答读者实际卡住的那个桥梁：具体观测场景 → 两个可能参数状态 → 计算目标的不同 → 完整数值效应 → 公式和条件 → 适用边界。只有数学上必须显示的式子才独立排版；对已具备背景的读者不重新铺一门基础课。若某个式子需要读者自己补上“为什么从上一行可以到这一行”，该段仍不合格。文字长短不是验收依据；用户实测能否复述因果关系才是。
-
-**不应误判：**本例是用户认可的聊天解释，并非已证明正式 Research Authoring 插件正常调用或通过自动回归；也不能将这一个数学主题写死为通用模板。它补充本条已有的“学习笔记推导链”问题，不另立重复 TODO，不更改插件发布状态。
-
-**2026-10-21 follow-up — preserve the accepted explanations and their section-to-section handoff:**
-- 用户再次明确认可逐节讲解中“接下来第 X 节要回答什么”这种结尾，因为它让人理解当前小节解决了哪一个问题、为什么下一个问题自然出现，而不只是机械翻页。
-- **可复用写法：**每一节开始先提出该节必须解决的读者疑问；讲透关键直觉与推导；结尾简短收束已经解决的疑问，再点出一个尚未解决、正好交给下一节回答的问题。过渡必须从数学/科学逻辑中产生，不要在所有段落末尾自动套一句“下一节我们将……”。
-- **真实例子：**第 3 节先说明局部拉普拉斯漏掉罕见发现概率的原因，结尾自然提出“既然截距尾部不容易近似，能不能准确积分掉截距？”；第 4 节利用最大值事件解析消去截距，结尾留下“最大值本身随机，能否求出它的分布？”；这使第 5 节的研究问题在阅读前就已经明确。
-- **私人全文定位：**作者批准把上述两节的原回答（仅把对话界面数字卡片改排为 Markdown 表格）存于私有仓库 `YuukiAS/CAT-TRACE/docs/model/catalog_aware/CAT_TRACE_ZERO_SLOT_SECTIONS_3_4_READER_EXPLANATIONS_20261021.md`。该路径是私人证据定位；不可从中央公开仓库复制原文、构建公开镜像或公开附件。
-- **用户反馈状态：**这些自然过渡属于被认可的正面写作案例；它只支持“这样的解释更易于个人科研学习”，不是一个固定标题模板，也不是 Research Authoring 已发布功能的自动化验证。
+这仅是用户认可的聊天解释，尚未证明正式插件正常调用或自动回归通过，不改变发布状态。
 
 **2026-10-28 follow-up — two additional failures in a self-study numerical-methods note:**
 
-本次反馈来自同一私人 CAT-TRACE 项目的 Notion 学习页《CAT-TRACE 数值方法地图：从 bigMVP 到匿名零槽位》。用户要求页面帮助本人复习 numerical analysis、bigMVP 与当前模型计算。以下只记录可泛化的写作失败，不复制私人页面全文或截图。
+本次反馈来自同一私人 该项目 项目的 Notion 学习页技术学习页。用户要求页面帮助本人复习 numerical analysis、bigMVP 与当前模型计算。以下只记录可泛化的写作失败，不复制私人页面全文或截图。
 
 **Failure A — citation/link substitution for explanation**
 - 第一版出现类似“你在某课程页学过节点与正交多项式的关系；某代码页记录了 Golub–Welsch”的句子，但正文没有真正解释这条关系。读者若想知道“为什么 Gaussian quadrature 节点是正交多项式的根、Jacobi 矩阵怎样产生节点和权重”，仍被迫在多个 Notion 页面之间来回跳转。
@@ -87,7 +68,7 @@ Y_j\to h_j(\theta_j)\to\widehat\theta_j\to H_j\to N(\widehat\theta_j,H_j^{-1}).
 
 **2026-10-28 Notion-specific follow-up — author-facing research notes need a separate production/QA contract**
 
-本轮继续在同一私人 CAT-TRACE Notion 学习页上发生多次返工。这里记录的不是数学内容，而是 **Research Authoring 将“写给作者本人长期复习的科研笔记”交付到 Notion 时**应遵守的页面级规则。
+本轮继续在同一私人 该项目 Notion 学习页上发生多次返工。这里记录的不是数学内容，而是 **Research Authoring 将“写给作者本人长期复习的科研笔记”交付到 Notion 时**应遵守的页面级规则。
 
 **Observed uncertainty — do not overclaim the root cause**
 - 用户在 Notion App 截图中看到标题、公式和正文块串台，例如上一节公式后突然接入下一节标题或旧块内容；连接器 fetch 返回的线性文本一度看起来顺序正常。随后用户查看网页端时又认为页面“好像倒是好了”。
@@ -100,7 +81,7 @@ Y_j\to h_j(\theta_j)\to\widehat\theta_j\to H_j\to N(\widehat\theta_j,H_j^{-1}).
 - Notion 的优势是可导航、可折叠、可持续更新；不能反过来用大量 cross-link 逃避正文解释。
 
 **Rule 2 — design the heading tree before writing blocks**
-- 先确定少量顶层 section，再把方法挂到相应父节。例如“数值积分基础 → Gaussian quadrature 家族 → Laplace → CAT-TRACE 匿名积分候选 → 优化/线性代数 → 数值误差 → Monte Carlo/MCMC → 总表 → 来源”。
+- 先确定少量顶层 section，再把方法挂到相应父节。例如“数值积分基础 → Gaussian quadrature 家族 → Laplace → 项目中的候选方法 → 优化/线性代数 → 数值误差 → Monte Carlo/MCMC → 总表 → 来源”。
 - 不允许每出现一个算法就直接升级成新的顶层标题，否则 TOC 变成算法清单，读者看不出概念关系。
 - 交付前必须检查最终 TOC，而不是只检查正文文本：顶层编号连续；子节只挂在所属父节；总结表和来源位于末尾；不存在旧标题残留或重复编号。
 
@@ -573,13 +554,8 @@ problem:
 - Therefore do not add another synonymous "do not change accepted content" policy and do not assume the mere existence of rules proves they were consumed. A central maintainer must establish which actual HW1 executor entry loaded the active contracts, what baseline identity and permitted edit scope reached the renderer, why unrelated pagination was not caught or escalated, and how an unaccepted artifact reached `final-release/`. Distinguish an intentionally necessary full-source compilation from an **unauthorized change to the full rendered artifact**.
 project-specific context: the original seven-page layout, R/Python route names, Q2(b) list details, header wording and local `final-release/` structure belong to STAT5060 HW1. Seven pages is an accepted *case-specific baseline*, not a universal page-count rule for research/assessment PDFs. This raw feedback does not modify the ongoing 059 frozen implementation plan, approve a new plugin design, or claim a verified fix.
 
-### CAT-TRACE explainer failed to present the canonical formulation before implementation detail
+### 私有技术讲解的正文组织未满足读者需求
 status: NEW
-source: CAT-TRACE framework explainer user rejection, 2026-11-11
-evidence: exact rejected Markdown preserved at \`docs/provenance/CAT_TRACE_FRAMEWORK_EXPLAINED_ZH_REJECTED_2026-11-11.md\`; source artifact was \`YuukiAS/CAT-TRACE@docs/cat-trace-explainer-20261110\` \`docs/explainer/CAT_TRACE_FRAMEWORK_EXPLAINED_ZH.md\`.
-problem: The task explicitly required the document to begin by completely restating the repository's frozen CAT-TRACE formulation. The delivered artifact instead opened with a broad narrative and distributed the scientific specification across many later sections. There was no early notation table that let the reader recover all symbols in one place, no compact prior table adjacent to the formulation, and no single canonical block that let the reader reconstruct the full model before entering computation. Closely related objects such as catalogue and open-tail slope structures were explained in separate prose passages instead of being directly compared when comparison was the reader's task.
-problem: The main narrative then spent substantial space on repository implementation/status material: internal stage names such as C01/C03/C09, function/file names, branch-specific numerical incidents, exact failure histories and implementation-state caveats. Those facts can be useful for traceability, but they displaced the requested scientific tutorial. The user wanted the currently agreed complete model and computation explained to the project author; implementation locators and historical incidents should normally move to an appendix, supplementary implementation note or traceability section unless they materially change understanding of the method.
-research-authoring responsibility exposed by this case: Before prose drafting, freeze the document's reader job and a content architecture that answers it. For a technical model explainer, that can require a canonical formulation block, notation/prior quick reference, side-by-side comparison of structurally parallel model components, then computation organized by scientific object and purpose. Main-text versus appendix/supplement placement is a research-document authoring decision and should be settled before Clear Writing polishes wording or a renderer lays out pages.
-project-specific context: CAT-TRACE's formulation, priors, catalogue/open-tail structure and implementation incidents are project-specific. The generic issue is research-document composition: a technically accurate explainer can still fail if canonical scientific content is fragmented while provenance, code locators and incident history occupy the reader's primary path.
-additional real-use evidence, 2026-11-11: After the first rewrite, the user accepted the new formulation/notation/prior direction but rejected a second authoring habit: technical section titles and topic sentences repeatedly framed material as tutorial questions such as “why use X” or “how does Y work”. For this reader, that pattern makes a mature technical guide sound like an FAQ or lecture script and adds unnecessary interrogative/negative framing. The requested style is declarative and purpose-bearing: state the method or object first, then the problem it solves or role it plays, e.g. “Newton–Laplace for single-column probit inference” rather than “Why does single-column probit use Newton–Laplace?”. This is broader than one heading: Research Authoring should choose declarative section jobs across the whole document and reserve explicit questions for genuine research questions or decision points, not routine exposition.
-
+source: 该项目的技术讲解返修反馈，2026-11-11。
+evidence: 被拒稿件原文留在私有项目仓库，此处不保存。
+problem: 正文先讲内部实现与历史记录，关键定义和说明分散在后文，读者无法顺着文章建立完整理解。需要先明确读者要解决的问题，集中说明必要定义，再展开计算或实现；相关对象应就近比较。常规章节用直接说明内容和用途的标题，避免把整篇技术说明写成连续问答。这里仅保留文档组织问题，不保存公式、模型细节或仓库定位。

@@ -198,7 +198,7 @@ regular Chat 无法调用、只能 Work/Codex 或无法消费 current thread con
 
 用户介入前完成：
 
-- CAT-TRACE：后期冻结决定覆盖早期探索，superseded route 不复活；
+- 某私有统计研究项目：后期冻结决定覆盖早期探索，superseded route 不复活；
 - CardiacNexus：代码/pipeline/实验数字主要重新读 repo，handoff 只传最近判断/open question/下一步；
 - 不 hardcode DII/CARE；
 - 不依赖 Bridge Kit。
@@ -272,7 +272,7 @@ results/science-communication--project-thread-handoff/target-surface-acceptance.
 results/science-communication--project-thread-handoff/review.md
 ```
 
-不得公开提交 DII/CAT-TRACE/CardiacNexus 私有 thread 全文。Target-surface receipt 只写最小非敏感
+不得公开提交 DII/private-project/CardiacNexus 私有 thread 全文。Target-surface receipt 只写最小非敏感
 PASS/FAIL、candidate identity、surface 与 invocation entry。
 
 ## 12. Version / README

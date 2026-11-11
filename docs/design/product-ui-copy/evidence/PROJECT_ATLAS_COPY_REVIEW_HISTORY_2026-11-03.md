@@ -47,7 +47,7 @@
 | A-0136 | 全部项目 / 全部项目 / option / `body>select#focus-filter` | 待本人 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
 | A-0158 | 全部项目 / 全部项目 / text / `body>div#content>div>div:nth-of-type(1)>span` | 20 项 · 关注顺序优先 | REVISE | 20 项 · 先显示当前关注 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-0161 | 全部项目 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(3)>span` | 数值路线待定 | REVISE | 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
-| A-0163 | 全部项目 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(5)>span` | 冻结真实数据的协变量合同，再选择零槽积分方法。 | REVISE | 先明确真实数据要固定的协变量，再解决参考 MCMC 可靠性和零槽积分方法，之后才能进入完整模型验证。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
+| A-0163 | 全部项目 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(5)>span` | 明确必要前置条件，再选择下一步方法。 | REVISE | 先明确必要前置条件，再解决当前方法的可靠性问题，之后才能进行完整验证。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-0165 | 全部项目 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(7)>span` | 待本人 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
 | A-0177 | 全部项目 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(11)>td:nth-of-type(5)>span` | 修正旧兼容入口结构，再配置灾备凭据并验收。 | REVISE | 先修复旧设备兼容入口，再配置灾备所需凭据，并实际检查网页迁移入口是否可用。 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
 | A-0191 | 全部项目 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(13)>td:nth-of-type(5)>span` | 补齐测试环境匹配验收，再形成上线决策包。 | REVISE | 先在测试环境完成真实匹配流程检查；确认结果可靠后，再决定是否启用真实匹配。 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
@@ -72,7 +72,7 @@
 | A-0352 | 需要留意筛选 / 全部项目 / option / `body>select#focus-filter` | 待本人 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
 | A-0374 | 需要留意筛选 / 全部项目 / text / `body>div#content>div>div:nth-of-type(1)>span` | 2 项 · 关注顺序优先 | REVISE | 2 项 · 先显示当前关注 | 保留原有界面作用，改成更直接、自然的用户语言。 |
 | A-0377 | 需要留意筛选 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(3)>span` | 数值路线待定 | REVISE | 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
-| A-0379 | 需要留意筛选 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(5)>span` | 冻结真实数据的协变量合同，再选择零槽积分方法。 | REVISE | 先明确真实数据要固定的协变量，再解决参考 MCMC 可靠性和零槽积分方法，之后才能进入完整模型验证。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
+| A-0379 | 需要留意筛选 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(5)>span` | 明确必要前置条件，再选择下一步方法。 | REVISE | 先明确必要前置条件，再解决当前方法的可靠性问题，之后才能进行完整验证。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-0381 | 需要留意筛选 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(7)>span` | 待本人 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
 | A-0386 | 需要留意筛选 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(2)>td:nth-of-type(5)>span` | 修正旧兼容入口结构，再配置灾备凭据并验收。 | REVISE | 先修复旧设备兼容入口，再配置灾备所需凭据，并实际检查网页迁移入口是否可用。 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
 | A-0395 | 需要留意筛选 / text / `body>div#content>div>div:nth-of-type(2)>table>thead>tr>th:nth-of-type(7)` | 本人 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
@@ -86,7 +86,7 @@
 | A-0442 | 47 行容量 / 容量样张 / option / `body>select#focus-filter` | 待本人 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
 | A-0465 | 47 行容量 / 容量样张 / text / `body>div#content>div>div:nth-of-type(2)>span` | 47 项 · 关注顺序优先 | REVISE | 47 项 · 先显示当前关注 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-0468 | 47 行容量 / text / `body>div#content>div>div:nth-of-type(3)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(3)>span` | 数值路线待定 | REVISE | 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
-| A-0470 | 47 行容量 / text / `body>div#content>div>div:nth-of-type(3)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(5)>span` | 冻结真实数据的协变量合同，再选择零槽积分方法。 | REVISE | 先明确真实数据要固定的协变量，再解决参考 MCMC 可靠性和零槽积分方法，之后才能进入完整模型验证。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
+| A-0470 | 47 行容量 / text / `body>div#content>div>div:nth-of-type(3)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(5)>span` | 明确必要前置条件，再选择下一步方法。 | REVISE | 先明确必要前置条件，再解决当前方法的可靠性问题，之后才能进行完整验证。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-0472 | 47 行容量 / text / `body>div#content>div>div:nth-of-type(3)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(7)>span` | 待本人 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
 | A-0491 | 47 行容量 / text / `body>div#content>div>div:nth-of-type(3)>table>tbody>tr:nth-of-type(12)>td:nth-of-type(3)>span` | 0.2 已验收 | REVISE | 0.2 已完成并确认可用 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
 | A-0530 | 47 行容量 / text / `body>div#content>div>div:nth-of-type(3)>table>tbody>tr:nth-of-type(17)>td:nth-of-type(5)>span` | 修正旧兼容入口结构，再配置灾备凭据并验收。 | REVISE | 先修复旧设备兼容入口，再配置灾备所需凭据，并实际检查网页迁移入口是否可用。 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
@@ -113,7 +113,7 @@
 | A-0935 | 当前关注筛选 / 全部项目 / option / `body>select#focus-filter` | 待本人 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
 | A-0957 | 当前关注筛选 / 全部项目 / text / `body>div#content>div>div:nth-of-type(1)>span` | 4 项 · 关注顺序优先 | REVISE | 4 项 · 先显示当前关注 | 保留原有界面作用，改成更直接、自然的用户语言。 |
 | A-0960 | 当前关注筛选 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(3)>span` | 数值路线待定 | REVISE | 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
-| A-0962 | 当前关注筛选 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(5)>span` | 冻结真实数据的协变量合同，再选择零槽积分方法。 | REVISE | 先明确真实数据要固定的协变量，再解决参考 MCMC 可靠性和零槽积分方法，之后才能进入完整模型验证。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
+| A-0962 | 当前关注筛选 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(5)>span` | 明确必要前置条件，再选择下一步方法。 | REVISE | 先明确必要前置条件，再解决当前方法的可靠性问题，之后才能进行完整验证。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-0964 | 当前关注筛选 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(1)>td:nth-of-type(7)>span` | 待本人 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
 | A-0967 | 当前关注筛选 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(2)>td:nth-of-type(3)>span` | 选题重整 | REVISE | 重新梳理选题 | 保留原有界面作用，改成更直接、自然的用户语言。 |
 | A-0969 | 当前关注筛选 / text / `body>div#content>div>div:nth-of-type(2)>table>tbody>tr:nth-of-type(2)>td:nth-of-type(5)>span` | 整合三份根因研究与导师反馈，再决定新一轮选题。 | REVISE | 先总结前 8 轮为什么一直没选出值得长期投入的方向，并结合导师反馈改进选题方法，再决定是否开始下一轮。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
@@ -132,8 +132,8 @@
 | A-1040 | 深色首页 / 待我处理 / text / `body>div#content>div>div>aside>section:nth-of-type(1)>div>h2` | 待我处理 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
 | A-1041 | 深色首页 / 待我处理 / text / `body>div#content>div>div>aside>section:nth-of-type(1)>p` | 仅显示已就绪、须由本人处理的事项。 | REVISE | 只显示已经准备好、现在必须由本人完成的事项。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-1049 | 深色首页 / 未来 30 天 / text / `body>div#content>div>div>aside>section:nth-of-type(2)>p` | 仅显示已确认日期。课程节点不等于本人待办。 | REVISE | 只显示已确认日期；课程日期不会自动变成你的待办。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
-| A-1054 | 深色首页 / 关注项目 / text / `body>div#content>div>div>section:nth-of-type(1)>ul>li:nth-of-type(1)>div:nth-of-type(1)` | 科研 · 预测验证与零槽积分 · 数值路线待定 | REVISE | 科研 · 预测验证与零槽积分 · 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
-| A-1056 | 深色首页 / 关注项目 / text / `body>div#content>div>div>section:nth-of-type(1)>ul>li:nth-of-type(1)>div:nth-of-type(2)` | 冻结真实数据的协变量合同，再选择零槽积分方法。 | REVISE | 先明确真实数据要固定的协变量，再解决参考 MCMC 可靠性和零槽积分方法，之后才能进入完整模型验证。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
+| A-1054 | 深色首页 / 关注项目 / text / `body>div#content>div>div>section:nth-of-type(1)>ul>li:nth-of-type(1)>div:nth-of-type(1)` | 科研 · 方法验证 · 数值路线待定 | REVISE | 科研 · 方法验证 · 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
+| A-1056 | 深色首页 / 关注项目 / text / `body>div#content>div>div>section:nth-of-type(1)>ul>li:nth-of-type(1)>div:nth-of-type(2)` | 明确必要前置条件，再选择下一步方法。 | REVISE | 先明确必要前置条件，再解决当前方法的可靠性问题，之后才能进行完整验证。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-1058 | 深色首页 / 关注项目 / text / `body>div#content>div>div>section:nth-of-type(1)>ul>li:nth-of-type(2)>div:nth-of-type(1)` | 科研 · 整合八轮研究与导师反馈 · 选题重整 | REVISE | 科研 · 总结前八轮研究与导师反馈 · 重新梳理选题 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-1060 | 深色首页 / 关注项目 / text / `body>div#content>div>div>section:nth-of-type(1)>ul>li:nth-of-type(2)>div:nth-of-type(2)` | 整合三份根因研究与导师反馈，再决定新一轮选题。 | REVISE | 先总结前 8 轮为什么一直没选出值得长期投入的方向，并结合导师反馈改进选题方法，再决定是否开始下一轮。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-1062 | 深色首页 / 关注项目 / text / `body>div#content>div>div>section:nth-of-type(1)>ul>li:nth-of-type(3)>div:nth-of-type(1)` | 课程与教学 · 课程材料与独立复验 · 验证器待修 | REVISE | 课程与教学 · 课程材料检查 · 课程验证器仍需修正 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
@@ -150,8 +150,8 @@
 | A-1127 | 首页 / 待我处理 / text / `body>div#content>div>div>aside>section:nth-of-type(1)>div>h2` | 待我处理 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
 | A-1128 | 首页 / 待我处理 / text / `body>div#content>div>div>aside>section:nth-of-type(1)>p` | 仅显示已就绪、须由本人处理的事项。 | REVISE | 只显示已经准备好、现在必须由本人完成的事项。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-1136 | 首页 / 未来 30 天 / text / `body>div#content>div>div>aside>section:nth-of-type(2)>p` | 仅显示已确认日期。课程节点不等于本人待办。 | REVISE | 只显示已确认日期；课程日期不会自动变成你的待办。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
-| A-1141 | 首页 / 关注项目 / text / `body>div#content>div>div>section:nth-of-type(1)>ul>li:nth-of-type(1)>div:nth-of-type(1)` | 科研 · 预测验证与零槽积分 · 数值路线待定 | REVISE | 科研 · 预测验证与零槽积分 · 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
-| A-1143 | 首页 / 关注项目 / text / `body>div#content>div>div>section:nth-of-type(1)>ul>li:nth-of-type(1)>div:nth-of-type(2)` | 冻结真实数据的协变量合同，再选择零槽积分方法。 | REVISE | 先明确真实数据要固定的协变量，再解决参考 MCMC 可靠性和零槽积分方法，之后才能进入完整模型验证。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
+| A-1141 | 首页 / 关注项目 / text / `body>div#content>div>div>section:nth-of-type(1)>ul>li:nth-of-type(1)>div:nth-of-type(1)` | 科研 · 方法验证 · 数值路线待定 | REVISE | 科研 · 方法验证 · 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
+| A-1143 | 首页 / 关注项目 / text / `body>div#content>div>div>section:nth-of-type(1)>ul>li:nth-of-type(1)>div:nth-of-type(2)` | 明确必要前置条件，再选择下一步方法。 | REVISE | 先明确必要前置条件，再解决当前方法的可靠性问题，之后才能进行完整验证。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-1145 | 首页 / 关注项目 / text / `body>div#content>div>div>section:nth-of-type(1)>ul>li:nth-of-type(2)>div:nth-of-type(1)` | 科研 · 整合八轮研究与导师反馈 · 选题重整 | REVISE | 科研 · 总结前八轮研究与导师反馈 · 重新梳理选题 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-1147 | 首页 / 关注项目 / text / `body>div#content>div>div>section:nth-of-type(1)>ul>li:nth-of-type(2)>div:nth-of-type(2)` | 整合三份根因研究与导师反馈，再决定新一轮选题。 | REVISE | 先总结前 8 轮为什么一直没选出值得长期投入的方向，并结合导师反馈改进选题方法，再决定是否开始下一轮。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-1149 | 首页 / 关注项目 / text / `body>div#content>div>div>section:nth-of-type(1)>ul>li:nth-of-type(3)>div:nth-of-type(1)` | 课程与教学 · 课程材料与独立复验 · 验证器待修 | REVISE | 课程与教学 · 课程材料检查 · 课程验证器仍需修正 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
@@ -247,32 +247,32 @@
 | A-1505 | 项目页 / cardiac / text / `body>div:nth-of-type(1)>div>span` | 静态设计样张 · 资料截点 2026-11-02 | REVISE | 静态设计样张 · 资料更新至 2026-11-02 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-1516 | 项目页 / cardiac / text / `body>div:nth-of-type(2)>aside>a:nth-of-type(3)` | 待我操作 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
 | A-1528 | 项目页 / cardiac / text / `body>div:nth-of-type(2)>aside>div:nth-of-type(5)` | 候选 A | REJECT | — | 候选标记属于设计过程，不应进入实际工作台。 |
-| A-1545 | 项目页 / cat-trace / CAT-TRACE / text / `body>div#content>article>div:nth-of-type(2)>span:nth-of-type(2)` | 数值路线待定 | REVISE | 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
-| A-1549 | 项目页 / cat-trace / CAT-TRACE / text / `body>div#content>article>div:nth-of-type(3)>p` | 冻结真实数据的协变量合同，再选择零槽积分方法。 | REVISE | 先明确真实数据要固定的协变量，再解决参考 MCMC 可靠性和零槽积分方法，之后才能进入完整模型验证。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
-| A-1550 | 项目页 / cat-trace / CAT-TRACE / text / `body>div#content>article>dl>dd:nth-of-type(1)` | 阅读数值方法地图，确定下一步数值路线。 | REVISE | 打开数值方法地图，在可行方案中确定下一步要验证的方法。 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
-| A-1551 | 项目页 / cat-trace / CAT-TRACE / text / `body>div#content>article>dl>dd:nth-of-type(2)` | 零槽生产积分尚未选定；参考 MCMC 尚未达到可靠性门槛。 | REVISE | 零槽积分方法还没选定，参考 MCMC 也还不够稳定，暂时不能据此验证完整模型。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
-| A-1552 | 项目页 / cat-trace / CAT-TRACE / text / `body>div#content>article>dl>dd:nth-of-type(3)` | 未设定日期；不据此制造催办。 | REVISE | 目前没有已确认日期。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
-| A-1553 | 项目页 / cat-trace / CAT-TRACE / text / `body>div#content>article>dl>dt:nth-of-type(1)` | 本人处理 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
-| A-1554 | 项目页 / cat-trace / CAT-TRACE / text / `body>div#content>article>dl>dt:nth-of-type(2)` | 阻塞与判断 | REVISE | 当前问题 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
-| A-1561 | 项目页 / cat-trace / 当前科学问题 / text / `body>div#content>article>section:nth-of-type(2)>p` | 给定参数下，显式列预测已能与参考计算对照；下一关口是匿名零槽积分的误差如何随重数放大，以及参考采样器能否给出足够可靠的比较。 | REVISE | 显式列预测已经能和参考计算对照。现在需要弄清匿名零槽积分的误差会怎样随重数放大，以及参考采样器能否提供足够可靠的比较。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
-| A-1562 | 项目页 / cat-trace / 已获得的证据 / text / `body>div#content>article>section:nth-of-type(3)>h2` | 已获得的证据 | REVISE | 已有证据 | 保留原有界面作用，改成更直接、自然的用户语言。 |
-| A-1563 | 项目页 / cat-trace / 已获得的证据 / text / `body>div#content>article>section:nth-of-type(3)>p` | 10 月 28 日的两张研究图已获带范围限制的组会使用认可。它们支持当前计算比较，不等于替代生产积分器已经选定。预测与日志任务整体仍有失败路径计数等限定修复。 | REVISE | 10 月 28 日的两张研究图已经确认可用于组会，但只支持当前计算比较；零槽积分方法仍未选定，预测与运行记录也还有已知问题要修正。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
-| A-1564 | 项目页 / cat-trace / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>div` | 根路线图仍写 9 月 15 日；当前下一步以 10 月 28 日决策为准。 | REVISE | 旧路线图仍停留在 9 月 15 日；当前下一步以 10 月 28 日的研究结论为准。 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
-| A-1566 | 项目页 / cat-trace / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>p` | 本页按 2026 年 11 月 2 日读取的固定来源核对；没有读取设备实时状态。 | REVISE | 资料更新至 2026 年 11 月 2 日。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
-| A-1568 | 项目页 / cat-trace / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(1)>a` | 当前研究决策 | REVISE | 当前研究结论 | 保留原有界面作用，改成更直接、自然的用户语言。 |
-| A-1569 | 项目页 / cat-trace / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(1)>span` | 原始材料 | REVISE | 查看材料 | 保留原有界面作用，改成更直接、自然的用户语言。 |
-| A-1571 | 项目页 / cat-trace / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(2)>a` | 数值路线与本人判断 | REVISE | 数值方法与本人判断 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
-| A-1572 | 项目页 / cat-trace / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(2)>span` | 原始材料 | REVISE | 查看材料 | 保留原有界面作用，改成更直接、自然的用户语言。 |
-| A-1574 | 项目页 / cat-trace / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(3)>a` | 预测与日志独立审查 | REVISE | 预测与运行记录检查 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
-| A-1575 | 项目页 / cat-trace / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(3)>span` | 原始材料 | REVISE | 查看材料 | 保留原有界面作用，改成更直接、自然的用户语言。 |
-| A-1577 | 项目页 / cat-trace / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(4)>a` | 研究图的使用范围 | REVISE | 研究图的适用范围 | 保留原有界面作用，改成更直接、自然的用户语言。 |
-| A-1578 | 项目页 / cat-trace / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(4)>span` | 原始材料 | REVISE | 查看材料 | 保留原有界面作用，改成更直接、自然的用户语言。 |
-| A-1580 | 项目页 / cat-trace / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(5)>a` | 实施材料入口 | REVISE | 模型实现材料 | 保留原有界面作用，改成更直接、自然的用户语言。 |
-| A-1581 | 项目页 / cat-trace / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(5)>span` | 原始材料 | REVISE | 查看材料 | 保留原有界面作用，改成更直接、自然的用户语言。 |
-| A-1584 | 项目页 / cat-trace / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(6)>span` | 原始材料 | REVISE | 查看材料 | 保留原有界面作用，改成更直接、自然的用户语言。 |
-| A-1585 | 项目页 / cat-trace / text / `body>div:nth-of-type(1)>div>span` | 静态设计样张 · 资料截点 2026-11-02 | REVISE | 静态设计样张 · 资料更新至 2026-11-02 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
-| A-1596 | 项目页 / cat-trace / text / `body>div:nth-of-type(2)>aside>a:nth-of-type(3)` | 待我操作 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
-| A-1608 | 项目页 / cat-trace / text / `body>div:nth-of-type(2)>aside>div:nth-of-type(5)` | 候选 A | REJECT | — | 候选标记属于设计过程，不应进入实际工作台。 |
+| A-1545 | 项目页 / private-project / 某私有统计研究项目 / text / `body>div#content>article>div:nth-of-type(2)>span:nth-of-type(2)` | 数值路线待定 | REVISE | 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
+| A-1549 | 项目页 / private-project / 该项目 / text / `body>div#content>article>div:nth-of-type(3)>p` | 待明确前置条件，再选择下一步方法。 | REVISE | 先明确前置条件，再选择下一步要验证的方法。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
+| A-1550 | 项目页 / private-project / 该项目 / text / `body>div#content>article>dl>dd:nth-of-type(1)` | 阅读数值方法地图，确定下一步数值路线。 | REVISE | 打开数值方法地图，在可行方案中确定下一步要验证的方法。 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
+| A-1551 | 项目页 / private-project / 该项目 / text / `body>div#content>article>dl>dd:nth-of-type(2)` | 方法尚未选定；参考结果仍需确认。 | REVISE | 方法还没选定，参考结果也还需确认，暂时无法进行完整验证。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
+| A-1552 | 项目页 / private-project / 该项目 / text / `body>div#content>article>dl>dd:nth-of-type(3)` | 未设定日期；不据此制造催办。 | REVISE | 目前没有已确认日期。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
+| A-1553 | 项目页 / private-project / 该项目 / text / `body>div#content>article>dl>dt:nth-of-type(1)` | 本人处理 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
+| A-1554 | 项目页 / private-project / 该项目 / text / `body>div#content>article>dl>dt:nth-of-type(2)` | 阻塞与判断 | REVISE | 当前问题 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
+| A-1561 | 项目页 / private-project / 当前科学问题 / text / `body>div#content>article>section:nth-of-type(2)>p` | 局部比较已有结果，仍需确认其余计算是否可靠。 | REVISE | 局部比较已有结果，下一步要确认其余计算是否可靠。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
+| A-1562 | 项目页 / private-project / 已获得的证据 / text / `body>div#content>article>section:nth-of-type(3)>h2` | 已获得的证据 | REVISE | 已有证据 | 保留原有界面作用，改成更直接、自然的用户语言。 |
+| A-1563 | 项目页 / private-project / 已获得的证据 / text / `body>div#content>article>section:nth-of-type(3)>p` | 部分材料已获限定范围的使用认可，仍有问题待修正。 | REVISE | 部分材料已确认可用，但适用范围有限，仍有问题要修正。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
+| A-1564 | 项目页 / private-project / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>div` | 根路线图仍写 9 月 15 日；当前下一步以 10 月 28 日决策为准。 | REVISE | 旧路线图仍停留在 9 月 15 日；当前下一步以 10 月 28 日的研究结论为准。 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
+| A-1566 | 项目页 / private-project / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>p` | 本页按 2026 年 11 月 2 日读取的固定来源核对；没有读取设备实时状态。 | REVISE | 资料更新至 2026 年 11 月 2 日。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
+| A-1568 | 项目页 / private-project / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(1)>a` | 当前研究决策 | REVISE | 当前研究结论 | 保留原有界面作用，改成更直接、自然的用户语言。 |
+| A-1569 | 项目页 / private-project / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(1)>span` | 原始材料 | REVISE | 查看材料 | 保留原有界面作用，改成更直接、自然的用户语言。 |
+| A-1571 | 项目页 / private-project / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(2)>a` | 数值路线与本人判断 | REVISE | 数值方法与本人判断 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
+| A-1572 | 项目页 / private-project / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(2)>span` | 原始材料 | REVISE | 查看材料 | 保留原有界面作用，改成更直接、自然的用户语言。 |
+| A-1574 | 项目页 / private-project / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(3)>a` | 预测与日志独立审查 | REVISE | 预测与运行记录检查 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
+| A-1575 | 项目页 / private-project / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(3)>span` | 原始材料 | REVISE | 查看材料 | 保留原有界面作用，改成更直接、自然的用户语言。 |
+| A-1577 | 项目页 / private-project / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(4)>a` | 研究图的使用范围 | REVISE | 研究图的适用范围 | 保留原有界面作用，改成更直接、自然的用户语言。 |
+| A-1578 | 项目页 / private-project / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(4)>span` | 原始材料 | REVISE | 查看材料 | 保留原有界面作用，改成更直接、自然的用户语言。 |
+| A-1580 | 项目页 / private-project / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(5)>a` | 实施材料入口 | REVISE | 模型实现材料 | 保留原有界面作用，改成更直接、自然的用户语言。 |
+| A-1581 | 项目页 / private-project / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(5)>span` | 原始材料 | REVISE | 查看材料 | 保留原有界面作用，改成更直接、自然的用户语言。 |
+| A-1584 | 项目页 / private-project / 材料与来源 / text / `body>div#content>article>section:nth-of-type(4)>ul>li:nth-of-type(6)>span` | 原始材料 | REVISE | 查看材料 | 保留原有界面作用，改成更直接、自然的用户语言。 |
+| A-1585 | 项目页 / private-project / text / `body>div:nth-of-type(1)>div>span` | 静态设计样张 · 资料截点 2026-11-02 | REVISE | 静态设计样张 · 资料更新至 2026-11-02 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
+| A-1596 | 项目页 / private-project / text / `body>div:nth-of-type(2)>aside>a:nth-of-type(3)` | 待我操作 | REVISE | 需要我 | 保留原有界面作用，改成更直接、自然的用户语言。 |
+| A-1608 | 项目页 / private-project / text / `body>div:nth-of-type(2)>aside>div:nth-of-type(5)` | 候选 A | REJECT | — | 候选标记属于设计过程，不应进入实际工作台。 |
 | A-1628 | 项目页 / clash / Clash Profile / text / `body>div#content>article>div:nth-of-type(3)>p` | 修正旧兼容入口结构，再配置灾备凭据并验收。 | REVISE | 先修复旧设备兼容入口，再配置灾备所需凭据，并实际检查网页迁移入口是否可用。 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
 | A-1629 | 项目页 / clash / Clash Profile / text / `body>div#content>article>dl>dd:nth-of-type(1)` | 动作尚未满足就绪条件，当前不进入本人操作。 | REVISE | 前提还没准备好，现在不需要你处理。 | 保留事实与行动含义，改成用户能直接理解的状态和下一步。 |
 | A-1630 | 项目页 / clash / Clash Profile / text / `body>div#content>article>dl>dd:nth-of-type(2)` | 旧兼容入口结构门禁未过，专用凭据尚未配置。 | REVISE | 旧设备兼容入口仍有结构问题，灾备所需的专用凭据也还没配置。 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
@@ -525,7 +525,7 @@
 | A-2640 | 资料与来源 / 资料与来源 / text / `body>div#content>div>p` | 本次核对覆盖 12 个项目的当前固定主分支来源，另外 8 个保留旧 Atlas 登记。这里显示资料是否已核对，不判断服务器是否在线。 | REVISE | 本次更新核对了 12 个项目的当前资料，另外 8 个项目暂时只保留已有登记。这里显示的是资料核对情况，不代表设备或服务器实时在线。 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
 | A-2642 | 资料与来源 / 资料与来源 / text / `body>div#content>div>ul>li:nth-of-type(1)` | ：来自原仓库的当前决定、结果、验收记录与课程时刻表。所有详情页保留固定提交链接。 | REVISE | ：来自原项目的当前结论、结果、完成记录和课程时刻表。 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
 | A-2644 | 资料与来源 / 资料与来源 / text / `body>div#content>div>ul>li:nth-of-type(2)` | ：首页四项是 A 候选的初始设置，可由本人调整；不是已经获批的新工作安排。 | REVISE | ：首页四项是当前初始设置，可由本人调整，不会改变原项目的真实优先级。 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
-| A-2646 | 资料与来源 / 资料与来源 / text / `body>div#content>div>ul>li:nth-of-type(3)` | ：今天能读到旧路线图，不代表旧内容重新有效。Bobbio 的接受记录、CAT-TRACE 的当前决策优先于旧摘要。 | REVISE | ：旧路线图仍可查看，但不会覆盖更新的项目结论。Bobbio 的完成记录和 CAT-TRACE 的当前研究结论优先于旧摘要。 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
+| A-2646 | 资料与来源 / 资料与来源 / text / `body>div#content>div>ul>li:nth-of-type(3)` | ：今天能读到旧路线图，不代表旧内容重新有效。Bobbio 的接受记录、该项目的当前决策优先于旧摘要。 | REVISE | ：旧路线图仍可查看，但不会覆盖更新的项目结论。Bobbio 的完成记录和 该项目的当前研究结论优先于旧摘要。 | 信息值得保留，但原文暴露内部实施或检查语言；改为直接说明现实状态和影响。 |
 | A-2647 | 资料与来源 / 资料与来源 / text / `body>div#content>div>ul>li:nth-of-type(4)>strong` | 同步边界 | REJECT | — | 这是设计或同步过程说明，不帮助用户判断现实工作。 |
 | A-2648 | 资料与来源 / 资料与来源 / text / `body>div#content>div>ul>li:nth-of-type(4)` | ：原 Atlas 的 11 项访问失败提示是旧同步器的记录。当前样张使用本轮独立核对，不把该提示当实时同步结果。 | REJECT | — | 这段文字不提供新的现实状态、决定或行动，删除后更清楚。 |
 | A-2649 | 资料与来源 / 资料与来源 / text / `body>div#content>div>ul>li:nth-of-type(5)>strong` | 原型边界 | REJECT | — | 这是设计或同步过程说明，不帮助用户判断现实工作。 |
@@ -545,8 +545,8 @@
 | B-0010 | HOME_DESKTOP_MOCKUP.svg / text[9] / x=48 y=324 | 同步与新鲜度 | REVISE | 资料与来源 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
 | B-0022 | HOME_DESKTOP_MOCKUP.svg / text[21] / x=28 y=858 | Border · 浅色 | REJECT | — | 设计阶段元数据不应进入最终工作台。 |
 | B-0027 | HOME_DESKTOP_MOCKUP.svg / text[26] / x=986 y=166 | 按组合优先级，而不是最近提交 | REVISE | 按当前关注顺序，不按最近提交排序 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
-| B-0031 | HOME_DESKTOP_MOCKUP.svg / text[30] / x=282 y=272 | C04 reference reliability · zero-slot 仍未关闭 | REVISE | C04 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
-| B-0033 | HOME_DESKTOP_MOCKUP.svg / text[32] / x=338 y=305 | 完成当前参考轮廓与证据收口，再决定是否设计后继采样器 | REVISE | 先解决 MCMC 慢混合和低维 zero-slot 积分，再验证完整模型 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
+| B-0031 | HOME_DESKTOP_MOCKUP.svg / text[30] / x=282 y=272 | 内部计算检查仍未完成 | REVISE | 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
+| B-0033 | HOME_DESKTOP_MOCKUP.svg / text[32] / x=338 y=305 | 完成当前参考轮廓与证据收口，再决定是否设计后继采样器 | REVISE | 先解决当前计算问题，再进行完整验证 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
 | B-0034 | HOME_DESKTOP_MOCKUP.svg / text[33] / x=282 y=346 | 下一次实现阶段批准 | REVISE | 第一个完整模型验证 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
 | B-0035 | HOME_DESKTOP_MOCKUP.svg / text[34] / x=956 y=346 | 来源已核对 · 10月28日 | REVISE | 资料更新至 10 月 28 日 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
 | B-0036 | HOME_DESKTOP_MOCKUP.svg / text[35] / x=290 y=398 | 等待收敛 | REVISE | 研究方向待确定 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
@@ -587,7 +587,7 @@
 | B-0122 | ALL_PROJECTS_MOCKUP.svg / text[28] / x=786 y=194 | 当前重点 → 需要我 → 节点 → 项目名 | REVISE | 当前重点 → 需要我 → 日期 → 项目名 | 保留事实边界，但避免把尚未准备好的未来动作冒充当前待办。 |
 | B-0131 | ALL_PROJECTS_MOCKUP.svg / text[37] / x=1250 y=250 | 新鲜度 | REVISE | 资料状态 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
 | B-0135 | ALL_PROJECTS_MOCKUP.svg / text[41] / x=650 y=290 | 当前 1 | REVISE | 重点 1 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
-| B-0136 | ALL_PROJECTS_MOCKUP.svg / text[42] / x=720 y=290 | C04 可靠性 · 完成参考轮廓与证据收口 | REVISE | C04 数值方法仍待确定 · 先解决关键计算问题 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
+| B-0136 | ALL_PROJECTS_MOCKUP.svg / text[42] / x=720 y=290 | C04 可靠性 · 完成参考轮廓与证据收口 | REVISE | 数值方法仍待确定 · 先解决关键计算问题 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
 | B-0139 | ALL_PROJECTS_MOCKUP.svg / text[45] / x=1250 y=290 | 已核对 | REJECT | — | 正常资料状态不需要逐行重复，表格只显示需要留意的例外。 |
 | B-0143 | ALL_PROJECTS_MOCKUP.svg / text[49] / x=650 y=332 | 当前 2 | REVISE | 重点 2 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
 | B-0144 | ALL_PROJECTS_MOCKUP.svg / text[50] / x=720 y=332 | 冻结下一版选题方式，再决定是否启动第九轮 | REVISE | 总结前 8 轮未选出方向的原因，再改进选题方法 | 保留事实边界，但避免把尚未准备好的未来动作冒充当前待办。 |
@@ -671,15 +671,15 @@
 | B-0286 | CODEX_HANDOFF.md / UI 种子 / 第 288 行 / occurrence 1 | 默认列为项目、类型、状态、当前阶段、关注、下一步、节点、需要我、新鲜度 | REVISE | 默认列为项目、类型、状态、当前阶段、关注、下一步、节点、需要我、资料状态 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
 | B-0287 | OBSIDIAN_IMPLEMENTATION_SPEC.md / UI 种子 / 第 174 行 / occurrence 1 | 列：项目、类型、状态、当前阶段、关注、下一步、节点、需要我、新鲜度 | REVISE | 列：项目、类型、状态、当前阶段、关注、下一步、节点、需要我、资料状态 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
 | B-0288 | VISUAL_SYSTEM.md / UI 种子 / 第 244 行 / occurrence 1 | 类型、状态、新鲜度使用短标签 | REVISE | 类型、状态、资料状态使用短标签 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
-| B-0289 | REAL_PROJECT_WALKTHROUGH.md / UI 种子 / 第 23 行 / occurrence 1 | 完成当前参考轮廓与证据收口，再决定是否设计后继采样器 | REVISE | 先解决 MCMC 慢混合和低维 zero-slot 积分，再验证第一个完整模型 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
-| B-0290 | REAL_PROJECT_WALKTHROUGH.md / UI 种子 / 第 41 行 / occurrence 2 | 完成当前参考轮廓与证据收口，再决定是否设计后继采样器 | REVISE | 先解决 MCMC 慢混合和低维 zero-slot 积分，再验证第一个完整模型 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
-| B-0291 | DATA_MODEL.md / UI 种子 / 第 29 行 / occurrence 1 | 完成当前参考分布轮廓并据证据决定是否设计后继采样器 | REVISE | 先解决 MCMC 慢混合和低维 zero-slot 积分，再验证第一个完整模型 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
-| B-0292 | REAL_PROJECT_WALKTHROUGH.md / UI 种子 / 第 38 行 / occurrence 1 | C04 reference reliability · zero-slot 仍未关闭 | REVISE | C04 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
-| B-0293 | DATA_MODEL.md / UI 种子 / 第 26 行 / occurrence 1 | C04 reference reliability 与开放尾部数值问题 | REVISE | C04 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
+| B-0289 | REAL_PROJECT_WALKTHROUGH.md / UI 种子 / 第 23 行 / occurrence 1 | 完成当前参考轮廓与证据收口，再决定是否设计后继采样器 | REVISE | 先解决当前计算问题，再进行完整验证 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
+| B-0290 | REAL_PROJECT_WALKTHROUGH.md / UI 种子 / 第 41 行 / occurrence 2 | 完成当前参考轮廓与证据收口，再决定是否设计后继采样器 | REVISE | 先解决当前计算问题，再进行完整验证 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
+| B-0291 | DATA_MODEL.md / UI 种子 / 第 29 行 / occurrence 1 | 完成当前参考分布轮廓并据证据决定是否设计后继采样器 | REVISE | 先解决当前计算问题，再进行完整验证 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
+| B-0292 | REAL_PROJECT_WALKTHROUGH.md / UI 种子 / 第 38 行 / occurrence 1 | 内部计算检查仍未完成 | REVISE | 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
+| B-0293 | DATA_MODEL.md / UI 种子 / 第 26 行 / occurrence 1 | C04 reference reliability 与开放尾部数值问题 | REVISE | 数值方法仍待确定 | 信息值得保留，但原文暴露内部实施、维护或机器语言；改为现实状态和行动。 |
 | B-0294 | DATA_MODEL.md / UI 种子 / 第 33 行 / occurrence 1 | 下一次实现阶段批准 | REVISE | 第一个完整模型验证 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
 | B-0295 | REAL_PROJECT_WALKTHROUGH.md / UI 种子 / 第 25 行 / occurrence 1 | 下一次实现阶段批准 | REVISE | 第一个完整模型验证 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
 | B-0296 | REAL_PROJECT_WALKTHROUGH.md / UI 种子 / 第 43 行 / occurrence 2 | 下一次实现阶段批准 | REVISE | 第一个完整模型验证 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
-| B-0297 | DATA_MODEL.md / UI 种子 / 第 34 行 / occurrence 1 | C03 的 zero-slot 问题仍未关闭 | REVISE | MCMC 慢混合和低维 zero-slot 积分仍不够可靠 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
+| B-0297 | DATA_MODEL.md / UI 种子 / 第 34 行 / occurrence 1 | 内部计算问题仍未解决 | REVISE | 当前计算方法仍不够可靠 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
 | B-0298 | DATA_MODEL.md / UI 种子 / 第 333 行 / occurrence 1 | 八轮历史与三份根因审计的选题方式收敛 | REVISE | 前 8 轮仍未选出值得长期投入的方向 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
 | B-0299 | REAL_PROJECT_WALKTHROUGH.md / UI 种子 / 第 70 行 / occurrence 1 | 八轮历史与三份根因审计的选题方式收敛 | REVISE | 前 8 轮仍未选出值得长期投入的方向 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
 | B-0300 | DATA_MODEL.md / UI 种子 / 第 336 行 / occurrence 1 | 合并根因审计、历史与导师反馈，冻结下一版选题方式 | REVISE | 总结前 8 轮为什么没有选出方向，改进选题方法，再决定是否开始下一轮 | 保留原有信息作用，改成用户能直接理解的现实状态、影响或下一步。 |
@@ -847,7 +847,7 @@
 | R3-A-011 | A-2318 Shione / 需要我 | 是否需要你处理还没有确认。 | REVISE | 暂时无法确认是否需要你处理。 | 同一未知状态应统一自然表达。 |
 | R3-A-012 | A-2380 STAT5050 / 需要我 | 是否需要你处理还没有确认。 | REVISE | 暂时无法确认是否需要你处理。 | 同一未知状态应统一自然表达。 |
 | R3-A-013 | A-2523 Zotero 文献镜像 / 需要我 | 是否需要你处理还没有确认。 | REVISE | 暂时无法确认是否需要你处理。 | 同一未知状态应统一自然表达。 |
-| R3-A-014 | A CAT-TRACE attention_reason（条件式可见文案，上一轮逐项表未单列） | 数值方法需要本人判断；目前的独立认可只覆盖显式列预测，不能代表整套模型已经可靠。 | REVISE | 数值方法需要你判断；目前确认可靠的只包括显式列预测，不能代表整套模型已经可靠。 | 条件式文案仍含“本人/独立认可”等内部评审口吻，且说明逐项清单对动态状态覆盖不足。 |
+| R3-A-014 | A 该项目 attention_reason（条件式可见文案，上一轮逐项表未单列） | 方法选择需要本人判断；局部认可不能代表整体可靠。 | REVISE | 方法选择需要你判断；目前确认可靠的部分不能代表整体可靠。 | 条件式文案仍含“本人/独立认可”等内部评审口吻，且说明逐项清单对动态状态覆盖不足。 |
 
 ## 这份证据必须怎样使用
 

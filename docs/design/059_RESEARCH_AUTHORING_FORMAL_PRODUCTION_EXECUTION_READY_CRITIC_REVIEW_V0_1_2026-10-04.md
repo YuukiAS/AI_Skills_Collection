@@ -31,9 +31,9 @@ Plan、Goal 与 Kickoff 三者语义一致，并且把已经批准的 v0.3 架�
 
 1. implementation 不只新增 `research-authoring-core`，还要求修改 profile、Marketplace source config、thin routes、routing tests 与 generated layer，能够真实接通 normal entry；
 2. RA2 incremental contract 已变成明确执行步骤和受保护不变量，不是仅写一句原则；
-3. development regression、pre-final candidate、final packet freeze、pre-final Critic、same-final-candidate final Gate 的顺序正确，已知 DII/CAT-TRACE regression 不会被重复包装成 fresh evidence；
+3. development regression、pre-final candidate、final packet freeze、pre-final Critic、same-final-candidate final Gate 的顺序正确，已知 DII/private-project regression 不会被重复包装成 fresh evidence；
 4. G2 两阶段在 final Gate 前冻结 candidate/rubric/raw-input/delta，Phase 1 与 Phase 2 之间禁止 adaptive rescue；
-5. G3 明确排除已用于产品调优的既有 CAT-TRACE workspace 自动充当 fresh holdout，并要求 pre-final 时冻结真正未用于调优的 manuscript task；
+5. G3 明确排除已用于产品调优的既有 某私有统计研究项目 workspace 自动充当 fresh holdout，并要求 pre-final 时冻结真正未用于调优的 manuscript task；
 6. G4 不在当前 Kickoff 中预授权 Plugin Creator live mutation，未授权时只能进入 `WAITING_USER_PLUGIN_MUTATION_AUTHORIZATION`，不能用替代分发路线冒充完成；
 7. Executor 不拥有 G1–G4 最终定性 PASS；独立 Reviewer 必须直接读取完整 input/source/output；
 8. `research-writing 0.2 -> 0.3` 只作为未发布 final candidate identity；repository VERSION、main merge、formal release 均不在当前 Goal；

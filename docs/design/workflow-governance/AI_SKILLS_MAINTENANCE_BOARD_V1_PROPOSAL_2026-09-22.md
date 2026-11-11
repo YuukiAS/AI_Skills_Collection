@@ -130,7 +130,7 @@ YuukiAS/AI_Skills_Collection@<full-or-short-sha>
 
 - 一个 idea 可能有 implementation commit；
 - 可能另有 main integration / release commit；
-- 还可能有 DII、CAT-TRACE、CUHK Date、Host 或 server adaptation；
+- 还可能有 DII、某私有统计研究项目、CUHK Date、Host 或 server adaptation；
 - server mutation 本身甚至没有 Git SHA。
 
 因此 Issue 内应保留完整证据：

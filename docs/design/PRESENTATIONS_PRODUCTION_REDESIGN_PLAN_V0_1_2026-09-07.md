@@ -23,7 +23,7 @@ However, current evidence does not support treating the existing architecture as
 3. selecting a file format, template, and renderer;
 4. proving completion through schemas, packets, validators, fixtures, and reviewer decisions.
 
-The strongest real-use improvements in CAT-TRACE v8→v14 came from changing the communication problem before generation: audience/page-job briefs, first-use ordering, claim-first figure redesign, transitions, spoken scientific language, preservation of accepted elements, and questions that genuinely help an advisor decide. By contrast, the frozen real holdout cycle recorded four failures out of four even after substantial work on gold compositions, exact CUHK rendering, repair loops, validators, and synthetic fixtures. This is the central architecture signal: the system invested heavily in renderer and control-plane observability without reliably solving semantic storyboard and visual reasoning.
+The strongest real-use improvements in a private research project v8→v14 came from changing the communication problem before generation: audience/page-job briefs, first-use ordering, claim-first figure redesign, transitions, spoken scientific language, preservation of accepted elements, and questions that genuinely help an advisor decide. By contrast, the frozen real holdout cycle recorded four failures out of four even after substantial work on gold compositions, exact CUHK rendering, repair loops, validators, and synthetic fixtures. This is the central architecture signal: the system invested heavily in renderer and control-plane observability without reliably solving semantic storyboard and visual reasoning.
 
 **Core judgment:** the current architecture is **partly correct, but its center of gravity is wrong**. Presentations should remain an orchestrator, but its production core should be a semantic storyboard and page-composition contract. Beamer, PPTX, Google Slides, HTML, templates, reference libraries, and validators should become bounded adapters or services rather than the theory of the product.
 
@@ -58,7 +58,7 @@ The strongest real-use improvements in CAT-TRACE v8→v14 came from changing the
 
 ### 1.3 Real production feedback
 
-**VERIFIED FACT.** CAT-TRACE v8→v14 feedback repeatedly identified failures that are only weakly captured by renderer success:
+**VERIFIED FACT.** a private research project v8→v14 feedback repeatedly identified failures that are only weakly captured by renderer success:
 
 - the page lacked a clear job for a particular audience;
 - a central term, method, dataset, or estimand appeared before explanation;
@@ -72,7 +72,7 @@ The strongest real-use improvements in CAT-TRACE v8→v14 came from changing the
 - accepted elements were damaged while fixing unrelated pages;
 - a deck passed page checks while still imposing excessive whole-deck reader effort.
 
-**VERIFIED FACT.** The CAT-TRACE v9 improvement was attributed to task-level audience/page-job briefs and a first-use registry prepared before language realization, while the production runtime itself remained unchanged.
+**VERIFIED FACT.** The a private research project v9 improvement was attributed to task-level audience/page-job briefs and a first-use registry prepared before language realization, while the production runtime itself remained unchanged.
 
 **VERIFIED FACT.** The current-cycle record reports that the frozen four-paper real batch failed 4/4: two cases did not render because no compatible gold composition was found; two rendered cases did not receive effective pixel-changing repair, and citation/body collisions or contact-sheet review still failed.
 
@@ -305,7 +305,7 @@ Business mode shares the front door, storyboard lifecycle, composition, renderin
 | Architecture | Description | Strengths | Main failure risk | Decision |
 |---|---|---|---|---|
 | A. Current schema-heavy orchestrator | A broad skill populates `deck-plan.yaml`, routes format/template, invokes render/QA/repair, and relies on validators and independent review | observable, testable, preserves many historical checks | completed schema can masquerade as communication quality; exact CUHK and gold compatibility dominate; revision remains gate-heavy | reject as center; retain selected safeguards |
-| B. Semantic storyboard + renderer adapters | Build a deck brief, narrative dependencies, and page briefs first; then language/visual services and renderer adapters; review actual artifact | directly targets real CAT-TRACE failures; format-neutral; keeps scientific meaning separate from mechanics | storyboard can become another checklist unless grounded in real audience decisions and artifacts | **selected** |
+| B. Semantic storyboard + renderer adapters | Build a deck brief, narrative dependencies, and page briefs first; then language/visual services and renderer adapters; review actual artifact | directly targets real a private research project failures; format-neutral; keeps scientific meaning separate from mechanics | storyboard can become another checklist unless grounded in real audience decisions and artifacts | **selected** |
 | C. Slide-object compiler / artifact-first | Compile typed objects into editable slides using a constraint solver and renderer-specific object model | strong editability, geometry, responsiveness, and deterministic QA | can create polished but semantically wrong decks; object vocabulary may overfit one renderer | adopt selected mechanisms as adapter/composition layer |
 | D. Direct whole-deck LLM planner + bounded renderer | Give the model the full source and task, generate the deck directly, then perform limited artifact review | low control-plane overhead; preserves global context | difficult traceability, unstable revisions, hidden fallback, weak preservation and source fidelity | keep as experimental baseline, not production architecture |
 
@@ -543,7 +543,7 @@ Validation must use real decks and rendered artifacts, not only schema validity.
 
 At least the following should be held out from implementation tuning:
 
-1. a CAT-TRACE research group-meeting deck with advisor decisions;
+1. a private research project research group-meeting deck with advisor decisions;
 2. a conference-length research talk from a manuscript;
 3. a defense or long seminar with prerequisites and backup material;
 4. a bounded existing-deck revision with accepted pages;
@@ -640,7 +640,7 @@ Work would consolidate routing, task contracts, source inventory, blockers, and 
 
 **New user capability:** group meeting, conference, and defense tasks receive explicit audience belief updates, narrative dependencies, page jobs, first-use order, transitions, and decision-valued endings before slide copy or geometry is produced.
 
-Acceptance must use CAT-TRACE and at least one independent real research deck.
+Acceptance must use a private research project and at least one independent real research deck.
 
 ### Phase 3 — Renderer and template adapters
 

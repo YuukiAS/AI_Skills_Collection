@@ -148,7 +148,7 @@ candidate closure、task results 和 upload zip。
 - 为了测试方便新增 scripts/schema/state；
 - 把 standalone Skill 复制进中央 Plugin；
 - 修改 Bridge Kit；
-- 修改 CAT-TRACE/DII/CardiacNexus；
+- 修改 private-project/DII/CardiacNexus；
 - 新 automation/watcher；
 - 不必要的新 distribution system。
 
@@ -190,7 +190,7 @@ candidate closure、task results 和 upload zip。
 
 ### G3
 
-CAT-TRACE + CardiacNexus representative regression：
+a private research project + CardiacNexus representative regression：
 
 - superseded decision 不复活；
 - repo facts 与 thread cognition 分工正确；
@@ -262,7 +262,7 @@ project-thread-handoff/
 
 Privacy：
 
-`target-surface-acceptance.md` 只能存 non-sensitive receipt，不得把 DII/CAT-TRACE/CardiacNexus
+`target-surface-acceptance.md` 只能存 non-sensitive receipt，不得把 DII/private-project/CardiacNexus
 私有 thread 全文或完整敏感 handoff Prompt推到公开 repo。
 
 如果 final Critic 需要更直接的 qualitative evidence，只允许一次最小 redacted output/screenshot

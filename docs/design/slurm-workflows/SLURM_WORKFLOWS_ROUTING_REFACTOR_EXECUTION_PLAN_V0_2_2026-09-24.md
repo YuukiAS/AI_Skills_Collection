@@ -116,7 +116,7 @@ Do not implement:
 - another scheduler/control plane;
 - Longleaf_Bridge or Bridge Kit changes.
 
-Do not modify real user experiments, existing Slurm jobs, CAT-TRACE/CARE logic, or any other standalone Skill.
+Do not modify real user experiments, existing Slurm jobs, private-project/CARE logic, or any other standalone Skill.
 
 ## 4. Implementation sequence
 

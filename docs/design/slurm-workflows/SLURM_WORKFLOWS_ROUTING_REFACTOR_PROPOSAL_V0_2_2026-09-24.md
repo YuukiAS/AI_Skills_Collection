@@ -485,7 +485,7 @@ duplicate race 不是普通 widening，而是例外 fallback。
 
 - Longleaf_Bridge production；
 - Bridge Kit；
-- CAT-TRACE / CARE 等项目实验逻辑；
+- 某私有统计研究项目 / CARE 等项目实验逻辑；
 - 中央 Marketplace topology；
 - 其他 standalone Skill；
 - 真实 `~/.config/ai-skills/local-overrides.toml`；

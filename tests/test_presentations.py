@@ -28,6 +28,9 @@ import deck_quality_loop  # noqa: E402
 import scientific_object_semantics  # noqa: E402
 import select_gold_compositions  # noqa: E402
 
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
+import build_codex_marketplace as marketplace_build  # noqa: E402
+
 
 HEX64 = "a" * 64
 
@@ -383,25 +386,40 @@ class PresentationSharedTests(unittest.TestCase):
             filenames = {path.name for path in root.rglob("*") if path.is_file()}
             self.assertNotIn("TODO.md", filenames)
             self.assertNotIn("CURRENT_RESEARCH_PRESENTATION_REVISION_RULES.md", filenames)
-            self.assertFalse(any(name.startswith("TODO_CAT_TRACE_") for name in filenames))
+            self.assertFalse(any(name.startswith("TODO_PRIVATE_PROJECT_") for name in filenames))
 
             runtime_text = "\n".join(
                 path.read_text(encoding="utf-8")
                 for path in root.rglob("*.md")
                 if path.is_file()
             )
-            self.assertNotIn("CAT-TRACE", runtime_text)
-            self.assertNotIn("Group marks preserve open-tail richness calibration", runtime_text)
-            self.assertNotIn("Delta^K + Delta^U", runtime_text)
+            self.assertNotIn("PRIVATE-PROJECT-X", runtime_text)
+            self.assertNotIn("PRIVATE_PROJECT_X_RESEARCH_DETAIL", runtime_text)
 
         for archived_name in [
             "TODO.md",
             "CURRENT_RESEARCH_PRESENTATION_REVISION_RULES.md",
-            "TODO_CAT_TRACE_V2_CANDIDATES_2026_08_27.md",
-            "TODO_CAT_TRACE_V3_MANDATORY_CANDIDATES_2026_08_27.md",
-            "TODO_CAT_TRACE_V3_CONFIRMED_2026_08_27.md",
+            "TODO_PRIVATE_PROJECT_V2_CANDIDATES_2026_08_27.md",
+            "TODO_PRIVATE_PROJECT_V3_MANDATORY_CANDIDATES_2026_08_27.md",
+            "TODO_PRIVATE_PROJECT_V3_CONFIRMED_2026_08_27.md",
         ]:
             self.assertTrue((archive / archived_name).exists(), archived_name)
+
+        # Exercise packaging with synthetic project content and a positive control.
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "source"
+            target = Path(tmp) / "payload"
+            source.mkdir()
+            (source / "SKILL.md").write_text("Public runtime instructions.\n", encoding="utf-8")
+            (source / "TODO.md").write_text(
+                "PRIVATE-PROJECT-X: PRIVATE_PROJECT_X_RESEARCH_DETAIL\n", encoding="utf-8"
+            )
+            marketplace_build.copy_source_tree(source, target)
+            self.assertEqual((target / "SKILL.md").read_text(), "Public runtime instructions.\n")
+            self.assertFalse((target / "TODO.md").exists())
+            payload = "\n".join(p.read_text() for p in target.rglob("*.md"))
+            self.assertNotIn("PRIVATE-PROJECT-X", payload)
+            self.assertNotIn("PRIVATE_PROJECT_X_RESEARCH_DETAIL", payload)
 
     def test_business_and_shared_routes_connect_chinese_writing_handoff(self) -> None:
         business_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/business-presentations/SKILL.md").read_text(encoding="utf-8")
@@ -1970,8 +1988,8 @@ class PresentationSharedTests(unittest.TestCase):
         )
 
         packet_text = packet_path.read_text(encoding="utf-8")
-        self.assertNotIn("CAT-TRACE", packet_text)
-        self.assertNotIn("/home/yuukias/code/TRACE", packet_text)
+        self.assertNotIn("PRIVATE-PROJECT-X", packet_text)
+        self.assertNotIn("<private repository>", packet_text)
         self.assertNotIn("catalogue", packet_text)
         self.assertNotIn("open-tail", packet_text)
 

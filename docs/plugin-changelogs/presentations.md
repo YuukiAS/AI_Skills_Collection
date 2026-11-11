@@ -17,7 +17,7 @@ No pending released changes.
 
 ## 0.3 - 2026-09-01
 
-- Tightened Beamer/PDF render routing so YuukiAS/TRACE handoffs preserve the
+- Tightened Beamer/PDF render routing so <private repository> handoffs preserve the
   current `/home/yuukias/render_resources/chinese_math_pdf` resource location and
   report missing local resources explicitly instead of substituting retired
   server-only paths.
@@ -25,7 +25,7 @@ No pending released changes.
 ## 0.2 - 2026-09-01
 
 - Added the existing-deck revision production completion gate for targeted research-deck revisions, requiring reviewer-seen baseline evidence, accepted-element ledger checks, targeted feedback, rerender evidence, high-resolution problem pages, first-use dependency order checks, rendered scientific-object QA, English scientific-prose final pass after scientific freeze, and independent visual review before `PASS_REVIEWED`.
-- Added public-safe known-failure replay and unrelated reviewed regression fixtures so the production gate blocks the real-use failure classes without packaging private CAT-TRACE rendered pages, TRACE absolute paths, project page numbers, or project-specific scientific content into the installed plugin payload.
+- Added public-safe known-failure replay and unrelated reviewed regression fixtures so the production gate blocks the real-use failure classes without packaging private a private research project rendered pages, TRACE absolute paths, project page numbers, or project-specific scientific content into the installed plugin payload.
 - Removed the TRACE checkout-specific Times font path from the CUHK scientific layout renderer; Times font discovery now uses `AI_SKILLS_TIMES_FONT_DIR` or the shared render-resources default.
 
 ## 0.1 - 2026-08-30

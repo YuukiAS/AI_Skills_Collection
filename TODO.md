@@ -69,7 +69,7 @@ docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md
 
 例如 TRACE 里：
 
-- CAT-TRACE 还要补哪个实验；
+- 某私有统计研究项目 还要补哪个实验；
 - 某个 theorem 到底应该怎么写；
 - Madagascar 数据应该怎么解释；
 - 下一步模型要不要加新 prior；
@@ -118,10 +118,10 @@ project-specific context: <哪些细节只属于当前项目，不应该变成�
 ```text
 ### Existing-deck revision changed an accepted slide
 status: NEW
-source: TRACE / CAT-TRACE group-meeting revision
+source: TRACE / a private research project group-meeting revision
 evidence: <实际 PDF / render / task 路径>
 problem: 用户只要求修改 P10，但上轮已经接受的 P9 也发生了明显变化。
-project-specific context: P9/P10 的 CAT-TRACE 科学内容本身不应成为通用规则。
+project-specific context: P9/P10 的 该项目 科学内容本身不应成为通用规则。
 ```
 
 这里先记录**真实失败**，不要急着写“以后所有 PPT 必须怎样”。

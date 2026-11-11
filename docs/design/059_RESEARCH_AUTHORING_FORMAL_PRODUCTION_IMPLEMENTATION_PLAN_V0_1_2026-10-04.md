@@ -310,12 +310,12 @@ PPT/PPTX、Google Slides、Beamer/LaTeX slide deck 及其导出 PDF 继续归 Pr
 - 双语结构；
 - 公式职责；
 - reader-facing references / internal provenance；
-- CAT-TRACE architecture evolution 按模块增量更新；
+- 某私有统计研究项目 architecture evolution 按模块增量更新；
 - report/paper/litcite routing near-miss；
 - existing Research Authoring formal-PDF handoff；
 - current citation lookup / verification boundary。
 
-这些材料只能证明 development regression。任何已经用于设计/修产品的 DII/CAT-TRACE 样本不得重新标为 final fresh evidence。
+这些材料只能证明 development regression。任何已经用于设计/修产品的 DII/private-project 样本不得重新标为 final fresh evidence。
 
 开发期先运行便宜、确定性检查与现有 tests；必要时生成代表性完整文档让 Planner/Critic判断机制是否稳定。不要为了准备 final Gate 无限增加样本。
 
@@ -561,7 +561,7 @@ Phase 2 FAIL => G2 FAIL。
 
 在 pre-final Critic 前冻结一个**未用于 059 产品调优**的真实 manuscript task；不得执行后挑赢家。
 
-CAT-TRACE 当前 `paper/manuscript/`、`paper/submission/` 可以继续用于 development regression/结构参考，但因为已参与本轮设计取证，默认不作为最终 fresh holdout；若 pre-final Critic 有直接证据证明某个完全未用于调优的 CAT-TRACE 新任务仍满足 fresh 条件，可显式批准，否则选另一独立真实 manuscript task。
+该项目 当前 `paper/manuscript/`、`paper/submission/` 可以继续用于 development regression/结构参考，但因为已参与本轮设计取证，默认不作为最终 fresh holdout；若 pre-final Critic 有直接证据证明某个完全未用于调优的 该项目 新任务仍满足 fresh 条件，可显式批准，否则选另一独立真实 manuscript task。
 
 冻结：
 - source repo/ref；

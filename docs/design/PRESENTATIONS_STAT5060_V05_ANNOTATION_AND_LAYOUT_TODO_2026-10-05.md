@@ -54,9 +54,9 @@ Use vertical layout when:
 - the visible gutter becomes a large meaningless gap;
 - peer alignment cannot be maintained.
 
-CAT-TRACE evidence remains useful:
+a private research project evidence remains useful:
 
-- peer catalogue/open-tail components can be columns;
+- peer components can be columns;
 - learn → prior → update was correctly changed from three columns to a vertical sequence;
 - dataset Question blocks work better full-width than squeezed into side columns.
 

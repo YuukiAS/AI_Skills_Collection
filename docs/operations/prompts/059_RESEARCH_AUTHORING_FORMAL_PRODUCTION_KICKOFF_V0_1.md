@@ -51,7 +51,7 @@ Exact task-owned worktree：
 - 落实 RA2 incremental authoring contract；
 - 更新 `research-main`、`codex-research-writing`、Marketplace source config、必要 tests 与 generated layer；
 - 保持 Statistical Modeling、Clear Writing、Presentations、renderer owner不变；
-- 开发期回放已知 DII/CAT-TRACE regressions，但不把它们伪装成 final fresh evidence。
+- 开发期回放已知 DII/private-project regressions，但不把它们伪装成 final fresh evidence。
 
 版本与候选：
 

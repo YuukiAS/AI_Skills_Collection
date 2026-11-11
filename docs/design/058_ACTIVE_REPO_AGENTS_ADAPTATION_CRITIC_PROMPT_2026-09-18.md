@@ -36,7 +36,7 @@ Bridge current main：
 目标 repo current canonical AGENTS / directly referenced rule surfaces，至少独立读取：
 
 - `Distributed_Imaging_Inference`
-- `CAT-TRACE`
+- `private-project`
 - `Reliable_Imaging_Inference`
 - `CUHK_Date`
 - `Clash_Profile`
@@ -120,7 +120,7 @@ Bridge current main：
 - 不允许再加056同义规则冒充修复；
 - 是否应等待056后安装/刷新Lite并做normal-entry消费验证。
 
-### CAT-TRACE
+### a private research project
 - 顶部“Codex不承担规划”是强项目不变量，不能被generic Lite冲掉；
 - generic Handoff/skill/version内容是否可更清楚地分owner；
 - tracked Lite是否需要post-056 refresh。

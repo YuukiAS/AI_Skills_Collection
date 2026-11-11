@@ -26,7 +26,7 @@
 
 ## 真实探针
 
-已按当前实际安装的 `render-chinese-math-pdf 0.2` 运行标准 Pandoc AST → LaTeX → XeLaTeX 入口，使用本任务新写的公开安全示例，未读取 CAT-TRACE 私有文件。示例包含中文、英文、行内/展示公式和表格。
+已按当前实际安装的 `render-chinese-math-pdf 0.2` 运行标准 Pandoc AST → LaTeX → XeLaTeX 入口，使用本任务新写的公开安全示例，未读取 某私有统计研究项目 私有文件。示例包含中文、英文、行内/展示公式和表格。
 
 持久目录：`/overflow/htzhu/mingcheng_new/AI_Skills_Collection/private/exports/documents-media--pdf-save-as-delivery/preflight/`。
 

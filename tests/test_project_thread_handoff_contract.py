@@ -164,7 +164,8 @@ class ProjectThreadHandoffContractTests(unittest.TestCase):
         _, body = read_frontmatter(SKILL_FILE)
         fixture = json.loads(G3_FIXTURE.read_text(encoding="utf-8"))
 
-        self.assertIn("cat_trace", fixture)
+        self.assertIn("private_project", fixture)
+        self.assertEqual(fixture["private_project"]["project_name"], "PRIVATE-PROJECT-X")
         self.assertIn("cardiacnexus", fixture)
         self.assertIn("ambiguous_target", fixture)
         self.assertIn("unsourced_recall", fixture)
@@ -178,7 +179,7 @@ class ProjectThreadHandoffContractTests(unittest.TestCase):
         self.assertIn("never invent unknown paths or SHAs", body)
         self.assertNotIn("DII", body)
         self.assertNotIn("CARE", body)
-        self.assertNotIn("CAT-TRACE", body)
+        self.assertNotIn(fixture["private_project"]["project_name"], body)
         self.assertNotIn("CardiacNexus", body)
 
     def test_canonical_icon_bytes_are_unchanged(self) -> None:

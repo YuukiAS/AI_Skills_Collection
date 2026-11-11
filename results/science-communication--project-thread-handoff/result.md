@@ -79,9 +79,9 @@ Evidence:
 - `tests.test_project_thread_handoff_contract.ProjectThreadHandoffContractTests.test_g3_representative_generalization_is_covered_without_project_hardcoding`
 
 Covered:
-- CAT-TRACE representative case: later frozen decisions override earlier exploration; superseded routes stay out of the active plan except as short recurrence guards.
+- a private research project representative case: later frozen decisions override earlier exploration; superseded routes stay out of the active plan except as short recurrence guards.
 - CardiacNexus representative case: code, pipeline, and numeric facts are recovered from current canonical sources; handoff carries recent judgment, open questions, next action, and locators.
-- The Skill body does not hardcode DII, CARE, CAT-TRACE, or CardiacNexus.
+- The Skill body does not hardcode DII, CARE, a private research project, or CardiacNexus.
 - The Skill has no Bridge Kit dependency.
 
 ## Upload Candidate

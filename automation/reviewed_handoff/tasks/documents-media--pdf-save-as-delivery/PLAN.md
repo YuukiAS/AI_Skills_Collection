@@ -84,7 +84,7 @@ Domain owner：`render-chinese-math-pdf`
 - 第二次追问后才出现文件仍然是 D1 FAIL。
 - 基线 `probe.pdf` 证明当前客户端通道存在，但不能替代修复后最终候选 D1。
 - 不能通过换成 Chromium/browser PDF、图片、手工附件或降低字体/公式/模板质量来换取交付 PASS。
-- 不得读取或外传 CAT-TRACE 私有论文/数据来完成回归；使用公开安全/任务自建的非敏感 fixture。
+- 不得读取或外传 某私有统计研究项目 私有论文/数据来完成回归；使用公开安全/任务自建的非敏感 fixture。
 - 不能新增公网下载 URL、云盘、外部 API、付费模型、Slurm 作业/GPU 或新的 credential。
 - 如果正常宿主最终证明不能让正式 skill 使用现有文件入口，必须停止并回 Planner；“只改 SKILL.md 后测试字符串存在”不能冒充解决。
 - 不能把 `38706208966` 从 FAIL 改写为 PASS，也不能用“忽略 CI”作为恢复理由。
@@ -262,7 +262,7 @@ PASS：
 - 修改 `slurm-workflows` 业务源码、提交/取消 Slurm 作业或申请 GPU；
 - 修改 Research Authoring 的文稿语义、其他中央 plugin routing 或 Marketplace 拓扑；
 - 新建公共上传服务、第三方下载站、云盘同步、数据库、daemon、定时任务或 credential broker；
-- 读取/上传 CAT-TRACE 私有论文、私有数据、凭据；
+- 读取/上传 该项目 私有论文、私有数据、凭据；
 - 调用付费外部 API/model；
 - 降级为 Chromium/browser PDF、图片或低质量替代物；
 - 把维护看板工具缺失、Planner/Reviewer transport 形式或其他执行手续升级成新的产品 blocker；

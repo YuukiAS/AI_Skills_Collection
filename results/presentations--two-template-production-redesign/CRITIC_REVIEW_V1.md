@@ -162,7 +162,7 @@ V1.0 却把 #45 直接映射到 consistency pass + template roles + first-use，
 
 **真实风险**
 
-为了满足“TODO 全解决”而把 candidate 项全部写进 production，会把 CAT-TRACE 经验过早固化成跨项目规则，增加误杀合法页面、规则堆叠和 schema/validator 再膨胀的风险；同时破坏 canonical TODO 的 maturity truth。
+为了满足“TODO 全解决”而把 candidate 项全部写进 production，会把 某私有统计研究项目 经验过早固化成跨项目规则，增加误杀合法页面、规则堆叠和 schema/validator 再膨胀的风险；同时破坏 canonical TODO 的 maturity truth。
 
 **最小关闭条件**
 

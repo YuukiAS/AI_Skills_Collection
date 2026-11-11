@@ -17,8 +17,8 @@ promotion gate: after task 050 closes and the generic language layer identity is
 
 status: NEW
 owner: GPT_PLANNER
-source: CAT-TRACE real-use failure, 2026-10-28; repeated user rejection of low-information architecture/status/formula visuals for advisor-facing research updates
-problem: When the audience is an experienced advisor, collaborator, reviewer, or domain scientist, a visually polished architecture diagram, status card, formula restatement, toy trajectory, or “what is implemented” schematic can still be a poor scientific artifact. Repeated CAT-TRACE planning failures showed that the GPT planner may satisfy the literal request for “a figure” while choosing something that conveys almost no new evidence to an expert audience. This wastes presentation space, makes mature researchers look as if they are being taught basics, and can create the appearance of progress without a substantive result.
+source: a private research project real-use failure, 2026-10-28; repeated user rejection of low-information architecture/status/formula visuals for advisor-facing research updates
+problem: When the audience is an experienced advisor, collaborator, reviewer, or domain scientist, a visually polished architecture diagram, status card, formula restatement, toy trajectory, or “what is implemented” schematic can still be a poor scientific artifact. Repeated a private research project planning failures showed that the GPT planner may satisfy the literal request for “a figure” while choosing something that conveys almost no new evidence to an expert audience. This wastes presentation space, makes mature researchers look as if they are being taught basics, and can create the appearance of progress without a substantive result.
 
 required GPT-side behavior:
 - Before delegating any scientific figure to Codex or a renderer, identify the actual audience, the claim/evidence the audience should learn, and why a figure or table is the right carrier. For advisor/peer/reviewer audiences, assume substantial domain knowledge unless the user says otherwise.
@@ -53,10 +53,10 @@ promotion gate:
 
 status: NEW
 tracking: #50
-source: Asteria 2.0 / CAT-TRACE real use, 2026-09-13 to 2026-09-14; corroborated by the user's private official ChatGPT export audit (raw conversations are not committed here)
+source: Asteria 2.0 / a private research project real use, 2026-09-13 to 2026-09-14; corroborated by the user's private official ChatGPT export audit (raw conversations are not committed here)
 evidence: Asteria repeatedly reached late QA with user-visible graph defects involving arrow endpoints touching the wrong part of cards, connectors crossing avoidably, labels and cards crowding paths, visually awkward relation grammar, and broken/weak math presentation. The Asteria repo subsequently added `docs/design/SCIENTIFIC_GRAPH_VISUAL_SYSTEM.md` plus developer visual self-QA, which is evidence that the failure class is real but does not by itself prove a generic Scientific Visualization rule is already needed or consumed.
 problem: In an interactive scientific model map, connector routing, endpoint placement, label grouping and math rendering are not merely frontend decoration: they communicate model dependency, lineage or evidence structure. Mechanical DOM/bbox checks and generic test PASS can miss a diagram that is obviously misleading, cluttered or unreadable at normal scale.
-project-specific context: Asteria's current open-chevron arrow style, exact spacing values, CAT-TRACE entities and its Architecture/Lineage/Evidence view grammar are project-specific. They must not become a universal figure style.
+project-specific context: Asteria's current open-chevron arrow style, exact spacing values, a private research project entities and its Architecture/Lineage/Evidence view grammar are project-specific. They must not become a universal figure style.
 
 Planner triage before promotion:
 
@@ -85,11 +85,8 @@ Use this file for real publication-figure, schematic, poster and figure-QA feedb
 - Do not convert one venue/project palette preference into a global default without repeated evidence.
 - Real export/readability/accessibility failures can qualify as severe single-project production failures.
 
-### CAT-TRACE technical explainer exposed a generic-box flowchart that hid scientific branches
+### 私有技术讲解的流程图掩盖了必要分支
 status: NEW
-source: CAT-TRACE framework explainer user rejection, 2026-11-11
-evidence: exact rejected Markdown preserved at \`docs/provenance/CAT_TRACE_FRAMEWORK_EXPLAINED_ZH_REJECTED_2026-11-11.md\`; source artifact was \`YuukiAS/CAT-TRACE@docs/cat-trace-explainer-20261110\` \`docs/explainer/CAT_TRACE_FRAMEWORK_EXPLAINED_ZH.md\`. Positive comparison: \`todo/assurance-plugins-20261109\` \`docs/design/assurance/ASSURANCE_PROCESS_V6_20261110.d2\` (blob \`b1217c1b95e7b9f4a05ae84195e853540ea5841f\`) and \`ASSURANCE_DIAGRAM_SPEC_V6_20261110.md\` (blob \`7d36e12089452eb4d1f54163dbec74a180573de8\`).
-problem: The explainer's main diagram converted the method into a generic pipeline of boxes. Four scientifically different column classes were visually introduced, but their distinct computational routes were then collapsed into a mostly single chain; internal labels such as C01/C09 appeared without giving the reader a semantic model of what those stages mean. The diagram therefore encoded implementation order more strongly than scientific structure, and did not make it easy to see which objects share computation, where catalogue-zero and anonymous-zero handling differ, where paths rejoin, or where residual dependence sits relative to marginal fitting and prediction. The user explicitly rejected the diagram as unreadable and pointed to the Design + Delivery Assurance V6 diagram as the quality reference.
-positive-comparison observation: The Assurance V6 diagram first partitions the semantic system into Design Assurance, frozen-contract handoff and Delivery Assurance; node classes correspond to real roles/decisions/artifacts; normal, optional, repair, proposal and evidence edges have different meanings; decision branches and return loops are explicit; and the rendered artifact is checked for zero crossings, zero text-edge collisions and contained routing. The reusable lesson is not its colors or exact geometry. A scientific methods diagram should similarly freeze the real scientific objects and relationship types before choosing boxes/arrows, and should use branching, convergence, grouping and visual containment to expose distinctions that matter to the reader.
-project-specific context: CAT-TRACE's four column classes, catalogue/open-tail terminology and C01/C09 identifiers are project-specific. The generic issue is that scientific schematics must communicate object classes, shared-versus-distinct routes, decisions and dependency semantics rather than expose internal module IDs or reduce a structured method to a linear implementation pipeline.
-
+source: 某私有统计研究项目的技术讲解返修反馈，2026-11-11。
+evidence: 被拒稿件原文留在私有项目仓库，此处不保存。
+problem: 流程图把不同对象和处理路线压成一串通用方框，内部编号代替了读者能理解的名称。图应先明确对象、关系、分支、汇合及返回路径，再选择布局；最终查看渲染结果，检查文字与连线碰撞和路由可读性。这里仅记录图示语义与版式问题，不保存私有科学内容。

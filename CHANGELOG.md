@@ -890,7 +890,7 @@ Affected plugin changelog:
 
 ## 5.0.3 - 2026-09-01
 
-Repository `5.0.3` is a compatible release for YuukiAS/TRACE render-resource routing hardening.
+Repository `5.0.3` is a compatible release for <private repository> render-resource routing hardening.
 
 Repository bump decision: PATCH
 Reason: this release improves an existing central plugin's production render-routing behavior without adding a new repository-level capability or breaking existing contracts.
@@ -909,7 +909,7 @@ Unchanged plugin versions: `workflow-core 0.1`, `ai-skills-core 0.2`, `writing-s
 
 Changed repository behavior:
 
-- YuukiAS/TRACE Beamer/PDF guidance now preserves `/home/yuukias/render_resources/chinese_math_pdf` as the local render-resource location when the probe reports it.
+- <private repository> Beamer/PDF guidance now preserves `/home/yuukias/render_resources/chinese_math_pdf` as the local render-resource location when the probe reports it.
 - Render failures now require reporting exact missing resources, TinyTeX, TeX packages, fonts, or PDF QA tools for user installation approval.
 - A regression test now guards tracked guidance against retired server render paths.
 
@@ -942,7 +942,7 @@ Changed repository behavior:
 
 - Presentations existing-deck revision requests now route to an executable completion gate instead of relying on prose-only guardrails or Codex self-inspection.
 - The gate consumes reviewer-seen baselines, accepted-element ledgers, targeted feedback, rerender evidence, high-resolution problem pages, first-use dependency order, rendered scientific-object QA, English scientific-prose final pass after scientific freeze, and independent visual review.
-- Public-safe known-failure and unrelated reviewed regression fixtures cover the 045 failure classes without packaging private CAT-TRACE rendered pages, TRACE absolute paths, project page numbers, or project-specific scientific content into the installed plugin payload.
+- Public-safe known-failure and unrelated reviewed regression fixtures cover the 045 failure classes without packaging private a private research project rendered pages, TRACE absolute paths, project page numbers, or project-specific scientific content into the installed plugin payload.
 - The CUHK scientific layout renderer no longer hard-codes a TRACE checkout font path.
 
 Plugin changelog index: `docs/plugin-changelogs/README.md`.
@@ -1023,7 +1023,7 @@ Affected plugin changelogs:
 
 - Established the long-term real-world plugin refinement structure: source-only per-plugin TODO inboxes, promotion gates, six-layer ownership, and bounded Reviewed Handoff batch semantics.
 - Moved Presentation maintenance TODO/history files out of the active `research-presentations` runtime source into `docs/provenance/research-presentation-maintenance-archive-2026-08-30/`.
-- Added a compact runtime Presentation guardrails reference for mature cross-project revision rules without packaging CAT-TRACE project history or maintenance inboxes into ordinary plugin installs.
+- Added a compact runtime Presentation guardrails reference for mature cross-project revision rules without packaging a private research project project history or maintenance inboxes into ordinary plugin installs.
 - Documented the release-version versus capability-maturity split; `presentations` remains `alpha / Base v1`, and unreviewed plugin maturity stays unclassified rather than being marked stable.
 - Aligned CLI package, registry, marketplace config, generated plugin metadata, and README release version on `4.4.2`.
 - Added regressions for one TODO inbox per central plugin, maintenance payload hygiene, Presentation history separation, version consistency, maturity/SemVer separation, and source-to-generated parity.

@@ -87,7 +87,7 @@ v0.2 新增最小 incremental authoring contract。它不创建 database、ledge
 
 对 paired/bilingual artifacts，科学证据、数字、公式与 claim strength 必须同步；语言组织可按读者分别优化，不要求逐句对应。
 
-CAT-TRACE architecture-evolution 的真实维护规则直接支持这一合同：后续变化修改对应模块，而不是在末尾追加日期流水账。DII advisor report 的 bounded-result-slot 经验也说明，新结果到达后应只补结果槽与直接依赖解释，而不是把早先方法动机重写成“结果早已注定”。
+某私有统计研究项目 architecture-evolution 的真实维护规则直接支持这一合同：后续变化修改对应模块，而不是在末尾追加日期流水账。DII advisor report 的 bounded-result-slot 经验也说明，新结果到达后应只补结果槽与直接依赖解释，而不是把早先方法动机重写成“结果早已注定”。
 
 ### RA3 — ACCEPT（针对 v0.2 Critic 的窄缺口）
 
@@ -443,14 +443,14 @@ v0.3 继续只保留 4 个不同用户能力 Gate。RA3 的修订只改变 G2 �
 |---|---|---|---|---|---|---|---|
 | **G1 自然入口与边界** | 证明“科研文档生产必须消费 core”，并且 support-only/邻近领域不误触发；它不证明写得好 | ChatGPT 与 Codex 的自然语言请求；正例至少包括 Methods、research update、related work、existing document revision；near-miss 至少包括 citation verify、paper lookup、单句润色、README/邮件、PPT/Beamer、render-only、普通问答 | 对每个正例看到 core 实际消费后的 document brief/route decision；对负例看到正确 owner；不能只看 trigger match | 正例直接落到下层 skill 未消费 core；负例错误进入 Research Authoring；Chat/Codex 对同一任务给出不同 owner | 纯引用/lookup、Clear Writing、Presentations、renderer-only route 保持独立 | **需要**，对自然语言边界与实际 route 做独立定性判断；机械 routing evidence 只作辅助 | **是** |
 | **G2 科研文档语义组织与长期增量维护** | 证明同一个 final candidate 既能从原始科研证据独立建立 reader-first report-family 文档，又能在随后真实 evidence/decision delta 到达时按 RA2 最小依赖闭包更新而不漂移；它不证明 manuscript package 或跨表面分发 | **同一个预先冻结的真实 report-family task，连续两阶段。Phase 1 greenfield：** 从真实 repo evidence / notes / results / figures / prior decisions 开始，不能把已经整理好的 reader-facing report 当主要输入；normal entry 类似“把这几天研究整理成给老师看的报告”。**Phase 2 incremental：** Phase 1 通过后冻结其完整文档为 baseline；使用在整个 final G2 开始前已经冻结、且 Phase 1 authoring 输入范围明确排除的后续 evidence/decision delta，按 RA2 更新 minimal dependency closure | **Phase 1：** 原始 source/evidence scope、完整 advisor/research-update 或 research-evolution source/artifact、必要的 source/claim anchors；Reviewer 直接看到原始证据与完整成稿，并检查 reader-first structure、方法/数据 orientation、claim/evidence、流程/审计抑制、table/figure/formula role、reader-facing references vs internal provenance、Clear Writing handoff 后科学语义。**Phase 2：** frozen baseline、预冻结 delta、完整 candidate、baseline→candidate diff、protected-invariant evidence；Reviewer 直接比较 baseline/delta/candidate/diff | 任一阶段 FAIL 即 G2 FAIL。Phase 1 FAIL 包括：依赖已整理好的 reader-facing report 作为主要输入、按运行时间线组织、方法/数据背景不足、claim/evidence 漂移、内部状态/provenance 泄漏主文、表图公式职责错误、Clear Writing 后语义变化。Phase 2 FAIL 包括：非受影响正文大面积漂移；notation/citation/equation label/figure-table identity/cross-reference 无依据变化；claim strength/limitation 漂移；bounded result 被事后改写成必然结论；或为了通过 Phase 2 在 Phase 1 后修改产品/rubric/task/delta | Phase 1 不得借“reader-first”改写原始科学事实、数字、公式、引用权威、未完成状态；Phase 2 必须保护未受影响 accepted text、notation、citation keys、equation labels、claim/evidence、figure/table identity、cross references；G2 失败后开发可以修产品，但原 final evidence 失去 fresh 身份 | **必须**。同一独立 Reviewer/rubric 可以覆盖两个阶段，但必须直接看到 Phase 1 原始 evidence + 完整成稿，以及 Phase 2 baseline + delta + candidate + diff；不能只跑字符串、diff size 或自动评分 | **是。** final candidate 与 Reviewer rubric 在两个阶段开始前冻结，Phase 1 与 Phase 2 之间禁止 product/rubric 修改；同一 candidate 必须直接通过两阶段 |
-| **G3 正式论文生产包与跨文件一致性** | 证明真实 manuscript 任务能按 venue/task 选择必要文件并保持主文、补充材料、引用、图表与声明一致；它不证明 Chat/Codex 分发 | 一个真实 manuscript production task，优先使用 CAT-TRACE 当前 canonical manuscript/submission workspace 或另一个真实项目；在 final candidate 冻结前锁定任务与 venue/project authority | 完整选定 package：manuscript + 本任务实际需要的 supplement/bibliography/figures/tables/captions/metadata/contributions/declarations/checklist/submission files 的**按需子集**；同时提供 package selection rationale 与 cross-file consistency evidence | 固定生成无关 sidecars；遗漏 venue-required artifact；主文/补充/图表/引用矛盾；citation key/label 断裂；旧结果残留；模板被无依据改写 | 未触及章节、venue template、已有 label/cite identity、科学 claim scope | **必须**，并结合 citation/LaTeX 等专业检查；文件存在或 compile success 不算质量 PASS | **是** |
+| **G3 正式论文生产包与跨文件一致性** | 证明真实 manuscript 任务能按 venue/task 选择必要文件并保持主文、补充材料、引用、图表与声明一致；它不证明 Chat/Codex 分发 | 一个真实 manuscript production task，优先使用 该项目 当前 canonical manuscript/submission workspace 或另一个真实项目；在 final candidate 冻结前锁定任务与 venue/project authority | 完整选定 package：manuscript + 本任务实际需要的 supplement/bibliography/figures/tables/captions/metadata/contributions/declarations/checklist/submission files 的**按需子集**；同时提供 package selection rationale 与 cross-file consistency evidence | 固定生成无关 sidecars；遗漏 venue-required artifact；主文/补充/图表/引用矛盾；citation key/label 断裂；旧结果残留；模板被无依据改写 | 未触及章节、venue template、已有 label/cite identity、科学 claim scope | **必须**，并结合 citation/LaTeX 等专业检查；文件存在或 compile success 不算质量 PASS | **是** |
 | **G4 ChatGPT/Codex 双表面生产与最终产物** | 证明同一 canonical candidate 能从 Chat 形成可执行 authoring source/handoff，并由 Codex 正常生产最终 artifact；它不重复评估 G2/G3 的全部内容质量 | 选用已经通过 G2 或 G3 语义检查的一项真实任务，从 PRIVATE skills-only Chat wrapper 的自然请求开始，再交给 Codex `research-main` | wrapper/source identity、Chat 输出、Codex handoff、Codex canonical source update、真实最终 PDF/DOCX/LaTeX artifact、renderer/file QA、最终 Research Authoring scientific QA | wrapper 与 Codex core/Clear Writing snapshot identity 不一致；handoff 丢 audience/purpose/edit scope/venue/renderer contract；Codex 只调用 renderer 绕过 authoring；最终 artifact 不可读或科学语义漂移；只返回 repo path 不实际交付 requested artifact | Markdown-only Chat request 不强制 PDF；slide PDF 仍归 Presentations；support-only lookup 不变 | **必须**看真实 final artifact；identity/render 检查同时存在 | **是** |
 
 ### 7.1 Regression bank
 
 开发期优先回放已知真实失败：
 - DII advisor report 运行日志化、方法/数据背景不足、bounded result slot、双语拆分、公式强调、provenance 泄漏；
-- CAT-TRACE architecture evolution 按模块增量更新；
+- 该项目 architecture evolution 按模块增量更新；
 - Clear Writing 与 document semantics 边界；
 - renderer/document identity handoff；
 - current report/paper/litcite route near-miss。
@@ -467,7 +467,7 @@ v0.3 继续只保留 4 个不同用户能力 Gate。RA3 的修订只改变 G2 �
   2. Phase 1 若通过，立即把该文档冻结为 baseline；不修改 product 或 rubric，使用预先冻结的 Phase 2 delta 按 RA2 minimal dependency closure 更新同一文档，并直接审 baseline、delta、candidate、diff。
   3. 任一阶段失败都使 G2 FAIL。看到任一阶段输出后若修产品、改 rubric、换 task 或换 delta，原 final G2 终止；后续只能作为 development regression，新的 final candidate 需要新的 fresh evidence。
   4. 尽量用一个真实任务完成两阶段，不额外要求用户提供两套 report 任务。
-- **G3**：使用一个真实 manuscript production task；CAT-TRACE 当前 `paper/manuscript/` + `paper/submission/` 是合适候选，但正式 final task 必须在 candidate 冻结前确定确切 scope，不能跑后挑最好看的结果。
+- **G3**：使用一个真实 manuscript production task；该项目 当前 `paper/manuscript/` + `paper/submission/` 是合适候选，但正式 final task 必须在 candidate 冻结前确定确切 scope，不能跑后挑最好看的结果。
 - **G4**：可以复用已经通过 G2/G3 的同一真实任务做 integration proof，不额外制造第四个内容样本。
 
 用户不是 regression tester。开发与独立质评先完成；用户如需最终验收，只做一次真实消费确认，不承担多轮调试。

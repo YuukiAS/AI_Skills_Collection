@@ -69,6 +69,6 @@ CI blocker 关闭后，在正常“生成 PDF”任务的第一次完成回复�
 
 ## Non-blocking notes
 
-- 本轮没有发现修改 `render_scientific_pdf.py`、Pandoc/XeLaTeX 路线、字体/公式/模板、中央 plugin 版本、Bridge Kit、Slurm 或 CAT-TRACE 私有材料的证据。
+- 本轮没有发现修改 `render_scientific_pdf.py`、Pandoc/XeLaTeX 路线、字体/公式/模板、中央 plugin 版本、Bridge Kit、Slurm 或 某私有统计研究项目 私有材料的证据。
 - standalone skill `0.3`、repository `5.5.0` release candidate、README/CHANGELOG、registry/catalog 和 canonical TODO `tracking: #101` 的改动与冻结版本收口方向一致；中央 plugins 保持 `NO_BUMP`。
 - receipt 的 font check 含一条“未通过名称启发式识别 CJK font”的 warning，但同一 receipt 的实际字体表明确包含嵌入且子集化的 `NotoSerifSC`，QA errors 为空，整页像素和提取文本中的中文均正常，因此该 warning 不构成本轮 blocker。

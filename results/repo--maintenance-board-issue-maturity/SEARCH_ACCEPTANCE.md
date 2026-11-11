@@ -58,7 +58,7 @@ Live titles:
 - #19: Keep style cleanup downstream of scientific structure
 - #21: Keep research authoring separate from the generic language layer
 - #25: Distinguish research-document semantics from comparison/render packaging
-- #29: CAT-TRACE v13/v14 follow-up feedback is consolidated into the canonical inbox
+- #29: a private research project v13/v14 follow-up feedback is consolidated into the canonical inbox
 - #92: 完善 AI Skills Maintenance Board 的 Issue 分类与 intake
 
 ### cross_repo

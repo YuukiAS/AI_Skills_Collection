@@ -229,7 +229,7 @@ Mode B 不得把 Saved Memory / profile summary / generic remembered fact 当作
 也必须：
 
 - 只使用能够归因于**当前 Project 目标旧 conversation**的聊天信息作为 recovery evidence；
-- 不因为模型“记得用户曾做 CARE / CAT-TRACE / Bridge”就当作旧 thread 的当前状态；
+- 不因为模型“记得用户曾做 CARE / 某私有统计研究项目 / Bridge”就当作旧 thread 的当前状态；
 - 如果某个关键 claim 无法判断是否来自目标 Project conversation，则不把它当作 recovered decision。
 
 Project-only memory 可以提供更强平台隔离，但 V4 不要求用户改变 Project 设置。
@@ -440,7 +440,7 @@ Recovered state 至少应正确恢复核心语义：
 - 如果存在明确 target locator，正常情况不要求确认；
 - ambiguous-target fixture 只允许一次最小 disambiguation；
 - canonical engineering facts 仍回到 current repo/artifact；
-- existing CAT-TRACE/CardiacNexus representative fixtures继续证明 latest-decision/generalization；
+- existing private-project/CardiacNexus representative fixtures继续证明 latest-decision/generalization；
 - no cross-Project recovery by default；
 - no Bridge Kit dependency / no transcript database。
 

@@ -1,5 +1,6 @@
 {
-  "cat_trace": {
+  "private_project": {
+    "project_name": "PRIVATE-PROJECT-X",
     "scenario": "A long research thread explored several early model and notation routes, then the user froze a later model/notation/data decision.",
     "must_preserve": [
       "later frozen decisions override early assistant exploration",

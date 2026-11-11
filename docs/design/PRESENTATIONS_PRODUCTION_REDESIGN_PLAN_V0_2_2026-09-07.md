@@ -23,7 +23,7 @@ The current presentations plugin contains real capabilities: source fidelity, au
 3. producing an artifact through Beamer, PPTX, Slides, or another renderer;
 4. proving completion through schemas, packets, validators, fixtures, and reviewer decisions.
 
-CAT-TRACE v4–v8 repeatedly showed that more complete packets and more local checks did not prevent a deck from remaining difficult to follow. CAT-TRACE v9 improved mainly because the task fixed the audience, page job, prerequisite knowledge, reason for introducing each term, and intended takeaway before writing visible copy. CAT-TRACE v10–v14 then showed that local page correctness still does not guarantee cross-page continuity, useful diagrams, claim-first figures, or honest review scope.
+a private research project v4–v8 repeatedly showed that more complete packets and more local checks did not prevent a deck from remaining difficult to follow. a private research project v9 improved mainly because the task fixed the audience, page job, prerequisite knowledge, reason for introducing each term, and intended takeaway before writing visible copy. a private research project v10–v14 then showed that local page correctness still does not guarantee cross-page continuity, useful diagrams, claim-first figures, or honest review scope.
 
 V0.1 correctly moved the architectural center away from exact CUHK generation, gold layouts, and schema completeness toward a semantic storyboard. The Critic identified one remaining structural ambiguity: v0.1 allowed the page brief to carry the scientific object, composition intent, and density budget while the page-composition planner also owned form, hierarchy, density, and spatial organization. That overlap would let a future implementation create `semantic_storyboard.yaml` with fields such as `RESULT_FIGURE`, `two-column`, and `density=medium`, then continue the old architecture under a new name.
 
@@ -56,7 +56,7 @@ The first step is semantic and sequential. The second is compositional and spati
 | Current broad planning artifact | `shared/deck-plan.schema.json` / `deck-plan.yaml` |
 | Executable research entry | `generate_research_presentation_production_entry.py` |
 | Existing-deck gate | `validate_existing_deck_revision_entry.py` |
-| Main real-use evidence | CAT-TRACE v4–v14 feedback, current-cycle reports, Reviewed Handoff history, plugin TODO |
+| Main real-use evidence | a private research project v4–v14 feedback, current-cycle reports, Reviewed Handoff history, plugin TODO |
 
 ### 1.2 Current production behavior
 
@@ -70,7 +70,7 @@ The first step is semantic and sequential. The second is compositional and spati
 
 ### 1.3 Real production feedback
 
-**VERIFIED FACT.** CAT-TRACE feedback repeatedly found the following failures despite valid files and increasingly complete QA artifacts:
+**VERIFIED FACT.** a private research project feedback repeatedly found the following failures despite valid files and increasingly complete QA artifacts:
 
 - a page existed without a clear reason for appearing at that moment;
 - a term was defined but the audience still did not know why it mattered now;
@@ -81,7 +81,7 @@ The first step is semantic and sequential. The second is compositional and spati
 - a scoped review issued a global PASS;
 - a full deck remained visually uneven even when page-level checks were marked ready.
 
-**VERIFIED FACT.** CAT-TRACE v9 improved substantially while the installed runtime remained essentially unchanged. The improvement came from pre-writing audience/page-job/prerequisite/takeaway planning and a full-deck first-use pass.
+**VERIFIED FACT.** a private research project v9 improved substantially while the installed runtime remained essentially unchanged. The improvement came from pre-writing audience/page-job/prerequisite/takeaway planning and a full-deck first-use pass.
 
 **VERIFIED FACT.** The frozen real four-paper batch failed 4/4. Two cases failed before rendering because no compatible gold composition was found; two rendered cases did not receive effective pixel-changing repair and retained visible blockers.
 
@@ -282,7 +282,7 @@ Business mode may share front door, semantic-sequence lifecycle, composition, re
 |---|---|---|---|
 | A. Current schema-heavy orchestrator | observable and already implemented | schema completion can masquerade as communication quality | reject as center |
 | B. V0.1 mixed storyboard/composition | moves focus toward audience meaning | page brief and composer can both decide page form | revise, not selected |
-| C. Strict semantic storyboard + page-composition planner + adapters | directly matches CAT-TRACE evidence and prevents renamed-schema regression | boundary can still erode unless tested on real artifacts | **selected** |
+| C. Strict semantic storyboard + page-composition planner + adapters | directly matches a private research project evidence and prevents renamed-schema regression | boundary can still erode unless tested on real artifacts | **selected** |
 | D. Slide-object compiler as center | strong geometry and editability | polished but semantically wrong decks | use below composition as adapter mechanism |
 | E. Direct whole-deck generation | low control-plane overhead | unstable revisions, hidden fallback, weak traceability | experimental baseline only |
 
@@ -492,7 +492,7 @@ The integration ladder remains: `DISCOVERED -> DOWNLOADED -> INSPECTED -> STRUCT
 
 ### 13.1 Minimum real task set
 
-1. CAT-TRACE group meeting with real advisor decisions;
+1. a private research project group meeting with real advisor decisions;
 2. conference-length talk from a manuscript;
 3. defense or long seminar with prerequisites and backup;
 4. bounded existing-deck revision with accepted pages;
@@ -674,4 +674,4 @@ Research-writing owns document argument and allocation. Presentations owns live 
 - `skills/tools/documents-media/presentations/research-presentations/SKILL.md`
 - `skills/tools/documents-media/presentations/business-presentations/SKILL.md`
 - `skills/tools/documents-media/presentations/shared/**`
-- CAT-TRACE v4–v14 feedback recorded in `docs/plugin-todos/presentations.md`
+- a private research project v4–v14 feedback recorded in `docs/plugin-todos/presentations.md`

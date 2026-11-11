@@ -626,7 +626,7 @@ YES。
 ### G9 — Cross-mode normal-entry, generalization and production integration
 
 Capability:
-同一 final candidate 在主要模式和真实安装身份下工作，不是只对 CAT-TRACE/Chapter1 特判。
+同一 final candidate 在主要模式和真实安装身份下工作，不是只对 private-project/Chapter1 特判。
 
 Evidence:
 风险匹配的跨模式 final batch至少覆盖：
@@ -639,7 +639,7 @@ Evidence:
 任务数量不机械固定；由改动 blast radius 和 Critic pre-final review 冻结。
 
 FAIL:
-只在 helper/fixture成功；换 candidate拼证据；只 CAT-TRACE selector有效；安装后的 plugin/Marketplace/profile 与被测 source不一致；某模式被 silent fallback。
+只在 helper/fixture成功；换 candidate拼证据；只 某私有统计研究项目 selector有效；安装后的 plugin/Marketplace/profile 与被测 source不一致；某模式被 silent fallback。
 
 Regression boundary:
 不要求每种任务都使用两个内置 template；business/editable 保持 official adapter。
@@ -670,7 +670,7 @@ YES。
 ### H3 — Regression bank and fresh-evidence integrity
 
 - cheap deterministic regressions 与 should-not-change 先跑；
-- CAT-TRACE known failures作为开发回归，可反复用，但不再叫 fresh；
+- 该项目 known failures作为开发回归，可反复用，但不再叫 fresh；
 - fresh/generalization batch 只在 candidate + rubric 冻结后运行；
 - grader/reviewer修复与 product修复分别记录。
 
@@ -790,7 +790,7 @@ Stage 2 semantic contracts；existing renderer/render QA。
 
 Stop conditions:
 - 解决 diagram回归需要 renderer-wide geometry subsystem；
-- 为通过 Gate需要硬编码 CAT-TRACE page/method；
+- 为通过 Gate需要硬编码 该项目 page/method；
 - generic occupancy阈值开始误杀 sparse pages。
 
 Recovery:
@@ -1078,7 +1078,7 @@ Generated layer只能通过现有 generator重建并验证 source/generated pari
 - Bridge Kit change；
 - ltx-talk migration；
 - full PDF/UA claim；
-- CAT-TRACE page/method-specific selectors；
+- a private research project page/method-specific selectors；
 - Chapter1 content copying；
 - automatic promotion #44–#48；
 - gold-layout hard gate；

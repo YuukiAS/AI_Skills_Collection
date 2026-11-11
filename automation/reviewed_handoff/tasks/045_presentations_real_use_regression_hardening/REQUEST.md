@@ -2,7 +2,7 @@
 
 ## Objective
 
-在继续 CAT-TRACE v5 之前，用 CAT-TRACE v4 这次真实返修作为**已知 replay**，审查并按需加固当前 `presentations` plugin 的 existing-deck revision 生产路径。目标不是把 CAT-TRACE 的页码、模型、术语或审美偏好硬编码进 plugin，而是解决一个已经跨多轮重复的事实：当前 active presentation rules 明明已经写了 first-use、diagram、render QA、accepted-element regression、figure readability 等要求，真实 Codex 返修仍能产出明显违反这些规则的最终 PDF。
+在继续 某私有统计研究项目 v5 之前，用 该项目 v4 这次真实返修作为**已知 replay**，审查并按需加固当前 `presentations` plugin 的 existing-deck revision 生产路径。目标不是把 该项目的页码、模型、术语或审美偏好硬编码进 plugin，而是解决一个已经跨多轮重复的事实：当前 active presentation rules 明明已经写了 first-use、diagram、render QA、accepted-element regression、figure readability 等要求，真实 Codex 返修仍能产出明显违反这些规则的最终 PDF。
 
 本任务必须先判断问题究竟属于：
 
@@ -15,9 +15,9 @@
 
 ## Real evidence
 
-- 真实项目：`YuukiAS/TRACE`
-- 已知 replay baseline：CAT-TRACE group-meeting deck v4，TRACE commit `e36cb5d93fc882ce158d88ac9201fe494b98b69a`
-- v4 PDF/source 只从本机 TRACE checkout 读取；不要把未公开 CAT-TRACE 正文、完整 PDF 或项目专属内容复制到公开 `AI_Skills_Collection`
+- 真实项目：`<private repository>`
+- 已知 replay baseline：该项目 group-meeting deck v4，私有来源（定位不在此保存）
+- v4 PDF/source 只从本机 TRACE checkout 读取；不要把未公开 该项目 正文、完整 PDF 或项目专属内容复制到公开 `AI_Skills_Collection`
 - 中央真实反馈已写入：
   - `docs/plugin-todos/presentations.md`
   - `docs/plugin-todos/writing-style.md`
@@ -42,11 +42,11 @@
 
 - 目标 owner plugin 是 `presentations`；`writing-style` 是相邻能力，不要让 writing-style 接管 layout、scientific structure 或 rendering。
 - 不新建顶级 plugin、skill、workflow state machine 或大型 schema family。
-- 不把 CAT-TRACE 的页码、theorem 名称、模型组件、数据集或特定英语句子写成通用 selector / hard-code。
-- 已知 CAT-TRACE v4 只能证明 known failure 被修复，不能称作 unseen generalization。
-- 必须有至少一个与 CAT-TRACE 无关的现有 presentation regression / fixture，证明改动没有把其他 research deck 过度限制。
+- 不把 该项目的页码、theorem 名称、模型组件、数据集或特定英语句子写成通用 selector / hard-code。
+- 已知 该项目 v4 只能证明 known failure 被修复，不能称作 unseen generalization。
+- 必须有至少一个与 该项目 无关的现有 presentation regression / fixture，证明改动没有把其他 research deck 过度限制。
 - `scientific-prose` 先做 baseline-first：如果当前 skill 已经能自然改好 representative English slide prose，则只修 `presentations` 的 routing/completion gate；只有当前 `scientific-prose` 本身真实失败时，才允许把 writing-style 相关问题升级到另一个 bounded task。
-- 不在本任务生成 CAT-TRACE v5；本任务通过后，用户再回 TRACE 做下一版。
+- 不在本任务生成 该项目 v5；本任务通过后，用户再回 TRACE 做下一版。
 
 ## Expected outcome
 

@@ -221,7 +221,7 @@ Do not modify:
 
 - `YuukiAS/GPT_Codex_AI_Bridge_Kit`;
 - Longleaf_Bridge;
-- CAT-TRACE / CARE scientific logic;
+- a private research project / CARE scientific logic;
 - other standalone Skills except unavoidable shared environment install parity;
 - central Plugin production behavior/topology;
 - Host Policy;
