@@ -251,7 +251,8 @@ Clear Writing 负责最终解释清晰度与语言质量
 ## 11. 当前明确决定
 
 - 这是一个真实、跨领域、重复出现的问题；
-- **不由 Clear Writing 暂时承担**；
-- 候选方向是新增独立插件，而不是继续给 `writing-style` 塞规则；
-- 本轮只创建立项种子文件，不声称插件已经实现、安装或发布；
-- 下一步应以本文件和真实对话失败为输入，独立完成插件设计、触发边界、回放集和实现方案，再决定正式 Marketplace 接入。
+- **不由 Clear Writing 承担**；
+- 2026-11-12 用户已确认：Warm Response 属于 **ChatGPT 全局协作指令**，不再推进独立 Plugin 或 standalone Skill；
+- 本文件及其真实对话继续作为全局指令设计和回归测试的证据来源；
+- 后续候选配置由 `YuukiAS/AI_Instruction_Configuration` 管理，当前入口为 `candidate/warm-response-personalization`；
+- Codex / GPT Work 不要求对称注入同类人际回应层。
