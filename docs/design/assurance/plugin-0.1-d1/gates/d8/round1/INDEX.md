@@ -1,6 +1,6 @@
 # D8 读者复述：第 1 轮
 
-受审 Blueprint：`docs/design/assurance/plugin-0.1-d1/blueprint.json`，提交 `a21edaaaafbd749d4ab1c079da5496d722ccd251`。共 51 个复述单位，每个单位开一个全新的 GPT 对话（Thinking，推理强度调到最高），把对应提示词整段贴进去。不要在同一个对话里跑两个单位。
+受审 Blueprint：`docs/design/assurance/plugin-0.1-d1/blueprint.json`，提交 `8962039f88b35668e8d27f282282ac596a8d679e`。共 53 个复述单位，每个单位开一个全新的 GPT 对话（Thinking，推理强度调到最高），把对应提示词整段贴进去。不要在同一个对话里跑两个单位。
 
 读者结果写回 `results/`。D1 会逐条对照原意判断是否复述正确，再整理成检查器要求的 `readability-review.json`。复述有误的步骤由 D1 改写文字，下一轮换新读者重读。
 
@@ -57,3 +57,5 @@
 | 49 | `fail-package-step-2` | 失败处理（fail-package） | 发现与传递异常 | `prompts/49-fail-package-step-2.md` |
 | 50 | `fail-package-step-3` | 失败处理（fail-package） | 识别问题并交回 | `prompts/50-fail-package-step-3.md` |
 | 51 | `fail-package-whole` | 失败情形整体收场（fail-package） | 整体收场说明 | `prompts/51-fail-package-whole.md` |
+| 52 | `fail-revocation-step-1` | 失败处理（fail-revocation） | 复核签发后的新事实 | `prompts/52-fail-revocation-step-1.md` |
+| 53 | `fail-revocation-whole` | 失败情形整体收场（fail-revocation） | 暂停与撤回的收场 | `prompts/53-fail-revocation-whole.md` |
