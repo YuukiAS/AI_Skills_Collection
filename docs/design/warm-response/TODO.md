@@ -7,7 +7,7 @@
 > Canonical product-shape decision: `docs/design/SHARED_CAPABILITY_PRODUCT_SHAPE_DECISIONS_2026-11-12.md`.
 
 
-> Candidate-plugin TODO. Warm Response is still a planned independent plugin; this file records real-use failures and does not claim production implementation or release.
+> Historical evidence TODO for the Warm Response global-collaboration candidate. This file records real-use failures; it is not a Plugin / Skill implementation queue and does not claim live configuration.
 >
 > Related seed: `WARM_RESPONSE_PLUGIN_SEED_2026-10-30.md`
 
