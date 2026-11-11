@@ -1,5 +1,12 @@
 # artifact-content-design — Long-Term TODO
 
+> **USER_DECISION_2026-11-12 — 产品形态已确认。**
+>
+> Artifact Content Design 固定为 **共享 standalone Skill**，不做独立 Plugin。它由适用的产物型插件/能力消费，至少覆盖制作前的可见内容准入与层级判断，以及**真实渲染后的整件作品复审**。后文仍保留的 “standalone skill / shared contract / Artifact Director / 分散到各 owner” 等比较属于历史研究问题，不再表示产品形态仍待用户裁决。
+>
+> Canonical product-shape decision: `docs/design/SHARED_CAPABILITY_PRODUCT_SHAPE_DECISIONS_2026-11-12.md`.
+
+
 Future standalone capability for deciding what a reader-facing artifact should visibly contain before or alongside rendering.
 
 ## Open candidates
