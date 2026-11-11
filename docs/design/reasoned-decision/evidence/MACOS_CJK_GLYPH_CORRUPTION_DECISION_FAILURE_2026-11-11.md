@@ -115,3 +115,76 @@ macOS `atsutil` 文档明确表明，移除字体数据库会影响激活状态�
 - **同型外部案例只能提升候选概率，不能替代当前机器验证。** Firefox 的 `fontd` 修复证据不能直接升级成 Edge + 飞书的确定根因。
 - **用户明确的变更成本约束必须进入 Task State。** “不把系统升级/整机重启作为优先动作”是当前硬约束，不得被通用排障模板覆盖。
 - **fallback 需要 Gap Proof。** 只有更小、可逆、局部动作已经证明不足，才能升级到系统级恢复。
+
+
+## 2026-11-11 现场审计后的 Decision Delta
+
+字体完整性审计与触发时间线审计已经完成，新增证据足以重新排序候选，但仍不足以宣称单一根因已被完全证明。
+
+### 已确认事实
+
+1. Font Book 验证 221 个字体文件全部通过，无红色失败或黄色警告；重复字体检查为 `No Duplicates Found`；`atsutil fonts -list` 未报告注册一致性错误；`~/Library/Fonts` 为空。由此，“损坏字体、用户字体覆盖、Font Book 可见重复字体”从主因候选降为低优先级。
+
+2. 2026-11-11 00:24:46，`mobileassetd` 记录字体资产下载请求；00:24:50 下载成功落盘。Acrobat 安装日志在 00:26:07 记录了 CoreText 注册操作。该时间线发生在同日中午首次出现 CJK wrong-glyph 之前。
+
+3. 当前机器同时存在：
+   - 系统 `/System/Library/PrivateFrameworks/FontServices.framework/Versions/A/Resources/Reserved/PingFangUI.ttc`
+   - MobileAsset `/System/Library/AssetsV2/com_apple_MobileAsset_Font8/86ba2c91f017a3749571a82f2c6d890ac7ffb2fb.asset/AssetData/PingFang.ttc`
+
+4. 对两套文件按真实 font face 检查发现 24 个完全相同的 PostScript 名称。以 `PingFangSC-Regular` 为例：
+   - 系统版 glyph count = 47,102
+   - 下载版 glyph count = 49,533
+   - 同一测试句 19 个字符的 glyph ID 全部不同，例如“周”在系统版为 1415、下载版为 1966。
+
+5. 当前新进程中的 CoreText 默认查找仍指向系统 `PingFangUI.ttc`；系统 UI fallback 与显式请求 `PingFang SC` / `PingFangSC-Regular` 在新进程中一致。因此“当前系统默认已经永久切换到下载版字体”没有证据支持。
+
+6. 飞书发生 wrong-glyph 后，完全退出并重新启动即可恢复。这说明坏状态至少可以被应用进程生命周期重置，支持“长驻应用持有旧 font-face/glyph mapping 或 renderer cache”的解释。
+
+7. Edge 的当前主进程在字体注册事件之前已经运行；磁盘上的 Edge 于 11:08:40 更新为 157.0.4341.46，但主进程仍加载此前落盘的 157.0.4341.42。因此 Edge 的应用更新不能解释 00:26 之前到中午之间的共同触发链，当前降权。
+
+8. 11:28:53 WindowServer 记录显示器 `hotplug in` 与模式重配，时间上接近中午首次观察到 wrong-glyph；它可能是使长驻 renderer 重新绘制/重新取字体 face 的近端触发条件，但当前只能标记为 plausible，不能认定为主因。
+
+### 更新后的候选排序
+
+**SUPPORTED：Acrobat 安装流程触发 MobileAsset PingFang 下载与 CoreText 注册，改变了系统可见字体集合。**
+
+这是目前唯一同时满足“今天首次发生”“跨多个应用”“字体文件本身健康”“两套同名 face 的 glyph table 不同”四个条件的共同上游事件。
+
+**STRONGLY PLAUSIBLE：长驻应用/renderer 在字体集合变化后保留了旧 font-face 身份或 glyph mapping，后续重绘时把一个 face 的 glyph ID 交给另一个同名 face 绘制。**
+
+它能直接解释：
+- 正确文本被画成另一批合法汉字；
+- 英文/数字基本正常；
+- 飞书完全退出重开后立即恢复；
+- 当前新进程 CoreText 查询已经正常；
+- 两个同名 PingFang face 的 glyph ID 实际不同。
+
+该链路尚未在故障时抓到应用内部 font cache，因此不能提升为“已证实根因”。
+
+**PLAUSIBLE：11:28 左右显示器 hotplug / 模式重配作为近端触发。**
+
+它可能迫使 renderer 重建 glyph atlas 或进行重绘，从而暴露已存在的 font-face identity 错配。当前没有证据证明显示器重配本身会独立制造问题。
+
+**DOWNRANKED：Edge / 飞书自身近期更新。**
+
+飞书没有当天更新证据；Edge 主进程故障时仍是旧运行实例，磁盘更新后的版本尚未进入该进程。它们仍可能决定“为什么这个 bug 能被触发”，但不能解释两者共享的当天字体注册事件。
+
+**DOWNRANKED：坏字体、用户字体覆盖、普通重复字体。**
+
+Font Book、CoreText 和注册检查均未发现支持证据。
+
+### 当前推荐
+
+当前不删除或停用 MobileAsset PingFang，不修改系统字体，不执行 `atsutil databases -remove*`，不重置 Font Book，不升级 macOS，也不把整机重启作为主方案。
+
+短期最小动作：
+- 避免重复触发同一 Acrobat 安装流程；
+- 对字体注册事件发生前已经长期运行、且出现错字形的应用，完全退出再启动，以重建进程内字体/renderer 状态；
+- 如果当前所有应用已正常，不额外执行 `killall fontd`。
+
+长期处理只在以下条件触发升级：
+- 后续在没有新的字体注册事件时再次复发；
+- 新启动应用也出现 wrong-glyph；
+- 或能捕获故障时应用内部实际使用的 font face / glyph mapping，证明仍在混用两套 PingFang。
+
+在这些条件出现前，删除系统下载字体或关闭 GPU 加速都没有 Gap Proof。
