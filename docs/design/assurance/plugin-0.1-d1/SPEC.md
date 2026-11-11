@@ -401,7 +401,7 @@ D5–D8可以并行读取同一稳定受审版本。D1收集到修改意见后�
 
 ### 6.4 冻结记录和接收
 
-`freeze.json`必填 `schema_version:"assurance-freeze/0.1",task_id,blueprint_ref,blueprint_sha256,document_version,semantic_version,semantic_hash,nine_item_refs,gate_refs,open_questions,user_approval,authorization_refs,created_by,created_at`。`nine_item_refs`恰好九项，每项引用现有节点/字段；`semantic_hash`（采自设计 B）是把九项所引用的内容按规范化 JSON（键排序、UTF-8、无多余空白）拼接后的 SHA-256，只覆盖九项语义，不覆盖错字所在的说明文字；它是判断“语义版本是否改变”的机械依据，投影与 Blueprint 当前内容算出的值不一致时拒绝交付派发；`gate_refs`恰好D5–D8并说明覆盖与有效性；冻结时阻塞型 `open_questions`必须为空；`user_approval`含用户实际回答、来源、时间和批准对象身份。未批准时不得生成带批准值的冻结记录。
+`freeze.json`必填 `schema_version:"assurance-freeze/0.1",task_id,blueprint_ref,snapshot_sha256,bundle_sha256,document_version,semantic_version,semantic_hash,nine_item_refs,gate_refs,open_questions,user_approval,authorization_refs,created_by,created_at`。`nine_item_refs`恰好九项，每项引用现有节点/字段；`snapshot_sha256`、`semantic_hash`、`bundle_sha256` 的定义与用途见第 6.5 节，`freeze.json` 同时记录这三项；`gate_refs`恰好D5–D8并说明覆盖与有效性；冻结时阻塞型 `open_questions`必须为空；`user_approval`含用户实际回答、来源、时间和批准对象身份。未批准时不得生成带批准值的冻结记录。
 
 D1给用户的冻结说明至少讲清交付能力、正常入口、允许实现自由度、不可降级边界、权限费用及尚未实现部分。用户批准内容版本后，才生成不可变快照和记录。工具成功创建快照不是用户批准；所有必要授权也不能从“同意设计”自动推导。
 
@@ -409,11 +409,13 @@ X1接收记录为 `handoff_id,from_thread,to_thread,freeze_ref,read_artifacts,ac
 
 ### 6.5 冻结对象与语义哈希的精确定义（D7 第 1 轮后由 D1 补定）
 
+**规范化规则（D7 第 6 轮后补定）。** 本规格所有“内容哈希”（`snapshot_sha256`、`semantic_hash`、`brief_sha256`）的输入，都是按 [RFC 8785 JSON Canonicalization Scheme（JCS）](https://www.rfc-editor.org/rfc/rfc8785) 规范化后的 UTF-8 字节，不加结尾换行。JCS 统一规定了键排序（按 UTF-16 码元）、字符串转义（非 ASCII 字符原样输出，不写成 `\u` 转义）和数字格式（ECMAScript 规则），所以同一个 JSON 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入、规范化字节的十六进制和 SHA-256，至少覆盖中文字符串、嵌套对象的键排序和整数，各端必须逐字节通过。`bundle_sha256` 例外：它是冻结输出文件原始字节的 SHA-256，不做规范化。
+
 **三个身份，各管一件事。**
 
 | 身份 | 怎样计算 | 用途 |
 |---|---|---|
-| `snapshot_sha256` | Blueprint 检查器 `snapshotOf` 取出的内容快照（`title,summary,sources,requirements,nodes,connections,evidence,walkthroughs,failurePaths,failureQuestions,complexityNote`，不含 `id`、`schemaVersion`、`versions`），按规范化 JSON（键排序、UTF-8、无多余空白）计算 SHA-256 | 用户批准的对象；D5 草稿档、D6、D7、D8 的结果都绑定它 |
+| `snapshot_sha256` | Blueprint 检查器 `snapshotOf` 取出的内容快照（`title,summary,sources,requirements,nodes,connections,evidence,walkthroughs,failurePaths,failureQuestions,complexityNote`，不含 `id`、`schemaVersion`、`versions`），按RFC 8785（JCS）规范化 JSON 的 UTF-8 字节（不加结尾换行）计算 SHA-256 | 用户批准的对象；D5 草稿档、D6、D7、D8 的结果都绑定它 |
 | `semantic_hash` | 见下文 | 判断语义版本是否改变；小修判定与交付派发核验 |
 | `bundle_sha256` | 冻结命令输出的、带 `versions` 历史的完整 Blueprint 文件本身的 SHA-256 | 冻结后文件的存档身份；X1 接收时核对 |
 
@@ -433,7 +435,7 @@ X1接收记录为 `handoff_id,from_thread,to_thread,freeze_ref,read_artifacts,ac
   - 顶层 `sources,evidence,title,summary,complexityNote`。
 
   节点的 `terminal`（包括 `mechanism`、`acceptance`、`retry`、`packages` 等）、顶层 `failureQuestions` 以及以后新增的任何字段，默认都在覆盖范围内。要排除新字段，只能由 D1 修改这份排除清单。
-- **计算：** 删去后的对象按规范化 JSON（键排序、UTF-8、无多余空白）计算 SHA-256。任何定义内容的变化都会改变它，不需要判断哪段文字是语义。
+- **计算：** 删去后的对象按RFC 8785（JCS）规范化 JSON 的 UTF-8 字节（不加结尾换行）计算 SHA-256。任何定义内容的变化都会改变它，不需要判断哪段文字是语义。
 - **与小修的关系：** `semantic_hash` 改变只说明“定义内容变了”，不自动等于大改。第 5.1 节的小修（错字、非语义说明）也会改变它；这时 D1 写一条修订记录，字段包括 `from_semantic_hash`、`to_semantic_hash`、字段级差异、逐条等价理由和新的 D5 结果，作为一条“继承记录”。
 - **派发核验，按阶段绑定不同对象（D7 第 3 轮后补定）：** 每次派发都在派发记录的 `based_on` 里写明绑定对象，再按角色检查：
   - **生成设计或核查事实的角色（D2、D3、D4）：** 绑定“设计任务书”的身份 `brief_sha256`（D7 第 4 轮后补定）。设计任务书是 D1 在 `D1-clarify` 结束时写出的不可变文件 `design/briefs/<brief_version>.json`，字段为 `schema_version:"assurance-brief/0.1",task_id,brief_version,requirements,user_decisions,facts,open_questions,read_allowlist,read_denylist,created_at`：
@@ -443,7 +445,7 @@ X1接收记录为 `handoff_id,from_thread,to_thread,freeze_ref,read_artifacts,ac
     - `open_questions`：允许设计者自行处理的开放事项；
     - 读写范围：允许设计者读取的材料范围。
 
-    它只包含需求、决定和事实，不含任何设计倾向，D2 和 D3 读到的是同一份。重新设计或大改时，若需求有变，D1 写新版本的任务书。`brief_sha256` 是对整个任务书 JSON 对象按规范化 JSON（键排序、UTF-8、无多余空白）计算的 SHA-256，所有字段都参与，与本节其他身份用同一套规范化规则；派发方、接收方和只读记录检查都按这一定义计算（D7 第 5 轮后补定）。派发记录的 `based_on` 写 `brief_sha256`；之后任务书再出新版本，绑定旧版的结果标为 `stale`，由 D1 判断还能支持哪些部分。D4 若在任务书之前就需要做现实核查，D1 先写一份只含待核实问题的任务书版本。
+    它只包含需求、决定和事实，不含任何设计倾向，D2 和 D3 读到的是同一份。重新设计或大改时，若需求有变，D1 写新版本的任务书。`brief_sha256` 是对整个任务书 JSON 对象按RFC 8785（JCS）规范化 JSON 的 UTF-8 字节（不加结尾换行）计算的 SHA-256，所有字段都参与，与本节其他身份用同一套规范化规则；派发方、接收方和只读记录检查都按这一定义计算（D7 第 5 轮后补定）。派发记录的 `based_on` 写 `brief_sha256`；之后任务书再出新版本，绑定旧版的结果标为 `stale`，由 D1 判断还能支持哪些部分。D4 若在任务书之前就需要做现实核查，D1 先写一份只含待核实问题的任务书版本。
   - **检查已有设计的角色（D5–D8，包括小修后重跑的 D5、大改后的整轮关卡）：** 绑定本次受审的 `snapshot_sha256`，只检查受审文件确实是这个快照，不检查批准链。首次冻结前没有获批值，也照常派发。
   - **依据冻结合同的工作（X1 接收，X2–X5 的实施、验收、专项和裁判）：** 绑定一个“有效冻结对象”，即获批的 `semantic_hash`，或者从它出发沿完整继承链到达的值。链条断开、有记录不满足第 5.1 节，或者遇到大改记录，就拒绝这次派发并退回 D1。
   - **交付期间出现修订：** 正在编辑的草稿不影响交付派发。未受影响的工作继续绑定原有效冻结对象；只有暂停范围（`paused_scopes`）内的节点暂停派发。小修的继承记录写完后，新值才成为有效冻结对象；大改须重新批准后才替换。
