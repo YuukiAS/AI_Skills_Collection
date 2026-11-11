@@ -1,6 +1,6 @@
 # D8 读者复述：第 1 轮
 
-受审 Blueprint：`docs/design/assurance/plugin-0.1-d1/blueprint.json`，提交 `bfb49470fc349c1cd6ef3154ab0566ca93167fdd`。共 51 个复述单位，每个单位开一个全新的 GPT 对话（Thinking，推理强度调到最高），把对应提示词整段贴进去。不要在同一个对话里跑两个单位。
+受审 Blueprint：`docs/design/assurance/plugin-0.1-d1/blueprint.json`，提交 `a21edaaaafbd749d4ab1c079da5496d722ccd251`。共 51 个复述单位，每个单位开一个全新的 GPT 对话（Thinking，推理强度调到最高），把对应提示词整段贴进去。不要在同一个对话里跑两个单位。
 
 读者结果写回 `results/`。D1 会逐条对照原意判断是否复述正确，再整理成检查器要求的 `readability-review.json`。复述有误的步骤由 D1 改写文字，下一轮换新读者重读。
 
