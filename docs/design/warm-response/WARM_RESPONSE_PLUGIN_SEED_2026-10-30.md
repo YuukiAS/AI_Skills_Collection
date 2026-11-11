@@ -1,5 +1,12 @@
 # Warm Response — 新插件立项种子
 
+> **USER_DECISION_2026-11-12 — 原独立 Plugin 方向已被替代。**
+>
+> Warm Response 固定为 **ChatGPT 全局协作指令候选**，不再作为 AI_Skills Plugin 或 standalone Skill 推进。主要消费面是普通 ChatGPT 网页对话；Codex / GPT Work 不要求对称承担该人际回应能力。本文件继续作为问题定义、真实案例和回归设计证据，后文关于“独立插件”的表述均按历史种子理解。
+>
+> Canonical product-shape decision: `docs/design/SHARED_CAPABILITY_PRODUCT_SHAPE_DECISIONS_2026-11-12.md`.
+
+
 > Active candidate TODO: [TODO.md](TODO.md)
 
 - 日期：2026-10-30
