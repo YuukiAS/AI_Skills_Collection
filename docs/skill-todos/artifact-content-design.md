@@ -356,3 +356,13 @@ A future implementation should be tested on whether it can:
 - avoid both failure modes: over-authored artifacts and over-minimal artifacts that leave the user unable to resume work.
 
 The DII Notion case is evidence for this distinction, not a Notion-specific specification. Formal architecture research should test the same judgment across other artifact classes before deciding ownership or implementation.
+
+### CAT-TRACE explainer admitted accurate but reader-irrelevant project metadata into the main artifact
+status: NEW
+source: CAT-TRACE framework explainer user rejection, 2026-11-11
+evidence: exact rejected Markdown preserved at \`docs/provenance/CAT_TRACE_FRAMEWORK_EXPLAINED_ZH_REJECTED_2026-11-11.md\`; source artifact was \`YuukiAS/CAT-TRACE@docs/cat-trace-explainer-20261110\` \`docs/explainer/CAT_TRACE_FRAMEWORK_EXPLAINED_ZH.md\`.
+problem: The first page admitted visible content such as the document's internal purpose statement, authoritative commit, implementation-source branches and a disclaimer that no statistical programs had been rerun. These statements were accurate and useful to the authoring process, but the user had asked for an independently readable technical guide and had not asked to see repository provenance in the reader path. The same over-admission continued later through a large current-function/file table, internal C-stage identifiers and branch-specific failure narratives.
+problem: The artifact also underused higher-value visible structures. The reader needed an immediate complete formulation, a notation table, a prior table and direct comparisons between parallel model components; instead, those facts were dispersed through prose while lower-value traceability metadata consumed prominent space. This is a content-admission failure before it is a wording or rendering failure.
+artifact-content lesson to retain as evidence: Truthful information does not automatically earn main-text space. For a reader-facing technical guide, provenance, file/function locators, branch status and implementation incidents should usually be DEMOTE/LINK/REMOVE unless the reader needs them to understand or act. Conversely, a notation table, prior table, side-by-side component comparison or semantic diagram may deserve VISUALIZE/KEEP because it materially reduces reconstruction effort. The artifact-level pass should decide these visibility outcomes before prose polishing and rendering.
+project-specific context: The CAT-TRACE commit/branch names, C-stage labels and exact model components are local evidence. Artifact Content Design is still a future standalone capability under study, not a released plugin; this entry records real-use evidence in its canonical skill TODO and does not authorize a production implementation.
+
