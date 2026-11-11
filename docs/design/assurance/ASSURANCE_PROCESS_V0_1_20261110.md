@@ -153,4 +153,4 @@ X1 只在下列情况退回设计，其余问题都在交付端内部返修：
 3. D1 汇总，过冻结关卡，用户批准冻结；
 4. X1 由 Claude 担任，Codex 在 AI_Skills_Collection 实现，遵守该仓库的维护规则（workflow-core 与 ai-skills-core）。
 
-CAT-TRACE 的三份 Blueprint 是这套流程的第一次真实试跑，用来检验插件规格有没有漏掉试跑暴露的问题。
+一个私有统计研究项目的三份 Blueprint 是这套流程的第一次真实试跑，用来检验插件规格有没有漏掉试跑暴露的问题。
