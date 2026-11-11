@@ -276,3 +276,65 @@ npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugi
 ```
 
 合并稿依据更新到 `06672776a40d75b659dacf59ef458b7325f659f1`。JSON 本轮改动没有自己的提交号，按该 HEAD 加路径及上述摘要定位，不声称已经存在于该提交中。本轮只改 JSON 并追加本说明，SPEC、MERGE_DECISIONS 和 A 原稿保持不变；未 commit、未 push、未切分支。新 JSON 与整份说明按相同正则自查，匹配数均为零。没有需要 D1 新增决定的事项，尚待真实读者记录及规定关卡。
+
+
+## 续：D7 第 4 轮补定同步（2026-11-11）
+
+已完整读取最新提交 `d530fed6192b69b1562459fa88305c6f49db3b63` 中 SPEC 第 6.5 节新增的“生成设计或核查事实的角色（D2、D3、D4）”及相关派发规则，以及 MERGE_DECISIONS 第 8 节，并按原决定更新 JSON。本节追加记录当前规则，前文各轮保留为历史；没有新增设计选择。
+
+### 修改的节点与规则
+
+- `clarify`：明确 D1 在 `D1-clarify` 结束时写不可变文件 `design/briefs/<brief_version>.json`。任务书只含需求、已有决定和事实，不含设计倾向；D2、D3 读同一份。需求改变而重新设计或大改时，D1 写新版本。
+- 任务书字段按原文写为 `schema_version:"assurance-brief/0.1",task_id,brief_version,requirements,user_decisions,facts,open_questions,read_allowlist,read_denylist,created_at`。其中需求带原话出处，事实带来源，开放事项限设计者可处理的范围；保留已定读限，没有另添任务书字段、字段类型或哈希计算算法。
+- `state`：在文件布局增加任务书位置，在已有 `dispatches` 字段说明 D2/D3/D4 的派发记录通过 `based_on.brief_sha256` 引用任务书身份。任务书出新版本后，旧版绑定结果标 `stale`，交 D1 判断还能支持的部分；没有另造任务书状态库或顶层状态字段。
+- `dispatch`：输入、输出、接口、机制、验收和反例都区分三类对象：D2/D3/D4 的 `based_on` 写 `brief_sha256`；D5–D8 仍绑定受审 `snapshot_sha256`，不查批准链；交付工作继续绑定有效冻结对象。尚无 Blueprint 时也可派出独立设计，不要求 D1 先提供起始设计。
+- `role-D2`、`role-D3`、`role-D4`：角色卡、输入、输出及验收绑定任务书身份；两位独立设计者同一任务书，互不读设计产物。D4 在正式任务书之前需要核查事实时，由 D1 先写仅含待核实问题的任务书版本，派发仍绑定该版本的 `brief_sha256`。
+- `writer`：结果采纳时按本次角色核对绑定对象，不再对 D2/D3/D4 统一要求已有 Blueprint 内容身份；任务书换版后的旧结果保留并标 `stale`，不直接当当前结果采纳。
+- `prompts`：提示词模板及读入清单加入任务书位置和身份，按角色提供任务书、受审快照或有效冻结对象，不让用户补找材料。`clarify` 的被拒方案按裁决加入：不由 D1 起始 Blueprint 给设计者共同基线，也不限制为只能接已有 Blueprint 的任务。
+- `record-check`：已有只读记录检查设计增加 `brief` 种类，写明任务书路径和上述既定字段；仅检查结构和已声明引用，不负责写任务书或代替 D1 判断设计倾向。
+
+`freeze`、`revision`、`q-inheritance`、`gates` 及 `state` 中重复的派发规则都同步了本轮原文，删除原先 D2–D8 一律绑定受审快照的说法。其他仅引用合并稿的节点更新来源提交；固定检查器仍为 `c05edcf51bc93f8be82180fd4ad28a250937f195`，排除式语义哈希、有效冻结对象、修订继承和签发撤回规则保持原决定。
+
+同步四条已有连接：`c-dispatch-to-prompts`、`c-prompts-to-role-D2`、`c-prompts-to-role-D3`、`c-clarify-to-role-D2`。源码走查现在明确从澄清完成的无设计倾向任务书进入派发，随后交独立设计并核对返回的任务书版本。没有新增节点、连接、正常走查或失败路径，全部失败路径与本轮基线逐项相同。
+
+数量仍为 54 个节点、14 条需求、48 条连接、4 条正常走查（22 步）、10 条失败路径（21 步及 10 段整体说明）、12 条依据记录、64 个验收器。验收器仍全部 `not-run` 且运行记录为空；`versions: []` 保持不变。本轮只写 Blueprint，没有创建真实受管任务的任务书、状态记录或检查脚本。
+
+### 全部受影响复述单位
+
+以本轮开始时 HEAD 中的 JSON 为基线，调用固定检查器 `content/readability.ts` 的实际 `readerHash` 比较六项读者文字。5 个原有单位的文字哈希改变，完整列表如下；没有新增复述单位，其余 48 个单位哈希未变。
+
+| 复述单位 id | 类型 | 改动字段 |
+| --- | --- | --- |
+| `ws-state` | 正常步骤 | `exampleData`、`expectedResult` |
+| `ws-dispatch` | 正常步骤 | `exampleData`、`expectedResult`、`why`、`onError` |
+| `ws-prompts` | 正常步骤 | `exampleData`、`expectedResult` |
+| `ws-designer` | 正常步骤 | `exampleData`、`expectedResult` |
+| `ws-owner` | 正常步骤 | `exampleData`、`onError` |
+
+这 5 个单位须交后续独立读者重新复述，不能复用旧文字的通过记录。本次没有生成或补签读者记录。源码走查入口与技术说明同步了任务书前提，但没有据此伪造额外复述单位。
+
+### 本轮检查与文件身份
+
+检查器分支保持 `fix/draft-check-tier-20261111`，实际提交为 `c05edcf51bc93f8be82180fd4ad28a250937f195`。先加载已有 `nodejs/24.16.0`，再实际运行离线、在线草稿档各一次；未修改检查器源码。下列变量代指用户指定的两个工作树，实际命令传入 JSON 的绝对路径，公开文件不记录本机路径。
+
+```bash
+module load nodejs/24.16.0
+cd "$BLUEPRINT_WORKTREE/content"
+npx tsx check.mjs --stage draft --offline "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+```
+
+| 本轮检查 | 退出码 | 确定缺口 | 人工解释待审 | 未完成项 |
+| --- | ---: | ---: | ---: | ---: |
+| 离线草稿 | 2 | 0 | 92 | 3 |
+| 在线草稿 | 2 | 0 | 92 | 2 |
+
+离线检查时间为 `2026-11-11T18:19:15.785Z`，未完成项为离线未核实来源、缺 `readability-review.json`、缺 `questions.json`。在线检查时间为 `2026-11-11T18:20:00.310Z`，只剩上述两份读者记录缺失。两次均无确定内容缺口，退出码 2 仍不能记完整通过；92 项人工解释未当作独立审阅完成。本轮没有实际运行任务书生成、派发、换版或 `brief` 记录检查实现。
+
+新 JSON 的 SHA-256：
+
+```text
+58b999ea31aa6e1450d39da46824819613e530d28332f382b024453f193bb615
+```
+
+合并稿依据更新到 `d530fed6192b69b1562459fa88305c6f49db3b63`。本轮 JSON 改动没有自己的提交号，以本轮 HEAD 加路径及上述摘要定位，不声称已存在于该提交中。只修改 JSON 并追加本说明，SPEC、MERGE_DECISIONS 和 A 原稿未改；未 commit、未 push、未切分支。新 JSON 和整份说明按相同正则做公开信息自查，匹配数均为零。没有需要 D1 新增决定的事项，尚待真实读者记录及规定关卡。
