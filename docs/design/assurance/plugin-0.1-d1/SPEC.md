@@ -427,11 +427,18 @@ X1接收记录为 `handoff_id,from_thread,to_thread,freeze_ref,read_artifacts,ac
 因为内容快照没有变化，第 1 步的关卡结果和第 2 步的批准继续有效，不需要重新批准；第 4 步只是机械确认，不通过就不写 `freeze.json`，回到 D1 查明原因。`freeze.json` 的必填字段 `blueprint_sha256` 以 `snapshot_sha256` 和 `bundle_sha256` 两项代替。
 
 **`semantic_hash` 覆盖的范围（D7 第 2 轮后修订）。**
-- **覆盖整份设计的定义内容：** 全部 `requirements`、全部 `connections`；每个节点（含子节点）的 `id,title,description,requirementIds,inputs,outputs,claims,authority,interface` 和 `childIds`（子节点 id 列表）；每个验收器的定义字段 `id,name,required,oracle,method,criteria,environment,runner,counterexample`；全部 `walkthroughs` 与 `failurePaths`。
-- **排除：** 进度、运行和出处记录，即节点的 `designStatus,implementationStatus,evidenceIds,ringLabel`，验收器的 `status,notRunReason,runs`，以及顶层 `sources`、`evidence`、`versions`、`title`、`summary`、`complexityNote`。
-- **计算：** 上述内容按 Blueprint 中的原有顺序取出，组成一个对象，按规范化 JSON（键排序、UTF-8、无多余空白）计算 SHA-256。不需要判断“哪段文字是语义”，也不需要解析节点之间的引用：任何定义内容的变化都会改变它。
+- **按排除法计算（D7 第 3 轮后改定）：** 从 `snapshot_sha256` 用的同一份内容快照（`snapshotOf`）出发，**只删去**以下进度、运行和出处字段，其余全部保留：
+  - 每个节点（含子节点）的 `designStatus,implementationStatus,evidenceIds,ringLabel`；
+  - 每个验收器的 `status,notRunReason,runs`；
+  - 顶层 `sources,evidence,title,summary,complexityNote`。
+
+  节点的 `terminal`（包括 `mechanism`、`acceptance`、`retry`、`packages` 等）、顶层 `failureQuestions` 以及以后新增的任何字段，默认都在覆盖范围内。要排除新字段，只能由 D1 修改这份排除清单。
+- **计算：** 删去后的对象按规范化 JSON（键排序、UTF-8、无多余空白）计算 SHA-256。任何定义内容的变化都会改变它，不需要判断哪段文字是语义。
 - **与小修的关系：** `semantic_hash` 改变只说明“定义内容变了”，不自动等于大改。第 5.1 节的小修（错字、非语义说明）也会改变它；这时 D1 写一条修订记录，字段包括 `from_semantic_hash`、`to_semantic_hash`、字段级差异、逐条等价理由和新的 D5 结果，作为一条“继承记录”。
-- **派发与交付的机械核验：** 当前 `semantic_hash` 必须等于冻结记录里获批的值，或者能从获批值出发，沿一串完整的继承记录逐条到达。链条断开、有记录不满足第 5.1 节条件，或者遇到大改记录，都拒绝派发，退回 D1。
+- **派发核验，按阶段绑定不同对象（D7 第 3 轮后补定）：** 每次派发都在派发记录的 `based_on` 里写明绑定对象，再按角色检查：
+  - **设计阶段的角色（D2–D8，包括小修后重跑的 D5、大改后的整轮关卡）：** 绑定本次受审的 `snapshot_sha256`，只检查受审文件确实是这个快照，不检查批准链。首次冻结前没有获批值，也照常派发。
+  - **依据冻结合同的工作（X1 接收，X2–X5 的实施、验收、专项和裁判）：** 绑定一个“有效冻结对象”，即获批的 `semantic_hash`，或者从它出发沿完整继承链到达的值。链条断开、有记录不满足第 5.1 节，或者遇到大改记录，就拒绝这次派发并退回 D1。
+  - **交付期间出现修订：** 正在编辑的草稿不影响交付派发。未受影响的工作继续绑定原有效冻结对象；只有暂停范围（`paused_scopes`）内的节点暂停派发。小修的继承记录写完后，新值才成为有效冻结对象；大改须重新批准后才替换。
 - **为什么这样定：** 覆盖整份定义内容，判定完全机械，不会漏掉写在别处的义务（例如 `dispatch` 里的角色档次）；而错字修复仍可以走小修，不必每次重新批准。D1 的人工判断只出现在继承记录里，并且必须留下字段级差异供事后核对。
 
 ## 7. 验收器、候选、证据与签发
