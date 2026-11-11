@@ -19,7 +19,7 @@ problem: Different artifact types repeatedly become over-authored even when the 
 scope examples: Notion/project pages, UI, generated visual artifacts, documents and presentations where content selection and visual restraint matter before final rendering.
 boundary: Clear Writing owns prose quality; product-ui-copy owns interface wording; research-writing owns research-document semantics; presentations and visualization own their domain composition; renderers own faithful layout. This future capability should not silently absorb those responsibilities.
 project-specific context: DII page history and current Notion cleanup are evidence only. CAT-TRACE method identities, formulas, accepted-versus-candidate method boundaries and unpublished-data boundary are also project-specific. Do not encode either project's sections, terminology or research workflow as generic behavior.
-next research step: audit overlap with existing authoring, UI, presentation, visualization and rendering skills; determine whether this becomes one standalone skill, a shared pre-render contract, or a small capability consumed by artifact-producing skills. Do not implement production behavior until that ownership study is complete.
+next research step: product shape is now fixed as a shared standalone Skill. Formal design should define the smallest reusable pre-production content-admission contract, the post-render whole-artifact review behavior, and how existing artifact-producing plugins consume it without duplicating domain-specific semantics. Do not implement production behavior until that bounded design and its consumer contract are reviewed.
 
 #### Accepted real-use evidence: CAT-TRACE Numerical Atlas
 
