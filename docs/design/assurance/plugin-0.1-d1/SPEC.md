@@ -78,7 +78,7 @@ JSON 使用 UTF-8、两个空格缩进、换行结束；未知值用 `null`，�
 
 为避免每张角色卡各自实现一套JSON判断，共用资源提供一个只读入口 `shared/assurance/scripts/check_records.py`，使用成熟依赖 `jsonschema[format-nongpl]==4.26.0`；运行环境为Python 3.10或更新的受支持版本。各记录结构使用JSON Schema Draft 2020-12，先用 `Draft202012Validator.check_schema` 检查结构定义，再用 `iter_errors` 收集记录错误，显式启用 `FormatChecker` 并核对对应格式依赖。引用只从同包预注册的本地结构读取，不在验收时联网取未知结构。版本与API依据为[jsonschema官方文档](https://python-jsonschema.readthedocs.io/en/stable/validate/)、[引用机制文档](https://python-jsonschema.readthedocs.io/en/stable/referencing/)和[4.26.0发行记录](https://pypi.org/project/jsonschema/4.26.0/)。这是拟采用依赖，本轮没有安装或运行该入口。
 
-计划命令为 `python shared/assurance/scripts/check_records.py --task-root <目录> --schema <记录种类> --record <文件> --format json`；允许的记录种类为 `state/dispatch/result/revision/freeze/candidate/evidence/calibration/return/release/measurement`。入口只读指定任务目录与包内结构，检查必填字段、枚举、时间、相对路径越界、编号唯一性和记录间已声明的身份引用。涉及版本、角色或候选不一致时报告具体引用，不替负责人判断语义等价。退出值0只表示记录结构及可检查引用符合规则，1表示存在确定错误，2表示依赖、输入或引用证据不足而无法完成检查；输出包含 `assessment,errors,unresolved,checked_files`，绝不把2记作产品失败。
+计划命令为 `python shared/assurance/scripts/check_records.py --task-root <目录> --schema <记录种类> --record <文件> --format json`；允许的记录种类为 `state/dispatch/result/revision/freeze/candidate/evidence/calibration/return/release/revocation/measurement`。入口只读指定任务目录与包内结构，检查必填字段、枚举、时间、相对路径越界、编号唯一性和记录间已声明的身份引用。涉及版本、角色或候选不一致时报告具体引用，不替负责人判断语义等价。退出值0只表示记录结构及可检查引用符合规则，1表示存在确定错误，2表示依赖、输入或引用证据不足而无法完成检查；输出包含 `assessment,errors,unresolved,checked_files`，绝不把2记作产品失败。
 
 该入口不写状态、不提交、不派发、不签发、不安装依赖、不执行记录中引用的命令，也不替代Blueprint检查器、领域验收或负责人阅读。任务目录之外的合法证据只核对已登记定位与身份，不能越过授权自动读取。检查器自己的三类校准与版本也按第7节由X1审查。
 
@@ -426,12 +426,13 @@ X1接收记录为 `handoff_id,from_thread,to_thread,freeze_ref,read_artifacts,ac
 
 因为内容快照没有变化，第 1 步的关卡结果和第 2 步的批准继续有效，不需要重新批准；第 4 步只是机械确认，不通过就不写 `freeze.json`，回到 D1 查明原因。`freeze.json` 的必填字段 `blueprint_sha256` 以 `snapshot_sha256` 和 `bundle_sha256` 两项代替。
 
-**`semantic_hash` 覆盖的范围。**
-- **覆盖：** 九个 `contract-*` 子节点（`contract-capability` 至 `contract-authorization`，按此固定顺序）。每个节点取 `id,title,description,requirementIds,inputs,outputs,claims,authority,interface`，以及每个验收器的定义字段 `id,name,required,oracle,method,criteria,environment,runner,counterexample`。再加上这些节点 `requirementIds` 所引用的需求对象全文。
-- **排除：** 进度和运行记录，即 `designStatus,implementationStatus,evidenceIds,ringLabel,children`，以及验收器的 `status,notRunReason,runs`。
-- **计算：** 上述内容按规范化 JSON 依次拼接后计算 SHA-256。
-- **完整性义务：** 凡是影响完成语义的义务（能力、入口、三态、证据、禁止替代、旧功能、控制例、变更权、授权边界），必须写在或明确引用到这九个节点中；只出现在其他节点里的，算设计缺口，由 D5 和 D6 检查。
-- **保守的代价：** 这九个节点里即使只改一个错字，也会改变 `semantic_hash`，因此按大改处理，需要重新批准。九个节点之外的错字修复，仍可按第 5.1 节作为小修。这是有意的取舍：用多一次批准，换取判定完全机械、不需要人工从一段文字里分辨哪部分是“语义”。
+**`semantic_hash` 覆盖的范围（D7 第 2 轮后修订）。**
+- **覆盖整份设计的定义内容：** 全部 `requirements`、全部 `connections`；每个节点（含子节点）的 `id,title,description,requirementIds,inputs,outputs,claims,authority,interface` 和 `childIds`（子节点 id 列表）；每个验收器的定义字段 `id,name,required,oracle,method,criteria,environment,runner,counterexample`；全部 `walkthroughs` 与 `failurePaths`。
+- **排除：** 进度、运行和出处记录，即节点的 `designStatus,implementationStatus,evidenceIds,ringLabel`，验收器的 `status,notRunReason,runs`，以及顶层 `sources`、`evidence`、`versions`、`title`、`summary`、`complexityNote`。
+- **计算：** 上述内容按 Blueprint 中的原有顺序取出，组成一个对象，按规范化 JSON（键排序、UTF-8、无多余空白）计算 SHA-256。不需要判断“哪段文字是语义”，也不需要解析节点之间的引用：任何定义内容的变化都会改变它。
+- **与小修的关系：** `semantic_hash` 改变只说明“定义内容变了”，不自动等于大改。第 5.1 节的小修（错字、非语义说明）也会改变它；这时 D1 写一条修订记录，字段包括 `from_semantic_hash`、`to_semantic_hash`、字段级差异、逐条等价理由和新的 D5 结果，作为一条“继承记录”。
+- **派发与交付的机械核验：** 当前 `semantic_hash` 必须等于冻结记录里获批的值，或者能从获批值出发，沿一串完整的继承记录逐条到达。链条断开、有记录不满足第 5.1 节条件，或者遇到大改记录，都拒绝派发，退回 D1。
+- **为什么这样定：** 覆盖整份定义内容，判定完全机械，不会漏掉写在别处的义务（例如 `dispatch` 里的角色档次）；而错字修复仍可以走小修，不必每次重新批准。D1 的人工判断只出现在继承记录里，并且必须留下字段级差异供事后核对。
 
 ## 7. 验收器、候选、证据与签发
 
@@ -502,7 +503,7 @@ X1只用以下五种 `return_reason`退回设计，并附原始证据：`contrac
 
 ### 7.5 X1签发清单与签发记录
 
-X1本人依次核对下列条件，任何必需项仍为失败、无法判断或过期，都不签发整个冻结范围。只有合同本来就把交付分成独立单元，才可签发其中完整合格的单元；不能通过临时缩小声明把缺项变成交付。
+X1本人依次核对下列条件，任何必需项仍为失败、无法判断或过期，都不签发整个冻结范围。0.1 只支持对整个冻结范围一次签发：不做分单元签发，也不能通过临时缩小声明把缺项变成交付。确实需要分批交付的，在设计阶段拆成多个任务，各自冻结、各自签发（D7 第 2 轮后收窄）。
 
 清单逐项记 `yes/no/unknown`，任何 `no` 或 `unknown` 都不能写成无条件交付（条目合并了设计 A 的八项与设计 B 的十三项）：
 
@@ -522,7 +523,16 @@ X1本人依次核对下列条件，任何必需项仍为失败、无法判断或
 
 签发记录为 `schema_version:"assurance-release/0.1",release_id,task_id,issuer_thread,freeze_ref,candidate_id,delivered_objects,criterion_evidence_map,acceptance_asset_decisions,role_evidence,personal_reading,disposition_of_deviations,user_acceptance,claim,issued_at`。`personal_reading`每项包含 `object_or_evidence_ref,read_at,observation,conclusion`；一个“已读=true”不够。`criterion_evidence_map`逐项指向当前原始证据，不仅指向汇总报告。签发后回读记录与最终对象，状态才进入 `delivered`。
 
-若用户明确否定真实产物，X1回读产物并按冻结标准处理；内部通过不能推翻真实失败。签发后的新事实保留原签发历史，另加撤回或返修记录；不篡改旧记录装作从未交付。
+若用户明确否定真实产物，X1回读产物并按冻结标准处理；内部通过不能推翻真实失败。
+
+**签发后的撤回（D7 第 2 轮后补定）。** 撤回只由 X1 决定，而且只针对整份签发（0.1 没有分单元签发）。
+1. 签发后出现可能推翻结论的新事实时，X1 先登记这个事实，暂停对外的交付声明。状态写入：`phase` 从 `delivered` 回到 `delivery`，`step` 为 `X1-review-release`，`delivery.release_ref` 保留原签发。
+2. X1 按冻结标准核对后，作出“维持”或“撤回”的决定，写不可变记录 `delivery/revocations/<revocation_id>.json`，字段为 `schema_version:"assurance-revocation/0.1",revocation_id,task_id,release_ref,decision,trigger_ref,evidence_refs,invalidated_evidence,reason,decided_by,decided_at`，`decision` 取 `upheld` 或 `revoked`。
+   - **维持：** 状态回到 `delivered`，原签发继续有效。
+   - **撤回：** `delivery.release_ref` 置为 `null`，原签发记录原样保留为历史；`invalidated_evidence` 中列出的证据标为 `stale`；`step` 进入 `X1-repair`，若命中五类设计退回条件则进入 `X1-design-return`。之后按正常返修流程重新取得证据，签发一份新的记录，新记录的 `supersedes` 指向被撤回的签发。
+3. 只读记录检查入口增加记录种类 `revocation`，并核对 `release_ref` 指向的签发确实存在。
+
+原签发记录永远不改写，也不删除。
 
 ## 8. 衡量记录
 
