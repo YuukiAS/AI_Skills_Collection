@@ -220,3 +220,59 @@ npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugi
 ```
 
 本轮只修改 `blueprint.json` 并在本说明追加记录；原规格和裁决文件未改，未 commit、未 push、未切分支。新改动尚无提交号，仅以本轮 HEAD 加路径和上述文件摘要标识，不声称这些改动已写进该提交。公开信息按原正则自查，新 JSON 和整份说明匹配数均为零。没有需要 D1 追加决定的事项，尚待实际读者记录和规定关卡。
+
+
+## 续：D7 第 3 轮补定同步（2026-11-11）
+
+已完整读取当前分支最新提交 `06672776a40d75b659dacf59ef458b7325f659f1` 中 SPEC 第 6.5 节“按排除法计算（D7 第 3 轮后改定）”“计算”“派发核验，按阶段绑定不同对象”及其上下文，以及 MERGE_DECISIONS 第 7 节，并按原决定同步 JSON。前文各轮记录保留为历史，本节说明当前投影与派发规则，没有新增设计选择。
+
+### 修改的节点与同步范围
+
+- `freeze`、`revision`、`q-inheritance`、`dispatch`、`gates`：所有重复的哈希规则统一替换为本次第 6.5 节原文，删除列举覆盖字段、`childIds` 和按字段清单重建对象的旧说法。以 `snapshot_sha256` 使用的同一 `snapshotOf` 内容快照为起点，只删除明确排除的字段，其余全部保留，再按键排序、UTF-8、无多余空白的规范化 JSON 计算 SHA-256。
+- 排除清单原样保留三类：每个节点及其子节点的 `designStatus,implementationStatus,evidenceIds,ringLabel`；每个验收器的 `status,notRunReason,runs`；顶层 `sources,evidence,title,summary,complexityNote`。节点 `terminal` 中的 `mechanism,acceptance,retry,packages` 等、顶层 `failureQuestions` 及将来新增的字段默认参与计算；只有 D1 能改动排除清单，没有自行增加排除项。
+- `dispatch`：输入、输出、接口、机制、验收条款及反例均写明每次派发在 `based_on` 中登记绑定对象。D2–D8，包括小修后的 D5 和大改后的整轮关卡，只核对本次受审 `snapshot_sha256`，不查批准链，首次冻结前可以正常派发。X1 接收及 X2–X5 的实施、验收、专项与裁判绑定有效冻结对象，才核对获批哈希或完整合格的小修继承链；链条断开、条件不符或经过大改记录则拒绝这次交付派发并退回 D1。
+- `state`、`dispatch`：交付期间的修订草稿不影响未暂停工作，未受影响部分继续绑定原有效冻结对象；仅 `paused_scopes` 内节点暂停派发。小修继承记录写完后新值才有效，大改重新批准后才替换。冻结前不实施插件的既有边界继续保留，设计检查不再被笼统的批准链要求拦住。
+- `revision`、`q-inheritance`、`freeze`、`gates`、`sign`：接口、验收或摘要中的笼统“当前哈希决定是否拒绝派发”统一限定到依据冻结合同的交付工作，并同步分阶段规则。签发后的暂停、维持、撤回及整份一次签发规则没有改变。
+
+`record-check`、`q-checker`、`role-X1`、`evidence`、`minimum`、`q-capacity` 只随 D1 新提交更新依据定位，未改变本轮之外的设计。固定检查器提交仍为 `c05edcf51bc93f8be82180fd4ad28a250937f195`。
+
+`c-dispatch-to-prompts` 同步携带派发阶段和 `based_on` 的绑定对象；`c-q-inheritance-to-revision` 把批准链校验范围限定为交付工作。走查 `ws-dispatch` 写明首次冻结前的设计派发不查批准链、交付草稿不阻断未暂停工作；`wr-contract` 改为解释排除式投影。`wr-freeze` 仅更新技术说明中的哈希计算定位。所有失败路径保持原样，没有新增节点、连接、走查或失败路径。
+
+数量仍为 54 个节点、14 条需求、48 条连接、4 条正常走查（22 步）、10 条失败路径（21 步及 10 段整体说明）、12 条依据记录、64 个验收器。验收器仍全部 `not-run`，运行记录为空；`versions: []` 不变。
+
+### 全部受影响复述单位
+
+以本轮开始时 HEAD 中的 JSON 为基线，实际调用固定检查器 `content/readability.ts` 的 `readerHash` 比较六项读者文字。只修改以下 2 个复述单位，没有新增单位；其余 51 个单位的读者文字哈希未变。
+
+| 复述单位 id | 类型 | 改动字段 |
+| --- | --- | --- |
+| `ws-dispatch` | 正常步骤 | `exampleData`、`expectedResult`、`why`、`onError` |
+| `wr-contract` | 正常步骤 | `expectedResult` |
+
+上述两个单位需由后续独立读者重新复述；本次没有生成或补签读者记录。`wr-freeze` 仅技术说明改变，不改变它的六项读者文字，因此未计入受影响复述单位。
+
+### 本轮检查与文件身份
+
+检查器分支保持 `fix/draft-check-tier-20261111`，提交仍为上述 `c05edcf` 完整提交。先加载机器已有 `nodejs/24.16.0`，再实际运行离线、在线草稿档各一次；未修改检查器源码。下列变量代指用户指定的两个工作树，实际命令传入 JSON 的绝对路径，公开文件不记录本机路径。
+
+```bash
+module load nodejs/24.16.0
+cd "$BLUEPRINT_WORKTREE/content"
+npx tsx check.mjs --stage draft --offline "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+```
+
+| 本轮检查 | 退出码 | 确定缺口 | 人工解释待审 | 未完成项 |
+| --- | ---: | ---: | ---: | ---: |
+| 离线草稿 | 2 | 0 | 92 | 3 |
+| 在线草稿 | 2 | 0 | 92 | 2 |
+
+离线检查时间为 `2026-11-11T18:08:10.278Z`，未完成项为离线未核实来源、缺 `readability-review.json`、缺 `questions.json`。在线检查时间为 `2026-11-11T18:08:51.214Z`，只剩上述两份读者记录缺失。两次均无确定内容缺口，但退出码 2 仍不能记完整通过；92 项人工解释没有冒充独立审阅。本轮没有实际运行插件的排除式哈希或分阶段派发实现。
+
+新 JSON 的 SHA-256：
+
+```text
+2a09885312849d5a6c0e293a8fe0df5262f76b701cb0232b90b0e064294ea7fb
+```
+
+合并稿依据更新到 `06672776a40d75b659dacf59ef458b7325f659f1`。JSON 本轮改动没有自己的提交号，按该 HEAD 加路径及上述摘要定位，不声称已经存在于该提交中。本轮只改 JSON 并追加本说明，SPEC、MERGE_DECISIONS 和 A 原稿保持不变；未 commit、未 push、未切分支。新 JSON 与整份说明按相同正则自查，匹配数均为零。没有需要 D1 新增决定的事项，尚待真实读者记录及规定关卡。
