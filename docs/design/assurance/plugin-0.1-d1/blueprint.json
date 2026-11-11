@@ -15,7 +15,11 @@
     },
     {
       "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
-      "revision": "66e670997525e3ad4d6fe4f5d27a795aa17eabee"
+      "revision": "e750a9c6ff3926815d6d75cf34ac2c13dd54709d"
+    },
+    {
+      "repository": "https://github.com/YuukiAS/Asteria-Blueprint",
+      "revision": "c05edcf51bc93f8be82180fd4ad28a250937f195"
     }
   ],
   "requirements": [
@@ -23,7 +27,7 @@
       "id": "r-state",
       "shortName": "当前状态",
       "text": "状态文件：格式、字段、谁在什么时候写、冲突怎么办、放在被管理项目的哪里。 事件追加到 history/events.jsonl，不能覆盖 STATE.json。",
-      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
+      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
       "route": [
         {
           "nodeId": "state",
@@ -43,7 +47,7 @@
       "id": "r-dispatch",
       "shortName": "角色调度",
       "text": "调度：怎样根据状态与流程决定下一步发给哪个角色（档次、新开或沿用线程），怎样生成可直接复制给用户的提示词；Claude 担任负责人时自己执行的步骤怎样先告知用户。 按 SPEC 第 2.2 节固定优先级，只取首个成立条件。",
-      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
+      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
       "route": [
         {
           "nodeId": "dispatch",
@@ -67,7 +71,7 @@
       "id": "r-roles",
       "shortName": "完整角色",
       "text": "角色卡：D1–D8、X1–X5 每张写全：任务、能读什么、不能读什么、产出写到哪、怎样算完成、回复格式。",
-      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
+      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
       "route": [
         {
           "nodeId": "role-D1",
@@ -127,7 +131,7 @@
       "id": "r-prompts",
       "shortName": "完整提示",
       "text": "提示词规则与模板：自包含要求（仓库、分支、写入测试、先读什么、写回哪里、回复格式）。",
-      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
+      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
       "route": [
         {
           "nodeId": "prompts",
@@ -143,7 +147,7 @@
       "id": "r-revision",
       "shortName": "修订告知",
       "text": "修订与告知：小修订与大改的判别规则（0.1 只给了原则，请细化成可判定的规则），事前事后告知模板。 采用已裁决的最多两个既有节点、语义哈希不变与原批准继承条件。",
-      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
+      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
       "route": [
         {
           "nodeId": "q-inheritance",
@@ -162,8 +166,8 @@
     {
       "id": "r-freeze",
       "shortName": "澄清冻结",
-      "text": "澄清（Grill Me）规则、冻结关卡 D5–D8 的通过标准、冻结合同格式（在 Blueprint 上增加流程文档第 4 节的九项）。 冻结记录包含九项语义的 semantic_hash，检查器采用已裁决的两档入口与三态结果。",
-      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
+      "text": "澄清（Grill Me）规则、冻结关卡 D5–D8 的通过标准、冻结合同格式（在 Blueprint 上增加流程文档第 4 节的九项）。 冻结记录包含九项语义的 semantic_hash，检查器采用已裁决的两档入口与三态结果。 首次冻结五步、三个身份和语义哈希逐字段覆盖与排除范围，以 SPEC 第 6.5 节为准。",
+      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
       "route": [
         {
           "nodeId": "clarify",
@@ -191,7 +195,7 @@
       "id": "r-evidence",
       "shortName": "验收交付",
       "text": "验收器规则、候选与证据记录格式、偏离申报模板、X1 签发清单。 X1 逐项核对十三项签发清单。",
-      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
+      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
       "route": [
         {
           "nodeId": "acceptance",
@@ -223,7 +227,7 @@
       "id": "r-metrics",
       "shortName": "衡量记录",
       "text": "衡量记录。",
-      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
+      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
       "route": [
         {
           "nodeId": "metrics",
@@ -235,7 +239,7 @@
       "id": "r-package",
       "shortName": "跨端打包",
       "text": "打包：两个插件在本仓库里的目录结构；规划端 SKILL.md 怎样同时被 Claude Code 与 GPT Work 直接使用；执行端 Codex 插件结构；ChatGPT 网页端以后另行打包时需要什么，只写说明不实现。 市场预算调整为 12 个插件、32 个技能，保留旧能力。",
-      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
+      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
       "route": [
         {
           "nodeId": "source-layout",
@@ -262,8 +266,8 @@
     {
       "id": "r-scope",
       "shortName": "最小范围",
-      "text": "最小可行范围：哪些部分 0.1 必须有，哪些可以留到 0.2。",
-      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
+      "text": "最小可行范围：哪些部分 0.1 必须有，哪些可以留到 0.2。 冻结前只允许 D4 现实核查和材料整理，不开始任何插件实现。",
+      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
       "route": [
         {
           "nodeId": "minimum",
@@ -279,7 +283,7 @@
       "id": "r-process",
       "shortName": "流程保真",
       "text": "流程本身（角色、负责人、档次、验收器分级、退回条件、告知规则）沿用已认可流程 0.1；具体实现与三项原开放问题按 D1 合并裁决执行，不新增设计选择。",
-      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
+      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
       "route": [
         {
           "nodeId": "dispatch",
@@ -302,8 +306,8 @@
     {
       "id": "r-sources",
       "shortName": "真实依据",
-      "text": "平台与工具的断言（例如 Claude Code 技能格式、Codex 插件结构）要有原始资料或仓库现有实现支持，记录出处；查不到就写成开放问题。",
-      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
+      "text": "平台与工具的断言（例如 Claude Code 技能格式、Codex 插件结构）要有原始资料或仓库现有实现支持，记录出处；查不到就写成开放问题。 Blueprint 检查器是独立前置工作，按 c05edcf 固定提交调用，Assurance 不修改上游。",
+      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
       "route": [
         {
           "nodeId": "record-check",
@@ -327,7 +331,7 @@
       "id": "r-blueprint",
       "shortName": "设计落地",
       "text": "blueprint.json：两个插件的完整 Blueprint（按 Asteria-Blueprint 格式），每条分支落到真实实现、具体设计或开放问题。",
-      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
+      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
       "route": [
         {
           "nodeId": "state",
@@ -351,7 +355,7 @@
       "id": "r-boundary",
       "shortName": "公开边界",
       "text": "本次仅在 design/assurance-plugins-0.1-merged 分支的 plugin-0.1-d1 目录更新 Blueprint 与检查说明；原稿不动，不提交、不推送。公开文件不含私有项目名、仓库定位、本机绝对路径或私有内容。",
-      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
+      "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
       "route": [
         {
           "nodeId": "prompts",
@@ -535,7 +539,7 @@
             {
               "id": "result",
               "name": "可回读结果",
-              "description": "UTF-8的STATE.json，schema_version=assurance-state/0.1，revision自1增加；字段及空值规则在mechanism完整列出。；history/events.jsonl 追加 event_id,at,actor,kind,state_revision,refs，不能覆盖 STATE.json。",
+              "description": "UTF-8的STATE.json，schema_version=assurance-state/0.1，revision自1增加；字段及空值规则在mechanism完整列出。；history/events.jsonl 追加 event_id,at,actor,kind,state_revision,refs，不能覆盖 STATE.json。；关卡与批准指向 snapshot_sha256，冻结记录另有 bundle_sha256、semantic_hash，三者用途按第 6.5 节区分。",
               "parentOutput": {
                 "nodeId": "shared",
                 "portId": "result"
@@ -555,10 +559,10 @@
               "oracle": {
                 "kind": "independent-reference",
                 "description": "期望由用户认可流程及本候选明确承诺确定；实现者输出不作真值。同一任务两个入口定位到同一STATE，未知与空集合区分。",
-                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/c1054e2976fdc5e447820cec1ff289f9826762d1/docs/design/assurance/ASSURANCE_PROCESS_V0_1_20261110.md"
+                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md"
               },
               "method": {
-                "description": "逐项核对：同一任务两个入口定位到同一STATE，未知与空集合区分。；新结构版本只读报不支持，不覆盖旧状态。；公开仓库记录不包含私有正文或密钥。；每次状态写入、派发、采纳、冲突、告知均追加事件，衡量可从日志重建；日志不覆盖当前状态。",
+                "description": "逐项核对：同一任务两个入口定位到同一STATE，未知与空集合区分。；新结构版本只读报不支持，不覆盖旧状态。；公开仓库记录不包含私有正文或密钥。；每次状态写入、派发、采纳、冲突、告知均追加事件，衡量可从日志重建；日志不覆盖当前状态。；用户批准和 D5 草稿档、D6、D7、D8 绑定 snapshot_sha256；semantic_hash 用于小修与派发核验，bundle_sha256 用于冻结文件存档及 X1 接收核对，不混用三个身份。",
                 "tool": "实际宿主、仓库读写工具与所需领域检查器；专业判断由规定角色完成",
                 "command": "按本节点验收条款实际执行并保存原始结果；这是拟定操作说明，不是已存在脚本或运行记录。"
               },
@@ -659,7 +663,7 @@
             "errors": [
               "对象身份、来源或结果缺失时记录无法判断并交负责人，保留已经产生的原始证据。"
             ],
-            "format": "用户给出的任务、repository、branch、task_id及已确认任务目录；现有STATE如存在必须先读取。；输出：UTF-8的STATE.json，schema_version=assurance-state/0.1，revision自1增加；字段及空值规则在mechanism完整列出。；history/events.jsonl 追加 event_id,at,actor,kind,state_revision,refs，不能覆盖 STATE.json。"
+            "format": "用户给出的任务、repository、branch、task_id及已确认任务目录；现有STATE如存在必须先读取。；输出：UTF-8的STATE.json，schema_version=assurance-state/0.1，revision自1增加；字段及空值规则在mechanism完整列出。；history/events.jsonl 追加 event_id,at,actor,kind,state_revision,refs，不能覆盖 STATE.json。；关卡与批准指向 snapshot_sha256，冻结记录另有 bundle_sha256、semantic_hash，三者用途按第 6.5 节区分。；状态变动先取得当前修订和写权。"
           },
           "children": [],
           "ringLabel": [
@@ -669,7 +673,7 @@
           "terminal": {
             "kind": "design",
             "integrationPoint": "shared/assurance/state.md；schemas/state.schema.json；templates/STATE.json",
-            "mechanism": "### 1.1 一项任务，一份当前状态\n\n被管理项目默认使用 `docs/assurance/<task_id>/STATE.json`。`task_id` 是初始化时固定的仓库内唯一标识，限小写字母、数字和连字符；已有任务标识可直接复用并记录，不按线程标题或插件版本重新生成。D1 首次进入时先查该任务是否已存在；同一任务的两个插件打开同一路径。用户已有明确目录时，初始化一次绑定实际目录，以后只读该绑定，不建立第二份状态。\n\n当前状态由 `STATE.json` 唯一决定；Blueprint 决定设计内容，冻结快照决定完成语义，原始证据决定实际观察。聊天、派发提示词和报告中的状态仅是某次读取的投影，不能覆盖文件。状态不能凭自报“通过”推导能力完成，也不保存密钥、私有全文或大二进制。\n\n建议的任务文件布局如下。路径是格式设计，尚未在任何被管理项目初始化：\n\n| 相对任务目录的路径 | 内容与写入者 |\n|---|---|\n| `STATE.json` | 当前权威状态；设计阶段 D1、交付阶段 X1 单独写入 |\n| `design/blueprint.json` | D1 汇总的当前设计；历史版本不原地覆盖 |\n| `design/versions/<version>/blueprint.json` | 不可变设计版本；D1 负责内容，实际文件操作可委派 |\n| `design/versions/<version>/freeze.json` | 九项定位、四关卡记录、批准和身份绑定；只引用 Blueprint 中的语义 |\n| `dispatches/<dispatch_id>/PROMPT.md` | 负责人生成的完整派发提示词 |\n| `dispatches/<dispatch_id>/RESULT.json`、`RESULT.md` | 被派出角色的结果和自然中文说明；各自只写自己的目录 |\n| `dispatches/<dispatch_id>/artifacts/` | 角色交回的候选设计、检查记录、复述等 |\n| `revisions/<revision_id>.json`、`returns/<return_id>.json` | 修订与退回的不可变原始记录 |\n| `history/events.jsonl` | 追加式事件日志（采自设计 B）：每次状态写入、派发、采纳、冲突、告知各追加一行 `event_id,at,actor,kind,state_revision,refs`；只用于审计和恢复线索，不能覆盖 `STATE.json`，衡量记录从这里重建 |\n| `delivery/candidates/<candidate_id>.json` | X1 维护候选身份与当前用途；实现者只提交候选提案 |\n| `delivery/evidence/<evidence_id>.json` | 各证据作者保存原始记录；X1登记采用范围 |\n| `delivery/acceptance-assets/<asset_id>/<version>.json` | 验收资产版本、校准与 X1 审定记录 |\n| `delivery/releases/<release_id>.json` | X1 的签发记录，指向最终对象与原始证据 |\n\n敏感证据留在用户已授权的持久位置，只在任务目录保存受众可读的定位。`private/` 这个目录名不形成访问控制；公开仓库不得因文件名含该词而提交私有内容。找不到合法且评审者实际可读的证据位置时，记录无法判断并补证。\n\n### 1.2 当前状态的字段\n\nJSON 使用 UTF-8、两个空格缩进、换行结束；未知值用 `null`，已知为空用 `[]`，不得用空字符串混淆。未知枚举或比当前支持版本更新的结构只读报告，不自动重写。时间使用带时区的 ISO 8601；用户说明按当前用户时区显示。\n\n| 字段 | 类型与必需内容 | 何时变化 |\n|---|---|---|\n| `schema_version`、`process_version` | 固定为 `assurance-state/0.1`、`0.1` | 不做隐式迁移 |\n| `task` | `id,title,repository,branch,root`，全部非空字符串 | D1 初始化；迁移须有明确定位与授权依据 |\n| `revision` | 从 1 递增的整数 | 每次被接受的状态写入加 1 |\n| `phase` | `design`、`delivery`、`delivered` | 初始设计、冻结交接完成、X1 签发后 |\n| `step` | 当前动作的稳定代号；候选值见第 2 节 | 负责人采纳结果后 |\n| `state_writer` | `D1` 或 `X1` | D1 与 X1 完成交接时切换一次 |\n| `owners` | D1、X1 各自的 `host,thread_ref,assigned_by`；尚未绑定 X1 为 `null` | 首次绑定；不能悄悄把同一线程写成两个负责人 |\n| `process_ref`、`plugin_refs` | 流程和实际加载技能的仓库/路径/版本及已知内容摘要 | 初始化与显式升级；不能仅凭市场名称推断加载版本 |\n| `blueprint` | `draft_ref,draft_revision,frozen_ref,semantic_version,approval_ref`；未冻结项为 `null` | D1 发布设计或新冻结版本，X1只引用采纳 |\n| `pending_decisions` | `id,question_ref,owner,affected_nodes,status,answer_ref` | 记录问题、回答与重新开放；不重复询问已有有效决定 |\n| `dispatches` | 派发记录数组，完整形状见第 2 节 | 准备、发出、返回、采纳、作废 |\n| `gate_results` | D5–D8 的 `gate,subject_ref,result_ref,status,coverage,validity` | 只采纳实际结果；状态为 `pending/passed/failed/unknown/stale` |\n| `revisions`、`design_returns` | 不可变修订/退回记录的引用数组 | 有新记录才追加，不删掉失败历史 |\n| `paused_scopes` | `node_ids,reason,return_id,resume_condition` | 只暂停受影响节点及其依赖闭包 |\n| `delivery` | `candidate_id,acceptance_plan_ref,evidence_ids,required_roles,release_ref` | X1 组织交付；初始全部为空或 `null` |\n| `measurements` | 原始衡量事件的引用与去重键 | 发生用户追问、退回或告知时追加；统计值临时计算 |\n| `updated_at`、`last_change` | 实际写入时间；`actor,expected_revision,reason,source_ref` | 每次状态写入 |\n\n`step` 是当前人工工作位置，不是后台状态机或自动执行许可。负责人读取后才能决定下一动作。`gate_results` 的通过只表示该关卡对指定设计版本的结论；`delivery` 中的运行结果只有第 7 节规定的三种语义。",
+            "mechanism": "### 1.1 一项任务，一份当前状态\n\n被管理项目默认使用 `docs/assurance/<task_id>/STATE.json`。`task_id` 是初始化时固定的仓库内唯一标识，限小写字母、数字和连字符；已有任务标识可直接复用并记录，不按线程标题或插件版本重新生成。D1 首次进入时先查该任务是否已存在；同一任务的两个插件打开同一路径。用户已有明确目录时，初始化一次绑定实际目录，以后只读该绑定，不建立第二份状态。\n\n当前状态由 `STATE.json` 唯一决定；Blueprint 决定设计内容，冻结快照决定完成语义，原始证据决定实际观察。聊天、派发提示词和报告中的状态仅是某次读取的投影，不能覆盖文件。状态不能凭自报“通过”推导能力完成，也不保存密钥、私有全文或大二进制。\n\n建议的任务文件布局如下。路径是格式设计，尚未在任何被管理项目初始化：\n\n| 相对任务目录的路径 | 内容与写入者 |\n|---|---|\n| `STATE.json` | 当前权威状态；设计阶段 D1、交付阶段 X1 单独写入 |\n| `design/blueprint.json` | D1 汇总的当前设计；历史版本不原地覆盖 |\n| `design/versions/<version>/blueprint.json` | 不可变设计版本；D1 负责内容，实际文件操作可委派 |\n| `design/versions/<version>/freeze.json` | 九项定位、四关卡记录、批准和身份绑定；只引用 Blueprint 中的语义 |\n| `dispatches/<dispatch_id>/PROMPT.md` | 负责人生成的完整派发提示词 |\n| `dispatches/<dispatch_id>/RESULT.json`、`RESULT.md` | 被派出角色的结果和自然中文说明；各自只写自己的目录 |\n| `dispatches/<dispatch_id>/artifacts/` | 角色交回的候选设计、检查记录、复述等 |\n| `revisions/<revision_id>.json`、`returns/<return_id>.json` | 修订与退回的不可变原始记录 |\n| `history/events.jsonl` | 追加式事件日志（采自设计 B）：每次状态写入、派发、采纳、冲突、告知各追加一行 `event_id,at,actor,kind,state_revision,refs`；只用于审计和恢复线索，不能覆盖 `STATE.json`，衡量记录从这里重建 |\n| `delivery/candidates/<candidate_id>.json` | X1 维护候选身份与当前用途；实现者只提交候选提案 |\n| `delivery/evidence/<evidence_id>.json` | 各证据作者保存原始记录；X1登记采用范围 |\n| `delivery/acceptance-assets/<asset_id>/<version>.json` | 验收资产版本、校准与 X1 审定记录 |\n| `delivery/releases/<release_id>.json` | X1 的签发记录，指向最终对象与原始证据 |\n\n敏感证据留在用户已授权的持久位置，只在任务目录保存受众可读的定位。`private/` 这个目录名不形成访问控制；公开仓库不得因文件名含该词而提交私有内容。找不到合法且评审者实际可读的证据位置时，记录无法判断并补证。\n\n### 1.2 当前状态的字段\n\nJSON 使用 UTF-8、两个空格缩进、换行结束；未知值用 `null`，已知为空用 `[]`，不得用空字符串混淆。未知枚举或比当前支持版本更新的结构只读报告，不自动重写。时间使用带时区的 ISO 8601；用户说明按当前用户时区显示。\n\n| 字段 | 类型与必需内容 | 何时变化 |\n|---|---|---|\n| `schema_version`、`process_version` | 固定为 `assurance-state/0.1`、`0.1` | 不做隐式迁移 |\n| `task` | `id,title,repository,branch,root`，全部非空字符串 | D1 初始化；迁移须有明确定位与授权依据 |\n| `revision` | 从 1 递增的整数 | 每次被接受的状态写入加 1 |\n| `phase` | `design`、`delivery`、`delivered` | 初始设计、冻结交接完成、X1 签发后 |\n| `step` | 当前动作的稳定代号；候选值见第 2 节 | 负责人采纳结果后 |\n| `state_writer` | `D1` 或 `X1` | D1 与 X1 完成交接时切换一次 |\n| `owners` | D1、X1 各自的 `host,thread_ref,assigned_by`；尚未绑定 X1 为 `null` | 首次绑定；不能悄悄把同一线程写成两个负责人 |\n| `process_ref`、`plugin_refs` | 流程和实际加载技能的仓库/路径/版本及已知内容摘要 | 初始化与显式升级；不能仅凭市场名称推断加载版本 |\n| `blueprint` | `draft_ref,draft_revision,frozen_ref,semantic_version,approval_ref`；未冻结项为 `null` | D1 发布设计或新冻结版本，X1只引用采纳 |\n| `pending_decisions` | `id,question_ref,owner,affected_nodes,status,answer_ref` | 记录问题、回答与重新开放；不重复询问已有有效决定 |\n| `dispatches` | 派发记录数组，完整形状见第 2 节 | 准备、发出、返回、采纳、作废 |\n| `gate_results` | D5–D8 的 `gate,subject_ref,result_ref,status,coverage,validity` | 只采纳实际结果；状态为 `pending/passed/failed/unknown/stale` |\n| `revisions`、`design_returns` | 不可变修订/退回记录的引用数组 | 有新记录才追加，不删掉失败历史 |\n| `paused_scopes` | `node_ids,reason,return_id,resume_condition` | 只暂停受影响节点及其依赖闭包 |\n| `delivery` | `candidate_id,acceptance_plan_ref,evidence_ids,required_roles,release_ref` | X1 组织交付；初始全部为空或 `null` |\n| `measurements` | 原始衡量事件的引用与去重键 | 发生用户追问、退回或告知时追加；统计值临时计算 |\n| `updated_at`、`last_change` | 实际写入时间；`actor,expected_revision,reason,source_ref` | 每次状态写入 |\n\n`step` 是当前人工工作位置，不是后台状态机或自动执行许可。负责人读取后才能决定下一动作。`gate_results` 的通过只表示该关卡对指定设计版本的结论；`delivery` 中的运行结果只有第 7 节规定的三种语义。\n\n**三个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---|---|\n| `snapshot_sha256` | Blueprint 检查器 `snapshotOf` 取出的内容快照（`title,summary,sources,requirements,nodes,connections,evidence,walkthroughs,failurePaths,failureQuestions,complexityNote`，不含 `id`、`schemaVersion`、`versions`），按规范化 JSON（键排序、UTF-8、无多余空白）计算 SHA-256 | 用户批准的对象；D5 草稿档、D6、D7、D8 的结果都绑定它 |\n| `semantic_hash` | 见下文 | 判断语义版本是否改变；小修判定与交付派发核验 |\n| `bundle_sha256` | 冻结命令输出的、带 `versions` 历史的完整 Blueprint 文件本身的 SHA-256 | 冻结后文件的存档身份；X1 接收时核对 |\n\n冻结前不开始任何插件实现；冻结前只允许 D4 的现实核查和材料整理。X2 的实施依据只有冻结合同，不存在冻结前的通用实施许可。",
             "packages": [
               {
                 "name": "Assurance共用文件协议与角色资源",
@@ -707,7 +711,8 @@
               "同一任务两个入口定位到同一STATE，未知与空集合区分。",
               "新结构版本只读报不支持，不覆盖旧状态。",
               "公开仓库记录不包含私有正文或密钥。",
-              "每次状态写入、派发、采纳、冲突、告知均追加事件，衡量可从日志重建；日志不覆盖当前状态。"
+              "每次状态写入、派发、采纳、冲突、告知均追加事件，衡量可从日志重建；日志不覆盖当前状态。",
+              "用户批准和 D5 草稿档、D6、D7、D8 绑定 snapshot_sha256；semantic_hash 用于小修与派发核验，bundle_sha256 用于冻结文件存档及 X1 接收核对，不混用三个身份。"
             ]
           }
         },
@@ -1126,7 +1131,7 @@
             {
               "id": "context",
               "name": "限定输入",
-              "description": "有效STATE、用户已经作出的条件选择、角色卡、宿主真实可用能力。",
+              "description": "有效STATE、用户已经作出的条件选择、角色卡、宿主真实可用能力。；冻结合同及三个身份尚未就绪时不得派 X2 实施。",
               "source": {
                 "kind": "parent",
                 "nodeId": "shared",
@@ -1167,10 +1172,10 @@
               "oracle": {
                 "kind": "independent-reference",
                 "description": "期望由用户认可流程及本候选明确承诺确定；实现者输出不作真值。D2必跑、本轮D3启用及D5–D8全部必跑不被省略。",
-                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/c1054e2976fdc5e447820cec1ff289f9826762d1/docs/design/assurance/ASSURANCE_PROCESS_V0_1_20261110.md"
+                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md"
               },
               "method": {
-                "description": "逐项核对：D2必跑、本轮D3启用及D5–D8全部必跑不被省略。；X3/X4/X5按不同条件触发，缺宿主不降档不自审。；Claude先告知后做支持且获准动作；GPT交完整提示词。；固定七级优先顺序只选首个成立条件；可并行角色作为一批派发且各有独立提示词，同一修订得到同一下一动作。",
+                "description": "逐项核对：D2必跑、本轮D3启用及D5–D8全部必跑不被省略。；X3/X4/X5按不同条件触发，缺宿主不降档不自审。；Claude先告知后做支持且获准动作；GPT交完整提示词。；固定七级优先顺序只选首个成立条件；可并行角色作为一批派发且各有独立提示词，同一修订得到同一下一动作。；冻结前不开始任何插件实现；冻结前只允许 D4 的现实核查和材料整理。X2 的实施依据只有冻结合同，不存在冻结前的通用实施许可。；首次冻结按第 6.5 节五步顺序：同一 snapshot_sha256 四关卡通过、用户批准、追加首版、D5 冻结档核实获批快照未变、再写含三个身份的 freeze.json。",
                 "tool": "实际宿主、仓库读写工具与所需领域检查器；专业判断由规定角色完成",
                 "command": "按本节点验收条款实际执行并保存原始结果；这是拟定操作说明，不是已存在脚本或运行记录。"
               },
@@ -1253,12 +1258,13 @@
               "所需实际定位、授权或输入未取得时返回缺项及接收方，不生成默认成功结果。"
             ],
             "boundaries": [
-              "仅处理本节点明确范围，未改变流程的角色、档次、必跑条件与完成语义。"
+              "仅处理本节点明确范围，未改变流程的角色、档次、必跑条件与完成语义。",
+              "冻结前不开始任何插件实现；冻结前只允许 D4 的现实核查和材料整理。X2 的实施依据只有冻结合同，不存在冻结前的通用实施许可。"
             ],
             "errors": [
               "对象身份、来源或结果缺失时记录无法判断并交负责人，保留已经产生的原始证据。"
             ],
-            "format": "有效STATE、用户已经作出的条件选择、角色卡、宿主真实可用能力。；输出：dispatch_id、role、tier、thread_mode、read_allowlist/read_denylist、write_scope与prepared状态的完整派发；实际发送才记sent。"
+            "format": "有效STATE、用户已经作出的条件选择、角色卡、宿主真实可用能力。；冻结合同及三个身份尚未就绪时不得派 X2 实施。；有效返回登记后再决定下一角色。；输出：dispatch_id、role、tier、thread_mode、read_allowlist/read_denylist、write_scope与prepared状态的完整派发；实际发送才记sent。；将已决定的角色和边界展开成完整消息。"
           },
           "children": [],
           "ringLabel": [
@@ -1268,7 +1274,7 @@
           "terminal": {
             "kind": "design",
             "integrationPoint": "shared/assurance/dispatch.md；templates/dispatch.json；两个规划SKILL.md",
-            "mechanism": "## 2. 调度与下一步提示词\n\n### 2.1 按条件选择，不替用户改变档次\n\n调度每次先检查当前状态和来源身份，再确定待完成条件，最后输出“发给谁、哪个档次、新开还是沿用、做完交回谁”以及完整提示词。角色档次固定如下；技能不会把用户界面里的“极高”猜成某个 API 参数，也不声称已经自动选好模型。[流程 0.1 第 2–3 节](../ASSURANCE_PROCESS_V0_1_20261110.md)\n\n| 角色 | 档次 | 会话规则 |\n|---|---|---|\n| D1、X1 | 规划端·专业：Claude 或 GPT Pro | 各自一个长期线程，彼此不同 |\n| D2、D3 | 规划端·专业：Claude 或 GPT Pro | 每次独立设计新开；互不读取本轮对方产物 |\n| D4、D5 | 执行端·普通：Codex 高 | 同一任务的盘点或机械检查可以沿用 |\n| D6 | 规划端·普通：GPT 极高 | 每轮新开，不继承负责人上下文 |\n| D7 | 执行端·普通：Codex 高 | 每轮新开，只给 Blueprint 和无设计暗示的运输说明 |\n| D8 | 规划端·普通：GPT 极高 | 每一步、每一轮复述换新读者 |\n| X2 | 执行端·普通：Codex 高；数学符号、精细推导等改用执行端·专业：GPT Work 极高 | 当前实现任务持续沿用；专业子任务明确划定文件与接缝 |\n| X3 | 执行端·专业：GPT Work 极高 | 首次独立新开；同一验收实现的返修沿用，不继承 X2 的解题过程 |\n| X4 | 执行端·专业或现有专门插件 | 同一检查器按既定准则复验可沿用 |\n| X5 | 规划端·专业：Claude 或 GPT Pro | 每次独立裁判新开，不看实现过程 |\n\n没有满足档次、独立性或工具能力的入口时，生成给该入口的提示词并等待，不自动降档或让负责人自己冒充。此处“新开”表示实际新上下文；与文件读取隔离分别记录。宿主有经验证的独立子代理能力时可用，必须确认未继承被禁止的上下文；没有该能力时手动新开线程即可。\n\n### 2.2 确定的优先级（采自设计 B）\n\n调度读完当前状态后，按以下顺序找第一个成立的条件，只给出一个下一动作。允许并行的角色（如 D5–D8、D2 与 D3）作为一个“派发批次”一次给出，但批次内每个角色仍有独立的提示词、依据身份和写回位置，调度明确写出“本批次可并行”，不让角色自己推断依赖。\n\n1. 状态冲突、身份或哈希不一致、负责人不合法；\n2. 阻塞流程的用户专属决定；\n3. 已派发且仍在进行的阻塞角色；\n4. 失败关卡或失效证据对应的返修；\n5. 当前阶段尚未完成的必跑角色；\n6. 已满足触发条件的 D3、D4、X3、X4、X5；\n7. 用户冻结、X1 签发或任务结束。\n\n同一状态修订号必须得到同一结果，这是第 10.2 节“从当前状态给正确下一步”的直接验收对象。\n\n### 2.3 设计与交付的条件表\n\n| `step` | 进入条件 | 负责人给出的动作与完成后接收者 |\n|---|---|---|\n| `D1-clarify` | 新任务或出现必须决定的问题 | 分类查询、设计选择、用户问题；回答进入带出处需求 |\n| `D2-D3-design` | 设计任务与读取边界已明确 | D2 必跑；D3 由 D1 按复杂/高风险决定并记录，本轮已强制启用；产物回 D1 |\n| `D4-reality` | 已有代码/数据且盘点或小探针会改变设计判断 | D1 决定是否调用 D4；事实回 D1，同样可给两位设计者使用 |\n| `D1-synthesize` | D2 及已启用角色返回，或关卡发现缺口 | D1 保留两份原稿、取舍理由与被拒方案，形成同一 Blueprint |\n| `D5-D8-gates` | D1 已明确受审版本和九项合同内容 | D5–D8 全部必跑，可对同一稳定版本并行；结果回 D1 |\n| `D1-approval` | 四关卡有效、关键开放问题已关闭 | D1 给用户可读冻结说明和精确对象，取得批准后生成冻结记录 |\n| `X1-intake` | 冻结快照、批准和四关卡记录可读 | 新 X1 线程接收，确定候选与必需角色，派 X2 |\n| `X2-implement` | 当前范围及授权可执行 | X2 实现、补验收、三类校准、申报偏离，交 X1 |\n| `X3-acceptance` | 科研数值/统计、安全相关，或某验收器太弱需换人重写 | X3 独立完成相应验收实现；不把所有普通验收一律转 X3 |\n| `X4-X5-check` | 当前候选已固定且所需原始证据可读 | 有既定准则和现成能力的维度启用 X4；无法靠准则和机械检查给出专业判断时必须启用 X5；两者可同时需要 |\n| `X1-repair` | 实现、检查程序、环境或普通缺证问题，合同不变 | 回原 X2 或原验收作者；X1重审验收资产变化，重验受影响项及必要回归 |\n| `X1-design-return` | 命中流程规定五种设计退回条件 | X1 写退回记录给原 D1；影响部分暂停，其余继续 |\n| `X1-sign` | 冻结义务有当前有效证据，所有必要角色返回 | X1亲读最终产物与原始证据，作唯一签发；如合同规定用户验收，完成该部分后才记交付 |\n\nD3 的可选判据可由设计者操作化：存在多个强耦合组件、重要方法没有稳定依据、科研/安全结果可能造成高影响、或用户明确要求时建议启用；D1 记录采用或不采用理由，不能以省事省掉用户已经启用的 D3。D4 同样按具体未知项调用，不把盘点扩成无边界审计。\n\nX4 需要的是“该维度存在且有现成检查能力”两个条件。某项必需质量没有现成插件时，义务仍由 X1安排现有工具、X2补程序或X5判断；不凭“X4未启用”删掉义务。X3 与 X5 是不同问题：前者编写独立验收实现，后者判断最终结论；科研任务可能同时需要。\n\n### 2.4 派发记录与实际发送\n\n每次派发保存 `dispatch_id,role,tier,owner,thread_mode,thread_ref,status,based_on,read_allowlist,read_denylist,write_scope,prompt_ref,expected_outputs,return_to,issued_at,result_ref`。`based_on` 包含状态修订号、设计版本与内容摘要、候选编号及受影响节点；`thread_ref` 可用用户给出的定位，不编造平台线程 ID。状态为 `prepared/sent/returned/accepted/stale/cancelled`；准备了提示词只能记 `prepared`，实际调用或用户转交确认才记 `sent`，没有自动回调就由负责人读取结果采纳。\n\nClaude 担任负责人时，可以执行统筹、阅读、写设计文件和已经获准的派出动作，不能亲自写产品或验收代码。动手前说明：“接下来我会让〔角色及档次〕在〔新/原线程〕完成〔具体工作〕，读取〔范围〕，写回〔位置〕。这一步用于确定〔问题〕，结果回到我这里。”事实上的执行能力不足时同样给复制提示词，不声称已派出。\n\nGPT 担任负责人时，按流程生成可复制提示词交给用户去跑，尤其修订不借后台子代理绕过告知。用户只需转交成品提示词；不负责自己找分支、拼文件或决定下一角色。本轮 D2 的资料助手不等于负责人调度，也不替代 D3 或 D5–D8。",
+            "mechanism": "## 2. 调度与下一步提示词\n\n### 2.1 按条件选择，不替用户改变档次\n\n调度每次先检查当前状态和来源身份，再确定待完成条件，最后输出“发给谁、哪个档次、新开还是沿用、做完交回谁”以及完整提示词。角色档次固定如下；技能不会把用户界面里的“极高”猜成某个 API 参数，也不声称已经自动选好模型。[流程 0.1 第 2–3 节](../ASSURANCE_PROCESS_V0_1_20261110.md)\n\n| 角色 | 档次 | 会话规则 |\n|---|---|---|\n| D1、X1 | 规划端·专业：Claude 或 GPT Pro | 各自一个长期线程，彼此不同 |\n| D2、D3 | 规划端·专业：Claude 或 GPT Pro | 每次独立设计新开；互不读取本轮对方产物 |\n| D4、D5 | 执行端·普通：Codex 高 | 同一任务的盘点或机械检查可以沿用 |\n| D6 | 规划端·普通：GPT 极高 | 每轮新开，不继承负责人上下文 |\n| D7 | 执行端·普通：Codex 高 | 每轮新开，只给 Blueprint 和无设计暗示的运输说明 |\n| D8 | 规划端·普通：GPT 极高 | 每一步、每一轮复述换新读者 |\n| X2 | 执行端·普通：Codex 高；数学符号、精细推导等改用执行端·专业：GPT Work 极高 | 当前实现任务持续沿用；专业子任务明确划定文件与接缝 |\n| X3 | 执行端·专业：GPT Work 极高 | 首次独立新开；同一验收实现的返修沿用，不继承 X2 的解题过程 |\n| X4 | 执行端·专业或现有专门插件 | 同一检查器按既定准则复验可沿用 |\n| X5 | 规划端·专业：Claude 或 GPT Pro | 每次独立裁判新开，不看实现过程 |\n\n没有满足档次、独立性或工具能力的入口时，生成给该入口的提示词并等待，不自动降档或让负责人自己冒充。此处“新开”表示实际新上下文；与文件读取隔离分别记录。宿主有经验证的独立子代理能力时可用，必须确认未继承被禁止的上下文；没有该能力时手动新开线程即可。\n\n### 2.2 确定的优先级（采自设计 B）\n\n调度读完当前状态后，按以下顺序找第一个成立的条件，只给出一个下一动作。允许并行的角色（如 D5–D8、D2 与 D3）作为一个“派发批次”一次给出，但批次内每个角色仍有独立的提示词、依据身份和写回位置，调度明确写出“本批次可并行”，不让角色自己推断依赖。\n\n1. 状态冲突、身份或哈希不一致、负责人不合法；\n2. 阻塞流程的用户专属决定；\n3. 已派发且仍在进行的阻塞角色；\n4. 失败关卡或失效证据对应的返修；\n5. 当前阶段尚未完成的必跑角色；\n6. 已满足触发条件的 D3、D4、X3、X4、X5；\n7. 用户冻结、X1 签发或任务结束。\n\n同一状态修订号必须得到同一结果，这是第 10.2 节“从当前状态给正确下一步”的直接验收对象。\n\n### 2.3 设计与交付的条件表\n\n| `step` | 进入条件 | 负责人给出的动作与完成后接收者 |\n|---|---|---|\n| `D1-clarify` | 新任务或出现必须决定的问题 | 分类查询、设计选择、用户问题；回答进入带出处需求 |\n| `D2-D3-design` | 设计任务与读取边界已明确 | D2 必跑；D3 由 D1 按复杂/高风险决定并记录，本轮已强制启用；产物回 D1 |\n| `D4-reality` | 已有代码/数据且盘点或小探针会改变设计判断 | D1 决定是否调用 D4；事实回 D1，同样可给两位设计者使用 |\n| `D1-synthesize` | D2 及已启用角色返回，或关卡发现缺口 | D1 保留两份原稿、取舍理由与被拒方案，形成同一 Blueprint |\n| `D5-D8-gates` | D1 已明确受审版本和九项合同内容 | D5–D8 全部必跑，可对同一稳定版本并行；结果回 D1 |\n| `D1-approval` | 四关卡有效、关键开放问题已关闭 | D1 给用户可读冻结说明和精确对象，取得批准后生成冻结记录 |\n| `X1-intake` | 冻结快照、批准和四关卡记录可读 | 新 X1 线程接收，确定候选与必需角色，派 X2 |\n| `X2-implement` | 当前范围及授权可执行 | X2 实现、补验收、三类校准、申报偏离，交 X1 |\n| `X3-acceptance` | 科研数值/统计、安全相关，或某验收器太弱需换人重写 | X3 独立完成相应验收实现；不把所有普通验收一律转 X3 |\n| `X4-X5-check` | 当前候选已固定且所需原始证据可读 | 有既定准则和现成能力的维度启用 X4；无法靠准则和机械检查给出专业判断时必须启用 X5；两者可同时需要 |\n| `X1-repair` | 实现、检查程序、环境或普通缺证问题，合同不变 | 回原 X2 或原验收作者；X1重审验收资产变化，重验受影响项及必要回归 |\n| `X1-design-return` | 命中流程规定五种设计退回条件 | X1 写退回记录给原 D1；影响部分暂停，其余继续 |\n| `X1-sign` | 冻结义务有当前有效证据，所有必要角色返回 | X1亲读最终产物与原始证据，作唯一签发；如合同规定用户验收，完成该部分后才记交付 |\n\nD3 的可选判据可由设计者操作化：存在多个强耦合组件、重要方法没有稳定依据、科研/安全结果可能造成高影响、或用户明确要求时建议启用；D1 记录采用或不采用理由，不能以省事省掉用户已经启用的 D3。D4 同样按具体未知项调用，不把盘点扩成无边界审计。\n\nX4 需要的是“该维度存在且有现成检查能力”两个条件。某项必需质量没有现成插件时，义务仍由 X1安排现有工具、X2补程序或X5判断；不凭“X4未启用”删掉义务。X3 与 X5 是不同问题：前者编写独立验收实现，后者判断最终结论；科研任务可能同时需要。\n\n### 2.4 派发记录与实际发送\n\n每次派发保存 `dispatch_id,role,tier,owner,thread_mode,thread_ref,status,based_on,read_allowlist,read_denylist,write_scope,prompt_ref,expected_outputs,return_to,issued_at,result_ref`。`based_on` 包含状态修订号、设计版本与内容摘要、候选编号及受影响节点；`thread_ref` 可用用户给出的定位，不编造平台线程 ID。状态为 `prepared/sent/returned/accepted/stale/cancelled`；准备了提示词只能记 `prepared`，实际调用或用户转交确认才记 `sent`，没有自动回调就由负责人读取结果采纳。\n\nClaude 担任负责人时，可以执行统筹、阅读、写设计文件和已经获准的派出动作，不能亲自写产品或验收代码。动手前说明：“接下来我会让〔角色及档次〕在〔新/原线程〕完成〔具体工作〕，读取〔范围〕，写回〔位置〕。这一步用于确定〔问题〕，结果回到我这里。”事实上的执行能力不足时同样给复制提示词，不声称已派出。\n\nGPT 担任负责人时，按流程生成可复制提示词交给用户去跑，尤其修订不借后台子代理绕过告知。用户只需转交成品提示词；不负责自己找分支、拼文件或决定下一角色。本轮 D2 的资料助手不等于负责人调度，也不替代 D3 或 D5–D8。\n\n冻结前不开始任何插件实现；冻结前只允许 D4 的现实核查和材料整理。X2 的实施依据只有冻结合同，不存在冻结前的通用实施许可。\n\n**首次冻结的顺序。**\n1. D5（草稿档）、D6、D7、D8 对同一 `snapshot_sha256` 全部通过。\n2. 用户批准这个 `snapshot_sha256`。\n3. 用 Blueprint 冻结命令追加首个版本。新版本的 `snapshot` 必须与获批快照逐字节一致，即重算得到同一个 `snapshot_sha256`。\n4. 对冻结命令的输出文件运行 D5 冻结档。冻结档本来就会检查“最新版本快照等于当前内容”，这里再核对它等于获批的 `snapshot_sha256`。\n5. 写 `freeze.json`，同时记录 `snapshot_sha256`、`bundle_sha256`、`semantic_hash`。\n\n因为内容快照没有变化，第 1 步的关卡结果和第 2 步的批准继续有效，不需要重新批准；第 4 步只是机械确认，不通过就不写 `freeze.json`，回到 D1 查明原因。`freeze.json` 的必填字段 `blueprint_sha256` 以 `snapshot_sha256` 和 `bundle_sha256` 两项代替。",
             "packages": [
               {
                 "name": "Assurance共用文件协议与角色资源",
@@ -1306,7 +1312,9 @@
               "D2必跑、本轮D3启用及D5–D8全部必跑不被省略。",
               "X3/X4/X5按不同条件触发，缺宿主不降档不自审。",
               "Claude先告知后做支持且获准动作；GPT交完整提示词。",
-              "固定七级优先顺序只选首个成立条件；可并行角色作为一批派发且各有独立提示词，同一修订得到同一下一动作。"
+              "固定七级优先顺序只选首个成立条件；可并行角色作为一批派发且各有独立提示词，同一修订得到同一下一动作。",
+              "冻结前不开始任何插件实现；冻结前只允许 D4 的现实核查和材料整理。X2 的实施依据只有冻结合同，不存在冻结前的通用实施许可。",
+              "首次冻结按第 6.5 节五步顺序：同一 snapshot_sha256 四关卡通过、用户批准、追加首版、D5 冻结档核实获批快照未变、再写含三个身份的 freeze.json。"
             ]
           }
         },
@@ -1601,10 +1609,10 @@
               "oracle": {
                 "kind": "independent-reference",
                 "description": "期望由用户认可流程及本候选明确承诺确定；实现者输出不作真值。九项、跨组件或用户决定任一改变即大改；不确定按大改。",
-                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/c1054e2976fdc5e447820cec1ff289f9826762d1/docs/design/assurance/ASSURANCE_PROCESS_V0_1_20261110.md"
+                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md"
               },
               "method": {
-                "description": "逐项核对：九项、跨组件或用户决定任一改变即大改；不确定按大改。；小修需至多两个既有节点，不改需求、连接、接口、权威、入口、失败路径及已复述文字，semantic_hash 不变，无新用户决定；差异限于规定的小修范围，累计差异不拆单规避。；事前和事后消息确实发生且可定位；其余获准工作继续。",
+                "description": "逐项核对：九项、跨组件或用户决定任一改变即大改；不确定按大改。；小修需至多两个既有节点，不改需求、连接、接口、权威、入口、失败路径及已复述文字，semantic_hash 不变，无新用户决定；差异限于规定的小修范围，累计差异不拆单规避。；事前和事后消息确实发生且可定位；其余获准工作继续。；**覆盖：** 九个 `contract-*` 子节点（`contract-capability` 至 `contract-authorization`，按此固定顺序）。每个节点取 `id,title,description,requirementIds,inputs,outputs,claims,authority,interface`，以及每个验收器的定义字段 `id,name,required,oracle,method,criteria,environment,runner,counterexample`。再加上这些节点 `requirementIds` 所引用的需求对象全文。；**排除：** 进度和运行记录，即 `designStatus,implementationStatus,evidenceIds,ringLabel,children`，以及验收器的 `status,notRunReason,runs`。；**计算：** 上述内容按规范化 JSON 依次拼接后计算 SHA-256。；**完整性义务：** 凡是影响完成语义的义务（能力、入口、三态、证据、禁止替代、旧功能、控制例、变更权、授权边界），必须写在或明确引用到这九个节点中；只出现在其他节点里的，算设计缺口，由 D5 和 D6 检查。；**保守的代价：** 这九个节点里即使只改一个错字，也会改变 `semantic_hash`，因此按大改处理，需要重新批准。九个节点之外的错字修复，仍可按第 5.1 节作为小修。这是有意的取舍：用多一次批准，换取判定完全机械、不需要人工从一段文字里分辨哪部分是“语义”。",
                 "tool": "实际宿主、仓库读写工具与所需领域检查器；专业判断由规定角色完成",
                 "command": "按本节点验收条款实际执行并保存原始结果；这是拟定操作说明，不是已存在脚本或运行记录。"
               },
@@ -1687,12 +1695,13 @@
               "所需实际定位、授权或输入未取得时返回缺项及接收方，不生成默认成功结果。"
             ],
             "boundaries": [
-              "仅处理本节点明确范围，未改变流程的角色、档次、必跑条件与完成语义。"
+              "仅处理本节点明确范围，未改变流程的角色、档次、必跑条件与完成语义。",
+              "九个 contract-* 节点内即使只改一个错字也改变 semantic_hash，按大改重新批准；九个节点之外的错字仍须满足第 5.1 节全部小修条件。"
             ],
             "errors": [
               "对象身份、来源或结果缺失时记录无法判断并交负责人，保留已经产生的原始证据。"
             ],
-            "format": "新旧Blueprint、九项合同、影响图、触发事实、用户已有决定与实际告知。；只有命中五类才回D1处理语义修订。；满足窄范围与语义哈希不变条件后，按已裁决继承规则处理小修。；输出：revisions/<revision_id>.json、不可变差异、paused_scopes及原负责人的决定；满足全部小修条件时文档版本加一、语义版本不变，D1 追加继承说明，只重跑 D5；否则按大改重跑 D5–D8 并重新批准。"
+            "format": "新旧Blueprint、九项合同、影响图、触发事实、用户已有决定与实际告知。；只有命中五类才回D1处理语义修订。；满足窄范围与语义哈希不变条件后，按已裁决继承规则处理小修。；输出：revisions/<revision_id>.json、不可变差异、paused_scopes及原负责人的决定；满足全部小修条件时文档版本加一、语义版本不变，D1 追加继承说明，只重跑 D5；否则按大改重跑 D5–D8 并重新批准。；原D1决定小修或大改并承担设计与告知。；从实际通知与归因记录产生事件。"
           },
           "children": [],
           "ringLabel": [
@@ -1702,7 +1711,7 @@
           "terminal": {
             "kind": "design",
             "integrationPoint": "shared/assurance/revision.md；templates/revision.json；templates/notices.md",
-            "mechanism": "## 5. 修订分类、事前告知与事后说明\n\n### 5.1 先判语义，再看节点数量\n\n出现以下任一变化即大改：改变需求或允许声明；改变正常入口、最终消费对象、成功/失败/无法判断含义；改变阈值、总体、证据真实度、不可替换方法、允许替代或旧功能承诺；改变权限、数据、费用、账号、设备边界；改变跨组件输入输出的字段含义、调用顺序、失败接收者、角色责任或写入权；或需要用户作新决定。改一个字也可能属于大改。\n\n在上述变化全部不存在后，小修还须同时满足以下全部条件（范围采自设计 B，比 A 原稿的“同一组件最多 3 个叶节点”更窄）：\n\n1. 只影响至多两个既有节点，不新增、删除、替换或重排节点；\n2. 不改需求原文或来源；\n3. 不改连接、跨组件接口、权威、正常入口、失败路径，也不改任何 D8 读者已经复述过的走查文字；\n4. 九项冻结合同的语义哈希（第 6.4 节）不变；\n5. 不引入只有用户能决定的新问题；\n6. 改动只限错字、同一固定对象的链接或定位修复、文件哈希与提交号、非语义技术说明、实现状态，且字段级差异能证明以上各条。\n\n无法证明任一条时按大改处理；不能靠把多个节点并成一个、或把一次大改拆成几次小修绕过。\n\n**批准继承（已裁决）。** 文档版本与语义版本分开记。满足上述小修条件时，文档版本加一、语义版本不变：原用户批准和原 D6、D7、D8 记录按原范围继续有效，旧 D8 复述及其文字哈希原样保留，D1 追加一份继承说明（逐项写明九项合同为何不变、实际差异、前后告知定位、新的 D5 结果），不伪造新的复述或新的批准。语义版本一旦变化，全部关卡重跑并重新取得用户批准。\n\n| 情况 | 分类与负责方 | 必要处理 |\n|---|---|---|\n| 同一含义的错字、同一固定对象的链接修复、非语义技术说明 | D1小修 | 事前告知、版本差异、仅重跑D5；按上文“批准继承”沿用原批准与读者记录 |\n| 更换接口字段含义、换正常入口、降低或提高合同阈值、删除旧能力 | D1大改 | 回D1汇总，重过D5–D8及用户批准 |\n| 日志、选择器、解析器、运行器的等价维修 | X1交付内修改 | 按第7节分类、审查、校准与重验，不自动改Blueprint |\n| 宣称只是“更严格”，实际排除原合同允许的实现或增加义务 | D1语义修订 | 不能由X1自行批准 |\n\n小修完成前暂停受影响节点及依赖消费者；其余工作继续。大改也按实际影响控制停工，不为未受影响的已有结果制造重做；重新冻结前不得用旧批准支撑已改变语义的部分。多次小修累计越过同一组件或接口边界时，应按累计差异重判，不能把一次大改拆成许多小修。\n\n### 5.2 修订记录\n\n`revisions/<revision_id>.json` 必填 `id,author_role,from_blueprint,to_blueprint,affected_nodes,dependency_closure,classification,classification_reasons,semantic_comparison,trigger,foreseeability,before_notice,after_notice,diff_ref,gate_effects,approval_effect`。`classification` 为 `minor/major`；`trigger` 为 `user-question/executor-stop/runtime-failure/review/proactive-update`；`foreseeability` 为 `foreseeable/runtime-only/undetermined`，最后一种必须说明缺何证据、谁负责裁定，不能统计成零缺口。\n\n`semantic_comparison` 对照九项合同逐项说明保持或改变的事实，不能只有一个“等价=true”。`before_notice`、`after_notice` 保存确实已给用户看的消息定位和时间；仅写好模板不算已告知。`diff_ref` 指向实际新旧版本差异；没有可定位差异不能复用旧批准。\n\n### 5.3 告知模板\n\n动手前：“我准备修改〔具体内容〕，因为〔事实或问题〕。按流程属于〔小修/大改〕，影响〔节点及用户结果〕；〔暂停范围〕先停，其他部分继续。接下来由〔角色、档次、新/原线程〕完成〔动作〕。”GPT负责人随后给完整提示词；Claude负责人在实际操作前先发这段说明。\n\n完成后：“已把〔旧版本〕改为〔新版本〕，差异是〔会改变理解或行为的内容〕，原因是〔依据〕。这次问题属于〔本可想到/跑了才知道〕，依据为〔简短解释〕。〔关卡和批准的有效范围〕，接下来〔实际接收方和动作〕。”尚不能归因时明确暂未判定及缺少的证据，不用“跑了才知道”掩盖本可查明的设计遗漏。\n\nX1对交付内验收资产变更按第7节留记录，并在交付汇报时一并告诉用户；流程并未要求每个日志或选择器维修都另请用户批准。若动作改变现有数据、费用或权限边界，仍按真实授权范围处理，不能以“小修”免除必要授权。",
+            "mechanism": "## 5. 修订分类、事前告知与事后说明\n\n### 5.1 先判语义，再看节点数量\n\n出现以下任一变化即大改：改变需求或允许声明；改变正常入口、最终消费对象、成功/失败/无法判断含义；改变阈值、总体、证据真实度、不可替换方法、允许替代或旧功能承诺；改变权限、数据、费用、账号、设备边界；改变跨组件输入输出的字段含义、调用顺序、失败接收者、角色责任或写入权；或需要用户作新决定。改一个字也可能属于大改。\n\n在上述变化全部不存在后，小修还须同时满足以下全部条件（范围采自设计 B，比 A 原稿的“同一组件最多 3 个叶节点”更窄）：\n\n1. 只影响至多两个既有节点，不新增、删除、替换或重排节点；\n2. 不改需求原文或来源；\n3. 不改连接、跨组件接口、权威、正常入口、失败路径，也不改任何 D8 读者已经复述过的走查文字；\n4. 九项冻结合同的语义哈希（第 6.4 节）不变；\n5. 不引入只有用户能决定的新问题；\n6. 改动只限错字、同一固定对象的链接或定位修复、文件哈希与提交号、非语义技术说明、实现状态，且字段级差异能证明以上各条。\n\n无法证明任一条时按大改处理；不能靠把多个节点并成一个、或把一次大改拆成几次小修绕过。\n\n**批准继承（已裁决）。** 文档版本与语义版本分开记。满足上述小修条件时，文档版本加一、语义版本不变：原用户批准和原 D6、D7、D8 记录按原范围继续有效，旧 D8 复述及其文字哈希原样保留，D1 追加一份继承说明（逐项写明九项合同为何不变、实际差异、前后告知定位、新的 D5 结果），不伪造新的复述或新的批准。语义版本一旦变化，全部关卡重跑并重新取得用户批准。\n\n| 情况 | 分类与负责方 | 必要处理 |\n|---|---|---|\n| 同一含义的错字、同一固定对象的链接修复、非语义技术说明 | D1小修 | 事前告知、版本差异、仅重跑D5；按上文“批准继承”沿用原批准与读者记录 |\n| 更换接口字段含义、换正常入口、降低或提高合同阈值、删除旧能力 | D1大改 | 回D1汇总，重过D5–D8及用户批准 |\n| 日志、选择器、解析器、运行器的等价维修 | X1交付内修改 | 按第7节分类、审查、校准与重验，不自动改Blueprint |\n| 宣称只是“更严格”，实际排除原合同允许的实现或增加义务 | D1语义修订 | 不能由X1自行批准 |\n\n小修完成前暂停受影响节点及依赖消费者；其余工作继续。大改也按实际影响控制停工，不为未受影响的已有结果制造重做；重新冻结前不得用旧批准支撑已改变语义的部分。多次小修累计越过同一组件或接口边界时，应按累计差异重判，不能把一次大改拆成许多小修。\n\n### 5.2 修订记录\n\n`revisions/<revision_id>.json` 必填 `id,author_role,from_blueprint,to_blueprint,affected_nodes,dependency_closure,classification,classification_reasons,semantic_comparison,trigger,foreseeability,before_notice,after_notice,diff_ref,gate_effects,approval_effect`。`classification` 为 `minor/major`；`trigger` 为 `user-question/executor-stop/runtime-failure/review/proactive-update`；`foreseeability` 为 `foreseeable/runtime-only/undetermined`，最后一种必须说明缺何证据、谁负责裁定，不能统计成零缺口。\n\n`semantic_comparison` 对照九项合同逐项说明保持或改变的事实，不能只有一个“等价=true”。`before_notice`、`after_notice` 保存确实已给用户看的消息定位和时间；仅写好模板不算已告知。`diff_ref` 指向实际新旧版本差异；没有可定位差异不能复用旧批准。\n\n### 5.3 告知模板\n\n动手前：“我准备修改〔具体内容〕，因为〔事实或问题〕。按流程属于〔小修/大改〕，影响〔节点及用户结果〕；〔暂停范围〕先停，其他部分继续。接下来由〔角色、档次、新/原线程〕完成〔动作〕。”GPT负责人随后给完整提示词；Claude负责人在实际操作前先发这段说明。\n\n完成后：“已把〔旧版本〕改为〔新版本〕，差异是〔会改变理解或行为的内容〕，原因是〔依据〕。这次问题属于〔本可想到/跑了才知道〕，依据为〔简短解释〕。〔关卡和批准的有效范围〕，接下来〔实际接收方和动作〕。”尚不能归因时明确暂未判定及缺少的证据，不用“跑了才知道”掩盖本可查明的设计遗漏。\n\nX1对交付内验收资产变更按第7节留记录，并在交付汇报时一并告诉用户；流程并未要求每个日志或选择器维修都另请用户批准。若动作改变现有数据、费用或权限边界，仍按真实授权范围处理，不能以“小修”免除必要授权。\n\n**`semantic_hash` 覆盖的范围。**\n- **覆盖：** 九个 `contract-*` 子节点（`contract-capability` 至 `contract-authorization`，按此固定顺序）。每个节点取 `id,title,description,requirementIds,inputs,outputs,claims,authority,interface`，以及每个验收器的定义字段 `id,name,required,oracle,method,criteria,environment,runner,counterexample`。再加上这些节点 `requirementIds` 所引用的需求对象全文。\n- **排除：** 进度和运行记录，即 `designStatus,implementationStatus,evidenceIds,ringLabel,children`，以及验收器的 `status,notRunReason,runs`。\n- **计算：** 上述内容按规范化 JSON 依次拼接后计算 SHA-256。\n- **完整性义务：** 凡是影响完成语义的义务（能力、入口、三态、证据、禁止替代、旧功能、控制例、变更权、授权边界），必须写在或明确引用到这九个节点中；只出现在其他节点里的，算设计缺口，由 D5 和 D6 检查。\n- **保守的代价：** 这九个节点里即使只改一个错字，也会改变 `semantic_hash`，因此按大改处理，需要重新批准。九个节点之外的错字修复，仍可按第 5.1 节作为小修。这是有意的取舍：用多一次批准，换取判定完全机械、不需要人工从一段文字里分辨哪部分是“语义”。\n\n已裁决依据：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md 第 5 节；SPEC.md 第 6.5 节。",
             "packages": [
               {
                 "name": "Assurance共用文件协议与角色资源",
@@ -1739,7 +1748,12 @@
             "acceptance": [
               "九项、跨组件或用户决定任一改变即大改；不确定按大改。",
               "小修需至多两个既有节点，不改需求、连接、接口、权威、入口、失败路径及已复述文字，semantic_hash 不变，无新用户决定；差异限于规定的小修范围，累计差异不拆单规避。",
-              "事前和事后消息确实发生且可定位；其余获准工作继续。"
+              "事前和事后消息确实发生且可定位；其余获准工作继续。",
+              "**覆盖：** 九个 `contract-*` 子节点（`contract-capability` 至 `contract-authorization`，按此固定顺序）。每个节点取 `id,title,description,requirementIds,inputs,outputs,claims,authority,interface`，以及每个验收器的定义字段 `id,name,required,oracle,method,criteria,environment,runner,counterexample`。再加上这些节点 `requirementIds` 所引用的需求对象全文。",
+              "**排除：** 进度和运行记录，即 `designStatus,implementationStatus,evidenceIds,ringLabel,children`，以及验收器的 `status,notRunReason,runs`。",
+              "**计算：** 上述内容按规范化 JSON 依次拼接后计算 SHA-256。",
+              "**完整性义务：** 凡是影响完成语义的义务（能力、入口、三态、证据、禁止替代、旧功能、控制例、变更权、授权边界），必须写在或明确引用到这九个节点中；只出现在其他节点里的，算设计缺口，由 D5 和 D6 检查。",
+              "**保守的代价：** 这九个节点里即使只改一个错字，也会改变 `semantic_hash`，因此按大改处理，需要重新批准。九个节点之外的错字修复，仍可按第 5.1 节作为小修。这是有意的取舍：用多一次批准，换取判定完全机械、不需要人工从一段文字里分辨哪部分是“语义”。"
             ]
           }
         },
@@ -2919,7 +2933,7 @@
                 {
                   "id": "from-q-checker",
                   "name": "入口裁决输入",
-                  "description": "D5 冻结前用草稿检查，冻结时及冻结后用冻结检查，结果按三态记录。",
+                  "description": "按固定提交 c05edcf 调用草稿或冻结检查，不修改上游；入口 https://github.com/YuukiAS/Asteria-Blueprint/blob/c05edcf51bc93f8be82180fd4ad28a250937f195/content/check.mjs。",
                   "source": {
                     "kind": "connection",
                     "connectionId": "c-q-checker-to-role-D5"
@@ -3748,7 +3762,7 @@
             {
               "id": "context",
               "name": "限定输入",
-              "description": "同一稳定Blueprint、真实D5/D6/D7/D8输出、逐步及整体说明复述记录和覆盖。",
+              "description": "同一 snapshot_sha256 的 Blueprint 内容快照、真实 D5 草稿档/D6/D7/D8 输出、逐步及整体说明复述记录和覆盖。",
               "source": {
                 "kind": "parent",
                 "nodeId": "design",
@@ -3805,7 +3819,7 @@
             {
               "id": "result",
               "name": "可回读结果",
-              "description": "四关卡的subject_ref/result_ref/status/coverage/validity；修改后的失效范围明确。",
+              "description": "四关卡的 subject_ref/result_ref/status/coverage/validity 均绑定 snapshot_sha256；首次冻结追加历史后另取得 D5 冻结档结果并重核获批快照不变。",
               "parentOutput": {
                 "nodeId": "design",
                 "portId": "result"
@@ -3814,7 +3828,7 @@
             {
               "id": "to-role-D5",
               "name": "结构核查输出",
-              "description": "明确指定文件与已批准接入方式。"
+              "description": "按固定提交 c05edcf 调用草稿或冻结检查，不修改上游；入口 https://github.com/YuukiAS/Asteria-Blueprint/blob/c05edcf51bc93f8be82180fd4ad28a250937f195/content/check.mjs。"
             },
             {
               "id": "to-role-D6",
@@ -3834,7 +3848,7 @@
             {
               "id": "to-freeze",
               "name": "关卡有效输出",
-              "description": "四项共同覆盖当前对象且无关键开放问题后请用户批准。"
+              "description": "D5 草稿档、D6、D7、D8 全部通过同一 snapshot_sha256 且无关键开放问题后，请用户批准该快照，再按五步顺序冻结。"
             }
           ],
           "validators": [
@@ -3845,10 +3859,10 @@
               "oracle": {
                 "kind": "independent-reference",
                 "description": "期望由用户认可流程及本候选明确承诺确定；实现者输出不作真值。首次冻结或大改四关卡均有效、关键问题关闭。",
-                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/c1054e2976fdc5e447820cec1ff289f9826762d1/docs/design/assurance/ASSURANCE_PROCESS_V0_1_20261110.md"
+                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md"
               },
               "method": {
-                "description": "从该节点规定的正常入口观察真实输出，并核对以下条件：首次冻结或大改四关卡均有效、关键问题关闭。；不同版本各过一项不能拼接冻结。；D8每正常步、失败步和整体收场分别有当前正文的真实最后一轮正确复述。",
+                "description": "逐项核对：首次冻结或大改四关卡均有效、关键问题关闭。；不同版本各过一项不能拼接冻结。；D8每正常步、失败步和整体收场分别有当前正文的真实最后一轮正确复述。；D5 草稿档、D6、D7、D8 和用户批准共同绑定 snapshot_sha256；追加历史后 D5 冻结档仍核对同一获批快照。；凡影响完成语义的义务必须写在或明确引用到九个 contract-* 节点；只在其他节点出现属于设计缺口，由 D5 和 D6 检查。；独立前置检查器固定在 c05edcf；Assurance 实施不修改上游。",
                 "tool": "实际宿主、仓库读写工具与所需领域检查器；专业判断由规定角色完成",
                 "command": "按本节点验收条款实际执行并保存原始结果；这是拟定操作说明，不是已存在脚本或运行记录。"
               },
@@ -3886,10 +3900,10 @@
               "oracle": {
                 "kind": "independent-reference",
                 "description": "预先确定的规则来自合并裁决第 2.3 节和 SPEC 第 6.2 节；无法完成的检查只能记无法判断。",
-                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md"
+                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md"
               },
               "method": {
-                "description": "注入所需检查入口不可用或外部来源不可访问，核对只记录无法判断、保留候选，并给出取得入口、环境或证据后重查的接收方。用户可见结果：候选已保存，但所需检查尚未完成，当前无法判断，不能冻结。",
+                "description": "注入固定检查器入口不可用、来源不可访问或冻结输出与获批 snapshot_sha256 不一致；核对未完成保留无法判断，不一致不写 freeze.json，由 D1 查明原因，冻结前不实施。用户可见：当前不能写冻结记录或开始插件实现；已保存候选和实际检查结果，由设计负责人查明原因。",
                 "tool": "实际宿主、仓库读写工具与所需领域检查器；专业判断由规定角色完成",
                 "command": "按本节点验收条款实际执行并保存原始结果；这是拟定操作说明，不是已存在脚本或运行记录。"
               },
@@ -3913,12 +3927,12 @@
                 "action": "负责人按已有授权发出本节点完整派发，实际执行者留证；必要独立角色亲读产物。"
               },
               "counterexample": {
-                "input": "所需的 Blueprint 草稿或冻结检查入口不可用，或外部来源不可访问，当前版本不能完成所需核实。",
-                "expectedFailure": "候选已保存，但所需检查尚未完成，当前无法判断，不能冻结。",
+                "input": "固定提交的 Blueprint 草稿或冻结检查入口不可用、外部来源不可访问，或追加历史后的内容快照与获批快照不一致。",
+                "expectedFailure": "当前不能写冻结记录或开始插件实现；已保存候选和实际检查结果，由设计负责人查明原因。",
                 "injection": {
                   "failurePathId": "fail-checker",
                   "nodeId": "gates",
-                  "situation": "所需的 Blueprint 草稿或冻结检查入口不可用，或外部来源不可访问，当前版本不能完成所需核实。"
+                  "situation": "固定提交的 Blueprint 草稿或冻结检查入口不可用、外部来源不可访问，或追加历史后的内容快照与获批快照不一致。"
                 }
               },
               "status": "not-run",
@@ -3931,7 +3945,8 @@
           "evidenceIds": [
             "e-process",
             "e-spec",
-            "e-merge"
+            "e-merge",
+            "e-checker-prerequisite"
           ],
           "claims": [
             {
@@ -3982,7 +3997,7 @@
             "errors": [
               "对象身份、来源或结果缺失时记录无法判断并交负责人，保留已经产生的原始证据。"
             ],
-            "format": "同一稳定Blueprint、真实D5/D6/D7/D8输出、逐步及整体说明复述记录和覆盖。；输出：四关卡的subject_ref/result_ref/status/coverage/validity；修改后的失效范围明确。"
+            "format": "同一 snapshot_sha256 的 Blueprint 内容快照、真实 D5 草稿档/D6/D7/D8 输出、逐步及整体说明复述记录和覆盖。；九项语义与完整设计固定身份再进入四关卡。；原始检查结果回D1纳入有效范围。；真实缺口与答案位置进入收敛。；开工阻塞或具体可行顺序交D1。；保留真实文字和复述，不制造通过记录。；输出：四关卡的 subject_ref/result_ref/status/coverage/validity 均绑定 snapshot_sha256；首次冻结追加历史后另取得 D5 冻结档结果并重核获批快照不变。；按固定提交 c05edcf 调用草稿或冻结检查，不修改上游；入口 https://github.com/YuukiAS/Asteria-Blueprint/blob/c05edcf51bc93f8be82180fd4ad28a250937f195/content/check.mjs。；新读者逐组件追问只在设计中找答案。；新执行者只收到Blueprint及无答案运输封套。；每步每轮及整体说明派给新读者。；D5 草稿档、D6、D7、D8 全部通过同一 snapshot_sha256 且无关键开放问题后，请用户批准该快照，再按五步顺序冻结。"
           },
           "children": [],
           "ringLabel": [
@@ -3992,7 +4007,7 @@
           "terminal": {
             "kind": "design",
             "integrationPoint": "shared/assurance/design-gates.md；templates/gate-result.json；Blueprint上游明确入口",
-            "mechanism": "### 6.2 四个冻结关卡\n\n| 关卡 | 直接检查对象 | 通过标准 | 未通过交回哪里 |\n|---|---|---|---|\n| D5 | 准确版本的JSON、端口/连接、需求路线、证据来源、历史与所需相邻文件 | 原检查器适用范围真实运行完成；没有结构和跨引用错误；所有叶子是三种合法终点；四环境走查与四问失败路径有真实内容；来源可核对。机器检查不能代替专业与可读性结论 | 设计缺项回D1；检查器/环境问题也回D1说明具体取得办法，结果记无法判断 |\n| D6 | 原需求与Blueprint里的所有有效组件 | 逐组件问题都有Blueprint内答案定位；没有漏掉用户正常入口、关键失败、旧能力或必须决定的事项 | D1汇总补缺，按修订范围重判 |\n| D7 | Blueprint全文及最小运输封套 | 新执行者无需设计者再决定产品、科研、接口、验收或权限就能开始已定工作；开工阻塞问题为零，允许合同内普通实现自由度 | D1补全设计，不能让冷读者临场设计答案 |\n| D8 | 正常与失败走查中每一步、每条失败路径整体说明的当前文字 | 各派发单位最后一轮真实独立读者正确复述动作、输入输出、理由与失败后果；文本身份一致，原样复述保留；D1对照原意判断 | D1重写对应文字，再给新的读者 |\n\nD5–D8可以并行读取同一稳定受审版本。D1收集到修改意见后生成新版本，按实际影响标明哪些旧结果已失效，不能把不同版本各过一项拼成冻结。对首次冻结或大改，四关卡必须共同覆盖待批准的设计；小修按流程仅重跑D5，批准及读者记录按第5.1节“批准继承”沿用。\n\n**检查器接入（已裁决）。** 现有 Blueprint 检查器有一处自相矛盾：起稿指南要求首版保留 `versions: []`，完整结构定义却要求至少一条冻结历史，新设计因此在冻结前永远过不了检查。修法放在 Blueprint 的维护源，不在本仓库复制一份检查器：Blueprint 提供两档入口——**草稿检查**沿用全部结构、端口、引用和来源规则，只是不要求已有冻结历史，冻结前的 D5 用它；**冻结检查**保留全部要求，冻结时及冻结后的 D5 用它。两档都要能区分“结构不成立”“外部证据不可访问”“完整检查完成”三种结果，第三态留在 Assurance 的证据记录里，暂不改变 Blueprint 的进度显示。上游修好之前，D5 结果只能记为无法判断；当前候选保留 `versions: []`，绝不虚构冻结快照绕过检查。",
+            "mechanism": "### 6.2 四个冻结关卡\n\n| 关卡 | 直接检查对象 | 通过标准 | 未通过交回哪里 |\n|---|---|---|---|\n| D5 | 准确版本的JSON、端口/连接、需求路线、证据来源、历史与所需相邻文件 | 原检查器适用范围真实运行完成；没有结构和跨引用错误；所有叶子是三种合法终点；四环境走查与四问失败路径有真实内容；来源可核对。机器检查不能代替专业与可读性结论 | 设计缺项回D1；检查器/环境问题也回D1说明具体取得办法，结果记无法判断 |\n| D6 | 原需求与Blueprint里的所有有效组件 | 逐组件问题都有Blueprint内答案定位；没有漏掉用户正常入口、关键失败、旧能力或必须决定的事项 | D1汇总补缺，按修订范围重判 |\n| D7 | Blueprint全文及最小运输封套 | 新执行者无需设计者再决定产品、科研、接口、验收或权限就能开始已定工作；开工阻塞问题为零，允许合同内普通实现自由度 | D1补全设计，不能让冷读者临场设计答案 |\n| D8 | 正常与失败走查中每一步、每条失败路径整体说明的当前文字 | 各派发单位最后一轮真实独立读者正确复述动作、输入输出、理由与失败后果；文本身份一致，原样复述保留；D1对照原意判断 | D1重写对应文字，再给新的读者 |\n\nD5–D8可以并行读取同一稳定受审版本。D1收集到修改意见后生成新版本，按实际影响标明哪些旧结果已失效，不能把不同版本各过一项拼成冻结。对首次冻结或大改，四关卡必须共同覆盖待批准的设计；小修按流程仅重跑D5，批准及读者记录按第5.1节“批准继承”沿用。\n\n**检查器接入（已裁决）。** 现有 Blueprint 检查器有一处自相矛盾：起稿指南要求首版保留 `versions: []`，完整结构定义却要求至少一条冻结历史，新设计因此在冻结前永远过不了检查。修法放在 Blueprint 的维护源，不在本仓库复制一份检查器：Blueprint 提供两档入口——**草稿检查**沿用全部结构、端口、引用和来源规则，只是不要求已有冻结历史，冻结前的 D5 用它；**冻结检查**保留全部要求，冻结时及冻结后的 D5 用它。两档都要能区分“结构不成立”“外部证据不可访问”“完整检查完成”三种结果，第三态留在 Assurance 的证据记录里，暂不改变 Blueprint 的进度显示。上游修好之前，D5 结果只能记为无法判断；当前候选保留 `versions: []`，绝不虚构冻结快照绕过检查。\n\n**上游改造的归属（D7 第 1 轮后补定）。** 检查器两档入口是本任务之外的独立前置工作，已由 D1 派出并交付：`YuukiAS/Asteria-Blueprint` 分支 `fix/draft-check-tier-20261111`，提交 `c05edcf`（两档检查、三态退出码、任意 GitHub 来源定位）。Assurance 实施不修改 Blueprint 仓库，只按固定提交调用；该分支并入 Blueprint 主线后，改为固定主线提交，并由 D1 作为小修更新这里的定位。\n\n**三个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---|---|\n| `snapshot_sha256` | Blueprint 检查器 `snapshotOf` 取出的内容快照（`title,summary,sources,requirements,nodes,connections,evidence,walkthroughs,failurePaths,failureQuestions,complexityNote`，不含 `id`、`schemaVersion`、`versions`），按规范化 JSON（键排序、UTF-8、无多余空白）计算 SHA-256 | 用户批准的对象；D5 草稿档、D6、D7、D8 的结果都绑定它 |\n| `semantic_hash` | 见下文 | 判断语义版本是否改变；小修判定与交付派发核验 |\n| `bundle_sha256` | 冻结命令输出的、带 `versions` 历史的完整 Blueprint 文件本身的 SHA-256 | 冻结后文件的存档身份；X1 接收时核对 |\n\n**首次冻结的顺序。**\n1. D5（草稿档）、D6、D7、D8 对同一 `snapshot_sha256` 全部通过。\n2. 用户批准这个 `snapshot_sha256`。\n3. 用 Blueprint 冻结命令追加首个版本。新版本的 `snapshot` 必须与获批快照逐字节一致，即重算得到同一个 `snapshot_sha256`。\n4. 对冻结命令的输出文件运行 D5 冻结档。冻结档本来就会检查“最新版本快照等于当前内容”，这里再核对它等于获批的 `snapshot_sha256`。\n5. 写 `freeze.json`，同时记录 `snapshot_sha256`、`bundle_sha256`、`semantic_hash`。\n\n因为内容快照没有变化，第 1 步的关卡结果和第 2 步的批准继续有效，不需要重新批准；第 4 步只是机械确认，不通过就不写 `freeze.json`，回到 D1 查明原因。`freeze.json` 的必填字段 `blueprint_sha256` 以 `snapshot_sha256` 和 `bundle_sha256` 两项代替。\n\n**完整性义务：** 凡是影响完成语义的义务（能力、入口、三态、证据、禁止替代、旧功能、控制例、变更权、授权边界），必须写在或明确引用到这九个节点中；只出现在其他节点里的，算设计缺口，由 D5 和 D6 检查。",
             "packages": [
               {
                 "name": "Assurance共用文件协议与角色资源",
@@ -4029,7 +4044,10 @@
             "acceptance": [
               "首次冻结或大改四关卡均有效、关键问题关闭。",
               "不同版本各过一项不能拼接冻结。",
-              "D8每正常步、失败步和整体收场分别有当前正文的真实最后一轮正确复述。"
+              "D8每正常步、失败步和整体收场分别有当前正文的真实最后一轮正确复述。",
+              "D5 草稿档、D6、D7、D8 和用户批准共同绑定 snapshot_sha256；追加历史后 D5 冻结档仍核对同一获批快照。",
+              "凡影响完成语义的义务必须写在或明确引用到九个 contract-* 节点；只在其他节点出现属于设计缺口，由 D5 和 D6 检查。",
+              "独立前置检查器固定在 c05edcf；Assurance 实施不修改上游。"
             ]
           }
         },
@@ -5556,7 +5574,7 @@
             {
               "id": "context",
               "name": "限定输入",
-              "description": "九项语义已齐的Blueprint、D5–D8有效结果、阻塞问题空集合、实际用户批准及资源授权。",
+              "description": "同一 snapshot_sha256 的九项合同及 Blueprint 快照、D5 草稿档/D6/D7/D8 有效结果、阻塞问题空集合、批准该快照的实际用户回答及资源授权。",
               "source": {
                 "kind": "parent",
                 "nodeId": "design",
@@ -5566,7 +5584,7 @@
             {
               "id": "from-gates",
               "name": "关卡有效输入",
-              "description": "四项共同覆盖当前对象且无关键开放问题后请用户批准。",
+              "description": "D5 草稿档、D6、D7、D8 全部通过同一 snapshot_sha256 且无关键开放问题后，请用户批准该快照，再按五步顺序冻结。",
               "source": {
                 "kind": "connection",
                 "connectionId": "c-gates-to-freeze"
@@ -5577,7 +5595,7 @@
             {
               "id": "result",
               "name": "可回读结果",
-              "description": "不可变design/versions/<version>/blueprint.json和freeze.json；X1接收后D1切换状态写者。；freeze.json 含 semantic_hash，按九项内容的规范化 JSON（键排序、UTF-8、无多余空白）拼接后计算 SHA-256。",
+              "description": "不可变 design/versions/<version>/blueprint.json 和 freeze.json；先追加首版并对输出运行 D5 冻结档，核对获批 snapshot_sha256 未变后才写记录。freeze.json 同时记录 snapshot_sha256、bundle_sha256、semantic_hash，以前两者替代旧 blueprint_sha256；X1 接收核对 bundle_sha256 后完成写者交接。",
               "parentOutput": {
                 "nodeId": "design",
                 "portId": "result"
@@ -5586,7 +5604,7 @@
             {
               "id": "to-role-X1",
               "name": "交付接收输出",
-              "description": "X1在独立长期线程实际读取冻结与批准。"
+              "description": "X1 在独立长期线程实际读取冻结包与批准，核对 bundle_sha256，并区分获批 snapshot_sha256 与用于派发的 semantic_hash。"
             }
           ],
           "validators": [
@@ -5597,10 +5615,10 @@
               "oracle": {
                 "kind": "independent-reference",
                 "description": "期望由用户认可流程及本候选明确承诺确定；实现者输出不作真值。freeze.json恰好定位九项和四关卡，批准指向具体对象且可回读。",
-                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/c1054e2976fdc5e447820cec1ff289f9826762d1/docs/design/assurance/ASSURANCE_PROCESS_V0_1_20261110.md"
+                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md"
               },
               "method": {
-                "description": "逐项核对：freeze.json恰好定位九项和四关卡，批准指向具体对象且可回读。；没有真实批准时不产生已批准记录，没有X1接收不称交接完成。；冻结记录只引用语义，不创第二份合同。；semantic_hash 只覆盖九项语义，不覆盖错字说明；投影与当前 Blueprint 重算不一致时拒绝交付派发。",
+                "description": "逐项核对：freeze.json 恰好定位九项和四关卡，用户批准对象为 snapshot_sha256；同时记录 bundle_sha256、semantic_hash，不再用旧 blueprint_sha256。；没有真实批准时不产生已批准记录，没有X1接收不称交接完成。；冻结记录只引用语义，不创第二份合同。；投影与当前 Blueprint 的 semantic_hash 重算不一致时拒绝交付派发；覆盖范围按第 6.5 节逐字段机械计算，九个合同节点内错字改变哈希也算大改。；**覆盖：** 九个 `contract-*` 子节点（`contract-capability` 至 `contract-authorization`，按此固定顺序）。每个节点取 `id,title,description,requirementIds,inputs,outputs,claims,authority,interface`，以及每个验收器的定义字段 `id,name,required,oracle,method,criteria,environment,runner,counterexample`。再加上这些节点 `requirementIds` 所引用的需求对象全文。；**排除：** 进度和运行记录，即 `designStatus,implementationStatus,evidenceIds,ringLabel,children`，以及验收器的 `status,notRunReason,runs`。；**计算：** 上述内容按规范化 JSON 依次拼接后计算 SHA-256。；**完整性义务：** 凡是影响完成语义的义务（能力、入口、三态、证据、禁止替代、旧功能、控制例、变更权、授权边界），必须写在或明确引用到这九个节点中；只出现在其他节点里的，算设计缺口，由 D5 和 D6 检查。；**保守的代价：** 这九个节点里即使只改一个错字，也会改变 `semantic_hash`，因此按大改处理，需要重新批准。九个节点之外的错字修复，仍可按第 5.1 节作为小修。这是有意的取舍：用多一次批准，换取判定完全机械、不需要人工从一段文字里分辨哪部分是“语义”。；首次冻结严格执行第 6.5 节五步；第 4 步不通过不写 freeze.json，回 D1 查明原因；内容快照未变时原四关卡和批准继续有效。；snapshot_sha256 对 snapshotOf 内容快照按键排序、UTF-8、无多余空白的规范化 JSON 计算；bundle_sha256 对冻结命令输出的完整文件字节计算。",
                 "tool": "实际宿主、仓库读写工具与所需领域检查器；专业判断由规定角色完成",
                 "command": "按本节点验收条款实际执行并保存原始结果；这是拟定操作说明，不是已存在脚本或运行记录。"
               },
@@ -5624,8 +5642,8 @@
                 "action": "负责人按已有授权发出本节点完整派发，实际执行者留证；必要独立角色亲读产物。"
               },
               "counterexample": {
-                "input": "删除本节点一项必需输入或把旧版本输出当当前结果。",
-                "expectedFailure": "明确指出缺项或身份不符，相关范围不能登记通过；报告交给本节点的负责人。"
+                "input": "四关卡或批准绑定不同 snapshot_sha256，追加首版后内容快照改变，或未完成 D5 冻结档便写 freeze.json；也检查把合同节点错字当小修的提案。",
+                "expectedFailure": "冻结档不通过或获批快照不一致时不写 freeze.json，交 D1 查明原因；合同节点错字改变 semantic_hash 时按大改重新批准。"
               },
               "status": "not-run",
               "notRunReason": "本轮为 D1 合并设计，插件及其正常入口尚未实现；本节点验收没有运行。",
@@ -5688,7 +5706,7 @@
             "errors": [
               "对象身份、来源或结果缺失时记录无法判断并交负责人，保留已经产生的原始证据。"
             ],
-            "format": "九项语义已齐的Blueprint、D5–D8有效结果、阻塞问题空集合、实际用户批准及资源授权。；四项共同覆盖当前对象且无关键开放问题后请用户批准。；输出：不可变design/versions/<version>/blueprint.json和freeze.json；X1接收后D1切换状态写者。；freeze.json 含 semantic_hash，按九项内容的规范化 JSON（键排序、UTF-8、无多余空白）拼接后计算 SHA-256。"
+            "format": "同一 snapshot_sha256 的九项合同及 Blueprint 快照、D5 草稿档/D6/D7/D8 有效结果、阻塞问题空集合、批准该快照的实际用户回答及资源授权。；D5 草稿档、D6、D7、D8 全部通过同一 snapshot_sha256 且无关键开放问题后，请用户批准该快照，再按五步顺序冻结。；输出：不可变 design/versions/<version>/blueprint.json 和 freeze.json；先追加首版并对输出运行 D5 冻结档，核对获批 snapshot_sha256 未变后才写记录。freeze.json 同时记录 snapshot_sha256、bundle_sha256、semantic_hash，以前两者替代旧 blueprint_sha256；X1 接收核对 bundle_sha256 后完成写者交接。；X1 在独立长期线程实际读取冻结包与批准，核对 bundle_sha256，并区分获批 snapshot_sha256 与用于派发的 semantic_hash。"
           },
           "children": [],
           "ringLabel": [
@@ -5698,7 +5716,7 @@
           "terminal": {
             "kind": "design",
             "integrationPoint": "shared/assurance/templates/freeze.json；templates/handoff.md；schemas/freeze.schema.json",
-            "mechanism": "### 6.3 冻结合同九项\n\n冻结合同本体仍是Blueprint的固定版本。九项通过其需求、节点、接口、验收器、证据及权威关系表达，下面给出每项必须包含的具体形状。`freeze.json`只保存这些内容的节点/字段定位、内容身份和批准记录，不复写第二份可独立修改的标准。\n\n| 项 | Blueprint必须明确的内容 | 推荐定位字段形状 |\n|---|---|---|\n| 1. 能力与声明范围 | 每项实际用户能力、支持环境、允许对外声称什么；明确未包含的内容 | `capability_id,requirement_ids,node_ids,observable_result,allowed_claim,scope` |\n| 2. 正常入口与最终消费对象 | 用户怎样开始；最终交到用户手里的软件、文档、图、结果或服务实例；对象身份怎样取得 | `entry,input_shape,consumer_object,identity_method` |\n| 3. 成功、失败、缺证据 | 可观察的三态，哪些观测能支持结论；产品失败与无法观察分开 | `criterion_id,success,failure,unknown,claim_effect` |\n| 4. 必需证据与不可替换方法 | 要看何种原始证据、真实到哪层、谁能读；决定语义的方法列为不可替换 | `criterion_id,evidence_types,fidelity,non_substitutable_methods,reader_access` |\n| 5. 禁止替代 | 对具体承诺禁止哪些mock、代理、缩范围、低配实现及其可识别表现 | `capability_id,forbidden_substitution,why_invalid,detectable_counterexample` |\n| 6. 旧功能与回归 | 已被接受的旧行为、保护边界、代表性完整任务与失败例 | `behavior_id,source_ref,observable_invariant,regression_case` |\n| 7. 三类控制例 | 正例应通过、危险坏例应失败、缺证例应无法判断；独立参考及期望结果来源 | `case_id,criterion_id,kind,input_ref,expected_result,oracle_ref` |\n| 8. 交付可改与须退回 | 可自由选择的实现细节、五级验收变更和五类设计退回条件的任务化应用 | `change_class,examples,decision_owner,equivalence_obligations,return_reason` |\n| 9. 权限与资源边界 | 允许仓库/分支/目录，数据类别与用途、服务商/账号/设备、费用上限及确切授权出处 | `resource,allowed_actions,prohibited_actions,limits,authorization_ref` |\n\n这张表是值的语义定义；不是要求往现有严格JSON顶层硬塞九个新键。对没有旧功能的新项目，第6项也要写清哪些现有安装、共享规则或邻近能力不得变差，若确实没有业务旧功能则说明原因，不能用空数组假装已经回归。\n\n在这两个插件自身的候选Blueprint中，九项已有具体设计节点：能力是完整派发/冻结/交付职责；正常入口是规划SKILL与两个Codex执行入口；禁止以文件齐全、旧候选、同线程自审或“缺证默认通过”替代；旧保护包含现有两个维护插件与其他已安装插件；真实验收见第10节。上游检查器两档入口完成并实际通过前，不写成已过D5。\n\n### 6.4 冻结记录和接收\n\n`freeze.json`必填 `schema_version:\"assurance-freeze/0.1\",task_id,blueprint_ref,blueprint_sha256,document_version,semantic_version,semantic_hash,nine_item_refs,gate_refs,open_questions,user_approval,authorization_refs,created_by,created_at`。`nine_item_refs`恰好九项，每项引用现有节点/字段；`semantic_hash`（采自设计 B）是把九项所引用的内容按规范化 JSON（键排序、UTF-8、无多余空白）拼接后的 SHA-256，只覆盖九项语义，不覆盖错字所在的说明文字；它是判断“语义版本是否改变”的机械依据，投影与 Blueprint 当前内容算出的值不一致时拒绝交付派发；`gate_refs`恰好D5–D8并说明覆盖与有效性；冻结时阻塞型 `open_questions`必须为空；`user_approval`含用户实际回答、来源、时间和批准对象身份。未批准时不得生成带批准值的冻结记录。\n\nD1给用户的冻结说明至少讲清交付能力、正常入口、允许实现自由度、不可降级边界、权限费用及尚未实现部分。用户批准内容版本后，才生成不可变快照和记录。工具成功创建快照不是用户批准；所有必要授权也不能从“同意设计”自动推导。\n\nX1接收记录为 `handoff_id,from_thread,to_thread,freeze_ref,read_artifacts,accepted_at,unresolved`。没有实际读取或仍有影响开工的矛盾时不接手实质实现，写出具体问题给D1；仅缺某项执行环境可在原合同允许的准备范围内处理，不重新制造整轮设计。",
+            "mechanism": "### 6.3 冻结合同九项\n\n冻结合同本体仍是Blueprint的固定版本。九项通过其需求、节点、接口、验收器、证据及权威关系表达，下面给出每项必须包含的具体形状。`freeze.json`只保存这些内容的节点/字段定位、内容身份和批准记录，不复写第二份可独立修改的标准。\n\n| 项 | Blueprint必须明确的内容 | 推荐定位字段形状 |\n|---|---|---|\n| 1. 能力与声明范围 | 每项实际用户能力、支持环境、允许对外声称什么；明确未包含的内容 | `capability_id,requirement_ids,node_ids,observable_result,allowed_claim,scope` |\n| 2. 正常入口与最终消费对象 | 用户怎样开始；最终交到用户手里的软件、文档、图、结果或服务实例；对象身份怎样取得 | `entry,input_shape,consumer_object,identity_method` |\n| 3. 成功、失败、缺证据 | 可观察的三态，哪些观测能支持结论；产品失败与无法观察分开 | `criterion_id,success,failure,unknown,claim_effect` |\n| 4. 必需证据与不可替换方法 | 要看何种原始证据、真实到哪层、谁能读；决定语义的方法列为不可替换 | `criterion_id,evidence_types,fidelity,non_substitutable_methods,reader_access` |\n| 5. 禁止替代 | 对具体承诺禁止哪些mock、代理、缩范围、低配实现及其可识别表现 | `capability_id,forbidden_substitution,why_invalid,detectable_counterexample` |\n| 6. 旧功能与回归 | 已被接受的旧行为、保护边界、代表性完整任务与失败例 | `behavior_id,source_ref,observable_invariant,regression_case` |\n| 7. 三类控制例 | 正例应通过、危险坏例应失败、缺证例应无法判断；独立参考及期望结果来源 | `case_id,criterion_id,kind,input_ref,expected_result,oracle_ref` |\n| 8. 交付可改与须退回 | 可自由选择的实现细节、五级验收变更和五类设计退回条件的任务化应用 | `change_class,examples,decision_owner,equivalence_obligations,return_reason` |\n| 9. 权限与资源边界 | 允许仓库/分支/目录，数据类别与用途、服务商/账号/设备、费用上限及确切授权出处 | `resource,allowed_actions,prohibited_actions,limits,authorization_ref` |\n\n这张表是值的语义定义；不是要求往现有严格JSON顶层硬塞九个新键。对没有旧功能的新项目，第6项也要写清哪些现有安装、共享规则或邻近能力不得变差，若确实没有业务旧功能则说明原因，不能用空数组假装已经回归。\n\n在这两个插件自身的候选Blueprint中，九项已有具体设计节点：能力是完整派发/冻结/交付职责；正常入口是规划SKILL与两个Codex执行入口；禁止以文件齐全、旧候选、同线程自审或“缺证默认通过”替代；旧保护包含现有两个维护插件与其他已安装插件；真实验收见第10节。上游检查器两档入口完成并实际通过前，不写成已过D5。\n\n### 6.4 冻结记录和接收\n\n`freeze.json`必填 `schema_version:\"assurance-freeze/0.1\",task_id,blueprint_ref,snapshot_sha256,bundle_sha256,document_version,semantic_version,semantic_hash,nine_item_refs,gate_refs,open_questions,user_approval,authorization_refs,created_by,created_at`。`nine_item_refs`恰好九项，每项引用现有节点/字段；`semantic_hash`（采自设计 B）按第 6.5 节明确的九个合同节点定义字段、验收器定义字段及所引用需求全文，按规范化 JSON 依次拼接后计算的 SHA-256；覆盖与排除范围严格见第 6.5 节，九个节点内即使只改一个错字也按大改处理；它是判断“语义版本是否改变”的机械依据，投影与 Blueprint 当前内容算出的值不一致时拒绝交付派发；`gate_refs`恰好D5–D8并说明覆盖与有效性；冻结时阻塞型 `open_questions`必须为空；`user_approval`含用户实际回答、来源、时间和批准对象身份。未批准时不得生成带批准值的冻结记录。\n\nD1给用户的冻结说明至少讲清交付能力、正常入口、允许实现自由度、不可降级边界、权限费用及尚未实现部分。用户批准内容版本后，才生成不可变快照和记录。工具成功创建快照不是用户批准；所有必要授权也不能从“同意设计”自动推导。\n\nX1接收记录为 `handoff_id,from_thread,to_thread,freeze_ref,read_artifacts,accepted_at,unresolved`。没有实际读取或仍有影响开工的矛盾时不接手实质实现，写出具体问题给D1；仅缺某项执行环境可在原合同允许的准备范围内处理，不重新制造整轮设计。\n\n### 6.5 冻结对象与语义哈希的精确定义（D7 第 1 轮后由 D1 补定）\n\n**三个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---|---|\n| `snapshot_sha256` | Blueprint 检查器 `snapshotOf` 取出的内容快照（`title,summary,sources,requirements,nodes,connections,evidence,walkthroughs,failurePaths,failureQuestions,complexityNote`，不含 `id`、`schemaVersion`、`versions`），按规范化 JSON（键排序、UTF-8、无多余空白）计算 SHA-256 | 用户批准的对象；D5 草稿档、D6、D7、D8 的结果都绑定它 |\n| `semantic_hash` | 见下文 | 判断语义版本是否改变；小修判定与交付派发核验 |\n| `bundle_sha256` | 冻结命令输出的、带 `versions` 历史的完整 Blueprint 文件本身的 SHA-256 | 冻结后文件的存档身份；X1 接收时核对 |\n\n**首次冻结的顺序。**\n1. D5（草稿档）、D6、D7、D8 对同一 `snapshot_sha256` 全部通过。\n2. 用户批准这个 `snapshot_sha256`。\n3. 用 Blueprint 冻结命令追加首个版本。新版本的 `snapshot` 必须与获批快照逐字节一致，即重算得到同一个 `snapshot_sha256`。\n4. 对冻结命令的输出文件运行 D5 冻结档。冻结档本来就会检查“最新版本快照等于当前内容”，这里再核对它等于获批的 `snapshot_sha256`。\n5. 写 `freeze.json`，同时记录 `snapshot_sha256`、`bundle_sha256`、`semantic_hash`。\n\n因为内容快照没有变化，第 1 步的关卡结果和第 2 步的批准继续有效，不需要重新批准；第 4 步只是机械确认，不通过就不写 `freeze.json`，回到 D1 查明原因。`freeze.json` 的必填字段 `blueprint_sha256` 以 `snapshot_sha256` 和 `bundle_sha256` 两项代替。\n\n**`semantic_hash` 覆盖的范围。**\n- **覆盖：** 九个 `contract-*` 子节点（`contract-capability` 至 `contract-authorization`，按此固定顺序）。每个节点取 `id,title,description,requirementIds,inputs,outputs,claims,authority,interface`，以及每个验收器的定义字段 `id,name,required,oracle,method,criteria,environment,runner,counterexample`。再加上这些节点 `requirementIds` 所引用的需求对象全文。\n- **排除：** 进度和运行记录，即 `designStatus,implementationStatus,evidenceIds,ringLabel,children`，以及验收器的 `status,notRunReason,runs`。\n- **计算：** 上述内容按规范化 JSON 依次拼接后计算 SHA-256。\n- **完整性义务：** 凡是影响完成语义的义务（能力、入口、三态、证据、禁止替代、旧功能、控制例、变更权、授权边界），必须写在或明确引用到这九个节点中；只出现在其他节点里的，算设计缺口，由 D5 和 D6 检查。\n- **保守的代价：** 这九个节点里即使只改一个错字，也会改变 `semantic_hash`，因此按大改处理，需要重新批准。九个节点之外的错字修复，仍可按第 5.1 节作为小修。这是有意的取舍：用多一次批准，换取判定完全机械、不需要人工从一段文字里分辨哪部分是“语义”。",
             "packages": [
               {
                 "name": "Assurance共用文件协议与角色资源",
@@ -5733,17 +5751,24 @@
               "failureState": "不重复外部副作用；保留原始结果与当前状态。负责人查明缺项或冲突后恢复，同一范围不重复索权。"
             },
             "acceptance": [
-              "freeze.json恰好定位九项和四关卡，批准指向具体对象且可回读。",
+              "freeze.json 恰好定位九项和四关卡，用户批准对象为 snapshot_sha256；同时记录 bundle_sha256、semantic_hash，不再用旧 blueprint_sha256。",
               "没有真实批准时不产生已批准记录，没有X1接收不称交接完成。",
               "冻结记录只引用语义，不创第二份合同。",
-              "semantic_hash 只覆盖九项语义，不覆盖错字说明；投影与当前 Blueprint 重算不一致时拒绝交付派发。"
+              "投影与当前 Blueprint 的 semantic_hash 重算不一致时拒绝交付派发；覆盖范围按第 6.5 节逐字段机械计算，九个合同节点内错字改变哈希也算大改。",
+              "**覆盖：** 九个 `contract-*` 子节点（`contract-capability` 至 `contract-authorization`，按此固定顺序）。每个节点取 `id,title,description,requirementIds,inputs,outputs,claims,authority,interface`，以及每个验收器的定义字段 `id,name,required,oracle,method,criteria,environment,runner,counterexample`。再加上这些节点 `requirementIds` 所引用的需求对象全文。",
+              "**排除：** 进度和运行记录，即 `designStatus,implementationStatus,evidenceIds,ringLabel,children`，以及验收器的 `status,notRunReason,runs`。",
+              "**计算：** 上述内容按规范化 JSON 依次拼接后计算 SHA-256。",
+              "**完整性义务：** 凡是影响完成语义的义务（能力、入口、三态、证据、禁止替代、旧功能、控制例、变更权、授权边界），必须写在或明确引用到这九个节点中；只出现在其他节点里的，算设计缺口，由 D5 和 D6 检查。",
+              "**保守的代价：** 这九个节点里即使只改一个错字，也会改变 `semantic_hash`，因此按大改处理，需要重新批准。九个节点之外的错字修复，仍可按第 5.1 节作为小修。这是有意的取舍：用多一次批准，换取判定完全机械、不需要人工从一段文字里分辨哪部分是“语义”。",
+              "首次冻结严格执行第 6.5 节五步；第 4 步不通过不写 freeze.json，回 D1 查明原因；内容快照未变时原四关卡和批准继续有效。",
+              "snapshot_sha256 对 snapshotOf 内容快照按键排序、UTF-8、无多余空白的规范化 JSON 计算；bundle_sha256 对冻结命令输出的完整文件字节计算。"
             ]
           }
         },
         {
           "id": "q-checker",
           "title": "草稿与冻结检查",
-          "description": "在 Blueprint 维护源提供草稿与冻结两档入口，共用结构规则并区分三态。",
+          "description": "检查器是任务之外已交付的独立前置工作；Assurance 只按固定提交 c05edcf 调用，不修改 Blueprint 仓库。",
           "requirementIds": [
             "r-freeze",
             "r-blueprint"
@@ -5752,7 +5777,7 @@
             {
               "id": "context",
               "name": "限定输入",
-              "description": "已裁决依据 MERGE_DECISIONS.md 第 2.3 节及对应 SPEC.md 内容。",
+              "description": "D1 补定的检查器固定提交 c05edcf51bc93f8be82180fd4ad28a250937f195；MERGE_DECISIONS.md 第 5 节及 SPEC 第 6.2、6.5 节。",
               "source": {
                 "kind": "parent",
                 "nodeId": "design",
@@ -5764,7 +5789,7 @@
             {
               "id": "result",
               "name": "可回读结果",
-              "description": "在 Blueprint 维护源提供草稿与冻结两档入口，共用结构规则并区分三态。 已裁决依据随输出保留。",
+              "description": "检查器是任务之外已交付的独立前置工作；Assurance 只按固定提交 c05edcf 调用，不修改 Blueprint 仓库。 两档检查与三态结果按 SPEC 第 6.2 节使用。",
               "parentOutput": {
                 "nodeId": "design",
                 "portId": "result"
@@ -5773,7 +5798,7 @@
             {
               "id": "to-role-D5",
               "name": "入口裁决输出",
-              "description": "在 Blueprint 维护源提供草稿与冻结两档入口，共用结构规则并区分三态。"
+              "description": "按固定提交 c05edcf 调用草稿或冻结检查，不修改上游；入口 https://github.com/YuukiAS/Asteria-Blueprint/blob/c05edcf51bc93f8be82180fd4ad28a250937f195/content/check.mjs。"
             }
           ],
           "validators": [
@@ -5784,10 +5809,10 @@
               "oracle": {
                 "kind": "independent-reference",
                 "description": "以 D1 已裁决依据与合并规格为预先确定的规则，实施输出不能自作真值。",
-                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md"
+                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md"
               },
               "method": {
-                "description": "逐项核对：草稿沿用全部结构规则，仅不要求已有冻结历史；冻结保留全部要求。；缺口、外部证据不可访问、完整检查完成分别记录，无法完成不能记通过。；上游完成并实际通过前，D5 只能记无法判断；不伪造读者记录或冻结历史。",
+                "description": "逐项核对：草稿沿用全部结构规则，仅不要求已有冻结历史；冻结保留全部要求。；缺口、外部证据不可访问、完整检查完成分别记录，无法完成不能记通过。；检查器固定为 c05edcf，两档入口、三态退出码和任意 GitHub 来源定位作为独立前置工作已交付；Assurance 不修改上游，不伪造读者记录或冻结历史。；该分支并入 Blueprint 主线后，改为固定主线提交，由 D1 作为小修更新定位。",
                 "tool": "实际宿主、仓库读写工具与所需领域检查器；专业判断由规定角色完成",
                 "command": "按本节点验收条款实际执行并保存原始结果；这是拟定操作说明，不是已存在脚本或运行记录。"
               },
@@ -5824,7 +5849,8 @@
           "evidenceIds": [
             "e-process",
             "e-spec",
-            "e-merge"
+            "e-merge",
+            "e-checker-prerequisite"
           ],
           "claims": [
             {
@@ -5846,7 +5872,7 @@
             "errors": [
               "对象身份、来源或结果缺失时记录无法判断并交负责人，保留已经产生的原始证据。"
             ],
-            "format": "已裁决依据 MERGE_DECISIONS.md 第 2.3 节及对应 SPEC.md 内容。；输出：在 Blueprint 维护源提供草稿与冻结两档入口，共用结构规则并区分三态。 已裁决依据随输出保留。"
+            "format": "D1 补定的检查器固定提交 c05edcf51bc93f8be82180fd4ad28a250937f195；MERGE_DECISIONS.md 第 5 节及 SPEC 第 6.2、6.5 节。；输出：检查器是任务之外已交付的独立前置工作；Assurance 只按固定提交 c05edcf 调用，不修改 Blueprint 仓库。 两档检查与三态结果按 SPEC 第 6.2 节使用。；按固定提交 c05edcf 调用草稿或冻结检查，不修改上游；入口 https://github.com/YuukiAS/Asteria-Blueprint/blob/c05edcf51bc93f8be82180fd4ad28a250937f195/content/check.mjs。"
           },
           "children": [],
           "ringLabel": [
@@ -5855,8 +5881,8 @@
           ],
           "terminal": {
             "kind": "design",
-            "integrationPoint": "Blueprint 维护源的 content/schema.ts、content/check.mjs；Assurance 的 D5 证据记录",
-            "mechanism": "### 6.2 四个冻结关卡\n\n| 关卡 | 直接检查对象 | 通过标准 | 未通过交回哪里 |\n|---|---|---|---|\n| D5 | 准确版本的JSON、端口/连接、需求路线、证据来源、历史与所需相邻文件 | 原检查器适用范围真实运行完成；没有结构和跨引用错误；所有叶子是三种合法终点；四环境走查与四问失败路径有真实内容；来源可核对。机器检查不能代替专业与可读性结论 | 设计缺项回D1；检查器/环境问题也回D1说明具体取得办法，结果记无法判断 |\n| D6 | 原需求与Blueprint里的所有有效组件 | 逐组件问题都有Blueprint内答案定位；没有漏掉用户正常入口、关键失败、旧能力或必须决定的事项 | D1汇总补缺，按修订范围重判 |\n| D7 | Blueprint全文及最小运输封套 | 新执行者无需设计者再决定产品、科研、接口、验收或权限就能开始已定工作；开工阻塞问题为零，允许合同内普通实现自由度 | D1补全设计，不能让冷读者临场设计答案 |\n| D8 | 正常与失败走查中每一步、每条失败路径整体说明的当前文字 | 各派发单位最后一轮真实独立读者正确复述动作、输入输出、理由与失败后果；文本身份一致，原样复述保留；D1对照原意判断 | D1重写对应文字，再给新的读者 |\n\nD5–D8可以并行读取同一稳定受审版本。D1收集到修改意见后生成新版本，按实际影响标明哪些旧结果已失效，不能把不同版本各过一项拼成冻结。对首次冻结或大改，四关卡必须共同覆盖待批准的设计；小修按流程仅重跑D5，批准及读者记录按第5.1节“批准继承”沿用。\n\n**检查器接入（已裁决）。** 现有 Blueprint 检查器有一处自相矛盾：起稿指南要求首版保留 `versions: []`，完整结构定义却要求至少一条冻结历史，新设计因此在冻结前永远过不了检查。修法放在 Blueprint 的维护源，不在本仓库复制一份检查器：Blueprint 提供两档入口——**草稿检查**沿用全部结构、端口、引用和来源规则，只是不要求已有冻结历史，冻结前的 D5 用它；**冻结检查**保留全部要求，冻结时及冻结后的 D5 用它。两档都要能区分“结构不成立”“外部证据不可访问”“完整检查完成”三种结果，第三态留在 Assurance 的证据记录里，暂不改变 Blueprint 的进度显示。上游修好之前，D5 结果只能记为无法判断；当前候选保留 `versions: []`，绝不虚构冻结快照绕过检查。\n\n已裁决依据：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md 第 2.3 节。",
+            "integrationPoint": "https://github.com/YuukiAS/Asteria-Blueprint/blob/c05edcf51bc93f8be82180fd4ad28a250937f195/content/check.mjs；分支 fix/draft-check-tier-20261111；独立前置工作已交付，Assurance 实施只接入。",
+            "mechanism": "### 6.2 四个冻结关卡\n\n| 关卡 | 直接检查对象 | 通过标准 | 未通过交回哪里 |\n|---|---|---|---|\n| D5 | 准确版本的JSON、端口/连接、需求路线、证据来源、历史与所需相邻文件 | 原检查器适用范围真实运行完成；没有结构和跨引用错误；所有叶子是三种合法终点；四环境走查与四问失败路径有真实内容；来源可核对。机器检查不能代替专业与可读性结论 | 设计缺项回D1；检查器/环境问题也回D1说明具体取得办法，结果记无法判断 |\n| D6 | 原需求与Blueprint里的所有有效组件 | 逐组件问题都有Blueprint内答案定位；没有漏掉用户正常入口、关键失败、旧能力或必须决定的事项 | D1汇总补缺，按修订范围重判 |\n| D7 | Blueprint全文及最小运输封套 | 新执行者无需设计者再决定产品、科研、接口、验收或权限就能开始已定工作；开工阻塞问题为零，允许合同内普通实现自由度 | D1补全设计，不能让冷读者临场设计答案 |\n| D8 | 正常与失败走查中每一步、每条失败路径整体说明的当前文字 | 各派发单位最后一轮真实独立读者正确复述动作、输入输出、理由与失败后果；文本身份一致，原样复述保留；D1对照原意判断 | D1重写对应文字，再给新的读者 |\n\nD5–D8可以并行读取同一稳定受审版本。D1收集到修改意见后生成新版本，按实际影响标明哪些旧结果已失效，不能把不同版本各过一项拼成冻结。对首次冻结或大改，四关卡必须共同覆盖待批准的设计；小修按流程仅重跑D5，批准及读者记录按第5.1节“批准继承”沿用。\n\n**检查器接入（已裁决）。** 现有 Blueprint 检查器有一处自相矛盾：起稿指南要求首版保留 `versions: []`，完整结构定义却要求至少一条冻结历史，新设计因此在冻结前永远过不了检查。修法放在 Blueprint 的维护源，不在本仓库复制一份检查器：Blueprint 提供两档入口——**草稿检查**沿用全部结构、端口、引用和来源规则，只是不要求已有冻结历史，冻结前的 D5 用它；**冻结检查**保留全部要求，冻结时及冻结后的 D5 用它。两档都要能区分“结构不成立”“外部证据不可访问”“完整检查完成”三种结果，第三态留在 Assurance 的证据记录里，暂不改变 Blueprint 的进度显示。上游修好之前，D5 结果只能记为无法判断；当前候选保留 `versions: []`，绝不虚构冻结快照绕过检查。\n\n**上游改造的归属（D7 第 1 轮后补定）。** 检查器两档入口是本任务之外的独立前置工作，已由 D1 派出并交付：`YuukiAS/Asteria-Blueprint` 分支 `fix/draft-check-tier-20261111`，提交 `c05edcf`（两档检查、三态退出码、任意 GitHub 来源定位）。Assurance 实施不修改 Blueprint 仓库，只按固定提交调用；该分支并入 Blueprint 主线后，改为固定主线提交，并由 D1 作为小修更新这里的定位。\n\n已裁决依据：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md 第 2.3、5 节。",
             "packages": [
               {
                 "name": "Assurance共用文件协议与角色资源",
@@ -5866,6 +5892,16 @@
                 "evidenceIds": [
                   "e-process",
                   "e-spec"
+                ]
+              },
+              {
+                "name": "Asteria-Blueprint 检查器",
+                "version": "c05edcf51bc93f8be82180fd4ad28a250937f195",
+                "registry": "other",
+                "rationale": "D1 已交付的独立前置检查器，固定提交调用，不由 Assurance 实施修改上游。",
+                "evidenceIds": [
+                  "e-checker-prerequisite",
+                  "e-merge"
                 ]
               }
             ],
@@ -5891,7 +5927,7 @@
               {
                 "round": 1,
                 "action": "负责人读取已裁决依据并按本节点规则处理，不重复询问已有有效决定。",
-                "sees": "在 Blueprint 维护源提供草稿与冻结两档入口，共用结构规则并区分三态。"
+                "sees": "检查器是任务之外已交付的独立前置工作；Assurance 只按固定提交 c05edcf 调用，不修改 Blueprint 仓库。"
               }
             ],
             "retry": {
@@ -5901,7 +5937,8 @@
             "acceptance": [
               "草稿沿用全部结构规则，仅不要求已有冻结历史；冻结保留全部要求。",
               "缺口、外部证据不可访问、完整检查完成分别记录，无法完成不能记通过。",
-              "上游完成并实际通过前，D5 只能记无法判断；不伪造读者记录或冻结历史。"
+              "检查器固定为 c05edcf，两档入口、三态退出码和任意 GitHub 来源定位作为独立前置工作已交付；Assurance 不修改上游，不伪造读者记录或冻结历史。",
+              "该分支并入 Blueprint 主线后，改为固定主线提交，由 D1 作为小修更新定位。"
             ]
           }
         },
@@ -5917,7 +5954,7 @@
             {
               "id": "context",
               "name": "限定输入",
-              "description": "已裁决依据 MERGE_DECISIONS.md 第 2.2 节及对应 SPEC.md 内容。",
+              "description": "MERGE_DECISIONS.md 第 2.2、5 节和 SPEC 第 5.1、6.5 节；新旧九个合同节点定义字段、验收器定义字段与所引用的需求全文。",
               "source": {
                 "kind": "parent",
                 "nodeId": "design",
@@ -5949,10 +5986,10 @@
               "oracle": {
                 "kind": "independent-reference",
                 "description": "以 D1 已裁决依据与合并规格为预先确定的规则，实施输出不能自作真值。",
-                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md"
+                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md"
               },
               "method": {
-                "description": "逐项核对：小修六项条件必须全部可证明：至多两个既有节点，需求、连接、接口、权威、正常入口、失败路径及已复述文字不变，semantic_hash 不变且无新用户问题。；文档版本加一、语义版本不变，原批准与 D6–D8 记录按原范围继承，D1 追加逐项继承说明和新 D5 结果。；任一条无法证明按大改，重跑 D5–D8 并重新取得用户批准；不拆分改动规避。",
+                "description": "逐项核对：小修六项条件必须全部可证明：至多两个既有节点，需求、连接、接口、权威、正常入口、失败路径及已复述文字不变，semantic_hash 不变且无新用户问题。；文档版本加一、语义版本不变，原批准与 D6–D8 记录按原范围继承，D1 追加逐项继承说明和新 D5 结果。；任一条无法证明按大改，重跑 D5–D8 并重新取得用户批准；不拆分改动规避。；**覆盖：** 九个 `contract-*` 子节点（`contract-capability` 至 `contract-authorization`，按此固定顺序）。每个节点取 `id,title,description,requirementIds,inputs,outputs,claims,authority,interface`，以及每个验收器的定义字段 `id,name,required,oracle,method,criteria,environment,runner,counterexample`。再加上这些节点 `requirementIds` 所引用的需求对象全文。；**排除：** 进度和运行记录，即 `designStatus,implementationStatus,evidenceIds,ringLabel,children`，以及验收器的 `status,notRunReason,runs`。；**计算：** 上述内容按规范化 JSON 依次拼接后计算 SHA-256。；**完整性义务：** 凡是影响完成语义的义务（能力、入口、三态、证据、禁止替代、旧功能、控制例、变更权、授权边界），必须写在或明确引用到这九个节点中；只出现在其他节点里的，算设计缺口，由 D5 和 D6 检查。；**保守的代价：** 这九个节点里即使只改一个错字，也会改变 `semantic_hash`，因此按大改处理，需要重新批准。九个节点之外的错字修复，仍可按第 5.1 节作为小修。这是有意的取舍：用多一次批准，换取判定完全机械、不需要人工从一段文字里分辨哪部分是“语义”。",
                 "tool": "实际宿主、仓库读写工具与所需领域检查器；专业判断由规定角色完成",
                 "command": "按本节点验收条款实际执行并保存原始结果；这是拟定操作说明，不是已存在脚本或运行记录。"
               },
@@ -5976,8 +6013,8 @@
                 "action": "负责人按已有授权发出本节点完整派发，实际执行者留证；必要独立角色亲读产物。"
               },
               "counterexample": {
-                "input": "修订改了第三个既有节点、接口、已复述文字，或九项 semantic_hash 改变，却要求只跑 D5 并继承原批准。",
-                "expectedFailure": "任一小修条件无法证明即按大改，重跑 D5–D8 并重新请用户批准。"
+                "input": "九个 contract-* 节点内只改一个错字，或更改验收器定义、引用的需求全文，却要求 semantic_hash 不变并继承批准。",
+                "expectedFailure": "按第 6.5 节覆盖字段重算；哈希变化即大改，重跑 D5–D8 并重新请用户批准；只改排除的进度或运行字段不改变该哈希。"
               },
               "status": "not-run",
               "notRunReason": "本次只更新 D1 Blueprint；本节点对应的插件实现与验收尚未运行。",
@@ -6006,12 +6043,13 @@
               "所需实际定位、授权或输入未取得时返回缺项及接收方，不生成默认成功结果。"
             ],
             "boundaries": [
-              "仅处理本节点明确范围，未改变流程的角色、档次、必跑条件与完成语义。"
+              "仅处理本节点明确范围，未改变流程的角色、档次、必跑条件与完成语义。",
+              "九个 contract-* 节点内即使只改一个错字也改变 semantic_hash，按大改重新批准；九个节点之外的错字仍须满足第 5.1 节全部小修条件。"
             ],
             "errors": [
               "对象身份、来源或结果缺失时记录无法判断并交负责人，保留已经产生的原始证据。"
             ],
-            "format": "已裁决依据 MERGE_DECISIONS.md 第 2.2 节及对应 SPEC.md 内容。；输出：最多两个既有节点且九项语义哈希不变时，保留原批准与原关卡记录，只重跑结构检查。 已裁决依据随输出保留。"
+            "format": "MERGE_DECISIONS.md 第 2.2、5 节和 SPEC 第 5.1、6.5 节；新旧九个合同节点定义字段、验收器定义字段与所引用的需求全文。；输出：最多两个既有节点且九项语义哈希不变时，保留原批准与原关卡记录，只重跑结构检查。 已裁决依据随输出保留。；最多两个既有节点且九项语义哈希不变时，保留原批准与原关卡记录，只重跑结构检查。"
           },
           "children": [],
           "ringLabel": [
@@ -6021,7 +6059,7 @@
           "terminal": {
             "kind": "design",
             "integrationPoint": "shared/assurance/revision.md；templates/revision.json；D1 继承说明",
-            "mechanism": "### 5.1 先判语义，再看节点数量\n\n出现以下任一变化即大改：改变需求或允许声明；改变正常入口、最终消费对象、成功/失败/无法判断含义；改变阈值、总体、证据真实度、不可替换方法、允许替代或旧功能承诺；改变权限、数据、费用、账号、设备边界；改变跨组件输入输出的字段含义、调用顺序、失败接收者、角色责任或写入权；或需要用户作新决定。改一个字也可能属于大改。\n\n在上述变化全部不存在后，小修还须同时满足以下全部条件（范围采自设计 B，比 A 原稿的“同一组件最多 3 个叶节点”更窄）：\n\n1. 只影响至多两个既有节点，不新增、删除、替换或重排节点；\n2. 不改需求原文或来源；\n3. 不改连接、跨组件接口、权威、正常入口、失败路径，也不改任何 D8 读者已经复述过的走查文字；\n4. 九项冻结合同的语义哈希（第 6.4 节）不变；\n5. 不引入只有用户能决定的新问题；\n6. 改动只限错字、同一固定对象的链接或定位修复、文件哈希与提交号、非语义技术说明、实现状态，且字段级差异能证明以上各条。\n\n无法证明任一条时按大改处理；不能靠把多个节点并成一个、或把一次大改拆成几次小修绕过。\n\n**批准继承（已裁决）。** 文档版本与语义版本分开记。满足上述小修条件时，文档版本加一、语义版本不变：原用户批准和原 D6、D7、D8 记录按原范围继续有效，旧 D8 复述及其文字哈希原样保留，D1 追加一份继承说明（逐项写明九项合同为何不变、实际差异、前后告知定位、新的 D5 结果），不伪造新的复述或新的批准。语义版本一旦变化，全部关卡重跑并重新取得用户批准。\n\n| 情况 | 分类与负责方 | 必要处理 |\n|---|---|---|\n| 同一含义的错字、同一固定对象的链接修复、非语义技术说明 | D1小修 | 事前告知、版本差异、仅重跑D5；按上文“批准继承”沿用原批准与读者记录 |\n| 更换接口字段含义、换正常入口、降低或提高合同阈值、删除旧能力 | D1大改 | 回D1汇总，重过D5–D8及用户批准 |\n| 日志、选择器、解析器、运行器的等价维修 | X1交付内修改 | 按第7节分类、审查、校准与重验，不自动改Blueprint |\n| 宣称只是“更严格”，实际排除原合同允许的实现或增加义务 | D1语义修订 | 不能由X1自行批准 |\n\n小修完成前暂停受影响节点及依赖消费者；其余工作继续。大改也按实际影响控制停工，不为未受影响的已有结果制造重做；重新冻结前不得用旧批准支撑已改变语义的部分。多次小修累计越过同一组件或接口边界时，应按累计差异重判，不能把一次大改拆成许多小修。\n\n已裁决依据：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md 第 2.2 节。",
+            "mechanism": "### 5.1 先判语义，再看节点数量\n\n出现以下任一变化即大改：改变需求或允许声明；改变正常入口、最终消费对象、成功/失败/无法判断含义；改变阈值、总体、证据真实度、不可替换方法、允许替代或旧功能承诺；改变权限、数据、费用、账号、设备边界；改变跨组件输入输出的字段含义、调用顺序、失败接收者、角色责任或写入权；或需要用户作新决定。改一个字也可能属于大改。\n\n在上述变化全部不存在后，小修还须同时满足以下全部条件（范围采自设计 B，比 A 原稿的“同一组件最多 3 个叶节点”更窄）：\n\n1. 只影响至多两个既有节点，不新增、删除、替换或重排节点；\n2. 不改需求原文或来源；\n3. 不改连接、跨组件接口、权威、正常入口、失败路径，也不改任何 D8 读者已经复述过的走查文字；\n4. 九项冻结合同的语义哈希（第 6.4 节）不变；\n5. 不引入只有用户能决定的新问题；\n6. 改动只限错字、同一固定对象的链接或定位修复、文件哈希与提交号、非语义技术说明、实现状态，且字段级差异能证明以上各条。\n\n无法证明任一条时按大改处理；不能靠把多个节点并成一个、或把一次大改拆成几次小修绕过。\n\n**批准继承（已裁决）。** 文档版本与语义版本分开记。满足上述小修条件时，文档版本加一、语义版本不变：原用户批准和原 D6、D7、D8 记录按原范围继续有效，旧 D8 复述及其文字哈希原样保留，D1 追加一份继承说明（逐项写明九项合同为何不变、实际差异、前后告知定位、新的 D5 结果），不伪造新的复述或新的批准。语义版本一旦变化，全部关卡重跑并重新取得用户批准。\n\n| 情况 | 分类与负责方 | 必要处理 |\n|---|---|---|\n| 同一含义的错字、同一固定对象的链接修复、非语义技术说明 | D1小修 | 事前告知、版本差异、仅重跑D5；按上文“批准继承”沿用原批准与读者记录 |\n| 更换接口字段含义、换正常入口、降低或提高合同阈值、删除旧能力 | D1大改 | 回D1汇总，重过D5–D8及用户批准 |\n| 日志、选择器、解析器、运行器的等价维修 | X1交付内修改 | 按第7节分类、审查、校准与重验，不自动改Blueprint |\n| 宣称只是“更严格”，实际排除原合同允许的实现或增加义务 | D1语义修订 | 不能由X1自行批准 |\n\n小修完成前暂停受影响节点及依赖消费者；其余工作继续。大改也按实际影响控制停工，不为未受影响的已有结果制造重做；重新冻结前不得用旧批准支撑已改变语义的部分。多次小修累计越过同一组件或接口边界时，应按累计差异重判，不能把一次大改拆成许多小修。\n\n**`semantic_hash` 覆盖的范围。**\n- **覆盖：** 九个 `contract-*` 子节点（`contract-capability` 至 `contract-authorization`，按此固定顺序）。每个节点取 `id,title,description,requirementIds,inputs,outputs,claims,authority,interface`，以及每个验收器的定义字段 `id,name,required,oracle,method,criteria,environment,runner,counterexample`。再加上这些节点 `requirementIds` 所引用的需求对象全文。\n- **排除：** 进度和运行记录，即 `designStatus,implementationStatus,evidenceIds,ringLabel,children`，以及验收器的 `status,notRunReason,runs`。\n- **计算：** 上述内容按规范化 JSON 依次拼接后计算 SHA-256。\n- **完整性义务：** 凡是影响完成语义的义务（能力、入口、三态、证据、禁止替代、旧功能、控制例、变更权、授权边界），必须写在或明确引用到这九个节点中；只出现在其他节点里的，算设计缺口，由 D5 和 D6 检查。\n- **保守的代价：** 这九个节点里即使只改一个错字，也会改变 `semantic_hash`，因此按大改处理，需要重新批准。九个节点之外的错字修复，仍可按第 5.1 节作为小修。这是有意的取舍：用多一次批准，换取判定完全机械、不需要人工从一段文字里分辨哪部分是“语义”。\n\n已裁决依据：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md 第 5 节；SPEC.md 第 6.5 节。",
             "packages": [
               {
                 "name": "Assurance共用文件协议与角色资源",
@@ -6066,7 +6104,12 @@
             "acceptance": [
               "小修六项条件必须全部可证明：至多两个既有节点，需求、连接、接口、权威、正常入口、失败路径及已复述文字不变，semantic_hash 不变且无新用户问题。",
               "文档版本加一、语义版本不变，原批准与 D6–D8 记录按原范围继承，D1 追加逐项继承说明和新 D5 结果。",
-              "任一条无法证明按大改，重跑 D5–D8 并重新取得用户批准；不拆分改动规避。"
+              "任一条无法证明按大改，重跑 D5–D8 并重新取得用户批准；不拆分改动规避。",
+              "**覆盖：** 九个 `contract-*` 子节点（`contract-capability` 至 `contract-authorization`，按此固定顺序）。每个节点取 `id,title,description,requirementIds,inputs,outputs,claims,authority,interface`，以及每个验收器的定义字段 `id,name,required,oracle,method,criteria,environment,runner,counterexample`。再加上这些节点 `requirementIds` 所引用的需求对象全文。",
+              "**排除：** 进度和运行记录，即 `designStatus,implementationStatus,evidenceIds,ringLabel,children`，以及验收器的 `status,notRunReason,runs`。",
+              "**计算：** 上述内容按规范化 JSON 依次拼接后计算 SHA-256。",
+              "**完整性义务：** 凡是影响完成语义的义务（能力、入口、三态、证据、禁止替代、旧功能、控制例、变更权、授权边界），必须写在或明确引用到这九个节点中；只出现在其他节点里的，算设计缺口，由 D5 和 D6 检查。",
+              "**保守的代价：** 这九个节点里即使只改一个错字，也会改变 `semantic_hash`，因此按大改处理，需要重新批准。九个节点之外的错字修复，仍可按第 5.1 节作为小修。这是有意的取舍：用多一次批准，换取判定完全机械、不需要人工从一段文字里分辨哪部分是“语义”。"
             ]
           }
         }
@@ -6371,7 +6414,7 @@
                 {
                   "id": "from-freeze",
                   "name": "交付接收输入",
-                  "description": "X1在独立长期线程实际读取冻结与批准。",
+                  "description": "X1 在独立长期线程实际读取冻结包与批准，核对 bundle_sha256，并区分获批 snapshot_sha256 与用于派发的 semantic_hash。",
                   "source": {
                     "kind": "connection",
                     "connectionId": "c-freeze-to-role-X1"
@@ -6407,10 +6450,10 @@
                   "oracle": {
                     "kind": "independent-reference",
                     "description": "期望由用户认可流程及本候选明确承诺确定；实现者输出不作真值。实际档次、必跑条件和读取范围符合角色卡。",
-                    "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/c1054e2976fdc5e447820cec1ff289f9826762d1/docs/design/assurance/ASSURANCE_PROCESS_V0_1_20261110.md"
+                    "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md"
                   },
                   "method": {
-                    "description": "从该节点规定的正常入口观察真实输出，并核对以下条件：实际档次、必跑条件和读取范围符合角色卡。；X2默认写验收；触发X3必须独立作者；X4只按准则看。；X5提供专业证据但不签发，X1亲读后作唯一交付决定。",
+                    "description": "逐项核对：实际档次、必跑条件和读取范围符合角色卡。；X2默认写验收；触发X3必须独立作者；X4只按准则看。；X5提供专业证据但不签发，X1亲读后作唯一交付决定。；接收时核对冻结文件 bundle_sha256；用户批准绑定 snapshot_sha256，派发核验使用 semantic_hash。",
                     "tool": "实际宿主、仓库读写工具与所需领域检查器；专业判断由规定角色完成",
                     "command": "按本节点验收条款实际执行并保存原始结果；这是拟定操作说明，不是已存在脚本或运行记录。"
                   },
@@ -6446,7 +6489,8 @@
               "implementationStatus": "not-implemented",
               "evidenceIds": [
                 "e-process",
-                "e-spec"
+                "e-spec",
+                "e-merge"
               ],
               "claims": [
                 {
@@ -6468,7 +6512,7 @@
                 "errors": [
                   "对象身份、来源或结果缺失时记录无法判断并交负责人，保留已经产生的原始证据。"
                 ],
-                "format": "有效冻结版本、具体派发、当前候选及卡片允许的材料；X5不读实现过程。；输出：卡片要求的真实产物、证据、偏离或观察结论，RESULT.json/RESULT.md写指定派发目录。"
+                "format": "有效冻结版本、具体派发、当前候选及卡片允许的材料；X5不读实现过程。；X1 在独立长期线程实际读取冻结包与批准，核对 bundle_sha256，并区分获批 snapshot_sha256 与用于派发的 semantic_hash。；输出：卡片要求的真实产物、证据、偏离或观察结论，RESULT.json/RESULT.md写指定派发目录。；只在当前冻结和授权范围实现。；触发条件成立时交专业执行者独立编写。"
               },
               "children": [],
               "ringLabel": [
@@ -6515,7 +6559,8 @@
                 "acceptance": [
                   "实际档次、必跑条件和读取范围符合角色卡。",
                   "X2默认写验收；触发X3必须独立作者；X4只按准则看。",
-                  "X5提供专业证据但不签发，X1亲读后作唯一交付决定。"
+                  "X5提供专业证据但不签发，X1亲读后作唯一交付决定。",
+                  "接收时核对冻结文件 bundle_sha256；用户批准绑定 snapshot_sha256，派发核验使用 semantic_hash。"
                 ]
               }
             },
@@ -9232,7 +9277,7 @@
             {
               "id": "context",
               "name": "限定输入",
-              "description": "本候选全部必需能力、三项已裁决依据、最终实施范围与真实资源授权。",
+              "description": "本候选全部必需能力、三项已裁决依据、最终实施范围与真实资源授权。；X2 开工须有按第 6.5 节生成的冻结合同。",
               "source": {
                 "kind": "parent",
                 "nodeId": "packaging",
@@ -9259,10 +9304,10 @@
               "oracle": {
                 "kind": "independent-reference",
                 "description": "期望由用户认可流程及本候选明确承诺确定；实现者输出不作真值。0.1规定的角色、冻结、校准、证据、修订与签发完整，不能只交模板。",
-                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/c1054e2976fdc5e447820cec1ff289f9826762d1/docs/design/assurance/ASSURANCE_PROCESS_V0_1_20261110.md"
+                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/SPEC.md"
               },
               "method": {
-                "description": "从该节点规定的正常入口观察真实输出，并核对以下条件：0.1规定的角色、冻结、校准、证据、修订与签发完整，不能只交模板。；三项原开放问题已按合并裁决关闭；实现与验收没有完成的能力仍不宣称可用。；新增能力有真实用户消费对象，不以元数据文件数衡量完成。",
+                "description": "逐项核对：0.1规定的角色、冻结、校准、证据、修订与签发完整，不能只交模板。；三项原开放问题已按合并裁决关闭；实现与验收没有完成的能力仍不宣称可用。；新增能力有真实用户消费对象，不以元数据文件数衡量完成。；冻结前不开始任何插件实现；冻结前只允许 D4 的现实核查和材料整理。X2 的实施依据只有冻结合同，不存在冻结前的通用实施许可。；D5适配所需的上游工作已作为独立前置任务交付（见第6.2节），X2只接入固定提交，不修改上游。",
                 "tool": "实际宿主、仓库读写工具与所需领域检查器；专业判断由规定角色完成",
                 "command": "按本节点验收条款实际执行并保存原始结果；这是拟定操作说明，不是已存在脚本或运行记录。"
               },
@@ -9286,8 +9331,8 @@
                 "action": "负责人按已有授权发出本节点完整派发，实际执行者留证；必要独立角色亲读产物。"
               },
               "counterexample": {
-                "input": "删除本节点一项必需输入或把旧版本输出当当前结果。",
-                "expectedFailure": "明确指出缺项或身份不符，相关范围不能登记通过；报告交给本节点的负责人。"
+                "input": "未完成首次冻结五步便安排 X2 实施插件，或让 X2 修改 Blueprint 上游检查器。",
+                "expectedFailure": "冻结前只允许 D4 现实核查和材料整理，不开始任何插件实现；Assurance 只接入 c05edcf，不修改上游。"
               },
               "status": "not-run",
               "notRunReason": "本轮为 D1 合并设计，插件及其正常入口尚未实现；本节点验收没有运行。",
@@ -9299,7 +9344,8 @@
           "evidenceIds": [
             "e-process",
             "e-spec",
-            "e-merge"
+            "e-merge",
+            "e-checker-prerequisite"
           ],
           "claims": [
             {
@@ -9316,12 +9362,13 @@
               "所需实际定位、授权或输入未取得时返回缺项及接收方，不生成默认成功结果。"
             ],
             "boundaries": [
-              "仅处理本节点明确范围，未改变流程的角色、档次、必跑条件与完成语义。"
+              "仅处理本节点明确范围，未改变流程的角色、档次、必跑条件与完成语义。",
+              "冻结前不开始任何插件实现；冻结前只允许 D4 的现实核查和材料整理。X2 的实施依据只有冻结合同，不存在冻结前的通用实施许可。"
             ],
             "errors": [
               "对象身份、来源或结果缺失时记录无法判断并交负责人，保留已经产生的原始证据。"
             ],
-            "format": "本候选全部必需能力、三项已裁决依据、最终实施范围与真实资源授权。；输出：可实际使用的0.1完整任务链及明确延后列表；不声明自动服务、隐藏基建或网页端上架。"
+            "format": "本候选全部必需能力、三项已裁决依据、最终实施范围与真实资源授权。；X2 开工须有按第 6.5 节生成的冻结合同。；输出：可实际使用的0.1完整任务链及明确延后列表；不声明自动服务、隐藏基建或网页端上架。"
           },
           "children": [],
           "ringLabel": [
@@ -9331,7 +9378,7 @@
           "terminal": {
             "kind": "design",
             "integrationPoint": "两规划SKILL、两执行SKILL、共用角色与模板、只读检查、既有生成和真实宿主任务",
-            "mechanism": "### 10.1 最小范围是完整可用的一条任务链\n\n0.1必须完成本规格的共享状态、只读记录检查及冲突处理、按流程生成提示词、13张角色卡、两类修订与前后告知、澄清分类、D5–D8接入、九项冻结合同、五级验收变更、三类校准、候选与证据绑定、偏离及退回、X1亲读签发和三项衡量。两个规划入口与两个执行入口都要能从正常使用方式消费这些规则。上游检查器两档入口完成并实际通过前，可以继续实现其他部分，不能宣布冻结与完整交付能力已可用。\n\n实现按四个内部工作包衔接，不新增流程角色：先做共享文件协议、模板与运输检查；再做设计端澄清/关卡/冻结接入；随后做交付端候选/校准/返修/签发；最后用现有生成器打包并从实际宿主跑完整任务。每一包完成只声明其新增能力，不能把“文件已存在”当0.1完成。D5适配需要的上游工作由D1决定范围，不交给X2临场猜。\n\n### 10.3 留到0.2或以后\n\n可延后的是跨宿主自动新建/恢复线程、自动发消息、后台调度、任务看板界面、中央数据库或服务、隐藏用例基础设施、通用验收器平台、所有项目预设适配器、历史任务自动迁移和ChatGPT网页端正式上架。它们不是0.1正确性的前提；有真实任务证明文件与现有入口不足时，再提出明确增量。\n\n0.1也不承诺所有复杂任务都不再发现设计缺口、独立模型不会误判或纯文件权限能阻止有写权的人篡改。能够承诺的是：缺口与偏离会按规定留下证据和接收方，无法判断不会被写成通过，最终签发明确绑定当前成品，用户能直接拿到下一条完整提示词。",
+            "mechanism": "### 10.1 最小范围是完整可用的一条任务链\n\n0.1必须完成本规格的共享状态、只读记录检查及冲突处理、按流程生成提示词、13张角色卡、两类修订与前后告知、澄清分类、D5–D8接入、九项冻结合同、五级验收变更、三类校准、候选与证据绑定、偏离及退回、X1亲读签发和三项衡量。两个规划入口与两个执行入口都要能从正常使用方式消费这些规则。冻结前不开始任何插件实现；冻结前只允许 D4 的现实核查和材料整理。X2 的实施依据只有冻结合同，不存在冻结前的通用实施许可。\n\n实现按四个内部工作包衔接，不新增流程角色：先做共享文件协议、模板与运输检查；再做设计端澄清/关卡/冻结接入；随后做交付端候选/校准/返修/签发；最后用现有生成器打包并从实际宿主跑完整任务。每一包完成只声明其新增能力，不能把“文件已存在”当0.1完成。D5适配所需的上游工作已作为独立前置任务交付（见第6.2节），X2只接入固定提交，不修改上游。\n\n### 10.3 留到0.2或以后\n\n可延后的是跨宿主自动新建/恢复线程、自动发消息、后台调度、任务看板界面、中央数据库或服务、隐藏用例基础设施、通用验收器平台、所有项目预设适配器、历史任务自动迁移和ChatGPT网页端正式上架。它们不是0.1正确性的前提；有真实任务证明文件与现有入口不足时，再提出明确增量。\n\n0.1也不承诺所有复杂任务都不再发现设计缺口、独立模型不会误判或纯文件权限能阻止有写权的人篡改。能够承诺的是：缺口与偏离会按规定留下证据和接收方，无法判断不会被写成通过，最终签发明确绑定当前成品，用户能直接拿到下一条完整提示词。",
             "packages": [
               {
                 "name": "Assurance共用文件协议与角色资源",
@@ -9368,7 +9415,9 @@
             "acceptance": [
               "0.1规定的角色、冻结、校准、证据、修订与签发完整，不能只交模板。",
               "三项原开放问题已按合并裁决关闭；实现与验收没有完成的能力仍不宣称可用。",
-              "新增能力有真实用户消费对象，不以元数据文件数衡量完成。"
+              "新增能力有真实用户消费对象，不以元数据文件数衡量完成。",
+              "冻结前不开始任何插件实现；冻结前只允许 D4 的现实核查和材料整理。X2 的实施依据只有冻结合同，不存在冻结前的通用实施许可。",
+              "D5适配所需的上游工作已作为独立前置任务交付（见第6.2节），X2只接入固定提交，不修改上游。"
             ]
           }
         },
@@ -9733,7 +9782,7 @@
               "oracle": {
                 "kind": "independent-reference",
                 "description": "以 D1 已裁决依据与合并规格为预先确定的规则，实施输出不能自作真值。",
-                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md"
+                "reference": "https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md"
               },
               "method": {
                 "description": "逐项核对：预算为 12 个插件、32 个技能，两个新插件各暴露一个执行技能，规划正文作为包内资料。；同步受影响的断言、说明和回归；不删除、不合并旧插件或旧技能。；不走只做直接安装包的过渡路线；若以后暴露规划技能须重新计算容量。",
@@ -9805,7 +9854,7 @@
           "terminal": {
             "kind": "design",
             "integrationPoint": "scripts/codex_marketplace_config.json；scripts/build_codex_marketplace.py；相关断言、说明和回归",
-            "mechanism": "### 9.3 市场预算与原有流程的接合\n\n当前配置已有10个插件，插件预算为10；生成器技能预算为30，现有技能数也是30。**已裁决（用户）：** 本次实施把预算明确调整为12个插件、32个技能，同步受影响的断言、说明和回归，两个新插件正式进入市场；不删除、不合并任何旧插件或旧技能，也不先走“只做直接安装包”的过渡路线。规划正文放入包内资料，不计为可调用技能；若后续决定暴露规划入口，必须重新计算而非沿用32。\n\n`workflow-core`继续负责执行中的来源、实际入口、权限、等待与证据纪律；`ai-skills-core`负责本仓库源层、生成一致性、回归、版本和发布；两个Assurance插件按已选流程决定本任务D1/X1职责与设计/交付语义。正式实施必须加载两个既有维护插件，不能把它们变成平级签发者，也不能以本设计改写Bridge或其他项目既有状态。\n\n0.1采用显式进入：用户选择或负责人派发的Assurance任务才建立本状态。已在旧流程中的任务不自动迁移，不删除旧保护。若目标仓库仍存在与新任务合同实质冲突的要求，D1在初始化时指出具体冲突并解决后再派实质工作；不能默默叠一整套旧审批，也不能偷偷绕过权限规则。\n\n已裁决依据：https://github.com/YuukiAS/AI_Skills_Collection/blob/66e670997525e3ad4d6fe4f5d27a795aa17eabee/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md 第 2.1 节。",
+            "mechanism": "### 9.3 市场预算与原有流程的接合\n\n当前配置已有10个插件，插件预算为10；生成器技能预算为30，现有技能数也是30。**已裁决（用户）：** 本次实施把预算明确调整为12个插件、32个技能，同步受影响的断言、说明和回归，两个新插件正式进入市场；不删除、不合并任何旧插件或旧技能，也不先走“只做直接安装包”的过渡路线。规划正文放入包内资料，不计为可调用技能；若后续决定暴露规划入口，必须重新计算而非沿用32。\n\n`workflow-core`继续负责执行中的来源、实际入口、权限、等待与证据纪律；`ai-skills-core`负责本仓库源层、生成一致性、回归、版本和发布；两个Assurance插件按已选流程决定本任务D1/X1职责与设计/交付语义。正式实施必须加载两个既有维护插件，不能把它们变成平级签发者，也不能以本设计改写Bridge或其他项目既有状态。\n\n0.1采用显式进入：用户选择或负责人派发的Assurance任务才建立本状态。已在旧流程中的任务不自动迁移，不删除旧保护。若目标仓库仍存在与新任务合同实质冲突的要求，D1在初始化时指出具体冲突并解决后再派实质工作；不能默默叠一整套旧审批，也不能偷偷绕过权限规则。\n\n已裁决依据：https://github.com/YuukiAS/AI_Skills_Collection/blob/e750a9c6ff3926815d6d75cf34ac2c13dd54709d/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md 第 2.1 节。",
             "packages": [
               {
                 "name": "Assurance共用文件协议与角色资源",
@@ -10210,12 +10259,13 @@
       "fromPort": "to-freeze",
       "toPort": "from-gates",
       "label": "关卡有效",
-      "relationship": "四项共同覆盖当前对象且无关键开放问题后请用户批准。",
+      "relationship": "D5 草稿档、D6、D7、D8 全部通过同一 snapshot_sha256 且无关键开放问题后，请用户批准该快照，再按五步顺序冻结。",
       "carries": [
         "gate refs",
         "validity",
         "coverage",
-        "closed questions"
+        "closed questions",
+        "同一 snapshot_sha256 的四关卡通过与批准对象"
       ]
     },
     {
@@ -10225,12 +10275,13 @@
       "fromPort": "to-role-X1",
       "toPort": "from-freeze",
       "label": "交付接收",
-      "relationship": "X1在独立长期线程实际读取冻结与批准。",
+      "relationship": "X1 在独立长期线程实际读取冻结包与批准，核对 bundle_sha256，并区分获批 snapshot_sha256 与用于派发的 semantic_hash。",
       "carries": [
         "immutable blueprint",
         "freeze record",
         "approval",
-        "authorization"
+        "authorization",
+        "snapshot_sha256、bundle_sha256、semantic_hash"
       ]
     },
     {
@@ -10510,11 +10561,12 @@
       "fromPort": "to-role-D5",
       "toPort": "from-q-checker",
       "label": "两档检查",
-      "relationship": "D5 冻结前用草稿检查，冻结时及冻结后用冻结检查，结果按三态记录。",
+      "relationship": "按固定提交 c05edcf 调用草稿或冻结检查，不修改上游；入口 https://github.com/YuukiAS/Asteria-Blueprint/blob/c05edcf51bc93f8be82180fd4ad28a250937f195/content/check.mjs。",
       "carries": [
         "草稿检查与冻结检查",
         "缺口、无法完成与完整完成三态",
-        "已裁决依据"
+        "已裁决依据",
+        "独立前置检查器固定提交 c05edcf51bc93f8be82180fd4ad28a250937f195"
       ]
     },
     {
@@ -10572,9 +10624,9 @@
         {
           "kind": "analysis",
           "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
-          "revision": "66e670997525e3ad4d6fe4f5d27a795aa17eabee",
+          "revision": "e750a9c6ff3926815d6d75cf34ac2c13dd54709d",
           "path": "docs/design/assurance/plugin-0.1-d1/SPEC.md",
-          "locator": "第 1–10 节；D1 合并规格"
+          "locator": "第 1–10 节；含第 6.2、6.5、10.1 节 D7 冷读后补定"
         }
       ]
     },
@@ -10632,9 +10684,9 @@
         {
           "kind": "analysis",
           "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
-          "revision": "66e670997525e3ad4d6fe4f5d27a795aa17eabee",
+          "revision": "e750a9c6ff3926815d6d75cf34ac2c13dd54709d",
           "path": "docs/design/assurance/plugin-0.1-d1/SPEC.md",
-          "locator": "第 5.1、6.2 节；合并裁决第 2.2–2.3 节"
+          "locator": "第 5.1、6.2、6.5 节；检查器归属、哈希与冻结对象补定"
         }
       ]
     },
@@ -10735,16 +10787,52 @@
     },
     {
       "id": "e-merge",
-      "claim": "D1 已确定底稿、四项吸收内容和三项实现前裁决。",
-      "proves": "固定调度优先级、追加式事件日志、semantic_hash、十三项签发清单，以及容量、小修继承和检查器接入的已定取舍。",
+      "claim": "D1 已确定底稿、四项吸收内容、三项实现前裁决和 D7 冷读后的三项补定。",
+      "proves": "固定调度优先级、追加式事件日志、semantic_hash、十三项签发清单，以及容量、小修继承和检查器接入的已定取舍。 第 5 节补定了语义哈希投影、独立前置检查器、首次冻结五步与三个身份。",
       "doesNotProve": "裁决依据不是 D5–D8 通过、批准冻结、插件实现或正常入口验收的证据。",
       "sources": [
         {
           "kind": "document",
           "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
-          "revision": "66e670997525e3ad4d6fe4f5d27a795aa17eabee",
+          "revision": "e750a9c6ff3926815d6d75cf34ac2c13dd54709d",
           "path": "docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md",
-          "locator": "第 1–3 节"
+          "locator": "第 1–3、5 节"
+        }
+      ]
+    },
+    {
+      "id": "e-checker-prerequisite",
+      "claim": "检查器两档入口、三态退出码和任意 GitHub 来源定位已作为独立前置工作交付。",
+      "proves": "D1 指定的固定检查器提交及可调用入口；Assurance 实施只接入，不修改上游。",
+      "doesNotProve": "上游代码身份不证明本 Blueprint 已完成全部检查、读者复述或批准冻结。",
+      "sources": [
+        {
+          "kind": "code",
+          "repository": "https://github.com/YuukiAS/Asteria-Blueprint",
+          "revision": "c05edcf51bc93f8be82180fd4ad28a250937f195",
+          "path": "content/check.mjs",
+          "locator": "parseArguments、runCheck、reportExitCode"
+        },
+        {
+          "kind": "code",
+          "repository": "https://github.com/YuukiAS/Asteria-Blueprint",
+          "revision": "c05edcf51bc93f8be82180fd4ad28a250937f195",
+          "path": "content/schema.ts",
+          "locator": "DraftBlueprintSchema、schemaForStage"
+        },
+        {
+          "kind": "code",
+          "repository": "https://github.com/YuukiAS/Asteria-Blueprint",
+          "revision": "c05edcf51bc93f8be82180fd4ad28a250937f195",
+          "path": "content/source-locations.ts",
+          "locator": "repositoryLocation 与任意 GitHub 来源定位"
+        },
+        {
+          "kind": "document",
+          "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+          "revision": "e750a9c6ff3926815d6d75cf34ac2c13dd54709d",
+          "path": "docs/design/assurance/plugin-0.1-d1/SPEC.md",
+          "locator": "第 6.2 节末尾“上游改造的归属”"
         }
       ]
     }
@@ -10770,7 +10858,7 @@
           "title": "定位当前任务",
           "action": "负责人先读取已经绑定的任务状态。",
           "exampleData": "拿到明确任务目录、目标分支和当前状态版本。",
-          "expectedResult": "得到本轮位置及已有决定；每次写入和派发另记历史事件，当前状态仍以任务状态文件为准。",
+          "expectedResult": "得到本轮位置及已有决定，区分获批内容、完成语义和冻结文件的三个身份；状态变动仍以任务状态文件为准。",
           "why": "后续决定必须基于同一当前事实。",
           "onError": "缺定位就查明来源，不能默认切到主分支。",
           "failurePathIds": [
@@ -10786,7 +10874,7 @@
             "nodeId": "state",
             "action": "负责人先读取已经绑定的任务状态。",
             "exampleData": "拿到明确任务目录、目标分支和当前状态版本。",
-            "expectedResult": "得到本轮位置及已有决定；每次写入和派发另记历史事件，当前状态仍以任务状态文件为准。"
+            "expectedResult": "得到本轮位置及已有决定，区分获批内容、完成语义和冻结文件的三个身份；状态变动仍以任务状态文件为准。"
           }
         },
         {
@@ -10820,7 +10908,7 @@
           "title": "决定下一角色",
           "action": "负责人按固定顺序寻找第一个成立的条件，只给一个下一动作。",
           "exampleData": "先看状态冲突，再看必须由用户决定的事项、进行中的角色、返修、必跑角色、条件角色，最后才安排批准或签发。",
-          "expectedResult": "得到唯一下一步；同一批可以并行的角色各有完整提示词和交回位置。",
+          "expectedResult": "得到唯一下一步和各角色的完整提示词；冻结前只安排现实核查或材料整理，不派实施任务。",
           "why": "角色独立性和档次是流程已认可的条件。",
           "onError": "缺满足条件的入口时等待相应入口，不降档或自审。",
           "failurePathIds": [
@@ -10836,7 +10924,7 @@
             "nodeId": "dispatch",
             "action": "负责人按固定顺序寻找第一个成立的条件，只给一个下一动作。",
             "exampleData": "先看状态冲突，再看必须由用户决定的事项、进行中的角色、返修、必跑角色、条件角色，最后才安排批准或签发。",
-            "expectedResult": "得到唯一下一步；同一批可以并行的角色各有完整提示词和交回位置。"
+            "expectedResult": "得到唯一下一步和各角色的完整提示词；冻结前只安排现实核查或材料整理，不派实施任务。"
           }
         },
         {
@@ -10932,7 +11020,7 @@
         "e-process",
         "e-spec"
       ],
-      "entry": "实施者按已收敛方案读取源技能与生成配置。",
+      "entry": "实施者在冻结合同已生成并可核对后，读取源技能与生成配置。",
       "exit": "生成的两插件进入实际安装验收。",
       "exampleInput": "四个源入口、一份共用资源与明确中央容量决定。",
       "expectedOutput": "得到包含规划资料和独立命名执行入口的两个自包含包。",
@@ -10942,10 +11030,10 @@
           "nodeId": "source-layout",
           "title": "核对源文件",
           "action": "实施者核对唯一可编辑规则源和复制映射。",
-          "exampleData": "拿到四个技能目录、共用角色模板和生成器。",
+          "exampleData": "拿到已批准并完成冻结的合同、四个技能目录、共用角色模板和生成器。",
           "expectedResult": "得到不会手工维护第二套正文的构建输入。",
           "why": "同源规则避免宿主之间逐渐分叉。",
-          "onError": "资源缺失或版本混用时停在具体缺项，不借旧包填充。",
+          "onError": "没有冻结合同就不开始实现，只保留现实核查和材料整理；检查器作为已交付前置工作调用，不在这里改造。",
           "failurePathIds": [
             "fail-package"
           ],
@@ -10958,7 +11046,7 @@
           "technical": {
             "nodeId": "source-layout",
             "action": "实施者核对唯一可编辑规则源和复制映射。",
-            "exampleData": "拿到四个技能目录、共用角色模板和生成器。",
+            "exampleData": "拿到已批准并完成冻结的合同、四个技能目录、共用角色模板和生成器。",
             "expectedResult": "得到不会手工维护第二套正文的构建输入。"
           }
         },
@@ -11040,7 +11128,7 @@
       ],
       "technical": {
         "title": "从同一源码生成两个包",
-        "entry": "实施者按已收敛方案读取源技能与生成配置。",
+        "entry": "实施者在冻结合同已生成并可核对后，读取源技能与生成配置。",
         "exit": "生成的两插件进入实际安装验收。",
         "exampleInput": "四个源入口、一份共用资源与明确中央容量决定。",
         "expectedOutput": "得到包含规划资料和独立命名执行入口的两个自包含包。"
@@ -11139,9 +11227,9 @@
           "title": "核对九项语义",
           "action": "D1核对设计是否包含九项明确完成语义。",
           "exampleData": "拿到用户要求、完整设计和关键开放问题。",
-          "expectedResult": "得到输入输出、失败后果、证据与资源边界明确的受审对象。",
+          "expectedResult": "得到九项合同节点已写明或明确引用全部完成义务的受审设计；定义字段及相关需求用于机械计算语义摘要。",
           "why": "没有完成定义就无法判断后续产物有没有做到。",
-          "onError": "有关键缺口先补设计或提出决定，不进入批准。",
+          "onError": "完成义务只写在其他节点也算设计缺口，由结构检查和逐组件追问发现后交回设计负责人。",
           "failurePathIds": [
             "fail-premise"
           ],
@@ -11155,7 +11243,7 @@
             "nodeId": "contract",
             "action": "D1核对设计是否包含九项明确完成语义。",
             "exampleData": "拿到用户要求、完整设计和关键开放问题。",
-            "expectedResult": "得到输入输出、失败后果、证据与资源边界明确的受审对象。"
+            "expectedResult": "得到九项合同节点已写明或明确引用全部完成义务的受审设计；定义字段及相关需求用于机械计算语义摘要。"
           }
         },
         {
@@ -11163,8 +11251,8 @@
           "nodeId": "gates",
           "title": "完成四项关卡",
           "action": "负责人在冻结前用草稿入口检查结构，并收集同一设计上的追问、冷读和逐步复述。",
-          "exampleData": "拿到实际检查、逐组件追问、冷读和复述记录。",
-          "expectedResult": "得到各项实际检查结论；有确定缺口就修订，核实未完成就保留无法判断，不把它记成通过。",
+          "exampleData": "拿到同一内容快照的草稿检查、逐组件追问、冷读和复述记录，以及已交付检查器的固定提交。",
+          "expectedResult": "四项通过记录都绑定同一份不含历史的内容快照；有缺口先修订，检查未完成就保留无法判断。",
           "why": "不同角度分别发现结构、需求、可开工性和理解缺口。",
           "onError": "某关不可运行或记录过期时不能拼凑冻结。",
           "failurePathIds": [
@@ -11179,19 +11267,19 @@
           "technical": {
             "nodeId": "gates",
             "action": "负责人在冻结前用草稿入口检查结构，并收集同一设计上的追问、冷读和逐步复述。",
-            "exampleData": "拿到实际检查、逐组件追问、冷读和复述记录。",
-            "expectedResult": "得到各项实际检查结论；有确定缺口就修订，核实未完成就保留无法判断，不把它记成通过。"
+            "exampleData": "拿到同一内容快照的草稿检查、逐组件追问、冷读和复述记录，以及已交付检查器的固定提交。",
+            "expectedResult": "四项通过记录都绑定同一份不含历史的内容快照；有缺口先修订，检查未完成就保留无法判断。"
           }
         },
         {
           "id": "wr-freeze",
           "nodeId": "freeze",
           "title": "批准具体设计",
-          "action": "D1把明确对象交用户批准并保存冻结记录。",
-          "exampleData": "拿到完整设计、有效关卡与实际用户答复。",
-          "expectedResult": "得到可回读的固定合同、九项内容的语义摘要和给新交付负责人的交接。",
-          "why": "批准必须能对应后来实现与验收的同一对象。",
-          "onError": "没有批准或接收记录时保持原阶段。",
+          "action": "用户先批准四项关卡共同通过的内容快照，再用冻结命令追加首个版本。",
+          "exampleData": "拿到获批快照、四项关卡结果、实际用户答复，以及追加历史后的完整文件。",
+          "expectedResult": "对完整输出运行冻结档检查，核对获批快照未变后才写冻结记录，同时保存内容快照、语义定义和完整文件的三个摘要。",
+          "why": "追加历史不改变获批内容时，原关卡和批准继续有效；冻结档复验只是机械确认，不需要重新批准。",
+          "onError": "冻结档不通过或内容快照改变就不写冻结记录，交回设计负责人查明原因。",
           "failurePathIds": [
             "fail-checker"
           ],
@@ -11203,9 +11291,9 @@
           ],
           "technical": {
             "nodeId": "freeze",
-            "action": "D1把明确对象交用户批准并保存冻结记录。",
-            "exampleData": "拿到完整设计、有效关卡与实际用户答复。",
-            "expectedResult": "得到可回读的固定合同、九项内容的语义摘要和给新交付负责人的交接。"
+            "action": "首次冻结五步：D5 草稿档/D6/D7/D8 同一 snapshot_sha256 通过；用户批准；冻结命令追加首版；D5 冻结档核对获批快照不变；写含 snapshot_sha256、bundle_sha256、semantic_hash 的 freeze.json。",
+            "exampleData": "snapshot_sha256=规范化 snapshotOf 内容快照 SHA-256，不含 id/schemaVersion/versions；bundle_sha256=带 versions 的完整输出文件字节 SHA-256；semantic_hash=第 6.5 节规定字段与需求投影 SHA-256。",
+            "expectedResult": "freeze.json 以 snapshot_sha256、bundle_sha256 替代旧 blueprint_sha256，并保留 semantic_hash；第 4 步不通过不写记录，回 D1，快照未变不重做批准。"
           }
         },
         {
@@ -11213,8 +11301,8 @@
           "nodeId": "role-X1",
           "title": "接收交付责任",
           "action": "新交付负责人亲读冻结包并确认接收。",
-          "exampleData": "拿到固定合同、授权和原设计负责人的定位。",
-          "expectedResult": "得到清楚的实施范围、必需角色和交回路径。",
+          "exampleData": "拿到固定合同、授权、原设计负责人的定位，以及分别代表获批内容、语义定义和冻结文件的三个摘要。",
+          "expectedResult": "核对完整冻结文件的摘要后确认接收，得到清楚的实施范围、必需角色和交回路径。",
           "why": "设计与交付需要分开负责人并保留返修接缝。",
           "onError": "合同矛盾或缺关键决定时按规定回原负责人。",
           "failurePathIds": [
@@ -11229,8 +11317,8 @@
           "technical": {
             "nodeId": "role-X1",
             "action": "新交付负责人亲读冻结包并确认接收。",
-            "exampleData": "拿到固定合同、授权和原设计负责人的定位。",
-            "expectedResult": "得到清楚的实施范围、必需角色和交回路径。"
+            "exampleData": "拿到固定合同、授权、原设计负责人的定位，以及分别代表获批内容、语义定义和冻结文件的三个摘要。",
+            "expectedResult": "核对完整冻结文件的摘要后确认接收，得到清楚的实施范围、必需角色和交回路径。"
           }
         },
         {
@@ -11627,7 +11715,7 @@
       "id": "fail-checker",
       "question": "can-not-do",
       "shortLabel": "检查入口未闭合",
-      "situation": "所需的 Blueprint 草稿或冻结检查入口不可用，或外部来源不可访问，当前版本不能完成所需核实。",
+      "situation": "固定提交的 Blueprint 草稿或冻结检查入口不可用、外部来源不可访问，或追加历史后的内容快照与获批快照不一致。",
       "brokenRequirementIds": [
         "r-freeze",
         "r-blueprint"
@@ -11638,18 +11726,18 @@
         "gates"
       ],
       "outcome": "stop",
-      "handling": "使用 Blueprint 维护源已裁决的两档入口，冻结前选草稿、冻结时及冻结后选冻结；无法完成时由 D1 取得入口、环境或缺失证据后重查，不伪造历史或读者记录，不将无法判断写成通过。",
-      "userSees": "候选已保存，但所需检查尚未完成，当前无法判断，不能冻结。",
+      "handling": "只调用独立前置检查器 c05edcf，不修改上游；入口或外部证据不可访问记无法判断，冻结档不通过或 snapshot_sha256 与获批值不一致时不写 freeze.json，交 D1 查明原因后重查。冻结前只允许 D4 现实核查和材料整理，不开始任何插件实现。",
+      "userSees": "当前不能写冻结记录或开始插件实现；已保存候选和实际检查结果，由设计负责人查明原因。",
       "validatorId": "v-fail-checker",
       "explanation": {
         "id": "fail-checker-whole",
         "nodeId": "gates",
         "title": "整体收场说明",
-        "action": "负责人说明整个失败情形怎样结束及谁继续处理。",
-        "exampleData": "这次出现的情况是：所需的 Blueprint 草稿或冻结检查入口不可用，或外部来源不可访问，当前版本不能完成所需核实。",
-        "expectedResult": "用户最终看到：候选已保存，但所需检查尚未完成，当前无法判断，不能冻结。",
+        "action": "负责人说明检查为何不能完成，或追加历史后的内容为何不符合用户批准，并交回设计负责人。",
+        "exampleData": "拿到固定检查器不可用、来源不可读或获批内容与冻结输出不一致的实际记录。",
+        "expectedResult": "保留候选和检查结果，不写冻结记录、不开始插件实现，由设计负责人查明原因。",
         "why": "受影响部分必须有明确收场，同时保留仍可继续的工作。",
-        "onError": "仍不满足恢复条件时保持当前停止或未知状态。",
+        "onError": "原因未查明或冻结档仍不通过时继续停在当前设计阶段，只允许现实核查和材料整理。",
         "failurePathIds": [
           "fail-checker"
         ],
@@ -11661,9 +11749,9 @@
         ],
         "technical": {
           "nodeId": "gates",
-          "action": "负责人说明整个失败情形怎样结束及谁继续处理。",
-          "exampleData": "这次出现的情况是：所需的 Blueprint 草稿或冻结检查入口不可用，或外部来源不可访问，当前版本不能完成所需核实。",
-          "expectedResult": "用户最终看到：候选已保存，但所需检查尚未完成，当前无法判断，不能冻结。"
+          "action": "负责人说明检查为何不能完成，或追加历史后的内容为何不符合用户批准，并交回设计负责人。",
+          "exampleData": "拿到固定检查器不可用、来源不可读或获批内容与冻结输出不一致的实际记录。",
+          "expectedResult": "保留候选和检查结果，不写冻结记录、不开始插件实现，由设计负责人查明原因。"
         }
       },
       "steps": [
@@ -11672,7 +11760,7 @@
           "nodeId": "contract",
           "title": "发现与传递异常",
           "action": "当前角色保留异常事实并交给下一接收者。",
-          "exampleData": "拿到的异常是：所需的 Blueprint 草稿或冻结检查入口不可用，或外部来源不可访问，当前版本不能完成所需核实。",
+          "exampleData": "拿到的异常是：固定提交的 Blueprint 草稿或冻结检查入口不可用、外部来源不可访问，或追加历史后的内容快照与获批快照不一致。",
           "expectedResult": "交出原始事实、对象身份和受影响范围。",
           "why": "问题必须落到负责处理的人，不能在转交时被写成成功。",
           "onError": "证据仍不足时保留无法判断并说明恢复所需条件。",
@@ -11688,7 +11776,7 @@
           "technical": {
             "nodeId": "contract",
             "action": "当前角色保留异常事实并交给下一接收者。",
-            "exampleData": "拿到的异常是：所需的 Blueprint 草稿或冻结检查入口不可用，或外部来源不可访问，当前版本不能完成所需核实。",
+            "exampleData": "拿到的异常是：固定提交的 Blueprint 草稿或冻结检查入口不可用、外部来源不可访问，或追加历史后的内容快照与获批快照不一致。",
             "expectedResult": "交出原始事实、对象身份和受影响范围。"
           }
         },
@@ -11696,11 +11784,11 @@
           "id": "fail-checker-step-2",
           "nodeId": "gates",
           "title": "识别问题并交回",
-          "action": "负责人在此处核对异常并采取合同允许的处理。",
-          "exampleData": "拿到的异常是：所需的 Blueprint 草稿或冻结检查入口不可用，或外部来源不可访问，当前版本不能完成所需核实。",
-          "expectedResult": "得到明确收场：候选已保存，但所需检查尚未完成，当前无法判断，不能冻结。",
+          "action": "负责人调用已交付的固定检查器，区分检查未完成与获批内容不一致，不修改上游。",
+          "exampleData": "拿到的异常是：固定提交的 Blueprint 草稿或冻结检查入口不可用、外部来源不可访问，或追加历史后的内容快照与获批快照不一致。",
+          "expectedResult": "不写冻结记录，也不开始插件实现；保留实际结果交设计负责人查明原因。",
           "why": "问题必须落到负责处理的人，不能在转交时被写成成功。",
-          "onError": "证据仍不足时保留无法判断并说明恢复所需条件。",
+          "onError": "未恢复检查能力或冻结输出仍不对应获批快照时，停在当前设计阶段。",
           "failurePathIds": [
             "fail-checker"
           ],
@@ -11712,9 +11800,9 @@
           ],
           "technical": {
             "nodeId": "gates",
-            "action": "负责人在此处核对异常并采取合同允许的处理。",
-            "exampleData": "拿到的异常是：所需的 Blueprint 草稿或冻结检查入口不可用，或外部来源不可访问，当前版本不能完成所需核实。",
-            "expectedResult": "得到明确收场：候选已保存，但所需检查尚未完成，当前无法判断，不能冻结。"
+            "action": "负责人调用已交付的固定检查器，区分检查未完成与获批内容不一致，不修改上游。",
+            "exampleData": "拿到的异常是：固定提交的 Blueprint 草稿或冻结检查入口不可用、外部来源不可访问，或追加历史后的内容快照与获批快照不一致。",
+            "expectedResult": "不写冻结记录，也不开始插件实现；保留实际结果交设计负责人查明原因。"
           }
         }
       ],
@@ -11722,7 +11810,7 @@
         "id": "fail-checker",
         "question": "can-not-do",
         "shortLabel": "检查入口未闭合",
-        "situation": "所需的 Blueprint 草稿或冻结检查入口不可用，或外部来源不可访问，当前版本不能完成所需核实。",
+        "situation": "固定提交的 Blueprint 草稿或冻结检查入口不可用、外部来源不可访问，或追加历史后的内容快照与获批快照不一致。",
         "brokenRequirementIds": [
           "r-freeze",
           "r-blueprint"
@@ -11733,8 +11821,8 @@
           "gates"
         ],
         "outcome": "stop",
-        "handling": "使用 Blueprint 维护源已裁决的两档入口，冻结前选草稿、冻结时及冻结后选冻结；无法完成时由 D1 取得入口、环境或缺失证据后重查，不伪造历史或读者记录，不将无法判断写成通过。",
-        "userSees": "候选已保存，但所需检查尚未完成，当前无法判断，不能冻结。",
+        "handling": "只调用独立前置检查器 c05edcf，不修改上游；入口或外部证据不可访问记无法判断，冻结档不通过或 snapshot_sha256 与获批值不一致时不写 freeze.json，交 D1 查明原因后重查。冻结前只允许 D4 现实核查和材料整理，不开始任何插件实现。",
+        "userSees": "当前不能写冻结记录或开始插件实现；已保存候选和实际检查结果，由设计负责人查明原因。",
         "validatorId": "v-fail-checker"
       }
     },
