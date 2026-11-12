@@ -353,8 +353,8 @@
     },
     {
       "id": "r-boundary",
-      "shortName": "公开边界",
-      "text": "本次仅在 design/assurance-plugins-0.1-merged 分支的 plugin-0.1-d1 目录更新 Blueprint 与检查说明；原稿不动，不提交、不推送。公开文件不含私有项目名、仓库定位、本机绝对路径或私有内容。",
+      "shortName": "写入与公开边界",
+      "text": "每个角色只在本次派发指定的仓库、分支和目录写入：先写入探针并从远端回读，完成后提交结果并回读；不改 main，不改他人的结果目录，不改原稿。公开仓库中的文件不得包含私有项目名、私有仓库定位、本机绝对路径或私有内容。",
       "source": "D1 合并稿：https://github.com/YuukiAS/AI_Skills_Collection/blob/966d35aadf5e775c6f4cceb355edb5d2d6ee99a6/docs/design/assurance/plugin-0.1-d1/SPEC.md；取舍与三项裁决：https://github.com/YuukiAS/AI_Skills_Collection/blob/966d35aadf5e775c6f4cceb355edb5d2d6ee99a6/docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md；流程语义沿用已认可流程 0.1。",
       "route": [
         {
