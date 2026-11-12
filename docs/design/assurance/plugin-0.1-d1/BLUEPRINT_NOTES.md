@@ -734,3 +734,96 @@ npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugi
 ```
 
 新文件未提交，没有新的提交号，以本轮 HEAD 加仓库内路径及上述摘要定位。只修改 JSON 并追加本说明，未 commit、未 push、未切分支。新 JSON 和整份说明按用户指定正则自查，公开信息匹配数均为零。
+
+
+## 续：D6 第 2 轮负责人宿主更正及 D8 第 2 轮指定文字
+
+已按 D1 第 15 节决定补齐负责人宿主和规划入口，并逐字替换第 2 轮指定的 7 个单位。负责人 D1、X1 恢复为 Claude 或 GPT Pro，只有需要用户手动转交的 D2、D3、D6、D8、X5 受 GPT 网页端及每角色每轮一次转交约束；没有新增设计选择。
+
+本轮完整读取设计分支 HEAD `79a252567fa0c88101a8f31573d89eabf9ad6a4b` 中 SPEC 第 2.1a 节两项更正及 MERGE_DECISIONS 第 15 节，并核对 SPEC 第 9.2 节的既定双规划宿主入口。指定改写文件通过 `git show origin/gates/assurance-0.1-d1:docs/design/assurance/plugin-0.1-d1/gates/d8/round2/REWRITES_ZH.json` 读取，远端引用当时指向 `bceaa9da6d6729a0bcdfbbc58f3a5bc1408ebb44`，文件 SHA-256 为 `6cf03089a1094aff780c572a07f98d0edfd9e0658d746186e391455031cbebbe`。
+
+### Blueprint 与流程文档改动
+
+- `dispatch`、`prompts` 的输入、输出、接口、说明和验收，所有重复的第 2.1a 节以及相关需求、连接、反例同步更正。负责人为 Claude 时直接派发执行端，为 GPT 时生成完整提示词交用户转交给 Codex。设计阶段仍由 D1 派发 D4/D5/D7、准备 D2/D3/D6/D8 提示词；交付阶段仍由 X1 派发 X2/X3/X4、准备 X5 提示词。没有把规划端的次数限制扩展到执行端。
+- `role-D1`、`role-X1` 的输入、角色说明、长期线程规则和验收明确负责人例外，删除只允许 GPT 网页端的限制；调度角色表恢复“Claude 或 GPT Pro”。SPEC 第 2.1a 节关于本插件自身由 Claude 担任 D1、X1 的原文也已写入。
+- `planning-entry` 恢复 SPEC 第 9.2 节，明确 Claude Code 与 GPT Work 读取同一固定来源的规划 `SKILL.md`、角色卡和支持文件；`capability-check` 的入口行、验收和相关依据恢复双规划宿主实际观察。需要转交的 GPT 角色和安装后的执行入口仍按各自职责验证，格式兼容不代替实际加载。
+- 修订提示、冻结和关卡中的重复规则均同步，删除仍把所有规划端限定在 GPT 网页端的有效规定。复制的第 2.1a 节标题沿用当前 SPEC 原文，正文完整包含负责人例外，不沿用该标题作泛化约束。
+- 在流程文档旧的 `2026-11-11` 修订说明之后，仅新增一段 `2026-11-12` 修订说明，引用 SPEC 第 2.1a 节。说明用户最终决定：需要转交的规划角色在 GPT 上跑、每角色每轮一次、D8 每轮新对话合批、负责人仍按原流程；明确取代上一段关于自动批量新建读者、执行端代跑 D8、关键单位独立复述及每步换读者的规定。已将新增段落从比较副本中移除核对，剩余字节与 HEAD 中原文完全一致，原正文和旧说明没有删改。
+
+自身字段发生变化的节点：`state`、`writer`、`record-check`、`dispatch`、`prompts`、`revision`、`role-D1`、`role-D2`、`role-D3`、`role-D4`、`role-D6`、`role-D8`、`clarify`、`gates`、`contract-fidelity`、`freeze`、`q-checker`、`q-inheritance`、`role-X1`、`role-X5`、`evidence`、`sign`、`planning-entry`、`minimum`、`capability-check`、`q-capacity`。这里只列节点自身改动，不把子节点变化重复算作容器改动。
+
+数量保持 54 个节点、14 条需求、48 条连接、4 条正常走查（22 步）、11 条失败路径（22 步及 11 段整体收场）、55 个复述单位、65 个验收器、12 条依据记录。没有新增节点、连接、走查、失败路径或验收器。验收器仍为未运行，`versions: []` 不变；本轮没有实际运行角色、派发执行端或完成正式冻结。
+
+### 全部修改的复述单位
+
+第一组，7 个单位按 D1 的 JSON 逐字段原样替换，已检查字符串完全一致，没有再润色：
+
+| 单位 id | 指定替换字段 |
+| --- | --- |
+| `fail-role-step-2` | `exampleData`、`expectedResult`、`onError` |
+| `fail-role-whole` | `exampleData`、`expectedResult` |
+| `wr-owner` | `exampleData`、`expectedResult` |
+| `ws-dispatch` | `action`、`expectedResult` |
+| `wr-contract` | `expectedResult` |
+| `fail-recovery-step-1` | `onError` |
+| `wr-gates` | `action`、`exampleData` |
+
+第二组，因负责人宿主和入口更正而额外修改的 3 个单位，单独列出供下一轮重读：
+
+| 单位 id | 修改的读者字段 |
+| --- | --- |
+| `ws-prompts` | `action`、`expectedResult` |
+| `wb-planning` | `expectedResult` |
+| `fail-role-step-1` | `exampleData` |
+
+`ws-prompts` 说明 Claude 负责人直接派执行端、GPT 负责人交完整提示词给用户，并把每轮一条的对象收窄为需要转交的规划角色；`wb-planning` 明确 Claude Code 与 GPT Work 实际读取同源规划材料；`fail-role-step-1` 将 GPT 档次示例收窄为需要用户转交的规划端角色。
+
+实际调用固定检查器 `content/readability.ts` 的 `readerHash` 对本轮 HEAD 比较：10 个原有单位哈希改变、45 个不变，无新增单位。第一组给出的字段优先于负责人规则同步时形成的中间文字，其余未指定字段只在第一项必须更正时改动；没有借替换步骤改动技术说明。所有变动文字待下一轮真实复述，没有复用旧文字通过记录或补签记录。
+
+### 负责人更正涉及的 technical 字段
+
+沿用用户此前明确的边界：规则同步必须涉及的技术说明随规则更正，术语或指定文字替换只改六个读者字段。第 1 项共改了以下 4 个既有技术字段；第 3 项没有再修改任何 `technical`。除 `ws-dispatch.technical.expectedResult` 因第一项必须纠正原先“规划端一律 GPT”的说法外，指定 7 个单位的其他技术字段均与 HEAD 相同。
+
+1. `ws-dispatch.technical.expectedResult`：
+   - 原文：生成设计或核查事实的角色绑定任务书，检查设计的角色绑定快照，交付工作绑定有效冻结对象。规划端一律在 GPT 网页端，每角色每轮由用户转交一条；执行端在设计阶段由设计负责人（D1）派发，在交付阶段由交付负责人（X1）派发，次数不限。
+   - 新文：生成设计或核查事实的角色绑定任务书，检查设计的角色绑定快照，交付工作绑定有效冻结对象。需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）在 GPT 网页端，每角色每轮由用户转交一条；负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端在设计阶段由设计负责人（D1）派发，在交付阶段由交付负责人（X1）派发，次数不限。
+
+2. `ws-prompts.technical.action`：
+   - 原文：负责人把派发展开成可直接复制的提示词。
+   - 新文：负责人把派发展开成可直接复制的提示词。Claude 担任负责人时直接派发执行端，GPT 担任时生成完整提示词交用户转交给 Codex。
+
+3. `ws-prompts.technical.expectedResult`：
+   - 原文：用户拿到该规划端角色本轮的一条完整提示词；读者复述在一个新的 GPT 对话里合批处理本轮全部单位。对话随机逐个作答，每单位只依据自身文字，由设计负责人逐项判断。
+   - 新文：用户拿到需要转交的规划端角色本轮的一条完整提示词；读者复述在一个新的 GPT 对话里合批处理本轮全部单位。对话随机逐个作答，每单位只依据自身文字，由设计负责人逐项判断。
+
+4. `fail-role.technical.handling`：
+   - 原文：保留缺项并给出符合角色宿主要求的完整提示词，不降档、不自审、不把 prepared 写成 sent。规划端只能由用户每角色每轮转交一条到 GPT 网页端，执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1）；D8 按每轮新 GPT 对话合批，不以缺少旧的派发方式阻断合批通过。
+   - 新文：保留缺项并给出符合角色宿主要求的完整提示词，不降档、不自审、不把 prepared 写成 sent。需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）由用户每角色每轮转交最多一条到 GPT 网页端；负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1）；D8 按每轮新 GPT 对话合批，不以缺少旧的派发方式阻断合批通过。
+
+### 草稿检查与未完成项
+
+检查器仍为 `c05edcf51bc93f8be82180fd4ad28a250937f195`，未修改源码。先执行 `module load nodejs/24.16.0`，在检查器 `content/` 下实际运行离线、在线各一次。下列变量代指用户指定工作树，运行时传入 JSON 绝对路径，公开文件不记录本机路径。
+
+```bash
+module load nodejs/24.16.0
+cd "$BLUEPRINT_WORKTREE/content"
+npx tsx check.mjs --stage draft --offline "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+```
+
+| 检查 | 时间（UTC） | 退出码 | 确定缺口 | 人工解释待审 | 未完成项 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 离线草稿 | `2026-11-12T05:50:38.587Z` | 2 | 0 | 92 | 3 |
+| 在线草稿 | `2026-11-12T05:51:25.567Z` | 2 | 0 | 92 | 2 |
+
+离线未完成项为离线模式未核实来源、缺 `readability-review.json`、缺 `questions.json`。在线只剩上述两份读者记录缺失。两次均没有确定内容缺口，退出码 2 不能记作完整通过；92 项证据解释仍需人工审查。本轮没有需要新增设计决定的事项，仍待变动单位的真实复述及规定关卡。
+
+新 JSON 的 SHA-256：
+
+```text
+e9a76982321f30017ac9c255d71ac008434db5ca70728d6699c23dcaf5e23417
+```
+
+追加修订说明后的流程文档 SHA-256：`ed0999e16ccae70f99984303d7287ff7c81a0b790ea76059d7446a0b78a59588`。合并稿引用使用本分支实际 HEAD `79a252567fa0c88101a8f31573d89eabf9ad6a4b` 加仓库内路径；本轮 JSON 与流程文档改动尚未提交，没有自己的提交号，上述摘要定位当前文件，不声称未提交内容已存在于 HEAD 中。
+
+只修改 JSON、流程文档并追加本说明。SPEC、MERGE_DECISIONS 和 A 原稿未改，未 commit、未 push、未切分支。新 JSON、整份说明和流程文档按用户指定正则公开信息自查，匹配数均为零。
