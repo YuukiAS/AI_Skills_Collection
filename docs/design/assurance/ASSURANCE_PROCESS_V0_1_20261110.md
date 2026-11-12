@@ -147,6 +147,7 @@ X1 只在下列情况退回设计，其余问题都在交付端内部返修：
   - 规划端规则写成一份 `SKILL.md`，Claude Code 与 GPT Work 直接读取；
   - 执行端做成 Codex 插件。
 - ChatGPT 网页端（GPT Pro、GPT 极高）需用 OpenAI 自己的插件打包工具另外打包，到打包阶段再处理。
+- **修订（2026/11/12，用户决定）：** 网页端打包纳入 0.1，不推迟到 0.2。用户已经在网页端测通 thread handoff 和 thread instruction 两个插件包，0.1 沿用同一种打包方法，从同一份规则源生成网页端包，并在真实网页端验收。
 
 ## 11. 怎样把插件做出来
 
@@ -155,6 +156,6 @@ X1 只在下列情况退回设计，其余问题都在交付端内部返修：
 1. D1 由 Claude 担任；
 2. D2、D3 由两份 GPT Pro 各自独立出插件规格，有疑问写成问题清单交回；
 3. D1 汇总，过冻结关卡，用户批准冻结；
-4. X1 由 Claude 担任，Codex 在 AI_Skills_Collection 实现，遵守该仓库的维护规则（workflow-core 与 ai-skills-core）。
+4. X1 由 Claude 担任（**修订，2026/11/12，用户决定：** 本插件的 X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；D1 仍由 Claude 担任；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断），Codex 在 AI_Skills_Collection 实现，遵守该仓库的维护规则（workflow-core 与 ai-skills-core）。
 
 一个私有统计研究项目的三份 Blueprint 是这套流程的第一次真实试跑，用来检验插件规格有没有漏掉试跑暴露的问题。
