@@ -1,0 +1,19 @@
+{
+ "round": 3,
+ "reader_isolation": "single-thread-batch",
+ "judged_by": "D1",
+ "passed": [
+  "ws-dispatch",
+  "wr-gates",
+  "fail-role-step-1",
+  "wr-owner",
+  "fail-recovery-step-1",
+  "fail-role-whole",
+  "wr-contract",
+  "wb-planning",
+  "ws-prompts",
+  "fail-role-step-2"
+ ],
+ "rewrite": [],
+ "note": "All 10 paraphrases correct; listed confusions concern definitions outside each unit's scope. D8 complete: all 55 units passed in rounds 1-3."
+}
