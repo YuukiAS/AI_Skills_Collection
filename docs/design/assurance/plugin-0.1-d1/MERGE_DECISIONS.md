@@ -185,3 +185,8 @@ D8 第 2 轮共 29 个单位，D1 的判断如下：
 - 15 个无疑惑，复述正确，判为通过；
 - 7 个有疑惑，但读者要的是单位范围以外的细节，复述本身正确，也判为通过：`wr-sign`、`wr-freeze`、`wr-calibration`、`wb-source`、`ws-prompts`、`fail-checker-whole`、`fail-recovery-whole`；
 - 7 个文字确有问题，由 D1 重写：`fail-role-step-2`、`fail-role-whole`、`wr-owner`、`ws-dispatch`、`wr-contract`、`fail-recovery-step-1`、`wr-gates`。新文字见 `gates/d8/round2/REWRITES_ZH.json`。
+
+## 16. D6 第 3 轮与 D8 第 3 轮之后（D1）
+
+- **D8 第 3 轮：** 10 个单位的复述，D1 逐条对照原文，全部正确。读者列出的疑问都是本单位范围以外的定义（例如三个哈希怎么算），判为通过。至此，55 个单位都已在第 1–3 轮通过，D8 完成。
+- **D6 第 3 轮：** 1 项阻塞缺口。`q-checker` 节点和 SPEC 第 6.2 节关卡表中的 D8 一行，仍是旧标准“各单位由真实独立读者复述”，与第 2.1a 节的合批规则冲突。这是之前改写时的遗漏，现已改为合批标准。这一行不属于任何读者复述单位，所以 D8 记录仍然有效；D6、D7 需要对新快照重跑。
