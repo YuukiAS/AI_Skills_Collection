@@ -464,3 +464,66 @@ npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugi
 ```
 
 合并稿依据更新到 `c24c2a8be4ea66cce5b3843e690a0127182aca5f`。本轮工作树改动尚无自己的提交号，按该 HEAD 加路径及上述摘要定位，不声称改动已存在于该提交中。只修改 JSON 并追加本说明；未 commit、未 push、未切分支。新 JSON 和整份说明按相同正则公开信息自查，匹配数均为零。没有需要 D1 新增决定的事项，尚待真实读者记录和规定关卡。
+
+
+## 续：规划端统一 GPT，D8 每轮新对话合批（第 13 节用户决定）
+
+已完整读取最新提交 `c001f5aa02b65f53fa587181beb01716dfb389cc` 中整节改写的 SPEC 第 2.1a 节、第 2.1 节表格的 D8 行，以及 MERGE_DECISIONS 第 13 节，并同步 JSON。当前规则取代此前执行端代跑 D8、负责人批量新建读者、按单位换读者和特殊单位额外独立复述的要求。历史说明保留为各轮记录，当前角色与复述规则以本节为准，没有新增设计选择。
+
+### 修改的节点与规则
+
+- `dispatch`：第 2.1a 节整体换成最新原文，D8 表格行使用“规划端·普通：GPT 极高；每一轮换一个新对话，合批处理本轮全部单位”。规划端角色 D1–D3、D6、D8、X1、X5 一律 GPT 网页端，每角色每轮由用户转交一条提示词；执行端 D4、D5、D7、X2–X4 由 D1 派发，不限次数。原表格中规划端的其他宿主备选也按第 2.1a 节收窄为 GPT。
+- `role-D8`：说明、输入输出、线程规则、操作轮次和验收均改为每轮一个新的 GPT 对话，合批处理本轮全部单位，随机顺序，逐单位只依据自身文字作答，记录 `reader_isolation: "single-thread-batch"`。D1 逐项比较原意和复述，全部正确就是本轮有效通过；读错则改写，下轮只放改过单位及受影响相邻单位，交新 GPT 对话重读，仍只转交一条。
+- `gates`：JSON 内第 6.2 节关卡表的 D8 行明确改成“每轮新对话合批”，不再按单位要求独立线程；记录文本身份和合批方式，D1 逐项判断。没有保留本轮通过后再另派一类单位独立复述的条件。
+- `freeze`、`contract-fidelity`：D8 本轮合批全部正确可作为有效通过，冻结说明如实披露用户接受的独立性取舍。不再以缺少旧的派发手段阻断合批，也不保留执行端代跑 D8 或按单位另做复述的门槛。
+- `prompts`：移除旧宿主分支和两种读者派发方式；规划端只向 GPT 网页端转交每角色每轮的一条完整提示词，D8 包含本轮全部单位，后续返修轮只含改动及受影响相邻单位。执行端仍由 D1 派发，不占用户转交次数。
+- `role-D1`、`role-D2`、`role-D3`、`role-D6`、`role-X1`、`role-X5`：角色卡、输入和验收明确规划端只在 GPT 网页端运行。`revision` 中旧的其他宿主负责人分支同步清理；既有修订告知、任务书、状态写权和结果交回职责保留。
+- `planning-entry`、`capability-check` 及相关需求和验收：规划角色实际入口、宿主核对收窄为 GPT 网页端与 Codex 执行端，不再要求在其他宿主运行规划角色。其他平台文件格式的官方依据只作资源参考，不再形成运行规划角色的许可；没有新增网页端打包、安装或发布实现。
+
+所有被取代的有效规则和反例已清理：执行端最高推理档代跑 D8、自动批量新建读者、按单位独立复述条件、因缺少该手段将 D8 记未知而等待的条件均不再适用。JSON 中按最新 SPEC 原文保留“旧规则改为新规则”的否定性说明，不能理解为继续执行旧规则。
+
+连接 `c-dispatch-to-prompts` 和 `c-gates-to-role-D8` 同步当前协议。已有 `fail-role` 恢复为真实入口、档次或材料缺失的处理，删除针对旧 D8 派发手段的失败情景，并同步反例注入、说明与收场；没有新增失败路径。正常走查写明 GPT 运行范围、按轮合批、D1 逐项判断及下一轮重读。
+
+数量仍为 54 个节点、14 条需求、48 条连接、4 条正常走查（22 步）、10 条失败路径（21 步及 10 段整体说明）、12 条依据记录、64 个验收器。验收器仍全部 `not-run`、运行记录为空；`versions: []` 不变。本轮没有实际运行 GPT 角色、派发执行端或完成 D8 复述。
+
+### 全部受影响复述单位
+
+以本轮开始时 HEAD 中的 JSON 为基线，实际调用固定检查器 `content/readability.ts` 的 `readerHash` 比较六项读者文字。7 个原有单位的文字哈希改变，无新增单位；其余 46 个单位文字哈希未变。
+
+| 复述单位 id | 类型 | 改动字段 |
+| --- | --- | --- |
+| `ws-dispatch` | 正常步骤 | `expectedResult` |
+| `ws-prompts` | 正常步骤 | `expectedResult`、`onError` |
+| `wr-gates` | 正常步骤 | `exampleData`、`expectedResult`、`why`、`onError` |
+| `wr-freeze` | 正常步骤 | `exampleData`、`onError` |
+| `fail-role-whole` | 失败路径整体收场 | `exampleData`、`expectedResult`、`onError` |
+| `fail-role-step-1` | 失败步骤 | `exampleData` |
+| `fail-role-step-2` | 失败步骤 | `exampleData`、`expectedResult`、`onError` |
+
+这些单位需按当前每轮新 GPT 对话的合批规则取得真实复述，不能复用旧文字的通过记录。本轮没有合成、复用或补签读者记录。
+
+### 草稿检查与文件身份
+
+检查器工作树仍为 `fix/draft-check-tier-20261111`，提交 `c05edcf51bc93f8be82180fd4ad28a250937f195`。先加载机器已有 `nodejs/24.16.0`，再实际运行离线、在线草稿档各一次；未修改检查器源码。变量代指用户指定的两个工作树，实际调用传入 JSON 的绝对路径，公开文件不记录本机路径。
+
+```bash
+module load nodejs/24.16.0
+cd "$BLUEPRINT_WORKTREE/content"
+npx tsx check.mjs --stage draft --offline "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+```
+
+| 本轮检查 | 退出码 | 确定缺口 | 人工解释待审 | 未完成项 |
+| --- | ---: | ---: | ---: | ---: |
+| 离线草稿 | 2 | 0 | 92 | 3 |
+| 在线草稿 | 2 | 0 | 92 | 2 |
+
+离线检查时间为 `2026-11-12T03:29:17.780Z`，未完成项为离线未核实来源、缺 `readability-review.json`、缺 `questions.json`。在线检查时间为 `2026-11-12T03:30:32.128Z`，只剩上述两份读者记录缺失。两次均无确定内容缺口，退出码 2 仍不能记完整通过；92 项人工解释没有当作独立审阅完成。本次没有验证实际 GPT 对话执行、合批结果或正式冻结。
+
+新 JSON 的 SHA-256：
+
+```text
+d8b1e414908b825fdfae7072bde0cfd3e1774de3650f8543172cc40626c2ce9e
+```
+
+合并稿依据更新到 `c001f5aa02b65f53fa587181beb01716dfb389cc`。本轮 JSON 改动尚无提交号，以该 HEAD 加路径及上述摘要定位，不声称已存在于该提交中。只修改 JSON 并追加本说明；SPEC、MERGE_DECISIONS、流程文档和 A 原稿未改，未 commit、未 push、未切分支。新 JSON 和整份说明按相同正则公开信息自查，匹配数均为零。没有需要 D1 新增选择的事项，尚待真实读者记录与规定关卡。
