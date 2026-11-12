@@ -1,0 +1,325 @@
+{
+ "blueprint_commit": "844c47941f4377166c7a9b4cadd973bfb60eed74",
+ "round": 1,
+ "reader_isolation": "single-thread-batch",
+ "units": [
+  {
+   "order": 1,
+   "subjectId": "ws-writer",
+   "textHash": "aff31aeaa072380ec0b81f5d8266f18fe62a870965f7451b53b42ef1d1f95f37",
+   "kind": "正常走查"
+  },
+  {
+   "order": 2,
+   "subjectId": "wb-planning",
+   "textHash": "2278555cbbb4944e769e86dd53614007bb0895665ccbb4290f9fd366b0a2ccb9",
+   "kind": "正常走查"
+  },
+  {
+   "order": 3,
+   "subjectId": "fail-candidate-step-3",
+   "textHash": "e5080961a89ce88e380ad39d0a4b3f07dd9e039518ff305701415ea084152b68",
+   "kind": "失败处理"
+  },
+  {
+   "order": 4,
+   "subjectId": "ws-dispatch",
+   "textHash": "e945d2a555cf26c3d037f95e804f084c9ab4e1f4b78d7b440388203c67253982",
+   "kind": "正常走查"
+  },
+  {
+   "order": 5,
+   "subjectId": "fail-package-step-1",
+   "textHash": "9ad293f8c5eed4084625515af294037b1dcfe6baa26e14ee3e476f221911e760",
+   "kind": "失败处理"
+  },
+  {
+   "order": 6,
+   "subjectId": "wr-calibration",
+   "textHash": "b0a6714f3ab57ab457b4c51201e3a17ae769a2089845314127307c6e73663c3b",
+   "kind": "正常走查"
+  },
+  {
+   "order": 7,
+   "subjectId": "fail-premise-whole",
+   "textHash": "6a37a46ae8f4a791c974b17f99b43afb889f4e6dde69c4e423229a14463a22a7",
+   "kind": "失败情形整体收场"
+  },
+  {
+   "order": 8,
+   "subjectId": "fail-package-step-2",
+   "textHash": "9ad293f8c5eed4084625515af294037b1dcfe6baa26e14ee3e476f221911e760",
+   "kind": "失败处理"
+  },
+  {
+   "order": 9,
+   "subjectId": "fail-premise-step-1",
+   "textHash": "6cb6415232cb9b4772ca8c2870f465d0f74e0fc9715cbd3450440bd0f4ecfa9c",
+   "kind": "失败处理"
+  },
+  {
+   "order": 10,
+   "subjectId": "wi-entry",
+   "textHash": "fdfb66948ffcc09548f863e09f1aeeee5d872dcd40819ccd3e9477420b72beec",
+   "kind": "正常走查"
+  },
+  {
+   "order": 11,
+   "subjectId": "fail-missing-step-1",
+   "textHash": "bf3d164bd942bb10e754e1af763f2b60b596ae27de154ea96645060c8d3e05c5",
+   "kind": "失败处理"
+  },
+  {
+   "order": 12,
+   "subjectId": "fail-semantic-step-2",
+   "textHash": "54a7038125d8033452072a83c74982313e30c0e9df6aed9f0fc2c5a123f45ce2",
+   "kind": "失败处理"
+  },
+  {
+   "order": 13,
+   "subjectId": "fail-package-step-3",
+   "textHash": "e55cc086746c55be9143e6bb52e4091e28f9b75a388c7808a5614e5f5db4b37b",
+   "kind": "失败处理"
+  },
+  {
+   "order": 14,
+   "subjectId": "fail-semantic-step-1",
+   "textHash": "b42f1846430ca6c600d4331945113731c279b8b4346f3e484c4433feeca8c9ee",
+   "kind": "失败处理"
+  },
+  {
+   "order": 15,
+   "subjectId": "fail-role-step-2",
+   "textHash": "ef5d5addbed6e98f1ad7f5c26ed1b60989196aad1795c84855f0f59cbbb5d455",
+   "kind": "失败处理"
+  },
+  {
+   "order": 16,
+   "subjectId": "fail-write-whole",
+   "textHash": "ec7cabd07cd876e5d3d5c65c13c3f2a7f1c4e301135bc5f3ec55a376b4c69dfb",
+   "kind": "失败情形整体收场"
+  },
+  {
+   "order": 17,
+   "subjectId": "fail-write-step-2",
+   "textHash": "fbb0c77cae7f19c1c58e032b916ce95cad1773e6cb9862be966b9f51d26fde7a",
+   "kind": "失败处理"
+  },
+  {
+   "order": 18,
+   "subjectId": "fail-missing-whole",
+   "textHash": "588c7760559d9b688936373ce32769254acfa52457a07a386d5805c80d83e30c",
+   "kind": "失败情形整体收场"
+  },
+  {
+   "order": 19,
+   "subjectId": "wr-contract",
+   "textHash": "a859fd7d523a8953e822591d0011b4c34bc6fc7c49935834578938cd22e76ee5",
+   "kind": "正常走查"
+  },
+  {
+   "order": 20,
+   "subjectId": "fail-role-whole",
+   "textHash": "66b70d5b761ff7bd6b20a5c1e4ed940e70bacdaf4aa3f1061141210b0c0dd774",
+   "kind": "失败情形整体收场"
+  },
+  {
+   "order": 21,
+   "subjectId": "ws-state",
+   "textHash": "884a483d4e8cbd140c7f738d00e80f57523cb281ffa060e4c368e8c3eedf95d9",
+   "kind": "正常走查"
+  },
+  {
+   "order": 22,
+   "subjectId": "fail-calibration-step-1",
+   "textHash": "b465642cde25807a73bb91f2331084574dbf5815faec7bb35d8413b61843508e",
+   "kind": "失败处理"
+  },
+  {
+   "order": 23,
+   "subjectId": "wb-capability",
+   "textHash": "9964b026a75c53c384d8fffd5397dc4b0a06a97227187e6912b89505beb2ffa3",
+   "kind": "正常走查"
+  },
+  {
+   "order": 24,
+   "subjectId": "wb-source",
+   "textHash": "a235761237b6a95ed879424d2262224b3051e5f2b861962825cb913fdcc57d8a",
+   "kind": "正常走查"
+  },
+  {
+   "order": 25,
+   "subjectId": "wr-gates",
+   "textHash": "f62256207d50b21f4cd22e7620ad339412db743fea393cd4f4ea052e8387f4c0",
+   "kind": "正常走查"
+  },
+  {
+   "order": 26,
+   "subjectId": "wr-candidate",
+   "textHash": "a4c8e9f131d4a44d5cd6f7a20008a56f7c49332d96a3571c6e990344de615418",
+   "kind": "正常走查"
+  },
+  {
+   "order": 27,
+   "subjectId": "fail-checker-whole",
+   "textHash": "81ca6380fb4019c6c7e2a93f9c4f53c04f8bb2cb8ab6f7dd5fc351f8751438c1",
+   "kind": "失败情形整体收场"
+  },
+  {
+   "order": 28,
+   "subjectId": "fail-calibration-step-2",
+   "textHash": "2783eabd5a26076ad985740745d5e1cf95953d521726c0df5d3d7a5dcda414e2",
+   "kind": "失败处理"
+  },
+  {
+   "order": 29,
+   "subjectId": "wb-execution",
+   "textHash": "2171b26e418ea54eabcab4eb68aeead0e3cc508214db52eb19e3f04b6862f9f8",
+   "kind": "正常走查"
+  },
+  {
+   "order": 30,
+   "subjectId": "fail-write-step-1",
+   "textHash": "96bff036689e61aeac8accfb345a0295def657c088ced6c7db29fc12b5d0a365",
+   "kind": "失败处理"
+  },
+  {
+   "order": 31,
+   "subjectId": "ws-owner",
+   "textHash": "141bbcb59e8fbb8523e6999262fdc4ae5d1e3349a7fcd3ba253994ce4a4f28ca",
+   "kind": "正常走查"
+  },
+  {
+   "order": 32,
+   "subjectId": "fail-semantic-whole",
+   "textHash": "c05a5955b9d05e24608e9b125a6f136bfaa2f4010ffece389135bac58711f335",
+   "kind": "失败情形整体收场"
+  },
+  {
+   "order": 33,
+   "subjectId": "fail-candidate-step-2",
+   "textHash": "3ad9469adb262b34660c48f2cbac120557230f9e1d99e57d7e249f2b267b3f2d",
+   "kind": "失败处理"
+  },
+  {
+   "order": 34,
+   "subjectId": "wi-check",
+   "textHash": "1cce9fbf66c42ece2586d8b4586394612f23198d0e38c66e6e26e14935bdb09b",
+   "kind": "正常走查"
+  },
+  {
+   "order": 35,
+   "subjectId": "fail-revocation-whole",
+   "textHash": "f31785bb85e8bbbe703234b7379f27f0c8e50a1aae809e38ab19ab74a83df19e",
+   "kind": "失败情形整体收场"
+  },
+  {
+   "order": 36,
+   "subjectId": "wr-freeze",
+   "textHash": "8be21e1091faf04423e1bb0d3efffe85457b3c0c94279cd1d575a0b498bfcffa",
+   "kind": "正常走查"
+  },
+  {
+   "order": 37,
+   "subjectId": "ws-designer",
+   "textHash": "1fedd61260a24ab2d6033872e1ca75d2e74d8e280c82746952faf6b78e9ecffe",
+   "kind": "正常走查"
+  },
+  {
+   "order": 38,
+   "subjectId": "fail-package-whole",
+   "textHash": "5333751b59ed73a85d18598e9ba9bab3e8be49ef76947902b947d6c5bbcc2050",
+   "kind": "失败情形整体收场"
+  },
+  {
+   "order": 39,
+   "subjectId": "fail-calibration-whole",
+   "textHash": "075abfae4d0a8ab00dfb93e0d45536c812fea0ae8b8abd08bea2a3a576d2680e",
+   "kind": "失败情形整体收场"
+  },
+  {
+   "order": 40,
+   "subjectId": "fail-revocation-step-1",
+   "textHash": "2883ea0a59f6f1184ea399203adda86eaffcd64beb05c838650e01fe649f7bd3",
+   "kind": "失败处理"
+  },
+  {
+   "order": 41,
+   "subjectId": "fail-checker-step-1",
+   "textHash": "8769c673bafcd237a9765e856f6c3fb9659956710f7c584df044635cea02e140",
+   "kind": "失败处理"
+  },
+  {
+   "order": 42,
+   "subjectId": "fail-premise-step-2",
+   "textHash": "4cbe42e265c4e11a63b6c3c79af4b229db03691568baf238f5e717b2f3ba0262",
+   "kind": "失败处理"
+  },
+  {
+   "order": 43,
+   "subjectId": "wr-build",
+   "textHash": "21d25b40436a9f48b7a8b7ca62c8c3abd3fad91b1bcb314360ffc0db7a5fd47a",
+   "kind": "正常走查"
+  },
+  {
+   "order": 44,
+   "subjectId": "ws-prompts",
+   "textHash": "502065ea5246f1fdbfffcfae689349b1927631436898b09d83afd035d49517b2",
+   "kind": "正常走查"
+  },
+  {
+   "order": 45,
+   "subjectId": "wr-asset",
+   "textHash": "a85c73463cf20cce85437bc1d35b2e35971f00b419275a2b852217a7ef4b63ee",
+   "kind": "正常走查"
+  },
+  {
+   "order": 46,
+   "subjectId": "fail-candidate-whole",
+   "textHash": "861dcd3a918c4674edde80b5c199a4310794a3ca0c9d9153132b6e88e843a078",
+   "kind": "失败情形整体收场"
+  },
+  {
+   "order": 47,
+   "subjectId": "fail-checker-step-2",
+   "textHash": "42d1673a8d11f470360294bed35a5fc549aba25a89012d0309faecf8cb487e12",
+   "kind": "失败处理"
+  },
+  {
+   "order": 48,
+   "subjectId": "wr-evidence",
+   "textHash": "224fbb278c9e0f1415c28f76b402d338f31202d36503da295cd710cd4b3d6973",
+   "kind": "正常走查"
+  },
+  {
+   "order": 49,
+   "subjectId": "wr-owner",
+   "textHash": "5f5e7a72433fb3b3c089d07acd211b087c1a9d814ed3c0cce77554e6cddb2647",
+   "kind": "正常走查"
+  },
+  {
+   "order": 50,
+   "subjectId": "fail-candidate-step-1",
+   "textHash": "3ad9469adb262b34660c48f2cbac120557230f9e1d99e57d7e249f2b267b3f2d",
+   "kind": "失败处理"
+  },
+  {
+   "order": 51,
+   "subjectId": "wr-sign",
+   "textHash": "ff5aeb0d08b5708a8fcb919c7dfb75a57d052cd35a8e63beae2f90ceaeb69790",
+   "kind": "正常走查"
+  },
+  {
+   "order": 52,
+   "subjectId": "fail-role-step-1",
+   "textHash": "6d86e7804178d60052a0a710bb1c7f38b94a764c77df8dcf5e7a6db3b5287ee2",
+   "kind": "失败处理"
+  },
+  {
+   "order": 53,
+   "subjectId": "fail-missing-step-2",
+   "textHash": "b218629d39ed426f40cb518b7687ccee269cd3727616db0675304cc85941066e",
+   "kind": "失败处理"
+  }
+ ]
+}
