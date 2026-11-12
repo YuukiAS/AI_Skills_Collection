@@ -1,0 +1,67 @@
+{
+ "blueprint_commit": "5b2537d3377021daa580b37be7bf22aa84a89565",
+ "round": 3,
+ "reader_isolation": "single-thread-batch",
+ "units": [
+  {
+   "order": 1,
+   "subjectId": "ws-dispatch",
+   "textHash": "16ddbb51711121b46399f7aec11de4ae15f2d314a4be150e355c51e017ce9e6e",
+   "kind": "正常走查"
+  },
+  {
+   "order": 2,
+   "subjectId": "wr-gates",
+   "textHash": "8cc9e394a9c34ac792de7bdbfa2ada59cc033fcba0fee8d1cf8937c15143a0fe",
+   "kind": "正常走查"
+  },
+  {
+   "order": 3,
+   "subjectId": "fail-role-step-1",
+   "textHash": "77ef23a95edb6a1eb539e5e7d1f9b6301115aaa15880b01c0c92e7bea01b2b6a",
+   "kind": "失败处理"
+  },
+  {
+   "order": 4,
+   "subjectId": "wr-owner",
+   "textHash": "836ef02456dd745a43edf210167a4ae9d8dc2eff3853b11bb15e56cd2c165ef1",
+   "kind": "正常走查"
+  },
+  {
+   "order": 5,
+   "subjectId": "fail-recovery-step-1",
+   "textHash": "a89996670414be7cd540b81c8bf96c43c57ed1456ba871c9e9a2da750cdee8cc",
+   "kind": "失败处理"
+  },
+  {
+   "order": 6,
+   "subjectId": "fail-role-whole",
+   "textHash": "8337a59a9dd25f2b0de0f67f6833b3df17cf0728279c7cc99d542e81a1bbc77e",
+   "kind": "失败情形整体收场"
+  },
+  {
+   "order": 7,
+   "subjectId": "wr-contract",
+   "textHash": "3597bb16a152eefb8ca7f2e4e07a62e44e65482faf84d47b31d9dab7aa8679d0",
+   "kind": "正常走查"
+  },
+  {
+   "order": 8,
+   "subjectId": "wb-planning",
+   "textHash": "51d38a1113e5250314b74c75041f9f00bf181db18d55797c96d7d0046724c66f",
+   "kind": "正常走查"
+  },
+  {
+   "order": 9,
+   "subjectId": "ws-prompts",
+   "textHash": "8d7ab810ead3322e2dc369b97e3fd4bbc411d79f45c181f2b8a068b1987956a4",
+   "kind": "正常走查"
+  },
+  {
+   "order": 10,
+   "subjectId": "fail-role-step-2",
+   "textHash": "16bdccd622b055d814f184c967222888ab84a63272f4f8a66f303e2ede8e6198",
+   "kind": "失败处理"
+  }
+ ]
+}
