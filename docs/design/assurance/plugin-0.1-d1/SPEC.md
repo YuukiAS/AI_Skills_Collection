@@ -90,7 +90,7 @@ JSON 使用 UTF-8、两个空格缩进、换行结束；未知值用 `null`，�
 
 为避免每张角色卡各自实现一套JSON判断，共用资源提供一个只读入口 `shared/assurance/scripts/check_records.py`，使用成熟依赖 `jsonschema[format-nongpl]==4.26.0`；运行环境为Python 3.10或更新的受支持版本。各记录结构使用JSON Schema Draft 2020-12，先用 `Draft202012Validator.check_schema` 检查结构定义，再用 `iter_errors` 收集记录错误，显式启用 `FormatChecker` 并核对对应格式依赖。引用只从同包预注册的本地结构读取，不在验收时联网取未知结构。版本与API依据为[jsonschema官方文档](https://python-jsonschema.readthedocs.io/en/stable/validate/)、[引用机制文档](https://python-jsonschema.readthedocs.io/en/stable/referencing/)和[4.26.0发行记录](https://pypi.org/project/jsonschema/4.26.0/)。这是拟采用依赖，本轮没有安装或运行该入口。
 
-计划命令为 `python shared/assurance/scripts/check_records.py --task-root <目录> --schema <记录种类> --record <文件> --format json`；允许的记录种类为 `state/dispatch/result/revision/freeze/candidate/evidence/calibration/return/release/revocation/measurement`。入口只读指定任务目录与包内结构，检查必填字段、枚举、时间、相对路径越界、编号唯一性和记录间已声明的身份引用。涉及版本、角色或候选不一致时报告具体引用，不替负责人判断语义等价。退出值0只表示记录结构及可检查引用符合规则，1表示存在确定错误，2表示依赖、输入或引用证据不足而无法完成检查；输出包含 `assessment,errors,unresolved,checked_files`，绝不把2记作产品失败。
+计划命令为 `python shared/assurance/scripts/check_records.py --task-root <目录> --schema <记录种类> --record <文件> --format json`；允许的记录种类为 `state/brief/dispatch/result/revision/freeze/candidate/evidence/calibration/return/release/revocation/recovery/measurement`（`brief` 见第 6.5 节，`recovery` 见第 1.3a 节）。入口只读指定任务目录与包内结构，检查必填字段、枚举、时间、相对路径越界、编号唯一性和记录间已声明的身份引用。涉及版本、角色或候选不一致时报告具体引用，不替负责人判断语义等价。退出值0只表示记录结构及可检查引用符合规则，1表示存在确定错误，2表示依赖、输入或引用证据不足而无法完成检查；输出包含 `assessment,errors,unresolved,checked_files`，绝不把2记作产品失败。
 
 该入口不写状态、不提交、不派发、不签发、不安装依赖、不执行记录中引用的命令，也不替代Blueprint检查器、领域验收或负责人阅读。任务目录之外的合法证据只核对已登记定位与身份，不能越过授权自动读取。检查器自己的三类校准与版本也按第7节由X1审查。
 
