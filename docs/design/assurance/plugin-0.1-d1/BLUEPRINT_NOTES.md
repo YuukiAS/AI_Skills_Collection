@@ -679,3 +679,58 @@ npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugi
 ```
 
 合并稿依据使用本分支实际 HEAD `a3dc0d96a57e18a1d6e2c542ca1acc6836cfd44f` 加仓库内路径。JSON 尚未提交，没有自己的提交号，以该 HEAD、路径和上述摘要定位未提交文件，不声称新文件已存在于该提交中。只修改 JSON 并追加本说明，SPEC、MERGE_DECISIONS、流程文档和 A 原稿均未修改。未 commit、未 push、未切分支。按用户指定正则检查新 JSON 和整份说明，公开信息匹配数均为零。
+
+
+## 续：采用术语表“补充”完成上一轮交回的改写
+
+上一轮交回的术语已按 D1 新增的“补充”改写，没有自行编写定义。`wr-calibration` 的验收用“检查器”首次写为“验收检查程序（检查器，用来判定成品是否达标的程序）”；检查设计文件的 Blueprint 检查器继续保持区别。其余词使用补充表中的原文解释，每个单位首次出现时展开，再次出现时保留简称。
+
+本轮开始时设计分支 HEAD 为 `b659193f508190d139192da554312d1c423e661f`，JSON 的 SHA-256 为 `048b00d56e07f94e93947606c532892739a0f28727601cdc76f9e9898bd65cf8`。术语表通过 `git show origin/gates/assurance-0.1-d1:docs/design/assurance/plugin-0.1-d1/gates/d8/round1/GLOSSARY_ZH.md` 完整读取，该远端引用当时指向 `dda47ca4265c8e894eb027ed74208c158cd88d7e`，文件 SHA-256 为 `eba6ac99577e6bd63cfc6a1f523970661b6c8d700e48562c72d878ae5481acc8`。本轮只改读者文字，既有设计字段和来源引用均保持原样。
+
+### 本次改写的单位
+
+| 单位 id | 改动的读者字段 |
+| --- | --- |
+| `wb-planning` | `action` |
+| `wb-source` | `action`、`exampleData` |
+| `wr-calibration` | `title`、`action`、`expectedResult` |
+| `wr-build` | `expectedResult` |
+| `wr-asset` | `action`、`exampleData`、`expectedResult`、`onError` |
+| `wr-candidate` | `action`、`exampleData`、`onError` |
+| `wr-freeze` | `expectedResult` |
+| `wr-sign` | `exampleData` |
+| `fail-semantic-whole` | `exampleData` |
+| `fail-semantic-step-1` | `exampleData`、`expectedResult` |
+| `fail-semantic-step-2` | `exampleData` |
+
+上述 11 个单位覆盖固定源提交、包根/资源根、复制映射、生成器、校准、控制例、验收用检查器、默认验收实现、冻结语义、候选、对象身份、实际运行器、冻结档、偏离结论和阈值。`wr-build` 将原“候选产物”按词表写为带解释的“候选成品”，没有改变所指对象或增加步骤。
+
+已逐字段核对：除这 11 个单位的六项读者字段外，整份 JSON 与本轮 HEAD 完全一致；全部 `technical` 字段未动，判断单中已经通过的 26 个单位完整对象未动。实际调用固定检查器的 `readerHash` 比较，11 个单位文字哈希改变、44 个不变、无新增单位。改过的文字需要下一轮真实复述，本轮没有补签读者通过记录。
+
+节点、需求、连接、走查、失败路径和验收器数量均未变化：54 个节点、14 条需求、48 条连接、4 条正常走查（22 步）、11 条失败路径（22 步及 11 段整体收场）、55 个复述单位、65 个验收器、12 条依据记录。`versions: []` 保持原样。
+
+### 草稿检查及未完成项
+
+在用户指定检查器工作树的 `content/` 下，先加载 `nodejs/24.16.0`，实际运行离线、在线草稿档各一次。检查器仍为提交 `c05edcf51bc93f8be82180fd4ad28a250937f195`，未修改源码。下列变量代指用户指定的工作树，实际运行使用新 JSON 的绝对路径，公开说明中不记录本机路径。
+
+```bash
+module load nodejs/24.16.0
+cd "$BLUEPRINT_WORKTREE/content"
+npx tsx check.mjs --stage draft --offline "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+```
+
+| 检查 | 时间（UTC） | 退出码 | 确定缺口 | 人工解释待审 | 未完成项 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 离线草稿 | `2026-11-12T05:18:46.470Z` | 2 | 0 | 92 | 3 |
+| 在线草稿 | `2026-11-12T05:19:07.003Z` | 2 | 0 | 92 | 2 |
+
+离线未完成项为使用离线模式未核实来源，以及缺 `readability-review.json`、缺 `questions.json`。在线只剩这两份读者记录缺失。两次均无确定内容缺口，退出码 2 仍不能记为完整通过；92 项证据解释仍待人工审查。本轮没有剩余需要新增定义的术语事项，尚待下一轮真实复述和规定关卡。
+
+新 JSON 的 SHA-256：
+
+```text
+6530517cee7ddc2ca6da4c7c9a6a1d4410f5f088c491b69cdbf739fa621b42fa
+```
+
+新文件未提交，没有新的提交号，以本轮 HEAD 加仓库内路径及上述摘要定位。只修改 JSON 并追加本说明，未 commit、未 push、未切分支。新 JSON 和整份说明按用户指定正则自查，公开信息匹配数均为零。
