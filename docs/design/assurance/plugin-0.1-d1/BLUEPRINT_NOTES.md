@@ -827,3 +827,101 @@ e9a76982321f30017ac9c255d71ac008434db5ca70728d6699c23dcaf5e23417
 追加修订说明后的流程文档 SHA-256：`ed0999e16ccae70f99984303d7287ff7c81a0b790ea76059d7446a0b78a59588`。合并稿引用使用本分支实际 HEAD `79a252567fa0c88101a8f31573d89eabf9ad6a4b` 加仓库内路径；本轮 JSON 与流程文档改动尚未提交，没有自己的提交号，上述摘要定位当前文件，不声称未提交内容已存在于 HEAD 中。
 
 只修改 JSON、流程文档并追加本说明。SPEC、MERGE_DECISIONS 和 A 原稿未改，未 commit、未 push、未切分支。新 JSON、整份说明和流程文档按用户指定正则公开信息自查，匹配数均为零。
+
+
+## 续：网页端打包纳入 0.1，及本插件自身的 X1 分工（第 17 节用户决定）
+
+网页端打包已写入 0.1 必需范围，既定的打包方法、包内内容、能力边界和三项真实验收完整落入 Blueprint；本插件自身的 X1 改为 GPT Work 极高，Claude 只做机械启动 Codex 的运输。通用的“Claude 或 GPT Pro 担任负责人”规则保留，没有新定打包工具、包格式或额外角色。
+
+本轮以实际 HEAD `966d35aadf5e775c6f4cceb355edb5d2d6ee99a6` 为准，完整读取 SPEC 第 9.4 节及第 10.3 节改动、流程文档第 10、11 节修订和 MERGE_DECISIONS 第 17 节。SPEC 文件 SHA-256 为 `b2cc2b9932b55c74afa9b252179ea7eb8726a75b87547972613c2baf32ae6c94`；这些是当前决定的依据，并不代替方法已由 X2 定位或网页端验收已执行的证据。
+
+### 节点、范围与验收
+
+- `web-later` 的标题改为“网页端打包与验收”，描述、输入输出、接口、接入位置和验收均改成 0.1 的实际打包与真实验收。保留该节点及主验收器的稳定 id，便于沿用引用；名称中的职责和正文均不再表示以后实施。其 `terminal.mechanism` 与当前 SPEC 第 9.4 节全文逐字一致。
+- X2 先在仓库和实际包中定位用户已测通的 thread handoff、thread instruction 所用方法和工具，记录来源后复用。没有自行选择另一套打包方式，也没有在本轮提前开展查包、打包或上传实施。
+- 网页端包包含 design-assurance、delivery-assurance 两规划入口的同一份正文、完整角色卡、模板、结构定义、清单和图标；规则正文只来自 `shared/assurance/`。网页端没有本地终端，只负责读状态、生成下一条提示词，并在有仓库连接器时按派发写回，不能声称运行本地脚本或启动 Codex。
+- X4 负责在真实 ChatGPT 网页端上传包、新开一个对话，实际读取规划正文、至少一张角色卡和一份模板，依据公开安全的示例任务状态生成正确的下一条完整提示词，并按要求写回指定分支，无写权限时如实给出内容。保留原始对话，由 X1 签发；只上传成功不算通过。
+- `minimum` 删除网页端上架的延后说法，采用当前第 10.3 节，并加入网页端必需范围；`r-package` 的文本与需求路线、`packaging` 的最终对象和父职责验收、`execution-package` 的两端能力边界、`capability-check` 的输出、正文与验收均同步。原有执行端能力保持必需，不能由网页端观察替代。
+- 所有提到“本插件自身的设计和实施由 Claude 担任 D1、X1”的句子均替换为当前特例：D1 仍由 Claude 担任，X1 由 GPT Work 极高在长期对话中持续负责；X1 写入仓库的派发由 Claude 只做机械启动 Codex 的运输，不参与交付判断。`role-X1` 另明确该特例的验收依据。没有把这个特例扩展成所有被管理任务的通用角色规则。
+
+所有自身字段发生变化的节点如下，容器仅因子节点改变时不重复列入：
+
+| 节点 id | 修改字段 |
+| --- | --- |
+| `state` | `validators` |
+| `writer` | `validators` |
+| `record-check` | `validators` |
+| `dispatch` | `validators`、`terminal` |
+| `prompts` | `validators`、`terminal` |
+| `revision` | `validators`、`terminal` |
+| `role-D1` | `validators`、`terminal` |
+| `role-D2` | `validators` |
+| `role-D3` | `validators` |
+| `role-D4` | `validators` |
+| `role-D6` | `validators` |
+| `role-D8` | `validators`、`terminal` |
+| `clarify` | `validators`、`terminal` |
+| `gates` | `validators`、`terminal` |
+| `contract-fidelity` | `validators`、`terminal` |
+| `freeze` | `validators`、`terminal` |
+| `q-checker` | `validators`、`terminal` |
+| `q-inheritance` | `validators`、`terminal` |
+| `role-X1` | `validators`、`terminal` |
+| `role-X5` | `validators` |
+| `evidence` | `validators` |
+| `deviation` | `inputs`、`validators`、`interface` |
+| `sign` | `validators` |
+| `packaging` | `description`、`outputs`、`validators` |
+| `planning-entry` | `validators`、`terminal` |
+| `execution-package` | `validators`、`interface`、`terminal` |
+| `minimum` | `description`、`outputs`、`validators`、`interface`、`terminal` |
+| `capability-check` | `inputs`、`outputs`、`validators`、`interface`、`terminal` |
+| `web-later` | `title`、`description`、`inputs`、`outputs`、`validators`、`interface`、`ringLabel`、`terminal` |
+| `q-capacity` | `validators`、`terminal` |
+
+新增三条连接：`c-capability-check-to-web-later` 将已定网页端专项验收交给对应职责；`c-web-later-to-capability-check` 返回三项原始对话证据；`c-web-later-to-deviation` 将方法找不到或无法复现的偏离交入既有偏离流程，由 X1 处理。连接及端口仅表示已定职责间的交接，不是新增后台派发能力。
+
+### 走查、失败路径与复述单位
+
+安装环境的 `walk-installed` 增加网页端入口、示例输入和输出，原有执行端两步完整保留。新增一步 `wi-web`，写清网页端三项实际观察、原始对话证据及权限边界。走查整体的 `entry`、`exit`、`exampleInput`、`expectedOutput` 和其对应技术元信息同步两端范围；这些整体元信息不计为独立复述单位。
+
+新增 `fail-web-method`：X2 找不到或无法复现已测通的方法时，记录实际查找与复现结果，作为偏离交给 X1，不另造方法。该情形和安装包缺资源的失败路径需要不同处理，故单列；新增对应验收探针 `v-fail-web-method`，仍为 `not-run`。失败路线按格式规则停在发现问题的节点，后续偏离交接由处理正文及连接说明。
+
+| 单位 id | 类型 | 本轮变化 |
+| --- | --- | --- |
+| `wi-web` | 安装环境正常步骤 | 新增网页端读取、提示词与写回验收 |
+| `fail-web-method-whole` | 失败路径整体收场 | 新增方法缺失/无法复现的偏离处理 |
+| `fail-web-method-step-1` | 失败步骤 | 新增保留实际结果并交 X1 的说明 |
+
+实际调用固定检查器 `content/readability.ts` 的 `readerHash` 比较本轮 HEAD：新增 3 个单位，原有 55 个单位文字哈希均未变；另外已逐字段确认这 55 个完整对象，包括 `technical`，全部保持原样。本轮没有修改原有复述单位，也没有生成或补签读者通过记录；三个新单位仍需真实读者复述。
+
+总数为 54 个节点、14 条需求、51 条连接、4 条正常走查（23 步）、12 条失败路径（23 步及 12 段整体收场）、58 个复述单位、66 个验收器、12 条依据记录。验收器仍全部 `not-run`、运行记录为空，`versions: []` 保持不变。没有实际运行网页端包、X4 专项验收或本插件自身的 X1/运输流程。
+
+### 草稿检查与修正记录
+
+检查器提交仍为 `c05edcf51bc93f8be82180fd4ad28a250937f195`，源码工作树检查后无改动。先加载 `nodejs/24.16.0`，在检查器 `content/` 下运行草稿档；下列变量代指用户指定的工作树，实际调用传入 JSON 的绝对路径，公开文件不记录本机路径。
+
+```bash
+module load nodejs/24.16.0
+cd "$BLUEPRINT_WORKTREE/content"
+npx tsx check.mjs --stage draft --offline "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+```
+
+| 检查 | 时间（UTC） | 退出码 | 确定缺口 | 人工解释待审 | 未完成项 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 首轮离线 | `2026-11-12T17:03:20.792Z` | 1 | 4 | 92 | 3 |
+| 修正后离线 | `2026-11-12T17:04:28.248Z` | 2 | 0 | 92 | 3 |
+| 在线草稿 | `2026-11-12T17:05:12.900Z` | 2 | 0 | 92 | 2 |
+
+首轮四项缺口是新增走查缺对应连线、失败步骤与路线不一致、失败路线终点未指向发现组件，以及验收反例缺少本路径注入绑定。按既有格式补齐后复跑离线，缺口已清零；这些修正未增加设计决定或改变三个新单位的读者文字。
+
+修正后离线未完成项为离线模式未核实来源、缺 `readability-review.json`、缺 `questions.json`；在线只剩这两份读者记录缺失。退出码 2 不能记成完整通过，92 项证据解释仍待人工审查。没有待 D1 新增选择的事项，仍待规定关卡及真实网页端验收。
+
+新 JSON 的 SHA-256：
+
+```text
+3e24c2239779e344fb654ebb3994d2da4e2e0d43ff085c6ad35c59fefec7fd9f
+```
+
+合并稿来源引用使用本分支实际 HEAD `966d35aadf5e775c6f4cceb355edb5d2d6ee99a6` 加仓库内路径。本轮 JSON 未提交，没有自己的提交号，以上摘要标识当前未提交文件，不声称已存在于该提交中。只修改 JSON 并追加本说明，SPEC、MERGE_DECISIONS、流程文档和 A 原稿均未修改；未 commit、未 push、未切分支。新 JSON 和整份说明按用户指定正则公开信息自查，匹配数均为零。
