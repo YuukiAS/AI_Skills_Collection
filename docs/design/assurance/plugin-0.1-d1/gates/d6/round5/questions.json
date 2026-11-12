@@ -1,0 +1,3782 @@
+[
+  {
+    "id": "D6-R5-Q001",
+    "nodeId": "shared",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "shared.inputs; shared.interface.emptyCases; connections[c-shared-to-design,c-shared-to-delivery,c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q002",
+    "nodeId": "shared",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "shared.outputs; shared.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q003",
+    "nodeId": "shared",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "shared.authority; shared.interface.boundaries; shared.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q004",
+    "nodeId": "shared",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "shared.interface.emptyCases; shared.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q005",
+    "nodeId": "shared",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "shared.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q006",
+    "nodeId": "shared",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "shared.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q007",
+    "nodeId": "shared",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "shared.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q008",
+    "nodeId": "state",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "state.inputs; state.interface.emptyCases; connections[c-state-to-writer]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q009",
+    "nodeId": "state",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "state.outputs; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q010",
+    "nodeId": "state",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "state.authority; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q011",
+    "nodeId": "state",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "state.interface.emptyCases; state.interface.errors; state.terminal.retry; failurePaths[fail-write,fail-recovery]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q012",
+    "nodeId": "state",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "state.validators; state.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q013",
+    "nodeId": "state",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "state.terminal.retry; state.interface.errors; failurePaths[fail-write,fail-recovery]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q014",
+    "nodeId": "state",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "state.interface.boundaries; state.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q015",
+    "nodeId": "writer",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "writer.inputs; writer.interface.emptyCases; connections[c-state-to-writer,c-writer-to-dispatch]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q016",
+    "nodeId": "writer",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "writer.outputs; writer.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q017",
+    "nodeId": "writer",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "writer.authority; writer.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q018",
+    "nodeId": "writer",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "writer.interface.emptyCases; writer.interface.errors; writer.terminal.retry; failurePaths[fail-write]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q019",
+    "nodeId": "writer",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "writer.validators; writer.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q020",
+    "nodeId": "writer",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "writer.terminal.retry; writer.interface.errors; failurePaths[fail-write]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q021",
+    "nodeId": "writer",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "writer.interface.boundaries; writer.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q022",
+    "nodeId": "record-check",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "record-check.inputs; record-check.interface.emptyCases",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q023",
+    "nodeId": "record-check",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "record-check.outputs; record-check.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q024",
+    "nodeId": "record-check",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "record-check.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q025",
+    "nodeId": "record-check",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "record-check.interface.emptyCases; record-check.interface.errors; record-check.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q026",
+    "nodeId": "record-check",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "record-check.validators; record-check.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q027",
+    "nodeId": "record-check",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "record-check.terminal.retry; record-check.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q028",
+    "nodeId": "record-check",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "record-check.interface.boundaries; record-check.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q029",
+    "nodeId": "dispatch",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "dispatch.inputs; dispatch.interface.emptyCases; connections[c-writer-to-dispatch,c-dispatch-to-prompts]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q030",
+    "nodeId": "dispatch",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "dispatch.outputs; dispatch.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q031",
+    "nodeId": "dispatch",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "dispatch.authority; dispatch.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q032",
+    "nodeId": "dispatch",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "dispatch.interface.emptyCases; dispatch.interface.errors; dispatch.terminal.retry; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q033",
+    "nodeId": "dispatch",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "dispatch.validators; dispatch.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q034",
+    "nodeId": "dispatch",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "dispatch.terminal.retry; dispatch.interface.errors; failurePaths[fail-role]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q035",
+    "nodeId": "dispatch",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "dispatch.interface.boundaries; dispatch.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q036",
+    "nodeId": "prompts",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "prompts.inputs; prompts.interface.emptyCases; connections[c-dispatch-to-prompts,c-prompts-to-role-D2,c-prompts-to-role-D3,c-prompts-to-clarify]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q037",
+    "nodeId": "prompts",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "prompts.outputs; prompts.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q038",
+    "nodeId": "prompts",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "prompts.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q039",
+    "nodeId": "prompts",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "prompts.interface.emptyCases; prompts.interface.errors; prompts.terminal.retry; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q040",
+    "nodeId": "prompts",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "prompts.validators; prompts.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q041",
+    "nodeId": "prompts",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "prompts.terminal.retry; prompts.interface.errors; failurePaths[fail-role]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q042",
+    "nodeId": "prompts",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": null,
+    "gap": "写入边界存在互相冲突的有效规则：顶层 requirements 中 r-boundary.text 要求本次只在 design/assurance-plugins-0.1-merged 的 plugin-0.1-d1 目录更新且“不提交、不推送”，其 route 又明确指向 prompts 与 contract-authorization；但 prompts.terminal.mechanism 的通用派发模板要求先提交 WRITE_PROBE.md 并远端回读，实质结果也要先提交并回读，prompts.terminal.acceptance 同样把探针回读和写回作为完成条件。Blueprint 没有说明 r-boundary 已失效、仅属历史作者阶段，或何时由哪条规则优先，因此无法得到唯一写入行为。",
+    "impact": "真实执行者无法唯一判断应当提交并远端回读，还是严格禁止提交/推送；前者可能越过声明的边界，后者会使正常派发与验收无法完成，因而会直接阻塞可靠开工和结果验收。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q043",
+    "nodeId": "revision",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "revision.inputs; revision.interface.emptyCases; connections[c-deviation-to-revision,c-revision-to-role-D1,c-revision-to-metrics,c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q044",
+    "nodeId": "revision",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "revision.outputs; revision.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q045",
+    "nodeId": "revision",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "revision.authority; revision.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q046",
+    "nodeId": "revision",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "revision.interface.emptyCases; revision.interface.errors; revision.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q047",
+    "nodeId": "revision",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "revision.validators; revision.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q048",
+    "nodeId": "revision",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "revision.terminal.retry; revision.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q049",
+    "nodeId": "revision",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "revision.interface.boundaries; revision.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q050",
+    "nodeId": "metrics",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "metrics.inputs; metrics.interface.emptyCases; connections[c-revision-to-metrics,c-deviation-to-metrics]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q051",
+    "nodeId": "metrics",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "metrics.outputs; metrics.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q052",
+    "nodeId": "metrics",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "metrics.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q053",
+    "nodeId": "metrics",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "metrics.interface.emptyCases; metrics.interface.errors; metrics.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q054",
+    "nodeId": "metrics",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "metrics.validators; metrics.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q055",
+    "nodeId": "metrics",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "metrics.terminal.retry; metrics.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q056",
+    "nodeId": "metrics",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "metrics.interface.boundaries; metrics.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q057",
+    "nodeId": "design",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "design.inputs; design.interface.emptyCases; connections[c-shared-to-design,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q058",
+    "nodeId": "design",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "design.outputs; design.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q059",
+    "nodeId": "design",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "design.authority; design.interface.boundaries; design.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q060",
+    "nodeId": "design",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "design.interface.emptyCases; design.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q061",
+    "nodeId": "design",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "design.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q062",
+    "nodeId": "design",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "design.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q063",
+    "nodeId": "design",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "design.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q064",
+    "nodeId": "design-roles",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "design-roles.inputs; design-roles.interface.emptyCases",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q065",
+    "nodeId": "design-roles",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "design-roles.outputs; design-roles.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q066",
+    "nodeId": "design-roles",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "design-roles.authority; design-roles.interface.boundaries; design-roles.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q067",
+    "nodeId": "design-roles",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "design-roles.interface.emptyCases; design-roles.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q068",
+    "nodeId": "design-roles",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "design-roles.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q069",
+    "nodeId": "design-roles",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "design-roles.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q070",
+    "nodeId": "design-roles",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "design-roles.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q071",
+    "nodeId": "role-D1",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "role-D1.inputs; role-D1.interface.emptyCases; connections[c-role-D2-to-role-D1,c-role-D3-to-role-D1,c-role-D4-to-role-D1,c-role-D1-to-contract,c-revision-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q072",
+    "nodeId": "role-D1",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "role-D1.outputs; role-D1.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q073",
+    "nodeId": "role-D1",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "role-D1.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q074",
+    "nodeId": "role-D1",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "role-D1.interface.emptyCases; role-D1.interface.errors; role-D1.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q075",
+    "nodeId": "role-D1",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "role-D1.validators; role-D1.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q076",
+    "nodeId": "role-D1",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "role-D1.terminal.retry; role-D1.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q077",
+    "nodeId": "role-D1",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "role-D1.interface.boundaries; role-D1.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q078",
+    "nodeId": "role-D2",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "role-D2.inputs; role-D2.interface.emptyCases; connections[c-prompts-to-role-D2,c-clarify-to-role-D2,c-role-D2-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q079",
+    "nodeId": "role-D2",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "role-D2.outputs; role-D2.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q080",
+    "nodeId": "role-D2",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "role-D2.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q081",
+    "nodeId": "role-D2",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "role-D2.interface.emptyCases; role-D2.interface.errors; role-D2.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q082",
+    "nodeId": "role-D2",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "role-D2.validators; role-D2.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q083",
+    "nodeId": "role-D2",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "role-D2.terminal.retry; role-D2.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q084",
+    "nodeId": "role-D2",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "role-D2.interface.boundaries; role-D2.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q085",
+    "nodeId": "role-D3",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "role-D3.inputs; role-D3.interface.emptyCases; connections[c-prompts-to-role-D3,c-role-D3-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q086",
+    "nodeId": "role-D3",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "role-D3.outputs; role-D3.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q087",
+    "nodeId": "role-D3",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "role-D3.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q088",
+    "nodeId": "role-D3",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "role-D3.interface.emptyCases; role-D3.interface.errors; role-D3.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q089",
+    "nodeId": "role-D3",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "role-D3.validators; role-D3.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q090",
+    "nodeId": "role-D3",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "role-D3.terminal.retry; role-D3.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q091",
+    "nodeId": "role-D3",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "role-D3.interface.boundaries; role-D3.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q092",
+    "nodeId": "role-D4",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "role-D4.inputs; role-D4.interface.emptyCases; connections[c-role-D4-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q093",
+    "nodeId": "role-D4",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "role-D4.outputs; role-D4.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q094",
+    "nodeId": "role-D4",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "role-D4.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q095",
+    "nodeId": "role-D4",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "role-D4.interface.emptyCases; role-D4.interface.errors; role-D4.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q096",
+    "nodeId": "role-D4",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "role-D4.validators; role-D4.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q097",
+    "nodeId": "role-D4",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "role-D4.terminal.retry; role-D4.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q098",
+    "nodeId": "role-D4",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "role-D4.interface.boundaries; role-D4.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q099",
+    "nodeId": "role-D5",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "role-D5.inputs; role-D5.interface.emptyCases; connections[c-gates-to-role-D5,c-role-D5-to-gates,c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q100",
+    "nodeId": "role-D5",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "role-D5.outputs; role-D5.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q101",
+    "nodeId": "role-D5",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "role-D5.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q102",
+    "nodeId": "role-D5",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "role-D5.interface.emptyCases; role-D5.interface.errors; role-D5.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q103",
+    "nodeId": "role-D5",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "role-D5.validators; role-D5.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q104",
+    "nodeId": "role-D5",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "role-D5.terminal.retry; role-D5.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q105",
+    "nodeId": "role-D5",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "role-D5.interface.boundaries; role-D5.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q106",
+    "nodeId": "role-D6",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "role-D6.inputs; role-D6.interface.emptyCases; connections[c-gates-to-role-D6,c-role-D6-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q107",
+    "nodeId": "role-D6",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "role-D6.outputs; role-D6.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q108",
+    "nodeId": "role-D6",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "role-D6.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q109",
+    "nodeId": "role-D6",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "role-D6.interface.emptyCases; role-D6.interface.errors; role-D6.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q110",
+    "nodeId": "role-D6",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "role-D6.validators; role-D6.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q111",
+    "nodeId": "role-D6",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "role-D6.terminal.retry; role-D6.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q112",
+    "nodeId": "role-D6",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "role-D6.interface.boundaries; role-D6.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q113",
+    "nodeId": "role-D7",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "role-D7.inputs; role-D7.interface.emptyCases; connections[c-gates-to-role-D7,c-role-D7-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q114",
+    "nodeId": "role-D7",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "role-D7.outputs; role-D7.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q115",
+    "nodeId": "role-D7",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "role-D7.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q116",
+    "nodeId": "role-D7",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "role-D7.interface.emptyCases; role-D7.interface.errors; role-D7.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q117",
+    "nodeId": "role-D7",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "role-D7.validators; role-D7.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q118",
+    "nodeId": "role-D7",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "role-D7.terminal.retry; role-D7.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q119",
+    "nodeId": "role-D7",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "role-D7.interface.boundaries; role-D7.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q120",
+    "nodeId": "role-D8",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "role-D8.inputs; role-D8.interface.emptyCases; connections[c-gates-to-role-D8,c-role-D8-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q121",
+    "nodeId": "role-D8",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "role-D8.outputs; role-D8.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q122",
+    "nodeId": "role-D8",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "role-D8.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q123",
+    "nodeId": "role-D8",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "role-D8.interface.emptyCases; role-D8.interface.errors; role-D8.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q124",
+    "nodeId": "role-D8",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "role-D8.validators; role-D8.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q125",
+    "nodeId": "role-D8",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "role-D8.terminal.retry; role-D8.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q126",
+    "nodeId": "role-D8",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "role-D8.interface.boundaries; role-D8.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q127",
+    "nodeId": "clarify",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "clarify.inputs; clarify.interface.emptyCases; connections[c-prompts-to-clarify,c-clarify-to-role-D2]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q128",
+    "nodeId": "clarify",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "clarify.outputs; clarify.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q129",
+    "nodeId": "clarify",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "clarify.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q130",
+    "nodeId": "clarify",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "clarify.interface.emptyCases; clarify.interface.errors; clarify.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q131",
+    "nodeId": "clarify",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "clarify.validators; clarify.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q132",
+    "nodeId": "clarify",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "clarify.terminal.retry; clarify.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q133",
+    "nodeId": "clarify",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "clarify.interface.boundaries; clarify.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q134",
+    "nodeId": "gates",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "gates.inputs; gates.interface.emptyCases; connections[c-contract-to-gates,c-gates-to-role-D5,c-gates-to-role-D6,c-gates-to-role-D7,c-gates-to-role-D8,c-role-D5-to-gates,c-role-D6-to-gates,c-role-D7-to-gates,c-role-D8-to-gates,c-gates-to-freeze]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q135",
+    "nodeId": "gates",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "gates.outputs; gates.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q136",
+    "nodeId": "gates",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "gates.authority; gates.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q137",
+    "nodeId": "gates",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "gates.interface.emptyCases; gates.interface.errors; gates.terminal.retry; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q138",
+    "nodeId": "gates",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "gates.validators; gates.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q139",
+    "nodeId": "gates",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "gates.terminal.retry; gates.interface.errors; failurePaths[fail-checker]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q140",
+    "nodeId": "gates",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "gates.interface.boundaries; gates.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q141",
+    "nodeId": "contract",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "contract.inputs; contract.interface.emptyCases; connections[c-role-D1-to-contract,c-contract-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q142",
+    "nodeId": "contract",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "contract.outputs; contract.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q143",
+    "nodeId": "contract",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "contract.authority; contract.interface.boundaries; contract.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q144",
+    "nodeId": "contract",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "contract.interface.emptyCases; contract.interface.errors; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q145",
+    "nodeId": "contract",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "contract.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q146",
+    "nodeId": "contract",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "contract.interface.errors; failurePaths[fail-checker]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q147",
+    "nodeId": "contract",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "contract.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q148",
+    "nodeId": "contract-capability",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "contract-capability.inputs; contract-capability.interface.emptyCases",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q149",
+    "nodeId": "contract-capability",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "contract-capability.outputs; contract-capability.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q150",
+    "nodeId": "contract-capability",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "contract-capability.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q151",
+    "nodeId": "contract-capability",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "contract-capability.interface.emptyCases; contract-capability.interface.errors; contract-capability.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q152",
+    "nodeId": "contract-capability",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "contract-capability.validators; contract-capability.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q153",
+    "nodeId": "contract-capability",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "contract-capability.terminal.retry; contract-capability.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q154",
+    "nodeId": "contract-capability",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "contract-capability.interface.boundaries; contract-capability.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q155",
+    "nodeId": "contract-entry",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "contract-entry.inputs; contract-entry.interface.emptyCases",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q156",
+    "nodeId": "contract-entry",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "contract-entry.outputs; contract-entry.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q157",
+    "nodeId": "contract-entry",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "contract-entry.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q158",
+    "nodeId": "contract-entry",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "contract-entry.interface.emptyCases; contract-entry.interface.errors; contract-entry.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q159",
+    "nodeId": "contract-entry",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "contract-entry.validators; contract-entry.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q160",
+    "nodeId": "contract-entry",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "contract-entry.terminal.retry; contract-entry.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q161",
+    "nodeId": "contract-entry",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "contract-entry.interface.boundaries; contract-entry.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q162",
+    "nodeId": "contract-outcomes",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "contract-outcomes.inputs; contract-outcomes.interface.emptyCases",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q163",
+    "nodeId": "contract-outcomes",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "contract-outcomes.outputs; contract-outcomes.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q164",
+    "nodeId": "contract-outcomes",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "contract-outcomes.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q165",
+    "nodeId": "contract-outcomes",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "contract-outcomes.interface.emptyCases; contract-outcomes.interface.errors; contract-outcomes.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q166",
+    "nodeId": "contract-outcomes",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "contract-outcomes.validators; contract-outcomes.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q167",
+    "nodeId": "contract-outcomes",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "contract-outcomes.terminal.retry; contract-outcomes.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q168",
+    "nodeId": "contract-outcomes",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "contract-outcomes.interface.boundaries; contract-outcomes.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q169",
+    "nodeId": "contract-fidelity",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "contract-fidelity.inputs; contract-fidelity.interface.emptyCases",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q170",
+    "nodeId": "contract-fidelity",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "contract-fidelity.outputs; contract-fidelity.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q171",
+    "nodeId": "contract-fidelity",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "contract-fidelity.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q172",
+    "nodeId": "contract-fidelity",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "contract-fidelity.interface.emptyCases; contract-fidelity.interface.errors; contract-fidelity.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q173",
+    "nodeId": "contract-fidelity",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "contract-fidelity.validators; contract-fidelity.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q174",
+    "nodeId": "contract-fidelity",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "contract-fidelity.terminal.retry; contract-fidelity.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q175",
+    "nodeId": "contract-fidelity",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "contract-fidelity.interface.boundaries; contract-fidelity.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q176",
+    "nodeId": "contract-forbidden",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "contract-forbidden.inputs; contract-forbidden.interface.emptyCases",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q177",
+    "nodeId": "contract-forbidden",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "contract-forbidden.outputs; contract-forbidden.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q178",
+    "nodeId": "contract-forbidden",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "contract-forbidden.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q179",
+    "nodeId": "contract-forbidden",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "contract-forbidden.interface.emptyCases; contract-forbidden.interface.errors; contract-forbidden.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q180",
+    "nodeId": "contract-forbidden",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "contract-forbidden.validators; contract-forbidden.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q181",
+    "nodeId": "contract-forbidden",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "contract-forbidden.terminal.retry; contract-forbidden.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q182",
+    "nodeId": "contract-forbidden",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "contract-forbidden.interface.boundaries; contract-forbidden.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q183",
+    "nodeId": "contract-regression",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "contract-regression.inputs; contract-regression.interface.emptyCases",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q184",
+    "nodeId": "contract-regression",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "contract-regression.outputs; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q185",
+    "nodeId": "contract-regression",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q186",
+    "nodeId": "contract-regression",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "contract-regression.interface.emptyCases; contract-regression.interface.errors; contract-regression.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q187",
+    "nodeId": "contract-regression",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "contract-regression.validators; contract-regression.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q188",
+    "nodeId": "contract-regression",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "contract-regression.terminal.retry; contract-regression.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q189",
+    "nodeId": "contract-regression",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "contract-regression.interface.boundaries; contract-regression.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q190",
+    "nodeId": "contract-controls",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "contract-controls.inputs; contract-controls.interface.emptyCases",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q191",
+    "nodeId": "contract-controls",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "contract-controls.outputs; contract-controls.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q192",
+    "nodeId": "contract-controls",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "contract-controls.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q193",
+    "nodeId": "contract-controls",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "contract-controls.interface.emptyCases; contract-controls.interface.errors; contract-controls.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q194",
+    "nodeId": "contract-controls",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "contract-controls.validators; contract-controls.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q195",
+    "nodeId": "contract-controls",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "contract-controls.terminal.retry; contract-controls.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q196",
+    "nodeId": "contract-controls",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "contract-controls.interface.boundaries; contract-controls.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q197",
+    "nodeId": "contract-changes",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "contract-changes.inputs; contract-changes.interface.emptyCases",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q198",
+    "nodeId": "contract-changes",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "contract-changes.outputs; contract-changes.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q199",
+    "nodeId": "contract-changes",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "contract-changes.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q200",
+    "nodeId": "contract-changes",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "contract-changes.interface.emptyCases; contract-changes.interface.errors; contract-changes.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q201",
+    "nodeId": "contract-changes",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "contract-changes.validators; contract-changes.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q202",
+    "nodeId": "contract-changes",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "contract-changes.terminal.retry; contract-changes.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q203",
+    "nodeId": "contract-changes",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "contract-changes.interface.boundaries; contract-changes.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q204",
+    "nodeId": "contract-authorization",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "contract-authorization.inputs; contract-authorization.interface.emptyCases",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q205",
+    "nodeId": "contract-authorization",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "contract-authorization.outputs; contract-authorization.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q206",
+    "nodeId": "contract-authorization",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "contract-authorization.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q207",
+    "nodeId": "contract-authorization",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "contract-authorization.interface.emptyCases; contract-authorization.interface.errors; contract-authorization.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q208",
+    "nodeId": "contract-authorization",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "contract-authorization.validators; contract-authorization.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q209",
+    "nodeId": "contract-authorization",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "contract-authorization.terminal.retry; contract-authorization.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q210",
+    "nodeId": "contract-authorization",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "contract-authorization.interface.boundaries; contract-authorization.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q211",
+    "nodeId": "freeze",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "freeze.inputs; freeze.interface.emptyCases; connections[c-gates-to-freeze,c-freeze-to-role-X1]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q212",
+    "nodeId": "freeze",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "freeze.outputs; freeze.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q213",
+    "nodeId": "freeze",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "freeze.authority; freeze.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q214",
+    "nodeId": "freeze",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "freeze.interface.emptyCases; freeze.interface.errors; freeze.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q215",
+    "nodeId": "freeze",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "freeze.validators; freeze.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q216",
+    "nodeId": "freeze",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "freeze.terminal.retry; freeze.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q217",
+    "nodeId": "freeze",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "freeze.interface.boundaries; freeze.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q218",
+    "nodeId": "q-checker",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "q-checker.inputs; q-checker.interface.emptyCases; connections[c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q219",
+    "nodeId": "q-checker",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "q-checker.outputs; q-checker.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q220",
+    "nodeId": "q-checker",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "q-checker.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q221",
+    "nodeId": "q-checker",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "q-checker.interface.emptyCases; q-checker.interface.errors; q-checker.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q222",
+    "nodeId": "q-checker",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "q-checker.validators; q-checker.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q223",
+    "nodeId": "q-checker",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "q-checker.terminal.retry; q-checker.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q224",
+    "nodeId": "q-checker",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "q-checker.interface.boundaries; q-checker.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q225",
+    "nodeId": "q-inheritance",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "q-inheritance.inputs; q-inheritance.interface.emptyCases; connections[c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q226",
+    "nodeId": "q-inheritance",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "q-inheritance.outputs; q-inheritance.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q227",
+    "nodeId": "q-inheritance",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "q-inheritance.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q228",
+    "nodeId": "q-inheritance",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "q-inheritance.interface.emptyCases; q-inheritance.interface.errors; q-inheritance.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q229",
+    "nodeId": "q-inheritance",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "q-inheritance.validators; q-inheritance.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q230",
+    "nodeId": "q-inheritance",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "q-inheritance.terminal.retry; q-inheritance.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q231",
+    "nodeId": "q-inheritance",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "q-inheritance.interface.boundaries; q-inheritance.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q232",
+    "nodeId": "delivery",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "delivery.inputs; delivery.interface.emptyCases; connections[c-shared-to-delivery,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q233",
+    "nodeId": "delivery",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "delivery.outputs; delivery.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q234",
+    "nodeId": "delivery",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "delivery.authority; delivery.interface.boundaries; delivery.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q235",
+    "nodeId": "delivery",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "delivery.interface.emptyCases; delivery.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q236",
+    "nodeId": "delivery",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "delivery.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q237",
+    "nodeId": "delivery",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "delivery.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q238",
+    "nodeId": "delivery",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "delivery.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q239",
+    "nodeId": "delivery-roles",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "delivery-roles.inputs; delivery-roles.interface.emptyCases",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q240",
+    "nodeId": "delivery-roles",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "delivery-roles.outputs; delivery-roles.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q241",
+    "nodeId": "delivery-roles",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "delivery-roles.authority; delivery-roles.interface.boundaries; delivery-roles.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q242",
+    "nodeId": "delivery-roles",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "delivery-roles.interface.emptyCases; delivery-roles.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q243",
+    "nodeId": "delivery-roles",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "delivery-roles.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q244",
+    "nodeId": "delivery-roles",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "delivery-roles.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q245",
+    "nodeId": "delivery-roles",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "delivery-roles.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q246",
+    "nodeId": "role-X1",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "role-X1.inputs; role-X1.interface.emptyCases; connections[c-freeze-to-role-X1,c-role-X1-to-role-X2,c-role-X1-to-role-X3]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q247",
+    "nodeId": "role-X1",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "role-X1.outputs; role-X1.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q248",
+    "nodeId": "role-X1",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "role-X1.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q249",
+    "nodeId": "role-X1",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "role-X1.interface.emptyCases; role-X1.interface.errors; role-X1.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q250",
+    "nodeId": "role-X1",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "role-X1.validators; role-X1.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q251",
+    "nodeId": "role-X1",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "role-X1.terminal.retry; role-X1.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q252",
+    "nodeId": "role-X1",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "role-X1.interface.boundaries; role-X1.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q253",
+    "nodeId": "role-X2",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "role-X2.inputs; role-X2.interface.emptyCases; connections[c-role-X1-to-role-X2,c-role-X2-to-calibration,c-role-X2-to-candidate,c-role-X2-to-deviation]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q254",
+    "nodeId": "role-X2",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "role-X2.outputs; role-X2.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q255",
+    "nodeId": "role-X2",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "role-X2.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q256",
+    "nodeId": "role-X2",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "role-X2.interface.emptyCases; role-X2.interface.errors; role-X2.terminal.retry; failurePaths[fail-premise,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q257",
+    "nodeId": "role-X2",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "role-X2.validators; role-X2.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q258",
+    "nodeId": "role-X2",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "role-X2.terminal.retry; role-X2.interface.errors; failurePaths[fail-premise,fail-calibration]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q259",
+    "nodeId": "role-X2",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "role-X2.interface.boundaries; role-X2.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q260",
+    "nodeId": "role-X3",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "role-X3.inputs; role-X3.interface.emptyCases; connections[c-role-X1-to-role-X3,c-role-X3-to-calibration]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q261",
+    "nodeId": "role-X3",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "role-X3.outputs; role-X3.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q262",
+    "nodeId": "role-X3",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "role-X3.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q263",
+    "nodeId": "role-X3",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "role-X3.interface.emptyCases; role-X3.interface.errors; role-X3.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q264",
+    "nodeId": "role-X3",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "role-X3.validators; role-X3.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q265",
+    "nodeId": "role-X3",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "role-X3.terminal.retry; role-X3.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q266",
+    "nodeId": "role-X3",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "role-X3.interface.boundaries; role-X3.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q267",
+    "nodeId": "role-X4",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "role-X4.inputs; role-X4.interface.emptyCases; connections[c-role-X4-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q268",
+    "nodeId": "role-X4",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "role-X4.outputs; role-X4.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q269",
+    "nodeId": "role-X4",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "role-X4.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q270",
+    "nodeId": "role-X4",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "role-X4.interface.emptyCases; role-X4.interface.errors; role-X4.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q271",
+    "nodeId": "role-X4",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "role-X4.validators; role-X4.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q272",
+    "nodeId": "role-X4",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "role-X4.terminal.retry; role-X4.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q273",
+    "nodeId": "role-X4",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "role-X4.interface.boundaries; role-X4.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q274",
+    "nodeId": "role-X5",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "role-X5.inputs; role-X5.interface.emptyCases; connections[c-role-X5-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q275",
+    "nodeId": "role-X5",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "role-X5.outputs; role-X5.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q276",
+    "nodeId": "role-X5",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "role-X5.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q277",
+    "nodeId": "role-X5",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "role-X5.interface.emptyCases; role-X5.interface.errors; role-X5.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q278",
+    "nodeId": "role-X5",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "role-X5.validators; role-X5.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q279",
+    "nodeId": "role-X5",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "role-X5.terminal.retry; role-X5.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q280",
+    "nodeId": "role-X5",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "role-X5.interface.boundaries; role-X5.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q281",
+    "nodeId": "acceptance",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "acceptance.inputs; acceptance.interface.emptyCases; connections[c-calibration-to-acceptance,c-acceptance-to-candidate]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q282",
+    "nodeId": "acceptance",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "acceptance.outputs; acceptance.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q283",
+    "nodeId": "acceptance",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "acceptance.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q284",
+    "nodeId": "acceptance",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "acceptance.interface.emptyCases; acceptance.interface.errors; acceptance.terminal.retry; failurePaths[fail-semantic]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q285",
+    "nodeId": "acceptance",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "acceptance.validators; acceptance.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q286",
+    "nodeId": "acceptance",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "acceptance.terminal.retry; acceptance.interface.errors; failurePaths[fail-semantic]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q287",
+    "nodeId": "acceptance",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "acceptance.interface.boundaries; acceptance.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q288",
+    "nodeId": "calibration",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "calibration.inputs; calibration.interface.emptyCases; connections[c-role-X2-to-calibration,c-role-X3-to-calibration,c-calibration-to-acceptance]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q289",
+    "nodeId": "calibration",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "calibration.outputs; calibration.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q290",
+    "nodeId": "calibration",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "calibration.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q291",
+    "nodeId": "calibration",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "calibration.interface.emptyCases; calibration.interface.errors; calibration.terminal.retry; failurePaths[fail-semantic,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q292",
+    "nodeId": "calibration",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "calibration.validators; calibration.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q293",
+    "nodeId": "calibration",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "calibration.terminal.retry; calibration.interface.errors; failurePaths[fail-semantic,fail-calibration]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q294",
+    "nodeId": "calibration",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "calibration.interface.boundaries; calibration.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q295",
+    "nodeId": "candidate",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "candidate.inputs; candidate.interface.emptyCases; connections[c-acceptance-to-candidate,c-role-X2-to-candidate,c-candidate-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q296",
+    "nodeId": "candidate",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "candidate.outputs; candidate.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q297",
+    "nodeId": "candidate",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "candidate.authority; candidate.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q298",
+    "nodeId": "candidate",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "candidate.interface.emptyCases; candidate.interface.errors; candidate.terminal.retry; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q299",
+    "nodeId": "candidate",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "candidate.validators; candidate.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q300",
+    "nodeId": "candidate",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "candidate.terminal.retry; candidate.interface.errors; failurePaths[fail-candidate,fail-missing]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q301",
+    "nodeId": "candidate",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "candidate.interface.boundaries; candidate.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q302",
+    "nodeId": "evidence",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "evidence.inputs; evidence.interface.emptyCases; connections[c-candidate-to-evidence,c-role-X4-to-evidence,c-role-X5-to-evidence,c-evidence-to-sign]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q303",
+    "nodeId": "evidence",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "evidence.outputs; evidence.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q304",
+    "nodeId": "evidence",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "evidence.authority; evidence.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q305",
+    "nodeId": "evidence",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "evidence.interface.emptyCases; evidence.interface.errors; evidence.terminal.retry; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q306",
+    "nodeId": "evidence",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "evidence.validators; evidence.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q307",
+    "nodeId": "evidence",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "evidence.terminal.retry; evidence.interface.errors; failurePaths[fail-candidate,fail-missing]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q308",
+    "nodeId": "evidence",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "evidence.interface.boundaries; evidence.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q309",
+    "nodeId": "deviation",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "deviation.inputs; deviation.interface.emptyCases; connections[c-role-X2-to-deviation,c-deviation-to-revision,c-deviation-to-metrics,c-web-later-to-deviation]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q310",
+    "nodeId": "deviation",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "deviation.outputs; deviation.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q311",
+    "nodeId": "deviation",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "deviation.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q312",
+    "nodeId": "deviation",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "deviation.interface.emptyCases; deviation.interface.errors; deviation.terminal.retry; failurePaths[fail-premise]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q313",
+    "nodeId": "deviation",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "deviation.validators; deviation.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q314",
+    "nodeId": "deviation",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "deviation.terminal.retry; deviation.interface.errors; failurePaths[fail-premise]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q315",
+    "nodeId": "deviation",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "deviation.interface.boundaries; deviation.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q316",
+    "nodeId": "sign",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "sign.inputs; sign.interface.emptyCases; connections[c-evidence-to-sign]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q317",
+    "nodeId": "sign",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "sign.outputs; sign.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q318",
+    "nodeId": "sign",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "sign.authority; sign.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q319",
+    "nodeId": "sign",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "sign.interface.emptyCases; sign.interface.errors; sign.terminal.retry; failurePaths[fail-candidate,fail-revocation]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q320",
+    "nodeId": "sign",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "sign.validators; sign.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q321",
+    "nodeId": "sign",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "sign.terminal.retry; sign.interface.errors; failurePaths[fail-candidate,fail-revocation]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q322",
+    "nodeId": "sign",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "sign.interface.boundaries; sign.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q323",
+    "nodeId": "packaging",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "packaging.inputs; packaging.interface.emptyCases; connections[c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q324",
+    "nodeId": "packaging",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "packaging.outputs; packaging.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q325",
+    "nodeId": "packaging",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "packaging.authority; packaging.interface.boundaries; packaging.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q326",
+    "nodeId": "packaging",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "packaging.interface.emptyCases; packaging.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q327",
+    "nodeId": "packaging",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "packaging.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q328",
+    "nodeId": "packaging",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "packaging.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q329",
+    "nodeId": "packaging",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "packaging.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q330",
+    "nodeId": "source-layout",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "source-layout.inputs; source-layout.interface.emptyCases; connections[c-source-layout-to-planning-entry]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q331",
+    "nodeId": "source-layout",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "source-layout.outputs; source-layout.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q332",
+    "nodeId": "source-layout",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "source-layout.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q333",
+    "nodeId": "source-layout",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "source-layout.interface.emptyCases; source-layout.interface.errors; source-layout.terminal.retry; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q334",
+    "nodeId": "source-layout",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "source-layout.validators; source-layout.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q335",
+    "nodeId": "source-layout",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "source-layout.terminal.retry; source-layout.interface.errors; failurePaths[fail-package]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q336",
+    "nodeId": "source-layout",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "source-layout.interface.boundaries; source-layout.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q337",
+    "nodeId": "planning-entry",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "planning-entry.inputs; planning-entry.interface.emptyCases; connections[c-source-layout-to-planning-entry,c-planning-entry-to-execution-package]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q338",
+    "nodeId": "planning-entry",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "planning-entry.outputs; planning-entry.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q339",
+    "nodeId": "planning-entry",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "planning-entry.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q340",
+    "nodeId": "planning-entry",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "planning-entry.interface.emptyCases; planning-entry.interface.errors; planning-entry.terminal.retry; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q341",
+    "nodeId": "planning-entry",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "planning-entry.validators; planning-entry.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q342",
+    "nodeId": "planning-entry",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "planning-entry.terminal.retry; planning-entry.interface.errors; failurePaths[fail-package]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q343",
+    "nodeId": "planning-entry",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "planning-entry.interface.boundaries; planning-entry.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q344",
+    "nodeId": "execution-package",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "execution-package.inputs; execution-package.interface.emptyCases; connections[c-planning-entry-to-execution-package,c-execution-package-to-capability-check,c-q-capacity-to-execution-package]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q345",
+    "nodeId": "execution-package",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "execution-package.outputs; execution-package.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q346",
+    "nodeId": "execution-package",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "execution-package.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q347",
+    "nodeId": "execution-package",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "execution-package.interface.emptyCases; execution-package.interface.errors; execution-package.terminal.retry; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q348",
+    "nodeId": "execution-package",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "execution-package.validators; execution-package.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q349",
+    "nodeId": "execution-package",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "execution-package.terminal.retry; execution-package.interface.errors; failurePaths[fail-package]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q350",
+    "nodeId": "execution-package",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "execution-package.interface.boundaries; execution-package.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q351",
+    "nodeId": "minimum",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "minimum.inputs; minimum.interface.emptyCases",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q352",
+    "nodeId": "minimum",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "minimum.outputs; minimum.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q353",
+    "nodeId": "minimum",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "minimum.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q354",
+    "nodeId": "minimum",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "minimum.interface.emptyCases; minimum.interface.errors; minimum.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q355",
+    "nodeId": "minimum",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "minimum.validators; minimum.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q356",
+    "nodeId": "minimum",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "minimum.terminal.retry; minimum.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q357",
+    "nodeId": "minimum",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "minimum.interface.boundaries; minimum.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q358",
+    "nodeId": "capability-check",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "capability-check.inputs; capability-check.interface.emptyCases; connections[c-execution-package-to-capability-check,c-web-later-to-capability-check,c-capability-check-to-web-later]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q359",
+    "nodeId": "capability-check",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "capability-check.outputs; capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q360",
+    "nodeId": "capability-check",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q361",
+    "nodeId": "capability-check",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "capability-check.interface.emptyCases; capability-check.interface.errors; capability-check.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q362",
+    "nodeId": "capability-check",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "capability-check.validators; capability-check.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q363",
+    "nodeId": "capability-check",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "capability-check.terminal.retry; capability-check.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q364",
+    "nodeId": "capability-check",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "capability-check.interface.boundaries; capability-check.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q365",
+    "nodeId": "web-later",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "web-later.inputs; web-later.interface.emptyCases; connections[c-web-later-to-capability-check,c-web-later-to-deviation,c-capability-check-to-web-later]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q366",
+    "nodeId": "web-later",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "web-later.outputs; web-later.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q367",
+    "nodeId": "web-later",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "web-later.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q368",
+    "nodeId": "web-later",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "web-later.interface.emptyCases; web-later.interface.errors; web-later.terminal.retry; failurePaths[fail-web-method]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q369",
+    "nodeId": "web-later",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "web-later.validators; web-later.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q370",
+    "nodeId": "web-later",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "web-later.terminal.retry; web-later.interface.errors; failurePaths[fail-web-method]; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q371",
+    "nodeId": "web-later",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "web-later.interface.boundaries; web-later.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q372",
+    "nodeId": "q-capacity",
+    "question": "用户怎样进入这一步，需要什么输入？",
+    "answerLocation": "q-capacity.inputs; q-capacity.interface.emptyCases; connections[c-q-capacity-to-execution-package]",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q373",
+    "nodeId": "q-capacity",
+    "question": "这一步产出什么，交给谁？",
+    "answerLocation": "q-capacity.outputs; q-capacity.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q374",
+    "nodeId": "q-capacity",
+    "question": "谁拥有这一步的决定权，其他角色不能替代什么？",
+    "answerLocation": "q-capacity.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q375",
+    "nodeId": "q-capacity",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "q-capacity.interface.emptyCases; q-capacity.interface.errors; q-capacity.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q376",
+    "nodeId": "q-capacity",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "q-capacity.validators; q-capacity.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q377",
+    "nodeId": "q-capacity",
+    "question": "中断、结果不明或状态异常后怎样恢复？",
+    "answerLocation": "q-capacity.terminal.retry; q-capacity.interface.errors; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R5-Q378",
+    "nodeId": "q-capacity",
+    "question": "这一步是否会使已有能力、旧功能、已有插件或既有职责退化，Blueprint 如何防止？",
+    "answerLocation": "q-capacity.interface.boundaries; q-capacity.terminal.acceptance; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出可直接定位的规则；本项不会单独造成用户卡住、误解、无法可靠开工或无法验收。",
+    "blocking": false,
+    "owner": "D1"
+  }
+]
