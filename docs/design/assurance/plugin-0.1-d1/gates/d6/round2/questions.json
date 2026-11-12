@@ -1,0 +1,3782 @@
+[
+  {
+    "id": "shared-entry",
+    "nodeId": "shared",
+    "question": "我实际怎么进入“共用任务协议”，它需要什么输入？",
+    "answerLocation": "nodes[id=shared].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "shared-output",
+    "nodeId": "shared",
+    "question": "“共用任务协议”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=shared].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "shared-authority",
+    "nodeId": "shared",
+    "question": "“共用任务协议”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=shared].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "shared-failure",
+    "nodeId": "shared",
+    "question": "“共用任务协议”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=shared].interface.emptyCases; nodes[id=shared].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "shared-acceptance",
+    "nodeId": "shared",
+    "question": "怎样才算“共用任务协议”完成并可被接受？",
+    "answerLocation": "nodes[id=shared].validators",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "shared-recovery",
+    "nodeId": "shared",
+    "question": "“共用任务协议”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "shared-regression",
+    "nodeId": "shared",
+    "question": "“共用任务协议”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=shared].validators",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "state-entry",
+    "nodeId": "state",
+    "question": "我实际怎么进入“单一当前状态”，它需要什么输入？",
+    "answerLocation": "nodes[id=state].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "state-output",
+    "nodeId": "state",
+    "question": "“单一当前状态”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=state].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "state-authority",
+    "nodeId": "state",
+    "question": "“单一当前状态”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=state].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "state-failure",
+    "nodeId": "state",
+    "question": "“单一当前状态”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=state].interface.emptyCases; nodes[id=state].interface.errors; failurePaths[id=fail-write]; failurePaths[id=fail-recovery]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "state-acceptance",
+    "nodeId": "state",
+    "question": "怎样才算“单一当前状态”完成并可被接受？",
+    "answerLocation": "nodes[id=state].validators; nodes[id=state].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "state-recovery",
+    "nodeId": "state",
+    "question": "“单一当前状态”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=state].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "state-regression",
+    "nodeId": "state",
+    "question": "“单一当前状态”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=state].validators; nodes[id=state].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "writer-entry",
+    "nodeId": "writer",
+    "question": "我实际怎么进入“写者交接与恢复”，它需要什么输入？",
+    "answerLocation": "nodes[id=writer].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "writer-output",
+    "nodeId": "writer",
+    "question": "“写者交接与恢复”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=writer].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "writer-authority",
+    "nodeId": "writer",
+    "question": "“写者交接与恢复”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=writer].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "writer-failure",
+    "nodeId": "writer",
+    "question": "“写者交接与恢复”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=writer].interface.emptyCases; nodes[id=writer].interface.errors; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "writer-acceptance",
+    "nodeId": "writer",
+    "question": "怎样才算“写者交接与恢复”完成并可被接受？",
+    "answerLocation": "nodes[id=writer].validators; nodes[id=writer].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "writer-recovery",
+    "nodeId": "writer",
+    "question": "“写者交接与恢复”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=writer].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "writer-regression",
+    "nodeId": "writer",
+    "question": "“写者交接与恢复”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=writer].validators; nodes[id=writer].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "record-check-entry",
+    "nodeId": "record-check",
+    "question": "我实际怎么进入“记录结构检查”，它需要什么输入？",
+    "answerLocation": "nodes[id=record-check].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "record-check-output",
+    "nodeId": "record-check",
+    "question": "“记录结构检查”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=record-check].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "record-check-authority",
+    "nodeId": "record-check",
+    "question": "“记录结构检查”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=record-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "record-check-failure",
+    "nodeId": "record-check",
+    "question": "“记录结构检查”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=record-check].interface.emptyCases; nodes[id=record-check].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "record-check-acceptance",
+    "nodeId": "record-check",
+    "question": "怎样才算“记录结构检查”完成并可被接受？",
+    "answerLocation": "nodes[id=record-check].validators; nodes[id=record-check].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "record-check-recovery",
+    "nodeId": "record-check",
+    "question": "“记录结构检查”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=record-check].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "record-check-regression",
+    "nodeId": "record-check",
+    "question": "“记录结构检查”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=record-check].validators; nodes[id=record-check].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "dispatch-entry",
+    "nodeId": "dispatch",
+    "question": "我实际怎么进入“按条件派发”，它需要什么输入？",
+    "answerLocation": "nodes[id=dispatch].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "dispatch-output",
+    "nodeId": "dispatch",
+    "question": "规划端负责人已经具备自动派发能力时，下一规划角色是否仍必须由用户手工转交提示词？",
+    "answerLocation": "nodes[id=dispatch].outputs; nodes[id=dispatch].terminal.mechanism §2.1a/§2.4; nodes[id=prompts].terminal.mechanism §4.2; requirements[id=r-dispatch]",
+    "gap": "Blueprint 将所有规划端角色无条件改成“用户每角色每轮转交一条提示词”。已认可流程只对“需要用户手动转交”的规划角色设这一上限；负责人能自动派发时应一次性批量派发。当前写法删掉了自动可用时的正常路径。",
+    "impact": "不阻止用户用手工方式继续，但会增加不必要的用户操作，并使具备自动派发能力的宿主也退化为人工搬运。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "dispatch-authority",
+    "nodeId": "dispatch",
+    "question": "“按条件派发”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=dispatch].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "dispatch-failure",
+    "nodeId": "dispatch",
+    "question": "“按条件派发”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=dispatch].interface.emptyCases; nodes[id=dispatch].interface.errors; failurePaths[id=fail-role]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "dispatch-acceptance",
+    "nodeId": "dispatch",
+    "question": "怎样才算“按条件派发”完成并可被接受？",
+    "answerLocation": "nodes[id=dispatch].validators; nodes[id=dispatch].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "dispatch-recovery",
+    "nodeId": "dispatch",
+    "question": "“按条件派发”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=dispatch].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "dispatch-regression",
+    "nodeId": "dispatch",
+    "question": "“按条件派发”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=dispatch].validators; nodes[id=dispatch].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "prompts-entry",
+    "nodeId": "prompts",
+    "question": "我实际怎么进入“自包含提示词”，它需要什么输入？",
+    "answerLocation": "nodes[id=prompts].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "prompts-output",
+    "nodeId": "prompts",
+    "question": "“自包含提示词”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=prompts].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "prompts-authority",
+    "nodeId": "prompts",
+    "question": "“自包含提示词”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=prompts].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "prompts-failure",
+    "nodeId": "prompts",
+    "question": "“自包含提示词”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=prompts].interface.emptyCases; nodes[id=prompts].interface.errors; failurePaths[id=fail-role]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "prompts-acceptance",
+    "nodeId": "prompts",
+    "question": "怎样才算“自包含提示词”完成并可被接受？",
+    "answerLocation": "nodes[id=prompts].validators; nodes[id=prompts].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "prompts-recovery",
+    "nodeId": "prompts",
+    "question": "“自包含提示词”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=prompts].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "prompts-regression",
+    "nodeId": "prompts",
+    "question": "“自包含提示词”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=prompts].validators; nodes[id=prompts].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "revision-entry",
+    "nodeId": "revision",
+    "question": "我实际怎么进入“修订与告知”，它需要什么输入？",
+    "answerLocation": "nodes[id=revision].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "revision-output",
+    "nodeId": "revision",
+    "question": "“修订与告知”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=revision].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "revision-authority",
+    "nodeId": "revision",
+    "question": "“修订与告知”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=revision].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "revision-failure",
+    "nodeId": "revision",
+    "question": "“修订与告知”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=revision].interface.emptyCases; nodes[id=revision].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "revision-acceptance",
+    "nodeId": "revision",
+    "question": "怎样才算“修订与告知”完成并可被接受？",
+    "answerLocation": "nodes[id=revision].validators; nodes[id=revision].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "revision-recovery",
+    "nodeId": "revision",
+    "question": "“修订与告知”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=revision].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "revision-regression",
+    "nodeId": "revision",
+    "question": "“修订与告知”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=revision].validators; nodes[id=revision].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "metrics-entry",
+    "nodeId": "metrics",
+    "question": "我实际怎么进入“三项衡量”，它需要什么输入？",
+    "answerLocation": "nodes[id=metrics].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "metrics-output",
+    "nodeId": "metrics",
+    "question": "“三项衡量”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=metrics].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "metrics-authority",
+    "nodeId": "metrics",
+    "question": "“三项衡量”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=metrics].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "metrics-failure",
+    "nodeId": "metrics",
+    "question": "“三项衡量”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=metrics].interface.emptyCases; nodes[id=metrics].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "metrics-acceptance",
+    "nodeId": "metrics",
+    "question": "怎样才算“三项衡量”完成并可被接受？",
+    "answerLocation": "nodes[id=metrics].validators; nodes[id=metrics].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "metrics-recovery",
+    "nodeId": "metrics",
+    "question": "“三项衡量”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=metrics].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "metrics-regression",
+    "nodeId": "metrics",
+    "question": "“三项衡量”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=metrics].validators; nodes[id=metrics].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "design-entry",
+    "nodeId": "design",
+    "question": "我实际怎么进入“设计保障”，它需要什么输入？",
+    "answerLocation": "nodes[id=design].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "design-output",
+    "nodeId": "design",
+    "question": "“设计保障”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=design].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "design-authority",
+    "nodeId": "design",
+    "question": "“设计保障”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=design].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "design-failure",
+    "nodeId": "design",
+    "question": "“设计保障”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=design].interface.emptyCases; nodes[id=design].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "design-acceptance",
+    "nodeId": "design",
+    "question": "怎样才算“设计保障”完成并可被接受？",
+    "answerLocation": "nodes[id=design].validators",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "design-recovery",
+    "nodeId": "design",
+    "question": "“设计保障”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "design-regression",
+    "nodeId": "design",
+    "question": "“设计保障”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=design].validators",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "design-roles-entry",
+    "nodeId": "design-roles",
+    "question": "我实际怎么进入“设计角色”，它需要什么输入？",
+    "answerLocation": "nodes[id=design-roles].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "design-roles-output",
+    "nodeId": "design-roles",
+    "question": "“设计角色”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=design-roles].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "design-roles-authority",
+    "nodeId": "design-roles",
+    "question": "“设计角色”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=design-roles].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "design-roles-failure",
+    "nodeId": "design-roles",
+    "question": "“设计角色”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=design-roles].interface.emptyCases; nodes[id=design-roles].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "design-roles-acceptance",
+    "nodeId": "design-roles",
+    "question": "怎样才算“设计角色”完成并可被接受？",
+    "answerLocation": "nodes[id=design-roles].validators",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "design-roles-recovery",
+    "nodeId": "design-roles",
+    "question": "“设计角色”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "design-roles-regression",
+    "nodeId": "design-roles",
+    "question": "“设计角色”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=design-roles].validators",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D1-entry",
+    "nodeId": "role-D1",
+    "question": "我实际怎么进入“D1：负责人”，它需要什么输入？",
+    "answerLocation": "nodes[id=role-D1].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D1-output",
+    "nodeId": "role-D1",
+    "question": "“D1：负责人”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=role-D1].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D1-authority",
+    "nodeId": "role-D1",
+    "question": "“D1：负责人”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=role-D1].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D1-failure",
+    "nodeId": "role-D1",
+    "question": "“D1：负责人”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=role-D1].interface.emptyCases; nodes[id=role-D1].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D1-acceptance",
+    "nodeId": "role-D1",
+    "question": "怎样才算“D1：负责人”完成并可被接受？",
+    "answerLocation": "nodes[id=role-D1].validators; nodes[id=role-D1].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D1-recovery",
+    "nodeId": "role-D1",
+    "question": "“D1：负责人”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=role-D1].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D1-regression",
+    "nodeId": "role-D1",
+    "question": "“D1：负责人”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=role-D1].validators; nodes[id=role-D1].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D2-entry",
+    "nodeId": "role-D2",
+    "question": "我实际怎么进入“D2：独立甲”，它需要什么输入？",
+    "answerLocation": "nodes[id=role-D2].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D2-output",
+    "nodeId": "role-D2",
+    "question": "“D2：独立甲”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=role-D2].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D2-authority",
+    "nodeId": "role-D2",
+    "question": "“D2：独立甲”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=role-D2].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D2-failure",
+    "nodeId": "role-D2",
+    "question": "“D2：独立甲”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=role-D2].interface.emptyCases; nodes[id=role-D2].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D2-acceptance",
+    "nodeId": "role-D2",
+    "question": "怎样才算“D2：独立甲”完成并可被接受？",
+    "answerLocation": "nodes[id=role-D2].validators; nodes[id=role-D2].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D2-recovery",
+    "nodeId": "role-D2",
+    "question": "“D2：独立甲”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=role-D2].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D2-regression",
+    "nodeId": "role-D2",
+    "question": "“D2：独立甲”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=role-D2].validators; nodes[id=role-D2].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D3-entry",
+    "nodeId": "role-D3",
+    "question": "我实际怎么进入“D3：独立乙”，它需要什么输入？",
+    "answerLocation": "nodes[id=role-D3].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D3-output",
+    "nodeId": "role-D3",
+    "question": "“D3：独立乙”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=role-D3].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D3-authority",
+    "nodeId": "role-D3",
+    "question": "“D3：独立乙”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=role-D3].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D3-failure",
+    "nodeId": "role-D3",
+    "question": "“D3：独立乙”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=role-D3].interface.emptyCases; nodes[id=role-D3].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D3-acceptance",
+    "nodeId": "role-D3",
+    "question": "怎样才算“D3：独立乙”完成并可被接受？",
+    "answerLocation": "nodes[id=role-D3].validators; nodes[id=role-D3].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D3-recovery",
+    "nodeId": "role-D3",
+    "question": "“D3：独立乙”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=role-D3].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D3-regression",
+    "nodeId": "role-D3",
+    "question": "“D3：独立乙”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=role-D3].validators; nodes[id=role-D3].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D4-entry",
+    "nodeId": "role-D4",
+    "question": "我实际怎么进入“D4：现实核查”，它需要什么输入？",
+    "answerLocation": "nodes[id=role-D4].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D4-output",
+    "nodeId": "role-D4",
+    "question": "“D4：现实核查”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=role-D4].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D4-authority",
+    "nodeId": "role-D4",
+    "question": "“D4：现实核查”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=role-D4].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D4-failure",
+    "nodeId": "role-D4",
+    "question": "“D4：现实核查”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=role-D4].interface.emptyCases; nodes[id=role-D4].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D4-acceptance",
+    "nodeId": "role-D4",
+    "question": "怎样才算“D4：现实核查”完成并可被接受？",
+    "answerLocation": "nodes[id=role-D4].validators; nodes[id=role-D4].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D4-recovery",
+    "nodeId": "role-D4",
+    "question": "“D4：现实核查”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=role-D4].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D4-regression",
+    "nodeId": "role-D4",
+    "question": "“D4：现实核查”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=role-D4].validators; nodes[id=role-D4].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D5-entry",
+    "nodeId": "role-D5",
+    "question": "我实际怎么进入“D5：格式检查”，它需要什么输入？",
+    "answerLocation": "nodes[id=role-D5].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D5-output",
+    "nodeId": "role-D5",
+    "question": "“D5：格式检查”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=role-D5].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D5-authority",
+    "nodeId": "role-D5",
+    "question": "“D5：格式检查”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=role-D5].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D5-failure",
+    "nodeId": "role-D5",
+    "question": "“D5：格式检查”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=role-D5].interface.emptyCases; nodes[id=role-D5].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D5-acceptance",
+    "nodeId": "role-D5",
+    "question": "怎样才算“D5：格式检查”完成并可被接受？",
+    "answerLocation": "nodes[id=role-D5].validators; nodes[id=role-D5].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D5-recovery",
+    "nodeId": "role-D5",
+    "question": "“D5：格式检查”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=role-D5].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D5-regression",
+    "nodeId": "role-D5",
+    "question": "“D5：格式检查”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=role-D5].validators; nodes[id=role-D5].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D6-entry",
+    "nodeId": "role-D6",
+    "question": "我实际怎么进入“D6：用户追问”，它需要什么输入？",
+    "answerLocation": "nodes[id=role-D6].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D6-output",
+    "nodeId": "role-D6",
+    "question": "“D6：用户追问”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=role-D6].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D6-authority",
+    "nodeId": "role-D6",
+    "question": "“D6：用户追问”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=role-D6].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D6-failure",
+    "nodeId": "role-D6",
+    "question": "“D6：用户追问”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=role-D6].interface.emptyCases; nodes[id=role-D6].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D6-acceptance",
+    "nodeId": "role-D6",
+    "question": "怎样才算“D6：用户追问”完成并可被接受？",
+    "answerLocation": "nodes[id=role-D6].validators; nodes[id=role-D6].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D6-recovery",
+    "nodeId": "role-D6",
+    "question": "“D6：用户追问”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=role-D6].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D6-regression",
+    "nodeId": "role-D6",
+    "question": "“D6：用户追问”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=role-D6].validators; nodes[id=role-D6].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D7-entry",
+    "nodeId": "role-D7",
+    "question": "我实际怎么进入“D7：冷读开工”，它需要什么输入？",
+    "answerLocation": "nodes[id=role-D7].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D7-output",
+    "nodeId": "role-D7",
+    "question": "“D7：冷读开工”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=role-D7].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D7-authority",
+    "nodeId": "role-D7",
+    "question": "“D7：冷读开工”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=role-D7].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D7-failure",
+    "nodeId": "role-D7",
+    "question": "“D7：冷读开工”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=role-D7].interface.emptyCases; nodes[id=role-D7].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D7-acceptance",
+    "nodeId": "role-D7",
+    "question": "怎样才算“D7：冷读开工”完成并可被接受？",
+    "answerLocation": "nodes[id=role-D7].validators; nodes[id=role-D7].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D7-recovery",
+    "nodeId": "role-D7",
+    "question": "“D7：冷读开工”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=role-D7].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D7-regression",
+    "nodeId": "role-D7",
+    "question": "“D7：冷读开工”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=role-D7].validators; nodes[id=role-D7].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D8-entry",
+    "nodeId": "role-D8",
+    "question": "我实际怎么进入“D8：逐步复述”，它需要什么输入？",
+    "answerLocation": "nodes[id=role-D8].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D8-output",
+    "nodeId": "role-D8",
+    "question": "“D8：逐步复述”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=role-D8].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D8-authority",
+    "nodeId": "role-D8",
+    "question": "“D8：逐步复述”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=role-D8].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D8-failure",
+    "nodeId": "role-D8",
+    "question": "“D8：逐步复述”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=role-D8].interface.emptyCases; nodes[id=role-D8].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D8-acceptance",
+    "nodeId": "role-D8",
+    "question": "怎样才算“D8：逐步复述”完成并可被接受？",
+    "answerLocation": "nodes[id=role-D8].validators; nodes[id=role-D8].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D8-recovery",
+    "nodeId": "role-D8",
+    "question": "“D8：逐步复述”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=role-D8].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-D8-regression",
+    "nodeId": "role-D8",
+    "question": "“D8：逐步复述”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=role-D8].validators; nodes[id=role-D8].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "clarify-entry",
+    "nodeId": "clarify",
+    "question": "我实际怎么进入“澄清与需求落图”，它需要什么输入？",
+    "answerLocation": "nodes[id=clarify].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "clarify-output",
+    "nodeId": "clarify",
+    "question": "“澄清与需求落图”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=clarify].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "clarify-authority",
+    "nodeId": "clarify",
+    "question": "“澄清与需求落图”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=clarify].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "clarify-failure",
+    "nodeId": "clarify",
+    "question": "“澄清与需求落图”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=clarify].interface.emptyCases; nodes[id=clarify].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "clarify-acceptance",
+    "nodeId": "clarify",
+    "question": "怎样才算“澄清与需求落图”完成并可被接受？",
+    "answerLocation": "nodes[id=clarify].validators; nodes[id=clarify].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "clarify-recovery",
+    "nodeId": "clarify",
+    "question": "“澄清与需求落图”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=clarify].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "clarify-regression",
+    "nodeId": "clarify",
+    "question": "“澄清与需求落图”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=clarify].validators; nodes[id=clarify].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "gates-entry",
+    "nodeId": "gates",
+    "question": "我实际怎么进入“四项冻结关卡”，它需要什么输入？",
+    "answerLocation": "nodes[id=gates].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "gates-output",
+    "nodeId": "gates",
+    "question": "“四项冻结关卡”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=gates].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "gates-authority",
+    "nodeId": "gates",
+    "question": "“四项冻结关卡”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=gates].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "gates-failure",
+    "nodeId": "gates",
+    "question": "“四项冻结关卡”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=gates].interface.emptyCases; nodes[id=gates].interface.errors; failurePaths[id=fail-checker]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "gates-acceptance",
+    "nodeId": "gates",
+    "question": "D8 在什么条件下才算通过：负责人能自动派发时是否每个单位各起独立新线程，只有必须手工转交时才允许单线程合批，并由 D1 处理隔离降低？",
+    "answerLocation": "nodes[id=gates].inputs; nodes[id=gates].outputs[id=to-role-D8]; nodes[id=gates].terminal.mechanism §6.2; nodes[id=role-D8].inputs; nodes[id=role-D8].outputs; nodes[id=role-D8].terminal.mechanism; nodes[id=dispatch].terminal.mechanism §2.1a; nodes[id=contract-fidelity].terminal.mechanism",
+    "gap": "Blueprint 把 D8 无条件固定为“每轮一个 GPT 新对话合批全部单位，全部复述正确即有效通过”，并明确用它取代逐单位独立读者。已认可流程则要求：负责人能自动派发时，每个单位各起全新线程且只见本单位；只有必须由用户手工转交时才整轮单线程合批，并由 D1 考虑隔离降低，关键单位可在后续自动条件具备时补独立复述，且自动派发时 D8 允许改用执行端最高推理档。Blueprint 没有保留这个条件分支。",
+    "impact": "这是冻结阻塞：当前 D8 可以用比已认可流程更弱的独立性证据直接记为通过，随后进入用户批准和冻结。用户无法仅从冻结记录判断 D8 是否在当时可用的更强隔离路径上运行。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "gates-recovery",
+    "nodeId": "gates",
+    "question": "“四项冻结关卡”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=gates].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "gates-regression",
+    "nodeId": "gates",
+    "question": "“四项冻结关卡”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=gates].validators; nodes[id=gates].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-entry",
+    "nodeId": "contract",
+    "question": "我实际怎么进入“九项冻结合同”，它需要什么输入？",
+    "answerLocation": "nodes[id=contract].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-output",
+    "nodeId": "contract",
+    "question": "“九项冻结合同”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=contract].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-authority",
+    "nodeId": "contract",
+    "question": "“九项冻结合同”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=contract].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-failure",
+    "nodeId": "contract",
+    "question": "“九项冻结合同”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=contract].interface.emptyCases; nodes[id=contract].interface.errors; failurePaths[id=fail-checker]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-acceptance",
+    "nodeId": "contract",
+    "question": "怎样才算“九项冻结合同”完成并可被接受？",
+    "answerLocation": "nodes[id=contract].validators",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-recovery",
+    "nodeId": "contract",
+    "question": "“九项冻结合同”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-regression",
+    "nodeId": "contract",
+    "question": "“九项冻结合同”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=contract].validators",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-capability-entry",
+    "nodeId": "contract-capability",
+    "question": "我实际怎么进入“能力与声明”，它需要什么输入？",
+    "answerLocation": "nodes[id=contract-capability].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-capability-output",
+    "nodeId": "contract-capability",
+    "question": "“能力与声明”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=contract-capability].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-capability-authority",
+    "nodeId": "contract-capability",
+    "question": "“能力与声明”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=contract-capability].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-capability-failure",
+    "nodeId": "contract-capability",
+    "question": "“能力与声明”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=contract-capability].interface.emptyCases; nodes[id=contract-capability].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-capability-acceptance",
+    "nodeId": "contract-capability",
+    "question": "怎样才算“能力与声明”完成并可被接受？",
+    "answerLocation": "nodes[id=contract-capability].validators; nodes[id=contract-capability].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-capability-recovery",
+    "nodeId": "contract-capability",
+    "question": "“能力与声明”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=contract-capability].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-capability-regression",
+    "nodeId": "contract-capability",
+    "question": "“能力与声明”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=contract-capability].validators; nodes[id=contract-capability].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-entry-entry",
+    "nodeId": "contract-entry",
+    "question": "我实际怎么进入“正常入口与成品”，它需要什么输入？",
+    "answerLocation": "nodes[id=contract-entry].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-entry-output",
+    "nodeId": "contract-entry",
+    "question": "“正常入口与成品”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=contract-entry].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-entry-authority",
+    "nodeId": "contract-entry",
+    "question": "“正常入口与成品”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=contract-entry].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-entry-failure",
+    "nodeId": "contract-entry",
+    "question": "“正常入口与成品”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=contract-entry].interface.emptyCases; nodes[id=contract-entry].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-entry-acceptance",
+    "nodeId": "contract-entry",
+    "question": "怎样才算“正常入口与成品”完成并可被接受？",
+    "answerLocation": "nodes[id=contract-entry].validators; nodes[id=contract-entry].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-entry-recovery",
+    "nodeId": "contract-entry",
+    "question": "“正常入口与成品”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=contract-entry].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-entry-regression",
+    "nodeId": "contract-entry",
+    "question": "“正常入口与成品”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=contract-entry].validators; nodes[id=contract-entry].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-outcomes-entry",
+    "nodeId": "contract-outcomes",
+    "question": "我实际怎么进入“成功失败与未知”，它需要什么输入？",
+    "answerLocation": "nodes[id=contract-outcomes].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-outcomes-output",
+    "nodeId": "contract-outcomes",
+    "question": "“成功失败与未知”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=contract-outcomes].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-outcomes-authority",
+    "nodeId": "contract-outcomes",
+    "question": "“成功失败与未知”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=contract-outcomes].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-outcomes-failure",
+    "nodeId": "contract-outcomes",
+    "question": "“成功失败与未知”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=contract-outcomes].interface.emptyCases; nodes[id=contract-outcomes].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-outcomes-acceptance",
+    "nodeId": "contract-outcomes",
+    "question": "怎样才算“成功失败与未知”完成并可被接受？",
+    "answerLocation": "nodes[id=contract-outcomes].validators; nodes[id=contract-outcomes].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-outcomes-recovery",
+    "nodeId": "contract-outcomes",
+    "question": "“成功失败与未知”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=contract-outcomes].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-outcomes-regression",
+    "nodeId": "contract-outcomes",
+    "question": "“成功失败与未知”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=contract-outcomes].validators; nodes[id=contract-outcomes].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-fidelity-entry",
+    "nodeId": "contract-fidelity",
+    "question": "我实际怎么进入“证据真实度”，它需要什么输入？",
+    "answerLocation": "nodes[id=contract-fidelity].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-fidelity-output",
+    "nodeId": "contract-fidelity",
+    "question": "“证据真实度”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=contract-fidelity].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-fidelity-authority",
+    "nodeId": "contract-fidelity",
+    "question": "“证据真实度”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=contract-fidelity].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-fidelity-failure",
+    "nodeId": "contract-fidelity",
+    "question": "“证据真实度”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=contract-fidelity].interface.emptyCases; nodes[id=contract-fidelity].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-fidelity-acceptance",
+    "nodeId": "contract-fidelity",
+    "question": "怎样才算“证据真实度”完成并可被接受？",
+    "answerLocation": "nodes[id=contract-fidelity].validators; nodes[id=contract-fidelity].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-fidelity-recovery",
+    "nodeId": "contract-fidelity",
+    "question": "“证据真实度”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=contract-fidelity].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-fidelity-regression",
+    "nodeId": "contract-fidelity",
+    "question": "“证据真实度”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=contract-fidelity].validators; nodes[id=contract-fidelity].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-forbidden-entry",
+    "nodeId": "contract-forbidden",
+    "question": "我实际怎么进入“禁止替代”，它需要什么输入？",
+    "answerLocation": "nodes[id=contract-forbidden].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-forbidden-output",
+    "nodeId": "contract-forbidden",
+    "question": "“禁止替代”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=contract-forbidden].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-forbidden-authority",
+    "nodeId": "contract-forbidden",
+    "question": "“禁止替代”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=contract-forbidden].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-forbidden-failure",
+    "nodeId": "contract-forbidden",
+    "question": "“禁止替代”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=contract-forbidden].interface.emptyCases; nodes[id=contract-forbidden].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-forbidden-acceptance",
+    "nodeId": "contract-forbidden",
+    "question": "怎样才算“禁止替代”完成并可被接受？",
+    "answerLocation": "nodes[id=contract-forbidden].validators; nodes[id=contract-forbidden].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-forbidden-recovery",
+    "nodeId": "contract-forbidden",
+    "question": "“禁止替代”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=contract-forbidden].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-forbidden-regression",
+    "nodeId": "contract-forbidden",
+    "question": "“禁止替代”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=contract-forbidden].validators; nodes[id=contract-forbidden].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-regression-entry",
+    "nodeId": "contract-regression",
+    "question": "我实际怎么进入“已有能力保护”，它需要什么输入？",
+    "answerLocation": "nodes[id=contract-regression].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-regression-output",
+    "nodeId": "contract-regression",
+    "question": "“已有能力保护”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=contract-regression].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-regression-authority",
+    "nodeId": "contract-regression",
+    "question": "“已有能力保护”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-regression-failure",
+    "nodeId": "contract-regression",
+    "question": "“已有能力保护”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=contract-regression].interface.emptyCases; nodes[id=contract-regression].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-regression-acceptance",
+    "nodeId": "contract-regression",
+    "question": "怎样才算“已有能力保护”完成并可被接受？",
+    "answerLocation": "nodes[id=contract-regression].validators; nodes[id=contract-regression].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-regression-recovery",
+    "nodeId": "contract-regression",
+    "question": "“已有能力保护”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=contract-regression].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-regression-regression",
+    "nodeId": "contract-regression",
+    "question": "“已有能力保护”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=contract-regression].validators; nodes[id=contract-regression].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-controls-entry",
+    "nodeId": "contract-controls",
+    "question": "我实际怎么进入“三类控制例”，它需要什么输入？",
+    "answerLocation": "nodes[id=contract-controls].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-controls-output",
+    "nodeId": "contract-controls",
+    "question": "“三类控制例”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=contract-controls].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-controls-authority",
+    "nodeId": "contract-controls",
+    "question": "“三类控制例”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=contract-controls].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-controls-failure",
+    "nodeId": "contract-controls",
+    "question": "“三类控制例”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=contract-controls].interface.emptyCases; nodes[id=contract-controls].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-controls-acceptance",
+    "nodeId": "contract-controls",
+    "question": "怎样才算“三类控制例”完成并可被接受？",
+    "answerLocation": "nodes[id=contract-controls].validators; nodes[id=contract-controls].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-controls-recovery",
+    "nodeId": "contract-controls",
+    "question": "“三类控制例”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=contract-controls].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-controls-regression",
+    "nodeId": "contract-controls",
+    "question": "“三类控制例”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=contract-controls].validators; nodes[id=contract-controls].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-changes-entry",
+    "nodeId": "contract-changes",
+    "question": "我实际怎么进入“交付修改与退回”，它需要什么输入？",
+    "answerLocation": "nodes[id=contract-changes].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-changes-output",
+    "nodeId": "contract-changes",
+    "question": "“交付修改与退回”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=contract-changes].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-changes-authority",
+    "nodeId": "contract-changes",
+    "question": "“交付修改与退回”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=contract-changes].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-changes-failure",
+    "nodeId": "contract-changes",
+    "question": "“交付修改与退回”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=contract-changes].interface.emptyCases; nodes[id=contract-changes].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-changes-acceptance",
+    "nodeId": "contract-changes",
+    "question": "怎样才算“交付修改与退回”完成并可被接受？",
+    "answerLocation": "nodes[id=contract-changes].validators; nodes[id=contract-changes].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-changes-recovery",
+    "nodeId": "contract-changes",
+    "question": "“交付修改与退回”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=contract-changes].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-changes-regression",
+    "nodeId": "contract-changes",
+    "question": "“交付修改与退回”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=contract-changes].validators; nodes[id=contract-changes].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-authorization-entry",
+    "nodeId": "contract-authorization",
+    "question": "我实际怎么进入“资源与授权”，它需要什么输入？",
+    "answerLocation": "nodes[id=contract-authorization].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-authorization-output",
+    "nodeId": "contract-authorization",
+    "question": "“资源与授权”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=contract-authorization].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-authorization-authority",
+    "nodeId": "contract-authorization",
+    "question": "“资源与授权”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=contract-authorization].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-authorization-failure",
+    "nodeId": "contract-authorization",
+    "question": "“资源与授权”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=contract-authorization].interface.emptyCases; nodes[id=contract-authorization].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-authorization-acceptance",
+    "nodeId": "contract-authorization",
+    "question": "怎样才算“资源与授权”完成并可被接受？",
+    "answerLocation": "nodes[id=contract-authorization].validators; nodes[id=contract-authorization].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-authorization-recovery",
+    "nodeId": "contract-authorization",
+    "question": "“资源与授权”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=contract-authorization].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "contract-authorization-regression",
+    "nodeId": "contract-authorization",
+    "question": "“资源与授权”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=contract-authorization].validators; nodes[id=contract-authorization].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "freeze-entry",
+    "nodeId": "freeze",
+    "question": "我实际怎么进入“批准与冻结交接”，它需要什么输入？",
+    "answerLocation": "nodes[id=freeze].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "freeze-output",
+    "nodeId": "freeze",
+    "question": "“批准与冻结交接”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=freeze].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "freeze-authority",
+    "nodeId": "freeze",
+    "question": "“批准与冻结交接”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=freeze].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "freeze-failure",
+    "nodeId": "freeze",
+    "question": "“批准与冻结交接”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=freeze].interface.emptyCases; nodes[id=freeze].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "freeze-acceptance",
+    "nodeId": "freeze",
+    "question": "怎样才算“批准与冻结交接”完成并可被接受？",
+    "answerLocation": "nodes[id=freeze].validators; nodes[id=freeze].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "freeze-recovery",
+    "nodeId": "freeze",
+    "question": "“批准与冻结交接”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=freeze].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "freeze-regression",
+    "nodeId": "freeze",
+    "question": "“批准与冻结交接”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=freeze].validators; nodes[id=freeze].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-checker-entry",
+    "nodeId": "q-checker",
+    "question": "我实际怎么进入“草稿与冻结检查”，它需要什么输入？",
+    "answerLocation": "nodes[id=q-checker].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-checker-output",
+    "nodeId": "q-checker",
+    "question": "“草稿与冻结检查”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=q-checker].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-checker-authority",
+    "nodeId": "q-checker",
+    "question": "“草稿与冻结检查”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=q-checker].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-checker-failure",
+    "nodeId": "q-checker",
+    "question": "“草稿与冻结检查”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=q-checker].interface.emptyCases; nodes[id=q-checker].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-checker-acceptance",
+    "nodeId": "q-checker",
+    "question": "怎样才算“草稿与冻结检查”完成并可被接受？",
+    "answerLocation": "nodes[id=q-checker].validators; nodes[id=q-checker].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-checker-recovery",
+    "nodeId": "q-checker",
+    "question": "“草稿与冻结检查”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=q-checker].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-checker-regression",
+    "nodeId": "q-checker",
+    "question": "“草稿与冻结检查”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=q-checker].validators; nodes[id=q-checker].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-inheritance-entry",
+    "nodeId": "q-inheritance",
+    "question": "我实际怎么进入“小修批准继承”，它需要什么输入？",
+    "answerLocation": "nodes[id=q-inheritance].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-inheritance-output",
+    "nodeId": "q-inheritance",
+    "question": "“小修批准继承”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=q-inheritance].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-inheritance-authority",
+    "nodeId": "q-inheritance",
+    "question": "“小修批准继承”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=q-inheritance].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-inheritance-failure",
+    "nodeId": "q-inheritance",
+    "question": "“小修批准继承”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=q-inheritance].interface.emptyCases; nodes[id=q-inheritance].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-inheritance-acceptance",
+    "nodeId": "q-inheritance",
+    "question": "怎样才算“小修批准继承”完成并可被接受？",
+    "answerLocation": "nodes[id=q-inheritance].validators; nodes[id=q-inheritance].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-inheritance-recovery",
+    "nodeId": "q-inheritance",
+    "question": "“小修批准继承”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=q-inheritance].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-inheritance-regression",
+    "nodeId": "q-inheritance",
+    "question": "“小修批准继承”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=q-inheritance].validators; nodes[id=q-inheritance].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "delivery-entry",
+    "nodeId": "delivery",
+    "question": "我实际怎么进入“交付保障”，它需要什么输入？",
+    "answerLocation": "nodes[id=delivery].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "delivery-output",
+    "nodeId": "delivery",
+    "question": "“交付保障”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=delivery].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "delivery-authority",
+    "nodeId": "delivery",
+    "question": "“交付保障”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=delivery].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "delivery-failure",
+    "nodeId": "delivery",
+    "question": "“交付保障”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=delivery].interface.emptyCases; nodes[id=delivery].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "delivery-acceptance",
+    "nodeId": "delivery",
+    "question": "怎样才算“交付保障”完成并可被接受？",
+    "answerLocation": "nodes[id=delivery].validators",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "delivery-recovery",
+    "nodeId": "delivery",
+    "question": "“交付保障”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "delivery-regression",
+    "nodeId": "delivery",
+    "question": "“交付保障”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=delivery].validators",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "delivery-roles-entry",
+    "nodeId": "delivery-roles",
+    "question": "我实际怎么进入“交付角色”，它需要什么输入？",
+    "answerLocation": "nodes[id=delivery-roles].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "delivery-roles-output",
+    "nodeId": "delivery-roles",
+    "question": "“交付角色”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=delivery-roles].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "delivery-roles-authority",
+    "nodeId": "delivery-roles",
+    "question": "“交付角色”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=delivery-roles].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "delivery-roles-failure",
+    "nodeId": "delivery-roles",
+    "question": "“交付角色”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=delivery-roles].interface.emptyCases; nodes[id=delivery-roles].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "delivery-roles-acceptance",
+    "nodeId": "delivery-roles",
+    "question": "怎样才算“交付角色”完成并可被接受？",
+    "answerLocation": "nodes[id=delivery-roles].validators",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "delivery-roles-recovery",
+    "nodeId": "delivery-roles",
+    "question": "“交付角色”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "delivery-roles-regression",
+    "nodeId": "delivery-roles",
+    "question": "“交付角色”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=delivery-roles].validators",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X1-entry",
+    "nodeId": "role-X1",
+    "question": "我实际怎么进入“X1：负责人”，它需要什么输入？",
+    "answerLocation": "nodes[id=role-X1].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X1-output",
+    "nodeId": "role-X1",
+    "question": "“X1：负责人”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=role-X1].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X1-authority",
+    "nodeId": "role-X1",
+    "question": "“X1：负责人”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=role-X1].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X1-failure",
+    "nodeId": "role-X1",
+    "question": "“X1：负责人”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=role-X1].interface.emptyCases; nodes[id=role-X1].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X1-acceptance",
+    "nodeId": "role-X1",
+    "question": "怎样才算“X1：负责人”完成并可被接受？",
+    "answerLocation": "nodes[id=role-X1].validators; nodes[id=role-X1].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X1-recovery",
+    "nodeId": "role-X1",
+    "question": "“X1：负责人”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=role-X1].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X1-regression",
+    "nodeId": "role-X1",
+    "question": "“X1：负责人”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=role-X1].validators; nodes[id=role-X1].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X2-entry",
+    "nodeId": "role-X2",
+    "question": "我实际怎么进入“X2：实现者”，它需要什么输入？",
+    "answerLocation": "nodes[id=role-X2].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X2-output",
+    "nodeId": "role-X2",
+    "question": "“X2：实现者”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=role-X2].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X2-authority",
+    "nodeId": "role-X2",
+    "question": "“X2：实现者”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=role-X2].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X2-failure",
+    "nodeId": "role-X2",
+    "question": "“X2：实现者”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=role-X2].interface.emptyCases; nodes[id=role-X2].interface.errors; failurePaths[id=fail-premise]; failurePaths[id=fail-calibration]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X2-acceptance",
+    "nodeId": "role-X2",
+    "question": "怎样才算“X2：实现者”完成并可被接受？",
+    "answerLocation": "nodes[id=role-X2].validators; nodes[id=role-X2].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X2-recovery",
+    "nodeId": "role-X2",
+    "question": "“X2：实现者”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=role-X2].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X2-regression",
+    "nodeId": "role-X2",
+    "question": "“X2：实现者”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=role-X2].validators; nodes[id=role-X2].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X3-entry",
+    "nodeId": "role-X3",
+    "question": "我实际怎么进入“X3：独立验收”，它需要什么输入？",
+    "answerLocation": "nodes[id=role-X3].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X3-output",
+    "nodeId": "role-X3",
+    "question": "“X3：独立验收”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=role-X3].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X3-authority",
+    "nodeId": "role-X3",
+    "question": "“X3：独立验收”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=role-X3].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X3-failure",
+    "nodeId": "role-X3",
+    "question": "“X3：独立验收”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=role-X3].interface.emptyCases; nodes[id=role-X3].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X3-acceptance",
+    "nodeId": "role-X3",
+    "question": "怎样才算“X3：独立验收”完成并可被接受？",
+    "answerLocation": "nodes[id=role-X3].validators; nodes[id=role-X3].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X3-recovery",
+    "nodeId": "role-X3",
+    "question": "“X3：独立验收”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=role-X3].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X3-regression",
+    "nodeId": "role-X3",
+    "question": "“X3：独立验收”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=role-X3].validators; nodes[id=role-X3].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X4-entry",
+    "nodeId": "role-X4",
+    "question": "我实际怎么进入“X4：专项检查”，它需要什么输入？",
+    "answerLocation": "nodes[id=role-X4].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X4-output",
+    "nodeId": "role-X4",
+    "question": "“X4：专项检查”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=role-X4].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X4-authority",
+    "nodeId": "role-X4",
+    "question": "“X4：专项检查”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=role-X4].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X4-failure",
+    "nodeId": "role-X4",
+    "question": "“X4：专项检查”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=role-X4].interface.emptyCases; nodes[id=role-X4].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X4-acceptance",
+    "nodeId": "role-X4",
+    "question": "怎样才算“X4：专项检查”完成并可被接受？",
+    "answerLocation": "nodes[id=role-X4].validators; nodes[id=role-X4].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X4-recovery",
+    "nodeId": "role-X4",
+    "question": "“X4：专项检查”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=role-X4].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X4-regression",
+    "nodeId": "role-X4",
+    "question": "“X4：专项检查”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=role-X4].validators; nodes[id=role-X4].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X5-entry",
+    "nodeId": "role-X5",
+    "question": "我实际怎么进入“X5：专业裁判”，它需要什么输入？",
+    "answerLocation": "nodes[id=role-X5].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X5-output",
+    "nodeId": "role-X5",
+    "question": "“X5：专业裁判”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=role-X5].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X5-authority",
+    "nodeId": "role-X5",
+    "question": "“X5：专业裁判”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=role-X5].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X5-failure",
+    "nodeId": "role-X5",
+    "question": "“X5：专业裁判”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=role-X5].interface.emptyCases; nodes[id=role-X5].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X5-acceptance",
+    "nodeId": "role-X5",
+    "question": "怎样才算“X5：专业裁判”完成并可被接受？",
+    "answerLocation": "nodes[id=role-X5].validators; nodes[id=role-X5].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X5-recovery",
+    "nodeId": "role-X5",
+    "question": "“X5：专业裁判”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=role-X5].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "role-X5-regression",
+    "nodeId": "role-X5",
+    "question": "“X5：专业裁判”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=role-X5].validators; nodes[id=role-X5].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "acceptance-entry",
+    "nodeId": "acceptance",
+    "question": "我实际怎么进入“验收资产分级”，它需要什么输入？",
+    "answerLocation": "nodes[id=acceptance].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "acceptance-output",
+    "nodeId": "acceptance",
+    "question": "“验收资产分级”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=acceptance].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "acceptance-authority",
+    "nodeId": "acceptance",
+    "question": "“验收资产分级”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=acceptance].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "acceptance-failure",
+    "nodeId": "acceptance",
+    "question": "“验收资产分级”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=acceptance].interface.emptyCases; nodes[id=acceptance].interface.errors; failurePaths[id=fail-semantic]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "acceptance-acceptance",
+    "nodeId": "acceptance",
+    "question": "怎样才算“验收资产分级”完成并可被接受？",
+    "answerLocation": "nodes[id=acceptance].validators; nodes[id=acceptance].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "acceptance-recovery",
+    "nodeId": "acceptance",
+    "question": "“验收资产分级”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=acceptance].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "acceptance-regression",
+    "nodeId": "acceptance",
+    "question": "“验收资产分级”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=acceptance].validators; nodes[id=acceptance].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "calibration-entry",
+    "nodeId": "calibration",
+    "question": "我实际怎么进入“验收器三类校准”，它需要什么输入？",
+    "answerLocation": "nodes[id=calibration].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "calibration-output",
+    "nodeId": "calibration",
+    "question": "“验收器三类校准”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=calibration].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "calibration-authority",
+    "nodeId": "calibration",
+    "question": "“验收器三类校准”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=calibration].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "calibration-failure",
+    "nodeId": "calibration",
+    "question": "“验收器三类校准”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=calibration].interface.emptyCases; nodes[id=calibration].interface.errors; failurePaths[id=fail-semantic]; failurePaths[id=fail-calibration]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "calibration-acceptance",
+    "nodeId": "calibration",
+    "question": "怎样才算“验收器三类校准”完成并可被接受？",
+    "answerLocation": "nodes[id=calibration].validators; nodes[id=calibration].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "calibration-recovery",
+    "nodeId": "calibration",
+    "question": "“验收器三类校准”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=calibration].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "calibration-regression",
+    "nodeId": "calibration",
+    "question": "“验收器三类校准”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=calibration].validators; nodes[id=calibration].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "candidate-entry",
+    "nodeId": "candidate",
+    "question": "我实际怎么进入“最终候选身份”，它需要什么输入？",
+    "answerLocation": "nodes[id=candidate].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "candidate-output",
+    "nodeId": "candidate",
+    "question": "“最终候选身份”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=candidate].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "candidate-authority",
+    "nodeId": "candidate",
+    "question": "“最终候选身份”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=candidate].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "candidate-failure",
+    "nodeId": "candidate",
+    "question": "“最终候选身份”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=candidate].interface.emptyCases; nodes[id=candidate].interface.errors; failurePaths[id=fail-candidate]; failurePaths[id=fail-missing]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "candidate-acceptance",
+    "nodeId": "candidate",
+    "question": "怎样才算“最终候选身份”完成并可被接受？",
+    "answerLocation": "nodes[id=candidate].validators; nodes[id=candidate].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "candidate-recovery",
+    "nodeId": "candidate",
+    "question": "“最终候选身份”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=candidate].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "candidate-regression",
+    "nodeId": "candidate",
+    "question": "“最终候选身份”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=candidate].validators; nodes[id=candidate].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "evidence-entry",
+    "nodeId": "evidence",
+    "question": "我实际怎么进入“三态原始证据”，它需要什么输入？",
+    "answerLocation": "nodes[id=evidence].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "evidence-output",
+    "nodeId": "evidence",
+    "question": "“三态原始证据”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=evidence].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "evidence-authority",
+    "nodeId": "evidence",
+    "question": "“三态原始证据”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=evidence].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "evidence-failure",
+    "nodeId": "evidence",
+    "question": "“三态原始证据”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=evidence].interface.emptyCases; nodes[id=evidence].interface.errors; failurePaths[id=fail-candidate]; failurePaths[id=fail-missing]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "evidence-acceptance",
+    "nodeId": "evidence",
+    "question": "怎样才算“三态原始证据”完成并可被接受？",
+    "answerLocation": "nodes[id=evidence].validators; nodes[id=evidence].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "evidence-recovery",
+    "nodeId": "evidence",
+    "question": "“三态原始证据”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=evidence].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "evidence-regression",
+    "nodeId": "evidence",
+    "question": "“三态原始证据”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=evidence].validators; nodes[id=evidence].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "deviation-entry",
+    "nodeId": "deviation",
+    "question": "我实际怎么进入“偏离和设计退回”，它需要什么输入？",
+    "answerLocation": "nodes[id=deviation].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "deviation-output",
+    "nodeId": "deviation",
+    "question": "“偏离和设计退回”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=deviation].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "deviation-authority",
+    "nodeId": "deviation",
+    "question": "“偏离和设计退回”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=deviation].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "deviation-failure",
+    "nodeId": "deviation",
+    "question": "“偏离和设计退回”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=deviation].interface.emptyCases; nodes[id=deviation].interface.errors; failurePaths[id=fail-premise]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "deviation-acceptance",
+    "nodeId": "deviation",
+    "question": "怎样才算“偏离和设计退回”完成并可被接受？",
+    "answerLocation": "nodes[id=deviation].validators; nodes[id=deviation].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "deviation-recovery",
+    "nodeId": "deviation",
+    "question": "“偏离和设计退回”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=deviation].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "deviation-regression",
+    "nodeId": "deviation",
+    "question": "“偏离和设计退回”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=deviation].validators; nodes[id=deviation].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "sign-entry",
+    "nodeId": "sign",
+    "question": "我实际怎么进入“亲读后唯一签发”，它需要什么输入？",
+    "answerLocation": "nodes[id=sign].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "sign-output",
+    "nodeId": "sign",
+    "question": "“亲读后唯一签发”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=sign].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "sign-authority",
+    "nodeId": "sign",
+    "question": "“亲读后唯一签发”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=sign].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "sign-failure",
+    "nodeId": "sign",
+    "question": "“亲读后唯一签发”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=sign].interface.emptyCases; nodes[id=sign].interface.errors; failurePaths[id=fail-candidate]; failurePaths[id=fail-revocation]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "sign-acceptance",
+    "nodeId": "sign",
+    "question": "怎样才算“亲读后唯一签发”完成并可被接受？",
+    "answerLocation": "nodes[id=sign].validators; nodes[id=sign].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "sign-recovery",
+    "nodeId": "sign",
+    "question": "“亲读后唯一签发”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=sign].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "sign-regression",
+    "nodeId": "sign",
+    "question": "“亲读后唯一签发”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=sign].validators; nodes[id=sign].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "packaging-entry",
+    "nodeId": "packaging",
+    "question": "我实际怎么进入“同源分发”，它需要什么输入？",
+    "answerLocation": "nodes[id=packaging].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "packaging-output",
+    "nodeId": "packaging",
+    "question": "“同源分发”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=packaging].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "packaging-authority",
+    "nodeId": "packaging",
+    "question": "“同源分发”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=packaging].authority",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "packaging-failure",
+    "nodeId": "packaging",
+    "question": "“同源分发”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=packaging].interface.emptyCases; nodes[id=packaging].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "packaging-acceptance",
+    "nodeId": "packaging",
+    "question": "怎样才算“同源分发”完成并可被接受？",
+    "answerLocation": "nodes[id=packaging].validators",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "packaging-recovery",
+    "nodeId": "packaging",
+    "question": "“同源分发”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "packaging-regression",
+    "nodeId": "packaging",
+    "question": "“同源分发”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=packaging].validators",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "source-layout-entry",
+    "nodeId": "source-layout",
+    "question": "我实际怎么进入“唯一源目录”，它需要什么输入？",
+    "answerLocation": "nodes[id=source-layout].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "source-layout-output",
+    "nodeId": "source-layout",
+    "question": "“唯一源目录”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=source-layout].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "source-layout-authority",
+    "nodeId": "source-layout",
+    "question": "“唯一源目录”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=source-layout].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "source-layout-failure",
+    "nodeId": "source-layout",
+    "question": "“唯一源目录”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=source-layout].interface.emptyCases; nodes[id=source-layout].interface.errors; failurePaths[id=fail-package]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "source-layout-acceptance",
+    "nodeId": "source-layout",
+    "question": "怎样才算“唯一源目录”完成并可被接受？",
+    "answerLocation": "nodes[id=source-layout].validators; nodes[id=source-layout].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "source-layout-recovery",
+    "nodeId": "source-layout",
+    "question": "“唯一源目录”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=source-layout].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "source-layout-regression",
+    "nodeId": "source-layout",
+    "question": "“唯一源目录”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=source-layout].validators; nodes[id=source-layout].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "planning-entry-entry",
+    "nodeId": "planning-entry",
+    "question": "从 Claude Code 或 GPT Work 直接读取规划 SKILL.md 后，D1/X1 是否允许在该宿主继续承担规划职责，并能接上后续执行派发？",
+    "answerLocation": "nodes[id=planning-entry].terminal.mechanism §9.2; nodes[id=dispatch].terminal.mechanism §2.1/§2.1a; nodes[id=prompts].terminal.mechanism §4.2; nodes[id=role-D1].terminal.mechanism; nodes[id=role-X1].terminal.mechanism; nodes[id=capability-check].terminal.mechanism §10.2; requirements[id=r-dispatch]; requirements[id=r-package]",
+    "gap": "Blueprint 一方面准备了 Claude Code / GPT Work 可读的规划 SKILL 与包内规划资源，另一方面又把 D1–D3、D6、D8、X1、X5 全部限定为 GPT 网页端，并把正常验收也只写成 GPT 网页端规划。它同时要求 D1/X1 直接派发执行端，却在提示词规则中声明不自动跨宿主发送消息。与已认可流程中“规划端·专业可由 Claude 或 GPT Pro 担任”、规划 SKILL 供 Claude Code 与 GPT Work 直接读取、且本插件自身 D1/X1 由 Claude 承担的要求不一致。当前 Blueprint 没有给出 Claude/GPT Work 规划入口的合法角色路由，也没有闭合 GPT 网页端负责人到 Codex/GPT Work 执行端的实际派发路径。",
+    "impact": "这是开工阻塞：按 Blueprint 的角色合同，从流程要求的 Claude/Claude Code 或 GPT Work 规划入口进入会被判为不允许；若坚持 GPT 网页端，又可能在需要负责人直接派发执行端时停住。用户无法确定应在哪个正式入口启动 D1/X1，也无法按既定自举流程实施插件。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "planning-entry-output",
+    "nodeId": "planning-entry",
+    "question": "“同源规划入口”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=planning-entry].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "planning-entry-authority",
+    "nodeId": "planning-entry",
+    "question": "“同源规划入口”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=planning-entry].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "planning-entry-failure",
+    "nodeId": "planning-entry",
+    "question": "“同源规划入口”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=planning-entry].interface.emptyCases; nodes[id=planning-entry].interface.errors; failurePaths[id=fail-package]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "planning-entry-acceptance",
+    "nodeId": "planning-entry",
+    "question": "怎样才算“同源规划入口”完成并可被接受？",
+    "answerLocation": "nodes[id=planning-entry].validators; nodes[id=planning-entry].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "planning-entry-recovery",
+    "nodeId": "planning-entry",
+    "question": "“同源规划入口”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=planning-entry].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "planning-entry-regression",
+    "nodeId": "planning-entry",
+    "question": "“同源规划入口”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=planning-entry].validators; nodes[id=planning-entry].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "execution-package-entry",
+    "nodeId": "execution-package",
+    "question": "我实际怎么进入“执行插件入口”，它需要什么输入？",
+    "answerLocation": "nodes[id=execution-package].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "execution-package-output",
+    "nodeId": "execution-package",
+    "question": "“执行插件入口”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=execution-package].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "execution-package-authority",
+    "nodeId": "execution-package",
+    "question": "“执行插件入口”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=execution-package].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "execution-package-failure",
+    "nodeId": "execution-package",
+    "question": "“执行插件入口”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=execution-package].interface.emptyCases; nodes[id=execution-package].interface.errors; failurePaths[id=fail-package]",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "execution-package-acceptance",
+    "nodeId": "execution-package",
+    "question": "怎样才算“执行插件入口”完成并可被接受？",
+    "answerLocation": "nodes[id=execution-package].validators; nodes[id=execution-package].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "execution-package-recovery",
+    "nodeId": "execution-package",
+    "question": "“执行插件入口”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=execution-package].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "execution-package-regression",
+    "nodeId": "execution-package",
+    "question": "“执行插件入口”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=execution-package].validators; nodes[id=execution-package].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "minimum-entry",
+    "nodeId": "minimum",
+    "question": "我实际怎么进入“完整最小范围”，它需要什么输入？",
+    "answerLocation": "nodes[id=minimum].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "minimum-output",
+    "nodeId": "minimum",
+    "question": "“完整最小范围”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=minimum].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "minimum-authority",
+    "nodeId": "minimum",
+    "question": "“完整最小范围”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=minimum].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "minimum-failure",
+    "nodeId": "minimum",
+    "question": "“完整最小范围”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=minimum].interface.emptyCases; nodes[id=minimum].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "minimum-acceptance",
+    "nodeId": "minimum",
+    "question": "怎样才算“完整最小范围”完成并可被接受？",
+    "answerLocation": "nodes[id=minimum].validators; nodes[id=minimum].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "minimum-recovery",
+    "nodeId": "minimum",
+    "question": "“完整最小范围”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=minimum].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "minimum-regression",
+    "nodeId": "minimum",
+    "question": "“完整最小范围”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=minimum].validators; nodes[id=minimum].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "capability-check-entry",
+    "nodeId": "capability-check",
+    "question": "我实际怎么进入“正常入口验收”，它需要什么输入？",
+    "answerLocation": "nodes[id=capability-check].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "capability-check-output",
+    "nodeId": "capability-check",
+    "question": "“正常入口验收”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=capability-check].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "capability-check-authority",
+    "nodeId": "capability-check",
+    "question": "“正常入口验收”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "capability-check-failure",
+    "nodeId": "capability-check",
+    "question": "“正常入口验收”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=capability-check].interface.emptyCases; nodes[id=capability-check].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "capability-check-acceptance",
+    "nodeId": "capability-check",
+    "question": "怎样才算“正常入口验收”完成并可被接受？",
+    "answerLocation": "nodes[id=capability-check].validators; nodes[id=capability-check].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "capability-check-recovery",
+    "nodeId": "capability-check",
+    "question": "“正常入口验收”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=capability-check].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "capability-check-regression",
+    "nodeId": "capability-check",
+    "question": "“正常入口验收”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=capability-check].validators; nodes[id=capability-check].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "web-later-entry",
+    "nodeId": "web-later",
+    "question": "我实际怎么进入“网页端打包说明”，它需要什么输入？",
+    "answerLocation": "nodes[id=web-later].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "web-later-output",
+    "nodeId": "web-later",
+    "question": "“网页端打包说明”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=web-later].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "web-later-authority",
+    "nodeId": "web-later",
+    "question": "“网页端打包说明”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=web-later].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "web-later-failure",
+    "nodeId": "web-later",
+    "question": "“网页端打包说明”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=web-later].interface.emptyCases; nodes[id=web-later].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "web-later-acceptance",
+    "nodeId": "web-later",
+    "question": "怎样才算“网页端打包说明”完成并可被接受？",
+    "answerLocation": "nodes[id=web-later].validators; nodes[id=web-later].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "web-later-recovery",
+    "nodeId": "web-later",
+    "question": "“网页端打包说明”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=web-later].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "web-later-regression",
+    "nodeId": "web-later",
+    "question": "“网页端打包说明”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=web-later].validators; nodes[id=web-later].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-capacity-entry",
+    "nodeId": "q-capacity",
+    "question": "我实际怎么进入“市场容量调整”，它需要什么输入？",
+    "answerLocation": "nodes[id=q-capacity].inputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-capacity-output",
+    "nodeId": "q-capacity",
+    "question": "“市场容量调整”会产出什么，结果交给谁或流向哪里？",
+    "answerLocation": "nodes[id=q-capacity].outputs",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-capacity-authority",
+    "nodeId": "q-capacity",
+    "question": "“市场容量调整”里由谁决定什么，谁没有这个决定权？",
+    "answerLocation": "nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-capacity-failure",
+    "nodeId": "q-capacity",
+    "question": "“市场容量调整”失败、缺证据或对象身份不明时会发生什么，谁接手？",
+    "answerLocation": "nodes[id=q-capacity].interface.emptyCases; nodes[id=q-capacity].interface.errors",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-capacity-acceptance",
+    "nodeId": "q-capacity",
+    "question": "怎样才算“市场容量调整”完成并可被接受？",
+    "answerLocation": "nodes[id=q-capacity].validators; nodes[id=q-capacity].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-capacity-recovery",
+    "nodeId": "q-capacity",
+    "question": "“市场容量调整”做到一半中断、状态损坏或写入结果不明时怎么恢复？",
+    "answerLocation": "nodes[id=q-capacity].terminal.retry; nodes[id=state].terminal.mechanism §1.3a; nodes[id=writer].terminal.mechanism §1.3/§1.3a",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-capacity-regression",
+    "nodeId": "q-capacity",
+    "question": "“市场容量调整”会不会破坏已有能力；已有行为靠什么回归或保护？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].validators; nodes[id=q-capacity].terminal.acceptance",
+    "gap": null,
+    "impact": "无新增用户阻塞；Blueprint 内有可定位答案。",
+    "blocking": false,
+    "owner": "D1"
+  }
+]
