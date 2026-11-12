@@ -397,3 +397,70 @@ npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugi
 ```
 
 合并稿依据更新到 `0282199a26c1d437f25eae6f2532485831d57e16`。JSON、流程追加说明和本说明均为尚未提交的工作树改动，没有自己的提交号；以该 HEAD 加路径及上述摘要标识，不声称已存在于该提交中。原 SPEC、MERGE_DECISIONS 和 A 原稿未改，流程原正文未删改；未 commit、未 push、未切分支。对本轮修改的三个文件按相同正则做公开信息自查，匹配数均为零。没有需要 D1 新增决定的事项，尚待真实读者记录和规定关卡。
+
+
+## 续：D8 合批结果的冻结资格（D7 第 8 轮补定）
+
+已完整读取最新提交 `c24c2a8be4ea66cce5b3843e690a0127182aca5f` 中 SPEC 第 2.1a 节“合批结果能否作为冻结依据”及上下文，以及 MERGE_DECISIONS 第 12 节，并按原决定同步 JSON。前一轮“关键单位可以下一轮补做”的说明，在冻结资格上受本轮强制条件约束：关键单位没有合格独立复述前，不能以合批通过冻结。没有新增设计选择。
+
+### 修改的节点与规则
+
+- `dispatch`：普通与关键单位分开核对。普通单位的单线程合批结果经 D1 逐单位判断复述正确，可以作为 D8 有效通过，保留 `reader_isolation: "single-thread-batch"`。关键单位必须由负责人通过执行端自动派发各自独立新读者；没有任何自动派发手段时，D8 记 `unknown`，冻结等待，不增加用户转交次数，也不以合批替代。
+- `role-D8`：说明正文、输入输出、验收与反例都写明上述资格；不再仅笼统要求 D1 考虑隔离降低，或把关键单位的独立复述当作通过以后可选的补做。
+- `gates`：除说明、接口和验收外，专门更新 JSON 内第 6.2 节关卡表的 D8 行。普通合批经过逐条判断可以有效通过，关键单位必须独立新读者正确复述；缺自动派发手段时 D8 为 `unknown`，冻结等待。
+- `contract-fidelity`：明确普通合批可用、关键单位不接受合批证据，不能以“D1 已考虑隔离降低”代替关键单位独立性要求。
+- `freeze`：冻结输入、说明正文、接口及验收都增加 D8 资格条件。普通合批可按规则支持通过；关键单位必须有各自独立新读者的正确复述。无自动派发手段时，不将合批记录补成 `passed`，不进入冻结。
+- `prompts`：提示词和结果说明区分两种证据资格，关键单位由负责人经执行端自动派发，不靠追加用户手动转交来完成；缺手段时明确报告 `unknown` 和冻结等待。
+
+关键单位范围照录为两类：
+
+1. 每条失败路径的整体收场说明，即 `failurePaths[*].explanation`。
+2. `nodeId` 为 `gates`、`freeze`、`sign`、`revision`、`q-inheritance` 的所有正常走查步骤和失败步骤。
+
+按当前 JSON 静态枚举，关键单位共 16 个：10 段失败路径整体收场、3 个正常走查步骤、3 个失败步骤；另外 37 个为普通单位。六个关键步骤的 id 为 `wr-gates`、`wr-freeze`、`wr-sign`、`fail-checker-step-2`、`fail-candidate-step-3`、`fail-revocation-step-1`。这只是按 D1 规则核对范围，不表示这些单位已经实际复述或通过。
+
+连接 `c-gates-to-role-D8` 同步关键范围、派发责任和未知时的收场。已有 `fail-role` 路径补充 D8 关键单位无执行端自动派发手段的情景，明确 `unknown`、冻结等待、不得用合批或增加用户转交次数替代，并同步反例注入、技术说明及读者文字。没有新增失败路径或改变其他失败处理。
+
+其他节点仅更新合并稿依据提交，没有改动既有任务书、哈希、签发与撤回决定。本轮不修改 SPEC、MERGE_DECISIONS、流程文档或 A 原稿。数量仍为 54 个节点、14 条需求、48 条连接、4 条正常走查（22 步）、10 条失败路径（21 步及 10 段整体说明）、12 条依据记录、64 个验收器。验收器仍全部 `not-run`、运行记录为空；`versions: []` 不变。
+
+### 全部受影响复述单位
+
+以本轮开始时 HEAD 中的 JSON 为基线，调用固定检查器 `content/readability.ts` 的实际 `readerHash` 比较六项读者文字。7 个原有单位的文字哈希改变，完整清单如下；无新增单位，其余 46 个单位文字哈希未变。
+
+| 复述单位 id | 类型 | 改动字段 |
+| --- | --- | --- |
+| `ws-dispatch` | 正常步骤 | `expectedResult` |
+| `ws-prompts` | 正常步骤 | `expectedResult`、`onError` |
+| `wr-gates` | 正常步骤 | `expectedResult`、`why`、`onError` |
+| `wr-freeze` | 正常步骤 | `exampleData`、`onError` |
+| `fail-role-whole` | 失败路径整体收场 | `exampleData`、`expectedResult`、`onError` |
+| `fail-role-step-1` | 失败步骤 | `exampleData` |
+| `fail-role-step-2` | 失败步骤 | `exampleData`、`expectedResult`、`onError` |
+
+这些单位须按当前资格规则取得实际复述，不能复用旧文字的通过记录；其中关键单位必须独立新读者，普通单位可以依本轮规则合批。本次没有派发 D8、生成复述或补签读者记录。
+
+### 草稿检查与文件身份
+
+检查器工作树保持分支 `fix/draft-check-tier-20261111`，提交为 `c05edcf51bc93f8be82180fd4ad28a250937f195`。先加载已有 `nodejs/24.16.0`，再实际运行离线、在线草稿档各一次，未修改检查器源码。下列变量代表用户指定的两个工作树，实际命令传入 JSON 的绝对路径，公开文件不记录本机路径。
+
+```bash
+module load nodejs/24.16.0
+cd "$BLUEPRINT_WORKTREE/content"
+npx tsx check.mjs --stage draft --offline "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+```
+
+| 本轮检查 | 退出码 | 确定缺口 | 人工解释待审 | 未完成项 |
+| --- | ---: | ---: | ---: | ---: |
+| 离线草稿 | 2 | 0 | 92 | 3 |
+| 在线草稿 | 2 | 0 | 92 | 2 |
+
+离线检查时间为 `2026-11-12T03:20:50.277Z`，未完成项是离线未核实来源、缺 `readability-review.json`、缺 `questions.json`。在线检查时间为 `2026-11-12T03:21:41.002Z`，只剩上述两份读者记录缺失。两次均无确定内容缺口，退出码 2 仍不能记完整通过；92 项人工解释没有当作独立审阅完成。本次未实际验证读者自动派发能力、合批执行结果或 D8 冻结通过。
+
+新 JSON 的 SHA-256：
+
+```text
+5f540d3e744245fe3f80c46ff4a715c7f11f6b0008196a901ca2de61f80be423
+```
+
+合并稿依据更新到 `c24c2a8be4ea66cce5b3843e690a0127182aca5f`。本轮工作树改动尚无自己的提交号，按该 HEAD 加路径及上述摘要定位，不声称改动已存在于该提交中。只修改 JSON 并追加本说明；未 commit、未 push、未切分支。新 JSON 和整份说明按相同正则公开信息自查，匹配数均为零。没有需要 D1 新增决定的事项，尚待真实读者记录和规定关卡。
