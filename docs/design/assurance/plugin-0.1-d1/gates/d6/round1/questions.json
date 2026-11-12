@@ -1,0 +1,3782 @@
+[
+  {
+    "id": "q-shared-entry",
+    "nodeId": "shared",
+    "question": "用户正常进入“共用任务协议”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "shared.inputs",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-shared-output",
+    "nodeId": "shared",
+    "question": "“共用任务协议”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "shared.outputs",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-shared-authority",
+    "nodeId": "shared",
+    "question": "在“共用任务协议”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "shared.authority",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-shared-failure",
+    "nodeId": "shared",
+    "question": "“共用任务协议”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "shared.interface.emptyCases; shared.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-shared-acceptance",
+    "nodeId": "shared",
+    "question": "“共用任务协议”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "shared.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-shared-recovery",
+    "nodeId": "shared",
+    "question": "“共用任务协议”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "shared.interface.errors; shared.children",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-shared-regression",
+    "nodeId": "shared",
+    "question": "“共用任务协议”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "shared.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-state-entry",
+    "nodeId": "state",
+    "question": "用户正常进入“单一当前状态”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "state.inputs; state.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-state-output",
+    "nodeId": "state",
+    "question": "“单一当前状态”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "state.outputs; state.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-state-authority",
+    "nodeId": "state",
+    "question": "在“单一当前状态”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "state.authority",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-state-failure",
+    "nodeId": "state",
+    "question": "“单一当前状态”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "state.interface.emptyCases; state.interface.errors; state.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-state-acceptance",
+    "nodeId": "state",
+    "question": "“单一当前状态”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "state.validators; state.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-state-recovery",
+    "nodeId": "state",
+    "question": "已有任务的唯一 STATE.json 丢失、损坏到无法解析，或无法确认其当前修订时，负责人怎样恢复到可继续派发的权威状态？",
+    "answerLocation": null,
+    "gap": "Blueprint 明确把 STATE.json 定为唯一当前权威，并规定 history/events.jsonl 只能作审计和恢复线索、不能覆盖 STATE.json；record-check 只能只读检查结构。但没有定义已有 STATE.json 丢失或不可解析时，依据什么记录重建、由谁确认、怎样验证重建结果并重新取得可写基线。",
+    "impact": "一旦唯一状态文件丢失或损坏，负责人无法可靠确定 phase、step、state_writer、当前冻结对象和未决事项；dispatch 又要求有效 STATE，因而任务会停住且设计没有给出恢复出口。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "q-state-regression",
+    "nodeId": "state",
+    "question": "“单一当前状态”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "state.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-writer-entry",
+    "nodeId": "writer",
+    "question": "用户正常进入“写者交接与恢复”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "writer.inputs; writer.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-writer-output",
+    "nodeId": "writer",
+    "question": "“写者交接与恢复”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "writer.outputs; writer.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-writer-authority",
+    "nodeId": "writer",
+    "question": "在“写者交接与恢复”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "writer.authority",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-writer-failure",
+    "nodeId": "writer",
+    "question": "“写者交接与恢复”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "writer.interface.emptyCases; writer.interface.errors; writer.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-writer-acceptance",
+    "nodeId": "writer",
+    "question": "“写者交接与恢复”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "writer.validators; writer.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-writer-recovery",
+    "nodeId": "writer",
+    "question": "“写者交接与恢复”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "writer.terminal.retry; writer.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-writer-regression",
+    "nodeId": "writer",
+    "question": "“写者交接与恢复”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "writer.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-record-check-entry",
+    "nodeId": "record-check",
+    "question": "用户正常进入“记录结构检查”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "record-check.inputs; record-check.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-record-check-output",
+    "nodeId": "record-check",
+    "question": "“记录结构检查”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "record-check.outputs; record-check.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-record-check-authority",
+    "nodeId": "record-check",
+    "question": "在“记录结构检查”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "record-check.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-record-check-failure",
+    "nodeId": "record-check",
+    "question": "“记录结构检查”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "record-check.interface.emptyCases; record-check.interface.errors; record-check.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-record-check-acceptance",
+    "nodeId": "record-check",
+    "question": "“记录结构检查”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "record-check.validators; record-check.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-record-check-recovery",
+    "nodeId": "record-check",
+    "question": "“记录结构检查”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "record-check.terminal.retry; record-check.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-record-check-regression",
+    "nodeId": "record-check",
+    "question": "“记录结构检查”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "record-check.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-dispatch-entry",
+    "nodeId": "dispatch",
+    "question": "用户正常进入“按条件派发”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "dispatch.inputs; dispatch.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-dispatch-output",
+    "nodeId": "dispatch",
+    "question": "“按条件派发”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "dispatch.outputs; dispatch.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-dispatch-authority",
+    "nodeId": "dispatch",
+    "question": "冻结交接完成后，交付阶段的执行端角色 X2–X4 到底由 D1 还是 X1 直接派发？",
+    "answerLocation": "dispatch.inputs; dispatch.outputs; dispatch.interface.boundaries; dispatch.terminal.mechanism; role-X1.terminal.mechanism",
+    "gap": "同一 Blueprint 给出了互相冲突的派发权：dispatch 多处规定 D4、D5、D7、X2–X4 由 D1 直接派发，但 dispatch.terminal.mechanism 的 X1-intake 又规定新 X1 接收后“派 X2”，role-X1.terminal.mechanism 也把安排实现、校准、专项和独立判断列为 X1 职责。交付阶段的唯一派发责任人因此无法从设计中唯一确定。",
+    "impact": "用户在冻结交接后的第一步实施就可能不知道应把 X2–X4 交给谁；D1 与 X1 可能同时认为自己有派发权，造成越权、重复派发或交付状态与实际负责人不一致，直接阻塞可靠开工。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "q-dispatch-failure",
+    "nodeId": "dispatch",
+    "question": "“按条件派发”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "dispatch.interface.emptyCases; dispatch.interface.errors; dispatch.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-dispatch-acceptance",
+    "nodeId": "dispatch",
+    "question": "“按条件派发”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "dispatch.validators; dispatch.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-dispatch-recovery",
+    "nodeId": "dispatch",
+    "question": "“按条件派发”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "dispatch.terminal.retry; dispatch.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-dispatch-regression",
+    "nodeId": "dispatch",
+    "question": "“按条件派发”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "dispatch.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-prompts-entry",
+    "nodeId": "prompts",
+    "question": "用户正常进入“自包含提示词”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "prompts.inputs; prompts.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-prompts-output",
+    "nodeId": "prompts",
+    "question": "“自包含提示词”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "prompts.outputs; prompts.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-prompts-authority",
+    "nodeId": "prompts",
+    "question": "在“自包含提示词”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "prompts.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-prompts-failure",
+    "nodeId": "prompts",
+    "question": "“自包含提示词”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "prompts.interface.emptyCases; prompts.interface.errors; prompts.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-prompts-acceptance",
+    "nodeId": "prompts",
+    "question": "“自包含提示词”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "prompts.validators; prompts.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-prompts-recovery",
+    "nodeId": "prompts",
+    "question": "“自包含提示词”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "prompts.terminal.retry; prompts.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-prompts-regression",
+    "nodeId": "prompts",
+    "question": "“自包含提示词”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "prompts.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-revision-entry",
+    "nodeId": "revision",
+    "question": "用户正常进入“修订与告知”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "revision.inputs; revision.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-revision-output",
+    "nodeId": "revision",
+    "question": "“修订与告知”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "revision.outputs; revision.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-revision-authority",
+    "nodeId": "revision",
+    "question": "在“修订与告知”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "revision.authority",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-revision-failure",
+    "nodeId": "revision",
+    "question": "“修订与告知”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "revision.interface.emptyCases; revision.interface.errors; revision.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-revision-acceptance",
+    "nodeId": "revision",
+    "question": "“修订与告知”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "revision.validators; revision.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-revision-recovery",
+    "nodeId": "revision",
+    "question": "“修订与告知”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "revision.terminal.retry; revision.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-revision-regression",
+    "nodeId": "revision",
+    "question": "“修订与告知”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "revision.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-metrics-entry",
+    "nodeId": "metrics",
+    "question": "用户正常进入“三项衡量”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "metrics.inputs; metrics.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-metrics-output",
+    "nodeId": "metrics",
+    "question": "“三项衡量”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "metrics.outputs; metrics.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-metrics-authority",
+    "nodeId": "metrics",
+    "question": "在“三项衡量”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "metrics.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-metrics-failure",
+    "nodeId": "metrics",
+    "question": "“三项衡量”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "metrics.interface.emptyCases; metrics.interface.errors; metrics.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-metrics-acceptance",
+    "nodeId": "metrics",
+    "question": "“三项衡量”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "metrics.validators; metrics.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-metrics-recovery",
+    "nodeId": "metrics",
+    "question": "“三项衡量”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "metrics.terminal.retry; metrics.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-metrics-regression",
+    "nodeId": "metrics",
+    "question": "“三项衡量”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "metrics.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-design-entry",
+    "nodeId": "design",
+    "question": "用户正常进入“设计保障”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "design.inputs",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-design-output",
+    "nodeId": "design",
+    "question": "“设计保障”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "design.outputs",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-design-authority",
+    "nodeId": "design",
+    "question": "在“设计保障”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "design.authority",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-design-failure",
+    "nodeId": "design",
+    "question": "“设计保障”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "design.interface.emptyCases; design.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-design-acceptance",
+    "nodeId": "design",
+    "question": "“设计保障”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "design.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-design-recovery",
+    "nodeId": "design",
+    "question": "“设计保障”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "design.interface.errors; design.children",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-design-regression",
+    "nodeId": "design",
+    "question": "“设计保障”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "design.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-design-roles-entry",
+    "nodeId": "design-roles",
+    "question": "用户正常进入“设计角色”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "design-roles.inputs",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-design-roles-output",
+    "nodeId": "design-roles",
+    "question": "“设计角色”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "design-roles.outputs",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-design-roles-authority",
+    "nodeId": "design-roles",
+    "question": "在“设计角色”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "design-roles.authority",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-design-roles-failure",
+    "nodeId": "design-roles",
+    "question": "“设计角色”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "design-roles.interface.emptyCases; design-roles.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-design-roles-acceptance",
+    "nodeId": "design-roles",
+    "question": "“设计角色”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "design-roles.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-design-roles-recovery",
+    "nodeId": "design-roles",
+    "question": "“设计角色”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "design-roles.interface.errors; design-roles.children",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-design-roles-regression",
+    "nodeId": "design-roles",
+    "question": "“设计角色”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "design-roles.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D1-entry",
+    "nodeId": "role-D1",
+    "question": "用户正常进入“D1：负责人”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "role-D1.inputs; role-D1.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D1-output",
+    "nodeId": "role-D1",
+    "question": "“D1：负责人”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "role-D1.outputs; role-D1.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D1-authority",
+    "nodeId": "role-D1",
+    "question": "在“D1：负责人”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "role-D1.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D1-failure",
+    "nodeId": "role-D1",
+    "question": "“D1：负责人”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "role-D1.interface.emptyCases; role-D1.interface.errors; role-D1.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D1-acceptance",
+    "nodeId": "role-D1",
+    "question": "“D1：负责人”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "role-D1.validators; role-D1.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D1-recovery",
+    "nodeId": "role-D1",
+    "question": "“D1：负责人”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "role-D1.terminal.retry; role-D1.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D1-regression",
+    "nodeId": "role-D1",
+    "question": "“D1：负责人”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "role-D1.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D2-entry",
+    "nodeId": "role-D2",
+    "question": "用户正常进入“D2：独立甲”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "role-D2.inputs; role-D2.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D2-output",
+    "nodeId": "role-D2",
+    "question": "“D2：独立甲”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "role-D2.outputs; role-D2.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D2-authority",
+    "nodeId": "role-D2",
+    "question": "在“D2：独立甲”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "role-D2.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D2-failure",
+    "nodeId": "role-D2",
+    "question": "“D2：独立甲”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "role-D2.interface.emptyCases; role-D2.interface.errors; role-D2.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D2-acceptance",
+    "nodeId": "role-D2",
+    "question": "“D2：独立甲”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "role-D2.validators; role-D2.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D2-recovery",
+    "nodeId": "role-D2",
+    "question": "“D2：独立甲”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "role-D2.terminal.retry; role-D2.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D2-regression",
+    "nodeId": "role-D2",
+    "question": "“D2：独立甲”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "role-D2.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D3-entry",
+    "nodeId": "role-D3",
+    "question": "用户正常进入“D3：独立乙”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "role-D3.inputs; role-D3.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D3-output",
+    "nodeId": "role-D3",
+    "question": "“D3：独立乙”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "role-D3.outputs; role-D3.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D3-authority",
+    "nodeId": "role-D3",
+    "question": "在“D3：独立乙”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "role-D3.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D3-failure",
+    "nodeId": "role-D3",
+    "question": "“D3：独立乙”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "role-D3.interface.emptyCases; role-D3.interface.errors; role-D3.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D3-acceptance",
+    "nodeId": "role-D3",
+    "question": "“D3：独立乙”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "role-D3.validators; role-D3.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D3-recovery",
+    "nodeId": "role-D3",
+    "question": "“D3：独立乙”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "role-D3.terminal.retry; role-D3.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D3-regression",
+    "nodeId": "role-D3",
+    "question": "“D3：独立乙”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "role-D3.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D4-entry",
+    "nodeId": "role-D4",
+    "question": "用户正常进入“D4：现实核查”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "role-D4.inputs; role-D4.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D4-output",
+    "nodeId": "role-D4",
+    "question": "“D4：现实核查”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "role-D4.outputs; role-D4.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D4-authority",
+    "nodeId": "role-D4",
+    "question": "在“D4：现实核查”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "role-D4.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D4-failure",
+    "nodeId": "role-D4",
+    "question": "“D4：现实核查”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "role-D4.interface.emptyCases; role-D4.interface.errors; role-D4.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D4-acceptance",
+    "nodeId": "role-D4",
+    "question": "“D4：现实核查”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "role-D4.validators; role-D4.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D4-recovery",
+    "nodeId": "role-D4",
+    "question": "“D4：现实核查”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "role-D4.terminal.retry; role-D4.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D4-regression",
+    "nodeId": "role-D4",
+    "question": "“D4：现实核查”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "role-D4.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D5-entry",
+    "nodeId": "role-D5",
+    "question": "用户正常进入“D5：格式检查”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "role-D5.inputs; role-D5.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D5-output",
+    "nodeId": "role-D5",
+    "question": "“D5：格式检查”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "role-D5.outputs; role-D5.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D5-authority",
+    "nodeId": "role-D5",
+    "question": "在“D5：格式检查”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "role-D5.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D5-failure",
+    "nodeId": "role-D5",
+    "question": "“D5：格式检查”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "role-D5.interface.emptyCases; role-D5.interface.errors; role-D5.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D5-acceptance",
+    "nodeId": "role-D5",
+    "question": "“D5：格式检查”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "role-D5.validators; role-D5.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D5-recovery",
+    "nodeId": "role-D5",
+    "question": "“D5：格式检查”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "role-D5.terminal.retry; role-D5.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D5-regression",
+    "nodeId": "role-D5",
+    "question": "“D5：格式检查”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "role-D5.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D6-entry",
+    "nodeId": "role-D6",
+    "question": "用户正常进入“D6：用户追问”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "role-D6.inputs; role-D6.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D6-output",
+    "nodeId": "role-D6",
+    "question": "“D6：用户追问”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "role-D6.outputs; role-D6.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D6-authority",
+    "nodeId": "role-D6",
+    "question": "在“D6：用户追问”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "role-D6.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D6-failure",
+    "nodeId": "role-D6",
+    "question": "“D6：用户追问”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "role-D6.interface.emptyCases; role-D6.interface.errors; role-D6.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D6-acceptance",
+    "nodeId": "role-D6",
+    "question": "“D6：用户追问”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "role-D6.validators; role-D6.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D6-recovery",
+    "nodeId": "role-D6",
+    "question": "“D6：用户追问”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "role-D6.terminal.retry; role-D6.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D6-regression",
+    "nodeId": "role-D6",
+    "question": "“D6：用户追问”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "role-D6.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D7-entry",
+    "nodeId": "role-D7",
+    "question": "用户正常进入“D7：冷读开工”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "role-D7.inputs; role-D7.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D7-output",
+    "nodeId": "role-D7",
+    "question": "“D7：冷读开工”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "role-D7.outputs; role-D7.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D7-authority",
+    "nodeId": "role-D7",
+    "question": "在“D7：冷读开工”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "role-D7.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D7-failure",
+    "nodeId": "role-D7",
+    "question": "“D7：冷读开工”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "role-D7.interface.emptyCases; role-D7.interface.errors; role-D7.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D7-acceptance",
+    "nodeId": "role-D7",
+    "question": "“D7：冷读开工”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "role-D7.validators; role-D7.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D7-recovery",
+    "nodeId": "role-D7",
+    "question": "“D7：冷读开工”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "role-D7.terminal.retry; role-D7.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D7-regression",
+    "nodeId": "role-D7",
+    "question": "“D7：冷读开工”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "role-D7.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D8-entry",
+    "nodeId": "role-D8",
+    "question": "用户正常进入“D8：逐步复述”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "role-D8.inputs; role-D8.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D8-output",
+    "nodeId": "role-D8",
+    "question": "“D8：逐步复述”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "role-D8.outputs; role-D8.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D8-authority",
+    "nodeId": "role-D8",
+    "question": "在“D8：逐步复述”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "role-D8.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D8-failure",
+    "nodeId": "role-D8",
+    "question": "“D8：逐步复述”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "role-D8.interface.emptyCases; role-D8.interface.errors; role-D8.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D8-acceptance",
+    "nodeId": "role-D8",
+    "question": "“D8：逐步复述”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "role-D8.validators; role-D8.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D8-recovery",
+    "nodeId": "role-D8",
+    "question": "“D8：逐步复述”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "role-D8.terminal.retry; role-D8.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-D8-regression",
+    "nodeId": "role-D8",
+    "question": "“D8：逐步复述”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "role-D8.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-clarify-entry",
+    "nodeId": "clarify",
+    "question": "用户正常进入“澄清与需求落图”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "clarify.inputs; clarify.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-clarify-output",
+    "nodeId": "clarify",
+    "question": "“澄清与需求落图”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "clarify.outputs; clarify.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-clarify-authority",
+    "nodeId": "clarify",
+    "question": "在“澄清与需求落图”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "clarify.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-clarify-failure",
+    "nodeId": "clarify",
+    "question": "“澄清与需求落图”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "clarify.interface.emptyCases; clarify.interface.errors; clarify.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-clarify-acceptance",
+    "nodeId": "clarify",
+    "question": "“澄清与需求落图”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "clarify.validators; clarify.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-clarify-recovery",
+    "nodeId": "clarify",
+    "question": "“澄清与需求落图”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "clarify.terminal.retry; clarify.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-clarify-regression",
+    "nodeId": "clarify",
+    "question": "“澄清与需求落图”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "clarify.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-gates-entry",
+    "nodeId": "gates",
+    "question": "用户正常进入“四项冻结关卡”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "gates.inputs; gates.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-gates-output",
+    "nodeId": "gates",
+    "question": "“四项冻结关卡”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "gates.outputs; gates.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-gates-authority",
+    "nodeId": "gates",
+    "question": "在“四项冻结关卡”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "gates.authority",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-gates-failure",
+    "nodeId": "gates",
+    "question": "“四项冻结关卡”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "gates.interface.emptyCases; gates.interface.errors; gates.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-gates-acceptance",
+    "nodeId": "gates",
+    "question": "“四项冻结关卡”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "gates.validators; gates.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-gates-recovery",
+    "nodeId": "gates",
+    "question": "“四项冻结关卡”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "gates.terminal.retry; gates.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-gates-regression",
+    "nodeId": "gates",
+    "question": "“四项冻结关卡”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "gates.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-entry",
+    "nodeId": "contract",
+    "question": "用户正常进入“九项冻结合同”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "contract.inputs",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-output",
+    "nodeId": "contract",
+    "question": "“九项冻结合同”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "contract.outputs",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-authority",
+    "nodeId": "contract",
+    "question": "在“九项冻结合同”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "contract.authority",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-failure",
+    "nodeId": "contract",
+    "question": "“九项冻结合同”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "contract.interface.emptyCases; contract.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-acceptance",
+    "nodeId": "contract",
+    "question": "“九项冻结合同”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "contract.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-recovery",
+    "nodeId": "contract",
+    "question": "“九项冻结合同”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "contract.interface.errors; contract.children",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-regression",
+    "nodeId": "contract",
+    "question": "“九项冻结合同”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "contract.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-capability-entry",
+    "nodeId": "contract-capability",
+    "question": "用户正常进入“能力与声明”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "contract-capability.inputs; contract-capability.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-capability-output",
+    "nodeId": "contract-capability",
+    "question": "“能力与声明”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "contract-capability.outputs; contract-capability.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-capability-authority",
+    "nodeId": "contract-capability",
+    "question": "在“能力与声明”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "contract-capability.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-capability-failure",
+    "nodeId": "contract-capability",
+    "question": "“能力与声明”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "contract-capability.interface.emptyCases; contract-capability.interface.errors; contract-capability.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-capability-acceptance",
+    "nodeId": "contract-capability",
+    "question": "“能力与声明”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "contract-capability.validators; contract-capability.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-capability-recovery",
+    "nodeId": "contract-capability",
+    "question": "“能力与声明”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "contract-capability.terminal.retry; contract-capability.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-capability-regression",
+    "nodeId": "contract-capability",
+    "question": "“能力与声明”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "contract-capability.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-entry-entry",
+    "nodeId": "contract-entry",
+    "question": "用户正常进入“正常入口与成品”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "contract-entry.inputs; contract-entry.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-entry-output",
+    "nodeId": "contract-entry",
+    "question": "“正常入口与成品”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "contract-entry.outputs; contract-entry.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-entry-authority",
+    "nodeId": "contract-entry",
+    "question": "在“正常入口与成品”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "contract-entry.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-entry-failure",
+    "nodeId": "contract-entry",
+    "question": "“正常入口与成品”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "contract-entry.interface.emptyCases; contract-entry.interface.errors; contract-entry.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-entry-acceptance",
+    "nodeId": "contract-entry",
+    "question": "“正常入口与成品”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "contract-entry.validators; contract-entry.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-entry-recovery",
+    "nodeId": "contract-entry",
+    "question": "“正常入口与成品”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "contract-entry.terminal.retry; contract-entry.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-entry-regression",
+    "nodeId": "contract-entry",
+    "question": "“正常入口与成品”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "contract-entry.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-outcomes-entry",
+    "nodeId": "contract-outcomes",
+    "question": "用户正常进入“成功失败与未知”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "contract-outcomes.inputs; contract-outcomes.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-outcomes-output",
+    "nodeId": "contract-outcomes",
+    "question": "“成功失败与未知”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "contract-outcomes.outputs; contract-outcomes.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-outcomes-authority",
+    "nodeId": "contract-outcomes",
+    "question": "在“成功失败与未知”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "contract-outcomes.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-outcomes-failure",
+    "nodeId": "contract-outcomes",
+    "question": "“成功失败与未知”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "contract-outcomes.interface.emptyCases; contract-outcomes.interface.errors; contract-outcomes.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-outcomes-acceptance",
+    "nodeId": "contract-outcomes",
+    "question": "“成功失败与未知”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "contract-outcomes.validators; contract-outcomes.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-outcomes-recovery",
+    "nodeId": "contract-outcomes",
+    "question": "“成功失败与未知”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "contract-outcomes.terminal.retry; contract-outcomes.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-outcomes-regression",
+    "nodeId": "contract-outcomes",
+    "question": "“成功失败与未知”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "contract-outcomes.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-fidelity-entry",
+    "nodeId": "contract-fidelity",
+    "question": "用户正常进入“证据真实度”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "contract-fidelity.inputs; contract-fidelity.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-fidelity-output",
+    "nodeId": "contract-fidelity",
+    "question": "“证据真实度”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "contract-fidelity.outputs; contract-fidelity.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-fidelity-authority",
+    "nodeId": "contract-fidelity",
+    "question": "在“证据真实度”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "contract-fidelity.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-fidelity-failure",
+    "nodeId": "contract-fidelity",
+    "question": "“证据真实度”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "contract-fidelity.interface.emptyCases; contract-fidelity.interface.errors; contract-fidelity.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-fidelity-acceptance",
+    "nodeId": "contract-fidelity",
+    "question": "“证据真实度”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "contract-fidelity.validators; contract-fidelity.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-fidelity-recovery",
+    "nodeId": "contract-fidelity",
+    "question": "“证据真实度”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "contract-fidelity.terminal.retry; contract-fidelity.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-fidelity-regression",
+    "nodeId": "contract-fidelity",
+    "question": "“证据真实度”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "contract-fidelity.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-forbidden-entry",
+    "nodeId": "contract-forbidden",
+    "question": "用户正常进入“禁止替代”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "contract-forbidden.inputs; contract-forbidden.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-forbidden-output",
+    "nodeId": "contract-forbidden",
+    "question": "“禁止替代”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "contract-forbidden.outputs; contract-forbidden.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-forbidden-authority",
+    "nodeId": "contract-forbidden",
+    "question": "在“禁止替代”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "contract-forbidden.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-forbidden-failure",
+    "nodeId": "contract-forbidden",
+    "question": "“禁止替代”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "contract-forbidden.interface.emptyCases; contract-forbidden.interface.errors; contract-forbidden.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-forbidden-acceptance",
+    "nodeId": "contract-forbidden",
+    "question": "“禁止替代”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "contract-forbidden.validators; contract-forbidden.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-forbidden-recovery",
+    "nodeId": "contract-forbidden",
+    "question": "“禁止替代”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "contract-forbidden.terminal.retry; contract-forbidden.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-forbidden-regression",
+    "nodeId": "contract-forbidden",
+    "question": "“禁止替代”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "contract-forbidden.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-regression-entry",
+    "nodeId": "contract-regression",
+    "question": "用户正常进入“已有能力保护”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "contract-regression.inputs; contract-regression.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-regression-output",
+    "nodeId": "contract-regression",
+    "question": "“已有能力保护”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "contract-regression.outputs; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-regression-authority",
+    "nodeId": "contract-regression",
+    "question": "在“已有能力保护”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-regression-failure",
+    "nodeId": "contract-regression",
+    "question": "“已有能力保护”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "contract-regression.interface.emptyCases; contract-regression.interface.errors; contract-regression.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-regression-acceptance",
+    "nodeId": "contract-regression",
+    "question": "“已有能力保护”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "contract-regression.validators; contract-regression.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-regression-recovery",
+    "nodeId": "contract-regression",
+    "question": "“已有能力保护”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "contract-regression.terminal.retry; contract-regression.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-regression-regression",
+    "nodeId": "contract-regression",
+    "question": "“已有能力保护”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "contract-regression.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-controls-entry",
+    "nodeId": "contract-controls",
+    "question": "用户正常进入“三类控制例”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "contract-controls.inputs; contract-controls.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-controls-output",
+    "nodeId": "contract-controls",
+    "question": "“三类控制例”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "contract-controls.outputs; contract-controls.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-controls-authority",
+    "nodeId": "contract-controls",
+    "question": "在“三类控制例”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "contract-controls.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-controls-failure",
+    "nodeId": "contract-controls",
+    "question": "“三类控制例”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "contract-controls.interface.emptyCases; contract-controls.interface.errors; contract-controls.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-controls-acceptance",
+    "nodeId": "contract-controls",
+    "question": "“三类控制例”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "contract-controls.validators; contract-controls.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-controls-recovery",
+    "nodeId": "contract-controls",
+    "question": "“三类控制例”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "contract-controls.terminal.retry; contract-controls.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-controls-regression",
+    "nodeId": "contract-controls",
+    "question": "“三类控制例”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "contract-controls.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-changes-entry",
+    "nodeId": "contract-changes",
+    "question": "用户正常进入“交付修改与退回”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "contract-changes.inputs; contract-changes.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-changes-output",
+    "nodeId": "contract-changes",
+    "question": "“交付修改与退回”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "contract-changes.outputs; contract-changes.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-changes-authority",
+    "nodeId": "contract-changes",
+    "question": "在“交付修改与退回”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "contract-changes.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-changes-failure",
+    "nodeId": "contract-changes",
+    "question": "“交付修改与退回”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "contract-changes.interface.emptyCases; contract-changes.interface.errors; contract-changes.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-changes-acceptance",
+    "nodeId": "contract-changes",
+    "question": "“交付修改与退回”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "contract-changes.validators; contract-changes.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-changes-recovery",
+    "nodeId": "contract-changes",
+    "question": "“交付修改与退回”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "contract-changes.terminal.retry; contract-changes.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-changes-regression",
+    "nodeId": "contract-changes",
+    "question": "“交付修改与退回”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "contract-changes.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-authorization-entry",
+    "nodeId": "contract-authorization",
+    "question": "用户正常进入“资源与授权”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "contract-authorization.inputs; contract-authorization.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-authorization-output",
+    "nodeId": "contract-authorization",
+    "question": "“资源与授权”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "contract-authorization.outputs; contract-authorization.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-authorization-authority",
+    "nodeId": "contract-authorization",
+    "question": "在“资源与授权”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "contract-authorization.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-authorization-failure",
+    "nodeId": "contract-authorization",
+    "question": "“资源与授权”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "contract-authorization.interface.emptyCases; contract-authorization.interface.errors; contract-authorization.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-authorization-acceptance",
+    "nodeId": "contract-authorization",
+    "question": "“资源与授权”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "contract-authorization.validators; contract-authorization.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-authorization-recovery",
+    "nodeId": "contract-authorization",
+    "question": "“资源与授权”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "contract-authorization.terminal.retry; contract-authorization.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-contract-authorization-regression",
+    "nodeId": "contract-authorization",
+    "question": "“资源与授权”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "contract-authorization.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-freeze-entry",
+    "nodeId": "freeze",
+    "question": "用户正常进入“批准与冻结交接”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "freeze.inputs; freeze.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-freeze-output",
+    "nodeId": "freeze",
+    "question": "“批准与冻结交接”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "freeze.outputs; freeze.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-freeze-authority",
+    "nodeId": "freeze",
+    "question": "在“批准与冻结交接”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "freeze.authority",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-freeze-failure",
+    "nodeId": "freeze",
+    "question": "“批准与冻结交接”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "freeze.interface.emptyCases; freeze.interface.errors; freeze.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-freeze-acceptance",
+    "nodeId": "freeze",
+    "question": "“批准与冻结交接”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "freeze.validators; freeze.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-freeze-recovery",
+    "nodeId": "freeze",
+    "question": "“批准与冻结交接”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "freeze.terminal.retry; freeze.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-freeze-regression",
+    "nodeId": "freeze",
+    "question": "“批准与冻结交接”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "freeze.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-checker-entry",
+    "nodeId": "q-checker",
+    "question": "用户正常进入“草稿与冻结检查”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "q-checker.inputs; q-checker.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-checker-output",
+    "nodeId": "q-checker",
+    "question": "“草稿与冻结检查”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "q-checker.outputs; q-checker.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-checker-authority",
+    "nodeId": "q-checker",
+    "question": "在“草稿与冻结检查”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "q-checker.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-checker-failure",
+    "nodeId": "q-checker",
+    "question": "“草稿与冻结检查”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "q-checker.interface.emptyCases; q-checker.interface.errors; q-checker.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-checker-acceptance",
+    "nodeId": "q-checker",
+    "question": "“草稿与冻结检查”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "q-checker.validators; q-checker.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-checker-recovery",
+    "nodeId": "q-checker",
+    "question": "“草稿与冻结检查”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "q-checker.terminal.retry; q-checker.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-checker-regression",
+    "nodeId": "q-checker",
+    "question": "“草稿与冻结检查”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "q-checker.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-inheritance-entry",
+    "nodeId": "q-inheritance",
+    "question": "用户正常进入“小修批准继承”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "q-inheritance.inputs; q-inheritance.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-inheritance-output",
+    "nodeId": "q-inheritance",
+    "question": "“小修批准继承”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "q-inheritance.outputs; q-inheritance.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-inheritance-authority",
+    "nodeId": "q-inheritance",
+    "question": "在“小修批准继承”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "q-inheritance.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-inheritance-failure",
+    "nodeId": "q-inheritance",
+    "question": "“小修批准继承”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "q-inheritance.interface.emptyCases; q-inheritance.interface.errors; q-inheritance.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-inheritance-acceptance",
+    "nodeId": "q-inheritance",
+    "question": "“小修批准继承”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "q-inheritance.validators; q-inheritance.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-inheritance-recovery",
+    "nodeId": "q-inheritance",
+    "question": "“小修批准继承”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "q-inheritance.terminal.retry; q-inheritance.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-inheritance-regression",
+    "nodeId": "q-inheritance",
+    "question": "“小修批准继承”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "q-inheritance.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-delivery-entry",
+    "nodeId": "delivery",
+    "question": "用户正常进入“交付保障”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "delivery.inputs",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-delivery-output",
+    "nodeId": "delivery",
+    "question": "“交付保障”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "delivery.outputs",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-delivery-authority",
+    "nodeId": "delivery",
+    "question": "在“交付保障”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "delivery.authority",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-delivery-failure",
+    "nodeId": "delivery",
+    "question": "“交付保障”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "delivery.interface.emptyCases; delivery.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-delivery-acceptance",
+    "nodeId": "delivery",
+    "question": "“交付保障”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "delivery.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-delivery-recovery",
+    "nodeId": "delivery",
+    "question": "“交付保障”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "delivery.interface.errors; delivery.children",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-delivery-regression",
+    "nodeId": "delivery",
+    "question": "“交付保障”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "delivery.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-delivery-roles-entry",
+    "nodeId": "delivery-roles",
+    "question": "用户正常进入“交付角色”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "delivery-roles.inputs",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-delivery-roles-output",
+    "nodeId": "delivery-roles",
+    "question": "“交付角色”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "delivery-roles.outputs",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-delivery-roles-authority",
+    "nodeId": "delivery-roles",
+    "question": "在“交付角色”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "delivery-roles.authority",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-delivery-roles-failure",
+    "nodeId": "delivery-roles",
+    "question": "“交付角色”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "delivery-roles.interface.emptyCases; delivery-roles.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-delivery-roles-acceptance",
+    "nodeId": "delivery-roles",
+    "question": "“交付角色”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "delivery-roles.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-delivery-roles-recovery",
+    "nodeId": "delivery-roles",
+    "question": "“交付角色”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "delivery-roles.interface.errors; delivery-roles.children",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-delivery-roles-regression",
+    "nodeId": "delivery-roles",
+    "question": "“交付角色”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "delivery-roles.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X1-entry",
+    "nodeId": "role-X1",
+    "question": "用户正常进入“X1：负责人”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "role-X1.inputs; role-X1.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X1-output",
+    "nodeId": "role-X1",
+    "question": "“X1：负责人”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "role-X1.outputs; role-X1.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X1-authority",
+    "nodeId": "role-X1",
+    "question": "在“X1：负责人”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "role-X1.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X1-failure",
+    "nodeId": "role-X1",
+    "question": "“X1：负责人”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "role-X1.interface.emptyCases; role-X1.interface.errors; role-X1.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X1-acceptance",
+    "nodeId": "role-X1",
+    "question": "“X1：负责人”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "role-X1.validators; role-X1.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X1-recovery",
+    "nodeId": "role-X1",
+    "question": "“X1：负责人”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "role-X1.terminal.retry; role-X1.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X1-regression",
+    "nodeId": "role-X1",
+    "question": "“X1：负责人”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "role-X1.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X2-entry",
+    "nodeId": "role-X2",
+    "question": "用户正常进入“X2：实现者”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "role-X2.inputs; role-X2.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X2-output",
+    "nodeId": "role-X2",
+    "question": "“X2：实现者”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "role-X2.outputs; role-X2.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X2-authority",
+    "nodeId": "role-X2",
+    "question": "在“X2：实现者”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "role-X2.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X2-failure",
+    "nodeId": "role-X2",
+    "question": "“X2：实现者”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "role-X2.interface.emptyCases; role-X2.interface.errors; role-X2.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X2-acceptance",
+    "nodeId": "role-X2",
+    "question": "“X2：实现者”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "role-X2.validators; role-X2.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X2-recovery",
+    "nodeId": "role-X2",
+    "question": "“X2：实现者”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "role-X2.terminal.retry; role-X2.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X2-regression",
+    "nodeId": "role-X2",
+    "question": "“X2：实现者”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "role-X2.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X3-entry",
+    "nodeId": "role-X3",
+    "question": "用户正常进入“X3：独立验收”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "role-X3.inputs; role-X3.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X3-output",
+    "nodeId": "role-X3",
+    "question": "“X3：独立验收”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "role-X3.outputs; role-X3.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X3-authority",
+    "nodeId": "role-X3",
+    "question": "在“X3：独立验收”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "role-X3.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X3-failure",
+    "nodeId": "role-X3",
+    "question": "“X3：独立验收”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "role-X3.interface.emptyCases; role-X3.interface.errors; role-X3.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X3-acceptance",
+    "nodeId": "role-X3",
+    "question": "“X3：独立验收”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "role-X3.validators; role-X3.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X3-recovery",
+    "nodeId": "role-X3",
+    "question": "“X3：独立验收”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "role-X3.terminal.retry; role-X3.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X3-regression",
+    "nodeId": "role-X3",
+    "question": "“X3：独立验收”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "role-X3.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X4-entry",
+    "nodeId": "role-X4",
+    "question": "用户正常进入“X4：专项检查”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "role-X4.inputs; role-X4.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X4-output",
+    "nodeId": "role-X4",
+    "question": "“X4：专项检查”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "role-X4.outputs; role-X4.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X4-authority",
+    "nodeId": "role-X4",
+    "question": "在“X4：专项检查”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "role-X4.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X4-failure",
+    "nodeId": "role-X4",
+    "question": "“X4：专项检查”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "role-X4.interface.emptyCases; role-X4.interface.errors; role-X4.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X4-acceptance",
+    "nodeId": "role-X4",
+    "question": "“X4：专项检查”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "role-X4.validators; role-X4.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X4-recovery",
+    "nodeId": "role-X4",
+    "question": "“X4：专项检查”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "role-X4.terminal.retry; role-X4.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X4-regression",
+    "nodeId": "role-X4",
+    "question": "“X4：专项检查”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "role-X4.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X5-entry",
+    "nodeId": "role-X5",
+    "question": "用户正常进入“X5：专业裁判”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "role-X5.inputs; role-X5.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X5-output",
+    "nodeId": "role-X5",
+    "question": "“X5：专业裁判”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "role-X5.outputs; role-X5.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X5-authority",
+    "nodeId": "role-X5",
+    "question": "在“X5：专业裁判”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "role-X5.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X5-failure",
+    "nodeId": "role-X5",
+    "question": "“X5：专业裁判”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "role-X5.interface.emptyCases; role-X5.interface.errors; role-X5.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X5-acceptance",
+    "nodeId": "role-X5",
+    "question": "“X5：专业裁判”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "role-X5.validators; role-X5.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X5-recovery",
+    "nodeId": "role-X5",
+    "question": "“X5：专业裁判”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "role-X5.terminal.retry; role-X5.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-role-X5-regression",
+    "nodeId": "role-X5",
+    "question": "“X5：专业裁判”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "role-X5.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-acceptance-entry",
+    "nodeId": "acceptance",
+    "question": "用户正常进入“验收资产分级”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "acceptance.inputs; acceptance.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-acceptance-output",
+    "nodeId": "acceptance",
+    "question": "“验收资产分级”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "acceptance.outputs; acceptance.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-acceptance-authority",
+    "nodeId": "acceptance",
+    "question": "在“验收资产分级”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "acceptance.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-acceptance-failure",
+    "nodeId": "acceptance",
+    "question": "“验收资产分级”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "acceptance.interface.emptyCases; acceptance.interface.errors; acceptance.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-acceptance-acceptance",
+    "nodeId": "acceptance",
+    "question": "“验收资产分级”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "acceptance.validators; acceptance.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-acceptance-recovery",
+    "nodeId": "acceptance",
+    "question": "“验收资产分级”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "acceptance.terminal.retry; acceptance.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-acceptance-regression",
+    "nodeId": "acceptance",
+    "question": "“验收资产分级”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "acceptance.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-calibration-entry",
+    "nodeId": "calibration",
+    "question": "用户正常进入“验收器三类校准”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "calibration.inputs; calibration.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-calibration-output",
+    "nodeId": "calibration",
+    "question": "“验收器三类校准”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "calibration.outputs; calibration.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-calibration-authority",
+    "nodeId": "calibration",
+    "question": "在“验收器三类校准”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "calibration.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-calibration-failure",
+    "nodeId": "calibration",
+    "question": "“验收器三类校准”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "calibration.interface.emptyCases; calibration.interface.errors; calibration.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-calibration-acceptance",
+    "nodeId": "calibration",
+    "question": "“验收器三类校准”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "calibration.validators; calibration.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-calibration-recovery",
+    "nodeId": "calibration",
+    "question": "“验收器三类校准”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "calibration.terminal.retry; calibration.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-calibration-regression",
+    "nodeId": "calibration",
+    "question": "“验收器三类校准”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "calibration.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-candidate-entry",
+    "nodeId": "candidate",
+    "question": "用户正常进入“最终候选身份”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "candidate.inputs; candidate.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-candidate-output",
+    "nodeId": "candidate",
+    "question": "“最终候选身份”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "candidate.outputs; candidate.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-candidate-authority",
+    "nodeId": "candidate",
+    "question": "在“最终候选身份”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "candidate.authority",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-candidate-failure",
+    "nodeId": "candidate",
+    "question": "“最终候选身份”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "candidate.interface.emptyCases; candidate.interface.errors; candidate.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-candidate-acceptance",
+    "nodeId": "candidate",
+    "question": "“最终候选身份”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "candidate.validators; candidate.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-candidate-recovery",
+    "nodeId": "candidate",
+    "question": "“最终候选身份”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "candidate.terminal.retry; candidate.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-candidate-regression",
+    "nodeId": "candidate",
+    "question": "“最终候选身份”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "candidate.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-evidence-entry",
+    "nodeId": "evidence",
+    "question": "用户正常进入“三态原始证据”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "evidence.inputs; evidence.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-evidence-output",
+    "nodeId": "evidence",
+    "question": "“三态原始证据”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "evidence.outputs; evidence.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-evidence-authority",
+    "nodeId": "evidence",
+    "question": "在“三态原始证据”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "evidence.authority",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-evidence-failure",
+    "nodeId": "evidence",
+    "question": "“三态原始证据”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "evidence.interface.emptyCases; evidence.interface.errors; evidence.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-evidence-acceptance",
+    "nodeId": "evidence",
+    "question": "“三态原始证据”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "evidence.validators; evidence.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-evidence-recovery",
+    "nodeId": "evidence",
+    "question": "“三态原始证据”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "evidence.terminal.retry; evidence.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-evidence-regression",
+    "nodeId": "evidence",
+    "question": "“三态原始证据”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "evidence.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-deviation-entry",
+    "nodeId": "deviation",
+    "question": "用户正常进入“偏离和设计退回”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "deviation.inputs; deviation.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-deviation-output",
+    "nodeId": "deviation",
+    "question": "“偏离和设计退回”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "deviation.outputs; deviation.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-deviation-authority",
+    "nodeId": "deviation",
+    "question": "在“偏离和设计退回”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "deviation.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-deviation-failure",
+    "nodeId": "deviation",
+    "question": "“偏离和设计退回”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "deviation.interface.emptyCases; deviation.interface.errors; deviation.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-deviation-acceptance",
+    "nodeId": "deviation",
+    "question": "“偏离和设计退回”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "deviation.validators; deviation.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-deviation-recovery",
+    "nodeId": "deviation",
+    "question": "“偏离和设计退回”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "deviation.terminal.retry; deviation.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-deviation-regression",
+    "nodeId": "deviation",
+    "question": "“偏离和设计退回”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "deviation.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-sign-entry",
+    "nodeId": "sign",
+    "question": "用户正常进入“亲读后唯一签发”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "sign.inputs; sign.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-sign-output",
+    "nodeId": "sign",
+    "question": "“亲读后唯一签发”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "sign.outputs; sign.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-sign-authority",
+    "nodeId": "sign",
+    "question": "在“亲读后唯一签发”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "sign.authority",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-sign-failure",
+    "nodeId": "sign",
+    "question": "“亲读后唯一签发”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "sign.interface.emptyCases; sign.interface.errors; sign.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-sign-acceptance",
+    "nodeId": "sign",
+    "question": "“亲读后唯一签发”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "sign.validators; sign.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-sign-recovery",
+    "nodeId": "sign",
+    "question": "“亲读后唯一签发”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "sign.terminal.retry; sign.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-sign-regression",
+    "nodeId": "sign",
+    "question": "“亲读后唯一签发”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "sign.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-packaging-entry",
+    "nodeId": "packaging",
+    "question": "用户正常进入“同源分发”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "packaging.inputs",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-packaging-output",
+    "nodeId": "packaging",
+    "question": "“同源分发”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "packaging.outputs",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-packaging-authority",
+    "nodeId": "packaging",
+    "question": "在“同源分发”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "packaging.authority",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-packaging-failure",
+    "nodeId": "packaging",
+    "question": "“同源分发”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "packaging.interface.emptyCases; packaging.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-packaging-acceptance",
+    "nodeId": "packaging",
+    "question": "“同源分发”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "packaging.validators",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-packaging-recovery",
+    "nodeId": "packaging",
+    "question": "“同源分发”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "packaging.interface.errors; packaging.children",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-packaging-regression",
+    "nodeId": "packaging",
+    "question": "“同源分发”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "packaging.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-source-layout-entry",
+    "nodeId": "source-layout",
+    "question": "用户正常进入“唯一源目录”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "source-layout.inputs; source-layout.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-source-layout-output",
+    "nodeId": "source-layout",
+    "question": "“唯一源目录”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "source-layout.outputs; source-layout.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-source-layout-authority",
+    "nodeId": "source-layout",
+    "question": "在“唯一源目录”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "source-layout.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-source-layout-failure",
+    "nodeId": "source-layout",
+    "question": "“唯一源目录”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "source-layout.interface.emptyCases; source-layout.interface.errors; source-layout.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-source-layout-acceptance",
+    "nodeId": "source-layout",
+    "question": "“唯一源目录”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "source-layout.validators; source-layout.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-source-layout-recovery",
+    "nodeId": "source-layout",
+    "question": "“唯一源目录”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "source-layout.terminal.retry; source-layout.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-source-layout-regression",
+    "nodeId": "source-layout",
+    "question": "“唯一源目录”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "source-layout.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-planning-entry-entry",
+    "nodeId": "planning-entry",
+    "question": "用户正常进入“同源规划入口”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "planning-entry.inputs; planning-entry.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-planning-entry-output",
+    "nodeId": "planning-entry",
+    "question": "“同源规划入口”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "planning-entry.outputs; planning-entry.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-planning-entry-authority",
+    "nodeId": "planning-entry",
+    "question": "在“同源规划入口”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "planning-entry.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-planning-entry-failure",
+    "nodeId": "planning-entry",
+    "question": "“同源规划入口”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "planning-entry.interface.emptyCases; planning-entry.interface.errors; planning-entry.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-planning-entry-acceptance",
+    "nodeId": "planning-entry",
+    "question": "“同源规划入口”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "planning-entry.validators; planning-entry.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-planning-entry-recovery",
+    "nodeId": "planning-entry",
+    "question": "“同源规划入口”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "planning-entry.terminal.retry; planning-entry.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-planning-entry-regression",
+    "nodeId": "planning-entry",
+    "question": "“同源规划入口”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "planning-entry.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-execution-package-entry",
+    "nodeId": "execution-package",
+    "question": "用户正常进入“执行插件入口”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "execution-package.inputs; execution-package.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-execution-package-output",
+    "nodeId": "execution-package",
+    "question": "“执行插件入口”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "execution-package.outputs; execution-package.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-execution-package-authority",
+    "nodeId": "execution-package",
+    "question": "在“执行插件入口”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "execution-package.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-execution-package-failure",
+    "nodeId": "execution-package",
+    "question": "“执行插件入口”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "execution-package.interface.emptyCases; execution-package.interface.errors; execution-package.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-execution-package-acceptance",
+    "nodeId": "execution-package",
+    "question": "“执行插件入口”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "execution-package.validators; execution-package.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-execution-package-recovery",
+    "nodeId": "execution-package",
+    "question": "“执行插件入口”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "execution-package.terminal.retry; execution-package.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-execution-package-regression",
+    "nodeId": "execution-package",
+    "question": "“执行插件入口”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "execution-package.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-minimum-entry",
+    "nodeId": "minimum",
+    "question": "用户正常进入“完整最小范围”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "minimum.inputs; minimum.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-minimum-output",
+    "nodeId": "minimum",
+    "question": "“完整最小范围”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "minimum.outputs; minimum.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-minimum-authority",
+    "nodeId": "minimum",
+    "question": "在“完整最小范围”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "minimum.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-minimum-failure",
+    "nodeId": "minimum",
+    "question": "“完整最小范围”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "minimum.interface.emptyCases; minimum.interface.errors; minimum.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-minimum-acceptance",
+    "nodeId": "minimum",
+    "question": "“完整最小范围”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "minimum.validators; minimum.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-minimum-recovery",
+    "nodeId": "minimum",
+    "question": "“完整最小范围”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "minimum.terminal.retry; minimum.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-minimum-regression",
+    "nodeId": "minimum",
+    "question": "“完整最小范围”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "minimum.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-capability-check-entry",
+    "nodeId": "capability-check",
+    "question": "用户正常进入“正常入口验收”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "capability-check.inputs; capability-check.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-capability-check-output",
+    "nodeId": "capability-check",
+    "question": "“正常入口验收”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "capability-check.outputs; capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-capability-check-authority",
+    "nodeId": "capability-check",
+    "question": "在“正常入口验收”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-capability-check-failure",
+    "nodeId": "capability-check",
+    "question": "“正常入口验收”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "capability-check.interface.emptyCases; capability-check.interface.errors; capability-check.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-capability-check-acceptance",
+    "nodeId": "capability-check",
+    "question": "“正常入口验收”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "capability-check.validators; capability-check.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-capability-check-recovery",
+    "nodeId": "capability-check",
+    "question": "“正常入口验收”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "capability-check.terminal.retry; capability-check.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-capability-check-regression",
+    "nodeId": "capability-check",
+    "question": "“正常入口验收”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "capability-check.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-web-later-entry",
+    "nodeId": "web-later",
+    "question": "用户正常进入“网页端打包说明”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "web-later.inputs; web-later.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-web-later-output",
+    "nodeId": "web-later",
+    "question": "“网页端打包说明”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "web-later.outputs; web-later.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-web-later-authority",
+    "nodeId": "web-later",
+    "question": "在“网页端打包说明”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "web-later.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-web-later-failure",
+    "nodeId": "web-later",
+    "question": "“网页端打包说明”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "web-later.interface.emptyCases; web-later.interface.errors; web-later.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-web-later-acceptance",
+    "nodeId": "web-later",
+    "question": "“网页端打包说明”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "web-later.validators; web-later.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-web-later-recovery",
+    "nodeId": "web-later",
+    "question": "“网页端打包说明”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "web-later.terminal.retry; web-later.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-web-later-regression",
+    "nodeId": "web-later",
+    "question": "“网页端打包说明”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "web-later.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-capacity-entry",
+    "nodeId": "q-capacity",
+    "question": "用户正常进入“市场容量调整”时，从哪里开始，必须具备哪些输入？",
+    "answerLocation": "q-capacity.inputs; q-capacity.terminal.userRounds",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-capacity-output",
+    "nodeId": "q-capacity",
+    "question": "“市场容量调整”完成后产生什么结果，交给谁继续？",
+    "answerLocation": "q-capacity.outputs; q-capacity.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-capacity-authority",
+    "nodeId": "q-capacity",
+    "question": "在“市场容量调整”中，谁有权作出会改变状态、标准或下一步的决定？",
+    "answerLocation": "q-capacity.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-capacity-failure",
+    "nodeId": "q-capacity",
+    "question": "“市场容量调整”遇到缺输入、缺证据、身份不一致或结果不确定时，会怎样收场，用户会看到什么？",
+    "answerLocation": "q-capacity.interface.emptyCases; q-capacity.interface.errors; q-capacity.terminal.retry",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-capacity-acceptance",
+    "nodeId": "q-capacity",
+    "question": "“市场容量调整”怎样验收，什么条件下不能记作完成？",
+    "answerLocation": "q-capacity.validators; q-capacity.terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-capacity-recovery",
+    "nodeId": "q-capacity",
+    "question": "“市场容量调整”被中断或一次操作结果不明后，怎样恢复而不重复副作用或误用旧结果？",
+    "answerLocation": "q-capacity.terminal.retry; q-capacity.interface.errors",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "q-q-capacity-regression",
+    "nodeId": "q-capacity",
+    "question": "“市场容量调整”会不会让已有能力、旧状态或原有职责变差，Blueprint 用什么边界防止这种退化？",
+    "answerLocation": "q-capacity.interface.boundaries; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "Blueprint 已给出明确答案，本轮未发现会让用户卡住、误解、无法开工或无法验收的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  }
+]
