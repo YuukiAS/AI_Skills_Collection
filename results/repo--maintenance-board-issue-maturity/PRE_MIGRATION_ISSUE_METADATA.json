@@ -1309,7 +1309,7 @@
     {
       "canonicalTrackingSources": [
         {
-          "entry": "CAT-TRACE v13/v14 follow-up feedback is consolidated into the canonical inbox",
+          "entry": "a private research project v13/v14 follow-up feedback is consolidated into the canonical inbox",
           "source": "docs/plugin-todos/presentations.md",
           "status": "NEW"
         }
@@ -1338,7 +1338,7 @@
           },
           "Title": {
             "fieldId": "PVTF_lAHOA0Lgf84BkjCUzhjTPsk",
-            "text": "CAT-TRACE v13/v14 follow-up feedback is consolidated into the canonical inbox"
+            "text": "a private research project v13/v14 follow-up feedback is consolidated into the canonical inbox"
           }
         },
         "id": "PVTI_lAHOA0Lgf84BkjCUzg8jE3Q",
@@ -1351,7 +1351,7 @@
       },
       "state": "OPEN",
       "stateReason": null,
-      "title": "CAT-TRACE v13/v14 follow-up feedback is consolidated into the canonical inbox",
+      "title": "a private research project v13/v14 follow-up feedback is consolidated into the canonical inbox",
       "updatedAt": "2026-09-24T12:38:15Z",
       "url": "https://github.com/YuukiAS/AI_Skills_Collection/issues/29"
     },

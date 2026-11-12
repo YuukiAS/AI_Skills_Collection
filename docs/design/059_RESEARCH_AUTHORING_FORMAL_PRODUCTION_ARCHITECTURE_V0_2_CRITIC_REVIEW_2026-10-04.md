@@ -18,7 +18,7 @@
 - prior result: `REVISE`
 - stable blockers: `RA1`, `RA2`, `RA3`, `RA4`
 
-本轮重新读取了最新 main 的仓库规则、Capability Gate policy、维护看板、Research Authoring 当前 source/profile/generated plugin、Clear Writing、renderer、Presentations research route，以及 CAT-TRACE / Distributed_Imaging_Inference 的真实文档证据。本轮只审架构，没有修改 production source、创建 Goal/Kickoff、调用 Plugin Creator mutation、启动 Executor、paid API 或 automation。
+本轮重新读取了最新 main 的仓库规则、Capability Gate policy、维护看板、Research Authoring 当前 source/profile/generated plugin、Clear Writing、renderer、Presentations research route，以及 某私有统计研究项目 / Distributed_Imaging_Inference 的真实文档证据。本轮只审架构，没有修改 production source、创建 Goal/Kickoff、调用 Plugin Creator mutation、启动 Executor、paid API 或 automation。
 
 ## 核心判断
 
@@ -76,7 +76,7 @@ v0.2 已冻结：
 
 `minimal dependency closure` 允许一个新结果同时更新 Results、Abstract、Discussion、caption，而不把不相关 Introduction 一并改写；protected invariants 也都带有“除非 delta 真正要求变化”的条件，因此不会把科学修订冻结死。
 
-CAT-TRACE 的模块化演变记录与 DII bounded-result-slot 经验都直接支持这种维护方式。
+该项目的模块化演变记录与 DII bounded-result-slot 经验都直接支持这种维护方式。
 
 RA2 = CLOSED.
 
@@ -94,7 +94,7 @@ v0.2 的 G1 只证明路由与边界；它明确“不证明写得好”。
 
 G2 的 Normal entry / real input 是：
 
-> 一份真实 DII/CAT-TRACE 风格 advisor/research-update 或 research-evolution 文档 + 冻结 baseline + 新 evidence/decision delta
+> 一份真实 DII/private-project 风格 advisor/research-update 或 research-evolution 文档 + 冻结 baseline + 新 evidence/decision delta
 
 G2 的能力声明也明确是“证明已有科研文档可以按 evidence delta 安全更新”。
 

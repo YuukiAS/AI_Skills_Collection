@@ -291,7 +291,7 @@ Bridge failure；不应只为 gate 改实际 HTTPS 环境。
 - generic Memory 不冒充 target thread；
 - ambiguous-target 只一次最小 clarification；
 - canonical facts回 repo；
-- CAT-TRACE/CardiacNexus cheap fixtures继续做 generalization；
+- private-project/CardiacNexus cheap fixtures继续做 generalization；
 - no cross-Project default recovery；
 - no DB/MCP/Bridge dependency。
 

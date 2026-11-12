@@ -25,7 +25,7 @@
       "fontconfig_file": "/home/yuukias/AI_Skills_Collection/docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/fontconfig/fonts.conf",
       "fontconfig_file_repo_path": "docs/audits/research_presentation_cuhk_scientific_layout_stage3/generated/cuhk_stage3_build/fontconfig/fonts.conf",
       "font_cache_dir": "/tmp/fontconfig-cache-027",
-      "times_font_dir": "/home/yuukias/code/TRACE/presentations/group_meetings/2026-07-16/cat_trace_demo/fonts",
+      "times_font_dir": "<local-font-dir>",
       "times_font_dir_exists": true,
       "times_font_files_present": true
     },

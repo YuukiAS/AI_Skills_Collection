@@ -2,7 +2,7 @@
 
 Status: **canonical workflow contract**  
 Applies to: non-trivial teaching, research, business, product, and technical presentations  
-Primary evidence: STAT5060 Tutorial 01, CAT-TRACE, CUHK Date, Lucerna, Bobbio, and prior presentation-plugin production/review work
+Primary evidence: STAT5060 Tutorial 01, a private research project, CUHK Date, Lucerna, Bobbio, and prior presentation-plugin production/review work
 
 **Mandatory read-before-work order for every non-trivial presentation task:**
 

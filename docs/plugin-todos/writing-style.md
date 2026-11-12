@@ -117,7 +117,7 @@ evidence:
 problem:
 - **回答了一个更容易的问题，而不是用户真正的问题。** “能不能替代”只需一句结论；核心应是“各自负责什么、产物是什么、谁消费谁”。
 - **正确内容没有形成最小关系模型。** 三者本可用一条链说明：Grill Me 形成决定 → Grill with Docs 把决定落成可引用文档 → Asteria 把已冻结决定连接到系统对象、实现、证据和修订。回答却拆成大量章节，增加阅读负担。
-- **重复证明已知结论。** 用户已经接受“不能替代”后，继续论证长期时间尺度、Mica/CAT-TRACE 示例和工具生态，不再增加当前决策价值。
+- **重复证明已知结论。** 用户已经接受“不能替代”后，继续论证长期时间尺度、Mica/private-project 示例和工具生态，不再增加当前决策价值。
 - **显式调用 Clear Writing 后仍未完全执行停止条件。** 第二版虽更清楚，但没有把“用户到底要比较什么”放到第一屏并立即收敛。
 - **内部研究过程泄漏到成品答案。** 对周边工具的调查是形成判断所需的后台工作，不等于都应该出现在最终正文。
 
@@ -273,61 +273,13 @@ desired behavior / acceptance:
 project-specific context: BWG、GFW、DC9、换 IP 价格、具体机房和备用供应商只作为本次真实负例背景，不进入 Clear Writing 的固定领域规则。通用问题是：证据达到现实决策阈值后仍叠加免责措辞，以及把简单决策回答扩写成条件树/报告，迫使用户自己提炼结论。
 
 
-### 2026-10-28：科研图解释连续多轮绕过核心对象，先讲边界而不先讲“数据从哪来、横纵轴是什么”
+### 2026-10-28：科研图解释没有先建立数据来源和视觉对象
 
 status: NEW
-source: CAT-TRACE 组会图 `predictive_calibration_benchmark` 的 ChatGPT Web 解释；用户连续追问“这个 0.6 到底是什么”“是提前设置的还是 CAT-TRACE fit 的”，并显式调用 Clear Writing
-evidence:
-- **失败版本 1：先讲大量限定，核心生成过程缺席。** 回答先解释“横轴不是未来 8 次本身”“不是完全独立验证”“不能证明模型拟合、posterior recovery、真实数据 prediction”，并展开多个公式与边界，但没有在最前面明确告诉用户：这张图先人工生成 ((\alpha,\beta))，固定未来 (X)，横轴由 prediction code 计算累计概率，纵轴由同一组参数进行 Monte Carlo future simulation 得到经验概率。
-- **失败版本 2：回答‘有没有意义’时仍用抽象评价代替对象定义。** 回答说“横轴和纵轴本质上都建立在同一套 (p_{sij}) 上”“单元测试升级版”，但用户仍不知道这个 (p_{sij}) 到底从哪里来，也不知道图中的 0.6 是预先设定、模型拟合还是由人工参数经代码计算得到。
-- **失败版本 3：继续用否定串解释来源。** 回答用“不是提前手工设定的，也不是 CAT-TRACE fit 出来的”“不是……更不是……”来排除可能性，直到随后才说明 64 份 ((\alpha,\beta)) 是人工生成并输入 prediction code。虽然事实最终正确，信息顺序仍迫使读者先处理多个未确认假设。
-- **用户最终确认的清楚版本**：先生成 ((\alpha,\beta))，固定 (X)；横轴是 CAT-TRACE prediction code 算出的“未来 8 个样本里至少出现一次”的概率；纵轴是用同一批 ((\alpha,\beta)) 和同一 (X) 重复模拟很多组未来 8 个样本得到的经验概率。两者计算的是同一个目标量，因此正确实现时应靠近 (y=x)。
-
-problem:
-- **解释顺序错误**：面对“图到底是什么意思”这种问题，回答优先讲 caveat、validation scope、independence、fitted-model recovery 等二阶边界，而没有先建立最基本的 reader model：输入是什么、哪些量是人工给定、哪些量由代码算出、一次模拟包含什么、横轴和纵轴分别是什么。
-- **抽象符号先于对象**：直接使用 (p_{sij})、posterior draw、cumulative probability 等符号，读者还不知道这些量在本实验中是生成的、计算的还是拟合的。符号本身准确，但没有承担解释作用。
-- **用连续否定替代正面定义**：当用户问“0.6 是什么”，最有效的回答应直接说“0.6 是人工生成参数经过 prediction code 得到的累计预测概率”。连续说“不是预设、不是 fit、不是 real data”增加认知负担，而且要求读者自己反推出真正答案。
-- **先讲科学边界、后讲实验机制**：边界信息有价值，但必须在核心机制讲清之后再补一句；不能让“这不能证明什么”压过“这实际上做了什么”。
-- **回答是否清楚应以用户能否复述为准**：直到用户自己总结成“生成 ((\alpha,\beta))，固定 (X)，横轴是 CAT-TRACE 预测概率，纵轴是实际模拟概率”后，说明才真正闭合。Clear Writing 应主动达到这个层次，而不是让用户通过多轮追问完成压缩。
-
-desired behavior / acceptance:
-- 对科研图、模拟验证、算法实验的普通解释，第一段先回答四件事：**数据/参数从哪来；固定了什么；横轴是什么；纵轴是什么。**
-- 若图比较两个计算路径，第二步再说明“为什么理论上应该一致/不同”，例如“二者估计同一个未来 8 次至少出现一次的概率，所以应靠近对角线”。
-- 只有在核心实验机制已经建立后，才补充一句必要边界，如“这验证实现逻辑，不评价拟合能力”。不要先用一串“不是 X、不是 Y”开场。
-- 当用户追问一个具体数字（如 0.6）时，直接给出它的生成链：`人工参数 -> 固定 X -> prediction code -> 累计概率 0.6`。不要先列它不是什么。
-- 允许必要公式，但公式必须服务于已经建立的对象解释；若普通中文一句话能先建立正确 mental model，应先说人话，再给公式。
-- 回归时应测试用户能否在一次回答后准确复述实验：输入、计算路径、横纵轴、为何靠近对角线、这张图验证什么。若还需要追问“这个概率到底怎么来的”，判为失败。
-
-project-specific context: CAT-TRACE 的具体 ((\alpha,\beta))、8 个 future samples、64 parameter draws、20,000 replicates 和三类 species component 只作为真实负例证据，不进入 Clear Writing 的通用规则。通用规则针对科研图/模拟结果解释中的对象建立、信息顺序和正面定义。
-
-
-
-
-### 2026-10-28：heatmap 解释跳过坐标轴与视觉编码，读者无法先建立“图在扫描什么”
-
-status: NEW
-source: CAT-TRACE `zero_slot_laplace_regime_map` 的 ChatGPT Web 解释；用户指出“heatmap 轴也不讲清楚都不知道在干嘛”，并显式调用 Clear Writing
-evidence:
-- **失败版本 1：先讲公式与结论，坐标轴定义出现太晚。** 回答先解释 anonymous zero-slot、(I_g)、(m_g\log I_g) 和 accumulated error，再进入 heatmap；读者需要先处理一整段模型对象，仍不知道图的横轴和纵轴具体扫了什么。
-- **失败版本 2：自我纠正时反而删掉必要的轴解释。** 回答压缩成“左图是误差地图，越深错得越多”，随后直接说“随着 (n) 和 (gamma_g) 增大，问题越来越严重”，却没有先明确：横轴 (n) 是训练中的 sampling units 数量；纵轴 (gamma_g) 是该 open-tail group 的 richness/intensity 参数；每个格子对应一个固定的 ((n,gamma_g)) 组合；颜色编码的是该组合下 1000 个 anonymous zero slots 累积后的 Laplace-vs-reference absolute log-likelihood error。
-- **读图顺序失败**：用户看到 heatmap 时，首先需要知道“横着变什么、竖着变什么、一个格子是什么、颜色是什么”，而不是先听“系统性失败”“不是 cherry-picked”或“必须换算法”的结论。缺失这四个视觉对象定义后，后面的科研判断没有落点。
-
-problem:
-- **视觉对象没有先建立 reader model**：解释图表时，只讲数学对象还不够；必须把数学对象绑定到实际视觉元素。横轴、纵轴、颜色、点/线/格子各自代表什么，应在分析结论之前完成。
-- **过度压缩会删掉必要信息**：Clear Writing 不能把“简洁”理解为删除轴解释。对图表，轴与编码定义是最低限度的信息，不属于可省略的细节。
-- **结论先于读图机制**：直接说“误差随 n 和 gamma 增大”“一大片区域失效”，要求读者先相信结论，却还不知道如何从图上看到这个结论。
-- **术语必须落到当前图中**：例如 (n) 应直接解释为“训练中有多少个 sampling units”，(gamma_g) 应解释为“这个 open-tail group 的 richness/intensity 参数”，而不能只保留符号名。
-
-desired behavior / acceptance:
-- 解释 heatmap 时，默认先按以下顺序建立视觉语义：**横轴是什么 → 纵轴是什么 → 每个格子是什么 → 颜色是什么**。
-- 若有特殊标记，再解释标记：例如白圈是哪一个参数组合、等高线代表什么。
-- 若有第二 panel，再单独说明它是第一 panel 的哪个 slice / projection，以及为什么需要它。
-- 只有读者已经能独立指出“图上任意一个位置代表什么”之后，才总结趋势和科学结论。
-- 对专家受众可以简短，但不能省略视觉编码。所谓简短应该是“每个对象一句话”，而不是跳过对象。
-- 回归检查：给一张二维科研 heatmap，单次回答后用户应能准确回答五个问题：横轴是什么、纵轴是什么、一个格子是什么、颜色是什么、作者从图里看到了什么。任一问题仍需追问，判为解释失败。
-
-project-specific context: CAT-TRACE 的 (n)、(gamma_g)、(p_g=m_g=1000)、48-cell grid 和 Laplace 数值诊断只作为真实负例。通用规则针对 heatmap / contour / parameter-scan / error-surface 等科研图的视觉语义解释顺序。
-
+source: 某私有统计研究项目的科研图解释反馈。
+evidence: 用户连续追问具体数字从哪里来，以及图的横纵轴含义。原图、参数、结果和原回答留在私有项目仓库，此处不保存。
+problem: 回答先讲结论、公式和限定，迟迟没有解释输入、固定条件、计算路径和视觉编码；压缩回答时又删掉必要的轴解释。连续否定也让读者自行猜测实际机制。
+desired behavior / acceptance: 先说明数据或参数来自哪里、固定了什么，再依次解释横轴、纵轴、点或格子、颜色；之后说明为何能作比较和怎样理解趋势。具体数字应给出正面的生成链。对专家可以简短，但读者仍应在一次回答后指出任意视觉元素代表什么。
 
 ### 2026-10-26：DII 22题报告连续两次中文返修仍有术语障碍与整篇模板腔
 status: NEW
@@ -392,7 +344,7 @@ project-specific context: 文章中的生态数据集、数值、路径和科学
 
 #### 2026-10-14：伪澄清、反复变更建议和自我检讨式空话
 feedback_status: NEW
-source: CAT-TRACE 三个生态数据集的目录/分组研究讨论线程；用户对 ChatGPT Web 中文解释的再次直接否定与原文摘录，2026-10-14。
+source: 该项目 三个生态数据集的目录/分组研究讨论线程；用户对 ChatGPT Web 中文解释的再次直接否定与原文摘录，2026-10-14。
 evidence:
 - 直接反例：「这不是芬兰全国真菌名录，也不是从当前 1,021 个响应列中随机挑出一部分。」该句否定了两个读者未提出的备选，却没有正面回答「所指目录到底是什么、信息来自哪里、为什么有效、现在可否使用」。
 - 讨论曾在「按纲」「按门」「生态功能」「木生真菌/其他真菌」之间切换，甚至一面建议分成木生和其他，一面承认「其他」未必是合理的同质组。先列建议、后堆限制和免责声明，并不能让用户知道哪些建议有依据、哪些已经撤回、现在究竟应相信什么。
@@ -404,7 +356,7 @@ problem:
 - **变化无解释**：连续改变方案，却不比较变化原因、原建议退出原因或当前结论，容易让读者误以为存在稳定推荐。语言审校应暴露这种歧义并请求研究层澄清，不能靠润色抹平互相矛盾的观点。
 - **反馈意图被忽视**：用户批评的是表达质量与理解负担时，回答应直接核对批评所指文本，指出空话、绕行和真正缺少的正面信息，而不另起领域研究。空泛道歉、冗长自我检讨、代替用户定义其心理诉求也不能算解决。
 - **已有规则未发挥效果的证据**：现有 `skills/writing/core/chinese-prose/SKILL.md` 已明确限制机械「不是 X 而是 Y」、重复自我强调、机器腔并要求读者先看到实际判断；本例需要检查网页端普通自然回答是否真实消费这些能力以及最终是否有效。不要新增「禁用一切否定句」的通用规则：在确有读者误解、正式对照或风险排除时，否定句仍可必要。
-project-specific context: 真菌目录、样本维度及分组优劣属于 CAT-TRACE 科学研究，不在 Clear Writing 中冻结科学答案；本条仅保留用否定代替解释、空泛自我检讨、回避关键结论和错误回应写作反馈的可迁移失败模式。还没有证据证明上述原始网页输出经过正式安装的 Clear Writing 正常调用，不据此声称正式插件运行回归或已经修复。
+project-specific context: 真菌目录、样本维度及分组优劣属于 该项目 科学研究，不在 Clear Writing 中冻结科学答案；本条仅保留用否定代替解释、空泛自我检讨、回避关键结论和错误回应写作反馈的可迁移失败模式。还没有证据证明上述原始网页输出经过正式安装的 Clear Writing 正常调用，不据此声称正式插件运行回归或已经修复。
 
 #### 2026-10-14：具体解释改善后的正反对照
 feedback_status: NEW
@@ -567,7 +519,7 @@ promotion_gate: 已满足。当前推广条件由用户明确确认的长期跨�
 ### Promote `writing-style` into the generic content-preserving language layer
 status: READY_FOR_PROMOTION_AFTER_050
 tracking: #13
-source: 050 Deep Research rewrite failures + Distributed Imaging report v2 + CAT-TRACE presentation reviews + cross-plugin boundary audit, 2026-09-05
+source: 050 Deep Research rewrite failures + Distributed Imaging report v2 + a private research project presentation reviews + cross-plugin boundary audit, 2026-09-05
 evidence: `docs/design/READER_FACING_COMMUNICATION_PLUGIN_BOUNDARIES.md`; task 050 smoke/replay evidence; `docs/plugin-todos/research-writing.md`; `docs/plugin-todos/presentations.md`
 release evidence (2026-10-19): Clear Writing `0.5` / repository `5.5.1` formally released at `fd79c4be54fc50bd66d9a51bbc1e681f361f6a77` and integrated into main at `57c5a2c8124752587688475b3ebc09c198d35186`. The user confirmed the existing USER / PRIVATE ChatGPT plugin is `0.5.0`, with all 27 files read back and compared against the formal generated payload, no drift beyond version normalization `0.5 -> 0.5.0`. This completes the bounded release, not this item's broader promotion gate. Required statistical result/caption adaptation remains pending in `docs/plugin-todos/statistical-modeling.md`, heading `Delegate reader-facing wording without giving away statistical semantics`, tracking `#73`; scientific-visualization caption/annotation adaptation remains pending in `docs/plugin-todos/scientific-visualization.md`, heading `Delegate captions/annotations without giving away visual semantics`, tracking `#49`. Keep the original promotion gate and source maturity unchanged until those handoffs and the remaining required evidence are satisfied. Release closure evidence: `results/clear-writing--release-closure/STAGE_B_CLOSURE.md`.
 target layer: routing/language/fidelity
@@ -610,18 +562,18 @@ promotion_gate: replay on at least one additional advisor-facing English researc
 ### English scientific slide microcopy and full-deck prose remain cognitively heavy after a nominal final pass
 status: NEW
 tracking: #15
-source: TRACE / CAT-TRACE group-meeting deck v4–v8 reviews
-evidence: `YuukiAS/TRACE` commits `e36cb5d93fc882ce158d88ac9201fe494b98b69a`, `1de90f2f26b3f787073ecedd7a4df41a985712eb`, `ef08bc25673fb33b639e523504676c0f333d93f4` and `26fd2ad0f042f0a8d7c7dc2154392e3f9460760d`. Earlier rounds exposed `Failure prevented`, mechanical `Example.` language, `What it measures`, `Focal method`, `Backbone` and `Rare fit`. The 33-page v8 deck still contains first-use domain terms that are expanded but not placed in enough context for a statistics audience (`COI`, `Metabarcoding`, `VicFlora`, `MGP`), source-note-like wording such as `That threshold is an implementation choice, not a CAT-TRACE theoretical constant.`, and dense table/slide language that is grammatically valid but unnecessarily hard to parse. The v8 English-final-pass record explicitly says that it only reviewed visible wording touched in v8, so untouched but still difficult language could survive.
+source: TRACE / a private research project group-meeting deck v4–v8 reviews
+evidence: `<private repository>` commits `<private commit>`, `<private commit>`, `<private commit>` and `<private commit>`. Earlier rounds exposed `Failure prevented`, mechanical `Example.` language, `What it measures`, `Focal method`, `Backbone` and `Rare fit`. The 33-page v8 deck still contains first-use domain terms that are expanded but not placed in enough context for a statistics audience (`COI`, `Metabarcoding`, `VicFlora`, `MGP`), source-note-like wording such as `That threshold is an implementation choice, not a private-project theoretical constant.`, and dense table/slide language that is grammatically valid but unnecessarily hard to parse. The v8 English-final-pass record explicitly says that it only reviewed visible wording touched in v8, so untouched but still difficult language could survive.
 problem: `scientific-prose` / presentation handoff needs to distinguish grammatical correctness from reader effort. A research slide should let a first-time expert reader understand what an unfamiliar term is, why it appears here, and what the sentence is asking them to retain. Expanding an acronym alone is insufficient when the term remains contextless. Final slide prose review also cannot be limited only to source lines modified in the current round: layout changes alter wrapping and old wording may still be cognitively heavy. The desired behavior is a full-deck audience-facing pass after scientific freeze: direct sentences, explicit local context for unfamiliar terms, natural action labels, short explanatory bridges where needed, and removal of internal/defensive/meta wording. This is not detector evasion and must not weaken scientific precision.
-project-specific context: CAT-TRACE, TRACE, CORAL, VicFlora, COI, OTU, GBIF, MGP, catalogue/open-tail and the specific slide sentences belong to this project. Do not create a CAT-TRACE-specific banned-word list, and do not let writing-style alter equations, scientific claims, dataset values, theorem status, citations or slide layout.
+project-specific context: The exact scientific objects and slide sentences remain in the private project repository and are not retained here. Do not create project-specific banned-word list, and do not let writing-style alter equations, scientific claims, dataset values, theorem status, citations or slide layout.
 
 ### Versioned Chinese technical documents can regress into English-keyword scaffolding during content-preserving revision
 status: NEW
 tracking: #16
-source: TRACE / CAT-TRACE canonical architecture and code implementation plan, 2026-09-09
-evidence: compare `YuukiAS/TRACE/docs/model/catalog_aware/CAT_TRACE_CANONICAL_NOTATION_AND_ARCHITECTURE_20260908.md` with `...20260909.md`, and `CAT_TRACE_CODE_IMPLEMENTATION_MASTER_PLAN_20260908.md` with `...20260909.md`; user review of the rendered 20260909 PDFs found the newer technical content substantially stronger but the reader-facing Chinese markedly worse. Examples include prose such as `TRACE continuity + 按组标记的开放尾部 + residual structure`, `极端 rare-tail / scale stress test`, `production inference`, `composite 后验 interval`, `independent-residual`, `working set`, `source script`, `taxonomy-proxy variant`, `structured dependence`, `large-p engine`, and many sentences built from English noun chains joined by `/` or `+`. The 20260908 versions were easier to read despite containing older scientific decisions.
+source: TRACE / a private research project canonical architecture and code implementation plan, 2026-09-09
+evidence: compare `<private repository>` with `...20260909.md`, and `<private document>` with `...20260909.md`; user review of the rendered 20260909 PDFs found the newer technical content substantially stronger but the reader-facing Chinese markedly worse. Examples include prose such as `TRACE continuity + 按组标记的开放尾部 + residual structure`, `极端 rare-tail / scale stress test`, `production inference`, `composite 后验 interval`, `independent-residual`, `working set`, `source script`, `taxonomy-proxy variant`, `structured dependence`, `large-p engine`, and many sentences built from English noun chains joined by `/` or `+`. The 20260908 versions were easier to read despite containing older scientific decisions.
 problem: content-preserving revision of an existing Chinese technical document needs a version-aware prose contract: the newest version is authoritative for scientific content, notation, numbers and decisions, while an earlier accepted version may be the style/readability baseline. A revision pass must compare the full document, not only newly changed lines, and must prevent ordinary reasoning words from drifting back into English merely because the executor is editing technical content. Exact code identifiers, library names, method names and necessary acronyms should remain unchanged, but ordinary connective logic, section prose, role descriptions, implementation explanations and phase descriptions should be natural Chinese. This is a readability/fidelity problem, not a request to ban English globally or to alter domain semantics.
-project-specific context: CAT-TRACE notation, zero-slot logic, `C^{tax}`/`C^{phy}`, rd001–rd003 roles, R/C++ API names and implementation phases belong to TRACE. Do not promote those details into generic wording rules. The general reusable lesson is to support `current content authority + prior accepted prose baseline + full-document readability diff`, while preserving formulas, code fields, filenames, method/library names, citations and scientific claim strength.
+project-specific context: The project-specific notation, computation and implementation details remain in the private repository. Do not promote those details into generic wording rules. The general reusable lesson is to support `current content authority + prior accepted prose baseline + full-document readability diff`, while preserving formulas, code fields, filenames, method/library names, citations and scientific claim strength.
 
 
 ### Product UI microcopy should state user consequence, not internal implementation reassurance
@@ -814,12 +766,8 @@ positive example (verbatim):
 
 这也是为什么现在这版比第二轮更像你真正想要的 Atlas：不是一张“精选 50 篇必读论文海报”，也不是一张“100 篇论文全摊开的蜘蛛网”，而是你先能看懂领域骨架，继续放大以后又确实有足够的论文和证据让你研究。
 
-### CAT-TRACE explainer remained machine-like Chinese despite explicit reader-language constraints
+### 私有技术讲解仍有中英混杂与机械句式
 status: NEW
-source: CAT-TRACE framework explainer user rejection, 2026-11-11
-evidence: exact rejected Markdown preserved at \`docs/provenance/CAT_TRACE_FRAMEWORK_EXPLAINED_ZH_REJECTED_2026-11-11.md\`; source artifact was \`YuukiAS/CAT-TRACE@docs/cat-trace-explainer-20261110\` \`docs/explainer/CAT_TRACE_FRAMEWORK_EXPLAINED_ZH.md\`.
-problem: The user had explicitly required natural Chinese, minimal unnecessary English mixing, restrained use of contrastive negative constructions, inline math for short relations, and first-use explanation of unfamiliar abbreviations. The delivered explainer still opened with project-authority/provenance prose rather than reader content; repeatedly used negative/contrastive formulations to organize explanations; left ordinary taxonomy and workflow language in English; introduced abbreviations or specialist English labels such as ASV, UNITE species hypothesis and MCSE without first giving a useful Chinese expansion/explanation; and used display equations in places where a short inline relation would have read more naturally. The document was technically grammatical but still read like an internal engineering/research artifact rather than a mature Chinese explanation for the project author.
-reader-visible examples from the rejected artifact include mixed forms such as \`other/unresolved\`, \`name/family/order/class/phylum\`, \`South-West Australia plants\`, \`reference/exploratory\`, \`bulk ESS\`, \`MCSE\`, and implementation vocabulary carried into prose without a consistent first-use explanation policy. The user also explicitly reiterated that ordinary concepts should be translated while formal algorithm names such as Cholesky, Armijo, BFGS and Albert–Chib may remain.
-project-specific context: CAT-TRACE's exact biological groups, model symbols and algorithm names belong to the project. The reusable failure is a whole-document Chinese-language gate: locally correct sentences can still fail when ordinary English labels, unexplained abbreviations, contrastive-negative sentence templates and unnecessarily displayed simple formulas accumulate across the artifact.
-additional real-use evidence, 2026-11-11: In the revised explainer, `BFGS` still appeared without its full algorithm name even after the user had explicitly complained about unexplained abbreviations such as ASV/UNITE/MCSE. The reusable language requirement is first-use expansion for nontrivial algorithm/statistical abbreviations when a reader cannot reasonably infer them from context. Formal names may remain in English when they are canonical, but the first occurrence should give the full name and a concise Chinese role when useful; later occurrences may use the abbreviation alone.
-
+source: 该项目的技术讲解返修反馈，2026-11-11。
+evidence: 被拒稿件原文留在私有项目仓库，此处不保存。
+problem: 读者已要求自然中文，稿件仍以内部来源说明开场，频繁使用否定对照，普通概念保留英文，缩写首次出现缺少解释，短关系式也过度独立排版。结构性例子是先写“本节讨论的并不是……”再说明主题，或让一个缩写承担整段解释。应直接说明对象与作用，首次解释必要缩写，并从头检查整篇读起来是否自然。这里不保存原句中的模型内容、公式或私有仓库定位。

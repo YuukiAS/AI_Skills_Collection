@@ -10,11 +10,11 @@ Archived files:
   as backlog, or superseded.
 - `CURRENT_RESEARCH_PRESENTATION_REVISION_RULES.md`: cumulative runtime rule
   ledger used during earlier real deck revisions.
-- `TODO_CAT_TRACE_V2_CANDIDATES_2026_08_27.md`: generic candidates extracted
-  from the CAT-TRACE v2 review.
-- `TODO_CAT_TRACE_V3_MANDATORY_CANDIDATES_2026_08_27.md`: mandatory candidates
-  from the CAT-TRACE v3 review.
-- `TODO_CAT_TRACE_V3_CONFIRMED_2026_08_27.md`: user-confirmed CAT-TRACE v3
+- `TODO_PRIVATE_PROJECT_V2_CANDIDATES_2026_08_27.md`: generic candidates extracted
+  from the private research project v2 review.
+- `TODO_PRIVATE_PROJECT_V3_MANDATORY_CANDIDATES_2026_08_27.md`: mandatory candidates
+  from the private research project v3 review.
+- `TODO_PRIVATE_PROJECT_V3_CONFIRMED_2026_08_27.md`: user-confirmed a private research project v3
   follow-up decisions, including project-local science that must not become a
   generic runtime rule.
 
@@ -23,7 +23,7 @@ Runtime boundary:
 - Mature cross-project rules are condensed in
   `skills/tools/documents-media/presentations/research-presentations/references/real-world-presentation-guardrails.md`.
 - Open generic candidates are maintained in `docs/plugin-todos/presentations.md`.
-- CAT-TRACE page-level decisions, theorem/estimand choices, and project-specific
+- a private research project page-level decisions, theorem/estimand choices, and project-specific
   scientific conclusions stay in provenance or the project repo.
 
 These files are source-only provenance. They must not be copied into generated

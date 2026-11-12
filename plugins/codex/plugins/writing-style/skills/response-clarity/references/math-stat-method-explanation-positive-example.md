@@ -28,164 +28,33 @@ facts, notation, and evidence.
 
 ---
 
-## Example
+## Example: a synthetic dice calculation
 
-The question was how to understand a proposed high-dimensional zero-slot
-integration strategy: why one might condition on part of a Gaussian parameter
-vector, integrate one direction accurately, and use randomized quasi-Monte
-Carlo for the remaining directions.
+This is an invented classroom example, unrelated to any private research model.
+Let $U$ and $V$ be independent fair six-sided dice. We want the probability that
+their sum exceeds 8.
 
-A concrete version begins with a zero-slot having (q=20) environmental
-response coefficients,
+### Concrete picture before notation
 
-[
-\beta=(\beta_1,\ldots,\beta_{20}),
-]
+A direct simulation rolls both dice and records either 0 or 1. A conditional
+calculation rolls only the first die, then averages over all six possibilities
+for the second die. It replaces one random outcome with its exact conditional
+average.
 
-plus an intercept (alpha). There are therefore 21 unknown coordinates. If
-the slot is zero in (n=100) observed samples, then conditional on
-((alpha,\beta)),
+If the first roll is 4, the second die must be 5 or 6. The conditional probability
+is therefore $2/6$. For first rolls 1 through 6, the probabilities are
+$0, 0, 1/6, 2/6, 3/6, 4/6$. Their average is $5/18$.
 
-[
-L_0(\alpha,\beta)
-=
-\prod_{i=1}^{100}
-\Phi\!\left(-\alpha-x_i^\top\beta\right).
-]
+### Formal statement after the mechanism
 
-The required integrated zero probability is
+Writing $h(u)=P(V>8-u)$, the same calculation is
 
-[
-I_0
-=
-\int
-L_0(\alpha,\beta),
-p(\alpha,\beta)
-,d\alpha,d\beta .
-]
+$$P(U+V>8)=E_U[h(U)].$$
 
-### Mental model: a 21-dimensional room
-
-A direct Monte Carlo calculation can be pictured as repeatedly throwing a dart
-into a 21-dimensional room. Each dart chooses one possible intercept and one
-possible set of 20 environmental responses. Most draws may fall in regions that
-contribute little to the small discovery complement that matters for a
-zero-slot calculation.
-
-The structural observation is that the intercept has a special role. It moves
-all sample-level linear predictors together. Once a particular (eta) is
-fixed, the remaining uncertainty in (alpha) is only one-dimensional.
-
-Define
-
-[
-h(\beta)
-=
-\int
-\prod_{i=1}^{100}
-\Phi(-\alpha-x_i^\top\beta)
-p(\alpha\mid\beta),d\alpha.
-]
-
-Then
-
-[
-I_0 = E_{\beta}\{h(\beta)\}.
-]
-
-The computation can therefore be organized as:
-
-- outer step: explore plausible environmental-response vectors (eta);
-- inner step: for each such vector, integrate the intercept direction carefully
-  in one dimension;
-- final step: average the resulting (h(eta)) values.
-
-The point is not merely that the nominal dimension falls from 21 to 20. The
-important direction is being averaged rather than randomly sampled. This can
-reduce variance and can make the remaining integrand smoother, which is exactly
-the setting in which quasi-Monte Carlo methods can become more effective.
-
-### Small worked example
-
-Suppose there are only two environmental coefficients, so the parameter vector
-is ((alpha,eta_1,eta_2)). Take three sample covariates
-
-[
-x_1=(0,0),\qquad
-x_2=(1,0),\qquad
-x_3=(0,1).
-]
-
-If the slot is zero in all three samples, its conditional zero probability is
-
-[
-L_0
-=
-\Phi(-\alpha)
-\Phi(-\alpha-\beta_1)
-\Phi(-\alpha-\beta_2).
-]
-
-A direct calculation integrates over all three coordinates. The conditional
-version first chooses, for example,
-
-[
-\beta_1=0.7,\qquad \beta_2=-0.4,
-]
-
-and then solves the one-dimensional integral
-
-[
-\int
-\Phi(-\alpha)
-\Phi(-\alpha-0.7)
-\Phi(-\alpha+0.4)
-p(\alpha),d\alpha.
-]
-
-After that value is computed accurately, the outer procedure moves to another
-((eta_1,eta_2)) pair. In the full model, randomized Sobol points can play
-that outer role.
-
-### Formal interpretation after the intuition
-
-The underlying identity is simply conditional expectation,
-
-[
-E\{f(A,B)\}
-=
-E_B\!\left[E\{f(A,B)\mid B\}\right].
-]
-
-The relevant numerical ideas include conditional Monte Carlo, preintegration,
-randomized quasi-Monte Carlo, active-subspace-based preintegration, and, for
-very small rare-event complements, importance sampling or exponential tilting.
-
-A further refinement is that the preintegrated direction need not be one raw
-coordinate such as (alpha). For a Gaussian parameter vector, one may rotate
-the coordinates and integrate a particularly influential linear combination
-first, provided the resulting conditional integral remains tractable.
-
-### Literature connection
-
-The explanation connected the mechanism to established work rather than
-presenting it as a CAT-TRACE invention:
-
-- Genz-style conditioning and transformation for multivariate normal
-  probabilities;
-- randomized quasi-Monte Carlo and scrambled nets;
-- preintegration / active-subspace ideas for identifying useful integration
-  directions;
-- minimax tilting and importance sampling for Gaussian rare-event
-  probabilities;
-- modern probit examples that reorganize seemingly high-dimensional Gaussian
-  integrals into lower-dimensional calculations.
-
-The project-specific research question is therefore not "invent high-dimensional
-integration from scratch." It is to determine which combination of
-conditioning, preintegration, RQMC or tilting gives a stable and auditable
-zero-slot calculation when a tiny per-slot error is multiplied across a large
-zero-slot multiplicity.
+This is conditional expectation. Averaging out the second die removes the
+variation due to that die. In this tiny example all outcomes can be enumerated;
+simulation only illustrates why conditioning can help in larger calculations.
+The example establishes no claim about the performance of a research algorithm.
 
 ---
 

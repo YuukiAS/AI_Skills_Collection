@@ -502,7 +502,7 @@ README 只需要同步 standalone Skill 当前版本和一句准确定位，不�
 - Longleaf_Bridge production；
 - Bridge Kit；
 - Longleaf tunnel/Bridge A/B 的 `general` partition policy；
-- CAT-TRACE / CARE 等项目自己的实验逻辑；
+- 某私有统计研究项目 / CARE 等项目自己的实验逻辑；
 - 中央 Marketplace plugin topology；
 - 其他 standalone Skill；
 - 自动 watcher / daemon / persistent scheduler；

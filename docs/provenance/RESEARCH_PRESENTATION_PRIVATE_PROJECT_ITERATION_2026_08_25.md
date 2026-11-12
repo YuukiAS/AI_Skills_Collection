@@ -1,6 +1,6 @@
-# Research Presentation Iteration Notes — CAT-TRACE review, 2026-08-25
+# Research Presentation Iteration Notes — a private research project review, 2026-08-25
 
-This note records reusable presentation-design failures exposed while reviewing a statistics group-meeting deck. It is intentionally project-agnostic: the examples came from CAT-TRACE, but the TODOs below should be considered for later consolidation into `research-presentations/TODO.md`, active guidance, or rendered-slide QA.
+This note records reusable presentation-design failures exposed while reviewing a statistics group-meeting deck. It is intentionally project-agnostic: the examples came from a private research project, but the TODOs below should be considered for later consolidation into `research-presentations/TODO.md`, active guidance, or rendered-slide QA.
 
 ## Status
 

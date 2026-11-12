@@ -598,7 +598,7 @@ Asteria 已经明确要求 build 通过不能替代 browser QA，并有 accepted
 
 **PROJECT_SPECIFIC_DETAIL_NOT_TO_GENERALIZE**
 
-- TRACE/CAT-TRACE semantics、React Flow graph、具体 node/edge relation、A/B/C/D/E1/E2 concept 内容、Asteria 性能 fixture 数量。
+- TRACE/private-project semantics、React Flow graph、具体 node/edge relation、A/B/C/D/E1/E2 concept 内容、Asteria 性能 fixture 数量。
 
 ### 明确不作为本轮 baseline replay
 

@@ -238,7 +238,7 @@ docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md
 
 ### Presentation
 
-5.0.0 之后，用已安装的 `presentations` plugin 继续返修现有 CAT-TRACE deck。
+5.0.0 之后，用已安装的 `presentations` plugin 继续返修现有 某私有统计研究项目 deck。
 
 如果返修中出现 plugin 问题，直接写入：
 

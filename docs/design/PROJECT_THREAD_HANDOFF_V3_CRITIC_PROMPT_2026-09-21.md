@@ -243,7 +243,7 @@ Codex `$project-thread-handoff` 只能证明 Codex surface。
 
 ### G3 — Generalization / Should-not-change
 
-CAT-TRACE：
+a private research project：
 后期冻结决定覆盖早期探索。
 
 CardiacNexus：

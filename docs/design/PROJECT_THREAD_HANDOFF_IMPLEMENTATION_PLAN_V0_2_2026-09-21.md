@@ -130,7 +130,7 @@ browser automation 或 external service adapter。
 不得修改：
 
 - Bridge Kit production source；
-- CAT-TRACE / DII / CardiacNexus production repos；
+- a private research project / DII / CardiacNexus production repos；
 - 任一中央 Plugin source；
 - Mica；
 - browser extension；
@@ -372,7 +372,7 @@ thread 中实际调用。
 
 在用户介入前完成。
 
-CAT-TRACE representative regression：
+a private research project representative regression：
 
 - 后期冻结的模型/符号/数据决定覆盖早期探索；
 - superseded route 不复活。
@@ -471,7 +471,7 @@ Executor 在用户操作前写：
 - G1/G2 criterion-level PASS/FAIL；
 - 必要的最小 redacted evidence locator。
 
-不得 commit DII/CAT-TRACE/CardiacNexus 私有 thread 全文、未公开研究内容或完整敏感 prompt。
+不得 commit DII/private-project/CardiacNexus 私有 thread 全文、未公开研究内容或完整敏感 prompt。
 
 Skill source freeze 后写 evidence receipt 不改变 final candidate identity。
 
@@ -528,7 +528,7 @@ Approved Kickoff 发送后允许：
 - ChatGPT account upload/install（由用户在最终 acceptance session 自己完成）；
 - paid API/evaluator；
 - Bridge Kit modification；
-- CAT-TRACE/DII/CardiacNexus write；
+- private-project/DII/CardiacNexus write；
 - central Plugin source change；
 - live-global plugin/skill mutation outside the exact test/install sandbox；
 - automation/watcher；

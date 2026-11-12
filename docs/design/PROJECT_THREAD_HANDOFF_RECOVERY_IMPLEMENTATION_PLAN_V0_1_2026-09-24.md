@@ -294,7 +294,7 @@ Public-safe fixtures至少包括：
 - ambiguous target -> one minimal clarification；
 - unsourced recall -> limited recovery；
 - missing route-changing provenance -> fail closed；
-- CAT-TRACE decision precedence；
+- a private research project decision precedence；
 - CardiacNexus canonical-fact recovery；
 - DII/CARE Mode A regression。
 
@@ -387,7 +387,7 @@ Final claim只允许：
 不声称 absolute isolation、every influencing factor visible、raw transcript recovery或 transcript-level fidelity。
 
 G3另验证 unique target通常不确认、ambiguous-target fixture最多一次 clarification、canonical facts回 current
-source、CAT-TRACE/CardiacNexus fixtures generalize、no DB/MCP/Bridge dependency、cross-Project contract regression，
+source、private-project/CardiacNexus fixtures generalize、no DB/MCP/Bridge dependency、cross-Project contract regression，
 且不要求另一个私有 Project live leakage test。
 
 ## 13. Same-final-candidate sequence

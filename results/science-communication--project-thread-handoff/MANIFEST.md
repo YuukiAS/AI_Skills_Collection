@@ -63,4 +63,4 @@ Archive checks:
 
 ## Privacy
 
-No private DII, CAT-TRACE, or CardiacNexus thread transcript is committed in this task. G3 fixtures are public-safe representative summaries only.
+No private DII, a private research project, or CardiacNexus thread transcript is committed in this task. G3 fixtures are public-safe representative summaries only.

@@ -1,6 +1,6 @@
-# Mandatory research-presentation rule candidates — CAT-TRACE v3 review, 2026-08-27
+# Mandatory research-presentation rule candidates — a private research project v3 review, 2026-08-27
 
-本文件只保存本轮橙色/深橙色批注中 **用户明确要求以后必须形成通用规则** 的内容。它们不是 CAT-TRACE 专属科学决定；后续在 v4 方向确认后，应与现有 `TODO.md`、v2 candidates、active skill、shared QA 和 regression tests 做去重，然后把重复失败项优先提升为 hard QA，而不是继续停留在模糊建议层。
+本文件只保存本轮橙色/深橙色批注中 **用户明确要求以后必须形成通用规则** 的内容。它们不是 某私有统计研究项目 专属科学决定；后续在 v4 方向确认后，应与现有 `TODO.md`、v2 candidates、active skill、shared QA 和 regression tests 做去重，然后把重复失败项优先提升为 hard QA，而不是继续停留在模糊建议层。
 
 ## 1. Rule inheritance：每轮必须继承上一轮规则
 
@@ -105,7 +105,7 @@
 来源：P21；承接 v2 metric candidate。
 
 - [MANDATORY_CANDIDATE] Metric table 名称直接携带方向：`RMSE ↓`, `PR-AUC ↑`, `Coverage -> nominal`，避免另设 `direction = lower/higher/near target` 的冗余列。
-- [MANDATORY_CANDIDATE] 多个同 family metrics 合并方向说明，例如 `Discovery RMSE ↓ (total / catalogue / open tail)`。
+- [MANDATORY_CANDIDATE] 多个同 family metrics 合并方向说明，例如 `RMSE ↓ (group A / group B)`（合成示例）。
 - [MANDATORY_CANDIDATE] Metric 仍需说明它检查什么统计性质；方向符号不能替代 metric purpose。
 
 ## 14. Comparison block 不能用分号 dump，也不能把 focal method 当普通 competitor
@@ -142,7 +142,7 @@
 v4 方向确认后，逐条与以下现有规则对比：
 
 - `research-presentations/TODO.md`
-- `TODO_CAT_TRACE_V2_CANDIDATES_2026_08_27.md`
+- `TODO_PRIVATE_PROJECT_V2_CANDIDATES_2026_08_27.md`
 - active `SKILL.md`
 - shared `visual-qa.md`
 - archetypes / regression tests
@@ -152,4 +152,4 @@ v4 方向确认后，逐条与以下现有规则对比：
 1. **v2 已有且 v3 重复失败**：优先提升为 hard QA / regression，不再新增重复文字；
 2. v2 有但过于模糊：补可执行 layout primitive / threshold / rendered check；
 3. v3 真正新增：进入 main TODO；
-4. 只有 CAT-TRACE 才成立：留在项目 review，不进入通用 skill。
+4. 只有 该项目 才成立：留在项目 review，不进入通用 skill。

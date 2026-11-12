@@ -49,7 +49,7 @@ The adaptation task should prove consumption rather than duplicate policy.
 
 Examples:
 
-- `CAT-TRACE`: root AGENTS mixes the project's very important "Codex does not plan" override, skill routing, version preflight, scientific render rules, Handoff protocol, plugin feedback rules and Overleaf rules. It has a tracked but older `prompts/AGENT_RULES.md`.
+- `private-project`: root AGENTS mixes the project's very important "Codex does not plan" override, skill routing, version preflight, scientific render rules, Handoff protocol, plugin feedback rules and Overleaf rules. It has a tracked but older `prompts/AGENT_RULES.md`.
 - `Reliable_Imaging_Inference`: research/novelty rules and generic Handoff live in one root; tracked Lite rules exist but are older than 057/056.
 - `Clash_Profile`: root contains critical production safety plus a long operational runbook. It has several deeper canonical docs already, but no tracked Lite surface.
 - `CARE_Challenge`: root AGENTS is currently about 50 KiB / 567 lines and therefore can exceed Codex's default aggregate project-instruction budget before nested instructions are added.
@@ -171,7 +171,7 @@ Action after 056:
 - verify missing HUMAN_ONLY authorization produces a visible user action instead of silent waiting;
 - do not solve the failure by adding a second local copy of 056.
 
-#### CAT-TRACE — `SUBSTANTIAL_REORGANIZATION`
+#### a private research project — `SUBSTANTIAL_REORGANIZATION`
 
 Preserve at root, prominently:
 - **Codex does not plan** / GPT-approved scientific contract requirement;
@@ -323,7 +323,7 @@ No new H-number gate system is needed for 058.
 
 Do **not** mass-adapt before 056 finishes.
 
-Reason: CAT-TRACE/Reliable currently carry older Lite rules, DII/CUHK do not have a complete tracked Lite surface, and the exact HUMAN_ONLY behavior the user cares about is a 056 production change. Adapting now would either copy incomplete rules or require a second migration immediately after 056.
+Reason: private-project/Reliable currently carry older Lite rules, DII/CUHK do not have a complete tracked Lite surface, and the exact HUMAN_ONLY behavior the user cares about is a 056 production change. Adapting now would either copy incomplete rules or require a second migration immediately after 056.
 
 Correct order:
 

@@ -468,7 +468,7 @@ G3 另外验证：
 - unique target 正常不确认；
 - ambiguous-target public-safe fixture最多一次 clarification；
 - canonical facts回 current repo/artifact；
-- existing CAT-TRACE/CardiacNexus public-safe fixtures继续验证 generalization；
+- existing private-project/CardiacNexus public-safe fixtures继续验证 generalization；
 - no DB/MCP/Bridge dependency；
 - cross-Project contract regression通过；
 - 不要求另一个私有 Project live leakage test。

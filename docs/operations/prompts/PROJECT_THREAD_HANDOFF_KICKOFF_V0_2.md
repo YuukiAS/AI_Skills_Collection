@@ -85,7 +85,7 @@ tests/test_project_thread_handoff_contract.py
 `tests/fixtures/project_thread_handoff/`
 
 不要创建 Plugin、MCP、database、CURRENT、handoff history、state machine、browser extension、
-automation/watcher；不要改 Bridge Kit、CAT-TRACE、DII、CardiacNexus、Mica 或中央 Plugin source。
+automation/watcher；不要改 Bridge Kit、某私有统计研究项目、DII、CardiacNexus、Mica 或中央 Plugin source。
 
 ### 4. PTH-05：冻结 SKILL.md frontmatter
 
@@ -183,7 +183,7 @@ G2：
 不能替代。Skill 必须消费已有 thread context，不要求用户重新粘贴历史。
 
 G3：
-CAT-TRACE + CardiacNexus representative generalization / should-not-change，用户介入前完成。
+该项目 + CardiacNexus representative generalization / should-not-change，用户介入前完成。
 
 如果需要新增 G4/G5 才能覆盖新的用户能力，停止并返回 Planner/Critic。
 

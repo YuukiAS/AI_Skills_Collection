@@ -57,7 +57,7 @@ Project Thread Handoff 只解决：
 
 > 长期科研/工程项目旧 thread 快到上下文或线程长度边界时，用户在当前普通 Chat 中显式调用一次 Skill，旧 thread 直接输出一份最小充分的新 thread 初始化 Prompt。
 
-典型项目：CAT-TRACE、Distributed Imaging Inference（DII）、CardiacNexus。
+典型项目：某私有统计研究项目、Distributed Imaging Inference（DII）、CardiacNexus。
 
 用户正常路径：
 
@@ -516,7 +516,7 @@ G2 证明用户真正消费的 semantic capability，不由安装/metadata 或 f
 
 ### G3 — Generalization / Should-not-change
 
-CAT-TRACE：
+a private research project：
 - 后期冻结的模型/符号/数据决定覆盖早期探索；
 - 不把过时路线重新列为当前选择。
 
@@ -597,7 +597,7 @@ tests/fixtures/project_thread_handoff/...   # 仅在最小 acceptance fixture �
 不修改：
 
 - Bridge Kit production source；
-- CAT-TRACE / DII / CardiacNexus production repo；
+- a private research project / DII / CardiacNexus production repo；
 - 中央 Plugin source；
 - Mica；
 - browser extension。
@@ -722,7 +722,7 @@ G1–G3 与一次最小用户 smoke 直接覆盖这些风险。
 
 - G1 PASS：target Pro account 安装 + regular Chat explicit entry；
 - G2 PASS：target Pro regular Chat DII/CARE normal-entry replay；
-- G3 PASS：CAT-TRACE / CardiacNexus generalization；
+- G3 PASS：a private research project / CardiacNexus generalization；
 - Skill 能消费当前 thread context；
 - output 只有一份初始化 Prompt；
 - no second confirmation；

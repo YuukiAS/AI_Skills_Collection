@@ -2,7 +2,7 @@
 
 本文件是科研 PPT 在多轮人工返修期间的**当前累计规则入口**。在这些规则正式合并进 presentation plugin / shared QA 之前，真实项目的下一轮 Codex 执行必须先读取这里，不能只靠当前项目 prompt 重新描述一遍。
 
-它不是某个 CAT-TRACE 页面清单；只保留已经从真实返修中确认、可跨项目复用的规则。项目自己的科学事实和逐页决定仍应留在项目 task / revision ledger 中。
+它不是某个 某私有统计研究项目 页面清单；只保留已经从真实返修中确认、可跨项目复用的规则。项目自己的科学事实和逐页决定仍应留在项目 task / revision ledger 中。
 
 ## 0. 每轮执行前必须同步规则仓库
 
@@ -112,7 +112,7 @@ Two-column 只在两个对象需要并行比较时使用。连续推导、因果
 - `PR-AUC ↑`；
 - `Coverage → 95%` / `→ nominal`。
 
-不要另设 `direction = lower/higher` 一列。多个同 family metrics 可合并，如 `Discovery RMSE ↓ (total / catalogue / open tail)`。
+不要另设 `direction = lower/higher` 一列。多个同 family metrics 可合并，如 `RMSE ↓ (group A / group B)`（合成示例）。
 
 方向符号不能替代解释：每个 metric 仍需用很短的文字说明它检查什么统计性质。
 
@@ -130,7 +130,7 @@ Comparison 中要区分 focal method 与 baselines / ablations，不写 `ours; A
 
 推荐 presentation framing：
 
-- slide title 直接写科学保证 / 新能力，例如 `Group marks preserve open-tail richness calibration`；
+- slide title 直接写科学保证 / 新能力，例如 `The estimator remains stable under the stated assumptions`（合成示例）；
 - formal theorem/corollary/proposition 的分类和 manuscript 编号是次要信息，可留 source note / speaker note，除非编号本身对现场讨论重要；
 - 不能用“结果数量”代替理论价值；
 - 一个简单 estimand decomposition 不包装成深 theorem；

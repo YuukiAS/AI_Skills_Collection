@@ -30,7 +30,7 @@
 
 当前 `presentations 0.3` 已经有真实能力：来源保真、research-group-meeting 规划、exact CUHK、真实 render、contact sheet、existing-deck revision gate、accepted-element preservation、first-use 检查、scientific-prose handoff 和独立视觉 review。
 
-但 CAT-TRACE v4–v14 的连续真实返修证明了一个更深的问题：**规则越来越多，production path 仍然可以产出“形式合规但讲不清、看不清、review 范围不诚实”的 deck。** 典型表现包括：
+但 某私有统计研究项目 v4–v14 的连续真实返修证明了一个更深的问题：**规则越来越多，production path 仍然可以产出“形式合规但讲不清、看不清、review 范围不诚实”的 deck。** 典型表现包括：
 
 - 每页都能解释自己在做什么，但页与页之间没有必然关系；
 - 术语“定义过”却仍在听众真正理解前被使用；
@@ -492,13 +492,13 @@ Executor 的 `READY_FOR_REVIEW` 需要展示原 finding 在 final render 中怎�
 | G7 Existing-deck revision preservation | 定向修复不破坏已接受内容，不从头重做 | 新建能力不能证明返修可靠 | 真实 reviewer-seen deck + targeted feedback | baseline、accepted ledger、source/render diff、affected-page review、whole-deck should-not-change | unrelated redesign、accepted element 回归、和错误 baseline 比较 | 合法的全局重构需用户明确授权 | 是 |
 | G8 自然语言与整套读者负担 | final deck 能口头讲、标题/句子/过渡自然，教学/科研语体匹配 | 机械 grammar 或单页检查不能证明全场可讲 | English research + Chinese/English tutorial | Clear Writing handoff evidence；scientific freeze；rerender；spoken-read review；deck sequence review | memo/AI 式语言、模板标题、内部状态、dataset 作用被删、final prose 导致 layout 回归 | 写作层不得改公式、数值、citation、layout ownership | 是 |
 | G9 Review scope、独立判断与完成权 | reviewer 看到了其声称审核的完整对象，global PASS 不越权 | 证明 completion 可信，不只是 artifact 存在 | 任何 pre-final / final review | review scope；item-level observations；unreviewed list；candidate identity；原 finding closure | 局部 review 给 global PASS、自签 PASS、只有 top-level score | reviewer 错判可追加裁定，但不涂改原记录 | 是 |
-| G10 跨模式真实使用与发布一致性 | 同一 final candidate 在 CUHK research、course tutorial、revision 三类正常任务均可靠 | 防止只针对 CAT-TRACE 或单模板调参 | frozen final batch | known regression bank + unrelated tasks + fresh research + fresh teaching；安装/Marketplace/profile identity；README/changelog/version closure | 拼接不同 commit 的 PASS、fresh 样本被调参、正常入口未消费新机制 | 不要求每次新失败都新建 gate；归入现有 gate | 是 |
+| G10 跨模式真实使用与发布一致性 | 同一 final candidate 在 CUHK research、course tutorial、revision 三类正常任务均可靠 | 防止只针对 该项目 或单模板调参 | frozen final batch | known regression bank + unrelated tasks + fresh research + fresh teaching；安装/Marketplace/profile identity；README/changelog/version closure | 拼接不同 commit 的 PASS、fresh 样本被调参、正常入口未消费新机制 | 不要求每次新失败都新建 gate；归入现有 gate | 是 |
 
 ### 8.1 Final batch 建议
 
 开发期：
 
-- CAT-TRACE 已知失败回放；
+- 该项目 已知失败回放；
 - 当前已有 presentation fixtures；
 - 两模板 skeleton/render probes；
 - deterministic text/citation/geometry checks。
@@ -601,7 +601,7 @@ Executor 的 `READY_FOR_REVIEW` 需要展示原 finding 在 final render 中怎�
 
 ### 11.3 私有材料
 
-- CAT-TRACE 私有全文/render 不提交进普通 plugin payload；只提交 public-safe regression evidence；
+- 该项目 私有全文/render 不提交进普通 plugin payload；只提交 public-safe regression evidence；
 - `Chapter1.pdf` 只作为用户提供的 style reference，implementation 提交重建 source、设计规格和 synthetic fixture，不复制课程正文；
 - 必须记录模板来源、hash、检查内容、采用范围和不采用内容；
 - 不把老师 slide 的 annotation/highlight、课程内容或具体例题当 plugin 默认资产。

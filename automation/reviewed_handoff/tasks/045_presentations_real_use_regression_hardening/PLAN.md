@@ -4,13 +4,13 @@ task_key: 045_presentations_real_use_regression_hardening
 decision: PLAN_FROZEN
 ---
 
-# 045 Presentations — real-use regression hardening before CAT-TRACE v5
+# 045 Presentations — real-use regression hardening before a private research project v5
 
 ## Objective and value
 
-先修掉这次已经被真实 CAT-TRACE v4 反复证明的 presentation production 缺口，再回 TRACE 做 v5。目标不是“把 presentation TODO 全部做完”，而是把下一轮最容易重复犯的系统性错误真正挡在交付门外。
+先修掉这次已经被真实 某私有统计研究项目 v4 反复证明的 presentation production 缺口，再回 TRACE 做 v5。目标不是“把 presentation TODO 全部做完”，而是把下一轮最容易重复犯的系统性错误真正挡在交付门外。
 
-长期原则冻结为：**以后不需要每一版 PPT 前都先改 plugin。** 真实项目正常迭代并持续把 plugin 问题写回中央 TODO；只有满足 promotion gate 的重复、严重或用户明确跨项目长期偏好，才插入一个 bounded plugin repair。CAT-TRACE v4 已达到这个门槛，因为多个 active guardrail 在连续多轮真实 render 中仍然失效。
+长期原则冻结为：**以后不需要每一版 PPT 前都先改 plugin。** 真实项目正常迭代并持续把 plugin 问题写回中央 TODO；只有满足 promotion gate 的重复、严重或用户明确跨项目长期偏好，才插入一个 bounded plugin repair。该项目 v4 已达到这个门槛，因为多个 active guardrail 在连续多轮真实 render 中仍然失效。
 
 ## Frozen decisions
 
@@ -40,7 +40,7 @@ decision: PLAN_FROZEN
 
 Executor 必须把它落到 existing-deck revision 的可执行检查中：最终 deck sequence review 必须检查新方法、缩写、数据集、领域术语、estimand 是否在首次作为中心对象前已经获得目标听众所需的解释。
 
-不要为 CAT-TRACE 建词表。实现应使用已有 deck plan / reviewer evidence 的最小扩展；若需要额外内部字段，只能扩现有 artifact，不创建新顶级 schema。
+不要为 该项目 建词表。实现应使用已有 deck plan / reviewer evidence 的最小扩展；若需要额外内部字段，只能扩现有 artifact，不创建新顶级 schema。
 
 ### C. PROMOTE_NOW — rendered scientific-object QA 硬化
 
@@ -57,7 +57,7 @@ Executor 必须把它落到 existing-deck revision 的可执行检查中：最�
 
 Owner 仍然是 `presentations` routing/completion contract；`writing-style/scientific-prose` 是邻接能力。
 
-先做 baseline：从 CAT-TRACE v4 可见英文中抽取少量**不泄露项目机密、但覆盖真实失败类型**的 representative prose，在当前未修改 `scientific-prose` 上跑正常 user-facing rewrite。重点验证 `Failure prevented`、机械 `Example.` 标签、noun-stack/table microcopy、不自然开场能否被当前 skill 正常处理。
+先做 baseline：从 该项目 v4 可见英文中抽取少量**不泄露项目机密、但覆盖真实失败类型**的 representative prose，在当前未修改 `scientific-prose` 上跑正常 user-facing rewrite。重点验证 `Failure prevented`、机械 `Example.` 标签、noun-stack/table microcopy、不自然开场能否被当前 skill 正常处理。
 
 - 如果 current `scientific-prose` 已经能改好：不要修改 writing-style；只把 presentations 的 English final-pass handoff 从 optional 改成 existing-deck research presentation 的完成门槛，并要求语言修改后重新 render 检查 layout。
 - 如果 current `scientific-prose` 本身仍失败：本任务不要顺手大改 writing-style，进入 `NEEDS_GPT_PLANNER` 或把 writing-style NEW 保持待下一 bounded task。
@@ -75,13 +75,13 @@ Owner 仍然是 `presentations` routing/completion contract；`writing-style/sci
 - Question/Background 的统一视觉 primitive；
 - slide-level source/figure citation 的完整 house style。
 
-原因：这些都可以在 CAT-TRACE v5 项目层先正确实现，同时继续作为真实证据；目前没有必要为了一个 deck 把全局 presentation layout 固化得过细。若 Executor 发现已有 active primitive 只需很小修复即可解决明显 regression，可以在不扩大语义边界的情况下补 regression test，但不得把这些项升级成大型子项目。
+原因：这些都可以在 该项目 v5 项目层先正确实现，同时继续作为真实证据；目前没有必要为了一个 deck 把全局 presentation layout 固化得过细。若 Executor 发现已有 active primitive 只需很小修复即可解决明显 regression，可以在不扩大语义边界的情况下补 regression test，但不得把这些项升级成大型子项目。
 
 ### PROJECT_LOCAL
 
-- CAT-TRACE 不再使用 `taxa` 的具体措辞偏好；
-- CAT-TRACE model closure 页具体应该列 finite catalogue、open tail、matching、residual dependence 的哪些公式；
-- CAT-TRACE 的 exact page order、theory 内容、真实数据名称和讨论问题。
+- 该项目 不再使用 `taxa` 的具体措辞偏好；
+- 该项目完整方法页具体应该包含哪些科学公式（具体内容留在私有项目仓库）；
+- 该项目的 exact page order、theory 内容、真实数据名称和讨论问题。
 
 这些留在 TRACE v5 task，不进入 plugin。
 
@@ -106,7 +106,7 @@ Owner 仍然是 `presentations` routing/completion contract；`writing-style/sci
 
 Executor 在写代码前必须先回答并记录：
 
-1. CAT-TRACE v4 task 实际有没有调用 `generate_research_presentation_production_entry.py` 或等价 production path，还是主要靠人工读取 skill/guardrails 后直接改 `.tex`？
+1. 该项目 v4 task 实际有没有调用 `generate_research_presentation_production_entry.py` 或等价 production path，还是主要靠人工读取 skill/guardrails 后直接改 `.tex`？
 2. current existing-deck revision 是否有正式可调用入口；如果没有，当前 guardrail 为什么没有被 production enforcement 消费？
 3. independent visual reviewer 是否实际参与 v4 最终 PASS；如果没有，为什么 Codex self-inspection 能越过 plugin 的“generator must not assign final PASS”合同？
 4. current `scientific-prose` 在 representative English slide microcopy 上 baseline 是否已经足够？
@@ -119,7 +119,7 @@ Executor 在写代码前必须先回答并记录：
 
 本任务的验收和回归门槛由本节、后续 `## Acceptance gates`、`## Repository / CI` 和 `## Version decision` 共同定义；不得用 process PASS 替代 artifact/product PASS。
 
-### Known replay: CAT-TRACE v4
+### Known replay: a private research project v4
 
 从本机 TRACE checkout 读取 v4 source/PDF，不把完整内容提交到公开仓库。修复后至少验证现有路径能够对这些已知问题给出 `REVISE/BLOCKED`，而不是错误 PASS：
 
@@ -131,11 +131,11 @@ Executor 在写代码前必须先回答并记录：
 - body/source/footer safe-zone violation；
 - English slide prose 未经过 final scientific-prose handoff。
 
-不要求 045 直接把 CAT-TRACE v4 改成 v5；只证明 plugin/revision path 能识别和阻止这些失败。
+不要求 045 直接把 该项目 v4 改成 v5；只证明 plugin/revision path 能识别和阻止这些失败。
 
 ### Unrelated regression
 
-至少使用一个当前 repository 已有、与 CAT-TRACE 无关的 research presentation regression / fixture / cached rendered case，验证：
+至少使用一个当前 repository 已有、与 该项目 无关的 research presentation regression / fixture / cached rendered case，验证：
 
 - 不会把所有页面强迫成同一布局；
 - legitimate compact diagrams 不会因为 node/arrow 规则被误杀；
@@ -180,7 +180,7 @@ Executor 在写代码前必须先回答并记录：
 - relevant unit/regression tests通过；
 - repository canonical validate/audit/build 按当前要求通过；
 - CI_required=true，因此最终必须有真实 CI 状态；
-- 不提交 CAT-TRACE 私有 PDF/全文；
+- 不提交 该项目 私有 PDF/全文；
 - 不新增顶级 plugin/skill/schema/state。
 
 ## TODO state updates expected after implementation
@@ -189,7 +189,7 @@ Executor/Reviewer 根据真实结果更新 central TODO，不机械把所有 NEW
 
 - existing-deck production path / first-use enforcement / rendered QA / English final-pass：若实现并 replay 通过 → `PROMOTED`；若证据不足 → 保持/降到 `BLOCKED_NEEDS_EVIDENCE`。
 - table/list/paragraph、model closure、Question/Background、citation house style：默认整理为 `CANDIDATE_GENERIC`，除非本任务发现已有更强 active rule 已覆盖，则 `SUPERSEDED`。
-- CAT-TRACE 专属措辞/结构不得进入 central TODO active generic layer。
+- 该项目 专属措辞/结构不得进入 central TODO active generic layer。
 
 ## Routing contract
 
@@ -207,7 +207,7 @@ Executor/Reviewer 根据真实结果更新 central TODO，不机械把所有 NEW
 - “从这篇论文给我新做一套 20 页 conference talk。” → new-deck production
 - “把这个 PPT 的一个框往左挪 5 像素。” → minor object edit
 - “只帮我润色这三句英文，不涉及 PPT 结构。” → writing-style/scientific-prose
-- “重新设计 CAT-TRACE 的模型和 theorem。” → project scientific reasoning
+- “重新设计 该项目的模型和 theorem。” → project scientific reasoning
 - “总结这份 PDF。” → summarization/document task
 
 ## Out of scope

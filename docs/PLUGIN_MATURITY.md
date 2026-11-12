@@ -25,7 +25,7 @@ Status 只能由真实任务、真实 artifact/render 和用户验收改变。Sy
 
 | Plugin | Status | Basis |
 |---|---|---|
-| `presentations` | `baseline` | Stage 1–4 production path 已成立，但 041 真实 frozen batch 未通过；043 已暂停。下一步直接用于现有 CAT-TRACE deck refinement，真实使用后再决定是否进入 `alpha`。 |
+| `presentations` | `baseline` | Stage 1–4 production path 已成立，但 041 真实 frozen batch 未通过；043 已暂停。下一步直接用于现有 某私有统计研究项目 deck refinement，真实使用后再决定是否进入 `alpha`。 |
 | `research-writing` | `unclassified` | Distributed Imaging Inference 的 advisor-report 反馈已进入 active `research-reporting`；等待下一份独立真实报告验证。 |
 | `writing-style` | `unclassified` | 尚未做统一跨项目状态判断。 |
 | `workflow-core` | `unclassified` | 尚未做统一跨项目状态判断。 |

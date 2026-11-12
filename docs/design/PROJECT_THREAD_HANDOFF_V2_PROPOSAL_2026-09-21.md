@@ -39,7 +39,7 @@ Project Thread Handoff 只解决一个问题：
 
 > 长期项目旧 thread 快到上下文/线程长度边界时，用户显式调用一次 Skill，旧 thread 直接生成一份最小充分的新 thread 初始化 Prompt。
 
-典型项目包括 CAT-TRACE、DII、CardiacNexus。V1 不负责项目知识管理，不复制完整历史，不维护另一份 CURRENT，不自动打开新 thread，不自动写 repo。
+典型项目包括 某私有统计研究项目、DII、CardiacNexus。V1 不负责项目知识管理，不复制完整历史，不维护另一份 CURRENT，不自动打开新 thread，不自动写 repo。
 
 用户默认操作只有一次显式调用。正常情况不确认、不问表单、不要求用户重复项目背景。
 
@@ -253,7 +253,7 @@ Bridge Kit 不是依赖，只是已安装项目可利用的 source-role conventi
 
 ### G3 — Generalization / Should-not-change
 
-CAT-TRACE acceptance：
+a private research project acceptance：
 - 后期明确冻结的模型、符号或数据决定覆盖早期探索；
 - 不把已过时路线重新并列成当前选项。
 
@@ -340,7 +340,7 @@ V1 只有在同一 final candidate 满足以下条件时才可称 standalone Ski
 - 显式 invocation metadata 正确；
 - contract/trigger tests 通过；
 - DII/CARE 真实 normal-entry replay 通过；
-- CAT-TRACE、CardiacNexus acceptance 不暴露过拟合/角色误判；
+- 该项目、CardiacNexus acceptance 不暴露过拟合/角色误判；
 - output 是一份最小充分初始化 Prompt；
 - no repo-write side effect；
 - source/generated/provenance/registry/catalog parity 通过；

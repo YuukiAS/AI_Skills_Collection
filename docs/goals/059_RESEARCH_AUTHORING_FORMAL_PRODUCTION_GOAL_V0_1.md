@@ -117,7 +117,7 @@ canonical document + delta
 
 ## 4. Development regressions
 
-开发期允许反复使用已知 DII/CAT-TRACE 真实失败和 current routing regressions，但这些材料不能在修产品后冒充 final fresh evidence。
+开发期允许反复使用已知 DII/private-project 真实失败和 current routing regressions，但这些材料不能在修产品后冒充 final fresh evidence。
 
 至少保护：
 
@@ -127,7 +127,7 @@ canonical document + delta
 - 双语文档语义一致但不逐句翻译；
 - 公式职责；
 - reader-facing references 与 internal provenance 分离；
-- CAT-TRACE 按模块增量更新；
+- 某私有统计研究项目 按模块增量更新；
 - report/paper/litcite support-only near-miss；
 - existing formal PDF handoff 不退化。
 
