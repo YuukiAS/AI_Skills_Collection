@@ -527,3 +527,210 @@ d8b1e414908b825fdfae7072bde0cfd3e1774de3650f8543172cc40626c2ce9e
 ```
 
 合并稿依据更新到 `c001f5aa02b65f53fa587181beb01716dfb389cc`。本轮 JSON 改动尚无提交号，以该 HEAD 加路径及上述摘要定位，不声称已存在于该提交中。只修改 JSON 并追加本说明；SPEC、MERGE_DECISIONS、流程文档和 A 原稿未改，未 commit、未 push、未切分支。新 JSON 和整份说明按相同正则公开信息自查，匹配数均为零。没有需要 D1 新增选择的事项，尚待真实读者记录与规定关卡。
+
+
+## 续：按阶段派发、状态恢复及 D8 第 1 轮术语改写（第 14 节）
+
+本轮以设计分支 HEAD `a3dc0d96a57e18a1d6e2c542ca1acc6836cfd44f` 为准，完整读取 SPEC 第 1.3a 节、更正后的第 2.1a 节执行端派发项，以及 MERGE_DECISIONS 第 14 节。D8 的术语表和判断单均通过 `git show origin/gates/assurance-0.1-d1:<路径>` 读取，没有切换分支；该远端引用当时指向 `e6c614cac5a07a60f87c1dcfc9ff5c0e0629ce97`。文件位置分别为 `docs/design/assurance/plugin-0.1-d1/gates/d8/round1/GLOSSARY_ZH.md`、`docs/design/assurance/plugin-0.1-d1/gates/d8/round1/D1_JUDGMENT.json`，两份文件 SHA-256 分别为 `213e61f2823a05abed2407deb379229f665f62d07cfe3774d1d3e484c4326338`、`5345598735fed5a99c4cbae277b06652aad5400b29dff22e9d75865614b6c521`。
+
+依用户补充，前两项规则同步可以修改必要的 `technical` 字段；第三项术语改写严格只动读者可见的六个字段。本轮先完成派发与恢复，再改术语，并比对各阶段内容；没有自行增订设计或术语解释。
+
+### 已写入的规则与节点
+
+- 设计阶段由 D1 派发 D4、D5、D7，准备 D2、D3、D6、D8 的提示词；交付阶段由 X1 派发 X2、X3、X4，准备 X5 的提示词。执行端不限次数，不占用户转交次数。`dispatch` 的输入、输出、接口、正文、验收和 `X1-intake` 表格项、D1/X1 角色卡以及重复规则全部同步，不再笼统写执行端由 D1 派发；`ws-dispatch` 的读者文字与技术说明同时改正。
+- `state`、`writer`、`record-check` 写入 SPEC 第 1.3a 节完整原文，并同步接口、输出和验收：四种触发条件、发现者立即停下不派发不写记录、按有效历史状态和原始记录恢复、冲突不得自选、涉及冻结/批准/签发交用户、新状态修订号接基线递增及 `last_change.reason=recovery`、检查和远端回读后才能恢复派发、无有效历史状态须先获用户确认。恢复记录为不可变的 `recovery/<recovery_id>.json`，只采用 D1 给出的基线提交、补登事件、冲突、处理结果四类内容，没有自行命名机器字段或格式版本。
+- 只读记录检查增加 `recovery` 类型。新增 `fail-recovery` 及对应 `v-fail-recovery`，把状态丢失或损坏与现有的写入结果不明区分开：前者需要历史有效状态和不可变事件的对照恢复，不能只重试写入。该路径的完整技术说明照录六步恢复，读者文字说明停下、负责人恢复、用户处理指定冲突以及恢复派发条件。
+- 更新 `r-state`、`r-dispatch`、派发连接和依据引用。以下列出所有自身字段发生变化的节点；仅因子节点变化的容器不重复计入。部分节点只同步了固定来源引用或已有验收说明，没有新增规则。
+
+| 节点 | 修改字段 |
+| --- | --- |
+| `state` | `outputs`、`validators`、`interface`、`terminal` |
+| `writer` | `outputs`、`validators`、`interface`、`terminal` |
+| `record-check` | `inputs`、`validators`、`interface`、`terminal` |
+| `dispatch` | `inputs`、`outputs`、`validators`、`interface`、`terminal` |
+| `prompts` | `inputs`、`validators`、`interface`、`terminal` |
+| `revision` | `validators`、`terminal` |
+| `role-D1` | `outputs`、`validators`、`interface`、`terminal` |
+| `role-D2` | `validators`、`terminal` |
+| `role-D3` | `validators`、`terminal` |
+| `role-D4` | `validators` |
+| `role-D6` | `validators`、`terminal` |
+| `role-D8` | `validators`、`interface`、`terminal` |
+| `clarify` | `validators`、`terminal` |
+| `gates` | `validators`、`interface`、`terminal` |
+| `contract-fidelity` | `validators`、`interface`、`terminal` |
+| `freeze` | `validators`、`interface`、`terminal` |
+| `q-checker` | `validators`、`terminal` |
+| `q-inheritance` | `validators`、`terminal` |
+| `role-X1` | `outputs`、`validators`、`interface`、`terminal` |
+| `role-X5` | `validators`、`terminal` |
+| `evidence` | `validators` |
+| `sign` | `validators` |
+| `planning-entry` | `validators`、`terminal` |
+| `minimum` | `validators` |
+| `capability-check` | `validators` |
+| `q-capacity` | `validators`、`terminal` |
+
+总数为 54 个节点、14 条需求、48 条连接、4 条正常走查（22 步）、11 条失败路径（22 步及 11 段整体收场）、55 个复述单位、65 个验收器、12 条依据记录。验收器仍全部 `not-run`、运行记录为空；`versions: []` 不变。没有运行这些待实现的插件能力，没有模拟状态恢复或角色派发。
+
+### 三类复述单位
+
+实际调用固定检查器 `content/readability.ts` 的 `readerHash`，以本轮 HEAD 中的 JSON 为基线比较：27 个原有单位的读者文字哈希改变，26 个不变，新增 2 个单位。判断单中 `passed` 的 26 个单位已对完整对象逐字段比对，全部保持原样；不只检查文字哈希。
+
+第一类，按术语表改写的 27 个单位，顺序与判断单相同：
+
+| 单位 id | 实际修改的读者字段 |
+| --- | --- |
+| `wb-planning` | `action` |
+| `ws-dispatch` | `action`、`expectedResult` |
+| `fail-package-step-1` | `exampleData` |
+| `wr-calibration` | `exampleData` |
+| `fail-package-step-2` | `exampleData` |
+| `fail-semantic-step-2` | `exampleData` |
+| `fail-package-step-3` | `exampleData` |
+| `fail-semantic-step-1` | `exampleData` |
+| `fail-role-step-2` | `exampleData`、`expectedResult`、`onError` |
+| `wr-contract` | `title`、`action`、`expectedResult` |
+| `fail-role-whole` | `exampleData`、`expectedResult` |
+| `wb-capability` | `action` |
+| `wb-source` | `why`、`onError` |
+| `wr-gates` | `title`、`exampleData`、`expectedResult` |
+| `wr-candidate` | `action` |
+| `fail-checker-whole` | `action`、`exampleData` |
+| `wb-execution` | `exampleData` |
+| `fail-semantic-whole` | `exampleData` |
+| `wr-freeze` | `action`、`exampleData`、`expectedResult` |
+| `fail-package-whole` | `exampleData` |
+| `wr-build` | `onError` |
+| `ws-prompts` | `onError` |
+| `wr-asset` | `action`、`exampleData` |
+| `fail-checker-step-2` | `action`、`exampleData` |
+| `wr-owner` | `exampleData` |
+| `wr-sign` | `action`、`exampleData` |
+| `fail-role-step-1` | `exampleData` |
+
+第二类，因前两项规则必须修改的原有单位：`ws-dispatch`，改了 `expectedResult` 与 `technical.expectedResult`，已同时列在第一类。27 个名单以外的原有单位没有被动修改，原先通过的 26 个单位无例外改动。失败路径 `fail-role` 自身的 `technical.handling` 改了派发人，但不是复述单位，未改变该路径已有步骤和整体收场的技术字段。
+
+第三类，新增单位：`fail-recovery-whole`（失败路径整体收场）、`fail-recovery-step-1`（失败步骤）。这两个新增单位均需下一轮真实复述。27 个改写单位不能复用旧文字的通过记录，未合成、补签或声称已完成 D8 复述。
+
+### 因前两项规则改动的全部 technical 字段
+
+既有技术字段共改两处；第三项术语改写没有修改任何 `technical` 字段。逐项如下：
+
+1. `ws-dispatch.technical.expectedResult`：
+   - 原文：生成设计或核查事实的角色绑定任务书，检查设计的角色绑定快照，交付工作绑定有效冻结对象。规划端一律在 GPT 网页端，每角色每轮由用户转交一条；执行端由设计负责人派发，不限次数。
+   - 新文：生成设计或核查事实的角色绑定任务书，检查设计的角色绑定快照，交付工作绑定有效冻结对象。规划端一律在 GPT 网页端，每角色每轮由用户转交一条；执行端在设计阶段由设计负责人（D1）派发，在交付阶段由交付负责人（X1）派发，次数不限。
+2. `fail-role.technical.handling`：
+   - 原文：保留缺项并给出符合角色宿主要求的完整提示词，不降档、不自审、不把 prepared 写成 sent。规划端只能由用户每角色每轮转交一条到 GPT 网页端，执行端由 D1 派发；D8 按每轮新 GPT 对话合批，不以缺少旧的派发方式阻断合批通过。
+   - 新文：保留缺项并给出符合角色宿主要求的完整提示词，不降档、不自审、不把 prepared 写成 sent。规划端只能由用户每角色每轮转交一条到 GPT 网页端，执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1）；D8 按每轮新 GPT 对话合批，不以缺少旧的派发方式阻断合批通过。
+
+状态恢复失败路径是本轮新增内容，以下逐字段列出其新增技术内容，避免把新增误称为旧字段修改：
+
+| 新增字段 | 内容 |
+| --- | --- |
+| `fail-recovery.technical.id` | fail-recovery |
+| `fail-recovery.technical.question` | interrupted |
+| `fail-recovery.technical.shortLabel` | 状态文件丢失或损坏 |
+| `fail-recovery.technical.situation` | STATE.json 不存在、无法解析、未通过 state 记录检查，或者修订号与远端分支上的最新提交对不上。 |
+| `fail-recovery.technical.brokenRequirementIds` | ["r-state"] |
+| `fail-recovery.technical.detectedBy` | state |
+| `fail-recovery.technical.route` | ["state"] |
+| `fail-recovery.technical.outcome` | stop |
+| `fail-recovery.technical.handling` | SPEC 第 1.3a 节完整原文，含触发条件和六步恢复。 |
+| `fail-recovery.technical.userSees` | 当前派发和写记录已停止，由当前阶段负责人按历史与原始记录恢复；恢复冲突不自行选择，涉及冻结、批准或签发的交用户决定，无有效历史状态也先请用户确认。 |
+| `fail-recovery.technical.validatorId` | v-fail-recovery |
+| `fail-recovery-whole.technical.nodeId` | state |
+| `fail-recovery-whole.technical.action` | SPEC 第 1.3a 节完整原文，含触发条件和六步恢复。 |
+| `fail-recovery-whole.technical.exampleData` | STATE.json 不存在、无法解析、未通过 state 记录检查，或者修订号与远端分支上的最新提交对不上。 |
+| `fail-recovery-whole.technical.expectedResult` | 恢复记录 recovery/<recovery_id>.json 包含基线提交、补登的事件、冲突和处理结果；STATE.json 的 revision 接基线递增，last_change.reason=recovery；检查通过和远端回读后才派发。 |
+| `fail-recovery-step-1.technical.nodeId` | state |
+| `fail-recovery-step-1.technical.action` | SPEC 第 1.3a 节完整原文，含触发条件和六步恢复。 |
+| `fail-recovery-step-1.technical.exampleData` | STATE.json 不存在、无法解析、未通过 state 记录检查，或者修订号与远端分支上的最新提交对不上。 |
+| `fail-recovery-step-1.technical.expectedResult` | 恢复记录 recovery/<recovery_id>.json 包含基线提交、补登的事件、冲突和处理结果；STATE.json 的 revision 接基线递增，last_change.reason=recovery；检查通过和远端回读后才派发。 |
+
+### 交回 D1 的术语事项
+
+`wr-calibration.expectedResult` 的“检查器”指该步骤实际运行的验收检查实现，原文是“得到检查器能否正确区分三种情况的原始结果”。术语表把“检查器”统一解释成“固定版本的 Blueprint 检查器”，直接套用会改变对象，所以本处保留原词；该单位的“来源独立的预期”已按词表解释。请 D1 指定本处是补一条适用于验收实现的解释，还是调整本处用词；本轮不自行选择。
+
+以下仍需要词表补充的词没有自行编解释：`wb-planning` 的“固定源提交、包根、资源根”；`wb-source` 的“复制映射、生成器”；`wr-calibration` 的“校准、控制例”；`wr-build` 的“默认验收实现”；`wr-asset` 的“冻结语义”；`wr-candidate` 的“候选、对象身份、实际运行器”；`wr-freeze` 的“冻结档”；`wr-sign` 的“偏离结论”；`fail-semantic-whole`、`fail-semantic-step-1`、`fail-semantic-step-2` 的“阈值”。这里只列词和位置，不补新的定义或完成条件。
+
+### 草稿检查、未完成项与文件身份
+
+检查器提交仍为 `c05edcf51bc93f8be82180fd4ad28a250937f195`，源码工作树检查后无改动。先加载 `nodejs/24.16.0`，从检查器 `content/` 实际运行离线、在线各一次；下列变量代指用户指定工作树，运行时传入 JSON 的绝对路径，公开文件不记录本机路径。
+
+```bash
+module load nodejs/24.16.0
+cd "$BLUEPRINT_WORKTREE/content"
+npx tsx check.mjs --stage draft --offline "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+```
+
+| 检查 | 检查时间（UTC） | 退出码 | 确定缺口 | 人工解释待审 | 未完成项 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 离线草稿 | `2026-11-12T05:13:44.276Z` | 2 | 0 | 92 | 3 |
+| 在线草稿 | `2026-11-12T05:14:24.572Z` | 2 | 0 | 92 | 2 |
+
+离线未完成项为来源未在线核实、缺 `readability-review.json`、缺 `questions.json`；在线只剩上述两份读者记录缺失。两次均没有确定内容缺口，退出码 2 不能写成完整通过。92 项证据解释仍需人工审查；本轮只完成机械草稿检查，尚未完成 D8 新文字复述、术语补定或正式冻结。
+
+新 JSON 的 SHA-256：
+
+```text
+048b00d56e07f94e93947606c532892739a0f28727601cdc76f9e9898bd65cf8
+```
+
+合并稿依据使用本分支实际 HEAD `a3dc0d96a57e18a1d6e2c542ca1acc6836cfd44f` 加仓库内路径。JSON 尚未提交，没有自己的提交号，以该 HEAD、路径和上述摘要定位未提交文件，不声称新文件已存在于该提交中。只修改 JSON 并追加本说明，SPEC、MERGE_DECISIONS、流程文档和 A 原稿均未修改。未 commit、未 push、未切分支。按用户指定正则检查新 JSON 和整份说明，公开信息匹配数均为零。
+
+
+## 续：采用术语表“补充”完成上一轮交回的改写
+
+上一轮交回的术语已按 D1 新增的“补充”改写，没有自行编写定义。`wr-calibration` 的验收用“检查器”首次写为“验收检查程序（检查器，用来判定成品是否达标的程序）”；检查设计文件的 Blueprint 检查器继续保持区别。其余词使用补充表中的原文解释，每个单位首次出现时展开，再次出现时保留简称。
+
+本轮开始时设计分支 HEAD 为 `b659193f508190d139192da554312d1c423e661f`，JSON 的 SHA-256 为 `048b00d56e07f94e93947606c532892739a0f28727601cdc76f9e9898bd65cf8`。术语表通过 `git show origin/gates/assurance-0.1-d1:docs/design/assurance/plugin-0.1-d1/gates/d8/round1/GLOSSARY_ZH.md` 完整读取，该远端引用当时指向 `dda47ca4265c8e894eb027ed74208c158cd88d7e`，文件 SHA-256 为 `eba6ac99577e6bd63cfc6a1f523970661b6c8d700e48562c72d878ae5481acc8`。本轮只改读者文字，既有设计字段和来源引用均保持原样。
+
+### 本次改写的单位
+
+| 单位 id | 改动的读者字段 |
+| --- | --- |
+| `wb-planning` | `action` |
+| `wb-source` | `action`、`exampleData` |
+| `wr-calibration` | `title`、`action`、`expectedResult` |
+| `wr-build` | `expectedResult` |
+| `wr-asset` | `action`、`exampleData`、`expectedResult`、`onError` |
+| `wr-candidate` | `action`、`exampleData`、`onError` |
+| `wr-freeze` | `expectedResult` |
+| `wr-sign` | `exampleData` |
+| `fail-semantic-whole` | `exampleData` |
+| `fail-semantic-step-1` | `exampleData`、`expectedResult` |
+| `fail-semantic-step-2` | `exampleData` |
+
+上述 11 个单位覆盖固定源提交、包根/资源根、复制映射、生成器、校准、控制例、验收用检查器、默认验收实现、冻结语义、候选、对象身份、实际运行器、冻结档、偏离结论和阈值。`wr-build` 将原“候选产物”按词表写为带解释的“候选成品”，没有改变所指对象或增加步骤。
+
+已逐字段核对：除这 11 个单位的六项读者字段外，整份 JSON 与本轮 HEAD 完全一致；全部 `technical` 字段未动，判断单中已经通过的 26 个单位完整对象未动。实际调用固定检查器的 `readerHash` 比较，11 个单位文字哈希改变、44 个不变、无新增单位。改过的文字需要下一轮真实复述，本轮没有补签读者通过记录。
+
+节点、需求、连接、走查、失败路径和验收器数量均未变化：54 个节点、14 条需求、48 条连接、4 条正常走查（22 步）、11 条失败路径（22 步及 11 段整体收场）、55 个复述单位、65 个验收器、12 条依据记录。`versions: []` 保持原样。
+
+### 草稿检查及未完成项
+
+在用户指定检查器工作树的 `content/` 下，先加载 `nodejs/24.16.0`，实际运行离线、在线草稿档各一次。检查器仍为提交 `c05edcf51bc93f8be82180fd4ad28a250937f195`，未修改源码。下列变量代指用户指定的工作树，实际运行使用新 JSON 的绝对路径，公开说明中不记录本机路径。
+
+```bash
+module load nodejs/24.16.0
+cd "$BLUEPRINT_WORKTREE/content"
+npx tsx check.mjs --stage draft --offline "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugin-0.1-d1/blueprint.json"
+```
+
+| 检查 | 时间（UTC） | 退出码 | 确定缺口 | 人工解释待审 | 未完成项 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 离线草稿 | `2026-11-12T05:18:46.470Z` | 2 | 0 | 92 | 3 |
+| 在线草稿 | `2026-11-12T05:19:07.003Z` | 2 | 0 | 92 | 2 |
+
+离线未完成项为使用离线模式未核实来源，以及缺 `readability-review.json`、缺 `questions.json`。在线只剩这两份读者记录缺失。两次均无确定内容缺口，退出码 2 仍不能记为完整通过；92 项证据解释仍待人工审查。本轮没有剩余需要新增定义的术语事项，尚待下一轮真实复述和规定关卡。
+
+新 JSON 的 SHA-256：
+
+```text
+6530517cee7ddc2ca6da4c7c9a6a1d4410f5f088c491b69cdbf739fa621b42fa
+```
+
+新文件未提交，没有新的提交号，以本轮 HEAD 加仓库内路径及上述摘要定位。只修改 JSON 并追加本说明，未 commit、未 push、未切分支。新 JSON 和整份说明按用户指定正则自查，公开信息匹配数均为零。
