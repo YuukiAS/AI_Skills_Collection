@@ -1,0 +1,25 @@
+{
+ "blueprint_commit": "a125c03d42e3da82a4ff4d8c31bc0ae9e39409fa",
+ "round": 4,
+ "reader_isolation": "single-thread-batch",
+ "units": [
+  {
+   "order": 1,
+   "subjectId": "fail-web-method-step-1",
+   "textHash": "c7c4b1e19b1e33785d00e073509e1ab15f6fa1d75f311042c4b09098f044f945",
+   "kind": "失败处理"
+  },
+  {
+   "order": 2,
+   "subjectId": "wi-web",
+   "textHash": "936dbe6f0381921f296c519cff1f1bd635e908bf9f403f401bcb071fdd586a24",
+   "kind": "正常走查"
+  },
+  {
+   "order": 3,
+   "subjectId": "fail-web-method-whole",
+   "textHash": "6f72dedc7afa5afc43ce38d999954a61ef70aacb0af9ddf3f8b8f0361d188f6d",
+   "kind": "失败情形整体收场"
+  }
+ ]
+}
