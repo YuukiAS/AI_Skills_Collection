@@ -1,0 +1,3782 @@
+[
+  {
+    "id": "D6R4-001",
+    "nodeId": "shared",
+    "question": "用户正常怎样进入「共用任务协议」(shared)，需要提供或已经具备哪些输入？",
+    "answerLocation": "shared.inputs; shared.interface.emptyCases; connections[c-shared-to-design, c-shared-to-delivery, c-packaging-to-shared]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-002",
+    "nodeId": "shared",
+    "question": "「共用任务协议」(shared) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "shared.outputs; shared.interface.format; connections[c-shared-to-design, c-shared-to-delivery, c-packaging-to-shared]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-003",
+    "nodeId": "shared",
+    "question": "「共用任务协议」(shared) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "shared.authority; shared.validators; state.authority; writer.validators; dispatch.validators",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-004",
+    "nodeId": "shared",
+    "question": "「共用任务协议」(shared) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "shared.interface.emptyCases; shared.interface.errors; shared.validators",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-005",
+    "nodeId": "shared",
+    "question": "「共用任务协议」(shared) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "shared.validators",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-006",
+    "nodeId": "shared",
+    "question": "「共用任务协议」(shared) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-007",
+    "nodeId": "shared",
+    "question": "「共用任务协议」(shared) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "shared.validators; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-008",
+    "nodeId": "state",
+    "question": "用户正常怎样进入「单一当前状态」(state)，需要提供或已经具备哪些输入？",
+    "answerLocation": "state.inputs; state.interface.emptyCases; state.terminal.mechanism; connections[c-state-to-writer]; requirements[r-state, r-blueprint]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-009",
+    "nodeId": "state",
+    "question": "「单一当前状态」(state) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "state.outputs; state.interface.format; state.terminal.mechanism; connections[c-state-to-writer]; walkthroughs[walk-source/ws-state]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-010",
+    "nodeId": "state",
+    "question": "「单一当前状态」(state) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "state.authority; state.validators; state.terminal.mechanism; state.authority; writer.validators; dispatch.validators; requirements[r-state, r-blueprint]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-011",
+    "nodeId": "state",
+    "question": "「单一当前状态」(state) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "state.interface.emptyCases; state.interface.errors; state.validators; state.terminal.retry; failurePaths[fail-write, fail-recovery]; walkthroughs[walk-source/ws-state]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-012",
+    "nodeId": "state",
+    "question": "「单一当前状态」(state) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "state.validators; state.terminal.acceptance; requirements[r-state, r-blueprint]; walkthroughs[walk-source/ws-state]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-013",
+    "nodeId": "state",
+    "question": "「单一当前状态」(state) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "state.terminal.retry; state.terminal.mechanism; writer.validators; failurePaths[fail-write, fail-recovery]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-014",
+    "nodeId": "state",
+    "question": "「单一当前状态」(state) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "state.validators; state.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-state, r-blueprint]; walkthroughs[walk-source/ws-state]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-015",
+    "nodeId": "writer",
+    "question": "用户正常怎样进入「写者交接与恢复」(writer)，需要提供或已经具备哪些输入？",
+    "answerLocation": "writer.inputs; writer.interface.emptyCases; writer.terminal.mechanism; connections[c-state-to-writer, c-writer-to-dispatch]; requirements[r-state]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-016",
+    "nodeId": "writer",
+    "question": "「写者交接与恢复」(writer) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "writer.outputs; writer.interface.format; writer.terminal.mechanism; connections[c-state-to-writer, c-writer-to-dispatch]; walkthroughs[walk-source/ws-writer]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-017",
+    "nodeId": "writer",
+    "question": "「写者交接与恢复」(writer) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "writer.authority; writer.validators; writer.terminal.mechanism; state.authority; writer.validators; dispatch.validators; requirements[r-state]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-018",
+    "nodeId": "writer",
+    "question": "「写者交接与恢复」(writer) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "writer.interface.emptyCases; writer.interface.errors; writer.validators; writer.terminal.retry; failurePaths[fail-write]; walkthroughs[walk-source/ws-writer]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-019",
+    "nodeId": "writer",
+    "question": "「写者交接与恢复」(writer) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "writer.validators; writer.terminal.acceptance; requirements[r-state]; walkthroughs[walk-source/ws-writer]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-020",
+    "nodeId": "writer",
+    "question": "「写者交接与恢复」(writer) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "writer.terminal.retry; state.terminal.mechanism; writer.validators; failurePaths[fail-write]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-021",
+    "nodeId": "writer",
+    "question": "「写者交接与恢复」(writer) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "writer.validators; writer.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-state]; walkthroughs[walk-source/ws-writer]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-022",
+    "nodeId": "record-check",
+    "question": "用户正常怎样进入「记录结构检查」(record-check)，需要提供或已经具备哪些输入？",
+    "answerLocation": "record-check.inputs; record-check.interface.emptyCases; record-check.terminal.mechanism; requirements[r-state, r-sources]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-023",
+    "nodeId": "record-check",
+    "question": "「记录结构检查」(record-check) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "record-check.outputs; record-check.interface.format; record-check.terminal.mechanism",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-024",
+    "nodeId": "record-check",
+    "question": "「记录结构检查」(record-check) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "record-check.authority; record-check.validators; record-check.terminal.mechanism; state.authority; writer.validators; dispatch.validators; requirements[r-state, r-sources]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-025",
+    "nodeId": "record-check",
+    "question": "「记录结构检查」(record-check) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "record-check.interface.emptyCases; record-check.interface.errors; record-check.validators; record-check.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-026",
+    "nodeId": "record-check",
+    "question": "「记录结构检查」(record-check) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "record-check.validators; record-check.terminal.acceptance; requirements[r-state, r-sources]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-027",
+    "nodeId": "record-check",
+    "question": "「记录结构检查」(record-check) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "record-check.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-028",
+    "nodeId": "record-check",
+    "question": "「记录结构检查」(record-check) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "record-check.validators; record-check.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-state, r-sources]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-029",
+    "nodeId": "dispatch",
+    "question": "用户正常怎样进入「按条件派发」(dispatch)，需要提供或已经具备哪些输入？",
+    "answerLocation": "dispatch.inputs; dispatch.interface.emptyCases; dispatch.terminal.mechanism; connections[c-writer-to-dispatch, c-dispatch-to-prompts]; requirements[r-dispatch, r-process]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-030",
+    "nodeId": "dispatch",
+    "question": "「按条件派发」(dispatch) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "dispatch.outputs; dispatch.interface.format; dispatch.terminal.mechanism; connections[c-writer-to-dispatch, c-dispatch-to-prompts]; walkthroughs[walk-source/ws-dispatch]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-031",
+    "nodeId": "dispatch",
+    "question": "「按条件派发」(dispatch) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "dispatch.authority; dispatch.validators; dispatch.terminal.mechanism; state.authority; writer.validators; dispatch.validators; requirements[r-dispatch, r-process]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-032",
+    "nodeId": "dispatch",
+    "question": "「按条件派发」(dispatch) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "dispatch.interface.emptyCases; dispatch.interface.errors; dispatch.validators; dispatch.terminal.retry; failurePaths[fail-role]; walkthroughs[walk-source/ws-dispatch]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-033",
+    "nodeId": "dispatch",
+    "question": "「按条件派发」(dispatch) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "dispatch.validators; dispatch.terminal.acceptance; requirements[r-dispatch, r-process]; walkthroughs[walk-source/ws-dispatch]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-034",
+    "nodeId": "dispatch",
+    "question": "「按条件派发」(dispatch) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "dispatch.terminal.retry; state.terminal.mechanism; writer.validators; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-035",
+    "nodeId": "dispatch",
+    "question": "「按条件派发」(dispatch) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "dispatch.validators; dispatch.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-dispatch, r-process]; walkthroughs[walk-source/ws-dispatch]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-036",
+    "nodeId": "prompts",
+    "question": "用户正常怎样进入「自包含提示词」(prompts)，需要提供或已经具备哪些输入？",
+    "answerLocation": "prompts.inputs; prompts.interface.emptyCases; prompts.terminal.mechanism; connections[c-dispatch-to-prompts, c-prompts-to-role-D2, c-prompts-to-role-D3, c-prompts-to-clarify]; requirements[r-dispatch, r-prompts, r-boundary]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-037",
+    "nodeId": "prompts",
+    "question": "「自包含提示词」(prompts) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "prompts.outputs; prompts.interface.format; prompts.terminal.mechanism; connections[c-dispatch-to-prompts, c-prompts-to-role-D2, c-prompts-to-role-D3, c-prompts-to-clarify]; walkthroughs[walk-source/ws-prompts]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-038",
+    "nodeId": "prompts",
+    "question": "「自包含提示词」(prompts) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "prompts.authority; prompts.validators; prompts.terminal.mechanism; state.authority; writer.validators; dispatch.validators; requirements[r-dispatch, r-prompts, r-boundary]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-039",
+    "nodeId": "prompts",
+    "question": "「自包含提示词」(prompts) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "prompts.interface.emptyCases; prompts.interface.errors; prompts.validators; prompts.terminal.retry; failurePaths[fail-role]; walkthroughs[walk-source/ws-prompts]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-040",
+    "nodeId": "prompts",
+    "question": "「自包含提示词」(prompts) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "prompts.validators; prompts.terminal.acceptance; requirements[r-dispatch, r-prompts, r-boundary]; walkthroughs[walk-source/ws-prompts]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-041",
+    "nodeId": "prompts",
+    "question": "「自包含提示词」(prompts) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "prompts.terminal.retry; state.terminal.mechanism; writer.validators; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-042",
+    "nodeId": "prompts",
+    "question": "「自包含提示词」(prompts) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "prompts.validators; prompts.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-dispatch, r-prompts, r-boundary]; walkthroughs[walk-source/ws-prompts]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-043",
+    "nodeId": "revision",
+    "question": "用户正常怎样进入「修订与告知」(revision)，需要提供或已经具备哪些输入？",
+    "answerLocation": "revision.inputs; revision.interface.emptyCases; revision.terminal.mechanism; connections[c-deviation-to-revision, c-revision-to-role-D1, c-revision-to-metrics, c-q-inheritance-to-revision]; requirements[r-revision, r-process]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-044",
+    "nodeId": "revision",
+    "question": "「修订与告知」(revision) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "revision.outputs; revision.interface.format; revision.terminal.mechanism; connections[c-deviation-to-revision, c-revision-to-role-D1, c-revision-to-metrics, c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-045",
+    "nodeId": "revision",
+    "question": "「修订与告知」(revision) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "revision.authority; revision.validators; revision.terminal.mechanism; state.authority; writer.validators; dispatch.validators; requirements[r-revision, r-process]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-046",
+    "nodeId": "revision",
+    "question": "「修订与告知」(revision) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "revision.interface.emptyCases; revision.interface.errors; revision.validators; revision.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-047",
+    "nodeId": "revision",
+    "question": "「修订与告知」(revision) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "revision.validators; revision.terminal.acceptance; requirements[r-revision, r-process]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-048",
+    "nodeId": "revision",
+    "question": "「修订与告知」(revision) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "revision.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-049",
+    "nodeId": "revision",
+    "question": "「修订与告知」(revision) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "revision.validators; revision.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-revision, r-process]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-050",
+    "nodeId": "metrics",
+    "question": "用户正常怎样进入「三项衡量」(metrics)，需要提供或已经具备哪些输入？",
+    "answerLocation": "metrics.inputs; metrics.interface.emptyCases; metrics.terminal.mechanism; connections[c-revision-to-metrics, c-deviation-to-metrics]; requirements[r-metrics]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-051",
+    "nodeId": "metrics",
+    "question": "「三项衡量」(metrics) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "metrics.outputs; metrics.interface.format; metrics.terminal.mechanism; connections[c-revision-to-metrics, c-deviation-to-metrics]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-052",
+    "nodeId": "metrics",
+    "question": "「三项衡量」(metrics) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "metrics.authority; metrics.validators; metrics.terminal.mechanism; state.authority; writer.validators; dispatch.validators; requirements[r-metrics]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-053",
+    "nodeId": "metrics",
+    "question": "「三项衡量」(metrics) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "metrics.interface.emptyCases; metrics.interface.errors; metrics.validators; metrics.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-054",
+    "nodeId": "metrics",
+    "question": "「三项衡量」(metrics) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "metrics.validators; metrics.terminal.acceptance; requirements[r-metrics]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-055",
+    "nodeId": "metrics",
+    "question": "「三项衡量」(metrics) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "metrics.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-056",
+    "nodeId": "metrics",
+    "question": "「三项衡量」(metrics) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "metrics.validators; metrics.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-metrics]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-057",
+    "nodeId": "design",
+    "question": "用户正常怎样进入「设计保障」(design)，需要提供或已经具备哪些输入？",
+    "answerLocation": "design.inputs; design.interface.emptyCases; connections[c-shared-to-design, c-design-to-delivery]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-058",
+    "nodeId": "design",
+    "question": "「设计保障」(design) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "design.outputs; design.interface.format; connections[c-shared-to-design, c-design-to-delivery]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-059",
+    "nodeId": "design",
+    "question": "「设计保障」(design) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "design.authority; design.validators; role-D1.terminal.mechanism; role-D1.validators; freeze.validators",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-060",
+    "nodeId": "design",
+    "question": "「设计保障」(design) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "design.interface.emptyCases; design.interface.errors; design.validators",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-061",
+    "nodeId": "design",
+    "question": "「设计保障」(design) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "design.validators",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-062",
+    "nodeId": "design",
+    "question": "「设计保障」(design) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-063",
+    "nodeId": "design",
+    "question": "「设计保障」(design) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "design.validators; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-064",
+    "nodeId": "design-roles",
+    "question": "用户正常怎样进入「设计角色」(design-roles)，需要提供或已经具备哪些输入？",
+    "answerLocation": "design-roles.inputs; design-roles.interface.emptyCases",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-065",
+    "nodeId": "design-roles",
+    "question": "「设计角色」(design-roles) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "design-roles.outputs; design-roles.interface.format",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-066",
+    "nodeId": "design-roles",
+    "question": "「设计角色」(design-roles) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "design-roles.authority; design-roles.validators; role-D1.terminal.mechanism; role-D1.validators; freeze.validators",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-067",
+    "nodeId": "design-roles",
+    "question": "「设计角色」(design-roles) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "design-roles.interface.emptyCases; design-roles.interface.errors; design-roles.validators",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-068",
+    "nodeId": "design-roles",
+    "question": "「设计角色」(design-roles) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "design-roles.validators",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-069",
+    "nodeId": "design-roles",
+    "question": "「设计角色」(design-roles) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-070",
+    "nodeId": "design-roles",
+    "question": "「设计角色」(design-roles) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "design-roles.validators; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-071",
+    "nodeId": "role-D1",
+    "question": "用户正常怎样进入「D1：负责人」(role-D1)，需要提供或已经具备哪些输入？",
+    "answerLocation": "role-D1.inputs; role-D1.interface.emptyCases; role-D1.terminal.mechanism; connections[c-role-D2-to-role-D1, c-role-D3-to-role-D1, c-role-D4-to-role-D1, c-role-D1-to-contract, c-revision-to-role-D1]; requirements[r-dispatch, r-roles]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-072",
+    "nodeId": "role-D1",
+    "question": "「D1：负责人」(role-D1) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "role-D1.outputs; role-D1.interface.format; role-D1.terminal.mechanism; connections[c-role-D2-to-role-D1, c-role-D3-to-role-D1, c-role-D4-to-role-D1, c-role-D1-to-contract, c-revision-to-role-D1]; walkthroughs[walk-source/ws-owner]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-073",
+    "nodeId": "role-D1",
+    "question": "「D1：负责人」(role-D1) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "role-D1.authority; role-D1.validators; role-D1.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators; requirements[r-dispatch, r-roles]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-074",
+    "nodeId": "role-D1",
+    "question": "「D1：负责人」(role-D1) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "role-D1.interface.emptyCases; role-D1.interface.errors; role-D1.validators; role-D1.terminal.retry; walkthroughs[walk-source/ws-owner]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-075",
+    "nodeId": "role-D1",
+    "question": "「D1：负责人」(role-D1) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "role-D1.validators; role-D1.terminal.acceptance; requirements[r-dispatch, r-roles]; walkthroughs[walk-source/ws-owner]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-076",
+    "nodeId": "role-D1",
+    "question": "「D1：负责人」(role-D1) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "role-D1.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-077",
+    "nodeId": "role-D1",
+    "question": "「D1：负责人」(role-D1) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "role-D1.validators; role-D1.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-dispatch, r-roles]; walkthroughs[walk-source/ws-owner]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-078",
+    "nodeId": "role-D2",
+    "question": "用户正常怎样进入「D2：独立甲」(role-D2)，需要提供或已经具备哪些输入？",
+    "answerLocation": "role-D2.inputs; role-D2.interface.emptyCases; role-D2.terminal.mechanism; connections[c-prompts-to-role-D2, c-clarify-to-role-D2, c-role-D2-to-role-D1]; requirements[r-roles]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-079",
+    "nodeId": "role-D2",
+    "question": "「D2：独立甲」(role-D2) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "role-D2.outputs; role-D2.interface.format; role-D2.terminal.mechanism; connections[c-prompts-to-role-D2, c-clarify-to-role-D2, c-role-D2-to-role-D1]; walkthroughs[walk-source/ws-designer]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-080",
+    "nodeId": "role-D2",
+    "question": "「D2：独立甲」(role-D2) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "role-D2.authority; role-D2.validators; role-D2.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-081",
+    "nodeId": "role-D2",
+    "question": "「D2：独立甲」(role-D2) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "role-D2.interface.emptyCases; role-D2.interface.errors; role-D2.validators; role-D2.terminal.retry; walkthroughs[walk-source/ws-designer]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-082",
+    "nodeId": "role-D2",
+    "question": "「D2：独立甲」(role-D2) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "role-D2.validators; role-D2.terminal.acceptance; requirements[r-roles]; walkthroughs[walk-source/ws-designer]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-083",
+    "nodeId": "role-D2",
+    "question": "「D2：独立甲」(role-D2) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "role-D2.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-084",
+    "nodeId": "role-D2",
+    "question": "「D2：独立甲」(role-D2) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "role-D2.validators; role-D2.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-roles]; walkthroughs[walk-source/ws-designer]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-085",
+    "nodeId": "role-D3",
+    "question": "用户正常怎样进入「D3：独立乙」(role-D3)，需要提供或已经具备哪些输入？",
+    "answerLocation": "role-D3.inputs; role-D3.interface.emptyCases; role-D3.terminal.mechanism; connections[c-prompts-to-role-D3, c-role-D3-to-role-D1]; requirements[r-roles]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-086",
+    "nodeId": "role-D3",
+    "question": "「D3：独立乙」(role-D3) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "role-D3.outputs; role-D3.interface.format; role-D3.terminal.mechanism; connections[c-prompts-to-role-D3, c-role-D3-to-role-D1]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-087",
+    "nodeId": "role-D3",
+    "question": "「D3：独立乙」(role-D3) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "role-D3.authority; role-D3.validators; role-D3.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-088",
+    "nodeId": "role-D3",
+    "question": "「D3：独立乙」(role-D3) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "role-D3.interface.emptyCases; role-D3.interface.errors; role-D3.validators; role-D3.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-089",
+    "nodeId": "role-D3",
+    "question": "「D3：独立乙」(role-D3) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "role-D3.validators; role-D3.terminal.acceptance; requirements[r-roles]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-090",
+    "nodeId": "role-D3",
+    "question": "「D3：独立乙」(role-D3) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "role-D3.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-091",
+    "nodeId": "role-D3",
+    "question": "「D3：独立乙」(role-D3) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "role-D3.validators; role-D3.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-092",
+    "nodeId": "role-D4",
+    "question": "用户正常怎样进入「D4：现实核查」(role-D4)，需要提供或已经具备哪些输入？",
+    "answerLocation": "role-D4.inputs; role-D4.interface.emptyCases; role-D4.terminal.mechanism; connections[c-role-D4-to-role-D1]; requirements[r-roles]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-093",
+    "nodeId": "role-D4",
+    "question": "「D4：现实核查」(role-D4) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "role-D4.outputs; role-D4.interface.format; role-D4.terminal.mechanism; connections[c-role-D4-to-role-D1]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-094",
+    "nodeId": "role-D4",
+    "question": "「D4：现实核查」(role-D4) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "role-D4.authority; role-D4.validators; role-D4.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-095",
+    "nodeId": "role-D4",
+    "question": "「D4：现实核查」(role-D4) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "role-D4.interface.emptyCases; role-D4.interface.errors; role-D4.validators; role-D4.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-096",
+    "nodeId": "role-D4",
+    "question": "「D4：现实核查」(role-D4) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "role-D4.validators; role-D4.terminal.acceptance; requirements[r-roles]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-097",
+    "nodeId": "role-D4",
+    "question": "「D4：现实核查」(role-D4) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "role-D4.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-098",
+    "nodeId": "role-D4",
+    "question": "「D4：现实核查」(role-D4) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "role-D4.validators; role-D4.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-099",
+    "nodeId": "role-D5",
+    "question": "用户正常怎样进入「D5：格式检查」(role-D5)，需要提供或已经具备哪些输入？",
+    "answerLocation": "role-D5.inputs; role-D5.interface.emptyCases; role-D5.terminal.mechanism; connections[c-gates-to-role-D5, c-role-D5-to-gates, c-q-checker-to-role-D5]; requirements[r-roles]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-100",
+    "nodeId": "role-D5",
+    "question": "「D5：格式检查」(role-D5) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "role-D5.outputs; role-D5.interface.format; role-D5.terminal.mechanism; connections[c-gates-to-role-D5, c-role-D5-to-gates, c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-101",
+    "nodeId": "role-D5",
+    "question": "「D5：格式检查」(role-D5) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "role-D5.authority; role-D5.validators; role-D5.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-102",
+    "nodeId": "role-D5",
+    "question": "「D5：格式检查」(role-D5) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "role-D5.interface.emptyCases; role-D5.interface.errors; role-D5.validators; role-D5.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-103",
+    "nodeId": "role-D5",
+    "question": "「D5：格式检查」(role-D5) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "role-D5.validators; role-D5.terminal.acceptance; requirements[r-roles]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-104",
+    "nodeId": "role-D5",
+    "question": "「D5：格式检查」(role-D5) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "role-D5.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-105",
+    "nodeId": "role-D5",
+    "question": "「D5：格式检查」(role-D5) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "role-D5.validators; role-D5.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-106",
+    "nodeId": "role-D6",
+    "question": "用户正常怎样进入「D6：用户追问」(role-D6)，需要提供或已经具备哪些输入？",
+    "answerLocation": "role-D6.inputs; role-D6.interface.emptyCases; role-D6.terminal.mechanism; connections[c-gates-to-role-D6, c-role-D6-to-gates]; requirements[r-roles]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-107",
+    "nodeId": "role-D6",
+    "question": "「D6：用户追问」(role-D6) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "role-D6.outputs; role-D6.interface.format; role-D6.terminal.mechanism; connections[c-gates-to-role-D6, c-role-D6-to-gates]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-108",
+    "nodeId": "role-D6",
+    "question": "「D6：用户追问」(role-D6) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "role-D6.authority; role-D6.validators; role-D6.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-109",
+    "nodeId": "role-D6",
+    "question": "「D6：用户追问」(role-D6) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "role-D6.interface.emptyCases; role-D6.interface.errors; role-D6.validators; role-D6.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-110",
+    "nodeId": "role-D6",
+    "question": "「D6：用户追问」(role-D6) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "role-D6.validators; role-D6.terminal.acceptance; requirements[r-roles]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-111",
+    "nodeId": "role-D6",
+    "question": "「D6：用户追问」(role-D6) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "role-D6.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-112",
+    "nodeId": "role-D6",
+    "question": "「D6：用户追问」(role-D6) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "role-D6.validators; role-D6.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-113",
+    "nodeId": "role-D7",
+    "question": "用户正常怎样进入「D7：冷读开工」(role-D7)，需要提供或已经具备哪些输入？",
+    "answerLocation": "role-D7.inputs; role-D7.interface.emptyCases; role-D7.terminal.mechanism; connections[c-gates-to-role-D7, c-role-D7-to-gates]; requirements[r-roles]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-114",
+    "nodeId": "role-D7",
+    "question": "「D7：冷读开工」(role-D7) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "role-D7.outputs; role-D7.interface.format; role-D7.terminal.mechanism; connections[c-gates-to-role-D7, c-role-D7-to-gates]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-115",
+    "nodeId": "role-D7",
+    "question": "「D7：冷读开工」(role-D7) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "role-D7.authority; role-D7.validators; role-D7.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-116",
+    "nodeId": "role-D7",
+    "question": "「D7：冷读开工」(role-D7) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "role-D7.interface.emptyCases; role-D7.interface.errors; role-D7.validators; role-D7.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-117",
+    "nodeId": "role-D7",
+    "question": "「D7：冷读开工」(role-D7) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "role-D7.validators; role-D7.terminal.acceptance; requirements[r-roles]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-118",
+    "nodeId": "role-D7",
+    "question": "「D7：冷读开工」(role-D7) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "role-D7.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-119",
+    "nodeId": "role-D7",
+    "question": "「D7：冷读开工」(role-D7) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "role-D7.validators; role-D7.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-120",
+    "nodeId": "role-D8",
+    "question": "用户正常怎样进入「D8：逐步复述」(role-D8)，需要提供或已经具备哪些输入？",
+    "answerLocation": "role-D8.inputs; role-D8.interface.emptyCases; role-D8.terminal.mechanism; connections[c-gates-to-role-D8, c-role-D8-to-gates]; requirements[r-roles]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-121",
+    "nodeId": "role-D8",
+    "question": "「D8：逐步复述」(role-D8) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "role-D8.outputs; role-D8.interface.format; role-D8.terminal.mechanism; connections[c-gates-to-role-D8, c-role-D8-to-gates]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-122",
+    "nodeId": "role-D8",
+    "question": "「D8：逐步复述」(role-D8) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "role-D8.authority; role-D8.validators; role-D8.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-123",
+    "nodeId": "role-D8",
+    "question": "「D8：逐步复述」(role-D8) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "role-D8.interface.emptyCases; role-D8.interface.errors; role-D8.validators; role-D8.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-124",
+    "nodeId": "role-D8",
+    "question": "「D8：逐步复述」(role-D8) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "role-D8.validators; role-D8.terminal.acceptance; requirements[r-roles]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-125",
+    "nodeId": "role-D8",
+    "question": "「D8：逐步复述」(role-D8) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "role-D8.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-126",
+    "nodeId": "role-D8",
+    "question": "「D8：逐步复述」(role-D8) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "role-D8.validators; role-D8.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-127",
+    "nodeId": "clarify",
+    "question": "用户正常怎样进入「澄清与需求落图」(clarify)，需要提供或已经具备哪些输入？",
+    "answerLocation": "clarify.inputs; clarify.interface.emptyCases; clarify.terminal.mechanism; connections[c-prompts-to-clarify, c-clarify-to-role-D2]; requirements[r-prompts, r-freeze]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-128",
+    "nodeId": "clarify",
+    "question": "「澄清与需求落图」(clarify) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "clarify.outputs; clarify.interface.format; clarify.terminal.mechanism; connections[c-prompts-to-clarify, c-clarify-to-role-D2]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-129",
+    "nodeId": "clarify",
+    "question": "「澄清与需求落图」(clarify) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "clarify.authority; clarify.validators; clarify.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators; requirements[r-prompts, r-freeze]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-130",
+    "nodeId": "clarify",
+    "question": "「澄清与需求落图」(clarify) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "clarify.interface.emptyCases; clarify.interface.errors; clarify.validators; clarify.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-131",
+    "nodeId": "clarify",
+    "question": "「澄清与需求落图」(clarify) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "clarify.validators; clarify.terminal.acceptance; requirements[r-prompts, r-freeze]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-132",
+    "nodeId": "clarify",
+    "question": "「澄清与需求落图」(clarify) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "clarify.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-133",
+    "nodeId": "clarify",
+    "question": "「澄清与需求落图」(clarify) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "clarify.validators; clarify.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-prompts, r-freeze]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-134",
+    "nodeId": "gates",
+    "question": "用户正常怎样进入「四项冻结关卡」(gates)，需要提供或已经具备哪些输入？",
+    "answerLocation": "gates.inputs; gates.interface.emptyCases; gates.terminal.mechanism; connections[c-contract-to-gates, c-gates-to-role-D5, c-gates-to-role-D6, c-gates-to-role-D7, c-gates-to-role-D8, c-role-D5-to-gates, c-role-D6-to-gates, c-role-D7-to-gates, c-role-D8-to-gates, c-gates-to-freeze]; requirements[r-freeze]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-135",
+    "nodeId": "gates",
+    "question": "「四项冻结关卡」(gates) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "gates.outputs; gates.interface.format; gates.terminal.mechanism; connections[c-contract-to-gates, c-gates-to-role-D5, c-gates-to-role-D6, c-gates-to-role-D7, c-gates-to-role-D8, c-role-D5-to-gates, c-role-D6-to-gates, c-role-D7-to-gates, c-role-D8-to-gates, c-gates-to-freeze]; walkthroughs[walk-real/wr-gates]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-136",
+    "nodeId": "gates",
+    "question": "「四项冻结关卡」(gates) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "gates.authority; gates.validators; gates.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators; requirements[r-freeze]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-137",
+    "nodeId": "gates",
+    "question": "「四项冻结关卡」(gates) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "gates.interface.emptyCases; gates.interface.errors; gates.validators; gates.terminal.retry; failurePaths[fail-checker]; walkthroughs[walk-real/wr-gates]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-138",
+    "nodeId": "gates",
+    "question": "「四项冻结关卡」(gates) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "gates.validators; gates.terminal.acceptance; requirements[r-freeze]; walkthroughs[walk-real/wr-gates]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-139",
+    "nodeId": "gates",
+    "question": "「四项冻结关卡」(gates) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "gates.terminal.retry; state.terminal.mechanism; writer.validators; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-140",
+    "nodeId": "gates",
+    "question": "「四项冻结关卡」(gates) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "gates.validators; gates.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-freeze]; walkthroughs[walk-real/wr-gates]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-141",
+    "nodeId": "contract",
+    "question": "用户正常怎样进入「九项冻结合同」(contract)，需要提供或已经具备哪些输入？",
+    "answerLocation": "contract.inputs; contract.interface.emptyCases; connections[c-role-D1-to-contract, c-contract-to-gates]; requirements[r-freeze, r-blueprint]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-142",
+    "nodeId": "contract",
+    "question": "「九项冻结合同」(contract) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "contract.outputs; contract.interface.format; connections[c-role-D1-to-contract, c-contract-to-gates]; walkthroughs[walk-real/wr-contract]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-143",
+    "nodeId": "contract",
+    "question": "「九项冻结合同」(contract) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "contract.authority; contract.validators; role-D1.terminal.mechanism; role-D1.validators; freeze.validators; requirements[r-freeze, r-blueprint]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-144",
+    "nodeId": "contract",
+    "question": "「九项冻结合同」(contract) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "contract.interface.emptyCases; contract.interface.errors; contract.validators; failurePaths[fail-checker]; walkthroughs[walk-real/wr-contract]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-145",
+    "nodeId": "contract",
+    "question": "「九项冻结合同」(contract) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "contract.validators; requirements[r-freeze, r-blueprint]; walkthroughs[walk-real/wr-contract]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-146",
+    "nodeId": "contract",
+    "question": "「九项冻结合同」(contract) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "state.terminal.mechanism; writer.validators; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-147",
+    "nodeId": "contract",
+    "question": "「九项冻结合同」(contract) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "contract.validators; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-freeze, r-blueprint]; walkthroughs[walk-real/wr-contract]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-148",
+    "nodeId": "contract-capability",
+    "question": "用户正常怎样进入「能力与声明」(contract-capability)，需要提供或已经具备哪些输入？",
+    "answerLocation": "contract-capability.inputs; contract-capability.interface.emptyCases; contract-capability.terminal.mechanism",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-149",
+    "nodeId": "contract-capability",
+    "question": "「能力与声明」(contract-capability) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "contract-capability.outputs; contract-capability.interface.format; contract-capability.terminal.mechanism",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-150",
+    "nodeId": "contract-capability",
+    "question": "「能力与声明」(contract-capability) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "contract-capability.authority; contract-capability.validators; contract-capability.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-151",
+    "nodeId": "contract-capability",
+    "question": "「能力与声明」(contract-capability) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "contract-capability.interface.emptyCases; contract-capability.interface.errors; contract-capability.validators; contract-capability.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-152",
+    "nodeId": "contract-capability",
+    "question": "「能力与声明」(contract-capability) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "contract-capability.validators; contract-capability.terminal.acceptance",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-153",
+    "nodeId": "contract-capability",
+    "question": "「能力与声明」(contract-capability) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "contract-capability.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-154",
+    "nodeId": "contract-capability",
+    "question": "「能力与声明」(contract-capability) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "contract-capability.validators; contract-capability.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-155",
+    "nodeId": "contract-entry",
+    "question": "用户正常怎样进入「正常入口与成品」(contract-entry)，需要提供或已经具备哪些输入？",
+    "answerLocation": "contract-entry.inputs; contract-entry.interface.emptyCases; contract-entry.terminal.mechanism",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-156",
+    "nodeId": "contract-entry",
+    "question": "「正常入口与成品」(contract-entry) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "contract-entry.outputs; contract-entry.interface.format; contract-entry.terminal.mechanism",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-157",
+    "nodeId": "contract-entry",
+    "question": "「正常入口与成品」(contract-entry) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "contract-entry.authority; contract-entry.validators; contract-entry.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-158",
+    "nodeId": "contract-entry",
+    "question": "「正常入口与成品」(contract-entry) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "contract-entry.interface.emptyCases; contract-entry.interface.errors; contract-entry.validators; contract-entry.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-159",
+    "nodeId": "contract-entry",
+    "question": "「正常入口与成品」(contract-entry) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "contract-entry.validators; contract-entry.terminal.acceptance",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-160",
+    "nodeId": "contract-entry",
+    "question": "「正常入口与成品」(contract-entry) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "contract-entry.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-161",
+    "nodeId": "contract-entry",
+    "question": "「正常入口与成品」(contract-entry) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "contract-entry.validators; contract-entry.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-162",
+    "nodeId": "contract-outcomes",
+    "question": "用户正常怎样进入「成功失败与未知」(contract-outcomes)，需要提供或已经具备哪些输入？",
+    "answerLocation": "contract-outcomes.inputs; contract-outcomes.interface.emptyCases; contract-outcomes.terminal.mechanism",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-163",
+    "nodeId": "contract-outcomes",
+    "question": "「成功失败与未知」(contract-outcomes) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "contract-outcomes.outputs; contract-outcomes.interface.format; contract-outcomes.terminal.mechanism",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-164",
+    "nodeId": "contract-outcomes",
+    "question": "「成功失败与未知」(contract-outcomes) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "contract-outcomes.authority; contract-outcomes.validators; contract-outcomes.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-165",
+    "nodeId": "contract-outcomes",
+    "question": "「成功失败与未知」(contract-outcomes) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "contract-outcomes.interface.emptyCases; contract-outcomes.interface.errors; contract-outcomes.validators; contract-outcomes.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-166",
+    "nodeId": "contract-outcomes",
+    "question": "「成功失败与未知」(contract-outcomes) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "contract-outcomes.validators; contract-outcomes.terminal.acceptance",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-167",
+    "nodeId": "contract-outcomes",
+    "question": "「成功失败与未知」(contract-outcomes) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "contract-outcomes.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-168",
+    "nodeId": "contract-outcomes",
+    "question": "「成功失败与未知」(contract-outcomes) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "contract-outcomes.validators; contract-outcomes.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-169",
+    "nodeId": "contract-fidelity",
+    "question": "用户正常怎样进入「证据真实度」(contract-fidelity)，需要提供或已经具备哪些输入？",
+    "answerLocation": "contract-fidelity.inputs; contract-fidelity.interface.emptyCases; contract-fidelity.terminal.mechanism",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-170",
+    "nodeId": "contract-fidelity",
+    "question": "「证据真实度」(contract-fidelity) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "contract-fidelity.outputs; contract-fidelity.interface.format; contract-fidelity.terminal.mechanism",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-171",
+    "nodeId": "contract-fidelity",
+    "question": "「证据真实度」(contract-fidelity) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "contract-fidelity.authority; contract-fidelity.validators; contract-fidelity.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-172",
+    "nodeId": "contract-fidelity",
+    "question": "「证据真实度」(contract-fidelity) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "contract-fidelity.interface.emptyCases; contract-fidelity.interface.errors; contract-fidelity.validators; contract-fidelity.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-173",
+    "nodeId": "contract-fidelity",
+    "question": "「证据真实度」(contract-fidelity) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "contract-fidelity.validators; contract-fidelity.terminal.acceptance",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-174",
+    "nodeId": "contract-fidelity",
+    "question": "「证据真实度」(contract-fidelity) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "contract-fidelity.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-175",
+    "nodeId": "contract-fidelity",
+    "question": "「证据真实度」(contract-fidelity) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "contract-fidelity.validators; contract-fidelity.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-176",
+    "nodeId": "contract-forbidden",
+    "question": "用户正常怎样进入「禁止替代」(contract-forbidden)，需要提供或已经具备哪些输入？",
+    "answerLocation": "contract-forbidden.inputs; contract-forbidden.interface.emptyCases; contract-forbidden.terminal.mechanism",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-177",
+    "nodeId": "contract-forbidden",
+    "question": "「禁止替代」(contract-forbidden) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "contract-forbidden.outputs; contract-forbidden.interface.format; contract-forbidden.terminal.mechanism",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-178",
+    "nodeId": "contract-forbidden",
+    "question": "「禁止替代」(contract-forbidden) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "contract-forbidden.authority; contract-forbidden.validators; contract-forbidden.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-179",
+    "nodeId": "contract-forbidden",
+    "question": "「禁止替代」(contract-forbidden) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "contract-forbidden.interface.emptyCases; contract-forbidden.interface.errors; contract-forbidden.validators; contract-forbidden.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-180",
+    "nodeId": "contract-forbidden",
+    "question": "「禁止替代」(contract-forbidden) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "contract-forbidden.validators; contract-forbidden.terminal.acceptance",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-181",
+    "nodeId": "contract-forbidden",
+    "question": "「禁止替代」(contract-forbidden) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "contract-forbidden.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-182",
+    "nodeId": "contract-forbidden",
+    "question": "「禁止替代」(contract-forbidden) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "contract-forbidden.validators; contract-forbidden.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-183",
+    "nodeId": "contract-regression",
+    "question": "用户正常怎样进入「已有能力保护」(contract-regression)，需要提供或已经具备哪些输入？",
+    "answerLocation": "contract-regression.inputs; contract-regression.interface.emptyCases; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-184",
+    "nodeId": "contract-regression",
+    "question": "「已有能力保护」(contract-regression) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "contract-regression.outputs; contract-regression.interface.format; contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-185",
+    "nodeId": "contract-regression",
+    "question": "「已有能力保护」(contract-regression) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "contract-regression.authority; contract-regression.validators; contract-regression.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-186",
+    "nodeId": "contract-regression",
+    "question": "「已有能力保护」(contract-regression) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "contract-regression.interface.emptyCases; contract-regression.interface.errors; contract-regression.validators; contract-regression.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-187",
+    "nodeId": "contract-regression",
+    "question": "「已有能力保护」(contract-regression) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "contract-regression.validators; contract-regression.terminal.acceptance",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-188",
+    "nodeId": "contract-regression",
+    "question": "「已有能力保护」(contract-regression) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "contract-regression.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-189",
+    "nodeId": "contract-regression",
+    "question": "「已有能力保护」(contract-regression) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "contract-regression.validators; contract-regression.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-190",
+    "nodeId": "contract-controls",
+    "question": "用户正常怎样进入「三类控制例」(contract-controls)，需要提供或已经具备哪些输入？",
+    "answerLocation": "contract-controls.inputs; contract-controls.interface.emptyCases; contract-controls.terminal.mechanism",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-191",
+    "nodeId": "contract-controls",
+    "question": "「三类控制例」(contract-controls) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "contract-controls.outputs; contract-controls.interface.format; contract-controls.terminal.mechanism",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-192",
+    "nodeId": "contract-controls",
+    "question": "「三类控制例」(contract-controls) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "contract-controls.authority; contract-controls.validators; contract-controls.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-193",
+    "nodeId": "contract-controls",
+    "question": "「三类控制例」(contract-controls) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "contract-controls.interface.emptyCases; contract-controls.interface.errors; contract-controls.validators; contract-controls.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-194",
+    "nodeId": "contract-controls",
+    "question": "「三类控制例」(contract-controls) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "contract-controls.validators; contract-controls.terminal.acceptance",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-195",
+    "nodeId": "contract-controls",
+    "question": "「三类控制例」(contract-controls) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "contract-controls.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-196",
+    "nodeId": "contract-controls",
+    "question": "「三类控制例」(contract-controls) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "contract-controls.validators; contract-controls.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-197",
+    "nodeId": "contract-changes",
+    "question": "用户正常怎样进入「交付修改与退回」(contract-changes)，需要提供或已经具备哪些输入？",
+    "answerLocation": "contract-changes.inputs; contract-changes.interface.emptyCases; contract-changes.terminal.mechanism",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-198",
+    "nodeId": "contract-changes",
+    "question": "「交付修改与退回」(contract-changes) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "contract-changes.outputs; contract-changes.interface.format; contract-changes.terminal.mechanism",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-199",
+    "nodeId": "contract-changes",
+    "question": "「交付修改与退回」(contract-changes) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "contract-changes.authority; contract-changes.validators; contract-changes.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-200",
+    "nodeId": "contract-changes",
+    "question": "「交付修改与退回」(contract-changes) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "contract-changes.interface.emptyCases; contract-changes.interface.errors; contract-changes.validators; contract-changes.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-201",
+    "nodeId": "contract-changes",
+    "question": "「交付修改与退回」(contract-changes) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "contract-changes.validators; contract-changes.terminal.acceptance",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-202",
+    "nodeId": "contract-changes",
+    "question": "「交付修改与退回」(contract-changes) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "contract-changes.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-203",
+    "nodeId": "contract-changes",
+    "question": "「交付修改与退回」(contract-changes) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "contract-changes.validators; contract-changes.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-204",
+    "nodeId": "contract-authorization",
+    "question": "用户正常怎样进入「资源与授权」(contract-authorization)，需要提供或已经具备哪些输入？",
+    "answerLocation": "contract-authorization.inputs; contract-authorization.interface.emptyCases; contract-authorization.terminal.mechanism; requirements[r-boundary]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-205",
+    "nodeId": "contract-authorization",
+    "question": "「资源与授权」(contract-authorization) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "contract-authorization.outputs; contract-authorization.interface.format; contract-authorization.terminal.mechanism",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-206",
+    "nodeId": "contract-authorization",
+    "question": "「资源与授权」(contract-authorization) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "contract-authorization.authority; contract-authorization.validators; contract-authorization.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators; requirements[r-boundary]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-207",
+    "nodeId": "contract-authorization",
+    "question": "「资源与授权」(contract-authorization) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "contract-authorization.interface.emptyCases; contract-authorization.interface.errors; contract-authorization.validators; contract-authorization.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-208",
+    "nodeId": "contract-authorization",
+    "question": "「资源与授权」(contract-authorization) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "contract-authorization.validators; contract-authorization.terminal.acceptance; requirements[r-boundary]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-209",
+    "nodeId": "contract-authorization",
+    "question": "「资源与授权」(contract-authorization) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "contract-authorization.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-210",
+    "nodeId": "contract-authorization",
+    "question": "「资源与授权」(contract-authorization) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "contract-authorization.validators; contract-authorization.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-boundary]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-211",
+    "nodeId": "freeze",
+    "question": "用户正常怎样进入「批准与冻结交接」(freeze)，需要提供或已经具备哪些输入？",
+    "answerLocation": "freeze.inputs; freeze.interface.emptyCases; freeze.terminal.mechanism; connections[c-gates-to-freeze, c-freeze-to-role-X1]; requirements[r-freeze]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-212",
+    "nodeId": "freeze",
+    "question": "「批准与冻结交接」(freeze) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "freeze.outputs; freeze.interface.format; freeze.terminal.mechanism; connections[c-gates-to-freeze, c-freeze-to-role-X1]; walkthroughs[walk-real/wr-freeze]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-213",
+    "nodeId": "freeze",
+    "question": "「批准与冻结交接」(freeze) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "freeze.authority; freeze.validators; freeze.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators; requirements[r-freeze]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-214",
+    "nodeId": "freeze",
+    "question": "「批准与冻结交接」(freeze) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "freeze.interface.emptyCases; freeze.interface.errors; freeze.validators; freeze.terminal.retry; walkthroughs[walk-real/wr-freeze]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-215",
+    "nodeId": "freeze",
+    "question": "「批准与冻结交接」(freeze) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "freeze.validators; freeze.terminal.acceptance; requirements[r-freeze]; walkthroughs[walk-real/wr-freeze]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-216",
+    "nodeId": "freeze",
+    "question": "「批准与冻结交接」(freeze) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "freeze.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-217",
+    "nodeId": "freeze",
+    "question": "「批准与冻结交接」(freeze) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "freeze.validators; freeze.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-freeze]; walkthroughs[walk-real/wr-freeze]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-218",
+    "nodeId": "q-checker",
+    "question": "用户正常怎样进入「草稿与冻结检查」(q-checker)，需要提供或已经具备哪些输入？",
+    "answerLocation": "q-checker.inputs; q-checker.interface.emptyCases; q-checker.terminal.mechanism; connections[c-q-checker-to-role-D5]; requirements[r-freeze, r-blueprint]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-219",
+    "nodeId": "q-checker",
+    "question": "「草稿与冻结检查」(q-checker) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "q-checker.outputs; q-checker.interface.format; q-checker.terminal.mechanism; connections[c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-220",
+    "nodeId": "q-checker",
+    "question": "「草稿与冻结检查」(q-checker) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "q-checker.authority; q-checker.validators; q-checker.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators; requirements[r-freeze, r-blueprint]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-221",
+    "nodeId": "q-checker",
+    "question": "「草稿与冻结检查」(q-checker) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "q-checker.interface.emptyCases; q-checker.interface.errors; q-checker.validators; q-checker.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-222",
+    "nodeId": "q-checker",
+    "question": "「草稿与冻结检查」(q-checker) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "q-checker.validators; q-checker.terminal.acceptance; requirements[r-freeze, r-blueprint]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-223",
+    "nodeId": "q-checker",
+    "question": "「草稿与冻结检查」(q-checker) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "q-checker.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-224",
+    "nodeId": "q-checker",
+    "question": "「草稿与冻结检查」(q-checker) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "q-checker.validators; q-checker.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-freeze, r-blueprint]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-225",
+    "nodeId": "q-inheritance",
+    "question": "用户正常怎样进入「小修批准继承」(q-inheritance)，需要提供或已经具备哪些输入？",
+    "answerLocation": "q-inheritance.inputs; q-inheritance.interface.emptyCases; q-inheritance.terminal.mechanism; connections[c-q-inheritance-to-revision]; requirements[r-revision]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-226",
+    "nodeId": "q-inheritance",
+    "question": "「小修批准继承」(q-inheritance) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "q-inheritance.outputs; q-inheritance.interface.format; q-inheritance.terminal.mechanism; connections[c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-227",
+    "nodeId": "q-inheritance",
+    "question": "「小修批准继承」(q-inheritance) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "q-inheritance.authority; q-inheritance.validators; q-inheritance.terminal.mechanism; role-D1.terminal.mechanism; role-D1.validators; freeze.validators; requirements[r-revision]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-228",
+    "nodeId": "q-inheritance",
+    "question": "「小修批准继承」(q-inheritance) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "q-inheritance.interface.emptyCases; q-inheritance.interface.errors; q-inheritance.validators; q-inheritance.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-229",
+    "nodeId": "q-inheritance",
+    "question": "「小修批准继承」(q-inheritance) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "q-inheritance.validators; q-inheritance.terminal.acceptance; requirements[r-revision]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-230",
+    "nodeId": "q-inheritance",
+    "question": "「小修批准继承」(q-inheritance) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "q-inheritance.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-231",
+    "nodeId": "q-inheritance",
+    "question": "「小修批准继承」(q-inheritance) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "q-inheritance.validators; q-inheritance.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-revision]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-232",
+    "nodeId": "delivery",
+    "question": "用户正常怎样进入「交付保障」(delivery)，需要提供或已经具备哪些输入？",
+    "answerLocation": "delivery.inputs; delivery.interface.emptyCases; connections[c-shared-to-delivery, c-design-to-delivery]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-233",
+    "nodeId": "delivery",
+    "question": "「交付保障」(delivery) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "delivery.outputs; delivery.interface.format; connections[c-shared-to-delivery, c-design-to-delivery]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-234",
+    "nodeId": "delivery",
+    "question": "「交付保障」(delivery) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "delivery.authority; delivery.validators; role-X1.terminal.mechanism; role-X1.validators; sign.validators",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-235",
+    "nodeId": "delivery",
+    "question": "「交付保障」(delivery) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "delivery.interface.emptyCases; delivery.interface.errors; delivery.validators",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-236",
+    "nodeId": "delivery",
+    "question": "「交付保障」(delivery) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "delivery.validators",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-237",
+    "nodeId": "delivery",
+    "question": "「交付保障」(delivery) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-238",
+    "nodeId": "delivery",
+    "question": "「交付保障」(delivery) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "delivery.validators; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-239",
+    "nodeId": "delivery-roles",
+    "question": "用户正常怎样进入「交付角色」(delivery-roles)，需要提供或已经具备哪些输入？",
+    "answerLocation": "delivery-roles.inputs; delivery-roles.interface.emptyCases",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-240",
+    "nodeId": "delivery-roles",
+    "question": "「交付角色」(delivery-roles) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "delivery-roles.outputs; delivery-roles.interface.format",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-241",
+    "nodeId": "delivery-roles",
+    "question": "「交付角色」(delivery-roles) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "delivery-roles.authority; delivery-roles.validators; role-X1.terminal.mechanism; role-X1.validators; sign.validators",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-242",
+    "nodeId": "delivery-roles",
+    "question": "「交付角色」(delivery-roles) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "delivery-roles.interface.emptyCases; delivery-roles.interface.errors; delivery-roles.validators",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-243",
+    "nodeId": "delivery-roles",
+    "question": "「交付角色」(delivery-roles) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "delivery-roles.validators",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-244",
+    "nodeId": "delivery-roles",
+    "question": "「交付角色」(delivery-roles) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-245",
+    "nodeId": "delivery-roles",
+    "question": "「交付角色」(delivery-roles) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "delivery-roles.validators; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-246",
+    "nodeId": "role-X1",
+    "question": "用户正常怎样进入「X1：负责人」(role-X1)，需要提供或已经具备哪些输入？",
+    "answerLocation": "role-X1.inputs; role-X1.interface.emptyCases; role-X1.terminal.mechanism; connections[c-freeze-to-role-X1, c-role-X1-to-role-X2, c-role-X1-to-role-X3]; requirements[r-dispatch, r-roles]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-247",
+    "nodeId": "role-X1",
+    "question": "「X1：负责人」(role-X1) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "role-X1.outputs; role-X1.interface.format; role-X1.terminal.mechanism; connections[c-freeze-to-role-X1, c-role-X1-to-role-X2, c-role-X1-to-role-X3]; walkthroughs[walk-real/wr-owner]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-248",
+    "nodeId": "role-X1",
+    "question": "「X1：负责人」(role-X1) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "role-X1.authority; role-X1.validators; role-X1.terminal.mechanism; role-X1.terminal.mechanism; role-X1.validators; sign.validators; requirements[r-dispatch, r-roles]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-249",
+    "nodeId": "role-X1",
+    "question": "「X1：负责人」(role-X1) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "role-X1.interface.emptyCases; role-X1.interface.errors; role-X1.validators; role-X1.terminal.retry; walkthroughs[walk-real/wr-owner]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-250",
+    "nodeId": "role-X1",
+    "question": "「X1：负责人」(role-X1) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "role-X1.validators; role-X1.terminal.acceptance; requirements[r-dispatch, r-roles]; walkthroughs[walk-real/wr-owner]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-251",
+    "nodeId": "role-X1",
+    "question": "「X1：负责人」(role-X1) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "role-X1.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-252",
+    "nodeId": "role-X1",
+    "question": "「X1：负责人」(role-X1) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "role-X1.validators; role-X1.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-dispatch, r-roles]; walkthroughs[walk-real/wr-owner]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-253",
+    "nodeId": "role-X2",
+    "question": "用户正常怎样进入「X2：实现者」(role-X2)，需要提供或已经具备哪些输入？",
+    "answerLocation": "role-X2.inputs; role-X2.interface.emptyCases; role-X2.terminal.mechanism; connections[c-role-X1-to-role-X2, c-role-X2-to-calibration, c-role-X2-to-candidate, c-role-X2-to-deviation]; requirements[r-roles]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-254",
+    "nodeId": "role-X2",
+    "question": "「X2：实现者」(role-X2) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "role-X2.outputs; role-X2.interface.format; role-X2.terminal.mechanism; connections[c-role-X1-to-role-X2, c-role-X2-to-calibration, c-role-X2-to-candidate, c-role-X2-to-deviation]; walkthroughs[walk-real/wr-build]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-255",
+    "nodeId": "role-X2",
+    "question": "「X2：实现者」(role-X2) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "role-X2.authority; role-X2.validators; role-X2.terminal.mechanism; role-X1.terminal.mechanism; role-X1.validators; sign.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-256",
+    "nodeId": "role-X2",
+    "question": "「X2：实现者」(role-X2) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "role-X2.interface.emptyCases; role-X2.interface.errors; role-X2.validators; role-X2.terminal.retry; failurePaths[fail-premise, fail-calibration]; walkthroughs[walk-real/wr-build]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-257",
+    "nodeId": "role-X2",
+    "question": "「X2：实现者」(role-X2) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "role-X2.validators; role-X2.terminal.acceptance; requirements[r-roles]; walkthroughs[walk-real/wr-build]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-258",
+    "nodeId": "role-X2",
+    "question": "「X2：实现者」(role-X2) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "role-X2.terminal.retry; state.terminal.mechanism; writer.validators; failurePaths[fail-premise, fail-calibration]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-259",
+    "nodeId": "role-X2",
+    "question": "「X2：实现者」(role-X2) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "role-X2.validators; role-X2.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-roles]; walkthroughs[walk-real/wr-build]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-260",
+    "nodeId": "role-X3",
+    "question": "用户正常怎样进入「X3：独立验收」(role-X3)，需要提供或已经具备哪些输入？",
+    "answerLocation": "role-X3.inputs; role-X3.interface.emptyCases; role-X3.terminal.mechanism; connections[c-role-X1-to-role-X3, c-role-X3-to-calibration]; requirements[r-roles]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-261",
+    "nodeId": "role-X3",
+    "question": "「X3：独立验收」(role-X3) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "role-X3.outputs; role-X3.interface.format; role-X3.terminal.mechanism; connections[c-role-X1-to-role-X3, c-role-X3-to-calibration]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-262",
+    "nodeId": "role-X3",
+    "question": "「X3：独立验收」(role-X3) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "role-X3.authority; role-X3.validators; role-X3.terminal.mechanism; role-X1.terminal.mechanism; role-X1.validators; sign.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-263",
+    "nodeId": "role-X3",
+    "question": "「X3：独立验收」(role-X3) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "role-X3.interface.emptyCases; role-X3.interface.errors; role-X3.validators; role-X3.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-264",
+    "nodeId": "role-X3",
+    "question": "「X3：独立验收」(role-X3) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "role-X3.validators; role-X3.terminal.acceptance; requirements[r-roles]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-265",
+    "nodeId": "role-X3",
+    "question": "「X3：独立验收」(role-X3) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "role-X3.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-266",
+    "nodeId": "role-X3",
+    "question": "「X3：独立验收」(role-X3) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "role-X3.validators; role-X3.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-267",
+    "nodeId": "role-X4",
+    "question": "用户正常怎样进入「X4：专项检查」(role-X4)，需要提供或已经具备哪些输入？",
+    "answerLocation": "role-X4.inputs; role-X4.interface.emptyCases; role-X4.terminal.mechanism; connections[c-role-X4-to-evidence]; requirements[r-roles]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-268",
+    "nodeId": "role-X4",
+    "question": "「X4：专项检查」(role-X4) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "role-X4.outputs; role-X4.interface.format; role-X4.terminal.mechanism; connections[c-role-X4-to-evidence]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-269",
+    "nodeId": "role-X4",
+    "question": "「X4：专项检查」(role-X4) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "role-X4.authority; role-X4.validators; role-X4.terminal.mechanism; role-X1.terminal.mechanism; role-X1.validators; sign.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-270",
+    "nodeId": "role-X4",
+    "question": "「X4：专项检查」(role-X4) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "role-X4.interface.emptyCases; role-X4.interface.errors; role-X4.validators; role-X4.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-271",
+    "nodeId": "role-X4",
+    "question": "「X4：专项检查」(role-X4) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "role-X4.validators; role-X4.terminal.acceptance; requirements[r-roles]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-272",
+    "nodeId": "role-X4",
+    "question": "「X4：专项检查」(role-X4) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "role-X4.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-273",
+    "nodeId": "role-X4",
+    "question": "「X4：专项检查」(role-X4) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "role-X4.validators; role-X4.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-274",
+    "nodeId": "role-X5",
+    "question": "用户正常怎样进入「X5：专业裁判」(role-X5)，需要提供或已经具备哪些输入？",
+    "answerLocation": "role-X5.inputs; role-X5.interface.emptyCases; role-X5.terminal.mechanism; connections[c-role-X5-to-evidence]; requirements[r-roles]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-275",
+    "nodeId": "role-X5",
+    "question": "「X5：专业裁判」(role-X5) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "role-X5.outputs; role-X5.interface.format; role-X5.terminal.mechanism; connections[c-role-X5-to-evidence]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-276",
+    "nodeId": "role-X5",
+    "question": "「X5：专业裁判」(role-X5) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "role-X5.authority; role-X5.validators; role-X5.terminal.mechanism; role-X1.terminal.mechanism; role-X1.validators; sign.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-277",
+    "nodeId": "role-X5",
+    "question": "「X5：专业裁判」(role-X5) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "role-X5.interface.emptyCases; role-X5.interface.errors; role-X5.validators; role-X5.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-278",
+    "nodeId": "role-X5",
+    "question": "「X5：专业裁判」(role-X5) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "role-X5.validators; role-X5.terminal.acceptance; requirements[r-roles]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-279",
+    "nodeId": "role-X5",
+    "question": "「X5：专业裁判」(role-X5) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "role-X5.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-280",
+    "nodeId": "role-X5",
+    "question": "「X5：专业裁判」(role-X5) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "role-X5.validators; role-X5.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-roles]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-281",
+    "nodeId": "acceptance",
+    "question": "用户正常怎样进入「验收资产分级」(acceptance)，需要提供或已经具备哪些输入？",
+    "answerLocation": "acceptance.inputs; acceptance.interface.emptyCases; acceptance.terminal.mechanism; connections[c-calibration-to-acceptance, c-acceptance-to-candidate]; requirements[r-evidence, r-process]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-282",
+    "nodeId": "acceptance",
+    "question": "「验收资产分级」(acceptance) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "acceptance.outputs; acceptance.interface.format; acceptance.terminal.mechanism; connections[c-calibration-to-acceptance, c-acceptance-to-candidate]; walkthroughs[walk-real/wr-asset]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-283",
+    "nodeId": "acceptance",
+    "question": "「验收资产分级」(acceptance) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "acceptance.authority; acceptance.validators; acceptance.terminal.mechanism; role-X1.terminal.mechanism; role-X1.validators; sign.validators; requirements[r-evidence, r-process]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-284",
+    "nodeId": "acceptance",
+    "question": "「验收资产分级」(acceptance) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "acceptance.interface.emptyCases; acceptance.interface.errors; acceptance.validators; acceptance.terminal.retry; failurePaths[fail-semantic]; walkthroughs[walk-real/wr-asset]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-285",
+    "nodeId": "acceptance",
+    "question": "「验收资产分级」(acceptance) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "acceptance.validators; acceptance.terminal.acceptance; requirements[r-evidence, r-process]; walkthroughs[walk-real/wr-asset]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-286",
+    "nodeId": "acceptance",
+    "question": "「验收资产分级」(acceptance) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "acceptance.terminal.retry; state.terminal.mechanism; writer.validators; failurePaths[fail-semantic]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-287",
+    "nodeId": "acceptance",
+    "question": "「验收资产分级」(acceptance) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "acceptance.validators; acceptance.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-evidence, r-process]; walkthroughs[walk-real/wr-asset]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-288",
+    "nodeId": "calibration",
+    "question": "用户正常怎样进入「验收器三类校准」(calibration)，需要提供或已经具备哪些输入？",
+    "answerLocation": "calibration.inputs; calibration.interface.emptyCases; calibration.terminal.mechanism; connections[c-role-X2-to-calibration, c-role-X3-to-calibration, c-calibration-to-acceptance]; requirements[r-evidence]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-289",
+    "nodeId": "calibration",
+    "question": "「验收器三类校准」(calibration) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "calibration.outputs; calibration.interface.format; calibration.terminal.mechanism; connections[c-role-X2-to-calibration, c-role-X3-to-calibration, c-calibration-to-acceptance]; walkthroughs[walk-real/wr-calibration]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-290",
+    "nodeId": "calibration",
+    "question": "「验收器三类校准」(calibration) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "calibration.authority; calibration.validators; calibration.terminal.mechanism; role-X1.terminal.mechanism; role-X1.validators; sign.validators; requirements[r-evidence]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-291",
+    "nodeId": "calibration",
+    "question": "「验收器三类校准」(calibration) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "calibration.interface.emptyCases; calibration.interface.errors; calibration.validators; calibration.terminal.retry; failurePaths[fail-semantic, fail-calibration]; walkthroughs[walk-real/wr-calibration]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-292",
+    "nodeId": "calibration",
+    "question": "「验收器三类校准」(calibration) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "calibration.validators; calibration.terminal.acceptance; requirements[r-evidence]; walkthroughs[walk-real/wr-calibration]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-293",
+    "nodeId": "calibration",
+    "question": "「验收器三类校准」(calibration) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "calibration.terminal.retry; state.terminal.mechanism; writer.validators; failurePaths[fail-semantic, fail-calibration]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-294",
+    "nodeId": "calibration",
+    "question": "「验收器三类校准」(calibration) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "calibration.validators; calibration.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-evidence]; walkthroughs[walk-real/wr-calibration]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-295",
+    "nodeId": "candidate",
+    "question": "用户正常怎样进入「最终候选身份」(candidate)，需要提供或已经具备哪些输入？",
+    "answerLocation": "candidate.inputs; candidate.interface.emptyCases; candidate.terminal.mechanism; connections[c-acceptance-to-candidate, c-role-X2-to-candidate, c-candidate-to-evidence]; requirements[r-evidence]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-296",
+    "nodeId": "candidate",
+    "question": "「最终候选身份」(candidate) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "candidate.outputs; candidate.interface.format; candidate.terminal.mechanism; connections[c-acceptance-to-candidate, c-role-X2-to-candidate, c-candidate-to-evidence]; walkthroughs[walk-real/wr-candidate]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-297",
+    "nodeId": "candidate",
+    "question": "「最终候选身份」(candidate) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "candidate.authority; candidate.validators; candidate.terminal.mechanism; role-X1.terminal.mechanism; role-X1.validators; sign.validators; requirements[r-evidence]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-298",
+    "nodeId": "candidate",
+    "question": "「最终候选身份」(candidate) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "candidate.interface.emptyCases; candidate.interface.errors; candidate.validators; candidate.terminal.retry; failurePaths[fail-candidate, fail-missing]; walkthroughs[walk-real/wr-candidate]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-299",
+    "nodeId": "candidate",
+    "question": "「最终候选身份」(candidate) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "candidate.validators; candidate.terminal.acceptance; requirements[r-evidence]; walkthroughs[walk-real/wr-candidate]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-300",
+    "nodeId": "candidate",
+    "question": "「最终候选身份」(candidate) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "candidate.terminal.retry; state.terminal.mechanism; writer.validators; failurePaths[fail-candidate, fail-missing]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-301",
+    "nodeId": "candidate",
+    "question": "「最终候选身份」(candidate) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "candidate.validators; candidate.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-evidence]; walkthroughs[walk-real/wr-candidate]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-302",
+    "nodeId": "evidence",
+    "question": "用户正常怎样进入「三态原始证据」(evidence)，需要提供或已经具备哪些输入？",
+    "answerLocation": "evidence.inputs; evidence.interface.emptyCases; evidence.terminal.mechanism; connections[c-candidate-to-evidence, c-role-X4-to-evidence, c-role-X5-to-evidence, c-evidence-to-sign]; requirements[r-evidence]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-303",
+    "nodeId": "evidence",
+    "question": "「三态原始证据」(evidence) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "evidence.outputs; evidence.interface.format; evidence.terminal.mechanism; connections[c-candidate-to-evidence, c-role-X4-to-evidence, c-role-X5-to-evidence, c-evidence-to-sign]; walkthroughs[walk-real/wr-evidence]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-304",
+    "nodeId": "evidence",
+    "question": "「三态原始证据」(evidence) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "evidence.authority; evidence.validators; evidence.terminal.mechanism; role-X1.terminal.mechanism; role-X1.validators; sign.validators; requirements[r-evidence]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-305",
+    "nodeId": "evidence",
+    "question": "「三态原始证据」(evidence) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "evidence.interface.emptyCases; evidence.interface.errors; evidence.validators; evidence.terminal.retry; failurePaths[fail-candidate, fail-missing]; walkthroughs[walk-real/wr-evidence]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-306",
+    "nodeId": "evidence",
+    "question": "「三态原始证据」(evidence) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "evidence.validators; evidence.terminal.acceptance; requirements[r-evidence]; walkthroughs[walk-real/wr-evidence]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-307",
+    "nodeId": "evidence",
+    "question": "「三态原始证据」(evidence) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "evidence.terminal.retry; state.terminal.mechanism; writer.validators; failurePaths[fail-candidate, fail-missing]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-308",
+    "nodeId": "evidence",
+    "question": "「三态原始证据」(evidence) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "evidence.validators; evidence.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-evidence]; walkthroughs[walk-real/wr-evidence]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-309",
+    "nodeId": "deviation",
+    "question": "用户正常怎样进入「偏离和设计退回」(deviation)，需要提供或已经具备哪些输入？",
+    "answerLocation": "deviation.inputs; deviation.interface.emptyCases; deviation.terminal.mechanism; connections[c-role-X2-to-deviation, c-deviation-to-revision, c-deviation-to-metrics]; requirements[r-revision, r-evidence]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-310",
+    "nodeId": "deviation",
+    "question": "「偏离和设计退回」(deviation) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "deviation.outputs; deviation.interface.format; deviation.terminal.mechanism; connections[c-role-X2-to-deviation, c-deviation-to-revision, c-deviation-to-metrics]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-311",
+    "nodeId": "deviation",
+    "question": "「偏离和设计退回」(deviation) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "deviation.authority; deviation.validators; deviation.terminal.mechanism; role-X1.terminal.mechanism; role-X1.validators; sign.validators; requirements[r-revision, r-evidence]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-312",
+    "nodeId": "deviation",
+    "question": "「偏离和设计退回」(deviation) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "deviation.interface.emptyCases; deviation.interface.errors; deviation.validators; deviation.terminal.retry; failurePaths[fail-premise]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-313",
+    "nodeId": "deviation",
+    "question": "「偏离和设计退回」(deviation) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "deviation.validators; deviation.terminal.acceptance; requirements[r-revision, r-evidence]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-314",
+    "nodeId": "deviation",
+    "question": "「偏离和设计退回」(deviation) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "deviation.terminal.retry; state.terminal.mechanism; writer.validators; failurePaths[fail-premise]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-315",
+    "nodeId": "deviation",
+    "question": "「偏离和设计退回」(deviation) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "deviation.validators; deviation.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-revision, r-evidence]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-316",
+    "nodeId": "sign",
+    "question": "用户正常怎样进入「亲读后唯一签发」(sign)，需要提供或已经具备哪些输入？",
+    "answerLocation": "sign.inputs; sign.interface.emptyCases; sign.terminal.mechanism; connections[c-evidence-to-sign]; requirements[r-evidence, r-process]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-317",
+    "nodeId": "sign",
+    "question": "「亲读后唯一签发」(sign) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "sign.outputs; sign.interface.format; sign.terminal.mechanism; connections[c-evidence-to-sign]; walkthroughs[walk-real/wr-sign]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-318",
+    "nodeId": "sign",
+    "question": "「亲读后唯一签发」(sign) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "sign.authority; sign.validators; sign.terminal.mechanism; role-X1.terminal.mechanism; role-X1.validators; sign.validators; requirements[r-evidence, r-process]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-319",
+    "nodeId": "sign",
+    "question": "「亲读后唯一签发」(sign) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "sign.interface.emptyCases; sign.interface.errors; sign.validators; sign.terminal.retry; failurePaths[fail-candidate, fail-revocation]; walkthroughs[walk-real/wr-sign]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-320",
+    "nodeId": "sign",
+    "question": "「亲读后唯一签发」(sign) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "sign.validators; sign.terminal.acceptance; requirements[r-evidence, r-process]; walkthroughs[walk-real/wr-sign]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-321",
+    "nodeId": "sign",
+    "question": "「亲读后唯一签发」(sign) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "sign.terminal.retry; state.terminal.mechanism; writer.validators; failurePaths[fail-candidate, fail-revocation]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-322",
+    "nodeId": "sign",
+    "question": "「亲读后唯一签发」(sign) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "sign.validators; sign.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-evidence, r-process]; walkthroughs[walk-real/wr-sign]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-323",
+    "nodeId": "packaging",
+    "question": "用户正常怎样进入「同源分发」(packaging)，需要提供或已经具备哪些输入？",
+    "answerLocation": "packaging.inputs; packaging.interface.emptyCases; connections[c-packaging-to-shared]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-324",
+    "nodeId": "packaging",
+    "question": "「同源分发」(packaging) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "packaging.outputs; packaging.interface.format; connections[c-packaging-to-shared]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-325",
+    "nodeId": "packaging",
+    "question": "「同源分发」(packaging) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "packaging.authority; packaging.validators; execution-package.terminal.mechanism; capability-check.validators; contract-regression.validators",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-326",
+    "nodeId": "packaging",
+    "question": "「同源分发」(packaging) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "packaging.interface.emptyCases; packaging.interface.errors; packaging.validators",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-327",
+    "nodeId": "packaging",
+    "question": "「同源分发」(packaging) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "packaging.validators",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-328",
+    "nodeId": "packaging",
+    "question": "「同源分发」(packaging) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-329",
+    "nodeId": "packaging",
+    "question": "「同源分发」(packaging) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "packaging.validators; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-330",
+    "nodeId": "source-layout",
+    "question": "用户正常怎样进入「唯一源目录」(source-layout)，需要提供或已经具备哪些输入？",
+    "answerLocation": "source-layout.inputs; source-layout.interface.emptyCases; source-layout.terminal.mechanism; connections[c-source-layout-to-planning-entry]; requirements[r-package, r-sources]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-331",
+    "nodeId": "source-layout",
+    "question": "「唯一源目录」(source-layout) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "source-layout.outputs; source-layout.interface.format; source-layout.terminal.mechanism; connections[c-source-layout-to-planning-entry]; walkthroughs[walk-built/wb-source]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-332",
+    "nodeId": "source-layout",
+    "question": "「唯一源目录」(source-layout) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "source-layout.authority; source-layout.validators; source-layout.terminal.mechanism; execution-package.terminal.mechanism; capability-check.validators; contract-regression.validators; requirements[r-package, r-sources]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-333",
+    "nodeId": "source-layout",
+    "question": "「唯一源目录」(source-layout) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "source-layout.interface.emptyCases; source-layout.interface.errors; source-layout.validators; source-layout.terminal.retry; failurePaths[fail-package]; walkthroughs[walk-built/wb-source]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-334",
+    "nodeId": "source-layout",
+    "question": "「唯一源目录」(source-layout) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "source-layout.validators; source-layout.terminal.acceptance; requirements[r-package, r-sources]; walkthroughs[walk-built/wb-source]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-335",
+    "nodeId": "source-layout",
+    "question": "「唯一源目录」(source-layout) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "source-layout.terminal.retry; state.terminal.mechanism; writer.validators; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-336",
+    "nodeId": "source-layout",
+    "question": "「唯一源目录」(source-layout) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "source-layout.validators; source-layout.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-package, r-sources]; walkthroughs[walk-built/wb-source]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-337",
+    "nodeId": "planning-entry",
+    "question": "用户正常怎样进入「同源规划入口」(planning-entry)，需要提供或已经具备哪些输入？",
+    "answerLocation": "planning-entry.inputs; planning-entry.interface.emptyCases; planning-entry.terminal.mechanism; connections[c-source-layout-to-planning-entry, c-planning-entry-to-execution-package]; requirements[r-package, r-sources]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-338",
+    "nodeId": "planning-entry",
+    "question": "「同源规划入口」(planning-entry) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "planning-entry.outputs; planning-entry.interface.format; planning-entry.terminal.mechanism; connections[c-source-layout-to-planning-entry, c-planning-entry-to-execution-package]; walkthroughs[walk-built/wb-planning]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-339",
+    "nodeId": "planning-entry",
+    "question": "「同源规划入口」(planning-entry) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "planning-entry.authority; planning-entry.validators; planning-entry.terminal.mechanism; execution-package.terminal.mechanism; capability-check.validators; contract-regression.validators; requirements[r-package, r-sources]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-340",
+    "nodeId": "planning-entry",
+    "question": "「同源规划入口」(planning-entry) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "planning-entry.interface.emptyCases; planning-entry.interface.errors; planning-entry.validators; planning-entry.terminal.retry; failurePaths[fail-package]; walkthroughs[walk-built/wb-planning]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-341",
+    "nodeId": "planning-entry",
+    "question": "「同源规划入口」(planning-entry) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "planning-entry.validators; planning-entry.terminal.acceptance; requirements[r-package, r-sources]; walkthroughs[walk-built/wb-planning]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-342",
+    "nodeId": "planning-entry",
+    "question": "「同源规划入口」(planning-entry) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "planning-entry.terminal.retry; state.terminal.mechanism; writer.validators; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-343",
+    "nodeId": "planning-entry",
+    "question": "「同源规划入口」(planning-entry) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "planning-entry.validators; planning-entry.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-package, r-sources]; walkthroughs[walk-built/wb-planning]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-344",
+    "nodeId": "execution-package",
+    "question": "用户正常怎样进入「执行插件入口」(execution-package)，需要提供或已经具备哪些输入？",
+    "answerLocation": "execution-package.inputs; execution-package.interface.emptyCases; execution-package.terminal.mechanism; connections[c-planning-entry-to-execution-package, c-execution-package-to-capability-check, c-q-capacity-to-execution-package]; requirements[r-package, r-sources]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-345",
+    "nodeId": "execution-package",
+    "question": "「执行插件入口」(execution-package) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "execution-package.outputs; execution-package.interface.format; execution-package.terminal.mechanism; connections[c-planning-entry-to-execution-package, c-execution-package-to-capability-check, c-q-capacity-to-execution-package]; walkthroughs[walk-built/wb-execution, walk-installed/wi-entry]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-346",
+    "nodeId": "execution-package",
+    "question": "「执行插件入口」(execution-package) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "execution-package.authority; execution-package.validators; execution-package.terminal.mechanism; execution-package.terminal.mechanism; capability-check.validators; contract-regression.validators; requirements[r-package, r-sources]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-347",
+    "nodeId": "execution-package",
+    "question": "「执行插件入口」(execution-package) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "execution-package.interface.emptyCases; execution-package.interface.errors; execution-package.validators; execution-package.terminal.retry; failurePaths[fail-package]; walkthroughs[walk-built/wb-execution, walk-installed/wi-entry]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-348",
+    "nodeId": "execution-package",
+    "question": "「执行插件入口」(execution-package) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "execution-package.validators; execution-package.terminal.acceptance; requirements[r-package, r-sources]; walkthroughs[walk-built/wb-execution, walk-installed/wi-entry]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-349",
+    "nodeId": "execution-package",
+    "question": "「执行插件入口」(execution-package) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "execution-package.terminal.retry; state.terminal.mechanism; writer.validators; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-350",
+    "nodeId": "execution-package",
+    "question": "「执行插件入口」(execution-package) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "execution-package.validators; execution-package.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-package, r-sources]; walkthroughs[walk-built/wb-execution, walk-installed/wi-entry]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-351",
+    "nodeId": "minimum",
+    "question": "用户正常怎样进入「完整最小范围」(minimum)，需要提供或已经具备哪些输入？",
+    "answerLocation": "minimum.inputs; minimum.interface.emptyCases; minimum.terminal.mechanism; requirements[r-scope, r-blueprint]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-352",
+    "nodeId": "minimum",
+    "question": "「完整最小范围」(minimum) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "minimum.outputs; minimum.interface.format; minimum.terminal.mechanism",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-353",
+    "nodeId": "minimum",
+    "question": "「完整最小范围」(minimum) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "minimum.authority; minimum.validators; minimum.terminal.mechanism; execution-package.terminal.mechanism; capability-check.validators; contract-regression.validators; requirements[r-scope, r-blueprint]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-354",
+    "nodeId": "minimum",
+    "question": "「完整最小范围」(minimum) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "minimum.interface.emptyCases; minimum.interface.errors; minimum.validators; minimum.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-355",
+    "nodeId": "minimum",
+    "question": "「完整最小范围」(minimum) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "minimum.validators; minimum.terminal.acceptance; requirements[r-scope, r-blueprint]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-356",
+    "nodeId": "minimum",
+    "question": "「完整最小范围」(minimum) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "minimum.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-357",
+    "nodeId": "minimum",
+    "question": "「完整最小范围」(minimum) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "minimum.validators; minimum.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-scope, r-blueprint]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-358",
+    "nodeId": "capability-check",
+    "question": "用户正常怎样进入「正常入口验收」(capability-check)，需要提供或已经具备哪些输入？",
+    "answerLocation": "capability-check.inputs; capability-check.interface.emptyCases; capability-check.terminal.mechanism; connections[c-execution-package-to-capability-check]; requirements[r-scope]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-359",
+    "nodeId": "capability-check",
+    "question": "「正常入口验收」(capability-check) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "capability-check.outputs; capability-check.interface.format; capability-check.terminal.mechanism; connections[c-execution-package-to-capability-check]; walkthroughs[walk-built/wb-capability, walk-installed/wi-check]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-360",
+    "nodeId": "capability-check",
+    "question": "「正常入口验收」(capability-check) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "capability-check.authority; capability-check.validators; capability-check.terminal.mechanism; execution-package.terminal.mechanism; capability-check.validators; contract-regression.validators; requirements[r-scope]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-361",
+    "nodeId": "capability-check",
+    "question": "「正常入口验收」(capability-check) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "capability-check.interface.emptyCases; capability-check.interface.errors; capability-check.validators; capability-check.terminal.retry; walkthroughs[walk-built/wb-capability, walk-installed/wi-check]",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-362",
+    "nodeId": "capability-check",
+    "question": "「正常入口验收」(capability-check) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "capability-check.validators; capability-check.terminal.acceptance; requirements[r-scope]; walkthroughs[walk-built/wb-capability, walk-installed/wi-check]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-363",
+    "nodeId": "capability-check",
+    "question": "「正常入口验收」(capability-check) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "capability-check.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-364",
+    "nodeId": "capability-check",
+    "question": "「正常入口验收」(capability-check) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "capability-check.validators; capability-check.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-scope]; walkthroughs[walk-built/wb-capability, walk-installed/wi-check]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-365",
+    "nodeId": "web-later",
+    "question": "用户正常怎样进入「网页端打包说明」(web-later)，需要提供或已经具备哪些输入？",
+    "answerLocation": "web-later.description; web-later.inputs; web-later.outputs; web-later.terminal.mechanism; minimum.terminal.mechanism; requirements[r-package]",
+    "gap": "Blueprint 明确把 ChatGPT 网页端的正式插件打包/上架留到 0.2 或以后，仅在 0.1 记录未来打包输入；但用户认可流程 ASSURANCE_PROCESS_V0_1_20261110.md 第 10 节明确要求 ChatGPT 网页端使用 OpenAI 自己的插件打包工具另行打包，并在打包阶段处理。两者对 0.1 的交付范围不能同时成立，Blueprint 中也没有记录用户已批准把这一要求延后。",
+    "impact": "按当前 Blueprint 实施，设计、冻结、Codex 执行和手动 GPT 网页角色仍可运行，但 0.1 最终跨端交付会缺少用户已要求的 ChatGPT 网页端插件包，因此无法按认可流程完成 0.1 的打包验收。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-366",
+    "nodeId": "web-later",
+    "question": "「网页端打包说明」(web-later) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "web-later.outputs; web-later.interface.format; web-later.terminal.mechanism",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-367",
+    "nodeId": "web-later",
+    "question": "「网页端打包说明」(web-later) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "web-later.authority; web-later.validators; web-later.terminal.mechanism; execution-package.terminal.mechanism; capability-check.validators; contract-regression.validators; requirements[r-package]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-368",
+    "nodeId": "web-later",
+    "question": "「网页端打包说明」(web-later) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "web-later.interface.emptyCases; web-later.interface.errors; web-later.validators; web-later.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-369",
+    "nodeId": "web-later",
+    "question": "「网页端打包说明」(web-later) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "web-later.validators; web-later.terminal.acceptance; requirements[r-package]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-370",
+    "nodeId": "web-later",
+    "question": "「网页端打包说明」(web-later) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "web-later.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-371",
+    "nodeId": "web-later",
+    "question": "「网页端打包说明」(web-later) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "web-later.validators; web-later.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-package]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-372",
+    "nodeId": "q-capacity",
+    "question": "用户正常怎样进入「市场容量调整」(q-capacity)，需要提供或已经具备哪些输入？",
+    "answerLocation": "q-capacity.inputs; q-capacity.interface.emptyCases; q-capacity.terminal.mechanism; connections[c-q-capacity-to-execution-package]; requirements[r-package]",
+    "gap": null,
+    "impact": "入口、所需输入和缺输入时的停点已有明确定位，用户不需要自行猜测材料或入口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-373",
+    "nodeId": "q-capacity",
+    "question": "「市场容量调整」(q-capacity) 会产出什么，产物交给谁或进入哪个后续组件？",
+    "answerLocation": "q-capacity.outputs; q-capacity.interface.format; q-capacity.terminal.mechanism; connections[c-q-capacity-to-execution-package]",
+    "gap": null,
+    "impact": "产物、身份和后续接收关系已有明确定位，不会因交回对象不明而卡住。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-374",
+    "nodeId": "q-capacity",
+    "question": "「市场容量调整」(q-capacity) 中谁有权作决定，哪些决定明确不属于本组件？",
+    "answerLocation": "q-capacity.authority; q-capacity.validators; q-capacity.terminal.mechanism; execution-package.terminal.mechanism; capability-check.validators; contract-regression.validators; requirements[r-package]",
+    "gap": null,
+    "impact": "决定权、不得越权的范围及最终负责人已有明确定位，不需要由执行角色临场补决定。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-375",
+    "nodeId": "q-capacity",
+    "question": "「市场容量调整」(q-capacity) 在输入、权限、对象身份或证据不足/失败时会怎样处理，用户会看到什么？",
+    "answerLocation": "q-capacity.interface.emptyCases; q-capacity.interface.errors; q-capacity.validators; q-capacity.terminal.retry",
+    "gap": null,
+    "impact": "失败、缺输入或缺证据时的停止、退回或无法判断处理已有明确定位，不会被默认写成成功。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-376",
+    "nodeId": "q-capacity",
+    "question": "「市场容量调整」(q-capacity) 怎样验收，什么条件下不能算完成或通过？",
+    "answerLocation": "q-capacity.validators; q-capacity.terminal.acceptance; requirements[r-package]",
+    "gap": null,
+    "impact": "完成与不通过条件已有可核对位置，用户可以知道何时不能宣称完成。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-377",
+    "nodeId": "q-capacity",
+    "question": "「市场容量调整」(q-capacity) 中断、写入不明、状态损坏或结果过期后怎样恢复并继续？",
+    "answerLocation": "q-capacity.terminal.retry; state.terminal.mechanism; writer.validators",
+    "gap": null,
+    "impact": "节点级保留/重试规则与全局状态恢复规则共同给出恢复路径，过期或不明结果不会直接覆盖当前事实。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R4-378",
+    "nodeId": "q-capacity",
+    "question": "「市场容量调整」(q-capacity) 是否说明怎样避免已有能力、旧功能或既有职责在本组件中退化？",
+    "answerLocation": "q-capacity.validators; q-capacity.terminal.acceptance; contract-regression.validators; contract-regression.terminal.acceptance; capability-check.validators; requirements[r-package]",
+    "gap": null,
+    "impact": "本组件的验收与全局旧能力保护、最终包回归要求共同覆盖退化风险。",
+    "blocking": false,
+    "owner": "D1"
+  }
+]
