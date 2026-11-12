@@ -1,0 +1,12 @@
+{
+ "round": 4,
+ "reader_isolation": "single-thread-batch",
+ "judged_by": "D1",
+ "passed": [
+  "fail-web-method-step-1",
+  "wi-web",
+  "fail-web-method-whole"
+ ],
+ "rewrite": [],
+ "note": "3 new units correct; confusions out of unit scope. D8 complete: 58 units passed."
+}
