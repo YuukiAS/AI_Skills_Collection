@@ -1,0 +1,39 @@
+{
+ "round": 2,
+ "reader_isolation": "single-thread-batch",
+ "judged_by": "D1",
+ "passed": [
+  "wr-candidate",
+  "ws-prompts",
+  "wb-execution",
+  "wb-source",
+  "wr-build",
+  "fail-package-step-1",
+  "fail-package-step-2",
+  "fail-checker-whole",
+  "fail-package-step-3",
+  "fail-role-step-1",
+  "wb-planning",
+  "wr-calibration",
+  "wr-freeze",
+  "fail-checker-step-2",
+  "wr-asset",
+  "wr-sign",
+  "fail-semantic-step-1",
+  "fail-semantic-step-2",
+  "fail-semantic-whole",
+  "fail-package-whole",
+  "wb-capability",
+  "fail-recovery-whole"
+ ],
+ "rewrite": [
+  "fail-role-step-2",
+  "fail-role-whole",
+  "wr-owner",
+  "ws-dispatch",
+  "wr-contract",
+  "fail-recovery-step-1",
+  "wr-gates"
+ ],
+ "note": "7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole"
+}
