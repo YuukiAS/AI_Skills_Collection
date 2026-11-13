@@ -1,0 +1,112 @@
+[
+  {
+    "id": "D6R12-Q01",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明能否把交付角色的职责关系改成与 Blueprint 完全一致：X1 只负责接收冻结、组织交付、审定验收资产、亲读证据和唯一签发，不写产品或验收代码；X2 才是默认实现者并默认编写验收实现，X3 只在规定触发条件下独立编写验收实现？",
+    "answerLocation": "blueprint.json → delivery/delivery-roles/role-X1.terminal.mechanism；delivery/delivery-roles/role-X2.terminal.mechanism；delivery/delivery-roles/role-X3.terminal.mechanism；delivery/acceptance；delivery/calibration",
+    "gap": "第 1 节写成“X1 会按这份设计做出两个插件”，容易把实现责任放到 X1；第 8 节虽写 X2 实施，却没有明确 X1 不写产品/验收代码，也没有披露 X2 是默认验收实现作者。用户因此无法仅凭冻结说明判断默认验收是否独立。",
+    "impact": "会让用户误解实现、验收独立性和最终签发之间的职责隔离，可能批准一个自己以为“验收默认独立”或“X1 亲自实现”的对象。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R12-Q02",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明能否补齐会影响独立性的会话规则和角色不可用时的处理，而不是只写模型档次和 D8 的合批方式？",
+    "answerLocation": "blueprint.json → shared/dispatch.terminal.mechanism §2.1；design/design-roles/role-D2、role-D3、role-D6、role-D7、role-D8；delivery/delivery-roles/role-X2、role-X3、role-X4、role-X5",
+    "gap": "说明遗漏了 D2/D3 每次独立设计新开且互不读对方产物、D6 每轮新开且不继承负责人上下文、D7 每轮新开且只给 Blueprint/无设计暗示运输说明、X3 首次独立新开且不继承 X2 解题过程、X5 每次独立裁判新开且不看实现过程，以及 X2/X4 哪些返修或复验允许沿用。Blueprint 还规定没有满足档次/独立性/工具能力的入口时只能等待对应入口，不自动降档或由负责人冒充；说明只做了概括性“如实报告”。",
+    "impact": "这些规则直接决定“独立设计、冷读、独立验收、专业裁判”是否真的独立；省略后用户可能按同一上下文复用角色，批准到比 Blueprint 更弱的独立性。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R12-Q03",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明能否完整、等价地写出小修继承批准的边界和决定者？",
+    "answerLocation": "blueprint.json → shared/revision.terminal.mechanism §5.1；design/q-inheritance.terminal.mechanism 与 validators[v-q-inheritance]",
+    "gap": "说明列了六条条件，但把精确的“当前 semantic_hash 等于获批值，或从获批值沿完整合格小修继承链可达”改写成较宽泛的“语义内容可证明不变，或沿完整继承链可追溯”；没有说明小修/大改由原 D1 判断、原批准与 D6–D8 记录按原范围继承、语义版本不变、继承记录完成后新值才成为有效冻结对象，也没有披露多次小修须按累计差异重判、不得拆单规避。",
+    "impact": "用户可能以为只要有人主观证明“意思没变”或把改动拆小，就能继承旧批准；这会直接扩大无需重新批准的修改范围。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R12-Q04",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明能否补上恢复时“git 历史里找不到任何有效 STATE.json”的用户决定边界？",
+    "answerLocation": "blueprint.json → shared/state.terminal.mechanism §1.3a 第 6 步；validators[v-fail-recovery]",
+    "gap": "第 2 节已经说明普通冲突、冻结/批准/签发/撤回冲突、原写入冲突、不可撤回外部后果和 paused_scopes，但遗漏了“没有任何有效历史状态时不得自动重建，负责人列出现存不可变记录，交用户确认后再初始化”。",
+    "impact": "用户会低估恢复时自己必须介入的一种明确情形，并可能误以为系统总能自行从历史恢复。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R12-Q05",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明能否把签发后新事实出现时的复核判据和撤回后果写到与 Blueprint 等价？",
+    "answerLocation": "blueprint.json → delivery/sign.terminal.mechanism §7.5；validators[v-sign]、validators[v-fail-revocation]",
+    "gap": "说明只写“X1 先暂停对外声明，再决定维持还是撤回整份签发”，没有说明 X1 必须按原冻结标准复核后才能决定；也没有说明复核期间保留原签发引用、撤回后当前签发引用清空、被推翻证据标 stale、进入返修或规定的设计退回、新签发 supersedes 被撤回签发且旧签发记录永不改写/删除。",
+    "impact": "用户看不到“维持/撤回”受什么标准约束，以及撤回后历史、证据和重新签发怎样处理，容易误解签发的实际强度和可追溯性。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R12-Q06",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明能否删除或改正“每个用例……用公开的示例任务（给一个小命令行工具加导出功能）”这一概括，使它不再与后面的正式固定输入相冲突？",
+    "answerLocation": "blueprint.json → packaging/capability-check.validators[v-regression-set]；FREEZE_EXPLANATION.md → “回归用例完整定义” R1–R7、S1",
+    "gap": "正式回归表的 8 行与 Blueprint 逐字一致，但第 4 节前面的概括把全部用例说成同一个“小命令行工具加导出功能”输入；实际上 R4 是交付状态、R6 是损坏状态文件、R7 是市场包安装与网页端包、S1 是三个既有插件的日常请求等。",
+    "impact": "同一份冻结说明对正式回归输入给出两套不等价描述，会让用户误解最终完成测试到底覆盖什么。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R12-Q07",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "第 5 节能否把实现/验收所依赖的既有组件和固定检查器身份披露完整，并保留未知大小事实？",
+    "answerLocation": "blueprint.json → design/q-checker（固定 Asteria-Blueprint 检查器提交 c05edcf51bc93f8be82180fd4ad28a250937f195）；packaging/q-capacity.terminal.mechanism；packaging/source-layout；packaging/web-later",
+    "gap": "说明把检查器只写成“固定版本的 Blueprint 检查器（你已有的仓库）”，没有给出 Blueprint 已经固定的 Asteria-Blueprint 检查器提交 c05edcf51bc93f8be82180fd4ad28a250937f195；同时没有披露正式实施必须加载既有 workflow-core 与 ai-skills-core 两个维护插件。现有生成器与 thread handoff/thread instruction 方法虽在其他章节出现，但第 5 节没有形成完整资源清单。",
+    "impact": "用户无法只读冻结说明确认实际绑定的检查器版本和既有插件依赖，可能在缺少关键运行依赖信息时批准。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R12-Q08",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明能否披露 Blueprint 明确保留的 0.1 能力上限，而不只列“这次不做的功能”？",
+    "answerLocation": "blueprint.json → packaging/minimum.terminal.mechanism §10.3",
+    "gap": "Blueprint 明确说明 0.1 不承诺所有复杂任务从此不再发现设计缺口、不承诺独立模型不会误判、也不承诺纯文件权限能阻止有写权的人篡改；冻结说明第 9 节只列延后功能，完全漏掉这些残余风险边界。",
+    "impact": "用户可能把 Assurance 0.1 批准成比 Blueprint 更强的保证，误以为它能消除设计遗漏、模型误判或有写权限者的篡改风险。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R12-Q09",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "第 3 节“你自己怎么验”能否明确这是用户可选的独立抽查，而不是新增的正式完成前提；只有冻结合同明确要求的用户验收才是签发前提？",
+    "answerLocation": "ASSURANCE_PROCESS_V0_1_20261110.md → §3.1 用户；blueprint.json → delivery/sign.terminal.mechanism；packaging/capability-check",
+    "gap": "“拿一个公开、安全的示例任务……拦住了才算通过”容易读成用户必须亲自走一遍端到端故障注入；Blueprint 的正式组织和判定由 X1 负责，脚本/真实宿主/专业判断分别由 X2/X4/X5 或明确写出的用户判定承担，用户只在合同明确要求时必须验收。",
+    "impact": "正式章节已把责任放回 X1，因此没有改变设计本身，但措辞可能给用户增加 Blueprint 未规定的操作负担。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R12-Q10",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "第 2 节开头能否准确区分“用户已经裁决的决定”和“设计者默认”，避免用“前四条/后面几条”概括？",
+    "answerLocation": "blueprint.json → packaging/q-capacity.terminal.mechanism；packaging/minimum.terminal.mechanism §9.4；shared/dispatch.terminal.mechanism §2.1a",
+    "gap": "说明说“前四条是你之前明说过的，后面几条是设计者替你定的默认做法”，但第 5 条市场容量 12/32 在 Blueprint 中明确标为“已裁决（用户）”，后文 X1=GPT Work 极高也明确是用户决定。各具体条目多数写对了，但总括句的来源归因不准确。",
+    "impact": "不改变最终行为，却会让用户误判某些既有决定是本轮设计者新定的默认。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R12-Q11",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "用户可见的首次冻结流程能否补一句：用户批准同一内容快照后，还要追加首版、对冻结输出再跑 D5 冻结档并确认获批快照未变，之后才写冻结记录；该机械核对不改变内容时无需再次批准？",
+    "answerLocation": "blueprint.json → design/freeze.terminal.mechanism §6.5“首次冻结的顺序”；validators[v-freeze]",
+    "gap": "第 3 节把流程概括为“四道关卡 → 你批准 → 交付”，省略了批准后的追加首版、D5 冻结档复核和四个身份写入冻结记录这道机械保护。",
+    "impact": "不会降低用户实际批准的内容，也不会引入错误授权，但使用户看到的冻结流程比 Blueprint 少一个批准后的防错步骤。",
+    "blocking": false,
+    "owner": "D1"
+  }
+]
