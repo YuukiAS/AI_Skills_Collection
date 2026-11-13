@@ -2,15 +2,15 @@
   "source": {
     "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
     "branch": "design/assurance-plugins-0.1-merged",
-    "head": "52d32f7df843a926ab7bfc956b77a6877ed1330c",
+    "head": "612383dd299c20e7425e121d6409a10a7eb36461",
     "path": "docs/design/assurance/plugin-0.1-d1/blueprint.json",
-    "sha256": "7bfbb275dec5ed6c79f02d0c9c916e3ac8e47d68a72704801625ec7dca8ba1c7",
+    "sha256": "2cbaaa62d77284050b03de8f9382e6fd2212841394bd458e21ee2ef030c8a247",
     "working_tree_uncommitted": true
   },
   "counting": {
     "unit": "terminal.acceptance 中的每一条字符串，不拆句、不去重、不合并相同文字；顶层组件仅由节点树位置确定。",
     "function_classification": "未做功能分类，仅按顶层组件及用户给定 needs 值汇总。",
-    "acceptance_item_count": 262,
+    "acceptance_item_count": 272,
     "validator_object_count": 67,
     "warning": "验收条目数与 validators 对象数是两种口径，不能把条目数直接当冻结说明的验收器总数。",
     "needs": "needs 为本条的单值机械需求判断；明确需 X5 判断用 expert，需用户回答/批准用 user；不能归入单值时为 unclear 并逐项给原因。",
@@ -544,9 +544,9 @@
       "node_title": "按条件派发",
       "acceptance_index": 2,
       "source_pointer": "/nodes/0/children/3/terminal/acceptance/2",
-      "text": "负责人按职责生成每轮完整提示词；需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1），动作与实际结果如实登记。",
+      "text": "负责人按职责生成每轮完整提示词；需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1），动作与实际结果如实登记。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -661,9 +661,9 @@
       "node_title": "按条件派发",
       "acceptance_index": 11,
       "source_pointer": "/nodes/0/children/3/terminal/acceptance/11",
-      "text": "需要用户手动转交的规划端角色，每角色每轮提示词最多一条；Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端派发次数不限，不占规划端用户转交次数。",
+      "text": "需要用户手动转交的规划端角色，每角色每轮提示词最多一条；执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。不需要用户转交的派发次数不限，不占用户的转交次数；需用户转交的执行端角色每角色每轮最多一条。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -674,9 +674,9 @@
       "node_title": "按条件派发",
       "acceptance_index": 12,
       "source_pointer": "/nodes/0/children/3/terminal/acceptance/12",
-      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
+      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；不需要用户转交的派发次数不限，不占用户的转交次数；需用户转交的执行端角色每角色每轮最多一条。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -700,9 +700,9 @@
       "node_title": "按条件派发",
       "acceptance_index": 14,
       "source_pointer": "/nodes/0/children/3/terminal/acceptance/14",
-      "text": "设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
+      "text": "设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；不需要用户转交的派发次数不限，不占用户的转交次数；需用户转交的执行端角色每角色每轮最多一条。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
       "needs": "file-check",
-      "needs_reason": "核对原文规定的文件内容、结构、引用、差异、记录或可运行脚本验证的规则。",
+      "needs_reason": "核对派发记录中的阶段负责人和每角色每轮转交次数，角色的实际运行位置另由新增真实宿主条目验证。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -774,6 +774,58 @@
     {
       "top_component_id": "shared",
       "top_component_title": "共用任务协议",
+      "node_id": "dispatch",
+      "node_title": "按条件派发",
+      "acceptance_index": 20,
+      "source_pointer": "/nodes/0/children/3/terminal/acceptance/20",
+      "text": "档次为 Codex 的（D4、D5、D7，以及 X2 的普通实现）：Claude 担任负责人时直接派发；GPT 担任负责人时生成完整提示词，由用户转交给 Codex。",
+      "needs": "real-host",
+      "needs_reason": "该条要求按档次在实际 Codex、GPT Work 或所选专门插件宿主运行，并观察规定的会话及用户转交行为；不能只用模拟或文字声明代替。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "shared",
+      "top_component_title": "共用任务协议",
+      "node_id": "dispatch",
+      "node_title": "按条件派发",
+      "acceptance_index": 21,
+      "source_pointer": "/nodes/0/children/3/terminal/acceptance/21",
+      "text": "档次为 GPT Work 极高的（X2 的专业子任务、X3）：无论负责人是谁，都生成完整提示词，由用户在 GPT Work 里按该角色的会话规则新开或沿用对话转交；不得改用 Codex 代替，也不得降档。",
+      "needs": "real-host",
+      "needs_reason": "该条要求按档次在实际 Codex、GPT Work 或所选专门插件宿主运行，并观察规定的会话及用户转交行为；不能只用模拟或文字声明代替。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "shared",
+      "top_component_title": "共用任务协议",
+      "node_id": "dispatch",
+      "node_title": "按条件派发",
+      "acceptance_index": 22,
+      "source_pointer": "/nodes/0/children/3/terminal/acceptance/22",
+      "text": "X4：派发记录写明用“执行端·专业（GPT Work 极高）”还是哪一个现有专门插件。前者同 X3；后者在该插件实际所在的宿主运行，宿主需要用户转交时同样由用户转交。",
+      "needs": "real-host",
+      "needs_reason": "该条要求按档次在实际 Codex、GPT Work 或所选专门插件宿主运行，并观察规定的会话及用户转交行为；不能只用模拟或文字声明代替。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "shared",
+      "top_component_title": "共用任务协议",
+      "node_id": "dispatch",
+      "node_title": "按条件派发",
+      "acceptance_index": 23,
+      "source_pointer": "/nodes/0/children/3/terminal/acceptance/23",
+      "text": "凡需要用户手动转交的执行端角色，与规划端角色一样，每个角色每轮最多一条。",
+      "needs": "real-host",
+      "needs_reason": "该条要求按档次在实际 Codex、GPT Work 或所选专门插件宿主运行，并观察规定的会话及用户转交行为；不能只用模拟或文字声明代替。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "shared",
+      "top_component_title": "共用任务协议",
       "node_id": "prompts",
       "node_title": "自包含提示词",
       "acceptance_index": 0,
@@ -830,9 +882,9 @@
       "node_title": "自包含提示词",
       "acceptance_index": 4,
       "source_pointer": "/nodes/0/children/4/terminal/acceptance/4",
-      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
+      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；不需要用户转交的派发次数不限，不占用户的转交次数；需用户转交的执行端角色每角色每轮最多一条。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -846,6 +898,19 @@
       "text": "D8 每轮一个新 GPT 对话，合批处理本轮全部单位，随机顺序、逐单位仅凭其自身文字作答，记录 reader_isolation: \"single-thread-batch\"；D1 逐项比对，全部正确即有效通过；读错则改写，下一轮新对话只重读改过单位及受影响相邻单位，仍只转交一条；冻结说明如实写明合批方式。",
       "needs": "real-host",
       "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "shared",
+      "top_component_title": "共用任务协议",
+      "node_id": "prompts",
+      "node_title": "自包含提示词",
+      "acceptance_index": 6,
+      "source_pointer": "/nodes/0/children/4/terminal/acceptance/6",
+      "text": "凡需要用户手动转交的执行端角色，与规划端角色一样，每个角色每轮最多一条。",
+      "needs": "real-host",
+      "needs_reason": "该条要求按档次在实际 Codex、GPT Work 或所选专门插件宿主运行，并观察规定的会话及用户转交行为；不能只用模拟或文字声明代替。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -999,9 +1064,9 @@
       "node_title": "D1：负责人",
       "acceptance_index": 3,
       "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/3",
-      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
+      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；不需要用户转交的派发次数不限，不占用户的转交次数；需用户转交的执行端角色每角色每轮最多一条。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -1025,9 +1090,9 @@
       "node_title": "D1：负责人",
       "acceptance_index": 5,
       "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/5",
-      "text": "负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。",
+      "text": "负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -1142,9 +1207,9 @@
       "node_title": "D2：独立甲",
       "acceptance_index": 6,
       "source_pointer": "/nodes/1/children/0/children/1/terminal/acceptance/6",
-      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
+      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；不需要用户转交的派发次数不限，不占用户的转交次数；需用户转交的执行端角色每角色每轮最多一条。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -1233,9 +1298,9 @@
       "node_title": "D3：独立乙",
       "acceptance_index": 6,
       "source_pointer": "/nodes/1/children/0/children/2/terminal/acceptance/6",
-      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
+      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；不需要用户转交的派发次数不限，不占用户的转交次数；需用户转交的执行端角色每角色每轮最多一条。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -1402,9 +1467,9 @@
       "node_title": "D6：用户追问",
       "acceptance_index": 3,
       "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/3",
-      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
+      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；不需要用户转交的派发次数不限，不占用户的转交次数；需用户转交的执行端角色每角色每轮最多一条。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -1571,9 +1636,9 @@
       "node_title": "D8：逐步复述",
       "acceptance_index": 3,
       "source_pointer": "/nodes/1/children/0/children/7/terminal/acceptance/3",
-      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
+      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；不需要用户转交的派发次数不限，不占用户的转交次数；需用户转交的执行端角色每角色每轮最多一条。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -1766,9 +1831,9 @@
       "node_title": "四项冻结关卡",
       "acceptance_index": 7,
       "source_pointer": "/nodes/1/children/2/terminal/acceptance/7",
-      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
+      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；不需要用户转交的派发次数不限，不占用户的转交次数；需用户转交的执行端角色每角色每轮最多一条。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -1909,9 +1974,9 @@
       "node_title": "证据真实度",
       "acceptance_index": 1,
       "source_pointer": "/nodes/1/children/3/children/3/terminal/acceptance/1",
-      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
+      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；不需要用户转交的派发次数不限，不占用户的转交次数；需用户转交的执行端角色每角色每轮最多一条。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2182,9 +2247,9 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 7,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/7",
-      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
+      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；不需要用户转交的派发次数不限，不占用户的转交次数；需用户转交的执行端角色每角色每轮最多一条。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2507,9 +2572,9 @@
       "node_title": "X1：负责人",
       "acceptance_index": 4,
       "source_pointer": "/nodes/2/children/0/children/0/terminal/acceptance/4",
-      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
+      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；不需要用户转交的派发次数不限，不占用户的转交次数；需用户转交的执行端角色每角色每轮最多一条。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2533,9 +2598,9 @@
       "node_title": "X1：负责人",
       "acceptance_index": 6,
       "source_pointer": "/nodes/2/children/0/children/0/terminal/acceptance/6",
-      "text": "负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。",
+      "text": "负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2546,9 +2611,9 @@
       "node_title": "X1：负责人",
       "acceptance_index": 7,
       "source_pointer": "/nodes/2/children/0/children/0/terminal/acceptance/7",
-      "text": "本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。",
+      "text": "本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。Claude 不参与交付判断。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "需要在真实 GPT Work 极高长期对话及 Claude 运输中观察本插件自身的 X1 分工；Claude 只机械启动 X1 已写入仓库的 Codex 派发，不参与交付判断。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2594,6 +2659,32 @@
     {
       "top_component_id": "delivery",
       "top_component_title": "交付保障",
+      "node_id": "role-X2",
+      "node_title": "X2：实现者",
+      "acceptance_index": 3,
+      "source_pointer": "/nodes/2/children/0/children/1/terminal/acceptance/3",
+      "text": "档次为 Codex 的（D4、D5、D7，以及 X2 的普通实现）：Claude 担任负责人时直接派发；GPT 担任负责人时生成完整提示词，由用户转交给 Codex。",
+      "needs": "real-host",
+      "needs_reason": "该条要求按档次在实际 Codex、GPT Work 或所选专门插件宿主运行，并观察规定的会话及用户转交行为；不能只用模拟或文字声明代替。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "delivery",
+      "top_component_title": "交付保障",
+      "node_id": "role-X2",
+      "node_title": "X2：实现者",
+      "acceptance_index": 4,
+      "source_pointer": "/nodes/2/children/0/children/1/terminal/acceptance/4",
+      "text": "档次为 GPT Work 极高的（X2 的专业子任务、X3）：无论负责人是谁，都生成完整提示词，由用户在 GPT Work 里按该角色的会话规则新开或沿用对话转交；不得改用 Codex 代替，也不得降档。",
+      "needs": "real-host",
+      "needs_reason": "该条要求按档次在实际 Codex、GPT Work 或所选专门插件宿主运行，并观察规定的会话及用户转交行为；不能只用模拟或文字声明代替。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "delivery",
+      "top_component_title": "交付保障",
       "node_id": "role-X3",
       "node_title": "X3：独立验收",
       "acceptance_index": 0,
@@ -2633,6 +2724,19 @@
     {
       "top_component_id": "delivery",
       "top_component_title": "交付保障",
+      "node_id": "role-X3",
+      "node_title": "X3：独立验收",
+      "acceptance_index": 3,
+      "source_pointer": "/nodes/2/children/0/children/2/terminal/acceptance/3",
+      "text": "档次为 GPT Work 极高的（X2 的专业子任务、X3）：无论负责人是谁，都生成完整提示词，由用户在 GPT Work 里按该角色的会话规则新开或沿用对话转交；不得改用 Codex 代替，也不得降档。",
+      "needs": "real-host",
+      "needs_reason": "该条要求按档次在实际 Codex、GPT Work 或所选专门插件宿主运行，并观察规定的会话及用户转交行为；不能只用模拟或文字声明代替。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "delivery",
+      "top_component_title": "交付保障",
       "node_id": "role-X4",
       "node_title": "X4：专项检查",
       "acceptance_index": 0,
@@ -2666,6 +2770,32 @@
       "text": "X5提供专业证据但不签发，X1亲读后作唯一交付决定。",
       "needs": "expert",
       "needs_reason": "此条明确涉及 X5 的专业证据或专业判断；expert 按用户定义仅指 X5。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "delivery",
+      "top_component_title": "交付保障",
+      "node_id": "role-X4",
+      "node_title": "X4：专项检查",
+      "acceptance_index": 3,
+      "source_pointer": "/nodes/2/children/0/children/3/terminal/acceptance/3",
+      "text": "X4：派发记录写明用“执行端·专业（GPT Work 极高）”还是哪一个现有专门插件。前者同 X3；后者在该插件实际所在的宿主运行，宿主需要用户转交时同样由用户转交。",
+      "needs": "real-host",
+      "needs_reason": "该条要求按档次在实际 Codex、GPT Work 或所选专门插件宿主运行，并观察规定的会话及用户转交行为；不能只用模拟或文字声明代替。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "delivery",
+      "top_component_title": "交付保障",
+      "node_id": "role-X4",
+      "node_title": "X4：专项检查",
+      "acceptance_index": 4,
+      "source_pointer": "/nodes/2/children/0/children/3/terminal/acceptance/4",
+      "text": "凡需要用户手动转交的执行端角色，与规划端角色一样，每个角色每轮最多一条。",
+      "needs": "real-host",
+      "needs_reason": "该条要求按档次在实际 Codex、GPT Work 或所选专门插件宿主运行，并观察规定的会话及用户转交行为；不能只用模拟或文字声明代替。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2715,9 +2845,9 @@
       "node_title": "X5：专业裁判",
       "acceptance_index": 3,
       "source_pointer": "/nodes/2/children/0/children/4/terminal/acceptance/3",
-      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
+      "text": "需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专业档次或哪一个现有专门插件；凡需用户转交的执行端角色，每角色每轮最多一条。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；不需要用户转交的派发次数不限，不占用户的转交次数；需用户转交的执行端角色每角色每轮最多一条。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。",
       "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -3442,11 +3572,11 @@
       "top_component_id": "shared",
       "top_component_title": "共用任务协议",
       "file-check": 44,
-      "real-host": 19,
+      "real-host": 24,
       "expert": 0,
       "user": 8,
       "unclear": 0,
-      "total": 71
+      "total": 76
     },
     {
       "top_component_id": "design",
@@ -3462,11 +3592,11 @@
       "top_component_id": "delivery",
       "top_component_title": "交付保障",
       "file-check": 25,
-      "real-host": 10,
+      "real-host": 15,
       "expert": 6,
       "user": 0,
       "unclear": 3,
-      "total": 44
+      "total": 49
     },
     {
       "top_component_id": "packaging",
@@ -3512,8 +3642,8 @@
     }
   ],
   "download_scan": {
-    "scanned_string_count": 6890,
-    "matched_string_count": 214,
+    "scanned_string_count": 6903,
+    "matched_string_count": 213,
     "matches": [
       {
         "source_pointer": "/complexityNote",
@@ -4106,6 +4236,13 @@
         "excerpt": "本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。"
       },
       {
+        "source_pointer": "/nodes/2/children/0/children/1/interface/format",
+        "terms": [
+          "安装"
+        ],
+        "excerpt": "T.md写指定派发目录。；默认作者提交验收实现并真实区分三类样例。；实现者交实际源码和构建安装对象，X1选择。；每次交回声明差异、替代、未运行和缺证。"
+      },
+      {
         "source_pointer": "/nodes/2/children/0/children/2/claims/0/text",
         "terms": [
           "安装"
@@ -4514,13 +4651,6 @@
         "excerpt": "实际安装"
       },
       {
-        "source_pointer": "/evidence/1/sources/0/locator",
-        "terms": [
-          "下载"
-        ],
-        "excerpt": " 6.4、6.4a 节：explanation_sha256、三处一致、说明改动重查与大件下载的依据"
-      },
-      {
         "source_pointer": "/evidence/2/doesNotProve",
         "terms": [
           "安装"
@@ -4581,14 +4711,7 @@
         "terms": [
           "下载"
         ],
-        "excerpt": "、用户决定边界及未决范围隔离。 第 22 节补定说明身份、改动后 D6 说明检查失效及实际下载大小和用户授权依据。"
-      },
-      {
-        "source_pointer": "/evidence/10/sources/0/locator",
-        "terms": [
-          "下载"
-        ],
-        "excerpt": "第 1–3、5–22 节；说明身份与下载依据以第 22 节为准"
+        "excerpt": "、用户决定边界及未决范围隔离。 第 22 节补定说明身份、改动后 D6 说明检查失效及实际下载大小和用户授权依据。 第 23 节明确执行端按档次表运行、GPT Work 极高不得用 Codex 代替、X4 记录选择与手动执行角色每轮一条。"
       },
       {
         "source_pointer": "/walkthroughs/1/exit",
@@ -4724,7 +4847,7 @@
           "下载",
           "安装"
         ],
-        "excerpt": "定十节骨架（结论、你在做的决定、做完时看到什么和怎么验、验收器、单项超过 100 MB 的下载或安装、不能降级的、实现者可自定的、权限费用时间、这次不做的、与上次批准相比的变化）给用户冻结说明，说明已由用户追问角色对照设计检查漏写、多写、验收器的总数和各类个数是否与设计一致，以及单项超过 100 MB 的下载或安装有没有遗漏；检查结果、批准请求、用户批准和冻结记录都写同一个说明文件的原始字节哈希。用户先批准四道冻结关卡（结构检查、用户代理追问、冷读、读者复述）共同通过的内容快照（设计文件除版本历史以外全部内容的哈希），再用B"
+        "excerpt": "定十节骨架（结论、你在做的决定、做完时看到什么和怎么验、验收器、单项超过 100 MB 的下载或安装、不能降级的、实现者可自定的、权限费用时间、这次不做的、与上次批准相比的变化）给用户冻结说明，说明已由用户追问角色对照设计检查漏写、多写、验收器的总数和各类个数是否与设计一致，以及单项超过 100 MB 的下载或安装有没有遗漏；检查结果、批准请求、用户批准和冻结记录都写同一个说明文件的原始字节哈希。用户先批准四道冻结关卡（结构检查、用户代理追问、冷读、读者复述）共同通过的内容快照（设计文件除版本历史以外全部内容的哈希），再由设"
       },
       {
         "source_pointer": "/walkthroughs/3/steps/7/action",
@@ -5279,7 +5402,7 @@
       "references": [
         {
           "source_pointer": "/requirements/1/text",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1）不限次数。按第 2.2 节固定优先级只取首个成立条件。 执行端派发按阶段：D1 派 D4/D5/D7，X1 派 X2/X3/X4；D1 准备设计规划角色提示词，X1 准备"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/requirements/8/text",
@@ -5287,159 +5410,159 @@
         },
         {
           "source_pointer": "/nodes/0/children/3/inputs/0/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端在设计阶段由 D1 派发 D4、D5、D7，在交付阶段由 X1 派发 X2、X3、X4，不限次数。D8 每轮一个新 GPT 对话处理本轮全部单位，不分普通与关键单位。；当前阶段必须明确：设计由 D1、交付由 X1 派发。状态"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/outputs/0/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。D8 整轮合批并记录 reader_isolation: \"single-thread-batch\"，D1 逐项判断，错误单位改写后下轮新对话重读改动及受影响相邻单"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按"
         },
         {
           "source_pointer": "/nodes/0/children/3/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1），动作与实际结果如实登记。；固定七级优先顺序只选首个成立条件；可并行角色作为一批派发且各有独立提示词，同一修订得到同一下一动作。；冻结前不开始任何插件实现；冻结前只允许 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/validators/0/counterexample/expectedFailure",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。D8 本轮全部单位在一个新对话合批，D1 逐项判断，错误改写后下轮新对话重读改动及受影响相邻单位。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/interface/boundaries/3",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/interface/format",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端在设计阶段由 D1 派发 D4、D5、D7，在交付阶段由 X1 派发 X2、X3、X4，不限次数。D8 每轮一个新 GPT 对话处理本轮全部单位，不分普通与关键单位。；当前阶段必须明确：设计由 D1、交付由 X1 派发。状态"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/terminal/mechanism",
-          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。负责人派执行端：Claude 担任时直接派发；GPT 担任时生成完整提示词，由用户转交给 Codex。用户这句话的本"
+          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。负责人怎样派执行端，见下一条。用户这句话的本意是“需要我转交的那些角色在 GPT 上跑”，不是要取消 Claude 担任负责人。\n- **执行端"
         },
         {
           "source_pointer": "/nodes/0/children/3/terminal/acceptance/2",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1），动作与实际结果如实登记。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/terminal/acceptance/12",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/4/inputs/0/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按"
         },
         {
           "source_pointer": "/nodes/0/children/4/inputs/1/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1，次数不限。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1；不需要用户转交的派发次数不限，需用户转交的每角色每轮最多一条。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子"
         },
         {
           "source_pointer": "/nodes/0/children/4/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；D8 每轮一个新 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/4/interface/boundaries/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/4/interface/format",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。；按角色展开身份与读写范围；需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）在 GPT 网页端，由用户每角色每轮转交一条提示词；负责人 D1、X1 由 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按"
         },
         {
           "source_pointer": "/nodes/0/children/4/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1，次数不限。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。自己读取、整理和登记结果仍按原职责完成。\n```\n\n调度不自动跨宿主发送消息，不假称控制了模型选择、开启了网页线程或收到结果。0.1 的正常入口是负责人读取"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1；不需要用户转交的派发次数不限，需用户转交的每角色每轮最多一条。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子"
         },
         {
           "source_pointer": "/nodes/0/children/4/terminal/acceptance/4",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/inputs/0/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；设计阶段 D1 派"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/interface/format",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。；D1收到A完整原稿与真正未决问题。；D1收到B完整原稿后自行比较；不回传A。；盘点和授权探针的真实证据进入设计。；原D1决定小修或大改并承担设计与告知。；输出：本角色卡列出的实际产物及RESULT.json/RESULT.md；"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。\n\n设计阶段 D1 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/3",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/5",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/1/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/1/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/1/terminal/acceptance/6",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/2/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/2/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/2/terminal/acceptance/6",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/5/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；对照 Bluepr"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/5/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。\n\n### 冻结说明"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/3",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/7/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；D8 每轮一个新 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/7/interface/boundaries/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/7/terminal/mechanism",
-          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。负责人派执行端：Claude 担任时直接派发；GPT 担任时生成完整提示词，由用户转交给 Codex。用户这句话的本"
+          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。负责人怎样派执行端，见下一条。用户这句话的本意是“需要我转交的那些角色在 GPT 上跑”，不是要取消 Claude 担任负责人。\n- **执行端"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/7/terminal/acceptance/3",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/2/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；D8 每轮一个新 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/2/interface/boundaries/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/2/terminal/mechanism",
-          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。负责人派执行端：Claude 担任时直接派发；GPT 担任时生成完整提示词，由用户转交给 Codex。用户这句话的本"
+          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。负责人怎样派执行端，见下一条。用户这句话的本意是“需要我转交的那些角色在 GPT 上跑”，不是要取消 Claude 担任负责人。\n- **执行端"
         },
         {
           "source_pointer": "/nodes/1/children/2/terminal/acceptance/7",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/validators/0/method/description",
@@ -5447,7 +5570,7 @@
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/interface/boundaries/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/terminal/mechanism",
@@ -5459,59 +5582,59 @@
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/terminal/acceptance/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/4/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；D8 每轮一个新 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/4/interface/boundaries/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/4/terminal/mechanism",
-          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。负责人派执行端：Claude 担任时直接派发；GPT 担任时生成完整提示词，由用户转交给 Codex。用户这句话的本"
+          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。负责人怎样派执行端，见下一条。用户这句话的本意是“需要我转交的那些角色在 GPT 上跑”，不是要取消 Claude 担任负责人。\n- **执行端"
         },
         {
           "source_pointer": "/nodes/1/children/4/terminal/acceptance/7",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/inputs/0/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；X1-intake"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/interface/format",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。；X1 在独立长期线程实际读取冻结包与批准，核对 bundle_sha256，并区分获批 snapshot_sha256 与用于派发的 semantic_hash。；输出：卡片要求的真实产物、证据、偏离或观察结论，RESULT.j"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。\n\nX1-intak"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/terminal/acceptance/4",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/terminal/acceptance/6",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/4/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/4/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/4/terminal/acceptance/3",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/3/children/1/description",
@@ -5527,7 +5650,7 @@
         },
         {
           "source_pointer": "/nodes/3/children/1/terminal/mechanism",
-          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。负责人派执行端：Claude 担任时直接派发；GPT 担任时生成完整提示词，由用户转交给 Codex。用户这句话的本"
+          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。负责人怎样派执行端，见下一条。用户这句话的本意是“需要我转交的那些角色在 GPT 上跑”，不是要取消 Claude 担任负责人。\n- **执行端"
         },
         {
           "source_pointer": "/nodes/3/children/1/terminal/userRounds/0/sees",
@@ -5551,7 +5674,7 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。\n\n### 9.4 ChatGPT 网页端打包（纳入 0.1，D6 第 4 轮后按用户决定改定）\n\n用户决定（2026/11/12）：网页端打包属于 0.1，不推迟。用户已在 ChatGPT 网页端测通 thread handof"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/acceptance/0",
@@ -5559,15 +5682,15 @@
         },
         {
           "source_pointer": "/connections/6/relationship",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1，次数不限。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1；不需要用户转交的派发次数不限，需用户转交的每角色每轮最多一条。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子"
         },
         {
           "source_pointer": "/connections/6/carries/5",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/walkthroughs/0/steps/2/technical/expectedResult",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端在设计阶段由设计负责人（D1）派发，在交付阶段由交付负责人（X1）派发，次数不限。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/walkthroughs/1/steps/1/expectedResult",
@@ -5575,11 +5698,11 @@
         },
         {
           "source_pointer": "/failurePaths/1/handling",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1）；D8 按每轮新 GPT 对话合批，不以缺少旧的派发方式阻断合批通过。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/failurePaths/1/technical/handling",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1）；D8 按每轮新 GPT 对话合批，不以缺少旧的派发方式阻断合批通过。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         }
       ],
       "size_disclosure": "大小未记录",
@@ -5599,7 +5722,7 @@
       "references": [
         {
           "source_pointer": "/requirements/1/text",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1）不限次数。按第 2.2 节固定优先级只取首个成立条件。 执行端派发按阶段：D1 派 D4/D5/D7，X1 派 X2/X3/X4；D1 准备设计规划角色提示词，X1 准备"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/requirements/8/text",
@@ -5607,159 +5730,159 @@
         },
         {
           "source_pointer": "/nodes/0/children/3/inputs/0/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端在设计阶段由 D1 派发 D4、D5、D7，在交付阶段由 X1 派发 X2、X3、X4，不限次数。D8 每轮一个新 GPT 对话处理本轮全部单位，不分普通与关键单位。；当前阶段必须明确：设计由 D1、交付由 X1 派发。状态"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/outputs/0/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。D8 整轮合批并记录 reader_isolation: \"single-thread-batch\"，D1 逐项判断，错误单位改写后下轮新对话重读改动及受影响相邻单"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按"
         },
         {
           "source_pointer": "/nodes/0/children/3/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1），动作与实际结果如实登记。；固定七级优先顺序只选首个成立条件；可并行角色作为一批派发且各有独立提示词，同一修订得到同一下一动作。；冻结前不开始任何插件实现；冻结前只允许 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/validators/0/counterexample/expectedFailure",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。D8 本轮全部单位在一个新对话合批，D1 逐项判断，错误改写后下轮新对话重读改动及受影响相邻单位。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/interface/boundaries/3",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/interface/format",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端在设计阶段由 D1 派发 D4、D5、D7，在交付阶段由 X1 派发 X2、X3、X4，不限次数。D8 每轮一个新 GPT 对话处理本轮全部单位，不分普通与关键单位。；当前阶段必须明确：设计由 D1、交付由 X1 派发。状态"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/terminal/mechanism",
-          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。负责人派执行端：Claude 担任时直接派发；GPT 担任时生成完整提示词，由用户转交给 Codex。用户这句话的本"
+          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。负责人怎样派执行端，见下一条。用户这句话的本意是“需要我转交的那些角色在 GPT 上跑”，不是要取消 Claude 担任负责人。\n- **执行端"
         },
         {
           "source_pointer": "/nodes/0/children/3/terminal/acceptance/2",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1），动作与实际结果如实登记。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/terminal/acceptance/12",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/4/inputs/0/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按"
         },
         {
           "source_pointer": "/nodes/0/children/4/inputs/1/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1，次数不限。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1；不需要用户转交的派发次数不限，需用户转交的每角色每轮最多一条。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子"
         },
         {
           "source_pointer": "/nodes/0/children/4/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；D8 每轮一个新 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/4/interface/boundaries/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/4/interface/format",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。；按角色展开身份与读写范围；需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）在 GPT 网页端，由用户每角色每轮转交一条提示词；负责人 D1、X1 由 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按"
         },
         {
           "source_pointer": "/nodes/0/children/4/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1，次数不限。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。自己读取、整理和登记结果仍按原职责完成。\n```\n\n调度不自动跨宿主发送消息，不假称控制了模型选择、开启了网页线程或收到结果。0.1 的正常入口是负责人读取"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1；不需要用户转交的派发次数不限，需用户转交的每角色每轮最多一条。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子"
         },
         {
           "source_pointer": "/nodes/0/children/4/terminal/acceptance/4",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/inputs/0/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；设计阶段 D1 派"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/interface/format",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。；D1收到A完整原稿与真正未决问题。；D1收到B完整原稿后自行比较；不回传A。；盘点和授权探针的真实证据进入设计。；原D1决定小修或大改并承担设计与告知。；输出：本角色卡列出的实际产物及RESULT.json/RESULT.md；"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。\n\n设计阶段 D1 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/3",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/5",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/1/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/1/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/1/terminal/acceptance/6",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/2/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/2/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/2/terminal/acceptance/6",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/5/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；对照 Bluepr"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/5/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。\n\n### 冻结说明"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/3",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/7/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；D8 每轮一个新 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/7/interface/boundaries/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/7/terminal/mechanism",
-          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。负责人派执行端：Claude 担任时直接派发；GPT 担任时生成完整提示词，由用户转交给 Codex。用户这句话的本"
+          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。负责人怎样派执行端，见下一条。用户这句话的本意是“需要我转交的那些角色在 GPT 上跑”，不是要取消 Claude 担任负责人。\n- **执行端"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/7/terminal/acceptance/3",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/2/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；D8 每轮一个新 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/2/interface/boundaries/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/2/terminal/mechanism",
-          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。负责人派执行端：Claude 担任时直接派发；GPT 担任时生成完整提示词，由用户转交给 Codex。用户这句话的本"
+          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。负责人怎样派执行端，见下一条。用户这句话的本意是“需要我转交的那些角色在 GPT 上跑”，不是要取消 Claude 担任负责人。\n- **执行端"
         },
         {
           "source_pointer": "/nodes/1/children/2/terminal/acceptance/7",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/validators/0/method/description",
@@ -5767,7 +5890,7 @@
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/interface/boundaries/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/terminal/mechanism",
@@ -5779,59 +5902,59 @@
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/terminal/acceptance/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/4/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；D8 每轮一个新 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/4/interface/boundaries/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/4/terminal/mechanism",
-          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。负责人派执行端：Claude 担任时直接派发；GPT 担任时生成完整提示词，由用户转交给 Codex。用户这句话的本"
+          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。负责人怎样派执行端，见下一条。用户这句话的本意是“需要我转交的那些角色在 GPT 上跑”，不是要取消 Claude 担任负责人。\n- **执行端"
         },
         {
           "source_pointer": "/nodes/1/children/4/terminal/acceptance/7",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/inputs/0/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；X1-intake"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/interface/format",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。；X1 在独立长期线程实际读取冻结包与批准，核对 bundle_sha256，并区分获批 snapshot_sha256 与用于派发的 semantic_hash。；输出：卡片要求的真实产物、证据、偏离或观察结论，RESULT.j"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。\n\nX1-intak"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/terminal/acceptance/4",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/terminal/acceptance/6",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/4/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/4/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/4/terminal/acceptance/3",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/3/children/1/description",
@@ -5847,7 +5970,7 @@
         },
         {
           "source_pointer": "/nodes/3/children/1/terminal/mechanism",
-          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。负责人派执行端：Claude 担任时直接派发；GPT 担任时生成完整提示词，由用户转交给 Codex。用户这句话的本"
+          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。负责人怎样派执行端，见下一条。用户这句话的本意是“需要我转交的那些角色在 GPT 上跑”，不是要取消 Claude 担任负责人。\n- **执行端"
         },
         {
           "source_pointer": "/nodes/3/children/1/terminal/userRounds/0/sees",
@@ -5871,7 +5994,7 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。\n\n### 9.4 ChatGPT 网页端打包（纳入 0.1，D6 第 4 轮后按用户决定改定）\n\n用户决定（2026/11/12）：网页端打包属于 0.1，不推迟。用户已在 ChatGPT 网页端测通 thread handof"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/acceptance/0",
@@ -5879,15 +6002,15 @@
         },
         {
           "source_pointer": "/connections/6/relationship",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1，次数不限。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1；不需要用户转交的派发次数不限，需用户转交的每角色每轮最多一条。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子"
         },
         {
           "source_pointer": "/connections/6/carries/5",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/walkthroughs/0/steps/2/technical/expectedResult",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端在设计阶段由设计负责人（D1）派发，在交付阶段由交付负责人（X1）派发，次数不限。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/walkthroughs/1/steps/1/expectedResult",
@@ -5895,11 +6018,11 @@
         },
         {
           "source_pointer": "/failurePaths/1/handling",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1）；D8 按每轮新 GPT 对话合批，不以缺少旧的派发方式阻断合批通过。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/failurePaths/1/technical/handling",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1）；D8 按每轮新 GPT 对话合批，不以缺少旧的派发方式阻断合批通过。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         }
       ],
       "size_disclosure": "大小未记录",
@@ -5919,7 +6042,7 @@
       "references": [
         {
           "source_pointer": "/requirements/1/text",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1）不限次数。按第 2.2 节固定优先级只取首个成立条件。 执行端派发按阶段：D1 派 D4/D5/D7，X1 派 X2/X3/X4；D1 准备设计规划角色提示词，X1 准备"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/requirements/8/text",
@@ -5927,159 +6050,159 @@
         },
         {
           "source_pointer": "/nodes/0/children/3/inputs/0/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端在设计阶段由 D1 派发 D4、D5、D7，在交付阶段由 X1 派发 X2、X3、X4，不限次数。D8 每轮一个新 GPT 对话处理本轮全部单位，不分普通与关键单位。；当前阶段必须明确：设计由 D1、交付由 X1 派发。状态"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/outputs/0/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。D8 整轮合批并记录 reader_isolation: \"single-thread-batch\"，D1 逐项判断，错误单位改写后下轮新对话重读改动及受影响相邻单"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按"
         },
         {
           "source_pointer": "/nodes/0/children/3/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1），动作与实际结果如实登记。；固定七级优先顺序只选首个成立条件；可并行角色作为一批派发且各有独立提示词，同一修订得到同一下一动作。；冻结前不开始任何插件实现；冻结前只允许 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/validators/0/counterexample/expectedFailure",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。D8 本轮全部单位在一个新对话合批，D1 逐项判断，错误改写后下轮新对话重读改动及受影响相邻单位。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/interface/boundaries/3",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/interface/format",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端在设计阶段由 D1 派发 D4、D5、D7，在交付阶段由 X1 派发 X2、X3、X4，不限次数。D8 每轮一个新 GPT 对话处理本轮全部单位，不分普通与关键单位。；当前阶段必须明确：设计由 D1、交付由 X1 派发。状态"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/terminal/mechanism",
-          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。负责人派执行端：Claude 担任时直接派发；GPT 担任时生成完整提示词，由用户转交给 Codex。用户这句话的本"
+          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。负责人怎样派执行端，见下一条。用户这句话的本意是“需要我转交的那些角色在 GPT 上跑”，不是要取消 Claude 担任负责人。\n- **执行端"
         },
         {
           "source_pointer": "/nodes/0/children/3/terminal/acceptance/2",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1），动作与实际结果如实登记。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/3/terminal/acceptance/12",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/4/inputs/0/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按"
         },
         {
           "source_pointer": "/nodes/0/children/4/inputs/1/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1，次数不限。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1；不需要用户转交的派发次数不限，需用户转交的每角色每轮最多一条。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子"
         },
         {
           "source_pointer": "/nodes/0/children/4/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；D8 每轮一个新 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/4/interface/boundaries/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/0/children/4/interface/format",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。；按角色展开身份与读写范围；需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）在 GPT 网页端，由用户每角色每轮转交一条提示词；负责人 D1、X1 由 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发（设计阶段 D1，交付阶段 X1）；执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按"
         },
         {
           "source_pointer": "/nodes/0/children/4/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1，次数不限。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。自己读取、整理和登记结果仍按原职责完成。\n```\n\n调度不自动跨宿主发送消息，不假称控制了模型选择、开启了网页线程或收到结果。0.1 的正常入口是负责人读取"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1；不需要用户转交的派发次数不限，需用户转交的每角色每轮最多一条。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子"
         },
         {
           "source_pointer": "/nodes/0/children/4/terminal/acceptance/4",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/inputs/0/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；设计阶段 D1 派"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/interface/format",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。；D1收到A完整原稿与真正未决问题。；D1收到B完整原稿后自行比较；不回传A。；盘点和授权探针的真实证据进入设计。；原D1决定小修或大改并承担设计与告知。；输出：本角色卡列出的实际产物及RESULT.json/RESULT.md；"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。\n\n设计阶段 D1 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/3",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/5",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/1/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/1/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/1/terminal/acceptance/6",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/2/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/2/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/2/terminal/acceptance/6",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/5/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；对照 Bluepr"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/5/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。\n\n### 冻结说明"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/3",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/7/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；D8 每轮一个新 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/7/interface/boundaries/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/7/terminal/mechanism",
-          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。负责人派执行端：Claude 担任时直接派发；GPT 担任时生成完整提示词，由用户转交给 Codex。用户这句话的本"
+          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。负责人怎样派执行端，见下一条。用户这句话的本意是“需要我转交的那些角色在 GPT 上跑”，不是要取消 Claude 担任负责人。\n- **执行端"
         },
         {
           "source_pointer": "/nodes/1/children/0/children/7/terminal/acceptance/3",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/2/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；D8 每轮一个新 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/2/interface/boundaries/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/2/terminal/mechanism",
-          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。负责人派执行端：Claude 担任时直接派发；GPT 担任时生成完整提示词，由用户转交给 Codex。用户这句话的本"
+          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。负责人怎样派执行端，见下一条。用户这句话的本意是“需要我转交的那些角色在 GPT 上跑”，不是要取消 Claude 担任负责人。\n- **执行端"
         },
         {
           "source_pointer": "/nodes/1/children/2/terminal/acceptance/7",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/validators/0/method/description",
@@ -6087,7 +6210,7 @@
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/interface/boundaries/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/terminal/mechanism",
@@ -6099,59 +6222,59 @@
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/terminal/acceptance/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/4/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；D8 每轮一个新 "
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/4/interface/boundaries/1",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/1/children/4/terminal/mechanism",
-          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。负责人派执行端：Claude 担任时直接派发；GPT 担任时生成完整提示词，由用户转交给 Codex。用户这句话的本"
+          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。负责人怎样派执行端，见下一条。用户这句话的本意是“需要我转交的那些角色在 GPT 上跑”，不是要取消 Claude 担任负责人。\n- **执行端"
         },
         {
           "source_pointer": "/nodes/1/children/4/terminal/acceptance/7",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/inputs/0/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。；X1-intake"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/interface/format",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。；X1 在独立长期线程实际读取冻结包与批准，核对 bundle_sha256，并区分获批 snapshot_sha256 与用于派发的 semantic_hash。；输出：卡片要求的真实产物、证据、偏离或观察结论，RESULT.j"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。\n\nX1-intak"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/terminal/acceptance/4",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/0/terminal/acceptance/6",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/4/validators/0/method/description",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/4/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/2/children/0/children/4/terminal/acceptance/3",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/3/children/1/description",
@@ -6167,7 +6290,7 @@
         },
         {
           "source_pointer": "/nodes/3/children/1/terminal/mechanism",
-          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身的设计和实施：D1 仍由 Claude 担任；X1 改由 GPT Work 极高担任，在一个长期对话里持续负责；X1 写进仓库的派发，由 Claude 只做机械启动 Codex 的运输，不参与交付判断。负责人派执行端：Claude 担任时直接派发；GPT 担任时生成完整提示词，由用户转交给 Codex。用户这句话的本"
+          "excerpt": " Claude 或 GPT Pro 担任，各自在一个长期线程里工作；规划 `SKILL.md` 由 Claude Code 和 GPT Work 直接读取。本插件自身：D1 由 Claude 担任；X1 由 GPT Work 极高担任（用户决定，2026/11/12），Claude 只负责机械地启动 X1 写在仓库里的 Codex 派发。负责人怎样派执行端，见下一条。用户这句话的本意是“需要我转交的那些角色在 GPT 上跑”，不是要取消 Claude 担任负责人。\n- **执行端"
         },
         {
           "source_pointer": "/nodes/3/children/1/terminal/userRounds/0/sees",
@@ -6191,7 +6314,7 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/mechanism",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。\n\n### 9.4 ChatGPT 网页端打包（纳入 0.1，D6 第 4 轮后按用户决定改定）\n\n用户决定（2026/11/12）：网页端打包属于 0.1，不推迟。用户已在 ChatGPT 网页端测通 thread handof"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/acceptance/0",
@@ -6199,15 +6322,15 @@
         },
         {
           "source_pointer": "/connections/6/relationship",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1，次数不限。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织派发：设计阶段 D1，交付阶段 X1；不需要用户转交的派发次数不限，需用户转交的每角色每轮最多一条。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子"
         },
         {
           "source_pointer": "/connections/6/carries/5",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。设计阶段由 D1 派发 D4、D5、D7，交付阶段由 X1 派发 X2、X3、X4；次数不限，不占用户转交次数。设计阶段由 D1 准备 D2、D3、D6、D8 的提示词，交付阶段由 X1 准备 X5 的提示词。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/walkthroughs/0/steps/2/technical/expectedResult",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端在设计阶段由设计负责人（D1）派发，在交付阶段由交付负责人（X1）派发，次数不限。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/walkthroughs/1/steps/1/expectedResult",
@@ -6215,11 +6338,11 @@
         },
         {
           "source_pointer": "/failurePaths/1/handling",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1）；D8 按每轮新 GPT 对话合批，不以缺少旧的派发方式阻断合批通过。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         },
         {
           "source_pointer": "/failurePaths/1/technical/handling",
-          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。Claude 担任负责人时直接派发执行端；GPT 担任时生成完整提示词，由用户转交给 Codex。执行端由当前阶段负责人派发（设计阶段 D1，交付阶段 X1）；D8 按每轮新 GPT 对话合批，不以缺少旧的派发方式阻断合批通过。"
+          "excerpt": "1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给 Codex；GPT Work 极高档次（X2 专业子任务、X3）无论负责人是谁，都由用户在 GPT Work 按会话规则转交，不得改用 Codex 或降档；X4 的派发记录写明专"
         }
       ],
       "size_disclosure": "大小未记录",
@@ -6239,7 +6362,7 @@
       "references": [
         {
           "source_pointer": "/nodes/3/children/3/terminal/mechanism",
-          "excerpt": "提下），不能声称会运行本地脚本或启动 Codex。\n- **验收（X4 负责，X1 签发）：** 在真实的 ChatGPT 网页端上传包，新开一个对话完成三件事：\n  1. 读取包内规划正文、至少一张角色卡和一份模板；\n  2. 依据一个公开安全的示例任务状态，生成正确的下一条完整提示词；\n  3. 按提示词要求写回指定分支（或在无写权限时如实给出内容）。\n\n  保留原始对话记录作为证据。只上传成功、没有完成这三件事，不算通过。\n\n本插件自身的设计和实施：D1 仍由 Cl"
+          "excerpt": "提下），不能声称会运行本地脚本或启动 Codex。\n- **验收（X4 负责，X1 签发）：** 在真实的 ChatGPT 网页端上传包，新开一个对话完成三件事：\n  1. 读取包内规划正文、至少一张角色卡和一份模板；\n  2. 依据一个公开安全的示例任务状态，生成正确的下一条完整提示词；\n  3. 按提示词要求写回指定分支（或在无写权限时如实给出内容）。\n\n  保留原始对话记录作为证据。只上传成功、没有完成这三件事，不算通过。\n\n本插件自身：D1 由 Claude 担任"
         },
         {
           "source_pointer": "/nodes/3/children/4/validators/0/method/description",
@@ -6295,7 +6418,7 @@
       "references": [
         {
           "source_pointer": "/nodes/3/children/3/terminal/mechanism",
-          "excerpt": "提下），不能声称会运行本地脚本或启动 Codex。\n- **验收（X4 负责，X1 签发）：** 在真实的 ChatGPT 网页端上传包，新开一个对话完成三件事：\n  1. 读取包内规划正文、至少一张角色卡和一份模板；\n  2. 依据一个公开安全的示例任务状态，生成正确的下一条完整提示词；\n  3. 按提示词要求写回指定分支（或在无写权限时如实给出内容）。\n\n  保留原始对话记录作为证据。只上传成功、没有完成这三件事，不算通过。\n\n本插件自身的设计和实施：D1 仍由 Cl"
+          "excerpt": "提下），不能声称会运行本地脚本或启动 Codex。\n- **验收（X4 负责，X1 签发）：** 在真实的 ChatGPT 网页端上传包，新开一个对话完成三件事：\n  1. 读取包内规划正文、至少一张角色卡和一份模板；\n  2. 依据一个公开安全的示例任务状态，生成正确的下一条完整提示词；\n  3. 按提示词要求写回指定分支（或在无写权限时如实给出内容）。\n\n  保留原始对话记录作为证据。只上传成功、没有完成这三件事，不算通过。\n\n本插件自身：D1 由 Claude 担任"
         },
         {
           "source_pointer": "/nodes/3/children/4/validators/0/method/description",
