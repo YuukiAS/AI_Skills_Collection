@@ -1,0 +1,3892 @@
+[
+  {
+    "id": "D6-R8-N001-Q1",
+    "nodeId": "shared",
+    "question": "shared：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[shared].inputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N001-Q2",
+    "nodeId": "shared",
+    "question": "shared：产出什么，交给谁？",
+    "answerLocation": "nodes[shared].outputs; connections[c-shared-to-design]; connections[c-shared-to-delivery]; connections[c-packaging-to-shared]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N001-Q3",
+    "nodeId": "shared",
+    "question": "shared：谁有权决定？",
+    "answerLocation": "nodes[shared].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N001-Q4",
+    "nodeId": "shared",
+    "question": "shared：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[shared].interface.emptyCases; nodes[shared].interface.errors",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N001-Q5",
+    "nodeId": "shared",
+    "question": "shared：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[shared].validators",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N001-Q6",
+    "nodeId": "shared",
+    "question": "shared：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[shared].interface.errors; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N001-Q7",
+    "nodeId": "shared",
+    "question": "shared：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[shared].interface.boundaries; nodes[shared].requirementIds; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N002-Q1",
+    "nodeId": "state",
+    "question": "state：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[shared].children[state].inputs; nodes[shared].children[state].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N002-Q2",
+    "nodeId": "state",
+    "question": "state：产出什么，交给谁？",
+    "answerLocation": "nodes[shared].children[state].outputs; connections[c-state-to-writer]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N002-Q3",
+    "nodeId": "state",
+    "question": "state：谁有权决定？",
+    "answerLocation": "nodes[shared].children[state].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N002-Q4",
+    "nodeId": "state",
+    "question": "state：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[shared].children[state].interface.emptyCases; nodes[shared].children[state].interface.errors; nodes[shared].children[state].terminal.retry; failurePaths[fail-write]; failurePaths[fail-recovery]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N002-Q5",
+    "nodeId": "state",
+    "question": "state：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[shared].children[state].validators; nodes[shared].children[state].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N002-Q6",
+    "nodeId": "state",
+    "question": "state：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[shared].children[state].interface.errors; nodes[shared].children[state].terminal.retry; failurePaths[fail-write]; failurePaths[fail-recovery]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N002-Q7",
+    "nodeId": "state",
+    "question": "state：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[shared].children[state].interface.boundaries; nodes[shared].children[state].requirementIds; nodes[shared].children[state].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N003-Q1",
+    "nodeId": "writer",
+    "question": "writer：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[shared].children[writer].inputs; nodes[shared].children[writer].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N003-Q2",
+    "nodeId": "writer",
+    "question": "writer：产出什么，交给谁？",
+    "answerLocation": "nodes[shared].children[writer].outputs; connections[c-state-to-writer]; connections[c-writer-to-dispatch]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N003-Q3",
+    "nodeId": "writer",
+    "question": "writer：谁有权决定？",
+    "answerLocation": "nodes[shared].children[writer].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N003-Q4",
+    "nodeId": "writer",
+    "question": "writer：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[shared].children[writer].interface.emptyCases; nodes[shared].children[writer].interface.errors; nodes[shared].children[writer].terminal.retry; failurePaths[fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N003-Q5",
+    "nodeId": "writer",
+    "question": "writer：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[shared].children[writer].validators; nodes[shared].children[writer].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N003-Q6",
+    "nodeId": "writer",
+    "question": "writer：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[shared].children[writer].interface.errors; nodes[shared].children[writer].terminal.retry; failurePaths[fail-write]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N003-Q7",
+    "nodeId": "writer",
+    "question": "writer：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[shared].children[writer].interface.boundaries; nodes[shared].children[writer].requirementIds; nodes[shared].children[writer].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N004-Q1",
+    "nodeId": "record-check",
+    "question": "record-check：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[shared].children[record-check].inputs; nodes[shared].children[record-check].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N004-Q2",
+    "nodeId": "record-check",
+    "question": "record-check：产出什么，交给谁？",
+    "answerLocation": "nodes[shared].children[record-check].outputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N004-Q3",
+    "nodeId": "record-check",
+    "question": "record-check：谁有权决定？",
+    "answerLocation": "nodes[shared].children[record-check].description; nodes[shared].children[record-check].interface.boundaries; nodes[shared].children[record-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N004-Q4",
+    "nodeId": "record-check",
+    "question": "record-check：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[shared].children[record-check].interface.emptyCases; nodes[shared].children[record-check].interface.errors; nodes[shared].children[record-check].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N004-Q5",
+    "nodeId": "record-check",
+    "question": "record-check：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[shared].children[record-check].validators; nodes[shared].children[record-check].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N004-Q6",
+    "nodeId": "record-check",
+    "question": "record-check：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[shared].children[record-check].interface.errors; nodes[shared].children[record-check].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N004-Q7",
+    "nodeId": "record-check",
+    "question": "record-check：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[shared].children[record-check].interface.boundaries; nodes[shared].children[record-check].requirementIds; nodes[shared].children[record-check].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N005-Q1",
+    "nodeId": "dispatch",
+    "question": "dispatch：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[shared].children[dispatch].inputs; nodes[shared].children[dispatch].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N005-Q2",
+    "nodeId": "dispatch",
+    "question": "dispatch：当负责人是 GPT 且触发 X2 的专业子任务、X3 或 X4 时，完整派发究竟交给哪个执行入口？",
+    "answerLocation": "requirements[r-dispatch].text; nodes[shared].children[dispatch].inputs[context].description; nodes[shared].children[dispatch].outputs[result].description; nodes[shared].children[dispatch].terminal.mechanism（§2.1 角色档次表、§2.1a、§2.4）; nodes[delivery].children[delivery-roles].children[role-X2].terminal.mechanism; nodes[delivery].children[delivery-roles].children[role-X3].terminal.mechanism; nodes[delivery].children[delivery-roles].children[role-X4].terminal.mechanism; connections[c-dispatch-to-prompts].relationship; failurePaths[fail-role].handling",
+    "gap": "执行宿主规则互相冲突：通用派发规则多处写成“GPT 负责人生成完整提示词，由用户转交给 Codex”，但同一 Blueprint 的角色档次表和 X2/X3/X4 角色卡又规定 X2 的专业子任务使用 GPT Work 极高、X3 使用 GPT Work 极高、X4 使用执行端·专业或现有专门插件。触发这些角色时没有唯一可执行的收件宿主与转交方式。",
+    "impact": "X1 为 GPT 负责人时，用户和负责人无法唯一判断应把专业执行工作交给 Codex、GPT Work 还是专门插件；可能造成错误降档、破坏 X3 独立性，或直接无法可靠开工。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N005-Q3",
+    "nodeId": "dispatch",
+    "question": "dispatch：谁有权决定？",
+    "answerLocation": "nodes[shared].children[dispatch].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N005-Q4",
+    "nodeId": "dispatch",
+    "question": "dispatch：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[shared].children[dispatch].interface.emptyCases; nodes[shared].children[dispatch].interface.errors; nodes[shared].children[dispatch].terminal.retry; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N005-Q5",
+    "nodeId": "dispatch",
+    "question": "dispatch：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[shared].children[dispatch].validators; nodes[shared].children[dispatch].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N005-Q6",
+    "nodeId": "dispatch",
+    "question": "dispatch：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[shared].children[dispatch].interface.errors; nodes[shared].children[dispatch].terminal.retry; failurePaths[fail-role]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N005-Q7",
+    "nodeId": "dispatch",
+    "question": "dispatch：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[shared].children[dispatch].interface.boundaries; nodes[shared].children[dispatch].requirementIds; nodes[shared].children[dispatch].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N006-Q1",
+    "nodeId": "prompts",
+    "question": "prompts：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[shared].children[prompts].inputs; nodes[shared].children[prompts].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N006-Q2",
+    "nodeId": "prompts",
+    "question": "prompts：产出什么，交给谁？",
+    "answerLocation": "nodes[shared].children[prompts].outputs; connections[c-dispatch-to-prompts]; connections[c-prompts-to-role-D2]; connections[c-prompts-to-role-D3]; connections[c-prompts-to-clarify]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N006-Q3",
+    "nodeId": "prompts",
+    "question": "prompts：谁有权决定？",
+    "answerLocation": "nodes[shared].children[prompts].description; nodes[shared].children[prompts].interface.boundaries; nodes[shared].children[prompts].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N006-Q4",
+    "nodeId": "prompts",
+    "question": "prompts：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[shared].children[prompts].interface.emptyCases; nodes[shared].children[prompts].interface.errors; nodes[shared].children[prompts].terminal.retry; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N006-Q5",
+    "nodeId": "prompts",
+    "question": "prompts：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[shared].children[prompts].validators; nodes[shared].children[prompts].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N006-Q6",
+    "nodeId": "prompts",
+    "question": "prompts：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[shared].children[prompts].interface.errors; nodes[shared].children[prompts].terminal.retry; failurePaths[fail-role]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N006-Q7",
+    "nodeId": "prompts",
+    "question": "prompts：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[shared].children[prompts].interface.boundaries; nodes[shared].children[prompts].requirementIds; nodes[shared].children[prompts].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N007-Q1",
+    "nodeId": "revision",
+    "question": "revision：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[shared].children[revision].inputs; nodes[shared].children[revision].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N007-Q2",
+    "nodeId": "revision",
+    "question": "revision：产出什么，交给谁？",
+    "answerLocation": "nodes[shared].children[revision].outputs; connections[c-deviation-to-revision]; connections[c-revision-to-role-D1]; connections[c-revision-to-metrics]; connections[c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N007-Q3",
+    "nodeId": "revision",
+    "question": "revision：谁有权决定？",
+    "answerLocation": "nodes[shared].children[revision].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N007-Q4",
+    "nodeId": "revision",
+    "question": "revision：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[shared].children[revision].interface.emptyCases; nodes[shared].children[revision].interface.errors; nodes[shared].children[revision].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N007-Q5",
+    "nodeId": "revision",
+    "question": "revision：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[shared].children[revision].validators; nodes[shared].children[revision].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N007-Q6",
+    "nodeId": "revision",
+    "question": "revision：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[shared].children[revision].interface.errors; nodes[shared].children[revision].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N007-Q7",
+    "nodeId": "revision",
+    "question": "revision：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[shared].children[revision].interface.boundaries; nodes[shared].children[revision].requirementIds; nodes[shared].children[revision].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N008-Q1",
+    "nodeId": "metrics",
+    "question": "metrics：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[shared].children[metrics].inputs; nodes[shared].children[metrics].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N008-Q2",
+    "nodeId": "metrics",
+    "question": "metrics：产出什么，交给谁？",
+    "answerLocation": "nodes[shared].children[metrics].outputs; connections[c-revision-to-metrics]; connections[c-deviation-to-metrics]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N008-Q3",
+    "nodeId": "metrics",
+    "question": "metrics：谁有权决定？",
+    "answerLocation": "nodes[shared].children[metrics].description; nodes[shared].children[metrics].interface.boundaries; nodes[shared].children[metrics].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N008-Q4",
+    "nodeId": "metrics",
+    "question": "metrics：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[shared].children[metrics].interface.emptyCases; nodes[shared].children[metrics].interface.errors; nodes[shared].children[metrics].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N008-Q5",
+    "nodeId": "metrics",
+    "question": "metrics：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[shared].children[metrics].validators; nodes[shared].children[metrics].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N008-Q6",
+    "nodeId": "metrics",
+    "question": "metrics：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[shared].children[metrics].interface.errors; nodes[shared].children[metrics].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N008-Q7",
+    "nodeId": "metrics",
+    "question": "metrics：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[shared].children[metrics].interface.boundaries; nodes[shared].children[metrics].requirementIds; nodes[shared].children[metrics].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N009-Q1",
+    "nodeId": "design",
+    "question": "design：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].inputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N009-Q2",
+    "nodeId": "design",
+    "question": "design：产出什么，交给谁？",
+    "answerLocation": "nodes[design].outputs; connections[c-shared-to-design]; connections[c-design-to-delivery]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N009-Q3",
+    "nodeId": "design",
+    "question": "design：谁有权决定？",
+    "answerLocation": "nodes[design].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N009-Q4",
+    "nodeId": "design",
+    "question": "design：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].interface.emptyCases; nodes[design].interface.errors",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N009-Q5",
+    "nodeId": "design",
+    "question": "design：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].validators",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N009-Q6",
+    "nodeId": "design",
+    "question": "design：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].interface.errors; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N009-Q7",
+    "nodeId": "design",
+    "question": "design：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].interface.boundaries; nodes[design].requirementIds; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N010-Q1",
+    "nodeId": "design-roles",
+    "question": "design-roles：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[design-roles].inputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N010-Q2",
+    "nodeId": "design-roles",
+    "question": "design-roles：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[design-roles].outputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N010-Q3",
+    "nodeId": "design-roles",
+    "question": "design-roles：谁有权决定？",
+    "answerLocation": "nodes[design].children[design-roles].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N010-Q4",
+    "nodeId": "design-roles",
+    "question": "design-roles：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[design-roles].interface.emptyCases; nodes[design].children[design-roles].interface.errors",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N010-Q5",
+    "nodeId": "design-roles",
+    "question": "design-roles：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[design-roles].validators",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N010-Q6",
+    "nodeId": "design-roles",
+    "question": "design-roles：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[design-roles].interface.errors; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N010-Q7",
+    "nodeId": "design-roles",
+    "question": "design-roles：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[design-roles].interface.boundaries; nodes[design].children[design-roles].requirementIds; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N011-Q1",
+    "nodeId": "role-D1",
+    "question": "role-D1：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D1].inputs; nodes[design].children[design-roles].children[role-D1].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N011-Q2",
+    "nodeId": "role-D1",
+    "question": "role-D1：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D1].outputs; connections[c-role-D2-to-role-D1]; connections[c-role-D3-to-role-D1]; connections[c-role-D4-to-role-D1]; connections[c-role-D1-to-contract]; connections[c-revision-to-role-D1]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N011-Q3",
+    "nodeId": "role-D1",
+    "question": "role-D1：谁有权决定？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D1].description; nodes[design].children[design-roles].children[role-D1].interface.boundaries; nodes[design].children[design-roles].children[role-D1].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N011-Q4",
+    "nodeId": "role-D1",
+    "question": "role-D1：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D1].interface.emptyCases; nodes[design].children[design-roles].children[role-D1].interface.errors; nodes[design].children[design-roles].children[role-D1].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N011-Q5",
+    "nodeId": "role-D1",
+    "question": "role-D1：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D1].validators; nodes[design].children[design-roles].children[role-D1].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N011-Q6",
+    "nodeId": "role-D1",
+    "question": "role-D1：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D1].interface.errors; nodes[design].children[design-roles].children[role-D1].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N011-Q7",
+    "nodeId": "role-D1",
+    "question": "role-D1：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D1].interface.boundaries; nodes[design].children[design-roles].children[role-D1].requirementIds; nodes[design].children[design-roles].children[role-D1].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N012-Q1",
+    "nodeId": "role-D2",
+    "question": "role-D2：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D2].inputs; nodes[design].children[design-roles].children[role-D2].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N012-Q2",
+    "nodeId": "role-D2",
+    "question": "role-D2：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D2].outputs; connections[c-prompts-to-role-D2]; connections[c-clarify-to-role-D2]; connections[c-role-D2-to-role-D1]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N012-Q3",
+    "nodeId": "role-D2",
+    "question": "role-D2：谁有权决定？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D2].description; nodes[design].children[design-roles].children[role-D2].interface.boundaries; nodes[design].children[design-roles].children[role-D2].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N012-Q4",
+    "nodeId": "role-D2",
+    "question": "role-D2：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D2].interface.emptyCases; nodes[design].children[design-roles].children[role-D2].interface.errors; nodes[design].children[design-roles].children[role-D2].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N012-Q5",
+    "nodeId": "role-D2",
+    "question": "role-D2：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D2].validators; nodes[design].children[design-roles].children[role-D2].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N012-Q6",
+    "nodeId": "role-D2",
+    "question": "role-D2：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D2].interface.errors; nodes[design].children[design-roles].children[role-D2].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N012-Q7",
+    "nodeId": "role-D2",
+    "question": "role-D2：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D2].interface.boundaries; nodes[design].children[design-roles].children[role-D2].requirementIds; nodes[design].children[design-roles].children[role-D2].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N013-Q1",
+    "nodeId": "role-D3",
+    "question": "role-D3：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D3].inputs; nodes[design].children[design-roles].children[role-D3].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N013-Q2",
+    "nodeId": "role-D3",
+    "question": "role-D3：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D3].outputs; connections[c-prompts-to-role-D3]; connections[c-role-D3-to-role-D1]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N013-Q3",
+    "nodeId": "role-D3",
+    "question": "role-D3：谁有权决定？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D3].description; nodes[design].children[design-roles].children[role-D3].interface.boundaries; nodes[design].children[design-roles].children[role-D3].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N013-Q4",
+    "nodeId": "role-D3",
+    "question": "role-D3：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D3].interface.emptyCases; nodes[design].children[design-roles].children[role-D3].interface.errors; nodes[design].children[design-roles].children[role-D3].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N013-Q5",
+    "nodeId": "role-D3",
+    "question": "role-D3：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D3].validators; nodes[design].children[design-roles].children[role-D3].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N013-Q6",
+    "nodeId": "role-D3",
+    "question": "role-D3：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D3].interface.errors; nodes[design].children[design-roles].children[role-D3].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N013-Q7",
+    "nodeId": "role-D3",
+    "question": "role-D3：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D3].interface.boundaries; nodes[design].children[design-roles].children[role-D3].requirementIds; nodes[design].children[design-roles].children[role-D3].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N014-Q1",
+    "nodeId": "role-D4",
+    "question": "role-D4：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D4].inputs; nodes[design].children[design-roles].children[role-D4].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N014-Q2",
+    "nodeId": "role-D4",
+    "question": "role-D4：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D4].outputs; connections[c-role-D4-to-role-D1]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N014-Q3",
+    "nodeId": "role-D4",
+    "question": "role-D4：谁有权决定？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D4].description; nodes[design].children[design-roles].children[role-D4].interface.boundaries; nodes[design].children[design-roles].children[role-D4].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N014-Q4",
+    "nodeId": "role-D4",
+    "question": "role-D4：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D4].interface.emptyCases; nodes[design].children[design-roles].children[role-D4].interface.errors; nodes[design].children[design-roles].children[role-D4].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N014-Q5",
+    "nodeId": "role-D4",
+    "question": "role-D4：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D4].validators; nodes[design].children[design-roles].children[role-D4].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N014-Q6",
+    "nodeId": "role-D4",
+    "question": "role-D4：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D4].interface.errors; nodes[design].children[design-roles].children[role-D4].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N014-Q7",
+    "nodeId": "role-D4",
+    "question": "role-D4：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D4].interface.boundaries; nodes[design].children[design-roles].children[role-D4].requirementIds; nodes[design].children[design-roles].children[role-D4].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N015-Q1",
+    "nodeId": "role-D5",
+    "question": "role-D5：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D5].inputs; nodes[design].children[design-roles].children[role-D5].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N015-Q2",
+    "nodeId": "role-D5",
+    "question": "role-D5：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D5].outputs; connections[c-gates-to-role-D5]; connections[c-role-D5-to-gates]; connections[c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N015-Q3",
+    "nodeId": "role-D5",
+    "question": "role-D5：谁有权决定？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D5].description; nodes[design].children[design-roles].children[role-D5].interface.boundaries; nodes[design].children[design-roles].children[role-D5].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N015-Q4",
+    "nodeId": "role-D5",
+    "question": "role-D5：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D5].interface.emptyCases; nodes[design].children[design-roles].children[role-D5].interface.errors; nodes[design].children[design-roles].children[role-D5].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N015-Q5",
+    "nodeId": "role-D5",
+    "question": "role-D5：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D5].validators; nodes[design].children[design-roles].children[role-D5].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N015-Q6",
+    "nodeId": "role-D5",
+    "question": "role-D5：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D5].interface.errors; nodes[design].children[design-roles].children[role-D5].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N015-Q7",
+    "nodeId": "role-D5",
+    "question": "role-D5：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D5].interface.boundaries; nodes[design].children[design-roles].children[role-D5].requirementIds; nodes[design].children[design-roles].children[role-D5].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N016-Q1",
+    "nodeId": "role-D6",
+    "question": "role-D6：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D6].inputs; nodes[design].children[design-roles].children[role-D6].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N016-Q2",
+    "nodeId": "role-D6",
+    "question": "role-D6：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D6].outputs; connections[c-gates-to-role-D6]; connections[c-role-D6-to-gates]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N016-Q3",
+    "nodeId": "role-D6",
+    "question": "role-D6：谁有权决定？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D6].description; nodes[design].children[design-roles].children[role-D6].interface.boundaries; nodes[design].children[design-roles].children[role-D6].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N016-Q4",
+    "nodeId": "role-D6",
+    "question": "role-D6：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D6].interface.emptyCases; nodes[design].children[design-roles].children[role-D6].interface.errors; nodes[design].children[design-roles].children[role-D6].terminal.retry; failurePaths[fail-freeze-explanation]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N016-Q5",
+    "nodeId": "role-D6",
+    "question": "role-D6：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D6].validators; nodes[design].children[design-roles].children[role-D6].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N016-Q6",
+    "nodeId": "role-D6",
+    "question": "role-D6：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D6].interface.errors; nodes[design].children[design-roles].children[role-D6].terminal.retry; failurePaths[fail-freeze-explanation]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N016-Q7",
+    "nodeId": "role-D6",
+    "question": "role-D6：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D6].interface.boundaries; nodes[design].children[design-roles].children[role-D6].requirementIds; nodes[design].children[design-roles].children[role-D6].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N017-Q1",
+    "nodeId": "role-D7",
+    "question": "role-D7：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D7].inputs; nodes[design].children[design-roles].children[role-D7].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N017-Q2",
+    "nodeId": "role-D7",
+    "question": "role-D7：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D7].outputs; connections[c-gates-to-role-D7]; connections[c-role-D7-to-gates]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N017-Q3",
+    "nodeId": "role-D7",
+    "question": "role-D7：谁有权决定？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D7].description; nodes[design].children[design-roles].children[role-D7].interface.boundaries; nodes[design].children[design-roles].children[role-D7].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N017-Q4",
+    "nodeId": "role-D7",
+    "question": "role-D7：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D7].interface.emptyCases; nodes[design].children[design-roles].children[role-D7].interface.errors; nodes[design].children[design-roles].children[role-D7].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N017-Q5",
+    "nodeId": "role-D7",
+    "question": "role-D7：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D7].validators; nodes[design].children[design-roles].children[role-D7].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N017-Q6",
+    "nodeId": "role-D7",
+    "question": "role-D7：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D7].interface.errors; nodes[design].children[design-roles].children[role-D7].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N017-Q7",
+    "nodeId": "role-D7",
+    "question": "role-D7：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D7].interface.boundaries; nodes[design].children[design-roles].children[role-D7].requirementIds; nodes[design].children[design-roles].children[role-D7].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N018-Q1",
+    "nodeId": "role-D8",
+    "question": "role-D8：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D8].inputs; nodes[design].children[design-roles].children[role-D8].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N018-Q2",
+    "nodeId": "role-D8",
+    "question": "role-D8：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D8].outputs; connections[c-gates-to-role-D8]; connections[c-role-D8-to-gates]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N018-Q3",
+    "nodeId": "role-D8",
+    "question": "role-D8：谁有权决定？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D8].description; nodes[design].children[design-roles].children[role-D8].interface.boundaries; nodes[design].children[design-roles].children[role-D8].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N018-Q4",
+    "nodeId": "role-D8",
+    "question": "role-D8：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D8].interface.emptyCases; nodes[design].children[design-roles].children[role-D8].interface.errors; nodes[design].children[design-roles].children[role-D8].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N018-Q5",
+    "nodeId": "role-D8",
+    "question": "role-D8：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D8].validators; nodes[design].children[design-roles].children[role-D8].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N018-Q6",
+    "nodeId": "role-D8",
+    "question": "role-D8：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D8].interface.errors; nodes[design].children[design-roles].children[role-D8].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N018-Q7",
+    "nodeId": "role-D8",
+    "question": "role-D8：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D8].interface.boundaries; nodes[design].children[design-roles].children[role-D8].requirementIds; nodes[design].children[design-roles].children[role-D8].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N019-Q1",
+    "nodeId": "clarify",
+    "question": "clarify：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[clarify].inputs; nodes[design].children[clarify].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N019-Q2",
+    "nodeId": "clarify",
+    "question": "clarify：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[clarify].outputs; connections[c-prompts-to-clarify]; connections[c-clarify-to-role-D2]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N019-Q3",
+    "nodeId": "clarify",
+    "question": "clarify：谁有权决定？",
+    "answerLocation": "nodes[design].children[clarify].description; nodes[design].children[clarify].interface.boundaries; nodes[design].children[clarify].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N019-Q4",
+    "nodeId": "clarify",
+    "question": "clarify：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[clarify].interface.emptyCases; nodes[design].children[clarify].interface.errors; nodes[design].children[clarify].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N019-Q5",
+    "nodeId": "clarify",
+    "question": "clarify：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[clarify].validators; nodes[design].children[clarify].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N019-Q6",
+    "nodeId": "clarify",
+    "question": "clarify：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[clarify].interface.errors; nodes[design].children[clarify].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N019-Q7",
+    "nodeId": "clarify",
+    "question": "clarify：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[clarify].interface.boundaries; nodes[design].children[clarify].requirementIds; nodes[design].children[clarify].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N020-Q1",
+    "nodeId": "gates",
+    "question": "gates：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[gates].inputs; nodes[design].children[gates].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N020-Q2",
+    "nodeId": "gates",
+    "question": "gates：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[gates].outputs; connections[c-contract-to-gates]; connections[c-gates-to-role-D5]; connections[c-gates-to-role-D6]; connections[c-gates-to-role-D7]; connections[c-gates-to-role-D8]; connections[c-role-D5-to-gates]; connections[c-role-D6-to-gates]; connections[c-role-D7-to-gates]; connections[c-role-D8-to-gates]; connections[c-gates-to-freeze]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N020-Q3",
+    "nodeId": "gates",
+    "question": "gates：谁有权决定？",
+    "answerLocation": "nodes[design].children[gates].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N020-Q4",
+    "nodeId": "gates",
+    "question": "gates：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[gates].interface.emptyCases; nodes[design].children[gates].interface.errors; nodes[design].children[gates].terminal.retry; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N020-Q5",
+    "nodeId": "gates",
+    "question": "gates：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[gates].validators; nodes[design].children[gates].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N020-Q6",
+    "nodeId": "gates",
+    "question": "gates：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[gates].interface.errors; nodes[design].children[gates].terminal.retry; failurePaths[fail-checker]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N020-Q7",
+    "nodeId": "gates",
+    "question": "gates：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[gates].interface.boundaries; nodes[design].children[gates].requirementIds; nodes[design].children[gates].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N021-Q1",
+    "nodeId": "contract",
+    "question": "contract：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[contract].inputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N021-Q2",
+    "nodeId": "contract",
+    "question": "contract：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[contract].outputs; connections[c-role-D1-to-contract]; connections[c-contract-to-gates]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N021-Q3",
+    "nodeId": "contract",
+    "question": "contract：谁有权决定？",
+    "answerLocation": "nodes[design].children[contract].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N021-Q4",
+    "nodeId": "contract",
+    "question": "contract：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[contract].interface.emptyCases; nodes[design].children[contract].interface.errors; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N021-Q5",
+    "nodeId": "contract",
+    "question": "contract：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[contract].validators",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N021-Q6",
+    "nodeId": "contract",
+    "question": "contract：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[contract].interface.errors; failurePaths[fail-checker]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N021-Q7",
+    "nodeId": "contract",
+    "question": "contract：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[contract].interface.boundaries; nodes[design].children[contract].requirementIds; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N022-Q1",
+    "nodeId": "contract-capability",
+    "question": "contract-capability：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[contract].children[contract-capability].inputs; nodes[design].children[contract].children[contract-capability].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N022-Q2",
+    "nodeId": "contract-capability",
+    "question": "contract-capability：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[contract].children[contract-capability].outputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N022-Q3",
+    "nodeId": "contract-capability",
+    "question": "contract-capability：谁有权决定？",
+    "answerLocation": "nodes[design].children[contract].children[contract-capability].description; nodes[design].children[contract].children[contract-capability].interface.boundaries; nodes[design].children[contract].children[contract-capability].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N022-Q4",
+    "nodeId": "contract-capability",
+    "question": "contract-capability：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[contract].children[contract-capability].interface.emptyCases; nodes[design].children[contract].children[contract-capability].interface.errors; nodes[design].children[contract].children[contract-capability].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N022-Q5",
+    "nodeId": "contract-capability",
+    "question": "contract-capability：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[contract].children[contract-capability].validators; nodes[design].children[contract].children[contract-capability].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N022-Q6",
+    "nodeId": "contract-capability",
+    "question": "contract-capability：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[contract].children[contract-capability].interface.errors; nodes[design].children[contract].children[contract-capability].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N022-Q7",
+    "nodeId": "contract-capability",
+    "question": "contract-capability：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[contract].children[contract-capability].interface.boundaries; nodes[design].children[contract].children[contract-capability].requirementIds; nodes[design].children[contract].children[contract-capability].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N023-Q1",
+    "nodeId": "contract-entry",
+    "question": "contract-entry：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[contract].children[contract-entry].inputs; nodes[design].children[contract].children[contract-entry].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N023-Q2",
+    "nodeId": "contract-entry",
+    "question": "contract-entry：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[contract].children[contract-entry].outputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N023-Q3",
+    "nodeId": "contract-entry",
+    "question": "contract-entry：谁有权决定？",
+    "answerLocation": "nodes[design].children[contract].children[contract-entry].description; nodes[design].children[contract].children[contract-entry].interface.boundaries; nodes[design].children[contract].children[contract-entry].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N023-Q4",
+    "nodeId": "contract-entry",
+    "question": "contract-entry：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[contract].children[contract-entry].interface.emptyCases; nodes[design].children[contract].children[contract-entry].interface.errors; nodes[design].children[contract].children[contract-entry].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N023-Q5",
+    "nodeId": "contract-entry",
+    "question": "contract-entry：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[contract].children[contract-entry].validators; nodes[design].children[contract].children[contract-entry].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N023-Q6",
+    "nodeId": "contract-entry",
+    "question": "contract-entry：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[contract].children[contract-entry].interface.errors; nodes[design].children[contract].children[contract-entry].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N023-Q7",
+    "nodeId": "contract-entry",
+    "question": "contract-entry：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[contract].children[contract-entry].interface.boundaries; nodes[design].children[contract].children[contract-entry].requirementIds; nodes[design].children[contract].children[contract-entry].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N024-Q1",
+    "nodeId": "contract-outcomes",
+    "question": "contract-outcomes：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[contract].children[contract-outcomes].inputs; nodes[design].children[contract].children[contract-outcomes].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N024-Q2",
+    "nodeId": "contract-outcomes",
+    "question": "contract-outcomes：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[contract].children[contract-outcomes].outputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N024-Q3",
+    "nodeId": "contract-outcomes",
+    "question": "contract-outcomes：谁有权决定？",
+    "answerLocation": "nodes[design].children[contract].children[contract-outcomes].description; nodes[design].children[contract].children[contract-outcomes].interface.boundaries; nodes[design].children[contract].children[contract-outcomes].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N024-Q4",
+    "nodeId": "contract-outcomes",
+    "question": "contract-outcomes：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[contract].children[contract-outcomes].interface.emptyCases; nodes[design].children[contract].children[contract-outcomes].interface.errors; nodes[design].children[contract].children[contract-outcomes].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N024-Q5",
+    "nodeId": "contract-outcomes",
+    "question": "contract-outcomes：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[contract].children[contract-outcomes].validators; nodes[design].children[contract].children[contract-outcomes].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N024-Q6",
+    "nodeId": "contract-outcomes",
+    "question": "contract-outcomes：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[contract].children[contract-outcomes].interface.errors; nodes[design].children[contract].children[contract-outcomes].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N024-Q7",
+    "nodeId": "contract-outcomes",
+    "question": "contract-outcomes：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[contract].children[contract-outcomes].interface.boundaries; nodes[design].children[contract].children[contract-outcomes].requirementIds; nodes[design].children[contract].children[contract-outcomes].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N025-Q1",
+    "nodeId": "contract-fidelity",
+    "question": "contract-fidelity：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[contract].children[contract-fidelity].inputs; nodes[design].children[contract].children[contract-fidelity].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N025-Q2",
+    "nodeId": "contract-fidelity",
+    "question": "contract-fidelity：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[contract].children[contract-fidelity].outputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N025-Q3",
+    "nodeId": "contract-fidelity",
+    "question": "contract-fidelity：谁有权决定？",
+    "answerLocation": "nodes[design].children[contract].children[contract-fidelity].description; nodes[design].children[contract].children[contract-fidelity].interface.boundaries; nodes[design].children[contract].children[contract-fidelity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N025-Q4",
+    "nodeId": "contract-fidelity",
+    "question": "contract-fidelity：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[contract].children[contract-fidelity].interface.emptyCases; nodes[design].children[contract].children[contract-fidelity].interface.errors; nodes[design].children[contract].children[contract-fidelity].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N025-Q5",
+    "nodeId": "contract-fidelity",
+    "question": "contract-fidelity：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[contract].children[contract-fidelity].validators; nodes[design].children[contract].children[contract-fidelity].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N025-Q6",
+    "nodeId": "contract-fidelity",
+    "question": "contract-fidelity：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[contract].children[contract-fidelity].interface.errors; nodes[design].children[contract].children[contract-fidelity].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N025-Q7",
+    "nodeId": "contract-fidelity",
+    "question": "contract-fidelity：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[contract].children[contract-fidelity].interface.boundaries; nodes[design].children[contract].children[contract-fidelity].requirementIds; nodes[design].children[contract].children[contract-fidelity].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N026-Q1",
+    "nodeId": "contract-forbidden",
+    "question": "contract-forbidden：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[contract].children[contract-forbidden].inputs; nodes[design].children[contract].children[contract-forbidden].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N026-Q2",
+    "nodeId": "contract-forbidden",
+    "question": "contract-forbidden：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[contract].children[contract-forbidden].outputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N026-Q3",
+    "nodeId": "contract-forbidden",
+    "question": "contract-forbidden：谁有权决定？",
+    "answerLocation": "nodes[design].children[contract].children[contract-forbidden].description; nodes[design].children[contract].children[contract-forbidden].interface.boundaries; nodes[design].children[contract].children[contract-forbidden].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N026-Q4",
+    "nodeId": "contract-forbidden",
+    "question": "contract-forbidden：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[contract].children[contract-forbidden].interface.emptyCases; nodes[design].children[contract].children[contract-forbidden].interface.errors; nodes[design].children[contract].children[contract-forbidden].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N026-Q5",
+    "nodeId": "contract-forbidden",
+    "question": "contract-forbidden：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[contract].children[contract-forbidden].validators; nodes[design].children[contract].children[contract-forbidden].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N026-Q6",
+    "nodeId": "contract-forbidden",
+    "question": "contract-forbidden：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[contract].children[contract-forbidden].interface.errors; nodes[design].children[contract].children[contract-forbidden].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N026-Q7",
+    "nodeId": "contract-forbidden",
+    "question": "contract-forbidden：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[contract].children[contract-forbidden].interface.boundaries; nodes[design].children[contract].children[contract-forbidden].requirementIds; nodes[design].children[contract].children[contract-forbidden].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N027-Q1",
+    "nodeId": "contract-regression",
+    "question": "contract-regression：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[contract].children[contract-regression].inputs; nodes[design].children[contract].children[contract-regression].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N027-Q2",
+    "nodeId": "contract-regression",
+    "question": "contract-regression：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[contract].children[contract-regression].outputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N027-Q3",
+    "nodeId": "contract-regression",
+    "question": "contract-regression：谁有权决定？",
+    "answerLocation": "nodes[design].children[contract].children[contract-regression].description; nodes[design].children[contract].children[contract-regression].interface.boundaries; nodes[design].children[contract].children[contract-regression].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N027-Q4",
+    "nodeId": "contract-regression",
+    "question": "contract-regression：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[contract].children[contract-regression].interface.emptyCases; nodes[design].children[contract].children[contract-regression].interface.errors; nodes[design].children[contract].children[contract-regression].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N027-Q5",
+    "nodeId": "contract-regression",
+    "question": "contract-regression：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[contract].children[contract-regression].validators; nodes[design].children[contract].children[contract-regression].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N027-Q6",
+    "nodeId": "contract-regression",
+    "question": "contract-regression：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[contract].children[contract-regression].interface.errors; nodes[design].children[contract].children[contract-regression].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N027-Q7",
+    "nodeId": "contract-regression",
+    "question": "contract-regression：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[contract].children[contract-regression].interface.boundaries; nodes[design].children[contract].children[contract-regression].requirementIds; nodes[design].children[contract].children[contract-regression].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N028-Q1",
+    "nodeId": "contract-controls",
+    "question": "contract-controls：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[contract].children[contract-controls].inputs; nodes[design].children[contract].children[contract-controls].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N028-Q2",
+    "nodeId": "contract-controls",
+    "question": "contract-controls：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[contract].children[contract-controls].outputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N028-Q3",
+    "nodeId": "contract-controls",
+    "question": "contract-controls：谁有权决定？",
+    "answerLocation": "nodes[design].children[contract].children[contract-controls].description; nodes[design].children[contract].children[contract-controls].interface.boundaries; nodes[design].children[contract].children[contract-controls].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N028-Q4",
+    "nodeId": "contract-controls",
+    "question": "contract-controls：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[contract].children[contract-controls].interface.emptyCases; nodes[design].children[contract].children[contract-controls].interface.errors; nodes[design].children[contract].children[contract-controls].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N028-Q5",
+    "nodeId": "contract-controls",
+    "question": "contract-controls：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[contract].children[contract-controls].validators; nodes[design].children[contract].children[contract-controls].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N028-Q6",
+    "nodeId": "contract-controls",
+    "question": "contract-controls：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[contract].children[contract-controls].interface.errors; nodes[design].children[contract].children[contract-controls].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N028-Q7",
+    "nodeId": "contract-controls",
+    "question": "contract-controls：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[contract].children[contract-controls].interface.boundaries; nodes[design].children[contract].children[contract-controls].requirementIds; nodes[design].children[contract].children[contract-controls].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N029-Q1",
+    "nodeId": "contract-changes",
+    "question": "contract-changes：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[contract].children[contract-changes].inputs; nodes[design].children[contract].children[contract-changes].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N029-Q2",
+    "nodeId": "contract-changes",
+    "question": "contract-changes：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[contract].children[contract-changes].outputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N029-Q3",
+    "nodeId": "contract-changes",
+    "question": "contract-changes：谁有权决定？",
+    "answerLocation": "nodes[design].children[contract].children[contract-changes].description; nodes[design].children[contract].children[contract-changes].interface.boundaries; nodes[design].children[contract].children[contract-changes].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N029-Q4",
+    "nodeId": "contract-changes",
+    "question": "contract-changes：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[contract].children[contract-changes].interface.emptyCases; nodes[design].children[contract].children[contract-changes].interface.errors; nodes[design].children[contract].children[contract-changes].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N029-Q5",
+    "nodeId": "contract-changes",
+    "question": "contract-changes：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[contract].children[contract-changes].validators; nodes[design].children[contract].children[contract-changes].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N029-Q6",
+    "nodeId": "contract-changes",
+    "question": "contract-changes：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[contract].children[contract-changes].interface.errors; nodes[design].children[contract].children[contract-changes].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N029-Q7",
+    "nodeId": "contract-changes",
+    "question": "contract-changes：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[contract].children[contract-changes].interface.boundaries; nodes[design].children[contract].children[contract-changes].requirementIds; nodes[design].children[contract].children[contract-changes].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N030-Q1",
+    "nodeId": "contract-authorization",
+    "question": "contract-authorization：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[contract].children[contract-authorization].inputs; nodes[design].children[contract].children[contract-authorization].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N030-Q2",
+    "nodeId": "contract-authorization",
+    "question": "contract-authorization：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[contract].children[contract-authorization].outputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N030-Q3",
+    "nodeId": "contract-authorization",
+    "question": "contract-authorization：谁有权决定？",
+    "answerLocation": "nodes[design].children[contract].children[contract-authorization].description; nodes[design].children[contract].children[contract-authorization].interface.boundaries; nodes[design].children[contract].children[contract-authorization].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N030-Q4",
+    "nodeId": "contract-authorization",
+    "question": "contract-authorization：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[contract].children[contract-authorization].interface.emptyCases; nodes[design].children[contract].children[contract-authorization].interface.errors; nodes[design].children[contract].children[contract-authorization].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N030-Q5",
+    "nodeId": "contract-authorization",
+    "question": "contract-authorization：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[contract].children[contract-authorization].validators; nodes[design].children[contract].children[contract-authorization].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N030-Q6",
+    "nodeId": "contract-authorization",
+    "question": "contract-authorization：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[contract].children[contract-authorization].interface.errors; nodes[design].children[contract].children[contract-authorization].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N030-Q7",
+    "nodeId": "contract-authorization",
+    "question": "contract-authorization：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[contract].children[contract-authorization].interface.boundaries; nodes[design].children[contract].children[contract-authorization].requirementIds; nodes[design].children[contract].children[contract-authorization].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N031-Q1",
+    "nodeId": "freeze",
+    "question": "freeze：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[freeze].inputs; nodes[design].children[freeze].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N031-Q2",
+    "nodeId": "freeze",
+    "question": "freeze：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[freeze].outputs; connections[c-gates-to-freeze]; connections[c-freeze-to-role-X1]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N031-Q3",
+    "nodeId": "freeze",
+    "question": "freeze：谁有权决定？",
+    "answerLocation": "nodes[design].children[freeze].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N031-Q4",
+    "nodeId": "freeze",
+    "question": "freeze：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[freeze].interface.emptyCases; nodes[design].children[freeze].interface.errors; nodes[design].children[freeze].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N031-Q5",
+    "nodeId": "freeze",
+    "question": "freeze：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[freeze].validators; nodes[design].children[freeze].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N031-Q6",
+    "nodeId": "freeze",
+    "question": "freeze：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[freeze].interface.errors; nodes[design].children[freeze].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N031-Q7",
+    "nodeId": "freeze",
+    "question": "freeze：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[freeze].interface.boundaries; nodes[design].children[freeze].requirementIds; nodes[design].children[freeze].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N032-Q1",
+    "nodeId": "q-checker",
+    "question": "q-checker：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[q-checker].inputs; nodes[design].children[q-checker].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N032-Q2",
+    "nodeId": "q-checker",
+    "question": "q-checker：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[q-checker].outputs; connections[c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N032-Q3",
+    "nodeId": "q-checker",
+    "question": "q-checker：谁有权决定？",
+    "answerLocation": "nodes[design].children[q-checker].description; nodes[design].children[q-checker].interface.boundaries; nodes[design].children[q-checker].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N032-Q4",
+    "nodeId": "q-checker",
+    "question": "q-checker：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[q-checker].interface.emptyCases; nodes[design].children[q-checker].interface.errors; nodes[design].children[q-checker].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N032-Q5",
+    "nodeId": "q-checker",
+    "question": "q-checker：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[q-checker].validators; nodes[design].children[q-checker].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N032-Q6",
+    "nodeId": "q-checker",
+    "question": "q-checker：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[q-checker].interface.errors; nodes[design].children[q-checker].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N032-Q7",
+    "nodeId": "q-checker",
+    "question": "q-checker：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[q-checker].interface.boundaries; nodes[design].children[q-checker].requirementIds; nodes[design].children[q-checker].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N033-Q1",
+    "nodeId": "q-inheritance",
+    "question": "q-inheritance：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[design].children[q-inheritance].inputs; nodes[design].children[q-inheritance].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N033-Q2",
+    "nodeId": "q-inheritance",
+    "question": "q-inheritance：产出什么，交给谁？",
+    "answerLocation": "nodes[design].children[q-inheritance].outputs; connections[c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N033-Q3",
+    "nodeId": "q-inheritance",
+    "question": "q-inheritance：谁有权决定？",
+    "answerLocation": "nodes[design].children[q-inheritance].description; nodes[design].children[q-inheritance].interface.boundaries; nodes[design].children[q-inheritance].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N033-Q4",
+    "nodeId": "q-inheritance",
+    "question": "q-inheritance：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[design].children[q-inheritance].interface.emptyCases; nodes[design].children[q-inheritance].interface.errors; nodes[design].children[q-inheritance].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N033-Q5",
+    "nodeId": "q-inheritance",
+    "question": "q-inheritance：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].children[q-inheritance].validators; nodes[design].children[q-inheritance].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N033-Q6",
+    "nodeId": "q-inheritance",
+    "question": "q-inheritance：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[design].children[q-inheritance].interface.errors; nodes[design].children[q-inheritance].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N033-Q7",
+    "nodeId": "q-inheritance",
+    "question": "q-inheritance：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[design].children[q-inheritance].interface.boundaries; nodes[design].children[q-inheritance].requirementIds; nodes[design].children[q-inheritance].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N034-Q1",
+    "nodeId": "delivery",
+    "question": "delivery：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[delivery].inputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N034-Q2",
+    "nodeId": "delivery",
+    "question": "delivery：产出什么，交给谁？",
+    "answerLocation": "nodes[delivery].outputs; connections[c-shared-to-delivery]; connections[c-design-to-delivery]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N034-Q3",
+    "nodeId": "delivery",
+    "question": "delivery：谁有权决定？",
+    "answerLocation": "nodes[delivery].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N034-Q4",
+    "nodeId": "delivery",
+    "question": "delivery：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[delivery].interface.emptyCases; nodes[delivery].interface.errors",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N034-Q5",
+    "nodeId": "delivery",
+    "question": "delivery：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[delivery].validators",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N034-Q6",
+    "nodeId": "delivery",
+    "question": "delivery：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[delivery].interface.errors; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N034-Q7",
+    "nodeId": "delivery",
+    "question": "delivery：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[delivery].interface.boundaries; nodes[delivery].requirementIds; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N035-Q1",
+    "nodeId": "delivery-roles",
+    "question": "delivery-roles：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].inputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N035-Q2",
+    "nodeId": "delivery-roles",
+    "question": "delivery-roles：产出什么，交给谁？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].outputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N035-Q3",
+    "nodeId": "delivery-roles",
+    "question": "delivery-roles：谁有权决定？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N035-Q4",
+    "nodeId": "delivery-roles",
+    "question": "delivery-roles：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].interface.emptyCases; nodes[delivery].children[delivery-roles].interface.errors",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N035-Q5",
+    "nodeId": "delivery-roles",
+    "question": "delivery-roles：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].validators",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N035-Q6",
+    "nodeId": "delivery-roles",
+    "question": "delivery-roles：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].interface.errors; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N035-Q7",
+    "nodeId": "delivery-roles",
+    "question": "delivery-roles：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].interface.boundaries; nodes[delivery].children[delivery-roles].requirementIds; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N036-Q1",
+    "nodeId": "role-X1",
+    "question": "role-X1：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X1].inputs; nodes[delivery].children[delivery-roles].children[role-X1].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N036-Q2",
+    "nodeId": "role-X1",
+    "question": "role-X1：产出什么，交给谁？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X1].outputs; connections[c-freeze-to-role-X1]; connections[c-role-X1-to-role-X2]; connections[c-role-X1-to-role-X3]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N036-Q3",
+    "nodeId": "role-X1",
+    "question": "role-X1：谁有权决定？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X1].description; nodes[delivery].children[delivery-roles].children[role-X1].interface.boundaries; nodes[delivery].children[delivery-roles].children[role-X1].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N036-Q4",
+    "nodeId": "role-X1",
+    "question": "role-X1：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X1].interface.emptyCases; nodes[delivery].children[delivery-roles].children[role-X1].interface.errors; nodes[delivery].children[delivery-roles].children[role-X1].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N036-Q5",
+    "nodeId": "role-X1",
+    "question": "role-X1：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X1].validators; nodes[delivery].children[delivery-roles].children[role-X1].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N036-Q6",
+    "nodeId": "role-X1",
+    "question": "role-X1：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X1].interface.errors; nodes[delivery].children[delivery-roles].children[role-X1].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N036-Q7",
+    "nodeId": "role-X1",
+    "question": "role-X1：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X1].interface.boundaries; nodes[delivery].children[delivery-roles].children[role-X1].requirementIds; nodes[delivery].children[delivery-roles].children[role-X1].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N037-Q1",
+    "nodeId": "role-X2",
+    "question": "role-X2：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X2].inputs; nodes[delivery].children[delivery-roles].children[role-X2].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N037-Q2",
+    "nodeId": "role-X2",
+    "question": "role-X2：产出什么，交给谁？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X2].outputs; connections[c-role-X1-to-role-X2]; connections[c-role-X2-to-calibration]; connections[c-role-X2-to-candidate]; connections[c-role-X2-to-deviation]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N037-Q3",
+    "nodeId": "role-X2",
+    "question": "role-X2：谁有权决定？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X2].description; nodes[delivery].children[delivery-roles].children[role-X2].interface.boundaries; nodes[delivery].children[delivery-roles].children[role-X2].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N037-Q4",
+    "nodeId": "role-X2",
+    "question": "role-X2：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X2].interface.emptyCases; nodes[delivery].children[delivery-roles].children[role-X2].interface.errors; nodes[delivery].children[delivery-roles].children[role-X2].terminal.retry; failurePaths[fail-premise]; failurePaths[fail-calibration]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N037-Q5",
+    "nodeId": "role-X2",
+    "question": "role-X2：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X2].validators; nodes[delivery].children[delivery-roles].children[role-X2].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N037-Q6",
+    "nodeId": "role-X2",
+    "question": "role-X2：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X2].interface.errors; nodes[delivery].children[delivery-roles].children[role-X2].terminal.retry; failurePaths[fail-premise]; failurePaths[fail-calibration]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N037-Q7",
+    "nodeId": "role-X2",
+    "question": "role-X2：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X2].interface.boundaries; nodes[delivery].children[delivery-roles].children[role-X2].requirementIds; nodes[delivery].children[delivery-roles].children[role-X2].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N038-Q1",
+    "nodeId": "role-X3",
+    "question": "role-X3：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X3].inputs; nodes[delivery].children[delivery-roles].children[role-X3].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N038-Q2",
+    "nodeId": "role-X3",
+    "question": "role-X3：产出什么，交给谁？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X3].outputs; connections[c-role-X1-to-role-X3]; connections[c-role-X3-to-calibration]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N038-Q3",
+    "nodeId": "role-X3",
+    "question": "role-X3：谁有权决定？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X3].description; nodes[delivery].children[delivery-roles].children[role-X3].interface.boundaries; nodes[delivery].children[delivery-roles].children[role-X3].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N038-Q4",
+    "nodeId": "role-X3",
+    "question": "role-X3：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X3].interface.emptyCases; nodes[delivery].children[delivery-roles].children[role-X3].interface.errors; nodes[delivery].children[delivery-roles].children[role-X3].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N038-Q5",
+    "nodeId": "role-X3",
+    "question": "role-X3：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X3].validators; nodes[delivery].children[delivery-roles].children[role-X3].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N038-Q6",
+    "nodeId": "role-X3",
+    "question": "role-X3：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X3].interface.errors; nodes[delivery].children[delivery-roles].children[role-X3].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N038-Q7",
+    "nodeId": "role-X3",
+    "question": "role-X3：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X3].interface.boundaries; nodes[delivery].children[delivery-roles].children[role-X3].requirementIds; nodes[delivery].children[delivery-roles].children[role-X3].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N039-Q1",
+    "nodeId": "role-X4",
+    "question": "role-X4：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X4].inputs; nodes[delivery].children[delivery-roles].children[role-X4].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N039-Q2",
+    "nodeId": "role-X4",
+    "question": "role-X4：产出什么，交给谁？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X4].outputs; connections[c-role-X4-to-evidence]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N039-Q3",
+    "nodeId": "role-X4",
+    "question": "role-X4：谁有权决定？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X4].description; nodes[delivery].children[delivery-roles].children[role-X4].interface.boundaries; nodes[delivery].children[delivery-roles].children[role-X4].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N039-Q4",
+    "nodeId": "role-X4",
+    "question": "role-X4：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X4].interface.emptyCases; nodes[delivery].children[delivery-roles].children[role-X4].interface.errors; nodes[delivery].children[delivery-roles].children[role-X4].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N039-Q5",
+    "nodeId": "role-X4",
+    "question": "role-X4：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X4].validators; nodes[delivery].children[delivery-roles].children[role-X4].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N039-Q6",
+    "nodeId": "role-X4",
+    "question": "role-X4：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X4].interface.errors; nodes[delivery].children[delivery-roles].children[role-X4].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N039-Q7",
+    "nodeId": "role-X4",
+    "question": "role-X4：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X4].interface.boundaries; nodes[delivery].children[delivery-roles].children[role-X4].requirementIds; nodes[delivery].children[delivery-roles].children[role-X4].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N040-Q1",
+    "nodeId": "role-X5",
+    "question": "role-X5：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X5].inputs; nodes[delivery].children[delivery-roles].children[role-X5].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N040-Q2",
+    "nodeId": "role-X5",
+    "question": "role-X5：产出什么，交给谁？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X5].outputs; connections[c-role-X5-to-evidence]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N040-Q3",
+    "nodeId": "role-X5",
+    "question": "role-X5：谁有权决定？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X5].description; nodes[delivery].children[delivery-roles].children[role-X5].interface.boundaries; nodes[delivery].children[delivery-roles].children[role-X5].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N040-Q4",
+    "nodeId": "role-X5",
+    "question": "role-X5：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X5].interface.emptyCases; nodes[delivery].children[delivery-roles].children[role-X5].interface.errors; nodes[delivery].children[delivery-roles].children[role-X5].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N040-Q5",
+    "nodeId": "role-X5",
+    "question": "role-X5：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X5].validators; nodes[delivery].children[delivery-roles].children[role-X5].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N040-Q6",
+    "nodeId": "role-X5",
+    "question": "role-X5：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X5].interface.errors; nodes[delivery].children[delivery-roles].children[role-X5].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N040-Q7",
+    "nodeId": "role-X5",
+    "question": "role-X5：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X5].interface.boundaries; nodes[delivery].children[delivery-roles].children[role-X5].requirementIds; nodes[delivery].children[delivery-roles].children[role-X5].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N041-Q1",
+    "nodeId": "acceptance",
+    "question": "acceptance：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[delivery].children[acceptance].inputs; nodes[delivery].children[acceptance].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N041-Q2",
+    "nodeId": "acceptance",
+    "question": "acceptance：产出什么，交给谁？",
+    "answerLocation": "nodes[delivery].children[acceptance].outputs; connections[c-calibration-to-acceptance]; connections[c-acceptance-to-candidate]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N041-Q3",
+    "nodeId": "acceptance",
+    "question": "acceptance：谁有权决定？",
+    "answerLocation": "nodes[delivery].children[acceptance].description; nodes[delivery].children[acceptance].interface.boundaries; nodes[delivery].children[acceptance].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N041-Q4",
+    "nodeId": "acceptance",
+    "question": "acceptance：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[delivery].children[acceptance].interface.emptyCases; nodes[delivery].children[acceptance].interface.errors; nodes[delivery].children[acceptance].terminal.retry; failurePaths[fail-semantic]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N041-Q5",
+    "nodeId": "acceptance",
+    "question": "acceptance：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[delivery].children[acceptance].validators; nodes[delivery].children[acceptance].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N041-Q6",
+    "nodeId": "acceptance",
+    "question": "acceptance：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[delivery].children[acceptance].interface.errors; nodes[delivery].children[acceptance].terminal.retry; failurePaths[fail-semantic]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N041-Q7",
+    "nodeId": "acceptance",
+    "question": "acceptance：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[delivery].children[acceptance].interface.boundaries; nodes[delivery].children[acceptance].requirementIds; nodes[delivery].children[acceptance].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N042-Q1",
+    "nodeId": "calibration",
+    "question": "calibration：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[delivery].children[calibration].inputs; nodes[delivery].children[calibration].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N042-Q2",
+    "nodeId": "calibration",
+    "question": "calibration：产出什么，交给谁？",
+    "answerLocation": "nodes[delivery].children[calibration].outputs; connections[c-role-X2-to-calibration]; connections[c-role-X3-to-calibration]; connections[c-calibration-to-acceptance]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N042-Q3",
+    "nodeId": "calibration",
+    "question": "calibration：谁有权决定？",
+    "answerLocation": "nodes[delivery].children[calibration].description; nodes[delivery].children[calibration].interface.boundaries; nodes[delivery].children[calibration].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N042-Q4",
+    "nodeId": "calibration",
+    "question": "calibration：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[delivery].children[calibration].interface.emptyCases; nodes[delivery].children[calibration].interface.errors; nodes[delivery].children[calibration].terminal.retry; failurePaths[fail-semantic]; failurePaths[fail-calibration]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N042-Q5",
+    "nodeId": "calibration",
+    "question": "calibration：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[delivery].children[calibration].validators; nodes[delivery].children[calibration].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N042-Q6",
+    "nodeId": "calibration",
+    "question": "calibration：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[delivery].children[calibration].interface.errors; nodes[delivery].children[calibration].terminal.retry; failurePaths[fail-semantic]; failurePaths[fail-calibration]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N042-Q7",
+    "nodeId": "calibration",
+    "question": "calibration：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[delivery].children[calibration].interface.boundaries; nodes[delivery].children[calibration].requirementIds; nodes[delivery].children[calibration].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N043-Q1",
+    "nodeId": "candidate",
+    "question": "candidate：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[delivery].children[candidate].inputs; nodes[delivery].children[candidate].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N043-Q2",
+    "nodeId": "candidate",
+    "question": "candidate：产出什么，交给谁？",
+    "answerLocation": "nodes[delivery].children[candidate].outputs; connections[c-acceptance-to-candidate]; connections[c-role-X2-to-candidate]; connections[c-candidate-to-evidence]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N043-Q3",
+    "nodeId": "candidate",
+    "question": "candidate：谁有权决定？",
+    "answerLocation": "nodes[delivery].children[candidate].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N043-Q4",
+    "nodeId": "candidate",
+    "question": "candidate：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[delivery].children[candidate].interface.emptyCases; nodes[delivery].children[candidate].interface.errors; nodes[delivery].children[candidate].terminal.retry; failurePaths[fail-candidate]; failurePaths[fail-missing]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N043-Q5",
+    "nodeId": "candidate",
+    "question": "candidate：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[delivery].children[candidate].validators; nodes[delivery].children[candidate].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N043-Q6",
+    "nodeId": "candidate",
+    "question": "candidate：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[delivery].children[candidate].interface.errors; nodes[delivery].children[candidate].terminal.retry; failurePaths[fail-candidate]; failurePaths[fail-missing]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N043-Q7",
+    "nodeId": "candidate",
+    "question": "candidate：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[delivery].children[candidate].interface.boundaries; nodes[delivery].children[candidate].requirementIds; nodes[delivery].children[candidate].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N044-Q1",
+    "nodeId": "evidence",
+    "question": "evidence：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[delivery].children[evidence].inputs; nodes[delivery].children[evidence].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N044-Q2",
+    "nodeId": "evidence",
+    "question": "evidence：产出什么，交给谁？",
+    "answerLocation": "nodes[delivery].children[evidence].outputs; connections[c-candidate-to-evidence]; connections[c-role-X4-to-evidence]; connections[c-role-X5-to-evidence]; connections[c-evidence-to-sign]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N044-Q3",
+    "nodeId": "evidence",
+    "question": "evidence：谁有权决定？",
+    "answerLocation": "nodes[delivery].children[evidence].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N044-Q4",
+    "nodeId": "evidence",
+    "question": "evidence：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[delivery].children[evidence].interface.emptyCases; nodes[delivery].children[evidence].interface.errors; nodes[delivery].children[evidence].terminal.retry; failurePaths[fail-candidate]; failurePaths[fail-missing]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N044-Q5",
+    "nodeId": "evidence",
+    "question": "evidence：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[delivery].children[evidence].validators; nodes[delivery].children[evidence].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N044-Q6",
+    "nodeId": "evidence",
+    "question": "evidence：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[delivery].children[evidence].interface.errors; nodes[delivery].children[evidence].terminal.retry; failurePaths[fail-candidate]; failurePaths[fail-missing]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N044-Q7",
+    "nodeId": "evidence",
+    "question": "evidence：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[delivery].children[evidence].interface.boundaries; nodes[delivery].children[evidence].requirementIds; nodes[delivery].children[evidence].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N045-Q1",
+    "nodeId": "deviation",
+    "question": "deviation：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[delivery].children[deviation].inputs; nodes[delivery].children[deviation].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N045-Q2",
+    "nodeId": "deviation",
+    "question": "deviation：产出什么，交给谁？",
+    "answerLocation": "nodes[delivery].children[deviation].outputs; connections[c-role-X2-to-deviation]; connections[c-deviation-to-revision]; connections[c-deviation-to-metrics]; connections[c-web-later-to-deviation]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N045-Q3",
+    "nodeId": "deviation",
+    "question": "deviation：谁有权决定？",
+    "answerLocation": "nodes[delivery].children[deviation].description; nodes[delivery].children[deviation].interface.boundaries; nodes[delivery].children[deviation].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N045-Q4",
+    "nodeId": "deviation",
+    "question": "deviation：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[delivery].children[deviation].interface.emptyCases; nodes[delivery].children[deviation].interface.errors; nodes[delivery].children[deviation].terminal.retry; failurePaths[fail-premise]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N045-Q5",
+    "nodeId": "deviation",
+    "question": "deviation：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[delivery].children[deviation].validators; nodes[delivery].children[deviation].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N045-Q6",
+    "nodeId": "deviation",
+    "question": "deviation：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[delivery].children[deviation].interface.errors; nodes[delivery].children[deviation].terminal.retry; failurePaths[fail-premise]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N045-Q7",
+    "nodeId": "deviation",
+    "question": "deviation：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[delivery].children[deviation].interface.boundaries; nodes[delivery].children[deviation].requirementIds; nodes[delivery].children[deviation].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N046-Q1",
+    "nodeId": "sign",
+    "question": "sign：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[delivery].children[sign].inputs; nodes[delivery].children[sign].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N046-Q2",
+    "nodeId": "sign",
+    "question": "sign：产出什么，交给谁？",
+    "answerLocation": "nodes[delivery].children[sign].outputs; connections[c-evidence-to-sign]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N046-Q3",
+    "nodeId": "sign",
+    "question": "sign：谁有权决定？",
+    "answerLocation": "nodes[delivery].children[sign].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N046-Q4",
+    "nodeId": "sign",
+    "question": "sign：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[delivery].children[sign].interface.emptyCases; nodes[delivery].children[sign].interface.errors; nodes[delivery].children[sign].terminal.retry; failurePaths[fail-candidate]; failurePaths[fail-revocation]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N046-Q5",
+    "nodeId": "sign",
+    "question": "sign：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[delivery].children[sign].validators; nodes[delivery].children[sign].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N046-Q6",
+    "nodeId": "sign",
+    "question": "sign：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[delivery].children[sign].interface.errors; nodes[delivery].children[sign].terminal.retry; failurePaths[fail-candidate]; failurePaths[fail-revocation]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N046-Q7",
+    "nodeId": "sign",
+    "question": "sign：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[delivery].children[sign].interface.boundaries; nodes[delivery].children[sign].requirementIds; nodes[delivery].children[sign].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N047-Q1",
+    "nodeId": "packaging",
+    "question": "packaging：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[packaging].inputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N047-Q2",
+    "nodeId": "packaging",
+    "question": "packaging：产出什么，交给谁？",
+    "answerLocation": "nodes[packaging].outputs; connections[c-packaging-to-shared]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N047-Q3",
+    "nodeId": "packaging",
+    "question": "packaging：谁有权决定？",
+    "answerLocation": "nodes[packaging].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N047-Q4",
+    "nodeId": "packaging",
+    "question": "packaging：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[packaging].interface.emptyCases; nodes[packaging].interface.errors",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N047-Q5",
+    "nodeId": "packaging",
+    "question": "packaging：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[packaging].validators",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N047-Q6",
+    "nodeId": "packaging",
+    "question": "packaging：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[packaging].interface.errors; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N047-Q7",
+    "nodeId": "packaging",
+    "question": "packaging：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[packaging].interface.boundaries; nodes[packaging].requirementIds; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N048-Q1",
+    "nodeId": "source-layout",
+    "question": "source-layout：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[packaging].children[source-layout].inputs; nodes[packaging].children[source-layout].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N048-Q2",
+    "nodeId": "source-layout",
+    "question": "source-layout：产出什么，交给谁？",
+    "answerLocation": "nodes[packaging].children[source-layout].outputs; connections[c-source-layout-to-planning-entry]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N048-Q3",
+    "nodeId": "source-layout",
+    "question": "source-layout：谁有权决定？",
+    "answerLocation": "nodes[packaging].children[source-layout].description; nodes[packaging].children[source-layout].interface.boundaries; nodes[packaging].children[source-layout].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N048-Q4",
+    "nodeId": "source-layout",
+    "question": "source-layout：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[packaging].children[source-layout].interface.emptyCases; nodes[packaging].children[source-layout].interface.errors; nodes[packaging].children[source-layout].terminal.retry; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N048-Q5",
+    "nodeId": "source-layout",
+    "question": "source-layout：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[packaging].children[source-layout].validators; nodes[packaging].children[source-layout].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N048-Q6",
+    "nodeId": "source-layout",
+    "question": "source-layout：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[packaging].children[source-layout].interface.errors; nodes[packaging].children[source-layout].terminal.retry; failurePaths[fail-package]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N048-Q7",
+    "nodeId": "source-layout",
+    "question": "source-layout：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[packaging].children[source-layout].interface.boundaries; nodes[packaging].children[source-layout].requirementIds; nodes[packaging].children[source-layout].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N049-Q1",
+    "nodeId": "planning-entry",
+    "question": "planning-entry：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[packaging].children[planning-entry].inputs; nodes[packaging].children[planning-entry].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N049-Q2",
+    "nodeId": "planning-entry",
+    "question": "planning-entry：产出什么，交给谁？",
+    "answerLocation": "nodes[packaging].children[planning-entry].outputs; connections[c-source-layout-to-planning-entry]; connections[c-planning-entry-to-execution-package]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N049-Q3",
+    "nodeId": "planning-entry",
+    "question": "planning-entry：谁有权决定？",
+    "answerLocation": "nodes[packaging].children[planning-entry].description; nodes[packaging].children[planning-entry].interface.boundaries; nodes[packaging].children[planning-entry].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N049-Q4",
+    "nodeId": "planning-entry",
+    "question": "planning-entry：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[packaging].children[planning-entry].interface.emptyCases; nodes[packaging].children[planning-entry].interface.errors; nodes[packaging].children[planning-entry].terminal.retry; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N049-Q5",
+    "nodeId": "planning-entry",
+    "question": "planning-entry：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[packaging].children[planning-entry].validators; nodes[packaging].children[planning-entry].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N049-Q6",
+    "nodeId": "planning-entry",
+    "question": "planning-entry：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[packaging].children[planning-entry].interface.errors; nodes[packaging].children[planning-entry].terminal.retry; failurePaths[fail-package]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N049-Q7",
+    "nodeId": "planning-entry",
+    "question": "planning-entry：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[packaging].children[planning-entry].interface.boundaries; nodes[packaging].children[planning-entry].requirementIds; nodes[packaging].children[planning-entry].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N050-Q1",
+    "nodeId": "execution-package",
+    "question": "execution-package：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[packaging].children[execution-package].inputs; nodes[packaging].children[execution-package].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N050-Q2",
+    "nodeId": "execution-package",
+    "question": "execution-package：产出什么，交给谁？",
+    "answerLocation": "nodes[packaging].children[execution-package].outputs; connections[c-planning-entry-to-execution-package]; connections[c-execution-package-to-capability-check]; connections[c-q-capacity-to-execution-package]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N050-Q3",
+    "nodeId": "execution-package",
+    "question": "execution-package：谁有权决定？",
+    "answerLocation": "nodes[packaging].children[execution-package].description; nodes[packaging].children[execution-package].interface.boundaries; nodes[packaging].children[execution-package].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N050-Q4",
+    "nodeId": "execution-package",
+    "question": "execution-package：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[packaging].children[execution-package].interface.emptyCases; nodes[packaging].children[execution-package].interface.errors; nodes[packaging].children[execution-package].terminal.retry; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N050-Q5",
+    "nodeId": "execution-package",
+    "question": "execution-package：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[packaging].children[execution-package].validators; nodes[packaging].children[execution-package].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N050-Q6",
+    "nodeId": "execution-package",
+    "question": "execution-package：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[packaging].children[execution-package].interface.errors; nodes[packaging].children[execution-package].terminal.retry; failurePaths[fail-package]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N050-Q7",
+    "nodeId": "execution-package",
+    "question": "execution-package：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[packaging].children[execution-package].interface.boundaries; nodes[packaging].children[execution-package].requirementIds; nodes[packaging].children[execution-package].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N051-Q1",
+    "nodeId": "minimum",
+    "question": "minimum：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[packaging].children[minimum].inputs; nodes[packaging].children[minimum].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N051-Q2",
+    "nodeId": "minimum",
+    "question": "minimum：产出什么，交给谁？",
+    "answerLocation": "nodes[packaging].children[minimum].outputs",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N051-Q3",
+    "nodeId": "minimum",
+    "question": "minimum：谁有权决定？",
+    "answerLocation": "nodes[packaging].children[minimum].description; nodes[packaging].children[minimum].interface.boundaries; nodes[packaging].children[minimum].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N051-Q4",
+    "nodeId": "minimum",
+    "question": "minimum：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[packaging].children[minimum].interface.emptyCases; nodes[packaging].children[minimum].interface.errors; nodes[packaging].children[minimum].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N051-Q5",
+    "nodeId": "minimum",
+    "question": "minimum：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[packaging].children[minimum].validators; nodes[packaging].children[minimum].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N051-Q6",
+    "nodeId": "minimum",
+    "question": "minimum：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[packaging].children[minimum].interface.errors; nodes[packaging].children[minimum].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N051-Q7",
+    "nodeId": "minimum",
+    "question": "minimum：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[packaging].children[minimum].interface.boundaries; nodes[packaging].children[minimum].requirementIds; nodes[packaging].children[minimum].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N052-Q1",
+    "nodeId": "capability-check",
+    "question": "capability-check：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[packaging].children[capability-check].inputs; nodes[packaging].children[capability-check].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N052-Q2",
+    "nodeId": "capability-check",
+    "question": "capability-check：产出什么，交给谁？",
+    "answerLocation": "nodes[packaging].children[capability-check].outputs; connections[c-execution-package-to-capability-check]; connections[c-web-later-to-capability-check]; connections[c-capability-check-to-web-later]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N052-Q3",
+    "nodeId": "capability-check",
+    "question": "capability-check：谁有权决定？",
+    "answerLocation": "nodes[packaging].children[capability-check].description; nodes[packaging].children[capability-check].interface.boundaries; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N052-Q4",
+    "nodeId": "capability-check",
+    "question": "capability-check：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[packaging].children[capability-check].interface.emptyCases; nodes[packaging].children[capability-check].interface.errors; nodes[packaging].children[capability-check].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N052-Q5",
+    "nodeId": "capability-check",
+    "question": "capability-check：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[packaging].children[capability-check].validators; nodes[packaging].children[capability-check].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N052-Q6",
+    "nodeId": "capability-check",
+    "question": "capability-check：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[packaging].children[capability-check].interface.errors; nodes[packaging].children[capability-check].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N052-Q7",
+    "nodeId": "capability-check",
+    "question": "capability-check：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[packaging].children[capability-check].interface.boundaries; nodes[packaging].children[capability-check].requirementIds; nodes[packaging].children[capability-check].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N053-Q1",
+    "nodeId": "web-later",
+    "question": "web-later：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[packaging].children[web-later].inputs; nodes[packaging].children[web-later].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N053-Q2",
+    "nodeId": "web-later",
+    "question": "web-later：产出什么，交给谁？",
+    "answerLocation": "nodes[packaging].children[web-later].outputs; connections[c-web-later-to-capability-check]; connections[c-web-later-to-deviation]; connections[c-capability-check-to-web-later]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N053-Q3",
+    "nodeId": "web-later",
+    "question": "web-later：谁有权决定？",
+    "answerLocation": "nodes[packaging].children[web-later].description; nodes[packaging].children[web-later].interface.boundaries; nodes[packaging].children[web-later].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N053-Q4",
+    "nodeId": "web-later",
+    "question": "web-later：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[packaging].children[web-later].interface.emptyCases; nodes[packaging].children[web-later].interface.errors; nodes[packaging].children[web-later].terminal.retry; failurePaths[fail-web-method]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N053-Q5",
+    "nodeId": "web-later",
+    "question": "web-later：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[packaging].children[web-later].validators; nodes[packaging].children[web-later].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N053-Q6",
+    "nodeId": "web-later",
+    "question": "web-later：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[packaging].children[web-later].interface.errors; nodes[packaging].children[web-later].terminal.retry; failurePaths[fail-web-method]; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N053-Q7",
+    "nodeId": "web-later",
+    "question": "web-later：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[packaging].children[web-later].interface.boundaries; nodes[packaging].children[web-later].requirementIds; nodes[packaging].children[web-later].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N054-Q1",
+    "nodeId": "q-capacity",
+    "question": "q-capacity：用户怎样进入，需要什么输入？",
+    "answerLocation": "nodes[packaging].children[q-capacity].inputs; nodes[packaging].children[q-capacity].terminal.userRounds",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N054-Q2",
+    "nodeId": "q-capacity",
+    "question": "q-capacity：产出什么，交给谁？",
+    "answerLocation": "nodes[packaging].children[q-capacity].outputs; connections[c-q-capacity-to-execution-package]",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N054-Q3",
+    "nodeId": "q-capacity",
+    "question": "q-capacity：谁有权决定？",
+    "answerLocation": "nodes[packaging].children[q-capacity].description; nodes[packaging].children[q-capacity].interface.boundaries; nodes[packaging].children[q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N054-Q4",
+    "nodeId": "q-capacity",
+    "question": "q-capacity：失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[packaging].children[q-capacity].interface.emptyCases; nodes[packaging].children[q-capacity].interface.errors; nodes[packaging].children[q-capacity].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N054-Q5",
+    "nodeId": "q-capacity",
+    "question": "q-capacity：怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[packaging].children[q-capacity].validators; nodes[packaging].children[q-capacity].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N054-Q6",
+    "nodeId": "q-capacity",
+    "question": "q-capacity：中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[packaging].children[q-capacity].interface.errors; nodes[packaging].children[q-capacity].terminal.retry; nodes[shared].children[state].terminal.mechanism（§1.3a 状态恢复）",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-N054-Q7",
+    "nodeId": "q-capacity",
+    "question": "q-capacity：是否会使已有能力、旧功能、已有插件或既有职责退化？",
+    "answerLocation": "nodes[packaging].children[q-capacity].interface.boundaries; nodes[packaging].children[q-capacity].requirementIds; nodes[packaging].children[q-capacity].terminal.acceptance; nodes[design].children[contract].children[contract-regression].terminal.mechanism; nodes[packaging].children[capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-X-REQ",
+    "nodeId": "BLUEPRINT_CROSSCHECK",
+    "question": "是否逐条检查全部 requirements，并核对其路由与节点规则？",
+    "answerLocation": "requirements[0..13]；各 requirement.route 指向的 nodes；D6-R8-N005-Q2 已单独记录 r-dispatch 的唯一冲突",
+    "gap": null,
+    "impact": "14 条 requirements 已全部检查；除已单独记录的 dispatch 执行宿主冲突外，没有发现新的独立缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-X-CONN",
+    "nodeId": "BLUEPRINT_CROSSCHECK",
+    "question": "是否逐条检查全部 connections，并核对端点、端口和承载语义？",
+    "answerLocation": "connections[0..50]",
+    "gap": null,
+    "impact": "51 条 connections 已全部检查；节点与端口引用完整，未发现新的独立缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-X-WALK",
+    "nodeId": "BLUEPRINT_CROSSCHECK",
+    "question": "是否逐条检查全部 walkthroughs，并与节点和失败路径交叉核对？",
+    "answerLocation": "walkthroughs[0..3]",
+    "gap": null,
+    "impact": "4 条 walkthroughs 已全部检查；步骤节点与失败路径引用完整，未发现新的独立缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-X-FAIL",
+    "nodeId": "BLUEPRINT_CROSSCHECK",
+    "question": "是否逐条检查全部 failurePaths，并核对触发、接收者、恢复与验收器？",
+    "answerLocation": "failurePaths[0..12]",
+    "gap": null,
+    "impact": "13 条 failurePaths 已全部检查；detectedBy、route 与 validatorId 均能解析到有效对象，未发现新的独立缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-FE-LEAK-001",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明是否漏写会改变用户批准判断的交付签发边界与用户参与条件？",
+    "answerLocation": "nodes[delivery].children[delivery-roles].children[role-X1].terminal.mechanism; nodes[delivery].children[sign].inputs[context].description; nodes[delivery].children[sign].terminal.mechanism（§7.5，尤其签发范围、清单第 12 项与签发后复核）; failurePaths[fail-revocation].handling",
+    "gap": "冻结说明没有告诉用户三个会直接改变实际使用方式的签发规则：0.1 只支持整个冻结范围一次签发、需要分批交付时必须在设计阶段拆成多个任务；冻结合同若约定用户验收，X1 签发前必须取得实际结果；签发后出现可能推翻结论的新事实时，X1 会先暂停交付声明，并可按冻结标准维持或撤回整份签发。",
+    "impact": "用户在唯一的批准说明中看不到最终交付是否能分批、自己何时仍需参与验收，以及 X1 在交付后可暂停/撤回签发的权限，可能在不完整理解交付边界的情况下批准。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-FE-EXTRA-001",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明对执行角色宿主的陈述是否严格等于 Blueprint？",
+    "answerLocation": "requirements[r-dispatch].text; nodes[shared].children[dispatch].terminal.mechanism（§2.1 角色档次表）; nodes[delivery].children[delivery-roles].children[role-X2].terminal.mechanism; nodes[delivery].children[delivery-roles].children[role-X3].terminal.mechanism; nodes[delivery].children[delivery-roles].children[role-X4].terminal.mechanism",
+    "gap": "冻结说明第 2 节把 D4、D5、D7、X2、X3、X4 全部写成“由 Codex 跑”。Blueprint 的具体角色档次却规定 X2 的数学/精细推导等专业子任务改用 GPT Work 极高、X3 为 GPT Work 极高、X4 为执行端·专业或现有专门插件。因此冻结说明把条件性/专业执行路线写成了统一 Codex 路线。",
+    "impact": "用户会误解实际需要的宿主、模型档次、独立性和可能的资源/费用边界；即使 Blueprint 的内部冲突另行修复，这一句也必须与最终唯一规则同步。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-FE-EXTRA-002",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明关于本机已有 Python 以及 Claude Code、GPT Work、Codex、ChatGPT 网页端已经可用的陈述，Blueprint 是否有证据？",
+    "answerLocation": null,
+    "gap": "Blueprint 只规定记录检查需要 Python 3.10+，并把 Claude Code、GPT Work、Codex、ChatGPT 网页端作为目标宿主/验收环境；它没有记录当前机器已经安装 Python，也没有记录这些宿主当前已安装或无需重新安装。冻结说明第 5 节把这些未知环境事实写成了已知。",
+    "impact": "用户可能据此低估实现前需要安装/准备的资源和下载负担；这正是冻结说明“大件下载/安装”部分需要避免的未知当已知。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-FE-EXTRA-003",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明“由 X1 接手后估计工期”的承诺是否存在 Blueprint 出处？",
+    "answerLocation": null,
+    "gap": "Blueprint 没有规定 X1 接手后必须给出工期估计。冻结说明第 8 节在“设计里没有定工期”之后新增了一个未在 Blueprint 中定义的后续承诺。",
+    "impact": "会造成额外但不影响当前设计开工或验收语义的时间预期。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-FE-VALIDATORS",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明的验收器总数、54/13 划分、六类数量以及环境分类是否与 Blueprint 的 validators 数组一致？",
+    "answerLocation": "全部 54 个有效节点及子节点的 validators 数组（递归统计）；不计 terminal.acceptance",
+    "gap": null,
+    "impact": "统计一致：67 个验收器，67 个 required=true，id 无重复；54 个正常功能、13 个失败处理；六类为 8/3/15/18/13/10；环境为 real 48、source 17、built 1、installed 1。每个验收器恰好归入一类，没有把 terminal.acceptance 当成新验收器。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-FE-100MB",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明是否遗漏 Blueprint 正常交付/验收路径中已知的单项超过 100 MB 下载或安装，或把未知大小写成“没有”？",
+    "answerLocation": "nodes[shared].children[record-check].terminal.mechanism; nodes[shared].children[record-check].terminal.packages; nodes[design].children[q-checker].terminal.packages; nodes[design].children[contract].children[contract-authorization].terminal.mechanism; nodes[design].children[contract].children[contract-authorization].terminal.acceptance; nodes[design].children[freeze].terminal.acceptance[13]",
+    "gap": null,
+    "impact": "Blueprint 没有记录这些依赖的大小，因此无法证明“没有单项超过 100 MB”。冻结说明没有作这种断言，而是明确写“大小未记录”，并写明首次下载/安装前记录实际大小、单项超过 100 MB 先获用户授权；这一项没有遗漏。关于“当前机器已经安装”的无依据陈述已另记为 D6-R8-FE-EXTRA-002。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R8-FE-IDENTITY",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "本轮检查是否绑定到固定提交中的 FREEZE_EXPLANATION.md 原始字节身份？",
+    "answerLocation": "nodes[design].children[design-roles].children[role-D6].terminal.acceptance; nodes[design].children[freeze].terminal.mechanism; failurePaths[fail-freeze-explanation].handling",
+    "gap": null,
+    "impact": "已从固定提交 c21249d1c0497ec3b875949fdb524e1ae1afd965 取得文件原始字节并计算 SHA-256：dd878411f66c37e8950bb4d83018d3fdb120cb2e3215d6e884c058444ce5a97f；不是 Git blob SHA、URL、提交 SHA 或重编码文本哈希。",
+    "blocking": false,
+    "owner": "D1"
+  }
+]
