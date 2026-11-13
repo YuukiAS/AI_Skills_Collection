@@ -9,7 +9,7 @@
 ## 仓库与读取范围
 
 - 仓库：`YuukiAS/AI_Skills_Collection`（公开）。
-- 只读分支：`gates/assurance-0.1-d1`，固定提交 `794aa29144104dc069eeba3cf412d8661a1ac222`。
+- 只读分支：`gates/assurance-0.1-d1`，固定提交 `2a647bdaff3d2e8248f353d825ad789fa99bb676`。
 - 只读这三个文件：
   1. `docs/design/assurance/ASSURANCE_PROCESS_V0_1_20261110.md`：用户认可的流程，也就是用户需求原文。
   2. `docs/design/assurance/plugin-0.1-d1/blueprint.json`：受审设计，按其中的 `nodes`、`requirements`、`connections`、`walkthroughs`、`failurePaths` 阅读。
@@ -32,7 +32,7 @@
 **另外，对照 `blueprint.json` 检查冻结说明，四项：**
 1. **漏写：** 设计里会影响用户决定的内容（取舍、默认做法、被放弃的方案、权限费用、不做的事），说明里有没有漏；
 2. **多写：** 说明里有没有设计里找不到出处的承诺；
-3. **验收器：** 说明给出的验收器总数、各类个数，是否与 `blueprint.json` 中全部验收器一致：验收器是各节点（含子节点）`validators` 数组里的对象，带 `id`、`name`、`oracle`；`terminal.acceptance` 里的文字是检查条目，不是验收器；分类是否把每个验收器都放进了某一类、没有重复；
+3. **验收器与回归用例：** 说明给出的验收器总数、各类个数，是否与 `blueprint.json` 中全部验收器一致：验收器是各节点（含子节点）`validators` 数组里的对象，带 `id`、`name`、`oracle`；`terminal.acceptance` 里的文字是检查条目，不是验收器；分类是否把每个验收器都放进了某一类、没有重复；说明里回归用例的个数、每个用例的内容和判定方式，是否与设计中的回归用例集一致；
 4. **大件下载：** 设计里需要下载或安装的东西，说明是否都交代了；说明“没有超过 100 MB 的”是否与设计相符。
 
 这四项的问题也记进 `questions.json`，`nodeId` 写 `FREEZE_EXPLANATION`。另外在 `RESULT.md` 开头写明你检查的冻结说明的 `explanation_sha256`：即该提交中 `FREEZE_EXPLANATION.md` 文件原始字节的 SHA-256（读不到原始字节就如实说明）。说明的语言是否通俗不在你的检查范围内。
