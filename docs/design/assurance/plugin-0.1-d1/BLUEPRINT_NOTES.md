@@ -1328,3 +1328,160 @@ npx tsx check.mjs --stage draft "$CHECK_INPUT"
 ```
 
 本轮没有需要新增设计选择的事项。只修改指定工作树的 JSON 并追加本说明，另重新生成 D5 目录验收条目清单；SPEC、MERGE_DECISIONS、冻结说明正文、流程文档和 A 原稿均未改。未 commit、未 push、未切分支。新 JSON、整份说明和清单按用户指定正则公开信息自查，匹配数均为零。
+
+
+## 续：执行端按档次运行及冻结步骤责任人（第 23 节，D6 第 8 轮后）
+
+执行端运行位置已统一按档次表：Codex 档次沿用原运输，GPT Work 极高档次由用户在 GPT Work 转交，X4 记录所选档次或专门插件；需要用户转交的执行角色每角色每轮最多一条。冻结步骤也已写明由设计负责人追加首版、运行冻结档检查和写冻结记录。本轮无新增设计选择。
+
+完整读取实际 HEAD `612383dd299c20e7425e121d6409a10a7eb36461` 中 SPEC 第 2.1a 节、对应第 2.1 节档次表及 MERGE_DECISIONS 第 23 节。所有原先完整复制的第 2.1a 节均与最新 SPEC 逐字核对一致；角色表中负责人仍是通用的 Claude 或 GPT Pro，需用户转交的规划角色仍按此前规定在 GPT 网页端。
+
+### Blueprint 同步内容
+
+- Codex 档次（D4、D5、D7 和 X2 普通实现）：Claude 负责人直接派发，GPT 负责人生成完整提示词由用户交给 Codex。
+- GPT Work 极高档次（X2 专业子任务、X3）：无论负责人是谁，由用户在 GPT Work 按该角色会话规则新开或沿用对话转交；不得用 Codex 代替，也不得降档。
+- X4 的派发记录写明“执行端·专业（GPT Work 极高）”或具体哪一个现有专门插件。前者按 X3 的方式，后者在插件实际所在宿主运行，需要用户转交时同样由用户转交。未替 X4 选择一个默认档次或插件。
+- 凡需用户手动转交的执行端角色，每角色每轮最多一条；只有不需用户转交的派发次数不限。`r-dispatch`、`dispatch` 的机制/输入输出/接口/验收、`prompts`、修订提示及所有重复的通用运输规则均同步，删除把所有执行角色一律交给 Codex 的说法。
+- `role-X2`、`role-X3`、`role-X4` 卡片补完整运行规则与对应验收，既有 `fail-role` 的情景、收场和反例追加错误宿主、降档、X4 未记录选择、同轮多条手动转交；原探针 `v-fail-role` 的注入和预期收场同步，无新增路径或验收器。
+- 本插件自身的表述采用最新原文：D1 由 Claude 担任，X1 由 GPT Work 极高担任；Claude 只机械启动 X1 写进仓库的 Codex 派发，不参与交付判断。通用负责人规则未改。
+
+所有自身字段发生变化的节点如下；仅因子节点变化的容器不重复计入，来源提交引用更新包含在内：
+
+| 节点 id | 修改字段 |
+| --- | --- |
+| `state` | `validators` |
+| `writer` | `validators` |
+| `record-check` | `validators` |
+| `dispatch` | `inputs`、`outputs`、`validators`、`interface`、`terminal` |
+| `prompts` | `inputs`、`validators`、`interface`、`terminal` |
+| `revision` | `validators`、`terminal` |
+| `role-D1` | `inputs`、`validators`、`interface`、`terminal` |
+| `role-D2` | `validators`、`terminal` |
+| `role-D3` | `validators`、`terminal` |
+| `role-D4` | `validators` |
+| `role-D6` | `validators`、`terminal` |
+| `role-D8` | `validators`、`interface`、`terminal` |
+| `clarify` | `validators`、`terminal` |
+| `gates` | `validators`、`interface`、`terminal` |
+| `contract-fidelity` | `validators`、`interface`、`terminal` |
+| `contract-authorization` | `validators` |
+| `freeze` | `validators`、`interface`、`terminal` |
+| `q-checker` | `validators`、`terminal` |
+| `q-inheritance` | `validators`、`terminal` |
+| `role-X1` | `inputs`、`validators`、`interface`、`terminal` |
+| `role-X2` | `inputs`、`validators`、`interface`、`terminal` |
+| `role-X3` | `inputs`、`validators`、`interface`、`terminal` |
+| `role-X4` | `inputs`、`validators`、`interface`、`terminal` |
+| `role-X5` | `validators`、`terminal` |
+| `evidence` | `validators` |
+| `deviation` | `validators` |
+| `sign` | `validators` |
+| `packaging` | `validators` |
+| `source-layout` | `validators` |
+| `planning-entry` | `validators`、`terminal` |
+| `execution-package` | `validators` |
+| `minimum` | `validators`、`terminal` |
+| `capability-check` | `validators`、`terminal` |
+| `web-later` | `validators` |
+| `q-capacity` | `validators`、`terminal` |
+
+### 全部修改的复述单位
+
+任务二的三个指定单位：
+
+| 单位 id | 改动读者字段 |
+| --- | --- |
+| `wr-freeze` | `action`、`expectedResult`、`onError` |
+| `fail-freeze-explanation-step-1` | `expectedResult` |
+| `fail-freeze-explanation-whole` | `expectedResult` |
+
+`wr-freeze` 明确设计负责人执行追加首个版本、运行冻结档检查、写冻结记录；三个单位中“逐组件追问”第一次出现处，均加上用户给定的解释：即用户代理追问角色站在用户角度，对设计中每个组件逐个追问是否有答案。没有改动含义或另编术语定义。
+
+因任务一必须同步的其他五个单位，单独列出供重读：
+
+| 单位 id | 改动读者字段 |
+| --- | --- |
+| `ws-dispatch` | `expectedResult` |
+| `ws-prompts` | `action`、`expectedResult` |
+| `fail-role-whole` | `exampleData` |
+| `fail-role-step-1` | `exampleData` |
+| `fail-role-step-2` | `exampleData` |
+
+它们分别反映按档次派发、完整提示词及错误档次/宿主/转交的失败情形。实际调用固定检查器 `readerHash` 比较本轮 HEAD：共 8 个单位文字哈希改变，无新增；其余 52 个单位完整对象未变，包括技术字段。未合成或补签读者通过记录。
+
+因规则及责任人同步修改的所有既有技术字段逐项列出；“逐组件追问”的术语解释只加在读者字段：
+
+| 技术字段 | 同步内容 |
+| --- | --- |
+| `ws-dispatch.technical.expectedResult` | 补按档次分流及转交范围，或明确冻结档检查和冻结记录由 D1 执行。 |
+| `ws-prompts.technical.action` | 补准确档次、运行位置和手动转交规则，或明确 D1 执行冻结动作。 |
+| `ws-prompts.technical.expectedResult` | 补按档次分流及转交范围，或明确冻结档检查和冻结记录由 D1 执行。 |
+| `wr-freeze.technical.action` | 补准确档次、运行位置和手动转交规则，或明确 D1 执行冻结动作。 |
+| `wr-freeze.technical.expectedResult` | 补按档次分流及转交范围，或明确冻结档检查和冻结记录由 D1 执行。 |
+| `fail-role-whole.technical.exampleData` | 同步错误宿主、降档、X4 未记选择和同轮多条转交的具体情景。 |
+| `fail-role-step-1.technical.exampleData` | 同步错误宿主、降档、X4 未记选择和同轮多条转交的具体情景。 |
+| `fail-role-step-2.technical.exampleData` | 同步错误宿主、降档、X4 未记选择和同轮多条转交的具体情景。 |
+| `fail-role.technical.situation` | 追加 GPT Work 角色被送往 Codex/降档、X4 未记选择及同轮多条转交。 |
+| `fail-role.technical.handling` | 保留入口/材料处理并照录第 2.1a 节执行端运行规则。 |
+| `fail-role.technical.userSees` | 运行位置或转交不合规则时暂停，负责人按规定补齐后重派，不写成已执行。 |
+
+数量仍为 54 个节点、14 条需求、51 条连接、4 条正常走查（23 步）、13 条失败路径（24 步及 13 段整体收场）、60 个复述单位、67 个验收器对象、12 条依据记录。所有验收器仍为 `not-run`、运行记录为空，`versions: []` 不变。本轮未实际派发角色、运行产品验收或正式冻结。
+
+### 重新生成验收清单与环境分布
+
+已重新生成用户指定 D5 目录的 `acceptance-inventory.json`。条目按节点原序逐条提取，保留节点 id/标题、原文、索引、JSON 出处及 `needs`/下载判断；未做功能分类。18 个原有条目的措辞同步后重新核对需求判断，新增 10 条运行与转交验收均归 `real-host`；其他条目沿用原先同义判断，6 条 `unclear` 及原因保持。
+
+验收条目由 262 增至 **272 条**，验收器对象仍为 **67 个，未变化**。`needs` 是条目层面的机械需求判断，`environment` 统计直接取自验收器对象，没有用两者互相替代。
+
+| 验收器 environment | 本轮前 | 本轮后 |
+| --- | ---: | ---: |
+| `real` | 48 | 48 |
+| `source` | 17 | 17 |
+| `built` | 1 | 1 |
+| `installed` | 1 | 1 |
+| 合计 | 67 | 67 |
+
+| 顶层组件 | file-check | real-host | expert | user | unclear | 合计 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 共用任务协议（`shared`） | 44 | 24 | 0 | 8 | 0 | 76 |
+| 设计保障（`design`） | 79 | 28 | 0 | 6 | 2 | 115 |
+| 交付保障（`delivery`） | 25 | 15 | 6 | 0 | 3 | 49 |
+| 同源分发（`packaging`） | 18 | 12 | 1 | 0 | 1 | 32 |
+| 合计 | 166 | 79 | 7 | 14 | 6 | 272 |
+
+整个当前 JSON 的下载/安装相关搜索已重做，所有候选出处重新生成；11 个候选大小仍未记录，继续如实写“大小未记录”，不推定已有安装或自行估小。首次下载/安装前记录实际大小、超过 100 MB 先经用户授权的既定规则保留。本轮没有新增下载或安装要求，也没有安装依赖。
+
+上一版清单 SHA-256：`63ca2c4bb09068fbcba3c626ac9ab1399c14d0c62e5c7d84023e901073acf61f`；新版 SHA-256：`2bceae063210c33181e44e6c6fa08a61e36f4d88206243066b9c4813273463d1`。清单原文、归属、索引、出处、计数及源文件摘要已逐项与当前 JSON 核对。
+
+### 草稿检查与预期读者缺口
+
+检查器仍为 `529bbde9b7d0ae9d2be7084fff2b34d9e4a6af1e`，源码未改。使用缓存专用目录中的只读输入链接，分别指向本轮新 JSON 和指定 D5 目录的读者/疑问原件；原件未覆盖。先加载 Node，在检查器 `content/` 下实际离线、在线各跑一次：
+
+```bash
+module load nodejs/24.16.0
+cd "$BLUEPRINT_WORKTREE/content"
+CHECK_INPUT="$BLUEPRINT_WORKTREE/content/.cache/assurance-executor-host-612383dd/blueprint.json"
+npx tsx check.mjs --stage draft --offline "$CHECK_INPUT"
+npx tsx check.mjs --stage draft "$CHECK_INPUT"
+```
+
+变量代指用户给定工作树，实际调用使用绝对路径，公开文件不记本机路径。
+
+| 检查 | 时间（UTC） | 原始退出码 | 本轮读者缺口 | 既有读者缺口 | 其他缺口 | 人工解释待审 | 未完成核实 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 离线草稿 | `2026-11-13T12:05:19.967Z` | 1 | 8 | 3 | 0 | 92 | 1 |
+| 在线草稿 | `2026-11-13T12:07:04.002Z` | 1 | 8 | 3 | 0 | 92 | 0 |
+
+11 项均为 `reader-current-hash`。本轮 8 项就是上述两组单位；另外 3 项为本轮未改、但指定读者汇总文件尚未覆盖的 `wr-gates`、`fail-recovery-whole`、`fail-recovery-step-1`。按约定单列预期读者缺口，其他缺口为零；在线未完成核实为零，离线唯一未完成项是来源未联网核实。原始退出码没有改成零，未声称正式 D5/D8 已通过；92 项证据解释仍待人工审查。
+
+补充哈希比对起初在仓库工作树而非检查器目录调用 `npx tsx`，触发公开包元数据请求及缓存 `EROFS` 错误，未安装依赖、未完成该次比对。随后回到检查器 `content/` 用已有工具成功调用 `readerHash`。这次辅助命令错误与上表两次正常完成的草稿检查分开记录，没有修改检查器或扩大写入权限。
+
+读者原件 SHA-256 仍为 `c36ddb6392c62d597c05f11a3db71f838ab11fd2f336e298ce3a152b9062d2e7`，疑问原件仍为 `37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570`。
+
+新 JSON 的 SHA-256：
+
+```text
+2cbaaa62d77284050b03de8f9382e6fd2212841394bd458e21ee2ef030c8a247
+```
+
+本轮没有需要新增设计选择的事项。只修改指定工作树的 JSON 并追加本说明，另重新生成 D5 目录验收清单；SPEC、MERGE_DECISIONS、冻结说明正文、流程文档和 A 原稿均未改。未 commit、未 push、未切分支。新 JSON、整份说明和清单按用户指定正则自查，公开信息匹配数均为零。
