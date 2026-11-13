@@ -1,0 +1,1603 @@
+{
+  "schemaVersion": "blueprint-readability-v1",
+  "projectId": "assurance-plugins-0-1-d1",
+  "records": [
+    {
+      "subjectId": "ws-state",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "884a483d4e8cbd140c7f738d00e80f57523cb281ffa060e4c368e8c3eedf95d9",
+          "reviewedText": "这一步：定位当前任务\n这一步在做什么：负责人先读取已经绑定的任务状态。\n拿到什么：拿到明确任务目录、目标分支、当前状态，以及澄清结束时生成的不可变任务书。\n交出什么：得到本轮位置、已有决定和任务书版本，后续派发在状态记录中引用它；不要求这时已经有设计稿。\n为什么要这样：后续决定必须基于同一当前事实。\n出错会怎样：缺定位就查明来源，不能默认切到主分支。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人先定位当前任务并读取已经绑定的任务状态。2. 它拿到任务目录、目标分支、当前状态以及澄清结束时形成的不可变任务书。3. 它交出本轮所处位置、既有决定和任务书版本，之后的派发都引用这个版本，而且此时不要求已经存在设计稿。4. 这样做是为了让后续决定都基于同一组当前事实。5. 如果任务定位缺失，就查清真实来源，不能默认切到主分支。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "ws-writer",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "aff31aeaa072380ec0b81f5d8266f18fe62a870965f7451b53b42ef1d1f95f37",
+          "reviewedText": "这一步：确认写入基线\n这一步在做什么：负责人核对写者和读取的状态身份。\n拿到什么：拿到状态修订号、文件身份与实际远端分支。\n交出什么：得到可接受新结果的基线，过期记录另行处理。\n为什么要这样：并行工作不能让旧结果覆盖已发生的新决定。\n出错会怎样：写入不明先回读，仍不清楚便保留待写结果。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在接收新结果前，由负责人确认写入者面对的状态版本、文件和远端分支是否一致。2. 它拿到状态修订号、文件身份和真实远端分支。3. 它交出一个可以安全接收新结果的写入基线，并把过期记录单独处置。4. 这样做是为了避免并行工作把已经发生的新决定被旧结果覆盖。5. 如果无法判断写入是否明确，就先回读；回读后仍不清楚，则保留待写结果而不贸然落库。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "ws-dispatch",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "e945d2a555cf26c3d037f95e804f084c9ab4e1f4b78d7b440388203c67253982",
+          "reviewedText": "这一步：决定下一角色\n这一步在做什么：负责人按固定顺序寻找第一个成立的条件，只给一个下一动作。\n拿到什么：拿到当前状态、角色和澄清结束后的任务书；先按既定优先顺序选择下一动作。\n交出什么：生成设计或核查事实的角色绑定任务书，检查设计的角色绑定快照，交付工作绑定有效冻结对象。规划端一律在 GPT 网页端，每角色每轮由用户转交一条；执行端由设计负责人派发，不限次数。\n为什么要这样：第一次独立设计开始时还没有设计稿；共同任务书提供需求、决定和事实，同时避免给设计者共同的设计基线。\n出错会怎样：任务书换版就把旧版结果标为过期并交设计负责人判断；提前核查事实时也先写只含待核实问题的任务书。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人按照预先规定的优先顺序，只选出一个下一角色或下一动作。2. 它拿到当前状态、当前角色和澄清结束后的任务书。3. 它交出与下一角色绑定的材料：设计或事实核查绑定任务书，设计检查绑定快照，交付工作绑定有效冻结对象；规划侧每个角色每轮由用户转交一条 GPT 网页端提示词，执行侧由设计负责人派发。4. 这样做是为了在还没有共同设计稿时仍能给独立设计者相同的需求、决定和事实，又不向他们提供共同设计基线。5. 如果任务书换版，旧结果会标记过期并由设计负责人判断还能否使用；若提前做事实核查，也先只生成包含待核实问题的任务书。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“固定顺序”“第一个成立的条件”具体有哪些条件、优先顺序是什么，本单位没有给出，因此无法仅凭本单位判断某一状态下究竟会派给谁。\",\"“检查设计的角色绑定快照”中的“快照”具体包含哪些内容，本单位没有定义。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "33f27c6218cd46c71638a17ae161789dcd580f481e38571f71a72ecbc0c78b61",
+          "reviewedText": "这一步：决定下一角色\n这一步在做什么：负责人按固定的优先顺序（先处理状态冲突，再处理用户决定、进行中的角色、返修、必跑角色、条件角色，最后是冻结或签发）检查各条件，只给一个下一动作。\n拿到什么：拿到当前状态、角色和澄清结束后的任务书；先按既定优先顺序选择下一动作。\n交出什么：生成设计或核查事实的角色绑定任务书，检查设计的角色绑定内容快照（设计文件除版本历史以外全部内容的哈希），交付工作绑定有效冻结对象。规划端一律在 GPT 网页端，每角色每轮由用户转交一条；执行端在设计阶段由设计负责人（D1）派发，在交付阶段由交付负责人（X1）派发，次数不限。\n为什么要这样：第一次独立设计开始时还没有设计稿；共同任务书提供需求、决定和事实，同时避免给设计者共同的设计基线。\n出错会怎样：任务书换版就把旧版结果标为过期并交设计负责人判断；提前核查事实时也先写只含待核实问题的任务书。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由负责人按固定优先顺序检查当前条件，并且每次只决定一个下一动作；优先级从状态冲突、用户决定、进行中角色、返修、必跑角色、条件角色，最后到冻结或签发。\n2. 它拿到当前状态、当前角色以及澄清结束后的任务书，并先按既定顺序选择下一动作。\n3. 它交出与角色绑定的派发对象：生成设计或核查事实的角色绑定任务书，检查设计的角色绑定内容快照，交付工作绑定有效冻结对象；规划端角色每轮由用户在 GPT 网页端转交一条提示词，执行端则分别由 D1 或 X1 派发。\n4. 这样做是因为第一个独立设计者开始时还没有设计稿，因此共同任务书只提供需求、决定和事实，而不把共同设计基线提前给设计者。\n5. 如果任务书换版，旧版结果要标记为过期并交设计负责人判断；如果需要提前核查事实，也先建立只包含待核实问题的任务书。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[\"“必跑角色”和“条件角色”分别如何判定，本单位没有定义。\",\"“生成设计或核查事实的角色”与“检查设计的角色”具体包含哪些角色，本单位没有列明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        },
+        {
+          "round": 3,
+          "textHash": "16ddbb51711121b46399f7aec11de4ae15f2d314a4be150e355c51e017ce9e6e",
+          "reviewedText": "这一步：决定下一角色\n这一步在做什么：负责人按固定的优先顺序检查各条件：先处理状态冲突，再处理用户决定、进行中的角色、返修、必跑角色（流程规定每次都要跑的角色）、条件角色（满足条件才启用的角色，如现实核查、独立验收），最后是冻结或签发；只给出一个下一动作。\n拿到什么：拿到当前状态、角色和澄清结束后的任务书；先按既定优先顺序选择下一动作。\n交出什么：生成设计或核查事实的角色（两位独立设计者和现实核查）绑定任务书；检查设计的角色（四道冻结关卡）绑定内容快照（设计文件除版本历史以外全部内容的哈希）；交付工作绑定有效的冻结对象。需要用户转交的规划端角色在 GPT 网页端运行，每个角色每轮转交一条；执行端在设计阶段由设计负责人（D1）派发，在交付阶段由交付负责人（X1）派发，次数不限。\n为什么要这样：第一次独立设计开始时还没有设计稿；共同任务书提供需求、决定和事实，同时避免给设计者共同的设计基线。\n出错会怎样：任务书换版就把旧版结果标为过期并交设计负责人判断；提前核查事实时也先写只含待核实问题的任务书。",
+          "readerAgentId": "gpt-web-batch-round3",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步做什么：负责人按固定优先级检查当前条件，从状态冲突开始，依次看用户决定、正在进行的角色、返修、必跑角色、条件角色，最后才到冻结或签发，并且只选一个下一动作。\\n2. 拿到什么：当前状态、当前角色，以及澄清完成后的任务书。\\n3. 交出什么：把不同类型的下一角色绑定到相应依据上：生成设计或核查事实的角色拿任务书，四道设计检查角色拿内容快照，交付工作拿有效冻结对象；需要用户转交的规划端角色在 GPT 网页端每轮转交一条，执行端则由当前阶段负责人派发。\\n4. 为什么这样做：第一次独立设计开始时还没有设计稿，所以用共同任务书给出需求、决定和事实，又避免给独立设计者一个共同设计基线。\\n5. 出错时怎样处理：任务书换版后，旧版结果标为过期并交设计负责人判断；如果要提前核查事实，就先写一份只包含待核实问题的任务书。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":3,\"note\":\"All 10 paraphrases correct; listed confusions concern definitions outside each unit's scope. D8 complete: all 55 units passed in rounds 1-3.\",\"confusions\":[\"“状态冲突”具体指哪些冲突，仅凭本单位无法确定。\",\"“冻结或签发”分别在什么条件下发生，以及它们作为下一动作的具体内容，本单位没有说明。\",\"“有效的冻结对象”怎样判定为有效，本单位没有给出标准。\",\"“每个角色每轮转交一条”中的“一条”具体是提示词、消息还是其他转交对象，本单位没有明确。\",\"任务书换版后由设计负责人如何判断旧结果还能否使用，本单位没有给出判断规则。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round3\",\"result_commit\":\"67a45b81d972dc512f8a4dbd69e2c330eecb1a8b\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T14:43:38.000Z",
+          "batchId": "d8-batch-3"
+        },
+        {
+          "round": 4,
+          "textHash": "d9de4c11e4f25232dab104292a91aa4354d29cf89000261220c60552dbb1f7e2",
+          "reviewedText": "这一步：决定下一角色\n这一步在做什么：负责人按固定的优先顺序检查各条件：先处理状态冲突，再处理用户决定、进行中的角色、返修、必跑角色（流程规定每次都要跑的角色）、条件角色（满足条件才启用的角色，如现实核查、独立验收），最后是冻结或签发；只给出一个下一动作。\n拿到什么：拿到当前状态、角色和澄清结束后的任务书；先按既定优先顺序选择下一动作。\n交出什么：生成设计或核查事实的角色（两位独立设计者和现实核查）绑定任务书；检查设计的角色（四道冻结关卡）绑定内容快照（设计文件除版本历史以外全部内容的哈希）；交付工作绑定有效的冻结对象。需用户转交的规划端角色在 GPT 网页端，每角色每轮转交一条；执行端由设计负责人（D1）或交付负责人（X1）按阶段与档次派发：Codex 档次在 Claude 负责人时直接派发、GPT 负责人时交用户转给 Codex，GPT Work 极高档次由用户在 GPT Work 转交且不得改用 Codex 或降档，X4 按记录选专业档次或指定插件宿主；需用户转交的执行端角色每角色每轮最多一条。\n为什么要这样：第一次独立设计开始时还没有设计稿；共同任务书提供需求、决定和事实，同时避免给设计者共同的设计基线。\n出错会怎样：任务书换版就把旧版结果标为过期并交设计负责人判断；提前核查事实时也先写只含待核实问题的任务书。",
+          "readerAgentId": "gpt-web-batch-round7",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步在做什么：负责人按固定优先级从当前所有可能事项中挑出唯一的下一动作，顺序依次是状态冲突、用户决定、正在进行的角色、返修、每次必跑角色、满足条件才启用的角色，最后才是冻结或签发。2. 它拿到什么：拿到当前状态、当前角色和已经完成澄清的任务书，并据此按既定优先顺序决定下一步。3. 它交出什么：为不同类型的角色绑定相应依据：独立设计者和现实核查绑定任务书，四道冻结关卡绑定设计内容快照，交付工作绑定有效冻结对象；同时按负责人类型和执行档次决定由谁把消息交给 Codex、GPT Work 或其他指定宿主，并限制每个需用户转交的角色每轮只转交一条。4. 为什么这样做：第一次独立设计开始时还没有现成设计稿，因此用共同任务书提供相同的需求、决定和事实，而又不让设计者共享一份既有设计基线。5. 出错时会怎样：任务书一旦换版，旧版结果会被标成过期并交给设计负责人判断；如果要提前核查事实，也先建立一份只包含待核实问题的任务书再派发。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"pass\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":7,\"note\":\"复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。\",\"confusions\":[\"“X4”具体是什么角色，本单位没有定义。\",\"执行端所依据的完整“档次”对应关系没有列出，因此无法只凭本单位确定所有角色应使用哪个宿主或模型档次。\",\"“状态冲突”具体包括哪些状态组合，以及各条件角色的启用条件，本单位没有给出。\",\"“有效的冻结对象”需要满足哪些条件才算有效，本单位没有定义。\"],\"evidence_commit\":\"fb77fb107c4c00830146d083b67fd566723227ca\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round7\",\"blueprint_commit\":\"2a647bdaff3d2e8248f353d825ad789fa99bb676\",\"result_commit\":\"54f3d7877f627e889703efa9e9450ed3b98145af\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-13T13:26:46.000Z",
+          "batchId": "d8-batch-7"
+        }
+      ]
+    },
+    {
+      "subjectId": "ws-prompts",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "502065ea5246f1fdbfffcfae689349b1927631436898b09d83afd035d49517b2",
+          "reviewedText": "这一步：交出完整消息\n这一步在做什么：负责人把派发展开成可直接复制的提示词。\n拿到什么：拿到确切仓库、分支、任务书位置与身份、读限、写入目录和角色卡。\n交出什么：用户拿到该规划端角色本轮的一条完整提示词；读者复述在一个新的 GPT 对话里合批处理本轮全部单位。对话随机逐个作答，每单位只依据自身文字，由设计负责人逐项判断。\n为什么要这样：新接收者不应靠旧聊天猜授权和产出。\n出错会怎样：缺材料先补齐；读错则改写，下一轮只把改过单位和受影响相邻单位交一个新 GPT 对话重读，仍只转交一条。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人把已经决定好的派发内容展开成新接收者可以直接复制使用的一条完整提示词。2. 它拿到确切仓库、分支、任务书位置与身份、读取限制、写入目录和角色卡。3. 它交给用户该规划角色本轮唯一的一条完整提示词；读者复述则在一个新的 GPT 对话中合批处理本轮全部单位，每个单位只依据自己的文字，由设计负责人逐项判断。4. 这样做是为了让新接收者不需要依靠旧聊天猜测授权、材料和产出。5. 如果材料缺失就先补齐；若某单位被读错则先改写，下一轮只把改动单位及受影响相邻单位放进一个新的 GPT 对话重读，仍然只让用户转交一条提示词。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“受影响相邻单位”由什么规则判断为受影响，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "1919abed33731a896f011dfe70c893cb3ce19f8902fde7fa21fcda474cb57ce5",
+          "reviewedText": "这一步：交出完整消息\n这一步在做什么：负责人把派发展开成可直接复制的提示词。\n拿到什么：拿到确切仓库、分支、任务书位置与身份、读限、写入目录和角色卡。\n交出什么：用户拿到该规划端角色本轮的一条完整提示词；读者复述在一个新的 GPT 对话里合批处理本轮全部单位。对话随机逐个作答，每单位只依据自身文字，由设计负责人逐项判断。\n为什么要这样：新接收者不应靠旧聊天猜授权和产出。\n出错会怎样：缺材料先补齐；读错则改写，下一轮只把改过单位和与改写单位属于同一步骤或同一失败路径的单位交一个新 GPT 对话重读，仍只转交一条。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由负责人把一次角色派发整理成接收者可以直接复制使用的完整提示词。\n2. 它拿到确切仓库、分支、任务书的位置和身份、读取限制、允许写入的目录以及角色卡。\n3. 它交出该规划端角色本轮唯一的一条完整提示词；读者复述则在一个新的 GPT 对话里一次处理本轮全部单位，每个单位只按自身文字作答，再由设计负责人逐项判断。\n4. 这样做是为了让新接收者只靠当前派发就知道授权和产出要求，不需要猜旧聊天内容。\n5. 如果材料缺失先补齐；如果读者读错，就改写文字，下一轮只把改过的单位以及与它属于同一步骤或同一失败路径的单位放进新的 GPT 对话重读，仍然只转交一条提示词。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[\"“对话随机逐个作答”中的“随机”具体只指单位作答顺序随机，还是还包括其他随机化，文字没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        },
+        {
+          "round": 3,
+          "textHash": "8d7ab810ead3322e2dc369b97e3fd4bbc411d79f45c181f2b8a068b1987956a4",
+          "reviewedText": "这一步：交出完整消息\n这一步在做什么：负责人把派发展开成可直接复制的提示词。Claude 担任负责人时直接派发执行端，GPT 担任时生成完整提示词交用户转交给 Codex。\n拿到什么：拿到确切仓库、分支、任务书位置与身份、读限、写入目录和角色卡。\n交出什么：用户拿到需要转交的规划端角色本轮的一条完整提示词；读者复述在一个新的 GPT 对话里合批处理本轮全部单位。对话随机逐个作答，每单位只依据自身文字，由设计负责人逐项判断。\n为什么要这样：新接收者不应靠旧聊天猜授权和产出。\n出错会怎样：缺材料先补齐；读错则改写，下一轮只把改过单位和与改写单位属于同一步骤或同一失败路径的单位交一个新 GPT 对话重读，仍只转交一条。",
+          "readerAgentId": "gpt-web-batch-round3",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步做什么：负责人把一次派发整理成接收者可以直接复制使用的完整提示词；如果负责人是 Claude，就直接派发执行端，如果负责人是 GPT，就生成完整提示词交给用户再转给 Codex。\\n2. 拿到什么：明确的仓库、分支、任务书位置和身份、读取限制、写入目录以及角色卡。\\n3. 交出什么：用户得到需要转交给规划端角色的本轮一条完整提示词；如果是读者复述，则把本轮全部单位放进一个新的 GPT 对话中合批，按随机顺序逐单位作答，每个单位只能依据自己的文字，再由设计负责人逐项判断。\\n4. 为什么这样做：新的接收者不应该依赖旧聊天去猜授权范围或应该产出什么。\\n5. 出错时怎样处理：缺材料就先补齐；如果某单位被读错，就改写，并在下一轮只把改过的单位及与其属于同一步骤或同一失败路径的单位交给一个新的 GPT 对话重读，同时仍保持一次转交一条完整消息。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":3,\"note\":\"All 10 paraphrases correct; listed confusions concern definitions outside each unit's scope. D8 complete: all 55 units passed in rounds 1-3.\",\"confusions\":[\"“Claude 担任负责人”具体指哪个 Claude 宿主或运行方式，本单位没有明确。\",\"“规划端角色”和“执行端”各自的边界与职责，本单位没有定义。\",\"“任务书身份”具体是名称、版本、哈希还是其他标识，本单位没有说明。\",\"“读限”具体限制什么读取范围，本单位没有展开。\",\"“对话随机逐个作答”的随机顺序由谁产生、如何保证，本单位没有说明。\",\"怎样判断单位之间“属于同一步骤或同一失败路径”，本单位没有规则。\",\"“仍只转交一条”是指一个包含多个待重读单位的提示词，还是别的消息单位，本单位没有完全明确。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round3\",\"result_commit\":\"67a45b81d972dc512f8a4dbd69e2c330eecb1a8b\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T14:43:38.000Z",
+          "batchId": "d8-batch-3"
+        },
+        {
+          "round": 4,
+          "textHash": "a239d3b8d81e4c7555ade617382199de3dc931ec75eafe2525ed2009364d98ec",
+          "reviewedText": "这一步：交出完整消息\n这一步在做什么：负责人把派发展开成可直接复制的提示词。Codex 档次在 Claude 负责人时直接派发、GPT 负责人时交用户转给 Codex；GPT Work 极高档次必须由用户在 GPT Work 转交，不得改用 Codex 或降档，X4 写明专业档次或所用专门插件；需要用户转交的执行端角色每角色每轮最多一条。\n拿到什么：拿到确切仓库、分支、任务书位置与身份、读限、写入目录和角色卡。\n交出什么：用户拿到需要转交的角色（含规划端和需要用户转交的执行端）本轮的一条完整提示词；读者复述在一个新的 GPT 对话里合批处理本轮全部单位。对话随机逐个作答，每单位只依据自身文字，由设计负责人逐项判断。\n为什么要这样：新接收者不应靠旧聊天猜授权和产出。\n出错会怎样：缺材料先补齐；读错则改写，下一轮只把改过单位和与改写单位属于同一步骤或同一失败路径的单位交一个新 GPT 对话重读，仍只转交一条。",
+          "readerAgentId": "gpt-web-batch-round7",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步在做什么：负责人把一次角色派发整理成可以直接复制给接收者的完整提示词，并按负责人类型、角色档次和宿主决定是直接派发还是让用户转交。2. 它拿到什么：拿到确切的仓库、分支、任务书位置与身份、可读取范围、可写目录和角色卡。3. 它交出什么：用户得到每个需要自己转交的角色在本轮唯一的一条完整提示词；读者复述则放到一个新的 GPT 对话中合批处理本轮全部单位，随机逐个回答，每个单位只看自己的文字，再由设计负责人逐项判断。4. 为什么这样做：让新接收者只靠本次完整消息就能知道授权和产出要求，不需要从旧聊天里猜。5. 出错时会怎样：材料不全先补材料；某单位被读错就改写，下一轮只把改过的单位及与它处在同一步骤或同一失败路径的单位交给一个新的 GPT 对话重读，而且对每个需用户转交的角色仍只转交一条消息。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"pass\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":7,\"note\":\"复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。\",\"confusions\":[\"“Claude 负责人”和“GPT 负责人”分别是什么身份、为什么决定 Codex 的派发方式，本单位没有定义。\",\"“X4”具体是什么角色，本单位没有定义。\",\"文中引用了角色“档次”及档次规则，但没有给出完整档次表，因此无法从本单位知道除已举例部分之外的档次对应关系。\"],\"evidence_commit\":\"fb77fb107c4c00830146d083b67fd566723227ca\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round7\",\"blueprint_commit\":\"2a647bdaff3d2e8248f353d825ad789fa99bb676\",\"result_commit\":\"54f3d7877f627e889703efa9e9450ed3b98145af\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-13T13:26:46.000Z",
+          "batchId": "d8-batch-7"
+        }
+      ]
+    },
+    {
+      "subjectId": "ws-designer",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "1fedd61260a24ab2d6033872e1ca75d2e74d8e280c82746952faf6b78e9ecffe",
+          "reviewedText": "这一步：独立完成候选\n这一步在做什么：独立设计者只读允许材料并形成完整设计。\n拿到什么：拿到带原话出处的需求、已有用户决定、事实来源、开放事项和读限，不拿到共同设计基线。\n交出什么：交回绑定任务书版本的完整候选；任务书换版后旧结果保留但标为过期，由负责人判断还能支持的部分。\n为什么要这样：独立原稿使负责人能够比较不同方案。\n出错会怎样：读不到必要材料就说明缺项，不读取另一位设计者。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是独立设计者只读取允许的材料，独立形成一份完整候选设计。2. 它拿到带原话出处的需求、已有用户决定、事实来源、开放事项和读取限制，但不会拿到共同设计基线。3. 它交出绑定特定任务书版本的完整候选；若任务书换版，旧结果保留但标记过期，由负责人判断还能使用哪些部分。4. 这样做是为了让负责人能够比较真正独立形成的不同方案。5. 如果必要材料读不到，就说明缺项，而且不能转去读取另一位设计者的成果。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "ws-owner",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "141bbcb59e8fbb8523e6999262fdc4ae5d1e3349a7fcd3ba253994ce4a4f28ca",
+          "reviewedText": "这一步：收敛两份原稿\n这一步在做什么：设计负责人亲读独立原稿并说明取舍。\n拿到什么：拿到独立原稿、各自绑定的任务书版本、问题和来源记录。\n交出什么：得到一份汇总设计及下一轮要核查的具体对象。\n为什么要这样：冻结前必须把关键决定收敛成一个完整方案。\n出错会怎样：任务书换版后先判断旧结果还能支持哪些部分；仍有关键互斥决定时先澄清，不让执行者临场补设计。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是设计负责人亲自阅读多份独立原稿，并明确说明如何取舍和收敛。2. 它拿到独立原稿、各原稿绑定的任务书版本、问题和来源记录。3. 它交出一份汇总后的完整设计，以及下一轮需要核查的具体对象。4. 这样做是为了在冻结前把关键决定收敛成一个完整方案。5. 如果任务书换版，就先判断旧结果还能支持哪些部分；若仍有关键且互斥的决定，就先澄清，不能留给执行者现场补设计。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "wb-source",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "a235761237b6a95ed879424d2262224b3051e5f2b861962825cb913fdcc57d8a",
+          "reviewedText": "这一步：核对源文件\n这一步在做什么：实施者核对唯一可编辑规则源和复制映射。\n拿到什么：拿到已批准并完成冻结的合同、四个技能目录、共用角色模板和生成器。\n交出什么：得到不会手工维护第二套正文的构建输入。\n为什么要这样：同源规则避免宿主之间逐渐分叉。\n出错会怎样：没有冻结合同就不开始实现，只保留现实核查和材料整理；检查器作为已交付前置工作调用，不在这里改造。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是实施者确认唯一可以编辑的规则源，以及这些规则如何复制到需要的位置。2. 它拿到已批准并冻结的合同、四个技能目录、共用角色模板和生成器。3. 它交出一组构建输入，使规则正文只维护一份而不是人工维护第二套。4. 这样做是为了让不同运行环境共享同一规则源，避免逐渐分叉。5. 如果还没有冻结合同，就不开始实现，只做现实核查和材料整理；已有检查器只作为前置成品调用，不在这里改造。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"最后一句所说的“检查器”具体是哪一个检查器、检查什么，本单位没有给出。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "09c002c3027047d720d705b853096684dcab2a5a973843b44bbabff63b72f2b3",
+          "reviewedText": "这一步：核对源文件\n这一步在做什么：实施者核对唯一可编辑规则源和复制映射（生成插件包时，哪些源文件复制到包内哪个位置的对照表）。\n拿到什么：拿到已批准并完成冻结的合同、四个技能目录、共用角色模板和插件包生成器（仓库里把源技能打包成插件的脚本）。\n交出什么：得到不会手工维护第二套正文的构建输入。\n为什么要这样：同源规则避免运行插件的工具（宿主，如 Claude Code、Codex 或 GPT 网页端）之间逐渐分叉。\n出错会怎样：没有冻结合同就不开始实现，只保留现实核查和材料整理；固定版本的 Blueprint 检查器作为已交付前置工作调用，不在这里改造。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由实施者核对唯一可编辑的规则源，以及生成插件包时源文件复制到包内位置的映射，确保构建只维护一套正文。\n2. 它拿到已批准且完成冻结的合同、四个技能目录、共用角色模板和把源技能打包成插件的生成器。\n3. 它交出一套不会靠人工再维护第二份正文的构建输入。\n4. 这样做是为了让 Claude Code、Codex、GPT 网页端等不同宿主使用同一来源，避免规则逐渐分叉。\n5. 如果没有冻结合同，就不开始实现，只做现实核查和材料整理；已经交付的固定版本 Blueprint 检查器只作为前置工具调用，不在这里改造。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[\"“四个技能目录”具体是哪四个，本单位没有给出身份或位置。\",\"“固定版本的 Blueprint 检查器”在本单位中只被称为已交付前置工作，没有说明它具体检查哪些内容。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        }
+      ]
+    },
+    {
+      "subjectId": "wb-planning",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "2278555cbbb4944e769e86dd53614007bb0895665ccbb4290f9fd366b0a2ccb9",
+          "reviewedText": "这一步：确定读取来源\n这一步在做什么：入口明确给出固定源提交或宿主可读包根。\n拿到什么：拿到同一规划正文与支持资源的实际定位。\n交出什么：得到可以跨宿主核对的同源读取方式。\n为什么要这样：文件格式相同不代表任意包目录都自动可见。\n出错会怎样：资源根未确认时不声称完整加载。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在开始规划读取前，明确一个固定源提交或当前环境确实能读取的包根。2. 它拿到规划正文和配套资源的实际位置。3. 它交出一种在不同运行环境中仍能核对为同一来源的读取方式。4. 这样做是因为文件格式相同并不代表任何包目录都能被当前环境看见。5. 如果资源根没有确认，就不能声称已经完整加载了规划材料。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“宿主可读包根 / 跨宿主”里的“宿主”具体指哪类运行环境或工具，单靠本单位不能完全确定。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "b5bcbc57582e12007161a7f2028d0a46396d797a35dee4e33618855b5ec8d2b7",
+          "reviewedText": "这一步：确定读取来源\n这一步在做什么：入口明确给出固定的源仓库提交（指定的版本，读取规则时不随最新改动变化），或者运行插件的工具（宿主，如 Claude Code、Codex 或 GPT 网页端）可读的插件包的根目录（安装后包内文件的起点）。\n拿到什么：拿到同一规划正文与支持资源的实际定位。\n交出什么：得到可以跨宿主核对的同源读取方式。\n为什么要这样：文件格式相同不代表任意包目录都自动可见。\n出错会怎样：资源根未确认时不声称完整加载。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步为规划内容确定一个可重复读取的来源：要么指定固定的源仓库提交，要么指定宿主能够读取的已安装插件包根目录。\n2. 它拿到同一份规划正文及其支持资源的实际位置。\n3. 它交出一种可以在不同宿主之间核对、且来源一致的读取方式。\n4. 这样做是因为即使文件格式相同，也不能假设任何插件包目录都会被所有宿主自动看见。\n5. 如果插件包的资源根目录还没有确认，就不能声称已经完整加载了规划内容。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        },
+        {
+          "round": 3,
+          "textHash": "51d38a1113e5250314b74c75041f9f00bf181db18d55797c96d7d0046724c66f",
+          "reviewedText": "这一步：确定读取来源\n这一步在做什么：入口明确给出固定的源仓库提交（指定的版本，读取规则时不随最新改动变化），或者运行插件的工具（宿主，如 Claude Code、Codex 或 GPT 网页端）可读的插件包的根目录（安装后包内文件的起点）。\n拿到什么：拿到同一规划正文与支持资源的实际定位。\n交出什么：Claude Code 和 GPT Work 实际读取同一固定来源的规划正文、角色卡和模板，得到可以跨宿主核对的同源读取方式。\n为什么要这样：文件格式相同不代表任意包目录都自动可见。\n出错会怎样：资源根未确认时不声称完整加载。",
+          "readerAgentId": "gpt-web-batch-round3",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步做什么：先确定规划材料实际从哪里读取，要么由入口指定一个固定的源仓库提交，要么指定当前宿主能够读取的已安装插件包根目录。\\n2. 拿到什么：同一份规划正文和支持资源的实际位置。\\n3. 交出什么：让 Claude Code 和 GPT Work 都从同一固定来源读取规划正文、角色卡和模板，从而得到可以跨宿主核对的同源读取方式。\\n4. 为什么这样做：即使文件格式相同，也不能推定任何包目录都会自动被不同宿主看到，所以必须明确真实来源。\\n5. 出错时怎样处理：如果资源根还没有确认，就不能声称已经完整加载这些材料。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":3,\"note\":\"All 10 paraphrases correct; listed confusions concern definitions outside each unit's scope. D8 complete: all 55 units passed in rounds 1-3.\",\"confusions\":[\"“入口”具体是什么组件或角色，本单位没有说明。\",\"固定源仓库提交与插件包根目录这两种来源何时分别使用，本单位没有给出选择规则。\",\"“同一规划正文与支持资源”具体包含哪些文件，本单位没有列明。\",\"插件包根目录如何发现或确认，本单位没有说明。\",\"什么条件达到后才可以称为“完整加载”，本单位没有给出验收标准。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round3\",\"result_commit\":\"67a45b81d972dc512f8a4dbd69e2c330eecb1a8b\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T14:43:38.000Z",
+          "batchId": "d8-batch-3"
+        }
+      ]
+    },
+    {
+      "subjectId": "wb-execution",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "2171b26e418ea54eabcab4eb68aeead0e3cc508214db52eb19e3f04b6862f9f8",
+          "reviewedText": "这一步：生成执行包\n这一步在做什么：实施者用现有生成器形成两个执行插件。\n拿到什么：拿到已裁决的十二个插件、三十二个技能预算、两个新增执行技能和共用资源。\n交出什么：两个新插件进入市场，原有十个插件和三十个技能全部保留。\n为什么要这样：用户要通过实际安装入口消费规则。\n出错会怎样：容量未决定或旧能力被挤掉时不能声明构建完成。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是实施者使用现有生成器生成两个新的执行插件。2. 它拿到已经裁决好的十二个插件、三十二个技能的容量预算、两个新增执行技能和共用资源。3. 它交出两个进入市场的新插件，同时原来的十个插件和三十个技能全部保留。4. 这样做是为了让用户通过实际安装入口来使用这些规则。5. 如果容量还没有确定，或新增内容挤掉了旧能力，就不能声明构建已经完成。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“三十二个技能预算”以及最后所说“容量”具体受什么平台上限约束，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "77d7aa42d6796d00671c158d0963fdd0022e354ecee3f27da78fe036cd950441",
+          "reviewedText": "这一步：生成执行包\n这一步在做什么：实施者用现有生成器形成两个执行插件。\n拿到什么：拿到已裁决的插件市场的容量上限（本次定为 12 个插件、32 个技能）、两个新增执行技能和共用资源。\n交出什么：两个新插件进入市场，原有十个插件和三十个技能全部保留。\n为什么要这样：用户要通过实际安装入口消费规则。\n出错会怎样：容量未决定或旧能力被挤掉时不能声明构建完成。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由实施者使用现有生成器，把已经决定的执行能力打包成两个执行插件。\n2. 它拿到已裁决的插件市场容量上限（12 个插件、32 个技能）、两个新增执行技能和共用资源。\n3. 它交出两个进入插件市场的新插件，同时保留原有十个插件和三十个技能。\n4. 这样做是因为用户需要通过真正的安装入口来使用这些规则，而不只是看到源文件。\n5. 如果市场容量还没有决定，或者新增插件挤掉了旧能力，就不能声称构建完成。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        }
+      ]
+    },
+    {
+      "subjectId": "wb-capability",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "9964b026a75c53c384d8fffd5397dc4b0a06a97227187e6912b89505beb2ffa3",
+          "reviewedText": "这一步：转入真实验证\n这一步在做什么：负责人使用同一最终包安排实际宿主任务。\n拿到什么：拿到生成对象身份、原始构建记录和已定验收范围。\n交出什么：得到需要实际观察的能力与失败情形清单。\n为什么要这样：生成成功只证明机械构造，不能替代正常使用。\n出错会怎样：宿主未运行或证据不足时保留无法判断。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人拿同一个最终包去安排真实运行环境里的实际任务，以验证能力。2. 它拿到生成对象的身份、原始构建记录和已经确定的验收范围。3. 它交出一份必须通过真实观察来确认的能力和失败情形清单。4. 这样做是因为成功生成产物只证明机械构造完成，并不能证明正常使用真的有效。5. 如果真实环境没有运行，或证据不足，就保留为无法判断。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“实际宿主任务”中的“宿主”具体指哪种运行平台或环境，本单位没有明确。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "20b7646270dcaee96dc45ee99e177c69c67eebfb0ca5871014a404a39fdba7f4",
+          "reviewedText": "这一步：转入真实验证\n这一步在做什么：负责人使用同一最终包安排实际运行插件的工具（宿主，如 Claude Code、Codex 或 GPT 网页端）任务。\n拿到什么：拿到生成对象身份、原始构建记录和已定验收范围。\n交出什么：得到需要实际观察的能力与失败情形清单。\n为什么要这样：生成成功只证明机械构造，不能替代正常使用。\n出错会怎样：宿主未运行或证据不足时保留无法判断。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由负责人把同一个最终插件包转入真实运行验证，安排 Claude Code、Codex、GPT 网页端等宿主实际执行任务。\n2. 它拿到生成对象的身份、原始构建记录和已经确定的验收范围。\n3. 它交出一份需要在真实运行中观察的能力清单和失败情形清单。\n4. 这样做是因为生成器成功产出包，只能证明机械构造成功，不能证明普通使用真的可用。\n5. 如果宿主没有真正运行，或者证据不足，就保留“无法判断”。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        },
+        {
+          "round": 3,
+          "textHash": "44ff0ad4787302698369b09e87388a1d0d84ec83a70d0ee2ad91d76f7859d105",
+          "reviewedText": "这一步：转入真实验证\n这一步在做什么：交付负责人使用同一最终包安排实际运行插件的工具（宿主，如 Claude Code、Codex 或 GPT 网页端）任务，按设计中的 8 个回归用例（R1–R7、S1）逐条检查。\n拿到什么：拿到生成对象身份、原始构建记录和已定验收范围。\n交出什么：得到每个用例及其中每条检查的判定；最终候选在同一版本上完整跑一遍，8 个用例全部通过才算做完。\n为什么要这样：生成成功只证明机械构造，不能替代正常使用。\n出错会怎样：有用例不过就回到实现修复，开发中只重跑没过的和本次修改受影响的用例；最终完整运行后再改代码，就要再完整跑一遍。",
+          "readerAgentId": "gpt-web-batch-round7",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步在做什么：交付负责人拿同一个最终包，在真正会运行插件的宿主工具中安排实际运行任务，并按设计规定的 8 个回归用例 R1–R7、S1 逐条验证。2. 它拿到什么：拿到本次生成对象的身份、原始构建记录，以及已经确定好的验收范围。3. 它交出什么：得到 8 个用例中每个用例、以及用例内部每条检查的判定；最终候选必须在同一个版本上把完整 8 个用例全部跑过且全部通过，才算完成。4. 为什么这样做：只证明东西被成功生成还不足以证明它在正常使用中有效，因此要做真实运行验证。5. 出错时会怎样：某个用例失败就回到实现修复；开发过程中只重跑失败用例和本次改动可能影响的用例；一旦做过最终完整运行后又改了代码，就必须重新完整运行全部 8 个用例。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"pass\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":7,\"note\":\"复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。\",\"confusions\":[\"R1–R7 和 S1 各自检查什么，本单位没有给出，因此只能理解验证流程，无法知道具体能力要求。\"],\"evidence_commit\":\"fb77fb107c4c00830146d083b67fd566723227ca\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round7\",\"blueprint_commit\":\"2a647bdaff3d2e8248f353d825ad789fa99bb676\",\"result_commit\":\"54f3d7877f627e889703efa9e9450ed3b98145af\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-13T13:26:46.000Z",
+          "batchId": "d8-batch-7"
+        }
+      ]
+    },
+    {
+      "subjectId": "wi-entry",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "fdfb66948ffcc09548f863e09f1aeeee5d872dcd40819ccd3e9477420b72beec",
+          "reviewedText": "这一步：调用已派发技能\n这一步在做什么：执行者从安装后的正式入口读取本次派发。\n拿到什么：拿到最终包身份、唯一技能名称和允许范围。\n交出什么：得到完整可读的角色规则与支持资源。\n为什么要这样：源码目录可读不能代替安装入口可用。\n出错会怎样：没有有效派发或包缺资源时说明具体问题并停在此处。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是执行者通过安装后的正式入口读取本次已经派发给自己的技能任务。2. 它拿到最终包身份、唯一技能名称和允许执行的范围。3. 它交出完整可读的角色规则和配套资源。4. 这样做是因为能看到源码目录并不能证明安装后的正式入口真的可用。5. 如果派发无效或安装包缺资源，就明确说明具体问题并停在这里。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "wi-check",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "1cce9fbf66c42ece2586d8b4586394612f23198d0e38c66e6e26e14935bdb09b",
+          "reviewedText": "这一步：观察真实使用\n这一步在做什么：验收者核对正式入口中的实际工作和回写。\n拿到什么：拿到原始调用记录、实际产物与对应版本。\n交出什么：得到支持或反驳安装能力的直接证据。\n为什么要这样：安装清单本身不能证明角色工作执行正确。\n出错会怎样：拿不到原始观察时不由摘要补写通过。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是验收者从正式入口观察实际工作过程和回写结果。2. 它拿到原始调用记录、真实产物以及各自对应的版本。3. 它交出直接证据，用来支持或反驳安装后的能力是否真的成立。4. 这样做是因为安装清单只能证明装了什么，不能证明角色工作执行正确。5. 如果拿不到原始观察，就不能用摘要替代原始证据补出一个通过结论。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "wi-web",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "936dbe6f0381921f296c519cff1f1bd635e908bf9f403f401bcb071fdd586a24",
+          "reviewedText": "这一步：在网页端验收规划包\n这一步在做什么：专项检查者在真实的 ChatGPT 网页端上传包并新开对话，读取规划正文、至少一张角色卡和一份模板。再依据公开安全的示例任务状态生成下一条完整提示词，并按要求写回指定分支，无写权限时如实给出内容。\n拿到什么：拿到来自同一规则源的两规划入口包、公开安全的示例任务状态和实际仓库权限。\n交出什么：得到三件事的原始对话记录，由交付负责人判断是否签发；只上传成功不算通过。\n为什么要这样：网页端没有本地终端，不能以本地安装或上传成功代替实际读取、生成和写回的验证。\n出错会怎样：找不到或无法复现既有打包方法时，由实现者把实际偏离交给交付负责人，不另造打包方式；缺写权限时给出内容并记录实际边界。",
+          "readerAgentId": "gpt-web-batch-round4",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步在做什么：专项检查者要在真实的 ChatGPT 网页端上传规划包并新建对话，实际读取规划正文、至少一张角色卡和一份模板；随后根据一个公开且安全的示例任务状态生成下一条完整提示词，并尝试把它按要求写回指定分支，没有写权限时则如实给出生成内容。2. 它拿到什么：来自同一规则源的两个规划入口包、一个公开安全的示例任务状态，以及当时真实的仓库权限。3. 它交出什么：交付负责人拿到用于判断是否签发的原始对话记录；仅仅证明文件上传成功还不算这一步通过。4. 为什么要这样做：因为网页端没有本地终端，所以必须验证网页端是否真的能读取材料、生成后续提示词并完成写回或暴露真实权限边界，不能拿本地安装结果或上传成功来替代。5. 出错时会怎样：如果找不到或无法复现既有的打包方法，实现者要把实际偏离交给交付负责人，不能自行另造打包方式；如果没有写权限，就给出本应写回的内容，并记录实际权限边界。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":4,\"note\":\"3 new units correct; confusions out of unit scope. D8 complete: 58 units passed.\",\"confusions\":[\"“来自同一规则源的两规划入口包”：我不知道“两规划入口包”具体是哪两个包，也不知道“同一规则源”具体指什么。\",\"“公开安全的示例任务状态”：本单位没有说明这种“任务状态”的具体内容、格式或必须包含哪些信息，因此我无法确定检查者实际拿到的是什么。\",\"“得到三件事的原始对话记录”：正文没有明确把这“三件事”逐一对应出来；前面同时出现了读取多类材料、生成提示词和写回等动作，我拿不准三件事究竟指哪三项。\",\"“并按要求写回指定分支”：本单位没有给出这里所说的具体“要求”或“指定分支”，因此我只能知道要写回，但不知道准确写到哪里以及写回条件是什么。\",\"“既有打包方法”：本单位只说找不到或无法复现时如何处理，没有说明这个既有方法本身是什么，因此我无法知道失败时具体是在复现哪一种打包做法。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round4\",\"result_commit\":\"4cf76aa268a2b3ff23df1bb0cc4ddb24d44fc97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T17:24:14.000Z",
+          "batchId": "d8-batch-4"
+        }
+      ]
+    },
+    {
+      "subjectId": "wr-contract",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "a859fd7d523a8953e822591d0011b4c34bc6fc7c49935834578938cd22e76ee5",
+          "reviewedText": "这一步：核对九项语义\n这一步在做什么：D1核对设计是否包含九项明确完成语义。\n拿到什么：拿到用户要求、完整设计和关键开放问题。\n交出什么：得到九项完成约定明确的受审设计；机械摘要从同一内容快照中只删规定字段，其余全部保留，节点内的具体设计和新增字段也参与计算。\n为什么要这样：没有完成定义就无法判断后续产物有没有做到。\n出错会怎样：定义内容、走查或失败处理有缺口时先补设计，不能因为不在九项合同节点内就忽略。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是 D1 检查设计是否把九项完成语义都明确写出来。2. 它拿到用户要求、完整设计和关键开放问题。3. 它交出一份九项完成约定都明确的受审设计；机械摘要基于同一内容快照，仅删除规定字段，其余内容包括节点里的具体设计和新增字段都保留并纳入计算。4. 这样做是因为如果没有明确完成定义，就无法判断后续产物是否真的完成。5. 如果定义、走查或失败处理存在缺口，就先补设计，不能因为某内容不位于九项合同节点中而忽略。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"D1 是什么角色或阶段，本单位没有定义。\",\"“九项语义”具体是哪九项，本单位没有列出。\",\"机械摘要要删除哪些“规定字段”，本单位没有说明。\",\"“节点内的具体设计和新增字段也参与计算”里的“计算”具体计算什么，本单位无法确定。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "64ba9988ea8d07e246f5a43c541ef0fd78b83a8da73363ebec509659c49ae19d",
+          "reviewedText": "这一步：核对冻结合同的九项内容（能力范围、入口与最终对象、成败与无法判断、证据、禁止替代、旧功能、控制例、变更权、授权边界）\n这一步在做什么：设计负责人（D1）核对设计是否包含九项明确完成语义。\n拿到什么：拿到用户要求、完整设计和关键开放问题。\n交出什么：得到九项完成约定明确的受审设计；机械摘要从同一内容快照（设计文件除版本历史以外全部内容的哈希）中只删进度、运行和出处字段，其余全部保留，节点内的具体设计和新增字段也参与计算。\n为什么要这样：没有完成定义就无法判断后续产物有没有做到。\n出错会怎样：定义内容、走查或失败处理有缺口时先补设计，不能因为不在九项合同节点内就忽略。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由设计负责人（D1）检查设计里是否把九类完成约定都说清楚，包括范围、入口和最终对象、结果状态、证据、禁止替代、旧功能、控制例、变更权和授权边界。\n2. 它拿到用户要求、完整设计和仍然关键的开放问题。\n3. 它交出一份九类完成约定明确的受审设计；同时，机械摘要必须基于同一个内容快照，只去掉进度、运行和出处字段，其他设计内容和新增字段仍参与计算。\n4. 这样做是因为如果没有明确的完成定义，后面就无法判断成品到底有没有做到要求。\n5. 如果定义、走查或失败处理存在缺口，就先补设计；不能因为某项内容不在九项合同节点内就忽略它。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[\"“机械摘要”具体是什么产物、供谁使用，单位文字没有说明。\",\"“九项合同节点内”里的“节点”具体怎样划分，与前面列出的九类内容是否完全一一对应，文字没有进一步说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        },
+        {
+          "round": 3,
+          "textHash": "3597bb16a152eefb8ca7f2e4e07a62e44e65482faf84d47b31d9dab7aa8679d0",
+          "reviewedText": "这一步：核对冻结合同的九项内容（能力范围、入口与最终对象、成败与无法判断、证据、禁止替代、旧功能、控制例、变更权、授权边界）\n这一步在做什么：设计负责人（D1）核对设计是否包含九项明确完成语义。\n拿到什么：拿到用户要求、完整设计和关键开放问题。\n交出什么：得到九项完成约定明确的受审设计。用来判断含义是否改变的语义哈希，从同一份内容快照（设计文件除版本历史以外的全部内容）出发，只删去进度、运行和出处字段，其余全部参与计算，包括九项以外节点里的具体设计。\n为什么要这样：没有完成定义就无法判断后续产物有没有做到。\n出错会怎样：定义内容、走查或失败处理有缺口时先补设计，不能因为不在九项合同节点内就忽略。",
+          "readerAgentId": "gpt-web-batch-round3",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步做什么：设计负责人 D1 检查设计里是否把九类完成语义写清楚，包括能力范围、入口与最终对象、成功/失败/无法判断、证据、禁止替代、旧功能、控制例、变更权和授权边界。\\n2. 拿到什么：用户要求、完整设计以及关键开放问题。\\n3. 交出什么：得到一份九类完成约定都明确的受审设计；同时从同一内容快照出发计算语义哈希，计算时只去掉进度、运行和出处字段，其余内容都参与，包括九项节点之外的具体设计。\\n4. 为什么这样做：如果没有明确的完成定义，后续就无法判断交付物究竟有没有达到要求。\\n5. 出错时怎样处理：如果完成定义、正常走查或失败处理还有缺口，就先补设计；不能因为缺口位于九项合同节点之外而忽略。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":3,\"note\":\"All 10 paraphrases correct; listed confusions concern definitions outside each unit's scope. D8 complete: all 55 units passed in rounds 1-3.\",\"confusions\":[\"九项中的每一项具体需要包含哪些信息、达到什么程度才算“明确”，本单位没有展开。\",\"“关键开放问题”如果仍然开放，怎样与“九项完成约定明确”同时成立，本单位没有说明。\",\"语义哈希的具体规范化和哈希算法，本单位没有给出。\",\"哪些字段属于“进度、运行和出处字段”，本单位没有枚举。\",\"“控制例”和“旧功能”在这里各自具体指什么，本单位没有定义。\",\"“走查”需要覆盖哪些内容、怎样判断有缺口，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round3\",\"result_commit\":\"67a45b81d972dc512f8a4dbd69e2c330eecb1a8b\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T14:43:38.000Z",
+          "batchId": "d8-batch-3"
+        }
+      ]
+    },
+    {
+      "subjectId": "wr-gates",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "f62256207d50b21f4cd22e7620ad339412db743fea393cd4f4ea052e8387f4c0",
+          "reviewedText": "这一步：完成四项关卡\n这一步在做什么：负责人在冻结前用草稿入口检查结构，并收集同一设计上的追问、冷读和逐步复述。\n拿到什么：拿到同一内容快照的四项关卡结果、D8 本轮新 GPT 对话逐单位复述及合批标记。\n交出什么：设计负责人逐项比对原意与复述，全部正确时本轮合批就是有效通过，不另设单位例外。读错则改写，下一轮新对话只重读改动及受影响相邻单位。\n为什么要这样：每轮新对话合批降低逐步换人的独立性，但这是用户为可操作性接受的取舍，冻结说明要如实写明。\n出错会怎样：有单位读错就改写后进入下一轮新 GPT 对话，不复用旧文字或旧对话的通过记录。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在冻结设计之前，由负责人用草稿入口做结构检查，并在同一设计快照上完成追问、冷读和逐步复述等四项关卡。2. 它拿到同一快照的四项关卡结果，以及 D8 在本轮新 GPT 对话中逐单位复述的结果和合批标记。3. 它交出的判断是设计负责人逐项比对原意和复述；全部正确则整批通过，任何单位读错则先改写，再让下一轮新对话只重读改动及受影响相邻单位。4. 这样做是因为一轮新对话合批虽然降低了逐步换人的独立性，但这是为可操作性接受的取舍，并需要在冻结说明中如实记录。5. 如果有单位读错，就不能沿用旧文字、旧对话的通过记录，而要改写后进入下一轮新对话。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“四项关卡”具体是哪四项，本单位没有完整列名。\",\"D8 是什么关卡或角色，本单位没有定义。\",\"“合批标记”具体是什么形式或判定信息，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "7767e31a75db48db2d2ff0936f55a8c7e1065c5d1b11db835bac5b3b22b00787",
+          "reviewedText": "这一步：完成四道冻结关卡（结构检查、用户代理追问、冷读、读者复述）\n这一步在做什么：负责人在冻结前用草稿入口检查结构，并收集同一设计上的追问、冷读和逐步复述。\n拿到什么：拿到同一内容快照（设计文件除版本历史以外全部内容的哈希）的四项关卡结果、读者复述关卡（D8） 本轮新 GPT 对话逐单位复述及记录中的读者隔离字段 `reader_isolation`。\n交出什么：设计负责人逐项比对原意与复述，全部正确时本轮合批就是有效通过，不另设单位例外。读错则改写，下一轮新对话只重读改动及与改写单位属于同一步骤或同一失败路径的单位。\n为什么要这样：每轮新对话合批降低逐步换人的独立性，但这是用户为可操作性接受的取舍，冻结说明要如实写明。\n出错会怎样：有单位读错就改写后进入下一轮新 GPT 对话，不复用旧文字或旧对话的通过记录。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由负责人在设计冻结前，对同一个设计内容快照完成结构检查、用户代理追问、冷读和读者复述四道关卡。\n2. 它拿到同一内容快照对应的四项关卡结果，以及 D8 本轮新 GPT 对话逐单位复述的结果和记录中的 `reader_isolation` 字段。\n3. 它交出设计负责人逐项比对原意后的判断：本轮所有单位都复述正确时，整个合批有效通过；有读错时则改写，并在下一轮新对话只重读改动单位和与它同一步骤或同一失败路径的单位。\n4. 这样做是为了在可操作性和读者独立性之间作已接受的取舍，并在冻结说明中明确这种合批会降低逐步换人的独立性。\n5. 如果任何单位读错，就必须改写后进入新一轮，不能继续沿用旧文字，也不能沿用旧对话的通过记录。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[\"`reader_isolation` 字段具体记录什么值、怎样判断符合要求，本单位没有说明。\",\"“草稿入口”具体是什么入口，本单位没有定义。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        },
+        {
+          "round": 3,
+          "textHash": "8cc9e394a9c34ac792de7bdbfa2ada59cc033fcba0fee8d1cf8937c15143a0fe",
+          "reviewedText": "这一步：完成四道冻结关卡（结构检查、用户代理追问、冷读、读者复述）\n这一步在做什么：负责人在冻结前用草稿检查（Blueprint 检查器中不要求已有版本历史的模式）检查结构，并收集同一设计上的追问、冷读和复述。\n拿到什么：拿到同一内容快照（设计文件除版本历史以外全部内容的哈希）的四项关卡结果、读者复述关卡（D8）本轮新 GPT 对话的逐单位复述，以及记录中的读者隔离字段 `reader_isolation`（合批时取值 `single-thread-batch`）。\n交出什么：设计负责人逐项比对原意与复述，全部正确时本轮合批就是有效通过，不另设单位例外。读错则改写，下一轮新对话只重读改动及与改写单位属于同一步骤或同一失败路径的单位。\n为什么要这样：每轮新对话合批降低逐步换人的独立性，但这是用户为可操作性接受的取舍，冻结说明要如实写明。\n出错会怎样：有单位读错就改写后进入下一轮新 GPT 对话，不复用旧文字或旧对话的通过记录。",
+          "readerAgentId": "gpt-web-batch-round3",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步做什么：冻结前完成四类检查：结构检查、用户代理追问、冷读和读者复述，并确保它们针对同一份设计内容。\\n2. 拿到什么：同一内容快照对应的四项关卡结果、D8 本轮新 GPT 对话产生的逐单位复述，以及记录中的 reader_isolation 值；合批时该值是 single-thread-batch。\\n3. 交出什么：设计负责人逐项把原意和复述比较；如果全部理解正确，本轮合批整体通过，不再为个别单位另设例外。如果有读错，就改写，并在下一轮新对话中只重读改动单位及与其属于同一步骤或同一失败路径的单位。\\n4. 为什么这样做：把多个单位放进每轮一个新对话会降低逐步更换读者带来的独立性，但这是为了可操作性而接受的取舍，并且需要在冻结说明里如实记录。\\n5. 出错时怎样处理：任何单位被读错，就改写并进入下一轮新 GPT 对话；旧文字和旧对话里的通过记录不能继续当作本轮通过依据。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":3,\"note\":\"All 10 paraphrases correct; listed confusions concern definitions outside each unit's scope. D8 complete: all 55 units passed in rounds 1-3.\",\"confusions\":[\"“Blueprint 检查器”是什么，以及“不要求已有版本历史的模式”具体检查什么，本单位没有定义。\",\"“用户代理追问”和“冷读”各自怎样执行、怎样判定通过，本单位没有说明。\",\"四项关卡除了读者复述外，其结果需要满足什么条件才算通过，本单位没有给出。\",\"怎样判断两个单位“属于同一步骤或同一失败路径”，本单位没有判定规则。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round3\",\"result_commit\":\"67a45b81d972dc512f8a4dbd69e2c330eecb1a8b\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T14:43:38.000Z",
+          "batchId": "d8-batch-3"
+        },
+        {
+          "round": 4,
+          "textHash": "046c88ec01dd2c03f33a21be44fe083e05eaea9cd03f4b04d77b547987f54478",
+          "reviewedText": "这一步：完成四道冻结关卡（结构检查；用户代理追问：站在用户角度逐个组件追问设计里有没有答案；冷读：新执行者只读设计判断能否开工；读者复述）\n这一步在做什么：负责人在冻结前用草稿检查（Blueprint 检查器中不要求已有版本历史的模式）检查结构，并收集同一设计上的追问、冷读和复述。用户追问角色还要把冻结说明和设计对照，检查漏写、多写、验收器的总数和各类个数及回归用例的数量和分组是否与设计一致，以及单项超过 100 MB 的下载或安装有没有遗漏，并在结果里写明本次说明文件原始字节的哈希。\n拿到什么：拿到按固定格式（结论、你在做的决定、做完时看到什么和怎么验、验收器、单项超过 100 MB 的下载或安装、不能降级的、实现者可自定的、权限费用时间、这次不做的、与上次批准相比的变化）编写的冻结说明，以及同一内容快照（设计文件除版本历史以外全部内容的哈希）的四项关卡结果、读者复述关卡（D8）本轮新 GPT 对话的逐单位复述，以及记录中的读者隔离字段 `reader_isolation`（合批时取值 `single-thread-batch`）。\n交出什么：设计负责人逐项比对原意与复述，全部正确时本轮合批就是有效通过，不另设单位例外。读错则改写，下一轮新对话只重读改动及与改写单位属于同一步骤或同一失败路径的单位。\n为什么要这样：每轮新对话合批降低逐步换人的独立性，但这是用户为可操作性接受的取舍，冻结说明要如实写明。\n出错会怎样：有单位读错就改写后进入下一轮新 GPT 对话，不复用旧文字或旧对话的通过记录。用户追问角色检查后说明只要改动，原说明检查就失效，由它对新说明重做四项检查；设计未变时不必重做逐组件追问。",
+          "readerAgentId": "gpt-web-batch-round7",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步在做什么：负责人在冻结前完成四道关卡：用不要求已有版本历史的草稿检查验证结构，并在同一设计上收集用户代理逐组件追问、冷读和读者复述；同时用户追问角色还把冻结说明与设计对照检查是否漏写、多写、验收器和回归用例数量或分组不一致，以及是否漏掉单项超过 100 MB 的下载或安装。2. 它拿到什么：拿到按固定十项内容写成的冻结说明、同一设计内容快照对应的四项关卡结果、D8 本轮新 GPT 对话产生的逐单位复述，以及记录读者隔离方式的 reader_isolation 字段。3. 它交出什么：设计负责人逐个把复述与原意比较；所有单位都理解正确时，本轮合批整体有效通过；有单位读错时，改写后下一轮只重读改动单位以及与它属于同一步骤或同一失败路径的单位。4. 为什么这样做：同一轮把多个单位放进一个新对话会降低逐单位换读者的独立性，但这是为可操作性接受的取舍，因此冻结说明需要把这种情况如实告诉用户。5. 出错时会怎样：任何单位被读错就进入改写和下一轮新对话，不能沿用旧文字或旧对话的通过记录；冻结说明在用户追问角色检查后只要发生改动，旧检查就失效，需要对新说明重新检查，而设计本身没变时不必重做逐组件追问。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"pass\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":7,\"note\":\"复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。\",\"confusions\":[],\"evidence_commit\":\"fb77fb107c4c00830146d083b67fd566723227ca\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round7\",\"blueprint_commit\":\"2a647bdaff3d2e8248f353d825ad789fa99bb676\",\"result_commit\":\"54f3d7877f627e889703efa9e9450ed3b98145af\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-13T13:26:46.000Z",
+          "batchId": "d8-batch-7"
+        }
+      ]
+    },
+    {
+      "subjectId": "wr-freeze",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "8be21e1091faf04423e1bb0d3efffe85457b3c0c94279cd1d575a0b498bfcffa",
+          "reviewedText": "这一步：批准具体设计\n这一步在做什么：用户先批准四项关卡共同通过的内容快照，再用冻结命令追加首个版本。\n拿到什么：拿到获批快照、四项有效关卡结果、用户答复和追加历史后的完整文件；D8 合批已经设计负责人逐项判断正确。\n交出什么：对完整输出运行冻结档检查，核对获批快照未变后才写冻结记录，同时保存内容快照、语义定义和完整文件的三个摘要。\n为什么要这样：追加历史不改变获批内容时，原关卡和批准继续有效；冻结档复验只是机械确认，不需要重新批准。\n出错会怎样：D8 尚未判断全部正确时先改写并下一轮重读；冻结档不通过或快照改变则不写冻结记录，交回设计负责人。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是用户先批准四项关卡共同通过的内容快照，然后再通过冻结命令形成第一个冻结版本。2. 它拿到获批快照、四项有效关卡结果、用户答复和追加历史后的完整文件，并且 D8 的合批已由设计负责人逐项确认正确。3. 它交出通过冻结档检查且与获批快照一致的冻结记录，同时保存内容快照、语义定义和完整文件三个摘要。4. 这样做是因为只追加历史而不改变已批准内容时，原来的关卡和批准仍有效，冻结档复验只需机械确认。5. 如果 D8 还没有全部判定正确，就先改写并进入下一轮重读；如果冻结档检查失败或快照发生变化，则不写冻结记录并交回设计负责人。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“四项关卡”具体是哪四项，本单位没有列出。\",\"D8 是什么关卡或角色，本单位没有定义。\",\"“内容快照、语义定义和完整文件的三个摘要”中的“摘要”是哈希、机器摘要还是别的形式，本单位无法确定。\",\"“冻结命令”具体是什么入口或命令，本单位没有给出。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "cfdf0763a7c88ba6d94cad7bd42c33418f0079c0ab6a12f03b08e6d7f6853458",
+          "reviewedText": "这一步：批准具体设计\n这一步在做什么：用户先批准四道冻结关卡（结构检查、用户代理追问、冷读、读者复述）共同通过的内容快照（设计文件除版本历史以外全部内容的哈希），再用Blueprint 的冻结命令（给设计文件追加一条版本历史）追加首个版本。\n拿到什么：拿到获批快照、四项有效关卡结果、用户答复和追加一条版本历史（内容快照本身不变）后的完整文件；读者复述关卡（D8） 合批已经设计负责人逐项判断正确。\n交出什么：对完整输出运行冻结档检查（Blueprint 检查器中要求已有版本历史的严格模式），核对获批快照未变后才写冻结记录，同时保存内容快照、语义定义和完整文件的三个哈希（内容快照、语义、完整文件）。\n为什么要这样：追加历史不改变获批内容时，原关卡和批准继续有效；冻结档复验只是机械确认，不需要重新批准。\n出错会怎样：D8 尚未判断全部正确时先改写并下一轮重读；冻结档不通过或快照改变则不写冻结记录，交回设计负责人。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步先让用户批准已经通过四道冻结关卡的具体内容快照，然后用 Blueprint 冻结命令只追加首个版本历史，再对完整冻结输出做严格复验。\n2. 它拿到获批内容快照、四项有效关卡结果、用户答复，以及追加版本历史后的完整文件；D8 合批结果已经由设计负责人逐项判断正确。\n3. 它交出通过严格冻结档检查且确认内容快照没有变化后的冻结记录，并保存内容快照、语义定义和完整文件三个哈希。\n4. 这样做是因为如果追加历史没有改变用户批准的内容，原有四道关卡和用户批准仍然有效，之后只需要机械复验，不必重新批准。\n5. 如果 D8 还没有全部判断正确，就先改写并进入下一轮重读；如果冻结档检查失败或内容快照发生变化，就不能写冻结记录，并交回设计负责人。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[\"三个哈希中的“语义定义”具体覆盖设计的哪些部分，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        },
+        {
+          "round": 3,
+          "textHash": "a4431d068c2d5b7c6d939c6cb017fa82edd316a0cb3b1d4df0bf0133a90880c9",
+          "reviewedText": "这一步：批准具体设计\n这一步在做什么：设计负责人先按固定十节骨架（结论、你在做的决定、做完时看到什么和怎么验、验收器、单项超过 100 MB 的下载或安装、不能降级的、实现者可自定的、权限费用时间、这次不做的、与上次批准相比的变化）给用户冻结说明，说明已由用户追问角色对照设计检查漏写、多写、验收器的总数和各类个数及回归用例的数量和分组是否与设计一致，以及单项超过 100 MB 的下载或安装有没有遗漏；检查结果、批准请求、用户批准和冻结记录都写同一个说明文件的原始字节哈希。用户先批准四道冻结关卡（结构检查、用户代理追问、冷读、读者复述）共同通过的内容快照（设计文件除版本历史以外全部内容的哈希），再由设计负责人用 Blueprint 的冻结命令（给设计文件追加一条版本历史）追加首个版本。\n拿到什么：拿到按固定格式写成并经用户追问检查的冻结说明、获批快照、四项有效关卡结果、用户答复和追加一条版本历史（内容快照本身不变）后的完整文件；读者复述关卡（D8） 合批已经设计负责人逐项判断正确。\n交出什么：设计负责人对完整输出运行冻结档检查（Blueprint 检查器中要求已有版本历史的严格模式），核对获批快照未变后才写冻结记录，同时保存内容快照的哈希、语义哈希（去掉进度和出处字段后的设计内容的哈希）、完整文件的哈希和冻结说明原始字节的哈希。\n为什么要这样：追加历史不改变获批内容、冻结说明也未改动时，原关卡和批准继续有效；冻结档复验只是机械确认，不需要重新批准。\n出错会怎样：D8 尚未判断全部正确时先改写并下一轮重读；冻结档不通过或快照改变则不写冻结记录，交回设计负责人。冻结说明有漏写或多写等缺口时交设计负责人按固定格式改写，说明改动后由用户追问角色对新说明重做四项检查，设计未变不重做逐组件追问（即用户代理追问角色站在用户角度，对设计中每个组件逐个追问是否有答案）。",
+          "readerAgentId": "gpt-web-batch-round7",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步在做什么：设计负责人先给用户一份按十节固定骨架写成、并已由用户追问角色对照设计检查过的冻结说明；用户批准已经通过四道冻结关卡的设计内容快照后，设计负责人再通过 Blueprint 的冻结命令只追加首条版本历史。2. 它拿到什么：拿到经检查的冻结说明、用户已批准的内容快照、四项有效关卡结果、用户答复，以及追加一条版本历史后的完整设计文件；同时 D8 合批结果已经由设计负责人逐项判断正确。3. 它交出什么：设计负责人对追加历史后的完整文件运行要求已有版本历史的严格冻结档检查，确认获批内容快照没有变化后写冻结记录，并保存内容快照哈希、去掉进度和出处字段后的语义哈希、完整文件哈希和冻结说明原始字节哈希。4. 为什么这样做：只追加版本历史而不改变用户批准的设计内容，而且冻结说明本身也没变时，原来的关卡结果和用户批准仍可继续使用；最后的严格检查只是机械确认。5. 出错时会怎样：D8 还没有全部判断正确时先改写并进入下一轮重读；严格冻结档检查失败或内容快照变化时不写冻结记录并退回设计负责人；冻结说明有漏写或多写等问题时重写说明并重新检查，新说明改变会使旧说明检查失效，但设计未变时无需重做逐组件追问。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"pass\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":7,\"note\":\"复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。\",\"confusions\":[\"语义哈希要求去掉“进度和出处字段”，但本单位没有说明哪些具体字段属于这两类，因此无法仅凭本单位确定精确的哈希输入。\"],\"evidence_commit\":\"fb77fb107c4c00830146d083b67fd566723227ca\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round7\",\"blueprint_commit\":\"2a647bdaff3d2e8248f353d825ad789fa99bb676\",\"result_commit\":\"54f3d7877f627e889703efa9e9450ed3b98145af\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-13T13:26:46.000Z",
+          "batchId": "d8-batch-7"
+        }
+      ]
+    },
+    {
+      "subjectId": "wr-owner",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "5f5e7a72433fb3b3c089d07acd211b087c1a9d814ed3c0cce77554e6cddb2647",
+          "reviewedText": "这一步：接收交付责任\n这一步在做什么：新交付负责人亲读冻结包并确认接收。\n拿到什么：拿到冻结合同、授权、三个内容摘要，以及定义内容变动时连接获批值和当前值的完整小修继承记录。\n交出什么：核对完整冻结文件的摘要后确认接收，得到清楚的实施范围、必需角色和交回路径。\n为什么要这样：设计与交付需要分开负责人并保留返修接缝。\n出错会怎样：合同矛盾或缺关键决定时按规定回原负责人。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是新的交付负责人亲自阅读冻结包并正式确认接手交付责任。2. 它拿到冻结合同、授权、三个内容摘要，以及当定义内容发生变动时用于连接获批值和当前值的完整小修继承记录。3. 它在核对完整冻结文件的摘要后确认接收，并得到清楚的实施范围、必需角色和需要退回时的路径。4. 这样做是为了把设计负责人和交付负责人分开，同时保留返修时能接回原设计的衔接。5. 如果合同自相矛盾或缺少关键决定，就按规定退回原负责人。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“三个内容摘要”具体是哪三个、摘要形式是什么，本单位没有给出。\",\"“小修继承记录”具体记录哪些字段、什么变化才算小修，本单位没有定义。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "c71b995befd029e3eea66d1c0ec7252447692e37db2c43151e5a6983db4944da",
+          "reviewedText": "这一步：接收交付责任\n这一步在做什么：新交付负责人亲读冻结包并确认接收。\n拿到什么：拿到冻结合同、授权、三个哈希（内容快照、语义、完整文件），以及定义内容变动时连接获批值和当前值的完整记录小修前后哈希、字段差异和等价理由的文件。\n交出什么：核对完整冻结文件的摘要后确认接收，得到清楚的实施范围、必需角色和交回路径。\n为什么要这样：设计与交付需要分开负责人并保留返修接缝。\n出错会怎样：合同矛盾或缺关键决定时按规定回原负责人。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由新的交付负责人亲自读取冻结包，核对后正式接收交付责任。\n2. 它拿到冻结合同、授权、内容快照/语义/完整文件三个哈希，以及在定义内容发生变动时用于连接获批值和当前值的记录文件，其中包含小修前后哈希、字段差异和等价理由。\n3. 它交出对完整冻结文件摘要核对后的接收确认，并形成清楚的实施范围、必需角色和需要退回时的路径。\n4. 这样做是为了把设计责任和交付责任分开，同时保留出现问题时能够返回设计侧的接缝。\n5. 如果合同本身有矛盾，或者仍缺关键决定，就按规定退回原负责人处理。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[\"“定义内容变动时连接获批值和当前值的完整记录小修前后哈希、字段差异和等价理由的文件”这一段句法关系不够明确；我理解为有一个记录文件包含这些内容，但文字没有清楚说明这些成分之间的结构关系。\",\"“连接获批值和当前值”具体指哪些字段或哪些值之间的对应关系，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        },
+        {
+          "round": 3,
+          "textHash": "836ef02456dd745a43edf210167a4ae9d8dc2eff3853b11bb15e56cd2c165ef1",
+          "reviewedText": "这一步：接收交付责任\n这一步在做什么：新交付负责人亲读冻结包并确认接收。\n拿到什么：拿到冻结合同、授权记录和三个哈希（内容快照、语义、完整文件）。冻结后如果做过小修，还拿到每次小修的继承记录：写明小修前后的哈希、改了哪些字段、为什么含义不变；这些记录把获批时的语义哈希一路连到当前的语义哈希。\n交出什么：核对完整冻结文件的哈希后确认接收，得到清楚的实施范围、必需角色和交回路径。\n为什么要这样：设计与交付需要分开负责人并保留返修接缝。\n出错会怎样：合同矛盾或缺关键决定时按规定回原负责人。",
+          "readerAgentId": "gpt-web-batch-round3",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步做什么：新的交付负责人亲自读取冻结包，并在核对后正式接收交付责任。\\n2. 拿到什么：冻结合同、授权记录、内容快照哈希、语义哈希和完整文件哈希；如果冻结后有小修，还要拿到每次小修的继承记录，其中记录前后哈希、改动字段和语义不变的理由，并把获批时的语义哈希连续连接到当前语义哈希。\\n3. 交出什么：在核对完整冻结文件的哈希后确认接收，并得到明确的实施范围、必须参与的角色以及需要交回时的路径。\\n4. 为什么这样做：设计责任和交付责任需要由不同负责人承担，同时小修和返修之间要保留可追踪的衔接。\\n5. 出错时怎样处理：如果冻结合同内部矛盾，或者缺少关键决定，就按既定规则退回原负责人处理。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":3,\"note\":\"All 10 paraphrases correct; listed confusions concern definitions outside each unit's scope. D8 complete: all 55 units passed in rounds 1-3.\",\"confusions\":[\"三个哈希各自如何计算、彼此怎样对应，本单位没有完整定义。\",\"什么改动算“小修”，以及怎样证明“含义不变”，本单位没有判定标准。\",\"“原负责人”具体指哪一位负责人，本单位没有直接写明。\",\"“按规定回原负责人”所依据的具体规则不在本单位中。\",\"“返修接缝”具体包含哪些交接信息，本单位没有展开。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round3\",\"result_commit\":\"67a45b81d972dc512f8a4dbd69e2c330eecb1a8b\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T14:43:38.000Z",
+          "batchId": "d8-batch-3"
+        }
+      ]
+    },
+    {
+      "subjectId": "wr-build",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "21d25b40436a9f48b7a8b7ca62c8c3abd3fad91b1bcb314360ffc0db7a5fd47a",
+          "reviewedText": "这一步：实现并申报\n这一步在做什么：实现者按冻结范围实现并申报实际偏离。\n拿到什么：拿到合同、实际代码或材料以及已授权环境。\n交出什么：得到候选产物、默认验收实现和所有未做到的内容。\n为什么要这样：实现结果必须和承诺逐项对上。\n出错会怎样：普通缺陷留同一任务，语义问题交负责人处理。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是实现者按照已经冻结的范围完成实现，并主动申报和冻结要求相比实际有哪些偏离。2. 它拿到合同、真实代码或材料以及已经授权的运行环境。3. 它交出候选产物、默认的验收实现，以及所有尚未做到的内容。4. 这样做是为了让真实实现和既有承诺能够逐项对应。5. 如果只是普通缺陷，就留在同一任务里修；如果属于语义问题，则交给负责人处理。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“普通缺陷”和“语义问题”的具体分界标准，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "47aadb90b95307a9b4e4f3cfb07fdeae8963b767c475dfdf1614280deab1f050",
+          "reviewedText": "这一步：实现并申报\n这一步在做什么：实现者按冻结范围实现并申报实际偏离。\n拿到什么：拿到合同、实际代码或材料以及已授权环境。\n交出什么：得到候选成品（准备交付、正在接受验收的某一个具体版本）、实现者默认同时写好的验收检查程序和所有未做到的内容。\n为什么要这样：实现结果必须和承诺逐项对上。\n出错会怎样：普通缺陷（不改变“什么算完成”的实现或程序错误）留同一任务，语义问题（需要改变完成标准）交负责人处理。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由实现者按照已经冻结的范围完成实现，并主动申报实际实现和要求之间的偏离。\n2. 它拿到冻结合同、实际代码或其他材料，以及已经授权的运行环境。\n3. 它交出一个具体候选成品、实现者默认同时写好的验收检查程序，以及所有尚未做到的内容。\n4. 这样做是为了让实际实现结果能够逐项对应原先承诺，而不是只报告成功部分。\n5. 如果只是不会改变完成定义的普通实现或程序缺陷，就留在同一任务中修；如果问题需要改变什么才算完成，则交负责人处理。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        }
+      ]
+    },
+    {
+      "subjectId": "wr-calibration",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "b0a6714f3ab57ab457b4c51201e3a17ae769a2089845314127307c6e73663c3b",
+          "reviewedText": "这一步：校准验收实现\n这一步在做什么：验收作者用三类控制例实际运行同一检查。\n拿到什么：拿到来源独立的预期以及好例、坏例和缺证例。\n交出什么：得到检查器能否正确区分三种情况的原始结果。\n为什么要这样：弱检查可能把降级成品也判为成功。\n出错会怎样：太弱需换人重写时启用独立验收作者。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是验收作者用同一个检查器分别跑好例、坏例和缺证例，确认它是否能正确分辨。2. 它拿到独立形成的预期结果以及三类控制样例。3. 它交出检查器对三类样例的原始运行结果。4. 这样做是为了防止过弱的检查器把已经降级的成品也误判为成功。5. 如果检查器弱到需要换人重写，就启用独立的验收作者来重做。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“来源独立的预期”是要求预期结果独立于实现者、独立于检查器，还是独立于别的来源，本单位没有进一步说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "7351b4c4c406f9a67a3c4e903e5f32b7f27a934a31f0ad8ca58cb3c0fc6ac0bd",
+          "reviewedText": "这一步：校准（用答案已知的样例试运行检查程序，确认它给出正确判定）验收实现\n这一步在做什么：验收作者用三类控制例（答案已知的样例：应通过的正例、应失败的坏例、应判“无法判断”的缺证例）实际运行同一检查。\n拿到什么：预期结果来自冻结标准或独立参考，而不是被测实现自己的输出。拿到这些预期结果以及好例、坏例和缺证例。\n交出什么：得到验收检查程序（检查器，用来判定成品是否达标的程序）能否正确区分三种情况的原始结果。\n为什么要这样：弱检查可能把降级成品也判为成功。\n出错会怎样：太弱需换人重写时启用独立验收作者。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由验收作者用答案已知的样例实际运行同一个验收检查程序，确认检查程序能正确给出通过、失败和无法判断三类结果。\n2. 它拿到由冻结标准或独立参考确定的预期结果，以及应通过的正例、应失败的坏例和缺证时应判无法判断的样例。\n3. 它交出检查程序能否正确区分三种情况的原始运行结果。\n4. 这样做是为了防止一个过弱的检查程序把实际已经降级的成品也判成成功。\n5. 如果检查程序太弱、需要换人重写，就启用独立验收作者。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[\"“太弱”由谁判定、依据什么界限判定，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        }
+      ]
+    },
+    {
+      "subjectId": "wr-asset",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "a85c73463cf20cce85437bc1d35b2e35971f00b419275a2b852217a7ef4b63ee",
+          "reviewedText": "这一步：审查验收变化\n这一步在做什么：X1亲读验收差异和校准记录并作分级决定。\n拿到什么：拿到资产版本、冻结语义和实际运行证据。\n交出什么：得到可以用于本次候选的验收资产或明确设计退回。\n为什么要这样：验收可以维修，但完成标准不能由交付方改写。\n出错会怎样：改变阈值或真实度等语义时退回设计。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是 X1 亲自阅读验收资产的变化和校准记录，并判断这项验收变化属于可接受维修还是必须退回设计。2. 它拿到验收资产版本、冻结的完成语义和真实运行证据。3. 它交出可以用于当前候选的验收资产，或者明确要求退回设计。4. 这样做是因为验收工具本身可以维修，但交付阶段不能借维修改写原来的完成标准。5. 如果变化触及阈值、真实度等语义，就退回设计阶段。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"X1 是哪个角色，本单位没有定义。\",\"“验收资产”具体包括检查器、测试样例、准则还是其他对象，本单位没有明确列出。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "d2a0aff243dd8c4c700d3a2c7550e815f8f92865bcbe3cd68dbe17cd7a9cbe35",
+          "reviewedText": "这一步：审查验收变化\n这一步在做什么：交付负责人（X1）亲读验收差异和校准（用答案已知的样例试运行检查程序，确认它给出正确判定）记录并作分级决定。\n拿到什么：拿到验收用的检查代码、测试样例、参考答案和准则的版本、冻结的完成标准（用户批准时确定的“什么算完成”）和实际运行证据。\n交出什么：得到可以用于本次候选成品（准备交付、正在接受验收的某一个具体版本）的验收资产或明确设计退回。\n为什么要这样：验收可以维修，但完成标准不能由交付方改写。\n出错会怎样：改变阈值（判定通过与否的数值界限）或真实度等语义时退回设计。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由交付负责人（X1）亲自阅读验收资产的变化和校准记录，并判断这些变化只是验收维修，还是已经触及完成标准。\n2. 它拿到验收检查代码、测试样例、参考答案和准则的版本、冻结的完成标准，以及实际运行证据。\n3. 它交出一套可用于当前候选成品的验收资产；如果变化已经涉及设计语义，则明确退回设计阶段。\n4. 这样做是因为验收工具本身可以维修，但用户批准的“什么算完成”不能由交付方自行改写。\n5. 如果修改改变了通过阈值，或改变了证据真实度等完成语义，就退回设计处理。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        }
+      ]
+    },
+    {
+      "subjectId": "wr-candidate",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "a4c8e9f131d4a44d5cd6f7a20008a56f7c49332d96a3571c6e990344de615418",
+          "reviewedText": "这一步：固定最终对象\n这一步在做什么：X1选择具有完整来源与安装身份的当前候选。\n拿到什么：拿到源码集合、构建安装产物和实际运行器。\n交出什么：得到本轮观察必须对应的精确最终对象。\n为什么要这样：验过的对象必须就是最后交给用户的对象。\n出错会怎样：对象身份不明或版本混用时先恢复对应关系。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是 X1 选定一个来源完整、安装身份明确的当前最终候选。2. 它拿到源码集合、构建和安装产物以及实际运行器。3. 它交出一个精确的最终对象，要求本轮所有观察都必须对应这个对象。4. 这样做是为了确保被验证的对象和最后交给用户的对象是同一个。5. 如果对象身份不清或不同版本混在一起，就先恢复它们的正确对应关系。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"X1 是哪个角色或职责，本单位没有定义。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "8aeb973af8acbe589d01d4728df69c45171ed190c5583f1d676faef1a60bb433",
+          "reviewedText": "这一步：固定最终对象\n这一步在做什么：交付负责人（X1）选择具有完整来源与安装身份的当前候选成品（准备交付、正在接受验收的某一个具体版本）。\n拿到什么：拿到源码集合、构建安装产物和实际运行检查的程序或环境。\n交出什么：得到本轮观察必须对应的精确最终对象。\n为什么要这样：验过的对象必须就是最后交给用户的对象。\n出错会怎样：对象身份（能唯一确认是哪一个文件或安装版本的标识，例如哈希或版本号）不明或版本混用时先恢复对应关系。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由交付负责人（X1）把本轮真正要验收和交付的候选版本固定下来，确保来源、安装身份和运行对象能对应到同一个具体成品。\n2. 它拿到源码集合、构建或安装产物，以及实际运行检查所用的程序或环境。\n3. 它交出一个身份明确的最终候选对象，后续观察都必须指向这个对象。\n4. 这样做是为了保证被验收的东西和最后交给用户的东西是同一个版本。\n5. 如果对象身份不清楚或多个版本混在一起，就先恢复各源码、产物、安装版本之间的对应关系，再继续。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        }
+      ]
+    },
+    {
+      "subjectId": "wr-evidence",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "224fbb278c9e0f1415c28f76b402d338f31202d36503da295cd710cd4b3d6973",
+          "reviewedText": "这一步：读取直接证据\n这一步在做什么：验收者从当前正常入口产生并保存原始观察。\n拿到什么：拿到固定候选、准则和所需专业角色结果。\n交出什么：得到逐项成功、失败或无法判断及支持边界。\n为什么要这样：摘要和历史绿色结果不能替代当前成品观察。\n出错会怎样：必要证据不可取时记无法判断并交负责人补证。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是验收者通过当前正常入口亲自产生并保存原始观察证据。2. 它拿到固定候选、验收准则以及所需专业角色的结果。3. 它交出逐项的成功、失败或无法判断结论，并明确证据能支持到什么边界。4. 这样做是因为摘要或历史上曾经通过的结果不能代替对当前成品的直接观察。5. 如果必要证据拿不到，就把该项记为无法判断，并交给负责人补证。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "wr-sign",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "ff5aeb0d08b5708a8fcb919c7dfb75a57d052cd35a8e63beae2f90ceaeb69790",
+          "reviewedText": "这一步：亲读后签发\n这一步在做什么：交付负责人亲读成品和原始证据，核对十三项条件后只对整个冻结范围一次签发。\n拿到什么：拿到当前证据、偏离结论和必要用户验收。\n交出什么：全部条件满足后交出整份受验成品；确需分批交付时，应在设计阶段拆成多个各自冻结和签发的任务。\n为什么要这样：唯一签发责任需要建立在实际消费对象上。\n出错会怎样：必需项失败、未知或过期时不签发；签发后出现新事实就先暂停声明，再按整份签发复核。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是交付负责人亲自阅读最终成品和原始证据，核对十三项条件后，只对整个冻结范围做一次签发。2. 它拿到当前证据、关于偏离是否可接受的结论以及必要的用户验收。3. 它在全部条件满足后交出整份已验证成品；如果确实需要分批交付，则应早在设计阶段拆成多个各自冻结、各自签发的任务。4. 这样做是为了让唯一签发责任建立在用户实际会消费的对象上。5. 只要必需项失败、未知或已经过期，就不签发；签发后出现新事实则先暂停声明，再对整份签发重新复核。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“十三项条件”具体是哪十三项，本单位没有列出。\",\"什么情况下属于“必要用户验收”，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "1a3af0022bee0634520bb1cf2df1b31f91259d8deb62cd59c2a02bda962d9e57",
+          "reviewedText": "这一步：亲读后签发\n这一步在做什么：交付负责人亲读成品和原始证据，核对签发清单的十三项（核心是：同一最终成品、原始证据齐全、负责人亲读、声明不越界）后只对整个冻结范围一次签发。\n拿到什么：拿到当前证据、对偏离的处理结论（实现与冻结要求不一致时，决定返修、限制对外声明还是退回设计）和冻结合同写明必须由用户本人判断的项目。\n交出什么：全部条件满足后交出整份受验成品；确需分批交付时，应在设计阶段拆成多个各自冻结和签发的任务。\n为什么要这样：唯一签发责任需要建立在实际消费对象上。\n出错会怎样：必需项失败、未知或过期时不签发；签发后出现新事实就先暂停声明，再按整份签发复核。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由交付负责人亲自阅读最终成品和原始证据，核对十三项签发清单后，只对整个冻结范围做一次最终签发。\n2. 它拿到当前证据、对实际偏离冻结要求的处理结论，以及冻结合同中必须由用户本人判断的项目。\n3. 它在全部条件满足时交出整份经过验收的成品；如果确实需要分批交付，必须在设计阶段就拆成多个各自冻结、各自签发的任务。\n4. 这样做是为了让唯一的签发责任直接建立在用户实际收到和使用的最终对象上。\n5. 如果任何必需项失败、未知或已经过期，就不能签发；如果签发后出现新事实，要先暂停原有声明，再按整份范围重新复核。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[\"本单位只概括了十三项签发清单的“核心”，没有给出完整十三项，因此仅凭本单位无法知道全部签发条件。\",\"“冻结合同写明必须由用户本人判断的项目”具体可能有哪些，本单位没有列出。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        },
+        {
+          "round": 3,
+          "textHash": "82139dfe734b93323d441f8be057e362c459409f07195b6699b49e09c661353c",
+          "reviewedText": "这一步：亲读后签发\n这一步在做什么：交付负责人亲读成品和原始证据，核对签发清单的十三项（核心是：同一最终成品、原始证据齐全、负责人亲读、声明不越界），并确认回归用例集全部通过后只对整个冻结范围一次签发。\n拿到什么：拿到当前证据、对偏离的处理结论（实现与冻结要求不一致时，决定返修、限制对外声明还是退回设计）和冻结合同写明必须由用户本人判断的项目。\n交出什么：全部条件满足后交出整份受验成品；确需分批交付时，应在设计阶段拆成多个各自冻结和签发的任务。\n为什么要这样：唯一签发责任需要建立在实际消费对象上。\n出错会怎样：必需项失败、未知或过期时不签发；签发后出现新事实就先暂停声明，再按整份签发复核。",
+          "readerAgentId": "gpt-web-batch-round7",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步在做什么：交付负责人亲自阅读最终成品和原始证据，核对签发清单中的十三项，并确认全部回归用例通过，然后只针对整个冻结范围做一次签发。2. 它拿到什么：拿到当前证据、对实现偏离冻结要求时已经作出的处理结论，以及冻结合同中明确要求用户本人判断的项目。3. 它交出什么：所有条件满足后交出整份受验成品；如果确实需要分批交付，则这些批次应当在设计阶段就拆成分别冻结、分别签发的独立任务。4. 为什么这样做：让唯一的签发责任建立在负责人实际读过和核对过的最终消费对象上。5. 出错时会怎样：任何必需项失败、未知或证据过期都不签发；已经签发后如果出现新事实，就先暂停原有声明，再对整份签发重新复核。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"pass\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":7,\"note\":\"复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。\",\"confusions\":[\"十三项签发清单只给了几个核心例子，其余项目在本单位中没有列出。\",\"“回归用例集”具体包含哪些用例、怎样判定全部通过，本单位没有给出。\"],\"evidence_commit\":\"fb77fb107c4c00830146d083b67fd566723227ca\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round7\",\"blueprint_commit\":\"2a647bdaff3d2e8248f353d825ad789fa99bb676\",\"result_commit\":\"54f3d7877f627e889703efa9e9450ed3b98145af\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-13T13:26:46.000Z",
+          "batchId": "d8-batch-7"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-write-whole",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "ec7cabd07cd876e5d3d5c65c13c3f2a7f1c4e301135bc5f3ec55a376b4c69dfb",
+          "reviewedText": "这一步：整体收场说明\n这一步在做什么：负责人说明整个失败情形怎样结束及谁继续处理。\n拿到什么：这次出现的情况是：状态提交响应中断，当前写者不知道远端是否已经成功。\n交出什么：用户最终看到：当前结果暂未登记；已保留记录，负责人会回读确认后继续。\n为什么要这样：受影响部分必须有明确收场，同时保留仍可继续的工作。\n出错会怎样：仍不满足恢复条件时保持当前停止或未知状态。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人对“状态提交响应中断，写者不知道远端是否成功”这一失败情形作整体收场。2. 它拿到提交结果不确定这一事实。3. 它交给用户的状态是当前结果暂未登记，但记录已经保留，之后由负责人回读确认再继续。4. 这样做是为了明确受影响部分的当前状态，同时保留还能继续处理的工作。5. 如果仍不能确认，就继续保持停止或未知状态。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-write-step-1",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "96bff036689e61aeac8accfb345a0295def657c088ced6c7db29fc12b5d0a365",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：状态提交响应中断，当前写者不知道远端是否已经成功。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在状态提交响应中断、写者不知道远端是否成功时，把异常事实原样保留并交接。2. 它拿到远端写入结果不确定的事实。3. 它交出原始事实、对象身份和影响范围。4. 这样做是为了让后续负责人处理真实的不确定性，而不是在交接中把它写成成功。5. 如果证据仍不足，就保持无法判断并说明恢复所需条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-write-step-2",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "fbb0c77cae7f19c1c58e032b916ce95cad1773e6cb9862be966b9f51d26fde7a",
+          "reviewedText": "这一步：识别问题并交回\n这一步在做什么：负责人在此处核对异常并采取合同允许的处理。\n拿到什么：拿到的异常是：状态提交响应中断，当前写者不知道远端是否已经成功。\n交出什么：得到明确收场：当前结果暂未登记；已保留记录，负责人会回读确认后继续。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人核对状态提交响应中断造成的远端成功与否不明，并按合同处理。2. 它拿到当前写者无法确认远端是否已成功的异常。3. 它交出的结论是当前结果暂不登记，已有记录保留，负责人回读确认后再继续。4. 这样做是为了不把不确定的写入结果在交接中写成成功。5. 如果证据仍不足，就保持无法判断并说明恢复所需条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-role-whole",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "66b70d5b761ff7bd6b20a5c1e4ed940e70bacdaf4aa3f1061141210b0c0dd774",
+          "reviewedText": "这一步：整体收场说明\n这一步在做什么：负责人说明整个失败情形怎样结束及谁继续处理。\n拿到什么：这次出现的情况是：所需档次或新上下文入口不可用，或者派发缺少必要材料定位。\n交出什么：用户最终看到：下一角色所需入口或材料尚未具备；保留实际状态与缺项，按本轮一条提示词和规定宿主继续。\n为什么要这样：受影响部分必须有明确收场，同时保留仍可继续的工作。\n出错会怎样：必要的 GPT 对话、执行端入口或材料仍不具备时保留缺项，不冒充角色已经执行或复述已经通过。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人对下一角色所需档次、全新上下文入口或必要材料定位缺失这一失败情形作整体收场。2. 它拿到入口或材料尚未具备的事实。3. 它交给用户的结果是保留真实状态和缺项，并继续遵守本轮一条提示词以及规定运行环境。4. 这样做是为了让受影响部分有明确收场，同时允许仍然具备条件的工作继续。5. 如果必要的 GPT 对话、执行入口或材料仍不具备，就继续保留缺项，不能假装角色已执行或复述已通过。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“所需档次”具体指什么等级，本单位没有说明。\",\"“规定宿主”具体是哪一种运行环境，本单位没有给出。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "4d4220412e069dbc2a7dd4ec301c627a5443ba30c07e674d9e9286b1aa958010",
+          "reviewedText": "这一步：整体收场说明\n这一步在做什么：负责人说明整个失败情形怎样结束及谁继续处理。\n拿到什么：这次出现的情况是：角色规定的模型档次（例如规划端用 GPT 最高推理，执行端用 Codex）或新开的对话或线程不可用，或者派发缺少必要材料定位。\n交出什么：用户最终看到：下一角色所需入口或材料尚未具备；保留实际状态与缺项，按本轮一条提示词和运行插件的工具（宿主，如 Claude Code、Codex 或 GPT 网页端）继续。\n为什么要这样：受影响部分必须有明确收场，同时保留仍可继续的工作。\n出错会怎样：必要的 GPT 对话、执行端入口或材料仍不具备时保留缺项，不冒充角色已经执行或复述已经通过。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由负责人对“指定模型档次或新对话/线程不可用，或者派发缺少必要材料定位”这一整类失败做收场说明，并说明后续由谁继续。\n2. 它拿到上述入口、模型或材料定位不可用的实际情况。\n3. 它交出给用户的明确状态：下一角色需要的入口或材料还没具备，同时保留真实状态和缺项，并按本轮一条提示词及相应宿主继续处理。\n4. 这样做是为了让受影响部分有明确结论，同时不丢掉仍可继续的工作。\n5. 如果必要的 GPT 对话、执行端入口或材料仍然不具备，就继续保留缺项，不能假装角色已经执行，也不能假装读者复述已经通过。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[\"文字一方面说“下一角色所需入口或材料尚未具备”，另一方面又说“按本轮一条提示词和宿主继续”；在缺项仍存在时具体如何继续，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        },
+        {
+          "round": 3,
+          "textHash": "8337a59a9dd25f2b0de0f67f6833b3df17cf0728279c7cc99d542e81a1bbc77e",
+          "reviewedText": "这一步：整体收场说明\n这一步在做什么：负责人说明整个失败情形怎样结束及谁继续处理。\n拿到什么：这次出现的情况是：角色规定的模型档次（例如需要用户转交的规划端角色用 GPT 最高推理，执行端用 Codex）不可用，无法新开对话或线程，或者派发缺少必要的材料位置。\n交出什么：用户最终看到：下一角色还缺入口或材料，这一步暂停；已保留实际状态和缺项清单，补齐后由负责人重新派发。\n为什么要这样：受影响部分必须有明确收场，同时保留仍可继续的工作。\n出错会怎样：必要的 GPT 对话、执行端入口或材料仍不具备时保留缺项，不冒充角色已经执行或复述已经通过。",
+          "readerAgentId": "gpt-web-batch-round3",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步做什么：负责人对这类角色运行失败给出整体收场说明，明确本次受影响部分停在哪里，以及之后由谁继续处理。\\n2. 拿到什么：本次异常可能是角色规定的模型档次不可用、不能新开所需对话或线程，或者派发时缺少必要材料的位置。\\n3. 交出什么：向用户明确说明下一角色还缺入口或材料，所以当前步骤暂停；同时保留实际状态和缺项清单，等条件补齐后由负责人重新派发。\\n4. 为什么这样做：受影响的部分要有明确的结束状态，同时不能因此抹掉仍然可以继续的其他工作。\\n5. 出错时怎样处理：只要必要的 GPT 对话、执行端入口或材料还没有具备，就继续保留缺项，不假装角色已经执行，也不假装复述已经通过。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":3,\"note\":\"All 10 paraphrases correct; listed confusions concern definitions outside each unit's scope. D8 complete: all 55 units passed in rounds 1-3.\",\"confusions\":[\"这里的“负责人”具体是哪一类负责人，本单位没有说明。\",\"“下一角色”是谁、怎样确定，本单位没有给出。\",\"哪些工作属于“仍可继续的工作”，以及是否允许在当前暂停状态下继续，本单位没有界定。\",\"“入口”具体指工具账号、宿主环境、会话入口还是其他条件，本单位没有明确。\",\"补齐缺项后由谁确认已经满足重新派发条件，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round3\",\"result_commit\":\"67a45b81d972dc512f8a4dbd69e2c330eecb1a8b\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T14:43:38.000Z",
+          "batchId": "d8-batch-3"
+        },
+        {
+          "round": 4,
+          "textHash": "f17cd05c11b384a5400f34b18d0213bfb8d3005f117589c115177f82e77a95b2",
+          "reviewedText": "这一步：整体收场说明\n这一步在做什么：负责人说明整个失败情形怎样结束及谁继续处理。\n拿到什么：这次出现的情况是：角色规定的模型档次（例如需要用户转交的规划端角色用 GPT 最高推理，执行端按档次表用 Codex 或 GPT Work 极高，X4 依派发记录使用专业档次或现有专门插件）不可用，无法新开对话或线程，或者派发缺少必要的材料位置。也包括将 GPT Work 极高的执行角色改用 Codex 或降档、X4 未写明专业档次或所用专门插件、需用户转交的角色同轮被要求转交多条。\n交出什么：用户最终看到：下一角色还缺入口或材料，这一步暂停；已保留实际状态和缺项清单，补齐后由负责人重新派发。\n为什么要这样：受影响部分必须有明确收场，同时保留仍可继续的工作。\n出错会怎样：必要的 GPT 对话、执行端入口或材料仍不具备时保留缺项，不冒充角色已经执行或复述已经通过。",
+          "readerAgentId": "gpt-web-batch-round7",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步在做什么：负责人对整次角色派发失败做收场，说明当前为什么停、谁还需要继续处理以及怎样恢复。2. 它拿到什么：拿到规定模型档次不可用、不能新开对话或线程、派发缺少材料位置，或执行角色被错误换成 Codex 或降档、X4 缺少档次或插件说明、同一需用户转交角色一轮被要求转交多条等情况。3. 它交出什么：向用户明确说明下一角色仍缺入口或材料，所以当前步骤暂停；同时保存实际状态和缺项清单，等补齐后由负责人重新派发。4. 为什么这样做：让受影响部分有明确结束状态，同时使没有受影响、仍能继续的工作得以保留。5. 出错时会怎样：如果所需 GPT 对话、执行端入口或材料仍然不存在，就继续保留缺项，不把角色写成已经执行，也不把复述写成已经通过。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"pass\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":7,\"note\":\"复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。\",\"confusions\":[\"“X4”具体是什么角色或对象，本单位没有定义。\",\"“仍可继续的工作”具体包括哪些工作、怎样判断不受本次失败影响，本单位没有说明。\"],\"evidence_commit\":\"fb77fb107c4c00830146d083b67fd566723227ca\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round7\",\"blueprint_commit\":\"2a647bdaff3d2e8248f353d825ad789fa99bb676\",\"result_commit\":\"54f3d7877f627e889703efa9e9450ed3b98145af\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-13T13:26:46.000Z",
+          "batchId": "d8-batch-7"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-role-step-1",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "6d86e7804178d60052a0a710bb1c7f38b94a764c77df8dcf5e7a6db3b5287ee2",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：所需档次或新上下文入口不可用，或者派发缺少必要材料定位。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在发现所需档次或新上下文入口不可用，或者派发没有给出必要材料位置时，把异常事实保留并交接。2. 它拿到下一角色所需入口或材料不足这一异常。3. 它交出原始事实、对象身份和受影响范围。4. 这样做是为了让问题进入后续责任人处理，而不是在转交时被写成成功。5. 如果证据不足，就继续记为无法判断并说明恢复所需条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“所需档次”具体是什么档次，本单位没有说明。\",\"“新上下文入口”具体指哪类入口，本单位没有进一步定义。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "f97ee2651708989db9d26b6122e89f303bde250d34469fd376ccca60bca8f9a6",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：角色规定的模型档次（例如规划端用 GPT 最高推理，执行端用 Codex）或新开的对话或线程不可用，或者派发缺少必要材料定位。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由当前角色在发现规定的模型档次、新对话/线程或必要材料定位不可用时，保留事实并把异常交给下一接收者。\n2. 它拿到模型档次或新会话入口不可用，或者派发缺少必要材料定位的实际异常。\n3. 它交出原始事实、对象身份和受影响范围。\n4. 这样做是为了让问题落到下一位负责处理的人手里，避免交接时把失败写成成功。\n5. 如果现有证据不足，就保留“无法判断”，并写明需要什么条件才能恢复判断。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        },
+        {
+          "round": 3,
+          "textHash": "77ef23a95edb6a1eb539e5e7d1f9b6301115aaa15880b01c0c92e7bea01b2b6a",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：角色规定的模型档次（例如需要用户转交的规划端角色用 GPT 最高推理，执行端用 Codex）或新开的对话或线程不可用，或者派发缺少必要材料定位。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round3",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步做什么：当前角色遇到角色运行或派发异常时，不把问题包装成成功，而是保留事实并传给下一接收者。\\n2. 拿到什么：异常事实，可能是规定的模型档次不可用、新开的对话或线程不可用，或者派发时缺少必要材料的位置。\\n3. 交出什么：原始异常事实、出问题对象的身份，以及受影响的范围。\\n4. 为什么这样做：异常需要传到真正负责处理的人那里，而且转交过程不能把失败状态误写成成功。\\n5. 出错时怎样处理：如果现有证据还不足以判断，就保留“无法判断”的状态，并说明恢复判断或继续处理需要哪些条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":3,\"note\":\"All 10 paraphrases correct; listed confusions concern definitions outside each unit's scope. D8 complete: all 55 units passed in rounds 1-3.\",\"confusions\":[\"“下一接收者”是谁、由什么规则确定，本单位没有说明。\",\"“对象身份”具体要记录哪一种对象及哪些身份信息，本单位没有定义。\",\"“受影响范围”应按任务、角色、文件还是其他维度记录，本单位没有说明。\",\"规定的“模型档次”除示例外如何确定，本单位没有给出来源。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round3\",\"result_commit\":\"67a45b81d972dc512f8a4dbd69e2c330eecb1a8b\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T14:43:38.000Z",
+          "batchId": "d8-batch-3"
+        },
+        {
+          "round": 4,
+          "textHash": "833e8d2dc11f3766cda6c68d41f60154c1111726968ce9cb0c51a422fdbe5690",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：角色规定的模型档次（例如需要用户转交的规划端角色用 GPT 最高推理，执行端按档次表用 Codex 或 GPT Work 极高，X4 依派发记录使用专业档次或现有专门插件）或新开的对话或线程不可用，或者派发缺少必要材料定位。也包括将 GPT Work 极高的执行角色改用 Codex 或降档、X4 未写明专业档次或所用专门插件、需用户转交的角色同轮被要求转交多条。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round7",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步在做什么：当前角色发现角色档次、对话或线程可用性、派发材料或派发方式方面的异常后，保留异常事实并把它交给下一接收者。2. 它拿到什么：拿到某个角色无法使用规定模型档次、无法新开对话或线程、缺少必要材料位置，或出现错误改用较低档次、X4 未注明专业档次或专门插件、同一需用户转交角色一轮被要求转交多条等异常。3. 它交出什么：交出未经改写成成功状态的原始异常事实、异常所涉及对象的身份和受影响范围。4. 为什么这样做：让异常实际到达负责处理它的人，同时避免转交过程把失败误记成成功。5. 出错时会怎样：如果现有证据还不足以确定情况，就保持“无法判断”，并说明恢复判断所需要补齐的条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"pass\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":7,\"note\":\"复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。\",\"confusions\":[\"“下一接收者”具体是谁、按什么规则确定，本单位没有说明。\",\"“X4”具体是什么角色或对象，本单位没有定义。\"],\"evidence_commit\":\"fb77fb107c4c00830146d083b67fd566723227ca\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round7\",\"blueprint_commit\":\"2a647bdaff3d2e8248f353d825ad789fa99bb676\",\"result_commit\":\"54f3d7877f627e889703efa9e9450ed3b98145af\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-13T13:26:46.000Z",
+          "batchId": "d8-batch-7"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-role-step-2",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "ef5d5addbed6e98f1ad7f5c26ed1b60989196aad1795c84855f0f59cbbb5d455",
+          "reviewedText": "这一步：识别问题并交回\n这一步在做什么：负责人在此处核对异常并采取合同允许的处理。\n拿到什么：拿到的异常是：所需档次或新上下文入口不可用，或者派发缺少必要材料定位。\n交出什么：得到明确收场：下一角色所需入口或材料尚未具备；保留实际状态与缺项，按本轮一条提示词和规定宿主继续。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：按规定宿主补齐入口和材料；D8 没读懂的文字交 D1 改写，再用下一轮新 GPT 对话重读，不额外拆成逐单位用户转交。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人确认下一角色所需的模型档次、全新上下文入口或必要材料定位尚未具备，并按规则把问题交回。2. 它拿到这些入口或材料缺失的异常。3. 它交出的收场是保留真实状态和缺项，并继续遵守本轮只给一条提示词、使用规定运行环境的方式推进。4. 这样做是为了让角色缺失问题被明确处理，而不是假装下一角色已经执行。5. 如果仍缺入口或材料，就按规定环境补齐；若 D8 对文字读不懂，则交 D1 改写，再由下一轮新的 GPT 对话重读，而不是拆成每个单位单独让用户转交。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“所需档次”具体是模型档次、权限档次还是其他等级，本单位没有明确说明。\",\"“规定宿主”具体是哪一个运行环境，本单位没有给出。\",\"D8 和 D1 分别是什么角色或阶段，仅凭本单位无法知道。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "72a9e9d0d1756dbfe591a98964c2363f47309c7b29c6bf082d281a9fc54a3b8c",
+          "reviewedText": "这一步：识别问题并交回\n这一步在做什么：负责人在此处核对异常并采取合同允许的处理。\n拿到什么：拿到的异常是：角色规定的模型档次（例如规划端用 GPT 最高推理，执行端用 Codex）或新开的对话或线程不可用，或者派发缺少必要材料定位。\n交出什么：得到明确收场：下一角色所需入口或材料尚未具备；保留实际状态与缺项，按本轮一条提示词和运行插件的工具（宿主，如 Claude Code、Codex 或 GPT 网页端）继续。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：按规定宿主补齐入口和材料；读者复述关卡（D8） 没读懂的文字交 设计负责人（D1） 改写，再用下一轮新 GPT 对话重读，不额外拆成逐单位用户转交。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由负责人核对模型档次、新对话/线程或材料定位不可用的异常，并按合同允许的方式处理和交回。\n2. 它拿到规定模型档次或新开的对话/线程不可用，或者派发缺少必要材料定位的异常。\n3. 它交出明确收场：下一角色需要的入口或材料还没具备，实际状态和缺项被保留，并按本轮一条提示词和相应宿主继续。\n4. 这样做是为了让异常真正落到负责处理的人手里，而不是在交接中被写成成功。\n5. 如果仍有问题，就按规定补齐入口和材料；D8 读不懂的文字交设计负责人（D1）改写，再在下一轮新的 GPT 对话里重读，而不是让用户逐单位另行转交。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[\"文字同时说“下一角色所需入口或材料尚未具备”和“按本轮一条提示词和宿主继续”，但没有说明缺项未补齐时具体如何继续。\",\"“按规定宿主补齐入口和材料”这一句中，究竟是宿主本身负责补齐，还是通过宿主由某个角色补齐，主体关系不明确。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        },
+        {
+          "round": 3,
+          "textHash": "16bdccd622b055d814f184c967222888ab84a63272f4f8a66f303e2ede8e6198",
+          "reviewedText": "这一步：识别问题并交回\n这一步在做什么：负责人在此处核对异常并采取合同允许的处理。\n拿到什么：拿到的异常是：角色规定的模型档次（例如需要用户转交的规划端角色用 GPT 最高推理，执行端用 Codex）不可用，无法新开对话或线程，或者派发缺少必要的材料位置。\n交出什么：得到明确收场：下一角色还缺入口或材料，这一步暂停；负责人记录实际状态和缺项，补齐后再派发，不写成已经执行。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：缺的是工具入口，由负责人换到该角色规定的工具（宿主，如 Claude Code、Codex 或 GPT 网页端）；缺的是材料，由负责人补齐材料位置后重新派发。",
+          "readerAgentId": "gpt-web-batch-round3",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步做什么：负责人收到角色运行或派发异常后，核对问题，并只采用合同允许的处理方式。\\n2. 拿到什么：异常可能是规定的模型档次不可用、无法新开所需对话或线程，或者派发缺少必要材料的位置。\\n3. 交出什么：形成明确的暂停状态：下一角色仍缺入口或材料，负责人记录真实状态和缺项，补齐后再重新派发，并且不写成已经执行。\\n4. 为什么这样做：异常必须交到真正负责处理的人那里，而且不能在转交过程中把失败伪装成成功。\\n5. 出错时怎样处理：如果缺的是工具入口，负责人改用该角色规定的宿主；如果缺的是材料，就补齐材料的位置后重新派发。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":3,\"note\":\"All 10 paraphrases correct; listed confusions concern definitions outside each unit's scope. D8 complete: all 55 units passed in rounds 1-3.\",\"confusions\":[\"“合同允许的处理”具体有哪些允许和禁止项，本单位没有给出合同内容。\",\"这里的“负责人”和“下一角色”分别是谁，本单位没有说明。\",\"角色规定的宿主和模型档次从哪里查到，本单位没有给出来源。\",\"如果问题是模型档次不可用，仅“换到规定的工具”是否足以解决，本单位没有说明。\",\"“材料位置”具体要补到什么粒度，例如文件路径、提交、链接还是其他标识，本单位没有定义。\",\"补齐入口或材料后由谁验证条件已经满足，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round3\",\"result_commit\":\"67a45b81d972dc512f8a4dbd69e2c330eecb1a8b\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T14:43:38.000Z",
+          "batchId": "d8-batch-3"
+        },
+        {
+          "round": 4,
+          "textHash": "10f8d542c97fa3a0ec3ff609e5275bf3da0c9261de47bc5cf8b84f68435510b7",
+          "reviewedText": "这一步：识别问题并交回\n这一步在做什么：负责人在此处核对异常并采取合同允许的处理。\n拿到什么：拿到的异常是：角色规定的模型档次（例如需要用户转交的规划端角色用 GPT 最高推理，执行端按档次表用 Codex 或 GPT Work 极高，X4 依派发记录使用专业档次或现有专门插件）不可用，无法新开对话或线程，或者派发缺少必要的材料位置。也包括将 GPT Work 极高的执行角色改用 Codex 或降档、X4 未写明专业档次或所用专门插件、需用户转交的角色同轮被要求转交多条。\n交出什么：得到明确收场：下一角色还缺入口或材料，这一步暂停；负责人记录实际状态和缺项，补齐后再派发，不写成已经执行。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：缺的是工具入口，由负责人换到该角色规定的工具（宿主，如 Claude Code、Codex 或 GPT 网页端）；缺的是材料，由负责人补齐材料位置后重新派发。",
+          "readerAgentId": "gpt-web-batch-round7",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步在做什么：负责人收到角色派发异常后，在这里确认异常并按照合同允许的办法处理。2. 它拿到什么：拿到规定模型档次不可用、无法新开对话或线程、派发缺少材料位置，或者把 GPT Work 极高档执行角色改成 Codex 或降档、X4 没写专业档次或插件、同一需用户转交角色一轮被要求转交多条等异常。3. 它交出什么：给出明确的暂停结论，记录下一角色仍缺的入口或材料、当前实际状态和缺项，补齐后再重新派发，并且不把未执行的角色写成已经执行。4. 为什么这样做：把异常交到真正负责处理的人手上，同时防止失败在转交过程中被记成成功。5. 出错时会怎样：缺工具入口时，负责人改用该角色合同规定的宿主；缺材料时，负责人补齐材料位置后重新派发。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"pass\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":7,\"note\":\"复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。\",\"confusions\":[\"“合同允许的处理”具体有哪些边界，本单位没有给出合同内容，因此除了后文列出的两类恢复方式外无法知道完整允许范围。\",\"“X4”具体是什么角色或对象，本单位没有定义。\"],\"evidence_commit\":\"fb77fb107c4c00830146d083b67fd566723227ca\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round7\",\"blueprint_commit\":\"2a647bdaff3d2e8248f353d825ad789fa99bb676\",\"result_commit\":\"54f3d7877f627e889703efa9e9450ed3b98145af\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-13T13:26:46.000Z",
+          "batchId": "d8-batch-7"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-checker-whole",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "81ca6380fb4019c6c7e2a93f9c4f53c04f8bb2cb8ab6f7dd5fc351f8751438c1",
+          "reviewedText": "这一步：整体收场说明\n这一步在做什么：负责人说明检查为何不能完成，或追加历史后的内容为何不符合用户批准，并交回设计负责人。\n拿到什么：拿到固定检查器不可用、来源不可读或获批内容与冻结输出不一致的实际记录。\n交出什么：保留候选和检查结果，不写冻结记录、不开始插件实现，由设计负责人查明原因。\n为什么要这样：受影响部分必须有明确收场，同时保留仍可继续的工作。\n出错会怎样：原因未查明或冻结档仍不通过时继续停在当前设计阶段，只允许现实核查和材料整理。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人说明为什么检查无法完成，或为什么追加历史后的内容与用户批准内容不一致，并把问题交回设计负责人。2. 它拿到固定检查器不可用、来源不可读，或获批内容与冻结输出不一致的实际记录。3. 它交出保留的候选和检查结果，同时不写冻结记录、不开始插件实现，由设计负责人查因。4. 这样做是为了让失败有明确收场并保留已有事实，而不是越过未解决问题继续实现。5. 如果原因没有查清或冻结文件仍不通过，就继续停在设计阶段，只做现实核查和材料整理。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“固定检查器”具体是哪一个工具或检查入口，本单位没有说明。\",\"“追加历史”具体追加什么历史以及怎样影响内容快照，本单位没有定义。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "df3a968a1129f13236a529c30123a457121c52ad8a7f4b51580ba3e38153d35d",
+          "reviewedText": "这一步：整体收场说明\n这一步在做什么：负责人说明检查为何不能完成，或追加一条版本历史（内容快照本身不变）后的内容为何不符合用户批准，并交回设计负责人。\n拿到什么：拿到固定版本的 Blueprint 检查器不可用、来源不可读或获批内容与冻结输出不一致的实际记录。\n交出什么：保留候选和检查结果，不写冻结记录、不开始插件实现，由设计负责人查明原因。\n为什么要这样：受影响部分必须有明确收场，同时保留仍可继续的工作。\n出错会怎样：原因未查明或冻结档仍不通过时继续停在当前设计阶段，只允许现实核查和材料整理。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由负责人对 Blueprint 检查器无法完成检查，或追加版本历史后冻结输出与用户批准内容不一致的情况做整体收场，并交回设计负责人。\n2. 它拿到固定版本检查器不可用、来源不可读，或获批内容和冻结输出不一致的实际记录。\n3. 它交出被保留的候选和检查结果；此时不写冻结记录，也不开始插件实现，由设计负责人继续查因。\n4. 这样做是为了给失败一个明确收场，同时保留仍然可以继续调查的工作和证据。\n5. 如果原因还没查清，或者冻结档仍然不能通过，就继续停在设计阶段，只允许现实核查和材料整理。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[\"“来源不可读”没有说明具体是检查器的来源、设计来源还是其他外部来源。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-checker-step-1",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "8769c673bafcd237a9765e856f6c3fb9659956710f7c584df044635cea02e140",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：固定提交的 Blueprint 草稿或冻结检查入口不可用、外部来源不可访问，或追加历史后的内容快照与获批快照不一致。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在固定提交的 Blueprint 草稿、冻结检查入口、外部来源或快照一致性出现问题时，把异常事实原样交接。2. 它拿到检查入口不可用、来源不可访问，或追加历史后的内容快照和获批快照不一致这一类异常。3. 它交出原始事实、对象身份和影响范围。4. 这样做是为了让后续负责人处理真实问题，而不是在转交时把失败写成成功。5. 如果证据还不足，就保持无法判断并说明恢复所需条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-checker-step-2",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "42d1673a8d11f470360294bed35a5fc549aba25a89012d0309faecf8cb487e12",
+          "reviewedText": "这一步：识别问题并交回\n这一步在做什么：负责人调用已交付的固定检查器，区分检查未完成与获批内容不一致，不修改上游。\n拿到什么：拿到的异常是：固定提交的 Blueprint 草稿或冻结检查入口不可用、外部来源不可访问，或追加历史后的内容快照与获批快照不一致。\n交出什么：不写冻结记录，也不开始插件实现；保留实际结果交设计负责人查明原因。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：未恢复检查能力或冻结输出仍不对应获批快照时，停在当前设计阶段。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人调用已经交付的固定检查器，判断当前问题究竟是检查没完成，还是冻结输出与获批内容不一致，而且不去修改上游内容。2. 它拿到固定提交的 Blueprint 草稿或冻结检查入口不可用、外部来源不可访问，或追加历史后的内容快照和获批快照不一致这一异常。3. 它交出的处理是不写冻结记录、不开始插件实现，保留实际结果交给设计负责人查因。4. 这样做是为了避免未解决的检查问题在交接中被写成成功。5. 如果检查能力还没恢复，或冻结输出仍不对应获批快照，就停留在当前设计阶段。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“固定检查器”具体是哪一个检查器或入口，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "e35ab94d46fb7045cbb57475fa32e57b5ca3de468d71c6ed0fe997694df56e96",
+          "reviewedText": "这一步：识别问题并交回\n这一步在做什么：负责人调用已交付的固定版本的 Blueprint 检查器，区分检查未完成与获批内容不一致，不修改上游。\n拿到什么：拿到的异常是：固定提交的 Blueprint 草稿或冻结检查入口不可用、外部来源不可访问，或追加一条版本历史（内容快照本身不变）后的内容快照（设计文件除版本历史以外全部内容的哈希）与获批快照不一致。\n交出什么：不写冻结记录，也不开始插件实现；保留实际结果交设计负责人查明原因。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：未恢复检查能力或冻结输出仍不对应获批快照时，停在当前设计阶段。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由负责人调用固定版本的 Blueprint 检查器，把“检查本身没有完成”和“冻结输出与用户批准内容不一致”区分开，并把问题交回设计负责人，不修改上游内容。\n2. 它拿到草稿或冻结检查入口不可用、外部来源不可访问，或者追加版本历史后的内容快照与获批快照不一致等异常。\n3. 它交出实际检查结果给设计负责人查因；此时不写冻结记录，也不开始插件实现。\n4. 这样做是为了把问题交给真正负责的人处理，避免把检查失败或内容不一致误写成成功。\n5. 如果检查能力还没恢复，或者冻结输出仍然不能对应获批快照，就继续停在当前设计阶段。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-premise-whole",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "6a37a46ae8f4a791c974b17f99b43afb889f4e6dde69c4e423229a14463a22a7",
+          "reviewedText": "这一步：整体收场说明\n这一步在做什么：负责人说明整个失败情形怎样结束及谁继续处理。\n拿到什么：这次出现的情况是：实际所需方法在授权环境无法做到，且合同没有允许的等价替代。\n交出什么：用户最终看到：受影响部分已暂停并交原设计负责人决定，其他获准工作继续。\n为什么要这样：受影响部分必须有明确收场，同时保留仍可继续的工作。\n出错会怎样：仍不满足恢复条件时保持当前停止或未知状态。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人对整个“所需方法在已授权环境里做不到，而且合同没有等价替代”这一失败情形作整体收场。2. 它拿到该不可实现且无合同替代方案的事实。3. 它交出给用户的结果是：受影响部分暂停并交回原设计负责人决定，其他已经获准的工作继续。4. 这样做是为了明确受影响部分怎么结束，同时不阻断仍然可以合法继续的工作。5. 如果恢复条件仍不满足，就继续保持停止或未知状态。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-premise-step-1",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "6cb6415232cb9b4772ca8c2870f465d0f74e0fc9715cbd3450440bd0f4ecfa9c",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：实际所需方法在授权环境无法做到，且合同没有允许的等价替代。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在发现实际所需方法在获准环境里无法实现、而合同又没有允许等价替代时，把异常事实原样交接。2. 它拿到这一无法实现且无替代的异常。3. 它交出原始事实、对象身份和受影响范围。4. 这样做是为了让后续责任人处理真实问题，而不是在交接时把它写成成功。5. 如果证据仍不够，就保持无法判断，并说明恢复判断需要什么条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-premise-step-2",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "4cbe42e265c4e11a63b6c3c79af4b229db03691568baf238f5e717b2f3ba0262",
+          "reviewedText": "这一步：识别问题并交回\n这一步在做什么：负责人在此处核对异常并采取合同允许的处理。\n拿到什么：拿到的异常是：实际所需方法在授权环境无法做到，且合同没有允许的等价替代。\n交出什么：得到明确收场：受影响部分已暂停并交原设计负责人决定，其他获准工作继续。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人确认实际所需方法在已授权环境中无法做到、合同又没有等价替代，并按合同处理。2. 它拿到这一不可实现且无允许替代的异常。3. 它交出的收场是受影响部分暂停并交原设计负责人决定，其他获准工作继续。4. 这样做是为了让问题落到明确负责人手里，不能在转交中被写成成功。5. 如果证据仍不足，就保持无法判断并说明恢复所需条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-semantic-whole",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "c05a5955b9d05e24608e9b125a6f136bfaa2f4010ffece389135bac58711f335",
+          "reviewedText": "这一步：整体收场说明\n这一步在做什么：负责人说明整个失败情形怎样结束及谁继续处理。\n拿到什么：这次出现的情况是：验收维修提案降低阈值或以较低真实度替代合同要求，却声称只是机械修复。\n交出什么：用户最终看到：这项修改改变了完成标准，当前不能用它证明交付。\n为什么要这样：受影响部分必须有明确收场，同时保留仍可继续的工作。\n出错会怎样：仍不满足恢复条件时保持当前停止或未知状态。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人对“验收维修实际上降低阈值或真实度，却被称为机械修复”这一失败情形整体收场。2. 它拿到这项可能改变完成标准的修改。3. 它交给用户的结论是该修改已经改变完成标准，因此不能用它证明当前交付。4. 这样做是为了让受影响部分有明确结论，同时保留仍可继续的工作。5. 如果恢复条件仍不满足，就继续保持停止或未知状态。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“较低真实度”具体由什么标准判断，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "6838c065bda6c938cba7f0b9505f5354e4bd08ce5a7f9c2e3e07afc193248488",
+          "reviewedText": "这一步：整体收场说明\n这一步在做什么：负责人说明整个失败情形怎样结束及谁继续处理。\n拿到什么：这次出现的情况是：验收维修提案降低阈值（判定通过与否的数值界限）或以真实度更低的证据（离用户实际收到的东西更远，例如用源码检查代替安装后的实际运行）替代合同要求，却声称只是机械修复。\n交出什么：用户最终看到：这项修改改变了完成标准，当前不能用它证明交付。\n为什么要这样：受影响部分必须有明确收场，同时保留仍可继续的工作。\n出错会怎样：仍不满足恢复条件时保持当前停止或未知状态。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由负责人对“验收维修实际降低完成标准却被称为机械修复”这一整类失败做最终收场，并说明后续由谁继续。\n2. 它拿到降低通过阈值，或用真实度更低的证据替代合同要求的实际情况。\n3. 它交出给用户的明确结论：这项修改改变了完成标准，当前不能用它来证明交付完成。\n4. 这样做是为了让受影响部分有明确收场，同时保留其他仍可以继续的工作。\n5. 如果恢复条件仍没有满足，就维持当前停止或未知状态。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-semantic-step-1",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "b42f1846430ca6c600d4331945113731c279b8b4346f3e484c4433feeca8c9ee",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：验收维修提案降低阈值或以较低真实度替代合同要求，却声称只是机械修复。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在发现验收维修提案实际降低阈值或真实度、却被称为机械修复时，把异常事实保留并交给下一接收者。2. 它拿到这一可能改变完成标准的提案。3. 它交出原始事实、对象身份和影响范围。4. 这样做是为了让真实语义问题进入后续处理，而不是在转交时被包装成成功。5. 如果证据不够，就保留无法判断并说明恢复所需条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“较低真实度”具体如何判断，本单位没有给出标准。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "48fb1727923e0c01f828b35a4ba1150bab12b4aa044fdc4cf3adc82fe9876d4c",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：验收维修提案降低阈值（判定通过与否的数值界限）或以真实度更低的证据（离用户实际收到的东西更远，例如用源码检查代替安装后的实际运行）替代合同要求，却声称只是机械修复。\n交出什么：交出原始事实、对象身份（能唯一确认是哪一个文件或安装版本的标识，例如哈希或版本号）和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由当前角色发现验收维修实际上降低了完成标准时，保留事实并把异常传给下一接收者。\n2. 它拿到的异常是：维修提案降低通过阈值，或用离用户实际成品更远、真实度更低的证据替代合同要求，却声称这只是机械修复。\n3. 它交出原始事实、能唯一确认相关文件或安装版本的对象身份，以及受影响范围。\n4. 这样做是为了保证这种异常被真正交给负责处理的人，而不是在交接时被描述成成功。\n5. 如果证据仍不足，就保留“无法判断”，并说明要满足哪些条件才能恢复判断。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-semantic-step-2",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "54a7038125d8033452072a83c74982313e30c0e9df6aed9f0fc2c5a123f45ce2",
+          "reviewedText": "这一步：识别问题并交回\n这一步在做什么：负责人在此处核对异常并采取合同允许的处理。\n拿到什么：拿到的异常是：验收维修提案降低阈值或以较低真实度替代合同要求，却声称只是机械修复。\n交出什么：得到明确收场：这项修改改变了完成标准，当前不能用它证明交付。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人识别出某个所谓验收维修其实降低了阈值或真实度，从而改变了完成标准，并按合同处理。2. 它拿到这种被称为机械修复、实际却改变验收语义的提案。3. 它交出的结论是这项修改改变了完成标准，当前不能拿它证明交付完成。4. 这样做是为了把问题交给有责任处理的人，避免把语义变化伪装成成功修复。5. 如果证据仍不足，就保持无法判断，并写清恢复判断所需条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“较低真实度”具体按什么维度判定真实度降低，本单位没有定义。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "f5d8066e28dbd294f612e072da6557ced77c0d2581d5dbb0ce13de919a0177be",
+          "reviewedText": "这一步：识别问题并交回\n这一步在做什么：负责人在此处核对异常并采取合同允许的处理。\n拿到什么：拿到的异常是：验收维修提案降低阈值（判定通过与否的数值界限）或以真实度更低的证据（离用户实际收到的东西更远，例如用源码检查代替安装后的实际运行）替代合同要求，却声称只是机械修复。\n交出什么：得到明确收场：这项修改改变了完成标准，当前不能用它证明交付。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由负责人核对验收维修是否实际上改变了完成标准，并按合同允许的方式处理。\n2. 它拿到的异常是：维修提案降低通过阈值，或把合同要求的证据换成真实度更低的证据，却声称只是机械修复。\n3. 它交出明确结论：这类修改已经改变完成标准，因此当前不能用修改后的验收方式证明交付完成。\n4. 这样做是为了让语义变化被正式识别并交给正确责任方，而不是在处理过程中变成假成功。\n5. 如果证据还不充分，就保留“无法判断”，并说明恢复判断需要哪些条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-calibration-whole",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "075abfae4d0a8ab00dfb93e0d45536c812fea0ae8b8abd08bea2a3a576d2680e",
+          "reviewedText": "这一步：整体收场说明\n这一步在做什么：负责人说明整个失败情形怎样结束及谁继续处理。\n拿到什么：这次出现的情况是：同一验收器把危险坏例或缺证例输出为通过。\n交出什么：用户最终看到：验收器尚不能可靠区分好坏与缺证，本轮结果不能支持交付。\n为什么要这样：受影响部分必须有明确收场，同时保留仍可继续的工作。\n出错会怎样：仍不满足恢复条件时保持当前停止或未知状态。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人对“同一验收器把危险坏例或缺证例判为通过”这一失败情形整体收场。2. 它拿到验收器不能正确区分这些情况的事实。3. 它交给用户的结论是该验收器目前不能可靠区分好坏与缺证，因此本轮结果不能支持交付。4. 这样做是为了给受影响部分一个明确结论，同时保留仍可以继续的其他工作。5. 如果恢复条件仍不满足，就继续保持停止或未知状态。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-calibration-step-1",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "b465642cde25807a73bb91f2331084574dbf5815faec7bb35d8413b61843508e",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：同一验收器把危险坏例或缺证例输出为通过。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在发现同一验收器竟把危险坏例或缺证例判为通过时，把异常事实原样交接。2. 它拿到验收器发生误判的事实。3. 它交出原始事实、对象身份和影响范围。4. 这样做是为了让问题进入负责处理的人手里，而不是在转交时被写成成功。5. 如果证据仍不足，就保持无法判断并说明恢复判断所需条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-calibration-step-2",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "2783eabd5a26076ad985740745d5e1cf95953d521726c0df5d3d7a5dcda414e2",
+          "reviewedText": "这一步：识别问题并交回\n这一步在做什么：负责人在此处核对异常并采取合同允许的处理。\n拿到什么：拿到的异常是：同一验收器把危险坏例或缺证例输出为通过。\n交出什么：得到明确收场：验收器尚不能可靠区分好坏与缺证，本轮结果不能支持交付。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人确认同一验收器把危险坏例或缺证例判为通过这一异常，并按合同处理。2. 它拿到验收器误把这些情况判为通过的事实。3. 它交出的结论是验收器目前不能可靠区分好、坏和缺证，因此这轮结果不能支持交付。4. 这样做是为了让验收器的问题由负责人处理，不能在交接时写成成功。5. 如果证据仍不足，就保持无法判断并说明恢复所需条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-candidate-whole",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "861dcd3a918c4674edde80b5c199a4310794a3ca0c9d9153132b6e88e843a078",
+          "reviewedText": "这一步：整体收场说明\n这一步在做什么：负责人说明整个失败情形怎样结束及谁继续处理。\n拿到什么：这次出现的情况是：签发前发现被验安装包或最终文档与用户将收到的对象不一致。\n交出什么：用户最终看到：当前成品还没有对应的有效证据，因此暂不签发。\n为什么要这样：受影响部分必须有明确收场，同时保留仍可继续的工作。\n出错会怎样：仍不满足恢复条件时保持当前停止或未知状态。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人对签发前发现“被验安装包或最终文档与用户将收到的对象不一致”这一失败情形整体收场。2. 它拿到最终消费对象和被验对象不一致的事实。3. 它交给用户的结论是当前成品还没有与之对应的有效证据，因此暂不签发。4. 这样做是为了让受影响部分有明确结论，同时保留仍可继续的其他工作。5. 如果恢复条件仍不满足，就继续保持停止或未知状态。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-candidate-step-1",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "3ad9469adb262b34660c48f2cbac120557230f9e1d99e57d7e249f2b267b3f2d",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：签发前发现被验安装包或最终文档与用户将收到的对象不一致。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在签发前发现被验安装包或最终文档与用户最终会收到的对象不一致时，把异常事实保留并交给下一接收者。2. 它拿到对象不一致这一异常。3. 它交出原始事实、对象身份和受影响范围。4. 这样做是为了让对象错配问题由负责的人处理，而不是在交接时被写成成功。5. 如果证据还不足，就保持无法判断并说明恢复所需条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-candidate-step-2",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "3ad9469adb262b34660c48f2cbac120557230f9e1d99e57d7e249f2b267b3f2d",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：签发前发现被验安装包或最终文档与用户将收到的对象不一致。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在签发前发现被验安装包或最终文档和用户最终会收到的对象不一致时，把异常事实原样交接。2. 它拿到最终消费对象与被验对象不一致的事实。3. 它交出原始事实、对象身份和影响范围。4. 这样做是为了让对象错配问题被后续负责人真实处理，而不是在转交时写成成功。5. 如果证据仍不足，就保持无法判断并说明恢复所需条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-candidate-step-3",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "e5080961a89ce88e380ad39d0a4b3f07dd9e039518ff305701415ea084152b68",
+          "reviewedText": "这一步：识别问题并交回\n这一步在做什么：负责人在此处核对异常并采取合同允许的处理。\n拿到什么：拿到的异常是：签发前发现被验安装包或最终文档与用户将收到的对象不一致。\n交出什么：得到明确收场：当前成品还没有对应的有效证据，因此暂不签发。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在签发前由负责人确认最终被验对象和用户将收到的对象不一致这一异常，并按既定合同处理。2. 它拿到的是对象不一致的事实。3. 它交出的结论是当前成品没有对应的有效证据，因此暂时不能签发。4. 这样做是为了让异常落到明确责任人处理，而不是在交接时被包装成成功。5. 如果证据仍不足，就保持无法判断，并说明恢复判断还需要什么条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-missing-whole",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "588c7760559d9b688936373ce32769254acfa52457a07a386d5805c80d83e30c",
+          "reviewedText": "这一步：整体收场说明\n这一步在做什么：负责人说明整个失败情形怎样结束及谁继续处理。\n拿到什么：这次出现的情况是：运行结束但原始观察丢失或评审者无权读取，只有实现者摘要。\n交出什么：用户最终看到：该项目前无法判断；保留已知事实并明确需要补回的原始证据。\n为什么要这样：受影响部分必须有明确收场，同时保留仍可继续的工作。\n出错会怎样：仍不满足恢复条件时保持当前停止或未知状态。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人对“运行结束但原始观察丢失或评审者读不到，只剩实现者摘要”作整体收场。2. 它拿到原始证据缺失或不可访问的事实。3. 它交给用户的结果是该项当前无法判断，同时保留已知事实并明确需要补回哪些原始证据。4. 这样做是为了让受影响部分有清楚结论，又不妨碍仍可继续的其他工作。5. 如果恢复条件仍不满足，就继续维持停止或未知状态。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-missing-step-1",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "bf3d164bd942bb10e754e1af763f2b60b596ae27de154ea96645060c8d3e05c5",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：运行结束但原始观察丢失或评审者无权读取，只有实现者摘要。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在运行已经结束但原始观察丢失、评审者无权读取且只剩实现者摘要时，把这一异常原样传下去。2. 它拿到原始证据缺失或不可读的事实。3. 它交出原始事实、对象身份和影响范围。4. 这样做是为了避免只有摘要时仍把结果当成已经证明成功。5. 如果证据还不够，就继续记为无法判断，并说明需要补回什么才能恢复。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-missing-step-2",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "b218629d39ed426f40cb518b7687ccee269cd3727616db0675304cc85941066e",
+          "reviewedText": "这一步：识别问题并交回\n这一步在做什么：负责人在此处核对异常并采取合同允许的处理。\n拿到什么：拿到的异常是：运行结束但原始观察丢失或评审者无权读取，只有实现者摘要。\n交出什么：得到明确收场：该项目前无法判断；保留已知事实并明确需要补回的原始证据。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人确认运行已经结束但原始观察丢失或评审者无权读取、只剩实现者摘要这一异常，并按合同处理。2. 它拿到原始证据缺失或不可访问的事实。3. 它交出的收场是该项当前无法判断，保留已知事实并明确需要补回的原始证据。4. 这样做是为了让证据缺失问题由负责人处理，不能在转交中被写成成功。5. 如果证据仍不足，就保持无法判断并说明恢复所需条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-package-whole",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "5333751b59ed73a85d18598e9ba9bab3e8be49ef76947902b947d6c5bbcc2050",
+          "reviewedText": "这一步：整体收场说明\n这一步在做什么：负责人说明整个失败情形怎样结束及谁继续处理。\n拿到什么：这次出现的情况是：安装后的技能能读入口但缺少角色卡或共用模板，或者中央容量仍不允许新增包。\n交出什么：用户最终看到：安装入口尚不完整，不能声明两插件已经可用。\n为什么要这样：受影响部分必须有明确收场，同时保留仍可继续的工作。\n出错会怎样：仍不满足恢复条件时保持当前停止或未知状态。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人对“安装技能能打开入口，但缺角色卡、共用模板或中央容量不允许新增包”这一失败情形作整体收场。2. 它拿到安装入口不完整或容量不满足的事实。3. 它交给用户的结论是安装入口尚不完整，因此不能宣称两个插件已经可用。4. 这样做是为了明确受影响部分的结论，同时保留仍可继续的工作。5. 如果恢复条件仍不满足，就继续保持停止或未知状态。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“中央容量”具体指什么容量或数量上限，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "a3bd87ea98acb3b177bd02dd201a65e31b6dacb7b8bb7d84f18c9eb46f85566f",
+          "reviewedText": "这一步：整体收场说明\n这一步在做什么：负责人说明整个失败情形怎样结束及谁继续处理。\n拿到什么：这次出现的情况是：安装后的技能能读入口但缺少角色卡或共用模板，或者插件市场的容量上限（本次定为 12 个插件、32 个技能）仍不允许新增包。\n交出什么：用户最终看到：安装入口尚不完整，不能声明两插件已经可用。\n为什么要这样：受影响部分必须有明确收场，同时保留仍可继续的工作。\n出错会怎样：仍不满足恢复条件时保持当前停止或未知状态。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由负责人对安装后的技能缺少必要资源，或市场容量阻止新增插件包这一整类失败做最终收场，并说明后续由谁继续。\n2. 它拿到安装技能能读入口却缺角色卡或共用模板，或者市场容量上限仍不允许新增包的实际情况。\n3. 它交出给用户的明确结论：安装入口还不完整，因此不能声称两个插件已经可用。\n4. 这样做是为了让受影响部分有明确收场，同时保留仍可继续推进的工作。\n5. 如果恢复条件仍然没有满足，就保持当前停止或未知状态。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-package-step-1",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "9ad293f8c5eed4084625515af294037b1dcfe6baa26e14ee3e476f221911e760",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：安装后的技能能读入口但缺少角色卡或共用模板，或者中央容量仍不允许新增包。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在发现安装后的技能缺必要资源或容量条件不满足时，把异常事实原样保留下来并交给下一接收者。2. 它拿到的是技能虽能读取入口但缺角色卡或共用模板，或中央容量仍不允许新增包这一异常。3. 它交出异常原始事实、涉及对象的身份以及影响范围。4. 这样做是为了让问题被负责处理的人接住，而不是在转交时被写成成功。5. 如果证据还不足，就维持无法判断，并写清恢复判断所需条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“中央容量”具体是什么容量、由什么上限约束，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "0e8ad2e6196ceea35e3c5fa5c6e06106565657f240df42e7a7764d3d2fb91ce2",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：安装后的技能能读入口但缺少角色卡或共用模板，或者插件市场的容量上限（本次定为 12 个插件、32 个技能）仍不允许新增包。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由当前角色在发现安装包或市场容量异常时，保留事实并把异常传给下一接收者。\n2. 它拿到的异常是：安装后的技能虽然能读入口，但缺少角色卡或共用模板；或者市场容量上限仍然不允许新增插件包。\n3. 它交出原始异常事实、涉及对象的身份和受影响范围。\n4. 这样做是为了让问题落到后续负责处理的人手里，并防止在交接时把失败写成成功。\n5. 如果证据还不够，就保留“无法判断”，并说明要满足什么恢复条件才能继续判断。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-package-step-2",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "9ad293f8c5eed4084625515af294037b1dcfe6baa26e14ee3e476f221911e760",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：安装后的技能能读入口但缺少角色卡或共用模板，或者中央容量仍不允许新增包。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在发现安装技能缺角色卡、共用模板或容量不足时，把异常事实保留并交给下一接收者。2. 它拿到技能入口可读但资源不完整，或中央容量不允许新增包的事实。3. 它交出原始异常、对象身份和影响范围。4. 这样做是为了避免交接过程把未解决问题误写成成功。5. 如果证据不够，就保留无法判断并说明恢复需要的条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“中央容量”具体指什么资源或数量上限，本单位无法确定。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "0e8ad2e6196ceea35e3c5fa5c6e06106565657f240df42e7a7764d3d2fb91ce2",
+          "reviewedText": "这一步：发现与传递异常\n这一步在做什么：当前角色保留异常事实并交给下一接收者。\n拿到什么：拿到的异常是：安装后的技能能读入口但缺少角色卡或共用模板，或者插件市场的容量上限（本次定为 12 个插件、32 个技能）仍不允许新增包。\n交出什么：交出原始事实、对象身份和受影响范围。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由当前角色在发现安装包或市场容量异常时，保留事实并把异常传给下一接收者。\n2. 它拿到的异常是：安装后的技能虽然能读入口，但缺少角色卡或共用模板；或者市场容量上限仍然不允许新增插件包。\n3. 它交出原始异常事实、涉及对象的身份和受影响范围。\n4. 这样做是为了让问题落到后续负责处理的人手里，并防止在交接时把失败写成成功。\n5. 如果证据还不够，就保留“无法判断”，并说明要满足什么恢复条件才能继续判断。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-package-step-3",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "e55cc086746c55be9143e6bb52e4091e28f9b75a388c7808a5614e5f5db4b37b",
+          "reviewedText": "这一步：识别问题并交回\n这一步在做什么：负责人在此处核对异常并采取合同允许的处理。\n拿到什么：拿到的异常是：安装后的技能能读入口但缺少角色卡或共用模板，或者中央容量仍不允许新增包。\n交出什么：得到明确收场：安装入口尚不完整，不能声明两插件已经可用。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是负责人确认安装后的技能入口虽然存在，但必要角色卡、共用模板或容量条件仍不满足，并按合同收场。2. 它拿到安装入口不完整或中央容量不足这一异常。3. 它交出的结论是安装入口尚不完整，因此不能声明两个插件已经可用。4. 这样做是为了让未解决问题由负责人处理，而不是在交接时被写成成功。5. 如果证据仍不足，就维持无法判断并说明恢复所需条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[\"“中央容量”具体是什么容量限制，本单位没有说明。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        },
+        {
+          "round": 2,
+          "textHash": "fbe9c9bf7705ceaf73e8371d8fc6366ac99326c14ac6d61c074163c76f01aca1",
+          "reviewedText": "这一步：识别问题并交回\n这一步在做什么：负责人在此处核对异常并采取合同允许的处理。\n拿到什么：拿到的异常是：安装后的技能能读入口但缺少角色卡或共用模板，或者插件市场的容量上限（本次定为 12 个插件、32 个技能）仍不允许新增包。\n交出什么：得到明确收场：安装入口尚不完整，不能声明两插件已经可用。\n为什么要这样：问题必须落到负责处理的人，不能在转交时被写成成功。\n出错会怎样：证据仍不足时保留无法判断并说明恢复所需条件。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步由负责人核对安装包或市场容量异常，并按合同允许的方式处理。\n2. 它拿到的异常是：安装后的技能能读入口但缺少角色卡或共用模板，或者插件市场容量上限仍然不允许新增包。\n3. 它交出明确结论：安装入口还不完整，因此不能宣称两个插件已经可用。\n4. 这样做是为了让异常由负责的人正式处理，而不是在转交过程中被改写成成功。\n5. 如果证据仍然不足，就保持“无法判断”，并说明恢复判断所需的条件。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-revocation-whole",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "f31785bb85e8bbbe703234b7379f27f0c8e50a1aae809e38ab19ab74a83df19e",
+          "reviewedText": "这一步：暂停与撤回的收场\n这一步在做什么：交付负责人先登记新事实并暂停声明，再按冻结标准决定维持还是撤回整份签发。\n拿到什么：拿到可能推翻原结论的新事实、原签发和可核对的证据。\n交出什么：维持就恢复已交付状态；撤回就清空当前签发引用、标记相关证据失效并进入返修或规定的设计退回。\n为什么要这样：新事实可能推翻交付结论，需要先停止对外声明，再保留核对依据和原签发历史。\n出错会怎样：证据不足时保持声明暂停和原签发引用，不把复核中写成已经维持或已完成新的签发。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在已经签发后出现可能推翻原结论的新事实时，由交付负责人先登记事实并暂停对外声明，再按冻结标准决定维持还是撤回整份签发。2. 它拿到新事实、原签发和可核对证据。3. 它交出的结果有两种：维持则恢复已交付状态；撤回则清除当前签发引用、把相关证据标为失效，并进入返修或规定的设计退回。4. 这样做是为了在新事实可能推翻原结论时先停止继续宣称已交付，同时保留核查依据和签发历史。5. 如果证据不足，就保持声明暂停并保留原签发引用，不能把复核中状态写成已经维持或已经重新签发。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-revocation-step-1",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "2883ea0a59f6f1184ea399203adda86eaffcd64beb05c838650e01fe649f7bd3",
+          "reviewedText": "这一步：复核签发后的新事实\n这一步在做什么：交付负责人先登记新事实并暂停声明，再按冻结标准决定维持还是撤回整份签发。\n拿到什么：拿到可能推翻原结论的新事实、原签发和可核对的证据。\n交出什么：维持就恢复已交付状态；撤回就清空当前签发引用、标记相关证据失效并进入返修或规定的设计退回。\n为什么要这样：新事实可能推翻交付结论，需要先停止对外声明，再保留核对依据和原签发历史。\n出错会怎样：证据不足时保持声明暂停和原签发引用，不把复核中写成已经维持或已完成新的签发。",
+          "readerAgentId": "gpt-web-batch-round1",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步是在签发之后出现可能推翻原结论的新事实时，由交付负责人先登记并暂停声明，再用冻结标准复核整份签发。2. 它拿到新事实、原签发和可核对证据。3. 它交出的结果是：若维持则恢复已交付状态；若撤回则清除当前签发引用、让相关证据失效，并进入返修或规定的设计退回。4. 这样做是为了在新事实可能推翻交付结论时先停止对外宣称，并保留审查依据和原签发历史。5. 如果证据不足，就保持声明暂停和原签发引用，不能把复核过程说成已经维持或已经完成新的签发。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":1,\"note\":null,\"confusions\":[],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round1\",\"result_commit\":\"24185ca08512549aa997659d5eb239b7be00e97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T04:54:59.000Z",
+          "batchId": "d8-batch-1"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-recovery-whole",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "b9e1c3b5344b0798d0b9c4a5200f0cba8cfbec825af8a5ceb169d0c4ec96fa29",
+          "reviewedText": "这一步：状态恢复的收场\n这一步在做什么：任何角色发现当前状态文件丢失、损坏或与远端不符，立即停下，只把现象报告当前阶段负责人。\n拿到什么：拿到状态文件不存在、无法解析、检查未通过或修订号与远端最新提交不符的实际现象。\n交出什么：负责人从历史最后一个通过检查的状态恢复，只补登有原始记录支撑的事件，写新的状态和不可变恢复记录。通过检查并从远端回读后才恢复派发；无有效历史状态先交用户确认。\n为什么要这样：事件日志需要与派发、结果、冻结和签发等原始记录逐条对照，不能凭记忆选择一个状态。\n出错会怎样：不知道当前阶段就报告设计负责人（D1）；负责人不自行选择恢复冲突，涉及冻结、批准或签发的交用户决定。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步处理状态文件丢失、损坏或与远端不一致的整个恢复收场：发现者立即停止工作，只向当前阶段负责人报告，由负责人负责恢复。\n2. 它拿到状态文件不存在、无法解析、检查失败，或修订号与远端最新提交不一致等实际现象。\n3. 它交出从历史最后一个通过检查的状态恢复出来的新状态和不可变恢复记录；只补登有原始记录支撑的事件，并在检查通过、远端回读成功后恢复派发。没有有效历史状态时先交用户确认。\n4. 这样做是为了让事件日志和派发、结果、冻结、签发等原始记录逐条一致，而不是凭记忆选择一个状态。\n5. 如果当前阶段都不清楚，就报告设计负责人（D1）；负责人不能自行裁决恢复冲突，涉及冻结、批准或签发的冲突交用户决定。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[\"“恢复冲突”具体包括哪些类型的冲突没有在本单位中界定。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        },
+        {
+          "round": 2,
+          "textHash": "b2e771e8697a630454e3b1690e7a6acc565e994fbc5685dfe2b2e2757e761d08",
+          "reviewedText": "这一步：状态恢复的收场\n这一步在做什么：任何角色发现当前状态文件丢失、损坏或与远端不符，立即停下，只把现象报告当前阶段负责人。\n拿到什么：拿到状态文件不存在、无法解析、检查未通过或修订号与远端最新提交不符的实际现象。恢复冲突指事件与记录对不上，或者无法判断某个变化是否已经发生。\n交出什么：负责人从最后一个通过检查的历史状态恢复，只补登有原始记录支撑的事件，写新的状态和恢复记录。普通冲突只能把这次变化当作没有发生，相关派发记为 stale、结果不被采用、原始记录和事件全部保留，仍需要时用新编号重派；通过检查并回读后，其余范围照常恢复。\n为什么要这样：负责人不能在两种说法之间挑一个当真；新派发的提示词必须列出原派发在仓库里已经留下的写入（提交和文件），接收者从当前仓库状态出发，不得假设原派发没有执行过，以免重复写入。\n出错会怎样：不知道当前阶段就报告设计负责人（D1），无有效历史状态先交用户确认。涉及冻结、批准、签发、撤回，或原写入与重派工作冲突、重派有无法撤回外部后果（付费调用、对外发布、向他人发消息）时交用户决定；等待决定的节点及其依赖工作写进 paused_scopes，暂停派发。",
+          "readerAgentId": "gpt-web-batch-round5",
+          "contextInherited": false,
+          "paraphrase": "1）这一步在做什么：任何角色一旦发现当前状态文件缺失、损坏、校验失败或与远端最新提交对不上，就停止继续工作，只向当前阶段负责人报告现象；负责人再从最后一个通过检查的历史状态恢复。2）它拿到什么：拿到状态文件不存在、无法解析、检查失败、修订号与远端不符等实际异常；如果事件与记录互相对不上，或无法判断某个变化究竟发生过没有，也视为恢复冲突。3）它交出什么：负责人写出新的状态和恢复记录，只补入有原始记录支持的事件。普通冲突中的那次变化按“没有发生”处理，相关派发标为 stale，结果不用，但原始记录和事件都保留；如果这项工作仍需要，就换新编号重派。检查并回读通过后，未受影响的其他范围继续恢复。4）为什么这样做：发生冲突时，负责人不能自行选择其中一种说法当事实；重派时还必须把原派发已经在仓库留下的提交和文件列出来，让接收者从当前仓库状态继续，避免把已经发生的写入再做一次。5）出错时会怎样：如果连当前阶段都不知道，就报告设计负责人（D1）；没有可用的历史状态时先让用户确认。若冲突牵涉冻结、批准、签发、撤回，原写入与重派互相冲突，或重派会产生付费调用、对外发布、发消息等不可撤回后果，则交用户决定，并把等待决定的节点及其依赖范围记入 paused_scopes，暂停继续派发。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"pass\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":5,\"note\":\"复述与原意一致。读者提出的“当前阶段负责人”“普通冲突”边界等疑问，单位文字已用“其余冲突”与列举的交用户情形划定，判断不影响理解，不改写。\",\"confusions\":[\"“当前阶段负责人”：本单位没有说明在已知当前阶段时，如何确定具体由谁担任该负责人。\",\"“通过检查并回读后”：本单位没有明确这里具体要检查、回读哪一份对象，以及通过标准是什么。\",\"“普通冲突”：文字说明了若干必须交用户决定的高影响情形，但没有直接给出“普通冲突”的完整边界，因此遇到未列举的冲突时我拿不准是否仍属于普通冲突。\"],\"evidence_commit\":\"fb77fb107c4c00830146d083b67fd566723227ca\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round5\",\"blueprint_commit\":\"73117c4b792df857e95cb9cdb6e50bba43159fc1\",\"result_commit\":\"333a3621c3d874c0018c0598e5d4f6f870f66e03\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-13T05:52:02.000Z",
+          "batchId": "d8-batch-5"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-recovery-step-1",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "faad3043a407065009e8f2eb1e9d57e6e5bbb58985fa723c846335b07a576945",
+          "reviewedText": "这一步：停止并恢复状态\n这一步在做什么：任何角色发现当前状态文件丢失、损坏或与远端不符，立即停下，只把现象报告当前阶段负责人。\n拿到什么：拿到状态文件不存在、无法解析、检查未通过或修订号与远端最新提交不符的实际现象。\n交出什么：负责人从历史最后一个通过检查的状态恢复，只补登有原始记录支撑的事件，写新的状态和不可变恢复记录。通过检查并从远端回读后才恢复派发；无有效历史状态先交用户确认。\n为什么要这样：事件日志需要与派发、结果、冻结和签发等原始记录逐条对照，不能凭记忆选择一个状态。\n出错会怎样：不知道当前阶段就报告设计负责人（D1）；负责人不自行选择恢复冲突，涉及冻结、批准或签发的交用户决定。",
+          "readerAgentId": "gpt-web-batch-round2",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步处理状态文件丢失、损坏或与远端不一致的情况：发现者立即停止当前工作，只向当前阶段负责人报告现象，由负责人恢复状态。\n2. 它拿到状态文件不存在、无法解析、检查失败，或修订号与远端最新提交不一致等实际现象。\n3. 它交出从历史最后一个通过检查的状态恢复出来的新状态和不可变恢复记录；只补登有原始记录支撑的事件，并在检查通过、远端回读成功后恢复派发。没有有效历史状态时先交用户确认。\n4. 这样做是为了让状态日志能和派发、结果、冻结、签发等原始记录逐项对上，而不是凭记忆猜当前状态。\n5. 如果连当前阶段都不知道，就报告设计负责人（D1）；负责人不能自行裁决恢复冲突，涉及冻结、批准或签发的冲突要交用户决定。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"rewrite\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":2,\"note\":\"7 units listed confusions only about details outside the unit's scope; paraphrases correct, judged passed: wr-sign, wr-freeze, wr-calibration, wb-source, ws-prompts, fail-checker-whole, fail-recovery-whole\",\"confusions\":[\"“恢复冲突”具体包括哪些类型的冲突没有在本单位中界定。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round2\",\"result_commit\":\"e283989444be3d1719e6de619c5a4897772b5929\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": false,
+          "reviewedAt": "2026-11-12T05:38:01.000Z",
+          "batchId": "d8-batch-2"
+        },
+        {
+          "round": 2,
+          "textHash": "a89996670414be7cd540b81c8bf96c43c57ed1456ba871c9e9a2da750cdee8cc",
+          "reviewedText": "这一步：停止并恢复状态\n这一步在做什么：任何角色发现当前状态文件丢失、损坏或与远端不符，立即停下，只把现象报告当前阶段负责人。\n拿到什么：拿到状态文件不存在、无法解析、检查未通过或修订号与远端最新提交不符的实际现象。\n交出什么：负责人从历史最后一个通过检查的状态恢复，只补登有原始记录支撑的事件，写新的状态和不可变恢复记录。通过检查并从远端回读后才恢复派发；无有效历史状态先交用户确认。\n为什么要这样：事件日志需要与派发、结果、冻结和签发等原始记录逐条对照，不能凭记忆选择一个状态。\n出错会怎样：不知道当前阶段就报告设计负责人（D1）。恢复冲突指事件日志和原始记录对不上，或者无法判断某个变化是否已经发生；负责人不自行选择，涉及冻结、批准或签发的交用户决定。",
+          "readerAgentId": "gpt-web-batch-round3",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步做什么：任何角色一旦发现当前状态文件丢失、损坏或和远端不一致，就立即停止继续工作，只把观察到的现象报告给当前阶段负责人。\\n2. 拿到什么：状态文件不存在、不能解析、检查失败，或者其中修订号与远端最新提交不一致等实际现象。\\n3. 交出什么：阶段负责人从历史中最后一个通过检查的状态恢复，只补记有原始记录支撑的事件，然后写出新的状态和不可变的恢复记录；这些内容通过检查并从远端回读后才能重新派发。如果没有有效历史状态，就先让用户确认。\\n4. 为什么这样做：恢复状态时必须把事件日志逐条和派发、结果、冻结、签发等原始记录对应，不能凭记忆任选一个状态。\\n5. 出错时怎样处理：如果连当前处于哪个阶段都不知道，就报告设计负责人 D1；如果事件日志与原始记录冲突，或无法判断某个变化是否已发生，负责人不能自行选择，涉及冻结、批准或签发时交给用户决定。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":3,\"note\":\"All 10 paraphrases correct; listed confusions concern definitions outside each unit's scope. D8 complete: all 55 units passed in rounds 1-3.\",\"confusions\":[\"“当前状态文件”具体是哪一个文件、格式是什么，本单位没有说明。\",\"“检查未通过”指哪一种检查、通过标准是什么，本单位没有定义。\",\"“修订号”是什么字段，以及如何对应远端最新提交，本单位没有说明。\",\"“历史最后一个通过检查的状态”和“原始记录”从哪里读取，本单位没有给出位置。\",\"“不可变恢复记录”怎样实现不可变，本单位没有说明。\",\"恢复冲突中哪些情况算“涉及冻结、批准或签发”并必须交用户决定，本单位没有进一步界定。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round3\",\"result_commit\":\"67a45b81d972dc512f8a4dbd69e2c330eecb1a8b\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T14:43:38.000Z",
+          "batchId": "d8-batch-3"
+        },
+        {
+          "round": 3,
+          "textHash": "6c72443da792d9ed4f0155e075457996e44ce9d8c69be3573b9790e81da65fbf",
+          "reviewedText": "这一步：停止并恢复状态\n这一步在做什么：任何角色发现当前状态文件丢失、损坏或与远端不符，立即停下，只把现象报告当前阶段负责人。\n拿到什么：拿到状态文件不存在、无法解析、检查未通过或修订号与远端最新提交不符的实际现象。恢复冲突指事件与记录对不上，或者无法判断某个变化是否已经发生。\n交出什么：负责人从最后一个通过检查的历史状态恢复，只补登有原始记录支撑的事件，写新的状态和恢复记录。普通冲突只能把这次变化当作没有发生，相关派发记为 stale、结果不被采用、原始记录和事件全部保留，仍需要时用新编号重派；通过检查并回读后，其余范围照常恢复。\n为什么要这样：负责人不能在两种说法之间挑一个当真；新派发的提示词必须列出原派发在仓库里已经留下的写入（提交和文件），接收者从当前仓库状态出发，不得假设原派发没有执行过，以免重复写入。\n出错会怎样：不知道当前阶段就报告设计负责人（D1），无有效历史状态先交用户确认。涉及冻结、批准、签发、撤回，或原写入与重派工作冲突、重派有无法撤回外部后果（付费调用、对外发布、向他人发消息）时交用户决定；等待决定的节点及其依赖工作写进 paused_scopes，暂停派发。",
+          "readerAgentId": "gpt-web-batch-round5",
+          "contextInherited": false,
+          "paraphrase": "1）这一步在做什么：任何角色一旦发现当前状态文件缺失、损坏、校验失败或与远端最新提交对不上，就停止继续工作，只向当前阶段负责人报告现象；负责人再从最后一个通过检查的历史状态恢复。2）它拿到什么：拿到状态文件不存在、无法解析、检查失败、修订号与远端不符等实际异常；如果事件与记录互相对不上，或无法判断某个变化究竟发生过没有，也视为恢复冲突。3）它交出什么：负责人写出新的状态和恢复记录，只补入有原始记录支持的事件。普通冲突中的那次变化按“没有发生”处理，相关派发标为 stale，结果不用，但原始记录和事件都保留；如果这项工作仍需要，就换新编号重派。检查并回读通过后，未受影响的其他范围继续恢复。4）为什么这样做：发生冲突时，负责人不能自行选择其中一种说法当事实；重派时还必须把原派发已经在仓库留下的提交和文件列出来，让接收者从当前仓库状态继续，避免把已经发生的写入再做一次。5）出错时会怎样：如果连当前阶段都不知道，就报告设计负责人（D1）；没有可用的历史状态时先让用户确认。若冲突牵涉冻结、批准、签发、撤回，原写入与重派互相冲突，或重派会产生付费调用、对外发布、发消息等不可撤回后果，则交用户决定，并把等待决定的节点及其依赖范围记入 paused_scopes，暂停继续派发。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"pass\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":5,\"note\":\"复述与原意一致。读者提出的“当前阶段负责人”“普通冲突”边界等疑问，单位文字已用“其余冲突”与列举的交用户情形划定，判断不影响理解，不改写。\",\"confusions\":[\"“当前阶段负责人”：本单位没有说明在已知当前阶段时，如何确定具体由谁担任该负责人。\",\"“通过检查并回读后”：本单位没有明确这里具体要检查、回读哪一份对象，以及通过标准是什么。\",\"“普通冲突”：文字说明了若干必须交用户决定的高影响情形，但没有直接给出“普通冲突”的完整边界，因此遇到未列举的冲突时我拿不准是否仍属于普通冲突。\"],\"evidence_commit\":\"fb77fb107c4c00830146d083b67fd566723227ca\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round5\",\"blueprint_commit\":\"73117c4b792df857e95cb9cdb6e50bba43159fc1\",\"result_commit\":\"333a3621c3d874c0018c0598e5d4f6f870f66e03\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-13T05:52:02.000Z",
+          "batchId": "d8-batch-5"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-web-method-whole",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "6f72dedc7afa5afc43ce38d999954a61ef70aacb0af9ddf3f8b8f0361d188f6d",
+          "reviewedText": "这一步：既有打包方法缺失的收场\n这一步在做什么：实现者找不到或无法复现用户已测通的网页端打包方法时，把实际结果作为偏离交给交付负责人。\n拿到什么：拿到仓库及实际包中已查找的来源和复现结果，注明找不到或无法复现的部分。\n交出什么：交付负责人收到偏离和原始事实，不把这部分记为完成，也不由实现者另造打包方式。\n为什么要这样：已定方案是复用用户测通的方法，不能因为找不到就换一套方案并声称满足要求。\n出错会怎样：仍找不到或无法复现时保留缺口，交付负责人按既有偏离流程处理。",
+          "readerAgentId": "gpt-web-batch-round4",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步在做什么：当实现者在网页端找不到或无法复现用户已经验证可行的打包方法时，把自己实际查到和复现到的结果作为一项偏离提交给交付负责人。2. 它拿到什么：实现者掌握自己在仓库和实际包中查过的来源、复现结果，以及哪些部分没有找到或无法复现。3. 它交出什么：交付负责人收到这项偏离及其原始事实；这部分不会被记成已经完成，实现者也不会自行设计另一种打包方式来替代。4. 为什么要这样做：既定要求是复用用户已经测通的方法，所以找不到原方法时不能换成另一套方法后仍宣称满足原要求。5. 出错时会怎样：如果最后仍然找不到或无法复现，就保留这个缺口，由交付负责人按照文中所称的既有偏离流程继续处理。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":4,\"note\":\"3 new units correct; confusions out of unit scope. D8 complete: 58 units passed.\",\"confusions\":[\"“交付负责人按既有偏离流程处理”：本单位没有说明“既有偏离流程”包含什么，因此我不知道保留缺口之后交付负责人会采取哪些具体动作或作出什么决定。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round4\",\"result_commit\":\"4cf76aa268a2b3ff23df1bb0cc4ddb24d44fc97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T17:24:14.000Z",
+          "batchId": "d8-batch-4"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-web-method-step-1",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "c7c4b1e19b1e33785d00e073509e1ab15f6fa1d75f311042c4b09098f044f945",
+          "reviewedText": "这一步：申报网页端打包偏离\n这一步在做什么：实现者找不到或无法复现用户已测通的网页端打包方法时，把实际结果作为偏离交给交付负责人。\n拿到什么：拿到仓库及实际包中已查找的来源和复现结果，注明找不到或无法复现的部分。\n交出什么：交付负责人收到偏离和原始事实，不把这部分记为完成，也不由实现者另造打包方式。\n为什么要这样：已定方案是复用用户测通的方法，不能因为找不到就换一套方案并声称满足要求。\n出错会怎样：仍找不到或无法复现时保留缺口，交付负责人按既有偏离流程处理。",
+          "readerAgentId": "gpt-web-batch-round4",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步在做什么：当实现者在网页端找不到或无法复现用户已经验证可行的打包方法时，把自己实际查到和复现到的结果作为一项偏离提交给交付负责人。2. 它拿到什么：实现者掌握自己在仓库和实际包中查过的来源、复现结果，以及哪些部分没有找到或无法复现。3. 它交出什么：交付负责人收到这项偏离及其原始事实；这部分不会被记成已经完成，实现者也不会自行设计另一种打包方式来替代。4. 为什么要这样做：既定要求是复用用户已经测通的方法，所以找不到原方法时不能换成另一套方法后仍宣称满足原要求。5. 出错时会怎样：如果最后仍然找不到或无法复现，就保留这个缺口，由交付负责人按照文中所称的既有偏离流程继续处理。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"passed\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":4,\"note\":\"3 new units correct; confusions out of unit scope. D8 complete: 58 units passed.\",\"confusions\":[\"“交付负责人按既有偏离流程处理”：本单位没有说明“既有偏离流程”包含什么，因此我不知道保留缺口之后交付负责人会采取哪些具体动作或作出什么决定。\"],\"evidence_commit\":\"6690ad6ce65f3bc6c137727761441d4b4fa5dbd5\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round4\",\"result_commit\":\"4cf76aa268a2b3ff23df1bb0cc4ddb24d44fc97e\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-12T17:24:14.000Z",
+          "batchId": "d8-batch-4"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-freeze-explanation-whole",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "23a77e49b6c74863a11d5387e358026b8ff89d17655ef26e3609582d428c1e34",
+          "reviewedText": "这一步：冻结说明缺口的收场\n这一步在做什么：用户追问角色对照设计检查冻结说明，发现影响用户决定的内容漏写、增加未承诺内容、验收器的总数和各类个数及回归用例的数量和分组与设计不一致，或单项超过 100 MB 的下载或安装遗漏时，交回设计负责人改写。说明在检查之后只要有改动，原来对说明的检查就失效。\n拿到什么：拿到按固定格式（结论、你在做的决定、做完时看到什么和怎么验、验收器、单项超过 100 MB 的下载或安装、不能降级的、实现者可自定的、权限费用时间、这次不做的、与上次批准相比的变化）写的冻结说明和同一份受审设计。\n交出什么：设计负责人收到具体缺口，按固定骨架改写。用户追问角色在冻结前对新说明重做四项检查，结果写明说明文件的原始字节哈希；设计未变时不必重做逐组件追问（即用户代理追问角色站在用户角度，对设计中每个组件逐个追问是否有答案）。\n为什么要这样：冻结说明是用户批准前唯一要读的东西，漏写会使用户在没看到的情况下批准。\n出错会怎样：问题未解决时保持缺口，交回设计负责人，不把说明已经通过检查写进记录。",
+          "readerAgentId": "gpt-web-batch-round7",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步在做什么：用户追问角色把冻结说明与同一份受审设计对照；如果说明漏掉会影响用户决定的内容、加入设计没有承诺的内容、验收器或回归用例数量与分组不一致，或者漏掉单项超过 100 MB 的下载或安装，就把说明退回设计负责人改写；说明一旦在检查后发生改动，原检查作废。2. 它拿到什么：拿到按指定十个主题写成的冻结说明，以及与它对应的同一份受审设计。3. 它交出什么：设计负责人得到具体缺口并按原骨架改写；冻结前，用户追问角色对新说明重新做四项检查，并记录新说明文件的原始字节哈希；如果设计本身没变，则不用重做逐组件追问。4. 为什么这样做：因为冻结说明是用户批准前唯一需要阅读的材料，说明漏项会让用户在没有看到相关信息的情况下作出批准。5. 出错时会怎样：缺口没有解决就继续保持为缺口并退回设计负责人，不在记录里写成说明已经通过检查。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"pass\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":7,\"note\":\"复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。\",\"confusions\":[\"“四项检查”在本单位没有逐项明确列名；我能看出前文有若干检查内容，但不能仅凭本单位确定这里所指四项的正式边界。\"],\"evidence_commit\":\"fb77fb107c4c00830146d083b67fd566723227ca\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round7\",\"blueprint_commit\":\"2a647bdaff3d2e8248f353d825ad789fa99bb676\",\"result_commit\":\"54f3d7877f627e889703efa9e9450ed3b98145af\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-13T13:26:46.000Z",
+          "batchId": "d8-batch-7"
+        }
+      ]
+    },
+    {
+      "subjectId": "fail-freeze-explanation-step-1",
+      "rounds": [
+        {
+          "round": 1,
+          "textHash": "69bdfc2f86a5b438d05f829c209569ca095c1bd02b61a2f59f1a059f602aa5e0",
+          "reviewedText": "这一步：检查说明并交回改写\n这一步在做什么：用户追问角色对照设计检查冻结说明，发现影响用户决定的内容漏写、增加未承诺内容、验收器的总数和各类个数及回归用例的数量和分组与设计不一致，或单项超过 100 MB 的下载或安装遗漏时，交回设计负责人改写。说明在检查之后只要有改动，原来对说明的检查就失效。\n拿到什么：拿到按固定格式（结论、你在做的决定、做完时看到什么和怎么验、验收器、单项超过 100 MB 的下载或安装、不能降级的、实现者可自定的、权限费用时间、这次不做的、与上次批准相比的变化）写的冻结说明和同一份受审设计。\n交出什么：设计负责人收到具体缺口，按固定骨架改写。用户追问角色在冻结前对新说明重做四项检查，结果写明说明文件的原始字节哈希；设计未变时不必重做逐组件追问（即用户代理追问角色站在用户角度，对设计中每个组件逐个追问是否有答案）。\n为什么要这样：冻结说明是用户批准前唯一要读的东西，漏写会使用户在没看到的情况下批准。\n出错会怎样：问题未解决时保持缺口，交回设计负责人，不把说明已经通过检查写进记录。",
+          "readerAgentId": "gpt-web-batch-round7",
+          "contextInherited": false,
+          "paraphrase": "1. 这一步在做什么：用户追问角色把冻结说明与同一份设计对照检查；如果发现影响用户决定的内容漏写、加入未承诺内容、验收器或回归用例的数量与分组和设计不一致，或漏掉单项超过 100 MB 的下载或安装，就把说明退回设计负责人重写；检查之后说明只要改过，原检查立即失效。2. 它拿到什么：拿到按指定十个主题组织的冻结说明和与之对应的同一份受审设计。3. 它交出什么：把具体缺口交给设计负责人按原骨架改写；冻结前，用户追问角色对新说明重新做四项检查，并写明新说明文件的原始字节哈希；如果设计没有变，不需要重做逐组件追问。4. 为什么这样做：冻结说明是用户批准前唯一要读的材料，任何影响决定的漏项都会使批准建立在不完整信息上。5. 出错时会怎样：缺口未解决就继续保留为缺口并退回改写，不把它登记成已经检查通过。",
+          "judgment": "{\"judged_by\":\"D1\",\"decision\":\"pass\",\"reader_isolation\":\"single-thread-batch\",\"d8_round\":7,\"note\":\"复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。\",\"confusions\":[\"“四项检查”在本单位没有逐项明确列名；前文虽然列出多类检查内容，但这里所指四项的正式划分仍需要猜。\"],\"evidence_commit\":\"fb77fb107c4c00830146d083b67fd566723227ca\",\"evidence_path\":\"docs/design/assurance/plugin-0.1-d1/gates/d8/round7\",\"blueprint_commit\":\"2a647bdaff3d2e8248f353d825ad789fa99bb676\",\"result_commit\":\"54f3d7877f627e889703efa9e9450ed3b98145af\",\"reviewedAt_basis\":\"RESULT.json last-change commit committer timestamp; actual reader time unavailable\"}",
+          "passed": true,
+          "reviewedAt": "2026-11-13T13:26:46.000Z",
+          "batchId": "d8-batch-7"
+        }
+      ]
+    }
+  ],
+  "readerIsolation": "single-thread-batch"
+}
