@@ -1,0 +1,31 @@
+{
+ "blueprint_commit": "c21249d1c0497ec3b875949fdb524e1ae1afd965",
+ "round": 6,
+ "reader_isolation": "single-thread-batch",
+ "units": [
+  {
+   "order": 1,
+   "subjectId": "fail-freeze-explanation-whole",
+   "textHash": "77f9dc6082e57146b899dda18f503045dae5508508d0868a7fb3078480e1a979",
+   "kind": "失败情形整体收场"
+  },
+  {
+   "order": 2,
+   "subjectId": "wr-freeze",
+   "textHash": "2b8c51a64b55fbac475ac9acd054964a8c05f821bbeacd44dff0f848b004ce28",
+   "kind": "正常走查"
+  },
+  {
+   "order": 3,
+   "subjectId": "wr-gates",
+   "textHash": "3cb9ff7a0f8f65a9d32b15b0111e8ddcd93e93f7eb41c0ab974f2a9bbafef787",
+   "kind": "正常走查"
+  },
+  {
+   "order": 4,
+   "subjectId": "fail-freeze-explanation-step-1",
+   "textHash": "47383817f99135d407de2f9503f41de11b2e7fca13091eca5c398532bf4c1485",
+   "kind": "失败处理"
+  }
+ ]
+}
