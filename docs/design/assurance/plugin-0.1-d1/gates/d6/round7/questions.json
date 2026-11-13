@@ -1,0 +1,3822 @@
+[
+  {
+    "id": "Q0001",
+    "nodeId": "shared",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=shared].inputs; connections[to=shared]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0002",
+    "nodeId": "shared",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=shared].outputs; connections[from=shared]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0003",
+    "nodeId": "shared",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=shared].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0004",
+    "nodeId": "shared",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=shared].interface.emptyCases; nodes[id=shared].interface.errors",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0005",
+    "nodeId": "shared",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=shared].validators",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0006",
+    "nodeId": "shared",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0007",
+    "nodeId": "shared",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=shared].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0008",
+    "nodeId": "state",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=state].inputs; connections[to=state]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0009",
+    "nodeId": "state",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=state].outputs; connections[from=state]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0010",
+    "nodeId": "state",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=state].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0011",
+    "nodeId": "state",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=state].interface.emptyCases; nodes[id=state].interface.errors; nodes[id=state].terminal.retry; failurePaths[id=fail-write]; failurePaths[id=fail-recovery]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0012",
+    "nodeId": "state",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=state].validators; nodes[id=state].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0013",
+    "nodeId": "state",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=state].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0014",
+    "nodeId": "state",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=state].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0015",
+    "nodeId": "writer",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=writer].inputs; connections[to=writer]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0016",
+    "nodeId": "writer",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=writer].outputs; connections[from=writer]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0017",
+    "nodeId": "writer",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=writer].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0018",
+    "nodeId": "writer",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=writer].interface.emptyCases; nodes[id=writer].interface.errors; nodes[id=writer].terminal.retry; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0019",
+    "nodeId": "writer",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=writer].validators; nodes[id=writer].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0020",
+    "nodeId": "writer",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=writer].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0021",
+    "nodeId": "writer",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=writer].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0022",
+    "nodeId": "record-check",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=record-check].inputs; connections[to=record-check]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0023",
+    "nodeId": "record-check",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=record-check].outputs; connections[from=record-check]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0024",
+    "nodeId": "record-check",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=record-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0025",
+    "nodeId": "record-check",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=record-check].interface.emptyCases; nodes[id=record-check].interface.errors; nodes[id=record-check].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0026",
+    "nodeId": "record-check",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=record-check].validators; nodes[id=record-check].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0027",
+    "nodeId": "record-check",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=record-check].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0028",
+    "nodeId": "record-check",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=record-check].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0029",
+    "nodeId": "dispatch",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=dispatch].inputs; connections[to=dispatch]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0030",
+    "nodeId": "dispatch",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=dispatch].outputs; connections[from=dispatch]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0031",
+    "nodeId": "dispatch",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=dispatch].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0032",
+    "nodeId": "dispatch",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=dispatch].interface.emptyCases; nodes[id=dispatch].interface.errors; nodes[id=dispatch].terminal.retry; failurePaths[id=fail-role]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0033",
+    "nodeId": "dispatch",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=dispatch].validators; nodes[id=dispatch].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0034",
+    "nodeId": "dispatch",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=dispatch].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0035",
+    "nodeId": "dispatch",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=dispatch].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0036",
+    "nodeId": "prompts",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=prompts].inputs; connections[to=prompts]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0037",
+    "nodeId": "prompts",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=prompts].outputs; connections[from=prompts]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0038",
+    "nodeId": "prompts",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=prompts].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0039",
+    "nodeId": "prompts",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=prompts].interface.emptyCases; nodes[id=prompts].interface.errors; nodes[id=prompts].terminal.retry; failurePaths[id=fail-role]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0040",
+    "nodeId": "prompts",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=prompts].validators; nodes[id=prompts].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0041",
+    "nodeId": "prompts",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=prompts].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0042",
+    "nodeId": "prompts",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=prompts].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0043",
+    "nodeId": "revision",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=revision].inputs; connections[to=revision]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0044",
+    "nodeId": "revision",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=revision].outputs; connections[from=revision]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0045",
+    "nodeId": "revision",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=revision].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0046",
+    "nodeId": "revision",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=revision].interface.emptyCases; nodes[id=revision].interface.errors; nodes[id=revision].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0047",
+    "nodeId": "revision",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=revision].validators; nodes[id=revision].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0048",
+    "nodeId": "revision",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=revision].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0049",
+    "nodeId": "revision",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=revision].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0050",
+    "nodeId": "metrics",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=metrics].inputs; connections[to=metrics]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0051",
+    "nodeId": "metrics",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=metrics].outputs; connections[from=metrics]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0052",
+    "nodeId": "metrics",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=metrics].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0053",
+    "nodeId": "metrics",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=metrics].interface.emptyCases; nodes[id=metrics].interface.errors; nodes[id=metrics].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0054",
+    "nodeId": "metrics",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=metrics].validators; nodes[id=metrics].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0055",
+    "nodeId": "metrics",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=metrics].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0056",
+    "nodeId": "metrics",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=metrics].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0057",
+    "nodeId": "design",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=design].inputs; connections[to=design]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0058",
+    "nodeId": "design",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=design].outputs; connections[from=design]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0059",
+    "nodeId": "design",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=design].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0060",
+    "nodeId": "design",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=design].interface.emptyCases; nodes[id=design].interface.errors",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0061",
+    "nodeId": "design",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=design].validators",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0062",
+    "nodeId": "design",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0063",
+    "nodeId": "design",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=design].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0064",
+    "nodeId": "design-roles",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=design-roles].inputs; connections[to=design-roles]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0065",
+    "nodeId": "design-roles",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=design-roles].outputs; connections[from=design-roles]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0066",
+    "nodeId": "design-roles",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=design-roles].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0067",
+    "nodeId": "design-roles",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=design-roles].interface.emptyCases; nodes[id=design-roles].interface.errors",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0068",
+    "nodeId": "design-roles",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=design-roles].validators",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0069",
+    "nodeId": "design-roles",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0070",
+    "nodeId": "design-roles",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=design-roles].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0071",
+    "nodeId": "role-D1",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=role-D1].inputs; connections[to=role-D1]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0072",
+    "nodeId": "role-D1",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=role-D1].outputs; connections[from=role-D1]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0073",
+    "nodeId": "role-D1",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=role-D1].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0074",
+    "nodeId": "role-D1",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=role-D1].interface.emptyCases; nodes[id=role-D1].interface.errors; nodes[id=role-D1].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0075",
+    "nodeId": "role-D1",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=role-D1].validators; nodes[id=role-D1].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0076",
+    "nodeId": "role-D1",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=role-D1].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0077",
+    "nodeId": "role-D1",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=role-D1].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0078",
+    "nodeId": "role-D2",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=role-D2].inputs; connections[to=role-D2]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0079",
+    "nodeId": "role-D2",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=role-D2].outputs; connections[from=role-D2]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0080",
+    "nodeId": "role-D2",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=role-D2].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0081",
+    "nodeId": "role-D2",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=role-D2].interface.emptyCases; nodes[id=role-D2].interface.errors; nodes[id=role-D2].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0082",
+    "nodeId": "role-D2",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=role-D2].validators; nodes[id=role-D2].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0083",
+    "nodeId": "role-D2",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=role-D2].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0084",
+    "nodeId": "role-D2",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=role-D2].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0085",
+    "nodeId": "role-D3",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=role-D3].inputs; connections[to=role-D3]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0086",
+    "nodeId": "role-D3",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=role-D3].outputs; connections[from=role-D3]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0087",
+    "nodeId": "role-D3",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=role-D3].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0088",
+    "nodeId": "role-D3",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=role-D3].interface.emptyCases; nodes[id=role-D3].interface.errors; nodes[id=role-D3].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0089",
+    "nodeId": "role-D3",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=role-D3].validators; nodes[id=role-D3].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0090",
+    "nodeId": "role-D3",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=role-D3].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0091",
+    "nodeId": "role-D3",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=role-D3].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0092",
+    "nodeId": "role-D4",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=role-D4].inputs; connections[to=role-D4]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0093",
+    "nodeId": "role-D4",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=role-D4].outputs; connections[from=role-D4]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0094",
+    "nodeId": "role-D4",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=role-D4].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0095",
+    "nodeId": "role-D4",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=role-D4].interface.emptyCases; nodes[id=role-D4].interface.errors; nodes[id=role-D4].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0096",
+    "nodeId": "role-D4",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=role-D4].validators; nodes[id=role-D4].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0097",
+    "nodeId": "role-D4",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=role-D4].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0098",
+    "nodeId": "role-D4",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=role-D4].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0099",
+    "nodeId": "role-D5",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=role-D5].inputs; connections[to=role-D5]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0100",
+    "nodeId": "role-D5",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=role-D5].outputs; connections[from=role-D5]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0101",
+    "nodeId": "role-D5",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=role-D5].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0102",
+    "nodeId": "role-D5",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=role-D5].interface.emptyCases; nodes[id=role-D5].interface.errors; nodes[id=role-D5].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0103",
+    "nodeId": "role-D5",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=role-D5].validators; nodes[id=role-D5].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0104",
+    "nodeId": "role-D5",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=role-D5].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0105",
+    "nodeId": "role-D5",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=role-D5].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0106",
+    "nodeId": "role-D6",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=role-D6].inputs; connections[to=role-D6]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0107",
+    "nodeId": "role-D6",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=role-D6].outputs; connections[from=role-D6]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0108",
+    "nodeId": "role-D6",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=role-D6].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0109",
+    "nodeId": "role-D6",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=role-D6].interface.emptyCases; nodes[id=role-D6].interface.errors; nodes[id=role-D6].terminal.retry; failurePaths[id=fail-freeze-explanation]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0110",
+    "nodeId": "role-D6",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=role-D6].validators; nodes[id=role-D6].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0111",
+    "nodeId": "role-D6",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=role-D6].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0112",
+    "nodeId": "role-D6",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=role-D6].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0113",
+    "nodeId": "role-D7",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=role-D7].inputs; connections[to=role-D7]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0114",
+    "nodeId": "role-D7",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=role-D7].outputs; connections[from=role-D7]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0115",
+    "nodeId": "role-D7",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=role-D7].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0116",
+    "nodeId": "role-D7",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=role-D7].interface.emptyCases; nodes[id=role-D7].interface.errors; nodes[id=role-D7].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0117",
+    "nodeId": "role-D7",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=role-D7].validators; nodes[id=role-D7].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0118",
+    "nodeId": "role-D7",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=role-D7].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0119",
+    "nodeId": "role-D7",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=role-D7].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0120",
+    "nodeId": "role-D8",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=role-D8].inputs; connections[to=role-D8]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0121",
+    "nodeId": "role-D8",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=role-D8].outputs; connections[from=role-D8]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0122",
+    "nodeId": "role-D8",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=role-D8].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0123",
+    "nodeId": "role-D8",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=role-D8].interface.emptyCases; nodes[id=role-D8].interface.errors; nodes[id=role-D8].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0124",
+    "nodeId": "role-D8",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=role-D8].validators; nodes[id=role-D8].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0125",
+    "nodeId": "role-D8",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=role-D8].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0126",
+    "nodeId": "role-D8",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=role-D8].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0127",
+    "nodeId": "clarify",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=clarify].inputs; connections[to=clarify]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0128",
+    "nodeId": "clarify",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=clarify].outputs; connections[from=clarify]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0129",
+    "nodeId": "clarify",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=clarify].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0130",
+    "nodeId": "clarify",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=clarify].interface.emptyCases; nodes[id=clarify].interface.errors; nodes[id=clarify].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0131",
+    "nodeId": "clarify",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=clarify].validators; nodes[id=clarify].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0132",
+    "nodeId": "clarify",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=clarify].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0133",
+    "nodeId": "clarify",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=clarify].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0134",
+    "nodeId": "gates",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=gates].inputs; connections[to=gates]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0135",
+    "nodeId": "gates",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=gates].outputs; connections[from=gates]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0136",
+    "nodeId": "gates",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=gates].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0137",
+    "nodeId": "gates",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=gates].interface.emptyCases; nodes[id=gates].interface.errors; nodes[id=gates].terminal.retry; failurePaths[id=fail-checker]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0138",
+    "nodeId": "gates",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=gates].validators; nodes[id=gates].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0139",
+    "nodeId": "gates",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=gates].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0140",
+    "nodeId": "gates",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=gates].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0141",
+    "nodeId": "contract",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=contract].inputs; connections[to=contract]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0142",
+    "nodeId": "contract",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=contract].outputs; connections[from=contract]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0143",
+    "nodeId": "contract",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=contract].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0144",
+    "nodeId": "contract",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=contract].interface.emptyCases; nodes[id=contract].interface.errors; failurePaths[id=fail-checker]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0145",
+    "nodeId": "contract",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=contract].validators",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0146",
+    "nodeId": "contract",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0147",
+    "nodeId": "contract",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=contract].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0148",
+    "nodeId": "contract-capability",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=contract-capability].inputs; connections[to=contract-capability]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0149",
+    "nodeId": "contract-capability",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=contract-capability].outputs; connections[from=contract-capability]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0150",
+    "nodeId": "contract-capability",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=contract-capability].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0151",
+    "nodeId": "contract-capability",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=contract-capability].interface.emptyCases; nodes[id=contract-capability].interface.errors; nodes[id=contract-capability].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0152",
+    "nodeId": "contract-capability",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=contract-capability].validators; nodes[id=contract-capability].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0153",
+    "nodeId": "contract-capability",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=contract-capability].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0154",
+    "nodeId": "contract-capability",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=contract-capability].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0155",
+    "nodeId": "contract-entry",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=contract-entry].inputs; connections[to=contract-entry]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0156",
+    "nodeId": "contract-entry",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=contract-entry].outputs; connections[from=contract-entry]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0157",
+    "nodeId": "contract-entry",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=contract-entry].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0158",
+    "nodeId": "contract-entry",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=contract-entry].interface.emptyCases; nodes[id=contract-entry].interface.errors; nodes[id=contract-entry].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0159",
+    "nodeId": "contract-entry",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=contract-entry].validators; nodes[id=contract-entry].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0160",
+    "nodeId": "contract-entry",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=contract-entry].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0161",
+    "nodeId": "contract-entry",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=contract-entry].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0162",
+    "nodeId": "contract-outcomes",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=contract-outcomes].inputs; connections[to=contract-outcomes]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0163",
+    "nodeId": "contract-outcomes",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=contract-outcomes].outputs; connections[from=contract-outcomes]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0164",
+    "nodeId": "contract-outcomes",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=contract-outcomes].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0165",
+    "nodeId": "contract-outcomes",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=contract-outcomes].interface.emptyCases; nodes[id=contract-outcomes].interface.errors; nodes[id=contract-outcomes].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0166",
+    "nodeId": "contract-outcomes",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=contract-outcomes].validators; nodes[id=contract-outcomes].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0167",
+    "nodeId": "contract-outcomes",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=contract-outcomes].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0168",
+    "nodeId": "contract-outcomes",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=contract-outcomes].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0169",
+    "nodeId": "contract-fidelity",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=contract-fidelity].inputs; connections[to=contract-fidelity]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0170",
+    "nodeId": "contract-fidelity",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=contract-fidelity].outputs; connections[from=contract-fidelity]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0171",
+    "nodeId": "contract-fidelity",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=contract-fidelity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0172",
+    "nodeId": "contract-fidelity",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=contract-fidelity].interface.emptyCases; nodes[id=contract-fidelity].interface.errors; nodes[id=contract-fidelity].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0173",
+    "nodeId": "contract-fidelity",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=contract-fidelity].validators; nodes[id=contract-fidelity].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0174",
+    "nodeId": "contract-fidelity",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=contract-fidelity].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0175",
+    "nodeId": "contract-fidelity",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=contract-fidelity].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0176",
+    "nodeId": "contract-forbidden",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=contract-forbidden].inputs; connections[to=contract-forbidden]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0177",
+    "nodeId": "contract-forbidden",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=contract-forbidden].outputs; connections[from=contract-forbidden]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0178",
+    "nodeId": "contract-forbidden",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=contract-forbidden].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0179",
+    "nodeId": "contract-forbidden",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=contract-forbidden].interface.emptyCases; nodes[id=contract-forbidden].interface.errors; nodes[id=contract-forbidden].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0180",
+    "nodeId": "contract-forbidden",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=contract-forbidden].validators; nodes[id=contract-forbidden].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0181",
+    "nodeId": "contract-forbidden",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=contract-forbidden].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0182",
+    "nodeId": "contract-forbidden",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=contract-forbidden].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0183",
+    "nodeId": "contract-regression",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=contract-regression].inputs; connections[to=contract-regression]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0184",
+    "nodeId": "contract-regression",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=contract-regression].outputs; connections[from=contract-regression]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0185",
+    "nodeId": "contract-regression",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=contract-regression].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0186",
+    "nodeId": "contract-regression",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=contract-regression].interface.emptyCases; nodes[id=contract-regression].interface.errors; nodes[id=contract-regression].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0187",
+    "nodeId": "contract-regression",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=contract-regression].validators; nodes[id=contract-regression].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0188",
+    "nodeId": "contract-regression",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=contract-regression].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0189",
+    "nodeId": "contract-regression",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=contract-regression].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0190",
+    "nodeId": "contract-controls",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=contract-controls].inputs; connections[to=contract-controls]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0191",
+    "nodeId": "contract-controls",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=contract-controls].outputs; connections[from=contract-controls]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0192",
+    "nodeId": "contract-controls",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=contract-controls].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0193",
+    "nodeId": "contract-controls",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=contract-controls].interface.emptyCases; nodes[id=contract-controls].interface.errors; nodes[id=contract-controls].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0194",
+    "nodeId": "contract-controls",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=contract-controls].validators; nodes[id=contract-controls].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0195",
+    "nodeId": "contract-controls",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=contract-controls].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0196",
+    "nodeId": "contract-controls",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=contract-controls].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0197",
+    "nodeId": "contract-changes",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=contract-changes].inputs; connections[to=contract-changes]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0198",
+    "nodeId": "contract-changes",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=contract-changes].outputs; connections[from=contract-changes]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0199",
+    "nodeId": "contract-changes",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=contract-changes].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0200",
+    "nodeId": "contract-changes",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=contract-changes].interface.emptyCases; nodes[id=contract-changes].interface.errors; nodes[id=contract-changes].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0201",
+    "nodeId": "contract-changes",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=contract-changes].validators; nodes[id=contract-changes].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0202",
+    "nodeId": "contract-changes",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=contract-changes].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0203",
+    "nodeId": "contract-changes",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=contract-changes].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0204",
+    "nodeId": "contract-authorization",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=contract-authorization].inputs; connections[to=contract-authorization]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0205",
+    "nodeId": "contract-authorization",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=contract-authorization].outputs; connections[from=contract-authorization]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0206",
+    "nodeId": "contract-authorization",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=contract-authorization].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0207",
+    "nodeId": "contract-authorization",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=contract-authorization].interface.emptyCases; nodes[id=contract-authorization].interface.errors; nodes[id=contract-authorization].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0208",
+    "nodeId": "contract-authorization",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=contract-authorization].validators; nodes[id=contract-authorization].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0209",
+    "nodeId": "contract-authorization",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=contract-authorization].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0210",
+    "nodeId": "contract-authorization",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=contract-authorization].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0211",
+    "nodeId": "freeze",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=freeze].inputs; connections[to=freeze]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0212",
+    "nodeId": "freeze",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=freeze].outputs; connections[from=freeze]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0213",
+    "nodeId": "freeze",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=freeze].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0214",
+    "nodeId": "freeze",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=freeze].interface.emptyCases; nodes[id=freeze].interface.errors; nodes[id=freeze].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0215",
+    "nodeId": "freeze",
+    "question": "冻结说明作为用户批准前唯一阅读材料时，怎样证明用户看到并批准的正是 D6 已对照检查的那一份；说明被替换时什么情况下不能算冻结完成？",
+    "answerLocation": null,
+    "gap": "Blueprint 要求 D6 在冻结前对照检查冻结说明，也要求用户批准 Blueprint 的 snapshot_sha256，但没有为冻结说明定义内容身份，也没有要求 D6 结果、用户批准或 freeze.json 记录并核对该说明的哈希/版本。freeze.inputs 只写“由 D6 对照检查的冻结说明”，freeze.json 的必填字段也没有冻结说明身份，因此无法唯一证明 D6 检查、用户阅读和冻结记录对应同一份说明。",
+    "impact": "冻结说明是用户批准前唯一要读的材料；若它在 D6 检查后被修改或替换，现有规则仍可能沿用同一 Blueprint 快照与 D6 结果，用户可能基于一份未经过 D6 对照检查的说明批准，冻结链条无法可靠验收。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0216",
+    "nodeId": "freeze",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=freeze].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0217",
+    "nodeId": "freeze",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=freeze].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0218",
+    "nodeId": "q-checker",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=q-checker].inputs; connections[to=q-checker]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0219",
+    "nodeId": "q-checker",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=q-checker].outputs; connections[from=q-checker]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0220",
+    "nodeId": "q-checker",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=q-checker].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0221",
+    "nodeId": "q-checker",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=q-checker].interface.emptyCases; nodes[id=q-checker].interface.errors; nodes[id=q-checker].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0222",
+    "nodeId": "q-checker",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=q-checker].validators; nodes[id=q-checker].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0223",
+    "nodeId": "q-checker",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=q-checker].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0224",
+    "nodeId": "q-checker",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=q-checker].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0225",
+    "nodeId": "q-inheritance",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=q-inheritance].inputs; connections[to=q-inheritance]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0226",
+    "nodeId": "q-inheritance",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=q-inheritance].outputs; connections[from=q-inheritance]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0227",
+    "nodeId": "q-inheritance",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=q-inheritance].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0228",
+    "nodeId": "q-inheritance",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=q-inheritance].interface.emptyCases; nodes[id=q-inheritance].interface.errors; nodes[id=q-inheritance].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0229",
+    "nodeId": "q-inheritance",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=q-inheritance].validators; nodes[id=q-inheritance].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0230",
+    "nodeId": "q-inheritance",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=q-inheritance].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0231",
+    "nodeId": "q-inheritance",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=q-inheritance].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0232",
+    "nodeId": "delivery",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=delivery].inputs; connections[to=delivery]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0233",
+    "nodeId": "delivery",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=delivery].outputs; connections[from=delivery]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0234",
+    "nodeId": "delivery",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=delivery].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0235",
+    "nodeId": "delivery",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=delivery].interface.emptyCases; nodes[id=delivery].interface.errors",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0236",
+    "nodeId": "delivery",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=delivery].validators",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0237",
+    "nodeId": "delivery",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0238",
+    "nodeId": "delivery",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=delivery].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0239",
+    "nodeId": "delivery-roles",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=delivery-roles].inputs; connections[to=delivery-roles]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0240",
+    "nodeId": "delivery-roles",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=delivery-roles].outputs; connections[from=delivery-roles]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0241",
+    "nodeId": "delivery-roles",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=delivery-roles].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0242",
+    "nodeId": "delivery-roles",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=delivery-roles].interface.emptyCases; nodes[id=delivery-roles].interface.errors",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0243",
+    "nodeId": "delivery-roles",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=delivery-roles].validators",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0244",
+    "nodeId": "delivery-roles",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0245",
+    "nodeId": "delivery-roles",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=delivery-roles].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0246",
+    "nodeId": "role-X1",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=role-X1].inputs; connections[to=role-X1]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0247",
+    "nodeId": "role-X1",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=role-X1].outputs; connections[from=role-X1]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0248",
+    "nodeId": "role-X1",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=role-X1].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0249",
+    "nodeId": "role-X1",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=role-X1].interface.emptyCases; nodes[id=role-X1].interface.errors; nodes[id=role-X1].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0250",
+    "nodeId": "role-X1",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=role-X1].validators; nodes[id=role-X1].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0251",
+    "nodeId": "role-X1",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=role-X1].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0252",
+    "nodeId": "role-X1",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=role-X1].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0253",
+    "nodeId": "role-X2",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=role-X2].inputs; connections[to=role-X2]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0254",
+    "nodeId": "role-X2",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=role-X2].outputs; connections[from=role-X2]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0255",
+    "nodeId": "role-X2",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=role-X2].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0256",
+    "nodeId": "role-X2",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=role-X2].interface.emptyCases; nodes[id=role-X2].interface.errors; nodes[id=role-X2].terminal.retry; failurePaths[id=fail-premise]; failurePaths[id=fail-calibration]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0257",
+    "nodeId": "role-X2",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=role-X2].validators; nodes[id=role-X2].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0258",
+    "nodeId": "role-X2",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=role-X2].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0259",
+    "nodeId": "role-X2",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=role-X2].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0260",
+    "nodeId": "role-X3",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=role-X3].inputs; connections[to=role-X3]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0261",
+    "nodeId": "role-X3",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=role-X3].outputs; connections[from=role-X3]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0262",
+    "nodeId": "role-X3",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=role-X3].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0263",
+    "nodeId": "role-X3",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=role-X3].interface.emptyCases; nodes[id=role-X3].interface.errors; nodes[id=role-X3].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0264",
+    "nodeId": "role-X3",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=role-X3].validators; nodes[id=role-X3].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0265",
+    "nodeId": "role-X3",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=role-X3].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0266",
+    "nodeId": "role-X3",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=role-X3].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0267",
+    "nodeId": "role-X4",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=role-X4].inputs; connections[to=role-X4]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0268",
+    "nodeId": "role-X4",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=role-X4].outputs; connections[from=role-X4]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0269",
+    "nodeId": "role-X4",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=role-X4].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0270",
+    "nodeId": "role-X4",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=role-X4].interface.emptyCases; nodes[id=role-X4].interface.errors; nodes[id=role-X4].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0271",
+    "nodeId": "role-X4",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=role-X4].validators; nodes[id=role-X4].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0272",
+    "nodeId": "role-X4",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=role-X4].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0273",
+    "nodeId": "role-X4",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=role-X4].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0274",
+    "nodeId": "role-X5",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=role-X5].inputs; connections[to=role-X5]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0275",
+    "nodeId": "role-X5",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=role-X5].outputs; connections[from=role-X5]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0276",
+    "nodeId": "role-X5",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=role-X5].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0277",
+    "nodeId": "role-X5",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=role-X5].interface.emptyCases; nodes[id=role-X5].interface.errors; nodes[id=role-X5].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0278",
+    "nodeId": "role-X5",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=role-X5].validators; nodes[id=role-X5].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0279",
+    "nodeId": "role-X5",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=role-X5].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0280",
+    "nodeId": "role-X5",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=role-X5].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0281",
+    "nodeId": "acceptance",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=acceptance].inputs; connections[to=acceptance]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0282",
+    "nodeId": "acceptance",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=acceptance].outputs; connections[from=acceptance]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0283",
+    "nodeId": "acceptance",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=acceptance].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0284",
+    "nodeId": "acceptance",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=acceptance].interface.emptyCases; nodes[id=acceptance].interface.errors; nodes[id=acceptance].terminal.retry; failurePaths[id=fail-semantic]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0285",
+    "nodeId": "acceptance",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=acceptance].validators; nodes[id=acceptance].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0286",
+    "nodeId": "acceptance",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=acceptance].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0287",
+    "nodeId": "acceptance",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=acceptance].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0288",
+    "nodeId": "calibration",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=calibration].inputs; connections[to=calibration]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0289",
+    "nodeId": "calibration",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=calibration].outputs; connections[from=calibration]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0290",
+    "nodeId": "calibration",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=calibration].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0291",
+    "nodeId": "calibration",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=calibration].interface.emptyCases; nodes[id=calibration].interface.errors; nodes[id=calibration].terminal.retry; failurePaths[id=fail-semantic]; failurePaths[id=fail-calibration]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0292",
+    "nodeId": "calibration",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=calibration].validators; nodes[id=calibration].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0293",
+    "nodeId": "calibration",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=calibration].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0294",
+    "nodeId": "calibration",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=calibration].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0295",
+    "nodeId": "candidate",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=candidate].inputs; connections[to=candidate]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0296",
+    "nodeId": "candidate",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=candidate].outputs; connections[from=candidate]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0297",
+    "nodeId": "candidate",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=candidate].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0298",
+    "nodeId": "candidate",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=candidate].interface.emptyCases; nodes[id=candidate].interface.errors; nodes[id=candidate].terminal.retry; failurePaths[id=fail-candidate]; failurePaths[id=fail-missing]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0299",
+    "nodeId": "candidate",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=candidate].validators; nodes[id=candidate].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0300",
+    "nodeId": "candidate",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=candidate].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0301",
+    "nodeId": "candidate",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=candidate].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0302",
+    "nodeId": "evidence",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=evidence].inputs; connections[to=evidence]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0303",
+    "nodeId": "evidence",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=evidence].outputs; connections[from=evidence]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0304",
+    "nodeId": "evidence",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=evidence].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0305",
+    "nodeId": "evidence",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=evidence].interface.emptyCases; nodes[id=evidence].interface.errors; nodes[id=evidence].terminal.retry; failurePaths[id=fail-candidate]; failurePaths[id=fail-missing]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0306",
+    "nodeId": "evidence",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=evidence].validators; nodes[id=evidence].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0307",
+    "nodeId": "evidence",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=evidence].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0308",
+    "nodeId": "evidence",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=evidence].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0309",
+    "nodeId": "deviation",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=deviation].inputs; connections[to=deviation]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0310",
+    "nodeId": "deviation",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=deviation].outputs; connections[from=deviation]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0311",
+    "nodeId": "deviation",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=deviation].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0312",
+    "nodeId": "deviation",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=deviation].interface.emptyCases; nodes[id=deviation].interface.errors; nodes[id=deviation].terminal.retry; failurePaths[id=fail-premise]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0313",
+    "nodeId": "deviation",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=deviation].validators; nodes[id=deviation].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0314",
+    "nodeId": "deviation",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=deviation].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0315",
+    "nodeId": "deviation",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=deviation].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0316",
+    "nodeId": "sign",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=sign].inputs; connections[to=sign]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0317",
+    "nodeId": "sign",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=sign].outputs; connections[from=sign]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0318",
+    "nodeId": "sign",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=sign].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0319",
+    "nodeId": "sign",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=sign].interface.emptyCases; nodes[id=sign].interface.errors; nodes[id=sign].terminal.retry; failurePaths[id=fail-candidate]; failurePaths[id=fail-revocation]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0320",
+    "nodeId": "sign",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=sign].validators; nodes[id=sign].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0321",
+    "nodeId": "sign",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=sign].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0322",
+    "nodeId": "sign",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=sign].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0323",
+    "nodeId": "packaging",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=packaging].inputs; connections[to=packaging]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0324",
+    "nodeId": "packaging",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=packaging].outputs; connections[from=packaging]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0325",
+    "nodeId": "packaging",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=packaging].authority",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0326",
+    "nodeId": "packaging",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=packaging].interface.emptyCases; nodes[id=packaging].interface.errors",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0327",
+    "nodeId": "packaging",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=packaging].validators",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0328",
+    "nodeId": "packaging",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0329",
+    "nodeId": "packaging",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=packaging].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0330",
+    "nodeId": "source-layout",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=source-layout].inputs; connections[to=source-layout]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0331",
+    "nodeId": "source-layout",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=source-layout].outputs; connections[from=source-layout]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0332",
+    "nodeId": "source-layout",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=source-layout].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0333",
+    "nodeId": "source-layout",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=source-layout].interface.emptyCases; nodes[id=source-layout].interface.errors; nodes[id=source-layout].terminal.retry; failurePaths[id=fail-package]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0334",
+    "nodeId": "source-layout",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=source-layout].validators; nodes[id=source-layout].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0335",
+    "nodeId": "source-layout",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=source-layout].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0336",
+    "nodeId": "source-layout",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=source-layout].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0337",
+    "nodeId": "planning-entry",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=planning-entry].inputs; connections[to=planning-entry]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0338",
+    "nodeId": "planning-entry",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=planning-entry].outputs; connections[from=planning-entry]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0339",
+    "nodeId": "planning-entry",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=planning-entry].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0340",
+    "nodeId": "planning-entry",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=planning-entry].interface.emptyCases; nodes[id=planning-entry].interface.errors; nodes[id=planning-entry].terminal.retry; failurePaths[id=fail-package]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0341",
+    "nodeId": "planning-entry",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=planning-entry].validators; nodes[id=planning-entry].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0342",
+    "nodeId": "planning-entry",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=planning-entry].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0343",
+    "nodeId": "planning-entry",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=planning-entry].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0344",
+    "nodeId": "execution-package",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=execution-package].inputs; connections[to=execution-package]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0345",
+    "nodeId": "execution-package",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=execution-package].outputs; connections[from=execution-package]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0346",
+    "nodeId": "execution-package",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=execution-package].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0347",
+    "nodeId": "execution-package",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=execution-package].interface.emptyCases; nodes[id=execution-package].interface.errors; nodes[id=execution-package].terminal.retry; failurePaths[id=fail-package]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0348",
+    "nodeId": "execution-package",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=execution-package].validators; nodes[id=execution-package].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0349",
+    "nodeId": "execution-package",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=execution-package].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0350",
+    "nodeId": "execution-package",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=execution-package].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0351",
+    "nodeId": "minimum",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=minimum].inputs; connections[to=minimum]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0352",
+    "nodeId": "minimum",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=minimum].outputs; connections[from=minimum]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0353",
+    "nodeId": "minimum",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=minimum].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0354",
+    "nodeId": "minimum",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=minimum].interface.emptyCases; nodes[id=minimum].interface.errors; nodes[id=minimum].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0355",
+    "nodeId": "minimum",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=minimum].validators; nodes[id=minimum].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0356",
+    "nodeId": "minimum",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=minimum].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0357",
+    "nodeId": "minimum",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=minimum].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0358",
+    "nodeId": "capability-check",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=capability-check].inputs; connections[to=capability-check]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0359",
+    "nodeId": "capability-check",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=capability-check].outputs; connections[from=capability-check]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0360",
+    "nodeId": "capability-check",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=capability-check].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0361",
+    "nodeId": "capability-check",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=capability-check].interface.emptyCases; nodes[id=capability-check].interface.errors; nodes[id=capability-check].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0362",
+    "nodeId": "capability-check",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=capability-check].validators; nodes[id=capability-check].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0363",
+    "nodeId": "capability-check",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=capability-check].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0364",
+    "nodeId": "capability-check",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=capability-check].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0365",
+    "nodeId": "web-later",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=web-later].inputs; connections[to=web-later]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0366",
+    "nodeId": "web-later",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=web-later].outputs; connections[from=web-later]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0367",
+    "nodeId": "web-later",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=web-later].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0368",
+    "nodeId": "web-later",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=web-later].interface.emptyCases; nodes[id=web-later].interface.errors; nodes[id=web-later].terminal.retry; failurePaths[id=fail-web-method]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0369",
+    "nodeId": "web-later",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=web-later].validators; nodes[id=web-later].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0370",
+    "nodeId": "web-later",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=web-later].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0371",
+    "nodeId": "web-later",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=web-later].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0372",
+    "nodeId": "q-capacity",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[id=q-capacity].inputs; connections[to=q-capacity]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0373",
+    "nodeId": "q-capacity",
+    "question": "这个组件产出什么，交给谁？",
+    "answerLocation": "nodes[id=q-capacity].outputs; connections[from=q-capacity]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0374",
+    "nodeId": "q-capacity",
+    "question": "这个组件中谁有权决定，权威冲突怎样处理？",
+    "answerLocation": "nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0375",
+    "nodeId": "q-capacity",
+    "question": "失败、缺输入或缺证据时怎样处理？",
+    "answerLocation": "nodes[id=q-capacity].interface.emptyCases; nodes[id=q-capacity].interface.errors; nodes[id=q-capacity].terminal.retry",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0376",
+    "nodeId": "q-capacity",
+    "question": "怎样验收，什么情况下不能算完成？",
+    "answerLocation": "nodes[id=q-capacity].validators; nodes[id=q-capacity].terminal.acceptance",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0377",
+    "nodeId": "q-capacity",
+    "question": "中断、结果不明或状态异常以后怎样恢复？",
+    "answerLocation": "nodes[id=q-capacity].terminal.retry; nodes[id=state].terminal.mechanism; nodes[id=writer].terminal.mechanism; failurePaths[id=fail-recovery]; failurePaths[id=fail-write]",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0378",
+    "nodeId": "q-capacity",
+    "question": "是否会使已有能力、旧功能、既有插件或已有职责退化；Blueprint 怎样防止？",
+    "answerLocation": "nodes[id=q-capacity].interface.boundaries; nodes[id=contract-regression].terminal.mechanism; nodes[id=q-capacity].terminal.mechanism",
+    "gap": null,
+    "impact": "无；Blueprint 已在所列字段或跨组件规则中给出明确答案。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0379",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明关于规划端角色运行位置和用户转交方式的表述，是否与 Blueprint 唯一一致？",
+    "answerLocation": "requirements[id=r-dispatch].text; nodes[id=role-D1].terminal.mechanism; nodes[id=role-X1].terminal.mechanism; nodes[id=planning-entry].terminal.mechanism",
+    "gap": "冻结说明写“规划端角色都在 GPT 上跑，每个角色每轮只转交一次”，但 Blueprint 明确只把需要用户手动转交的 D2、D3、D6、D8、X5 放在 GPT 网页端；D1、X1 明确不在此列，由 Claude 或 GPT Pro 担任长期负责人。冻结说明后文又写本插件 D1 由 Claude 担任，前后形成实质冲突。",
+    "impact": "用户无法从冻结说明唯一判断自己每轮究竟需要转交哪些角色，以及 D1/X1 是否也必须在 GPT 网页端运行，直接影响批准后的实际使用方式和人工负担。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0380",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明对状态恢复中必须由用户决定的冲突范围，是否完整等同于 Blueprint？",
+    "answerLocation": "nodes[id=state].terminal.mechanism; failurePaths[id=fail-recovery].handling",
+    "gap": "冻结说明只列“冻结、批准、签发”的冲突交用户，并称普通冲突只有重做会产生付费、发布、发消息等不可撤回后果时才找用户。Blueprint 还明确包含“撤回”冲突必须交用户，以及普通冲突在原派发已有写入与重新派发互相冲突、固定保守处置无法安全实行时也必须交用户。冻结说明把用户介入范围写窄了。",
+    "impact": "状态损坏恢复时，用户可能以为某些冲突会自动保守恢复，实际却必须暂停相关范围等待其决定；这会改变批准时对中断恢复、人工介入和外部副作用风险的理解。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0381",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明关于哪些验收需要真实环境或专人、哪些只需读文件或跑脚本的描述，是否与全部 validators 一致？",
+    "answerLocation": "all nodes/subnodes.validators[].environment; all nodes/subnodes.validators[].runner; nodes[id=capability-check].terminal.acceptance",
+    "gap": "冻结说明在列出少数真实宿主/专业判断后写“其余检查读文件、跑脚本就能完成”。Blueprint 的 67 个 validators 中有 48 个 environment 为 real，且 67 个 runner 均为 one-human-action；大量角色、冻结关卡、交付证据和恢复验证要求真实派发、真实观察或负责人亲读，不能归结为只读文件/跑脚本。该句把验收执行强度写得比设计更轻。",
+    "impact": "用户会低估正式验收需要的真实运行、角色参与和证据取得成本，批准时无法准确判断这套流程实际怎样证明可用。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0382",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "Blueprint 是否足以支持冻结说明“没有超过 100 MB 的下载或安装；只有三个小程序库且都不到几 MB”的资源判断？",
+    "answerLocation": null,
+    "gap": "Blueprint 确实列出 jsonschema[format-nongpl] 4.26.0，并规定哈希实现使用 Python rfc8785 与 JavaScript canonicalize，还需要 Python 3.10+、固定提交的 Asteria-Blueprint 检查器以及已测通网页端打包方法/包作为正常路径资源；但 Blueprint 没有给这些依赖、运行时或插件包提供体积上限/实测大小，也把 rfc8785、canonicalize 的具体版本留到实施时固定。因此无法从 Blueprint 验证“没有单项超过 100 MB”或“三个库都不到几 MB”。",
+    "impact": "用户在批准前得到的是未经设计证据支持的资源承诺；如果实施时需要额外运行时、资源获取或体积超过预期，资源边界会在批准后才暴露。",
+    "blocking": true,
+    "owner": "D1"
+  }
+]
