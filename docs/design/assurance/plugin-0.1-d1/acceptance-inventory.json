@@ -2,9 +2,9 @@
   "source": {
     "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
     "branch": "design/assurance-plugins-0.1-merged",
-    "head": "adabdedb0be94200efebdf390501b6abbe8b5e4b",
+    "head": "15613f70f3f0c86774da63caf80bd66cbb702f4d",
     "path": "docs/design/assurance/plugin-0.1-d1/blueprint.json",
-    "sha256": "7bf8744cbcab1b72c53ba9eba574405f7766e422ee28cd60089f7eec0587bb66",
+    "sha256": "636343ee548a8504c5e901ad32dc3557b952c02b12c7c0f5f1420a64563c04f5",
     "working_tree_uncommitted": true
   },
   "counting": {
@@ -1097,17 +1097,17 @@
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
+      "needs": "file-check",
+      "needs_reason": "对照冻结说明与第 6.4a 节七类固定清单，核对清单项覆盖、其余细节以设计为准及不把设计写得更强或更弱。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
       "top_component_title": "设计保障",
       "node_id": "role-D1",
       "node_title": "D1：负责人",
       "acceptance_index": 6,
       "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/6",
-      "text": "D1 给用户的冻结说明按第 6.4a 节的格式写；首次冻结或大改使用同一固定骨架，冻结前与 Blueprint 一起交 D6 检查。",
-      "needs": "file-check",
-      "needs_reason": "核对原文规定的文件内容、结构、引用、差异、记录或可运行脚本验证的规则。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+      "text": "D1 给用户的冻结说明按第 6.4a 节的格式写；首次冻结或大改使用同一固定骨架，冻结前与 Blueprint 一起交 D6 检查。\n\n说明里的每一条都必须能在 Blueprint 里找到出处，Blueprint 里没有的承诺不能写进说明，也不能把设计写得更强或更弱。\n\n- **“影响用户决定的内容”指下面这张固定清单（用户授权 D1 决定，2026/11/13），说明必须写到；清单之外的细节不要求写，说明中写明“其余细节以设计为准”：**\n  1. 用户已经做过的决定，以及设计者替用户定下的默认做法和被放弃的方案；\n  2. 哪些情况会交给用户决定或请用户确认；\n  3. 会增加用户工作量（例如需要用户转交的角色、每轮转交几条）、费用或权限范围的事；\n  4. 各角色何时启用、在哪里运行、各自负什么责任（谁实现、谁验收、谁签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。"
     },
     {
       "top_component_id": "design",
@@ -1500,30 +1500,30 @@
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
+      "needs": "file-check",
+      "needs_reason": "只按七类固定清单对照说明是否漏写，清单之外未写不算漏写，核对说明中的其余细节以设计为准。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
       "top_component_title": "设计保障",
       "node_id": "role-D6",
       "node_title": "D6：用户追问",
       "acceptance_index": 4,
       "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/4",
-      "text": "对照 Blueprint 检查冻结说明有没有漏写影响用户决定的内容；发现问题按 D6 缺口交回 D1。",
-      "needs": "file-check",
-      "needs_reason": "核对原文规定的文件内容、结构、引用、差异、记录或可运行脚本验证的规则。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+      "text": "- **“影响用户决定的内容”指下面这张固定清单（用户授权 D1 决定，2026/11/13），说明必须写到；清单之外的细节不要求写，说明中写明“其余细节以设计为准”：**\n  1. 用户已经做过的决定，以及设计者替用户定下的默认做法和被放弃的方案；\n  2. 哪些情况会交给用户决定或请用户确认；\n  3. 会增加用户工作量（例如需要用户转交的角色、每轮转交几条）、费用或权限范围的事；\n  4. 各角色何时启用、在哪里运行、各自负什么责任（谁实现、谁验收、谁签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。"
     },
     {
+      "needs": "file-check",
+      "needs_reason": "逐条比较说明承诺与 Blueprint，核对有出处且没有把设计写得更强或更弱。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
       "top_component_title": "设计保障",
       "node_id": "role-D6",
       "node_title": "D6：用户追问",
       "acceptance_index": 5,
       "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/5",
-      "text": "对照 Blueprint 检查冻结说明有没有写入 Blueprint 中没有的承诺；发现问题按 D6 缺口交回 D1。",
-      "needs": "file-check",
-      "needs_reason": "核对原文规定的文件内容、结构、引用、差异、记录或可运行脚本验证的规则。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+      "text": "说明里的每一条都必须能在 Blueprint 里找到出处，Blueprint 里没有的承诺不能写进说明，也不能把设计写得更强或更弱。 发现问题按 D6 的缺口处理，交回 D1。"
     },
     {
       "needs": "file-check",
@@ -1877,17 +1877,17 @@
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
+      "needs": "file-check",
+      "needs_reason": "核对 D6 说明检查记录覆盖固定清单、矛盾、验收器数量与回归、大件下载，并按缺口交回 D1。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
       "top_component_title": "设计保障",
       "node_id": "gates",
       "node_title": "四项冻结关卡",
       "acceptance_index": 9,
       "source_pointer": "/nodes/1/children/2/terminal/acceptance/9",
-      "text": "冻结前，D6 在原有逐组件追问之外，接收冻结说明并对照 Blueprint 检查漏写、多写、验收器数量分类和大件下载遗漏；发现问题交回 D1。 D6 还要核对冻结说明里回归用例的数量和分组与设计一致；发现问题按 D6 的缺口处理，交回 D1。",
-      "needs": "file-check",
-      "needs_reason": "核对原文规定的文件内容、结构、引用、差异、记录或可运行脚本验证的规则。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+      "text": "冻结前，说明与 Blueprint 一起交给 D6。D6 在原有的逐组件追问之外，再对照 Blueprint 查说明四项：上面清单里的七类内容有没有漏写；有没有写 Blueprint 里没有的承诺、或把设计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。"
     },
     {
       "top_component_id": "design",
@@ -2657,30 +2657,30 @@
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
+      "needs": "file-check",
+      "needs_reason": "对照冻结说明和 Blueprint 核对七类清单全部写到、清单外以设计为准，以及承诺不增强或削弱设计。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
       "top_component_title": "设计保障",
       "node_id": "freeze",
       "node_title": "批准与冻结交接",
       "acceptance_index": 14,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/14",
-      "text": "冻结说明每一条都能在 Blueprint 找到出处，不写 Blueprint 没有的承诺；Blueprint 中任何会影响用户决定的内容都不能漏。",
-      "needs": "file-check",
-      "needs_reason": "对照第 6.4a 节与 Blueprint 检查冻结说明文件的骨架、写法、数量、出处或下载披露。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+      "text": "说明里的每一条都必须能在 Blueprint 里找到出处，Blueprint 里没有的承诺不能写进说明，也不能把设计写得更强或更弱。\n\n- **“影响用户决定的内容”指下面这张固定清单（用户授权 D1 决定，2026/11/13），说明必须写到；清单之外的细节不要求写，说明中写明“其余细节以设计为准”：**\n  1. 用户已经做过的决定，以及设计者替用户定下的默认做法和被放弃的方案；\n  2. 哪些情况会交给用户决定或请用户确认；\n  3. 会增加用户工作量（例如需要用户转交的角色、每轮转交几条）、费用或权限范围的事；\n  4. 各角色何时启用、在哪里运行、各自负什么责任（谁实现、谁验收、谁签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。"
     },
     {
+      "needs": "file-check",
+      "needs_reason": "核对 D6 按七类固定清单和规定的四项说明检查完成记录，不把清单外未写细节列为漏写。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
       "top_component_title": "设计保障",
       "node_id": "freeze",
       "node_title": "批准与冻结交接",
       "acceptance_index": 15,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/15",
-      "text": "冻结前，冻结说明与 Blueprint 一起交给 D6；D6 在逐组件追问之外，对照检查漏写、多写、验收器数量分类是否一致及大件下载是否遗漏；发现问题按 D6 缺口交回 D1。 D6 还要核对冻结说明里回归用例的数量和分组与设计一致；发现问题按 D6 的缺口处理，交回 D1。",
-      "needs": "file-check",
-      "needs_reason": "对照第 6.4a 节与 Blueprint 检查冻结说明文件的骨架、写法、数量、出处或下载披露。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+      "text": "冻结前，说明与 Blueprint 一起交给 D6。D6 在原有的逐组件追问之外，再对照 Blueprint 查说明四项：上面清单里的七类内容有没有漏写；有没有写 Blueprint 里没有的承诺、或把设计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。"
     },
     {
       "top_component_id": "design",
@@ -2722,17 +2722,17 @@
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
+      "needs": "file-check",
+      "needs_reason": "比较说明与 Blueprint 是否变化，核对旧说明检查失效后只重做固定清单、矛盾、数量与回归、大件下载四项的记录。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
       "top_component_title": "设计保障",
       "node_id": "freeze",
       "node_title": "批准与冻结交接",
       "acceptance_index": 19,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/19",
-      "text": "D6 检查后说明只要改动，原说明检查就失效；由 D6 对新说明重做漏写、多写、验收器数量分类和大件下载四项检查，Blueprint 没变时不必重做逐组件追问。 D6 还要核对冻结说明里回归用例的数量和分组与设计一致；发现问题按 D6 的缺口处理，交回 D1。",
-      "needs": "file-check",
-      "needs_reason": "比较说明与 Blueprint 是否变化，读取 D6 四项检查记录，核对原说明检查失效及不重复逐组件追问的条件。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+      "text": "D6 检查后说明只要改动，原说明检查就失效；由 D6 对新说明重做四项检查（清单项是否写到、是否矛盾、数量与回归、大件下载），Blueprint 没变时不必重做逐组件追问。"
     },
     {
       "needs": "file-check",
@@ -4328,8 +4328,8 @@
     }
   ],
   "download_scan": {
-    "scanned_string_count": 7001,
-    "matched_string_count": 214,
+    "scanned_string_count": 7005,
+    "matched_string_count": 224,
     "matches": [
       {
         "source_pointer": "/complexityNote",
@@ -4471,6 +4471,14 @@
         "excerpt": "本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。"
       },
       {
+        "source_pointer": "/nodes/1/children/0/children/0/validators/0/method/description",
+        "terms": [
+          "下载",
+          "安装"
+        ],
+        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。；D1 交给用户的批准请求写明冻结说明的 explanation_sha256，用户批准和 freeze.json 同时记录 snapshot_sha256 与 explanation_sha256。；D1 按第 6.4a 节在冻结说明第 4 节写清回归用例集：**回归用例集**（第 6.3a 节）：一共几个用例；**按检查条**统计“新能力 / 要修的真实问题 / 受影响的旧能"
+      },
+      {
         "source_pointer": "/nodes/1/children/0/children/0/claims/0/text",
         "terms": [
           "安装"
@@ -4478,12 +4486,28 @@
         "excerpt": "本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。"
       },
       {
+        "source_pointer": "/nodes/1/children/0/children/0/interface/boundaries/2",
+        "terms": [
+          "下载",
+          "安装"
+        ],
+        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。"
+      },
+      {
         "source_pointer": "/nodes/1/children/0/children/0/terminal/mechanism",
         "terms": [
           "下载",
           "安装"
         ],
-        "excerpt": " 对新说明重做上面四项检查（Blueprint 没变时，不必重做逐组件追问）。\n\n**大件下载的依据（D6 第 7 轮后补定）：** 第 5 节只能写 Blueprint 里有依据的内容。Blueprint 没有记录某项依赖的大小时，说明必须写“大小未记录”，不能凭常识写“很小”。实施时，执行者第一次下载或安装任何依赖前，先记录它的实际大小；单项超过 100 MB 的，先经用户授权再下载。\n\n冻结说明第 4 节补充：**回归用例集**（第 6.3a 节）：一共几个用例；**按检查条**统计“新能力 / 要修的真实问题 / 受"
+        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n冻结前，说明与 Blueprint 一起交给 D6，发现问题交回 D1 改写。\n\n**说明的身份（D6 第 7 轮后补定）：** 冻结说明是一个独立文件，它的身份 `explanation_sha256` 是该文件原始字节的 SHA-256（与 `bundle_sha256` 一样不做规范化）。D6 的结果写明它检查的 `explanation_sha256`；D1 交给用户"
+      },
+      {
+        "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/6",
+        "terms": [
+          "下载",
+          "安装"
+        ],
+        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。"
       },
       {
         "source_pointer": "/nodes/1/children/0/children/1/claims/0/text",
@@ -4526,7 +4550,15 @@
           "下载",
           "安装"
         ],
-        "excerpt": "完整跑一遍。；D6 按第 6.4a 节检查说明第 5 节是否遗漏单项超过 100 MB 的下载或安装；第 5 节只能写 Blueprint 里有依据的内容。Blueprint 没有记录某项依赖的大小时，说明必须写“大小未记录”，不能凭常识写“很小”；发现问题按 D6 的缺口处理，交回 D1。；D6 的结果写明所检查说明的 explanation_sha256，即独立文件原始字节的 SHA-256，不做规范化。；说明在 D6 检查后有任何改动，原说明检查失效；D6 对新说明重做四项检查，Blueprint 没变时不必重做逐组件"
+        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。；说明里的每一条都必须能在 Blueprint 里找到出处，Blueprint 里没有的承诺不能写进说明，也不能把设计写得更强或更弱。 发现问题按 D6 的缺口处理，交回 D1。；检查冻结说明的验收器数量和分类是否与 Blueprint 一致；发现问题按 D6 缺口交回 D1。 D6 还要核对冻结说明里回"
+      },
+      {
+        "source_pointer": "/nodes/1/children/0/children/5/validators/1/method/description",
+        "terms": [
+          "下载",
+          "安装"
+        ],
+        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n冻结前，说明与 Blueprint 一起交给 D6。D6 在原有的逐组件追问之外，再对照 Blueprint 查说明四项：上面清单里的七类内容有没有漏写；有没有写 Blueprint 里没有的承诺、或把设计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1"
       },
       {
         "source_pointer": "/nodes/1/children/0/children/5/validators/1/counterexample/input",
@@ -4550,6 +4582,14 @@
         "excerpt": "本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。"
       },
       {
+        "source_pointer": "/nodes/1/children/0/children/5/interface/boundaries/3",
+        "terms": [
+          "下载",
+          "安装"
+        ],
+        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n冻结前，说明与 Blueprint 一起交给 D6。D6 在原有的逐组件追问之外，再对照 Blueprint 查说明四项：上面清单里的七类内容有没有漏写；有没有写 Blueprint 里没有的承诺、或把设计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1"
+      },
+      {
         "source_pointer": "/nodes/1/children/0/children/5/interface/errors/1",
         "terms": [
           "下载"
@@ -4569,7 +4609,15 @@
           "下载",
           "安装"
         ],
-        "excerpt": "量和分类是否与 Blueprint 一致（包括说明里回归用例的数量和分组与设计一致）、大件下载有没有漏。发现问题按 D6 的缺口处理，交回 D1。\n\n**说明的身份（D6 第 7 轮后补定）：** 冻结说明是一个独立文件，它的身份 `explanation_sha256` 是该文件原始字节的 SHA-256（与 `bundle_sha256` 一样不做规范化）。D6 的结果写明它检查的 `explanation_sha256`；D1 交给用户批准时写明说明的 `explanation_sha256`；用户批准和 `freez"
+        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n冻结前，说明与 Blueprint 一起交给 D6。D6 在原有的逐组件追问之外，再对照 Blueprint 查说明四项：上面清单里的七类内容有没有漏写；有没有写 Blueprint 里没有的承诺、或把设计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1"
+      },
+      {
+        "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/4",
+        "terms": [
+          "下载",
+          "安装"
+        ],
+        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。"
       },
       {
         "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/7",
@@ -4605,7 +4653,7 @@
         "terms": [
           "下载"
         ],
-        "excerpt": "组件追问之外，接收冻结说明并对照 Blueprint 检查漏写、多写、验收器数量分类和大件下载遗漏；发现问题交回 D1。 D6 还要核对冻结说明里回归用例的数量和分组与设计一致；发现问题按 D6 的缺口处理，交回 D1。；D6 结果记录检查说明的 explanation_sha256；说明改动后原说明检查失效，Blueprint 未变时只重做说明四项检查，不重做逐组件追问。"
+        "excerpt": "计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。；D6 结果记录检查说明的 explanation_sha256；说明改动后原说明检查失效，Blueprint 未变时只重做说明四项检查，不重做逐组件追问。"
       },
       {
         "source_pointer": "/nodes/1/children/2/claims/0/text",
@@ -4615,12 +4663,21 @@
         "excerpt": "本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。"
       },
       {
+        "source_pointer": "/nodes/1/children/2/interface/boundaries/3",
+        "terms": [
+          "下载",
+          "安装"
+        ],
+        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n冻结前，说明与 Blueprint 一起交给 D6。D6 在原有的逐组件追问之外，再对照 Blueprint 查说明四项：上面清单里的七类内容有没有漏写；有没有写 Blueprint 里没有的承诺、或把设计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1"
+      },
+      {
         "source_pointer": "/nodes/1/children/2/terminal/mechanism",
         "terms": [
           "rfc8785",
           "Python",
           "canonicalize",
-          "下载"
+          "下载",
+          "安装"
         ],
         "excerpt": " Scheme（JCS）](https://www.rfc-editor.org/rfc/rfc8785) 规范化后的 UTF-8 字节，不加结尾换行。JCS 统一规定了键排序（按 UTF-16 码元）、字符串转义（非 ASCII 字符原样输出，不写成 `\\u` 转义）和数字格式（ECMAScript 规则），所以同一个 JSON 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入"
       },
@@ -4629,7 +4686,7 @@
         "terms": [
           "下载"
         ],
-        "excerpt": "组件追问之外，接收冻结说明并对照 Blueprint 检查漏写、多写、验收器数量分类和大件下载遗漏；发现问题交回 D1。 D6 还要核对冻结说明里回归用例的数量和分组与设计一致；发现问题按 D6 的缺口处理，交回 D1。"
+        "excerpt": "计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/0/validators/0/oracle/description",
@@ -4847,6 +4904,14 @@
         "excerpt": "本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。"
       },
       {
+        "source_pointer": "/nodes/1/children/4/interface/boundaries/3",
+        "terms": [
+          "下载",
+          "安装"
+        ],
+        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n冻结前，说明与 Blueprint 一起交给 D6。D6 在原有的逐组件追问之外，再对照 Blueprint 查说明四项：上面清单里的七类内容有没有漏写；有没有写 Blueprint 里没有的承诺、或把设计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1"
+      },
+      {
         "source_pointer": "/nodes/1/children/4/terminal/mechanism",
         "terms": [
           "安装",
@@ -4866,18 +4931,26 @@
         "excerpt": "序写冻结说明：一句话结论；你这次在做的决定；做完时你会看到什么、你自己怎么验；验收器；需要下载或安装的大件；不能降级的；实现者可以自己定的；权限、费用、时间；这次不做的；和上次批准相比改了什么（只在大改后重新批准时写）。"
       },
       {
+        "source_pointer": "/nodes/1/children/4/terminal/acceptance/14",
+        "terms": [
+          "下载",
+          "安装"
+        ],
+        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。"
+      },
+      {
         "source_pointer": "/nodes/1/children/4/terminal/acceptance/15",
         "terms": [
           "下载"
         ],
-        "excerpt": " 一起交给 D6；D6 在逐组件追问之外，对照检查漏写、多写、验收器数量分类是否一致及大件下载是否遗漏；发现问题按 D6 缺口交回 D1。 D6 还要核对冻结说明里回归用例的数量和分组与设计一致；发现问题按 D6 的缺口处理，交回 D1。"
+        "excerpt": "计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。"
       },
       {
         "source_pointer": "/nodes/1/children/4/terminal/acceptance/19",
         "terms": [
           "下载"
         ],
-        "excerpt": "查后说明只要改动，原说明检查就失效；由 D6 对新说明重做漏写、多写、验收器数量分类和大件下载四项检查，Blueprint 没变时不必重做逐组件追问。 D6 还要核对冻结说明里回归用例的数量和分组与设计一致；发现问题按 D6 的缺口处理，交回 D1。"
+        "excerpt": "说明检查就失效；由 D6 对新说明重做四项检查（清单项是否写到、是否矛盾、数量与回归、大件下载），Blueprint 没变时不必重做逐组件追问。"
       },
       {
         "source_pointer": "/nodes/1/children/5/claims/0/text",
@@ -5345,6 +5418,13 @@
           "安装"
         ],
         "excerpt": "实际安装"
+      },
+      {
+        "source_pointer": "/evidence/1/sources/0/locator",
+        "terms": [
+          "下载"
+        ],
+        "excerpt": "类固定清单、清单之外以设计为准、不把设计写得更强或更弱，以及清单项/矛盾/数量与回归/大件下载四项检查。"
       },
       {
         "source_pointer": "/evidence/2/doesNotProve",

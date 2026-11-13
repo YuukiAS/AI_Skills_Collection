@@ -1819,3 +1819,64 @@ npx tsx check.mjs --stage draft .cache/d5-regression-r27/blueprint.json
 出处使用实际 HEAD `adabdedb0be94200efebdf390501b6abbe8b5e4b` 加仓库内路径。未提交 Blueprint 以该 HEAD、相对路径 `docs/design/assurance/plugin-0.1-d1/blueprint.json` 和上述 SHA-256 定位，不虚构提交号。
 
 公开信息自查覆盖新 Blueprint、本记录全文及验收清单，用户指定正则匹配数均为 0；`git diff --check` 无问题。工作树只留下 Blueprint 与本记录修改，验收清单在 D5 输出目录。SPEC、裁决、冻结说明、流程文档和检查器源码均未修改。未 stage、未 commit、未 push、未切分支；没有需要 D1 新作决定的事项。
+
+
+## 2026-11-13：冻结说明漏写范围改为七类固定清单
+
+本轮从干净工作树开始，分支为 `design/assurance-plugins-0.1-merged`，实际 HEAD 为 `15613f70f3f0c86774da63caf80bd66cbb702f4d`。已完整读取 `SPEC.md` 第 6.4a 节的新写法要求与检查，以及 `MERGE_DECISIONS.md` 第 28 节，按 D1 已定规则写入，没有新增设计选择。
+
+### 修改内容
+
+- `freeze`：机制中的第 6.4a 节完整换成当前 SPEC 原文。写法及相关验收明确：说明每条承诺必须在 Blueprint 有出处，也不能把设计写得更强或更弱；必须覆盖七类固定清单，清单之外细节不要求写，说明写明“其余细节以设计为准”。D6 的检查及说明改动后的四项复查同步为清单项、矛盾、数量与回归、大件下载。
+- `role-D6`：机制和接口边界写入同一完整清单与检查原文；原“漏写影响用户决定内容”的验收条目改为按七类清单检查，清单外未写不算漏写。矛盾检查包括设计被写强或写弱；原有验收器的核对说明同步。`v-fail-freeze-explanation` 的检查方法与期望也明确此边界，保留原反例注入对象及说明身份失效规则。
+- `role-D1`：删除冻结说明中无边界的“任何会影响用户决定的内容都不能漏”要求，机制、接口边界与既有说明格式验收条目换为新规则。
+- `gates`：此处重复了旧 D6 说明检查段落，同步为新清单和四项检查；否则同一 Blueprint 会残留两套漏写范围。
+
+七类内容逐字取自 SPEC：
+
+1. 用户已经做过的决定，以及设计者替用户定下的默认做法和被放弃的方案；
+2. 哪些情况会交给用户决定或请用户确认；
+3. 会增加用户工作量（例如需要用户转交的角色、每轮转交几条）、费用或权限范围的事；
+4. 各角色何时启用、在哪里运行、各自负什么责任（谁实现、谁验收、谁签发）；
+5. 验收器的数量与分类，回归用例集；
+6. 单项超过 100 MB 的下载或安装；
+7. 这个版本不做的事，以及不保证的事。
+
+以上为四个节点的实质变化；其他差异仅更新实际出处提交号与依据说明。D6 原有逐组件追问职责、说明身份绑定和说明改动后检查失效规则保留，没有改变其他冻结或恢复合同。
+
+### 复述单位与验收清单
+
+修改的复述单位 id：**无**。新增复述单位 id：**无**。`walkthroughs` 和 `failurePaths` 与本轮 HEAD 原稿整体逐值相同；所有读者可见字段、technical 字段和文字哈希均未改变。现有“漏写、多写、验收器数量分类、大件下载”沿用新定义，不需改写。
+
+节点 54、需求 14、连接 51、正常走查 4 条及步骤 23 个、失败路径 13 条及步骤 24 个、失败整体解释 13 个、复述单位 60 个、证据 12，均不变。没有新增节点、连接或验收器。验收器仍为 **68 个**，environment 分布为 `real: 49`、`source: 17`、`built: 1`、`installed: 1`；全部保持 `not-run`、`runs: []`，`versions: []` 保留。
+
+已重新生成 `d5-assurance/acceptance-inventory.json`。319 条验收原文及其定位与当前 Blueprint 一一对应，条目数和 needs 汇总不变；更新七个相关条目的文字与核对说明。下载扫描和引用重新生成，下载清单仍为 11 项，未知大小继续如实标注。本轮没有运行插件验收器或回归用例。
+
+### 草稿检查
+
+检查器仍为提交 `529bbde9b7d0ae9d2be7084fff2b34d9e4a6af1e`。在其 `content/` 目录依次运行：
+
+```sh
+module load nodejs/24.16.0
+npx tsx check.mjs --stage draft --offline .cache/d5-explanation-r28/blueprint.json
+npx tsx check.mjs --stage draft .cache/d5-explanation-r28/blueprint.json
+```
+
+缓存目录的 Blueprint 链接到本轮文件，读者记录和疑问记录分别链接到用户指定 D5 输出目录的 `readability-review.json`、`questions.json`。链接目标与字节已核对；输入记录及 D5 原有 Blueprint 的哈希在本轮检查前后保持一致，没有修改读者通过记录。
+
+| 检查 | checkedAt（UTC） | 退出码 | errors | reader-current-hash | unresolved | reviews |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| 离线 | 2026-11-13T15:39:56.715Z | 2 | 0 | 0 | 1 | 92 |
+| 在线 | 2026-11-13T15:40:00.504Z | 0 | 0 | 0 | 0 | 92 |
+
+本轮指定的读者记录已覆盖当前复述文字，没有报告读者哈希不匹配。离线唯一未完成项是跳过 Git、外链和 npm 核实；在线核实完成，退出 0，草稿检查通过。92 条人工证据解释仍需独立审查；草稿检查通过不代表实际插件验收器已运行、D6/D7 独立检查已通过或用户已批准冻结。
+
+### 文件身份与范围
+
+新 Blueprint SHA-256：`636343ee548a8504c5e901ad32dc3557b952c02b12c7c0f5f1420a64563c04f5`。
+
+重新生成的验收清单 SHA-256：`1961ddb228af3ae563c17f27a972d60e51f25e233abc92d3ab567bc00ea8a4d3`。
+
+出处使用实际 HEAD `15613f70f3f0c86774da63caf80bd66cbb702f4d` 加仓库内路径；未提交 Blueprint 以该 HEAD、相对路径 `docs/design/assurance/plugin-0.1-d1/blueprint.json` 和上述 SHA-256 定位，不虚构本轮提交号。
+
+按用户指定公开信息正则检查新 Blueprint、本记录全文及验收清单，匹配数均为 0；`git diff --check` 无问题。工作树只留下 Blueprint 与本记录修改，验收清单在 D5 输出目录。SPEC、裁决、冻结说明、流程文档与检查器源码均未修改。未 stage、未 commit、未 push、未切分支；没有需要 D1 新作决定的事项。
