@@ -1,0 +1,32 @@
+[
+  {
+    "id": "D6-R14-001",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "请把冻结说明第 2 节的角色启用与独立性说明补到与 Blueprint 等价：明确 D1、D2、D5–D8、X1、X2 的必跑状态；保留 D3、D4、X3、X4、X5 的条件启用及其触发；并写清 D2/D3 每次独立设计新开、D6 每轮新开且不继承负责人上下文、D7 每轮新开且只读 Blueprint 与无设计暗示的运输说明、X3 首次独立新开且不继承 X2 解题过程、X5 每次独立裁判新开且不看实现过程。规定档次、独立性或工具能力的入口不可用时，应生成给该入口的完整提示词并等待，不能自动降档或由负责人冒充。当前说明的“哪些角色每次必跑”只列 D2 和 D5–D8，漏了 D1、X1、X2；独立性和不可用入口的处置也只披露了一部分。",
+    "answerLocation": "ASSURANCE_PROCESS_V0_1_20261110.md §3 角色表与线程规则；blueprint.json -> nodes[id=shared]/children[id=dispatch].terminal.mechanism §2.1；nodes[id=design]/children[id=design-roles]/children[id=role-D2,role-D3,role-D6,role-D7].terminal.mechanism；nodes[id=delivery]/children[id=delivery-roles]/children[id=role-X1,role-X2,role-X3,role-X5].terminal.mechanism",
+    "gap": "冻结说明没有逐角色完整披露必跑/条件启用与关键独立性规则，并把“入口不可用”缩写成“如实报告、不让别人顶替自审”，漏掉“生成给规定入口的提示词并等待、不得自动降档”的明确处置。",
+    "impact": "用户可能低估必跑角色与手工等待成本，或批准一个允许复用受污染上下文、在规定宿主不可用时采取比设计更弱替代的流程；这会改变角色独立性、实际工作量和验收可信度。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R14-002",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "请补全冻结说明第 9 节的 0.1 明确不做范围。Blueprint 除了已经列出的自动新建/恢复线程、自动发消息、后台调度、任务看板、中央数据库或服务、历史任务自动迁移外，还明确把“隐藏用例基础设施”“通用验收器平台”“所有项目预设适配器”留到 0.2 或以后；当前说明漏掉了这三项。",
+    "answerLocation": "blueprint.json -> nodes[id=packaging]/children[id=minimum].terminal.mechanism §10.3“留到0.2或以后”",
+    "gap": "七类固定清单第 7 类不完整：三个 Blueprint 明确排除在 0.1 之外的能力没有出现在冻结说明。",
+    "impact": "冻结说明是用户批准前唯一阅读材料；漏写会让用户合理地把这三类能力理解为 0.1 可能包含或应交付，造成对批准范围和完成标准的误解。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R14-003",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "请把第 4 节回归用例的概括段改到与 Blueprint 等价，或删除会改变语义的概括，只保留后面的正式定义。当前有三处问题：R2 把旧表现概括成“第一版说明写成了审计报告”，Blueprint 的旧表现依据实际是“正文以哈希开头，缺验收器数量和下载说明”；R3 把“说明没有身份，无法证明用户看到的是已检查版本”强化成“没有身份、拦不住”；R6 的概括只写“不涉及付费或对外发布”就说“不来打扰你”，漏掉 Blueprint 固定输入里的“不向他人发消息”，从而把无需询问用户的范围写宽。末尾正式回归表本身是正确的，但不能抵消前面已经写给用户看的相反或更强陈述。",
+    "answerLocation": "blueprint.json -> nodes[id=packaging]/children[id=capability-check]/validators[id=v-capability-check].method.description（R1–R7、S1 的固定输入、判定者与旧表现依据）；nodes[id=shared]/children[id=state].terminal.mechanism §1.3a（恢复冲突与不可撤回外部后果的用户决定边界）",
+    "gap": "回归用例完整定义与 Blueprint 一致，但其前面的用户摘要不是等价摘要：R2、R3 的旧表现依据被改写，R6 又扩大了“不需要问用户”的条件。",
+    "impact": "用户会误解两个真实问题究竟由什么历史证据支持，并可能误以为涉及向他人发消息的恢复重派也可内部自动处理；这正落在本轮要求严格核对的“旧表现依据”和“用户决定边界”内。",
+    "blocking": true,
+    "owner": "D1"
+  }
+]
