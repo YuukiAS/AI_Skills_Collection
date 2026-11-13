@@ -925,3 +925,134 @@ npx tsx check.mjs --stage draft "$ASSURANCE_WORKTREE/docs/design/assurance/plugi
 ```
 
 合并稿来源引用使用本分支实际 HEAD `966d35aadf5e775c6f4cceb355edb5d2d6ee99a6` 加仓库内路径。本轮 JSON 未提交，没有自己的提交号，以上摘要标识当前未提交文件，不声称已存在于该提交中。只修改 JSON 并追加本说明，SPEC、MERGE_DECISIONS、流程文档和 A 原稿均未修改；未 commit、未 push、未切分支。新 JSON 和整份说明按用户指定正则公开信息自查，匹配数均为零。
+
+
+## 续：冻结说明固定格式与验收条目清单（第 20 节用户决定）
+
+第 6.4a 节固定格式已完整写入 Blueprint，D1 编写、D6 对照检查、模板、走查与缺口退回规则均已同步。另已在用户指定的 D5 目录生成 `acceptance-inventory.json`，供 D1 整理说明时使用；本轮没有撰写冻结说明正文，也没有做功能分类。
+
+本轮以实际 HEAD `811d05d9cf05c6514a15ea0bb65821b7f8b5797a` 为准，完整读取 SPEC 第 6.4 节改动、第 6.4a 节全文与 MERGE_DECISIONS 第 20 节。合并稿依据引用使用该提交加仓库内路径；JSON 与清单是当前未提交结果，没有新的提交号。
+
+### 写入的规则和节点
+
+- `freeze.terminal.mechanism` 加入第 6.4a 节全文，并逐字核对一致；重复出现的旧“至少讲清”清单全部改为新格式引用。
+- 每次首次冻结或大改都按固定十节骨架顺序写，最后一节只在大改后重新批准时写；日常语言、正文一页左右、正文不出现文件名/路径/字段名/哈希/节点编号，技术信息仅放附录；验收器清单可单列、不受一页限制。说明中的每条承诺均须能在 Blueprint 找到出处，不能漏掉影响用户决定的内容。
+- `freeze` 验收补上骨架、写法、验收器数量分类及各类功能/判定说明、大件逐项披露或“没有”、逐条出处与不漏写、D6 四项检查，以及附录中的身份、关卡和节点对应关系。
+- `role-D1` 明确写固定格式说明并在冻结前与 Blueprint 一起交 D6；`role-D6` 增加可读的冻结说明及四项对照检查：漏写、多写、验收器数量分类、大件下载。缺口交回 D1 改写。`gates` 与调度批准步骤同步该检查。
+- 在已有模板清单补入冻结说明模板设计定位 `shared/assurance/templates/freeze-explanation.md`，按第 6.4a 节分正文和附录；只写模板条目，本轮没有创建或实现产品模板文件。
+- 新增 `fail-freeze-explanation` 及对应的 `v-fail-freeze-explanation`，说明 D6 发现冻结说明缺口后交回 D1 按固定格式改写。它和检查器不可用、网页端打包偏离有不同的处理责任，未合并成同一路径。
+
+| 修改节点 | 修改的自身字段 |
+| --- | --- |
+| `state` | `validators` |
+| `writer` | `validators` |
+| `record-check` | `validators` |
+| `dispatch` | `validators`、`terminal` |
+| `prompts` | `validators` |
+| `revision` | `validators`、`terminal` |
+| `role-D1` | `outputs`、`validators`、`interface`、`terminal` |
+| `role-D2` | `validators` |
+| `role-D3` | `validators` |
+| `role-D4` | `validators` |
+| `role-D6` | `inputs`、`outputs`、`validators`、`interface`、`terminal` |
+| `role-D8` | `validators` |
+| `clarify` | `validators`、`terminal` |
+| `gates` | `validators`、`terminal` |
+| `contract-fidelity` | `validators` |
+| `freeze` | `inputs`、`outputs`、`validators`、`interface`、`terminal` |
+| `q-checker` | `validators`、`terminal` |
+| `q-inheritance` | `validators`、`terminal` |
+| `role-X1` | `validators` |
+| `role-X5` | `validators` |
+| `evidence` | `validators` |
+| `deviation` | `validators` |
+| `sign` | `validators` |
+| `packaging` | `validators` |
+| `source-layout` | `validators`、`interface`、`terminal` |
+| `planning-entry` | `validators` |
+| `execution-package` | `validators`、`terminal` |
+| `minimum` | `validators` |
+| `capability-check` | `validators` |
+| `web-later` | `validators` |
+| `q-capacity` | `validators`、`terminal` |
+
+数量为 54 个节点、14 条需求、51 条连接、4 条正常走查（23 步）、13 条失败路径（24 步及 13 段整体收场）、60 个复述单位、67 个验收器对象、12 条依据记录。所有验收器仍为 `not-run`、运行记录为空；`versions: []` 保持原样。本轮没有用户批准、正式冻结或产品运行验收。
+
+### 所有受影响复述单位
+
+实际调用当前固定检查器的 `readerHash` 比较本轮 HEAD：两个原有单位文字哈希改变，新增两个单位，其余 56 个原有单位的完整内容未变。
+
+| 单位 id | 类型 | 修改字段或用途 |
+| --- | --- | --- |
+| `wr-gates` | 修改 | `action` |
+| `wr-freeze` | 修改 | `action`、`exampleData`、`onError` |
+| `fail-freeze-explanation-whole` | 新增 | 失败路径整体收场 |
+| `fail-freeze-explanation-step-1` | 新增 | 失败路径步骤 |
+
+这些单位需要新一轮真实复述，没有补签或篡改既有读者记录。规则同步所需的既有技术字段也随之修改，逐项如下；新增失败路径及两个新单位的技术说明是新增内容。
+
+| 技术字段 | 原文 | 新文 |
+| --- | --- | --- |
+| `wr-gates.technical.action` | 负责人在冻结前用草稿入口检查结构，并收集同一设计上的追问、冷读和逐步复述。 | 负责人在冻结前用草稿入口检查结构，并收集同一设计上的追问、冷读和逐步复述。 D6 冻结前对照 Blueprint 检查冻结说明漏写、多写、验收器数量分类和大件下载，发现问题交回 D1。 |
+| `wr-freeze.technical.action` | 首次冻结五步：D5 草稿档/D6/D7/D8 同一 snapshot_sha256 通过；用户批准；冻结命令追加首版；D5 冻结档核对获批快照不变；写含 snapshot_sha256、bundle_sha256、semantic_hash 的 freeze.json。 | 首次冻结五步：D5 草稿档/D6/D7/D8 同一 snapshot_sha256 通过；用户批准；冻结命令追加首版；D5 冻结档核对获批快照不变；写含 snapshot_sha256、bundle_sha256、semantic_hash 的 freeze.json。 首次冻结或大改，D1 按第 6.4a 节给用户冻结说明，正文与技术附录分开，冻结前由 D6 对照 Blueprint 检查四项缺口。 |
+| `wr-freeze.technical.exampleData` | 拿到获批快照、四项有效关卡结果、用户答复和追加历史后的完整文件；D8 合批已经设计负责人逐项判断正确。 | 拿到获批快照、四项有效关卡结果、用户答复和追加历史后的完整文件；D8 合批已经设计负责人逐项判断正确。；冻结说明按第 6.4a 节写成并由 D6 对照检查。 |
+
+### 验收条目清单与汇总
+
+清单逐节点、按原序取出每条 `terminal.acceptance`，保留节点 id、标题、原文、从零开始的条目索引、JSON 出处、顶层组件、单值 `needs` 及理由、`big_download` 和判断依据。已按原树顺序逐项核对，没有漏项、拆句、去重或改写条目。相同文字在不同节点仍保留各自的一条。
+
+共有 **243 条验收条目**，Blueprint 中则是 **67 个 `validators` 对象**。这是两个不同口径，不能把 243 直接当作冻结说明中的验收器总数。`needs` 只是当前任务要求的机械需求判断，不是功能分类；D1 的功能分类未在本轮代做。
+
+| 顶层组件 | file-check | real-host | expert | user | unclear | 合计 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 共用任务协议（`shared`） | 40 | 16 | 0 | 5 | 0 | 61 |
+| 设计保障（`design`） | 71 | 28 | 0 | 5 | 2 | 106 |
+| 交付保障（`delivery`） | 25 | 10 | 6 | 0 | 3 | 44 |
+| 同源分发（`packaging`） | 18 | 12 | 1 | 0 | 1 | 32 |
+| 合计 | 154 | 66 | 7 | 10 | 6 | 243 |
+
+以下 6 条无法机械归入单一需要，已标 `unclear` 并保留原因，未拆成新的验收条件：
+
+- `contract-capability.terminal.acceptance[0]`：该条把真实宿主能力、用户批准、签发和不承诺事项合在一起，单一 needs 无法代表全部；未另拆条目或替 D1 做功能分类。
+- `contract-changes.terminal.acceptance[0]`：该条涵盖验收资产语义、设计退回和用户专属决定；具体变化可能只需对照文件，也可能需用户决定，原文没有唯一验证场景。
+- `calibration.terminal.acceptance[2]`：该条规定校准不能替代正常入口、回归或专业判断；三者分别可能需真实宿主、脚本或 X5，原文未指定本条独立的验证对象。
+- `evidence.terminal.acceptance[2]`：亲读原始证据的质量观察依产物而定，可能需文件比较、真实宿主或 X5；原文未固定当前证据类型。
+- `sign.terminal.acceptance[0]`：十三项清单及最终产物/必要证据的亲读可能同时含真实宿主、X5 或用户项目，未指定本次冻结任务具体必需子项，不能机械压成一种需要。
+- `minimum.terminal.acceptance[0]`：完整任务链同时涉及角色、冻结、校准、证据、修订、签发，跨多个 needs；不拆功能子类或假定只读文件就能验完。
+
+清单末尾的 `downloads` 单独列出 Python、jsonschema 及格式依赖、两种 JCS 库、两执行插件、各实际宿主和两网页端包，共 11 个依赖或环境/产物候选。全 JSON 的安装、下载及有关库名搜索位置和摘录保存在 `download_scan`，可复核并区分实际要求与第 6.4a 节中的类型示例。
+
+Blueprint 没有写这些候选的发行包大小、平台或具体安装器；本轮不自行选择安装包、编译器或本地模型。没有可从 Blueprint 确认的单项超过 100 MB 的具体下载，条目 `big_download` 为 `null`，下载记录的大小及是否超过阈值仍为未知。**这不等于已证明“没有大件”**；清单已明确提醒 D1，实际安装版本、机器及大小仍待核实。网页端上传包、已有宿主可用性、泛指的模型/数据/镜像示例没有被改写成强制新下载安装要求。本轮没有下载或安装任何东西。
+
+清单 SHA-256：`1da00a5f4cca868f9b41bb31063d763100610e150f15dccb3040a25726959382`。清单的 `source.sha256` 与下面的新 Blueprint 摘要一致。
+
+### 草稿检查：预期读者缺口单列
+
+检查器当前提交为 `529bbde9b7d0ae9d2be7084fff2b34d9e4a6af1e`，源码未改。该版本从受检 JSON 的同目录读取 `readability-review.json` 和 `questions.json`，未提供外置读者文件参数。因此在检查器缓存的本轮专用目录放三个只读输入链接：Blueprint 指向本轮新 JSON，读者文件和疑问文件分别指向用户指定 D5 目录的原件。三份链接均已核对原始字节，D5 目录原有 Blueprint、读者文件、疑问文件均未覆盖或修改。
+
+先加载 Node 后，从检查器 `content/` 实际运行离线、在线各一次。变量代指用户给定工作树，公开说明不记录本机绝对路径：
+
+```bash
+module load nodejs/24.16.0
+cd "$BLUEPRINT_WORKTREE/content"
+CHECK_INPUT="$BLUEPRINT_WORKTREE/content/.cache/assurance-freeze-format-811d05d9/blueprint.json"
+npx tsx check.mjs --stage draft --offline "$CHECK_INPUT"
+npx tsx check.mjs --stage draft "$CHECK_INPUT"
+```
+
+| 检查 | 时间（UTC） | 原始退出码 | 预期读者缺口 | 其他缺口 | 人工解释待审 | 未完成核实 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| 离线草稿 | `2026-11-13T05:11:30.429Z` | 1 | 4 | 0 | 92 | 1 |
+| 在线草稿 | `2026-11-13T05:14:36.358Z` | 1 | 4 | 0 | 92 | 0 |
+
+四项均为 `reader-current-hash`：`wr-gates`、`wr-freeze` 的旧文字记录不再匹配，`fail-freeze-explanation-whole`、`fail-freeze-explanation-step-1` 尚无新增单位记录。这四项按用户当前约定单列，不算本任务失败，但也没有修改检查器输出或把正式 D8/D5 写成通过。其他缺口为零；在线未完成核实为零。离线唯一未完成项是来源未联网核实。92 项证据解释仍待人工审查。
+
+使用的读者原件 SHA-256 为 `c36ddb6392c62d597c05f11a3db71f838ab11fd2f336e298ce3a152b9062d2e7`；疑问文件原件 SHA-256 为 `37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570`。前后摘要一致。
+
+新 JSON 的 SHA-256：
+
+```text
+540f99bcfafe6f358f42aee1f71a3b4d312655c488988f5cc60501a057b35670
+```
+
+只在指定工作树修改 JSON 并追加本说明，另在用户指定 D5 目录生成清单；检查器缓存只创建本轮只读输入链接与常规检查报告。SPEC、MERGE_DECISIONS、流程文档和原稿均未修改，未 commit、未 push、未切分支。新 JSON、整份说明和验收条目清单按用户指定正则自查，公开信息匹配数均为零。
