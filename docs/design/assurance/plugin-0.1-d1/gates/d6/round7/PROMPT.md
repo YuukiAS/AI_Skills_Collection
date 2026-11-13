@@ -9,7 +9,7 @@
 ## 仓库与读取范围
 
 - 仓库：`YuukiAS/AI_Skills_Collection`（公开）。
-- 只读分支：`gates/assurance-0.1-d1`，固定提交 `8ac85f4b41de60f89c8c2eab440b84773a165ab4`。
+- 只读分支：`gates/assurance-0.1-d1`，固定提交 `73117c4b792df857e95cb9cdb6e50bba43159fc1`。
 - 只读这三个文件：
   1. `docs/design/assurance/ASSURANCE_PROCESS_V0_1_20261110.md`：用户认可的流程，也就是用户需求原文。
   2. `docs/design/assurance/plugin-0.1-d1/blueprint.json`：受审设计，按其中的 `nodes`、`requirements`、`connections`、`walkthroughs`、`failurePaths` 阅读。
