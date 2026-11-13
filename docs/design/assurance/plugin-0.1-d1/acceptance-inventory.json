@@ -2,15 +2,15 @@
   "source": {
     "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
     "branch": "design/assurance-plugins-0.1-merged",
-    "head": "19417de42af27dc6c9427dc3eac2f4e62df78881",
+    "head": "89c0aa9f8354d157d08b9e2ef86348355d5d1999",
     "path": "docs/design/assurance/plugin-0.1-d1/blueprint.json",
-    "sha256": "3bfdaea821e992b45820fcb1b91523187fc3ddde69817c6d9bea2ce63966ce09",
+    "sha256": "ac7b0dde95f30d0bb26773e154c97bc13f6da63aae44e24fac39c9560d0d97e7",
     "working_tree_uncommitted": true
   },
   "counting": {
     "unit": "terminal.acceptance 中的每一条字符串，不拆句、不去重、不合并相同文字；顶层组件仅由节点树位置确定。",
     "function_classification": "未做功能分类，仅按顶层组件及用户给定 needs 值汇总。",
-    "acceptance_item_count": 305,
+    "acceptance_item_count": 311,
     "validator_object_count": 68,
     "warning": "验收条目数与 validators 对象数是两种口径，不能把条目数直接当冻结说明的验收器总数。",
     "needs": "needs 为本条的单值机械需求判断；明确需 X5 判断用 expert，需用户回答/批准用 user；不能归入单值时为 unclear 并逐项给原因。",
@@ -22,12 +22,12 @@
       "installed": 1
     },
     "previous_validator_environment_counts": {
-      "real": 48,
+      "real": 49,
       "source": 17,
       "built": 1,
       "installed": 1
     },
-    "validator_environment_changed": true
+    "validator_environment_changed": false
   },
   "items": [
     {
@@ -1134,6 +1134,19 @@
       "acceptance_index": 8,
       "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/8",
       "text": "D1 按第 6.4a 节在冻结说明第 4 节写清回归用例集：**回归用例集**（第 6.3a 节）：一共几个，按“新能力 / 要修的真实问题 / 受影响的旧能力 / 冒烟集”分别多少个；每个用例一句话说清输入是什么、看什么、谁判；整体规则是全部通过才算这个版本做完。"
+    },
+    {
+      "needs": "file-check",
+      "needs_reason": "核对合同中 D1 写的用例集及冻结说明数量分组，D6 的核对结果有记录。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
+      "top_component_id": "design",
+      "top_component_title": "设计保障",
+      "node_id": "role-D1",
+      "node_title": "D1：负责人",
+      "acceptance_index": 9,
+      "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/9",
+      "text": "**写用例集：** D1，在设计阶段写进合同；D6 在冻结前核对冻结说明里的用例数量和分组与设计一致。"
     },
     {
       "top_component_id": "design",
@@ -2891,6 +2904,19 @@
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
+      "needs": "real-host",
+      "needs_reason": "X1 在真实交付中组织派发、亲读每个用例原始输出并逐条判断，最终候选全部通过后才能签发。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
+      "top_component_id": "delivery",
+      "top_component_title": "交付保障",
+      "node_id": "role-X1",
+      "node_title": "X1：负责人",
+      "acceptance_index": 8,
+      "source_pointer": "/nodes/2/children/0/children/0/terminal/acceptance/8",
+      "text": "**组织和判定：** X1 负责安排上面这些派发，亲自读每个用例的原始输出并逐条记录通过与否；最终候选上整份用例集全部通过，是 X1 签发的前提。"
+    },
+    {
       "top_component_id": "delivery",
       "top_component_title": "交付保障",
       "node_id": "role-X2",
@@ -2954,6 +2980,32 @@
       "needs_reason": "该条要求按档次在实际 Codex、GPT Work 或所选专门插件宿主运行，并观察规定的会话及用户转交行为；不能只用模拟或文字声明代替。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "needs": "real-host",
+      "needs_reason": "X2 动手修之前须在旧版本实际复现真实问题，留下原始输出，不能只列计划。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
+      "top_component_id": "delivery",
+      "top_component_title": "交付保障",
+      "node_id": "role-X2",
+      "node_title": "X2：实现者",
+      "acceptance_index": 5,
+      "source_pointer": "/nodes/2/children/0/children/1/terminal/acceptance/5",
+      "text": "**复现旧问题：** X2 在动手修之前，先在旧版本上跑“要修的真实问题”类用例，留下原始输出。"
+    },
+    {
+      "needs": "file-check",
+      "needs_reason": "脚本判定的用例由 X2 运行脚本并保留实际输出，可用脚本验证。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
+      "top_component_id": "delivery",
+      "top_component_title": "交付保障",
+      "node_id": "role-X2",
+      "node_title": "X2：实现者",
+      "acceptance_index": 6,
+      "source_pointer": "/nodes/2/children/0/children/1/terminal/acceptance/6",
+      "text": "**跑用例：** 脚本判的由 X2 跑。"
     },
     {
       "top_component_id": "delivery",
@@ -3073,6 +3125,19 @@
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
+      "needs": "real-host",
+      "needs_reason": "明确要求 X4 在真实宿主上操作，文件齐全和模拟不能替代。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
+      "top_component_id": "delivery",
+      "top_component_title": "交付保障",
+      "node_id": "role-X4",
+      "node_title": "X4：专项检查",
+      "acceptance_index": 5,
+      "source_pointer": "/nodes/2/children/0/children/3/terminal/acceptance/5",
+      "text": "**跑用例：** 要在真实宿主上操作的由 X4 跑。"
+    },
+    {
       "top_component_id": "delivery",
       "top_component_title": "交付保障",
       "node_id": "role-X5",
@@ -3123,6 +3188,19 @@
       "needs_reason": "该条已改为按档次表区分 Codex、GPT Work 极高或 X4 所选插件宿主；沿用真实宿主观察需要，实际运行、会话和转交不能用文件声明替代。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "needs": "unclear",
+      "needs_reason": "本条同时规定 X5 专业判断和写明由用户判的必须交用户；涉及 expert 与 user，单一 needs 不能代替两者。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
+      "top_component_id": "delivery",
+      "top_component_title": "交付保障",
+      "node_id": "role-X5",
+      "node_title": "X5：专业裁判",
+      "acceptance_index": 4,
+      "source_pointer": "/nodes/2/children/0/children/4/terminal/acceptance/4",
+      "text": "**跑用例：** 要专业判断的交 X5 按尺子判；写明由用户判的交用户。"
     },
     {
       "top_component_id": "delivery",
@@ -4010,22 +4088,22 @@
     {
       "top_component_id": "design",
       "top_component_title": "设计保障",
-      "file-check": 92,
+      "file-check": 93,
       "real-host": 34,
       "expert": 0,
       "user": 6,
       "unclear": 4,
-      "total": 136
+      "total": 137
     },
     {
       "top_component_id": "delivery",
       "top_component_title": "交付保障",
-      "file-check": 25,
-      "real-host": 15,
+      "file-check": 26,
+      "real-host": 18,
       "expert": 6,
       "user": 0,
-      "unclear": 4,
-      "total": 50
+      "unclear": 5,
+      "total": 55
     },
     {
       "top_component_id": "packaging",
@@ -4058,6 +4136,11 @@
       "node_id": "contract-changes",
       "acceptance_index": 0,
       "reason": "该条涵盖验收资产语义、设计退回和用户专属决定；具体变化可能只需对照文件，也可能需用户决定，原文没有唯一验证场景。"
+    },
+    {
+      "node_id": "role-X5",
+      "acceptance_index": 4,
+      "reason": "本条同时规定 X5 专业判断和写明由用户判的必须交用户；涉及 expert 与 user，单一 needs 不能代替两者。"
     },
     {
       "node_id": "calibration",
@@ -4111,7 +4194,7 @@
     }
   ],
   "download_scan": {
-    "scanned_string_count": 6970,
+    "scanned_string_count": 6981,
     "matched_string_count": 214,
     "matches": [
       {
@@ -4702,7 +4785,7 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "T.md写指定派发目录。；默认作者提交验收实现并真实区分三类样例。；实现者交实际源码和构建安装对象，X1选择。；每次交回声明差异、替代、未运行和缺证。"
+        "excerpt": " 脚本判的由 X2 跑。；默认作者提交验收实现并真实区分三类样例。；实现者交实际源码和构建安装对象，X1选择。；每次交回声明差异、替代、未运行和缺证。"
       },
       {
         "source_pointer": "/nodes/2/children/0/children/2/claims/0/text",
