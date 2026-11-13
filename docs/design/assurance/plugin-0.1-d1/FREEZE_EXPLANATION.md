@@ -88,10 +88,10 @@
 
 ## 附录
 
-- 设计文件：本目录 `blueprint.json`，分支 `design/assurance-plugins-0.1-merged`，提交 `f63fc8ca`
-- 文件 SHA-256：`540f99bcfafe6f358f42aee1f71a3b4d312655c488988f5cc60501a057b35670`
-- 要批准的内容快照 `snapshot_sha256`：`65f262716d86e948b386d608d97ef7349b09fafb93090346e2c7d64e5d218bab`
-- 关卡（针对上面这份快照）：D5、D6、D7、D8 待重跑。上一版快照（`668eebd8…`）四道关卡都已通过，这一版只加了冻结说明的格式规则。
+- 设计文件：本目录 `blueprint.json`，分支 `design/assurance-plugins-0.1-merged`，提交 `baae8298`
+- 文件 SHA-256：`361ce72d7e6a5acd0dab86fef246f7a52dc3209cf62b1e7d61665eea12b5238d`
+- 要批准的内容快照 `snapshot_sha256`：`fe2b4f923eceee32d898dbdee2925ed5dcd00b8ccbd2d801535ffb23c55180b5`
+- 关卡（针对上面这份快照）：D5、D6、D7、D8 待重跑。上一版快照（`668eebd8…`）四道关卡都已通过，这一版加了冻结说明的格式规则，以及普通恢复冲突的处置规则（D7 第 17 轮发现的缺口）。
 - 各节出处：
   - 第 2 节：`MERGE_DECISIONS.md` 第 2、15–21 节；SPEC 1.3a、2.1a、5.1、9.3、9.4 节；
   - 第 3 节：SPEC 9.2、9.4、10.2 节；
