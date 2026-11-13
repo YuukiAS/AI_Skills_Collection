@@ -1,0 +1,44 @@
+{
+ "round": 5,
+ "reader_isolation": "single-thread-batch",
+ "judge": "D1",
+ "date": "2026-11-13",
+ "units": [
+  {
+   "subjectId": "fail-recovery-whole",
+   "textHash": "b2e771e8697a630454e3b1690e7a6acc565e994fbc5685dfe2b2e2757e761d08",
+   "judgment": "pass",
+   "note": "复述与原意一致。读者提出的“当前阶段负责人”“普通冲突”边界等疑问，单位文字已用“其余冲突”与列举的交用户情形划定，判断不影响理解，不改写。"
+  },
+  {
+   "subjectId": "wr-freeze",
+   "textHash": "cfb69c668ad5bb18c1eae394c819903956ba0cdd753769d7c95968a88f4d6561",
+   "judgment": "correct-but-superseded",
+   "note": "复述与原意一致；因 D6 第 7 轮补定说明身份，本单位文字将修改，并顺带就地说明读者指出的“大件下载”“验收器数量分类”“固定格式”等词，下一轮重读。"
+  },
+  {
+   "subjectId": "fail-freeze-explanation-step-1",
+   "textHash": "2857f989cec60ce910515d0455ac6247e6f36b8f0c01d944d57c17b73056d65f",
+   "judgment": "correct-but-superseded",
+   "note": "复述与原意一致；因 D6 第 7 轮补定说明身份，本单位文字将修改，并顺带就地说明读者指出的“大件下载”“验收器数量分类”“固定格式”等词，下一轮重读。"
+  },
+  {
+   "subjectId": "wr-gates",
+   "textHash": "bfb84a45e7efd69661af191d10187aa346e254317e0419dfb13b4174dd88fecf",
+   "judgment": "correct-but-superseded",
+   "note": "复述与原意一致；因 D6 第 7 轮补定说明身份，本单位文字将修改，并顺带就地说明读者指出的“大件下载”“验收器数量分类”“固定格式”等词，下一轮重读。"
+  },
+  {
+   "subjectId": "fail-recovery-step-1",
+   "textHash": "6c72443da792d9ed4f0155e075457996e44ce9d8c69be3573b9790e81da65fbf",
+   "judgment": "pass",
+   "note": "复述与原意一致。读者提出的“当前阶段负责人”“普通冲突”边界等疑问，单位文字已用“其余冲突”与列举的交用户情形划定，判断不影响理解，不改写。"
+  },
+  {
+   "subjectId": "fail-freeze-explanation-whole",
+   "textHash": "f2dbd5c7b4b89f7ba82029ee114bcdff1f57e568653b170fe97111c389866829",
+   "judgment": "correct-but-superseded",
+   "note": "复述与原意一致；因 D6 第 7 轮补定说明身份，本单位文字将修改，并顺带就地说明读者指出的“大件下载”“验收器数量分类”“固定格式”等词，下一轮重读。"
+  }
+ ]
+}
