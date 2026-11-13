@@ -1771,3 +1771,51 @@ npx tsx check.mjs --stage draft .cache/d5-regression-r26/blueprint.json
 合并稿出处使用实际 HEAD `49eadf1f49880d0b0cd798fe91c38f87cbc32bcb` 加仓库内路径。本轮未提交的 Blueprint 以该 HEAD、相对路径 `docs/design/assurance/plugin-0.1-d1/blueprint.json` 及上述 SHA-256 定位，不虚构新的提交号。
 
 对新 Blueprint、本记录全文和验收清单按用户指定正则做公开信息自查，匹配数均为 0；`git diff --check` 无问题。工作树仅 Blueprint 与本记录留有修改，验收清单位于 D5 输出目录。SPEC、裁决、冻结说明、流程文档和检查器源码均未修改。未 stage、未 commit、未 push、未切分支；没有需要 D1 新作决定的事项。
+
+
+## 2026-11-13：D7 第 23 轮后的 S1 正文与 R6 场景
+
+本轮从干净工作树开始，分支为 `design/assurance-plugins-0.1-merged`，HEAD 为 `adabdedb0be94200efebdf390501b6abbe8b5e4b`。已读取 `SPEC.md` 第 10.2a 节 R6、S1 的完整新行及 `MERGE_DECISIONS.md` 第 27 节，按原文同步，没有自行编写输入或新增设计选择。
+
+实质修改仅在 `capability-check`：机制表格、验收条目 R6/S1、`inputs[context]` 和 `v-regression-set` 的方法说明均写入新的两项输入。R6 明确上一个 git 提交有有效状态基线、基线后一条 D4 派发记为已返回但结果不存在、只留下一个与重派不冲突的新建笔记文件，以及不涉及付费调用、对外发布或向他人发消息。S1 第一条请求包含“这个工具可以把表格里的数据整理成一份报告”起始的固定中文正文，完整保留所有字句及输入固定不变的要求；不再使用约 200 字的占位说明。另两条 S1 请求及两项检查不变。
+
+`v-capability-check` 的核对说明随验收条目同步。机制、接口边界和 `v-regression-set` 说明按裁决保留覆盖范围：R6 只检验这一条路线；其他恢复路线由 `state`、`writer` 既有恢复验收器覆盖。没有改动总恢复合同。其余差异仅同步实际出处提交号和依据说明。
+
+已逐字核对：新表的两条整行分别出现在机制与回归验收器说明中；两条输入全文分别出现在 `inputs[context]`，对应验收条目的输入、检查、判定者和旧表现依据与 SPEC 一致。本轮没有生成示例快照或运行实际插件用例。
+
+### 复述单位、数量与清单
+
+修改的复述单位 id：**无**。新增复述单位 id：**无**。`walkthroughs` 和 `failurePaths` 与 HEAD 原稿整体逐值相同，所有读者可见字段、technical 字段及文字哈希均未因本轮改变。
+
+节点 54、需求 14、连接 51、正常走查 4 条及步骤 23 个、失败路径 13 条及步骤 24 个、失败整体解释 13 个、复述单位 60 个、证据 12，均不变。没有新增节点或验收器。验收器总数仍为 68，environment 分布仍为 `real: 49`、`source: 17`、`built: 1`、`installed: 1`；全部保留 `not-run`、`runs: []`，`versions: []` 保留。
+
+已重新生成 `d5-assurance/acceptance-inventory.json`，319 条验收原文及定位与当前 Blueprint 一一对应，条目数和 needs 汇总均不变。只更新 R6、S1 对应文字和机械需求说明，未自行做功能分类。下载扫描及引用重新生成，下载清单仍为 11 项，未知大小继续如实标注。
+
+### 草稿检查
+
+检查器仍为提交 `529bbde9b7d0ae9d2be7084fff2b34d9e4a6af1e`。在其 `content/` 目录依次运行：
+
+```sh
+module load nodejs/24.16.0
+npx tsx check.mjs --stage draft --offline .cache/d5-regression-r27/blueprint.json
+npx tsx check.mjs --stage draft .cache/d5-regression-r27/blueprint.json
+```
+
+缓存目录中的 Blueprint 链接到本轮文件；读者记录和疑问记录链接到用户指定 D5 输出目录的 `readability-review.json`、`questions.json`。链接目标与字节已核对，没有改写输入记录或覆盖 D5 原有 Blueprint。
+
+| 检查 | checkedAt（UTC） | 退出码 | reader-current-hash | 其他 errors | unresolved | reviews |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| 离线 | 2026-11-13T13:57:15.562Z | 1 | 13 | 0 | 1 | 92 |
+| 在线 | 2026-11-13T13:57:19.185Z | 1 | 13 | 0 | 0 | 92 |
+
+13 个 reader-current-hash 单位为：`ws-dispatch`、`ws-prompts`、`wb-capability`、`wr-gates`、`wr-freeze`、`wr-sign`、`fail-role-whole`、`fail-role-step-1`、`fail-role-step-2`、`fail-recovery-whole`、`fail-recovery-step-1`、`fail-freeze-explanation-whole`、`fail-freeze-explanation-step-1`。这些都是本轮之前已有的当前文字与指定读者记录不匹配；本轮未修改其中任何单位或读者通过记录。离线唯一未完成项为跳过 Git、外链和 npm 核实；在线未完成项为零。除已有读者欠项外，其他缺口为零。两次实际退出码都为 1，不能称为完整检查通过。92 条人工证据解释仍待独立审查，已有读者记录欠项仍待补齐；本轮不代替独立关卡、批准或真实回归运行。
+
+### 文件身份与范围
+
+新 Blueprint SHA-256：`7bf8744cbcab1b72c53ba9eba574405f7766e422ee28cd60089f7eec0587bb66`。
+
+重新生成的验收清单 SHA-256：`c47079926eb6d3272d35caa70c1fb5e17946358e7db247f19f5fe191ccdd07fb`。
+
+出处使用实际 HEAD `adabdedb0be94200efebdf390501b6abbe8b5e4b` 加仓库内路径。未提交 Blueprint 以该 HEAD、相对路径 `docs/design/assurance/plugin-0.1-d1/blueprint.json` 和上述 SHA-256 定位，不虚构提交号。
+
+公开信息自查覆盖新 Blueprint、本记录全文及验收清单，用户指定正则匹配数均为 0；`git diff --check` 无问题。工作树只留下 Blueprint 与本记录修改，验收清单在 D5 输出目录。SPEC、裁决、冻结说明、流程文档和检查器源码均未修改。未 stage、未 commit、未 push、未切分支；没有需要 D1 新作决定的事项。
