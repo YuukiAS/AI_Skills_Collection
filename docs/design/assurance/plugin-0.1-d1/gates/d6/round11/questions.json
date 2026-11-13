@@ -58,5 +58,15 @@
     "impact": "这会降低依赖清单精度，但冻结说明已经明确所有依赖大小均未记录、首次下载安装前必须测量实际大小且单项超过 100 MB 先获用户授权，因此不会导致本轮对大件下载边界的错误批准。",
     "blocking": false,
     "owner": "D1"
+  },
+  {
+    "id": "D6-R11-007",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明对“失败”和“无法判断”的三态语义是否与 Blueprint 一致？",
+    "answerLocation": "blueprint.json nodes[id=design].children[id=contract].children[id=contract-outcomes] 及 validators[id=v-contract-outcomes]、nodes[id=delivery].children[id=evidence]；FREEZE_EXPLANATION.md §3、§6，以及回归用例 R3、R4",
+    "gap": "冻结说明 §3 在故意制造过期状态、验 A 交 B、放松验收标准、缺原始证据等错误后统一写成“出错时应该明确告诉你‘无法判断’”。Blueprint 明确区分三态：已经观察到违反冻结义务属于失败/拒绝；只有未运行、证据取不到或对象身份不明等证据不足情形才是“无法判断”。冻结说明自己的 R3/R4 也已经按这一规则分别写了拒绝与无法判断。",
+    "impact": "这句话会把确定违反标准的失败降成“无法判断”，直接改变用户所批准的验收语义和失败处理强度。",
+    "blocking": true,
+    "owner": "D1"
   }
 ]
