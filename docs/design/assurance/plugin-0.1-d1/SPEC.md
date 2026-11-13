@@ -435,7 +435,7 @@ D5–D8可以并行读取同一稳定受审版本。D1收集到修改意见后�
 
 ### 6.4 冻结记录和接收
 
-`freeze.json`必填 `schema_version:"assurance-freeze/0.1",task_id,blueprint_ref,snapshot_sha256,bundle_sha256,document_version,semantic_version,semantic_hash,nine_item_refs,gate_refs,open_questions,user_approval,authorization_refs,created_by,created_at`。`nine_item_refs`恰好九项，每项引用现有节点/字段；`snapshot_sha256`、`semantic_hash`、`bundle_sha256` 的定义与用途见第 6.5 节，`freeze.json` 同时记录这三项；`gate_refs`恰好D5–D8并说明覆盖与有效性；冻结时阻塞型 `open_questions`必须为空；`user_approval`含用户实际回答、来源、时间和批准对象身份。未批准时不得生成带批准值的冻结记录。
+`freeze.json`必填 `schema_version:"assurance-freeze/0.1",task_id,blueprint_ref,snapshot_sha256,explanation_sha256,bundle_sha256,document_version,semantic_version,semantic_hash,nine_item_refs,gate_refs,open_questions,user_approval,authorization_refs,created_by,created_at`。`nine_item_refs`恰好九项，每项引用现有节点/字段；`snapshot_sha256`、`semantic_hash`、`bundle_sha256` 的定义与用途见第 6.5 节，`freeze.json` 同时记录这三项；`gate_refs`恰好D5–D8并说明覆盖与有效性；冻结时阻塞型 `open_questions`必须为空；`user_approval`含用户实际回答、来源、时间和批准对象身份。未批准时不得生成带批准值的冻结记录。
 
 D1给用户的冻结说明按第 6.4a 节的格式写。用户批准内容版本后，才生成不可变快照和记录。工具成功创建快照不是用户批准；所有必要授权也不能从“同意设计”自动推导。
 
@@ -470,6 +470,10 @@ X1接收记录为 `handoff_id,from_thread,to_thread,freeze_ref,read_artifacts,ac
 **附录：** 要批准的 `snapshot_sha256`、文件 SHA-256 和提交号；D5–D8 各关卡的结果；正文每一节对应的 Blueprint 节点。
 
 **检查：** 冻结前，说明与 Blueprint 一起交给 D6。D6 在原有的逐组件追问之外，再对照 Blueprint 查说明有没有漏写影响用户决定的内容、有没有写 Blueprint 里没有的承诺、验收器数量和分类是否与 Blueprint 一致、大件下载有没有漏。发现问题按 D6 的缺口处理，交回 D1。
+
+**说明的身份（D6 第 7 轮后补定）：** 冻结说明是一个独立文件，它的身份 `explanation_sha256` 是该文件原始字节的 SHA-256（与 `bundle_sha256` 一样不做规范化）。D6 的结果写明它检查的 `explanation_sha256`；D1 交给用户批准时写明说明的 `explanation_sha256`；用户批准和 `freeze.json` 同时记录 `snapshot_sha256` 和 `explanation_sha256`。三处必须是同一个值。D6 检查之后说明只要有改动，原来对说明的检查就失效：由 D6 对新说明重做上面四项检查（Blueprint 没变时，不必重做逐组件追问）。
+
+**大件下载的依据（D6 第 7 轮后补定）：** 第 5 节只能写 Blueprint 里有依据的内容。Blueprint 没有记录某项依赖的大小时，说明必须写“大小未记录”，不能凭常识写“很小”。实施时，执行者第一次下载或安装任何依赖前，先记录它的实际大小；单项超过 100 MB 的，先经用户授权再下载。
 
 ### 6.5 冻结对象与语义哈希的精确定义（D7 第 1 轮后由 D1 补定）
 
