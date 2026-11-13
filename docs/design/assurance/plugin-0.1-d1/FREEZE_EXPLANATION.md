@@ -114,9 +114,9 @@
 
 - 这份说明自身的身份 `explanation_sha256` 是本文件原始字节的 SHA-256。D6 检查时、你批准时、冻结记录里写的必须是同一个值；说明再改，D6 要对新说明重新检查。
 
-- 设计文件：本目录 `blueprint.json`，分支 `design/assurance-plugins-0.1-merged`，提交 `c07b1003`
-- 文件 SHA-256：`61dddf90f5118ca882a67295549047790b6ac73ac0ccfe79d3fd7905904c0735`
-- 要批准的内容快照 `snapshot_sha256`：`0dd80a95a03db663bed52a6455d3a1bf3674bdb068cda41e8de1addc4effc92d`
+- 设计文件：本目录 `blueprint.json`，分支 `design/assurance-plugins-0.1-merged`，提交 `6f194f52`
+- 文件 SHA-256：`7bf8744cbcab1b72c53ba9eba574405f7766e422ee28cd60089f7eec0587bb66`
+- 要批准的内容快照 `snapshot_sha256`：`cf2c0967045c1a0eb8e7038006efd1da906ed2e573ca9eed18a7c5186b4d1ced`
 - 关卡（针对上面这份快照）：D5、D6、D7、D8 待重跑。上一版快照（`668eebd8…`）四道关卡都已通过，这一版加了冻结说明的格式规则、普通恢复冲突的处置规则（D7 第 17 轮），冻结说明的身份和大件下载的依据（D6 第 7 轮），执行端角色按档次表运行（D6 第 8 轮），以及回归用例集（用户冻结前追问）。
 - 各节出处：
   - 第 2 节：`MERGE_DECISIONS.md` 第 2、15–27 节；SPEC 1.3a、2.1a、6.3a、7.5、10.2a、5.1、9.3、9.4 节；
