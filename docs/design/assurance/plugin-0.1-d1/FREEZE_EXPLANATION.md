@@ -99,13 +99,13 @@ Claude Code、GPT Work、Codex 和 ChatGPT 网页端你都已经有了，设计�
 
 - 这份说明自身的身份 `explanation_sha256` 是本文件原始字节的 SHA-256。D6 检查时、你批准时、冻结记录里写的必须是同一个值；说明再改，D6 要对新说明重新检查。
 
-- 设计文件：本目录 `blueprint.json`，分支 `design/assurance-plugins-0.1-merged`，提交 `baae8298`
-- 文件 SHA-256：`361ce72d7e6a5acd0dab86fef246f7a52dc3209cf62b1e7d61665eea12b5238d`
-- 要批准的内容快照 `snapshot_sha256`：`fe2b4f923eceee32d898dbdee2925ed5dcd00b8ccbd2d801535ffb23c55180b5`
-- 关卡（针对上面这份快照）：D5、D6、D7、D8 待重跑。上一版快照（`668eebd8…`）四道关卡都已通过，这一版加了冻结说明的格式规则，以及普通恢复冲突的处置规则（D7 第 17 轮发现的缺口）。
+- 设计文件：本目录 `blueprint.json`，分支 `design/assurance-plugins-0.1-merged`，提交 `9fb40bd3`
+- 文件 SHA-256：`7bfbb275dec5ed6c79f02d0c9c916e3ac8e47d68a72704801625ec7dca8ba1c7`
+- 要批准的内容快照 `snapshot_sha256`：`86935182f864ff26b805ec5280f9b9795dc4d641bdc61ab603ea8e0ac2d29d9a`
+- 关卡（针对上面这份快照）：D5、D6、D7、D8 待重跑。上一版快照（`668eebd8…`）四道关卡都已通过，这一版加了冻结说明的格式规则、普通恢复冲突的处置规则（D7 第 17 轮），以及冻结说明的身份和大件下载的依据（D6 第 7 轮）。
 - 各节出处：
   - 第 2 节：`MERGE_DECISIONS.md` 第 2、15–22 节；SPEC 1.3a、2.1a、5.1、9.3、9.4 节；
   - 第 3 节：SPEC 9.2、9.4、10.2 节；
-  - 第 4 节：Blueprint 全部 67 个验收器，逐条清单见本目录 `acceptance-inventory.json`（252 条检查项，Codex 机械整理；分类由 D1 做）；
+  - 第 4 节：Blueprint 全部 67 个验收器，逐条清单见本目录 `acceptance-inventory.json`（262 条检查项，Codex 机械整理；分类由 D1 做）；
   - 第 5 节：Blueprint 中的依赖（记录检查、哈希规范化、插件包）；
   - 第 6–9 节：SPEC 6.3、9.1、9.3、10.3 节。
