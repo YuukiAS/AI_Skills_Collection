@@ -95,6 +95,6 @@
 - 各节出处：
   - 第 2 节：`MERGE_DECISIONS.md` 第 2、15–21 节；SPEC 1.3a、2.1a、5.1、9.3、9.4 节；
   - 第 3 节：SPEC 9.2、9.4、10.2 节；
-  - 第 4 节：Blueprint 全部 67 个验收器，逐条清单见本目录 `acceptance-inventory.json`（243 条检查项，Codex 机械整理；分类由 D1 做）；
+  - 第 4 节：Blueprint 全部 67 个验收器，逐条清单见本目录 `acceptance-inventory.json`（252 条检查项，Codex 机械整理；分类由 D1 做）；
   - 第 5 节：Blueprint 中的依赖（记录检查、哈希规范化、插件包）；
   - 第 6–9 节：SPEC 6.3、9.1、9.3、10.3 节。

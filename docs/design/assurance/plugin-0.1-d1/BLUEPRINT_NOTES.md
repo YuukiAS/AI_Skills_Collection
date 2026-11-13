@@ -1056,3 +1056,129 @@ npx tsx check.mjs --stage draft "$CHECK_INPUT"
 ```
 
 只在指定工作树修改 JSON 并追加本说明，另在用户指定 D5 目录生成清单；检查器缓存只创建本轮只读输入链接与常规检查报告。SPEC、MERGE_DECISIONS、流程文档和原稿均未修改，未 commit、未 push、未切分支。新 JSON、整份说明和验收条目清单按用户指定正则自查，公开信息匹配数均为零。
+
+
+## 续：普通恢复冲突的固定处置（第 21 节，D7 第 17 轮后补定）
+
+普通恢复冲突的固定处置已写入 Blueprint，验收器对象数量仍为 **67 个，没有变化**。验收条目清单已按当前 JSON 重新生成，条目从 243 条增至 252 条；没有新增角色、节点、连接、验收器或复述单位，也没有新增设计选择。
+
+本轮完整读取实际 HEAD `6aaa858524e5f3a429c8e6d2bd6aee8cce183e15` 中 SPEC 第 1.3a 节第 4 步及 MERGE_DECISIONS 第 21 节。`state`、`writer`、`record-check`、`dispatch` 的机制、状态与写者的接口边界、`fail-recovery` 的处理及两个复述单位的技术步骤，均逐字包含第 4 步的新四条规则。旧的笼统“不能自行选择、涉及冻结批准签发交用户”说法已删除。
+
+### 写入内容与范围
+
+- 涉及冻结、批准、签发、撤回的冲突交用户决定。
+- 其余普通冲突只能按固定保守处置当作变化没有发生，相关派发记 `stale`，不采用结果；原始记录和事件原样保留，不删除、不改写。仍需工作时用新派发编号，新提示词列出原派发已留下的提交和文件，接收者从当前仓库状态出发，不能假设原派发没有执行过。
+- 保守处置做不了时也交用户：包括原写入与重派工作冲突，或重派会有无法撤回的外部后果，如付费、对外发布、向他人发消息。本轮没有执行这些外部动作。
+- 等待用户的冲突涉及的节点及依赖工作写入 `paused_scopes` 暂停派发；其余范围只有在恢复记录通过检查并回读后才恢复。`fail-recovery.outcome` 同步为 `recover`，不表示忽略检查门槛或恢复仍暂停的范围。
+- 恢复记录原先列出的基线提交、补登事件、冲突、处理结果保留，补上每个冲突的处置方式 `stale-redispatch` 或 `user` 及暂停范围。本轮只补已有记录说明，没有另定机器字段名、结构版本或空值规则。`record-check` 只核对已有处置记录、暂停范围结构及已声明引用，不代替用户裁决、不执行重派或记录中的命令。
+- 状态与写者的原单条冲突验收改为四条原文；派发验收补普通冲突重派、不能保守处置交用户、隔离与恢复三条；恢复记录验收补新内容。原有 `v-fail-recovery` 同步反例、预期收场和引用，没有另建验收器。
+
+| 自身字段发生变化的节点 | 修改字段 |
+| --- | --- |
+| `state` | `outputs`、`validators`、`interface`、`terminal` |
+| `writer` | `outputs`、`validators`、`interface`、`terminal` |
+| `record-check` | `validators`、`terminal` |
+| `dispatch` | `validators`、`terminal` |
+| `prompts` | `validators` |
+| `revision` | `validators`、`terminal` |
+| `role-D1` | `validators` |
+| `role-D2` | `validators` |
+| `role-D3` | `validators` |
+| `role-D4` | `validators` |
+| `role-D6` | `validators` |
+| `role-D8` | `validators` |
+| `clarify` | `validators`、`terminal` |
+| `gates` | `validators` |
+| `contract-fidelity` | `validators` |
+| `freeze` | `validators` |
+| `q-checker` | `validators`、`terminal` |
+| `q-inheritance` | `validators`、`terminal` |
+| `role-X1` | `validators` |
+| `role-X5` | `validators` |
+| `evidence` | `validators` |
+| `deviation` | `validators` |
+| `sign` | `validators` |
+| `packaging` | `validators` |
+| `source-layout` | `validators` |
+| `planning-entry` | `validators` |
+| `execution-package` | `validators` |
+| `minimum` | `validators` |
+| `capability-check` | `validators` |
+| `web-later` | `validators` |
+| `q-capacity` | `validators`、`terminal` |
+
+上述列表包含合并稿引用提交更新；仅因子节点变化的容器不重复列入。来源引用固定在本分支实际 HEAD 加仓库内路径，本轮未提交改动另用下述摘要定位。
+
+### 全部修改的复述单位
+
+| 单位 id | 改动的读者字段 |
+| --- | --- |
+| `fail-recovery-whole` | `exampleData`、`expectedResult`、`why`、`onError` |
+| `fail-recovery-step-1` | `exampleData`、`expectedResult`、`why`、`onError` |
+
+实际调用固定检查器 `readerHash` 比较本轮 HEAD：只改动 `fail-recovery-whole`、`fail-recovery-step-1`，无新增单位；其余 58 个单位的完整对象未变。两个单位说明普通冲突固定记 stale、保留记录、安全重派披露旧写入，以及用户决定与暂停范围，技术步骤照录新规则。没有生成或补签新的读者通过记录。
+
+因规则同步修改的所有既有 `technical` 字段逐项如下：
+
+| 技术字段 | 同步内容 |
+| --- | --- |
+| `fail-recovery-whole.technical.action` | 将原第 4 步替换为新四条原文，并补恢复记录每个冲突的处置方式和暂停范围。 |
+| `fail-recovery-whole.technical.expectedResult` | 恢复记录列出处置方式 stale-redispatch/user 及暂停范围，检查和回读后只恢复未暂停范围。 |
+| `fail-recovery-step-1.technical.action` | 将原第 4 步替换为新四条原文，并补恢复记录每个冲突的处置方式和暂停范围。 |
+| `fail-recovery-step-1.technical.expectedResult` | 恢复记录列出处置方式 stale-redispatch/user 及暂停范围，检查和回读后只恢复未暂停范围。 |
+| `fail-recovery.technical.outcome` | 由 stop 改为 recover，表示按新规则在检查回读后恢复未暂停范围，等待用户的范围仍暂停。 |
+| `fail-recovery.technical.handling` | 完整恢复流程中的第 4 步换成新四条原文，恢复记录补处置方式和暂停范围。 |
+| `fail-recovery.technical.userSees` | 收场分别说明普通冲突、交用户情形、暂停范围与其余范围恢复，不再笼统停住全部工作。 |
+
+总量保持 54 个节点、14 条需求、51 条连接、4 条正常走查（23 步）、13 条失败路径（24 步及 13 段整体收场）、60 个复述单位、67 个验收器对象、12 条依据记录。所有验收器仍为 `not-run`、运行记录为空；`versions: []` 保持不变。未实际破坏或恢复任务状态，没有正式冻结。
+
+### 重新生成验收条目清单
+
+在用户指定 D5 目录重新生成 `acceptance-inventory.json`。逐条保留节点 id、标题、条目原文、从零开始的索引和 JSON 出处，按原树顺序重新提取；未拆句、合并、去重或做功能分类。未变的条目沿用上一轮相同的 `needs` 判断，改写或新增条目逐条重判；6 条 `unclear` 及其原因保留。清单所有原文、归属、索引、出处和汇总均已与当前 Blueprint 逐项核对。
+
+**验收条目为 252 条，增加 9 条；`validators` 对象仍为 67 个，增量为零。** 两种口径没有混算。
+
+| 顶层组件 | file-check | real-host | expert | user | unclear | 合计 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 共用任务协议（`shared`） | 43 | 19 | 0 | 8 | 0 | 70 |
+| 设计保障（`design`） | 71 | 28 | 0 | 5 | 2 | 106 |
+| 交付保障（`delivery`） | 25 | 10 | 6 | 0 | 3 | 44 |
+| 同源分发（`packaging`） | 18 | 12 | 1 | 0 | 1 | 32 |
+| 合计 | 157 | 69 | 7 | 13 | 6 | 252 |
+
+已重搜整个当前 JSON 的下载/安装相关字符串，并更新 `download_scan` 及末尾 `downloads` 的所有出处。依赖与环境候选仍是 11 项，安装体积未知项没有被估算；没有可从 Blueprint 确认的具体单项超过 100 MB 下载，仍不能据此把大件说明写成“没有”。没有新增下载或安装要求，也没有下载或安装软件。
+
+旧清单 SHA-256：`1da00a5f4cca868f9b41bb31063d763100610e150f15dccb3040a25726959382`；新清单 SHA-256：`d36254b36f53e2b353f8475cc691bf2b8ceff03d85411faff9ac271686005ba9`。清单 `source.sha256` 与下述当前 Blueprint 摘要一致。
+
+### 草稿检查：本轮与既有读者缺口分列
+
+检查器当前提交仍为 `529bbde9b7d0ae9d2be7084fff2b34d9e4a6af1e`，源码未修改。先加载 Node；在缓存目录建立本轮新 JSON、用户指定的读者文件与疑问文件的只读输入链接，再运行离线和在线草稿档各一次。D5 目录原有 Blueprint、读者文件和疑问文件未改写。
+
+```bash
+module load nodejs/24.16.0
+cd "$BLUEPRINT_WORKTREE/content"
+CHECK_INPUT="$BLUEPRINT_WORKTREE/content/.cache/assurance-recovery-conflicts-6aaa8585/blueprint.json"
+npx tsx check.mjs --stage draft --offline "$CHECK_INPUT"
+npx tsx check.mjs --stage draft "$CHECK_INPUT"
+```
+
+变量代指用户指定的工作树，实际传入绝对输入路径；公开说明不记录本机路径。
+
+在改动前，已用当前读者文件对 HEAD 中 Blueprint 单独核对读者规则，确认已有 4 项缺口：`wr-gates`、`wr-freeze`、`fail-freeze-explanation-whole`、`fail-freeze-explanation-step-1`。这些是上一轮尚未补读的固定格式改动，本轮没有再改它们。
+
+| 检查 | 时间（UTC） | 原始退出码 | 本轮读者缺口 | 既有读者缺口 | 其他缺口 | 人工解释待审 | 未完成核实 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 离线草稿 | `2026-11-13T05:34:08.710Z` | 1 | 2 | 4 | 0 | 92 | 1 |
+| 在线草稿 | `2026-11-13T05:36:08.623Z` | 1 | 2 | 4 | 0 | 92 | 0 |
+
+本轮两项为 `fail-recovery-whole`、`fail-recovery-step-1` 的 `reader-current-hash`。上述合计六项均按约定单列为预期读者记录缺口，其他缺口为零；没有修改原始检查器报告或把正式 D5/D8 写成通过。在线未完成核实为零；离线唯一未完成项是来源未联网核实。92 项证据解释仍待人工审查。
+
+读者原件 SHA-256 仍为 `c36ddb6392c62d597c05f11a3db71f838ab11fd2f336e298ce3a152b9062d2e7`，疑问原件仍为 `37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570`。
+
+新 JSON 的 SHA-256：
+
+```text
+361ce72d7e6a5acd0dab86fef246f7a52dc3209cf62b1e7d61665eea12b5238d
+```
+
+本轮没有需要 D1 新增选择的事项。只修改指定工作树中的 JSON 并追加本说明，另重新生成指定 D5 目录的验收条目清单；SPEC、MERGE_DECISIONS、冻结说明正文、流程文档和 A 原稿均未改。未 commit、未 push、未切分支。新 JSON、整份说明和清单按用户指定正则自查，公开信息匹配数均为零。
