@@ -1,0 +1,3832 @@
+[
+  {
+    "id": "Q0001",
+    "nodeId": "shared",
+    "question": "【共用任务协议】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "shared.inputs；shared.interface.emptyCases；shared.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0002",
+    "nodeId": "shared",
+    "question": "【共用任务协议】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "shared.outputs；connections（from/to=shared）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0003",
+    "nodeId": "shared",
+    "question": "【共用任务协议】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "shared.authority；shared.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0004",
+    "nodeId": "shared",
+    "question": "【共用任务协议】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "shared.interface.emptyCases；shared.interface.errors",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0005",
+    "nodeId": "shared",
+    "question": "【共用任务协议】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "shared.validators；shared.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0006",
+    "nodeId": "shared",
+    "question": "【共用任务协议】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "shared.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0007",
+    "nodeId": "shared",
+    "question": "【共用任务协议】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "shared.requirementIds；shared.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0008",
+    "nodeId": "state",
+    "question": "【单一当前状态】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "state.inputs；state.interface.emptyCases；state.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0009",
+    "nodeId": "state",
+    "question": "【单一当前状态】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "state.outputs；connections（from/to=state）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0010",
+    "nodeId": "state",
+    "question": "【单一当前状态】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "state.authority；state.interface.boundaries；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0011",
+    "nodeId": "state",
+    "question": "【单一当前状态】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "state.interface.emptyCases；state.interface.errors；state.terminal.retry；failurePaths[fail-write,fail-recovery]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0012",
+    "nodeId": "state",
+    "question": "【单一当前状态】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "state.validators；state.terminal.acceptance；state.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0013",
+    "nodeId": "state",
+    "question": "【单一当前状态】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "state.terminal.retry；state.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0014",
+    "nodeId": "state",
+    "question": "【单一当前状态】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "state.requirementIds；state.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0015",
+    "nodeId": "writer",
+    "question": "【写者交接与恢复】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "writer.inputs；writer.interface.emptyCases；writer.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0016",
+    "nodeId": "writer",
+    "question": "【写者交接与恢复】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "writer.outputs；connections（from/to=writer）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0017",
+    "nodeId": "writer",
+    "question": "【写者交接与恢复】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "writer.authority；writer.interface.boundaries；writer.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0018",
+    "nodeId": "writer",
+    "question": "【写者交接与恢复】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "writer.interface.emptyCases；writer.interface.errors；writer.terminal.retry；failurePaths[fail-write]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0019",
+    "nodeId": "writer",
+    "question": "【写者交接与恢复】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "writer.validators；writer.terminal.acceptance；writer.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0020",
+    "nodeId": "writer",
+    "question": "【写者交接与恢复】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "writer.terminal.retry；writer.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0021",
+    "nodeId": "writer",
+    "question": "【写者交接与恢复】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "writer.requirementIds；writer.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0022",
+    "nodeId": "record-check",
+    "question": "【记录结构检查】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "record-check.inputs；record-check.interface.emptyCases；record-check.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0023",
+    "nodeId": "record-check",
+    "question": "【记录结构检查】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "record-check.outputs；connections（from/to=record-check）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0024",
+    "nodeId": "record-check",
+    "question": "【记录结构检查】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "record-check.interface.boundaries；record-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0025",
+    "nodeId": "record-check",
+    "question": "【记录结构检查】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "record-check.interface.emptyCases；record-check.interface.errors；record-check.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0026",
+    "nodeId": "record-check",
+    "question": "【记录结构检查】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "record-check.validators；record-check.terminal.acceptance；record-check.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0027",
+    "nodeId": "record-check",
+    "question": "【记录结构检查】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "record-check.terminal.retry；record-check.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0028",
+    "nodeId": "record-check",
+    "question": "【记录结构检查】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "record-check.requirementIds；record-check.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0029",
+    "nodeId": "dispatch",
+    "question": "【按条件派发】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "dispatch.inputs；dispatch.interface.emptyCases；dispatch.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0030",
+    "nodeId": "dispatch",
+    "question": "【按条件派发】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "dispatch.outputs；connections（from/to=dispatch）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0031",
+    "nodeId": "dispatch",
+    "question": "【按条件派发】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "dispatch.authority；dispatch.interface.boundaries；dispatch.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0032",
+    "nodeId": "dispatch",
+    "question": "【按条件派发】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "dispatch.interface.emptyCases；dispatch.interface.errors；dispatch.terminal.retry；failurePaths[fail-role]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0033",
+    "nodeId": "dispatch",
+    "question": "【按条件派发】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "dispatch.validators；dispatch.terminal.acceptance；dispatch.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0034",
+    "nodeId": "dispatch",
+    "question": "【按条件派发】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "dispatch.terminal.retry；dispatch.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0035",
+    "nodeId": "dispatch",
+    "question": "【按条件派发】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "dispatch.requirementIds；dispatch.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0036",
+    "nodeId": "prompts",
+    "question": "【自包含提示词】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "prompts.inputs；prompts.interface.emptyCases；prompts.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0037",
+    "nodeId": "prompts",
+    "question": "【自包含提示词】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "prompts.outputs；connections（from/to=prompts）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0038",
+    "nodeId": "prompts",
+    "question": "【自包含提示词】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "prompts.interface.boundaries；prompts.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0039",
+    "nodeId": "prompts",
+    "question": "【自包含提示词】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "prompts.interface.emptyCases；prompts.interface.errors；prompts.terminal.retry；failurePaths[fail-role]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0040",
+    "nodeId": "prompts",
+    "question": "【自包含提示词】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "prompts.validators；prompts.terminal.acceptance；prompts.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0041",
+    "nodeId": "prompts",
+    "question": "【自包含提示词】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "prompts.terminal.retry；prompts.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0042",
+    "nodeId": "prompts",
+    "question": "【自包含提示词】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "prompts.requirementIds；prompts.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0043",
+    "nodeId": "revision",
+    "question": "【修订与告知】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "revision.inputs；revision.interface.emptyCases；revision.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0044",
+    "nodeId": "revision",
+    "question": "【修订与告知】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "revision.outputs；connections（from/to=revision）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0045",
+    "nodeId": "revision",
+    "question": "【修订与告知】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "revision.authority；revision.interface.boundaries；revision.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0046",
+    "nodeId": "revision",
+    "question": "【修订与告知】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "revision.interface.emptyCases；revision.interface.errors；revision.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0047",
+    "nodeId": "revision",
+    "question": "【修订与告知】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "revision.validators；revision.terminal.acceptance；revision.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0048",
+    "nodeId": "revision",
+    "question": "【修订与告知】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "revision.terminal.retry；revision.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0049",
+    "nodeId": "revision",
+    "question": "【修订与告知】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "revision.requirementIds；revision.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0050",
+    "nodeId": "metrics",
+    "question": "【三项衡量】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "metrics.inputs；metrics.interface.emptyCases；metrics.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0051",
+    "nodeId": "metrics",
+    "question": "【三项衡量】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "metrics.outputs；connections（from/to=metrics）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0052",
+    "nodeId": "metrics",
+    "question": "【三项衡量】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "metrics.interface.boundaries；metrics.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0053",
+    "nodeId": "metrics",
+    "question": "【三项衡量】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "metrics.interface.emptyCases；metrics.interface.errors；metrics.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0054",
+    "nodeId": "metrics",
+    "question": "【三项衡量】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "metrics.validators；metrics.terminal.acceptance；metrics.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0055",
+    "nodeId": "metrics",
+    "question": "【三项衡量】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "metrics.terminal.retry；metrics.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0056",
+    "nodeId": "metrics",
+    "question": "【三项衡量】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "metrics.requirementIds；metrics.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0057",
+    "nodeId": "design",
+    "question": "【设计保障】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "design.inputs；design.interface.emptyCases；design.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0058",
+    "nodeId": "design",
+    "question": "【设计保障】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "design.outputs；connections（from/to=design）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0059",
+    "nodeId": "design",
+    "question": "【设计保障】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "design.authority；design.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0060",
+    "nodeId": "design",
+    "question": "【设计保障】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "design.interface.emptyCases；design.interface.errors",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0061",
+    "nodeId": "design",
+    "question": "【设计保障】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "design.validators；design.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0062",
+    "nodeId": "design",
+    "question": "【设计保障】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "design.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0063",
+    "nodeId": "design",
+    "question": "【设计保障】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "design.requirementIds；design.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0064",
+    "nodeId": "design-roles",
+    "question": "【设计角色】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "design-roles.inputs；design-roles.interface.emptyCases；design-roles.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0065",
+    "nodeId": "design-roles",
+    "question": "【设计角色】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "design-roles.outputs；connections（from/to=design-roles）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0066",
+    "nodeId": "design-roles",
+    "question": "【设计角色】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "design-roles.authority；design-roles.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0067",
+    "nodeId": "design-roles",
+    "question": "【设计角色】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "design-roles.interface.emptyCases；design-roles.interface.errors",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0068",
+    "nodeId": "design-roles",
+    "question": "【设计角色】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "design-roles.validators；design-roles.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0069",
+    "nodeId": "design-roles",
+    "question": "【设计角色】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "design-roles.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0070",
+    "nodeId": "design-roles",
+    "question": "【设计角色】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "design-roles.requirementIds；design-roles.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0071",
+    "nodeId": "role-D1",
+    "question": "【D1：负责人】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "role-D1.inputs；role-D1.interface.emptyCases；role-D1.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0072",
+    "nodeId": "role-D1",
+    "question": "【D1：负责人】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "role-D1.outputs；connections（from/to=role-D1）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0073",
+    "nodeId": "role-D1",
+    "question": "【D1：负责人】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "role-D1.interface.boundaries；role-D1.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0074",
+    "nodeId": "role-D1",
+    "question": "【D1：负责人】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "role-D1.interface.emptyCases；role-D1.interface.errors；role-D1.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0075",
+    "nodeId": "role-D1",
+    "question": "【D1：负责人】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "role-D1.validators；role-D1.terminal.acceptance；role-D1.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0076",
+    "nodeId": "role-D1",
+    "question": "【D1：负责人】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "role-D1.terminal.retry；role-D1.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0077",
+    "nodeId": "role-D1",
+    "question": "【D1：负责人】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "role-D1.requirementIds；role-D1.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0078",
+    "nodeId": "role-D2",
+    "question": "【D2：独立甲】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "role-D2.inputs；role-D2.interface.emptyCases；role-D2.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0079",
+    "nodeId": "role-D2",
+    "question": "【D2：独立甲】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "role-D2.outputs；connections（from/to=role-D2）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0080",
+    "nodeId": "role-D2",
+    "question": "【D2：独立甲】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "role-D2.interface.boundaries；role-D2.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0081",
+    "nodeId": "role-D2",
+    "question": "【D2：独立甲】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "role-D2.interface.emptyCases；role-D2.interface.errors；role-D2.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0082",
+    "nodeId": "role-D2",
+    "question": "【D2：独立甲】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "role-D2.validators；role-D2.terminal.acceptance；role-D2.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0083",
+    "nodeId": "role-D2",
+    "question": "【D2：独立甲】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "role-D2.terminal.retry；role-D2.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0084",
+    "nodeId": "role-D2",
+    "question": "【D2：独立甲】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "role-D2.requirementIds；role-D2.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0085",
+    "nodeId": "role-D3",
+    "question": "【D3：独立乙】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "role-D3.inputs；role-D3.interface.emptyCases；role-D3.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0086",
+    "nodeId": "role-D3",
+    "question": "【D3：独立乙】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "role-D3.outputs；connections（from/to=role-D3）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0087",
+    "nodeId": "role-D3",
+    "question": "【D3：独立乙】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "role-D3.interface.boundaries；role-D3.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0088",
+    "nodeId": "role-D3",
+    "question": "【D3：独立乙】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "role-D3.interface.emptyCases；role-D3.interface.errors；role-D3.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0089",
+    "nodeId": "role-D3",
+    "question": "【D3：独立乙】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "role-D3.validators；role-D3.terminal.acceptance；role-D3.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0090",
+    "nodeId": "role-D3",
+    "question": "【D3：独立乙】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "role-D3.terminal.retry；role-D3.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0091",
+    "nodeId": "role-D3",
+    "question": "【D3：独立乙】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "role-D3.requirementIds；role-D3.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0092",
+    "nodeId": "role-D4",
+    "question": "【D4：现实核查】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "role-D4.inputs；role-D4.interface.emptyCases；role-D4.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0093",
+    "nodeId": "role-D4",
+    "question": "【D4：现实核查】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "role-D4.outputs；connections（from/to=role-D4）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0094",
+    "nodeId": "role-D4",
+    "question": "【D4：现实核查】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "role-D4.interface.boundaries；role-D4.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0095",
+    "nodeId": "role-D4",
+    "question": "【D4：现实核查】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "role-D4.interface.emptyCases；role-D4.interface.errors；role-D4.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0096",
+    "nodeId": "role-D4",
+    "question": "【D4：现实核查】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "role-D4.validators；role-D4.terminal.acceptance；role-D4.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0097",
+    "nodeId": "role-D4",
+    "question": "【D4：现实核查】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "role-D4.terminal.retry；role-D4.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0098",
+    "nodeId": "role-D4",
+    "question": "【D4：现实核查】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "role-D4.requirementIds；role-D4.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0099",
+    "nodeId": "role-D5",
+    "question": "【D5：格式检查】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "role-D5.inputs；role-D5.interface.emptyCases；role-D5.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0100",
+    "nodeId": "role-D5",
+    "question": "【D5：格式检查】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "role-D5.outputs；connections（from/to=role-D5）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0101",
+    "nodeId": "role-D5",
+    "question": "【D5：格式检查】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "role-D5.interface.boundaries；role-D5.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0102",
+    "nodeId": "role-D5",
+    "question": "【D5：格式检查】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "role-D5.interface.emptyCases；role-D5.interface.errors；role-D5.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0103",
+    "nodeId": "role-D5",
+    "question": "【D5：格式检查】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "role-D5.validators；role-D5.terminal.acceptance；role-D5.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0104",
+    "nodeId": "role-D5",
+    "question": "【D5：格式检查】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "role-D5.terminal.retry；role-D5.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0105",
+    "nodeId": "role-D5",
+    "question": "【D5：格式检查】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "role-D5.requirementIds；role-D5.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0106",
+    "nodeId": "role-D6",
+    "question": "【D6：用户追问】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "role-D6.inputs；role-D6.interface.emptyCases；role-D6.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0107",
+    "nodeId": "role-D6",
+    "question": "【D6：用户追问】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "role-D6.outputs；connections（from/to=role-D6）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0108",
+    "nodeId": "role-D6",
+    "question": "【D6：用户追问】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "role-D6.interface.boundaries；role-D6.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0109",
+    "nodeId": "role-D6",
+    "question": "【D6：用户追问】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "role-D6.interface.emptyCases；role-D6.interface.errors；role-D6.terminal.retry；failurePaths[fail-freeze-explanation]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0110",
+    "nodeId": "role-D6",
+    "question": "【D6：用户追问】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "role-D6.validators；role-D6.terminal.acceptance；role-D6.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0111",
+    "nodeId": "role-D6",
+    "question": "【D6：用户追问】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "role-D6.terminal.retry；role-D6.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0112",
+    "nodeId": "role-D6",
+    "question": "【D6：用户追问】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "role-D6.requirementIds；role-D6.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0113",
+    "nodeId": "role-D7",
+    "question": "【D7：冷读开工】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "role-D7.inputs；role-D7.interface.emptyCases；role-D7.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0114",
+    "nodeId": "role-D7",
+    "question": "【D7：冷读开工】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "role-D7.outputs；connections（from/to=role-D7）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0115",
+    "nodeId": "role-D7",
+    "question": "【D7：冷读开工】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "role-D7.interface.boundaries；role-D7.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0116",
+    "nodeId": "role-D7",
+    "question": "【D7：冷读开工】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "role-D7.interface.emptyCases；role-D7.interface.errors；role-D7.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0117",
+    "nodeId": "role-D7",
+    "question": "【D7：冷读开工】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "role-D7.validators；role-D7.terminal.acceptance；role-D7.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0118",
+    "nodeId": "role-D7",
+    "question": "【D7：冷读开工】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "role-D7.terminal.retry；role-D7.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0119",
+    "nodeId": "role-D7",
+    "question": "【D7：冷读开工】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "role-D7.requirementIds；role-D7.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0120",
+    "nodeId": "role-D8",
+    "question": "【D8：逐步复述】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "role-D8.inputs；role-D8.interface.emptyCases；role-D8.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0121",
+    "nodeId": "role-D8",
+    "question": "【D8：逐步复述】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "role-D8.outputs；connections（from/to=role-D8）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0122",
+    "nodeId": "role-D8",
+    "question": "【D8：逐步复述】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "role-D8.interface.boundaries；role-D8.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0123",
+    "nodeId": "role-D8",
+    "question": "【D8：逐步复述】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "role-D8.interface.emptyCases；role-D8.interface.errors；role-D8.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0124",
+    "nodeId": "role-D8",
+    "question": "【D8：逐步复述】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "role-D8.validators；role-D8.terminal.acceptance；role-D8.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0125",
+    "nodeId": "role-D8",
+    "question": "【D8：逐步复述】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "role-D8.terminal.retry；role-D8.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0126",
+    "nodeId": "role-D8",
+    "question": "【D8：逐步复述】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "role-D8.requirementIds；role-D8.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0127",
+    "nodeId": "clarify",
+    "question": "【澄清与需求落图】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "clarify.inputs；clarify.interface.emptyCases；clarify.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0128",
+    "nodeId": "clarify",
+    "question": "【澄清与需求落图】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "clarify.outputs；connections（from/to=clarify）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0129",
+    "nodeId": "clarify",
+    "question": "【澄清与需求落图】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "clarify.interface.boundaries；clarify.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0130",
+    "nodeId": "clarify",
+    "question": "【澄清与需求落图】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "clarify.interface.emptyCases；clarify.interface.errors；clarify.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0131",
+    "nodeId": "clarify",
+    "question": "【澄清与需求落图】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "clarify.validators；clarify.terminal.acceptance；clarify.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0132",
+    "nodeId": "clarify",
+    "question": "【澄清与需求落图】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "clarify.terminal.retry；clarify.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0133",
+    "nodeId": "clarify",
+    "question": "【澄清与需求落图】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "clarify.requirementIds；clarify.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0134",
+    "nodeId": "gates",
+    "question": "【四项冻结关卡】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "gates.inputs；gates.interface.emptyCases；gates.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0135",
+    "nodeId": "gates",
+    "question": "【四项冻结关卡】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "gates.outputs；connections（from/to=gates）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0136",
+    "nodeId": "gates",
+    "question": "【四项冻结关卡】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "gates.authority；gates.interface.boundaries；gates.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0137",
+    "nodeId": "gates",
+    "question": "【四项冻结关卡】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "gates.interface.emptyCases；gates.interface.errors；gates.terminal.retry；failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0138",
+    "nodeId": "gates",
+    "question": "【四项冻结关卡】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "gates.validators；gates.terminal.acceptance；gates.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0139",
+    "nodeId": "gates",
+    "question": "【四项冻结关卡】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "gates.terminal.retry；gates.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0140",
+    "nodeId": "gates",
+    "question": "【四项冻结关卡】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "gates.requirementIds；gates.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0141",
+    "nodeId": "contract",
+    "question": "【九项冻结合同】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "contract.inputs；contract.interface.emptyCases；contract.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0142",
+    "nodeId": "contract",
+    "question": "【九项冻结合同】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "contract.outputs；connections（from/to=contract）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0143",
+    "nodeId": "contract",
+    "question": "【九项冻结合同】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "contract.authority；contract.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0144",
+    "nodeId": "contract",
+    "question": "【九项冻结合同】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "contract.interface.emptyCases；contract.interface.errors；failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0145",
+    "nodeId": "contract",
+    "question": "【九项冻结合同】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "contract.validators；contract.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0146",
+    "nodeId": "contract",
+    "question": "【九项冻结合同】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "contract.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0147",
+    "nodeId": "contract",
+    "question": "【九项冻结合同】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "contract.requirementIds；contract.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0148",
+    "nodeId": "contract-capability",
+    "question": "【能力与声明】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "contract-capability.inputs；contract-capability.interface.emptyCases；contract-capability.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0149",
+    "nodeId": "contract-capability",
+    "question": "【能力与声明】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "contract-capability.outputs；connections（from/to=contract-capability）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0150",
+    "nodeId": "contract-capability",
+    "question": "【能力与声明】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "contract-capability.interface.boundaries；contract-capability.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0151",
+    "nodeId": "contract-capability",
+    "question": "【能力与声明】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "contract-capability.interface.emptyCases；contract-capability.interface.errors；contract-capability.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0152",
+    "nodeId": "contract-capability",
+    "question": "【能力与声明】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "contract-capability.validators；contract-capability.terminal.acceptance；contract-capability.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0153",
+    "nodeId": "contract-capability",
+    "question": "【能力与声明】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "contract-capability.terminal.retry；contract-capability.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0154",
+    "nodeId": "contract-capability",
+    "question": "【能力与声明】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "contract-capability.requirementIds；contract-capability.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0155",
+    "nodeId": "contract-entry",
+    "question": "【正常入口与成品】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "contract-entry.inputs；contract-entry.interface.emptyCases；contract-entry.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0156",
+    "nodeId": "contract-entry",
+    "question": "【正常入口与成品】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "contract-entry.outputs；connections（from/to=contract-entry）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0157",
+    "nodeId": "contract-entry",
+    "question": "【正常入口与成品】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "contract-entry.interface.boundaries；contract-entry.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0158",
+    "nodeId": "contract-entry",
+    "question": "【正常入口与成品】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "contract-entry.interface.emptyCases；contract-entry.interface.errors；contract-entry.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0159",
+    "nodeId": "contract-entry",
+    "question": "【正常入口与成品】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "contract-entry.validators；contract-entry.terminal.acceptance；contract-entry.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0160",
+    "nodeId": "contract-entry",
+    "question": "【正常入口与成品】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "contract-entry.terminal.retry；contract-entry.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0161",
+    "nodeId": "contract-entry",
+    "question": "【正常入口与成品】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "contract-entry.requirementIds；contract-entry.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0162",
+    "nodeId": "contract-outcomes",
+    "question": "【成功失败与未知】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "contract-outcomes.inputs；contract-outcomes.interface.emptyCases；contract-outcomes.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0163",
+    "nodeId": "contract-outcomes",
+    "question": "【成功失败与未知】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "contract-outcomes.outputs；connections（from/to=contract-outcomes）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0164",
+    "nodeId": "contract-outcomes",
+    "question": "【成功失败与未知】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "contract-outcomes.interface.boundaries；contract-outcomes.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0165",
+    "nodeId": "contract-outcomes",
+    "question": "【成功失败与未知】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "contract-outcomes.interface.emptyCases；contract-outcomes.interface.errors；contract-outcomes.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0166",
+    "nodeId": "contract-outcomes",
+    "question": "【成功失败与未知】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "contract-outcomes.validators；contract-outcomes.terminal.acceptance；contract-outcomes.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0167",
+    "nodeId": "contract-outcomes",
+    "question": "【成功失败与未知】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "contract-outcomes.terminal.retry；contract-outcomes.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0168",
+    "nodeId": "contract-outcomes",
+    "question": "【成功失败与未知】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "contract-outcomes.requirementIds；contract-outcomes.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0169",
+    "nodeId": "contract-fidelity",
+    "question": "【证据真实度】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "contract-fidelity.inputs；contract-fidelity.interface.emptyCases；contract-fidelity.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0170",
+    "nodeId": "contract-fidelity",
+    "question": "【证据真实度】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "contract-fidelity.outputs；connections（from/to=contract-fidelity）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0171",
+    "nodeId": "contract-fidelity",
+    "question": "【证据真实度】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "contract-fidelity.interface.boundaries；contract-fidelity.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0172",
+    "nodeId": "contract-fidelity",
+    "question": "【证据真实度】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "contract-fidelity.interface.emptyCases；contract-fidelity.interface.errors；contract-fidelity.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0173",
+    "nodeId": "contract-fidelity",
+    "question": "【证据真实度】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "contract-fidelity.validators；contract-fidelity.terminal.acceptance；contract-fidelity.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0174",
+    "nodeId": "contract-fidelity",
+    "question": "【证据真实度】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "contract-fidelity.terminal.retry；contract-fidelity.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0175",
+    "nodeId": "contract-fidelity",
+    "question": "【证据真实度】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "contract-fidelity.requirementIds；contract-fidelity.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0176",
+    "nodeId": "contract-forbidden",
+    "question": "【禁止替代】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "contract-forbidden.inputs；contract-forbidden.interface.emptyCases；contract-forbidden.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0177",
+    "nodeId": "contract-forbidden",
+    "question": "【禁止替代】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "contract-forbidden.outputs；connections（from/to=contract-forbidden）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0178",
+    "nodeId": "contract-forbidden",
+    "question": "【禁止替代】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "contract-forbidden.interface.boundaries；contract-forbidden.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0179",
+    "nodeId": "contract-forbidden",
+    "question": "【禁止替代】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "contract-forbidden.interface.emptyCases；contract-forbidden.interface.errors；contract-forbidden.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0180",
+    "nodeId": "contract-forbidden",
+    "question": "【禁止替代】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "contract-forbidden.validators；contract-forbidden.terminal.acceptance；contract-forbidden.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0181",
+    "nodeId": "contract-forbidden",
+    "question": "【禁止替代】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "contract-forbidden.terminal.retry；contract-forbidden.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0182",
+    "nodeId": "contract-forbidden",
+    "question": "【禁止替代】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "contract-forbidden.requirementIds；contract-forbidden.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0183",
+    "nodeId": "contract-regression",
+    "question": "【已有能力保护】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "contract-regression.inputs；contract-regression.interface.emptyCases；contract-regression.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0184",
+    "nodeId": "contract-regression",
+    "question": "【已有能力保护】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "contract-regression.outputs；connections（from/to=contract-regression）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0185",
+    "nodeId": "contract-regression",
+    "question": "【已有能力保护】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "contract-regression.interface.boundaries；contract-regression.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0186",
+    "nodeId": "contract-regression",
+    "question": "【已有能力保护】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "contract-regression.interface.emptyCases；contract-regression.interface.errors；contract-regression.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0187",
+    "nodeId": "contract-regression",
+    "question": "【已有能力保护】冻结说明要求按“新能力／要修的真实问题／受影响的旧能力／冒烟集”报告回归用例分组时，R1–R7、S1各属于哪一类、各类分别多少个，四类是否允许重叠？",
+    "answerLocation": null,
+    "gap": "Blueprint要求D1在冻结说明中写四类分别数量，D6还要核对数量和分组；但固定的R1–R7、S1表没有group字段，也没有规定四类是互斥分组还是可重叠标签。R1–R3在同一用例内同时含“真实问题”与“新能力检查”，R7同时检查新安装能力与既有10插件/30技能，S1写成“新能力检查（保护旧行为）”，因此无法从Blueprint唯一推出四类归属和数量。相关冲突/缺失位置：role-D1.terminal.acceptance、role-D6.terminal.acceptance、contract-regression.terminal.mechanism、capability-check.terminal.acceptance。",
+    "impact": "D6无法客观核对冻结说明的回归分组，R2要求的“数量和分组与设计一致”没有唯一真值；用户批准前的说明验收会卡住。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0188",
+    "nodeId": "contract-regression",
+    "question": "【已有能力保护】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "contract-regression.terminal.retry；contract-regression.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0189",
+    "nodeId": "contract-regression",
+    "question": "【已有能力保护】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "contract-regression.requirementIds；contract-regression.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0190",
+    "nodeId": "contract-controls",
+    "question": "【三类控制例】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "contract-controls.inputs；contract-controls.interface.emptyCases；contract-controls.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0191",
+    "nodeId": "contract-controls",
+    "question": "【三类控制例】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "contract-controls.outputs；connections（from/to=contract-controls）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0192",
+    "nodeId": "contract-controls",
+    "question": "【三类控制例】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "contract-controls.interface.boundaries；contract-controls.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0193",
+    "nodeId": "contract-controls",
+    "question": "【三类控制例】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "contract-controls.interface.emptyCases；contract-controls.interface.errors；contract-controls.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0194",
+    "nodeId": "contract-controls",
+    "question": "【三类控制例】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "contract-controls.validators；contract-controls.terminal.acceptance；contract-controls.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0195",
+    "nodeId": "contract-controls",
+    "question": "【三类控制例】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "contract-controls.terminal.retry；contract-controls.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0196",
+    "nodeId": "contract-controls",
+    "question": "【三类控制例】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "contract-controls.requirementIds；contract-controls.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0197",
+    "nodeId": "contract-changes",
+    "question": "【交付修改与退回】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "contract-changes.inputs；contract-changes.interface.emptyCases；contract-changes.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0198",
+    "nodeId": "contract-changes",
+    "question": "【交付修改与退回】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "contract-changes.outputs；connections（from/to=contract-changes）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0199",
+    "nodeId": "contract-changes",
+    "question": "【交付修改与退回】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "contract-changes.interface.boundaries；contract-changes.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0200",
+    "nodeId": "contract-changes",
+    "question": "【交付修改与退回】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "contract-changes.interface.emptyCases；contract-changes.interface.errors；contract-changes.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0201",
+    "nodeId": "contract-changes",
+    "question": "【交付修改与退回】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "contract-changes.validators；contract-changes.terminal.acceptance；contract-changes.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0202",
+    "nodeId": "contract-changes",
+    "question": "【交付修改与退回】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "contract-changes.terminal.retry；contract-changes.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0203",
+    "nodeId": "contract-changes",
+    "question": "【交付修改与退回】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "contract-changes.requirementIds；contract-changes.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0204",
+    "nodeId": "contract-authorization",
+    "question": "【资源与授权】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "contract-authorization.inputs；contract-authorization.interface.emptyCases；contract-authorization.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0205",
+    "nodeId": "contract-authorization",
+    "question": "【资源与授权】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "contract-authorization.outputs；connections（from/to=contract-authorization）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0206",
+    "nodeId": "contract-authorization",
+    "question": "【资源与授权】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "contract-authorization.interface.boundaries；contract-authorization.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0207",
+    "nodeId": "contract-authorization",
+    "question": "【资源与授权】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "contract-authorization.interface.emptyCases；contract-authorization.interface.errors；contract-authorization.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0208",
+    "nodeId": "contract-authorization",
+    "question": "【资源与授权】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "contract-authorization.validators；contract-authorization.terminal.acceptance；contract-authorization.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0209",
+    "nodeId": "contract-authorization",
+    "question": "【资源与授权】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "contract-authorization.terminal.retry；contract-authorization.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0210",
+    "nodeId": "contract-authorization",
+    "question": "【资源与授权】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "contract-authorization.requirementIds；contract-authorization.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0211",
+    "nodeId": "freeze",
+    "question": "【批准与冻结交接】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "freeze.inputs；freeze.interface.emptyCases；freeze.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0212",
+    "nodeId": "freeze",
+    "question": "【批准与冻结交接】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "freeze.outputs；connections（from/to=freeze）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0213",
+    "nodeId": "freeze",
+    "question": "【批准与冻结交接】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "freeze.authority；freeze.interface.boundaries；freeze.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0214",
+    "nodeId": "freeze",
+    "question": "【批准与冻结交接】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "freeze.interface.emptyCases；freeze.interface.errors；freeze.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0215",
+    "nodeId": "freeze",
+    "question": "【批准与冻结交接】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "freeze.validators；freeze.terminal.acceptance；freeze.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0216",
+    "nodeId": "freeze",
+    "question": "【批准与冻结交接】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "freeze.terminal.retry；freeze.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0217",
+    "nodeId": "freeze",
+    "question": "【批准与冻结交接】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "freeze.requirementIds；freeze.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0218",
+    "nodeId": "q-checker",
+    "question": "【草稿与冻结检查】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "q-checker.inputs；q-checker.interface.emptyCases；q-checker.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0219",
+    "nodeId": "q-checker",
+    "question": "【草稿与冻结检查】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "q-checker.outputs；connections（from/to=q-checker）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0220",
+    "nodeId": "q-checker",
+    "question": "【草稿与冻结检查】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "q-checker.interface.boundaries；q-checker.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0221",
+    "nodeId": "q-checker",
+    "question": "【草稿与冻结检查】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "q-checker.interface.emptyCases；q-checker.interface.errors；q-checker.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0222",
+    "nodeId": "q-checker",
+    "question": "【草稿与冻结检查】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "q-checker.validators；q-checker.terminal.acceptance；q-checker.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0223",
+    "nodeId": "q-checker",
+    "question": "【草稿与冻结检查】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "q-checker.terminal.retry；q-checker.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0224",
+    "nodeId": "q-checker",
+    "question": "【草稿与冻结检查】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "q-checker.requirementIds；q-checker.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0225",
+    "nodeId": "q-inheritance",
+    "question": "【小修批准继承】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "q-inheritance.inputs；q-inheritance.interface.emptyCases；q-inheritance.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0226",
+    "nodeId": "q-inheritance",
+    "question": "【小修批准继承】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "q-inheritance.outputs；connections（from/to=q-inheritance）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0227",
+    "nodeId": "q-inheritance",
+    "question": "【小修批准继承】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "q-inheritance.interface.boundaries；q-inheritance.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0228",
+    "nodeId": "q-inheritance",
+    "question": "【小修批准继承】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "q-inheritance.interface.emptyCases；q-inheritance.interface.errors；q-inheritance.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0229",
+    "nodeId": "q-inheritance",
+    "question": "【小修批准继承】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "q-inheritance.validators；q-inheritance.terminal.acceptance；q-inheritance.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0230",
+    "nodeId": "q-inheritance",
+    "question": "【小修批准继承】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "q-inheritance.terminal.retry；q-inheritance.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0231",
+    "nodeId": "q-inheritance",
+    "question": "【小修批准继承】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "q-inheritance.requirementIds；q-inheritance.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0232",
+    "nodeId": "delivery",
+    "question": "【交付保障】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "delivery.inputs；delivery.interface.emptyCases；delivery.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0233",
+    "nodeId": "delivery",
+    "question": "【交付保障】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "delivery.outputs；connections（from/to=delivery）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0234",
+    "nodeId": "delivery",
+    "question": "【交付保障】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "delivery.authority；delivery.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0235",
+    "nodeId": "delivery",
+    "question": "【交付保障】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "delivery.interface.emptyCases；delivery.interface.errors",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0236",
+    "nodeId": "delivery",
+    "question": "【交付保障】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "delivery.validators；delivery.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0237",
+    "nodeId": "delivery",
+    "question": "【交付保障】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "delivery.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0238",
+    "nodeId": "delivery",
+    "question": "【交付保障】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "delivery.requirementIds；delivery.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0239",
+    "nodeId": "delivery-roles",
+    "question": "【交付角色】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "delivery-roles.inputs；delivery-roles.interface.emptyCases；delivery-roles.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0240",
+    "nodeId": "delivery-roles",
+    "question": "【交付角色】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "delivery-roles.outputs；connections（from/to=delivery-roles）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0241",
+    "nodeId": "delivery-roles",
+    "question": "【交付角色】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "delivery-roles.authority；delivery-roles.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0242",
+    "nodeId": "delivery-roles",
+    "question": "【交付角色】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "delivery-roles.interface.emptyCases；delivery-roles.interface.errors",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0243",
+    "nodeId": "delivery-roles",
+    "question": "【交付角色】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "delivery-roles.validators；delivery-roles.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0244",
+    "nodeId": "delivery-roles",
+    "question": "【交付角色】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "delivery-roles.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0245",
+    "nodeId": "delivery-roles",
+    "question": "【交付角色】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "delivery-roles.requirementIds；delivery-roles.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0246",
+    "nodeId": "role-X1",
+    "question": "【X1：负责人】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "role-X1.inputs；role-X1.interface.emptyCases；role-X1.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0247",
+    "nodeId": "role-X1",
+    "question": "【X1：负责人】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "role-X1.outputs；connections（from/to=role-X1）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0248",
+    "nodeId": "role-X1",
+    "question": "【X1：负责人】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "role-X1.interface.boundaries；role-X1.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0249",
+    "nodeId": "role-X1",
+    "question": "【X1：负责人】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "role-X1.interface.emptyCases；role-X1.interface.errors；role-X1.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0250",
+    "nodeId": "role-X1",
+    "question": "【X1：负责人】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "role-X1.validators；role-X1.terminal.acceptance；role-X1.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0251",
+    "nodeId": "role-X1",
+    "question": "【X1：负责人】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "role-X1.terminal.retry；role-X1.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0252",
+    "nodeId": "role-X1",
+    "question": "【X1：负责人】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "role-X1.requirementIds；role-X1.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0253",
+    "nodeId": "role-X2",
+    "question": "【X2：实现者】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "role-X2.inputs；role-X2.interface.emptyCases；role-X2.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0254",
+    "nodeId": "role-X2",
+    "question": "【X2：实现者】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "role-X2.outputs；connections（from/to=role-X2）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0255",
+    "nodeId": "role-X2",
+    "question": "【X2：实现者】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "role-X2.interface.boundaries；role-X2.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0256",
+    "nodeId": "role-X2",
+    "question": "【X2：实现者】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "role-X2.interface.emptyCases；role-X2.interface.errors；role-X2.terminal.retry；failurePaths[fail-premise,fail-calibration]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0257",
+    "nodeId": "role-X2",
+    "question": "【X2：实现者】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "role-X2.validators；role-X2.terminal.acceptance；role-X2.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0258",
+    "nodeId": "role-X2",
+    "question": "【X2：实现者】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "role-X2.terminal.retry；role-X2.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0259",
+    "nodeId": "role-X2",
+    "question": "【X2：实现者】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "role-X2.requirementIds；role-X2.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0260",
+    "nodeId": "role-X3",
+    "question": "【X3：独立验收】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "role-X3.inputs；role-X3.interface.emptyCases；role-X3.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0261",
+    "nodeId": "role-X3",
+    "question": "【X3：独立验收】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "role-X3.outputs；connections（from/to=role-X3）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0262",
+    "nodeId": "role-X3",
+    "question": "【X3：独立验收】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "role-X3.interface.boundaries；role-X3.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0263",
+    "nodeId": "role-X3",
+    "question": "【X3：独立验收】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "role-X3.interface.emptyCases；role-X3.interface.errors；role-X3.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0264",
+    "nodeId": "role-X3",
+    "question": "【X3：独立验收】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "role-X3.validators；role-X3.terminal.acceptance；role-X3.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0265",
+    "nodeId": "role-X3",
+    "question": "【X3：独立验收】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "role-X3.terminal.retry；role-X3.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0266",
+    "nodeId": "role-X3",
+    "question": "【X3：独立验收】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "role-X3.requirementIds；role-X3.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0267",
+    "nodeId": "role-X4",
+    "question": "【X4：专项检查】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "role-X4.inputs；role-X4.interface.emptyCases；role-X4.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0268",
+    "nodeId": "role-X4",
+    "question": "【X4：专项检查】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "role-X4.outputs；connections（from/to=role-X4）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0269",
+    "nodeId": "role-X4",
+    "question": "【X4：专项检查】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "role-X4.interface.boundaries；role-X4.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0270",
+    "nodeId": "role-X4",
+    "question": "【X4：专项检查】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "role-X4.interface.emptyCases；role-X4.interface.errors；role-X4.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0271",
+    "nodeId": "role-X4",
+    "question": "【X4：专项检查】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "role-X4.validators；role-X4.terminal.acceptance；role-X4.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0272",
+    "nodeId": "role-X4",
+    "question": "【X4：专项检查】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "role-X4.terminal.retry；role-X4.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0273",
+    "nodeId": "role-X4",
+    "question": "【X4：专项检查】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "role-X4.requirementIds；role-X4.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0274",
+    "nodeId": "role-X5",
+    "question": "【X5：专业裁判】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "role-X5.inputs；role-X5.interface.emptyCases；role-X5.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0275",
+    "nodeId": "role-X5",
+    "question": "【X5：专业裁判】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "role-X5.outputs；connections（from/to=role-X5）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0276",
+    "nodeId": "role-X5",
+    "question": "【X5：专业裁判】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "role-X5.interface.boundaries；role-X5.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0277",
+    "nodeId": "role-X5",
+    "question": "【X5：专业裁判】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "role-X5.interface.emptyCases；role-X5.interface.errors；role-X5.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0278",
+    "nodeId": "role-X5",
+    "question": "【X5：专业裁判】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "role-X5.validators；role-X5.terminal.acceptance；role-X5.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0279",
+    "nodeId": "role-X5",
+    "question": "【X5：专业裁判】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "role-X5.terminal.retry；role-X5.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0280",
+    "nodeId": "role-X5",
+    "question": "【X5：专业裁判】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "role-X5.requirementIds；role-X5.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0281",
+    "nodeId": "acceptance",
+    "question": "【验收资产分级】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "acceptance.inputs；acceptance.interface.emptyCases；acceptance.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0282",
+    "nodeId": "acceptance",
+    "question": "【验收资产分级】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "acceptance.outputs；connections（from/to=acceptance）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0283",
+    "nodeId": "acceptance",
+    "question": "【验收资产分级】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "acceptance.interface.boundaries；acceptance.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0284",
+    "nodeId": "acceptance",
+    "question": "【验收资产分级】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "acceptance.interface.emptyCases；acceptance.interface.errors；acceptance.terminal.retry；failurePaths[fail-semantic]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0285",
+    "nodeId": "acceptance",
+    "question": "【验收资产分级】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "acceptance.validators；acceptance.terminal.acceptance；acceptance.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0286",
+    "nodeId": "acceptance",
+    "question": "【验收资产分级】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "acceptance.terminal.retry；acceptance.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0287",
+    "nodeId": "acceptance",
+    "question": "【验收资产分级】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "acceptance.requirementIds；acceptance.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0288",
+    "nodeId": "calibration",
+    "question": "【验收器三类校准】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "calibration.inputs；calibration.interface.emptyCases；calibration.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0289",
+    "nodeId": "calibration",
+    "question": "【验收器三类校准】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "calibration.outputs；connections（from/to=calibration）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0290",
+    "nodeId": "calibration",
+    "question": "【验收器三类校准】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "calibration.interface.boundaries；calibration.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0291",
+    "nodeId": "calibration",
+    "question": "【验收器三类校准】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "calibration.interface.emptyCases；calibration.interface.errors；calibration.terminal.retry；failurePaths[fail-semantic,fail-calibration]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0292",
+    "nodeId": "calibration",
+    "question": "【验收器三类校准】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "calibration.validators；calibration.terminal.acceptance；calibration.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0293",
+    "nodeId": "calibration",
+    "question": "【验收器三类校准】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "calibration.terminal.retry；calibration.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0294",
+    "nodeId": "calibration",
+    "question": "【验收器三类校准】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "calibration.requirementIds；calibration.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0295",
+    "nodeId": "candidate",
+    "question": "【最终候选身份】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "candidate.inputs；candidate.interface.emptyCases；candidate.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0296",
+    "nodeId": "candidate",
+    "question": "【最终候选身份】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "candidate.outputs；connections（from/to=candidate）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0297",
+    "nodeId": "candidate",
+    "question": "【最终候选身份】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "candidate.authority；candidate.interface.boundaries；candidate.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0298",
+    "nodeId": "candidate",
+    "question": "【最终候选身份】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "candidate.interface.emptyCases；candidate.interface.errors；candidate.terminal.retry；failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0299",
+    "nodeId": "candidate",
+    "question": "【最终候选身份】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "candidate.validators；candidate.terminal.acceptance；candidate.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0300",
+    "nodeId": "candidate",
+    "question": "【最终候选身份】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "candidate.terminal.retry；candidate.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0301",
+    "nodeId": "candidate",
+    "question": "【最终候选身份】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "candidate.requirementIds；candidate.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0302",
+    "nodeId": "evidence",
+    "question": "【三态原始证据】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "evidence.inputs；evidence.interface.emptyCases；evidence.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0303",
+    "nodeId": "evidence",
+    "question": "【三态原始证据】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "evidence.outputs；connections（from/to=evidence）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0304",
+    "nodeId": "evidence",
+    "question": "【三态原始证据】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "evidence.authority；evidence.interface.boundaries；evidence.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0305",
+    "nodeId": "evidence",
+    "question": "【三态原始证据】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "evidence.interface.emptyCases；evidence.interface.errors；evidence.terminal.retry；failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0306",
+    "nodeId": "evidence",
+    "question": "【三态原始证据】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "evidence.validators；evidence.terminal.acceptance；evidence.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0307",
+    "nodeId": "evidence",
+    "question": "【三态原始证据】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "evidence.terminal.retry；evidence.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0308",
+    "nodeId": "evidence",
+    "question": "【三态原始证据】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "evidence.requirementIds；evidence.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0309",
+    "nodeId": "deviation",
+    "question": "【偏离和设计退回】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "deviation.inputs；deviation.interface.emptyCases；deviation.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0310",
+    "nodeId": "deviation",
+    "question": "【偏离和设计退回】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "deviation.outputs；connections（from/to=deviation）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0311",
+    "nodeId": "deviation",
+    "question": "【偏离和设计退回】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "deviation.interface.boundaries；deviation.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0312",
+    "nodeId": "deviation",
+    "question": "【偏离和设计退回】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "deviation.interface.emptyCases；deviation.interface.errors；deviation.terminal.retry；failurePaths[fail-premise]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0313",
+    "nodeId": "deviation",
+    "question": "【偏离和设计退回】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "deviation.validators；deviation.terminal.acceptance；deviation.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0314",
+    "nodeId": "deviation",
+    "question": "【偏离和设计退回】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "deviation.terminal.retry；deviation.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0315",
+    "nodeId": "deviation",
+    "question": "【偏离和设计退回】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "deviation.requirementIds；deviation.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0316",
+    "nodeId": "sign",
+    "question": "【亲读后唯一签发】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "sign.inputs；sign.interface.emptyCases；sign.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0317",
+    "nodeId": "sign",
+    "question": "【亲读后唯一签发】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "sign.outputs；connections（from/to=sign）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0318",
+    "nodeId": "sign",
+    "question": "【亲读后唯一签发】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "sign.authority；sign.interface.boundaries；sign.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0319",
+    "nodeId": "sign",
+    "question": "【亲读后唯一签发】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "sign.interface.emptyCases；sign.interface.errors；sign.terminal.retry；failurePaths[fail-candidate,fail-revocation]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0320",
+    "nodeId": "sign",
+    "question": "【亲读后唯一签发】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "sign.validators；sign.terminal.acceptance；sign.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0321",
+    "nodeId": "sign",
+    "question": "【亲读后唯一签发】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "sign.terminal.retry；sign.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0322",
+    "nodeId": "sign",
+    "question": "【亲读后唯一签发】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "sign.requirementIds；sign.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0323",
+    "nodeId": "packaging",
+    "question": "【同源分发】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "packaging.inputs；packaging.interface.emptyCases；packaging.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0324",
+    "nodeId": "packaging",
+    "question": "【同源分发】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "packaging.outputs；connections（from/to=packaging）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0325",
+    "nodeId": "packaging",
+    "question": "【同源分发】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "packaging.authority；packaging.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0326",
+    "nodeId": "packaging",
+    "question": "【同源分发】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "packaging.interface.emptyCases；packaging.interface.errors",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0327",
+    "nodeId": "packaging",
+    "question": "【同源分发】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "packaging.validators；packaging.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0328",
+    "nodeId": "packaging",
+    "question": "【同源分发】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "packaging.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0329",
+    "nodeId": "packaging",
+    "question": "【同源分发】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "packaging.requirementIds；packaging.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0330",
+    "nodeId": "source-layout",
+    "question": "【唯一源目录】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "source-layout.inputs；source-layout.interface.emptyCases；source-layout.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0331",
+    "nodeId": "source-layout",
+    "question": "【唯一源目录】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "source-layout.outputs；connections（from/to=source-layout）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0332",
+    "nodeId": "source-layout",
+    "question": "【唯一源目录】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "source-layout.interface.boundaries；source-layout.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0333",
+    "nodeId": "source-layout",
+    "question": "【唯一源目录】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "source-layout.interface.emptyCases；source-layout.interface.errors；source-layout.terminal.retry；failurePaths[fail-package]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0334",
+    "nodeId": "source-layout",
+    "question": "【唯一源目录】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "source-layout.validators；source-layout.terminal.acceptance；source-layout.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0335",
+    "nodeId": "source-layout",
+    "question": "【唯一源目录】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "source-layout.terminal.retry；source-layout.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0336",
+    "nodeId": "source-layout",
+    "question": "【唯一源目录】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "source-layout.requirementIds；source-layout.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0337",
+    "nodeId": "planning-entry",
+    "question": "【同源规划入口】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "planning-entry.inputs；planning-entry.interface.emptyCases；planning-entry.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0338",
+    "nodeId": "planning-entry",
+    "question": "【同源规划入口】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "planning-entry.outputs；connections（from/to=planning-entry）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0339",
+    "nodeId": "planning-entry",
+    "question": "【同源规划入口】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "planning-entry.interface.boundaries；planning-entry.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0340",
+    "nodeId": "planning-entry",
+    "question": "【同源规划入口】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "planning-entry.interface.emptyCases；planning-entry.interface.errors；planning-entry.terminal.retry；failurePaths[fail-package]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0341",
+    "nodeId": "planning-entry",
+    "question": "【同源规划入口】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "planning-entry.validators；planning-entry.terminal.acceptance；planning-entry.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0342",
+    "nodeId": "planning-entry",
+    "question": "【同源规划入口】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "planning-entry.terminal.retry；planning-entry.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0343",
+    "nodeId": "planning-entry",
+    "question": "【同源规划入口】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "planning-entry.requirementIds；planning-entry.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0344",
+    "nodeId": "execution-package",
+    "question": "【执行插件入口】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "execution-package.inputs；execution-package.interface.emptyCases；execution-package.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0345",
+    "nodeId": "execution-package",
+    "question": "【执行插件入口】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "execution-package.outputs；connections（from/to=execution-package）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0346",
+    "nodeId": "execution-package",
+    "question": "【执行插件入口】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "execution-package.interface.boundaries；execution-package.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0347",
+    "nodeId": "execution-package",
+    "question": "【执行插件入口】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "execution-package.interface.emptyCases；execution-package.interface.errors；execution-package.terminal.retry；failurePaths[fail-package]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0348",
+    "nodeId": "execution-package",
+    "question": "【执行插件入口】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "execution-package.validators；execution-package.terminal.acceptance；execution-package.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0349",
+    "nodeId": "execution-package",
+    "question": "【执行插件入口】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "execution-package.terminal.retry；execution-package.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0350",
+    "nodeId": "execution-package",
+    "question": "【执行插件入口】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "execution-package.requirementIds；execution-package.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0351",
+    "nodeId": "minimum",
+    "question": "【完整最小范围】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "minimum.inputs；minimum.interface.emptyCases；minimum.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0352",
+    "nodeId": "minimum",
+    "question": "【完整最小范围】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "minimum.outputs；connections（from/to=minimum）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0353",
+    "nodeId": "minimum",
+    "question": "【完整最小范围】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "minimum.interface.boundaries；minimum.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0354",
+    "nodeId": "minimum",
+    "question": "【完整最小范围】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "minimum.interface.emptyCases；minimum.interface.errors；minimum.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0355",
+    "nodeId": "minimum",
+    "question": "【完整最小范围】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "minimum.validators；minimum.terminal.acceptance；minimum.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0356",
+    "nodeId": "minimum",
+    "question": "【完整最小范围】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "minimum.terminal.retry；minimum.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0357",
+    "nodeId": "minimum",
+    "question": "【完整最小范围】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "minimum.requirementIds；minimum.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0358",
+    "nodeId": "capability-check",
+    "question": "【正常入口验收】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "capability-check.inputs；capability-check.interface.emptyCases；capability-check.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0359",
+    "nodeId": "capability-check",
+    "question": "【正常入口验收】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "capability-check.outputs；connections（from/to=capability-check）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0360",
+    "nodeId": "capability-check",
+    "question": "【正常入口验收】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "capability-check.interface.boundaries；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0361",
+    "nodeId": "capability-check",
+    "question": "【正常入口验收】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "capability-check.interface.emptyCases；capability-check.interface.errors；capability-check.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0362",
+    "nodeId": "capability-check",
+    "question": "【正常入口验收】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "capability-check.validators；capability-check.terminal.acceptance；capability-check.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0363",
+    "nodeId": "capability-check",
+    "question": "【正常入口验收】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "capability-check.terminal.retry；capability-check.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0364",
+    "nodeId": "capability-check",
+    "question": "【正常入口验收】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "capability-check.requirementIds；capability-check.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0365",
+    "nodeId": "web-later",
+    "question": "【网页端打包与验收】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "web-later.inputs；web-later.interface.emptyCases；web-later.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0366",
+    "nodeId": "web-later",
+    "question": "【网页端打包与验收】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "web-later.outputs；connections（from/to=web-later）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0367",
+    "nodeId": "web-later",
+    "question": "【网页端打包与验收】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "web-later.interface.boundaries；web-later.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0368",
+    "nodeId": "web-later",
+    "question": "【网页端打包与验收】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "web-later.interface.emptyCases；web-later.interface.errors；web-later.terminal.retry；failurePaths[fail-web-method]",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0369",
+    "nodeId": "web-later",
+    "question": "【网页端打包与验收】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "web-later.validators；web-later.terminal.acceptance；web-later.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0370",
+    "nodeId": "web-later",
+    "question": "【网页端打包与验收】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "web-later.terminal.retry；web-later.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0371",
+    "nodeId": "web-later",
+    "question": "【网页端打包与验收】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "web-later.requirementIds；web-later.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0372",
+    "nodeId": "q-capacity",
+    "question": "【市场容量调整】用户怎样进入这个组件，需要什么输入；输入缺失时下一步是否明确？",
+    "answerLocation": "q-capacity.inputs；q-capacity.interface.emptyCases；q-capacity.interface.format",
+    "gap": null,
+    "impact": "设计已给出入口、输入形状和缺输入处理，未发现会让用户卡住的额外缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0373",
+    "nodeId": "q-capacity",
+    "question": "【市场容量调整】这个组件产出什么，结果交给谁或由哪个后续组件消费？",
+    "answerLocation": "q-capacity.outputs；connections（from/to=q-capacity）",
+    "gap": null,
+    "impact": "设计已给出输出与连接关系，未发现接收方不明确的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0374",
+    "nodeId": "q-capacity",
+    "question": "【市场容量调整】涉及事实、状态、批准、签发或标准变化时，谁有权决定，冲突时以什么为准？",
+    "answerLocation": "q-capacity.interface.boundaries；q-capacity.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已给出职责边界或权威关系，未发现必须靠猜决定人的情况。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0375",
+    "nodeId": "q-capacity",
+    "question": "【市场容量调整】失败、缺输入、缺证据或对象身份不明时怎样处理，是否会把无法判断误写成完成？",
+    "answerLocation": "q-capacity.interface.emptyCases；q-capacity.interface.errors；q-capacity.terminal.retry",
+    "gap": null,
+    "impact": "设计已给出失败与缺证处理，未发现把失败或未知默认当成功的路径。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0376",
+    "nodeId": "q-capacity",
+    "question": "【市场容量调整】怎样验收这个组件，哪些条件不满足时绝不能算完成？",
+    "answerLocation": "q-capacity.validators；q-capacity.terminal.acceptance；q-capacity.interface.boundaries",
+    "gap": null,
+    "impact": "设计已给出验收器、完成条件或边界，未发现无法判定完成的问题。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0377",
+    "nodeId": "q-capacity",
+    "question": "【市场容量调整】中断、写入结果不明、状态异常或需要重试时怎样恢复，怎样避免重复副作用或采用过期结果？",
+    "answerLocation": "q-capacity.terminal.retry；q-capacity.interface.errors；writer.terminal.mechanism；state.terminal.mechanism",
+    "gap": null,
+    "impact": "设计已有统一恢复、状态回读和幂等/过期结果处理规则，未发现本组件额外恢复缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0378",
+    "nodeId": "q-capacity",
+    "question": "【市场容量调整】这个组件的实现或启用是否可能让已有能力、旧插件或既有职责变差，设计怎样发现并阻止这种退化？",
+    "answerLocation": "q-capacity.requirementIds；q-capacity.interface.boundaries；contract-regression.terminal.mechanism；capability-check.terminal.mechanism",
+    "gap": null,
+    "impact": "设计把旧能力保护、受影响回归和最终候选完整回归作为全局约束，未发现本组件有例外绕过。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0379",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明是否按Blueprint要求写出回归用例四类的分别数量，并让用户和D6能唯一核对分组？",
+    "answerLocation": "role-D1.terminal.acceptance；role-D6.terminal.acceptance；contract-regression.terminal.mechanism；freeze.terminal.mechanism",
+    "gap": "冻结说明第4节写了总数8、逐项R1–R7/S1，并指出其中有3条对应真实问题，但没有给出“新能力／要修的真实问题／受影响的旧能力／冒烟集”四类分别多少个。Blueprint本身又没有唯一分组映射，因此D6不能自行补算。",
+    "impact": "用户看不到完整的回归覆盖结构，D6也无法完成设计要求的数量与分组一致性核对。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0380",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明是否完整写明最终完整回归之后如果代码再次变化，必须重新把整套R1–R7、S1完整跑一遍？",
+    "answerLocation": "contract-regression.terminal.acceptance；capability-check.terminal.acceptance；capability-check.validators[v-regression-set].method.description",
+    "gap": "冻结说明只写“最终版本确定后再完整跑一遍”，没有写Blueprint明确规定的后续规则：这次最终完整运行之后只要代码再次变化，就要重新完整运行整套用例。",
+    "impact": "实现者可能在完整回归后继续改代码，却只做局部重跑或直接签发，使最终签发对象不再是完成整套回归的同一版本。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0381",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明对R5的输入、检查内容和判定者是否与Blueprint逐项一致，而不是把它弱化成“缺PDF/Markdown就停下”？",
+    "answerLocation": "contract-regression.terminal.mechanism（R5）；capability-check.terminal.acceptance（R5）；capability-check.validators[v-regression-set].method.description（R5）",
+    "gap": "冻结说明R5只写“没写导出成PDF还是Markdown，执行者停下列选项，不能自己选”。它漏掉固定输入中的关键约束“导出文件要能被不装任何软件的同事直接打开”，也漏掉每个选项必须说明对该约束的影响，以及由X5判断选项是否抓住这个选择的判定部分。",
+    "impact": "R5在用户唯一阅读的说明里变成更弱的用例；即使实现者列了两个格式但没有分析“直接打开”的影响，也可能被用户误以为符合冻结设计。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0382",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明是否把需要用户手动转交的各规划角色的精确模型档次与条件性说清楚？",
+    "answerLocation": "dispatch.terminal.mechanism（2.1角色档次表、2.3条件表）；role-D2.terminal.mechanism；role-D3.terminal.mechanism；role-D6.terminal.mechanism；role-D8.terminal.mechanism；role-X5.terminal.mechanism",
+    "gap": "冻结说明说明了D2、D3、D6、D8、X5都在GPT网页端并每轮最多转交一次，但没有明确D2/D3/X5为GPT Pro、D6/D8为GPT极高，也没有在同一处说明D3与X5是条件启用角色。",
+    "impact": "用户批准时对实际模型档次、费用/能力级别和需要手工转交的实际频率认识不完整；不过Blueprint本身能唯一决定后续派发，因此当前不阻塞实现。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q0383",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明是否说明D1或X1原长期线程彻底无法恢复时，用户需要明确指定替代线程并保留替换原因，而且两位负责人仍必须分开？",
+    "answerLocation": "writer.terminal.mechanism（负责人线程异常恢复）；dispatch.terminal.mechanism（D1/X1线程规则）",
+    "gap": "冻结说明写了“不自动新开或恢复对话”，但没有写Blueprint已经规定的异常恢复动作：原负责人线程确实无法恢复时，由用户明确指定接替线程，留下替换原因和授权引用，D1与X1仍保持分离。",
+    "impact": "极端线程丢失时，用户只看冻结说明会知道系统不会自动恢复，却不知道已经设计好的正确恢复动作；Blueprint本身有答案，因此不阻塞正常开工。",
+    "blocking": false,
+    "owner": "D1"
+  }
+]
