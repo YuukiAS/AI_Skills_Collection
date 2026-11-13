@@ -1,0 +1,32 @@
+{
+ "round": 6,
+ "reader_isolation": "single-thread-batch",
+ "judge": "D1",
+ "date": "2026-11-13",
+ "units": [
+  {
+   "subjectId": "fail-freeze-explanation-whole",
+   "textHash": "77f9dc6082e57146b899dda18f503045dae5508508d0868a7fb3078480e1a979",
+   "judgment": "correct-but-superseded",
+   "note": "复述与原意一致；因 D6 第 8 轮修改及读者指出的执行者主语、“逐组件追问”未解释，本单位文字将修改并下一轮重读。"
+  },
+  {
+   "subjectId": "wr-freeze",
+   "textHash": "2b8c51a64b55fbac475ac9acd054964a8c05f821bbeacd44dff0f848b004ce28",
+   "judgment": "correct-but-superseded",
+   "note": "复述与原意一致；因 D6 第 8 轮修改及读者指出的执行者主语、“逐组件追问”未解释，本单位文字将修改并下一轮重读。"
+  },
+  {
+   "subjectId": "wr-gates",
+   "textHash": "3cb9ff7a0f8f65a9d32b15b0111e8ddcd93e93f7eb41c0ab974f2a9bbafef787",
+   "judgment": "correct-but-superseded",
+   "note": "复述与原意一致；因 D6 第 8 轮修改及读者指出的执行者主语、“逐组件追问”未解释，本单位文字将修改并下一轮重读。"
+  },
+  {
+   "subjectId": "fail-freeze-explanation-step-1",
+   "textHash": "47383817f99135d407de2f9503f41de11b2e7fca13091eca5c398532bf4c1485",
+   "judgment": "correct-but-superseded",
+   "note": "复述与原意一致；因 D6 第 8 轮修改及读者指出的执行者主语、“逐组件追问”未解释，本单位文字将修改并下一轮重读。"
+  }
+ ]
+}
