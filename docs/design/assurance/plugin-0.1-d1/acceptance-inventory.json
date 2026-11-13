@@ -2,15 +2,15 @@
   "source": {
     "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
     "branch": "design/assurance-plugins-0.1-merged",
-    "head": "89c0aa9f8354d157d08b9e2ef86348355d5d1999",
+    "head": "9e5dc87fab6130fb4ad455eb9010fbae2ccbd774",
     "path": "docs/design/assurance/plugin-0.1-d1/blueprint.json",
-    "sha256": "ac7b0dde95f30d0bb26773e154c97bc13f6da63aae44e24fac39c9560d0d97e7",
+    "sha256": "81b012ec8fd7a2846d70cd40c3011e589708b9e12a3c7ead0c1c670525f19134",
     "working_tree_uncommitted": true
   },
   "counting": {
     "unit": "terminal.acceptance 中的每一条字符串，不拆句、不去重、不合并相同文字；顶层组件仅由节点树位置确定。",
     "function_classification": "未做功能分类，仅按顶层组件及用户给定 needs 值汇总。",
-    "acceptance_item_count": 311,
+    "acceptance_item_count": 317,
     "validator_object_count": 68,
     "warning": "验收条目数与 validators 对象数是两种口径，不能把条目数直接当冻结说明的验收器总数。",
     "needs": "needs 为本条的单值机械需求判断；明确需 X5 判断用 expert，需用户回答/批准用 user；不能归入单值时为 unclear 并逐项给原因。",
@@ -2111,8 +2111,8 @@
       "text": "**数量怎么定：** 不定固定数字，由覆盖规则决定，既不能少到漏掉新东西，也不追求大而全：\n- **每一项新能力至少一个用例**（新能力取自冻结合同第 1 项的能力清单）。"
     },
     {
-      "needs": "real-host",
-      "needs_reason": "验证真实问题先在旧版本复现、再由新版本通过，需要实际执行对应正常任务；不能由存在两份文字代替。",
+      "needs": "unclear",
+      "needs_reason": "已有可运行旧版本须实际复现；新插件允许回读公开历史原始记录；本条同时包含 real-host 与 file-check 两种条件，不默认要求不存在的旧版。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
@@ -2121,7 +2121,7 @@
       "node_title": "已有能力保护",
       "acceptance_index": 5,
       "source_pointer": "/nodes/1/children/3/children/5/terminal/acceptance/5",
-      "text": "**数量怎么定：** 不定固定数字，由覆盖规则决定，既不能少到漏掉新东西，也不追求大而全：\n- **每一个要修的真实问题一个用例。** 这类用例必须**先在旧版本上复现出问题**，再在新版本上通过；旧版本上复现不出来的，不能证明修好了什么，不计入。新能力在旧版本上本来就没有的，记“旧版本不具备”即可。"
+      "text": "**数量怎么定：** 不定固定数字，由覆盖规则决定，既不能少到漏掉新东西，也不追求大而全：\n- **每一个要修的真实问题一个用例。** 这类用例必须**先在旧版本上复现出问题**，再在新版本上通过；旧版本上复现不出来的，不能证明修好了什么，不计入。新能力在旧版本上本来就没有的，记“旧版本不具备”即可。 **新插件的旧表现：** 插件本身是新的、没有可运行的旧版本时，“要修的真实问题”可以用**本仓库公开的历史原始记录**证明旧表现，合同里必须给出记录的定位和它证明了什么；没有公开记录的，不算“要修的真实问题”，改记为新能力检查。已有可运行旧版本的插件，仍须在旧版本上实际复现。"
     },
     {
       "needs": "file-check",
@@ -2280,8 +2280,8 @@
       "text": "**谁负责（不新增角色）：**\n- **写用例集：** D1，在设计阶段写进合同；D6 在冻结前核对冻结说明里的用例数量和分组与设计一致。"
     },
     {
-      "needs": "real-host",
-      "needs_reason": "X2 动手修前在旧版本实际复现真实问题，必须取得原始输出，不能只列计划。",
+      "needs": "unclear",
+      "needs_reason": "X2 的旧问题复现义务附带新插件历史记录例外，验证方式随旧版是否存在而变，不能只指定 real-host。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
@@ -2290,7 +2290,7 @@
       "node_title": "已有能力保护",
       "acceptance_index": 18,
       "source_pointer": "/nodes/1/children/3/children/5/terminal/acceptance/18",
-      "text": "**谁负责（不新增角色）：**\n- **复现旧问题：** X2 在动手修之前，先在旧版本上跑“要修的真实问题”类用例，留下原始输出。"
+      "text": "**谁负责（不新增角色）：**\n- **复现旧问题：** X2 在动手修之前，先在旧版本上跑“要修的真实问题”类用例，留下原始输出。 **新插件的旧表现：** 插件本身是新的、没有可运行的旧版本时，“要修的真实问题”可以用**本仓库公开的历史原始记录**证明旧表现，合同里必须给出记录的定位和它证明了什么；没有公开记录的，不算“要修的真实问题”，改记为新能力检查。已有可运行旧版本的插件，仍须在旧版本上实际复现。"
     },
     {
       "needs": "unclear",
@@ -2317,6 +2317,45 @@
       "acceptance_index": 20,
       "source_pointer": "/nodes/1/children/3/children/5/terminal/acceptance/20",
       "text": "**谁负责（不新增角色）：**\n- **组织和判定：** X1 负责安排上面这些派发，亲自读每个用例的原始输出并逐条记录通过与否；最终候选上整份用例集全部通过，是 X1 签发的前提。"
+    },
+    {
+      "needs": "file-check",
+      "needs_reason": "对照合同确认 D1 已写定关键输入、期望与尺子，且执行者未自行选择语义内容。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
+      "top_component_id": "design",
+      "top_component_title": "设计保障",
+      "node_id": "contract-regression",
+      "node_title": "已有能力保护",
+      "acceptance_index": 21,
+      "source_pointer": "/nodes/1/children/3/children/5/terminal/acceptance/21",
+      "text": "**语义内容由 D1 在合同里写定：** 每个用例的关键输入内容（例如“缺的是哪一项选择”“发哪几条请求”）、期望和尺子都写在合同里，执行者不得自行选择。"
+    },
+    {
+      "needs": "file-check",
+      "needs_reason": "核对 X2 生成文件与合同描述、X1 首次运行前的逐项核对及哈希冻结记录；描述不够时应有 D1 退回记录。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
+      "top_component_id": "design",
+      "top_component_title": "设计保障",
+      "node_id": "contract-regression",
+      "node_title": "已有能力保护",
+      "acceptance_index": 22,
+      "source_pointer": "/nodes/1/children/3/children/5/terminal/acceptance/22",
+      "text": "**机械文件由 X2 按描述生成：** 示例任务的状态快照、示例文件等，由 X2 按合同描述写成文件；X1 在首次运行前逐条核对它们与描述一致，记录哈希后冻结。生成时不得改变描述中的语义内容；描述不够写成文件时，交回 D1。"
+    },
+    {
+      "needs": "unclear",
+      "needs_reason": "无可运行旧版的新插件需读公开历史记录及定位，已有旧版则仍须实际复现；两种验证条件不同，保留原分支。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
+      "top_component_id": "design",
+      "top_component_title": "设计保障",
+      "node_id": "contract-regression",
+      "node_title": "已有能力保护",
+      "acceptance_index": 23,
+      "source_pointer": "/nodes/1/children/3/children/5/terminal/acceptance/23",
+      "text": "**新插件的旧表现：** 插件本身是新的、没有可运行的旧版本时，“要修的真实问题”可以用**本仓库公开的历史原始记录**证明旧表现，合同里必须给出记录的定位和它证明了什么；没有公开记录的，不算“要修的真实问题”，改记为新能力检查。已有可运行旧版本的插件，仍须在旧版本上实际复现。"
     },
     {
       "top_component_id": "design",
@@ -2917,6 +2956,19 @@
       "text": "**组织和判定：** X1 负责安排上面这些派发，亲自读每个用例的原始输出并逐条记录通过与否；最终候选上整份用例集全部通过，是 X1 签发的前提。"
     },
     {
+      "needs": "file-check",
+      "needs_reason": "核对机械文件与合同描述，以及首次运行前 X1 逐条核对、记录哈希并冻结的文件记录。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
+      "top_component_id": "delivery",
+      "top_component_title": "交付保障",
+      "node_id": "role-X1",
+      "node_title": "X1：负责人",
+      "acceptance_index": 9,
+      "source_pointer": "/nodes/2/children/0/children/0/terminal/acceptance/9",
+      "text": "**机械文件由 X2 按描述生成：** 示例任务的状态快照、示例文件等，由 X2 按合同描述写成文件；X1 在首次运行前逐条核对它们与描述一致，记录哈希后冻结。生成时不得改变描述中的语义内容；描述不够写成文件时，交回 D1。"
+    },
+    {
       "top_component_id": "delivery",
       "top_component_title": "交付保障",
       "node_id": "role-X2",
@@ -2982,8 +3034,8 @@
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
-      "needs": "real-host",
-      "needs_reason": "X2 动手修之前须在旧版本实际复现真实问题，留下原始输出，不能只列计划。",
+      "needs": "unclear",
+      "needs_reason": "已有可运行旧版需实际复现；没有可运行旧版的新插件按公开历史定位证明，不能把一种验证方式推广到另一种。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "delivery",
@@ -2992,7 +3044,7 @@
       "node_title": "X2：实现者",
       "acceptance_index": 5,
       "source_pointer": "/nodes/2/children/0/children/1/terminal/acceptance/5",
-      "text": "**复现旧问题：** X2 在动手修之前，先在旧版本上跑“要修的真实问题”类用例，留下原始输出。"
+      "text": "**复现旧问题：** X2 在动手修之前，先在旧版本上跑“要修的真实问题”类用例，留下原始输出。 **新插件的旧表现：** 插件本身是新的、没有可运行的旧版本时，“要修的真实问题”可以用**本仓库公开的历史原始记录**证明旧表现，合同里必须给出记录的定位和它证明了什么；没有公开记录的，不算“要修的真实问题”，改记为新能力检查。已有可运行旧版本的插件，仍须在旧版本上实际复现。"
     },
     {
       "needs": "file-check",
@@ -3006,6 +3058,32 @@
       "acceptance_index": 6,
       "source_pointer": "/nodes/2/children/0/children/1/terminal/acceptance/6",
       "text": "**跑用例：** 脚本判的由 X2 跑。"
+    },
+    {
+      "needs": "file-check",
+      "needs_reason": "比较 X2 机械文件与 D1 已定描述，检查 X1 首次运行前核对及哈希冻结记录，语义不足时应交回 D1。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
+      "top_component_id": "delivery",
+      "top_component_title": "交付保障",
+      "node_id": "role-X2",
+      "node_title": "X2：实现者",
+      "acceptance_index": 7,
+      "source_pointer": "/nodes/2/children/0/children/1/terminal/acceptance/7",
+      "text": "**机械文件由 X2 按描述生成：** 示例任务的状态快照、示例文件等，由 X2 按合同描述写成文件；X1 在首次运行前逐条核对它们与描述一致，记录哈希后冻结。生成时不得改变描述中的语义内容；描述不够写成文件时，交回 D1。"
+    },
+    {
+      "needs": "unclear",
+      "needs_reason": "公开历史记录核对与旧版本实际复现是按插件条件选择的两种验证方式，本条无法压成单一 needs。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
+      "top_component_id": "delivery",
+      "top_component_title": "交付保障",
+      "node_id": "role-X2",
+      "node_title": "X2：实现者",
+      "acceptance_index": 8,
+      "source_pointer": "/nodes/2/children/0/children/1/terminal/acceptance/8",
+      "text": "**新插件的旧表现：** 插件本身是新的、没有可运行的旧版本时，“要修的真实问题”可以用**本仓库公开的历史原始记录**证明旧表现，合同里必须给出记录的定位和它证明了什么；没有公开记录的，不算“要修的真实问题”，改记为新能力检查。已有可运行旧版本的插件，仍须在旧版本上实际复现。"
     },
     {
       "top_component_id": "delivery",
@@ -3815,7 +3893,7 @@
     },
     {
       "needs": "file-check",
-      "needs_reason": "检查公开安全的示例输入、预存状态快照及旧版本当时记录；本条规定预备材料，实际用例运行逐条另列。",
+      "needs_reason": "核对本仓库公开历史记录定位与证明范围，以及 X2 生成和 X1 首次运行前核对冻结的材料记录。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "packaging",
@@ -3824,11 +3902,11 @@
       "node_title": "正常入口验收",
       "acceptance_index": 5,
       "source_pointer": "/nodes/3/children/4/terminal/acceptance/5",
-      "text": "本插件是新插件，“旧版本”指不用本插件时的现行做法；“要修的真实问题”取自本插件设计过程中实际发生、已有记录的问题，旧版本上的表现以当时的记录为准。所有用例都用公开、安全的示例任务，不含任何私有项目内容。示例任务的各阶段状态预先存成固定快照，每个用例从一个快照出发、一次输入、直接判断。"
+      "text": "本插件是新插件，没有可运行的旧版本，“要修的真实问题”的旧表现按第 6.3a 节用本仓库公开的历史记录证明，定位见下表“旧表现依据”。所有用例都用公开、安全的示例任务，不含任何私有项目内容。示例任务的状态快照由 X2 按下表描述生成，X1 首次运行前核对并冻结。"
     },
     {
       "needs": "unclear",
-      "needs_reason": "R1 同时要求 Claude Code/GPT Work 的真实下一步与脚本核对，以及 X5 读全文判用词；单一 needs 无法代表全部。",
+      "needs_reason": "R1 要在 Claude Code 和 GPT Work 处理固定 52 个单位，脚本核对下一步和提示词，X5 按全文未解释词零处判；同时涉及真实宿主与专业判断。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "packaging",
@@ -3837,11 +3915,11 @@
       "node_title": "正常入口验收",
       "acceptance_index": 6,
       "source_pointer": "/nodes/3/children/4/terminal/acceptance/6",
-      "text": "R1｜覆盖：新能力：给出下一步；问题：复述要转交几十条、给用户的文字夹杂英文｜输入：一个处在设计阶段、有 50 多个待复述单位的示例状态，分别在 Claude Code 和 GPT Work 里请负责人“继续”｜看什么（逐条判）：① 两边给出同一个正确的下一步（角色、档次、新开还是沿用、写回位置）；② D8 只生成一条合批提示词；③ 给用户看的文字里没有未加解释的英文术语和字段名（产品名、命令、路径除外）｜谁判：① ② 脚本；③ X5 按尺子读全文"
+      "text": "R1｜输入（D1 写定）：一个设计阶段的示例任务（给一个小型命令行工具加一个导出功能），四道关卡中只剩 D8 未做，待复述单位 52 个；分别在 Claude Code 和 GPT Work 里请负责人“继续”｜看什么（逐条判）：① 两边给出同一个下一步：角色 D8、档次 GPT 极高、新开对话、写回位置正确；② 只生成一条合批提示词，包含全部 52 个单位；③ 给用户看的文字里没有未加解释的英文术语和内部字段名（产品名、命令、路径、文件名除外）｜谁判：① ② 脚本；③ X5 读全文，按“每出现一个未解释的英文术语或字段名记一处，零处才过”判｜旧表现依据：② MERGE_DECISIONS 第 11 节（原设计每单位一个对话，用户需转交 53 条）；①③ 为新能力检查"
     },
     {
       "needs": "unclear",
-      "needs_reason": "R2 的说明由用户或 X5 判定，冻结身份由脚本核对；原文提供两种判定者而非唯一 needs。",
+      "needs_reason": "R2 尚未批准，说明由用户或 X5 逐条判断，批准请求与实际说明和设计身份由脚本核对；不能指定单一 needs 代替全部。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "packaging",
@@ -3850,11 +3928,11 @@
       "node_title": "正常入口验收",
       "acceptance_index": 7,
       "source_pointer": "/nodes/3/children/4/terminal/acceptance/7",
-      "text": "R2｜覆盖：新能力：正确冻结；问题：冻结说明写成审计报告｜输入：四道关卡齐全、用户已批准的示例状态，请 D1 写冻结说明并冻结｜看什么（逐条判）：① 冻结说明按第 6.4a 节十节骨架，正文无文件名和哈希，验收器与回归用例数量和设计一致；② 冻结记录按第 6.5 节生成，各身份一致｜谁判：① 用户或 X5 按第 6.4a 节逐条判；② 脚本"
+      "text": "R2｜输入（D1 写定）：同一示例任务，四道关卡都已通过、尚未请用户批准；请 D1 写冻结说明并发出批准请求｜看什么（逐条判）：① 冻结说明按第 6.4a 节十节骨架，正文没有文件名、路径和哈希，验收器个数与分类、回归用例个数与分组和设计一致；② 批准请求里写明说明的 `explanation_sha256` 和设计的 `snapshot_sha256`，且与实际文件一致｜谁判：① 用户或 X5 按第 6.4a 节逐条判；② 脚本｜旧表现依据：① 本仓库提交 `2965b008` 的第一版冻结说明（正文以哈希开头，缺验收器数量和下载说明），以及 MERGE_DECISIONS 第 20 节"
     },
     {
       "needs": "file-check",
-      "needs_reason": "SPEC 明确由脚本核对拒绝冻结及同时指出的两项原因，可运行脚本验证。",
+      "needs_reason": "R3 三个固定快照场景由脚本核对有效冻结的四个身份，以及缺 D7 和说明身份不一致时的各自拒绝结果。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "packaging",
@@ -3863,11 +3941,11 @@
       "node_title": "正常入口验收",
       "acceptance_index": 8,
       "source_pointer": "/nodes/3/children/4/terminal/acceptance/8",
-      "text": "R3｜覆盖：新能力：拒绝不合规冻结；问题：说明检查后被改动仍能批准｜输入：缺一道关卡结果、且冻结说明在 D6 检查后被改动的示例状态，请求冻结｜看什么（逐条判）：拒绝冻结，并同时指出缺哪道关卡、说明身份与 D6 检查的不一致｜谁判：脚本"
+      "text": "R3｜输入（D1 写定）：一个写好的场景，对同一示例任务的三个固定快照依次请求冻结：A 四关卡齐全、用户批准的说明身份与 D6 检查的一致；B 缺 D7 结果；C 用户批准的说明身份与 D6 检查过的不一致（说明检查后被改过）｜看什么（逐条判）：① A 生成冻结记录，`snapshot_sha256`、`explanation_sha256`、`bundle_sha256`、`semantic_hash` 都与第 6.5 节计算一致；② B 拒绝，并指出缺 D7；③ C 拒绝，并指出说明身份不一致、需 D6 重做说明检查｜谁判：脚本｜旧表现依据：③ MERGE_DECISIONS 第 22 节（说明原本没有身份，无法证明用户看到的就是检查过的那份）；①② 为新能力检查"
     },
     {
       "needs": "unclear",
-      "needs_reason": "R4 同时需脚本核对去向和 X5 判断改变完成定义的理由，不能只选其中一项。",
+      "needs_reason": "R4 同时需脚本核对阈值变更去向、对象错配和缺证据处理，X5 判断阈值修改理由，不能只取一种 needs。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "packaging",
@@ -3876,11 +3954,11 @@
       "node_title": "正常入口验收",
       "acceptance_index": 9,
       "source_pointer": "/nodes/3/children/4/terminal/acceptance/9",
-      "text": "R4｜覆盖：新能力：交付修复不改完成定义、签发正确对象｜输入：交付阶段的示例状态：一条放宽验收阈值的修改，一份证据对应 A 版本而待签发的是 B 版本，另一项缺原始证据｜看什么（逐条判）：① 放宽阈值被判为改变完成定义，退回 D1；② 验 A 交 B 拒绝签发；③ 缺原始证据记为“无法判断”｜谁判：脚本核对去向，X5 判①的理由"
+      "text": "R4｜输入（D1 写定）：交付阶段的示例状态，同时含三件事：一条把某验收器通过阈值从 0.95 改为 0.90 的修改；一份证据对应候选 A，而待签发的是候选 B；另一项判据没有原始证据｜看什么（逐条判）：① 阈值修改被判为改变完成定义，退回 D1；② 拒绝签发 B；③ 缺证据的判据记为“无法判断”，不签发｜谁判：① 的去向和 ② ③ 脚本；① 的理由 X5 判｜旧表现依据：新能力检查"
     },
     {
       "needs": "unclear",
-      "needs_reason": "R5 同时需脚本判断是否停下与 X5 判断选项是否需要设计决定，原文没有单一 needs。",
+      "needs_reason": "R5 脚本核对停下且未改代码，X5 判断 PDF 与 Markdown 选项是否抓住直接打开的选择，跨脚本与专业判断。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "packaging",
@@ -3889,11 +3967,11 @@
       "node_title": "正常入口验收",
       "acceptance_index": 10,
       "source_pointer": "/nodes/3/children/4/terminal/acceptance/10",
-      "text": "R5｜覆盖：问题：执行者遇到没写清的选择自己拍板｜输入：给执行端一份有一处产品或科学选择没写清的派发｜看什么（逐条判）：停下，列出选项交回负责人，不自己选｜谁判：脚本核对是否停下，X5 判选项是否真需设计方决定"
+      "text": "R5｜输入（D1 写定）：给执行端一份派发：为示例工具实现“导出报告”，但没写导出成 PDF 还是 Markdown，而派发里写明“导出文件要能被不装任何软件的同事直接打开”｜看什么（逐条判）：执行端停下，不实现；交回负责人，列出至少“PDF / Markdown”两个选项及各自对“直接打开”这一要求的影响｜谁判：脚本核对是否停下且未改代码；X5 判列出的选项是否抓住了这个选择｜旧表现依据：新能力检查"
     },
     {
       "needs": "file-check",
-      "needs_reason": "SPEC 明确由脚本核对状态恢复、记录保留、作废与重派提示词写入披露。",
+      "needs_reason": "R6 按固定的不可解析状态、已返回但缺结果文件的事件场景，由脚本核对恢复修订号、作废保留、重派披露及不索取无须用户的决定。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "packaging",
@@ -3902,11 +3980,11 @@
       "node_title": "正常入口验收",
       "acceptance_index": 11,
       "source_pointer": "/nodes/3/children/4/terminal/acceptance/11",
-      "text": "R6｜覆盖：新能力：状态恢复｜输入：一个损坏的状态文件，事件日志里有一条对不上的派发记录｜看什么（逐条判）：按第 1.3a 节恢复：该派发记作废、保留原记录、重派提示词列出原有写入；不涉及用户决定时不找用户｜谁判：脚本"
+      "text": "R6｜输入（D1 写定）：一个无法解析的状态文件；事件日志里有一条派发记为“已返回”，但对应结果文件不存在｜看什么（逐条判）：按第 1.3a 节恢复：新状态修订号接着基线；该派发记为作废，原记录保留；重派提示词列出原派发已在仓库留下的写入；不涉及冻结、批准、签发、撤回，所以不找用户｜谁判：脚本｜旧表现依据：新能力检查"
     },
     {
       "needs": "real-host",
-      "needs_reason": "需实际生成安装并在真实 ChatGPT 网页端新对话观察三项工作，源码和清单不能替代。",
+      "needs_reason": "R7 必须实际生成安装和在真实 ChatGPT 网页端完成三件事，X4 观察，X1 读原始对话。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "packaging",
@@ -3915,11 +3993,11 @@
       "node_title": "正常入口验收",
       "acceptance_index": 12,
       "source_pointer": "/nodes/3/children/4/terminal/acceptance/12",
-      "text": "R7｜覆盖：新能力：安装与网页端；受影响的旧能力：市场包｜输入：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出两个执行技能，资源可读；③ 网页端完成第 9.4 节三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读"
+      "text": "R7｜输入（D1 写定）：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读原始对话｜旧表现依据：新能力检查"
     },
     {
-      "needs": "real-host",
-      "needs_reason": "需要安装后的三个现有插件实际处理固定场景，观察是否升级及输出是否保持正常。",
+      "needs": "unclear",
+      "needs_reason": "S1 的三条固定请求需实际宿主执行，脚本查是否进入 Assurance，用户或 X5 判任务是否完成，含多个 needs。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "packaging",
@@ -3928,7 +4006,7 @@
       "node_title": "正常入口验收",
       "acceptance_index": 13,
       "source_pointer": "/nodes/3/children/4/terminal/acceptance/13",
-      "text": "S1｜覆盖：冒烟集｜输入：一个固定场景：用三个现有插件各发一条日常请求（写作类、工作流类、本仓库维护类）｜看什么（逐条判）：安装本插件后，这些请求不会被自动升级成 Assurance 流程，原有行为不变｜谁判：脚本核对是否触发，人看输出是否正常"
+      "text": "S1｜输入（D1 写定）：一个写好的场景，在装好本插件的环境里依次发三条日常请求：① 对 `writing-style` 发“把下面这段话改得更通顺：〈固定的一段 200 字左右中文说明文字〉”；② 对 `workflow-core` 发“看一下当前分支的状态，告诉我下一步”；③ 对 `ai-skills-core` 发“列出本仓库现有插件和它们的版本”｜看什么（逐条判）：① 三条请求都完成了所要求的事；② 没有任何一条被转进 Assurance 流程：没有创建 `docs/assurance/` 下的文件，输出里没有出现 D1–D8、X1–X5、冻结、派发等 Assurance 用语｜谁判：② 脚本；① 用户或 X5 判是否完成所要求的事｜旧表现依据：新能力检查（保护旧行为）"
     },
     {
       "needs": "unclear",
@@ -4088,31 +4166,31 @@
     {
       "top_component_id": "design",
       "top_component_title": "设计保障",
-      "file-check": 93,
-      "real-host": 34,
+      "file-check": 95,
+      "real-host": 32,
       "expert": 0,
       "user": 6,
-      "unclear": 4,
-      "total": 137
+      "unclear": 7,
+      "total": 140
     },
     {
       "top_component_id": "delivery",
       "top_component_title": "交付保障",
-      "file-check": 26,
-      "real-host": 18,
+      "file-check": 28,
+      "real-host": 17,
       "expert": 6,
       "user": 0,
-      "unclear": 5,
-      "total": 55
+      "unclear": 7,
+      "total": 58
     },
     {
       "top_component_id": "packaging",
       "top_component_title": "同源分发",
       "file-check": 21,
-      "real-host": 15,
+      "real-host": 14,
       "expert": 1,
       "user": 0,
-      "unclear": 6,
+      "unclear": 7,
       "total": 43
     }
   ],
@@ -4124,8 +4202,18 @@
     },
     {
       "node_id": "contract-regression",
+      "acceptance_index": 5,
+      "reason": "已有可运行旧版本须实际复现；新插件允许回读公开历史原始记录；本条同时包含 real-host 与 file-check 两种条件，不默认要求不存在的旧版。"
+    },
+    {
+      "node_id": "contract-regression",
       "acceptance_index": 14,
       "reason": "网站场景同时包括浏览器实际操作、机械断言及观感由人或 X5 判断；本条没有唯一 needs，不自行另定评分方案。"
+    },
+    {
+      "node_id": "contract-regression",
+      "acceptance_index": 18,
+      "reason": "X2 的旧问题复现义务附带新插件历史记录例外，验证方式随旧版是否存在而变，不能只指定 real-host。"
     },
     {
       "node_id": "contract-regression",
@@ -4133,9 +4221,24 @@
       "reason": "原文按用例分别指定 X2 脚本、X4 真实宿主、X5 专业判断或用户；分工规则本身跨多个 needs，不能自行指定一种替代全部。"
     },
     {
+      "node_id": "contract-regression",
+      "acceptance_index": 23,
+      "reason": "无可运行旧版的新插件需读公开历史记录及定位，已有旧版则仍须实际复现；两种验证条件不同，保留原分支。"
+    },
+    {
       "node_id": "contract-changes",
       "acceptance_index": 0,
       "reason": "该条涵盖验收资产语义、设计退回和用户专属决定；具体变化可能只需对照文件，也可能需用户决定，原文没有唯一验证场景。"
+    },
+    {
+      "node_id": "role-X2",
+      "acceptance_index": 5,
+      "reason": "已有可运行旧版需实际复现；没有可运行旧版的新插件按公开历史定位证明，不能把一种验证方式推广到另一种。"
+    },
+    {
+      "node_id": "role-X2",
+      "acceptance_index": 8,
+      "reason": "公开历史记录核对与旧版本实际复现是按插件条件选择的两种验证方式，本条无法压成单一 needs。"
     },
     {
       "node_id": "role-X5",
@@ -4170,22 +4273,27 @@
     {
       "node_id": "capability-check",
       "acceptance_index": 6,
-      "reason": "R1 同时要求 Claude Code/GPT Work 的真实下一步与脚本核对，以及 X5 读全文判用词；单一 needs 无法代表全部。"
+      "reason": "R1 要在 Claude Code 和 GPT Work 处理固定 52 个单位，脚本核对下一步和提示词，X5 按全文未解释词零处判；同时涉及真实宿主与专业判断。"
     },
     {
       "node_id": "capability-check",
       "acceptance_index": 7,
-      "reason": "R2 的说明由用户或 X5 判定，冻结身份由脚本核对；原文提供两种判定者而非唯一 needs。"
+      "reason": "R2 尚未批准，说明由用户或 X5 逐条判断，批准请求与实际说明和设计身份由脚本核对；不能指定单一 needs 代替全部。"
     },
     {
       "node_id": "capability-check",
       "acceptance_index": 9,
-      "reason": "R4 同时需脚本核对去向和 X5 判断改变完成定义的理由，不能只选其中一项。"
+      "reason": "R4 同时需脚本核对阈值变更去向、对象错配和缺证据处理，X5 判断阈值修改理由，不能只取一种 needs。"
     },
     {
       "node_id": "capability-check",
       "acceptance_index": 10,
-      "reason": "R5 同时需脚本判断是否停下与 X5 判断选项是否需要设计决定，原文没有单一 needs。"
+      "reason": "R5 脚本核对停下且未改代码，X5 判断 PDF 与 Markdown 选项是否抓住直接打开的选择，跨脚本与专业判断。"
+    },
+    {
+      "node_id": "capability-check",
+      "acceptance_index": 13,
+      "reason": "S1 的三条固定请求需实际宿主执行，脚本查是否进入 Assurance，用户或 X5 判任务是否完成，含多个 needs。"
     },
     {
       "node_id": "capability-check",
@@ -4194,7 +4302,7 @@
     }
   ],
   "download_scan": {
-    "scanned_string_count": 6981,
+    "scanned_string_count": 6995,
     "matched_string_count": 214,
     "matches": [
       {
@@ -4785,7 +4893,7 @@
         "terms": [
           "安装"
         ],
-        "excerpt": " 脚本判的由 X2 跑。；默认作者提交验收实现并真实区分三类样例。；实现者交实际源码和构建安装对象，X1选择。；每次交回声明差异、替代、未运行和缺证。"
+        "excerpt": "仍须在旧版本上实际复现。；默认作者提交验收实现并真实区分三类样例。；实现者交实际源码和构建安装对象，X1选择。；每次交回声明差异、替代、未运行和缺证。"
       },
       {
         "source_pointer": "/nodes/2/children/0/children/2/claims/0/text",
@@ -5105,18 +5213,20 @@
         "excerpt": "实际安装输入"
       },
       {
-        "source_pointer": "/nodes/3/children/4/validators/0/oracle/description",
-        "terms": [
-          "安装"
-        ],
-        "excerpt": "e Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口直接验证，不能以源码或单元结构检查替代。"
-      },
-      {
         "source_pointer": "/nodes/3/children/4/validators/0/method/description",
         "terms": [
-          "安装"
+          "安装",
+          "下载"
         ],
         "excerpt": "e Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口直接验证，不能以源码或单元结构检查替代。；安全相关检查由X3，开放专业判断由X5，X1最终亲读。；开发修复样例不冒充未见样例；最终批次不换题挑通过。；X4 在真实 ChatGPT 网页端上传包并新开一个对话：读取规划正文、至少一张角色卡及一份模板；按公开安全的示例任务状态生成正确的下一条完整提示词；按要求写回指定分支，无写权限时如实给出内容。；保留上述三件事的原始对话记录作为证据，由 X1 签发；只上传成功不"
+      },
+      {
+        "source_pointer": "/nodes/3/children/4/validators/1/method/description",
+        "terms": [
+          "下载",
+          "安装"
+        ],
+        "excerpt": "| ① 本仓库提交 `2965b008` 的第一版冻结说明（正文以哈希开头，缺验收器数量和下载说明），以及 MERGE_DECISIONS 第 20 节 |\n| R3 | 一个写好的场景，对同一示例任务的三个固定快照依次请求冻结：A 四关卡齐全、用户批准的说明身份与 D6 检查的一致；B 缺 D7 结果；C 用户批准的说明身份与 D6 检查过的不一致（说明检查后被改过） | ① A 生成冻结记录，`snapshot_sha256`、`explanation_sha256`、`bundle_sha256`、`semantic_"
       },
       {
         "source_pointer": "/nodes/3/children/4/claims/0/text",
@@ -5128,7 +5238,8 @@
       {
         "source_pointer": "/nodes/3/children/4/terminal/mechanism",
         "terms": [
-          "安装"
+          "安装",
+          "下载"
         ],
         "excerpt": "1直接取得最终产物与原始证据，按准则逐项签发；必要X4/X5提供专业观察 | 验A交B、旧安装包、只读摘要、证据失效、已触发必需X5而未启用时不得签发；取不到原始证据为无法判断 | 源码/构建/安装/真实对象分清，关键签发检查由最终对象直接通过 |\n| 中断、并发与修订可恢复 | 使用真实分支进行重复返回、状态并发和写入结果不明的恢复；小修/大改真实告知并回到正确负责人 | 过期结果覆盖、重复派发、越权改状态和未告知修订不能被当正常完成；不确定写入先回读 | 未受影响的获准工作继续，同一任务保留失败历史与资源边界 |\n| 安"
       },
@@ -5140,18 +5251,18 @@
         "excerpt": "e Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口直接验证，不能以源码或单元结构检查替代。"
       },
       {
+        "source_pointer": "/nodes/3/children/4/terminal/acceptance/7",
+        "terms": [
+          "下载"
+        ],
+        "excerpt": "据：① 本仓库提交 `2965b008` 的第一版冻结说明（正文以哈希开头，缺验收器数量和下载说明），以及 MERGE_DECISIONS 第 20 节"
+      },
+      {
         "source_pointer": "/nodes/3/children/4/terminal/acceptance/12",
         "terms": [
           "安装"
         ],
-        "excerpt": "R7｜覆盖：新能力：安装与网页端；受影响的旧能力：市场包｜输入：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出两个执行技能，资源可读；③ 网页端完成第 9.4 节三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读"
-      },
-      {
-        "source_pointer": "/nodes/3/children/4/terminal/acceptance/13",
-        "terms": [
-          "安装"
-        ],
-        "excerpt": "场景：用三个现有插件各发一条日常请求（写作类、工作流类、本仓库维护类）｜看什么（逐条判）：安装本插件后，这些请求不会被自动升级成 Assurance 流程，原有行为不变｜谁判：脚本核对是否触发，人看输出是否正常"
+        "excerpt": "R7｜输入（D1 写定）：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读原始对话｜旧表现依据：新能力检查"
       },
       {
         "source_pointer": "/nodes/3/children/5/claims/0/text",
@@ -5270,7 +5381,7 @@
         "terms": [
           "下载"
         ],
-        "excerpt": "、用户决定边界及未决范围隔离。 第 22 节补定说明身份、改动后 D6 说明检查失效及实际下载大小和用户授权依据。 第 23 节明确执行端按档次表运行、GPT Work 极高不得用 Codex 代替、X4 记录选择与手动执行角色每轮一条。 第 24 节补定回归用例集、按条覆盖与逐条判、开发中选择性重跑与最终完整重跑；本插件合并为 R1–R7、S1 共 8 个用例。"
+        "excerpt": "、用户决定边界及未决范围隔离。 第 22 节补定说明身份、改动后 D6 说明检查失效及实际下载大小和用户授权依据。 第 23 节明确执行端按档次表运行、GPT Work 极高不得用 Codex 代替、X4 记录选择与手动执行角色每轮一条。 第 24 节补定回归用例集、按条覆盖与逐条判、开发中选择性重跑与最终完整重跑；本插件合并为 R1–R7、S1 共 8 个用例。 第 25 节补定语义内容与机械文件的分工、新插件旧表现的公开历史依据，以及 R2 未批准起点、R3 三快照场景、R5 和 S1 固定输入与尺子。"
       },
       {
         "source_pointer": "/walkthroughs/1/exit",
@@ -5889,15 +6000,19 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/validators/0/method/description",
-          "excerpt": "定时不找用户｜谁判：脚本；R7｜覆盖：新能力：安装与网页端；受影响的旧能力：市场包｜输入：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出两个执行技能，资源可读；③ 网页端完成第 9.4 节三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读；S1｜覆盖：冒烟集｜输入：一个固定场景：用三个现有插件各发一条日常请求（写作类、工作流类、本仓库维护类）｜看什么（逐条判）：安装本插件后，这些请求不会"
+          "excerpt": "、签发、撤回，所以不找用户｜谁判：脚本｜旧表现依据：新能力检查；R7｜输入（D1 写定）：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读原始对话｜旧表现依据"
+        },
+        {
+          "source_pointer": "/nodes/3/children/4/validators/1/method/description",
+          "excerpt": "；不涉及冻结、批准、签发、撤回，所以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| S"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/mechanism",
-          "excerpt": "时不找用户 | 脚本 |\n| R7 | 新能力：安装与网页端；受影响的旧能力：市场包 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出两个执行技能，资源可读；③ 网页端完成第 9.4 节三件事 | ① ② 脚本；③ X4 观察、X1 亲读 |\n| S1 | 冒烟集 | 一个固定场景：用三个现有插件各发一条日常请求（写作类、工作流类、本仓库维护类） | 安装本插件后，这些请求不会被自动升级成 Assura"
+          "excerpt": "；不涉及冻结、批准、签发、撤回，所以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| S"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/acceptance/12",
-          "excerpt": "R7｜覆盖：新能力：安装与网页端；受影响的旧能力：市场包｜输入：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出两个执行技能，资源可读；③ 网页端完成第 9.4 节三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读"
+          "excerpt": "R7｜输入（D1 写定）：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读原始对话｜旧表现依据"
         },
         {
           "source_pointer": "/walkthroughs/1/exit",
@@ -5941,15 +6056,19 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/validators/0/method/description",
-          "excerpt": "定时不找用户｜谁判：脚本；R7｜覆盖：新能力：安装与网页端；受影响的旧能力：市场包｜输入：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出两个执行技能，资源可读；③ 网页端完成第 9.4 节三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读；S1｜覆盖：冒烟集｜输入：一个固定场景：用三个现有插件各发一条日常请求（写作类、工作流类、本仓库维护类）｜看什么（逐条判）：安装本插件后，这些请求不会"
+          "excerpt": "、签发、撤回，所以不找用户｜谁判：脚本｜旧表现依据：新能力检查；R7｜输入（D1 写定）：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读原始对话｜旧表现依据"
+        },
+        {
+          "source_pointer": "/nodes/3/children/4/validators/1/method/description",
+          "excerpt": "；不涉及冻结、批准、签发、撤回，所以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| S"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/mechanism",
-          "excerpt": "时不找用户 | 脚本 |\n| R7 | 新能力：安装与网页端；受影响的旧能力：市场包 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出两个执行技能，资源可读；③ 网页端完成第 9.4 节三件事 | ① ② 脚本；③ X4 观察、X1 亲读 |\n| S1 | 冒烟集 | 一个固定场景：用三个现有插件各发一条日常请求（写作类、工作流类、本仓库维护类） | 安装本插件后，这些请求不会被自动升级成 Assura"
+          "excerpt": "；不涉及冻结、批准、签发、撤回，所以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| S"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/acceptance/12",
-          "excerpt": "R7｜覆盖：新能力：安装与网页端；受影响的旧能力：市场包｜输入：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出两个执行技能，资源可读；③ 网页端完成第 9.4 节三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读"
+          "excerpt": "R7｜输入（D1 写定）：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读原始对话｜旧表现依据"
         },
         {
           "source_pointer": "/walkthroughs/1/exit",
@@ -6248,12 +6367,12 @@
           "excerpt": "让安装后的Codex技能只执行明确派发的职责。 必需信息缺失时，看到具体缺项、影响范围及接收方。"
         },
         {
-          "source_pointer": "/nodes/3/children/4/validators/0/oracle/description",
-          "excerpt": "期望由用户认可流程及本候选明确承诺确定；实现者输出不作真值。Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口直接验证，不能以源码或单元结构检查替代。"
-        },
-        {
           "source_pointer": "/nodes/3/children/4/validators/0/method/description",
           "excerpt": "逐项核对：Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口直接验证，不能以源码或单元结构检查替代。；安全相关检查由X3，开放专业判断由X5，X1最终亲读。；开发修复样例不冒充未见样例；最终批次不换题挑通过。；X4 在真实 ChatGPT 网页端上传包并新开一个对话：读取规划正文、至少一张角色卡及一份模板；按公开安全的示例任务状态生成正确的下一条完整提示词；按要求写回指"
+        },
+        {
+          "source_pointer": "/nodes/3/children/4/validators/1/method/description",
+          "excerpt": "小型命令行工具加一个导出功能），四道关卡中只剩 D8 未做，待复述单位 52 个；分别在 Claude Code 和 GPT Work 里请负责人“继续” | ① 两边给出同一个下一步：角色 D8、档次 GPT 极高、新开对话、写回位置正确；② 只生成一条合批提示词，包含全部 52 个单位；③ 给用户看的文字里没有未加解释的英文术语和内部字段名（产品名、命令、路径、文件名除外） | ① ② 脚本；③ X5 读全文，按“每出现一个未解释的英文术语或字段名记一处，零处才过”判 | ② MERGE_DECISIONS 第 11 节"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/mechanism",
@@ -6265,7 +6384,7 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/acceptance/6",
-          "excerpt": "给用户的文字夹杂英文｜输入：一个处在设计阶段、有 50 多个待复述单位的示例状态，分别在 Claude Code 和 GPT Work 里请负责人“继续”｜看什么（逐条判）：① 两边给出同一个正确的下一步（角色、档次、新开还是沿用、写回位置）；② D8 只生成一条合批提示词；③ 给用户看的文字里没有未加解释的英文术语和字段名（产品名、命令、路径除外）｜谁判：① ② 脚本；③ X5 按尺子读全文"
+          "excerpt": "小型命令行工具加一个导出功能），四道关卡中只剩 D8 未做，待复述单位 52 个；分别在 Claude Code 和 GPT Work 里请负责人“继续”｜看什么（逐条判）：① 两边给出同一个下一步：角色 D8、档次 GPT 极高、新开对话、写回位置正确；② 只生成一条合批提示词，包含全部 52 个单位；③ 给用户看的文字里没有未加解释的英文术语和内部字段名（产品名、命令、路径、文件名除外）｜谁判：① ② 脚本；③ X5 读全文，按“每出现一个未解释的英文术语或字段名记一处，零处才过”判｜旧表现依据：② MERGE_DECI"
         },
         {
           "source_pointer": "/connections/6/relationship",
@@ -6572,12 +6691,12 @@
           "excerpt": "让安装后的Codex技能只执行明确派发的职责。 必需信息缺失时，看到具体缺项、影响范围及接收方。"
         },
         {
-          "source_pointer": "/nodes/3/children/4/validators/0/oracle/description",
-          "excerpt": "期望由用户认可流程及本候选明确承诺确定；实现者输出不作真值。Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口直接验证，不能以源码或单元结构检查替代。"
-        },
-        {
           "source_pointer": "/nodes/3/children/4/validators/0/method/description",
           "excerpt": "逐项核对：Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口直接验证，不能以源码或单元结构检查替代。；安全相关检查由X3，开放专业判断由X5，X1最终亲读。；开发修复样例不冒充未见样例；最终批次不换题挑通过。；X4 在真实 ChatGPT 网页端上传包并新开一个对话：读取规划正文、至少一张角色卡及一份模板；按公开安全的示例任务状态生成正确的下一条完整提示词；按要求写回指"
+        },
+        {
+          "source_pointer": "/nodes/3/children/4/validators/1/method/description",
+          "excerpt": "小型命令行工具加一个导出功能），四道关卡中只剩 D8 未做，待复述单位 52 个；分别在 Claude Code 和 GPT Work 里请负责人“继续” | ① 两边给出同一个下一步：角色 D8、档次 GPT 极高、新开对话、写回位置正确；② 只生成一条合批提示词，包含全部 52 个单位；③ 给用户看的文字里没有未加解释的英文术语和内部字段名（产品名、命令、路径、文件名除外） | ① ② 脚本；③ X5 读全文，按“每出现一个未解释的英文术语或字段名记一处，零处才过”判 | ② MERGE_DECISIONS 第 11 节"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/mechanism",
@@ -6589,7 +6708,7 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/acceptance/6",
-          "excerpt": "给用户的文字夹杂英文｜输入：一个处在设计阶段、有 50 多个待复述单位的示例状态，分别在 Claude Code 和 GPT Work 里请负责人“继续”｜看什么（逐条判）：① 两边给出同一个正确的下一步（角色、档次、新开还是沿用、写回位置）；② D8 只生成一条合批提示词；③ 给用户看的文字里没有未加解释的英文术语和字段名（产品名、命令、路径除外）｜谁判：① ② 脚本；③ X5 按尺子读全文"
+          "excerpt": "小型命令行工具加一个导出功能），四道关卡中只剩 D8 未做，待复述单位 52 个；分别在 Claude Code 和 GPT Work 里请负责人“继续”｜看什么（逐条判）：① 两边给出同一个下一步：角色 D8、档次 GPT 极高、新开对话、写回位置正确；② 只生成一条合批提示词，包含全部 52 个单位；③ 给用户看的文字里没有未加解释的英文术语和内部字段名（产品名、命令、路径、文件名除外）｜谁判：① ② 脚本；③ X5 读全文，按“每出现一个未解释的英文术语或字段名记一处，零处才过”判｜旧表现依据：② MERGE_DECI"
         },
         {
           "source_pointer": "/connections/6/relationship",
@@ -6896,12 +7015,12 @@
           "excerpt": "让安装后的Codex技能只执行明确派发的职责。 必需信息缺失时，看到具体缺项、影响范围及接收方。"
         },
         {
-          "source_pointer": "/nodes/3/children/4/validators/0/oracle/description",
-          "excerpt": "期望由用户认可流程及本候选明确承诺确定；实现者输出不作真值。Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口直接验证，不能以源码或单元结构检查替代。"
-        },
-        {
           "source_pointer": "/nodes/3/children/4/validators/0/method/description",
           "excerpt": "逐项核对：Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口直接验证，不能以源码或单元结构检查替代。；安全相关检查由X3，开放专业判断由X5，X1最终亲读。；开发修复样例不冒充未见样例；最终批次不换题挑通过。；X4 在真实 ChatGPT 网页端上传包并新开一个对话：读取规划正文、至少一张角色卡及一份模板；按公开安全的示例任务状态生成正确的下一条完整提示词；按要求写回指"
+        },
+        {
+          "source_pointer": "/nodes/3/children/4/validators/1/method/description",
+          "excerpt": "小型命令行工具加一个导出功能），四道关卡中只剩 D8 未做，待复述单位 52 个；分别在 Claude Code 和 GPT Work 里请负责人“继续” | ① 两边给出同一个下一步：角色 D8、档次 GPT 极高、新开对话、写回位置正确；② 只生成一条合批提示词，包含全部 52 个单位；③ 给用户看的文字里没有未加解释的英文术语和内部字段名（产品名、命令、路径、文件名除外） | ① ② 脚本；③ X5 读全文，按“每出现一个未解释的英文术语或字段名记一处，零处才过”判 | ② MERGE_DECISIONS 第 11 节"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/mechanism",
@@ -6913,7 +7032,7 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/acceptance/6",
-          "excerpt": "给用户的文字夹杂英文｜输入：一个处在设计阶段、有 50 多个待复述单位的示例状态，分别在 Claude Code 和 GPT Work 里请负责人“继续”｜看什么（逐条判）：① 两边给出同一个正确的下一步（角色、档次、新开还是沿用、写回位置）；② D8 只生成一条合批提示词；③ 给用户看的文字里没有未加解释的英文术语和字段名（产品名、命令、路径除外）｜谁判：① ② 脚本；③ X5 按尺子读全文"
+          "excerpt": "小型命令行工具加一个导出功能），四道关卡中只剩 D8 未做，待复述单位 52 个；分别在 Claude Code 和 GPT Work 里请负责人“继续”｜看什么（逐条判）：① 两边给出同一个下一步：角色 D8、档次 GPT 极高、新开对话、写回位置正确；② 只生成一条合批提示词，包含全部 52 个单位；③ 给用户看的文字里没有未加解释的英文术语和内部字段名（产品名、命令、路径、文件名除外）｜谁判：① ② 脚本；③ X5 读全文，按“每出现一个未解释的英文术语或字段名记一处，零处才过”判｜旧表现依据：② MERGE_DECI"
         },
         {
           "source_pointer": "/connections/6/relationship",
@@ -6961,7 +7080,11 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/validators/0/method/description",
-          "excerpt": "业判断由X5，X1最终亲读。；开发修复样例不冒充未见样例；最终批次不换题挑通过。；X4 在真实 ChatGPT 网页端上传包并新开一个对话：读取规划正文、至少一张角色卡及一份模板；按公开安全的示例任务状态生成正确的下一条完整提示词；按要求写回指定分支，无写权限时如实给出内容。；保留上述三件事的原始对话记录作为证据，由 X1 签发；只上传成功不算通过。；本插件是新插件，“旧版本”指不用本插件时的现行做法；“要修的真实问题”取自本插件设计过程中实际发生、已有记录的问题，旧版本上的表现以当时的记录为准。所有用例都用公开、安全的示例"
+          "excerpt": "业判断由X5，X1最终亲读。；开发修复样例不冒充未见样例；最终批次不换题挑通过。；X4 在真实 ChatGPT 网页端上传包并新开一个对话：读取规划正文、至少一张角色卡及一份模板；按公开安全的示例任务状态生成正确的下一条完整提示词；按要求写回指定分支，无写权限时如实给出内容。；保留上述三件事的原始对话记录作为证据，由 X1 签发；只上传成功不算通过。；本插件是新插件，没有可运行的旧版本，“要修的真实问题”的旧表现按第 6.3a 节用本仓库公开的历史记录证明，定位见下表“旧表现依据”。所有用例都用公开、安全的示例任务，不含任何"
+        },
+        {
+          "source_pointer": "/nodes/3/children/4/validators/1/method/description",
+          "excerpt": "以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| S1 | 一个写好的场景，在装好本插"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/mechanism",
@@ -6973,7 +7096,7 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/acceptance/12",
-          "excerpt": "盖：新能力：安装与网页端；受影响的旧能力：市场包｜输入：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出两个执行技能，资源可读；③ 网页端完成第 9.4 节三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读"
+          "excerpt": "R7｜输入（D1 写定）：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读原始对话｜旧表现依据：新能力检查"
         },
         {
           "source_pointer": "/nodes/3/children/5/validators/0/method/description",
@@ -7021,7 +7144,11 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/validators/0/method/description",
-          "excerpt": "业判断由X5，X1最终亲读。；开发修复样例不冒充未见样例；最终批次不换题挑通过。；X4 在真实 ChatGPT 网页端上传包并新开一个对话：读取规划正文、至少一张角色卡及一份模板；按公开安全的示例任务状态生成正确的下一条完整提示词；按要求写回指定分支，无写权限时如实给出内容。；保留上述三件事的原始对话记录作为证据，由 X1 签发；只上传成功不算通过。；本插件是新插件，“旧版本”指不用本插件时的现行做法；“要修的真实问题”取自本插件设计过程中实际发生、已有记录的问题，旧版本上的表现以当时的记录为准。所有用例都用公开、安全的示例"
+          "excerpt": "业判断由X5，X1最终亲读。；开发修复样例不冒充未见样例；最终批次不换题挑通过。；X4 在真实 ChatGPT 网页端上传包并新开一个对话：读取规划正文、至少一张角色卡及一份模板；按公开安全的示例任务状态生成正确的下一条完整提示词；按要求写回指定分支，无写权限时如实给出内容。；保留上述三件事的原始对话记录作为证据，由 X1 签发；只上传成功不算通过。；本插件是新插件，没有可运行的旧版本，“要修的真实问题”的旧表现按第 6.3a 节用本仓库公开的历史记录证明，定位见下表“旧表现依据”。所有用例都用公开、安全的示例任务，不含任何"
+        },
+        {
+          "source_pointer": "/nodes/3/children/4/validators/1/method/description",
+          "excerpt": "以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| S1 | 一个写好的场景，在装好本插"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/mechanism",
@@ -7033,7 +7160,7 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/acceptance/12",
-          "excerpt": "盖：新能力：安装与网页端；受影响的旧能力：市场包｜输入：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出两个执行技能，资源可读；③ 网页端完成第 9.4 节三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读"
+          "excerpt": "R7｜输入（D1 写定）：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读原始对话｜旧表现依据：新能力检查"
         },
         {
           "source_pointer": "/nodes/3/children/5/validators/0/method/description",
