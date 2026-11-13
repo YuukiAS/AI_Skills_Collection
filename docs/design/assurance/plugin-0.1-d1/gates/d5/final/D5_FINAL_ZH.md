@@ -10,7 +10,7 @@
 | 分支 | `design/assurance-plugins-0.1-merged` |
 | 最新提交 | `37ff840b19e18aa39969dcf7a653c645b92ca75f` |
 | 仓库内路径 | `docs/design/assurance/plugin-0.1-d1/blueprint.json` |
-| 本机来源 | `/users/a/e/aereinh/AISC-wt-assurance-merged` |
+| 本机来源 | `~/AISC-wt-assurance-merged` |
 | 工作目录副本 | `blueprint.json` |
 | 文件字节数 | 1155256 |
 | SHA-256 | `7bf8744cbcab1b72c53ba9eba574405f7766e422ee28cd60089f7eec0587bb66` |
@@ -57,13 +57,13 @@
 
 ## 在线草稿检查
 
-检查器目录为 `/users/a/e/aereinh/BP-wt-draft-check/content`，分支为 `fix/draft-check-tier-20261111`，提交为 `529bbde9b7d0ae9d2be7084fff2b34d9e4a6af1e`。执行命令如下。
+检查器目录为 `~/BP-wt-draft-check/content`，分支为 `fix/draft-check-tier-20261111`，提交为 `529bbde9b7d0ae9d2be7084fff2b34d9e4a6af1e`。执行命令如下。
 
 ```bash
-cd /users/a/e/aereinh/BP-wt-draft-check/content
+cd ~/BP-wt-draft-check/content
 module load nodejs/24.16.0
-BLUEPRINT_SOURCE_ROOTS='YuukiAS/AI_Skills_Collection=/users/a/e/aereinh/AI_Skills_Collection' \
-npx tsx check.mjs --stage draft /users/a/e/aereinh/Asteria-Workspace/codex-runs/d5-assurance/blueprint.json
+BLUEPRINT_SOURCE_ROOTS='YuukiAS/AI_Skills_Collection=~/AI_Skills_Collection' \
+npx tsx check.mjs --stage draft <本机D5工作目录>/blueprint.json
 ```
 
 来源根沿用上次 `D5_REPORT.md` 的命令。该命令未显式设置 `BLOBS`，当前检查器也无此环境变量入口，本次沿用原入口执行 GitHub blob 在线身份核实。检查以 `live` 模式完成，时间为 `2026-11-13T14:37:07.581Z`。
@@ -87,7 +87,7 @@ npx tsx check.mjs --stage draft /users/a/e/aereinh/Asteria-Workspace/codex-runs/
 | `failure-count` | 1 |
 | `support-review` | 47 |
 
-机器报告位于 `/users/a/e/aereinh/BP-wt-draft-check/content/.cache/content-report.json`，本次副本保存在 `/tmp/d5-final-content-report.json`，完整终端输出保存在 `/tmp/d5-final-check.log`。人审条目逐项内容见机器报告的 `files[0].reviews`。
+机器报告位于 `~/BP-wt-draft-check/content/.cache/content-report.json`，本次副本保存在 `/tmp/d5-final-content-report.json`，完整终端输出保存在 `/tmp/d5-final-check.log`。人审条目逐项内容见机器报告的 `files[0].reviews`。
 
 ## 文件边界
 
