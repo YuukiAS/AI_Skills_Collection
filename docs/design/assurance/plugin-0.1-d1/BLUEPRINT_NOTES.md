@@ -1485,3 +1485,95 @@ npx tsx check.mjs --stage draft "$CHECK_INPUT"
 ```
 
 本轮没有需要新增设计选择的事项。只修改指定工作树的 JSON 并追加本说明，另重新生成 D5 目录验收清单；SPEC、MERGE_DECISIONS、冻结说明正文、流程文档和 A 原稿均未改。未 commit、未 push、未切分支。新 JSON、整份说明和清单按用户指定正则自查，公开信息匹配数均为零。
+
+
+## 2026-11-13：第 24 节回归用例集、8 个合并用例与责任分工
+
+本轮按用户重新给定的任务从干净工作树开始。分支为 `design/assurance-plugins-0.1-merged`，起始 HEAD 为 `147cbc682a1562d26858f8124f6ff46f2586aeda`，包含 `ceae6af3` 及合并用例、选择性重跑的后续修改。核对原文时 D1 将 HEAD 推进到 `19417de42af27dc6c9427dc3eac2f4e62df78881`，新增第 6.3a 节的责任分工；已完整补读并同步，以这个实际提交为最终出处。D1 的来源更新不是本执行者创建的提交。依据为 `SPEC.md` 第 6.3 节第 6 项、第 6.3a 节、第 6.4a 节第 4 项、第 10.2a 节，以及 `MERGE_DECISIONS.md` 第 24 节。用例采用最终的 R1–R7、S1 共 8 个，未沿用早期 15 个的版本。
+
+### 写入的设计
+
+- `contract-regression`：完整写入第 6.3a 节原文；接口与验收条目同步五要素、按覆盖条目定数量、自然合并且逐条判、旧版本先复现、冻结后只追加、失败即未完成、写错用例交回 D1，以及软件、网站、分析任务使用固定场景。开发中只重跑失败和受影响用例；最终候选在同一版本完整跑一遍，之后再改代码就再完整跑一遍。责任分工沿用原文：D1 写，D6 核对说明，X2 复现旧问题和跑脚本，X4 做真实宿主操作，X5 或用户按规定判断，X1 组织、亲读原始输出并逐条记录。不新增角色。
+- `freeze`：更新九项合同表第 6 项；冻结说明第 4 节按原文补回归用例总数、四类分组、逐用例的输入、看什么、谁判和全部通过的规则。`role-D1` 同步说明要求；`role-D6`、`gates`、`freeze` 中重复的 D6 检查说明与验收条目统一包含“回归用例的数量和分组与设计一致”，并纳入既有说明检查，不改说明身份及失效规则。
+- `capability-check`：完整写入第 10.2a 节及其八行用例，逐行保留覆盖、输入、观察和判定人；同步责任分工与重跑规则。仅新增一个验收器 `v-regression-set`，名称“回归用例集全部通过”，独立期望指向上述提交的 `SPEC.md` 第 10.2a 节，要求 8 个用例的全部检查条目通过、失败或无法判断或未执行条目为 0。`environment` 为 `real`；`runner` 与该节点已有验收器的 `one-human-action` 对象完全一致。
+- `sign`：补上“回归用例集全部通过是签发前提”，以及 X1 安排派发、亲读每个用例原始输出并逐条记录的原文。十三项签发清单保留。
+
+以上实质改动涉及 7 个节点。其余差异仅将引用合并稿的出处提交号更新到当前 HEAD；固定的上游检查器提交及历史来源不变。通用回归规则已完整位于 `contract-regression`，`contract-controls` 的三类控制例职责没有变化。没有新建节点、改连接、追加冻结历史或产生验收运行记录。
+
+### 复述单位及 technical 字段
+
+本轮修改的单位共 6 个：`wb-capability`、`wr-gates`、`wr-freeze`、`wr-sign`、`fail-freeze-explanation-whole`、`fail-freeze-explanation-step-1`。没有新增单位，其余 54 个单位的读者文字保持原样；使用检查器的 `readerHash` 与 HEAD 原稿逐一比较，变化集合与上述清单完全一致。
+
+`wb-capability` 的 `action`、`expectedResult`、`onError` 写明八个用例逐条判、最终完整运行、开发中选择性重跑和最终运行后再改代码的处理；`wr-sign.action` 加全部回归通过的前提。`wr-gates.action`、`wr-freeze.action` 和冻结说明失败路径的两个单位 `action`，只在已有 D6 说明检查中补回归用例数量和分组。失败路径继续使用 `fail-freeze-explanation`，没有新增路径。
+
+为同步已定规则，本轮修改的复述单位 `technical` 字段逐项为：
+
+- `wb-capability.technical.action`
+- `wb-capability.technical.expectedResult`
+- `wr-gates.technical.action`
+- `wr-freeze.technical.action`
+- `wr-sign.technical.action`
+- `fail-freeze-explanation-whole.technical.action`
+- `fail-freeze-explanation-whole.technical.exampleData`
+- `fail-freeze-explanation-step-1.technical.action`
+- `fail-freeze-explanation-step-1.technical.exampleData`
+
+此外，`fail-freeze-explanation.technical.situation` 和 `.handling` 同步回归数量分组不一致的失败情形和交回 D1 的处理；对应失败验收器的注入情景也与该路径保持一致。没有仅为术语改写而改动其他 technical 字段。
+
+### 数量与验收清单
+
+节点 54、需求 14、连接 51、正常走查 4 条及其步骤 23 个、失败路径 13 条及其步骤 24 个、失败路径整体解释 13 个、复述单位总数 60、证据 12，均未变化。`versions` 仍为空数组。验收器对象从 67 增至 68，均保持 `not-run`、`runs: []`；本轮没有实际执行插件回归用例。
+
+| environment | 修改前 | 修改后 |
+| --- | ---: | ---: |
+| real | 48 | 49 |
+| source | 17 | 17 |
+| built | 1 | 1 |
+| installed | 1 | 1 |
+| 合计 | 67 | 68 |
+
+已重新生成 D5 输出目录中的 `acceptance-inventory.json`，逐节点、逐字符串提取 `terminal.acceptance`，保留原文和定位；条目从 272 增至 305。这与 68 个验收器对象是不同口径。下面只按顶层组件和既定 `needs` 值汇总，没有替 D1 做功能分类：
+
+| 顶层组件 | file-check | real-host | expert | user | unclear | 合计 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 共用任务协议 | 44 | 24 | 0 | 8 | 0 | 76 |
+| 设计保障 | 92 | 34 | 0 | 6 | 4 | 136 |
+| 交付保障 | 25 | 15 | 6 | 0 | 4 | 50 |
+| 同源分发 | 21 | 15 | 1 | 0 | 6 | 43 |
+
+`unclear` 共 14 条，均在清单里逐条说明：例如同一合并用例同时要求脚本与 X5，或允许用户与 X5 二选一，不能机械指定一个需要来代表全部。这是清单的单值标注限制，不是新增设计问题。下载清单仍为 11 项；实际大小未记录的继续标“大小未记录”，没有据此声称不存在单项超过 100 MB 的依赖。通用场景里的软件、模型、镜像等例子不当作本插件新增的具体下载要求；首次下载或安装前记录实际大小、超过阈值先经用户授权的规则保留。
+
+### 草稿检查
+
+检查器 HEAD 为 `529bbde9b7d0ae9d2be7084fff2b34d9e4a6af1e`，只读运行。先执行 `module load nodejs/24.16.0`，在检查器的 `content/` 目录运行最终检查：
+
+```sh
+module load nodejs/24.16.0
+npx tsx check.mjs --stage draft --offline .cache/d5-regression-set-8/blueprint.json
+npx tsx check.mjs --stage draft .cache/d5-regression-set-8/blueprint.json
+```
+
+因为检查器从 Blueprint 同目录读取读者文件，缓存目录里的 `blueprint.json` 是本工作树新文件的符号链接；`readability-review.json`、`questions.json` 分别链接到用户指定 D5 输出目录中的原文件。已核对目标和字节，没有改写这些输入，也没有覆盖 D5 目录里原有的 Blueprint 副本。
+
+| 最终检查 | checkedAt（UTC） | 退出码 | reader-current-hash | 其他 errors | unresolved | reviews |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| 离线 | 2026-11-13T12:38:51.043Z | 1 | 13 | 0 | 1 | 92 |
+| 在线 | 2026-11-13T12:38:54.373Z | 1 | 13 | 0 | 0 | 92 |
+
+指定读者记录对当前文字缺少匹配通过记录的 13 个单位，已与本轮改动分开核对：
+
+- 本轮改过的 6 个：`wb-capability`、`wr-gates`、`wr-freeze`、`wr-sign`、`fail-freeze-explanation-whole`、`fail-freeze-explanation-step-1`。文字哈希变化按用户要求列为预期，不能复用旧通过记录。
+- 本轮未改过、但在开始时就与指定记录不匹配的 7 个：`ws-dispatch`、`ws-prompts`、`fail-role-whole`、`fail-role-step-1`、`fail-role-step-2`、`fail-recovery-whole`、`fail-recovery-step-1`。
+- 开始时合计已有 11 个不匹配单位：`ws-dispatch`、`ws-prompts`、`wr-gates`、`wr-freeze`、`fail-role-whole`、`fail-role-step-1`、`fail-role-step-2`、`fail-recovery-whole`、`fail-recovery-step-1`、`fail-freeze-explanation-whole`、`fail-freeze-explanation-step-1`。本轮新增到不匹配清单的是 `wb-capability`、`wr-sign`，其余为已有记录欠项。没有修改已通过记录来规避检查。
+
+离线唯一未完成项是跳过 Git、外链和 npm 核实；在线已完成这些核实，未完成项为 0。两次实际退出码都是 1，不能写成完整检查通过。92 条人工证据解释仍待独立审查；本轮也没有补做 D6、D7、D8、用户批准或插件真实回归运行。除明确单列的读者记录欠项外，其他内容缺口为零。没有需要设计负责人新作选择的事项。
+
+### 文件身份与公开信息
+
+新 Blueprint 的 SHA-256：`3bfdaea821e992b45820fcb1b91523187fc3ddde69817c6d9bea2ce63966ce09`。
+
+重新生成的验收清单 SHA-256：`3d2d1c97212ff9466e18a1c18f5034a0a89f5d4a65d0dd92047f9a630a0aab56`。
+
+合并稿出处使用实际 HEAD `19417de42af27dc6c9427dc3eac2f4e62df78881` 加仓库内相对路径；未提交的新 Blueprint 没有自己的提交号，以该 HEAD、相对路径 `docs/design/assurance/plugin-0.1-d1/blueprint.json` 和以上 SHA-256 共同定位，不声称未提交内容已进入 HEAD。
+
+对新 Blueprint、本记录全文及验收清单按用户指定的公开信息正则检查，匹配数均为 0。`git diff --check` 无问题。原稿与 SPEC、裁决、流程文档均未由本执行者修改；仅 Blueprint 和本记录留在指定工作树中未提交，验收清单更新在 D5 输出目录。未 stage、未 commit、未 push、未切换分支；检查器源码工作树保持干净。
