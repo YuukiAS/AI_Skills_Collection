@@ -1485,3 +1485,222 @@ npx tsx check.mjs --stage draft "$CHECK_INPUT"
 ```
 
 本轮没有需要新增设计选择的事项。只修改指定工作树的 JSON 并追加本说明，另重新生成 D5 目录验收清单；SPEC、MERGE_DECISIONS、冻结说明正文、流程文档和 A 原稿均未改。未 commit、未 push、未切分支。新 JSON、整份说明和清单按用户指定正则自查，公开信息匹配数均为零。
+
+
+## 2026-11-13：第 24 节回归用例集、8 个合并用例与责任分工
+
+本轮按用户重新给定的任务从干净工作树开始。分支为 `design/assurance-plugins-0.1-merged`，起始 HEAD 为 `147cbc682a1562d26858f8124f6ff46f2586aeda`，包含 `ceae6af3` 及合并用例、选择性重跑的后续修改。核对原文时 D1 将 HEAD 推进到 `19417de42af27dc6c9427dc3eac2f4e62df78881`，新增第 6.3a 节的责任分工；已完整补读并同步，以这个实际提交为最终出处。D1 的来源更新不是本执行者创建的提交。依据为 `SPEC.md` 第 6.3 节第 6 项、第 6.3a 节、第 6.4a 节第 4 项、第 10.2a 节，以及 `MERGE_DECISIONS.md` 第 24 节。用例采用最终的 R1–R7、S1 共 8 个，未沿用早期 15 个的版本。
+
+### 写入的设计
+
+- `contract-regression`：完整写入第 6.3a 节原文；接口与验收条目同步五要素、按覆盖条目定数量、自然合并且逐条判、旧版本先复现、冻结后只追加、失败即未完成、写错用例交回 D1，以及软件、网站、分析任务使用固定场景。开发中只重跑失败和受影响用例；最终候选在同一版本完整跑一遍，之后再改代码就再完整跑一遍。责任分工沿用原文：D1 写，D6 核对说明，X2 复现旧问题和跑脚本，X4 做真实宿主操作，X5 或用户按规定判断，X1 组织、亲读原始输出并逐条记录。不新增角色。
+- `freeze`：更新九项合同表第 6 项；冻结说明第 4 节按原文补回归用例总数、四类分组、逐用例的输入、看什么、谁判和全部通过的规则。`role-D1` 同步说明要求；`role-D6`、`gates`、`freeze` 中重复的 D6 检查说明与验收条目统一包含“回归用例的数量和分组与设计一致”，并纳入既有说明检查，不改说明身份及失效规则。
+- `capability-check`：完整写入第 10.2a 节及其八行用例，逐行保留覆盖、输入、观察和判定人；同步责任分工与重跑规则。仅新增一个验收器 `v-regression-set`，名称“回归用例集全部通过”，独立期望指向上述提交的 `SPEC.md` 第 10.2a 节，要求 8 个用例的全部检查条目通过、失败或无法判断或未执行条目为 0。`environment` 为 `real`；`runner` 与该节点已有验收器的 `one-human-action` 对象完全一致。
+- `sign`：补上“回归用例集全部通过是签发前提”，以及 X1 安排派发、亲读每个用例原始输出并逐条记录的原文。十三项签发清单保留。
+
+以上实质改动涉及 7 个节点。其余差异仅将引用合并稿的出处提交号更新到当前 HEAD；固定的上游检查器提交及历史来源不变。通用回归规则已完整位于 `contract-regression`，`contract-controls` 的三类控制例职责没有变化。没有新建节点、改连接、追加冻结历史或产生验收运行记录。
+
+### 复述单位及 technical 字段
+
+本轮修改的单位共 6 个：`wb-capability`、`wr-gates`、`wr-freeze`、`wr-sign`、`fail-freeze-explanation-whole`、`fail-freeze-explanation-step-1`。没有新增单位，其余 54 个单位的读者文字保持原样；使用检查器的 `readerHash` 与 HEAD 原稿逐一比较，变化集合与上述清单完全一致。
+
+`wb-capability` 的 `action`、`expectedResult`、`onError` 写明八个用例逐条判、最终完整运行、开发中选择性重跑和最终运行后再改代码的处理；`wr-sign.action` 加全部回归通过的前提。`wr-gates.action`、`wr-freeze.action` 和冻结说明失败路径的两个单位 `action`，只在已有 D6 说明检查中补回归用例数量和分组。失败路径继续使用 `fail-freeze-explanation`，没有新增路径。
+
+为同步已定规则，本轮修改的复述单位 `technical` 字段逐项为：
+
+- `wb-capability.technical.action`
+- `wb-capability.technical.expectedResult`
+- `wr-gates.technical.action`
+- `wr-freeze.technical.action`
+- `wr-sign.technical.action`
+- `fail-freeze-explanation-whole.technical.action`
+- `fail-freeze-explanation-whole.technical.exampleData`
+- `fail-freeze-explanation-step-1.technical.action`
+- `fail-freeze-explanation-step-1.technical.exampleData`
+
+此外，`fail-freeze-explanation.technical.situation` 和 `.handling` 同步回归数量分组不一致的失败情形和交回 D1 的处理；对应失败验收器的注入情景也与该路径保持一致。没有仅为术语改写而改动其他 technical 字段。
+
+### 数量与验收清单
+
+节点 54、需求 14、连接 51、正常走查 4 条及其步骤 23 个、失败路径 13 条及其步骤 24 个、失败路径整体解释 13 个、复述单位总数 60、证据 12，均未变化。`versions` 仍为空数组。验收器对象从 67 增至 68，均保持 `not-run`、`runs: []`；本轮没有实际执行插件回归用例。
+
+| environment | 修改前 | 修改后 |
+| --- | ---: | ---: |
+| real | 48 | 49 |
+| source | 17 | 17 |
+| built | 1 | 1 |
+| installed | 1 | 1 |
+| 合计 | 67 | 68 |
+
+已重新生成 D5 输出目录中的 `acceptance-inventory.json`，逐节点、逐字符串提取 `terminal.acceptance`，保留原文和定位；条目从 272 增至 305。这与 68 个验收器对象是不同口径。下面只按顶层组件和既定 `needs` 值汇总，没有替 D1 做功能分类：
+
+| 顶层组件 | file-check | real-host | expert | user | unclear | 合计 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 共用任务协议 | 44 | 24 | 0 | 8 | 0 | 76 |
+| 设计保障 | 92 | 34 | 0 | 6 | 4 | 136 |
+| 交付保障 | 25 | 15 | 6 | 0 | 4 | 50 |
+| 同源分发 | 21 | 15 | 1 | 0 | 6 | 43 |
+
+`unclear` 共 14 条，均在清单里逐条说明：例如同一合并用例同时要求脚本与 X5，或允许用户与 X5 二选一，不能机械指定一个需要来代表全部。这是清单的单值标注限制，不是新增设计问题。下载清单仍为 11 项；实际大小未记录的继续标“大小未记录”，没有据此声称不存在单项超过 100 MB 的依赖。通用场景里的软件、模型、镜像等例子不当作本插件新增的具体下载要求；首次下载或安装前记录实际大小、超过阈值先经用户授权的规则保留。
+
+### 草稿检查
+
+检查器 HEAD 为 `529bbde9b7d0ae9d2be7084fff2b34d9e4a6af1e`，只读运行。先执行 `module load nodejs/24.16.0`，在检查器的 `content/` 目录运行最终检查：
+
+```sh
+module load nodejs/24.16.0
+npx tsx check.mjs --stage draft --offline .cache/d5-regression-set-8/blueprint.json
+npx tsx check.mjs --stage draft .cache/d5-regression-set-8/blueprint.json
+```
+
+因为检查器从 Blueprint 同目录读取读者文件，缓存目录里的 `blueprint.json` 是本工作树新文件的符号链接；`readability-review.json`、`questions.json` 分别链接到用户指定 D5 输出目录中的原文件。已核对目标和字节，没有改写这些输入，也没有覆盖 D5 目录里原有的 Blueprint 副本。
+
+| 最终检查 | checkedAt（UTC） | 退出码 | reader-current-hash | 其他 errors | unresolved | reviews |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| 离线 | 2026-11-13T12:38:51.043Z | 1 | 13 | 0 | 1 | 92 |
+| 在线 | 2026-11-13T12:38:54.373Z | 1 | 13 | 0 | 0 | 92 |
+
+指定读者记录对当前文字缺少匹配通过记录的 13 个单位，已与本轮改动分开核对：
+
+- 本轮改过的 6 个：`wb-capability`、`wr-gates`、`wr-freeze`、`wr-sign`、`fail-freeze-explanation-whole`、`fail-freeze-explanation-step-1`。文字哈希变化按用户要求列为预期，不能复用旧通过记录。
+- 本轮未改过、但在开始时就与指定记录不匹配的 7 个：`ws-dispatch`、`ws-prompts`、`fail-role-whole`、`fail-role-step-1`、`fail-role-step-2`、`fail-recovery-whole`、`fail-recovery-step-1`。
+- 开始时合计已有 11 个不匹配单位：`ws-dispatch`、`ws-prompts`、`wr-gates`、`wr-freeze`、`fail-role-whole`、`fail-role-step-1`、`fail-role-step-2`、`fail-recovery-whole`、`fail-recovery-step-1`、`fail-freeze-explanation-whole`、`fail-freeze-explanation-step-1`。本轮新增到不匹配清单的是 `wb-capability`、`wr-sign`，其余为已有记录欠项。没有修改已通过记录来规避检查。
+
+离线唯一未完成项是跳过 Git、外链和 npm 核实；在线已完成这些核实，未完成项为 0。两次实际退出码都是 1，不能写成完整检查通过。92 条人工证据解释仍待独立审查；本轮也没有补做 D6、D7、D8、用户批准或插件真实回归运行。除明确单列的读者记录欠项外，其他内容缺口为零。没有需要设计负责人新作选择的事项。
+
+### 文件身份与公开信息
+
+新 Blueprint 的 SHA-256：`3bfdaea821e992b45820fcb1b91523187fc3ddde69817c6d9bea2ce63966ce09`。
+
+重新生成的验收清单 SHA-256：`3d2d1c97212ff9466e18a1c18f5034a0a89f5d4a65d0dd92047f9a630a0aab56`。
+
+合并稿出处使用实际 HEAD `19417de42af27dc6c9427dc3eac2f4e62df78881` 加仓库内相对路径；未提交的新 Blueprint 没有自己的提交号，以该 HEAD、相对路径 `docs/design/assurance/plugin-0.1-d1/blueprint.json` 和以上 SHA-256 共同定位，不声称未提交内容已进入 HEAD。
+
+对新 Blueprint、本记录全文及验收清单按用户指定的公开信息正则检查，匹配数均为 0。`git diff --check` 无问题。原稿与 SPEC、裁决、流程文档均未由本执行者修改；仅 Blueprint 和本记录留在指定工作树中未提交，验收清单更新在 D5 输出目录。未 stage、未 commit、未 push、未切换分支；检查器源码工作树保持干净。
+
+
+## 2026-11-13：将回归用例分工补齐到角色卡
+
+依据是提交 `19417de42af27dc6c9427dc3eac2f4e62df78881` 的 `SPEC.md` 第 6.3a 节“谁负责（不新增角色）”。本轮开始时 HEAD 为 `89c0aa9f8354d157d08b9e2ef86348355d5d1999`，上一轮的 Blueprint 和记录已进入该分支；工作树另有 `FREEZE_EXPLANATION.md` 的未提交改动，本轮未触碰，前后字节哈希一致。
+
+核对发现 `contract-regression` 已含整段分工，`sign` 已含 X1 组织、亲读和最终全过的签发前提，`capability-check` 的 `v-regression-set.method.description` 已完整含该段原文；这些位置保留。只补齐以下五个节点的机制、既有输出端口、接口边界和验收条目，并同步其已有验收器的核对说明与第 6.3a 节出处：
+
+- `role-D1`：D1 在设计阶段写用例集进合同；D6 冻结前核对说明里的数量和分组与设计一致。
+- `role-X1`：安排派发，亲自读每个用例的原始输出，逐条记录通过与否；最终候选整份用例集全部通过是签发前提。
+- `role-X2`：动手修之前先在旧版本复现“要修的真实问题”类用例，留下原始输出；脚本判的由 X2 跑。
+- `role-X4`：要在真实宿主上操作的由 X4 跑。
+- `role-X5`：要专业判断的交 X5 按尺子判；写明由用户判的交用户。
+
+角色机制保留原文的职责措辞；只在分配到单个角色时分开既有分号句，没有增加角色、运行器或判定尺子。本轮无需新的设计选择。
+
+### 复述单位和数量
+
+修改的复述单位 id：**无**。新增复述单位 id：**无**。已将 `walkthroughs` 和 `failurePaths` 与本轮 HEAD 原稿整体逐值比较，两者完全相同，因此全部读者可见字段、technical 字段及文字哈希均未因本轮变化。
+
+节点 54、需求 14、连接 51、正常走查 4 条及步骤 23 个、失败路径 13 条及步骤 24 个、整体解释 13 个、复述单位 60 个、证据 12，均不变。没有新增节点或验收器。验收器仍为 68 个，environment 分布仍为 `real: 49`、`source: 17`、`built: 1`、`installed: 1`；全部保持 `not-run`、`runs: []`，`versions: []` 保留。
+
+已重新生成 `d5-assurance/acceptance-inventory.json`，逐项保留本轮 Blueprint 的验收原文和定位。验收条目由 305 增至 311，新增六条角色职责条目，验收器对象总数仍为 68。只按顶层组件与给定的 needs 值汇总，没有作功能分类：
+
+| 顶层组件 | file-check | real-host | expert | user | unclear | 合计 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 共用任务协议 | 44 | 24 | 0 | 8 | 0 | 76 |
+| 设计保障 | 93 | 34 | 0 | 6 | 4 | 137 |
+| 交付保障 | 26 | 18 | 6 | 0 | 5 | 55 |
+| 同源分发 | 21 | 15 | 1 | 0 | 6 | 43 |
+
+`unclear` 共 15 条并逐条解释；新增的角色 X5 条目同时规定专业判断和必须由用户判断的边界，不能用一个 needs 值代替两者。全文件下载扫描和引用重新生成，下载清单仍为 11 项，没有新指定下载项；大小未知项继续标“大小未记录”。本轮没有运行实际插件用例。
+
+### 草稿检查
+
+检查器仍为提交 `529bbde9b7d0ae9d2be7084fff2b34d9e4a6af1e`，在其 `content/` 目录运行：
+
+```sh
+module load nodejs/24.16.0
+npx tsx check.mjs --stage draft --offline .cache/d5-regression-ownership/blueprint.json
+npx tsx check.mjs --stage draft .cache/d5-regression-ownership/blueprint.json
+```
+
+该缓存目录中的三个文件均为符号链接：Blueprint 指向本工作树新文件，读者记录和疑问记录指向用户指定 D5 输出目录的 `readability-review.json`、`questions.json`。链接目标与字节均已核对；输入记录及 D5 原 Blueprint 未改写。
+
+| 检查 | checkedAt（UTC） | 退出码 | reader-current-hash | 其他 errors | unresolved | reviews |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| 离线 | 2026-11-13T12:44:10.178Z | 1 | 13 | 0 | 1 | 92 |
+| 在线 | 2026-11-13T12:44:13.723Z | 1 | 13 | 0 | 0 | 92 |
+
+13 个 reader-current-hash 单位为：`ws-dispatch`、`ws-prompts`、`wb-capability`、`wr-gates`、`wr-freeze`、`wr-sign`、`fail-role-whole`、`fail-role-step-1`、`fail-role-step-2`、`fail-recovery-whole`、`fail-recovery-step-1`、`fail-freeze-explanation-whole`、`fail-freeze-explanation-step-1`。这些是本轮开始前已有的当前文字与指定读者记录不匹配，本轮没有修改其中任何单位，也没有改动读者通过记录。离线唯一未完成项是跳过 Git、外链和 npm 核实；在线核实已完成，其他缺口和未完成项均为零。原始退出码均为 1，不称为完整检查通过。92 条人工证据解释仍待独立审查，D8 记录欠项也仍需后续补齐；本轮不替代独立读者检查、用户批准或真实用例运行。
+
+### 文件身份与范围
+
+新 Blueprint SHA-256：`ac7b0dde95f30d0bb26773e154c97bc13f6da63aae44e24fac39c9560d0d97e7`。
+
+重新生成的验收清单 SHA-256：`4a52068839e8c9fb20736b79a2d19e2905e6fbb6d6e05511fd915fa2d2fd160c`。
+
+分工规则的固定出处仍为提交 `19417de4` 加 `SPEC.md` 相对路径；本轮未提交的 Blueprint 以基线 HEAD `89c0aa9f8354d157d08b9e2ef86348355d5d1999`、相对路径 `docs/design/assurance/plugin-0.1-d1/blueprint.json` 和以上 SHA-256 定位，不虚构新提交。
+
+按用户指定公开信息正则检查新 Blueprint、本记录全文和验收清单，匹配数均为 0；`git diff --check` 无问题。本轮仅修改 Blueprint、追加本记录，并重生成 D5 验收清单；原有冻结说明改动按原样保留，SPEC 和裁决文件未修改，检查器源码保持干净。未 stage、未 commit、未 push、未切分支。
+
+
+## 2026-11-13：D7 第 21 轮后的回归用例补定
+
+本轮开始时工作树干净，分支为 `design/assurance-plugins-0.1-merged`，实际 HEAD 为 `9e5dc87fab6130fb4ad455eb9010fbae2ccbd774`。已完整读取提交 `9115d13b` 新增的 `SPEC.md` 第 6.3a 节“用例写到多细”、第 10.2a 节重写后的用例表，以及 `MERGE_DECISIONS.md` 第 25 节。HEAD 包含上述补定；本轮出处统一引用实际 HEAD 加仓库内路径，不虚构未提交文件的提交号。
+
+### 修改内容
+
+实质修改四个节点，未新增设计选择：
+
+- `contract-regression`：用当前第 6.3a 节完整原文替换旧机制段落，接口和验收条目同步“语义内容由 D1 写定”“机械文件由 X2 按描述生成，X1 首次运行前逐条核对、记录哈希后冻结”“新插件旧表现用本仓库公开历史原始记录并给定位与证明范围”。已有旧版本的仍实际复现；没有公开记录的改记新能力检查。原来泛称先跑旧版本的验收条目就地附上此例外，避免要求不存在的旧版。
+- `capability-check`：机制完整换为新八用例表；`inputs[context]` 改为 X2 按描述生成、X1 首次运行前核对冻结的规则，删除旧的“各阶段预存快照、每个用例从单个快照出发”说法。验收条目逐行保留 D1 写定的输入、逐条检查、判定者和旧表现依据。`v-capability-check` 的核对说明同步这些条目；`v-regression-set` 的说明完整使用新表，并带机械文件、历史记录、责任和重跑规则，仍要求八用例全部通过。
+- `role-X1`：补 X2 生成快照和示例文件、X1 首次运行前逐条核对与描述一致、记录哈希后冻结的原文，并同步既有端口、接口和验收。
+- `role-X2`：同样补机械文件生成与 X1 核对冻结；语义不得自选，描述不够交回 D1。旧版本复现条款明确附新插件公开历史记录例外，不要求在不存在的旧版本上重新运行。
+
+新表的关键变化均照原文写入：R1 固定 52 个单位，下一步为 D8/GPT 极高/新对话，并按全文未解释术语零处判；R2 从“关卡齐全、尚未批准”开始，只检验冻结说明和批准请求；R3 是 A 正常冻结、B 缺 D7、C 说明身份不一致的三快照场景；R4 阈值从 0.95 改到 0.90；R5 明确 PDF/Markdown 与“直接打开”的选择及停下不改代码；R6 明确不可解析状态和已返回但结果文件不存在；R7 列出两个执行技能的确切名称；S1 使用表中的三个固定请求及是否进入 Assurance 的判断。
+
+旧表现依据保持表中定位与证明范围：R1② 为裁决第 11 节；R2① 为提交 `2965b008` 的第一版冻结说明与裁决第 20 节；R3③ 为裁决第 22 节。原先没有公开记录支持的问题按新表记为新能力检查，不补造历史证据。没有生成示例任务、快照、200 字文字或脚本，也没有替 D1 补选语义内容；这些是后续按已定合同实施的工作。
+
+除上述四节点及两项依据说明外，其余差异仅同步合并稿的出处提交号。固定上游检查器提交和历史来源保持原值。没有新增节点、连接或验收器，也没有改阈值或验收器运行状态。
+
+### 复述单位、数量与清单
+
+修改的复述单位 id：**无**。新增复述单位 id：**无**。`walkthroughs` 和 `failurePaths` 与本轮 HEAD 原稿整体逐值相同，所有读者可见字段及 technical 字段都保持原样，本轮没有新增文字哈希变化。
+
+节点 54、需求 14、连接 51、走查 4 条及步骤 23 个、失败路径 13 条及步骤 24 个、失败整体解释 13 个、复述单位 60 个、证据 12，均不变。验收器仍为 **68 个**，environment 分布不变：`real: 49`、`source: 17`、`built: 1`、`installed: 1`。所有验收器仍为 `not-run`、`runs: []`；`versions: []` 保留。本轮没有实际运行八个插件回归用例。
+
+已重新生成 `d5-assurance/acceptance-inventory.json`，逐节点提取验收原文及精确定位；验收条目由 311 增至 317，验收器对象总数仍为 68。只按顶层组件和既定 needs 值汇总，不做功能分类：
+
+| 顶层组件 | file-check | real-host | expert | user | unclear | 合计 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 共用任务协议 | 44 | 24 | 0 | 8 | 0 | 76 |
+| 设计保障 | 95 | 32 | 0 | 6 | 7 | 140 |
+| 交付保障 | 28 | 17 | 6 | 0 | 7 | 58 |
+| 同源分发 | 21 | 14 | 1 | 0 | 7 | 43 |
+
+`unclear` 共 21 条，逐条说明原因。新增的部分来自“无旧版时读公开历史、已有旧版时实际复现”的条件分支，以及 S1 的脚本和用户或 X5 判定，不能机械压成一个 needs 值；这不表示新增设计缺口。下载扫描已重生成，清单仍为 11 项；未知大小继续写“大小未记录”，没有假定任何依赖已安装或没有大件。
+
+### 草稿检查
+
+检查器保持提交 `529bbde9b7d0ae9d2be7084fff2b34d9e4a6af1e`，在其 `content/` 目录依次运行：
+
+```sh
+module load nodejs/24.16.0
+npx tsx check.mjs --stage draft --offline .cache/d5-regression-r21/blueprint.json
+npx tsx check.mjs --stage draft .cache/d5-regression-r21/blueprint.json
+```
+
+为使用用户指定读者记录，缓存目录的 `blueprint.json` 链接到本工作树文件，`readability-review.json`、`questions.json` 链接到指定 D5 输出目录的原文件；已核对目标与字节，未改写输入记录，也未覆盖 D5 原有 Blueprint。
+
+| 检查 | checkedAt（UTC） | 退出码 | reader-current-hash | 其他 errors | unresolved | reviews |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| 离线 | 2026-11-13T12:58:51.866Z | 1 | 13 | 0 | 1 | 92 |
+| 在线 | 2026-11-13T12:58:55.518Z | 1 | 13 | 0 | 0 | 92 |
+
+13 个 reader-current-hash 单位为：`ws-dispatch`、`ws-prompts`、`wb-capability`、`wr-gates`、`wr-freeze`、`wr-sign`、`fail-role-whole`、`fail-role-step-1`、`fail-role-step-2`、`fail-recovery-whole`、`fail-recovery-step-1`、`fail-freeze-explanation-whole`、`fail-freeze-explanation-step-1`。这些都是本轮开始前已有的当前文字与指定读者记录不匹配；本轮没有修改这些单位或读者通过记录。离线唯一未完成项为未核实 Git、外链和 npm；在线已核实，其他缺口和未完成项均为零。实际退出码均为 1，不称为完整通过。92 条人工证据解释仍需独立审查，已有读者欠项也仍待补齐；本轮不代替 D6、D7、D8、批准或真实用例运行。
+
+### 文件身份与范围
+
+新 Blueprint SHA-256：`81b012ec8fd7a2846d70cd40c3011e589708b9e12a3c7ead0c1c670525f19134`。
+
+重新生成的验收清单 SHA-256：`c2ba1b334592130a3ffc62848db54a9961c4938a38c78704cfc15ca9f059803c`。
+
+未提交的新文件以 HEAD `9e5dc87fab6130fb4ad455eb9010fbae2ccbd774`、相对路径 `docs/design/assurance/plugin-0.1-d1/blueprint.json` 和上述 SHA-256 定位，不声称本轮修改已进入该提交。
+
+公开信息自查覆盖新 Blueprint、本记录全文、验收清单，用户指定正则的匹配数均为 0。`git diff --check` 无问题。工作树只留下 Blueprint 与本记录的修改；验收清单写到 D5 输出目录。SPEC、裁决、冻结说明、流程文档及检查器源码均未改动。未 stage、未 commit、未 push、未切分支；没有需要 D1 新作决定的事项。
