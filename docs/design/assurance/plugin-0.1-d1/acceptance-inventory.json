@@ -2,15 +2,15 @@
   "source": {
     "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
     "branch": "design/assurance-plugins-0.1-merged",
-    "head": "9e5dc87fab6130fb4ad455eb9010fbae2ccbd774",
+    "head": "adabdedb0be94200efebdf390501b6abbe8b5e4b",
     "path": "docs/design/assurance/plugin-0.1-d1/blueprint.json",
-    "sha256": "81b012ec8fd7a2846d70cd40c3011e589708b9e12a3c7ead0c1c670525f19134",
+    "sha256": "7bf8744cbcab1b72c53ba9eba574405f7766e422ee28cd60089f7eec0587bb66",
     "working_tree_uncommitted": true
   },
   "counting": {
     "unit": "terminal.acceptance 中的每一条字符串，不拆句、不去重、不合并相同文字；顶层组件仅由节点树位置确定。",
     "function_classification": "未做功能分类，仅按顶层组件及用户给定 needs 值汇总。",
-    "acceptance_item_count": 317,
+    "acceptance_item_count": 319,
     "validator_object_count": 68,
     "warning": "验收条目数与 validators 对象数是两种口径，不能把条目数直接当冻结说明的验收器总数。",
     "needs": "needs 为本条的单值机械需求判断；明确需 X5 判断用 expert，需用户回答/批准用 user；不能归入单值时为 unclear 并逐项给原因。",
@@ -1124,7 +1124,7 @@
     },
     {
       "needs": "file-check",
-      "needs_reason": "对照冻结说明第 4 节和设计记录，机械核对回归用例数量、分组、输入、观察项与判定人。",
+      "needs_reason": "对照冻结说明第 4 节，检查用例总数、按检查条的四类统计、唯一归类及完整重跑规则是否与设计一致。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
@@ -1133,7 +1133,7 @@
       "node_title": "D1：负责人",
       "acceptance_index": 8,
       "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/8",
-      "text": "D1 按第 6.4a 节在冻结说明第 4 节写清回归用例集：**回归用例集**（第 6.3a 节）：一共几个，按“新能力 / 要修的真实问题 / 受影响的旧能力 / 冒烟集”分别多少个；每个用例一句话说清输入是什么、看什么、谁判；整体规则是全部通过才算这个版本做完。"
+      "text": "D1 按第 6.4a 节在冻结说明第 4 节写清回归用例集：**回归用例集**（第 6.3a 节）：一共几个用例；**按检查条**统计“新能力 / 要修的真实问题 / 受影响的旧能力 / 冒烟”各多少条（一个用例可以含几类检查，每一条检查只属于一类，这就是“分组”）；每个用例一句话说清输入是什么、看什么、谁判；整体规则是全部通过才算这个版本做完，以及开发中只重跑没过的和受影响的、最终候选完整跑一遍、此后代码再变就再完整跑一遍。"
     },
     {
       "needs": "file-check",
@@ -1526,17 +1526,17 @@
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
+      "needs": "file-check",
+      "needs_reason": "D6 对照冻结说明与 Blueprint，核对验收器数量分类、用例总数及按检查条的四类分组和完整重跑说明。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
       "top_component_title": "设计保障",
       "node_id": "role-D6",
       "node_title": "D6：用户追问",
       "acceptance_index": 6,
       "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/6",
-      "text": "检查冻结说明的验收器数量和分类是否与 Blueprint 一致；发现问题按 D6 缺口交回 D1。 D6 还要核对冻结说明里回归用例的数量和分组与设计一致；发现问题按 D6 的缺口处理，交回 D1。",
-      "needs": "file-check",
-      "needs_reason": "核对原文规定的文件内容、结构、引用、差异、记录或可运行脚本验证的规则。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+      "text": "检查冻结说明的验收器数量和分类是否与 Blueprint 一致；发现问题按 D6 缺口交回 D1。 D6 还要核对冻结说明里回归用例的数量和分组与设计一致；发现问题按 D6 的缺口处理，交回 D1。 按第 6.4a 节核对冻结说明中的回归统计和完整重跑规则：**回归用例集**（第 6.3a 节）：一共几个用例；**按检查条**统计“新能力 / 要修的真实问题 / 受影响的旧能力 / 冒烟”各多少条（一个用例可以含几类检查，每一条检查只属于一类，这就是“分组”）；每个用例一句话说清输入是什么、看什么、谁判；整体规则是全部通过才算这个版本做完，以及开发中只重跑没过的和受影响的、最终候选完整跑一遍、此后代码再变就再完整跑一遍。"
     },
     {
       "top_component_id": "design",
@@ -2358,6 +2358,19 @@
       "text": "**新插件的旧表现：** 插件本身是新的、没有可运行的旧版本时，“要修的真实问题”可以用**本仓库公开的历史原始记录**证明旧表现，合同里必须给出记录的定位和它证明了什么；没有公开记录的，不算“要修的真实问题”，改记为新能力检查。已有可运行旧版本的插件，仍须在旧版本上实际复现。"
     },
     {
+      "needs": "file-check",
+      "needs_reason": "对照冻结说明与合同，核对用例总数、按检查条计的四类数量、单条唯一归类，以及说明已写明选择性重跑和最终完整重跑规则。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
+      "top_component_id": "design",
+      "top_component_title": "设计保障",
+      "node_id": "contract-regression",
+      "node_title": "已有能力保护",
+      "acceptance_index": 24,
+      "source_pointer": "/nodes/1/children/3/children/5/terminal/acceptance/24",
+      "text": "**回归用例集**（第 6.3a 节）：一共几个用例；**按检查条**统计“新能力 / 要修的真实问题 / 受影响的旧能力 / 冒烟”各多少条（一个用例可以含几类检查，每一条检查只属于一类，这就是“分组”）；每个用例一句话说清输入是什么、看什么、谁判；整体规则是全部通过才算这个版本做完，以及开发中只重跑没过的和受影响的、最终候选完整跑一遍、此后代码再变就再完整跑一遍。"
+    },
+    {
       "top_component_id": "design",
       "top_component_title": "设计保障",
       "node_id": "contract-controls",
@@ -2732,7 +2745,7 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 20,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/20",
-      "text": "**回归用例集**（第 6.3a 节）：一共几个，按“新能力 / 要修的真实问题 / 受影响的旧能力 / 冒烟集”分别多少个；每个用例一句话说清输入是什么、看什么、谁判；整体规则是全部通过才算这个版本做完。"
+      "text": "**回归用例集**（第 6.3a 节）：一共几个用例；**按检查条**统计“新能力 / 要修的真实问题 / 受影响的旧能力 / 冒烟”各多少条（一个用例可以含几类检查，每一条检查只属于一类，这就是“分组”）；每个用例一句话说清输入是什么、看什么、谁判；整体规则是全部通过才算这个版本做完，以及开发中只重跑没过的和受影响的、最终候选完整跑一遍、此后代码再变就再完整跑一遍。"
     },
     {
       "top_component_id": "design",
@@ -3971,7 +3984,7 @@
     },
     {
       "needs": "file-check",
-      "needs_reason": "R6 按固定的不可解析状态、已返回但缺结果文件的事件场景，由脚本核对恢复修订号、作废保留、重派披露及不索取无须用户的决定。",
+      "needs_reason": "R6 的有效 git 历史基线、缺 D4 结果、无冲突新建笔记及无付费或发布或发消息后果均已固定；由脚本核对保守恢复、原始记录保留和重派披露。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "packaging",
@@ -3980,7 +3993,7 @@
       "node_title": "正常入口验收",
       "acceptance_index": 11,
       "source_pointer": "/nodes/3/children/4/terminal/acceptance/11",
-      "text": "R6｜输入（D1 写定）：一个无法解析的状态文件；事件日志里有一条派发记为“已返回”，但对应结果文件不存在｜看什么（逐条判）：按第 1.3a 节恢复：新状态修订号接着基线；该派发记为作废，原记录保留；重派提示词列出原派发已在仓库留下的写入；不涉及冻结、批准、签发、撤回，所以不找用户｜谁判：脚本｜旧表现依据：新能力检查"
+      "text": "R6｜输入（D1 写定）：一个无法解析的状态文件；git 历史里上一个提交的状态文件有效、可作为基线；基线之后，事件日志里有一条 D4 现实核查派发记为“已返回”，但对应结果文件不存在；这条派发在仓库里只留下一个新建的笔记文件，与重派的工作不冲突；这条派发不涉及付费调用、对外发布或向他人发消息｜看什么（逐条判）：按第 1.3a 节恢复：新状态修订号接着基线；该派发记为作废，原记录保留；重派提示词列出原派发已在仓库留下的写入；不涉及冻结、批准、签发、撤回，所以不找用户｜谁判：脚本｜旧表现依据：新能力检查"
     },
     {
       "needs": "real-host",
@@ -3997,7 +4010,7 @@
     },
     {
       "needs": "unclear",
-      "needs_reason": "S1 的三条固定请求需实际宿主执行，脚本查是否进入 Assurance，用户或 X5 判任务是否完成，含多个 needs。",
+      "needs_reason": "S1 使用固定中文正文和另两条固定请求，脚本判断未进入 Assurance，用户或 X5 判任务是否完成；同时涉及真实宿主、脚本及用户或专业判断，无法指定单一 needs。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "packaging",
@@ -4006,7 +4019,7 @@
       "node_title": "正常入口验收",
       "acceptance_index": 13,
       "source_pointer": "/nodes/3/children/4/terminal/acceptance/13",
-      "text": "S1｜输入（D1 写定）：一个写好的场景，在装好本插件的环境里依次发三条日常请求：① 对 `writing-style` 发“把下面这段话改得更通顺：〈固定的一段 200 字左右中文说明文字〉”；② 对 `workflow-core` 发“看一下当前分支的状态，告诉我下一步”；③ 对 `ai-skills-core` 发“列出本仓库现有插件和它们的版本”｜看什么（逐条判）：① 三条请求都完成了所要求的事；② 没有任何一条被转进 Assurance 流程：没有创建 `docs/assurance/` 下的文件，输出里没有出现 D1–D8、X1–X5、冻结、派发等 Assurance 用语｜谁判：② 脚本；① 用户或 X5 判是否完成所要求的事｜旧表现依据：新能力检查（保护旧行为）"
+      "text": "S1｜输入（D1 写定）：一个写好的场景，在装好本插件的环境里依次发三条日常请求：① 对 `writing-style` 发“把下面这段话改得更通顺：这个工具可以把表格里的数据整理成一份报告。使用的时候，先把表格放到指定的文件夹里，然后运行命令，工具就会自动读取表格，计算每一列的平均值和最大值，再把结果写成一个新的文件。如果表格里有空的格子，工具会跳过它们，不会报错。生成的报告可以直接打开查看，也可以发给同事。第一次使用之前，最好先看一下说明，确认表格的格式是对的，不然算出来的结果可能不准。”（这段输入固定不变，本身不含任何 Assurance 用语）；② 对 `workflow-core` 发“看一下当前分支的状态，告诉我下一步”；③ 对 `ai-skills-core` 发“列出本仓库现有插件和它们的版本”｜看什么（逐条判）：① 三条请求都完成了所要求的事；② 没有任何一条被转进 Assurance 流程：没有创建 `docs/assurance/` 下的文件，输出里没有出现 D1–D8、X1–X5、冻结、派发等 Assurance 用语｜谁判：② 脚本；① 用户或 X5 判是否完成所要求的事｜旧表现依据：新能力检查（保护旧行为）"
     },
     {
       "needs": "unclear",
@@ -4033,6 +4046,19 @@
       "acceptance_index": 15,
       "source_pointer": "/nodes/3/children/4/terminal/acceptance/15",
       "text": "**修复后重跑哪些（用户要求，2026/11/13）：** 开发过程中，修完只重跑没过的用例，以及本次修改实际碰到的部分所对应的用例；不必每修一次就全部重跑。**最终候选确定后，在同一个最终版本上把整份用例集完整跑一遍**，全部通过才算做完；这一遍之后再改代码，就要再跑一遍完整用例集。"
+    },
+    {
+      "needs": "file-check",
+      "needs_reason": "逐条对照 D1 写定的 18 条检查分组，机械核对 12/3/1/2、无重复归类且不漏条；无需自行分类。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
+      "top_component_id": "packaging",
+      "top_component_title": "同源分发",
+      "node_id": "capability-check",
+      "node_title": "正常入口验收",
+      "acceptance_index": 16,
+      "source_pointer": "/nodes/3/children/4/terminal/acceptance/16",
+      "text": "**每条检查的分组（D6 第 9 轮后补定，每条只属一类）：**\n- 新能力，12 条：R1①③、R2②、R3①②、R4①②③、R5、R6、R7②③；\n- 要修的真实问题，3 条：R1②、R2①、R3③；\n- 受影响的旧能力，1 条：R7①；\n- 冒烟，2 条：S1①②。"
     },
     {
       "top_component_id": "packaging",
@@ -4166,12 +4192,12 @@
     {
       "top_component_id": "design",
       "top_component_title": "设计保障",
-      "file-check": 95,
+      "file-check": 96,
       "real-host": 32,
       "expert": 0,
       "user": 6,
       "unclear": 7,
-      "total": 140
+      "total": 141
     },
     {
       "top_component_id": "delivery",
@@ -4186,12 +4212,12 @@
     {
       "top_component_id": "packaging",
       "top_component_title": "同源分发",
-      "file-check": 21,
+      "file-check": 22,
       "real-host": 14,
       "expert": 1,
       "user": 0,
       "unclear": 7,
-      "total": 43
+      "total": 44
     }
   ],
   "unclear_items": [
@@ -4293,7 +4319,7 @@
     {
       "node_id": "capability-check",
       "acceptance_index": 13,
-      "reason": "S1 的三条固定请求需实际宿主执行，脚本查是否进入 Assurance，用户或 X5 判任务是否完成，含多个 needs。"
+      "reason": "S1 使用固定中文正文和另两条固定请求，脚本判断未进入 Assurance，用户或 X5 判任务是否完成；同时涉及真实宿主、脚本及用户或专业判断，无法指定单一 needs。"
     },
     {
       "node_id": "capability-check",
@@ -4302,7 +4328,7 @@
     }
   ],
   "download_scan": {
-    "scanned_string_count": 6995,
+    "scanned_string_count": 7001,
     "matched_string_count": 214,
     "matches": [
       {
@@ -4457,7 +4483,7 @@
           "下载",
           "安装"
         ],
-        "excerpt": " 对新说明重做上面四项检查（Blueprint 没变时，不必重做逐组件追问）。\n\n**大件下载的依据（D6 第 7 轮后补定）：** 第 5 节只能写 Blueprint 里有依据的内容。Blueprint 没有记录某项依赖的大小时，说明必须写“大小未记录”，不能凭常识写“很小”。实施时，执行者第一次下载或安装任何依赖前，先记录它的实际大小；单项超过 100 MB 的，先经用户授权再下载。\n\n冻结说明第 4 节补充：**回归用例集**（第 6.3a 节）：一共几个，按“新能力 / 要修的真实问题 / 受影响的旧能力 / 冒烟"
+        "excerpt": " 对新说明重做上面四项检查（Blueprint 没变时，不必重做逐组件追问）。\n\n**大件下载的依据（D6 第 7 轮后补定）：** 第 5 节只能写 Blueprint 里有依据的内容。Blueprint 没有记录某项依赖的大小时，说明必须写“大小未记录”，不能凭常识写“很小”。实施时，执行者第一次下载或安装任何依赖前，先记录它的实际大小；单项超过 100 MB 的，先经用户授权再下载。\n\n冻结说明第 4 节补充：**回归用例集**（第 6.3a 节）：一共几个用例；**按检查条**统计“新能力 / 要修的真实问题 / 受"
       },
       {
         "source_pointer": "/nodes/1/children/0/children/1/claims/0/text",
@@ -4500,7 +4526,7 @@
           "下载",
           "安装"
         ],
-        "excerpt": "交回 D1。；D6 按第 6.4a 节检查说明第 5 节是否遗漏单项超过 100 MB 的下载或安装；第 5 节只能写 Blueprint 里有依据的内容。Blueprint 没有记录某项依赖的大小时，说明必须写“大小未记录”，不能凭常识写“很小”；发现问题按 D6 的缺口处理，交回 D1。；D6 的结果写明所检查说明的 explanation_sha256，即独立文件原始字节的 SHA-256，不做规范化。；说明在 D6 检查后有任何改动，原说明检查失效；D6 对新说明重做四项检查，Blueprint 没变时不必重做逐组件"
+        "excerpt": "完整跑一遍。；D6 按第 6.4a 节检查说明第 5 节是否遗漏单项超过 100 MB 的下载或安装；第 5 节只能写 Blueprint 里有依据的内容。Blueprint 没有记录某项依赖的大小时，说明必须写“大小未记录”，不能凭常识写“很小”；发现问题按 D6 的缺口处理，交回 D1。；D6 的结果写明所检查说明的 explanation_sha256，即独立文件原始字节的 SHA-256，不做规范化。；说明在 D6 检查后有任何改动，原说明检查失效；D6 对新说明重做四项检查，Blueprint 没变时不必重做逐组件"
       },
       {
         "source_pointer": "/nodes/1/children/0/children/5/validators/1/counterexample/input",
@@ -5381,7 +5407,7 @@
         "terms": [
           "下载"
         ],
-        "excerpt": "、用户决定边界及未决范围隔离。 第 22 节补定说明身份、改动后 D6 说明检查失效及实际下载大小和用户授权依据。 第 23 节明确执行端按档次表运行、GPT Work 极高不得用 Codex 代替、X4 记录选择与手动执行角色每轮一条。 第 24 节补定回归用例集、按条覆盖与逐条判、开发中选择性重跑与最终完整重跑；本插件合并为 R1–R7、S1 共 8 个用例。 第 25 节补定语义内容与机械文件的分工、新插件旧表现的公开历史依据，以及 R2 未批准起点、R3 三快照场景、R5 和 S1 固定输入与尺子。"
+        "excerpt": "、用户决定边界及未决范围隔离。 第 22 节补定说明身份、改动后 D6 说明检查失效及实际下载大小和用户授权依据。 第 23 节明确执行端按档次表运行、GPT Work 极高不得用 Codex 代替、X4 记录选择与手动执行角色每轮一条。 第 24 节补定回归用例集、按条覆盖与逐条判、开发中选择性重跑与最终完整重跑；本插件合并为 R1–R7、S1 共 8 个用例。 第 25 节补定语义内容与机械文件的分工、新插件旧表现的公开历史依据，以及 R2 未批准起点、R3 三快照场景、R5 和 S1 固定输入与尺子。 第 26 节明确"
       },
       {
         "source_pointer": "/walkthroughs/1/exit",
