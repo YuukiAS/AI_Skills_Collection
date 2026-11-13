@@ -1,0 +1,62 @@
+[
+  {
+    "id": "D6-R11-001",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明是否完整披露了所有按条件启用角色的触发条件？",
+    "answerLocation": "ASSURANCE_PROCESS_V0_1_20261110.md §3 的 D3、D4、X4 角色行；blueprint.json requirements[id=r-process]、nodes[id=design].children[id=design-roles].children[id=role-D3]、nodes[id=design].children[id=design-roles].children[id=role-D4]、nodes[id=delivery].children[id=delivery-roles].children[id=role-X4]；FREEZE_EXPLANATION.md §2",
+    "gap": "冻结说明写明 D3、X5 只在规定条件下启用，也写了 X4 的运行位置，但没有告诉用户 D3 在复杂或高风险时启用、D4 在已有代码或数据需要现实盘点/小探针时按条件启用、X4 在交付物存在版式/文案/视觉/领域等维度且有既定专项检查能力时启用。",
+    "impact": "用户会在不知道哪些任务会增加独立设计、现实核查或专项检查角色的情况下批准，直接影响手动转交次数、执行资源和实际流程长度。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R11-002",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明对“小修无需重新批准”的条件是否与 Blueprint 的批准继承规则完全一致？",
+    "answerLocation": "blueprint.json requirements[id=r-revision]、nodes[id=shared].children[id=revision].terminal.mechanism §5.1、nodes[id=design].children[id=q-inheritance].validators[id=v-q-inheritance]；FREEZE_EXPLANATION.md §2“只改错字一类的小修”",
+    "gap": "冻结说明只概括为“只改错字一类的小修不需要重新批准，改变含义就重新过关卡”，漏掉 Blueprint 的窄范围六项条件：至多两个既有节点，不增删替换或重排节点；需求及来源不变；连接、跨组件接口、权威、正常入口、失败路径和已复述文字不变；身份必须等于获批值或沿完整合格继承链可达；没有新的用户专属决定；改动仅限规定的非语义类型且有字段级差异证明。任一项不能证明都按大改处理。",
+    "impact": "用户可能把 Blueprint 实际要求重新过 D5–D8 并重新批准的多节点或结构性“看起来只是小改”误认为可以继承旧批准，因而批准了比 Blueprint 更宽的免重批规则。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R11-003",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明是否完整披露了 X1 在签发与整套回归中的亲读、组织和输入冻结责任？",
+    "answerLocation": "ASSURANCE_PROCESS_V0_1_20261110.md §3 X1 角色行；blueprint.json nodes[id=delivery].children[id=sign]、nodes[id=packaging].children[id=capability-check].validators[id=v-regression-set].method.description 中“用例写到多细/谁负责”；FREEZE_EXPLANATION.md §2、§4及“回归用例完整定义”",
+    "gap": "冻结说明完整抄出了 8 个用例的输入、检查条和逐条判定者，但没有披露两条会改变验收强度的总规则：X1 签发前必须亲自读最终产物和必要原始证据，并在回归中亲读每个用例的原始输出、逐条记录通过与否；回归所需机械状态快照/示例文件由 X2 按 D1 写定语义生成，X1 首次运行前核对一致并记录哈希冻结，描述不足时退回 D1。",
+    "impact": "用户可能理解为脚本或分项角色给出通过即可形成最终完成结论，而 Blueprint 实际要求 X1 对最终对象和原始证据承担不可替代的亲读责任，并要求先冻结回归输入，属于实质更强的验收治理。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R11-004",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明是否完整披露了运行期的权限、数据、服务商和跨宿主边界？",
+    "answerLocation": "blueprint.json nodes[id=design].children[id=contract].children[id=contract-authorization] 及 validators[id=v-contract-authorization]；FREEZE_EXPLANATION.md §8",
+    "gap": "冻结说明写了本次实施仓库、付费模型授权和工期，但漏掉 Blueprint 的运行期边界：角色只写本次派发指定位置；后续运行需记录并遵守仓库/分支/写入范围、数据用途、服务商、凭据、费用、账号和设备边界；同范围已有授权不重复询问，边界变化才需要对应用户决定；默认不做自动付费调用、跨宿主发消息或外部数据传输；敏感来源保留在已授权位置，公开库只记录允许公开的定位。",
+    "impact": "这些规则决定未来任务会不会传数据、向哪里写、何时重新索权以及是否发生跨宿主动作。漏写会让用户在缺少关键权限与数据边界的情况下批准。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R11-005",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明是否正确区分了本插件 X1 采用 GPT Work 极高这一决定的来源？",
+    "answerLocation": "ASSURANCE_PROCESS_V0_1_20261110.md §11 的 2026/11/12 修订；blueprint.json nodes[id=shared].children[id=dispatch].terminal.mechanism §2.1a；FREEZE_EXPLANATION.md §2",
+    "gap": "冻结说明把“本插件自己的实施由 GPT Work 极高担任 X1”标成“（默认）”，但 Blueprint 明确记录这是 2026/11/12 的用户决定。",
+    "impact": "实际采用的负责人和档次没有写错，只是决定来源标注错误，不会改变本次批准对象或执行结果。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R11-006",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明对记录检查依赖的安装名称是否足够精确？",
+    "answerLocation": "blueprint.json nodes[id=shared].children[id=record-check].terminal.mechanism、terminal.packages[0]；FREEZE_EXPLANATION.md §5",
+    "gap": "Blueprint 的拟安装依赖写为 `jsonschema[format-nongpl]==4.26.0`，冻结说明简写成 `jsonschema` 4.26.0，没有写出所需的格式校验附加依赖。",
+    "impact": "这会降低依赖清单精度，但冻结说明已经明确所有依赖大小均未记录、首次下载安装前必须测量实际大小且单项超过 100 MB 先获用户授权，因此不会导致本轮对大件下载边界的错误批准。",
+    "blocking": false,
+    "owner": "D1"
+  }
+]
