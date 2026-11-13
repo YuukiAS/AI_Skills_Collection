@@ -1,0 +1,74 @@
+{
+ "round": 7,
+ "reader_isolation": "single-thread-batch",
+ "judge": "D1",
+ "date": "2026-11-13",
+ "units": [
+  {
+   "subjectId": "fail-role-step-1",
+   "textHash": "833e8d2dc11f3766cda6c68d41f60154c1111726968ce9cb0c51a422fdbe5690",
+   "judgment": "pass",
+   "note": "复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。"
+  },
+  {
+   "subjectId": "fail-role-whole",
+   "textHash": "f17cd05c11b384a5400f34b18d0213bfb8d3005f117589c115177f82e77a95b2",
+   "judgment": "pass",
+   "note": "复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。"
+  },
+  {
+   "subjectId": "fail-freeze-explanation-whole",
+   "textHash": "23a77e49b6c74863a11d5387e358026b8ff89d17655ef26e3609582d428c1e34",
+   "judgment": "pass",
+   "note": "复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。"
+  },
+  {
+   "subjectId": "wr-sign",
+   "textHash": "82139dfe734b93323d441f8be057e362c459409f07195b6699b49e09c661353c",
+   "judgment": "pass",
+   "note": "复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。"
+  },
+  {
+   "subjectId": "fail-freeze-explanation-step-1",
+   "textHash": "69bdfc2f86a5b438d05f829c209569ca095c1bd02b61a2f59f1a059f602aa5e0",
+   "judgment": "pass",
+   "note": "复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。"
+  },
+  {
+   "subjectId": "wr-freeze",
+   "textHash": "a4431d068c2d5b7c6d939c6cb017fa82edd316a0cb3b1d4df0bf0133a90880c9",
+   "judgment": "pass",
+   "note": "复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。"
+  },
+  {
+   "subjectId": "ws-prompts",
+   "textHash": "a239d3b8d81e4c7555ade617382199de3dc931ec75eafe2525ed2009364d98ec",
+   "judgment": "pass",
+   "note": "复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。"
+  },
+  {
+   "subjectId": "fail-role-step-2",
+   "textHash": "10f8d542c97fa3a0ec3ff609e5275bf3da0c9261de47bc5cf8b84f68435510b7",
+   "judgment": "pass",
+   "note": "复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。"
+  },
+  {
+   "subjectId": "wr-gates",
+   "textHash": "046c88ec01dd2c03f33a21be44fe083e05eaea9cd03f4b04d77b547987f54478",
+   "judgment": "pass",
+   "note": "复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。"
+  },
+  {
+   "subjectId": "wb-capability",
+   "textHash": "44ff0ad4787302698369b09e87388a1d0d84ec83a70d0ee2ad91d76f7859d105",
+   "judgment": "pass",
+   "note": "复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。"
+  },
+  {
+   "subjectId": "ws-dispatch",
+   "textHash": "d9de4c11e4f25232dab104292a91aa4354d29cf89000261220c60552dbb1f7e2",
+   "judgment": "pass",
+   "note": "复述与原意一致；读者疑问均为本单位之外定义的词（X4、档次表、十三项清单、四项检查名称等），不影响理解。"
+  }
+ ]
+}
