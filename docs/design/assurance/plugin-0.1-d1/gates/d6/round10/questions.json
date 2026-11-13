@@ -1,0 +1,562 @@
+[
+  {
+    "id": "Q-NODE-001",
+    "nodeId": "shared",
+    "question": "共用任务协议：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=shared].inputs; nodes[id=shared].outputs; nodes[id=shared].authority; nodes[id=shared].interface; nodes[id=shared].validators; nodes[id=shared].children; connections[id=c-shared-to-design|c-shared-to-delivery|c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-002",
+    "nodeId": "state",
+    "question": "单一当前状态：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=shared].children[id=state].inputs; nodes[id=shared].children[id=state].outputs; nodes[id=shared].children[id=state].authority; nodes[id=shared].children[id=state].interface; nodes[id=shared].children[id=state].validators; nodes[id=shared].children[id=state].terminal.mechanism; nodes[id=shared].children[id=state].terminal.retry; nodes[id=shared].children[id=state].terminal.acceptance; connections[id=c-state-to-writer]; failurePaths[id=fail-write|fail-recovery]; requirements[id=r-state|r-blueprint]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-003",
+    "nodeId": "writer",
+    "question": "写者交接与恢复：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=shared].children[id=writer].inputs; nodes[id=shared].children[id=writer].outputs; nodes[id=shared].children[id=writer].authority; nodes[id=shared].children[id=writer].interface; nodes[id=shared].children[id=writer].validators; nodes[id=shared].children[id=writer].terminal.mechanism; nodes[id=shared].children[id=writer].terminal.retry; nodes[id=shared].children[id=writer].terminal.acceptance; connections[id=c-state-to-writer|c-writer-to-dispatch]; failurePaths[id=fail-write]; requirements[id=r-state]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-004",
+    "nodeId": "record-check",
+    "question": "记录结构检查：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=shared].children[id=record-check].inputs; nodes[id=shared].children[id=record-check].outputs; nodes[id=shared].children[id=record-check].authority; nodes[id=shared].children[id=record-check].interface; nodes[id=shared].children[id=record-check].validators; nodes[id=shared].children[id=record-check].terminal.mechanism; nodes[id=shared].children[id=record-check].terminal.retry; nodes[id=shared].children[id=record-check].terminal.acceptance; requirements[id=r-state|r-sources]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-005",
+    "nodeId": "dispatch",
+    "question": "按条件派发：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=shared].children[id=dispatch].inputs; nodes[id=shared].children[id=dispatch].outputs; nodes[id=shared].children[id=dispatch].authority; nodes[id=shared].children[id=dispatch].interface; nodes[id=shared].children[id=dispatch].validators; nodes[id=shared].children[id=dispatch].terminal.mechanism; nodes[id=shared].children[id=dispatch].terminal.retry; nodes[id=shared].children[id=dispatch].terminal.acceptance; connections[id=c-writer-to-dispatch|c-dispatch-to-prompts]; failurePaths[id=fail-role]; requirements[id=r-dispatch|r-process]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-006",
+    "nodeId": "prompts",
+    "question": "自包含提示词：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=shared].children[id=prompts].inputs; nodes[id=shared].children[id=prompts].outputs; nodes[id=shared].children[id=prompts].authority; nodes[id=shared].children[id=prompts].interface; nodes[id=shared].children[id=prompts].validators; nodes[id=shared].children[id=prompts].terminal.mechanism; nodes[id=shared].children[id=prompts].terminal.retry; nodes[id=shared].children[id=prompts].terminal.acceptance; connections[id=c-dispatch-to-prompts|c-prompts-to-role-D2|c-prompts-to-role-D3|c-prompts-to-clarify]; failurePaths[id=fail-role]; requirements[id=r-dispatch|r-prompts|r-boundary]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-007",
+    "nodeId": "revision",
+    "question": "修订与告知：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=shared].children[id=revision].inputs; nodes[id=shared].children[id=revision].outputs; nodes[id=shared].children[id=revision].authority; nodes[id=shared].children[id=revision].interface; nodes[id=shared].children[id=revision].validators; nodes[id=shared].children[id=revision].terminal.mechanism; nodes[id=shared].children[id=revision].terminal.retry; nodes[id=shared].children[id=revision].terminal.acceptance; connections[id=c-deviation-to-revision|c-revision-to-role-D1|c-revision-to-metrics|c-q-inheritance-to-revision]; requirements[id=r-revision|r-process]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-008",
+    "nodeId": "metrics",
+    "question": "三项衡量：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=shared].children[id=metrics].inputs; nodes[id=shared].children[id=metrics].outputs; nodes[id=shared].children[id=metrics].authority; nodes[id=shared].children[id=metrics].interface; nodes[id=shared].children[id=metrics].validators; nodes[id=shared].children[id=metrics].terminal.mechanism; nodes[id=shared].children[id=metrics].terminal.retry; nodes[id=shared].children[id=metrics].terminal.acceptance; connections[id=c-revision-to-metrics|c-deviation-to-metrics]; requirements[id=r-metrics]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-009",
+    "nodeId": "design",
+    "question": "设计保障：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].inputs; nodes[id=design].outputs; nodes[id=design].authority; nodes[id=design].interface; nodes[id=design].validators; nodes[id=design].children; connections[id=c-shared-to-design|c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-010",
+    "nodeId": "design-roles",
+    "question": "设计角色：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=design-roles].inputs; nodes[id=design].children[id=design-roles].outputs; nodes[id=design].children[id=design-roles].authority; nodes[id=design].children[id=design-roles].interface; nodes[id=design].children[id=design-roles].validators; nodes[id=design].children[id=design-roles].children",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-011",
+    "nodeId": "role-D1",
+    "question": "D1：负责人：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=design-roles].children[id=role-D1].inputs; nodes[id=design].children[id=design-roles].children[id=role-D1].outputs; nodes[id=design].children[id=design-roles].children[id=role-D1].authority; nodes[id=design].children[id=design-roles].children[id=role-D1].interface; nodes[id=design].children[id=design-roles].children[id=role-D1].validators; nodes[id=design].children[id=design-roles].children[id=role-D1].terminal.mechanism; nodes[id=design].children[id=design-roles].children[id=role-D1].terminal.retry; nodes[id=design].children[id=design-roles].children[id=role-D1].terminal.acceptance; connections[id=c-role-D2-to-role-D1|c-role-D3-to-role-D1|c-role-D4-to-role-D1|c-role-D1-to-contract|c-revision-to-role-D1]; requirements[id=r-dispatch|r-roles]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-012",
+    "nodeId": "role-D2",
+    "question": "D2：独立甲：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=design-roles].children[id=role-D2].inputs; nodes[id=design].children[id=design-roles].children[id=role-D2].outputs; nodes[id=design].children[id=design-roles].children[id=role-D2].authority; nodes[id=design].children[id=design-roles].children[id=role-D2].interface; nodes[id=design].children[id=design-roles].children[id=role-D2].validators; nodes[id=design].children[id=design-roles].children[id=role-D2].terminal.mechanism; nodes[id=design].children[id=design-roles].children[id=role-D2].terminal.retry; nodes[id=design].children[id=design-roles].children[id=role-D2].terminal.acceptance; connections[id=c-prompts-to-role-D2|c-clarify-to-role-D2|c-role-D2-to-role-D1]; requirements[id=r-roles]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-013",
+    "nodeId": "role-D3",
+    "question": "D3：独立乙：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=design-roles].children[id=role-D3].inputs; nodes[id=design].children[id=design-roles].children[id=role-D3].outputs; nodes[id=design].children[id=design-roles].children[id=role-D3].authority; nodes[id=design].children[id=design-roles].children[id=role-D3].interface; nodes[id=design].children[id=design-roles].children[id=role-D3].validators; nodes[id=design].children[id=design-roles].children[id=role-D3].terminal.mechanism; nodes[id=design].children[id=design-roles].children[id=role-D3].terminal.retry; nodes[id=design].children[id=design-roles].children[id=role-D3].terminal.acceptance; connections[id=c-prompts-to-role-D3|c-role-D3-to-role-D1]; requirements[id=r-roles]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-014",
+    "nodeId": "role-D4",
+    "question": "D4：现实核查：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=design-roles].children[id=role-D4].inputs; nodes[id=design].children[id=design-roles].children[id=role-D4].outputs; nodes[id=design].children[id=design-roles].children[id=role-D4].authority; nodes[id=design].children[id=design-roles].children[id=role-D4].interface; nodes[id=design].children[id=design-roles].children[id=role-D4].validators; nodes[id=design].children[id=design-roles].children[id=role-D4].terminal.mechanism; nodes[id=design].children[id=design-roles].children[id=role-D4].terminal.retry; nodes[id=design].children[id=design-roles].children[id=role-D4].terminal.acceptance; connections[id=c-role-D4-to-role-D1]; requirements[id=r-roles]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-015",
+    "nodeId": "role-D5",
+    "question": "D5：格式检查：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=design-roles].children[id=role-D5].inputs; nodes[id=design].children[id=design-roles].children[id=role-D5].outputs; nodes[id=design].children[id=design-roles].children[id=role-D5].authority; nodes[id=design].children[id=design-roles].children[id=role-D5].interface; nodes[id=design].children[id=design-roles].children[id=role-D5].validators; nodes[id=design].children[id=design-roles].children[id=role-D5].terminal.mechanism; nodes[id=design].children[id=design-roles].children[id=role-D5].terminal.retry; nodes[id=design].children[id=design-roles].children[id=role-D5].terminal.acceptance; connections[id=c-gates-to-role-D5|c-role-D5-to-gates|c-q-checker-to-role-D5]; requirements[id=r-roles]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-016",
+    "nodeId": "role-D6",
+    "question": "D6：用户追问：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=design-roles].children[id=role-D6].inputs; nodes[id=design].children[id=design-roles].children[id=role-D6].outputs; nodes[id=design].children[id=design-roles].children[id=role-D6].authority; nodes[id=design].children[id=design-roles].children[id=role-D6].interface; nodes[id=design].children[id=design-roles].children[id=role-D6].validators; nodes[id=design].children[id=design-roles].children[id=role-D6].terminal.mechanism; nodes[id=design].children[id=design-roles].children[id=role-D6].terminal.retry; nodes[id=design].children[id=design-roles].children[id=role-D6].terminal.acceptance; connections[id=c-gates-to-role-D6|c-role-D6-to-gates]; failurePaths[id=fail-freeze-explanation]; requirements[id=r-roles]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-017",
+    "nodeId": "role-D7",
+    "question": "D7：冷读开工：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=design-roles].children[id=role-D7].inputs; nodes[id=design].children[id=design-roles].children[id=role-D7].outputs; nodes[id=design].children[id=design-roles].children[id=role-D7].authority; nodes[id=design].children[id=design-roles].children[id=role-D7].interface; nodes[id=design].children[id=design-roles].children[id=role-D7].validators; nodes[id=design].children[id=design-roles].children[id=role-D7].terminal.mechanism; nodes[id=design].children[id=design-roles].children[id=role-D7].terminal.retry; nodes[id=design].children[id=design-roles].children[id=role-D7].terminal.acceptance; connections[id=c-gates-to-role-D7|c-role-D7-to-gates]; requirements[id=r-roles]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-018",
+    "nodeId": "role-D8",
+    "question": "D8：逐步复述：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=design-roles].children[id=role-D8].inputs; nodes[id=design].children[id=design-roles].children[id=role-D8].outputs; nodes[id=design].children[id=design-roles].children[id=role-D8].authority; nodes[id=design].children[id=design-roles].children[id=role-D8].interface; nodes[id=design].children[id=design-roles].children[id=role-D8].validators; nodes[id=design].children[id=design-roles].children[id=role-D8].terminal.mechanism; nodes[id=design].children[id=design-roles].children[id=role-D8].terminal.retry; nodes[id=design].children[id=design-roles].children[id=role-D8].terminal.acceptance; connections[id=c-gates-to-role-D8|c-role-D8-to-gates]; requirements[id=r-roles]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-019",
+    "nodeId": "clarify",
+    "question": "澄清与需求落图：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=clarify].inputs; nodes[id=design].children[id=clarify].outputs; nodes[id=design].children[id=clarify].authority; nodes[id=design].children[id=clarify].interface; nodes[id=design].children[id=clarify].validators; nodes[id=design].children[id=clarify].terminal.mechanism; nodes[id=design].children[id=clarify].terminal.retry; nodes[id=design].children[id=clarify].terminal.acceptance; connections[id=c-prompts-to-clarify|c-clarify-to-role-D2]; requirements[id=r-prompts|r-freeze]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-020",
+    "nodeId": "gates",
+    "question": "四项冻结关卡：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=gates].inputs; nodes[id=design].children[id=gates].outputs; nodes[id=design].children[id=gates].authority; nodes[id=design].children[id=gates].interface; nodes[id=design].children[id=gates].validators; nodes[id=design].children[id=gates].terminal.mechanism; nodes[id=design].children[id=gates].terminal.retry; nodes[id=design].children[id=gates].terminal.acceptance; connections[id=c-contract-to-gates|c-gates-to-role-D5|c-gates-to-role-D6|c-gates-to-role-D7|c-gates-to-role-D8|c-role-D5-to-gates|c-role-D6-to-gates|c-role-D7-to-gates|c-role-D8-to-gates|c-gates-to-freeze]; failurePaths[id=fail-checker]; requirements[id=r-freeze]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-021",
+    "nodeId": "contract",
+    "question": "九项冻结合同：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=contract].inputs; nodes[id=design].children[id=contract].outputs; nodes[id=design].children[id=contract].authority; nodes[id=design].children[id=contract].interface; nodes[id=design].children[id=contract].validators; nodes[id=design].children[id=contract].children; connections[id=c-role-D1-to-contract|c-contract-to-gates]; failurePaths[id=fail-checker]; requirements[id=r-freeze|r-blueprint]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-022",
+    "nodeId": "contract-capability",
+    "question": "能力与声明：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=contract].children[id=contract-capability].inputs; nodes[id=design].children[id=contract].children[id=contract-capability].outputs; nodes[id=design].children[id=contract].children[id=contract-capability].authority; nodes[id=design].children[id=contract].children[id=contract-capability].interface; nodes[id=design].children[id=contract].children[id=contract-capability].validators; nodes[id=design].children[id=contract].children[id=contract-capability].terminal.mechanism; nodes[id=design].children[id=contract].children[id=contract-capability].terminal.retry; nodes[id=design].children[id=contract].children[id=contract-capability].terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-023",
+    "nodeId": "contract-entry",
+    "question": "正常入口与成品：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=contract].children[id=contract-entry].inputs; nodes[id=design].children[id=contract].children[id=contract-entry].outputs; nodes[id=design].children[id=contract].children[id=contract-entry].authority; nodes[id=design].children[id=contract].children[id=contract-entry].interface; nodes[id=design].children[id=contract].children[id=contract-entry].validators; nodes[id=design].children[id=contract].children[id=contract-entry].terminal.mechanism; nodes[id=design].children[id=contract].children[id=contract-entry].terminal.retry; nodes[id=design].children[id=contract].children[id=contract-entry].terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-024",
+    "nodeId": "contract-outcomes",
+    "question": "成功失败与未知：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=contract].children[id=contract-outcomes].inputs; nodes[id=design].children[id=contract].children[id=contract-outcomes].outputs; nodes[id=design].children[id=contract].children[id=contract-outcomes].authority; nodes[id=design].children[id=contract].children[id=contract-outcomes].interface; nodes[id=design].children[id=contract].children[id=contract-outcomes].validators; nodes[id=design].children[id=contract].children[id=contract-outcomes].terminal.mechanism; nodes[id=design].children[id=contract].children[id=contract-outcomes].terminal.retry; nodes[id=design].children[id=contract].children[id=contract-outcomes].terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-025",
+    "nodeId": "contract-fidelity",
+    "question": "证据真实度：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=contract].children[id=contract-fidelity].inputs; nodes[id=design].children[id=contract].children[id=contract-fidelity].outputs; nodes[id=design].children[id=contract].children[id=contract-fidelity].authority; nodes[id=design].children[id=contract].children[id=contract-fidelity].interface; nodes[id=design].children[id=contract].children[id=contract-fidelity].validators; nodes[id=design].children[id=contract].children[id=contract-fidelity].terminal.mechanism; nodes[id=design].children[id=contract].children[id=contract-fidelity].terminal.retry; nodes[id=design].children[id=contract].children[id=contract-fidelity].terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-026",
+    "nodeId": "contract-forbidden",
+    "question": "禁止替代：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=contract].children[id=contract-forbidden].inputs; nodes[id=design].children[id=contract].children[id=contract-forbidden].outputs; nodes[id=design].children[id=contract].children[id=contract-forbidden].authority; nodes[id=design].children[id=contract].children[id=contract-forbidden].interface; nodes[id=design].children[id=contract].children[id=contract-forbidden].validators; nodes[id=design].children[id=contract].children[id=contract-forbidden].terminal.mechanism; nodes[id=design].children[id=contract].children[id=contract-forbidden].terminal.retry; nodes[id=design].children[id=contract].children[id=contract-forbidden].terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-027",
+    "nodeId": "contract-regression",
+    "question": "已有能力保护：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=contract].children[id=contract-regression].inputs; nodes[id=design].children[id=contract].children[id=contract-regression].outputs; nodes[id=design].children[id=contract].children[id=contract-regression].authority; nodes[id=design].children[id=contract].children[id=contract-regression].interface; nodes[id=design].children[id=contract].children[id=contract-regression].validators; nodes[id=design].children[id=contract].children[id=contract-regression].terminal.mechanism; nodes[id=design].children[id=contract].children[id=contract-regression].terminal.retry; nodes[id=design].children[id=contract].children[id=contract-regression].terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-028",
+    "nodeId": "contract-controls",
+    "question": "三类控制例：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=contract].children[id=contract-controls].inputs; nodes[id=design].children[id=contract].children[id=contract-controls].outputs; nodes[id=design].children[id=contract].children[id=contract-controls].authority; nodes[id=design].children[id=contract].children[id=contract-controls].interface; nodes[id=design].children[id=contract].children[id=contract-controls].validators; nodes[id=design].children[id=contract].children[id=contract-controls].terminal.mechanism; nodes[id=design].children[id=contract].children[id=contract-controls].terminal.retry; nodes[id=design].children[id=contract].children[id=contract-controls].terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-029",
+    "nodeId": "contract-changes",
+    "question": "交付修改与退回：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=contract].children[id=contract-changes].inputs; nodes[id=design].children[id=contract].children[id=contract-changes].outputs; nodes[id=design].children[id=contract].children[id=contract-changes].authority; nodes[id=design].children[id=contract].children[id=contract-changes].interface; nodes[id=design].children[id=contract].children[id=contract-changes].validators; nodes[id=design].children[id=contract].children[id=contract-changes].terminal.mechanism; nodes[id=design].children[id=contract].children[id=contract-changes].terminal.retry; nodes[id=design].children[id=contract].children[id=contract-changes].terminal.acceptance",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-030",
+    "nodeId": "contract-authorization",
+    "question": "资源与授权：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=contract].children[id=contract-authorization].inputs; nodes[id=design].children[id=contract].children[id=contract-authorization].outputs; nodes[id=design].children[id=contract].children[id=contract-authorization].authority; nodes[id=design].children[id=contract].children[id=contract-authorization].interface; nodes[id=design].children[id=contract].children[id=contract-authorization].validators; nodes[id=design].children[id=contract].children[id=contract-authorization].terminal.mechanism; nodes[id=design].children[id=contract].children[id=contract-authorization].terminal.retry; nodes[id=design].children[id=contract].children[id=contract-authorization].terminal.acceptance; requirements[id=r-boundary]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-031",
+    "nodeId": "freeze",
+    "question": "批准与冻结交接：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=freeze].inputs; nodes[id=design].children[id=freeze].outputs; nodes[id=design].children[id=freeze].authority; nodes[id=design].children[id=freeze].interface; nodes[id=design].children[id=freeze].validators; nodes[id=design].children[id=freeze].terminal.mechanism; nodes[id=design].children[id=freeze].terminal.retry; nodes[id=design].children[id=freeze].terminal.acceptance; connections[id=c-gates-to-freeze|c-freeze-to-role-X1]; requirements[id=r-freeze]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-032",
+    "nodeId": "q-checker",
+    "question": "草稿与冻结检查：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=q-checker].inputs; nodes[id=design].children[id=q-checker].outputs; nodes[id=design].children[id=q-checker].authority; nodes[id=design].children[id=q-checker].interface; nodes[id=design].children[id=q-checker].validators; nodes[id=design].children[id=q-checker].terminal.mechanism; nodes[id=design].children[id=q-checker].terminal.retry; nodes[id=design].children[id=q-checker].terminal.acceptance; connections[id=c-q-checker-to-role-D5]; requirements[id=r-freeze|r-blueprint]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-033",
+    "nodeId": "q-inheritance",
+    "question": "小修批准继承：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=design].children[id=q-inheritance].inputs; nodes[id=design].children[id=q-inheritance].outputs; nodes[id=design].children[id=q-inheritance].authority; nodes[id=design].children[id=q-inheritance].interface; nodes[id=design].children[id=q-inheritance].validators; nodes[id=design].children[id=q-inheritance].terminal.mechanism; nodes[id=design].children[id=q-inheritance].terminal.retry; nodes[id=design].children[id=q-inheritance].terminal.acceptance; connections[id=c-q-inheritance-to-revision]; requirements[id=r-revision]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-034",
+    "nodeId": "delivery",
+    "question": "交付保障：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=delivery].inputs; nodes[id=delivery].outputs; nodes[id=delivery].authority; nodes[id=delivery].interface; nodes[id=delivery].validators; nodes[id=delivery].children; connections[id=c-shared-to-delivery|c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-035",
+    "nodeId": "delivery-roles",
+    "question": "交付角色：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=delivery].children[id=delivery-roles].inputs; nodes[id=delivery].children[id=delivery-roles].outputs; nodes[id=delivery].children[id=delivery-roles].authority; nodes[id=delivery].children[id=delivery-roles].interface; nodes[id=delivery].children[id=delivery-roles].validators; nodes[id=delivery].children[id=delivery-roles].children",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-036",
+    "nodeId": "role-X1",
+    "question": "X1：负责人：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=delivery].children[id=delivery-roles].children[id=role-X1].inputs; nodes[id=delivery].children[id=delivery-roles].children[id=role-X1].outputs; nodes[id=delivery].children[id=delivery-roles].children[id=role-X1].authority; nodes[id=delivery].children[id=delivery-roles].children[id=role-X1].interface; nodes[id=delivery].children[id=delivery-roles].children[id=role-X1].validators; nodes[id=delivery].children[id=delivery-roles].children[id=role-X1].terminal.mechanism; nodes[id=delivery].children[id=delivery-roles].children[id=role-X1].terminal.retry; nodes[id=delivery].children[id=delivery-roles].children[id=role-X1].terminal.acceptance; connections[id=c-freeze-to-role-X1|c-role-X1-to-role-X2|c-role-X1-to-role-X3]; requirements[id=r-dispatch|r-roles]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-037",
+    "nodeId": "role-X2",
+    "question": "X2：实现者：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=delivery].children[id=delivery-roles].children[id=role-X2].inputs; nodes[id=delivery].children[id=delivery-roles].children[id=role-X2].outputs; nodes[id=delivery].children[id=delivery-roles].children[id=role-X2].authority; nodes[id=delivery].children[id=delivery-roles].children[id=role-X2].interface; nodes[id=delivery].children[id=delivery-roles].children[id=role-X2].validators; nodes[id=delivery].children[id=delivery-roles].children[id=role-X2].terminal.mechanism; nodes[id=delivery].children[id=delivery-roles].children[id=role-X2].terminal.retry; nodes[id=delivery].children[id=delivery-roles].children[id=role-X2].terminal.acceptance; connections[id=c-role-X1-to-role-X2|c-role-X2-to-calibration|c-role-X2-to-candidate|c-role-X2-to-deviation]; failurePaths[id=fail-premise|fail-calibration]; requirements[id=r-roles]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-038",
+    "nodeId": "role-X3",
+    "question": "X3：独立验收：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=delivery].children[id=delivery-roles].children[id=role-X3].inputs; nodes[id=delivery].children[id=delivery-roles].children[id=role-X3].outputs; nodes[id=delivery].children[id=delivery-roles].children[id=role-X3].authority; nodes[id=delivery].children[id=delivery-roles].children[id=role-X3].interface; nodes[id=delivery].children[id=delivery-roles].children[id=role-X3].validators; nodes[id=delivery].children[id=delivery-roles].children[id=role-X3].terminal.mechanism; nodes[id=delivery].children[id=delivery-roles].children[id=role-X3].terminal.retry; nodes[id=delivery].children[id=delivery-roles].children[id=role-X3].terminal.acceptance; connections[id=c-role-X1-to-role-X3|c-role-X3-to-calibration]; requirements[id=r-roles]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-039",
+    "nodeId": "role-X4",
+    "question": "X4：专项检查：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=delivery].children[id=delivery-roles].children[id=role-X4].inputs; nodes[id=delivery].children[id=delivery-roles].children[id=role-X4].outputs; nodes[id=delivery].children[id=delivery-roles].children[id=role-X4].authority; nodes[id=delivery].children[id=delivery-roles].children[id=role-X4].interface; nodes[id=delivery].children[id=delivery-roles].children[id=role-X4].validators; nodes[id=delivery].children[id=delivery-roles].children[id=role-X4].terminal.mechanism; nodes[id=delivery].children[id=delivery-roles].children[id=role-X4].terminal.retry; nodes[id=delivery].children[id=delivery-roles].children[id=role-X4].terminal.acceptance; connections[id=c-role-X4-to-evidence]; requirements[id=r-roles]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-040",
+    "nodeId": "role-X5",
+    "question": "X5：专业裁判：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=delivery].children[id=delivery-roles].children[id=role-X5].inputs; nodes[id=delivery].children[id=delivery-roles].children[id=role-X5].outputs; nodes[id=delivery].children[id=delivery-roles].children[id=role-X5].authority; nodes[id=delivery].children[id=delivery-roles].children[id=role-X5].interface; nodes[id=delivery].children[id=delivery-roles].children[id=role-X5].validators; nodes[id=delivery].children[id=delivery-roles].children[id=role-X5].terminal.mechanism; nodes[id=delivery].children[id=delivery-roles].children[id=role-X5].terminal.retry; nodes[id=delivery].children[id=delivery-roles].children[id=role-X5].terminal.acceptance; connections[id=c-role-X5-to-evidence]; requirements[id=r-roles]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-041",
+    "nodeId": "acceptance",
+    "question": "验收资产分级：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=delivery].children[id=acceptance].inputs; nodes[id=delivery].children[id=acceptance].outputs; nodes[id=delivery].children[id=acceptance].authority; nodes[id=delivery].children[id=acceptance].interface; nodes[id=delivery].children[id=acceptance].validators; nodes[id=delivery].children[id=acceptance].terminal.mechanism; nodes[id=delivery].children[id=acceptance].terminal.retry; nodes[id=delivery].children[id=acceptance].terminal.acceptance; connections[id=c-calibration-to-acceptance|c-acceptance-to-candidate]; failurePaths[id=fail-semantic]; requirements[id=r-evidence|r-process]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-042",
+    "nodeId": "calibration",
+    "question": "验收器三类校准：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=delivery].children[id=calibration].inputs; nodes[id=delivery].children[id=calibration].outputs; nodes[id=delivery].children[id=calibration].authority; nodes[id=delivery].children[id=calibration].interface; nodes[id=delivery].children[id=calibration].validators; nodes[id=delivery].children[id=calibration].terminal.mechanism; nodes[id=delivery].children[id=calibration].terminal.retry; nodes[id=delivery].children[id=calibration].terminal.acceptance; connections[id=c-role-X2-to-calibration|c-role-X3-to-calibration|c-calibration-to-acceptance]; failurePaths[id=fail-semantic|fail-calibration]; requirements[id=r-evidence]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-043",
+    "nodeId": "candidate",
+    "question": "最终候选身份：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=delivery].children[id=candidate].inputs; nodes[id=delivery].children[id=candidate].outputs; nodes[id=delivery].children[id=candidate].authority; nodes[id=delivery].children[id=candidate].interface; nodes[id=delivery].children[id=candidate].validators; nodes[id=delivery].children[id=candidate].terminal.mechanism; nodes[id=delivery].children[id=candidate].terminal.retry; nodes[id=delivery].children[id=candidate].terminal.acceptance; connections[id=c-acceptance-to-candidate|c-role-X2-to-candidate|c-candidate-to-evidence]; failurePaths[id=fail-candidate|fail-missing]; requirements[id=r-evidence]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-044",
+    "nodeId": "evidence",
+    "question": "三态原始证据：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=delivery].children[id=evidence].inputs; nodes[id=delivery].children[id=evidence].outputs; nodes[id=delivery].children[id=evidence].authority; nodes[id=delivery].children[id=evidence].interface; nodes[id=delivery].children[id=evidence].validators; nodes[id=delivery].children[id=evidence].terminal.mechanism; nodes[id=delivery].children[id=evidence].terminal.retry; nodes[id=delivery].children[id=evidence].terminal.acceptance; connections[id=c-candidate-to-evidence|c-role-X4-to-evidence|c-role-X5-to-evidence|c-evidence-to-sign]; failurePaths[id=fail-candidate|fail-missing]; requirements[id=r-evidence]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-045",
+    "nodeId": "deviation",
+    "question": "偏离和设计退回：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=delivery].children[id=deviation].inputs; nodes[id=delivery].children[id=deviation].outputs; nodes[id=delivery].children[id=deviation].authority; nodes[id=delivery].children[id=deviation].interface; nodes[id=delivery].children[id=deviation].validators; nodes[id=delivery].children[id=deviation].terminal.mechanism; nodes[id=delivery].children[id=deviation].terminal.retry; nodes[id=delivery].children[id=deviation].terminal.acceptance; connections[id=c-role-X2-to-deviation|c-deviation-to-revision|c-deviation-to-metrics|c-web-later-to-deviation]; failurePaths[id=fail-premise]; requirements[id=r-revision|r-evidence]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-046",
+    "nodeId": "sign",
+    "question": "亲读后唯一签发：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=delivery].children[id=sign].inputs; nodes[id=delivery].children[id=sign].outputs; nodes[id=delivery].children[id=sign].authority; nodes[id=delivery].children[id=sign].interface; nodes[id=delivery].children[id=sign].validators; nodes[id=delivery].children[id=sign].terminal.mechanism; nodes[id=delivery].children[id=sign].terminal.retry; nodes[id=delivery].children[id=sign].terminal.acceptance; connections[id=c-evidence-to-sign]; failurePaths[id=fail-candidate|fail-revocation]; requirements[id=r-evidence|r-process]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-047",
+    "nodeId": "packaging",
+    "question": "同源分发：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=packaging].inputs; nodes[id=packaging].outputs; nodes[id=packaging].authority; nodes[id=packaging].interface; nodes[id=packaging].validators; nodes[id=packaging].children; connections[id=c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-048",
+    "nodeId": "source-layout",
+    "question": "唯一源目录：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=packaging].children[id=source-layout].inputs; nodes[id=packaging].children[id=source-layout].outputs; nodes[id=packaging].children[id=source-layout].authority; nodes[id=packaging].children[id=source-layout].interface; nodes[id=packaging].children[id=source-layout].validators; nodes[id=packaging].children[id=source-layout].terminal.mechanism; nodes[id=packaging].children[id=source-layout].terminal.retry; nodes[id=packaging].children[id=source-layout].terminal.acceptance; connections[id=c-source-layout-to-planning-entry]; failurePaths[id=fail-package]; requirements[id=r-package|r-sources]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-049",
+    "nodeId": "planning-entry",
+    "question": "同源规划入口：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=packaging].children[id=planning-entry].inputs; nodes[id=packaging].children[id=planning-entry].outputs; nodes[id=packaging].children[id=planning-entry].authority; nodes[id=packaging].children[id=planning-entry].interface; nodes[id=packaging].children[id=planning-entry].validators; nodes[id=packaging].children[id=planning-entry].terminal.mechanism; nodes[id=packaging].children[id=planning-entry].terminal.retry; nodes[id=packaging].children[id=planning-entry].terminal.acceptance; connections[id=c-source-layout-to-planning-entry|c-planning-entry-to-execution-package]; failurePaths[id=fail-package]; requirements[id=r-package|r-sources]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-050",
+    "nodeId": "execution-package",
+    "question": "执行插件入口：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=packaging].children[id=execution-package].inputs; nodes[id=packaging].children[id=execution-package].outputs; nodes[id=packaging].children[id=execution-package].authority; nodes[id=packaging].children[id=execution-package].interface; nodes[id=packaging].children[id=execution-package].validators; nodes[id=packaging].children[id=execution-package].terminal.mechanism; nodes[id=packaging].children[id=execution-package].terminal.retry; nodes[id=packaging].children[id=execution-package].terminal.acceptance; connections[id=c-planning-entry-to-execution-package|c-execution-package-to-capability-check|c-q-capacity-to-execution-package]; failurePaths[id=fail-package]; requirements[id=r-package|r-sources]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-051",
+    "nodeId": "minimum",
+    "question": "完整最小范围：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=packaging].children[id=minimum].inputs; nodes[id=packaging].children[id=minimum].outputs; nodes[id=packaging].children[id=minimum].authority; nodes[id=packaging].children[id=minimum].interface; nodes[id=packaging].children[id=minimum].validators; nodes[id=packaging].children[id=minimum].terminal.mechanism; nodes[id=packaging].children[id=minimum].terminal.retry; nodes[id=packaging].children[id=minimum].terminal.acceptance; requirements[id=r-scope|r-blueprint]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-052",
+    "nodeId": "capability-check",
+    "question": "正常入口验收：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=packaging].children[id=capability-check].inputs; nodes[id=packaging].children[id=capability-check].outputs; nodes[id=packaging].children[id=capability-check].authority; nodes[id=packaging].children[id=capability-check].interface; nodes[id=packaging].children[id=capability-check].validators; nodes[id=packaging].children[id=capability-check].terminal.mechanism; nodes[id=packaging].children[id=capability-check].terminal.retry; nodes[id=packaging].children[id=capability-check].terminal.acceptance; connections[id=c-execution-package-to-capability-check|c-web-later-to-capability-check|c-capability-check-to-web-later]; requirements[id=r-scope]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-053",
+    "nodeId": "web-later",
+    "question": "网页端打包与验收：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=packaging].children[id=web-later].inputs; nodes[id=packaging].children[id=web-later].outputs; nodes[id=packaging].children[id=web-later].authority; nodes[id=packaging].children[id=web-later].interface; nodes[id=packaging].children[id=web-later].validators; nodes[id=packaging].children[id=web-later].terminal.mechanism; nodes[id=packaging].children[id=web-later].terminal.retry; nodes[id=packaging].children[id=web-later].terminal.acceptance; connections[id=c-web-later-to-capability-check|c-web-later-to-deviation|c-capability-check-to-web-later]; failurePaths[id=fail-web-method]; requirements[id=r-package]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-NODE-054",
+    "nodeId": "q-capacity",
+    "question": "市场容量调整：用户怎样进入、需要什么输入；产出什么并交给谁；谁有决定权；缺输入、缺证据、失败或中断时怎样处理；怎样验收与恢复；以及怎样避免已有能力退化，是否都有明确且互相一致的答案？",
+    "answerLocation": "nodes[id=packaging].children[id=q-capacity].inputs; nodes[id=packaging].children[id=q-capacity].outputs; nodes[id=packaging].children[id=q-capacity].authority; nodes[id=packaging].children[id=q-capacity].interface; nodes[id=packaging].children[id=q-capacity].validators; nodes[id=packaging].children[id=q-capacity].terminal.mechanism; nodes[id=packaging].children[id=q-capacity].terminal.retry; nodes[id=packaging].children[id=q-capacity].terminal.acceptance; connections[id=c-q-capacity-to-execution-package]; requirements[id=r-package]",
+    "gap": null,
+    "impact": "Blueprint 已给出可执行答案；与 requirements、connections、walkthroughs、failurePaths 交叉核对后，未发现会让用户卡住、误解、无法可靠开工或无法验收的缺口。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-FREEZE-001",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明是否完整告诉用户条件角色何时必须启用，特别是 X3 何时会成为额外的 GPT Work 极高独立验收步骤？",
+    "answerLocation": "nodes[id=shared].children[id=dispatch].terminal.mechanism（§2.2–2.3，X3-acceptance 条件）；nodes[id=delivery].children[id=delivery-roles].children[id=role-X3].terminal.mechanism；nodes[id=delivery].children[id=delivery-roles].children[id=role-X3].terminal.acceptance",
+    "gap": "FREEZE_EXPLANATION 第 2 节只说明 X3 在 GPT Work 极高运行并需用户转交，却没有写明 Blueprint 的强制启用条件：科研数值或统计、安全相关验收，或验收器太弱需要换人重写时必须启用。用户仅阅读冻结说明时无法知道哪些任务必然增加这一独立验收步骤和人工转交。",
+    "impact": "用户会误判真实交付流程、需要亲自转交的次数和可能的模型资源消耗；在科研/统计/安全任务上还会误解独立验收是否是可选项。冻结说明是批准前唯一阅读材料，因此在修正前不应据此批准。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "Q-FREEZE-002",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明中的 R1–R7、S1 是否逐项保留 Blueprint 写定的固定输入、全部检查项、判定尺子和责任人，没有弱化、改写或增加不存在的规则？",
+    "answerLocation": "nodes[id=packaging].children[id=capability-check].inputs[id=context].description；nodes[id=packaging].children[id=capability-check].interface.boundaries；nodes[id=packaging].children[id=capability-check].validators[id=v-capability-check].oracle/method/criteria；nodes[id=packaging].children[id=capability-check].validators[id=v-regression-set].oracle/method/criteria；nodes[id=packaging].children[id=capability-check].terminal.acceptance",
+    "gap": "不完全一致。冻结说明把若干已冻结检查压成概括语句：R1 没写“仅 D8 未完成”这一固定状态及正确下一步必须同时包含 D8、GPT 极高、新对话和正确写回位置，并把 Blueprint 只交 X5 判的 R1③概括成“X5 或你”；R2 漏掉正文不得出现路径以及验收器/回归统计必须与设计一致等检查；R3 没写四个身份值逐项一致及说明身份不一致后必须由 D6 重做说明检查；R4 漏掉阈值变化理由由 X5 判；R6 没列出修订号续接、原派发置 stale、保留原记录、重派提示词列出既有写入这些检查；R7 漏掉 12/32 预算、包内资源可读以及网页端结果由 X4 观察、X1 亲读原始对话；S1 把 Blueprint 固定的三条输入概括为泛化请求。由此冻结说明描述的回归门槛和责任链比 Blueprint 弱。",
+    "impact": "用户批准时看不到最终完成门槛的完整内容，实施者也可能按更弱或不同的回归描述理解“什么算完成”，导致无法可靠验收最终候选。按 Blueprint 自己的冻结说明失败路径，这类不一致必须先交 D1 改写，再由 D6 对新说明重做四项检查。",
+    "blocking": true,
+    "owner": "D1"
+  }
+]
