@@ -1,0 +1,3782 @@
+[
+  {
+    "id": "D6R6-01-shared-1",
+    "nodeId": "shared",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[shared].inputs; nodes[shared].interface.emptyCases; requirements[r-state,r-dispatch,r-prompts,r-revision,r-metrics,r-process,r-sources,r-blueprint,r-boundary].route; connections[c-shared-to-design,c-shared-to-delivery,c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-01-shared-2",
+    "nodeId": "shared",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[shared].outputs; nodes[shared].interface.format; requirements[r-state,r-dispatch,r-prompts,r-revision,r-metrics,r-process,r-sources,r-blueprint,r-boundary].route; connections[c-shared-to-design,c-shared-to-delivery,c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-01-shared-3",
+    "nodeId": "shared",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[shared].authority; nodes[shared].validators; requirements[r-state,r-dispatch,r-prompts,r-revision,r-metrics,r-process,r-sources,r-blueprint,r-boundary].route; connections[c-shared-to-design,c-shared-to-delivery,c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-01-shared-4",
+    "nodeId": "shared",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[shared].interface.emptyCases; nodes[shared].interface.errors; requirements[r-state,r-dispatch,r-prompts,r-revision,r-metrics,r-process,r-sources,r-blueprint,r-boundary].route; connections[c-shared-to-design,c-shared-to-delivery,c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-01-shared-5",
+    "nodeId": "shared",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[shared].validators; requirements[r-state,r-dispatch,r-prompts,r-revision,r-metrics,r-process,r-sources,r-blueprint,r-boundary].route; connections[c-shared-to-design,c-shared-to-delivery,c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-01-shared-6",
+    "nodeId": "shared",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[shared].interface.errors; nodes[state].terminal.mechanism(§1.3a); requirements[r-state,r-dispatch,r-prompts,r-revision,r-metrics,r-process,r-sources,r-blueprint,r-boundary].route; connections[c-shared-to-design,c-shared-to-delivery,c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-01-shared-7",
+    "nodeId": "shared",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[shared].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-state,r-dispatch,r-prompts,r-revision,r-metrics,r-process,r-sources,r-blueprint,r-boundary].route; connections[c-shared-to-design,c-shared-to-delivery,c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-02-state-1",
+    "nodeId": "state",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[state].inputs; nodes[state].interface.emptyCases; requirements[r-state,r-blueprint].route; connections[c-state-to-writer]; walkthroughs[walk-source.ws-state]; failurePaths[fail-write,fail-recovery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-02-state-2",
+    "nodeId": "state",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[state].outputs; nodes[state].interface.format; requirements[r-state,r-blueprint].route; connections[c-state-to-writer]; walkthroughs[walk-source.ws-state]; failurePaths[fail-write,fail-recovery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-02-state-3",
+    "nodeId": "state",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[state].authority; nodes[state].terminal.mechanism; requirements[r-state,r-blueprint].route; connections[c-state-to-writer]; walkthroughs[walk-source.ws-state]; failurePaths[fail-write,fail-recovery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-02-state-4",
+    "nodeId": "state",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[state].interface.emptyCases; nodes[state].interface.errors; nodes[state].terminal.retry; requirements[r-state,r-blueprint].route; connections[c-state-to-writer]; walkthroughs[walk-source.ws-state]; failurePaths[fail-write,fail-recovery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-02-state-5",
+    "nodeId": "state",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[state].validators; nodes[state].terminal.acceptance; requirements[r-state,r-blueprint].route; connections[c-state-to-writer]; walkthroughs[walk-source.ws-state]; failurePaths[fail-write,fail-recovery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-02-state-6",
+    "nodeId": "state",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[state].interface.errors; nodes[state].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-state,r-blueprint].route; connections[c-state-to-writer]; walkthroughs[walk-source.ws-state]; failurePaths[fail-write,fail-recovery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-02-state-7",
+    "nodeId": "state",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[state].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-state,r-blueprint].route; connections[c-state-to-writer]; walkthroughs[walk-source.ws-state]; failurePaths[fail-write,fail-recovery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-03-writer-1",
+    "nodeId": "writer",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[writer].inputs; nodes[writer].interface.emptyCases; requirements[r-state,r-process,r-blueprint].route; connections[c-state-to-writer,c-writer-to-dispatch]; walkthroughs[walk-source.ws-writer]; failurePaths[fail-write]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-03-writer-2",
+    "nodeId": "writer",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[writer].outputs; nodes[writer].interface.format; requirements[r-state,r-process,r-blueprint].route; connections[c-state-to-writer,c-writer-to-dispatch]; walkthroughs[walk-source.ws-writer]; failurePaths[fail-write]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-03-writer-3",
+    "nodeId": "writer",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[writer].authority; nodes[writer].terminal.mechanism; requirements[r-state,r-process,r-blueprint].route; connections[c-state-to-writer,c-writer-to-dispatch]; walkthroughs[walk-source.ws-writer]; failurePaths[fail-write]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-03-writer-4",
+    "nodeId": "writer",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[writer].interface.emptyCases; nodes[writer].interface.errors; nodes[writer].terminal.retry; requirements[r-state,r-process,r-blueprint].route; connections[c-state-to-writer,c-writer-to-dispatch]; walkthroughs[walk-source.ws-writer]; failurePaths[fail-write]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-03-writer-5",
+    "nodeId": "writer",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[writer].validators; nodes[writer].terminal.acceptance; requirements[r-state,r-process,r-blueprint].route; connections[c-state-to-writer,c-writer-to-dispatch]; walkthroughs[walk-source.ws-writer]; failurePaths[fail-write]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-03-writer-6",
+    "nodeId": "writer",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[writer].interface.errors; nodes[writer].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-state,r-process,r-blueprint].route; connections[c-state-to-writer,c-writer-to-dispatch]; walkthroughs[walk-source.ws-writer]; failurePaths[fail-write]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-03-writer-7",
+    "nodeId": "writer",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[writer].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-state,r-process,r-blueprint].route; connections[c-state-to-writer,c-writer-to-dispatch]; walkthroughs[walk-source.ws-writer]; failurePaths[fail-write]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-04-record-check-1",
+    "nodeId": "record-check",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[record-check].inputs; nodes[record-check].interface.emptyCases; requirements[r-state,r-sources,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-04-record-check-2",
+    "nodeId": "record-check",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[record-check].outputs; nodes[record-check].interface.format; requirements[r-state,r-sources,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-04-record-check-3",
+    "nodeId": "record-check",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[record-check].terminal.mechanism; nodes[record-check].interface.boundaries; requirements[r-state,r-sources,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-04-record-check-4",
+    "nodeId": "record-check",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[record-check].interface.emptyCases; nodes[record-check].interface.errors; nodes[record-check].terminal.retry; requirements[r-state,r-sources,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-04-record-check-5",
+    "nodeId": "record-check",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[record-check].validators; nodes[record-check].terminal.acceptance; requirements[r-state,r-sources,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-04-record-check-6",
+    "nodeId": "record-check",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[record-check].interface.errors; nodes[record-check].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-state,r-sources,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-04-record-check-7",
+    "nodeId": "record-check",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[record-check].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-state,r-sources,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-05-dispatch-1",
+    "nodeId": "dispatch",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[dispatch].inputs; nodes[dispatch].interface.emptyCases; requirements[r-dispatch,r-process,r-blueprint].route; connections[c-writer-to-dispatch,c-dispatch-to-prompts]; walkthroughs[walk-source.ws-dispatch]; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-05-dispatch-2",
+    "nodeId": "dispatch",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[dispatch].outputs; nodes[dispatch].interface.format; requirements[r-dispatch,r-process,r-blueprint].route; connections[c-writer-to-dispatch,c-dispatch-to-prompts]; walkthroughs[walk-source.ws-dispatch]; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-05-dispatch-3",
+    "nodeId": "dispatch",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[dispatch].authority; nodes[dispatch].terminal.mechanism; requirements[r-dispatch,r-process,r-blueprint].route; connections[c-writer-to-dispatch,c-dispatch-to-prompts]; walkthroughs[walk-source.ws-dispatch]; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-05-dispatch-4",
+    "nodeId": "dispatch",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[dispatch].interface.emptyCases; nodes[dispatch].interface.errors; nodes[dispatch].terminal.retry; requirements[r-dispatch,r-process,r-blueprint].route; connections[c-writer-to-dispatch,c-dispatch-to-prompts]; walkthroughs[walk-source.ws-dispatch]; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-05-dispatch-5",
+    "nodeId": "dispatch",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[dispatch].validators; nodes[dispatch].terminal.acceptance; requirements[r-dispatch,r-process,r-blueprint].route; connections[c-writer-to-dispatch,c-dispatch-to-prompts]; walkthroughs[walk-source.ws-dispatch]; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-05-dispatch-6",
+    "nodeId": "dispatch",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[dispatch].interface.errors; nodes[dispatch].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-dispatch,r-process,r-blueprint].route; connections[c-writer-to-dispatch,c-dispatch-to-prompts]; walkthroughs[walk-source.ws-dispatch]; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-05-dispatch-7",
+    "nodeId": "dispatch",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[dispatch].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-dispatch,r-process,r-blueprint].route; connections[c-writer-to-dispatch,c-dispatch-to-prompts]; walkthroughs[walk-source.ws-dispatch]; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-06-prompts-1",
+    "nodeId": "prompts",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[prompts].inputs; nodes[prompts].interface.emptyCases; requirements[r-prompts,r-dispatch,r-boundary,r-blueprint].route; connections[c-dispatch-to-prompts,c-prompts-to-role-D2,c-prompts-to-role-D3,c-prompts-to-clarify]; walkthroughs[walk-source.ws-prompts]; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-06-prompts-2",
+    "nodeId": "prompts",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[prompts].outputs; nodes[prompts].interface.format; requirements[r-prompts,r-dispatch,r-boundary,r-blueprint].route; connections[c-dispatch-to-prompts,c-prompts-to-role-D2,c-prompts-to-role-D3,c-prompts-to-clarify]; walkthroughs[walk-source.ws-prompts]; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-06-prompts-3",
+    "nodeId": "prompts",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[prompts].terminal.mechanism; nodes[prompts].interface.boundaries; requirements[r-prompts,r-dispatch,r-boundary,r-blueprint].route; connections[c-dispatch-to-prompts,c-prompts-to-role-D2,c-prompts-to-role-D3,c-prompts-to-clarify]; walkthroughs[walk-source.ws-prompts]; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-06-prompts-4",
+    "nodeId": "prompts",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[prompts].interface.emptyCases; nodes[prompts].interface.errors; nodes[prompts].terminal.retry; requirements[r-prompts,r-dispatch,r-boundary,r-blueprint].route; connections[c-dispatch-to-prompts,c-prompts-to-role-D2,c-prompts-to-role-D3,c-prompts-to-clarify]; walkthroughs[walk-source.ws-prompts]; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-06-prompts-5",
+    "nodeId": "prompts",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[prompts].validators; nodes[prompts].terminal.acceptance; requirements[r-prompts,r-dispatch,r-boundary,r-blueprint].route; connections[c-dispatch-to-prompts,c-prompts-to-role-D2,c-prompts-to-role-D3,c-prompts-to-clarify]; walkthroughs[walk-source.ws-prompts]; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-06-prompts-6",
+    "nodeId": "prompts",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[prompts].interface.errors; nodes[prompts].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-prompts,r-dispatch,r-boundary,r-blueprint].route; connections[c-dispatch-to-prompts,c-prompts-to-role-D2,c-prompts-to-role-D3,c-prompts-to-clarify]; walkthroughs[walk-source.ws-prompts]; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-06-prompts-7",
+    "nodeId": "prompts",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[prompts].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-prompts,r-dispatch,r-boundary,r-blueprint].route; connections[c-dispatch-to-prompts,c-prompts-to-role-D2,c-prompts-to-role-D3,c-prompts-to-clarify]; walkthroughs[walk-source.ws-prompts]; failurePaths[fail-role]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-07-revision-1",
+    "nodeId": "revision",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[revision].inputs; nodes[revision].interface.emptyCases; requirements[r-revision,r-process,r-blueprint].route; connections[c-deviation-to-revision,c-revision-to-role-D1,c-revision-to-metrics,c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-07-revision-2",
+    "nodeId": "revision",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[revision].outputs; nodes[revision].interface.format; requirements[r-revision,r-process,r-blueprint].route; connections[c-deviation-to-revision,c-revision-to-role-D1,c-revision-to-metrics,c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-07-revision-3",
+    "nodeId": "revision",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[revision].authority; nodes[revision].terminal.mechanism; requirements[r-revision,r-process,r-blueprint].route; connections[c-deviation-to-revision,c-revision-to-role-D1,c-revision-to-metrics,c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-07-revision-4",
+    "nodeId": "revision",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[revision].interface.emptyCases; nodes[revision].interface.errors; nodes[revision].terminal.retry; requirements[r-revision,r-process,r-blueprint].route; connections[c-deviation-to-revision,c-revision-to-role-D1,c-revision-to-metrics,c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-07-revision-5",
+    "nodeId": "revision",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[revision].validators; nodes[revision].terminal.acceptance; requirements[r-revision,r-process,r-blueprint].route; connections[c-deviation-to-revision,c-revision-to-role-D1,c-revision-to-metrics,c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-07-revision-6",
+    "nodeId": "revision",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[revision].interface.errors; nodes[revision].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-revision,r-process,r-blueprint].route; connections[c-deviation-to-revision,c-revision-to-role-D1,c-revision-to-metrics,c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-07-revision-7",
+    "nodeId": "revision",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[revision].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-revision,r-process,r-blueprint].route; connections[c-deviation-to-revision,c-revision-to-role-D1,c-revision-to-metrics,c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-08-metrics-1",
+    "nodeId": "metrics",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[metrics].inputs; nodes[metrics].interface.emptyCases; requirements[r-metrics,r-blueprint].route; connections[c-revision-to-metrics,c-deviation-to-metrics]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-08-metrics-2",
+    "nodeId": "metrics",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[metrics].outputs; nodes[metrics].interface.format; requirements[r-metrics,r-blueprint].route; connections[c-revision-to-metrics,c-deviation-to-metrics]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-08-metrics-3",
+    "nodeId": "metrics",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[metrics].terminal.mechanism; nodes[metrics].interface.boundaries; requirements[r-metrics,r-blueprint].route; connections[c-revision-to-metrics,c-deviation-to-metrics]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-08-metrics-4",
+    "nodeId": "metrics",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[metrics].interface.emptyCases; nodes[metrics].interface.errors; nodes[metrics].terminal.retry; requirements[r-metrics,r-blueprint].route; connections[c-revision-to-metrics,c-deviation-to-metrics]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-08-metrics-5",
+    "nodeId": "metrics",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[metrics].validators; nodes[metrics].terminal.acceptance; requirements[r-metrics,r-blueprint].route; connections[c-revision-to-metrics,c-deviation-to-metrics]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-08-metrics-6",
+    "nodeId": "metrics",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[metrics].interface.errors; nodes[metrics].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-metrics,r-blueprint].route; connections[c-revision-to-metrics,c-deviation-to-metrics]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-08-metrics-7",
+    "nodeId": "metrics",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[metrics].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-metrics,r-blueprint].route; connections[c-revision-to-metrics,c-deviation-to-metrics]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-09-design-1",
+    "nodeId": "design",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[design].inputs; nodes[design].interface.emptyCases; requirements[r-state,r-dispatch,r-roles,r-prompts,r-revision,r-freeze,r-evidence,r-package,r-scope,r-process,r-blueprint,r-boundary].route; connections[c-shared-to-design,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-09-design-2",
+    "nodeId": "design",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[design].outputs; nodes[design].interface.format; requirements[r-state,r-dispatch,r-roles,r-prompts,r-revision,r-freeze,r-evidence,r-package,r-scope,r-process,r-blueprint,r-boundary].route; connections[c-shared-to-design,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-09-design-3",
+    "nodeId": "design",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[design].authority; nodes[design].validators; requirements[r-state,r-dispatch,r-roles,r-prompts,r-revision,r-freeze,r-evidence,r-package,r-scope,r-process,r-blueprint,r-boundary].route; connections[c-shared-to-design,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-09-design-4",
+    "nodeId": "design",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[design].interface.emptyCases; nodes[design].interface.errors; requirements[r-state,r-dispatch,r-roles,r-prompts,r-revision,r-freeze,r-evidence,r-package,r-scope,r-process,r-blueprint,r-boundary].route; connections[c-shared-to-design,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-09-design-5",
+    "nodeId": "design",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[design].validators; requirements[r-state,r-dispatch,r-roles,r-prompts,r-revision,r-freeze,r-evidence,r-package,r-scope,r-process,r-blueprint,r-boundary].route; connections[c-shared-to-design,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-09-design-6",
+    "nodeId": "design",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[design].interface.errors; nodes[state].terminal.mechanism(§1.3a); requirements[r-state,r-dispatch,r-roles,r-prompts,r-revision,r-freeze,r-evidence,r-package,r-scope,r-process,r-blueprint,r-boundary].route; connections[c-shared-to-design,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-09-design-7",
+    "nodeId": "design",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[design].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-state,r-dispatch,r-roles,r-prompts,r-revision,r-freeze,r-evidence,r-package,r-scope,r-process,r-blueprint,r-boundary].route; connections[c-shared-to-design,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-10-design-roles-1",
+    "nodeId": "design-roles",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[design-roles].inputs; nodes[design-roles].interface.emptyCases; requirements[r-dispatch,r-roles,r-freeze,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-10-design-roles-2",
+    "nodeId": "design-roles",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[design-roles].outputs; nodes[design-roles].interface.format; requirements[r-dispatch,r-roles,r-freeze,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-10-design-roles-3",
+    "nodeId": "design-roles",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[design-roles].authority; nodes[design-roles].validators; requirements[r-dispatch,r-roles,r-freeze,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-10-design-roles-4",
+    "nodeId": "design-roles",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[design-roles].interface.emptyCases; nodes[design-roles].interface.errors; requirements[r-dispatch,r-roles,r-freeze,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-10-design-roles-5",
+    "nodeId": "design-roles",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[design-roles].validators; requirements[r-dispatch,r-roles,r-freeze,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-10-design-roles-6",
+    "nodeId": "design-roles",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[design-roles].interface.errors; nodes[state].terminal.mechanism(§1.3a); requirements[r-dispatch,r-roles,r-freeze,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-10-design-roles-7",
+    "nodeId": "design-roles",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[design-roles].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-dispatch,r-roles,r-freeze,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-11-role-D1-1",
+    "nodeId": "role-D1",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[role-D1].inputs; nodes[role-D1].interface.emptyCases; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-role-D2-to-role-D1,c-role-D3-to-role-D1,c-role-D4-to-role-D1,c-role-D1-to-contract,c-revision-to-role-D1]; walkthroughs[walk-source.ws-owner]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-11-role-D1-2",
+    "nodeId": "role-D1",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[role-D1].outputs; nodes[role-D1].interface.format; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-role-D2-to-role-D1,c-role-D3-to-role-D1,c-role-D4-to-role-D1,c-role-D1-to-contract,c-revision-to-role-D1]; walkthroughs[walk-source.ws-owner]",
+    "gap": "role-D1.description 写成“交回设计负责人”，而该节点本身就是设计负责人；同时通用 result 输出仍沿用被派角色的 RESULT.json/RESULT.md 口径。terminal.mechanism 与 outputs.to-contract 已明确真实职责，因此主路径仍可执行，但摘要层级存在自指式措辞。",
+    "impact": "用户或只读取节点摘要的生成器可能短暂误把 D1 当成向另一位设计负责人交回结果的普通角色；完整角色机制和 to-contract 输出能消除歧义，所以不阻塞开工或验收。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-11-role-D1-3",
+    "nodeId": "role-D1",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[role-D1].terminal.mechanism; nodes[role-D1].interface.boundaries; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-role-D2-to-role-D1,c-role-D3-to-role-D1,c-role-D4-to-role-D1,c-role-D1-to-contract,c-revision-to-role-D1]; walkthroughs[walk-source.ws-owner]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-11-role-D1-4",
+    "nodeId": "role-D1",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[role-D1].interface.emptyCases; nodes[role-D1].interface.errors; nodes[role-D1].terminal.retry; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-role-D2-to-role-D1,c-role-D3-to-role-D1,c-role-D4-to-role-D1,c-role-D1-to-contract,c-revision-to-role-D1]; walkthroughs[walk-source.ws-owner]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-11-role-D1-5",
+    "nodeId": "role-D1",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[role-D1].validators; nodes[role-D1].terminal.acceptance; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-role-D2-to-role-D1,c-role-D3-to-role-D1,c-role-D4-to-role-D1,c-role-D1-to-contract,c-revision-to-role-D1]; walkthroughs[walk-source.ws-owner]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-11-role-D1-6",
+    "nodeId": "role-D1",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[role-D1].interface.errors; nodes[role-D1].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-role-D2-to-role-D1,c-role-D3-to-role-D1,c-role-D4-to-role-D1,c-role-D1-to-contract,c-revision-to-role-D1]; walkthroughs[walk-source.ws-owner]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-11-role-D1-7",
+    "nodeId": "role-D1",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[role-D1].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-role-D2-to-role-D1,c-role-D3-to-role-D1,c-role-D4-to-role-D1,c-role-D1-to-contract,c-revision-to-role-D1]; walkthroughs[walk-source.ws-owner]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-12-role-D2-1",
+    "nodeId": "role-D2",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[role-D2].inputs; nodes[role-D2].interface.emptyCases; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-prompts-to-role-D2,c-clarify-to-role-D2,c-role-D2-to-role-D1]; walkthroughs[walk-source.ws-designer]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-12-role-D2-2",
+    "nodeId": "role-D2",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[role-D2].outputs; nodes[role-D2].interface.format; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-prompts-to-role-D2,c-clarify-to-role-D2,c-role-D2-to-role-D1]; walkthroughs[walk-source.ws-designer]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-12-role-D2-3",
+    "nodeId": "role-D2",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[role-D2].terminal.mechanism; nodes[role-D2].interface.boundaries; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-prompts-to-role-D2,c-clarify-to-role-D2,c-role-D2-to-role-D1]; walkthroughs[walk-source.ws-designer]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-12-role-D2-4",
+    "nodeId": "role-D2",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[role-D2].interface.emptyCases; nodes[role-D2].interface.errors; nodes[role-D2].terminal.retry; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-prompts-to-role-D2,c-clarify-to-role-D2,c-role-D2-to-role-D1]; walkthroughs[walk-source.ws-designer]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-12-role-D2-5",
+    "nodeId": "role-D2",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[role-D2].validators; nodes[role-D2].terminal.acceptance; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-prompts-to-role-D2,c-clarify-to-role-D2,c-role-D2-to-role-D1]; walkthroughs[walk-source.ws-designer]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-12-role-D2-6",
+    "nodeId": "role-D2",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[role-D2].interface.errors; nodes[role-D2].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-prompts-to-role-D2,c-clarify-to-role-D2,c-role-D2-to-role-D1]; walkthroughs[walk-source.ws-designer]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-12-role-D2-7",
+    "nodeId": "role-D2",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[role-D2].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-prompts-to-role-D2,c-clarify-to-role-D2,c-role-D2-to-role-D1]; walkthroughs[walk-source.ws-designer]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-13-role-D3-1",
+    "nodeId": "role-D3",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[role-D3].inputs; nodes[role-D3].interface.emptyCases; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-prompts-to-role-D3,c-role-D3-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-13-role-D3-2",
+    "nodeId": "role-D3",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[role-D3].outputs; nodes[role-D3].interface.format; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-prompts-to-role-D3,c-role-D3-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-13-role-D3-3",
+    "nodeId": "role-D3",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[role-D3].terminal.mechanism; nodes[role-D3].interface.boundaries; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-prompts-to-role-D3,c-role-D3-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-13-role-D3-4",
+    "nodeId": "role-D3",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[role-D3].interface.emptyCases; nodes[role-D3].interface.errors; nodes[role-D3].terminal.retry; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-prompts-to-role-D3,c-role-D3-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-13-role-D3-5",
+    "nodeId": "role-D3",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[role-D3].validators; nodes[role-D3].terminal.acceptance; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-prompts-to-role-D3,c-role-D3-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-13-role-D3-6",
+    "nodeId": "role-D3",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[role-D3].interface.errors; nodes[role-D3].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-prompts-to-role-D3,c-role-D3-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-13-role-D3-7",
+    "nodeId": "role-D3",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[role-D3].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-prompts-to-role-D3,c-role-D3-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-14-role-D4-1",
+    "nodeId": "role-D4",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[role-D4].inputs; nodes[role-D4].interface.emptyCases; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-role-D4-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-14-role-D4-2",
+    "nodeId": "role-D4",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[role-D4].outputs; nodes[role-D4].interface.format; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-role-D4-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-14-role-D4-3",
+    "nodeId": "role-D4",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[role-D4].terminal.mechanism; nodes[role-D4].interface.boundaries; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-role-D4-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-14-role-D4-4",
+    "nodeId": "role-D4",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[role-D4].interface.emptyCases; nodes[role-D4].interface.errors; nodes[role-D4].terminal.retry; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-role-D4-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-14-role-D4-5",
+    "nodeId": "role-D4",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[role-D4].validators; nodes[role-D4].terminal.acceptance; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-role-D4-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-14-role-D4-6",
+    "nodeId": "role-D4",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[role-D4].interface.errors; nodes[role-D4].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-role-D4-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-14-role-D4-7",
+    "nodeId": "role-D4",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[role-D4].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-roles,r-process,r-dispatch,r-blueprint].route; connections[c-role-D4-to-role-D1]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-15-role-D5-1",
+    "nodeId": "role-D5",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[role-D5].inputs; nodes[role-D5].interface.emptyCases; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D5,c-role-D5-to-gates,c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-15-role-D5-2",
+    "nodeId": "role-D5",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[role-D5].outputs; nodes[role-D5].interface.format; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D5,c-role-D5-to-gates,c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-15-role-D5-3",
+    "nodeId": "role-D5",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[role-D5].terminal.mechanism; nodes[role-D5].interface.boundaries; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D5,c-role-D5-to-gates,c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-15-role-D5-4",
+    "nodeId": "role-D5",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[role-D5].interface.emptyCases; nodes[role-D5].interface.errors; nodes[role-D5].terminal.retry; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D5,c-role-D5-to-gates,c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-15-role-D5-5",
+    "nodeId": "role-D5",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[role-D5].validators; nodes[role-D5].terminal.acceptance; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D5,c-role-D5-to-gates,c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-15-role-D5-6",
+    "nodeId": "role-D5",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[role-D5].interface.errors; nodes[role-D5].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D5,c-role-D5-to-gates,c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-15-role-D5-7",
+    "nodeId": "role-D5",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[role-D5].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D5,c-role-D5-to-gates,c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-16-role-D6-1",
+    "nodeId": "role-D6",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[role-D6].inputs; nodes[role-D6].interface.emptyCases; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D6,c-role-D6-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-16-role-D6-2",
+    "nodeId": "role-D6",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[role-D6].outputs; nodes[role-D6].interface.format; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D6,c-role-D6-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-16-role-D6-3",
+    "nodeId": "role-D6",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[role-D6].terminal.mechanism; nodes[role-D6].interface.boundaries; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D6,c-role-D6-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-16-role-D6-4",
+    "nodeId": "role-D6",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[role-D6].interface.emptyCases; nodes[role-D6].interface.errors; nodes[role-D6].terminal.retry; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D6,c-role-D6-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-16-role-D6-5",
+    "nodeId": "role-D6",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[role-D6].validators; nodes[role-D6].terminal.acceptance; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D6,c-role-D6-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-16-role-D6-6",
+    "nodeId": "role-D6",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[role-D6].interface.errors; nodes[role-D6].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D6,c-role-D6-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-16-role-D6-7",
+    "nodeId": "role-D6",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[role-D6].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D6,c-role-D6-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-17-role-D7-1",
+    "nodeId": "role-D7",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[role-D7].inputs; nodes[role-D7].interface.emptyCases; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D7,c-role-D7-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-17-role-D7-2",
+    "nodeId": "role-D7",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[role-D7].outputs; nodes[role-D7].interface.format; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D7,c-role-D7-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-17-role-D7-3",
+    "nodeId": "role-D7",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[role-D7].terminal.mechanism; nodes[role-D7].interface.boundaries; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D7,c-role-D7-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-17-role-D7-4",
+    "nodeId": "role-D7",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[role-D7].interface.emptyCases; nodes[role-D7].interface.errors; nodes[role-D7].terminal.retry; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D7,c-role-D7-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-17-role-D7-5",
+    "nodeId": "role-D7",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[role-D7].validators; nodes[role-D7].terminal.acceptance; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D7,c-role-D7-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-17-role-D7-6",
+    "nodeId": "role-D7",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[role-D7].interface.errors; nodes[role-D7].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D7,c-role-D7-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-17-role-D7-7",
+    "nodeId": "role-D7",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[role-D7].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D7,c-role-D7-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-18-role-D8-1",
+    "nodeId": "role-D8",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[role-D8].inputs; nodes[role-D8].interface.emptyCases; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D8,c-role-D8-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-18-role-D8-2",
+    "nodeId": "role-D8",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[role-D8].outputs; nodes[role-D8].interface.format; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D8,c-role-D8-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-18-role-D8-3",
+    "nodeId": "role-D8",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[role-D8].terminal.mechanism; nodes[role-D8].interface.boundaries; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D8,c-role-D8-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-18-role-D8-4",
+    "nodeId": "role-D8",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[role-D8].interface.emptyCases; nodes[role-D8].interface.errors; nodes[role-D8].terminal.retry; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D8,c-role-D8-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-18-role-D8-5",
+    "nodeId": "role-D8",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[role-D8].validators; nodes[role-D8].terminal.acceptance; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D8,c-role-D8-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-18-role-D8-6",
+    "nodeId": "role-D8",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[role-D8].interface.errors; nodes[role-D8].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D8,c-role-D8-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-18-role-D8-7",
+    "nodeId": "role-D8",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[role-D8].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-roles,r-process,r-freeze,r-blueprint].route; connections[c-gates-to-role-D8,c-role-D8-to-gates]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-19-clarify-1",
+    "nodeId": "clarify",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[clarify].inputs; nodes[clarify].interface.emptyCases; requirements[r-freeze,r-prompts,r-blueprint].route; connections[c-prompts-to-clarify,c-clarify-to-role-D2]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-19-clarify-2",
+    "nodeId": "clarify",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[clarify].outputs; nodes[clarify].interface.format; requirements[r-freeze,r-prompts,r-blueprint].route; connections[c-prompts-to-clarify,c-clarify-to-role-D2]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-19-clarify-3",
+    "nodeId": "clarify",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[clarify].terminal.mechanism; nodes[clarify].interface.boundaries; requirements[r-freeze,r-prompts,r-blueprint].route; connections[c-prompts-to-clarify,c-clarify-to-role-D2]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-19-clarify-4",
+    "nodeId": "clarify",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[clarify].interface.emptyCases; nodes[clarify].interface.errors; nodes[clarify].terminal.retry; requirements[r-freeze,r-prompts,r-blueprint].route; connections[c-prompts-to-clarify,c-clarify-to-role-D2]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-19-clarify-5",
+    "nodeId": "clarify",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[clarify].validators; nodes[clarify].terminal.acceptance; requirements[r-freeze,r-prompts,r-blueprint].route; connections[c-prompts-to-clarify,c-clarify-to-role-D2]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-19-clarify-6",
+    "nodeId": "clarify",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[clarify].interface.errors; nodes[clarify].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-freeze,r-prompts,r-blueprint].route; connections[c-prompts-to-clarify,c-clarify-to-role-D2]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-19-clarify-7",
+    "nodeId": "clarify",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[clarify].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-freeze,r-prompts,r-blueprint].route; connections[c-prompts-to-clarify,c-clarify-to-role-D2]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-20-gates-1",
+    "nodeId": "gates",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[gates].inputs; nodes[gates].interface.emptyCases; requirements[r-freeze,r-process,r-blueprint].route; connections[c-contract-to-gates,c-gates-to-role-D5,c-gates-to-role-D6,c-gates-to-role-D7,c-gates-to-role-D8,c-role-D5-to-gates,c-role-D6-to-gates,c-role-D7-to-gates,c-role-D8-to-gates,c-gates-to-freeze]; walkthroughs[walk-real.wr-gates]; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-20-gates-2",
+    "nodeId": "gates",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[gates].outputs; nodes[gates].interface.format; requirements[r-freeze,r-process,r-blueprint].route; connections[c-contract-to-gates,c-gates-to-role-D5,c-gates-to-role-D6,c-gates-to-role-D7,c-gates-to-role-D8,c-role-D5-to-gates,c-role-D6-to-gates,c-role-D7-to-gates,c-role-D8-to-gates,c-gates-to-freeze]; walkthroughs[walk-real.wr-gates]; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-20-gates-3",
+    "nodeId": "gates",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[gates].authority; nodes[gates].terminal.mechanism; requirements[r-freeze,r-process,r-blueprint].route; connections[c-contract-to-gates,c-gates-to-role-D5,c-gates-to-role-D6,c-gates-to-role-D7,c-gates-to-role-D8,c-role-D5-to-gates,c-role-D6-to-gates,c-role-D7-to-gates,c-role-D8-to-gates,c-gates-to-freeze]; walkthroughs[walk-real.wr-gates]; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-20-gates-4",
+    "nodeId": "gates",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[gates].interface.emptyCases; nodes[gates].interface.errors; nodes[gates].terminal.retry; requirements[r-freeze,r-process,r-blueprint].route; connections[c-contract-to-gates,c-gates-to-role-D5,c-gates-to-role-D6,c-gates-to-role-D7,c-gates-to-role-D8,c-role-D5-to-gates,c-role-D6-to-gates,c-role-D7-to-gates,c-role-D8-to-gates,c-gates-to-freeze]; walkthroughs[walk-real.wr-gates]; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-20-gates-5",
+    "nodeId": "gates",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[gates].validators; nodes[gates].terminal.acceptance; requirements[r-freeze,r-process,r-blueprint].route; connections[c-contract-to-gates,c-gates-to-role-D5,c-gates-to-role-D6,c-gates-to-role-D7,c-gates-to-role-D8,c-role-D5-to-gates,c-role-D6-to-gates,c-role-D7-to-gates,c-role-D8-to-gates,c-gates-to-freeze]; walkthroughs[walk-real.wr-gates]; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-20-gates-6",
+    "nodeId": "gates",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[gates].interface.errors; nodes[gates].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-freeze,r-process,r-blueprint].route; connections[c-contract-to-gates,c-gates-to-role-D5,c-gates-to-role-D6,c-gates-to-role-D7,c-gates-to-role-D8,c-role-D5-to-gates,c-role-D6-to-gates,c-role-D7-to-gates,c-role-D8-to-gates,c-gates-to-freeze]; walkthroughs[walk-real.wr-gates]; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-20-gates-7",
+    "nodeId": "gates",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[gates].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-freeze,r-process,r-blueprint].route; connections[c-contract-to-gates,c-gates-to-role-D5,c-gates-to-role-D6,c-gates-to-role-D7,c-gates-to-role-D8,c-role-D5-to-gates,c-role-D6-to-gates,c-role-D7-to-gates,c-role-D8-to-gates,c-gates-to-freeze]; walkthroughs[walk-real.wr-gates]; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-21-contract-1",
+    "nodeId": "contract",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[contract].inputs; nodes[contract].interface.emptyCases; requirements[r-revision,r-freeze,r-evidence,r-package,r-scope,r-process,r-blueprint,r-boundary].route; connections[c-role-D1-to-contract,c-contract-to-gates]; walkthroughs[walk-real.wr-contract]; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-21-contract-2",
+    "nodeId": "contract",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[contract].outputs; nodes[contract].interface.format; requirements[r-revision,r-freeze,r-evidence,r-package,r-scope,r-process,r-blueprint,r-boundary].route; connections[c-role-D1-to-contract,c-contract-to-gates]; walkthroughs[walk-real.wr-contract]; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-21-contract-3",
+    "nodeId": "contract",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[contract].authority; nodes[contract].validators; requirements[r-revision,r-freeze,r-evidence,r-package,r-scope,r-process,r-blueprint,r-boundary].route; connections[c-role-D1-to-contract,c-contract-to-gates]; walkthroughs[walk-real.wr-contract]; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-21-contract-4",
+    "nodeId": "contract",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[contract].interface.emptyCases; nodes[contract].interface.errors; requirements[r-revision,r-freeze,r-evidence,r-package,r-scope,r-process,r-blueprint,r-boundary].route; connections[c-role-D1-to-contract,c-contract-to-gates]; walkthroughs[walk-real.wr-contract]; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-21-contract-5",
+    "nodeId": "contract",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[contract].validators; requirements[r-revision,r-freeze,r-evidence,r-package,r-scope,r-process,r-blueprint,r-boundary].route; connections[c-role-D1-to-contract,c-contract-to-gates]; walkthroughs[walk-real.wr-contract]; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-21-contract-6",
+    "nodeId": "contract",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[contract].interface.errors; nodes[state].terminal.mechanism(§1.3a); requirements[r-revision,r-freeze,r-evidence,r-package,r-scope,r-process,r-blueprint,r-boundary].route; connections[c-role-D1-to-contract,c-contract-to-gates]; walkthroughs[walk-real.wr-contract]; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-21-contract-7",
+    "nodeId": "contract",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[contract].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-revision,r-freeze,r-evidence,r-package,r-scope,r-process,r-blueprint,r-boundary].route; connections[c-role-D1-to-contract,c-contract-to-gates]; walkthroughs[walk-real.wr-contract]; failurePaths[fail-checker]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-22-contract-capability-1",
+    "nodeId": "contract-capability",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[contract-capability].inputs; nodes[contract-capability].interface.emptyCases; requirements[r-freeze,r-scope,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-22-contract-capability-2",
+    "nodeId": "contract-capability",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[contract-capability].outputs; nodes[contract-capability].interface.format; requirements[r-freeze,r-scope,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-22-contract-capability-3",
+    "nodeId": "contract-capability",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[contract-capability].terminal.mechanism; nodes[contract-capability].interface.boundaries; requirements[r-freeze,r-scope,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-22-contract-capability-4",
+    "nodeId": "contract-capability",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[contract-capability].interface.emptyCases; nodes[contract-capability].interface.errors; nodes[contract-capability].terminal.retry; requirements[r-freeze,r-scope,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-22-contract-capability-5",
+    "nodeId": "contract-capability",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[contract-capability].validators; nodes[contract-capability].terminal.acceptance; requirements[r-freeze,r-scope,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-22-contract-capability-6",
+    "nodeId": "contract-capability",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[contract-capability].interface.errors; nodes[contract-capability].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-freeze,r-scope,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-22-contract-capability-7",
+    "nodeId": "contract-capability",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[contract-capability].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-freeze,r-scope,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-23-contract-entry-1",
+    "nodeId": "contract-entry",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[contract-entry].inputs; nodes[contract-entry].interface.emptyCases; requirements[r-freeze,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-23-contract-entry-2",
+    "nodeId": "contract-entry",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[contract-entry].outputs; nodes[contract-entry].interface.format; requirements[r-freeze,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-23-contract-entry-3",
+    "nodeId": "contract-entry",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[contract-entry].terminal.mechanism; nodes[contract-entry].interface.boundaries; requirements[r-freeze,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-23-contract-entry-4",
+    "nodeId": "contract-entry",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[contract-entry].interface.emptyCases; nodes[contract-entry].interface.errors; nodes[contract-entry].terminal.retry; requirements[r-freeze,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-23-contract-entry-5",
+    "nodeId": "contract-entry",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[contract-entry].validators; nodes[contract-entry].terminal.acceptance; requirements[r-freeze,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-23-contract-entry-6",
+    "nodeId": "contract-entry",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[contract-entry].interface.errors; nodes[contract-entry].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-freeze,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-23-contract-entry-7",
+    "nodeId": "contract-entry",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[contract-entry].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-freeze,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-24-contract-outcomes-1",
+    "nodeId": "contract-outcomes",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[contract-outcomes].inputs; nodes[contract-outcomes].interface.emptyCases; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-24-contract-outcomes-2",
+    "nodeId": "contract-outcomes",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[contract-outcomes].outputs; nodes[contract-outcomes].interface.format; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-24-contract-outcomes-3",
+    "nodeId": "contract-outcomes",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[contract-outcomes].terminal.mechanism; nodes[contract-outcomes].interface.boundaries; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-24-contract-outcomes-4",
+    "nodeId": "contract-outcomes",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[contract-outcomes].interface.emptyCases; nodes[contract-outcomes].interface.errors; nodes[contract-outcomes].terminal.retry; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-24-contract-outcomes-5",
+    "nodeId": "contract-outcomes",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[contract-outcomes].validators; nodes[contract-outcomes].terminal.acceptance; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-24-contract-outcomes-6",
+    "nodeId": "contract-outcomes",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[contract-outcomes].interface.errors; nodes[contract-outcomes].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-24-contract-outcomes-7",
+    "nodeId": "contract-outcomes",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[contract-outcomes].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-25-contract-fidelity-1",
+    "nodeId": "contract-fidelity",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[contract-fidelity].inputs; nodes[contract-fidelity].interface.emptyCases; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-25-contract-fidelity-2",
+    "nodeId": "contract-fidelity",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[contract-fidelity].outputs; nodes[contract-fidelity].interface.format; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-25-contract-fidelity-3",
+    "nodeId": "contract-fidelity",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[contract-fidelity].terminal.mechanism; nodes[contract-fidelity].interface.boundaries; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-25-contract-fidelity-4",
+    "nodeId": "contract-fidelity",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[contract-fidelity].interface.emptyCases; nodes[contract-fidelity].interface.errors; nodes[contract-fidelity].terminal.retry; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-25-contract-fidelity-5",
+    "nodeId": "contract-fidelity",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[contract-fidelity].validators; nodes[contract-fidelity].terminal.acceptance; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-25-contract-fidelity-6",
+    "nodeId": "contract-fidelity",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[contract-fidelity].interface.errors; nodes[contract-fidelity].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-25-contract-fidelity-7",
+    "nodeId": "contract-fidelity",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[contract-fidelity].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-26-contract-forbidden-1",
+    "nodeId": "contract-forbidden",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[contract-forbidden].inputs; nodes[contract-forbidden].interface.emptyCases; requirements[r-freeze,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-26-contract-forbidden-2",
+    "nodeId": "contract-forbidden",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[contract-forbidden].outputs; nodes[contract-forbidden].interface.format; requirements[r-freeze,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-26-contract-forbidden-3",
+    "nodeId": "contract-forbidden",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[contract-forbidden].terminal.mechanism; nodes[contract-forbidden].interface.boundaries; requirements[r-freeze,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-26-contract-forbidden-4",
+    "nodeId": "contract-forbidden",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[contract-forbidden].interface.emptyCases; nodes[contract-forbidden].interface.errors; nodes[contract-forbidden].terminal.retry; requirements[r-freeze,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-26-contract-forbidden-5",
+    "nodeId": "contract-forbidden",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[contract-forbidden].validators; nodes[contract-forbidden].terminal.acceptance; requirements[r-freeze,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-26-contract-forbidden-6",
+    "nodeId": "contract-forbidden",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[contract-forbidden].interface.errors; nodes[contract-forbidden].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-freeze,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-26-contract-forbidden-7",
+    "nodeId": "contract-forbidden",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[contract-forbidden].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-freeze,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-27-contract-regression-1",
+    "nodeId": "contract-regression",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[contract-regression].inputs; nodes[contract-regression].interface.emptyCases; requirements[r-freeze,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-27-contract-regression-2",
+    "nodeId": "contract-regression",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[contract-regression].outputs; nodes[contract-regression].interface.format; requirements[r-freeze,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-27-contract-regression-3",
+    "nodeId": "contract-regression",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[contract-regression].terminal.mechanism; nodes[contract-regression].interface.boundaries; requirements[r-freeze,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-27-contract-regression-4",
+    "nodeId": "contract-regression",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[contract-regression].interface.emptyCases; nodes[contract-regression].interface.errors; nodes[contract-regression].terminal.retry; requirements[r-freeze,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-27-contract-regression-5",
+    "nodeId": "contract-regression",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[contract-regression].validators; nodes[contract-regression].terminal.acceptance; requirements[r-freeze,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-27-contract-regression-6",
+    "nodeId": "contract-regression",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[contract-regression].interface.errors; nodes[contract-regression].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-freeze,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-27-contract-regression-7",
+    "nodeId": "contract-regression",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[contract-regression].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-freeze,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-28-contract-controls-1",
+    "nodeId": "contract-controls",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[contract-controls].inputs; nodes[contract-controls].interface.emptyCases; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-28-contract-controls-2",
+    "nodeId": "contract-controls",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[contract-controls].outputs; nodes[contract-controls].interface.format; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-28-contract-controls-3",
+    "nodeId": "contract-controls",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[contract-controls].terminal.mechanism; nodes[contract-controls].interface.boundaries; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-28-contract-controls-4",
+    "nodeId": "contract-controls",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[contract-controls].interface.emptyCases; nodes[contract-controls].interface.errors; nodes[contract-controls].terminal.retry; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-28-contract-controls-5",
+    "nodeId": "contract-controls",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[contract-controls].validators; nodes[contract-controls].terminal.acceptance; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-28-contract-controls-6",
+    "nodeId": "contract-controls",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[contract-controls].interface.errors; nodes[contract-controls].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-28-contract-controls-7",
+    "nodeId": "contract-controls",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[contract-controls].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-freeze,r-evidence,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-29-contract-changes-1",
+    "nodeId": "contract-changes",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[contract-changes].inputs; nodes[contract-changes].interface.emptyCases; requirements[r-freeze,r-revision,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-29-contract-changes-2",
+    "nodeId": "contract-changes",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[contract-changes].outputs; nodes[contract-changes].interface.format; requirements[r-freeze,r-revision,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-29-contract-changes-3",
+    "nodeId": "contract-changes",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[contract-changes].terminal.mechanism; nodes[contract-changes].interface.boundaries; requirements[r-freeze,r-revision,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-29-contract-changes-4",
+    "nodeId": "contract-changes",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[contract-changes].interface.emptyCases; nodes[contract-changes].interface.errors; nodes[contract-changes].terminal.retry; requirements[r-freeze,r-revision,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-29-contract-changes-5",
+    "nodeId": "contract-changes",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[contract-changes].validators; nodes[contract-changes].terminal.acceptance; requirements[r-freeze,r-revision,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-29-contract-changes-6",
+    "nodeId": "contract-changes",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[contract-changes].interface.errors; nodes[contract-changes].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-freeze,r-revision,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-29-contract-changes-7",
+    "nodeId": "contract-changes",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[contract-changes].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-freeze,r-revision,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-30-contract-authorization-1",
+    "nodeId": "contract-authorization",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[contract-authorization].inputs; nodes[contract-authorization].interface.emptyCases; requirements[r-freeze,r-boundary,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-30-contract-authorization-2",
+    "nodeId": "contract-authorization",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[contract-authorization].outputs; nodes[contract-authorization].interface.format; requirements[r-freeze,r-boundary,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-30-contract-authorization-3",
+    "nodeId": "contract-authorization",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[contract-authorization].terminal.mechanism; nodes[contract-authorization].interface.boundaries; requirements[r-freeze,r-boundary,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-30-contract-authorization-4",
+    "nodeId": "contract-authorization",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[contract-authorization].interface.emptyCases; nodes[contract-authorization].interface.errors; nodes[contract-authorization].terminal.retry; requirements[r-freeze,r-boundary,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-30-contract-authorization-5",
+    "nodeId": "contract-authorization",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[contract-authorization].validators; nodes[contract-authorization].terminal.acceptance; requirements[r-freeze,r-boundary,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-30-contract-authorization-6",
+    "nodeId": "contract-authorization",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[contract-authorization].interface.errors; nodes[contract-authorization].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-freeze,r-boundary,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-30-contract-authorization-7",
+    "nodeId": "contract-authorization",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[contract-authorization].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-freeze,r-boundary,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-31-freeze-1",
+    "nodeId": "freeze",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[freeze].inputs; nodes[freeze].interface.emptyCases; requirements[r-freeze,r-state,r-process,r-blueprint].route; connections[c-gates-to-freeze,c-freeze-to-role-X1]; walkthroughs[walk-real.wr-freeze]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-31-freeze-2",
+    "nodeId": "freeze",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[freeze].outputs; nodes[freeze].interface.format; requirements[r-freeze,r-state,r-process,r-blueprint].route; connections[c-gates-to-freeze,c-freeze-to-role-X1]; walkthroughs[walk-real.wr-freeze]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-31-freeze-3",
+    "nodeId": "freeze",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[freeze].authority; nodes[freeze].terminal.mechanism; requirements[r-freeze,r-state,r-process,r-blueprint].route; connections[c-gates-to-freeze,c-freeze-to-role-X1]; walkthroughs[walk-real.wr-freeze]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-31-freeze-4",
+    "nodeId": "freeze",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[freeze].interface.emptyCases; nodes[freeze].interface.errors; nodes[freeze].terminal.retry; requirements[r-freeze,r-state,r-process,r-blueprint].route; connections[c-gates-to-freeze,c-freeze-to-role-X1]; walkthroughs[walk-real.wr-freeze]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-31-freeze-5",
+    "nodeId": "freeze",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[freeze].validators; nodes[freeze].terminal.acceptance; requirements[r-freeze,r-state,r-process,r-blueprint].route; connections[c-gates-to-freeze,c-freeze-to-role-X1]; walkthroughs[walk-real.wr-freeze]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-31-freeze-6",
+    "nodeId": "freeze",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[freeze].interface.errors; nodes[freeze].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-freeze,r-state,r-process,r-blueprint].route; connections[c-gates-to-freeze,c-freeze-to-role-X1]; walkthroughs[walk-real.wr-freeze]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-31-freeze-7",
+    "nodeId": "freeze",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[freeze].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-freeze,r-state,r-process,r-blueprint].route; connections[c-gates-to-freeze,c-freeze-to-role-X1]; walkthroughs[walk-real.wr-freeze]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-32-q-checker-1",
+    "nodeId": "q-checker",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[q-checker].inputs; nodes[q-checker].interface.emptyCases; requirements[r-freeze,r-blueprint].route; connections[c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-32-q-checker-2",
+    "nodeId": "q-checker",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[q-checker].outputs; nodes[q-checker].interface.format; requirements[r-freeze,r-blueprint].route; connections[c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-32-q-checker-3",
+    "nodeId": "q-checker",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[q-checker].terminal.mechanism; nodes[q-checker].interface.boundaries; requirements[r-freeze,r-blueprint].route; connections[c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-32-q-checker-4",
+    "nodeId": "q-checker",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[q-checker].interface.emptyCases; nodes[q-checker].interface.errors; nodes[q-checker].terminal.retry; requirements[r-freeze,r-blueprint].route; connections[c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-32-q-checker-5",
+    "nodeId": "q-checker",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[q-checker].validators; nodes[q-checker].terminal.acceptance; requirements[r-freeze,r-blueprint].route; connections[c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-32-q-checker-6",
+    "nodeId": "q-checker",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[q-checker].interface.errors; nodes[q-checker].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-freeze,r-blueprint].route; connections[c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-32-q-checker-7",
+    "nodeId": "q-checker",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[q-checker].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-freeze,r-blueprint].route; connections[c-q-checker-to-role-D5]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-33-q-inheritance-1",
+    "nodeId": "q-inheritance",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[q-inheritance].inputs; nodes[q-inheritance].interface.emptyCases; requirements[r-revision,r-blueprint].route; connections[c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-33-q-inheritance-2",
+    "nodeId": "q-inheritance",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[q-inheritance].outputs; nodes[q-inheritance].interface.format; requirements[r-revision,r-blueprint].route; connections[c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-33-q-inheritance-3",
+    "nodeId": "q-inheritance",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[q-inheritance].terminal.mechanism; nodes[q-inheritance].interface.boundaries; requirements[r-revision,r-blueprint].route; connections[c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-33-q-inheritance-4",
+    "nodeId": "q-inheritance",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[q-inheritance].interface.emptyCases; nodes[q-inheritance].interface.errors; nodes[q-inheritance].terminal.retry; requirements[r-revision,r-blueprint].route; connections[c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-33-q-inheritance-5",
+    "nodeId": "q-inheritance",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[q-inheritance].validators; nodes[q-inheritance].terminal.acceptance; requirements[r-revision,r-blueprint].route; connections[c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-33-q-inheritance-6",
+    "nodeId": "q-inheritance",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[q-inheritance].interface.errors; nodes[q-inheritance].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-revision,r-blueprint].route; connections[c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-33-q-inheritance-7",
+    "nodeId": "q-inheritance",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[q-inheritance].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-revision,r-blueprint].route; connections[c-q-inheritance-to-revision]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-34-delivery-1",
+    "nodeId": "delivery",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[delivery].inputs; nodes[delivery].interface.emptyCases; requirements[r-state,r-dispatch,r-roles,r-revision,r-evidence,r-process,r-blueprint].route; connections[c-shared-to-delivery,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-34-delivery-2",
+    "nodeId": "delivery",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[delivery].outputs; nodes[delivery].interface.format; requirements[r-state,r-dispatch,r-roles,r-revision,r-evidence,r-process,r-blueprint].route; connections[c-shared-to-delivery,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-34-delivery-3",
+    "nodeId": "delivery",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[delivery].authority; nodes[delivery].validators; requirements[r-state,r-dispatch,r-roles,r-revision,r-evidence,r-process,r-blueprint].route; connections[c-shared-to-delivery,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-34-delivery-4",
+    "nodeId": "delivery",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[delivery].interface.emptyCases; nodes[delivery].interface.errors; requirements[r-state,r-dispatch,r-roles,r-revision,r-evidence,r-process,r-blueprint].route; connections[c-shared-to-delivery,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-34-delivery-5",
+    "nodeId": "delivery",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[delivery].validators; requirements[r-state,r-dispatch,r-roles,r-revision,r-evidence,r-process,r-blueprint].route; connections[c-shared-to-delivery,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-34-delivery-6",
+    "nodeId": "delivery",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[delivery].interface.errors; nodes[state].terminal.mechanism(§1.3a); requirements[r-state,r-dispatch,r-roles,r-revision,r-evidence,r-process,r-blueprint].route; connections[c-shared-to-delivery,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-34-delivery-7",
+    "nodeId": "delivery",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[delivery].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-state,r-dispatch,r-roles,r-revision,r-evidence,r-process,r-blueprint].route; connections[c-shared-to-delivery,c-design-to-delivery]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-35-delivery-roles-1",
+    "nodeId": "delivery-roles",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[delivery-roles].inputs; nodes[delivery-roles].interface.emptyCases; requirements[r-dispatch,r-roles,r-evidence,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-35-delivery-roles-2",
+    "nodeId": "delivery-roles",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[delivery-roles].outputs; nodes[delivery-roles].interface.format; requirements[r-dispatch,r-roles,r-evidence,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-35-delivery-roles-3",
+    "nodeId": "delivery-roles",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[delivery-roles].authority; nodes[delivery-roles].validators; requirements[r-dispatch,r-roles,r-evidence,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-35-delivery-roles-4",
+    "nodeId": "delivery-roles",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[delivery-roles].interface.emptyCases; nodes[delivery-roles].interface.errors; requirements[r-dispatch,r-roles,r-evidence,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-35-delivery-roles-5",
+    "nodeId": "delivery-roles",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[delivery-roles].validators; requirements[r-dispatch,r-roles,r-evidence,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-35-delivery-roles-6",
+    "nodeId": "delivery-roles",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[delivery-roles].interface.errors; nodes[state].terminal.mechanism(§1.3a); requirements[r-dispatch,r-roles,r-evidence,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-35-delivery-roles-7",
+    "nodeId": "delivery-roles",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[delivery-roles].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-dispatch,r-roles,r-evidence,r-process,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-36-role-X1-1",
+    "nodeId": "role-X1",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[role-X1].inputs; nodes[role-X1].interface.emptyCases; requirements[r-roles,r-process,r-evidence,r-dispatch,r-blueprint].route; connections[c-freeze-to-role-X1,c-role-X1-to-role-X2,c-role-X1-to-role-X3]; walkthroughs[walk-real.wr-owner]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-36-role-X1-2",
+    "nodeId": "role-X1",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[role-X1].outputs; nodes[role-X1].interface.format; requirements[r-roles,r-process,r-evidence,r-dispatch,r-blueprint].route; connections[c-freeze-to-role-X1,c-role-X1-to-role-X2,c-role-X1-to-role-X3]; walkthroughs[walk-real.wr-owner]",
+    "gap": "role-X1.description 写成“形成当前候选的原始证据，交给交付负责人”，通用 result 输出也沿用普通交付角色措辞；但 X1 本身就是唯一交付负责人，terminal.mechanism 与 acceptance 明确其职责是组织、亲读和签发而非作为下属证据角色。",
+    "impact": "用户或基于摘要字段生成界面的实现可能误读 X1 的层级与产出；完整角色卡仍能唯一确定实际职责，因此不阻塞交付启动、验收或签发。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-36-role-X1-3",
+    "nodeId": "role-X1",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[role-X1].terminal.mechanism; nodes[role-X1].interface.boundaries; requirements[r-roles,r-process,r-evidence,r-dispatch,r-blueprint].route; connections[c-freeze-to-role-X1,c-role-X1-to-role-X2,c-role-X1-to-role-X3]; walkthroughs[walk-real.wr-owner]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-36-role-X1-4",
+    "nodeId": "role-X1",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[role-X1].interface.emptyCases; nodes[role-X1].interface.errors; nodes[role-X1].terminal.retry; requirements[r-roles,r-process,r-evidence,r-dispatch,r-blueprint].route; connections[c-freeze-to-role-X1,c-role-X1-to-role-X2,c-role-X1-to-role-X3]; walkthroughs[walk-real.wr-owner]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-36-role-X1-5",
+    "nodeId": "role-X1",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[role-X1].validators; nodes[role-X1].terminal.acceptance; requirements[r-roles,r-process,r-evidence,r-dispatch,r-blueprint].route; connections[c-freeze-to-role-X1,c-role-X1-to-role-X2,c-role-X1-to-role-X3]; walkthroughs[walk-real.wr-owner]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-36-role-X1-6",
+    "nodeId": "role-X1",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[role-X1].interface.errors; nodes[role-X1].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-roles,r-process,r-evidence,r-dispatch,r-blueprint].route; connections[c-freeze-to-role-X1,c-role-X1-to-role-X2,c-role-X1-to-role-X3]; walkthroughs[walk-real.wr-owner]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-36-role-X1-7",
+    "nodeId": "role-X1",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[role-X1].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-roles,r-process,r-evidence,r-dispatch,r-blueprint].route; connections[c-freeze-to-role-X1,c-role-X1-to-role-X2,c-role-X1-to-role-X3]; walkthroughs[walk-real.wr-owner]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-37-role-X2-1",
+    "nodeId": "role-X2",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[role-X2].inputs; nodes[role-X2].interface.emptyCases; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X1-to-role-X2,c-role-X2-to-calibration,c-role-X2-to-candidate,c-role-X2-to-deviation]; walkthroughs[walk-real.wr-build]; failurePaths[fail-premise,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-37-role-X2-2",
+    "nodeId": "role-X2",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[role-X2].outputs; nodes[role-X2].interface.format; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X1-to-role-X2,c-role-X2-to-calibration,c-role-X2-to-candidate,c-role-X2-to-deviation]; walkthroughs[walk-real.wr-build]; failurePaths[fail-premise,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-37-role-X2-3",
+    "nodeId": "role-X2",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[role-X2].terminal.mechanism; nodes[role-X2].interface.boundaries; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X1-to-role-X2,c-role-X2-to-calibration,c-role-X2-to-candidate,c-role-X2-to-deviation]; walkthroughs[walk-real.wr-build]; failurePaths[fail-premise,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-37-role-X2-4",
+    "nodeId": "role-X2",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[role-X2].interface.emptyCases; nodes[role-X2].interface.errors; nodes[role-X2].terminal.retry; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X1-to-role-X2,c-role-X2-to-calibration,c-role-X2-to-candidate,c-role-X2-to-deviation]; walkthroughs[walk-real.wr-build]; failurePaths[fail-premise,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-37-role-X2-5",
+    "nodeId": "role-X2",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[role-X2].validators; nodes[role-X2].terminal.acceptance; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X1-to-role-X2,c-role-X2-to-calibration,c-role-X2-to-candidate,c-role-X2-to-deviation]; walkthroughs[walk-real.wr-build]; failurePaths[fail-premise,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-37-role-X2-6",
+    "nodeId": "role-X2",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[role-X2].interface.errors; nodes[role-X2].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X1-to-role-X2,c-role-X2-to-calibration,c-role-X2-to-candidate,c-role-X2-to-deviation]; walkthroughs[walk-real.wr-build]; failurePaths[fail-premise,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-37-role-X2-7",
+    "nodeId": "role-X2",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[role-X2].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X1-to-role-X2,c-role-X2-to-calibration,c-role-X2-to-candidate,c-role-X2-to-deviation]; walkthroughs[walk-real.wr-build]; failurePaths[fail-premise,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-38-role-X3-1",
+    "nodeId": "role-X3",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[role-X3].inputs; nodes[role-X3].interface.emptyCases; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X1-to-role-X3,c-role-X3-to-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-38-role-X3-2",
+    "nodeId": "role-X3",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[role-X3].outputs; nodes[role-X3].interface.format; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X1-to-role-X3,c-role-X3-to-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-38-role-X3-3",
+    "nodeId": "role-X3",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[role-X3].terminal.mechanism; nodes[role-X3].interface.boundaries; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X1-to-role-X3,c-role-X3-to-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-38-role-X3-4",
+    "nodeId": "role-X3",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[role-X3].interface.emptyCases; nodes[role-X3].interface.errors; nodes[role-X3].terminal.retry; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X1-to-role-X3,c-role-X3-to-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-38-role-X3-5",
+    "nodeId": "role-X3",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[role-X3].validators; nodes[role-X3].terminal.acceptance; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X1-to-role-X3,c-role-X3-to-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-38-role-X3-6",
+    "nodeId": "role-X3",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[role-X3].interface.errors; nodes[role-X3].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X1-to-role-X3,c-role-X3-to-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-38-role-X3-7",
+    "nodeId": "role-X3",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[role-X3].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X1-to-role-X3,c-role-X3-to-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-39-role-X4-1",
+    "nodeId": "role-X4",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[role-X4].inputs; nodes[role-X4].interface.emptyCases; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X4-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-39-role-X4-2",
+    "nodeId": "role-X4",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[role-X4].outputs; nodes[role-X4].interface.format; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X4-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-39-role-X4-3",
+    "nodeId": "role-X4",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[role-X4].terminal.mechanism; nodes[role-X4].interface.boundaries; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X4-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-39-role-X4-4",
+    "nodeId": "role-X4",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[role-X4].interface.emptyCases; nodes[role-X4].interface.errors; nodes[role-X4].terminal.retry; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X4-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-39-role-X4-5",
+    "nodeId": "role-X4",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[role-X4].validators; nodes[role-X4].terminal.acceptance; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X4-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-39-role-X4-6",
+    "nodeId": "role-X4",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[role-X4].interface.errors; nodes[role-X4].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X4-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-39-role-X4-7",
+    "nodeId": "role-X4",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[role-X4].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X4-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-40-role-X5-1",
+    "nodeId": "role-X5",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[role-X5].inputs; nodes[role-X5].interface.emptyCases; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X5-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-40-role-X5-2",
+    "nodeId": "role-X5",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[role-X5].outputs; nodes[role-X5].interface.format; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X5-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-40-role-X5-3",
+    "nodeId": "role-X5",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[role-X5].terminal.mechanism; nodes[role-X5].interface.boundaries; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X5-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-40-role-X5-4",
+    "nodeId": "role-X5",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[role-X5].interface.emptyCases; nodes[role-X5].interface.errors; nodes[role-X5].terminal.retry; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X5-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-40-role-X5-5",
+    "nodeId": "role-X5",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[role-X5].validators; nodes[role-X5].terminal.acceptance; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X5-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-40-role-X5-6",
+    "nodeId": "role-X5",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[role-X5].interface.errors; nodes[role-X5].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X5-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-40-role-X5-7",
+    "nodeId": "role-X5",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[role-X5].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-roles,r-process,r-evidence,r-blueprint].route; connections[c-role-X5-to-evidence]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-41-acceptance-1",
+    "nodeId": "acceptance",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[acceptance].inputs; nodes[acceptance].interface.emptyCases; requirements[r-evidence,r-process,r-blueprint].route; connections[c-calibration-to-acceptance,c-acceptance-to-candidate]; walkthroughs[walk-real.wr-asset]; failurePaths[fail-semantic]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-41-acceptance-2",
+    "nodeId": "acceptance",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[acceptance].outputs; nodes[acceptance].interface.format; requirements[r-evidence,r-process,r-blueprint].route; connections[c-calibration-to-acceptance,c-acceptance-to-candidate]; walkthroughs[walk-real.wr-asset]; failurePaths[fail-semantic]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-41-acceptance-3",
+    "nodeId": "acceptance",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[acceptance].terminal.mechanism; nodes[acceptance].interface.boundaries; requirements[r-evidence,r-process,r-blueprint].route; connections[c-calibration-to-acceptance,c-acceptance-to-candidate]; walkthroughs[walk-real.wr-asset]; failurePaths[fail-semantic]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-41-acceptance-4",
+    "nodeId": "acceptance",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[acceptance].interface.emptyCases; nodes[acceptance].interface.errors; nodes[acceptance].terminal.retry; requirements[r-evidence,r-process,r-blueprint].route; connections[c-calibration-to-acceptance,c-acceptance-to-candidate]; walkthroughs[walk-real.wr-asset]; failurePaths[fail-semantic]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-41-acceptance-5",
+    "nodeId": "acceptance",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[acceptance].validators; nodes[acceptance].terminal.acceptance; requirements[r-evidence,r-process,r-blueprint].route; connections[c-calibration-to-acceptance,c-acceptance-to-candidate]; walkthroughs[walk-real.wr-asset]; failurePaths[fail-semantic]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-41-acceptance-6",
+    "nodeId": "acceptance",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[acceptance].interface.errors; nodes[acceptance].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-evidence,r-process,r-blueprint].route; connections[c-calibration-to-acceptance,c-acceptance-to-candidate]; walkthroughs[walk-real.wr-asset]; failurePaths[fail-semantic]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-41-acceptance-7",
+    "nodeId": "acceptance",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[acceptance].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-evidence,r-process,r-blueprint].route; connections[c-calibration-to-acceptance,c-acceptance-to-candidate]; walkthroughs[walk-real.wr-asset]; failurePaths[fail-semantic]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-42-calibration-1",
+    "nodeId": "calibration",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[calibration].inputs; nodes[calibration].interface.emptyCases; requirements[r-evidence,r-blueprint].route; connections[c-role-X2-to-calibration,c-role-X3-to-calibration,c-calibration-to-acceptance]; walkthroughs[walk-real.wr-calibration]; failurePaths[fail-semantic,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-42-calibration-2",
+    "nodeId": "calibration",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[calibration].outputs; nodes[calibration].interface.format; requirements[r-evidence,r-blueprint].route; connections[c-role-X2-to-calibration,c-role-X3-to-calibration,c-calibration-to-acceptance]; walkthroughs[walk-real.wr-calibration]; failurePaths[fail-semantic,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-42-calibration-3",
+    "nodeId": "calibration",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[calibration].terminal.mechanism; nodes[calibration].interface.boundaries; requirements[r-evidence,r-blueprint].route; connections[c-role-X2-to-calibration,c-role-X3-to-calibration,c-calibration-to-acceptance]; walkthroughs[walk-real.wr-calibration]; failurePaths[fail-semantic,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-42-calibration-4",
+    "nodeId": "calibration",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[calibration].interface.emptyCases; nodes[calibration].interface.errors; nodes[calibration].terminal.retry; requirements[r-evidence,r-blueprint].route; connections[c-role-X2-to-calibration,c-role-X3-to-calibration,c-calibration-to-acceptance]; walkthroughs[walk-real.wr-calibration]; failurePaths[fail-semantic,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-42-calibration-5",
+    "nodeId": "calibration",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[calibration].validators; nodes[calibration].terminal.acceptance; requirements[r-evidence,r-blueprint].route; connections[c-role-X2-to-calibration,c-role-X3-to-calibration,c-calibration-to-acceptance]; walkthroughs[walk-real.wr-calibration]; failurePaths[fail-semantic,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-42-calibration-6",
+    "nodeId": "calibration",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[calibration].interface.errors; nodes[calibration].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-evidence,r-blueprint].route; connections[c-role-X2-to-calibration,c-role-X3-to-calibration,c-calibration-to-acceptance]; walkthroughs[walk-real.wr-calibration]; failurePaths[fail-semantic,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-42-calibration-7",
+    "nodeId": "calibration",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[calibration].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-evidence,r-blueprint].route; connections[c-role-X2-to-calibration,c-role-X3-to-calibration,c-calibration-to-acceptance]; walkthroughs[walk-real.wr-calibration]; failurePaths[fail-semantic,fail-calibration]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-43-candidate-1",
+    "nodeId": "candidate",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[candidate].inputs; nodes[candidate].interface.emptyCases; requirements[r-evidence,r-blueprint].route; connections[c-acceptance-to-candidate,c-role-X2-to-candidate,c-candidate-to-evidence]; walkthroughs[walk-real.wr-candidate]; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-43-candidate-2",
+    "nodeId": "candidate",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[candidate].outputs; nodes[candidate].interface.format; requirements[r-evidence,r-blueprint].route; connections[c-acceptance-to-candidate,c-role-X2-to-candidate,c-candidate-to-evidence]; walkthroughs[walk-real.wr-candidate]; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-43-candidate-3",
+    "nodeId": "candidate",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[candidate].authority; nodes[candidate].terminal.mechanism; requirements[r-evidence,r-blueprint].route; connections[c-acceptance-to-candidate,c-role-X2-to-candidate,c-candidate-to-evidence]; walkthroughs[walk-real.wr-candidate]; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-43-candidate-4",
+    "nodeId": "candidate",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[candidate].interface.emptyCases; nodes[candidate].interface.errors; nodes[candidate].terminal.retry; requirements[r-evidence,r-blueprint].route; connections[c-acceptance-to-candidate,c-role-X2-to-candidate,c-candidate-to-evidence]; walkthroughs[walk-real.wr-candidate]; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-43-candidate-5",
+    "nodeId": "candidate",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[candidate].validators; nodes[candidate].terminal.acceptance; requirements[r-evidence,r-blueprint].route; connections[c-acceptance-to-candidate,c-role-X2-to-candidate,c-candidate-to-evidence]; walkthroughs[walk-real.wr-candidate]; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-43-candidate-6",
+    "nodeId": "candidate",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[candidate].interface.errors; nodes[candidate].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-evidence,r-blueprint].route; connections[c-acceptance-to-candidate,c-role-X2-to-candidate,c-candidate-to-evidence]; walkthroughs[walk-real.wr-candidate]; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-43-candidate-7",
+    "nodeId": "candidate",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[candidate].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-evidence,r-blueprint].route; connections[c-acceptance-to-candidate,c-role-X2-to-candidate,c-candidate-to-evidence]; walkthroughs[walk-real.wr-candidate]; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-44-evidence-1",
+    "nodeId": "evidence",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[evidence].inputs; nodes[evidence].interface.emptyCases; requirements[r-evidence,r-state,r-blueprint].route; connections[c-candidate-to-evidence,c-role-X4-to-evidence,c-role-X5-to-evidence,c-evidence-to-sign]; walkthroughs[walk-real.wr-evidence]; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-44-evidence-2",
+    "nodeId": "evidence",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[evidence].outputs; nodes[evidence].interface.format; requirements[r-evidence,r-state,r-blueprint].route; connections[c-candidate-to-evidence,c-role-X4-to-evidence,c-role-X5-to-evidence,c-evidence-to-sign]; walkthroughs[walk-real.wr-evidence]; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-44-evidence-3",
+    "nodeId": "evidence",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[evidence].authority; nodes[evidence].terminal.mechanism; requirements[r-evidence,r-state,r-blueprint].route; connections[c-candidate-to-evidence,c-role-X4-to-evidence,c-role-X5-to-evidence,c-evidence-to-sign]; walkthroughs[walk-real.wr-evidence]; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-44-evidence-4",
+    "nodeId": "evidence",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[evidence].interface.emptyCases; nodes[evidence].interface.errors; nodes[evidence].terminal.retry; requirements[r-evidence,r-state,r-blueprint].route; connections[c-candidate-to-evidence,c-role-X4-to-evidence,c-role-X5-to-evidence,c-evidence-to-sign]; walkthroughs[walk-real.wr-evidence]; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-44-evidence-5",
+    "nodeId": "evidence",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[evidence].validators; nodes[evidence].terminal.acceptance; requirements[r-evidence,r-state,r-blueprint].route; connections[c-candidate-to-evidence,c-role-X4-to-evidence,c-role-X5-to-evidence,c-evidence-to-sign]; walkthroughs[walk-real.wr-evidence]; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-44-evidence-6",
+    "nodeId": "evidence",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[evidence].interface.errors; nodes[evidence].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-evidence,r-state,r-blueprint].route; connections[c-candidate-to-evidence,c-role-X4-to-evidence,c-role-X5-to-evidence,c-evidence-to-sign]; walkthroughs[walk-real.wr-evidence]; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-44-evidence-7",
+    "nodeId": "evidence",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[evidence].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-evidence,r-state,r-blueprint].route; connections[c-candidate-to-evidence,c-role-X4-to-evidence,c-role-X5-to-evidence,c-evidence-to-sign]; walkthroughs[walk-real.wr-evidence]; failurePaths[fail-candidate,fail-missing]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-45-deviation-1",
+    "nodeId": "deviation",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[deviation].inputs; nodes[deviation].interface.emptyCases; requirements[r-evidence,r-revision,r-process,r-blueprint].route; connections[c-role-X2-to-deviation,c-deviation-to-revision,c-deviation-to-metrics,c-web-later-to-deviation]; failurePaths[fail-premise]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-45-deviation-2",
+    "nodeId": "deviation",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[deviation].outputs; nodes[deviation].interface.format; requirements[r-evidence,r-revision,r-process,r-blueprint].route; connections[c-role-X2-to-deviation,c-deviation-to-revision,c-deviation-to-metrics,c-web-later-to-deviation]; failurePaths[fail-premise]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-45-deviation-3",
+    "nodeId": "deviation",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[deviation].terminal.mechanism; nodes[deviation].interface.boundaries; requirements[r-evidence,r-revision,r-process,r-blueprint].route; connections[c-role-X2-to-deviation,c-deviation-to-revision,c-deviation-to-metrics,c-web-later-to-deviation]; failurePaths[fail-premise]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-45-deviation-4",
+    "nodeId": "deviation",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[deviation].interface.emptyCases; nodes[deviation].interface.errors; nodes[deviation].terminal.retry; requirements[r-evidence,r-revision,r-process,r-blueprint].route; connections[c-role-X2-to-deviation,c-deviation-to-revision,c-deviation-to-metrics,c-web-later-to-deviation]; failurePaths[fail-premise]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-45-deviation-5",
+    "nodeId": "deviation",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[deviation].validators; nodes[deviation].terminal.acceptance; requirements[r-evidence,r-revision,r-process,r-blueprint].route; connections[c-role-X2-to-deviation,c-deviation-to-revision,c-deviation-to-metrics,c-web-later-to-deviation]; failurePaths[fail-premise]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-45-deviation-6",
+    "nodeId": "deviation",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[deviation].interface.errors; nodes[deviation].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-evidence,r-revision,r-process,r-blueprint].route; connections[c-role-X2-to-deviation,c-deviation-to-revision,c-deviation-to-metrics,c-web-later-to-deviation]; failurePaths[fail-premise]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-45-deviation-7",
+    "nodeId": "deviation",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[deviation].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-evidence,r-revision,r-process,r-blueprint].route; connections[c-role-X2-to-deviation,c-deviation-to-revision,c-deviation-to-metrics,c-web-later-to-deviation]; failurePaths[fail-premise]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-46-sign-1",
+    "nodeId": "sign",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[sign].inputs; nodes[sign].interface.emptyCases; requirements[r-evidence,r-process,r-blueprint].route; connections[c-evidence-to-sign]; walkthroughs[walk-real.wr-sign]; failurePaths[fail-candidate,fail-revocation]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-46-sign-2",
+    "nodeId": "sign",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[sign].outputs; nodes[sign].interface.format; requirements[r-evidence,r-process,r-blueprint].route; connections[c-evidence-to-sign]; walkthroughs[walk-real.wr-sign]; failurePaths[fail-candidate,fail-revocation]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-46-sign-3",
+    "nodeId": "sign",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[sign].authority; nodes[sign].terminal.mechanism; requirements[r-evidence,r-process,r-blueprint].route; connections[c-evidence-to-sign]; walkthroughs[walk-real.wr-sign]; failurePaths[fail-candidate,fail-revocation]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-46-sign-4",
+    "nodeId": "sign",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[sign].interface.emptyCases; nodes[sign].interface.errors; nodes[sign].terminal.retry; requirements[r-evidence,r-process,r-blueprint].route; connections[c-evidence-to-sign]; walkthroughs[walk-real.wr-sign]; failurePaths[fail-candidate,fail-revocation]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-46-sign-5",
+    "nodeId": "sign",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[sign].validators; nodes[sign].terminal.acceptance; requirements[r-evidence,r-process,r-blueprint].route; connections[c-evidence-to-sign]; walkthroughs[walk-real.wr-sign]; failurePaths[fail-candidate,fail-revocation]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-46-sign-6",
+    "nodeId": "sign",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[sign].interface.errors; nodes[sign].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-evidence,r-process,r-blueprint].route; connections[c-evidence-to-sign]; walkthroughs[walk-real.wr-sign]; failurePaths[fail-candidate,fail-revocation]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-46-sign-7",
+    "nodeId": "sign",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[sign].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-evidence,r-process,r-blueprint].route; connections[c-evidence-to-sign]; walkthroughs[walk-real.wr-sign]; failurePaths[fail-candidate,fail-revocation]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-47-packaging-1",
+    "nodeId": "packaging",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[packaging].inputs; nodes[packaging].interface.emptyCases; requirements[r-evidence,r-package,r-scope,r-sources,r-blueprint].route; connections[c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-47-packaging-2",
+    "nodeId": "packaging",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[packaging].outputs; nodes[packaging].interface.format; requirements[r-evidence,r-package,r-scope,r-sources,r-blueprint].route; connections[c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-47-packaging-3",
+    "nodeId": "packaging",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[packaging].authority; nodes[packaging].validators; requirements[r-evidence,r-package,r-scope,r-sources,r-blueprint].route; connections[c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-47-packaging-4",
+    "nodeId": "packaging",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[packaging].interface.emptyCases; nodes[packaging].interface.errors; requirements[r-evidence,r-package,r-scope,r-sources,r-blueprint].route; connections[c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-47-packaging-5",
+    "nodeId": "packaging",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[packaging].validators; requirements[r-evidence,r-package,r-scope,r-sources,r-blueprint].route; connections[c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-47-packaging-6",
+    "nodeId": "packaging",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[packaging].interface.errors; nodes[state].terminal.mechanism(§1.3a); requirements[r-evidence,r-package,r-scope,r-sources,r-blueprint].route; connections[c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-47-packaging-7",
+    "nodeId": "packaging",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[packaging].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-evidence,r-package,r-scope,r-sources,r-blueprint].route; connections[c-packaging-to-shared]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-48-source-layout-1",
+    "nodeId": "source-layout",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[source-layout].inputs; nodes[source-layout].interface.emptyCases; requirements[r-package,r-sources,r-blueprint].route; connections[c-source-layout-to-planning-entry]; walkthroughs[walk-built.wb-source]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-48-source-layout-2",
+    "nodeId": "source-layout",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[source-layout].outputs; nodes[source-layout].interface.format; requirements[r-package,r-sources,r-blueprint].route; connections[c-source-layout-to-planning-entry]; walkthroughs[walk-built.wb-source]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-48-source-layout-3",
+    "nodeId": "source-layout",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[source-layout].terminal.mechanism; nodes[source-layout].interface.boundaries; requirements[r-package,r-sources,r-blueprint].route; connections[c-source-layout-to-planning-entry]; walkthroughs[walk-built.wb-source]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-48-source-layout-4",
+    "nodeId": "source-layout",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[source-layout].interface.emptyCases; nodes[source-layout].interface.errors; nodes[source-layout].terminal.retry; requirements[r-package,r-sources,r-blueprint].route; connections[c-source-layout-to-planning-entry]; walkthroughs[walk-built.wb-source]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-48-source-layout-5",
+    "nodeId": "source-layout",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[source-layout].validators; nodes[source-layout].terminal.acceptance; requirements[r-package,r-sources,r-blueprint].route; connections[c-source-layout-to-planning-entry]; walkthroughs[walk-built.wb-source]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-48-source-layout-6",
+    "nodeId": "source-layout",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[source-layout].interface.errors; nodes[source-layout].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-package,r-sources,r-blueprint].route; connections[c-source-layout-to-planning-entry]; walkthroughs[walk-built.wb-source]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-48-source-layout-7",
+    "nodeId": "source-layout",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[source-layout].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-package,r-sources,r-blueprint].route; connections[c-source-layout-to-planning-entry]; walkthroughs[walk-built.wb-source]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-49-planning-entry-1",
+    "nodeId": "planning-entry",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[planning-entry].inputs; nodes[planning-entry].interface.emptyCases; requirements[r-package,r-sources,r-blueprint].route; connections[c-source-layout-to-planning-entry,c-planning-entry-to-execution-package]; walkthroughs[walk-built.wb-planning]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-49-planning-entry-2",
+    "nodeId": "planning-entry",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[planning-entry].outputs; nodes[planning-entry].interface.format; requirements[r-package,r-sources,r-blueprint].route; connections[c-source-layout-to-planning-entry,c-planning-entry-to-execution-package]; walkthroughs[walk-built.wb-planning]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-49-planning-entry-3",
+    "nodeId": "planning-entry",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[planning-entry].terminal.mechanism; nodes[planning-entry].interface.boundaries; requirements[r-package,r-sources,r-blueprint].route; connections[c-source-layout-to-planning-entry,c-planning-entry-to-execution-package]; walkthroughs[walk-built.wb-planning]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-49-planning-entry-4",
+    "nodeId": "planning-entry",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[planning-entry].interface.emptyCases; nodes[planning-entry].interface.errors; nodes[planning-entry].terminal.retry; requirements[r-package,r-sources,r-blueprint].route; connections[c-source-layout-to-planning-entry,c-planning-entry-to-execution-package]; walkthroughs[walk-built.wb-planning]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-49-planning-entry-5",
+    "nodeId": "planning-entry",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[planning-entry].validators; nodes[planning-entry].terminal.acceptance; requirements[r-package,r-sources,r-blueprint].route; connections[c-source-layout-to-planning-entry,c-planning-entry-to-execution-package]; walkthroughs[walk-built.wb-planning]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-49-planning-entry-6",
+    "nodeId": "planning-entry",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[planning-entry].interface.errors; nodes[planning-entry].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-package,r-sources,r-blueprint].route; connections[c-source-layout-to-planning-entry,c-planning-entry-to-execution-package]; walkthroughs[walk-built.wb-planning]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-49-planning-entry-7",
+    "nodeId": "planning-entry",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[planning-entry].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-package,r-sources,r-blueprint].route; connections[c-source-layout-to-planning-entry,c-planning-entry-to-execution-package]; walkthroughs[walk-built.wb-planning]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-50-execution-package-1",
+    "nodeId": "execution-package",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[execution-package].inputs; nodes[execution-package].interface.emptyCases; requirements[r-package,r-sources,r-blueprint].route; connections[c-planning-entry-to-execution-package,c-execution-package-to-capability-check,c-q-capacity-to-execution-package]; walkthroughs[walk-built.wb-execution,walk-installed.wi-entry]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-50-execution-package-2",
+    "nodeId": "execution-package",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[execution-package].outputs; nodes[execution-package].interface.format; requirements[r-package,r-sources,r-blueprint].route; connections[c-planning-entry-to-execution-package,c-execution-package-to-capability-check,c-q-capacity-to-execution-package]; walkthroughs[walk-built.wb-execution,walk-installed.wi-entry]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-50-execution-package-3",
+    "nodeId": "execution-package",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[execution-package].terminal.mechanism; nodes[execution-package].interface.boundaries; requirements[r-package,r-sources,r-blueprint].route; connections[c-planning-entry-to-execution-package,c-execution-package-to-capability-check,c-q-capacity-to-execution-package]; walkthroughs[walk-built.wb-execution,walk-installed.wi-entry]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-50-execution-package-4",
+    "nodeId": "execution-package",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[execution-package].interface.emptyCases; nodes[execution-package].interface.errors; nodes[execution-package].terminal.retry; requirements[r-package,r-sources,r-blueprint].route; connections[c-planning-entry-to-execution-package,c-execution-package-to-capability-check,c-q-capacity-to-execution-package]; walkthroughs[walk-built.wb-execution,walk-installed.wi-entry]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-50-execution-package-5",
+    "nodeId": "execution-package",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[execution-package].validators; nodes[execution-package].terminal.acceptance; requirements[r-package,r-sources,r-blueprint].route; connections[c-planning-entry-to-execution-package,c-execution-package-to-capability-check,c-q-capacity-to-execution-package]; walkthroughs[walk-built.wb-execution,walk-installed.wi-entry]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-50-execution-package-6",
+    "nodeId": "execution-package",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[execution-package].interface.errors; nodes[execution-package].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-package,r-sources,r-blueprint].route; connections[c-planning-entry-to-execution-package,c-execution-package-to-capability-check,c-q-capacity-to-execution-package]; walkthroughs[walk-built.wb-execution,walk-installed.wi-entry]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-50-execution-package-7",
+    "nodeId": "execution-package",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[execution-package].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-package,r-sources,r-blueprint].route; connections[c-planning-entry-to-execution-package,c-execution-package-to-capability-check,c-q-capacity-to-execution-package]; walkthroughs[walk-built.wb-execution,walk-installed.wi-entry]; failurePaths[fail-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-51-minimum-1",
+    "nodeId": "minimum",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[minimum].inputs; nodes[minimum].interface.emptyCases; requirements[r-scope,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-51-minimum-2",
+    "nodeId": "minimum",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[minimum].outputs; nodes[minimum].interface.format; requirements[r-scope,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-51-minimum-3",
+    "nodeId": "minimum",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[minimum].terminal.mechanism; nodes[minimum].interface.boundaries; requirements[r-scope,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-51-minimum-4",
+    "nodeId": "minimum",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[minimum].interface.emptyCases; nodes[minimum].interface.errors; nodes[minimum].terminal.retry; requirements[r-scope,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-51-minimum-5",
+    "nodeId": "minimum",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[minimum].validators; nodes[minimum].terminal.acceptance; requirements[r-scope,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-51-minimum-6",
+    "nodeId": "minimum",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[minimum].interface.errors; nodes[minimum].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-scope,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-51-minimum-7",
+    "nodeId": "minimum",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[minimum].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-scope,r-package,r-blueprint].route",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-52-capability-check-1",
+    "nodeId": "capability-check",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[capability-check].inputs; nodes[capability-check].interface.emptyCases; requirements[r-scope,r-evidence,r-sources,r-blueprint].route; connections[c-execution-package-to-capability-check,c-web-later-to-capability-check,c-capability-check-to-web-later]; walkthroughs[walk-built.wb-capability,walk-installed.wi-check]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-52-capability-check-2",
+    "nodeId": "capability-check",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[capability-check].outputs; nodes[capability-check].interface.format; requirements[r-scope,r-evidence,r-sources,r-blueprint].route; connections[c-execution-package-to-capability-check,c-web-later-to-capability-check,c-capability-check-to-web-later]; walkthroughs[walk-built.wb-capability,walk-installed.wi-check]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-52-capability-check-3",
+    "nodeId": "capability-check",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[capability-check].terminal.mechanism; nodes[capability-check].interface.boundaries; requirements[r-scope,r-evidence,r-sources,r-blueprint].route; connections[c-execution-package-to-capability-check,c-web-later-to-capability-check,c-capability-check-to-web-later]; walkthroughs[walk-built.wb-capability,walk-installed.wi-check]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-52-capability-check-4",
+    "nodeId": "capability-check",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[capability-check].interface.emptyCases; nodes[capability-check].interface.errors; nodes[capability-check].terminal.retry; requirements[r-scope,r-evidence,r-sources,r-blueprint].route; connections[c-execution-package-to-capability-check,c-web-later-to-capability-check,c-capability-check-to-web-later]; walkthroughs[walk-built.wb-capability,walk-installed.wi-check]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-52-capability-check-5",
+    "nodeId": "capability-check",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[capability-check].validators; nodes[capability-check].terminal.acceptance; requirements[r-scope,r-evidence,r-sources,r-blueprint].route; connections[c-execution-package-to-capability-check,c-web-later-to-capability-check,c-capability-check-to-web-later]; walkthroughs[walk-built.wb-capability,walk-installed.wi-check]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-52-capability-check-6",
+    "nodeId": "capability-check",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[capability-check].interface.errors; nodes[capability-check].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-scope,r-evidence,r-sources,r-blueprint].route; connections[c-execution-package-to-capability-check,c-web-later-to-capability-check,c-capability-check-to-web-later]; walkthroughs[walk-built.wb-capability,walk-installed.wi-check]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-52-capability-check-7",
+    "nodeId": "capability-check",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[capability-check].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-scope,r-evidence,r-sources,r-blueprint].route; connections[c-execution-package-to-capability-check,c-web-later-to-capability-check,c-capability-check-to-web-later]; walkthroughs[walk-built.wb-capability,walk-installed.wi-check]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-53-web-later-1",
+    "nodeId": "web-later",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[web-later].inputs; nodes[web-later].interface.emptyCases; requirements[r-package,r-scope,r-blueprint].route; connections[c-web-later-to-capability-check,c-web-later-to-deviation,c-capability-check-to-web-later]; walkthroughs[walk-installed.wi-web]; failurePaths[fail-web-method]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-53-web-later-2",
+    "nodeId": "web-later",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[web-later].outputs; nodes[web-later].interface.format; requirements[r-package,r-scope,r-blueprint].route; connections[c-web-later-to-capability-check,c-web-later-to-deviation,c-capability-check-to-web-later]; walkthroughs[walk-installed.wi-web]; failurePaths[fail-web-method]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-53-web-later-3",
+    "nodeId": "web-later",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[web-later].terminal.mechanism; nodes[web-later].interface.boundaries; requirements[r-package,r-scope,r-blueprint].route; connections[c-web-later-to-capability-check,c-web-later-to-deviation,c-capability-check-to-web-later]; walkthroughs[walk-installed.wi-web]; failurePaths[fail-web-method]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-53-web-later-4",
+    "nodeId": "web-later",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[web-later].interface.emptyCases; nodes[web-later].interface.errors; nodes[web-later].terminal.retry; requirements[r-package,r-scope,r-blueprint].route; connections[c-web-later-to-capability-check,c-web-later-to-deviation,c-capability-check-to-web-later]; walkthroughs[walk-installed.wi-web]; failurePaths[fail-web-method]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-53-web-later-5",
+    "nodeId": "web-later",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[web-later].validators; nodes[web-later].terminal.acceptance; requirements[r-package,r-scope,r-blueprint].route; connections[c-web-later-to-capability-check,c-web-later-to-deviation,c-capability-check-to-web-later]; walkthroughs[walk-installed.wi-web]; failurePaths[fail-web-method]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-53-web-later-6",
+    "nodeId": "web-later",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[web-later].interface.errors; nodes[web-later].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-package,r-scope,r-blueprint].route; connections[c-web-later-to-capability-check,c-web-later-to-deviation,c-capability-check-to-web-later]; walkthroughs[walk-installed.wi-web]; failurePaths[fail-web-method]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-53-web-later-7",
+    "nodeId": "web-later",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[web-later].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-package,r-scope,r-blueprint].route; connections[c-web-later-to-capability-check,c-web-later-to-deviation,c-capability-check-to-web-later]; walkthroughs[walk-installed.wi-web]; failurePaths[fail-web-method]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-54-q-capacity-1",
+    "nodeId": "q-capacity",
+    "question": "用户怎样进入这个组件，需要什么输入？",
+    "answerLocation": "nodes[q-capacity].inputs; nodes[q-capacity].interface.emptyCases; requirements[r-package,r-blueprint].route; connections[c-q-capacity-to-execution-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-54-q-capacity-2",
+    "nodeId": "q-capacity",
+    "question": "这个组件产出什么，交给谁或进入哪个下一职责？",
+    "answerLocation": "nodes[q-capacity].outputs; nodes[q-capacity].interface.format; requirements[r-package,r-blueprint].route; connections[c-q-capacity-to-execution-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-54-q-capacity-3",
+    "nodeId": "q-capacity",
+    "question": "这个组件里的决定由谁作出，什么记录或对象具有权威？",
+    "answerLocation": "nodes[q-capacity].terminal.mechanism; nodes[q-capacity].interface.boundaries; requirements[r-package,r-blueprint].route; connections[c-q-capacity-to-execution-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-54-q-capacity-4",
+    "nodeId": "q-capacity",
+    "question": "失败、缺输入或缺证据时会怎样，用户会看到什么？",
+    "answerLocation": "nodes[q-capacity].interface.emptyCases; nodes[q-capacity].interface.errors; nodes[q-capacity].terminal.retry; requirements[r-package,r-blueprint].route; connections[c-q-capacity-to-execution-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-54-q-capacity-5",
+    "nodeId": "q-capacity",
+    "question": "怎样验收这个组件，什么情况下不能算完成？",
+    "answerLocation": "nodes[q-capacity].validators; nodes[q-capacity].terminal.acceptance; requirements[r-package,r-blueprint].route; connections[c-q-capacity-to-execution-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-54-q-capacity-6",
+    "nodeId": "q-capacity",
+    "question": "中断、结果不明或状态异常后怎样恢复，何时才能继续？",
+    "answerLocation": "nodes[q-capacity].interface.errors; nodes[q-capacity].terminal.retry; nodes[state].terminal.mechanism(§1.3a); requirements[r-package,r-blueprint].route; connections[c-q-capacity-to-execution-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6R6-54-q-capacity-7",
+    "nodeId": "q-capacity",
+    "question": "这个组件怎样避免使已有能力、旧功能、现有插件或既有职责退化？",
+    "answerLocation": "nodes[q-capacity].interface.boundaries; nodes[contract-regression].terminal.acceptance; nodes[capability-check].terminal.acceptance; requirements[r-package,r-blueprint].route; connections[c-q-capacity-to-execution-package]",
+    "gap": null,
+    "impact": "Blueprint 给出了可定位的输入、职责、失败处理或验收规则；本项不会使用户在该组件卡住，也没有发现与相关需求、连接、走查或失败路径构成实质冲突。",
+    "blocking": false,
+    "owner": "D1"
+  }
+]
