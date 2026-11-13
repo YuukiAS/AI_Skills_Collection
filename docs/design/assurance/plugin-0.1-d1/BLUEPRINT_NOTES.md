@@ -1182,3 +1182,149 @@ npx tsx check.mjs --stage draft "$CHECK_INPUT"
 ```
 
 本轮没有需要 D1 新增选择的事项。只修改指定工作树中的 JSON 并追加本说明，另重新生成指定 D5 目录的验收条目清单；SPEC、MERGE_DECISIONS、冻结说明正文、流程文档和 A 原稿均未改。未 commit、未 push、未切分支。新 JSON、整份说明和清单按用户指定正则自查，公开信息匹配数均为零。
+
+
+## 续：说明身份、大件下载依据及四个单位用词（第 22 节，D6 第 7 轮后）
+
+说明的独立身份和大件下载依据已写入 Blueprint，四个指定复述单位已就地解释术语。验收器对象仍为 **67 个**，`environment` 分布也未变化；没有新增验收器、失败路径或复述单位。
+
+本轮以实际 HEAD `52d32f7df843a926ab7bfc956b77a6877ed1330c` 为准，完整读取 SPEC 第 6.4a 节新增的“说明的身份”“大件下载的依据”、第 6.4 节必填字段，以及 MERGE_DECISIONS 第 22 节。来源引用绑定该提交和仓库内路径；本轮未提交文件的身份用下述 SHA-256 定位，不声称已存在于 HEAD 中。
+
+### 已写入的设计补定
+
+- `freeze.terminal.mechanism` 中第 6.4a 节与当前 SPEC 全文逐字一致。说明是独立文件，`explanation_sha256` 取其原始字节 SHA-256，和 `bundle_sha256` 一样不做规范化；没有把说明身份加入 JCS 内容哈希清单。
+- `freeze.json` 必填字段加入 `explanation_sha256`。D6 结果写明所检查的说明身份，D1 批准请求写明说明身份，用户批准与冻结记录同时记 `snapshot_sha256`、`explanation_sha256`；说明身份须为同一值。对应的机制、接口、验收和记录检查边界同步。
+- 说明在 D6 检查后只要改动，原说明检查就失效；D6 对新说明重做漏写、多写、验收器数量分类、大件下载四项检查，Blueprint 没变时不重复逐组件追问。`role-D1`、`role-D6`、`gates` 明确各自的记录与检查职责。
+- 在 Blueprint 已有的身份表中按本次要求补第四行 `explanation_sha256`，表头与相关冻结记录验收改为四个身份；设计快照、语义哈希和完整文件的原计算规则保持不变。其他复述单位里原本谈这三个设计身份的文字未改。
+- 冻结说明第 5 节只写 Blueprint 有依据的内容。依赖大小没有记录时写“大小未记录”，不凭常识写“很小”；D6 原来可能把大小未知读成“没有大件”的验收文字也已改清。执行者首次下载或安装任何依赖前记录实际大小，单项超过 100 MB 先经用户授权再下载；通用授权边界及其验收条目写入同一要求。本轮没有实际下载、安装或发起授权。
+- 扩充既有 `fail-freeze-explanation` 和 `v-fail-freeze-explanation`，反例包含说明身份不一致、检查后说明被改却仍采用原检查；更新注入绑定和预期收场。沿用既有 D6 四项检查失败的路径，未新增路径或验收器。
+
+所有自身字段变化的节点如下（包括来源提交引用更新，不重复计算只因子节点变化的容器）：
+
+| 节点 id | 修改字段 |
+| --- | --- |
+| `state` | `validators`、`terminal` |
+| `writer` | `validators` |
+| `record-check` | `validators`、`terminal` |
+| `dispatch` | `validators`、`terminal` |
+| `prompts` | `validators` |
+| `revision` | `validators`、`terminal` |
+| `role-D1` | `outputs`、`validators`、`interface`、`terminal` |
+| `role-D2` | `validators` |
+| `role-D3` | `validators` |
+| `role-D4` | `validators` |
+| `role-D6` | `outputs`、`validators`、`interface`、`terminal` |
+| `role-D8` | `validators` |
+| `clarify` | `validators`、`terminal` |
+| `gates` | `validators`、`terminal` |
+| `contract-fidelity` | `validators` |
+| `contract-authorization` | `validators`、`interface`、`terminal` |
+| `freeze` | `inputs`、`outputs`、`validators`、`interface`、`terminal` |
+| `q-checker` | `validators`、`terminal` |
+| `q-inheritance` | `validators`、`terminal` |
+| `role-X1` | `validators` |
+| `role-X5` | `validators` |
+| `evidence` | `validators` |
+| `deviation` | `validators` |
+| `sign` | `validators` |
+| `packaging` | `validators` |
+| `source-layout` | `validators` |
+| `planning-entry` | `validators` |
+| `execution-package` | `validators` |
+| `minimum` | `validators` |
+| `capability-check` | `validators` |
+| `web-later` | `validators` |
+| `q-capacity` | `validators`、`terminal` |
+
+### 本轮全部复述单位变化
+
+| 复述单位 id | 改动的读者字段 |
+| --- | --- |
+| `wr-gates` | `title`、`action`、`exampleData`、`onError` |
+| `wr-freeze` | `action`、`expectedResult`、`why`、`onError` |
+| `fail-freeze-explanation-step-1` | `action`、`exampleData`、`expectedResult` |
+| `fail-freeze-explanation-whole` | `action`、`exampleData`、`expectedResult` |
+
+四个单位中，“大件下载”均写成“单项超过 100 MB 的下载或安装”；数量分类说明为验收器总数和各类个数与设计是否一致；固定格式首次出现时就地列出十节；`wr-gates` 第一次出现用户代理追问、冷读时分别给出用户规定的半句解释；`wr-freeze` 使用用户给定的“语义哈希（去掉进度和出处字段后的设计内容的哈希）”。身份绑定和说明变动后重查也写进对应步骤，没有另编定义。
+
+实际调用固定检查器 `readerHash` 比较本轮 HEAD：只改上述四个单位，无新增，其余 56 个单位完整对象保持原样，包括其技术字段。没有补签或篡改任何读者通过记录。
+
+因任务一规则同步而修改的既有技术字段逐项列出；任务二术语改写未触及其他技术字段：
+
+| 技术字段 | 规则同步内容 |
+| --- | --- |
+| `wr-gates.technical.action` | 补说明身份绑定、说明变化后的四项重查及 Blueprint 未变时不重复逐组件追问。 |
+| `wr-gates.technical.exampleData` | 加入所检查说明身份或说明检查后变动的情景。 |
+| `wr-freeze.technical.action` | 补说明身份绑定、说明变化后的四项重查及 Blueprint 未变时不重复逐组件追问。 |
+| `wr-freeze.technical.expectedResult` | 补说明的原始字节哈希及三处一致，或旧检查失效后按范围重查。 |
+| `fail-freeze-explanation-whole.technical.action` | 补说明身份绑定、说明变化后的四项重查及 Blueprint 未变时不重复逐组件追问。 |
+| `fail-freeze-explanation-whole.technical.exampleData` | 加入所检查说明身份或说明检查后变动的情景。 |
+| `fail-freeze-explanation-whole.technical.expectedResult` | 补说明的原始字节哈希及三处一致，或旧检查失效后按范围重查。 |
+| `fail-freeze-explanation-step-1.technical.action` | 补说明身份绑定、说明变化后的四项重查及 Blueprint 未变时不重复逐组件追问。 |
+| `fail-freeze-explanation-step-1.technical.exampleData` | 加入所检查说明身份或说明检查后变动的情景。 |
+| `fail-freeze-explanation-step-1.technical.expectedResult` | 补说明的原始字节哈希及三处一致，或旧检查失效后按范围重查。 |
+| `fail-freeze-explanation.technical.situation` | 追加说明身份不一致、D6 检查后改动却仍采用旧检查的反例。 |
+| `fail-freeze-explanation.technical.handling` | 保留既有缺口交 D1，并照录新“说明的身份”段落。 |
+| `fail-freeze-explanation.technical.userSees` | 说明改动或身份不一致时旧检查失效，D6 重做说明四项检查，设计未变不重做逐组件追问。 |
+
+总量仍为 54 个节点、14 条需求、51 条连接、4 条正常走查（23 步）、13 条失败路径（24 步及 13 段整体收场）、60 个复述单位、67 个验收器对象、12 条依据记录。验收器仍全部 `not-run`、运行记录为空；`versions: []` 保持原样。本轮未实际执行 D6 或真实宿主验收，没有用户批准或正式冻结。
+
+### 重新生成的清单与环境分布
+
+已在用户指定 D5 目录重新生成 `acceptance-inventory.json`。清单仍逐节点原序取每条 `terminal.acceptance`，保留原文、节点 id/标题、索引、JSON 出处、`needs` 与理由、下载判断。未变条目沿用前次相同判断，改写或新增的 16 条重新核对，未拆句或做功能分类。
+
+条目从 252 条增至 **262 条**，增加 10 条；验收器对象仍为 **67 个，增量为零**。`needs` 是验收条目的机械需求判断，`environment` 是验收器对象的原有字段，两种口径没有互相推导或替换。
+
+| 验收器 environment | 本轮前 | 本轮后 |
+| --- | ---: | ---: |
+| `real` | 48 | 48 |
+| `source` | 17 | 17 |
+| `built` | 1 | 1 |
+| `installed` | 1 | 1 |
+| 合计 | 67 | 67 |
+
+环境分布已写入清单的 `counting.validator_environment_counts`，与本轮前的分布逐项一致。
+
+| 顶层组件 | file-check | real-host | expert | user | unclear | 合计 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 共用任务协议（`shared`） | 44 | 19 | 0 | 8 | 0 | 71 |
+| 设计保障（`design`） | 79 | 28 | 0 | 6 | 2 | 115 |
+| 交付保障（`delivery`） | 25 | 10 | 6 | 0 | 3 | 44 |
+| 同源分发（`packaging`） | 18 | 12 | 1 | 0 | 1 | 32 |
+| 合计 | 166 | 69 | 7 | 14 | 6 | 262 |
+
+6 条 `unclear` 仍逐条保留原因。全 JSON 下载/安装相关搜索和所有依赖出处已重建，11 个候选大小仍未记录；清单明确写“大小未记录”，并逐项附首次下载/安装前记录实际大小、超过阈值先经用户授权的规则，没有估算或凭常识标小。
+
+上一版清单 SHA-256：`d36254b36f53e2b353f8475cc691bf2b8ceff03d85411faff9ac271686005ba9`；新版清单 SHA-256：`63ca2c4bb09068fbcba3c626ac9ab1399c14d0c62e5c7d84023e901073acf61f`。清单所有条目原文、归属、索引、出处、统计及 `source.sha256` 已与当前 JSON 逐项核对。
+
+### 草稿检查及预期读者缺口
+
+检查器提交仍为 `529bbde9b7d0ae9d2be7084fff2b34d9e4a6af1e`，源码未改。缓存专用目录的三个只读输入链接分别指向当前新 JSON 和用户指定的读者/疑问文件；原件未覆盖。先加载 Node，再从检查器 `content/` 执行，变量代指用户指定工作树，公开文件不记录本机绝对路径。
+
+```bash
+module load nodejs/24.16.0
+cd "$BLUEPRINT_WORKTREE/content"
+CHECK_INPUT="$BLUEPRINT_WORKTREE/content/.cache/assurance-explanation-identity-52d32f7d/blueprint.json"
+npx tsx check.mjs --stage draft --offline "$CHECK_INPUT"
+npx tsx check.mjs --stage draft "$CHECK_INPUT"
+```
+
+| 检查 | 时间（UTC） | 原始退出码 | 本轮读者缺口 | 既有读者缺口 | 其他缺口 | 人工解释待审 | 未完成核实 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 首轮离线 | `2026-11-13T06:20:46.908Z` | 1 | 4 | 2 | 0 | 92 | 1 |
+| 最终离线 | `2026-11-13T06:22:24.418Z` | 1 | 4 | 2 | 0 | 92 | 1 |
+| 在线草稿 | `2026-11-13T06:23:52.827Z` | 1 | 4 | 2 | 0 | 92 | 0 |
+
+首轮后仅进一步改清 D6 下载依据条目的措辞，并重跑离线，未新增设计选择或改变验收器数量。六项均为 `reader-current-hash`：本轮上述四个单位，加上指定读者汇总文件尚未覆盖的 `fail-recovery-whole`、`fail-recovery-step-1`。第 22 节虽已记录两个恢复单位在 D8 第 5 轮通过，本轮仍严格使用给定的 D5 汇总文件，不据判定说明补签或改写原件。
+
+这些读者项按当前约定单列，其他缺口为零；在线未完成核实为零，离线唯一未完成项为未联网核实来源。原始退出码 1 未被修改，未声称正式 D5/D8 已通过；92 项证据解释仍待人工审查。
+
+读者原件 SHA-256 仍为 `c36ddb6392c62d597c05f11a3db71f838ab11fd2f336e298ce3a152b9062d2e7`，疑问原件仍为 `37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570`。
+
+新 JSON 的 SHA-256：
+
+```text
+7bfbb275dec5ed6c79f02d0c9c916e3ac8e47d68a72704801625ec7dca8ba1c7
+```
+
+本轮没有需要新增设计选择的事项。只修改指定工作树的 JSON 并追加本说明，另重新生成 D5 目录验收条目清单；SPEC、MERGE_DECISIONS、冻结说明正文、流程文档和 A 原稿均未改。未 commit、未 push、未切分支。新 JSON、整份说明和清单按用户指定正则公开信息自查，匹配数均为零。
