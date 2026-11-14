@@ -1,0 +1,291 @@
+{
+  "schema_version": "assurance-freeze/0.1",
+  "task_id": "assurance-plugins-0-1-d1",
+  "blueprint_ref": {
+    "repository": "YuukiAS/AI_Skills_Collection",
+    "branch": "design/assurance-plugins-0.1-merged",
+    "path": "docs/design/assurance/plugin-0.1-d1/blueprint.json",
+    "commit": "9e5943f33440587e0b220474caa89e41a5d0d697"
+  },
+  "snapshot_sha256": "8cd6ae62f6cbadf2a6a8776e900986d593d6ae93963e1f9460bd9d5c72ded733",
+  "explanation_sha256": "0c38e33f3899f27c80e47cd1a61cad8f79ce503e49fd0d7bdc988dc8f7a7d4b7",
+  "bundle_sha256": "ce5efd774c4c0a8b2defac03509ab522c3a3c0805f39f5bc293d0da24c7cd203",
+  "document_version": "0.1",
+  "semantic_version": "0.1",
+  "semantic_hash": "dc37bc84681e8b5a9ff719b3c1f3e219a922c57de7a088cc4645a65f397e5688",
+  "nine_item_refs": [
+    {
+      "item": 1,
+      "name": "能力与声明范围",
+      "node_id": "contract-capability",
+      "node_ref": "/nodes/1/children/3/children/0",
+      "field_refs": [
+        "/nodes/1/children/3/children/0/terminal/mechanism",
+        "/nodes/1/children/3/children/0/terminal/acceptance",
+        "/nodes/1/children/3/children/0/validators"
+      ]
+    },
+    {
+      "item": 2,
+      "name": "正常入口与最终消费对象",
+      "node_id": "contract-entry",
+      "node_ref": "/nodes/1/children/3/children/1",
+      "field_refs": [
+        "/nodes/1/children/3/children/1/terminal/mechanism",
+        "/nodes/1/children/3/children/1/terminal/acceptance",
+        "/nodes/1/children/3/children/1/validators"
+      ]
+    },
+    {
+      "item": 3,
+      "name": "成功、失败、缺证据",
+      "node_id": "contract-outcomes",
+      "node_ref": "/nodes/1/children/3/children/2",
+      "field_refs": [
+        "/nodes/1/children/3/children/2/terminal/mechanism",
+        "/nodes/1/children/3/children/2/terminal/acceptance",
+        "/nodes/1/children/3/children/2/validators"
+      ]
+    },
+    {
+      "item": 4,
+      "name": "必需证据与不可替换方法",
+      "node_id": "contract-fidelity",
+      "node_ref": "/nodes/1/children/3/children/3",
+      "field_refs": [
+        "/nodes/1/children/3/children/3/terminal/mechanism",
+        "/nodes/1/children/3/children/3/terminal/acceptance",
+        "/nodes/1/children/3/children/3/validators"
+      ]
+    },
+    {
+      "item": 5,
+      "name": "禁止替代",
+      "node_id": "contract-forbidden",
+      "node_ref": "/nodes/1/children/3/children/4",
+      "field_refs": [
+        "/nodes/1/children/3/children/4/terminal/mechanism",
+        "/nodes/1/children/3/children/4/terminal/acceptance",
+        "/nodes/1/children/3/children/4/validators"
+      ]
+    },
+    {
+      "item": 6,
+      "name": "旧功能与回归",
+      "node_id": "contract-regression",
+      "node_ref": "/nodes/1/children/3/children/5",
+      "field_refs": [
+        "/nodes/1/children/3/children/5/terminal/mechanism",
+        "/nodes/1/children/3/children/5/terminal/acceptance",
+        "/nodes/1/children/3/children/5/validators"
+      ]
+    },
+    {
+      "item": 7,
+      "name": "三类控制例",
+      "node_id": "contract-controls",
+      "node_ref": "/nodes/1/children/3/children/6",
+      "field_refs": [
+        "/nodes/1/children/3/children/6/terminal/mechanism",
+        "/nodes/1/children/3/children/6/terminal/acceptance",
+        "/nodes/1/children/3/children/6/validators"
+      ]
+    },
+    {
+      "item": 8,
+      "name": "交付可改与须退回",
+      "node_id": "contract-changes",
+      "node_ref": "/nodes/1/children/3/children/7",
+      "field_refs": [
+        "/nodes/1/children/3/children/7/terminal/mechanism",
+        "/nodes/1/children/3/children/7/terminal/acceptance",
+        "/nodes/1/children/3/children/7/validators"
+      ]
+    },
+    {
+      "item": 9,
+      "name": "权限与资源边界",
+      "node_id": "contract-authorization",
+      "node_ref": "/nodes/1/children/3/children/8",
+      "field_refs": [
+        "/nodes/1/children/3/children/8/terminal/mechanism",
+        "/nodes/1/children/3/children/8/terminal/acceptance",
+        "/nodes/1/children/3/children/8/validators"
+      ]
+    }
+  ],
+  "gate_refs": {
+    "D5": {
+      "coverage": "r28 在线草稿档；本次对完整冻结输出运行在线冻结档，含历史、当前结构、来源及读者记录。",
+      "validity": "草稿档绑定获批快照；冻结档退出 0、缺口 0、未完成 0，最新快照与当前内容及获批快照逐字节相同。",
+      "results": [
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d5/r28/RECORD.md"
+        }
+      ],
+      "frozen_check": {
+        "path": "d5-frozen-content-report.json",
+        "sha256": "fbd16024e59202d08e4de771e7bfb105e0d802b4e67daa9c61e686053fb90ac7",
+        "checked_bundle_sha256": "ce5efd774c4c0a8b2defac03509ab522c3a3c0805f39f5bc293d0da24c7cd203",
+        "exit_code": 0,
+        "errors": 0,
+        "unresolved": 0,
+        "reviews": 183
+      },
+      "snapshot_sha256": "8cd6ae62f6cbadf2a6a8776e900986d593d6ae93963e1f9460bd9d5c72ded733",
+      "status": "passed"
+    },
+    "D6": {
+      "coverage": "round13 逐组件覆盖全部 54 节点；round16 冻结说明全文四项检查；round17 按授权范围检查改动并关闭两处阻塞。",
+      "validity": "逐组件结果绑定获批快照；说明检查按 MERGE_DECISIONS 第28、29节合并生效，round17 绑定获批说明，questions=[]，无未关闭阻塞。",
+      "explanation_sha256": "0c38e33f3899f27c80e47cd1a61cad8f79ce503e49fd0d7bdc988dc8f7a7d4b7",
+      "results": [
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d6/round13/RECORD.md"
+        },
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d6/round13/RESULT.md"
+        },
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d6/round13/questions.json"
+        },
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d6/round16/RESULT.md"
+        },
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d6/round16/questions.json"
+        },
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d6/round17/RESULT.md"
+        },
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d6/round17/questions.json"
+        }
+      ],
+      "snapshot_sha256": "8cd6ae62f6cbadf2a6a8776e900986d593d6ae93963e1f9460bd9d5c72ded733",
+      "status": "passed"
+    },
+    "D7": {
+      "coverage": "round25 对 Blueprint 全文冷读，开工阻塞问题为零。",
+      "validity": "结果绑定获批文件与内容快照；冻结追加版本历史后内容快照相同，结果继续有效。",
+      "results": [
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d7/round25/RECORD.md"
+        },
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d7/round25/COLD_READ.md"
+        }
+      ],
+      "snapshot_sha256": "8cd6ae62f6cbadf2a6a8776e900986d593d6ae93963e1f9460bd9d5c72ded733",
+      "status": "passed"
+    },
+    "D8": {
+      "coverage": "累计 60 个正常步骤与失败说明单位、108 条读者记录；包含 round5 的 2 个通过单位及 round7 的 11 个通过单位。",
+      "validity": "各单位最后一次记录均通过，当前文字和哈希经冻结函数及 D5 冻结档核对；文字未改的历史记录继续有效。reader_isolation=single-thread-batch。",
+      "reader_isolation": "single-thread-batch",
+      "results": [
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d8/round5/manifest.json"
+        },
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d8/round5/RESULT.json"
+        },
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d8/round5/D1_JUDGMENT.json"
+        },
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d8/round7/manifest.json"
+        },
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d8/round7/RESULT.json"
+        },
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d8/round7/D1_JUDGMENT.json"
+        },
+        {
+          "repository": "YuukiAS/AI_Skills_Collection",
+          "branch": "gates/assurance-0.1-d1",
+          "commit": "72f1ee831672641c52550a942c6ad90bc2ae81cf",
+          "path": "docs/design/assurance/plugin-0.1-d1/gates/d5/final/readability-review.json"
+        }
+      ],
+      "readability_review_sha256": "b46353208cc05ae09398b6eb777a0f82f86fa7a659d96891ae7a763ff2d1f882",
+      "snapshot_sha256": "8cd6ae62f6cbadf2a6a8776e900986d593d6ae93963e1f9460bd9d5c72ded733",
+      "status": "passed"
+    }
+  },
+  "open_questions": [],
+  "user_approval": {
+    "answer": "D6没问题, 你去检查下, 没别的问题就让codex进入冻结",
+    "source": "Claude Code 主会话（D1），2026-11-14",
+    "time": "2026-11-14T11:55:10-05:00",
+    "approved_snapshot_sha256": "8cd6ae62f6cbadf2a6a8776e900986d593d6ae93963e1f9460bd9d5c72ded733",
+    "approved_explanation_sha256": "0c38e33f3899f27c80e47cd1a61cad8f79ce503e49fd0d7bdc988dc8f7a7d4b7"
+  },
+  "authorization_refs": [
+    {
+      "repository": "YuukiAS/AI_Skills_Collection",
+      "branch": "design/assurance-plugins-0.1-merged",
+      "commit": "3ece3d60603c62b57bd6837aab536cfc0da3d826",
+      "path": "docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md",
+      "section": "28"
+    },
+    {
+      "repository": "YuukiAS/AI_Skills_Collection",
+      "branch": "design/assurance-plugins-0.1-merged",
+      "commit": "3ece3d60603c62b57bd6837aab536cfc0da3d826",
+      "path": "docs/design/assurance/plugin-0.1-d1/MERGE_DECISIONS.md",
+      "section": "29"
+    }
+  ],
+  "created_by": "D1 (Claude) via Codex",
+  "created_at": "2026-11-14T12:06:10-05:00"
+}
