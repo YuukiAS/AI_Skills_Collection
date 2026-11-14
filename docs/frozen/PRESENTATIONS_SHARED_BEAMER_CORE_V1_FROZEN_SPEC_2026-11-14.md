@@ -208,9 +208,9 @@ Shared structure:
 - adjacent visible gap >=12 px at 1920×1080;
 - width cap based on section frame count:
 
-[
-W_{cap}(n_s)=34+38rac{n_s}{n_{max}} 	ext{PDF pt}.
-]
+\[
+W_{cap}(n_s)=34+38\\frac{n_s}{n_{max}}\\ \\text{PDF pt}.
+\]
 
 - >100% = FAIL;
 - 90–100% = REVIEW;
