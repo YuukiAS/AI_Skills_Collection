@@ -43,7 +43,7 @@ PDF 由 Chromium 直接打开同一 SVG 后导出，共 1 页。`pdfimages -list
 本次只读复用既有工作树的工具与字体。在本目录重建可运行以下命令。
 
 ```bash
-ASSURANCE_RENDER_RES=/users/a/e/aereinh/AISC-wt-assurance/.cache/assurance-diagram \
+ASSURANCE_RENDER_RES=<local>/AISC-wt-assurance/.cache/assurance-diagram \
 PYTHONDONTWRITEBYTECODE=1 python render_assurance_V7_20261115.py
 ```
 
