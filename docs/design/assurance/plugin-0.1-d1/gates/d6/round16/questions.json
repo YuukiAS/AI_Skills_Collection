@@ -1,0 +1,22 @@
+[
+  {
+    "id": "R16-Q1",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明是否应把 D4、D5、D7 和 X2 的普通实现明确写为“Codex 高”，而不是只写“Codex”？",
+    "answerLocation": "blueprint.json：shared/dispatch 的 terminal.mechanism §2.1；design/design-roles 下 role-D4、role-D5、role-D7；delivery/delivery-roles 下 role-X2。上述普通执行角色的档次均固定为“执行端·普通：Codex 高”。",
+    "gap": "FREEZE_EXPLANATION.md 第 2 节只写“D4、D5、D7 和 X2 的普通实现由 Codex 跑”，漏掉 Blueprint 固定的“高”档次；同一节又声明入口不满足档次时不得降档，因此当前说明把实际允许的模型档次写弱了。",
+    "impact": "用户批准时可能理解为任意 Codex 档次都满足设计，从而误解角色运行档次与“不降档”边界。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "R16-Q2",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明是否应把“你已经回答过的不再重复问”限定为“已有回答仍然有效时不重复问；新事实推翻回答适用前提时重新打开并说明原因和影响”？",
+    "answerLocation": "blueprint.json：design/clarify 的 terminal.mechanism §6.1。规则是同一选择已有有效回答时直接引用；新事实推翻回答适用前提时保留旧答、写明重开原因和影响，再重新处理该用户决定。",
+    "gap": "FREEZE_EXPLANATION.md 第 2 节“什么问题会来问你”写成“你已经回答过的不再重复问”，没有保留 Blueprint 对“回答仍然有效”的条件，也没有写新事实使原回答前提失效时需要重新打开问题。",
+    "impact": "这会让用户误以为做过的决定永远不会再次确认，低估后续用户工作量，并改变 Blueprint 对用户专属决定的重新确认边界。",
+    "blocking": true,
+    "owner": "D1"
+  }
+]
