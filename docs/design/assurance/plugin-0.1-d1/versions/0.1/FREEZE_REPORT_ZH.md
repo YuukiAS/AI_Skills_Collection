@@ -2,7 +2,7 @@
 
 本次机械冻结步骤全部通过。已生成首版 `blueprint.frozen.json` 和 `freeze.json`，在线 D5 冻结档退出 0、缺口 0、未完成核实 0。最新版本快照、当前内容和用户获批快照的 JCS 字节完全相同。冻结记录的 `blueprint_ref.commit` 按用户要求为 `PENDING_COMMIT`，等待 Claude 提交后回填。
 
-第一次执行因检查器缓存目录只读而停止。用户随后将 `/users/a/e/aereinh/BP-wt-draft-check/content/.cache` 加入可写范围，并明确要求从步骤 2 继续。本次沿用已通过的输入核对，完成步骤 2–6。第一次失败栈和报告分别保存在 `freeze-command.initial-failure.log`、`FREEZE_REPORT_ZH.initial-failure.md`。
+第一次执行因检查器缓存目录只读而停止。用户随后将 `<local>/BP-wt-draft-check/content/.cache` 加入可写范围，并明确要求从步骤 2 继续。本次沿用已通过的输入核对，完成步骤 2–6。第一次失败栈和报告分别保存在 `freeze-command.initial-failure.log`、`FREEZE_REPORT_ZH.initial-failure.md`。
 
 ## 执行结果
 
@@ -37,7 +37,7 @@
 
 Blueprint 来源文件、工作目录副本、设计 HEAD 中的对象和最后修改提交中的对象逐字节相同。冻结说明与指定设计 HEAD 中的文件相同。全部已读取关卡文件逐一与指定关卡提交中的 Git 对象比较，字节一致。逐文件哈希见 `input-evidence.json`。
 
-内容快照由指定检查器的 `snapshotOf` 导出，使用 `rfc8785==0.1.4` 规范化。JCS 结果为 969556 字节，无结尾换行，保存在 `snapshot.jcs`。规范化库装于 `/tmp/assurance-freeze-py`，安装输出显示 wheel 为 9.2 kB。
+内容快照由指定检查器的 `snapshotOf` 导出，使用 `rfc8785==0.1.4` 规范化。JCS 结果为 969556 字节，无结尾换行，保存在 `snapshot.jcs`。规范化库装于 `<scratch>/py`，安装输出显示 wheel 为 9.2 kB。
 
 
 ## 关卡证据与效力
@@ -90,21 +90,21 @@ D5 调用 `check.mjs` 导出的同一个 `runCheck` 实现，使用 `--stage fro
 下列命令属于上次已通过的执行，本次按用户指令沿用结果。
 
 ```bash
-PYTHONPATH=/tmp/assurance-freeze-py python verify-inputs.py > verify-inputs.log 2>&1
+PYTHONPATH=<scratch>/py python verify-inputs.py > verify-inputs.log 2>&1
 ```
 
 退出码 0。脚本内保存分支、提交、Git 对象字节、文件哈希及关卡记录的核对操作。此前在检查器 `content/` 使用 `tsx --eval` 调用 `snapshotOf` 导出 `snapshot.json`，再用 `rfc8785.dumps` 写 `snapshot.jcs` 并断言目标哈希，退出码 0。
 
 ### 步骤 2 的冻结命令
 
-在 `/users/a/e/aereinh/BP-wt-draft-check/content` 执行，退出码 0。
+在 `<local>/BP-wt-draft-check/content` 执行，退出码 0。
 
 ```bash
 module load nodejs/24.16.0
-BLUEPRINT_SOURCE_ROOTS='YuukiAS/AI_Skills_Collection=/users/a/e/aereinh/AI_Skills_Collection' \
+BLUEPRINT_SOURCE_ROOTS='YuukiAS/AI_Skills_Collection=<local>/AI_Skills_Collection' \
   ./node_modules/.bin/tsx \
-  /users/a/e/aereinh/Asteria-Workspace/codex-runs/freeze-assurance/freeze-assurance.mjs \
-  > /users/a/e/aereinh/Asteria-Workspace/codex-runs/freeze-assurance/freeze-command.log 2>&1
+  <local>/Asteria-Workspace/codex-runs/freeze-assurance/freeze-assurance.mjs \
+  > <local>/Asteria-Workspace/codex-runs/freeze-assurance/freeze-command.log 2>&1
 ```
 
 来源根沿用上次 D5，未显式设置 `BLOBS`。冻结校验报告 `freeze-command-report.json` 的 `errors=[]`，证据解释人审 183 项。
@@ -113,7 +113,7 @@ BLUEPRINT_SOURCE_ROOTS='YuukiAS/AI_Skills_Collection=/users/a/e/aereinh/AI_Skill
 
 ```bash
 module load nodejs/24.16.0
-./node_modules/.bin/tsx --eval "import {readFileSync,writeFileSync} from 'node:fs'; import {snapshotOf} from './history.ts'; const b=JSON.parse(readFileSync('/users/a/e/aereinh/Asteria-Workspace/codex-runs/freeze-assurance/blueprint.frozen.json','utf8')); writeFileSync('/users/a/e/aereinh/Asteria-Workspace/codex-runs/freeze-assurance/frozen-current-snapshot.json',JSON.stringify(snapshotOf(b)));"
+./node_modules/.bin/tsx --eval "import {readFileSync,writeFileSync} from 'node:fs'; import {snapshotOf} from './history.ts'; const b=JSON.parse(readFileSync('<local>/Asteria-Workspace/codex-runs/freeze-assurance/blueprint.frozen.json','utf8')); writeFileSync('<local>/Asteria-Workspace/codex-runs/freeze-assurance/frozen-current-snapshot.json',JSON.stringify(snapshotOf(b)));"
 ```
 
 Python 使用 `rfc8785.dumps` 规范化最新版本 `snapshot` 与导出的当前快照，并与原 `snapshot.jcs` 比较。三者均为 969556 字节且完全相同，SHA-256 为 `8cd6ae62f6cbadf2a6a8776e900986d593d6ae93963e1f9460bd9d5c72ded733`。结果保存在 `snapshot-verification.json`。步骤 4–6 的执行脚本在生成记录前再次验证该相等关系。
@@ -124,10 +124,10 @@ Python 使用 `rfc8785.dumps` 规范化最新版本 `snapshot` 与导出的当�
 
 ```bash
 module load nodejs/24.16.0
-BLUEPRINT_SOURCE_ROOTS='YuukiAS/AI_Skills_Collection=/users/a/e/aereinh/AI_Skills_Collection' \
+BLUEPRINT_SOURCE_ROOTS='YuukiAS/AI_Skills_Collection=<local>/AI_Skills_Collection' \
   ./node_modules/.bin/tsx \
-  /users/a/e/aereinh/Asteria-Workspace/codex-runs/freeze-assurance/check-frozen.mjs \
-  > /users/a/e/aereinh/Asteria-Workspace/codex-runs/freeze-assurance/d5-frozen-check.log 2>&1
+  <local>/Asteria-Workspace/codex-runs/freeze-assurance/check-frozen.mjs \
+  > <local>/Asteria-Workspace/codex-runs/freeze-assurance/d5-frozen-check.log 2>&1
 ```
 
 实际入口为 `runCheck(['--stage', 'frozen', '<工作目录>/blueprint.frozen.json'], {reportFile: '<工作目录>/d5-frozen-content-report.json'})`，`mode=live`。结果为 1 份内容、54 节点、0 项缺口、183 项证据解释人审、0 项未完成核实。
@@ -137,7 +137,7 @@ BLUEPRINT_SOURCE_ROOTS='YuukiAS/AI_Skills_Collection=/users/a/e/aereinh/AI_Skill
 在工作目录执行，退出码 0。
 
 ```bash
-PYTHONPATH=/tmp/assurance-freeze-py python finalize-freeze.py > finalize-freeze.log 2>&1
+PYTHONPATH=<scratch>/py python finalize-freeze.py > finalize-freeze.log 2>&1
 ```
 
 该脚本读取真实冻结档机器报告，确认通过后计算两个身份、解析九项节点及全部字段引用，按 SPEC 构造记录。它先在内存中执行 JSON Schema 与跨字段、身份及引用核对，再验证序列化后的 JSON，通过后将临时文件原子更名为 `freeze.json`。
