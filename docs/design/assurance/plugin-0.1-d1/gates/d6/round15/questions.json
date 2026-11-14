@@ -1,0 +1,22 @@
+[
+  {
+    "id": "D6-R15-Q1",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明能否把“需要你手动转交的角色（D2、D3、D6、D8、X5）”改成明确限定为“需要你手动转交的规划端角色”，并在同一处把条件性需要用户转交的执行端角色完整写成同一层级的用户工作量说明？",
+    "answerLocation": "blueprint.json → shared/dispatch → terminal.mechanism → §2.1、§2.1a；requirements 中的调度规则；walkthroughs[0].steps[2-3]",
+    "gap": "当前冻结说明第 2 节先用不带限定词的“需要你手动转交的角色（D2、D3、D6、D8、X5）”呈现一个看似穷尽的五角色清单，但同一 Blueprint 还规定：GPT 负责人时 D4/D5/D7 和 X2 普通实现需由用户转交给 Codex；X2 专业子任务和 X3 无论负责人是谁都由用户转交给 GPT Work；X4 采用 GPT Work 极高或所在专门插件宿主需要转交时也由用户转交。说明后文虽分别提到这些执行端情形，但开头的穷尽式表述与完整用户工作量不一致。",
+    "impact": "冻结说明是批准前唯一阅读材料。该表述可能让用户把五个规划端角色误认为全部手动转交工作，从而低估自己在 GPT 负责人、专业子任务或 X4 特定宿主下需要承担的转交次数和操作。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R15-Q2",
+    "nodeId": "FREEZE_EXPLANATION",
+    "question": "冻结说明能否补齐会影响角色独立性和会话操作的现有 Blueprint 规则，而不展开无关低层细节？",
+    "answerLocation": "blueprint.json → shared/dispatch → terminal.mechanism → §2.1 角色档次与会话表、§2.1a D8 合批规则；design/design-roles/role-D4、role-D5、role-D6、role-D8 → terminal.mechanism；delivery/delivery-roles/role-X3、role-X5 → terminal.mechanism",
+    "gap": "当前说明已写出多数角色的宿主、触发和主要独立性，但仍漏掉几条会改变独立性或会话使用的规则：D4 与 D5 的同任务盘点/机械复验可以沿用会话，且 D4 不得为了比较方案读取本轮独立设计原稿；D6 除了每轮新开外，不得读取负责人聊天、设计过程和为设计辩护的摘要；D8 合批时要随机顺序处理，并且每个单位只能依据本单位文字作答、不能借其他单位补全，也不能给预期复述答案；X3 首次独立新开后，同一验收实现的返修可沿用，但不得读取 X2 解题过程或候选辩护摘要；X5 除了不看实现过程，还不得读取 X2/X1 辩护摘要、其他裁判结论和旧评分。当前说明对这些限制的表达更弱或没有表达。",
+    "impact": "这些规则直接决定独立检查到底隔离了什么、哪些会话可以沿用。用户若按当前说明批准，会对 D4/D6/D8/X3/X5 的独立性强度和 D4/D5/X3 的会话复用边界形成与 Blueprint 不完全相同的理解，属于七类固定清单第 4 类的必要信息缺口。",
+    "blocking": true,
+    "owner": "D1"
+  }
+]
