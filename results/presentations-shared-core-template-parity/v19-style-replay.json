@@ -1,0 +1,476 @@
+{
+  "schema": "presentations-v19-generic-style-replay-v1",
+  "oracle": {
+    "source_repo": "YuukiAS/STAT5060-TA",
+    "artifact_commit": "62678cd22409906797474752ae4f304f867d96cc",
+    "style_freeze_commit": "d019fd53513682004c154d6d0e6ea76b2099296b",
+    "artifact_sha256": "88eae6b2073715729abd9c2b004d1d0f31541c4314c2b64cd49194346b35d6e1",
+    "measurement_basis": "PDF media boxes, text spans and vector geometry from the exact 39-page V19 artifact. No course copy, page IDs or source files are committed.",
+    "values_pdf_pt": {
+      "page_width": 453.54,
+      "page_height": 255.12,
+      "section_band_bottom": 16.201,
+      "section_label_bbox_top": 2.59,
+      "ordinary_frame_title_bbox_top": 28.81,
+      "footer_divider_y": 246.552,
+      "closing_cue_bbox_center_y": 195.62
+    }
+  },
+  "fixture_sha256": "ff7f6448b12d9572aa2d201f20fb832b879874de3e67e9d3d797900c4470bae9",
+  "pdf_sha256": "381579aaa0fbc0dcdbd461ad12c4f7d80262e12568eeaad215aaba142b3bea0e",
+  "status": "PASS_WITH_REVIEW",
+  "checks": [
+    {
+      "check": "Reference is 11 slides",
+      "status": "PASS"
+    },
+    {
+      "check": "Page width",
+      "measured": 453.5400085449219,
+      "expected": 453.54,
+      "tolerance": 0.02,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "Page height",
+      "measured": 255.1199951171875,
+      "expected": 255.12,
+      "tolerance": 0.02,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "frame_title font size",
+      "measured": 12.951399803161621,
+      "expected": 12.951,
+      "tolerance": 0.1,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "frame_title font face and series",
+      "status": "PASS"
+    },
+    {
+      "check": "body font size",
+      "measured": 10.958900451660156,
+      "expected": 10.959,
+      "tolerance": 0.1,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "body font face and series",
+      "status": "PASS"
+    },
+    {
+      "check": "subhead font size",
+      "measured": 10.958900451660156,
+      "expected": 10.959,
+      "tolerance": 0.1,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "subhead font face and series",
+      "status": "PASS"
+    },
+    {
+      "check": "table font size",
+      "measured": 9.962599754333496,
+      "expected": 9.963,
+      "tolerance": 0.1,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "table font face and series",
+      "status": "PASS"
+    },
+    {
+      "check": "caption font size",
+      "measured": 7.970099925994873,
+      "expected": 7.97,
+      "tolerance": 0.1,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "caption font face and series",
+      "status": "PASS"
+    },
+    {
+      "check": "footer font size",
+      "measured": 7.970099925994873,
+      "expected": 7.97,
+      "tolerance": 0.1,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "footer font face and series",
+      "status": "PASS"
+    },
+    {
+      "check": "section_nav font size",
+      "measured": 6.774600028991699,
+      "expected": 6.775,
+      "tolerance": 0.1,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "section_nav font face and series",
+      "status": "PASS"
+    },
+    {
+      "check": "code font size",
+      "measured": 7.970099925994873,
+      "expected": 7.97,
+      "tolerance": 0.1,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "code font face and series",
+      "status": "PASS"
+    },
+    {
+      "check": "closing_question font size",
+      "measured": 16.0,
+      "expected": 16.0,
+      "tolerance": 0.2,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "closing_question font face and series",
+      "status": "PASS"
+    },
+    {
+      "check": "Frame title vertical anchor",
+      "measured": 28.808635711669922,
+      "expected": 28.81,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "Ordinary body rail",
+      "measured": 22.676998138427734,
+      "expected": 22.67716535433071,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "Section label top",
+      "measured": 2.586193084716797,
+      "expected": 2.59,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "Section band bottom",
+      "measured": 16.201000213623047,
+      "expected": 16.201,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "Visible section labels are separated by at least 12 px",
+      "status": "PASS"
+    },
+    {
+      "check": "Near-budget label is legal",
+      "measured": 0.9360235002305772,
+      "target": [
+        0.9,
+        1.0
+      ],
+      "hard_minimum": 0.9,
+      "units": "fraction",
+      "status": "PASS"
+    },
+    {
+      "check": "Clickable miniframes cover all sectional slides",
+      "status": "PASS"
+    },
+    {
+      "check": "Wrapped item uses the ordinary baseline",
+      "measured": 13.450004577636719,
+      "expected": 13.449564134495642,
+      "tolerance": 0.1,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "Inter-item glue stays at the shared token",
+      "measured": 3.984426344019983,
+      "expected": 3.985056039850561,
+      "tolerance": 0.12,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "list_item_gap",
+      "measured": 7.559000142415371,
+      "target": [
+        3,
+        7
+      ],
+      "hard_minimum": 2,
+      "units": "PDF pt",
+      "status": "REVIEW"
+    },
+    {
+      "check": "paragraph_to_list",
+      "measured": 12.047156476974493,
+      "target": [
+        5,
+        12
+      ],
+      "hard_minimum": 3,
+      "units": "PDF pt",
+      "status": "REVIEW"
+    },
+    {
+      "check": "Question label bold and body italic",
+      "status": "PASS"
+    },
+    {
+      "check": "question_to_next",
+      "measured": 12.392005920410156,
+      "target": [
+        8,
+        15
+      ],
+      "hard_minimum": 6,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "Answer label is above the continuous rule",
+      "status": "PASS"
+    },
+    {
+      "check": "Answer body face is upright",
+      "status": "PASS"
+    },
+    {
+      "check": "Answer rule starts at its body ink",
+      "measured": 167.3209991455078,
+      "expected": 167.24287815093996,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "Answer rule ends at its body ink",
+      "measured": 204.093994140625,
+      "expected": 204.09300384521487,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "Caption has multiple lines below its plot",
+      "status": "PASS"
+    },
+    {
+      "check": "Caption line aligns with plot",
+      "measured": 22.676998138427734,
+      "expected": 22.875999450683594,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "caption_to_body",
+      "measured": 5.669250106811546,
+      "target": [
+        6,
+        12
+      ],
+      "hard_minimum": 4,
+      "units": "PDF pt",
+      "status": "REVIEW"
+    },
+    {
+      "check": "equal left rail",
+      "measured": 22.676998138427734,
+      "expected": 22.67716535433071,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "equal right anchor",
+      "measured": 234.93699645996094,
+      "expected": 234.93371782918615,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "equal peer top alignment",
+      "measured": 73.125,
+      "expected": 73.15799713134766,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "evidence_left left rail",
+      "measured": 22.676998138427734,
+      "expected": 22.67716535433071,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "evidence_left right anchor",
+      "measured": 271.6730041503906,
+      "expected": 271.6704288344496,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "evidence_left peer top alignment",
+      "measured": 73.125,
+      "expected": 73.16899871826172,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "evidence_right left rail",
+      "measured": 22.676998138427734,
+      "expected": 22.67716535433071,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "evidence_right right anchor",
+      "measured": 198.19500732421875,
+      "expected": 198.19700682392272,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "evidence_right peer top alignment",
+      "measured": 73.16899871826172,
+      "expected": 73.16899871826172,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "Table semantic atoms stay on one line",
+      "status": "PASS"
+    },
+    {
+      "check": "Shared math and CJK bind their fixed file faces",
+      "status": "PASS"
+    },
+    {
+      "check": "The ordered process has three distinct rendered shafts",
+      "status": "PASS"
+    },
+    {
+      "check": "Process shaft in preferred interval",
+      "measured": 8.551154941982693,
+      "target": [
+        8,
+        10
+      ],
+      "hard_minimum": 6,
+      "units": "mm",
+      "status": "PASS"
+    },
+    {
+      "check": "Process shaft in preferred interval",
+      "measured": 8.551157633463541,
+      "target": [
+        8,
+        10
+      ],
+      "hard_minimum": 6,
+      "units": "mm",
+      "status": "PASS"
+    },
+    {
+      "check": "Process shaft in preferred interval",
+      "measured": 8.551157633463541,
+      "target": [
+        8,
+        10
+      ],
+      "hard_minimum": 6,
+      "units": "mm",
+      "status": "PASS"
+    },
+    {
+      "check": "Peer shafts agree within two pixels",
+      "status": "PASS"
+    },
+    {
+      "check": "Footer divider baseline",
+      "measured": 246.552001953125,
+      "expected": 246.552,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "Footer credit optical center on page 2",
+      "measured": 250.62809847195945,
+      "expected": 250.6990235298872,
+      "tolerance": 0.11810937722524008,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "Footer credit optical center on page 10",
+      "measured": 250.74620784918469,
+      "expected": 250.6990235298872,
+      "tolerance": 0.11810937722524008,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "Frame credit replaces default",
+      "status": "PASS"
+    },
+    {
+      "check": "Questions horizontal center",
+      "measured": 226.77198791503906,
+      "expected": 226.77000427246094,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "Questions vertical center",
+      "measured": 195.61500549316406,
+      "expected": 195.62,
+      "tolerance": 9.203082077703476,
+      "units": "PDF pt",
+      "status": "PASS"
+    },
+    {
+      "check": "Closing frame title shares body rail",
+      "measured": 22.676998138427734,
+      "expected": 22.67716535433071,
+      "tolerance": 0.4724375089009603,
+      "units": "PDF pt",
+      "status": "PASS"
+    }
+  ]
+}

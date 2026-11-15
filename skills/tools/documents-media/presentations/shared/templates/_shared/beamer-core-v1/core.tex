@@ -1,0 +1,22 @@
+% Shared 16:9 Beamer core. Load the selected skin before this import.
+\ifdefined\PresentationCoreLoaded\endinput\fi
+\def\PresentationCoreLoaded{1}
+\RequirePackage{iftex}
+\RequireXeTeX
+\RequirePackage{etoolbox}
+\RequirePackage{amsmath}
+\RequirePackage{booktabs,tabularx,listings}
+\RequirePackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\providecommand\PresentationTitleBrand{}
+\providecommand\PresentationHeaderBrand{}
+\providecommand\PresentationCredit{}
+\InputIfFileExists{beamer-font-root.tex}{}{%
+  \ifdefined\PresentationFontResourceDir\else
+    \PackageError{beamer-core-v1}{Missing resolved render resource binding}{Build with build_beamer_template.py.}%
+  \fi
+}
+\input{\PresentationCoreDir/typography.tex}
+\input{\PresentationCoreDir/geometry.tex}
+\input{\PresentationCoreDir/semantic-components.tex}
+\input{\PresentationCoreDir/navigation.tex}

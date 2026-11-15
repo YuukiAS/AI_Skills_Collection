@@ -10,6 +10,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from validate_cuhk_scientific_layout_stage3 import audience_tex, validate_cuhk_brand_import
 
 REPO_ROOT = Path(__file__).resolve().parents[6]
 DEFAULT_TASK_KEY = "031_research_presentation_one_call_production_entry"
@@ -355,11 +356,13 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         errors.append("BUILD_MANIFEST.json: generated tex missing")
     else:
         tex = tex_path.read_text(encoding="utf-8")
-        for required_text in [r"\usetheme{sintef}", r"\titlebackground*{assets/background}", r"\input{scientific_layouts.tex}"]:
+        for required_text in [r"\usetheme{sintef}", r"\input{scientific_layouts.tex}"]:
             if required_text not in tex:
                 errors.append(f"{tex_path}: missing {required_text}")
+        errors.extend(validate_cuhk_brand_import(tex_path, tex))
+        visible = audience_tex(tex)
         for forbidden in FORBIDDEN_AUDIENCE_TERMS:
-            if forbidden in tex:
+            if forbidden in visible:
                 errors.append(f"{tex_path}: audience-facing TeX leaks {forbidden}")
 
     if render_status.get("status") == "ok":

@@ -1,0 +1,133 @@
+% Named glue is calibrated using visible object bounds.
+\newcommand\CoreGap[1]{\par\addvspace{#1}}
+\newcommand\CoreParagraphToList{\CoreGap{5pt}}
+\newcommand\CoreParagraphToTable{\CoreGap{8pt}}
+\newcommand\CoreParagraphToFigure{\CoreGap{4pt}}
+\newcommand\CoreParagraphToDisplayMath{\CoreGap{3pt}}
+\newcommand\CoreDisplayMathToTable{\CoreGap{10pt}}
+\newcommand\CoreDisplayMathToBody{\CoreGap{4pt}}
+\newcommand\CoreTableToInterpretation{\CoreGap{7pt}}
+\newcommand\CoreCaptionToBody{\CoreGap{5pt}}
+\newcommand\CoreQuestionToNext{\CoreGap{11pt}}
+\newcommand\CoreWithinGroup{\CoreGap{5pt}}
+\newcommand\CoreBetweenGroups{\CoreGap{10pt}}
+\AtBeginEnvironment{frame}{%
+  \setlength\abovedisplayskip{5pt}\setlength\belowdisplayskip{5pt}%
+  \setlength\abovedisplayshortskip{3pt}\setlength\belowdisplayshortskip{4pt}%
+}
+\newcommand\CoreListSpacing{%
+  \setlength\itemsep{4pt}\setlength\parskip{0pt}%
+  \setlength\parsep{0pt}\setlength\topsep{2pt}%
+}
+\makeatletter
+\newcommand\CoreInstallListSpacing{%
+  \setlength\leftmargini{19.99pt}\let\beamer@cramped\CoreListSpacing
+}
+\AtBeginEnvironment{itemize}{\CoreInstallListSpacing}
+\AtBeginEnvironment{enumerate}{\CoreInstallListSpacing}
+\AtBeginEnvironment{description}{\CoreInstallListSpacing}
+\makeatother
+\setbeamerfont{itemize/enumerate body}{size=\CoreBodyFont}
+\setbeamerfont{itemize/enumerate subbody}{size=\CoreBodyFont}
+\setbeamerfont{itemize/enumerate subsubbody}{size=\CoreBodyFont}
+\setbeamertemplate{itemize item}{\textcolor{coreAccent}{\textbullet}}
+\setbeamertemplate{itemize subitem}{\textcolor{coreAccent}{\textendash}}
+\setbeamertemplate{itemize subsubitem}{\textcolor{coreAccent}{\textbullet}}
+
+\newcommand\CoreSubhead[1]{\par\noindent{\usebeamerfont{core subhead}\color{coreAccent}#1}\par\vspace{2pt}}
+\newcommand\TermInline[2]{\textbf{\textcolor{coreAccent}{#1}}\hspace{0.3em}#2}
+\newcommand\TermBlock[2]{\CoreSubhead{#1}\noindent#2\par}
+\newcommand\TeachingTakeaway[1]{\TermBlock{Takeaway}{#1}}
+\newcommand\TeachingNote[1]{\TermBlock{Note}{#1}}
+\newcommand\TeachingConclusion[1]{\TermBlock{Conclusion}{#1}}
+\newsavebox\CoreQABox
+\newcommand\CoreQALabel[1]{\textbf{\textcolor{coreAccent}{#1}}}
+\newcommand\CoreQABody[1]{%
+  \par\noindent%
+  \sbox\CoreQABox{%
+    \begin{minipage}[t]{\dimexpr\linewidth-1.1pt-.42em\relax}%
+      \CoreBodyFont\raggedright\setlength\parindent{0pt}#1\par
+    \end{minipage}}%
+  {\color{coreAccent}\vrule width1.1pt height\ht\CoreQABox depth\dp\CoreQABox}%
+  \hspace{.42em}\usebox\CoreQABox\par
+}
+\newcommand\TeachingQuestion[1]{%
+  \CoreQABody{\CoreQALabel{Question}\hspace{.45em}{\itshape #1}}%
+}
+\newcommand\TeachingAnswer[1]{%
+  \par\noindent\hspace*{\dimexpr1.1pt+.42em\relax}\CoreQALabel{Answer}\par
+  \CoreQABody{{\upshape #1}}%
+}
+\newcommand\CoreCaption[1]{%
+  \par\vspace{2pt}{\noindent\raggedright\CoreCaptionFont\color{coreMuted}#1\par}%
+}
+\let\ShortCaption\CoreCaption
+\let\LongCaption\CoreCaption
+\let\CoreTableNote\CoreCaption
+\newsavebox\CoreCaptionedBox
+\newcommand\CoreCaptioned[2]{%
+  \sbox\CoreCaptionedBox{#1}%
+  \par\noindent\begin{minipage}[t]{\wd\CoreCaptionedBox}%
+    \usebox\CoreCaptionedBox\CoreCaption{#2}%
+  \end{minipage}\par
+}
+\setbeamertemplate{caption}{\raggedright\CoreCaptionFont\color{coreMuted}\insertcaption\par}
+\setlength\abovecaptionskip{2pt}
+\setlength\belowcaptionskip{0pt}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand\CoreTableLayout{\CoreTableFont\setlength\tabcolsep{4pt}\renewcommand\arraystretch{1.19}}
+\newcommand\CoreAtom[1]{\mbox{#1}}
+\lstdefinestyle{presentation-code}{
+  basicstyle=\CoreCodeFont, keywordstyle=\color{coreAccent}\bfseries,
+  commentstyle=\color{coreMuted}, showstringspaces=false, columns=fullflexible,
+  keepspaces=true, breaklines=true, breakatwhitespace=true, tabsize=2,
+  frame=single, rulecolor=\color{coreRule}, backgroundcolor=\color{black!2},
+  xleftmargin=.6mm, xrightmargin=.6mm, aboveskip=1pt, belowskip=.5pt,
+  literate={"}{{\textquotedbl}}1 {'}{{\textquotesingle}}1
+}
+\lstset{style=presentation-code}
+
+\newcommand\CoreColumns[4]{%
+  \par\noindent\begin{minipage}[t]{#1\linewidth}\vspace{0pt}#3\par\end{minipage}%
+  \hfill\begin{minipage}[t]{#2\linewidth}\vspace{0pt}#4\par\end{minipage}\par
+}
+\newcommand\CoreEqualColumns[2]{\CoreColumns{.48}{.48}{#1}{#2}}
+\newcommand\CoreEvidenceLeft[2]{\CoreColumns{.57}{.39}{#1}{#2}}
+\newcommand\CoreEvidenceRight[2]{\CoreColumns{.39}{.57}{#1}{#2}}
+
+\tikzset{
+  core process node/.style={draw=coreAccent,line width=.55pt,
+    rounded corners=2pt,inner xsep=6pt,inner ysep=3pt,font=\CoreBodyFont,align=center},
+  core process edge/.style={-{Latex[length=3pt,width=4pt]},coreAccent,line width=.65pt},
+  core process distance/.style={node distance=9.5mm}
+}
+
+% Build the cue in the page background box so it does not require aux
+% coordinates. Its zero-height line cannot move the ordinary body.
+\newsavebox\CoreClosingCueBox
+\newcommand\CoreClosingCue{%
+  \sbox\CoreClosingCueBox{{\usebeamerfont{core closing question}\color{coreMuted}Questions?}}%
+  \vbox to \paperheight{%
+    \offinterlineskip\kern\dimexpr\headheight+.78\dimexpr\textheight+4pt\relax+.5pt\relax
+    \hbox to \paperwidth{%
+      \hfil\raisebox{\dimexpr(\dp\CoreClosingCueBox-\ht\CoreClosingCueBox)/2\relax}[0pt][0pt]{%
+        \usebox\CoreClosingCueBox}\hfil}%
+    \vfil
+  }%
+}
+\newcommand\CoreClosing[2]{%
+  \begingroup
+  \setbeamertemplate{background}{\CoreClosingCue}%
+  \begin{frame}[t]{#1}%
+    \begin{minipage}[t][.68\textheight][t]{\textwidth}#2\par\end{minipage}%
+  \end{frame}%
+  \endgroup
+}
+\newcommand\backmatter[1][]{%
+  \ifstrequal{#1}{notitle}{\CoreClosing{Discussion}{\inserttitle}}%
+    {\CoreClosing{\inserttitle}{\insertsubtitle\par\insertshortinstitute}}%
+}
+\newenvironment{colorblock}[3][white]{%
+  \begingroup\setbeamercolor{block title}{fg=#1,bg=#2}%
+  \setbeamercolor{block body}{fg=#1,bg=#2}\begin{block}{#3}%
+}{\end{block}\endgroup}

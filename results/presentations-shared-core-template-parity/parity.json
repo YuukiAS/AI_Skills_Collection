@@ -1,0 +1,137 @@
+{
+  "schema": "presentations-beamer-template-parity-v1",
+  "pdf_sha256": {
+    "course-standard": "381579aaa0fbc0dcdbd461ad12c4f7d80262e12568eeaad215aaba142b3bea0e",
+    "cuhk": "93f6c43620e2e2c6ef00ce0618228ac541490ccff2ddac0e41c6f2db08a8cb63"
+  },
+  "mask_sha256": "5312102920f609389d474acf95dd93e71b77bee5016e4e85f30c02c7b20b0f7b",
+  "tolerance": {
+    "geometry_px_at_1920x1080": 2.0,
+    "font_pdf_pt": 0.1
+  },
+  "max_geometry_delta_px": 0.0,
+  "max_font_delta_pdf_pt": 0.0,
+  "pages": [
+    {
+      "page": 1,
+      "lines": 23,
+      "paths": 20,
+      "links": 19,
+      "scientific_or_teaching_images": 0,
+      "matched_brand_images": 2
+    },
+    {
+      "page": 2,
+      "lines": 25,
+      "paths": 21,
+      "links": 19,
+      "scientific_or_teaching_images": 0,
+      "matched_brand_images": 1
+    },
+    {
+      "page": 3,
+      "lines": 32,
+      "paths": 26,
+      "links": 19,
+      "scientific_or_teaching_images": 0,
+      "matched_brand_images": 1
+    },
+    {
+      "page": 4,
+      "lines": 23,
+      "paths": 28,
+      "links": 19,
+      "scientific_or_teaching_images": 0,
+      "matched_brand_images": 1
+    },
+    {
+      "page": 5,
+      "lines": 29,
+      "paths": 21,
+      "links": 19,
+      "scientific_or_teaching_images": 0,
+      "matched_brand_images": 1
+    },
+    {
+      "page": 6,
+      "lines": 31,
+      "paths": 21,
+      "links": 19,
+      "scientific_or_teaching_images": 0,
+      "matched_brand_images": 1
+    },
+    {
+      "page": 7,
+      "lines": 33,
+      "paths": 24,
+      "links": 19,
+      "scientific_or_teaching_images": 0,
+      "matched_brand_images": 1
+    },
+    {
+      "page": 8,
+      "lines": 23,
+      "paths": 47,
+      "links": 19,
+      "scientific_or_teaching_images": 0,
+      "matched_brand_images": 1
+    },
+    {
+      "page": 9,
+      "lines": 26,
+      "paths": 31,
+      "links": 19,
+      "scientific_or_teaching_images": 0,
+      "matched_brand_images": 1
+    },
+    {
+      "page": 10,
+      "lines": 27,
+      "paths": 21,
+      "links": 19,
+      "scientific_or_teaching_images": 0,
+      "matched_brand_images": 1
+    },
+    {
+      "page": 11,
+      "lines": 23,
+      "paths": 21,
+      "links": 19,
+      "scientific_or_teaching_images": 0,
+      "matched_brand_images": 1
+    }
+  ],
+  "errors": [],
+  "brand_masks": [
+    {
+      "id": "cuhk-header-logo",
+      "kind": "logo",
+      "pages": "all",
+      "rect": [
+        1823,
+        4,
+        1876,
+        66
+      ],
+      "asset": "assets/logo_RGB.png",
+      "pixel_md5": "359407a08e058b1ccd3c360df195d4d8"
+    },
+    {
+      "id": "cuhk-title-art",
+      "kind": "title-background",
+      "pages": [
+        1
+      ],
+      "rect": [
+        1559,
+        791,
+        1886,
+        1009
+      ],
+      "asset": "assets/background_negative.png",
+      "pixel_md5": "d0cbf2e6d3284c73d0f757d262367183"
+    }
+  ],
+  "status": "PASS",
+  "same_content_sha256": "ff7f6448b12d9572aa2d201f20fb832b879874de3e67e9d3d797900c4470bae9"
+}
