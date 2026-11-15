@@ -1,0 +1,373 @@
+{
+  "path_report": {
+    "budget": 140,
+    "top_files": [
+      {
+        "path": "plugins/codex/plugins/writing-style/skills/response-clarity/references/reasoned-decision-summary-architecture-negative-example-2026-11-05.md",
+        "length": 140,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "writing-style",
+        "active_skill": "response-clarity",
+        "source_skill": "skills/writing/core/response-clarity"
+      },
+      {
+        "path": "plugins/codex/plugins/writing-style/skills/response-clarity/references/karabiner-audit-human-decision-positive-example.md",
+        "length": 121,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "writing-style",
+        "active_skill": "response-clarity",
+        "source_skill": "skills/writing/core/response-clarity"
+      },
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/direction/references/frontend-design-eight-anchors-duplicate.md",
+        "length": 120,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "web-development",
+        "active_skill": "frontend-visual-systems",
+        "source_skill": "skills/tools/frontend/visual-direction"
+      },
+      {
+        "path": "plugins/codex/plugins/writing-style/skills/response-clarity/references/math-stat-method-explanation-positive-example.md",
+        "length": 119,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "writing-style",
+        "active_skill": "response-clarity",
+        "source_skill": "skills/writing/core/response-clarity"
+      },
+      {
+        "path": "plugins/codex/plugins/bioinformatics/skills/bio/_src/db/references/providers/gwas-summary-statistics-databases.md",
+        "length": 113,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "bioinformatics",
+        "active_skill": "bioinformatics-workflows",
+        "source_skill": "skills/domains/bioinformatics/databases/bioinformatics-database-retrieval"
+      },
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/direction/references/frontend-design-anthropic-like.md",
+        "length": 111,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "web-development",
+        "active_skill": "frontend-visual-systems",
+        "source_skill": "skills/tools/frontend/visual-direction"
+      },
+      {
+        "path": "plugins/codex/plugins/statistical-modeling/skills/bayes/_src/analysis/references/statistical-decision-notes.md",
+        "length": 110,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "statistical-modeling",
+        "active_skill": "bayesian-modeling",
+        "source_skill": "skills/domains/bayesian/statistical-analysis"
+      },
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/direction/references/frontend-design-eight-anchors.md",
+        "length": 110,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "web-development",
+        "active_skill": "frontend-visual-systems",
+        "source_skill": "skills/tools/frontend/visual-direction"
+      },
+      {
+        "path": "plugins/codex/plugins/ai-skills-core/skills/orchestrator/references/bridge-kit-distribution-runtime-update.md",
+        "length": 109,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "ai-skills-core",
+        "active_skill": "machine-update-orchestrator",
+        "source_skill": "skills/core/codex-system/machine-update-orchestrator"
+      },
+      {
+        "path": "plugins/codex/plugins/ai-skills-core/skills/orchestrator/references/cross-layer-stack-workflow-composition.md",
+        "length": 109,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "ai-skills-core",
+        "active_skill": "machine-update-orchestrator",
+        "source_skill": "skills/core/codex-system/machine-update-orchestrator"
+      },
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/direction/references/distinctive-frontend-design.md",
+        "length": 108,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "web-development",
+        "active_skill": "frontend-visual-systems",
+        "source_skill": "skills/tools/frontend/visual-direction"
+      },
+      {
+        "path": "plugins/codex/plugins/presentations/shared/fixtures/existing_deck_revision/public_safe_known_failures.json",
+        "length": 106,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "",
+        "active_skill": "",
+        "source_skill": ""
+      },
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/direction/references/ui-ux-pro-max-data/README.md",
+        "length": 106,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "web-development",
+        "active_skill": "frontend-visual-systems",
+        "source_skill": "skills/tools/frontend/visual-direction"
+      },
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/webapp-testing/examples/static_html_automation.py",
+        "length": 106,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "web-development",
+        "active_skill": "frontend-visual-systems",
+        "source_skill": "skills/tools/frontend/webapp-testing"
+      },
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/direction/references/frontend-design-ultimate.md",
+        "length": 105,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "web-development",
+        "active_skill": "frontend-visual-systems",
+        "source_skill": "skills/tools/frontend/visual-direction"
+      },
+      {
+        "path": "plugins/codex/plugins/presentations/shared/fixtures/existing_deck_revision/independent-review-trace.json",
+        "length": 104,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "",
+        "active_skill": "",
+        "source_skill": ""
+      },
+      {
+        "path": "plugins/codex/plugins/presentations/shared/fixtures/stage4_quality_loop_repair_stress_bundle/bundle.json",
+        "length": 104,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "",
+        "active_skill": "",
+        "source_skill": ""
+      },
+      {
+        "path": "plugins/codex/plugins/presentations/shared/validator_v2/presentations_validator_v2/integrity/__init__.py",
+        "length": 104,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "",
+        "active_skill": "",
+        "source_skill": ""
+      },
+      {
+        "path": "plugins/codex/plugins/ai-skills-core/skills/orchestrator/references/formal-release-and-update-impact.md",
+        "length": 103,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "ai-skills-core",
+        "active_skill": "machine-update-orchestrator",
+        "source_skill": "skills/core/codex-system/machine-update-orchestrator"
+      },
+      {
+        "path": "plugins/codex/plugins/presentations/shared/fixtures/existing_deck_revision/unrelated_pass_revision.json",
+        "length": 103,
+        "kind": "file",
+        "over_budget": false,
+        "plugin": "",
+        "active_skill": "",
+        "source_skill": ""
+      }
+    ],
+    "top_dirs": [
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/direction/references/ui-ux-pro-max-data",
+        "length": 96,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "web-development",
+        "active_skill": "frontend-visual-systems",
+        "source_skill": "skills/tools/frontend/visual-direction"
+      },
+      {
+        "path": "plugins/codex/plugins/presentations/shared/fixtures/stage4_quality_loop_repair_stress_bundle",
+        "length": 92,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "",
+        "active_skill": "",
+        "source_skill": ""
+      },
+      {
+        "path": "plugins/codex/plugins/presentations/shared/validator_v2/presentations_validator_v2/integrity",
+        "length": 92,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "",
+        "active_skill": "",
+        "source_skill": ""
+      },
+      {
+        "path": "plugins/codex/plugins/presentations/shared/validator_v2/presentations_validator_v2/adapters",
+        "length": 91,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "",
+        "active_skill": "",
+        "source_skill": ""
+      },
+      {
+        "path": "plugins/codex/plugins/presentations/shared/validator_v2/presentations_validator_v2/layout",
+        "length": 89,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "",
+        "active_skill": "",
+        "source_skill": ""
+      },
+      {
+        "path": "plugins/codex/plugins/presentations/shared/validator_v2/presentations_validator_v2/render",
+        "length": 89,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "",
+        "active_skill": "",
+        "source_skill": ""
+      },
+      {
+        "path": "plugins/codex/plugins/presentations/shared/validator_v2/presentations_validator_v2/review",
+        "length": 89,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "",
+        "active_skill": "",
+        "source_skill": ""
+      },
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/ux/references/ui-ux-pro-max-data",
+        "length": 89,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "web-development",
+        "active_skill": "frontend-visual-systems",
+        "source_skill": "skills/tools/frontend/product-ux-planning"
+      },
+      {
+        "path": "plugins/codex/plugins/presentations/shared/fixtures/stage4_engineering_research_bundle",
+        "length": 86,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "",
+        "active_skill": "",
+        "source_skill": ""
+      },
+      {
+        "path": "plugins/codex/plugins/scientific-visualization/skills/figures/_src/publication/assets",
+        "length": 85,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "scientific-visualization",
+        "active_skill": "publication-figures",
+        "source_skill": "skills/science/communication/scientific-visualization"
+      },
+      {
+        "path": "plugins/codex/plugins/presentations/shared/validator_v2/presentations_validator_v2",
+        "length": 82,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "",
+        "active_skill": "",
+        "source_skill": ""
+      },
+      {
+        "path": "plugins/codex/plugins/scientific-visualization/skills/figures/_src/seaborn/assets",
+        "length": 81,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "scientific-visualization",
+        "active_skill": "publication-figures",
+        "source_skill": "skills/tools/visualization/seaborn"
+      },
+      {
+        "path": "plugins/codex/plugins/scientific-visualization/skills/figures/_src/plotly/assets",
+        "length": 80,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "scientific-visualization",
+        "active_skill": "publication-figures",
+        "source_skill": "skills/tools/visualization/plotly"
+      },
+      {
+        "path": "plugins/codex/plugins/statistical-modeling/skills/bayes/_src/analysis/references",
+        "length": 80,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "statistical-modeling",
+        "active_skill": "bayesian-modeling",
+        "source_skill": "skills/domains/bayesian/statistical-analysis"
+      },
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/webapp-testing/examples",
+        "length": 80,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "web-development",
+        "active_skill": "frontend-visual-systems",
+        "source_skill": "skills/tools/frontend/webapp-testing"
+      },
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/webapp-testing/scripts",
+        "length": 79,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "web-development",
+        "active_skill": "frontend-visual-systems",
+        "source_skill": "skills/tools/frontend/webapp-testing"
+      },
+      {
+        "path": "plugins/codex/plugins/presentations/shared/templates/cuhk/beamer/source/assets",
+        "length": 78,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "",
+        "active_skill": "",
+        "source_skill": ""
+      },
+      {
+        "path": "plugins/codex/plugins/presentations/shared/templates/cuhk/beamer/source/styles",
+        "length": 78,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "",
+        "active_skill": "",
+        "source_skill": ""
+      },
+      {
+        "path": "plugins/codex/plugins/scientific-visualization/skills/figures/_src/publication",
+        "length": 78,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "scientific-visualization",
+        "active_skill": "publication-figures",
+        "source_skill": "skills/science/communication/scientific-visualization"
+      },
+      {
+        "path": "plugins/codex/plugins/web-development/skills/visual/_src/responsive/references",
+        "length": 78,
+        "kind": "dir",
+        "over_budget": false,
+        "plugin": "web-development",
+        "active_skill": "frontend-visual-systems",
+        "source_skill": "skills/tools/frontend/responsive-accessibility-review"
+      }
+    ],
+    "over_budget_count": 0,
+    "over_budget": [],
+    "max_file_length": 140,
+    "max_dir_length": 96
+  }
+}
