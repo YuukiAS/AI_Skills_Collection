@@ -2,22 +2,22 @@
   "source": {
     "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
     "branch": "design/assurance-plugins-0.1-merged",
-    "head": "15613f70f3f0c86774da63caf80bd66cbb702f4d",
+    "head": "cae957b8fc2e4e91a39d4f194dc83701f37402d0",
     "path": "docs/design/assurance/plugin-0.1-d1/blueprint.json",
-    "sha256": "636343ee548a8504c5e901ad32dc3557b952c02b12c7c0f5f1420a64563c04f5",
+    "sha256": "44942f1f110954698050f379b5cb26635617c5dce60ec1d5e4b467a459cc64f5",
     "working_tree_uncommitted": true
   },
   "counting": {
     "unit": "terminal.acceptance 中的每一条字符串，不拆句、不去重、不合并相同文字；顶层组件仅由节点树位置确定。",
     "function_classification": "未做功能分类，仅按顶层组件及用户给定 needs 值汇总。",
-    "acceptance_item_count": 319,
-    "validator_object_count": 68,
-    "warning": "验收条目数与 validators 对象数是两种口径，不能把条目数直接当冻结说明的验收器总数。",
-    "needs": "needs 为本条的单值机械需求判断；明确需 X5 判断用 expert，需用户回答/批准用 user；不能归入单值时为 unclear 并逐项给原因。",
+    "acceptance_item_count": 325,
+    "validator_object_count": 76,
+    "warning": "验收条目数与 validators 对象数是两种口径；冻结审阅正文只写规则与例外，数量与分类由界面从 Blueprint 自动派生。",
+    "needs": "沿用未改条目的既有判断；按 D1 决定新增的正文核对条目标 file-check；不能单值归类的保留 unclear 并说明理由，不代替 D1 作功能分类。",
     "big_download": "只标已确认单项超过 100 MB 的具体依赖，未记录大小必须披露“大小未记录”；首次下载/安装前记录实际大小，超过阈值先经用户授权。",
     "validator_environment_counts": {
       "real": 49,
-      "source": 17,
+      "source": 25,
       "built": 1,
       "installed": 1
     },
@@ -27,7 +27,56 @@
       "built": 1,
       "installed": 1
     },
-    "validator_environment_changed": false
+    "validator_environment_changed": true,
+    "regression_cases": {
+      "source_node_id": "capability-check",
+      "spec_section": "10.2a",
+      "case_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7",
+        "R8",
+        "S1"
+      ],
+      "case_count": 9,
+      "counting_unit": "每条检查只属于一类，不按含合并检查的用例重复分类",
+      "check_count": 20,
+      "groups": {
+        "new-capability": [
+          "R1①",
+          "R1③",
+          "R2②",
+          "R3①",
+          "R3②",
+          "R4①",
+          "R4②",
+          "R4③",
+          "R5",
+          "R6",
+          "R7②",
+          "R7③",
+          "R8①",
+          "R8②"
+        ],
+        "real-problem": [
+          "R1②",
+          "R2①",
+          "R3③"
+        ],
+        "affected-existing": [
+          "R7①"
+        ],
+        "smoke": [
+          "S1①",
+          "S1②"
+        ]
+      },
+      "unresolved": []
+    }
   },
   "items": [
     {
@@ -89,9 +138,9 @@
       "node_title": "单一当前状态",
       "acceptance_index": 4,
       "source_pointer": "/nodes/0/children/0/terminal/acceptance/4",
-      "text": "用户批准和 D5 草稿档、D6、D7、D8 绑定 snapshot_sha256；semantic_hash 用于小修与派发核验，bundle_sha256 用于冻结文件存档及 X1 接收核对，另以 explanation_sha256 绑定冻结说明，不混用四个身份。",
+      "text": "用户批准和 D5 草稿档、D6、D7、D8 绑定 snapshot_sha256；semantic_hash 用于小修与派发核验，bundle_sha256 用于冻结文件存档及 X1 接收核对，不混用三个身份。",
       "needs": "file-check",
-      "needs_reason": "读取状态及身份引用，分别核对内容快照、说明原始字节、语义和完整文件的哈希用途。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -505,9 +554,9 @@
       "node_title": "记录结构检查",
       "acceptance_index": 6,
       "source_pointer": "/nodes/0/children/2/terminal/acceptance/6",
-      "text": "freeze 记录包含 explanation_sha256，用户批准和 freeze.json 同时记录 snapshot_sha256 与 explanation_sha256；只读核对说明文件原始字节哈希及 D6 结果、D1 批准请求、用户批准和冻结记录的说明身份一致。",
+      "text": "freeze 记录只以 snapshot_sha256 绑定 Blueprint 用户批准对象；同时保存 bundle_sha256 和 semantic_hash，按第 6.4、6.5 节核对记录和引用，不代替用户批准。",
       "needs": "file-check",
-      "needs_reason": "只读计算说明原始字节哈希，核对冻结记录、批准记录、D1 请求与 D6 结果中的身份引用。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -583,9 +632,9 @@
       "node_title": "按条件派发",
       "acceptance_index": 5,
       "source_pointer": "/nodes/0/children/3/terminal/acceptance/5",
-      "text": "首次冻结按第 6.5 节五步顺序：同一 snapshot_sha256 四关卡通过、用户批准、追加首版、D5 冻结档核实获批快照未变、再写同时记录 snapshot_sha256、explanation_sha256、bundle_sha256、semantic_hash 的 freeze.json。",
-      "needs": "user",
-      "needs_reason": "沿用原首次冻结五步的用户批准需要，并核对冻结记录新增的说明身份。",
+      "text": "首次冻结按第 6.5 节五步顺序：同一 snapshot_sha256 四关卡通过、用户批准、追加首版、D5 冻结档核实获批快照未变、再写同时记录 snapshot_sha256、bundle_sha256、semantic_hash 的 freeze.json。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -687,9 +736,9 @@
       "node_title": "按条件派发",
       "acceptance_index": 13,
       "source_pointer": "/nodes/0/children/3/terminal/acceptance/13",
-      "text": "D8 每轮一个新 GPT 对话，合批处理本轮全部单位，随机顺序、逐单位仅凭其自身文字作答，记录 reader_isolation: \"single-thread-batch\"；D1 逐项比对，全部正确即有效通过；读错则改写，下一轮新对话只重读改过单位及受影响相邻单位，仍只转交一条；冻结说明如实写明合批方式。",
-      "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "text": "D8 每轮一个新 GPT 对话，合批处理本轮全部单位，随机顺序、逐单位仅凭其自身文字作答，记录 reader_isolation: \"single-thread-batch\"；D1 逐项比对，全部正确即有效通过；读错则改写，下一轮新对话只重读改过单位及受影响相邻单位，仍只转交一条；fr-decisions、fr-roles 如实写明合批方式。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -895,9 +944,9 @@
       "node_title": "自包含提示词",
       "acceptance_index": 5,
       "source_pointer": "/nodes/0/children/4/terminal/acceptance/5",
-      "text": "D8 每轮一个新 GPT 对话，合批处理本轮全部单位，随机顺序、逐单位仅凭其自身文字作答，记录 reader_isolation: \"single-thread-batch\"；D1 逐项比对，全部正确即有效通过；读错则改写，下一轮新对话只重读改过单位及受影响相邻单位，仍只转交一条；冻结说明如实写明合批方式。",
-      "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "text": "D8 每轮一个新 GPT 对话，合批处理本轮全部单位，随机顺序、逐单位仅凭其自身文字作答，记录 reader_isolation: \"single-thread-batch\"；D1 逐项比对，全部正确即有效通过；读错则改写，下一轮新对话只重读改过单位及受影响相邻单位，仍只转交一条；fr-decisions、fr-roles 如实写明合批方式。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -1098,7 +1147,7 @@
     },
     {
       "needs": "file-check",
-      "needs_reason": "对照冻结说明与第 6.4a 节七类固定清单，核对清单项覆盖、其余细节以设计为准及不把设计写得更强或更弱。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
@@ -1107,7 +1156,7 @@
       "node_title": "D1：负责人",
       "acceptance_index": 6,
       "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/6",
-      "text": "D1 给用户的冻结说明按第 6.4a 节的格式写；首次冻结或大改使用同一固定骨架，冻结前与 Blueprint 一起交 D6 检查。\n\n说明里的每一条都必须能在 Blueprint 里找到出处，Blueprint 里没有的承诺不能写进说明，也不能把设计写得更强或更弱。\n\n- **“影响用户决定的内容”指下面这张固定清单（用户授权 D1 决定，2026/11/13），说明必须写到；清单之外的细节不要求写，说明中写明“其余细节以设计为准”：**\n  1. 用户已经做过的决定，以及设计者替用户定下的默认做法和被放弃的方案；\n  2. 哪些情况会交给用户决定或请用户确认；\n  3. 会增加用户工作量（例如需要用户转交的角色、每轮转交几条）、费用或权限范围的事；\n  4. 各角色何时启用、在哪里运行、各自负什么责任（谁实现、谁验收、谁签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。"
+      "text": "D1 将冻结审阅七部分写入 freeze-review 节点组，直接在 Blueprint 中供用户审阅，正文可读且引用来源节点 id。"
     },
     {
       "top_component_id": "design",
@@ -1116,15 +1165,15 @@
       "node_title": "D1：负责人",
       "acceptance_index": 7,
       "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/7",
-      "text": "D1 交给用户的批准请求写明冻结说明的 explanation_sha256，用户批准和 freeze.json 同时记录 snapshot_sha256 与 explanation_sha256。",
+      "text": "批准请求写明当前 Blueprint 的 snapshot_sha256 及打开“冻结审阅”视图的方式；用户只批准该快照，freeze.json 不再包含 explanation_sha256。",
       "needs": "file-check",
-      "needs_reason": "核对已生成批准请求及批准/冻结记录是否写明同一说明身份；实际用户批准仍由原冻结流程条目单列。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
       "needs": "file-check",
-      "needs_reason": "对照冻结说明第 4 节，检查用例总数、按检查条的四类统计、唯一归类及完整重跑规则是否与设计一致。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
@@ -1133,11 +1182,11 @@
       "node_title": "D1：负责人",
       "acceptance_index": 8,
       "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/8",
-      "text": "D1 按第 6.4a 节在冻结说明第 4 节写清回归用例集：**回归用例集**（第 6.3a 节）：一共几个用例；**按检查条**统计“新能力 / 要修的真实问题 / 受影响的旧能力 / 冒烟”各多少条（一个用例可以含几类检查，每一条检查只属于一类，这就是“分组”）；每个用例一句话说清输入是什么、看什么、谁判；整体规则是全部通过才算这个版本做完，以及开发中只重跑没过的和受影响的、最终候选完整跑一遍、此后代码再变就再完整跑一遍。"
+      "text": "验收器数量与分类、回归用例数与按检查条的分组由界面从 Blueprint 自动统计；正文只写规则与例外。每条检查只属一类，合并用例逐条判，任何一条不过整个用例不过。"
     },
     {
       "needs": "file-check",
-      "needs_reason": "核对合同中 D1 写的用例集及冻结说明数量分组，D6 的核对结果有记录。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
@@ -1146,7 +1195,7 @@
       "node_title": "D1：负责人",
       "acceptance_index": 9,
       "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/9",
-      "text": "**写用例集：** D1，在设计阶段写进合同；D6 在冻结前核对冻结说明里的用例数量和分组与设计一致。"
+      "text": "**写用例集：** D1，在设计阶段写进合同；D6 像审其他组件一样审 freeze-review 节点组：答案是否在 Blueprint 中、是否与其他节点矛盾；发现缺口交回 D1，不以自己的常识补出答案后判通过。 验收器数量与分类、回归用例数与按检查条的分组由界面从 Blueprint 自动统计；正文只写规则与例外。每条检查只属一类，合并用例逐条判，任何一条不过整个用例不过。"
     },
     {
       "top_component_id": "design",
@@ -1500,80 +1549,28 @@
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
-      "needs": "file-check",
-      "needs_reason": "只按七类固定清单对照说明是否漏写，清单之外未写不算漏写，核对说明中的其余细节以设计为准。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
       "top_component_title": "设计保障",
       "node_id": "role-D6",
       "node_title": "D6：用户追问",
       "acceptance_index": 4,
       "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/4",
-      "text": "- **“影响用户决定的内容”指下面这张固定清单（用户授权 D1 决定，2026/11/13），说明必须写到；清单之外的细节不要求写，说明中写明“其余细节以设计为准”：**\n  1. 用户已经做过的决定，以及设计者替用户定下的默认做法和被放弃的方案；\n  2. 哪些情况会交给用户决定或请用户确认；\n  3. 会增加用户工作量（例如需要用户转交的角色、每轮转交几条）、费用或权限范围的事；\n  4. 各角色何时启用、在哪里运行、各自负什么责任（谁实现、谁验收、谁签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。"
+      "text": "D6 像审其他组件一样审 freeze-review 节点组：答案是否在 Blueprint 中、是否与其他节点矛盾；发现缺口交回 D1，不以自己的常识补出答案后判通过。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
-      "needs": "file-check",
-      "needs_reason": "逐条比较说明承诺与 Blueprint，核对有出处且没有把设计写得更强或更弱。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
       "top_component_title": "设计保障",
       "node_id": "role-D6",
       "node_title": "D6：用户追问",
       "acceptance_index": 5,
       "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/5",
-      "text": "说明里的每一条都必须能在 Blueprint 里找到出处，Blueprint 里没有的承诺不能写进说明，也不能把设计写得更强或更弱。 发现问题按 D6 的缺口处理，交回 D1。"
-    },
-    {
-      "needs": "file-check",
-      "needs_reason": "D6 对照冻结说明与 Blueprint，核对验收器数量分类、用例总数及按检查条的四类分组和完整重跑说明。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
-      "top_component_id": "design",
-      "top_component_title": "设计保障",
-      "node_id": "role-D6",
-      "node_title": "D6：用户追问",
-      "acceptance_index": 6,
-      "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/6",
-      "text": "检查冻结说明的验收器数量和分类是否与 Blueprint 一致；发现问题按 D6 缺口交回 D1。 D6 还要核对冻结说明里回归用例的数量和分组与设计一致；发现问题按 D6 的缺口处理，交回 D1。 按第 6.4a 节核对冻结说明中的回归统计和完整重跑规则：**回归用例集**（第 6.3a 节）：一共几个用例；**按检查条**统计“新能力 / 要修的真实问题 / 受影响的旧能力 / 冒烟”各多少条（一个用例可以含几类检查，每一条检查只属于一类，这就是“分组”）；每个用例一句话说清输入是什么、看什么、谁判；整体规则是全部通过才算这个版本做完，以及开发中只重跑没过的和受影响的、最终候选完整跑一遍、此后代码再变就再完整跑一遍。"
-    },
-    {
-      "top_component_id": "design",
-      "top_component_title": "设计保障",
-      "node_id": "role-D6",
-      "node_title": "D6：用户追问",
-      "acceptance_index": 7,
-      "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/7",
-      "text": "D6 按第 6.4a 节检查说明第 5 节是否遗漏单项超过 100 MB 的下载或安装；第 5 节只能写 Blueprint 里有依据的内容。Blueprint 没有记录某项依赖的大小时，说明必须写“大小未记录”，不能凭常识写“很小”；发现问题按 D6 的缺口处理，交回 D1。",
-      "needs": "file-check",
-      "needs_reason": "对照 Blueprint 与冻结说明的下载依据，核对未记录大小时明确写“大小未记录”，不靠常识估算。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
-    },
-    {
-      "top_component_id": "design",
-      "top_component_title": "设计保障",
-      "node_id": "role-D6",
-      "node_title": "D6：用户追问",
-      "acceptance_index": 8,
-      "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/8",
-      "text": "D6 的结果写明所检查说明的 explanation_sha256，即独立文件原始字节的 SHA-256，不做规范化。",
-      "needs": "file-check",
-      "needs_reason": "读取 D6 结果并与说明独立文件原始字节 SHA-256 比较，不需新增宿主运行来计算文件身份。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
-    },
-    {
-      "top_component_id": "design",
-      "top_component_title": "设计保障",
-      "node_id": "role-D6",
-      "node_title": "D6：用户追问",
-      "acceptance_index": 9,
-      "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/9",
-      "text": "说明在 D6 检查后有任何改动，原说明检查失效；D6 对新说明重做四项检查，Blueprint 没变时不必重做逐组件追问。",
-      "needs": "file-check",
-      "needs_reason": "比较新旧说明哈希、Blueprint 身份与四项检查记录，核对旧说明检查失效和检查范围。",
+      "text": "D6 结果绑定受审 Blueprint 的 snapshot_sha256，不能采纳其他快照的检查结果。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -1675,9 +1672,9 @@
       "node_title": "D8：逐步复述",
       "acceptance_index": 4,
       "source_pointer": "/nodes/1/children/0/children/7/terminal/acceptance/4",
-      "text": "D8 每轮一个新 GPT 对话，合批处理本轮全部单位，随机顺序、逐单位仅凭其自身文字作答，记录 reader_isolation: \"single-thread-batch\"；D1 逐项比对，全部正确即有效通过；读错则改写，下一轮新对话只重读改过单位及受影响相邻单位，仍只转交一条；冻结说明如实写明合批方式。",
-      "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "text": "D8 每轮一个新 GPT 对话，合批处理本轮全部单位，随机顺序、逐单位仅凭其自身文字作答，记录 reader_isolation: \"single-thread-batch\"；D1 逐项比对，全部正确即有效通过；读错则改写，下一轮新对话只重读改过单位及受影响相邻单位，仍只转交一条；fr-decisions、fr-roles 如实写明合批方式。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -1688,9 +1685,9 @@
       "node_title": "澄清与需求落图",
       "acceptance_index": 0,
       "source_pointer": "/nodes/1/children/1/terminal/acceptance/0",
-      "text": "已有决定不重复索问；事实缺失先查证。",
-      "needs": "file-check",
-      "needs_reason": "核对原文规定的文件内容、结构、引用、差异、记录或可运行脚本验证的规则。",
+      "text": "只有用户能定的问题才问用户；事实由 D1 自查或派执行端查，不问用户；技术选择由 D1 决定并写理由。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -1701,9 +1698,9 @@
       "node_title": "澄清与需求落图",
       "acceptance_index": 1,
       "source_pointer": "/nodes/1/children/1/terminal/acceptance/1",
-      "text": "影响范围、授权或用户偏好的互斥取舍不擅自选择。",
-      "needs": "user",
-      "needs_reason": "此条明确要求用户本人处理互斥决定、确认或批准，需真实用户答复作为依据。",
+      "text": "尚需澄清的事项组织成决策树，每轮问完整个前提已确定的前沿；依赖本轮其他答案的下一轮再问，查事实只暂停依赖该事实的问题。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -1714,9 +1711,9 @@
       "node_title": "澄清与需求落图",
       "acceptance_index": 2,
       "source_pointer": "/nodes/1/children/1/terminal/acceptance/2",
-      "text": "未解决关键问题不能进入冻结批准。",
-      "needs": "file-check",
-      "needs_reason": "核对原文规定的文件内容、结构、引用、差异、记录或可运行脚本验证的规则。",
+      "text": "每个用户问题编号、给出推荐答案和一句理由，回答“是”即接受推荐；已有有效回答不重复问，新事实推翻前提时保留旧答并说明重开原因和影响。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -1727,6 +1724,32 @@
       "node_title": "澄清与需求落图",
       "acceptance_index": 3,
       "source_pointer": "/nodes/1/children/1/terminal/acceptance/3",
+      "text": "每个用户回答记为带出处的需求；前沿为空、无静默假设分支且用户确认共同理解才进入设计；影响能力、开工、验收、授权的开放问题在冻结前关闭。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "design",
+      "top_component_title": "设计保障",
+      "node_id": "clarify",
+      "node_title": "澄清与需求落图",
+      "acceptance_index": 4,
+      "source_pointer": "/nodes/1/children/1/terminal/acceptance/4",
+      "text": "只吸收 grilling 的提问方式，不加运行时依赖；NOTICE 由 X2 按 source-layout 的共享资源约定创建。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "design",
+      "top_component_title": "设计保障",
+      "node_id": "clarify",
+      "node_title": "澄清与需求落图",
+      "acceptance_index": 5,
+      "source_pointer": "/nodes/1/children/1/terminal/acceptance/5",
       "text": "D1 在 D1-clarify 结束时写不可变 design/briefs/<brief_version>.json，字段完整包含 schema_version:\"assurance-brief/0.1\",task_id,brief_version,requirements,user_decisions,facts,open_questions,read_allowlist,read_denylist,created_at。",
       "needs": "file-check",
       "needs_reason": "核对原文规定的文件内容、结构、引用、差异、记录或可运行脚本验证的规则。",
@@ -1738,8 +1761,8 @@
       "top_component_title": "设计保障",
       "node_id": "clarify",
       "node_title": "澄清与需求落图",
-      "acceptance_index": 4,
-      "source_pointer": "/nodes/1/children/1/terminal/acceptance/4",
+      "acceptance_index": 6,
+      "source_pointer": "/nodes/1/children/1/terminal/acceptance/6",
       "text": "任务书只含带出处需求、已有用户决定、事实及来源、设计者可处理的开放事项和允许读取范围；D2 与 D3 读取同一份，不含设计倾向。",
       "needs": "file-check",
       "needs_reason": "核对原文规定的文件内容、结构、引用、差异、记录或可运行脚本验证的规则。",
@@ -1751,8 +1774,8 @@
       "top_component_title": "设计保障",
       "node_id": "clarify",
       "node_title": "澄清与需求落图",
-      "acceptance_index": 5,
-      "source_pointer": "/nodes/1/children/1/terminal/acceptance/5",
+      "acceptance_index": 7,
+      "source_pointer": "/nodes/1/children/1/terminal/acceptance/7",
       "text": "需求改变而重新设计或大改时写新任务书版本，旧版结果标 stale，由 D1 判断仍支持的范围；D4 提前核查时，先写只含待核实问题的任务书版本。",
       "needs": "file-check",
       "needs_reason": "核对原文规定的文件内容、结构、引用、差异、记录或可运行脚本验证的规则。",
@@ -1870,15 +1893,15 @@
       "node_title": "四项冻结关卡",
       "acceptance_index": 8,
       "source_pointer": "/nodes/1/children/2/terminal/acceptance/8",
-      "text": "D8 每轮一个新 GPT 对话，合批处理本轮全部单位，随机顺序、逐单位仅凭其自身文字作答，记录 reader_isolation: \"single-thread-batch\"；D1 逐项比对，全部正确即有效通过；读错则改写，下一轮新对话只重读改过单位及受影响相邻单位，仍只转交一条；冻结说明如实写明合批方式。",
-      "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "text": "D8 每轮一个新 GPT 对话，合批处理本轮全部单位，随机顺序、逐单位仅凭其自身文字作答，记录 reader_isolation: \"single-thread-batch\"；D1 逐项比对，全部正确即有效通过；读错则改写，下一轮新对话只重读改过单位及受影响相邻单位，仍只转交一条；fr-decisions、fr-roles 如实写明合批方式。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
       "needs": "file-check",
-      "needs_reason": "核对 D6 说明检查记录覆盖固定清单、矛盾、验收器数量与回归、大件下载，并按缺口交回 D1。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
@@ -1887,7 +1910,7 @@
       "node_title": "四项冻结关卡",
       "acceptance_index": 9,
       "source_pointer": "/nodes/1/children/2/terminal/acceptance/9",
-      "text": "冻结前，说明与 Blueprint 一起交给 D6。D6 在原有的逐组件追问之外，再对照 Blueprint 查说明四项：上面清单里的七类内容有没有漏写；有没有写 Blueprint 里没有的承诺、或把设计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。"
+      "text": "D6 像审其他组件一样审 freeze-review 节点组：答案是否在 Blueprint 中、是否与其他节点矛盾；发现缺口交回 D1，不以自己的常识补出答案后判通过。"
     },
     {
       "top_component_id": "design",
@@ -1896,9 +1919,9 @@
       "node_title": "四项冻结关卡",
       "acceptance_index": 10,
       "source_pointer": "/nodes/1/children/2/terminal/acceptance/10",
-      "text": "D6 结果记录检查说明的 explanation_sha256；说明改动后原说明检查失效，Blueprint 未变时只重做说明四项检查，不重做逐组件追问。",
+      "text": "关卡结果和用户批准均绑定同一 snapshot_sha256；Blueprint 改动后按修订规则判断有效范围并重跑关卡，不能拼接不同快照的通过结果。",
       "needs": "file-check",
-      "needs_reason": "对照说明身份与 D6 检查记录，确认说明变动使原说明检查失效，并核对四项检查范围。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -1987,9 +2010,9 @@
       "node_title": "证据真实度",
       "acceptance_index": 0,
       "source_pointer": "/nodes/1/children/3/children/3/terminal/acceptance/0",
-      "text": "Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，冻结说明如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。",
-      "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "text": "Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，fr-decisions、fr-roles 如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2013,9 +2036,9 @@
       "node_title": "证据真实度",
       "acceptance_index": 2,
       "source_pointer": "/nodes/1/children/3/children/3/terminal/acceptance/2",
-      "text": "D8 每轮一个新 GPT 对话，合批处理本轮全部单位，随机顺序、逐单位仅凭其自身文字作答，记录 reader_isolation: \"single-thread-batch\"；D1 逐项比对，全部正确即有效通过；读错则改写，下一轮新对话只重读改过单位及受影响相邻单位，仍只转交一条；冻结说明如实写明合批方式。",
-      "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "text": "D8 每轮一个新 GPT 对话，合批处理本轮全部单位，随机顺序、逐单位仅凭其自身文字作答，记录 reader_isolation: \"single-thread-batch\"；D1 逐项比对，全部正确即有效通过；读错则改写，下一轮新对话只重读改过单位及受影响相邻单位，仍只转交一条；fr-decisions、fr-roles 如实写明合批方式。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2267,17 +2290,17 @@
       "text": "**不是一条 prompt 的产品（软件、网站、数据分析等）：** 同样的原则，把“一条 prompt”换成“一个写好的场景”：\n- 每个场景仍然要能一次跑完、直接判断；不允许依赖人在中途临场操作。"
     },
     {
-      "needs": "file-check",
-      "needs_reason": "检查设计阶段 D1 编写的合同用例集及冻结前 D6 数量和分组核对记录。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
       "top_component_title": "设计保障",
       "node_id": "contract-regression",
       "node_title": "已有能力保护",
       "acceptance_index": 17,
       "source_pointer": "/nodes/1/children/3/children/5/terminal/acceptance/17",
-      "text": "**谁负责（不新增角色）：**\n- **写用例集：** D1，在设计阶段写进合同；D6 在冻结前核对冻结说明里的用例数量和分组与设计一致。"
+      "text": "**谁负责（不新增角色）：**\n- **写用例集：** D1，在设计阶段写进合同；D6 像审其他组件一样审 freeze-review 节点组：答案是否在 Blueprint 中、是否与其他节点矛盾；发现缺口交回 D1，不以自己的常识补出答案后判通过。 验收器数量与分类、回归用例数与按检查条的分组由界面从 Blueprint 自动统计；正文只写规则与例外。每条检查只属一类，合并用例逐条判，任何一条不过整个用例不过。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
       "needs": "unclear",
@@ -2481,9 +2504,9 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 0,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/0",
-      "text": "freeze.json 恰好定位九项和四关卡；用户批准与 freeze.json 同时记录 snapshot_sha256、explanation_sha256，并记录 bundle_sha256、semantic_hash，不再用旧 blueprint_sha256。",
+      "text": "freeze.json 恰好定位九项和四关卡；用户批准只绑定 snapshot_sha256，冻结记录另保存 bundle_sha256、semantic_hash，不再用旧 blueprint_sha256 或 explanation_sha256。",
       "needs": "file-check",
-      "needs_reason": "核对冻结记录与用户批准记录中必填字段和双身份，可读文件并计算哈希比较。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2533,9 +2556,9 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 4,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/4",
-      "text": "首次冻结严格执行第 6.5 节五步；第 4 步不通过不写 freeze.json，回 D1 查明原因；内容快照未变时原四关卡和批准继续有效。 D6 对说明的检查还须绑定 explanation_sha256；说明变动则该检查失效，不能仅因内容快照未变而继续采用旧说明检查。",
+      "text": "首次冻结严格执行第 6.5 节五步；第 4 步不通过不写 freeze.json，回 D1 查明原因；内容快照未变时原四关卡和批准继续有效。冻结审阅正文属于 Blueprint 快照，改动后按修订规则处理。",
       "needs": "user",
-      "needs_reason": "沿用原首次冻结流程的用户批准需要，说明检查另受其文件身份是否改变的约束。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2585,9 +2608,9 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 8,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/8",
-      "text": "D8 每轮一个新 GPT 对话，合批处理本轮全部单位，随机顺序、逐单位仅凭其自身文字作答，记录 reader_isolation: \"single-thread-batch\"；D1 逐项比对，全部正确即有效通过；读错则改写，下一轮新对话只重读改过单位及受影响相邻单位，仍只转交一条；冻结说明如实写明合批方式。",
-      "needs": "real-host",
-      "needs_reason": "需要实际宿主入口、模型/会话隔离、角色派发、读取、写回或实际用户可用结果的观察。",
+      "text": "D8 每轮一个新 GPT 对话，合批处理本轮全部单位，随机顺序、逐单位仅凭其自身文字作答，记录 reader_isolation: \"single-thread-batch\"；D1 逐项比对，全部正确即有效通过；读错则改写，下一轮新对话只重读改过单位及受影响相邻单位，仍只转交一条；fr-decisions、fr-roles 如实写明合批方式。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2598,9 +2621,9 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 9,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/9",
-      "text": "冻结说明明确 D8 用每轮新 GPT 对话合批，读者独立性取舍由用户接受；不额外要求按单位另做读者派发。",
+      "text": "fr-decisions、fr-roles 如实写明 D8 每轮一个新 GPT 对话合批及独立性取舍，不额外要求按单位另做读者派发。",
       "needs": "file-check",
-      "needs_reason": "核对原文规定的文件内容、结构、引用、差异、记录或可运行脚本验证的规则。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2611,9 +2634,9 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 10,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/10",
-      "text": "每次首次冻结或大改，D1 按第 6.4a 节的固定骨架顺序写冻结说明：一句话结论；你这次在做的决定；做完时你会看到什么、你自己怎么验；验收器；需要下载或安装的大件；不能降级的；实现者可以自己定的；权限、费用、时间；这次不做的；和上次批准相比改了什么（只在大改后重新批准时写）。",
+      "text": "freeze-review 按顺序含 fr-decisions、fr-asks、fr-costs、fr-roles、fr-validation、fr-downloads、fr-nongoals 七部分；正文直接写入 Blueprint，并引用相关节点 id。",
       "needs": "file-check",
-      "needs_reason": "对照第 6.4a 节与 Blueprint 检查冻结说明文件的骨架、写法、数量、出处或下载披露。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2624,9 +2647,9 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 11,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/11",
-      "text": "冻结说明写给用户本人看，用日常语言，正文一页左右；正文不出现文件名、路径、字段名、哈希和节点编号，这些只放附录；验收器清单可以在正文后单独一节，不受一页限制。",
+      "text": "冻结审阅正文给用户可读，不以文件名、路径、哈希开头或堆砌；角色档次表引用 SPEC 第 2.1 节原表，不转述。",
       "needs": "file-check",
-      "needs_reason": "对照第 6.4a 节与 Blueprint 检查冻结说明文件的骨架、写法、数量、出处或下载披露。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2637,9 +2660,9 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 12,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/12",
-      "text": "冻结说明列出验收器总数、分类及每类数量，与 Blueprint 一致；每类用一两句话说明测什么功能、怎么判通过，需要真实宿主、真实设备或专业判断的验收器单独点名。",
+      "text": "验收器数量与分类、回归用例数与按检查条的分组由界面从 Blueprint 自动统计；正文只写规则与例外。每条检查只属一类，合并用例逐条判，任何一条不过整个用例不过。",
       "needs": "file-check",
-      "needs_reason": "对照第 6.4a 节与 Blueprint 检查冻结说明文件的骨架、写法、数量、出处或下载披露。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2650,15 +2673,15 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 13,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/13",
-      "text": "单项超过 100 MB 的软件、编译器、模型、数据集、容器镜像等逐项写出名称、大约多大、为什么需要、装在哪台机器上；没有就写“没有”。 Blueprint 没有记录某项依赖的大小时，说明必须写“大小未记录”，不能凭常识写“很小”。",
+      "text": "fr-downloads 记录单项超过 100 MB 的下载或安装；依赖大小未记录就写“未记录”。首次下载或安装前先记录实际大小，单项超过 100 MB 先经用户授权再下载。",
       "needs": "file-check",
-      "needs_reason": "对照 Blueprint 是否记录依赖大小，核对说明的逐项披露或“大小未记录”；本条不是实际下载操作。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
       "needs": "file-check",
-      "needs_reason": "对照冻结说明和 Blueprint 核对七类清单全部写到、清单外以设计为准，以及承诺不增强或削弱设计。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
@@ -2667,11 +2690,11 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 14,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/14",
-      "text": "说明里的每一条都必须能在 Blueprint 里找到出处，Blueprint 里没有的承诺不能写进说明，也不能把设计写得更强或更弱。\n\n- **“影响用户决定的内容”指下面这张固定清单（用户授权 D1 决定，2026/11/13），说明必须写到；清单之外的细节不要求写，说明中写明“其余细节以设计为准”：**\n  1. 用户已经做过的决定，以及设计者替用户定下的默认做法和被放弃的方案；\n  2. 哪些情况会交给用户决定或请用户确认；\n  3. 会增加用户工作量（例如需要用户转交的角色、每轮转交几条）、费用或权限范围的事；\n  4. 各角色何时启用、在哪里运行、各自负什么责任（谁实现、谁验收、谁签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。"
+      "text": "freeze-review 的答案必须在 Blueprint 中，不能与其他节点矛盾；默认做法标“默认”，用户决定和被放弃方案保留来源。"
     },
     {
       "needs": "file-check",
-      "needs_reason": "核对 D6 按七类固定清单和规定的四项说明检查完成记录，不把清单外未写细节列为漏写。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
@@ -2680,7 +2703,7 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 15,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/15",
-      "text": "冻结前，说明与 Blueprint 一起交给 D6。D6 在原有的逐组件追问之外，再对照 Blueprint 查说明四项：上面清单里的七类内容有没有漏写；有没有写 Blueprint 里没有的承诺、或把设计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。"
+      "text": "D6 像审其他组件一样审 freeze-review 节点组：答案是否在 Blueprint 中、是否与其他节点矛盾；发现缺口交回 D1，不以自己的常识补出答案后判通过。"
     },
     {
       "top_component_id": "design",
@@ -2689,9 +2712,9 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 16,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/16",
-      "text": "冻结说明附录列出要批准的 snapshot_sha256、文件 SHA-256 和提交号、D5–D8 各关卡结果，以及正文每节对应的 Blueprint 节点。",
+      "text": "Blueprint“冻结审阅”视图自动派生当前 snapshot_sha256、D5–D8 状态、验收与回归统计、角色档次表及下载大小，每项可跳回来源节点；视图属独立实现任务。",
       "needs": "file-check",
-      "needs_reason": "对照第 6.4a 节与 Blueprint 检查冻结说明文件的骨架、写法、数量、出处或下载披露。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2702,9 +2725,9 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 17,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/17",
-      "text": "冻结说明是独立文件，explanation_sha256 是文件原始字节 SHA-256，与 bundle_sha256 一样不做规范化。",
+      "text": "批准对象只有 Blueprint 的 snapshot_sha256，不再另有冻结说明文件身份。",
       "needs": "file-check",
-      "needs_reason": "读取说明独立文件原始字节并计算 SHA-256，核对未做 JCS 规范化。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -2715,15 +2738,15 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 18,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/18",
-      "text": "D6 的结果写明检查的 explanation_sha256，D1 交给用户批准时写明 explanation_sha256；用户批准和 freeze.json 同时记录 snapshot_sha256 和 explanation_sha256，三处 explanation_sha256 必须相同。",
+      "text": "批准请求写明当前 Blueprint 的 snapshot_sha256 及打开“冻结审阅”视图的方式；用户只批准该快照，freeze.json 不再包含 explanation_sha256。",
       "needs": "file-check",
-      "needs_reason": "只读核对 D6 结果、D1 请求、用户批准和冻结记录的说明身份一致，以及批准/冻结记录的双身份。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
       "needs": "file-check",
-      "needs_reason": "比较说明与 Blueprint 是否变化，核对旧说明检查失效后只重做固定清单、矛盾、数量与回归、大件下载四项的记录。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
@@ -2732,20 +2755,20 @@
       "node_title": "批准与冻结交接",
       "acceptance_index": 19,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/19",
-      "text": "D6 检查后说明只要改动，原说明检查就失效；由 D6 对新说明重做四项检查（清单项是否写到、是否矛盾、数量与回归、大件下载），Blueprint 没变时不必重做逐组件追问。"
+      "text": "Blueprint 检查后改动导致批准对象与检查对象不一致时，拒绝冻结并按修订规则重跑关卡。"
     },
     {
-      "needs": "file-check",
-      "needs_reason": "对照冻结说明与设计中的回归用例总数、分组和逐用例文字；本条只核对说明内容，实际回归运行另列。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "design",
       "top_component_title": "设计保障",
       "node_id": "freeze",
       "node_title": "批准与冻结交接",
       "acceptance_index": 20,
       "source_pointer": "/nodes/1/children/4/terminal/acceptance/20",
-      "text": "**回归用例集**（第 6.3a 节）：一共几个用例；**按检查条**统计“新能力 / 要修的真实问题 / 受影响的旧能力 / 冒烟”各多少条（一个用例可以含几类检查，每一条检查只属于一类，这就是“分组”）；每个用例一句话说清输入是什么、看什么、谁判；整体规则是全部通过才算这个版本做完，以及开发中只重跑没过的和受影响的、最终候选完整跑一遍、此后代码再变就再完整跑一遍。"
+      "text": "回归用例集全部通过才算本版本做完；开发中只重跑没过和受影响的用例，最终候选完整跑一遍，此后代码再变须再完整跑一遍。验收器数量与分类、回归用例数与按检查条的分组由界面从 Blueprint 自动统计；正文只写规则与例外。每条检查只属一类，合并用例逐条判，任何一条不过整个用例不过。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
       "top_component_id": "design",
@@ -3651,9 +3674,9 @@
       "node_title": "唯一源目录",
       "acceptance_index": 3,
       "source_pointer": "/nodes/3/children/0/terminal/acceptance/3",
-      "text": "shared/assurance/templates/ 包含第 6.4a 节固定格式的冻结说明模板，正文与附录分开，固定骨架内容随任务填写。",
+      "text": "shared/assurance/NOTICE 注明提问方式吸收自 mattpocock/skills grilling skill，并附 MIT 许可全文；由 X2 实现时创建，设计目录内不放 NOTICE。",
       "needs": "file-check",
-      "needs_reason": "核对原文规定的文件内容、结构、引用、差异、记录或可运行脚本验证的规则。",
+      "needs_reason": "沿用本节点原条目的判定分工，正文按 D1 的 0.2 修订决定同步；具体观察以当前条文为准。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
@@ -3931,30 +3954,30 @@
       "text": "R1｜输入（D1 写定）：一个设计阶段的示例任务（给一个小型命令行工具加一个导出功能），四道关卡中只剩 D8 未做，待复述单位 52 个；分别在 Claude Code 和 GPT Work 里请负责人“继续”｜看什么（逐条判）：① 两边给出同一个下一步：角色 D8、档次 GPT 极高、新开对话、写回位置正确；② 只生成一条合批提示词，包含全部 52 个单位；③ 给用户看的文字里没有未加解释的英文术语和内部字段名（产品名、命令、路径、文件名除外）｜谁判：① ② 脚本；③ X5 读全文，按“每出现一个未解释的英文术语或字段名记一处，零处才过”判｜旧表现依据：② MERGE_DECISIONS 第 11 节（原设计每单位一个对话，用户需转交 53 条）；①③ 为新能力检查"
     },
     {
-      "needs": "unclear",
-      "needs_reason": "R2 尚未批准，说明由用户或 X5 逐条判断，批准请求与实际说明和设计身份由脚本核对；不能指定单一 needs 代替全部。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "packaging",
       "top_component_title": "同源分发",
       "node_id": "capability-check",
       "node_title": "正常入口验收",
       "acceptance_index": 7,
       "source_pointer": "/nodes/3/children/4/terminal/acceptance/7",
-      "text": "R2｜输入（D1 写定）：同一示例任务，四道关卡都已通过、尚未请用户批准；请 D1 写冻结说明并发出批准请求｜看什么（逐条判）：① 冻结说明按第 6.4a 节十节骨架，正文没有文件名、路径和哈希，验收器个数与分类、回归用例个数与分组和设计一致；② 批准请求里写明说明的 `explanation_sha256` 和设计的 `snapshot_sha256`，且与实际文件一致｜谁判：① 用户或 X5 按第 6.4a 节逐条判；② 脚本｜旧表现依据：① 本仓库提交 `2965b008` 的第一版冻结说明（正文以哈希开头，缺验收器数量和下载说明），以及 MERGE_DECISIONS 第 20 节"
+      "text": "R2｜输入（D1 写定）：同一示例任务，四道关卡都已通过、尚未请用户批准；请 D1 发出批准请求｜看什么（逐条判）：① Blueprint 的 `freeze-review` 节点组七部分齐全；界面派生的验收器个数与分类、回归用例个数与分组与设计一致；正文给用户可读，不以文件名、路径、哈希开头或堆砌；② 批准请求写明 `snapshot_sha256` 且与实际一致，并说明在 Blueprint“冻结审阅”视图中打开的方式｜谁判：① 用户或 X5 按冻结审阅规则逐条判；② 脚本｜旧表现依据：① 本仓库提交 `2965b008` 的第一版冻结说明和 MERGE_DECISIONS 第 20 节，另加第 30 节（D6 第 10–17 轮转述走样）；② 新能力",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
-      "needs": "file-check",
-      "needs_reason": "R3 三个固定快照场景由脚本核对有效冻结的四个身份，以及缺 D7 和说明身份不一致时的各自拒绝结果。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "packaging",
       "top_component_title": "同源分发",
       "node_id": "capability-check",
       "node_title": "正常入口验收",
       "acceptance_index": 8,
       "source_pointer": "/nodes/3/children/4/terminal/acceptance/8",
-      "text": "R3｜输入（D1 写定）：一个写好的场景，对同一示例任务的三个固定快照依次请求冻结：A 四关卡齐全、用户批准的说明身份与 D6 检查的一致；B 缺 D7 结果；C 用户批准的说明身份与 D6 检查过的不一致（说明检查后被改过）｜看什么（逐条判）：① A 生成冻结记录，`snapshot_sha256`、`explanation_sha256`、`bundle_sha256`、`semantic_hash` 都与第 6.5 节计算一致；② B 拒绝，并指出缺 D7；③ C 拒绝，并指出说明身份不一致、需 D6 重做说明检查｜谁判：脚本｜旧表现依据：③ MERGE_DECISIONS 第 22 节（说明原本没有身份，无法证明用户看到的就是检查过的那份）；①② 为新能力检查"
+      "text": "R3｜输入（D1 写定）：一个写好的场景，对同一示例任务的三个固定快照依次请求冻结：A 四关卡齐全、用户批准的 `snapshot_sha256` 与关卡检查的一致；B 缺 D7 结果；C 用户批准的快照与关卡检查过的不一致（检查后 Blueprint 被改过）｜看什么（逐条判）：① A 生成冻结记录，`snapshot_sha256`、`bundle_sha256`、`semantic_hash` 与第 6.5 节一致（不再有 `explanation_sha256`）；② B 拒绝并指出缺 D7；③ C 拒绝，指出批准对象与检查对象不一致，需按修订规则重跑关卡｜谁判：脚本｜旧表现依据：③ MERGE_DECISIONS 第 22 节（批准对象必须就是检查过的对象）与第 30 节；①② 新能力",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
       "needs": "unclear",
@@ -4009,6 +4032,19 @@
       "text": "R7｜输入（D1 写定）：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读原始对话｜旧表现依据：新能力检查"
     },
     {
+      "top_component_id": "packaging",
+      "top_component_title": "同源分发",
+      "node_id": "capability-check",
+      "node_title": "正常入口验收",
+      "acceptance_index": 13,
+      "source_pointer": "/nodes/3/children/4/terminal/acceptance/13",
+      "text": "R8｜输入（D1 写定）：示例任务沿用 R1 的“给一个小型命令行工具加一个导出功能”；请 D1 开始澄清。用例输入写死四项：用户取舍 U1：导出格式先支持 CSV 还是 JSON（用户偏好）；用户取舍 U2：导出是否包含已标记删除的记录（范围取舍）；U1、U2 互不依赖，因此应在同一轮提出；可查事实 F1：该工具当前使用的 Python 版本（在示例仓库的 `pyproject.toml` 中写明）；技术选择 T1：用标准库 `csv`/`json` 模块还是引入第三方库（应由 D1 自定：用标准库，理由是不增加依赖）｜看什么（逐条判）：① 第一轮只问 U1、U2 两题，每题编号、有推荐答案和一句理由，回答“是”即接受；② F1 没有问用户，T1 没有问用户且写了理由｜谁判：① 问题个数与编号、推荐答案是否存在用脚本，措辞由 X5 判；② X5 判｜旧表现依据：新能力检查",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
       "needs": "unclear",
       "needs_reason": "S1 使用固定中文正文和另两条固定请求，脚本判断未进入 Assurance，用户或 X5 判任务是否完成；同时涉及真实宿主、脚本及用户或专业判断，无法指定单一 needs。",
       "big_download": null,
@@ -4017,22 +4053,22 @@
       "top_component_title": "同源分发",
       "node_id": "capability-check",
       "node_title": "正常入口验收",
-      "acceptance_index": 13,
-      "source_pointer": "/nodes/3/children/4/terminal/acceptance/13",
+      "acceptance_index": 14,
+      "source_pointer": "/nodes/3/children/4/terminal/acceptance/14",
       "text": "S1｜输入（D1 写定）：一个写好的场景，在装好本插件的环境里依次发三条日常请求：① 对 `writing-style` 发“把下面这段话改得更通顺：这个工具可以把表格里的数据整理成一份报告。使用的时候，先把表格放到指定的文件夹里，然后运行命令，工具就会自动读取表格，计算每一列的平均值和最大值，再把结果写成一个新的文件。如果表格里有空的格子，工具会跳过它们，不会报错。生成的报告可以直接打开查看，也可以发给同事。第一次使用之前，最好先看一下说明，确认表格的格式是对的，不然算出来的结果可能不准。”（这段输入固定不变，本身不含任何 Assurance 用语）；② 对 `workflow-core` 发“看一下当前分支的状态，告诉我下一步”；③ 对 `ai-skills-core` 发“列出本仓库现有插件和它们的版本”｜看什么（逐条判）：① 三条请求都完成了所要求的事；② 没有任何一条被转进 Assurance 流程：没有创建 `docs/assurance/` 下的文件，输出里没有出现 D1–D8、X1–X5、冻结、派发等 Assurance 用语｜谁判：② 脚本；① 用户或 X5 判是否完成所要求的事｜旧表现依据：新能力检查（保护旧行为）"
     },
     {
-      "needs": "unclear",
-      "needs_reason": "8 个用例集合包含真实宿主、脚本、X5 与用户或 X5 判定；该聚合完成条件没有唯一 needs。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "packaging",
       "top_component_title": "同源分发",
       "node_id": "capability-check",
       "node_title": "正常入口验收",
-      "acceptance_index": 14,
-      "source_pointer": "/nodes/3/children/4/terminal/acceptance/14",
-      "text": "共 8 个用例（R1–R7、S1），**全部通过才算 0.1 做完**。实施中发现新的真实问题，按第 6.3a 节追加，不删改已有用例。"
+      "acceptance_index": 15,
+      "source_pointer": "/nodes/3/children/4/terminal/acceptance/15",
+      "text": "共 9 个用例（R1–R8、S1），**全部通过才算 0.1 做完**。实施中发现新的真实问题，按第 6.3a 节追加，不删改已有用例。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
       "needs": "real-host",
@@ -4043,22 +4079,22 @@
       "top_component_title": "同源分发",
       "node_id": "capability-check",
       "node_title": "正常入口验收",
-      "acceptance_index": 15,
-      "source_pointer": "/nodes/3/children/4/terminal/acceptance/15",
+      "acceptance_index": 16,
+      "source_pointer": "/nodes/3/children/4/terminal/acceptance/16",
       "text": "**修复后重跑哪些（用户要求，2026/11/13）：** 开发过程中，修完只重跑没过的用例，以及本次修改实际碰到的部分所对应的用例；不必每修一次就全部重跑。**最终候选确定后，在同一个最终版本上把整份用例集完整跑一遍**，全部通过才算做完；这一遍之后再改代码，就要再跑一遍完整用例集。"
     },
     {
-      "needs": "file-check",
-      "needs_reason": "逐条对照 D1 写定的 18 条检查分组，机械核对 12/3/1/2、无重复归类且不漏条；无需自行分类。",
-      "big_download": null,
-      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。",
       "top_component_id": "packaging",
       "top_component_title": "同源分发",
       "node_id": "capability-check",
       "node_title": "正常入口验收",
-      "acceptance_index": 16,
-      "source_pointer": "/nodes/3/children/4/terminal/acceptance/16",
-      "text": "**每条检查的分组（D6 第 9 轮后补定，每条只属一类）：**\n- 新能力，12 条：R1①③、R2②、R3①②、R4①②③、R5、R6、R7②③；\n- 要修的真实问题，3 条：R1②、R2①、R3③；\n- 受影响的旧能力，1 条：R7①；\n- 冒烟，2 条：S1①②。"
+      "acceptance_index": 17,
+      "source_pointer": "/nodes/3/children/4/terminal/acceptance/17",
+      "text": "**每条检查的分组（D6 第 9 轮后补定，每条只属一类）：**\n- 新能力，14 条：R1①③、R2②、R3①②、R4①②③、R5、R6、R7②③、R8①②；\n- 要修的真实问题，3 条：R1②、R2①、R3③；\n- 受影响的旧能力，1 条：R7①；\n- 冒烟，2 条：S1①②。",
+      "needs": "unclear",
+      "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     },
     {
       "top_component_id": "packaging",
@@ -4176,6 +4212,97 @@
       "needs_reason": "核对原文规定的文件内容、结构、引用、差异、记录或可运行脚本验证的规则。",
       "big_download": null,
       "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "freeze-review",
+      "top_component_title": "冻结审阅",
+      "node_id": "fr-decisions",
+      "node_title": "决定与默认做法",
+      "acceptance_index": 0,
+      "source_pointer": "/nodes/4/children/0/terminal/acceptance/0",
+      "text": "列出影响用户的已有决定、标“默认”的设计者默认做法及被放弃方案，并引用来源节点。",
+      "needs": "file-check",
+      "needs_reason": "核对 Blueprint 节点正文是否保存规定内容、引用来源及所需披露；不把这项文件核对当作界面或插件已实现。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "freeze-review",
+      "top_component_title": "冻结审阅",
+      "node_id": "fr-asks",
+      "node_title": "何时请你决定",
+      "acceptance_index": 0,
+      "source_pointer": "/nodes/4/children/1/terminal/acceptance/0",
+      "text": "正文写清用户决定、确认与授权的触发条件，保留有效回答及已有授权不重复询问的前提。",
+      "needs": "file-check",
+      "needs_reason": "核对 Blueprint 节点正文是否保存规定内容、引用来源及所需披露；不把这项文件核对当作界面或插件已实现。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "freeze-review",
+      "top_component_title": "冻结审阅",
+      "node_id": "fr-costs",
+      "node_title": "工作量费用权限",
+      "acceptance_index": 0,
+      "source_pointer": "/nodes/4/children/2/terminal/acceptance/0",
+      "text": "正文披露转交工作量、费用和权限范围，未知工期与环境不作事实承诺。",
+      "needs": "file-check",
+      "needs_reason": "核对 Blueprint 节点正文是否保存规定内容、引用来源及所需披露；不把这项文件核对当作界面或插件已实现。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "freeze-review",
+      "top_component_title": "冻结审阅",
+      "node_id": "fr-roles",
+      "node_title": "角色分工",
+      "acceptance_index": 0,
+      "source_pointer": "/nodes/4/children/3/terminal/acceptance/0",
+      "text": "写清角色启用条件、运行位置、派发者与责任；档次和会话表引用 dispatch 第 2.1 节原表，不转述。",
+      "needs": "file-check",
+      "needs_reason": "核对 Blueprint 节点正文是否保存规定内容、引用来源及所需披露；不把这项文件核对当作界面或插件已实现。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "freeze-review",
+      "top_component_title": "冻结审阅",
+      "node_id": "fr-validation",
+      "node_title": "验收与回归",
+      "acceptance_index": 0,
+      "source_pointer": "/nodes/4/children/4/terminal/acceptance/0",
+      "text": "验收器数量与分类、回归用例数与按检查条的分组由界面从 Blueprint 自动统计；正文只写规则与例外。每条检查只属一类，合并用例逐条判，任何一条不过整个用例不过。 完整用例引用 capability-check，执行及例外不得改变原判据。",
+      "needs": "file-check",
+      "needs_reason": "核对 Blueprint 节点正文是否保存规定内容、引用来源及所需披露；不把这项文件核对当作界面或插件已实现。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "freeze-review",
+      "top_component_title": "冻结审阅",
+      "node_id": "fr-downloads",
+      "node_title": "下载与安装",
+      "acceptance_index": 0,
+      "source_pointer": "/nodes/4/children/5/terminal/acceptance/0",
+      "text": "fr-downloads 记录单项超过 100 MB 的下载或安装；依赖大小未记录就写“未记录”。首次下载或安装前先记录实际大小，单项超过 100 MB 先经用户授权再下载。",
+      "needs": "file-check",
+      "needs_reason": "核对 Blueprint 节点正文是否保存规定内容、引用来源及所需披露；不把这项文件核对当作界面或插件已实现。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
+    },
+    {
+      "top_component_id": "freeze-review",
+      "top_component_title": "冻结审阅",
+      "node_id": "fr-nongoals",
+      "node_title": "不做与不保证",
+      "acceptance_index": 0,
+      "source_pointer": "/nodes/4/children/6/terminal/acceptance/0",
+      "text": "正文披露未纳入能力、不保证的事项、不得替代的要求及普通实现自由度，引用来源节点。",
+      "needs": "file-check",
+      "needs_reason": "核对 Blueprint 节点正文是否保存规定内容、引用来源及所需披露；不把这项文件核对当作界面或插件已实现。",
+      "big_download": null,
+      "big_download_basis": "本条未点名已确认单项超过 100 MB 的具体依赖成品；依赖大小未记录的如实标“大小未记录”，见末尾 downloads，不能据此声称没有大件。"
     }
   ],
   "summary": [
@@ -4183,21 +4310,21 @@
       "top_component_id": "shared",
       "top_component_title": "共用任务协议",
       "file-check": 44,
-      "real-host": 24,
+      "real-host": 22,
       "expert": 0,
-      "user": 8,
-      "unclear": 0,
+      "user": 7,
+      "unclear": 3,
       "total": 76
     },
     {
       "top_component_id": "design",
       "top_component_title": "设计保障",
-      "file-check": 96,
-      "real-host": 32,
+      "file-check": 86,
+      "real-host": 27,
       "expert": 0,
-      "user": 6,
-      "unclear": 7,
-      "total": 141
+      "user": 5,
+      "unclear": 21,
+      "total": 139
     },
     {
       "top_component_id": "delivery",
@@ -4212,19 +4339,99 @@
     {
       "top_component_id": "packaging",
       "top_component_title": "同源分发",
-      "file-check": 22,
+      "file-check": 20,
       "real-host": 14,
       "expert": 1,
       "user": 0,
-      "unclear": 7,
-      "total": 44
+      "unclear": 10,
+      "total": 45
+    },
+    {
+      "top_component_id": "freeze-review",
+      "top_component_title": "冻结审阅",
+      "file-check": 7,
+      "real-host": 0,
+      "expert": 0,
+      "user": 0,
+      "unclear": 0,
+      "total": 7
     }
   ],
   "unclear_items": [
     {
+      "node_id": "dispatch",
+      "acceptance_index": 5,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
+      "node_id": "dispatch",
+      "acceptance_index": 13,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
+      "node_id": "prompts",
+      "acceptance_index": 5,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
+      "node_id": "role-D6",
+      "acceptance_index": 4,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
+      "node_id": "role-D6",
+      "acceptance_index": 5,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
+      "node_id": "role-D8",
+      "acceptance_index": 4,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
+      "node_id": "clarify",
+      "acceptance_index": 0,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
+      "node_id": "clarify",
+      "acceptance_index": 1,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
+      "node_id": "clarify",
+      "acceptance_index": 2,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
+      "node_id": "clarify",
+      "acceptance_index": 3,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
+      "node_id": "clarify",
+      "acceptance_index": 4,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
+      "node_id": "gates",
+      "acceptance_index": 8,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
       "node_id": "contract-capability",
       "acceptance_index": 0,
       "reason": "该条把真实宿主能力、用户批准、签发和不承诺事项合在一起，单一 needs 无法代表全部；未另拆条目或替 D1 做功能分类。"
+    },
+    {
+      "node_id": "contract-fidelity",
+      "acceptance_index": 0,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
+      "node_id": "contract-fidelity",
+      "acceptance_index": 2,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
     },
     {
       "node_id": "contract-regression",
@@ -4235,6 +4442,11 @@
       "node_id": "contract-regression",
       "acceptance_index": 14,
       "reason": "网站场景同时包括浏览器实际操作、机械断言及观感由人或 X5 判断；本条没有唯一 needs，不自行另定评分方案。"
+    },
+    {
+      "node_id": "contract-regression",
+      "acceptance_index": 17,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
     },
     {
       "node_id": "contract-regression",
@@ -4255,6 +4467,16 @@
       "node_id": "contract-changes",
       "acceptance_index": 0,
       "reason": "该条涵盖验收资产语义、设计退回和用户专属决定；具体变化可能只需对照文件，也可能需用户决定，原文没有唯一验证场景。"
+    },
+    {
+      "node_id": "freeze",
+      "acceptance_index": 8,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
+      "node_id": "freeze",
+      "acceptance_index": 20,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
     },
     {
       "node_id": "role-X2",
@@ -4304,7 +4526,12 @@
     {
       "node_id": "capability-check",
       "acceptance_index": 7,
-      "reason": "R2 尚未批准，说明由用户或 X5 逐条判断，批准请求与实际说明和设计身份由脚本核对；不能指定单一 needs 代替全部。"
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
+      "node_id": "capability-check",
+      "acceptance_index": 8,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
     },
     {
       "node_id": "capability-check",
@@ -4319,31 +4546,41 @@
     {
       "node_id": "capability-check",
       "acceptance_index": 13,
-      "reason": "S1 使用固定中文正文和另两条固定请求，脚本判断未进入 Assurance，用户或 X5 判任务是否完成；同时涉及真实宿主、脚本及用户或专业判断，无法指定单一 needs。"
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
     },
     {
       "node_id": "capability-check",
       "acceptance_index": 14,
-      "reason": "8 个用例集合包含真实宿主、脚本、X5 与用户或 X5 判定；该聚合完成条件没有唯一 needs。"
+      "reason": "S1 使用固定中文正文和另两条固定请求，脚本判断未进入 Assurance，用户或 X5 判任务是否完成；同时涉及真实宿主、脚本及用户或专业判断，无法指定单一 needs。"
+    },
+    {
+      "node_id": "capability-check",
+      "acceptance_index": 15,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
+    },
+    {
+      "node_id": "capability-check",
+      "acceptance_index": 17,
+      "reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。"
     }
   ],
   "download_scan": {
-    "scanned_string_count": 7005,
-    "matched_string_count": 224,
+    "scanned_string_count": 7546,
+    "matched_string_count": 214,
     "matches": [
       {
         "source_pointer": "/complexityNote",
         "terms": [
           "安装"
         ],
-        "excerpt": "留。 新增网页端打包方法不可定位或复现的失败路径：它要求复用既有方法并申报偏离给 X1，与安装包缺资源不能采用同一修复决定。 冻结说明缺口需 D6 对照 Blueprint 发现并交回 D1 改写，不能合并为检查器不可用或网页端打包偏离的处理。"
+        "excerpt": "其余路径各自原有的独立处置仍保留。 新增网页端打包方法不可定位或复现的失败路径：它要求复用既有方法并申报偏离给 X1，与安装包缺资源不能采用同一修复决定。 新增 freeze-review 顶层组与七个审阅子节点；D6 像审其他组件一样检查其中答案和矛盾，缺口交回 D1。冻结审阅视图由 Blueprint 的独立实现任务提供，本稿只规定内容与派生规则。"
       },
       {
         "source_pointer": "/requirements/5/text",
         "terms": [
           "下载"
         ],
-        "excerpt": "a 节固定格式，D6 冻结前对照 Blueprint 检查漏写、多写、验收器数量分类和大件下载。 冻结说明另以 explanation_sha256 绑定，说明变动只使相应说明检查失效，按第 6.4a 节重做四项检查；依赖大小未记录必须如实写明。"
+        "excerpt": "eeze-review 的七部分直接写进节点正文并引用来源节点。D6 像其他组件一样检查答案和矛盾；统计由界面派生，未知下载大小如实写“未记录”。"
       },
       {
         "source_pointer": "/nodes/0/children/0/claims/0/text",
@@ -4355,11 +4592,11 @@
       {
         "source_pointer": "/nodes/0/children/0/terminal/mechanism",
         "terms": [
-          "rfc8785",
           "Python",
+          "rfc8785",
           "canonicalize"
         ],
-        "excerpt": " Scheme（JCS）](https://www.rfc-editor.org/rfc/rfc8785) 规范化后的 UTF-8 字节，不加结尾换行。JCS 统一规定了键排序（按 UTF-16 码元）、字符串转义（非 ASCII 字符原样输出，不写成 `\\u` 转义）和数字格式（ECMAScript 规则），所以同一个 JSON 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入"
+        "excerpt": "anonicalization Scheme（JCS）](https://www.rfc-editor.org/rfc/rfc8785) 规范化后的 UTF-8 字节，不加结尾换行。JCS 统一规定了键排序（按 UTF-16 码元）、字符串转义（非 ASCII 字符原样输出，不写成 `\\u` 转义）和数字格式（ECMAScript 规则），所以同一个 JSON 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入、规范化字节的十六进制和 SHA-256，至少覆盖中文字符串、嵌套对象的键排序和整数，各端必须逐字节通过。`bundle_sha256` 例外：它是冻结输出文件原始字节的 SHA-256，不做规范化。\n\n**三个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---|---|\n| `snapshot_sha256` | Blueprint 检查器 `snapshotOf` 取出的内容快照（`title,summ"
       },
       {
         "source_pointer": "/nodes/0/children/1/claims/0/text",
@@ -4396,16 +4633,16 @@
           "安装",
           "jsonschema"
         ],
-        "excerpt": "--task-root、--schema、--record、--format；已安装且格式依赖可用的jsonschema4.26.0。；--schema 支持 revocation，核对关联 release_ref 指向的签发存在。；--schema 新增 brief，检查任务书的既定字段与已声明引用。；--schema 新增 recovery，恢复记录位于 recovery/<recovery_id>.json。；输出：标准输出assessment/errors/unresolved/checked_files；"
+        "excerpt": "--task-root、--schema、--record、--format；已安装且格式依赖可用的jsonschema4.26.0。；--schema 支持 revocation，核对关联 release_ref 指向的签发存在。；--schema 新增 brief，检查任务书的既定字段与已声明引用。；--schema 新增 recovery，恢复记录位于 recovery/<recovery_id>.json。；输出：标准输出assessment/errors/unresolved/checked_files；退出0结构合规、1确定记录错误、2无法完成检查。"
       },
       {
         "source_pointer": "/nodes/0/children/2/terminal/mechanism",
         "terms": [
-          "jsonschema",
+          "安装",
           "Python",
-          "安装"
+          "jsonschema"
         ],
-        "excerpt": "/assurance/scripts/check_records.py`，使用成熟依赖 `jsonschema[format-nongpl]==4.26.0`；运行环境为Python 3.10或更新的受支持版本。各记录结构使用JSON Schema Draft 2020-12，先用 `Draft202012Validator.check_schema` 检查结构定义，再用 `iter_errors` 收集记录错误，显式启用 `FormatChecker` 并核对对应格式依赖。引用只从同包预注册的本地结构读取，不在验收时联网取"
+        "excerpt": "供一个只读入口 `shared/assurance/scripts/check_records.py`，使用成熟依赖 `jsonschema[format-nongpl]==4.26.0`；运行环境为Python 3.10或更新的受支持版本。各记录结构使用JSON Schema Draft 2020-12，先用 `Draft202012Validator.check_schema` 检查结构定义，再用 `iter_errors` 收集记录错误，显式启用 `FormatChecker` 并核对对应格式依赖。引用只从同包预注册的本地结构读取，不在验收时联网取未知结构。版本与API依据为[jsonschema官方文档](https://python-jsonschema.readthedocs.io/en/stable/validate/)、[引用机制文档](https://python-jsonschema.readthedocs.io/en/stable/referencing/)和[4.26.0发行记录](https://pypi.org/project/jsonschema/4.26"
       },
       {
         "source_pointer": "/nodes/0/children/2/terminal/packages/0/name",
@@ -4454,7 +4691,7 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "不代表整个任务冻结或交付。\n```\n\n写入测试只证明该指定目录与分支可写，不证明产品环境、安装权限或数据授权。重复恢复同一派发时沿用已经核实的探针记录并重新核对远端，不制造无限探针提交。对于D7/D8，调度器提前完成运输身份核对；其提示词只包含必要定位，不要求它们读取会泄露其他设计内容的状态或全仓材料。\n\n### 4.2 负责人继续工作的模板\n\n```text\n继续{任务名称}，沿用当前{D1或X1}线程。先从{仓库和分支}回读{STATE路径}，再读{本次新结果定位}。这是{派发编号}的返回，依据{设计或候选身份}。\n核对"
+        "excerpt": "{接收方}处理的事项。你的结果不代表整个任务冻结或交付。\n```\n\n写入测试只证明该指定目录与分支可写，不证明产品环境、安装权限或数据授权。重复恢复同一派发时沿用已经核实的探针记录并重新核对远端，不制造无限探针提交。对于D7/D8，调度器提前完成运输身份核对；其提示词只包含必要定位，不要求它们读取会泄露其他设计内容的状态或全仓材料。\n\n### 4.2 负责人继续工作的模板\n\n```text\n继续{任务名称}，沿用当前{D1或X1}线程。先从{仓库和分支}回读{STATE路径}，再读{本次新结果定位}。这是{派发编号}的返回，依据{设计或候选身份}。\n核对返回结果是否仍对应当前对象；只采纳仍有效的范围。推进{明确下一动作}，更新你有权修改的记录，并告诉我下一步交给谁。需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）只在 GPT 网页端运行，每角色每轮只生成并保存一条完整提示词交用户转交；负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端由当前阶段负责人组织"
       },
       {
         "source_pointer": "/nodes/0/children/5/claims/0/text",
@@ -4471,14 +4708,6 @@
         "excerpt": "本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。"
       },
       {
-        "source_pointer": "/nodes/1/children/0/children/0/validators/0/method/description",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。；D1 交给用户的批准请求写明冻结说明的 explanation_sha256，用户批准和 freeze.json 同时记录 snapshot_sha256 与 explanation_sha256。；D1 按第 6.4a 节在冻结说明第 4 节写清回归用例集：**回归用例集**（第 6.3a 节）：一共几个用例；**按检查条**统计“新能力 / 要修的真实问题 / 受影响的旧能"
-      },
-      {
         "source_pointer": "/nodes/1/children/0/children/0/claims/0/text",
         "terms": [
           "安装"
@@ -4486,28 +4715,13 @@
         "excerpt": "本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。"
       },
       {
-        "source_pointer": "/nodes/1/children/0/children/0/interface/boundaries/2",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。"
-      },
-      {
         "source_pointer": "/nodes/1/children/0/children/0/terminal/mechanism",
         "terms": [
           "下载",
-          "安装"
+          "安装",
+          "100 MB"
         ],
-        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n冻结前，说明与 Blueprint 一起交给 D6，发现问题交回 D1 改写。\n\n**说明的身份（D6 第 7 轮后补定）：** 冻结说明是一个独立文件，它的身份 `explanation_sha256` 是该文件原始字节的 SHA-256（与 `bundle_sha256` 一样不做规范化）。D6 的结果写明它检查的 `explanation_sha256`；D1 交给用户"
-      },
-      {
-        "source_pointer": "/nodes/1/children/0/children/0/terminal/acceptance/6",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。"
+        "excerpt": "量与分类由界面从 Blueprint 自动统计，不在正文手写统计值 |\n| `fr-downloads` | 单项超过 100 MB 的下载或安装；未记录大小的写“未记录” |\n| `fr-nongoals` | 不做的事与不保证的事 |\n\nD6 像审其他组件一样审 `freeze-review`：答案是否在 Blueprint 中、是否与其他节点矛盾；取消原来对单独冻结说明的四项检查。正文写给用户看，不以文件名、路径、哈希开头或堆砌；具体规则和来源通过节点 id 定位。\n\nBlueprint 应用新增“冻结审阅”视图，按上述七部分展示正文，并自动派生验收器总数与分类计数、回归用例数与按检查条的分组、角色档次表、单项下载大小、当前 `snapshot_sha256` 与 D5–D8 关卡状态；每项可跳转到来源节点。该视图由单独实现任务交付，本次只修订设计，不声称界面已可用。\n\n执行者第一次下载或安装任何依赖前，先记录实际大小；单项超过 100 MB 的，先经用户授权再下载。未记录大小时不能凭常识写“很小”或“没有大件”。\n\nD6 像审其他组件一样审 freeze-review 节点组："
       },
       {
         "source_pointer": "/nodes/1/children/0/children/1/claims/0/text",
@@ -4538,94 +4752,11 @@
         "excerpt": "本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。"
       },
       {
-        "source_pointer": "/nodes/1/children/0/children/5/outputs/0/description",
-        "terms": [
-          "下载"
-        ],
-        "excerpt": "LT.md；记录身份、实际读写和未运行项。；冻结说明漏写、多写、验收器数量分类不一致或大件下载遗漏的缺口，交回 D1。；结果写明检查的 explanation_sha256，说明改动后原说明检查失效，对新说明重做四项检查。；说明里回归用例的数量或分组与设计不一致，按 D6 缺口交回 D1。"
-      },
-      {
-        "source_pointer": "/nodes/1/children/0/children/5/validators/0/method/description",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。；说明里的每一条都必须能在 Blueprint 里找到出处，Blueprint 里没有的承诺不能写进说明，也不能把设计写得更强或更弱。 发现问题按 D6 的缺口处理，交回 D1。；检查冻结说明的验收器数量和分类是否与 Blueprint 一致；发现问题按 D6 缺口交回 D1。 D6 还要核对冻结说明里回"
-      },
-      {
-        "source_pointer": "/nodes/1/children/0/children/5/validators/1/method/description",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n冻结前，说明与 Blueprint 一起交给 D6。D6 在原有的逐组件追问之外，再对照 Blueprint 查说明四项：上面清单里的七类内容有没有漏写；有没有写 Blueprint 里没有的承诺、或把设计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1"
-      },
-      {
-        "source_pointer": "/nodes/1/children/0/children/5/validators/1/counterexample/input",
-        "terms": [
-          "下载"
-        ],
-        "excerpt": "的内容、写入 Blueprint 没有的承诺、验收器数量分类或回归用例数量分组不一致或大件下载遗漏。 或说明身份不一致、说明在 D6 检查后被改动却仍采用原说明检查。"
-      },
-      {
-        "source_pointer": "/nodes/1/children/0/children/5/validators/1/counterexample/injection/situation",
-        "terms": [
-          "下载"
-        ],
-        "excerpt": "的内容、写入 Blueprint 没有的承诺、验收器数量分类或回归用例数量分组不一致或大件下载遗漏。 或说明身份不一致、说明在 D6 检查后被改动却仍采用原说明检查。"
-      },
-      {
         "source_pointer": "/nodes/1/children/0/children/5/claims/0/text",
         "terms": [
           "安装"
         ],
         "excerpt": "本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。"
-      },
-      {
-        "source_pointer": "/nodes/1/children/0/children/5/interface/boundaries/3",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n冻结前，说明与 Blueprint 一起交给 D6。D6 在原有的逐组件追问之外，再对照 Blueprint 查说明四项：上面清单里的七类内容有没有漏写；有没有写 Blueprint 里没有的承诺、或把设计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1"
-      },
-      {
-        "source_pointer": "/nodes/1/children/0/children/5/interface/errors/1",
-        "terms": [
-          "下载"
-        ],
-        "excerpt": "D6 对照 Blueprint 发现冻结说明漏写、多写、验收器数量分类不一致或大件下载遗漏：按 D6 缺口交回 D1 改写。 说明身份不一致或检查后说明被改动，原说明检查失效，由 D6 对新说明重做四项检查，Blueprint 未变不重做逐组件追问。 D6 还要核对冻结说明里回归用例的数量和分组与设计一致；发现问题按 D6 的缺口处理，交回 D1。"
-      },
-      {
-        "source_pointer": "/nodes/1/children/0/children/5/interface/format",
-        "terms": [
-          "下载"
-        ],
-        "excerpt": "LT.md；记录身份、实际读写和未运行项。；冻结说明漏写、多写、验收器数量分类不一致或大件下载遗漏的缺口，交回 D1。；结果写明检查的 explanation_sha256，说明改动后原说明检查失效，对新说明重做四项检查。；说明里回归用例的数量或分组与设计不一致，按 D6 缺口交回 D1。；真实缺口与答案位置进入收敛。"
-      },
-      {
-        "source_pointer": "/nodes/1/children/0/children/5/terminal/mechanism",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n冻结前，说明与 Blueprint 一起交给 D6。D6 在原有的逐组件追问之外，再对照 Blueprint 查说明四项：上面清单里的七类内容有没有漏写；有没有写 Blueprint 里没有的承诺、或把设计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1"
-      },
-      {
-        "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/4",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。"
-      },
-      {
-        "source_pointer": "/nodes/1/children/0/children/5/terminal/acceptance/7",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "D6 按第 6.4a 节检查说明第 5 节是否遗漏单项超过 100 MB 的下载或安装；第 5 节只能写 Blueprint 里有依据的内容。Blueprint 没有记录某项依赖的大小时，说明必须写“大小未记录”，不能凭常识写“很小”；发现问题按 D6 的缺口处理，交回 D1。"
       },
       {
         "source_pointer": "/nodes/1/children/0/children/6/claims/0/text",
@@ -4649,13 +4780,6 @@
         "excerpt": "本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。"
       },
       {
-        "source_pointer": "/nodes/1/children/2/validators/0/method/description",
-        "terms": [
-          "下载"
-        ],
-        "excerpt": "计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。；D6 结果记录检查说明的 explanation_sha256；说明改动后原说明检查失效，Blueprint 未变时只重做说明四项检查，不重做逐组件追问。"
-      },
-      {
         "source_pointer": "/nodes/1/children/2/claims/0/text",
         "terms": [
           "安装"
@@ -4666,41 +4790,33 @@
         "source_pointer": "/nodes/1/children/2/interface/boundaries/3",
         "terms": [
           "下载",
-          "安装"
+          "安装",
+          "100 MB"
         ],
-        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n冻结前，说明与 Blueprint 一起交给 D6。D6 在原有的逐组件追问之外，再对照 Blueprint 查说明四项：上面清单里的七类内容有没有漏写；有没有写 Blueprint 里没有的承诺、或把设计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1"
+        "excerpt": "在哪里运行、各自负什么责任（谁实现、谁验收、谁签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\nD6 像审其他组件一样审 freeze-review 节点组：答案是否在 Blueprint 中、是否与其他节点矛盾；发现缺口交回 D1，不以自己的常识补出答案后判通过。"
       },
       {
         "source_pointer": "/nodes/1/children/2/terminal/mechanism",
         "terms": [
-          "rfc8785",
           "Python",
-          "canonicalize",
-          "下载",
-          "安装"
+          "rfc8785",
+          "canonicalize"
         ],
-        "excerpt": " Scheme（JCS）](https://www.rfc-editor.org/rfc/rfc8785) 规范化后的 UTF-8 字节，不加结尾换行。JCS 统一规定了键排序（按 UTF-16 码元）、字符串转义（非 ASCII 字符原样输出，不写成 `\\u` 转义）和数字格式（ECMAScript 规则），所以同一个 JSON 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入"
-      },
-      {
-        "source_pointer": "/nodes/1/children/2/terminal/acceptance/9",
-        "terms": [
-          "下载"
-        ],
-        "excerpt": "计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。"
+        "excerpt": "anonicalization Scheme（JCS）](https://www.rfc-editor.org/rfc/rfc8785) 规范化后的 UTF-8 字节，不加结尾换行。JCS 统一规定了键排序（按 UTF-16 码元）、字符串转义（非 ASCII 字符原样输出，不写成 `\\u` 转义）和数字格式（ECMAScript 规则），所以同一个 JSON 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入、规范化字节的十六进制和 SHA-256，至少覆盖中文字符串、嵌套对象的键排序和整数，各端必须逐字节通过。`bundle_sha256` 例外：它是冻结输出文件原始字节的 SHA-256，不做规范化。\n\n**三个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---|---|\n| `snapshot_sha256` | Blueprint 检查器 `snapshotOf` 取出的内容快照（`title,summ"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/0/validators/0/oracle/description",
         "terms": [
           "安装"
         ],
-        "excerpt": "控制网页会话、自动选模型、隐藏文件访问隔离、所有设计永不返修、专业判断必然正确或尚未实测的安装能力。"
+        "excerpt": "品和原始证据签发。不能承诺自动控制网页会话、自动选模型、隐藏文件访问隔离、所有设计永不返修、专业判断必然正确或尚未实测的安装能力。"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/0/validators/0/method/description",
         "terms": [
           "安装"
         ],
-        "excerpt": "控制网页会话、自动选模型、隐藏文件访问隔离、所有设计永不返修、专业判断必然正确或尚未实测的安装能力。；该项存在真实引用且无互相矛盾的第二份完成定义。"
+        "excerpt": "品和原始证据签发。不能承诺自动控制网页会话、自动选模型、隐藏文件访问隔离、所有设计永不返修、专业判断必然正确或尚未实测的安装能力。；该项存在真实引用且无互相矛盾的第二份完成定义。"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/0/claims/0/text",
@@ -4714,28 +4830,28 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "控制网页会话、自动选模型、隐藏文件访问隔离、所有设计永不返修、专业判断必然正确或尚未实测的安装能力。\n\n实现时把本项语义写入现有节点、接口、验收条款和来源；完整冻结记录形状已在本Blueprint的freeze节点给出，只保存定位，不复制第二份可变语义。"
+        "excerpt": "品和原始证据签发。不能承诺自动控制网页会话、自动选模型、隐藏文件访问隔离、所有设计永不返修、专业判断必然正确或尚未实测的安装能力。\n\n实现时把本项语义写入现有节点、接口、验收条款和来源；完整冻结记录形状已在本Blueprint的freeze节点给出，只保存定位，不复制第二份可变语义。"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/0/terminal/acceptance/0",
         "terms": [
           "安装"
         ],
-        "excerpt": "控制网页会话、自动选模型、隐藏文件访问隔离、所有设计永不返修、专业判断必然正确或尚未实测的安装能力。"
+        "excerpt": "品和原始证据签发。不能承诺自动控制网页会话、自动选模型、隐藏文件访问隔离、所有设计永不返修、专业判断必然正确或尚未实测的安装能力。"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/1/validators/0/oracle/description",
         "terms": [
           "安装"
         ],
-        "excerpt": "者输出不作真值。规划端正常入口是用户或负责人明确读取同源规划SKILL及角色资源；执行端是安装后调用对应design-assurance-execute或delivery-assurance-execute并取得有效派发。用户最终消费两个插件包、同源规划入口及由其实际生成的完整提示词、冻结文件和交付证据。只读源码不证明安装入口可用。"
+        "excerpt": "流程及本候选明确承诺确定；实现者输出不作真值。规划端正常入口是用户或负责人明确读取同源规划SKILL及角色资源；执行端是安装后调用对应design-assurance-execute或delivery-assurance-execute并取得有效派发。用户最终消费两个插件包、同源规划入口及由其实际生成的完整提示词、冻结文件和交付证据。只读源码不证明安装入口可用。"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/1/validators/0/method/description",
         "terms": [
           "安装"
         ],
-        "excerpt": "并核对以下条件：规划端正常入口是用户或负责人明确读取同源规划SKILL及角色资源；执行端是安装后调用对应design-assurance-execute或delivery-assurance-execute并取得有效派发。用户最终消费两个插件包、同源规划入口及由其实际生成的完整提示词、冻结文件和交付证据。只读源码不证明安装入口可用。；该项存在真实引用且无互相矛盾的第二份完成定义。"
+        "excerpt": "点规定的正常入口观察真实输出，并核对以下条件：规划端正常入口是用户或负责人明确读取同源规划SKILL及角色资源；执行端是安装后调用对应design-assurance-execute或delivery-assurance-execute并取得有效派发。用户最终消费两个插件包、同源规划入口及由其实际生成的完整提示词、冻结文件和交付证据。只读源码不证明安装入口可用。；该项存在真实引用且无互相矛盾的第二份完成定义。"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/1/claims/0/text",
@@ -4749,7 +4865,7 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "项的具体承诺：\n规划端正常入口是用户或负责人明确读取同源规划SKILL及角色资源；执行端是安装后调用对应design-assurance-execute或delivery-assurance-execute并取得有效派发。用户最终消费两个插件包、同源规划入口及由其实际生成的完整提示词、冻结文件和交付证据。只读源码不证明安装入口可用。\n\n实现时把本项语义写入现有节点、接口、验收条款和来源；完整冻结记录形状已在本Blueprint的freeze节点给出，只保存定位，不复制第二份可变语义。"
+        "excerpt": "mer。\n\n本插件当前候选在此项的具体承诺：\n规划端正常入口是用户或负责人明确读取同源规划SKILL及角色资源；执行端是安装后调用对应design-assurance-execute或delivery-assurance-execute并取得有效派发。用户最终消费两个插件包、同源规划入口及由其实际生成的完整提示词、冻结文件和交付证据。只读源码不证明安装入口可用。\n\n实现时把本项语义写入现有节点、接口、验收条款和来源；完整冻结记录形状已在本Blueprint的freeze节点给出，只保存定位，不复制第二份可变语义。"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/1/terminal/acceptance/0",
@@ -4770,7 +4886,7 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "e Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，冻结说明如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。；需要用户手动转交的规划端角色（D2"
+        "excerpt": "逐项核对：Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，fr-decisions、fr-roles 如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。；需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节表中的档次为准：Codex 档次照旧由 Claude 负责人直接派发，GPT 负责人生成完整提示词由用户转交给"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/3/claims/0/text",
@@ -4784,14 +4900,14 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "e Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，冻结说明如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。\n\n### 2.1a 规划端角色一律"
+        "excerpt": "在此项的具体承诺：\nClaude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，fr-decisions、fr-roles 如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。\n\n### 2.1a 规划端角色一律在 GPT 上跑，每轮每个角色转交一次（用户要求，2026-11-11）\n\n用户的原话：“每个角色一轮就发一次”；“我说的是规划端角色，执行端 codex 倒无所谓”；“规划端就都在 gpt 跑吧，不然容易乱”。据此：\n\n- **需要用户手动转交的规划端角色**（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，不用执行端代替；每个角色每一轮，由用户转交的提示词最多一条。\n- **负责人 D1"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/3/terminal/acceptance/0",
         "terms": [
           "安装"
         ],
-        "excerpt": "e Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，冻结说明如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。"
+        "excerpt": "Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，fr-decisions、fr-roles 如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/4/claims/0/text",
@@ -4803,9 +4919,11 @@
       {
         "source_pointer": "/nodes/1/children/3/children/5/validators/0/method/description",
         "terms": [
-          "安装"
+          "安装",
+          "workflow-core",
+          "ai-skills-core"
         ],
-        "excerpt": "逐项核对：保留既有10个插件和30个技能，不删除旧技能腾预算；普通问答与可逆局部修复不因安装Assurance被自动升级。已有workflow-core与ai-skills-core职责及任务状态不被覆盖。共享生成器改变时回归受影响生成、路径和安装行为，最终包亲自通过关键检查。；该项存在真实引用且无互相矛盾的第二份完成定义。；单个组件的验收器全过，不等于整个东西做完。每次首次冻结或大改，合同都要带一份**回归用例集**；最终候选从正常入口把这份用例集全部跑过，才算这个版本做完。；**每个用例写清五件事：**\n1. **来源"
+        "excerpt": "逐项核对：保留既有10个插件和30个技能，不删除旧技能腾预算；普通问答与可逆局部修复不因安装Assurance被自动升级。已有workflow-core与ai-skills-core职责及任务状态不被覆盖。共享生成器改变时回归受影响生成、路径和安装行为，最终包亲自通过关键检查。；该项存在真实引用且无互相矛盾的第二份完成定义。；单个组件的验收器全过，不等于整个东西做完。每次首次冻结或大改，合同都要带一份**回归用例集**；最终候选从正常入口把这份用例集全部跑过，才算这个版本做完。；**每个用例写清五件事：**\n1. **来源：** 真实发生过的案例（优先，例如用户实际用过、出过问题的一个 prompt），或者为某项新能力专门写的案例。\n2. **输入：** 一次就能给出的完整输入。插件类任务是一条 prompt；软件和网站见下文“不是一条 prompt 的产品”。\n3. **看什么：** 最终产出里要检查的具体现象，例如“讲清楚某件事，并且没有未加解释的英文术语”。\n4. **谁判、按什么尺子判：** 脚本（能机械判定时）、X5（需要专业判断时）或用户本人"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/5/claims/0/text",
@@ -4817,14 +4935,18 @@
       {
         "source_pointer": "/nodes/1/children/3/children/5/terminal/mechanism",
         "terms": [
-          "安装"
+          "安装",
+          "workflow-core",
+          "ai-skills-core"
         ],
-        "excerpt": "具体承诺：\n保留既有10个插件和30个技能，不删除旧技能腾预算；普通问答与可逆局部修复不因安装Assurance被自动升级。已有workflow-core与ai-skills-core职责及任务状态不被覆盖。共享生成器改变时回归受影响生成、路径和安装行为，最终包亲自通过关键检查。\n\n实现时把本项语义写入现有节点、接口、验收条款和来源；完整冻结记录形状已在本Blueprint的freeze节点给出，只保存定位，不复制第二份可变语义。\n\n### 6.3a 回归用例集：怎样算这个版本做完（用户决定，2026/11/13）\n\n单个组"
+        "excerpt": "s。\n\n本插件当前候选在此项的具体承诺：\n保留既有10个插件和30个技能，不删除旧技能腾预算；普通问答与可逆局部修复不因安装Assurance被自动升级。已有workflow-core与ai-skills-core职责及任务状态不被覆盖。共享生成器改变时回归受影响生成、路径和安装行为，最终包亲自通过关键检查。\n\n实现时把本项语义写入现有节点、接口、验收条款和来源；完整冻结记录形状已在本Blueprint的freeze节点给出，只保存定位，不复制第二份可变语义。\n\n### 6.3a 回归用例集：怎样算这个版本做完（用户决定，2026/11/13）\n\n单个组件的验收器全过，不等于整个东西做完。每次首次冻结或大改，合同都要带一份**回归用例集**；最终候选从正常入口把这份用例集全部跑过，才算这个版本做完。\n\n**每个用例写清五件事：**\n1. **来源：** 真实发生过的案例（优先，例如用户实际用过、出过问题的一个 prompt），或者为某项新能力专门写的案例。\n2. **输入：** 一次就能给出的完整输入。插件类任务是一条 prompt；软件和网站见下文“不是一条 prompt 的产品”。"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/5/terminal/acceptance/0",
         "terms": [
-          "安装"
+          "安装",
+          "workflow-core",
+          "ai-skills-core"
         ],
         "excerpt": "保留既有10个插件和30个技能，不删除旧技能腾预算；普通问答与可逆局部修复不因安装Assurance被自动升级。已有workflow-core与ai-skills-core职责及任务状态不被覆盖。共享生成器改变时回归受影响生成、路径和安装行为，最终包亲自通过关键检查。"
       },
@@ -4846,9 +4968,10 @@
         "source_pointer": "/nodes/1/children/3/children/8/validators/0/method/description",
         "terms": [
           "下载",
-          "安装"
+          "安装",
+          "100 MB"
         ],
-        "excerpt": "权位置，公开库只记允许定位。；该项存在真实引用且无互相矛盾的第二份完成定义。；执行者第一次下载或安装任何依赖前，先记录它的实际大小。；单项超过 100 MB 的依赖，先经用户授权再下载。"
+        "excerpt": "息或外部数据传输；敏感来源存授权位置，公开库只记允许定位。；该项存在真实引用且无互相矛盾的第二份完成定义。；执行者第一次下载或安装任何依赖前，先记录它的实际大小。；单项超过 100 MB 的依赖，先经用户授权再下载。"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/8/claims/0/text",
@@ -4861,7 +4984,8 @@
         "source_pointer": "/nodes/1/children/3/children/8/interface/boundaries/1",
         "terms": [
           "下载",
-          "安装"
+          "安装",
+          "100 MB"
         ],
         "excerpt": "执行者第一次下载或安装任何依赖前，先记录实际大小；单项超过 100 MB 的，先经用户授权再下载。"
       },
@@ -4869,9 +4993,10 @@
         "source_pointer": "/nodes/1/children/3/children/8/terminal/mechanism",
         "terms": [
           "下载",
-          "安装"
+          "安装",
+          "100 MB"
         ],
-        "excerpt": "本Blueprint的freeze节点给出，只保存定位，不复制第二份可变语义。\n\n**大件下载的依据（D6 第 7 轮后补定）：** 第 5 节只能写 Blueprint 里有依据的内容。Blueprint 没有记录某项依赖的大小时，说明必须写“大小未记录”，不能凭常识写“很小”。实施时，执行者第一次下载或安装任何依赖前，先记录它的实际大小；单项超过 100 MB 的，先经用户授权再下载。"
+        "excerpt": "款和来源；完整冻结记录形状已在本Blueprint的freeze节点给出，只保存定位，不复制第二份可变语义。\n\n**大件下载的依据（D6 第 7 轮后补定）：** 第 5 节只能写 Blueprint 里有依据的内容。Blueprint 没有记录某项依赖的大小时，说明必须写“大小未记录”，不能凭常识写“很小”。实施时，执行者第一次下载或安装任何依赖前，先记录它的实际大小；单项超过 100 MB 的，先经用户授权再下载。"
       },
       {
         "source_pointer": "/nodes/1/children/3/children/8/terminal/acceptance/2",
@@ -4884,7 +5009,8 @@
       {
         "source_pointer": "/nodes/1/children/3/children/8/terminal/acceptance/3",
         "terms": [
-          "下载"
+          "下载",
+          "100 MB"
         ],
         "excerpt": "单项超过 100 MB 的依赖，先经用户授权再下载。"
       },
@@ -4892,9 +5018,10 @@
         "source_pointer": "/nodes/1/children/4/validators/0/method/description",
         "terms": [
           "下载",
-          "安装"
+          "安装",
+          "100 MB"
         ],
-        "excerpt": "序写冻结说明：一句话结论；你这次在做的决定；做完时你会看到什么、你自己怎么验；验收器；需要下载或安装的大件；不能降级的；实现者可以自己定的；权限、费用、时间；这次不做的；和上次批准相比改了什么（只在大改后重新批准时写）。；冻结说明写给用户本人看，用日常语言，正文一页左右；正文不出现文件名、路径、字段名、哈希和节点编号，这些只放附录；验收器清单可以在正文后单独一节，不受一页限制。；冻结说明列出验收器总数、分类及每类数量，与 Blueprint 一致；每类用一两句话说明测什么功能、怎么判通过，需要真实宿主、真实设备或专业判断的验"
+        "excerpt": "文只写规则与例外。每条检查只属一类，合并用例逐条判，任何一条不过整个用例不过。；fr-downloads 记录单项超过 100 MB 的下载或安装；依赖大小未记录就写“未记录”。首次下载或安装前先记录实际大小，单项超过 100 MB 先经用户授权再下载。；freeze-review 的答案必须在 Blueprint 中，不能与其他节点矛盾；默认做法标“默认”，用户决定和被放弃方案保留来源。；D6 像审其他组件一样审 freeze-review 节点组：答案是否在 Blueprint 中、是否与其他节点矛盾；发现缺口交回 D1，不以自己的常识补出答案后判通过。；Blueprint“冻结审阅”视图自动派生当前 snapshot_sha256、D5–D8 状态、验收与回归统计、角色档次表及下载大小，每项可跳回来源节点；视图属独立实现任务。；批准对象只有 Blueprint 的 snapshot_sha256，不再另有冻结说明文件身份。；批准请求写明当前 Blueprint 的 snapshot_sha256 及打开“冻结审阅”视图的方式；用户只批准该快照，freeze.json 不再包含 e"
       },
       {
         "source_pointer": "/nodes/1/children/4/claims/0/text",
@@ -4904,53 +5031,32 @@
         "excerpt": "本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。"
       },
       {
-        "source_pointer": "/nodes/1/children/4/interface/boundaries/3",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。\n\n冻结前，说明与 Blueprint 一起交给 D6。D6 在原有的逐组件追问之外，再对照 Blueprint 查说明四项：上面清单里的七类内容有没有漏写；有没有写 Blueprint 里没有的承诺、或把设计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1"
-      },
-      {
         "source_pointer": "/nodes/1/children/4/terminal/mechanism",
         "terms": [
+          "下载",
           "安装",
-          "rfc8785",
           "Python",
+          "rfc8785",
           "canonicalize",
-          "下载"
+          "100 MB"
         ],
-        "excerpt": "；不是要求往现有严格JSON顶层硬塞九个新键。对没有旧功能的新项目，第6项也要写清哪些现有安装、共享规则或邻近能力不得变差，若确实没有业务旧功能则说明原因，不能用空数组假装已经回归。\n\n在这两个插件自身的候选Blueprint中，九项已有具体设计节点：能力是完整派发/冻结/交付职责；正常入口是规划SKILL与两个Codex执行入口；禁止以文件齐全、旧候选、同线程自审或“缺证默认通过”替代；旧保护包含现有两个维护插件与其他已安装插件；真实验收见第10节。上游检查器两档入口完成并实际通过前，不写成已过D5。\n\n### 6.4 冻"
+        "excerpt": "` |\n\n这张表是值的语义定义；不是要求往现有严格JSON顶层硬塞九个新键。对没有旧功能的新项目，第6项也要写清哪些现有安装、共享规则或邻近能力不得变差，若确实没有业务旧功能则说明原因，不能用空数组假装已经回归。\n\n在这两个插件自身的候选Blueprint中，九项已有具体设计节点：能力是完整派发/冻结/交付职责；正常入口是规划SKILL与两个Codex执行入口；禁止以文件齐全、旧候选、同线程自审或“缺证默认通过”替代；旧保护包含现有两个维护插件与其他已安装插件；真实验收见第10节。上游检查器两档入口完成并实际通过前，不写成已过D5。\n\n### 6.4 冻结记录和接收\n\n`freeze.json`必填 `schema_version:\"assurance-freeze/0.1\",task_id,blueprint_ref,snapshot_sha256,bundle_sha256,document_version,semantic_version,semantic_hash,nine_item_refs,gate_refs,open_questions,user_approval,aut"
       },
       {
-        "source_pointer": "/nodes/1/children/4/terminal/acceptance/10",
+        "source_pointer": "/nodes/1/children/4/terminal/acceptance/13",
         "terms": [
           "下载",
-          "安装"
+          "安装",
+          "100 MB"
         ],
-        "excerpt": "序写冻结说明：一句话结论；你这次在做的决定；做完时你会看到什么、你自己怎么验；验收器；需要下载或安装的大件；不能降级的；实现者可以自己定的；权限、费用、时间；这次不做的；和上次批准相比改了什么（只在大改后重新批准时写）。"
+        "excerpt": "fr-downloads 记录单项超过 100 MB 的下载或安装；依赖大小未记录就写“未记录”。首次下载或安装前先记录实际大小，单项超过 100 MB 先经用户授权再下载。"
       },
       {
-        "source_pointer": "/nodes/1/children/4/terminal/acceptance/14",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "签发）；\n  5. 验收器的数量与分类，回归用例集；\n  6. 单项超过 100 MB 的下载或安装；\n  7. 这个版本不做的事，以及不保证的事。"
-      },
-      {
-        "source_pointer": "/nodes/1/children/4/terminal/acceptance/15",
+        "source_pointer": "/nodes/1/children/4/terminal/acceptance/16",
         "terms": [
           "下载"
         ],
-        "excerpt": "计写得更强或更弱（矛盾）；验收器数量和分类、回归用例是否与 Blueprint 一致；大件下载有没有漏。清单之外的细节没写，不算漏写。发现问题按 D6 的缺口处理，交回 D1。"
-      },
-      {
-        "source_pointer": "/nodes/1/children/4/terminal/acceptance/19",
-        "terms": [
-          "下载"
-        ],
-        "excerpt": "说明检查就失效；由 D6 对新说明重做四项检查（清单项是否写到、是否矛盾、数量与回归、大件下载），Blueprint 没变时不必重做逐组件追问。"
+        "excerpt": "eprint“冻结审阅”视图自动派生当前 snapshot_sha256、D5–D8 状态、验收与回归统计、角色档次表及下载大小，每项可跳回来源节点；视图属独立实现任务。"
       },
       {
         "source_pointer": "/nodes/1/children/5/claims/0/text",
@@ -4992,7 +5098,7 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "仍须在旧版本上实际复现。；默认作者提交验收实现并真实区分三类样例。；实现者交实际源码和构建安装对象，X1选择。；每次交回声明差异、替代、未运行和缺证。"
+        "excerpt": "检查。已有可运行旧版本的插件，仍须在旧版本上实际复现。；默认作者提交验收实现并真实区分三类样例。；实现者交实际源码和构建安装对象，X1选择。；每次交回声明差异、替代、未运行和缺证。"
       },
       {
         "source_pointer": "/nodes/2/children/0/children/2/claims/0/text",
@@ -5034,7 +5140,7 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "否符合预期，不与候选自己的三态混淆。\n\n坏例必须表达真实的降级或领域错误，例如用源码冒充已安装对象、旧截图冒充当前运行、删除受保护行为、错误公式或误导图；只把指标数值改一位，通常仅能测试阈值运算。缺证例要真正移除或使必要观察不可用，不用错误成品冒充缺证。控制例依据与实际样本身份保留，若被修复使用则进入已知回归，不再叫未见样本。\n\n校准发现验收器太弱需换人重写时，X1必须启用X3；X2不能通过反复改自己的断言取得独立资格。科研数值/统计或安全相关验收，即使X2已经写了检查也须启用X3。新线程减少上下文影响，不保证真值独立；X3"
+        "excerpt": "assessment`是校准是否符合预期，不与候选自己的三态混淆。\n\n坏例必须表达真实的降级或领域错误，例如用源码冒充已安装对象、旧截图冒充当前运行、删除受保护行为、错误公式或误导图；只把指标数值改一位，通常仅能测试阈值运算。缺证例要真正移除或使必要观察不可用，不用错误成品冒充缺证。控制例依据与实际样本身份保留，若被修复使用则进入已知回归，不再叫未见样本。\n\n校准发现验收器太弱需换人重写时，X1必须启用X3；X2不能通过反复改自己的断言取得独立资格。科研数值/统计或安全相关验收，即使X2已经写了检查也须启用X3。新线程减少上下文影响，不保证真值独立；X3应说明解析参考、独立实现或外部标准的来源及共同依赖。\n\n已通过三类校准只证明该验收器能区分这些已知情形。正式交付还需从正常入口跑当前最终成品、保护旧能力，并取得所需X4/X5专业证据。0.1不默认建设隐藏样本服务；只有真实访问权限能限制实现者读取的样本才能称隐藏，否则写可见、未见或后加入样本。"
       },
       {
         "source_pointer": "/nodes/2/children/3/description",
@@ -5076,7 +5182,7 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "唯一；内容改变产生新候选，旧记录不改写。签发对象不仅是代码提交，也包括用户最终拿到的构建、安装实例、部署版本或文档。\n\n| 候选字段 | 必填语义 |\n|---|---|\n| `schema_version,task_id,candidate_id,freeze_ref` | `assurance-candidate/0.1`、任务、候选和对应冻结合同 |\n| `source_set` | 每项 `repository,revision,paths,content_hashes`；无法用单提交描述时完整列出来源集合，不省略未"
+        "excerpt": "idate_id`在同一任务内唯一；内容改变产生新候选，旧记录不改写。签发对象不仅是代码提交，也包括用户最终拿到的构建、安装实例、部署版本或文档。\n\n| 候选字段 | 必填语义 |\n|---|---|\n| `schema_version,task_id,candidate_id,freeze_ref` | `assurance-candidate/0.1`、任务、候选和对应冻结合同 |\n| `source_set` | 每项 `repository,revision,paths,content_hashes`；无法用单提交描述时完整列出来源集合，不省略未提交内容 |\n| `final_objects` | 每项 `object_id,type,locator,sha256_or_observed_identity,identity_method,source_binding`；动态服务另记版本与观察窗口 |\n| `build_install_deploy` | 适用的构建/安装/部署记录、来源映射、命令与原始输出；不适用给原因 |\n| `runner_set`、`environment"
       },
       {
         "source_pointer": "/nodes/2/children/3/terminal/userRounds/0/sees",
@@ -5111,7 +5217,7 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "bserved_objects`：与候选对象逐项匹配的身份和测量层级，清楚区分源码、构建、安装、真实运行。\n- `raw_refs`：原始完整输出、全文、渲染、交互记录或数据；含持久定位、内容摘要、可访问受众与敏感级别。路径存在不证明证据质量。\n- `assessment`：`passed/failed/unknown`。未运行另以 `execution_status:not-run`记录且 `assessment:unknown`，不能伪造一次运行。\n- `observations`：实际事实和数值；`supports`是"
+        "excerpt": "把转述者冒充观察者。\n- `observed_objects`：与候选对象逐项匹配的身份和测量层级，清楚区分源码、构建、安装、真实运行。\n- `raw_refs`：原始完整输出、全文、渲染、交互记录或数据；含持久定位、内容摘要、可访问受众与敏感级别。路径存在不证明证据质量。\n- `assessment`：`passed/failed/unknown`。未运行另以 `execution_status:not-run`记录且 `assessment:unknown`，不能伪造一次运行。\n- `observations`：实际事实和数值；`supports`是能支持的能力/主张，`does_not_support`是不可外推范围；不填“所有能力”。\n- `validity`：`current/stale/rejected`及原因。旧证据保留，不能删除后当没有失败。\n\n同一关键签发结论必须由最终候选从正常入口直接通过。开发期证据可以帮助返修，不能把多个不同候选各通过的部分拼成交付。纯记录文件更新可以产生新的仓库提交，但若被测源文件集合、构建/安装对象和验收实现均未变，应记录逐文件等价依据，不能"
       },
       {
         "source_pointer": "/nodes/2/children/5/claims/0/text",
@@ -5146,14 +5252,14 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "\n2. 当前 `candidate_id` 就是用户将收到的最终对象：最终源码集合、构建/安装/部署或最终文档身份与受验对象一致。\n3. 每项冻结能力、不可替换方法、禁止替代与旧功能都有对应直接证据或冻结合同明确规定的人类判断。\n4. 关键验收资产已由 X1 审定，并完成正例、坏例、缺证例三类校准。\n5. 正式验收、回归和专项检查都作用于同一最终候选；最后一次证据之后候选未再改变。\n6. 正常入口的完整成功链真实发生，关键坏例不会产生被禁止的成功产物，缺证例没有被默认通过；不能只验保守拒绝。\n7. 旧能力和代表性回归未退化。"
+        "excerpt": "/分支一致，设计退回已经关闭。\n2. 当前 `candidate_id` 就是用户将收到的最终对象：最终源码集合、构建/安装/部署或最终文档身份与受验对象一致。\n3. 每项冻结能力、不可替换方法、禁止替代与旧功能都有对应直接证据或冻结合同明确规定的人类判断。\n4. 关键验收资产已由 X1 审定，并完成正例、坏例、缺证例三类校准。\n5. 正式验收、回归和专项检查都作用于同一最终候选；最后一次证据之后候选未再改变。\n6. 正常入口的完整成功链真实发生，关键坏例不会产生被禁止的成功产物，缺证例没有被默认通过；不能只验保守拒绝。\n7. 旧能力和代表性回归未退化。\n8. X3/X4/X5 已按条件启用，结果覆盖正确对象；未启用者有未触发条件的具体依据。\n9. 所有偏离、替代、未运行项和证据缺口都有处置，不能因无人提出便视为不存在。\n10. 权限、数据、费用、账号和设备边界没有越界。\n11. X1 亲自读取最终产物与承载关键结论的原始证据，记录具体观察、矛盾处理和结论；实现者摘要仅作索引。\n12. 合同要求的用户验收已有实际结果；修订已按规定前后告知。\n13. 对外声明没有超出冻结范围和实际证据，"
       },
       {
         "source_pointer": "/nodes/3/children/0/validators/0/method/description",
         "terms": [
           "安装"
         ],
-        "excerpt": "ill的name各自唯一，planning不计作市场技能。；不使用包外符号链接，不从别的未安装插件借资源。；shared/assurance/templates/ 包含第 6.4a 节固定格式的冻结说明模板，正文与附录分开，固定骨架内容随任务填写。"
+        "excerpt": "副本与源字节一致。；两执行skill的name各自唯一，planning不计作市场技能。；不使用包外符号链接，不从别的未安装插件借资源。；shared/assurance/NOTICE 注明提问方式吸收自 mattpocock/skills grilling skill，并附 MIT 许可全文；由 X2 实现时创建，设计目录内不放 NOTICE。"
       },
       {
         "source_pointer": "/nodes/3/children/0/claims/0/text",
@@ -5165,10 +5271,11 @@
       {
         "source_pointer": "/nodes/3/children/0/terminal/mechanism",
         "terms": [
+          "安装",
           "jsonschema",
-          "安装"
+          "workflow-core"
         ],
-        "excerpt": "pts/check_records.py`、`requirements.txt` | 复用jsonschema验证结构与身份引用；不作业务决策或状态写入 |\n| 打包配置 | `scripts/codex_marketplace_config.json` | 新增两个插件条目及源路径、共用资源复制映射 |\n| 生成插件 | `plugins/codex/plugins/design-assurance/`、`plugins/codex/plugins/delivery-assurance/` | 每包一个 `skills/e"
+        "excerpt": "/assurance/scripts/check_records.py`、`requirements.txt` | 复用jsonschema验证结构与身份引用；不作业务决策或状态写入 |\n| 打包配置 | `scripts/codex_marketplace_config.json` | 新增两个插件条目及源路径、共用资源复制映射 |\n| 生成插件 | `plugins/codex/plugins/design-assurance/`、`plugins/codex/plugins/delivery-assurance/` | 每包一个 `skills/execute/SKILL.md`，另含规划正文与共用资源 |\n| 维护与回归 | 对应插件待办、changelog、README、现有测试目录 | 由正式实施任务按实际能力更新，不塞进普通运行包 |\n\n两个市场执行技能的 `name`分别是 `design-assurance-execute`、`delivery-assurance-execute`，源目录不相互嵌套。各插件的短目录可以同为 `execute`；现有生成器原样复制技能名"
       },
       {
         "source_pointer": "/nodes/3/children/0/terminal/acceptance/2",
@@ -5189,7 +5296,7 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "m/plugins/build/skills)支持同源内容复用。任意仓库路径自动发现、自动安装、自动新建GPT Pro网页线程和自动选择“极高”并不能由文件格式推出，本设计不作这种承诺。Claude专有 `context: fork`只能在实际支持的宿主使用，并检查上下文传递；它不是隐藏用例权限。\n\n0.1的跨宿主最低验收是：两个规划宿主实际读取同一候选正文、至少一张角色卡和一份模板或结构定义，证明资源来自同一固定来源，分别从已有任务状态生成正确下一步；GPT Work能在执行端·专业任务里消费同一角色合同；Codex从安装"
+        "excerpt": "opers.openai.com/plugins/build/skills)支持同源内容复用。任意仓库路径自动发现、自动安装、自动新建GPT Pro网页线程和自动选择“极高”并不能由文件格式推出，本设计不作这种承诺。Claude专有 `context: fork`只能在实际支持的宿主使用，并检查上下文传递；它不是隐藏用例权限。\n\n0.1的跨宿主最低验收是：两个规划宿主实际读取同一候选正文、至少一张角色卡和一份模板或结构定义，证明资源来自同一固定来源，分别从已有任务状态生成正确下一步；GPT Work能在执行端·专业任务里消费同一角色合同；Codex从安装后的正式执行入口收到派发、完成角色工作并回读结果。源码可读不等于安装成功，某一个宿主成功也不替代另一个宿主的观察。\n\n### 2.1a 规划端角色一律在 GPT 上跑，每轮每个角色转交一次（用户要求，2026-11-11）\n\n用户的原话：“每个角色一轮就发一次”；“我说的是规划端角色，执行端 codex 倒无所谓”；“规划端就都在 gpt 跑吧，不然容易乱”。据此：\n\n- **需要用户手动转交的规划端角色**（D2、D3、D6、D8、X"
       },
       {
         "source_pointer": "/nodes/3/children/2/description",
@@ -5217,7 +5324,7 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "./skills/，命名不冲突。；正式入口缺派发不接管，默认提示词精确引用各自技能。；当前安装包的角色资源可读且与源对应，旧入口保持。；Codex 执行包不代替 0.1 必需的网页端规划包；网页端不能运行本地脚本或启动 Codex，两端只共用同一规则源。"
+        "excerpt": "容现有生成器，skills指向./skills/，命名不冲突。；正式入口缺派发不接管，默认提示词精确引用各自技能。；当前安装包的角色资源可读且与源对应，旧入口保持。；Codex 执行包不代替 0.1 必需的网页端规划包；网页端不能运行本地脚本或启动 Codex，两端只共用同一规则源。"
       },
       {
         "source_pointer": "/nodes/3/children/2/validators/1/oracle/description",
@@ -5273,15 +5380,17 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "且职责分开。；实施将 12 插件、32 技能预算写入生成配置并保留全部旧能力。；输出：实际安装可调用的design-assurance-execute、delivery-assurance-execute；policy.allow_implicit_invocation:false。；在实际宿主运行同一最终包验证使用能力。"
+        "excerpt": "前角色。；相同规则随执行包提供且职责分开。；实施将 12 插件、32 技能预算写入生成配置并保留全部旧能力。；输出：实际安装可调用的design-assurance-execute、delivery-assurance-execute；policy.allow_implicit_invocation:false。；在实际宿主运行同一最终包验证使用能力。"
       },
       {
         "source_pointer": "/nodes/3/children/2/terminal/mechanism",
         "terms": [
+          "安装",
           "jsonschema",
-          "安装"
+          "workflow-core",
+          "ai-skills-core"
         ],
-        "excerpt": "pts/check_records.py`、`requirements.txt` | 复用jsonschema验证结构与身份引用；不作业务决策或状态写入 |\n| 打包配置 | `scripts/codex_marketplace_config.json` | 新增两个插件条目及源路径、共用资源复制映射 |\n| 生成插件 | `plugins/codex/plugins/design-assurance/`、`plugins/codex/plugins/delivery-assurance/` | 每包一个 `skills/e"
+        "excerpt": "/assurance/scripts/check_records.py`、`requirements.txt` | 复用jsonschema验证结构与身份引用；不作业务决策或状态写入 |\n| 打包配置 | `scripts/codex_marketplace_config.json` | 新增两个插件条目及源路径、共用资源复制映射 |\n| 生成插件 | `plugins/codex/plugins/design-assurance/`、`plugins/codex/plugins/delivery-assurance/` | 每包一个 `skills/execute/SKILL.md`，另含规划正文与共用资源 |\n| 维护与回归 | 对应插件待办、changelog、README、现有测试目录 | 由正式实施任务按实际能力更新，不塞进普通运行包 |\n\n两个市场执行技能的 `name`分别是 `design-assurance-execute`、`delivery-assurance-execute`，源目录不相互嵌套。各插件的短目录可以同为 `execute`；现有生成器原样复制技能名"
       },
       {
         "source_pointer": "/nodes/3/children/2/terminal/userRounds/0/sees",
@@ -5305,6 +5414,14 @@
         "excerpt": "本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。"
       },
       {
+        "source_pointer": "/nodes/3/children/4/inputs/0/description",
+        "terms": [
+          "workflow-core",
+          "ai-skills-core"
+        ],
+        "excerpt": "认表格的格式是对的，不然算出来的结果可能不准。”（这段输入固定不变，本身不含任何 Assurance 用语）；② 对 `workflow-core` 发“看一下当前分支的状态，告诉我下一步”；③ 对 `ai-skills-core` 发“列出本仓库现有插件和它们的版本”"
+      },
+      {
         "source_pointer": "/nodes/3/children/4/inputs/1/name",
         "terms": [
           "安装"
@@ -5315,17 +5432,21 @@
         "source_pointer": "/nodes/3/children/4/validators/0/method/description",
         "terms": [
           "安装",
-          "下载"
+          "Python",
+          "workflow-core",
+          "ai-skills-core"
         ],
-        "excerpt": "e Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口直接验证，不能以源码或单元结构检查替代。；安全相关检查由X3，开放专业判断由X5，X1最终亲读。；开发修复样例不冒充未见样例；最终批次不换题挑通过。；X4 在真实 ChatGPT 网页端上传包并新开一个对话：读取规划正文、至少一张角色卡及一份模板；按公开安全的示例任务状态生成正确的下一条完整提示词；按要求写回指定分支，无写权限时如实给出内容。；保留上述三件事的原始对话记录作为证据，由 X1 签发；只上传成功不"
+        "excerpt": "逐项核对：Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口直接验证，不能以源码或单元结构检查替代。；安全相关检查由X3，开放专业判断由X5，X1最终亲读。；开发修复样例不冒充未见样例；最终批次不换题挑通过。；X4 在真实 ChatGPT 网页端上传包并新开一个对话：读取规划正文、至少一张角色卡及一份模板；按公开安全的示例任务状态生成正确的下一条完整提示词；按要求写回指定分支，无写权限时如实给出内容。；保留上述三件事的原始对话记录作为证据，由 X1 签发；只上传成功不算通过。；本插件是新插件，没有可运行的旧版本，“要修的真实问题”的旧表现按第 6.3a 节用本仓库公开的历史记录证明，定位见下表“旧表现依据”。所有用例都用公开、安全的示例任务，不含任何私有项目内容。示例任务的状态快照由 X2 按下表描述生成，X1 首次运行前核对并冻结。；R1｜输入（D1 写定）：一个设计阶段的示例任务（给一个小型命令行工具加一个导出功能），四道关卡中只剩 D8 未做，待复述单位 52 个；分别在 Claude Cod"
       },
       {
         "source_pointer": "/nodes/3/children/4/validators/1/method/description",
         "terms": [
-          "下载",
-          "安装"
+          "安装",
+          "Python",
+          "workflow-core",
+          "ai-skills-core"
         ],
-        "excerpt": "| ① 本仓库提交 `2965b008` 的第一版冻结说明（正文以哈希开头，缺验收器数量和下载说明），以及 MERGE_DECISIONS 第 20 节 |\n| R3 | 一个写好的场景，对同一示例任务的三个固定快照依次请求冻结：A 四关卡齐全、用户批准的说明身份与 D6 检查的一致；B 缺 D7 结果；C 用户批准的说明身份与 D6 检查过的不一致（说明检查后被改过） | ① A 生成冻结记录，`snapshot_sha256`、`explanation_sha256`、`bundle_sha256`、`semantic_"
+        "excerpt": "入；不涉及冻结、批准、签发、撤回，所以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| R8 | 示例任务沿用 R1 的“给一个小型命令行工具加一个导出功能”；请 D1 开始澄清。用例输入写死四项：用户取舍 U1：导出格式先支持 CSV 还是 JSON（用户偏好）；用户取舍 U2：导出是否包含已标记删除的记录（范围取舍）；U1、U2 互不依赖，因此应在同一轮提出；可查事实 F1：该工具当前使用的 Python 版本（在示例仓库的 `pyproject.toml` 中写明）；技术选择 T1：用标准库 `csv`/`json` 模块还是引入第三方库（应由 "
       },
       {
         "source_pointer": "/nodes/3/children/4/claims/0/text",
@@ -5335,26 +5456,37 @@
         "excerpt": "本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。"
       },
       {
+        "source_pointer": "/nodes/3/children/4/interface/format",
+        "terms": [
+          "workflow-core",
+          "ai-skills-core"
+        ],
+        "excerpt": "认表格的格式是对的，不然算出来的结果可能不准。”（这段输入固定不变，本身不含任何 Assurance 用语）；② 对 `workflow-core` 发“看一下当前分支的状态，告诉我下一步”；③ 对 `ai-skills-core` 发“列出本仓库现有插件和它们的版本”；在实际宿主运行同一最终包验证使用能力。；X4 交回同一网页端规划包的三项原始对话证据，X1 亲读签发。；输出：六类能力矩阵的正常/坏例/缺证/回归结果，全部绑定最终候选。；另含 X4 的网页端读取规定资源、生成下一条完整提示词及按权限写回/给出内容的原始对话记录。；R1–R8、S1 逐条判定、每个用例的结果及同一最终版本上完整运行的证据，9 个用例全部通过才算本版本做完。；示例状态快照及文件由 X2 按合同描述生成，X1 首次运行前逐条核对，记录哈希后冻结；旧表现证据按每个用例“旧表现依据”给定的定位回读。；20 条检查的四类分组按原文逐条记录，不按用例数重复计入几类。；整体能力验收安排 X4 在真实 ChatGPT 网页端完成规定的三项观察，保留原始对话交 X1。"
+      },
+      {
+        "source_pointer": "/nodes/3/children/4/terminal/integrationPoint",
+        "terms": [
+          "workflow-core",
+          "ai-skills-core"
+        ],
+        "excerpt": "正式实施任务的验收矩阵、原始证据与X1签发；沿用workflow-core及ai-skills-core"
+      },
+      {
         "source_pointer": "/nodes/3/children/4/terminal/mechanism",
         "terms": [
           "安装",
-          "下载"
+          "Python",
+          "workflow-core",
+          "ai-skills-core"
         ],
-        "excerpt": "1直接取得最终产物与原始证据，按准则逐项签发；必要X4/X5提供专业观察 | 验A交B、旧安装包、只读摘要、证据失效、已触发必需X5而未启用时不得签发；取不到原始证据为无法判断 | 源码/构建/安装/真实对象分清，关键签发检查由最终对象直接通过 |\n| 中断、并发与修订可恢复 | 使用真实分支进行重复返回、状态并发和写入结果不明的恢复；小修/大改真实告知并回到正确负责人 | 过期结果覆盖、重复派发、越权改状态和未告知修订不能被当正常完成；不确定写入先回读 | 未受影响的获准工作继续，同一任务保留失败历史与资源边界 |\n| 安"
+        "excerpt": "亲读证据后签发正确对象 | X1直接取得最终产物与原始证据，按准则逐项签发；必要X4/X5提供专业观察 | 验A交B、旧安装包、只读摘要、证据失效、已触发必需X5而未启用时不得签发；取不到原始证据为无法判断 | 源码/构建/安装/真实对象分清，关键签发检查由最终对象直接通过 |\n| 中断、并发与修订可恢复 | 使用真实分支进行重复返回、状态并发和写入结果不明的恢复；小修/大改真实告知并回到正确负责人 | 过期结果覆盖、重复派发、越权改状态和未告知修订不能被当正常完成；不确定写入先回读 | 未受影响的获准工作继续，同一任务保留失败历史与资源边界 |\n| 安装与已有入口兼容 | 源码生成两个包；真实安装后只暴露两个新增执行技能，支持文件可读，同源规划正文一致 | 包缺角色卡、错误技能名、预算超限、无加载证据均不能当可用；不准借源码目录补安装缺项 | 原10插件与30技能保留，受影响共享生成/安装路径做广度相称的回归；同一最终包完成各项 |\n\n正、坏、缺证样例需要对应具体冻结能力，不为了表格凑固定数量。先跑便宜的记录结构、来源和已知回归，再在稳定最终候选上运行真实任务及专业判断。修改过的开发"
       },
       {
         "source_pointer": "/nodes/3/children/4/terminal/acceptance/0",
         "terms": [
           "安装"
         ],
-        "excerpt": "e Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口直接验证，不能以源码或单元结构检查替代。"
-      },
-      {
-        "source_pointer": "/nodes/3/children/4/terminal/acceptance/7",
-        "terms": [
-          "下载"
-        ],
-        "excerpt": "据：① 本仓库提交 `2965b008` 的第一版冻结说明（正文以哈希开头，缺验收器数量和下载说明），以及 MERGE_DECISIONS 第 20 节"
+        "excerpt": "Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口直接验证，不能以源码或单元结构检查替代。"
       },
       {
         "source_pointer": "/nodes/3/children/4/terminal/acceptance/12",
@@ -5362,6 +5494,21 @@
           "安装"
         ],
         "excerpt": "R7｜输入（D1 写定）：用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作｜看什么（逐条判）：① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事｜谁判：① ② 脚本；③ X4 观察、X1 亲读原始对话｜旧表现依据：新能力检查"
+      },
+      {
+        "source_pointer": "/nodes/3/children/4/terminal/acceptance/13",
+        "terms": [
+          "Python"
+        ],
+        "excerpt": "：导出是否包含已标记删除的记录（范围取舍）；U1、U2 互不依赖，因此应在同一轮提出；可查事实 F1：该工具当前使用的 Python 版本（在示例仓库的 `pyproject.toml` 中写明）；技术选择 T1：用标准库 `csv`/`json` 模块还是引入第三方库（应由 D1 自定：用标准库，理由是不增加依赖）｜看什么（逐条判）：① 第一轮只问 U1、U2 两题，每题编号、有推荐答案和一句理由，回答“是”即接受；② F1 没有问用户，T1 没有问用户且写了理由｜谁判：① 问题个数与编号、推荐答案是否存在用脚本，措辞由 X5 判；② X5 判｜旧表现依据：新能力检查"
+      },
+      {
+        "source_pointer": "/nodes/3/children/4/terminal/acceptance/14",
+        "terms": [
+          "workflow-core",
+          "ai-skills-core"
+        ],
+        "excerpt": "认表格的格式是对的，不然算出来的结果可能不准。”（这段输入固定不变，本身不含任何 Assurance 用语）；② 对 `workflow-core` 发“看一下当前分支的状态，告诉我下一步”；③ 对 `ai-skills-core` 发“列出本仓库现有插件和它们的版本”｜看什么（逐条判）：① 三条请求都完成了所要求的事；② 没有任何一条被转进 Assurance 流程：没有创建 `docs/assurance/` 下的文件，输出里没有出现 D1–D8、X1–X5、冻结、派发等 Assurance 用语｜谁判：② 脚本；① 用户或 X5 判是否完成所要求的事｜旧表现依据：新能力检查（保护旧行为）"
       },
       {
         "source_pointer": "/nodes/3/children/5/claims/0/text",
@@ -5375,7 +5522,7 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "作为包内资料。；同步受影响的断言、说明和回归；不删除、不合并旧插件或旧技能。；不走只做直接安装包的过渡路线；若以后暴露规划技能须重新计算容量。"
+        "excerpt": "件各暴露一个执行技能，规划正文作为包内资料。；同步受影响的断言、说明和回归；不删除、不合并旧插件或旧技能。；不走只做直接安装包的过渡路线；若以后暴露规划技能须重新计算容量。"
       },
       {
         "source_pointer": "/nodes/3/children/6/claims/0/text",
@@ -5387,9 +5534,11 @@
       {
         "source_pointer": "/nodes/3/children/6/terminal/mechanism",
         "terms": [
-          "安装"
+          "安装",
+          "workflow-core",
+          "ai-skills-core"
         ],
-        "excerpt": "、说明和回归，两个新插件正式进入市场；不删除、不合并任何旧插件或旧技能，也不先走“只做直接安装包”的过渡路线。规划正文放入包内资料，不计为可调用技能；若后续决定暴露规划入口，必须重新计算而非沿用32。\n\n`workflow-core`继续负责执行中的来源、实际入口、权限、等待与证据纪律；`ai-skills-core`负责本仓库源层、生成一致性、回归、版本和发布；两个Assurance插件按已选流程决定本任务D1/X1职责与设计/交付语义。正式实施必须加载两个既有维护插件，不能把它们变成平级签发者，也不能以本设计改写Brid"
+        "excerpt": "、32个技能，同步受影响的断言、说明和回归，两个新插件正式进入市场；不删除、不合并任何旧插件或旧技能，也不先走“只做直接安装包”的过渡路线。规划正文放入包内资料，不计为可调用技能；若后续决定暴露规划入口，必须重新计算而非沿用32。\n\n`workflow-core`继续负责执行中的来源、实际入口、权限、等待与证据纪律；`ai-skills-core`负责本仓库源层、生成一致性、回归、版本和发布；两个Assurance插件按已选流程决定本任务D1/X1职责与设计/交付语义。正式实施必须加载两个既有维护插件，不能把它们变成平级签发者，也不能以本设计改写Bridge或其他项目既有状态。\n\n0.1采用显式进入：用户选择或负责人派发的Assurance任务才建立本状态。已在旧流程中的任务不自动迁移，不删除旧保护。若目标仓库仍存在与新任务合同实质冲突的要求，D1在初始化时指出具体冲突并解决后再派实质工作；不能默默叠一整套旧审批，也不能偷偷绕过权限规则。\n\n已裁决依据：https://github.com/YuukiAS/AI_Skills_Collection/blob/15613f70f3f0c8"
       },
       {
         "source_pointer": "/nodes/3/children/6/terminal/alternatives/0/name",
@@ -5404,6 +5553,137 @@
           "安装"
         ],
         "excerpt": "不走只做直接安装包的过渡路线；若以后暴露规划技能须重新计算容量。"
+      },
+      {
+        "source_pointer": "/nodes/4/validators/0/oracle/description",
+        "terms": [
+          "下载"
+        ],
+        "excerpt": "含且按序排列七个指定子节点，正文可读、引用来源节点；批准只绑定 snapshot_sha256，界面派生统计、角色原表、下载大小和关卡状态。"
+      },
+      {
+        "source_pointer": "/nodes/4/validators/0/method/description",
+        "terms": [
+          "下载"
+        ],
+        "excerpt": "含且按序排列七个指定子节点，正文可读、引用来源节点；批准只绑定 snapshot_sha256，界面派生统计、角色原表、下载大小和关卡状态。"
+      },
+      {
+        "source_pointer": "/nodes/4/children/0/terminal/mechanism",
+        "terms": [
+          "安装"
+        ],
+        "excerpt": "、candidate、evidence。\n\n被放弃的方案及原因：每段一个新读者会要求用户转交几十条，改为合批；先只做直接安装包再上市场增加过渡，两个插件直接进市场；网页端推迟因已有测通方法而否决；合并成一个插件不符合用户选择；隐藏任务目录不便查看，采用 docs/assurance/<task_id>/；十余阶段加额外阻塞状态不需要，沿用 phase 与 step；冻结后结束 D1 身份会丢失设计权威，仍保留 D1；多个记录检查脚本先不做，起点是单一只读入口；检查器选择性移植会产生双份规则，修在 Blueprint 上游。小修允许改读者已读文字的旧方案和每次小改全重跑都已否决。来源节点：design、delivery、state、record-check、q-checker、q-inheritance、q-capacity、web-later。\n\n本次用户决定：D1 澄清采用前沿轮次与推荐式问法，保留三类分工；冻结审阅直接在 Blueprint 进行，只批准 snapshot_sha256，不再转述成单独冻结说明。来源节点：clarify、freeze、gates。"
+      },
+      {
+        "source_pointer": "/nodes/4/children/1/terminal/mechanism",
+        "terms": [
+          "下载",
+          "100 MB"
+        ],
+        "excerpt": "itance、revision、sign。\n\n涉及费用、账号、权限、数据用途、服务商、凭据或设备的新范围，以及单项超过 100 MB 的首次下载，要先取得你的明确授权；同一范围已有有效授权时不重复问。恢复冲突涉及冻结、批准、签发、撤回、保守处置不了的写入冲突或不可撤回外部后果，或者没有有效历史状态可恢复时，交你决定。负责人长期线程确实无法恢复时请你指定接替线程并记录授权。来源节点：contract-authorization、fr-downloads、state、writer、dispatch。"
+      },
+      {
+        "source_pointer": "/nodes/4/children/2/terminal/mechanism",
+        "terms": [
+          "安装"
+        ],
+        "excerpt": "orization、source-layout、q-checker、sign。\n\n设计没有规定工期，也没有记录各宿主当前安装情况或依赖大小；不据此承诺已有环境、费用或耗时。三项衡量从记录自动生成，不给你增加填表工作。来源节点：metrics、fr-downloads、minimum。"
+      },
+      {
+        "source_pointer": "/nodes/4/children/4/terminal/mechanism",
+        "terms": [
+          "安装"
+        ],
+        "excerpt": "每个验收器按已有授权由负责人发出完整派发，执行者保留原始输出；必要独立角色亲读产物，不能只跑脚本自动打勾。真实宿主、实际安装、网页端读取资源与生成提示词及写回须实际运行；专业判断交规定角色，X1 对最终产物和必要原始证据亲读并唯一签发。只有看到违反要求才是失败，未运行或证据不足是无法判断，两者均不得登记通过。来源节点：role-X3、role-X4、role-X5、capability-check、execution-package、web-later、evidence、sign。\n\n回归用例完整定义直接引用 capability-check 正文第 10.2a 节，按每条固定输入、期望、尺子、判定者执行，不另写概括代替原定义。新能力每项覆盖、真实问题先复现旧表现、受影响旧能力和固定冒烟集按 contract-regression 执行；本插件无可运行旧版本，真实问题按公开历史原始记录及定位证明，没有记录不得当真实问题。用例语义由 D1 写定，机械快照与文件由 X2 生成，X1 首次运行前逐条核对、记哈希并冻结；描述不足交回 D1。来源节点：contract-regression、ca"
+      },
+      {
+        "source_pointer": "/nodes/4/children/5/title",
+        "terms": [
+          "下载",
+          "安装"
+        ],
+        "excerpt": "下载与安装"
+      },
+      {
+        "source_pointer": "/nodes/4/children/5/description",
+        "terms": [
+          "下载",
+          "安装"
+        ],
+        "excerpt": "下载与安装的审阅内容直接保存在 Blueprint 中，按正文引用的节点查阅原规则。"
+      },
+      {
+        "source_pointer": "/nodes/4/children/5/validators/0/name",
+        "terms": [
+          "下载",
+          "安装"
+        ],
+        "excerpt": "下载与安装的内容核对"
+      },
+      {
+        "source_pointer": "/nodes/4/children/5/validators/0/oracle/description",
+        "terms": [
+          "下载",
+          "安装",
+          "100 MB"
+        ],
+        "excerpt": "按 D1 的 0.2 修订计划及本轮补充决定核对：fr-downloads 记录单项超过 100 MB 的下载或安装；依赖大小未记录就写“未记录”。首次下载或安装前先记录实际大小，单项超过 100 MB 先经用户授权再下载。"
+      },
+      {
+        "source_pointer": "/nodes/4/children/5/validators/0/method/description",
+        "terms": [
+          "下载",
+          "安装",
+          "100 MB"
+        ],
+        "excerpt": "fr-downloads 记录单项超过 100 MB 的下载或安装；依赖大小未记录就写“未记录”。首次下载或安装前先记录实际大小，单项超过 100 MB 先经用户授权再下载。"
+      },
+      {
+        "source_pointer": "/nodes/4/children/5/ringLabel/0",
+        "terms": [
+          "下载"
+        ],
+        "excerpt": "下载"
+      },
+      {
+        "source_pointer": "/nodes/4/children/5/ringLabel/1",
+        "terms": [
+          "安装"
+        ],
+        "excerpt": "安装"
+      },
+      {
+        "source_pointer": "/nodes/4/children/5/terminal/mechanism",
+        "terms": [
+          "下载",
+          "安装",
+          "Python",
+          "jsonschema",
+          "rfc8785",
+          "canonicalize",
+          "100 MB",
+          "workflow-core",
+          "ai-skills-core"
+        ],
+        "excerpt": "当前设计没有记录依赖的实际大小，不能据此说没有单项超过 100 MB 的依赖。以下各项大小均为“未记录”：Python 3.10 或更新的受支持版本（记录检查运行机器）；jsonschema[format-nongpl]==4.26.0（同一机器，记录结构检查）；rfc8785、canonicalize（实际计算哈希的授权宿主，版本实施时固定）；Asteria-Blueprint 固定提交 c05edcf 的检查器（运行 D5 的机器）；workflow-core、ai-skills-core（正式实施的维护环境）；两个插件包及沿用的网页端打包方法（对应的实际宿主）。具体机器和现有安装情况未记录，不假定已有。来源节点：record-check、state、gates、q-checker、source-layout、execution-package、web-later。\n\n单项超过 100 MB 的下载或安装要记录名称、大约大小、用途和目标机器；未记录大小如实写“未记录”，不能凭常识说很小。第一次下载或安装任何依赖前先记录"
+      },
+      {
+        "source_pointer": "/nodes/4/children/5/terminal/userRounds/0/sees",
+        "terms": [
+          "下载",
+          "安装"
+        ],
+        "excerpt": "下载与安装正文；缺项、未知大小及未完成关卡如实显示。"
+      },
+      {
+        "source_pointer": "/nodes/4/children/5/terminal/acceptance/0",
+        "terms": [
+          "下载",
+          "安装",
+          "100 MB"
+        ],
+        "excerpt": "fr-downloads 记录单项超过 100 MB 的下载或安装；依赖大小未记录就写“未记录”。首次下载或安装前先记录实际大小，单项超过 100 MB 先经用户授权再下载。"
       },
       {
         "source_pointer": "/connections/32/relationship",
@@ -5424,7 +5704,7 @@
         "terms": [
           "下载"
         ],
-        "excerpt": "类固定清单、清单之外以设计为准、不把设计写得更强或更弱，以及清单项/矛盾/数量与回归/大件下载四项检查。"
+        "excerpt": "4a 节写法要求与说明检查：七类固定清单、清单之外以设计为准、不把设计写得更强或更弱，以及清单项/矛盾/数量与回归/大件下载四项检查。"
       },
       {
         "source_pointer": "/evidence/2/doesNotProve",
@@ -5487,7 +5767,7 @@
         "terms": [
           "下载"
         ],
-        "excerpt": "、用户决定边界及未决范围隔离。 第 22 节补定说明身份、改动后 D6 说明检查失效及实际下载大小和用户授权依据。 第 23 节明确执行端按档次表运行、GPT Work 极高不得用 Codex 代替、X4 记录选择与手动执行角色每轮一条。 第 24 节补定回归用例集、按条覆盖与逐条判、开发中选择性重跑与最终完整重跑；本插件合并为 R1–R7、S1 共 8 个用例。 第 25 节补定语义内容与机械文件的分工、新插件旧表现的公开历史依据，以及 R2 未批准起点、R3 三快照场景、R5 和 S1 固定输入与尺子。 第 26 节明确"
+        "excerpt": "置、原始记录保留、重派写入披露、用户决定边界及未决范围隔离。 第 22 节补定说明身份、改动后 D6 说明检查失效及实际下载大小和用户授权依据。 第 23 节明确执行端按档次表运行、GPT Work 极高不得用 Codex 代替、X4 记录选择与手动执行角色每轮一条。 第 24 节补定回归用例集、按条覆盖与逐条判、开发中选择性重跑与最终完整重跑；本插件合并为 R1–R7、S1 共 8 个用例。 第 25 节补定语义内容与机械文件的分工、新插件旧表现的公开历史依据，以及 R2 未批准起点、R3 三快照场景、R5 和 S1 固定输入与尺子。 第 26 节明确分组按检查条计，每条只属一类：新能力 12、真实问题 3、受影响旧能力 1、冒烟 2；冻结说明写明完整回归后代码变化须再完整重跑。 第 27 节写定 S1 的固定正文及 R6 场景条件；R6 只检验该保守恢复路线，其他路线由 state、writer 既有恢复验收器覆盖。 第 28 节将冻结说明漏写范围限定为七类固定清单，清单之外以设计为准，D6 按清单项、矛盾、数量与回归和大件下载检查。"
       },
       {
         "source_pointer": "/walkthroughs/1/exit",
@@ -5501,7 +5781,7 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "（宿主，如 Claude Code、Codex 或 GPT 网页端）可读的插件包的根目录（安装后包内文件的起点）。"
+        "excerpt": "改动变化），或者运行插件的工具（宿主，如 Claude Code、Codex 或 GPT 网页端）可读的插件包的根目录（安装后包内文件的起点）。"
       },
       {
         "source_pointer": "/walkthroughs/1/steps/2/why",
@@ -5595,35 +5875,11 @@
         "excerpt": "用户在 Codex 安装两执行插件并显式调用对应技能；X4 在真实 ChatGPT 网页端上传规划包并新开对话。"
       },
       {
-        "source_pointer": "/walkthroughs/3/steps/1/action",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "验收器的总数和各类个数及回归用例的数量和分组是否与设计一致，以及单项超过 100 MB 的下载或安装有没有遗漏，并在结果里写明本次说明文件原始字节的哈希。"
-      },
-      {
         "source_pointer": "/walkthroughs/3/steps/1/exampleData",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "按固定格式（结论、你在做的决定、做完时看到什么和怎么验、验收器、单项超过 100 MB 的下载或安装、不能降级的、实现者可自定的、权限费用时间、这次不做的、与上次批准相比的变化）编写的冻结说明，以及同一内容快照（设计文件除版本历史以外全部内容的哈希）的四项关卡结果、读者复述关卡（D8）本轮新 GPT 对话的逐单位复述，以及记录中的读者隔离字段 `reader_isolation`（合批时取值 `single-thread-batch`）。"
-      },
-      {
-        "source_pointer": "/walkthroughs/3/steps/1/technical/action",
         "terms": [
           "下载"
         ],
-        "excerpt": "复述。 D6 冻结前对照 Blueprint 检查冻结说明漏写、多写、验收器数量分类和大件下载，发现问题交回 D1。 D6 结果写明 explanation_sha256；说明变动后原说明检查失效，Blueprint 未变只重做说明四项检查。 D6 还要核对说明里回归用例的数量和分组与设计一致。"
-      },
-      {
-        "source_pointer": "/walkthroughs/3/steps/2/action",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "定十节骨架（结论、你在做的决定、做完时看到什么和怎么验、验收器、单项超过 100 MB 的下载或安装、不能降级的、实现者可自定的、权限费用时间、这次不做的、与上次批准相比的变化）给用户冻结说明，说明已由用户追问角色对照设计检查漏写、多写、验收器的总数和各类个数及回归用例的数量和分组是否与设计一致，以及单项超过 100 MB 的下载或安装有没有遗漏；检查结果、批准请求、用户批准和冻结记录都写同一个说明文件的原始字节哈希。用户先批准四道冻结关卡（结构检查、用户代理追问、冷读、读者复述）共同通过的内容快照（设计文件除版本历史以外全"
+        "excerpt": "阅七部分的当前设计、对应的四道关卡结果及逐单位复述记录。验收与回归的数量、分类由界面从设计自动统计，角色档次表读取原表，下载大小未知的如实显示未记录。"
       },
       {
         "source_pointer": "/walkthroughs/3/steps/7/action",
@@ -5665,14 +5921,14 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "判定通过与否的数值界限）或以真实度更低的证据（离用户实际收到的东西更远，例如用源码检查代替安装后的实际运行）替代合同要求，却声称只是机械修复。"
+        "excerpt": "情况是：验收维修提案降低阈值（判定通过与否的数值界限）或以真实度更低的证据（离用户实际收到的东西更远，例如用源码检查代替安装后的实际运行）替代合同要求，却声称只是机械修复。"
       },
       {
         "source_pointer": "/failurePaths/4/steps/0/exampleData",
         "terms": [
           "安装"
         ],
-        "excerpt": "判定通过与否的数值界限）或以真实度更低的证据（离用户实际收到的东西更远，例如用源码检查代替安装后的实际运行）替代合同要求，却声称只是机械修复。"
+        "excerpt": "异常是：验收维修提案降低阈值（判定通过与否的数值界限）或以真实度更低的证据（离用户实际收到的东西更远，例如用源码检查代替安装后的实际运行）替代合同要求，却声称只是机械修复。"
       },
       {
         "source_pointer": "/failurePaths/4/steps/0/expectedResult",
@@ -5686,7 +5942,7 @@
         "terms": [
           "安装"
         ],
-        "excerpt": "判定通过与否的数值界限）或以真实度更低的证据（离用户实际收到的东西更远，例如用源码检查代替安装后的实际运行）替代合同要求，却声称只是机械修复。"
+        "excerpt": "异常是：验收维修提案降低阈值（判定通过与否的数值界限）或以真实度更低的证据（离用户实际收到的东西更远，例如用源码检查代替安装后的实际运行）替代合同要求，却声称只是机械修复。"
       },
       {
         "source_pointer": "/failurePaths/6/situation",
@@ -5883,66 +6139,6 @@
           "安装"
         ],
         "excerpt": "安装入口尚不完整，不能声明两插件已经可用。"
-      },
-      {
-        "source_pointer": "/failurePaths/12/situation",
-        "terms": [
-          "下载"
-        ],
-        "excerpt": "的内容、写入 Blueprint 没有的承诺、验收器数量分类或回归用例数量分组不一致或大件下载遗漏。 或说明身份不一致、说明在 D6 检查后被改动却仍采用原说明检查。"
-      },
-      {
-        "source_pointer": "/failurePaths/12/technical/situation",
-        "terms": [
-          "下载"
-        ],
-        "excerpt": "的内容、写入 Blueprint 没有的承诺、验收器数量分类或回归用例数量分组不一致或大件下载遗漏。 或说明身份不一致、说明在 D6 检查后被改动却仍采用原说明检查。"
-      },
-      {
-        "source_pointer": "/failurePaths/12/explanation/action",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "容、验收器的总数和各类个数及回归用例的数量和分组与设计不一致，或单项超过 100 MB 的下载或安装遗漏时，交回设计负责人改写。说明在检查之后只要有改动，原来对说明的检查就失效。"
-      },
-      {
-        "source_pointer": "/failurePaths/12/explanation/exampleData",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "按固定格式（结论、你在做的决定、做完时看到什么和怎么验、验收器、单项超过 100 MB 的下载或安装、不能降级的、实现者可自定的、权限费用时间、这次不做的、与上次批准相比的变化）写的冻结说明和同一份受审设计。"
-      },
-      {
-        "source_pointer": "/failurePaths/12/explanation/technical/exampleData",
-        "terms": [
-          "下载"
-        ],
-        "excerpt": "的内容、写入 Blueprint 没有的承诺、验收器数量分类或回归用例数量分组不一致或大件下载遗漏。 或说明身份不一致、说明在 D6 检查后被改动却仍采用原说明检查。"
-      },
-      {
-        "source_pointer": "/failurePaths/12/steps/0/action",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "容、验收器的总数和各类个数及回归用例的数量和分组与设计不一致，或单项超过 100 MB 的下载或安装遗漏时，交回设计负责人改写。说明在检查之后只要有改动，原来对说明的检查就失效。"
-      },
-      {
-        "source_pointer": "/failurePaths/12/steps/0/exampleData",
-        "terms": [
-          "下载",
-          "安装"
-        ],
-        "excerpt": "按固定格式（结论、你在做的决定、做完时看到什么和怎么验、验收器、单项超过 100 MB 的下载或安装、不能降级的、实现者可自定的、权限费用时间、这次不做的、与上次批准相比的变化）写的冻结说明和同一份受审设计。"
-      },
-      {
-        "source_pointer": "/failurePaths/12/steps/0/technical/exampleData",
-        "terms": [
-          "下载"
-        ],
-        "excerpt": "的内容、写入 Blueprint 没有的承诺、验收器数量分类或回归用例数量分组不一致或大件下载遗漏。 或说明身份不一致、说明在 D6 检查后被改动却仍采用原说明检查。"
       }
     ],
     "threshold_bytes_decimal": 100000000,
@@ -5961,7 +6157,8 @@
       "delivery-assurance 的 ChatGPT 网页端规划包"
     ],
     "not_concrete_download_requirements": "冻结说明格式所举的软件、编译器、模型、数据集、容器镜像是超过阈值时要披露的类型示例，Blueprint 没有据此指定一个实际要下载的编译器、模型权重、数据集或镜像；模型档次也不是本地权重下载清单。",
-    "first_download_rule": "首次下载或安装前记录实际大小；超过 100 MB 先经用户授权。"
+    "first_download_rule": "首次下载或安装前记录实际大小；超过 100 MB 先经用户授权。",
+    "scope": "仅当前内容；versions 中的冻结历史不参与本次草稿的下载扫描。"
   },
   "downloads": [
     {
@@ -6042,15 +6239,15 @@
       "references": [
         {
           "source_pointer": "/nodes/0/children/0/terminal/mechanism",
-          "excerpt": "cript 规则），所以同一个 JSON 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入、规范化字节的十六进制和 SHA-256，至少覆盖中文字符串、嵌套对象的键排序和整数，各端必须逐字节通过。`bundle_sha256` 例外：它是冻结输出文件原始字节的 SHA-256，不做规范化。\n\n**四个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---"
+          "excerpt": "6 码元）、字符串转义（非 ASCII 字符原样输出，不写成 `\\u` 转义）和数字格式（ECMAScript 规则），所以同一个 JSON 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入、规范化字节的十六进制和 SHA-256，至少覆盖中文字符串、嵌套对象的键排序和整数，各端必须逐字节通过。`bundle_sha256` 例外：它是冻结输出文件原始字节的 SHA-256，不做规范化。\n\n**三个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---|---|\n| `snapshot_sha256` | Blueprint 检查器 `snapshotOf` 取出的内容快照（`title,summary,sources,requirements,nodes,connections,evidence"
         },
         {
           "source_pointer": "/nodes/1/children/2/terminal/mechanism",
-          "excerpt": "cript 规则），所以同一个 JSON 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入、规范化字节的十六进制和 SHA-256，至少覆盖中文字符串、嵌套对象的键排序和整数，各端必须逐字节通过。`bundle_sha256` 例外：它是冻结输出文件原始字节的 SHA-256，不做规范化。\n\n**四个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---"
+          "excerpt": "6 码元）、字符串转义（非 ASCII 字符原样输出，不写成 `\\u` 转义）和数字格式（ECMAScript 规则），所以同一个 JSON 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入、规范化字节的十六进制和 SHA-256，至少覆盖中文字符串、嵌套对象的键排序和整数，各端必须逐字节通过。`bundle_sha256` 例外：它是冻结输出文件原始字节的 SHA-256，不做规范化。\n\n**三个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---|---|\n| `snapshot_sha256` | Blueprint 检查器 `snapshotOf` 取出的内容快照（`title,summary,sources,requirements,nodes,connections,evidence"
         },
         {
           "source_pointer": "/nodes/1/children/4/terminal/mechanism",
-          "excerpt": "cript 规则），所以同一个 JSON 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入、规范化字节的十六进制和 SHA-256，至少覆盖中文字符串、嵌套对象的键排序和整数，各端必须逐字节通过。`bundle_sha256` 例外：它是冻结输出文件原始字节的 SHA-256，不做规范化。\n\n**四个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---"
+          "excerpt": "6 码元）、字符串转义（非 ASCII 字符原样输出，不写成 `\\u` 转义）和数字格式（ECMAScript 规则），所以同一个 JSON 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入、规范化字节的十六进制和 SHA-256，至少覆盖中文字符串、嵌套对象的键排序和整数，各端必须逐字节通过。`bundle_sha256` 例外：它是冻结输出文件原始字节的 SHA-256，不做规范化。\n\n**三个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---|---|\n| `snapshot_sha256` | Blueprint 检查器 `snapshotOf` 取出的内容快照（`title,summary,sources,requirements,nodes,connections,evidence"
         }
       ],
       "size_disclosure": "大小未记录",
@@ -6070,15 +6267,15 @@
       "references": [
         {
           "source_pointer": "/nodes/0/children/0/terminal/mechanism",
-          "excerpt": "N 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入、规范化字节的十六进制和 SHA-256，至少覆盖中文字符串、嵌套对象的键排序和整数，各端必须逐字节通过。`bundle_sha256` 例外：它是冻结输出文件原始字节的 SHA-256，不做规范化。\n\n**四个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---|---|\n| `snapshot_s"
+          "excerpt": " 字符原样输出，不写成 `\\u` 转义）和数字格式（ECMAScript 规则），所以同一个 JSON 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入、规范化字节的十六进制和 SHA-256，至少覆盖中文字符串、嵌套对象的键排序和整数，各端必须逐字节通过。`bundle_sha256` 例外：它是冻结输出文件原始字节的 SHA-256，不做规范化。\n\n**三个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---|---|\n| `snapshot_sha256` | Blueprint 检查器 `snapshotOf` 取出的内容快照（`title,summary,sources,requirements,nodes,connections,evidence,walkthroughs,failu"
         },
         {
           "source_pointer": "/nodes/1/children/2/terminal/mechanism",
-          "excerpt": "N 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入、规范化字节的十六进制和 SHA-256，至少覆盖中文字符串、嵌套对象的键排序和整数，各端必须逐字节通过。`bundle_sha256` 例外：它是冻结输出文件原始字节的 SHA-256，不做规范化。\n\n**四个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---|---|\n| `snapshot_s"
+          "excerpt": " 字符原样输出，不写成 `\\u` 转义）和数字格式（ECMAScript 规则），所以同一个 JSON 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入、规范化字节的十六进制和 SHA-256，至少覆盖中文字符串、嵌套对象的键排序和整数，各端必须逐字节通过。`bundle_sha256` 例外：它是冻结输出文件原始字节的 SHA-256，不做规范化。\n\n**三个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---|---|\n| `snapshot_sha256` | Blueprint 检查器 `snapshotOf` 取出的内容快照（`title,summary,sources,requirements,nodes,connections,evidence,walkthroughs,failu"
         },
         {
           "source_pointer": "/nodes/1/children/4/terminal/mechanism",
-          "excerpt": "N 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入、规范化字节的十六进制和 SHA-256，至少覆盖中文字符串、嵌套对象的键排序和整数，各端必须逐字节通过。`bundle_sha256` 例外：它是冻结输出文件原始字节的 SHA-256，不做规范化。\n\n**四个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---|---|\n| `snapshot_s"
+          "excerpt": " 字符原样输出，不写成 `\\u` 转义）和数字格式（ECMAScript 规则），所以同一个 JSON 值在任何一端都只得到同一串字节。实现使用现成库：Python 用 `rfc8785`，JavaScript 用 `canonicalize`，具体版本在实施时固定。共享资源中附一组对照例，包含输入、规范化字节的十六进制和 SHA-256，至少覆盖中文字符串、嵌套对象的键排序和整数，各端必须逐字节通过。`bundle_sha256` 例外：它是冻结输出文件原始字节的 SHA-256，不做规范化。\n\n**三个身份，各管一件事。**\n\n| 身份 | 怎样计算 | 用途 |\n|---|---|---|\n| `snapshot_sha256` | Blueprint 检查器 `snapshotOf` 取出的内容快照（`title,summary,sources,requirements,nodes,connections,evidence,walkthroughs,failu"
         }
       ],
       "size_disclosure": "大小未记录",
@@ -6110,11 +6307,11 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/validators/1/method/description",
-          "excerpt": "；不涉及冻结、批准、签发、撤回，所以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| S"
+          "excerpt": "新建的笔记文件，与重派的工作不冲突；这条派发不涉及付费调用、对外发布或向他人发消息 | 按第 1.3a 节恢复：新状态修订号接着基线；该派发记为作废，原记录保留；重派提示词列出原派发已在仓库留下的写入；不涉及冻结、批准、签发、撤回，所以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| R8 | 示例任务沿用 R1 的“给一个小型命令行工具加一个导出功能”；请 D1 开始澄清。用例输入写死四项：用户取舍 U1：导出格式先支持 CSV 还"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/mechanism",
-          "excerpt": "；不涉及冻结、批准、签发、撤回，所以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| S"
+          "excerpt": "新建的笔记文件，与重派的工作不冲突；这条派发不涉及付费调用、对外发布或向他人发消息 | 按第 1.3a 节恢复：新状态修订号接着基线；该派发记为作废，原记录保留；重派提示词列出原派发已在仓库留下的写入；不涉及冻结、批准、签发、撤回，所以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| R8 | 示例任务沿用 R1 的“给一个小型命令行工具加一个导出功能”；请 D1 开始澄清。用例输入写死四项：用户取舍 U1：导出格式先支持 CSV 还"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/acceptance/12",
@@ -6166,11 +6363,11 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/validators/1/method/description",
-          "excerpt": "；不涉及冻结、批准、签发、撤回，所以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| S"
+          "excerpt": "新建的笔记文件，与重派的工作不冲突；这条派发不涉及付费调用、对外发布或向他人发消息 | 按第 1.3a 节恢复：新状态修订号接着基线；该派发记为作废，原记录保留；重派提示词列出原派发已在仓库留下的写入；不涉及冻结、批准、签发、撤回，所以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| R8 | 示例任务沿用 R1 的“给一个小型命令行工具加一个导出功能”；请 D1 开始澄清。用例输入写死四项：用户取舍 U1：导出格式先支持 CSV 还"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/mechanism",
-          "excerpt": "；不涉及冻结、批准、签发、撤回，所以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| S"
+          "excerpt": "新建的笔记文件，与重派的工作不冲突；这条派发不涉及付费调用、对外发布或向他人发消息 | 按第 1.3a 节恢复：新状态修订号接着基线；该派发记为作废，原记录保留；重派提示词列出原派发已在仓库留下的写入；不涉及冻结、批准、签发、撤回，所以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| R8 | 示例任务沿用 R1 的“给一个小型命令行工具加一个导出功能”；请 D1 开始澄清。用例输入写死四项：用户取舍 U1：导出格式先支持 CSV 还"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/acceptance/12",
@@ -6374,7 +6571,7 @@
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/validators/0/method/description",
-          "excerpt": "逐项核对：Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，冻结说明如实披"
+          "excerpt": "逐项核对：Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，fr-decisions、fr-roles 如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。；需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节"
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/interface/boundaries/1",
@@ -6382,11 +6579,11 @@
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/terminal/mechanism",
-          "excerpt": "non_substitutable_methods。\n\n本插件当前候选在此项的具体承诺：\nClaude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，冻结说明如实披"
+          "excerpt": "本项字段：evidence_kind,fidelity,non_substitutable_methods。\n\n本插件当前候选在此项的具体承诺：\nClaude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，fr-decisions、fr-roles 如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。\n\n### 2.1a 规划端角色一律在 GPT 上跑，每轮每个角色转交一次（用户要求，2026-11-11）\n\n用户的原话：“每个角色一轮就发一次”；“我说的是规划端角色，执行端 codex 倒"
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/terminal/acceptance/0",
-          "excerpt": "Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，冻结说明如实披"
+          "excerpt": "Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，fr-decisions、fr-roles 如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。"
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/terminal/acceptance/1",
@@ -6698,7 +6895,7 @@
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/validators/0/method/description",
-          "excerpt": "逐项核对：Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，冻结说明如实披"
+          "excerpt": "逐项核对：Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，fr-decisions、fr-roles 如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。；需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节"
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/interface/boundaries/1",
@@ -6706,11 +6903,11 @@
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/terminal/mechanism",
-          "excerpt": "non_substitutable_methods。\n\n本插件当前候选在此项的具体承诺：\nClaude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，冻结说明如实披"
+          "excerpt": "本项字段：evidence_kind,fidelity,non_substitutable_methods。\n\n本插件当前候选在此项的具体承诺：\nClaude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，fr-decisions、fr-roles 如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。\n\n### 2.1a 规划端角色一律在 GPT 上跑，每轮每个角色转交一次（用户要求，2026-11-11）\n\n用户的原话：“每个角色一轮就发一次”；“我说的是规划端角色，执行端 codex 倒"
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/terminal/acceptance/0",
-          "excerpt": "Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，冻结说明如实披"
+          "excerpt": "Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，fr-decisions、fr-roles 如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。"
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/terminal/acceptance/1",
@@ -7022,7 +7219,7 @@
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/validators/0/method/description",
-          "excerpt": "逐项核对：Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，冻结说明如实披"
+          "excerpt": "逐项核对：Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，fr-decisions、fr-roles 如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。；需要用户手动转交的规划端角色（D2、D3、D6、D8、X5）一律在 GPT 网页端运行，每角色每轮由用户转交最多一条提示词。负责人 D1、X1 由 Claude 或 GPT Pro 担任，各自使用长期线程；规划 SKILL.md 由 Claude Code 和 GPT Work 直接读取。执行端角色在哪里运行，以第 2.1 节"
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/interface/boundaries/1",
@@ -7030,11 +7227,11 @@
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/terminal/mechanism",
-          "excerpt": "non_substitutable_methods。\n\n本插件当前候选在此项的具体承诺：\nClaude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，冻结说明如实披"
+          "excerpt": "本项字段：evidence_kind,fidelity,non_substitutable_methods。\n\n本插件当前候选在此项的具体承诺：\nClaude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，fr-decisions、fr-roles 如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。\n\n### 2.1a 规划端角色一律在 GPT 上跑，每轮每个角色转交一次（用户要求，2026-11-11）\n\n用户的原话：“每个角色一轮就发一次”；“我说的是规划端角色，执行端 codex 倒"
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/terminal/acceptance/0",
-          "excerpt": "Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，冻结说明如实披"
+          "excerpt": "Claude Code 和 GPT Work 的同源规划入口、需要用户转交的 GPT 网页端角色以及安装后 Codex 执行入口须观察同一最终规则版本。关键交付核查直接使用最终候选；状态和哈希只证明对应关系，X1 仍亲读实际产物与原始记录。D7 只读 Blueprint；D8 每轮新 GPT 对话合批，D1 逐项判断且全部正确即有效通过，记录 reader_isolation: \"single-thread-batch\"，fr-decisions、fr-roles 如实披露合批方式。三类校准仍实际运行同一验收实现，不能由合成回执替代。"
         },
         {
           "source_pointer": "/nodes/1/children/3/children/3/terminal/acceptance/1",
@@ -7190,11 +7387,11 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/validators/1/method/description",
-          "excerpt": "以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| S1 | 一个写好的场景，在装好本插"
+          "excerpt": "；这条派发不涉及付费调用、对外发布或向他人发消息 | 按第 1.3a 节恢复：新状态修订号接着基线；该派发记为作废，原记录保留；重派提示词列出原派发已在仓库留下的写入；不涉及冻结、批准、签发、撤回，所以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| R8 | 示例任务沿用 R1 的“给一个小型命令行工具加一个导出功能”；请 D1 开始澄清。用例输入写死四项：用户取舍 U1：导出格式先支持 CSV 还是 JSON（用户偏好）；用户取舍"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/mechanism",
-          "excerpt": "能声称会运行本地脚本或启动 Codex。\n- **验收（X4 负责，X1 签发）：** 在真实的 ChatGPT 网页端上传包，新开一个对话完成三件事：\n  1. 读取包内规划正文、至少一张角色卡和一份模板；\n  2. 依据一个公开安全的示例任务状态，生成正确的下一条完整提示词；\n  3. 按提示词要求写回指定分支（或在无写权限时如实给出内容）。\n\n  保留原始对话记录作为证据。只上传成功、没有完成这三件事，不算通过。\n\n### 10.2a 本插件 0.1 的回归用例集（按第 6.3a 节，D1 补定，2026/11/13）"
+          "excerpt": "明须如实写明这一点：网页端负责读状态、生成下一条提示词、按派发写回仓库（在有仓库连接器的前提下），不能声称会运行本地脚本或启动 Codex。\n- **验收（X4 负责，X1 签发）：** 在真实的 ChatGPT 网页端上传包，新开一个对话完成三件事：\n  1. 读取包内规划正文、至少一张角色卡和一份模板；\n  2. 依据一个公开安全的示例任务状态，生成正确的下一条完整提示词；\n  3. 按提示词要求写回指定分支（或在无写权限时如实给出内容）。\n\n  保留原始对话记录作为证据。只上传成功、没有完成这三件事，不算通过。\n\n### 10.2a 本插件的回归用例集（设计草稿 0.2 修订，D1 决定，2026/11/15）\n\n本插件是新插件，没有可运行的旧版本，“要修的真实问题”的旧表现按第 6.3a 节用本仓库公开的历史记录证明，定位见下表“旧表现依据”。所有用例都用公开、安全的示例任务，不含任何私有项目内容。示例任务的状态快照由 X2 按下表描述生成，X1 首次运行前核"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/acceptance/3",
@@ -7254,11 +7451,11 @@
         },
         {
           "source_pointer": "/nodes/3/children/4/validators/1/method/description",
-          "excerpt": "以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| S1 | 一个写好的场景，在装好本插"
+          "excerpt": "；这条派发不涉及付费调用、对外发布或向他人发消息 | 按第 1.3a 节恢复：新状态修订号接着基线；该派发记为作废，原记录保留；重派提示词列出原派发已在仓库留下的写入；不涉及冻结、批准、签发、撤回，所以不找用户 | 脚本 | 新能力检查 |\n| R7 | 用现有生成器生成全部市场包并安装；把网页端包上传到 ChatGPT 网页端新对话，按第 9.4 节三件事操作 | ① 原有 10 个插件、30 个技能仍在，预算 12/32 生效；② 安装后只多出 `design-assurance-execute`、`delivery-assurance-execute` 两个执行技能，包内资源可读；③ 网页端完成三件事 | ① ② 脚本；③ X4 观察、X1 亲读原始对话 | 新能力检查 |\n| R8 | 示例任务沿用 R1 的“给一个小型命令行工具加一个导出功能”；请 D1 开始澄清。用例输入写死四项：用户取舍 U1：导出格式先支持 CSV 还是 JSON（用户偏好）；用户取舍"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/mechanism",
-          "excerpt": "能声称会运行本地脚本或启动 Codex。\n- **验收（X4 负责，X1 签发）：** 在真实的 ChatGPT 网页端上传包，新开一个对话完成三件事：\n  1. 读取包内规划正文、至少一张角色卡和一份模板；\n  2. 依据一个公开安全的示例任务状态，生成正确的下一条完整提示词；\n  3. 按提示词要求写回指定分支（或在无写权限时如实给出内容）。\n\n  保留原始对话记录作为证据。只上传成功、没有完成这三件事，不算通过。\n\n### 10.2a 本插件 0.1 的回归用例集（按第 6.3a 节，D1 补定，2026/11/13）"
+          "excerpt": "明须如实写明这一点：网页端负责读状态、生成下一条提示词、按派发写回仓库（在有仓库连接器的前提下），不能声称会运行本地脚本或启动 Codex。\n- **验收（X4 负责，X1 签发）：** 在真实的 ChatGPT 网页端上传包，新开一个对话完成三件事：\n  1. 读取包内规划正文、至少一张角色卡和一份模板；\n  2. 依据一个公开安全的示例任务状态，生成正确的下一条完整提示词；\n  3. 按提示词要求写回指定分支（或在无写权限时如实给出内容）。\n\n  保留原始对话记录作为证据。只上传成功、没有完成这三件事，不算通过。\n\n### 10.2a 本插件的回归用例集（设计草稿 0.2 修订，D1 决定，2026/11/15）\n\n本插件是新插件，没有可运行的旧版本，“要修的真实问题”的旧表现按第 6.3a 节用本仓库公开的历史记录证明，定位见下表“旧表现依据”。所有用例都用公开、安全的示例任务，不含任何私有项目内容。示例任务的状态快照由 X2 按下表描述生成，X1 首次运行前核"
         },
         {
           "source_pointer": "/nodes/3/children/4/terminal/acceptance/3",
