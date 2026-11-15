@@ -1,19 +1,12 @@
-% \documentclass[hyperref={CJKbookmarks=true}]{beamer}
-\documentclass{beamer}
-\usepackage{amsfonts,amsmath,amssymb,oldgerm,mathrsfs,booktabs}
-\usepackage{tcolorbox}   % For more usage, refer to https://liam.page/2016/07/22/using-the-tcolorbox-package-to-create-a-new-theorem-environment
-
-% \usepackage[UTF8]{ctex}
+\documentclass[aspectratio=169,t]{beamer}
+\usepackage{amsmath,booktabs}
+\providecommand\CUHKSourceDir{.}
+\providecommand\CUHKAssets{\CUHKSourceDir/assets}
 \makeatletter
-\def\input@path{{styles/}}
+\def\input@path{{\CUHKSourceDir/styles/}{\CUHKSourceDir/}}
 \makeatother
 \usetheme{sintef}
-\titlebackground*{assets/background}
-\tcbset{
-  colback=maincolor!5,
-  colframe=maincolor
-}
-\setbeameroption{show notes}
+\setbeameroption{hide notes}
 \bibliographystyle{unsrt}
 
 \title{Title}
@@ -50,8 +43,13 @@ Add your content here.
 
 \section{References}
 \begin{frame}[t,allowframebreaks]{References}
-  \bibliography{bibliography}
+  \IfFileExists{\jobname.bbl}{\bibliography{\CUHKSourceDir/bibliography}}{Add sources and run BibTeX.}
 \end{frame}
 
-\backmatter
+\CoreClosing{Discussion}{
+  \begin{itemize}
+  \item State the finding and where it applies.
+  \item Identify the open question for the group.
+  \end{itemize}
+}
 \end{document}

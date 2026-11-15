@@ -1,0 +1,54 @@
+\usefonttheme{professionalfonts}
+\RequirePackage{fontspec}
+\RequirePackage{xeCJK}
+\RequirePackage{unicode-math}
+\renewcommand{\familydefault}{\rmdefault}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont[
+  Path=\PresentationFontResourceDir/fonts/texgyre-termes/,
+  Extension=.otf, BoldFont=texgyretermes-bold,
+  ItalicFont=texgyretermes-italic, BoldItalicFont=texgyretermes-bolditalic
+]{texgyretermes-regular}
+\setsansfont[
+  Path=\PresentationFontResourceDir/fonts/texgyre-termes/,
+  Extension=.otf, BoldFont=texgyretermes-bold,
+  ItalicFont=texgyretermes-italic, BoldItalicFont=texgyretermes-bolditalic
+]{texgyretermes-regular}
+% Resolve this fixed file through the TeX distribution's search path.
+\setmonofont[
+  Extension=.otf, UprightFont=lmmono10-regular, ItalicFont=lmmono10-italic,
+  BoldFont=lmmonolt10-bold, BoldItalicFont=lmmonolt10-boldoblique
+]{lmmono10-regular}
+\setmathfont[Path=\PresentationFontResourceDir/fonts/texgyre-termes-math/]{texgyretermes-math.otf}
+\setmathfont[Path=\PresentationFontResourceDir/fonts/newcomputermodern/,range={cal,bfcal}]{NewCMMath-Regular.otf}
+\setCJKmainfont[
+  Path=\PresentationFontResourceDir/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf, BoldFont=NotoSerifSC-Bold, AutoFakeSlant=0.25
+]{NotoSerifSC-Regular}
+\setCJKsansfont[
+  Path=\PresentationFontResourceDir/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf, BoldFont=NotoSansSC-Bold
+]{NotoSansSC-Regular}
+\setCJKmonofont[
+  Path=\PresentationFontResourceDir/texmf/fonts/opentype/public/noto-cjk/,
+  Extension=.otf, BoldFont=NotoSansSC-Bold
+]{NotoSansSC-Regular}
+
+\newcommand\CoreBodyFont{\fontsize{11}{13.5}\selectfont}
+\newcommand\CoreTableFont{\fontsize{10}{12.2}\selectfont}
+\newcommand\CoreCaptionFont{\fontsize{8}{9.6}\selectfont}
+\newcommand\CoreCodeFont{\ttfamily\CoreCaptionFont}
+\setbeamerfont{normal text}{size=\CoreBodyFont}
+\setbeamerfont{frametitle}{size=\fontsize{13}{15.5}\selectfont,series=\bfseries}
+\setbeamerfont{framesubtitle}{size=\CoreBodyFont,series=\mdseries}
+\setbeamerfont{core subhead}{size=\CoreBodyFont,series=\bfseries}
+\setbeamerfont{section in head/foot}{size=\fontsize{6.8}{7.4}\selectfont,series=\bfseries}
+\setbeamerfont{core closing question}{size=\fontsize{16.06}{19.2}\selectfont}
+\setbeamerfont{title}{size=\fontsize{24}{27}\selectfont,series=\bfseries}
+\setbeamerfont{subtitle}{size=\fontsize{19}{22}\selectfont,series=\bfseries}
+\setbeamerfont{author}{size=\fontsize{12.5}{15}\selectfont}
+\setbeamerfont{institute}{parent=author,size=\usebeamerfont{author}}
+\setbeamerfont{date}{parent=author}
+\setbeamerfont{block title}{parent=core subhead}
+\setbeamerfont{block body}{size=\CoreBodyFont}
+\renewcommand\normalsize{\CoreBodyFont}

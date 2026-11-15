@@ -1,0 +1,16 @@
+{
+  "source_repo": "YuukiAS/STAT5060-TA",
+  "artifact_commit": "62678cd22409906797474752ae4f304f867d96cc",
+  "style_freeze_commit": "d019fd53513682004c154d6d0e6ea76b2099296b",
+  "artifact_sha256": "88eae6b2073715729abd9c2b004d1d0f31541c4314c2b64cd49194346b35d6e1",
+  "measurement_basis": "PDF media boxes, text spans and vector geometry from the exact 39-page V19 artifact. No course copy, page IDs or source files are committed.",
+  "values_pdf_pt": {
+    "page_width": 453.54,
+    "page_height": 255.12,
+    "section_band_bottom": 16.201,
+    "section_label_bbox_top": 2.59,
+    "ordinary_frame_title_bbox_top": 28.81,
+    "footer_divider_y": 246.552,
+    "closing_cue_bbox_center_y": 195.62
+  }
+}

@@ -351,7 +351,8 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertIn("PPT, PowerPoint, `.pptx`, editable, Slides, or later manual editing", ppt_routing)
         self.assertIn("PPTX/Slides/editable manual editing is explicitly requested", ppt_routing)
         self.assertIn("Explicit Beamer, LaTeX slides, `.tex`, academic PDF", ppt_routing)
-        self.assertIn("exact CUHK Beamer route by default", template_routing)
+        self.assertIn("CUHK Beamer by default", template_routing)
+        self.assertIn("templates/course-standard/beamer/source/", template_routing)
         self.assertIn("explicitly requested editable PPTX/Slides", template_routing)
         self.assertIn("file exists", research_skill)
         self.assertIn("file existence alone is not completion", visual_qa)
@@ -361,10 +362,9 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertIn("If the local skill is not installed", research_skill)
         self.assertIn("Academic presentation compilation must first use", latex_notes)
         self.assertIn("render-chinese-math-pdf", latex_notes)
-        self.assertIn("beamer/source/` is the canonical CUHK Beamer template", cuhk_readme)
-        self.assertIn("derived scaffolds for non-exact workflows only", cuhk_readme)
-        self.assertIn("Preserve the first/title slide layout", cuhk_readme)
-        self.assertIn("file-bound TeX Gyre Termes", cuhk_readme)
+        self.assertIn("is the canonical CUHK Beamer template", cuhk_readme)
+        self.assertIn("shared 16:9 core", cuhk_readme)
+        self.assertIn("fixed font policy", cuhk_readme)
         self.assertNotIn("Times New Roman Regular, Bold, Italic, and Bold Italic", cuhk_readme)
         self.assertIn("references/real-world-presentation-guardrails.md", research_skill)
         for required in [
@@ -444,6 +444,7 @@ class PresentationSharedTests(unittest.TestCase):
         source = root / "beamer/source"
         required = [
             source / "main.tex",
+            source / "skin.tex",
             source / "styles/beamerthemesintef.sty",
             source / "styles/sintefcolor.sty",
             source / "assets/background.png",
@@ -461,15 +462,12 @@ class PresentationSharedTests(unittest.TestCase):
 
         text = (source / "main.tex").read_text(encoding="utf-8")
         style_text = (source / "styles/beamerthemesintef.sty").read_text(encoding="utf-8")
+        typography_text = (SHARED / "templates/_shared/beamer-core-v1/typography.tex").read_text(encoding="utf-8")
         self.assertIn(r"\usetheme{sintef}", text)
-        self.assertIn(r"\titlebackground*{assets/background}", text)
-        self.assertIn(r"\usepackage{tcolorbox}", text)
-        self.assertIn(r"\setbeamertemplate{headline}", style_text)
-        self.assertIn(r"\includegraphics[height=4.0ex", style_text)
-        self.assertIn(r"\insertsectionnavigationhorizontal", style_text)
-        self.assertIn("__AI_SKILLS_FONT_RESOURCE_ROOT__", style_text)
-        self.assertIn("texgyretermes-regular", style_text)
-        self.assertIn("texgyretermes-math", style_text)
+        self.assertIn(r"\input{\PresentationCoreDir/core.tex}", style_text)
+        self.assertNotIn(r"\setbeamertemplate", style_text)
+        self.assertIn("texgyretermes-regular", typography_text)
+        self.assertIn("texgyretermes-math", typography_text)
         for forbidden_font in ["Times New Roman", "Liberation", "DejaVu", "Caladea", "Carlito"]:
             self.assertNotIn(forbidden_font, style_text)
 
@@ -1202,7 +1200,7 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertIn("The connector direction encodes data generation before interval estimation", tex)
             self.assertNotIn("centers -> subjects", tex)
             self.assertIn("Coverage target 0.95", tex)
-            self.assertIn(r"\scriptsize coverage", tex)
+            self.assertIn(r"\CoreCaptionFont coverage", tex)
             self.assertIn("DPP diverse batch", tex)
             self.assertIn("random batch", tex)
             self.assertIn("coverage >= .94", tex)
@@ -1216,7 +1214,7 @@ class PresentationSharedTests(unittest.TestCase):
             )
             self.assertNotIn(r"\tiny", process_tex)
             self.assertNotIn(r"\scriptsize", process_tex)
-            self.assertIn(r"\footnotesize", process_tex)
+            self.assertIn(r"\CoreTableFont", process_tex)
             self.assertNotIn("Error zoom:", tex)
             for forbidden in ["RRL-", "SRC-", "GSC-", "Reference retrieval", "EVIDENCE_MANIFEST", "Diagram contract", "run ID", "fixture", "workflow"]:
                 self.assertNotIn(forbidden, tex)
@@ -1502,7 +1500,8 @@ class PresentationSharedTests(unittest.TestCase):
             tex = stage3.emit_flow(spec, layout)
             self.assertNotIn(r"\tiny", tex)
             self.assertNotIn(r"\scriptsize", tex)
-            self.assertIn(r"\footnotesize", tex)
+            self.assertNotIn(r"\footnotesize", tex)
+            self.assertIn(r"\CoreTableFont", tex)
             for x1, x2 in re.findall(r"\\StageThreeConnector\{([0-9.]+)\}\{[0-9.]+\}\{([0-9.]+)\}\{[0-9.]+\};", tex):
                 self.assertGreater(float(x2), float(x1))
         experiment_tex = stage3.emit_flow(experiment_spec, stage3.resolve_layout(experiment_spec))
@@ -1849,7 +1848,7 @@ class PresentationSharedTests(unittest.TestCase):
             "required_panel_count": 0,
         }
         layout = stage3.resolve_layout(spec)
-        tex = stage3.emit_equation(spec, layout)
+        tex = stage3.emit_equation(spec)
 
         self.assertIn(r"\displaystyle h(t\mid x)=h_0(t)\exp(x^\top\beta)", tex)
         self.assertIn("Model components", tex)
@@ -1876,7 +1875,7 @@ class PresentationSharedTests(unittest.TestCase):
         minimal_spec = dict(spec)
         minimal_spec.pop("scientific_objects")
         minimal_spec.pop("key_message")
-        minimal_tex = stage3.emit_equation(minimal_spec, stage3.resolve_layout(minimal_spec))
+        minimal_tex = stage3.emit_equation(minimal_spec)
         self.assertIn("Hazard ratios are multiplicative shifts", minimal_tex)
         self.assertNotIn("Model components", minimal_tex)
         self.assertNotIn("Interpretation", minimal_tex)

@@ -1,0 +1,66 @@
+\newlength\CoreBodyRail
+\setlength\CoreBodyRail{8mm}
+\geometry{paperwidth=160mm,paperheight=90mm}
+\setbeamersize{text margin left=\CoreBodyRail,text margin right=\CoreBodyRail}
+\setbeamertemplate{sidebar right}{}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle continuation}{}
+\setbeamertemplate{bibliography item}[text]
+
+\setbeamercolor{background canvas}{bg=white}
+\setbeamercolor{normal text}{fg=coreInk,bg=white}
+\setbeamercolor{structure}{fg=coreAccent}
+\setbeamercolor{title}{fg=coreAccent}
+\setbeamercolor{frametitle}{fg=coreAccent,bg=white}
+\setbeamercolor{framesubtitle}{fg=coreMuted}
+\setbeamercolor{block title}{fg=coreAccent,bg=coreAccent!8}
+\setbeamercolor{block body}{fg=coreInk,bg=coreAccent!3}
+
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip\vskip 12.14pt%
+  \begin{beamercolorbox}[wd=\textwidth,sep=0pt]{frametitle}%
+    \raggedright{\usebeamerfont{frametitle}\strut\insertframetitle\par}%
+    \ifx\insertframesubtitle\empty\else
+      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\par}%
+    \fi
+  \end{beamercolorbox}%
+}
+
+\makeatletter
+\define@key{beamerframe}{shrink}[0]{%
+  \PackageError{beamer-core-v1}{Frame shrinking is disabled}{Split or reflow the frame at its prescribed type size.}%
+}
+\define@key{beamerframe}{squeeze}[true]{%
+  \PackageError{beamer-core-v1}{Frame squeezing is disabled}{Split or reflow the frame using the shared spacing.}%
+}
+% Shared metadata slots also support source decks written for the legacy entry.
+\newcommand\core@courselabel{}
+\newcommand\core@id{}
+\newcommand\core@supervisor{}
+\newcommand\course[1]{\renewcommand\core@courselabel{#1}}
+\newcommand\IDnumber[1]{\renewcommand\core@id{#1}}
+\newcommand\supervisor[1]{\renewcommand\core@supervisor{#1}}
+\setbeamertemplate{title page}{%
+  \par\vspace*{14mm}%
+  \centering
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+  \ifdefempty{\insertsubtitle}{}{%
+    \vspace{.18cm}{\usebeamerfont{subtitle}\insertsubtitle\par}}%
+  \ifdefempty{\core@courselabel}{}{\vspace{.18cm}{\CoreBodyFont\core@courselabel\par}}%
+  \vspace{.52cm}%
+  {\usebeamerfont{author}\insertauthor\ifdefempty{\core@id}{}{ (\core@id)}\par}%
+  \ifdefempty{\core@supervisor}{}{{\usebeamerfont{author}Supervisor: \core@supervisor\par}}%
+  {\usebeamerfont{institute}\insertinstitute\par}%
+  \vspace{.18cm}{\usebeamerfont{date}\insertdate\par}%
+}
+\renewcommand\maketitle{%
+  \ifbeamer@inframe
+    \titlepage
+  \else
+    \begingroup
+    \setbeamertemplate{background}{\PresentationTitleBrand}%
+    \begin{frame}[t]\titlepage\end{frame}%
+    \endgroup
+  \fi
+}
+\makeatother

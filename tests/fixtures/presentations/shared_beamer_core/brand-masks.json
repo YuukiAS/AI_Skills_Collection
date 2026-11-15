@@ -1,0 +1,34 @@
+{
+  "schema": "presentations-beamer-brand-masks-v1",
+  "coordinate_space": "1920x1080",
+  "cuhk": [
+    {
+      "id": "cuhk-header-logo",
+      "kind": "logo",
+      "pages": "all",
+      "rect": [
+        1823,
+        4,
+        1876,
+        66
+      ],
+      "asset": "assets/logo_RGB.png",
+      "pixel_md5": "359407a08e058b1ccd3c360df195d4d8"
+    },
+    {
+      "id": "cuhk-title-art",
+      "kind": "title-background",
+      "pages": [
+        1
+      ],
+      "rect": [
+        1559,
+        791,
+        1886,
+        1009
+      ],
+      "asset": "assets/background_negative.png",
+      "pixel_md5": "d0cbf2e6d3284c73d0f757d262367183"
+    }
+  ]
+}

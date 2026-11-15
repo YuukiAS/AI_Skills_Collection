@@ -42,6 +42,28 @@ def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def validate_cuhk_brand_import(tex_path: Path, tex: str) -> list[str]:
+    """Accept archived builds and require actual brand inputs for migrated builds."""
+    if r"\titlebackground*{assets/background}" in tex:
+        return []
+    root = tex_path.parent
+    files = (
+        "styles/beamerthemesintef.sty", "skin.tex", "assets/background_negative.png",
+        "assets/logo_RGB.png", "beamer-core-v1/core.tex",
+    )
+    errors = [f"{root / name}: missing shared CUHK input" for name in files if not (root / name).is_file()]
+    if not errors:
+        wrapper = (root / files[0]).read_text(encoding="utf-8")
+        if r"\input{skin.tex}" not in wrapper or r"\input{\PresentationCoreDir/core.tex}" not in wrapper:
+            errors.append(f"{root / files[0]}: missing CUHK skin or shared-core import")
+    return errors
+
+
+def audience_tex(tex: str) -> str:
+    """Remove includegraphics paths before looking for visible-copy terms."""
+    return re.sub(r"\\includegraphics(?:\[[^\]\n]*\])?\{[^{}\n]*\}", "", tex)
+
+
 def render_probe_status_allowed(render_probe: dict[str, Any], render_status: dict[str, Any], *, allow_missing_render: bool) -> bool:
     if render_probe.get("status") == "ok":
         return True
@@ -102,7 +124,6 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False, task_key: str
         tex = tex_path.read_text(encoding="utf-8")
         for required in [
             r"\usetheme{sintef}",
-            r"\titlebackground*{assets/background}",
             r"\input{scientific_layouts.tex}",
             r"\begin{tikzpicture}",
             r"\includegraphics",
@@ -110,8 +131,10 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False, task_key: str
         ]:
             if required not in tex:
                 errors.append(f"{tex_path}: missing required TeX primitive {required}")
+        errors.extend(validate_cuhk_brand_import(tex_path, tex))
+        visible = audience_tex(tex)
         for forbidden in FORBIDDEN_AUDIENCE_TERMS:
-            if forbidden in tex:
+            if forbidden in visible:
                 errors.append(f"{tex_path}: audience-facing TeX leaks {forbidden}")
         for source_like in [r"(?<![\\A-Za-z])beta_", r"(?<![\\A-Za-z])sum_", r"X'X", r"\^\(-1\)", r"(?<![\\A-Za-z])epsilon_"]:
             if re.search(source_like, tex):
@@ -122,7 +145,9 @@ def validate(out_dir: Path, *, allow_missing_render: bool = False, task_key: str
             errors.append(f"{tex_path}: old visual-maturity blocker text still present")
         if "Native axes, facets, method key, nominal line, and interval callout" in tex:
             errors.append(f"{tex_path}: quantitative result leaks implementation/QA wording")
-        if "small_g_negative_result.png" in tex and r"\scriptsize coverage" not in tex:
+        if "small_g_negative_result.png" in tex and not any(
+            label in tex for label in (r"\scriptsize coverage", r"\CoreCaptionFont coverage")
+        ):
             errors.append(f"{tex_path}: negative result plot lacks readable coverage y-axis label")
         connector_pattern = re.compile(r"\\StageThreeConnector\{([0-9.]+)\}\{([0-9.]+)\}\{([0-9.]+)\}\{([0-9.]+)\};")
         leftward_midline_connectors = [

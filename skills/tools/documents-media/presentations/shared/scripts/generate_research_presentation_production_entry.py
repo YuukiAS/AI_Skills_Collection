@@ -190,7 +190,9 @@ def build_storyline(bundle: dict[str, Any]) -> tuple[list[dict[str, Any]], dict[
     for job in ordered_jobs:
         enriched = dict(job)
         assignment = assignment_by_page[job["page_id"]]
-        enriched["section"] = assignment["workstream_label"]
+        # Keep the source's section names for the shared navigation. The
+        # workstream remains the authority for ordering and transition cues.
+        enriched.setdefault("section", assignment["workstream_label"])
         enriched["storyline"] = {
             "workstream_id": assignment["workstream_id"],
             "workstream_label": assignment["workstream_label"],
@@ -331,7 +333,7 @@ def build_specs(page_jobs: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def build_main_tex(bundle: dict[str, Any], specs: list[dict[str, Any]], layouts: list[dict[str, Any]], asset_map: dict[str, str]) -> str:
-    frames = "\n".join(stage3.emit_frame(spec, layout, asset_map) for spec, layout in zip(specs, layouts))
+    frames = stage3.emit_frames(specs, layouts, asset_map)
     metadata = bundle["metadata"]
     title = stage3.tex_escape(metadata["title"])
     subtitle = stage3.tex_escape(metadata.get("subtitle", "Research update"))
@@ -345,7 +347,6 @@ def build_main_tex(bundle: dict[str, Any], specs: list[dict[str, Any]], layouts:
 \def\input@path{{{{styles/}}}}
 \makeatother
 \usetheme{{sintef}}
-\titlebackground*{{assets/background}}
 \input{{scientific_layouts.tex}}
 \setbeameroption{{hide notes}}
 \bibliographystyle{{unsrt}}
@@ -375,6 +376,8 @@ def build_render_input_identity(build_dir: Path) -> dict[str, Any]:
             role = "copied_scientific_asset"
         elif relative.startswith("styles/"):
             role = "canonical_cuhk_style"
+        elif relative.startswith("beamer-core-v1/"):
+            role = "shared_beamer_core"
         elif relative.startswith("assets/"):
             role = "canonical_cuhk_asset"
         else:
@@ -469,7 +472,7 @@ def render_specs(bundle: dict[str, Any], specs: list[dict[str, Any]], out_dir: P
     build_dir = out_dir / "cuhk_production_build"
     if build_dir.exists():
         shutil.rmtree(build_dir)
-    shutil.copytree(CANONICAL_CUHK, build_dir)
+    stage3.copy_beamer_source(CANONICAL_CUHK, build_dir)
     previous_task_key = stage3.TASK_KEY
     stage3.TASK_KEY = task_key
     try:
