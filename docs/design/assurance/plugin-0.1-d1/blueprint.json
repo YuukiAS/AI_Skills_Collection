@@ -2326,7 +2326,7 @@
             {
               "id": "role-D1",
               "title": "D1：负责人",
-              "description": "按本角色规定的档次和上下文完成本轮任务，交回设计负责人。",
+              "description": "唯一负责人；规定验收语义；写冻结说明；审定改变完成标准的修订",
               "requirementIds": [
                 "r-roles",
                 "r-process",
@@ -2600,7 +2600,7 @@
             {
               "id": "role-D2",
               "title": "D2：独立甲",
-              "description": "按本角色规定的档次和上下文完成本轮任务，交回设计负责人。",
+              "description": "交出一份完整 Blueprint",
               "requirementIds": [
                 "r-roles",
                 "r-process",
@@ -2797,7 +2797,7 @@
             {
               "id": "role-D3",
               "title": "D3：独立乙",
-              "description": "按本角色规定的档次和上下文完成本轮任务，交回设计负责人。",
+              "description": "复杂或高风险时另出一份完整 Blueprint",
               "requirementIds": [
                 "r-roles",
                 "r-process",
@@ -2985,7 +2985,7 @@
             {
               "id": "role-D4",
               "title": "D4：现实核查",
-              "description": "按本角色规定的档次和上下文完成本轮任务，交回设计负责人。",
+              "description": "已有代码或数据时盘点并跑小探针",
               "requirementIds": [
                 "r-roles",
                 "r-process",
@@ -3163,7 +3163,7 @@
             {
               "id": "role-D5",
               "title": "D5：格式检查",
-              "description": "按本角色规定的档次和上下文完成本轮任务，交回设计负责人。",
+              "description": "跑 Blueprint 检查器",
               "requirementIds": [
                 "r-roles",
                 "r-process",
@@ -3341,7 +3341,7 @@
             {
               "id": "role-D6",
               "title": "D6：用户追问",
-              "description": "按本角色规定的档次和上下文完成本轮任务，交回设计负责人。",
+              "description": "扮演用户逐组件追问，答案不在 Blueprint 里即缺口；并核对冻结说明",
               "requirementIds": [
                 "r-roles",
                 "r-process",
@@ -3562,7 +3562,7 @@
             {
               "id": "role-D7",
               "title": "D7：冷读开工",
-              "description": "按本角色规定的档次和上下文完成本轮任务，交回设计负责人。",
+              "description": "只看 Blueprint，列出开工前还要问的问题",
               "requirementIds": [
                 "r-roles",
                 "r-process",
@@ -3731,7 +3731,7 @@
             {
               "id": "role-D8",
               "title": "D8：逐步复述",
-              "description": "每轮用一个新的 GPT 对话合批复述本轮全部单位，由 D1 逐项判断；读错改写后，下一轮新对话重读改动和受影响相邻单位。",
+              "description": "每轮一个新读者合批复述全部步骤，复述不对就重写",
               "requirementIds": [
                 "r-roles",
                 "r-process",
@@ -3910,7 +3910,7 @@
         {
           "id": "clarify",
           "title": "澄清与需求落图",
-          "description": "先查事实和作技术选择，只把用户有权决定的问题交给用户。",
+          "description": "只问用户能定的；能查的自己查；该定的自己定并写理由",
           "requirementIds": [
             "r-freeze",
             "r-prompts",
@@ -4454,7 +4454,7 @@
         {
           "id": "contract",
           "title": "九项冻结合同",
-          "description": "在Blueprint现有节点与接口中明确完成语义，并由冻结记录定位。",
+          "description": "能力与声明范围",
           "requirementIds": [
             "r-revision",
             "r-freeze",
@@ -6877,7 +6877,7 @@
             {
               "id": "role-X1",
               "title": "X1：负责人",
-              "description": "依本角色限定工作形成当前候选的原始证据，交给交付负责人。",
+              "description": "唯一负责人；只统筹不写代码；审查验收变化",
               "requirementIds": [
                 "r-roles",
                 "r-process",
@@ -7113,7 +7113,7 @@
             {
               "id": "role-X2",
               "title": "X2：实现者",
-              "description": "依本角色限定工作形成当前候选的原始证据，交给交付负责人。",
+              "description": "按冻结合同实现；写验收实现并用正例、坏例、缺证据例校准；申报所有偏离",
               "requirementIds": [
                 "r-roles",
                 "r-process",
@@ -7331,7 +7331,7 @@
             {
               "id": "role-X3",
               "title": "X3：独立验收",
-              "description": "依本角色限定工作形成当前候选的原始证据，交给交付负责人。",
+              "description": "科研数值、统计、安全相关，或验收器太弱需换人重写时启用",
               "requirementIds": [
                 "r-roles",
                 "r-process",
@@ -7521,7 +7521,7 @@
             {
               "id": "role-X4",
               "title": "X4：专项检查",
-              "description": "依本角色限定工作形成当前候选的原始证据，交给交付负责人。",
+              "description": "用现有插件或工具按既定准则逐项检查：版式、文案规范、视觉回归、领域规则；只交证据",
               "requirementIds": [
                 "r-roles",
                 "r-process",
@@ -7700,7 +7700,7 @@
             {
               "id": "role-X5",
               "title": "X5：专业裁判",
-              "description": "依本角色限定工作形成当前候选的原始证据，交给交付负责人。",
+              "description": "不看实现过程，判断最终产物是否真正满足冻结的验收语义：结论、推导、图表是否成立；只交证据",
               "requirementIds": [
                 "r-roles",
                 "r-process",
