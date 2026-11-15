@@ -1,0 +1,29 @@
+{
+  "code_sha256": "fb79726cf8e3bd5e7c30d0f3556d62f4f04079305738e90f88eb1295e0594834",
+  "conditional_selector_hits": [],
+  "integrity_hooks": [
+    "presentations_validator_v2.integrity.sources",
+    "presentations_validator_v2.integrity.registries",
+    "presentations_validator_v2.integrity.scope_and_locks",
+    "presentations_validator_v2.integrity.objects",
+    "presentations_validator_v2.integrity.artifacts_and_review"
+  ],
+  "layout_hooks": {
+    "CAPTION": "presentations_validator_v2.layout.checks.captions",
+    "CLOSING": "presentations_validator_v2.layout.checks.closing",
+    "COLUMN": "presentations_validator_v2.layout.checks.columns",
+    "DENSITY_WHITESPACE": "presentations_validator_v2.layout.checks.density",
+    "DIAGRAM": "presentations_validator_v2.layout.checks.diagram",
+    "FOOTER": "presentations_validator_v2.layout.checks.footer",
+    "PROTECTION": "presentations_validator_v2.layout.protection.compare",
+    "QA": "presentations_validator_v2.layout.checks.qa",
+    "RAIL": "presentations_validator_v2.layout.checks.rail",
+    "SECTION_NAV": "presentations_validator_v2.layout.checks.section_nav",
+    "SPACE": "presentations_validator_v2.layout.checks.spacing",
+    "TABLE": "presentations_validator_v2.layout.checks.tables",
+    "TYPE": "presentations_validator_v2.layout.checks.typography",
+    "TYPE_SOURCE": "presentations_validator_v2.layout.source.scan"
+  },
+  "scope": "AST scan for known forbidden selectors; not a semantic proof",
+  "validator_version": "2.0"
+}

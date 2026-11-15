@@ -1,0 +1,38 @@
+test_exact_archived_section_label_routes_fail (test_archive.ArchivedGeometry.test_exact_archived_section_label_routes_fail) ... ok
+test_exact_oracle_and_archived_body_rails (test_archive.ArchivedGeometry.test_exact_oracle_and_archived_body_rails) ... ok
+test_unrelated_teaching_and_research_renders (test_beamer.PublicBeamerControls.test_unrelated_teaching_and_research_renders) ... ok
+test_combined_layout_rejects_unbound_candidate_pdf (test_integrity.IntegrityTests.test_combined_layout_rejects_unbound_candidate_pdf) ... ok
+test_coordinated_source_substitution (test_integrity.IntegrityTests.test_coordinated_source_substitution) ... ok
+test_duplicate_id_rejected (test_integrity.IntegrityTests.test_duplicate_id_rejected) ... ok
+test_duplicate_key_before_materialization (test_integrity.IntegrityTests.test_duplicate_key_before_materialization) ... ok
+test_exact_source_tuple (test_integrity.IntegrityTests.test_exact_source_tuple) ... ok
+test_fake_relocation_and_wrong_real_destination (test_integrity.IntegrityTests.test_fake_relocation_and_wrong_real_destination) ... ok
+test_feedback_component_full_fidelity (test_integrity.IntegrityTests.test_feedback_component_full_fidelity) ... ok
+test_historical_commit_does_not_need_head (test_integrity.IntegrityTests.test_historical_commit_does_not_need_head) ... ok
+test_missing_lock_and_mandatory_identity (test_integrity.IntegrityTests.test_missing_lock_and_mandatory_identity) ... ok
+test_partial_global_review_and_artifact_namespace (test_integrity.IntegrityTests.test_partial_global_review_and_artifact_namespace) ... ok
+test_replay_no_substitution (test_integrity.IntegrityTests.test_replay_no_substitution) ... ok
+test_answer_rule_endpoints_and_label (test_layout.GeometryBoundaries.test_answer_rule_endpoints_and_label) ... ok
+test_arrow_thresholds_and_collision (test_layout.GeometryBoundaries.test_arrow_thresholds_and_collision) ... ok
+test_body_rail (test_layout.GeometryBoundaries.test_body_rail) ... ok
+test_caption_role_and_multiline_left_anchor (test_layout.GeometryBoundaries.test_caption_role_and_multiline_left_anchor) ... ok
+test_closing_center_and_body_rail (test_layout.GeometryBoundaries.test_closing_center_and_body_rail) ... ok
+test_column_anchors_and_custom_review (test_layout.GeometryBoundaries.test_column_anchors_and_custom_review) ... ok
+test_font_tolerance_and_compression (test_layout.GeometryBoundaries.test_font_tolerance_and_compression) ... ok
+test_footer_link_and_credit_center (test_layout.GeometryBoundaries.test_footer_link_and_credit_center) ... ok
+test_section_nav_frame_budget (test_layout.GeometryBoundaries.test_section_nav_frame_budget) ... ok
+test_spacing_relation_classification (test_layout.GeometryBoundaries.test_spacing_relation_classification) ... ok
+test_table_semantic_atom_wrap (test_layout.GeometryBoundaries.test_table_semantic_atom_wrap) ... ok
+test_whitespace_review_and_objective_contradiction (test_layout.GeometryBoundaries.test_whitespace_review_and_objective_contradiction) ... ok
+test_pdf_binding_and_review_preservation (test_layout.RenderedControls.test_pdf_binding_and_review_preservation) ... ok
+test_protection_masks (test_layout.RenderedControls.test_protection_masks) ... ok
+test_source_scan_ignores_comments (test_layout.RenderedControls.test_source_scan_ignores_comments) ... ok
+test_research_routing_defaults_to_exact_cuhk_beamer_with_editable_override (test_presentations.PresentationSharedTests.test_research_routing_defaults_to_exact_cuhk_beamer_with_editable_override) ... ok
+test_existing_deck_revision_gate_rejects_public_safe_known_failures (test_presentations.PresentationSharedTests.test_existing_deck_revision_gate_rejects_public_safe_known_failures) ... ok
+test_existing_deck_revision_gate_allows_unrelated_reviewed_regression (test_presentations.PresentationSharedTests.test_existing_deck_revision_gate_allows_unrelated_reviewed_regression) ... ok
+test_existing_deck_revision_gate_blocks_self_attested_review (test_presentations.PresentationSharedTests.test_existing_deck_revision_gate_blocks_self_attested_review) ... ok
+
+----------------------------------------------------------------------
+Ran 33 tests in 5.100s
+
+OK
