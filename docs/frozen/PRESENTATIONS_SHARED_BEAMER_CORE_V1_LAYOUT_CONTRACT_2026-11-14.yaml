@@ -1,0 +1,105 @@
+schema: presentations-shared-beamer-core-v1
+status: FROZEN_PLANNER_AUTHORITY
+source_oracle:
+  repo: YuukiAS/STAT5060-TA
+  artifact_commit: 62678cd22409906797474752ae4f304f867d96cc
+  style_freeze_commit: d019fd53513682004c154d6d0e6ea76b2099296b
+  pdf_sha256: 88eae6b2073715729abd9c2b004d1d0f31541c4314c2b64cd49194346b35d6e1
+geometry:
+  aspect_ratio: "16:9"
+  body_margin_left_mm: 8
+  body_margin_right_mm: 8
+fonts:
+  latin: TeX Gyre Termes
+  math: TeX Gyre Termes Math
+  math_cal: New Computer Modern Math
+  cjk_serif: Noto Serif SC
+  cjk_sans: Noto Sans SC
+  code: Latin Modern Mono
+typography:
+  frame_title: {tex_pt: 13, leading_pt: 15.5, pdf_pt: 12.951, tolerance_pdf_pt: 0.1, weight: bold}
+  body: {tex_pt: 11, leading_pt: 13.5, pdf_pt: 10.959, tolerance_pdf_pt: 0.1}
+  subhead: {tex_pt: 11, leading_pt: 13.5, pdf_pt: 10.959, tolerance_pdf_pt: 0.1, weight: bold}
+  table: {tex_pt: 10, leading_pt: 12.2, pdf_pt: 9.963, tolerance_pdf_pt: 0.1}
+  code: {tex_pt: 8, leading_pt: 9.6, pdf_pt: 7.970, tolerance_pdf_pt: 0.1}
+  caption: {tex_pt: 8, leading_pt: 9.6, pdf_pt: 7.970, tolerance_pdf_pt: 0.1}
+  footer: {tex_pt: 8, leading_pt: 9.6, pdf_pt: 7.970, tolerance_pdf_pt: 0.1}
+  section_nav: {tex_pt: 6.8, leading_pt: 7.4, pdf_pt: 6.775, tolerance_pdf_pt: 0.1, weight: bold}
+  closing_question: {tex_pt: 16, leading_pt: 19.2, pdf_pt: 16.0, tolerance_pdf_pt: 0.2}
+forbidden_local_fallbacks:
+  - tiny
+  - page_local_font_shrink
+  - arbitrary_fontsize
+  - resizebox_text
+  - scalebox_text
+  - reduced_body_baselineskip
+  - negative_vspace_for_fit
+  - itemsep_zero_for_teaching_list
+spacing_pdf_pt:
+  list_item_gap: {target: [3, 7], fail_below: 2}
+  paragraph_to_list: {target: [5, 12], fail_below: 3}
+  paragraph_to_table: {target: [7, 14], fail_below: 4}
+  paragraph_to_figure: {target: [7, 14], fail_below: 4}
+  paragraph_to_display_math: {target: [5, 12], fail_below: 3}
+  display_math_to_table: {target: [7, 14], fail_below: 4}
+  display_math_to_body: {target: [5, 12], fail_below: 3}
+  table_to_interpretation: {target: [7, 17], fail_below: 5}
+  caption_to_body: {target: [6, 12], fail_below: 4}
+  question_to_next: {target: [8, 15], fail_below: 6}
+  within_group: {target: [5, 15], fail_below: 4}
+  between_group: {target: [9, 22], fail_below: 7}
+teaching_list:
+  itemsep_tex_pt: 4
+  allowed_itemsep_tex_pt: [3, 6]
+  body_leading_tex_pt: 13.5
+columns:
+  equal: [0.48, 0.48]
+  evidence_left: [0.57, 0.39]
+  evidence_right: [0.39, 0.57]
+  optical_anchor_tolerance_px: 2
+caption:
+  below_object: true
+  alignment: left
+  left_anchor_tolerance_px: 2
+qa:
+  answer_label_outside_rule: true
+  answer_rule_top_to_body_tolerance_px: 2
+  answer_rule_bottom_to_body_tolerance_px: 2
+footer:
+  left_credit_center_tolerance_px: 0.5
+  native_navigation_required: true
+section_navigation:
+  font_tex_pt: 6.8
+  single_line: true
+  neighbor_gap_px_min: 12
+  width_cap:
+    base_pdf_pt: 34
+    page_weight_pdf_pt: 38
+    formula: "base + page_weight * n_s / n_max"
+    review_utilization: 0.90
+    fail_utilization: 1.0
+table:
+  accidental_semantic_atom_wrap: fail
+diagram:
+  shaft_fail_below_mm: 6
+  shaft_review_below_mm: 8
+  preferred_process_shaft_mm: [8, 10]
+  boundary_tolerance_px: 2
+  peer_length_tolerance_px: 2
+closing:
+  body_margin_mm: 8
+  upper_fraction: 0.68
+  questions_center_body_fraction: 0.78
+  questions_center_tolerance_fraction: 0.04
+  questions_pdf_pt: 16
+density_whitespace:
+  total_occupancy_alone_can_pass: false
+  large_void_without_objective_contradiction: REVIEW
+  large_void_with_objective_crowding_or_undersizing: FAIL_WHEN_MEASURABLE
+skins:
+  allowed_differences:
+    - palette
+    - logo
+    - title_background
+    - brand_identity_text
+    - brand_source_credit

@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "presentations-validator-v2"
+version = "2.0.0"
+requires-python = ">=3.10"
+dependencies = ["PyMuPDF>=1.24,<2", "PyYAML>=6,<7"]
+
+[project.scripts]
+presentations-validator-v2 = "presentations_validator_v2.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["presentations_validator_v2*"]
+namespaces = true

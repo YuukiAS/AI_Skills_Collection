@@ -84,7 +84,7 @@ Formal Presentations output must not use or resolve any of the following as an a
 - arbitrary system fonts
 - another font chosen because the canonical font is missing
 
-The existing legacy CUHK source currently contains Times New Roman. That is legacy source behavior, not the canonical Presentations font policy. When the CUHK adapter is migrated to the shared core, it must use this allowlist while preserving CUHK branding, geometry and colour roles.
+Both built-in skins load the allowlist from the shared Beamer core. CUHK's compatibility import loads the same core and retains the approved CUHK brand assets.
 
 ## 3. Resource ownership
 

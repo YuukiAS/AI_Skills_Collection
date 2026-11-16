@@ -23,21 +23,28 @@ DEFAULT_TASK_KEY = "027_research_presentation_executable_cuhk_scientific_layout_
 RECOVERY_TASK_KEY = "030_stage3_visual_recovery"
 TASK_KEY = DEFAULT_TASK_KEY
 CANONICAL_CUHK = SHARED / "templates" / "cuhk" / "beamer" / "source"
+CANONICAL_BEAMER_CORE = SHARED / "templates" / "_shared" / "beamer-core-v1"
 DEFAULT_OUT = REPO_ROOT / "docs" / "audits" / "research_presentation_cuhk_scientific_layout_stage3" / "generated"
 
 SLIDE_W = 16.0
 SLIDE_H = 9.0
 SAFE_REGION = {"x": 0.060, "y": 0.185, "w": 0.880, "h": 0.675}
 LOCAL_TINYTEX_BIN = Path("/home/yuukias/.TinyTeX/bin/x86_64-linux")
-FONT_RESOURCE_TOKEN = "__AI_SKILLS_FONT_RESOURCE_ROOT__"
 REQUIRED_FONT_FILES = {
     "texgyretermes_regular": Path("fonts/texgyre-termes/texgyretermes-regular.otf"),
     "texgyretermes_bold": Path("fonts/texgyre-termes/texgyretermes-bold.otf"),
     "texgyretermes_italic": Path("fonts/texgyre-termes/texgyretermes-italic.otf"),
     "texgyretermes_bolditalic": Path("fonts/texgyre-termes/texgyretermes-bolditalic.otf"),
     "texgyretermes_math": Path("fonts/texgyre-termes-math/texgyretermes-math.otf"),
+    "newcm_math_calligraphic": Path("fonts/newcomputermodern/NewCMMath-Regular.otf"),
+    **{
+        name.lower().replace("-", "_"): Path(f"texmf/fonts/opentype/public/noto-cjk/{name}.otf")
+        for family in ("NotoSerifSC", "NotoSansSC")
+        for face in ("Regular", "Bold")
+        for name in (f"{family}-{face}",)
+    },
 }
-ALLOWED_PDF_FONT_MARKERS = ("texgyretermes", "texgyretermesmath", "lmmono")
+ALLOWED_PDF_FONT_PREFIXES = ("texgyretermes", "newcmmath", "notoserifsc", "notosanssc", "lmmono")
 FORBIDDEN_AUDIENCE_TERMS = [
     "RRL-",
     "SRC-",
@@ -411,14 +418,26 @@ def materialize_font_binding(build_dir: Path) -> dict[str, Any]:
     binding = font_resource_binding()
     if binding["status"] != "READY":
         return binding
-    style = build_dir / "styles/beamerthemesintef.sty"
-    text = style.read_text(encoding="utf-8")
-    if FONT_RESOURCE_TOKEN not in text:
-        if binding["resource_dir"] in text:
-            return {**binding, "status": "READY", "materialized_style": rel(style), "materialized_style_sha256": file_sha(style)}
-        return {**binding, "status": "BLOCKED_FONT_RESOURCE_TOKEN_MISSING"}
-    style.write_text(text.replace(FONT_RESOURCE_TOKEN, binding["resource_dir"]), encoding="utf-8")
-    return {**binding, "status": "READY", "materialized_style": rel(style), "materialized_style_sha256": file_sha(style)}
+    target = build_dir / "beamer-font-root.tex"
+    resource = binding["resource_dir"]
+    if any(character in resource for character in "\n\r{}%\\"):
+        return {**binding, "status": "BLOCKED_UNSUPPORTED_TEX_RESOURCE_PATH"}
+    target.write_text(r"\def\PresentationFontResourceDir{\detokenize{" + resource + "}}\n", encoding="utf-8")
+    return {**binding, "materialized_font_binding": rel(target), "materialized_font_binding_sha256": file_sha(target)}
+
+
+def copy_beamer_source(source: Path, build_dir: Path) -> None:
+    def skip_previous_outputs(directory: str, names: list[str]) -> set[str]:
+        if Path(directory) != source:
+            return set()
+        prior_outputs = {
+            CANONICAL_BEAMER_CORE.name, "beamer-font-root.tex", "build-receipt.json", "compile.log",
+            "main.aux", "main.log", "main.nav", "main.out", "main.pdf", "main.snm", "main.toc", "main.vrb",
+        }
+        return prior_outputs.intersection(names)
+
+    shutil.copytree(source, build_dir, ignore=skip_previous_outputs)
+    shutil.copytree(CANONICAL_BEAMER_CORE, build_dir / CANONICAL_BEAMER_CORE.name)
 
 
 def pdf_font_qa(pdf: Path) -> dict[str, Any]:
@@ -428,7 +447,7 @@ def pdf_font_qa(pdf: Path) -> dict[str, Any]:
     run = subprocess.run([command, str(pdf)], check=False, capture_output=True, text=True)
     rows = [line for line in run.stdout.splitlines()[2:] if line.strip()]
     names = [line.split()[0] for line in rows]
-    unexpected = [name for name in names if not any(marker in name.lower() for marker in ALLOWED_PDF_FONT_MARKERS)]
+    unexpected = [name for name in names if not name.split("+")[-1].lower().startswith(ALLOWED_PDF_FONT_PREFIXES)]
     return {
         "status": "PASS" if run.returncode == 0 and not unexpected else "FAIL_UNEXPECTED_PDF_FONT",
         "command": command,
@@ -827,7 +846,7 @@ def model_support_blocks(spec: dict[str, Any]) -> list[dict[str, Any]]:
     ]
     if scientific_objects:
         role_lines = [
-            rf"\scriptsize\textbullet\ {tex_escape(item)}"
+            rf"\CoreCaptionFont\textbullet\ {tex_escape(item)}"
             for item in scientific_objects
         ]
         blocks.append(
@@ -854,27 +873,22 @@ def model_support_blocks(spec: dict[str, Any]) -> list[dict[str, Any]]:
     return blocks
 
 
-def emit_equation(spec: dict[str, Any], layout: dict[str, Any]) -> str:
-    primary = layout["resolved_primary_object_geometry"]
-    annotation = layout["resolved_supporting_object_geometry"]["annotation"]
-    caption = layout["resolved_supporting_object_geometry"]["caption"]
-    parts = [
-        tex_node(primary["x"], primary["y"], primary["w"], rf"\LARGE \[\displaystyle {spec['math']}\]", align="center"),
-        tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\normalsize {spec['annotation']}", align="center"),
-    ]
-    for block in model_support_blocks(spec):
-        bbox = block["bbox"]
-        parts.append(rf"\StageThreePanel{{{bbox['x'] - 0.015:.4f}}}{{{bbox['y'] - 0.020:.4f}}}{{{bbox['x'] + bbox['w'] + 0.015:.4f}}}{{{bbox['y'] + bbox['h'] + 0.020:.4f}}};")
-        parts.append(
-            tex_node(
-                bbox["x"],
-                bbox["y"],
-                bbox["w"],
-                rf"\footnotesize\textbf{{{block['label']}}}\\[-0.10em]{block['tex_body']}",
-            )
-        )
+def emit_equation(spec: dict[str, Any]) -> str:
+    # Let the native display use the full text rail. Supporting roles use
+    # normal-flow boxes so they grow with the source copy.
+    parts = [rf"\[\displaystyle {spec['math']}\]"]
     if caption_text := str(spec.get("caption") or "").strip():
-        parts.append(tex_node(caption["x"], caption["y"], caption["w"], rf"\scriptsize {tex_escape(caption_text)}", align="center"))
+        parts.append(rf"\CoreCaption{{{tex_escape(caption_text)}}}\CoreCaptionToBody")
+    else:
+        parts.append(r"\CoreDisplayMathToBody")
+    parts.append(rf"\noindent {spec['annotation']}\par")
+    blocks = [
+        rf"\TermBlock{{{block['label']}}}{{{block['tex_body']}}}"
+        for block in model_support_blocks(spec)
+    ]
+    if blocks:
+        parts.append(r"\CoreBetweenGroups")
+        parts.append(rf"\CoreEqualColumns{{{blocks[0]}}}{{{blocks[1]}}}" if len(blocks) == 2 else blocks[0])
     return "\n".join(parts)
 
 
@@ -933,7 +947,7 @@ def emit_result_figure(spec: dict[str, Any], layout: dict[str, Any]) -> str:
 
     parts = [
         tex_node(x, y + 0.005, w, r"\small\textbf{Coverage by ICC under imbalanced clusters}", align="center"),
-        tex_node(x, y + h - 0.038, w * 0.62, r"\scriptsize Data source: 400 simulation replicates per cell; y-axis shows 95\% interval coverage.", align="left"),
+        tex_node(x, y + h - 0.038, w * 0.62, r"\CoreCaptionFont Data source: 400 simulation replicates per cell; y-axis shows 95\% interval coverage.", align="left"),
     ]
     nominal_y = py(float(spec["nominal_coverage"]))
     center_counts = sorted(data)
@@ -943,20 +957,20 @@ def emit_result_figure(spec: dict[str, Any], layout: dict[str, Any]) -> str:
             [
                 rf"\draw[line width=0.55pt,draw=black!55] ({fx:.4f},{plot_y:.4f}) rectangle ({fx+facet_w:.4f},{plot_y+plot_h:.4f});",
                 rf"\draw[line width=0.75pt,draw=orange!85!black] ({fx:.4f},{nominal_y:.4f}) -- ({fx+facet_w:.4f},{nominal_y:.4f});",
-                tex_node(fx, plot_y - 0.032, facet_w, rf"\footnotesize\textbf{{G={center_count}}}", align="center"),
+                tex_node(fx, plot_y - 0.032, facet_w, rf"\CoreTableFont\textbf{{G={center_count}}}", align="center"),
             ]
         )
         for tick, label in [(0.50, "0.50"), (0.75, "0.75"), (0.95, "0.95"), (1.00, "1.00")]:
             ty = py(tick)
             parts.append(rf"\draw[line width=0.35pt,draw=black!22] ({fx:.4f},{ty:.4f}) -- ({fx+facet_w:.4f},{ty:.4f});")
             if facet_index == 0:
-                parts.append(tex_node(fx - 0.038, ty - 0.008, 0.032, rf"\scriptsize {label}", align="right"))
+                parts.append(tex_node(fx - 0.038, ty - 0.008, 0.032, rf"\CoreCaptionFont {label}", align="right"))
         for rho, label in [(0.0, "0"), (0.1, ".1"), (0.3, ".3"), (0.5, ".5")]:
             tx = px(facet_index, rho)
             parts.extend(
                 [
                     rf"\draw[line width=0.4pt,draw=black!45] ({tx:.4f},{plot_y+plot_h:.4f}) -- ({tx:.4f},{plot_y+plot_h+0.008:.4f});",
-                    tex_node(tx - 0.011, plot_y + plot_h + 0.014, 0.030, rf"\scriptsize {label}", align="center"),
+                    tex_node(tx - 0.011, plot_y + plot_h + 0.014, 0.030, rf"\CoreCaptionFont {label}", align="center"),
                 ]
             )
         for method in spec["methods"]:
@@ -980,40 +994,34 @@ def emit_result_figure(spec: dict[str, Any], layout: dict[str, Any]) -> str:
     parts.extend(
         [
             rf"\draw[-{{Latex[length=2mm]}},line width=0.75pt,draw=maincolor!80] ({label_x+0.114:.4f},{label_y+0.032:.4f}) -- ({callout_x:.4f},{callout_y:.4f});",
-            tex_node(label_x, label_y, 0.142, rf"\scriptsize\textbf{{{tex_escape(callout['label'])}}}\\cluster robust = 0.78", align="left"),
-            tex_node(legend_x, plot_y + 0.010, legend_w, r"\footnotesize\textbf{Method key}", align="left"),
+            tex_node(label_x, label_y, 0.142, rf"\CoreCaptionFont\textbf{{{tex_escape(callout['label'])}}}\\cluster robust = 0.78", align="left"),
+            tex_node(legend_x, plot_y + 0.010, legend_w, r"\CoreTableFont\textbf{Method key}", align="left"),
         ]
     )
     for idx, method in enumerate(spec["methods"]):
         ly = plot_y + 0.064 + idx * 0.054
         parts.append(rf"\draw[line width=1.4pt,draw={method['color']}] ({legend_x:.4f},{ly:.4f}) -- ({legend_x+0.032:.4f},{ly:.4f});")
         parts.append(rf"\fill[fill={method['color']}] ({legend_x+0.016:.4f},{ly:.4f}) circle (1.5pt);")
-        parts.append(tex_node(legend_x + 0.041, ly - 0.015, legend_w - 0.045, rf"\footnotesize {tex_escape(method['label'])}", align="left"))
+        parts.append(tex_node(legend_x + 0.041, ly - 0.015, legend_w - 0.045, rf"\CoreTableFont {tex_escape(method['label'])}", align="left"))
     parts.extend(
         [
             rf"\draw[line width=1.0pt,draw=orange!85!black] ({legend_x:.4f},{plot_y+0.174:.4f}) -- ({legend_x+0.032:.4f},{plot_y+0.174:.4f});",
-            tex_node(legend_x + 0.041, plot_y + 0.159, legend_w - 0.045, r"\footnotesize nominal 0.95", align="left"),
-            tex_node(plot_x + facet_w * 1.12, plot_y + plot_h + 0.040, facet_w, r"\footnotesize ICC \(\rho\)", align="center"),
-            tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}"),
-            tex_node(caption["x"], caption["y"], caption["w"], rf"\scriptsize {tex_escape(spec['caption'])}"),
+            tex_node(legend_x + 0.041, plot_y + 0.159, legend_w - 0.045, r"\CoreTableFont nominal 0.95", align="left"),
+            tex_node(plot_x + facet_w * 1.12, plot_y + plot_h + 0.040, facet_w, r"\CoreTableFont ICC \(\rho\)", align="center"),
+            tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\CoreTableFont {tex_escape(spec['annotation'])}"),
+            tex_node(caption["x"], caption["y"], caption["w"], rf"\CoreCaptionFont {tex_escape(spec['caption'])}"),
         ]
     )
     return "\n".join(parts)
 
 
-def emit_figure(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str, str]) -> str:
-    if spec.get("dominant_object") == "negative_evidence_plot":
-        return emit_negative_evidence_plot(spec, layout, asset_map)
-    primary = layout["resolved_primary_object_geometry"]
-    annotation = layout["resolved_supporting_object_geometry"]["annotation"]
-    caption = layout["resolved_supporting_object_geometry"]["caption"]
+def emit_figure(spec: dict[str, Any], asset_map: dict[str, str]) -> str:
     asset = asset_map[spec["asset"]]
     trim = f",trim={spec['image_trim']},clip" if spec.get("image_trim") else ""
-    return "\n".join([
-        tex_node(primary["x"], primary["y"], primary["w"], rf"\includegraphics[width={primary['w']:.4f}\paperwidth,height={primary['h']:.4f}\paperheight,keepaspectratio{trim}]{{{asset}}}", align="center"),
-        tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}"),
-        tex_node(caption["x"], caption["y"], caption["w"], rf"\scriptsize {tex_escape(spec['caption'])}"),
-    ])
+    return rf"""\CoreEvidenceLeft{{%
+  \CoreCaptioned{{\includegraphics[width=\linewidth,height=.62\textheight,keepaspectratio{trim}]{{{asset}}}}}
+                {{{tex_escape(spec['caption'])}}}%
+}}{{\noindent {tex_escape(spec['annotation'])}\par}}"""
 
 
 def emit_negative_evidence_plot(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str, str]) -> str:
@@ -1039,14 +1047,14 @@ def emit_negative_evidence_plot(spec: dict[str, Any], layout: dict[str, Any], as
         parts.extend(
             [
                 rf"\draw[line width=0.55pt,draw=black!62] ({plot_x-0.006:.4f},{ty:.4f}) -- ({plot_x+0.006:.4f},{ty:.4f});",
-                tex_node(plot_x - 0.050, ty - 0.010, 0.040, rf"\scriptsize {label}", align="right"),
+                tex_node(plot_x - 0.050, ty - 0.010, 0.040, rf"\CoreCaptionFont {label}", align="right"),
             ]
         )
     parts.extend(
         [
-            tex_node(plot_x - 0.072, plot_y + plot_h + 0.012, 0.066, r"\scriptsize coverage", align="right"),
-            tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\footnotesize {tex_escape(spec['annotation'])}"),
-            tex_node(caption["x"], caption["y"], caption["w"], rf"\scriptsize {tex_escape(spec['caption'])}"),
+            tex_node(plot_x - 0.072, plot_y + plot_h + 0.012, 0.066, r"\CoreCaptionFont coverage", align="right"),
+            tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\CoreTableFont {tex_escape(spec['annotation'])}"),
+            tex_node(caption["x"], caption["y"], caption["w"], rf"\CoreCaptionFont {tex_escape(spec['caption'])}"),
         ]
     )
     return "\n".join(parts)
@@ -1069,7 +1077,7 @@ def emit_flow(spec: dict[str, Any], layout: dict[str, Any]) -> str:
         x = primary["x"] + idx * (node_w + gap)
         centers.append((x + node_w, y + node_h / 2))
         parts.append(rf"\StageThreeBox{{{x:.4f}}}{{{y:.4f}}}{{{x+node_w:.4f}}}{{{y+node_h:.4f}}};")
-        parts.append(tex_node(x + 0.008, y + 0.027, node_w - 0.016, rf"\footnotesize {tex_escape(label)}", align="center"))
+        parts.append(tex_node(x + 0.008, y + 0.027, node_w - 0.016, rf"\CoreTableFont {tex_escape(label)}", align="center"))
     for idx in range(len(centers) - 1):
         x1 = centers[idx][0] + 0.004
         y1 = centers[idx][1]
@@ -1111,14 +1119,14 @@ def emit_experiment_design(spec: dict[str, Any], layout: dict[str, Any]) -> str:
         parts.extend(
             [
                 rf"\fill[fill=maincolor!75] ({factor_x:.4f},{fy+0.007:.4f}) circle (2.7pt);",
-                tex_node(factor_x + 0.018, fy - 0.007, factor_w - 0.018, rf"\footnotesize {factor}", align="left"),
+                tex_node(factor_x + 0.018, fy - 0.007, factor_w - 0.018, rf"\CoreTableFont {factor}", align="left"),
             ]
         )
     parts.extend(
         [
             rf"\draw[line width=1.0pt,draw=maincolor!60] ({hierarchy_x+0.048:.4f},{center_y-0.094:.4f}) ellipse (0.068 and 0.090);",
             rf"\draw[line width=1.0pt,draw=maincolor!60] ({hierarchy_x+0.048:.4f},{center_y+0.094:.4f}) ellipse (0.068 and 0.090);",
-            tex_node(hierarchy_x - 0.038, center_y + 0.205, 0.185, rf"\footnotesize {tex_escape(section_labels[1])}", align="center"),
+            tex_node(hierarchy_x - 0.038, center_y + 0.205, 0.185, rf"\CoreTableFont {tex_escape(section_labels[1])}", align="center"),
         ]
     )
     for base_y in [center_y - 0.094, center_y + 0.094]:
@@ -1129,12 +1137,12 @@ def emit_experiment_design(spec: dict[str, Any], layout: dict[str, Any]) -> str:
     for procedure, py in zip(spec["procedures"], procedure_rows):
         parts.append(rf"\draw[line width=1.15pt,draw=maincolor!75] ({proc_x:.4f},{py:.4f}) -- ({proc_x+0.160:.4f},{py:.4f});")
         parts.append(rf"\fill[fill=white,draw=maincolor!75,line width=1.0pt] ({proc_x+0.080:.4f},{py:.4f}) circle (9.6pt);")
-        parts.append(tex_node(proc_x - 0.006, py + 0.026, 0.172, rf"\footnotesize {tex_escape(procedure)}", align="center"))
+        parts.append(tex_node(proc_x - 0.006, py + 0.026, 0.172, rf"\CoreTableFont {tex_escape(procedure)}", align="center"))
     endpoint_rows = spread_positions(y + h * 0.190, y + h * 0.565, len(spec["endpoints"]))
     for endpoint, ey in zip(spec["endpoints"], endpoint_rows):
         parts.append(rf"\draw[line width=1.35pt,draw=orange!80!black] ({endpoint_x:.4f},{ey:.4f}) -- ({endpoint_x+0.035:.4f},{ey:.4f});")
         parts.append(rf"\draw[line width=0.70pt,draw=black!50] ({endpoint_x:.4f},{ey-0.015:.4f}) -- ({endpoint_x:.4f},{ey+0.015:.4f});")
-        parts.append(tex_node(endpoint_x + 0.043, ey - 0.026, 0.170, rf"\footnotesize {tex_escape(endpoint)}", align="left"))
+        parts.append(tex_node(endpoint_x + 0.043, ey - 0.026, 0.170, rf"\CoreTableFont {tex_escape(endpoint)}", align="left"))
     mid_y = center_y
     parts.extend([
         rf"\StageThreeConnector{{{factor_x+factor_w+0.010:.4f}}}{{{mid_y:.4f}}}{{{hierarchy_x-0.014:.4f}}}{{{mid_y:.4f}}};",
@@ -1171,35 +1179,35 @@ def emit_next_experiment(spec: dict[str, Any], layout: dict[str, Any]) -> str:
     mid_y = y + h * 0.460
     parts = [
         tex_node(evidence_x, y + 0.020, 0.230, r"\small\textbf{Failure evidence}", align="left"),
-        tex_node(evidence_x, y + 0.082, 0.238, rf"\footnotesize {tex_escape(spec['current_limit'])}", align="left"),
+        tex_node(evidence_x, y + 0.082, 0.238, rf"\CoreTableFont {tex_escape(spec['current_limit'])}", align="left"),
         rf"\draw[line width=1.35pt,draw=red!70!black] ({evidence_x:.4f},{mid_y+0.064:.4f}) -- ({evidence_x+0.198:.4f},{mid_y+0.064:.4f});",
         rf"\draw[line width=1.35pt,draw=orange!80!black] ({evidence_x:.4f},{mid_y+0.021:.4f}) -- ({evidence_x+0.198:.4f},{mid_y+0.021:.4f});",
         rf"\draw[line width=1.35pt,draw=teal!70!black] ({evidence_x:.4f},{mid_y-0.021:.4f}) -- ({evidence_x+0.198:.4f},{mid_y-0.021:.4f});",
-        tex_node(evidence_x + 0.010, mid_y + 0.088, 0.210, rf"\footnotesize {tex_escape(evidence_label)}", align="left"),
+        tex_node(evidence_x + 0.010, mid_y + 0.088, 0.210, rf"\CoreTableFont {tex_escape(evidence_label)}", align="left"),
         tex_node(strategy_x, y + 0.020, 0.230, r"\small\textbf{Manipulate sampling}", align="center"),
     ]
     strategy_rows = spread_positions(y + h * 0.205, y + h * 0.575, len(spec["strategy_variation"]))
     for strategy, sy in zip(spec["strategy_variation"], strategy_rows):
         parts.append(rf"\draw[line width=1.05pt,draw=maincolor!70] ({strategy_x:.4f},{mid_y:.4f}) -- ({strategy_x+0.082:.4f},{sy+0.012:.4f});")
         parts.append(rf"\fill[fill=white,draw=maincolor!70,line width=1.0pt] ({strategy_x+0.104:.4f},{sy+0.012:.4f}) circle (8.8pt);")
-        parts.append(tex_node(strategy_x + 0.128, sy - 0.010, 0.142, rf"\footnotesize {tex_escape(strategy)}", align="left"))
+        parts.append(tex_node(strategy_x + 0.128, sy - 0.010, 0.142, rf"\CoreTableFont {tex_escape(strategy)}", align="left"))
     parts.append(tex_node(comparator_x, y + 0.020, 0.188, r"\small\textbf{Comparator arms}", align="center"))
     comparator_rows = spread_positions(y + h * 0.300, y + h * 0.535, len(spec["comparator_setup"]))
     for comparator, cy in zip(spec["comparator_setup"], comparator_rows):
         parts.append(rf"\draw[line width=1.05pt,draw=teal!65!black] ({comparator_x:.4f},{mid_y:.4f}) -- ({comparator_x+0.060:.4f},{cy:.4f});")
         parts.append(rf"\draw[line width=1.35pt,draw=teal!65!black] ({comparator_x+0.060:.4f},{cy:.4f}) -- ({comparator_x+0.180:.4f},{cy:.4f});")
-        parts.append(tex_node(comparator_x + 0.056, cy + 0.012, 0.145, rf"\footnotesize {tex_escape(comparator)}", align="center"))
+        parts.append(tex_node(comparator_x + 0.056, cy + 0.012, 0.145, rf"\CoreTableFont {tex_escape(comparator)}", align="center"))
     parts.extend(
         [
             tex_node(decision_x - 0.005, y + 0.020, decision_text_w, r"\small\textbf{Decision rule}", align="center"),
             rf"\draw[line width=1.1pt,draw=orange!85!black] ({decision_x+0.075:.4f},{mid_y-0.080:.4f}) -- ({decision_x+0.150:.4f},{mid_y:.4f}) -- ({decision_x+0.075:.4f},{mid_y+0.080:.4f}) -- ({decision_x:.4f},{mid_y:.4f}) -- cycle;",
-            tex_node(decision_x + 0.020, mid_y - 0.020, 0.110, r"\footnotesize go/no-go", align="center"),
-            tex_node(decision_x - 0.002, mid_y + 0.108, decision_text_w, rf"\footnotesize {tex_escape(spec['decision_criterion'])}", align="left"),
+            tex_node(decision_x + 0.020, mid_y - 0.020, 0.110, r"\CoreTableFont go/no-go", align="center"),
+            tex_node(decision_x - 0.002, mid_y + 0.108, decision_text_w, rf"\CoreTableFont {tex_escape(spec['decision_criterion'])}", align="left"),
         ]
     )
     parts.extend([
         rf"\StageThreeConnector{{{evidence_x+0.218:.4f}}}{{{mid_y:.4f}}}{{{strategy_x-0.022:.4f}}}{{{mid_y:.4f}}};",
-        tex_node(evidence_x + 0.220, mid_y + connector_label_y, 0.075, r"\footnotesize motivates", align="center"),
+        tex_node(evidence_x + 0.220, mid_y + connector_label_y, 0.075, r"\CoreTableFont motivates", align="center"),
         rf"\StageThreeConnector{{{strategy_x+0.165:.4f}}}{{{mid_y:.4f}}}{{{comparator_x-0.018:.4f}}}{{{mid_y:.4f}}};",
         rf"\StageThreeConnector{{{comparator_x+0.115:.4f}}}{{{mid_y:.4f}}}{{{decision_x-0.018:.4f}}}{{{mid_y:.4f}}};",
     ])
@@ -1220,7 +1228,7 @@ def emit_image_panel(spec: dict[str, Any], layout: dict[str, Any], asset_map: di
     parts = []
     for idx, (label, asset) in enumerate(zip(labels, assets)):
         x = row_x + idx * (panel_w + gap)
-        parts.append(tex_node(x, y - 0.037, panel_w, rf"\footnotesize\textbf{{{tex_escape(label)}}}", align="center"))
+        parts.append(tex_node(x, y - 0.037, panel_w, rf"\CoreTableFont\textbf{{{tex_escape(label)}}}", align="center"))
         parts.append(tex_node(x, y, panel_w, rf"\includegraphics[width={panel_w:.4f}\paperwidth,height={panel_h:.4f}\paperheight,keepaspectratio]{{{asset}}}", align="center"))
     roi = spec["same_case_roi_zoom"]["roi_xywh"]
     source_w = spec["same_case_roi_zoom"]["crop_records"][0]["source_image_size"]["w"]
@@ -1248,37 +1256,82 @@ def emit_image_panel(spec: dict[str, Any], layout: dict[str, Any], asset_map: di
         [
             rf"\draw[line width=0.9pt,draw=orange!85!black] ({roi_x:.4f},{roi_y:.4f}) rectangle ({roi_x+roi_w:.4f},{roi_y+roi_h:.4f});",
             rf"\StageThreeConnector{{{roi_x+roi_w:.4f}}}{{{roi_y+roi_h:.4f}}}{{{zoom_x+zoom_panel_w*2+zoom_gap*2:.4f}}}{{{zoom_y - (0.016 if spec.get('legend_repair_hint') else 0.0):.4f}}};",
-            tex_node(zoom_x, zoom_y - 0.030, 0.435, r"\footnotesize\textbf{Same-case ROI zoom}", align="left"),
+            tex_node(zoom_x, zoom_y - 0.030, 0.435, r"\CoreTableFont\textbf{Same-case ROI zoom}", align="left"),
         ]
     )
     for idx, (label, raw) in enumerate(zip(spec["roi_crop_labels"], spec["roi_crop_assets"])):
         zx = zoom_x + idx * (zoom_panel_w + zoom_gap)
         crop_asset = asset_map[f"{raw}#roi_zoom"]
         parts.append(tex_node(zx, zoom_y, zoom_panel_w, rf"\includegraphics[width={zoom_panel_w:.4f}\paperwidth,height={zoom_panel_h:.4f}\paperheight,keepaspectratio]{{{crop_asset}}}", align="center"))
-        parts.append(tex_node(zx, zoom_y + zoom_panel_h + 0.008, zoom_panel_w, rf"\scriptsize {tex_escape(label)}", align="center"))
+        parts.append(tex_node(zx, zoom_y + zoom_panel_h + 0.008, zoom_panel_w, rf"\CoreCaptionFont {tex_escape(label)}", align="center"))
     parts.extend(
         [
-            tex_node(legend_x, legend_y, 0.205, r"\footnotesize\textbf{Overlay legend}", align="left"),
+            tex_node(legend_x, legend_y, 0.205, r"\CoreTableFont\textbf{Overlay legend}", align="left"),
             rf"\fill[fill=teal!70!black] ({legend_x+0.010:.4f},{legend_y+0.054:.4f}) circle (2.4pt);",
-            tex_node(legend_x + 0.025, legend_y + 0.041, 0.145, r"\scriptsize TP: overlap", align="left"),
+            tex_node(legend_x + 0.025, legend_y + 0.041, 0.145, r"\CoreCaptionFont TP: overlap", align="left"),
             rf"\fill[fill=red!70!black] ({legend_x+0.010:.4f},{legend_y+0.095:.4f}) circle (2.4pt);",
-            tex_node(legend_x + 0.025, legend_y + 0.082, 0.145, r"\scriptsize FP: prediction only", align="left"),
+            tex_node(legend_x + 0.025, legend_y + 0.082, 0.145, r"\CoreCaptionFont FP: prediction only", align="left"),
             rf"\fill[fill=orange!85!black] ({legend_x+0.010:.4f},{legend_y+0.136:.4f}) circle (2.4pt);",
-            tex_node(legend_x + 0.025, legend_y + 0.123, 0.145, r"\scriptsize FN: missed GT", align="left"),
+            tex_node(legend_x + 0.025, legend_y + 0.123, 0.145, r"\CoreCaptionFont FN: missed GT", align="left"),
         ]
     )
     annotation = layout["resolved_supporting_object_geometry"]["caption"]
-    parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\scriptsize {tex_escape(spec['annotation'])}", align="center"))
+    parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\CoreCaptionFont {tex_escape(spec['annotation'])}", align="center"))
     return "\n".join(parts)
 
 
+def emit_interpretation(spec: dict[str, Any]) -> str:
+    nodes = []
+    edges = []
+    for index, label in enumerate(spec["nodes"]):
+        preceding = f",right=of step{index-1}" if index else ""
+        nodes.append(rf"\node[core process node,text width=.16\linewidth{preceding}] (step{index}) {{{tex_escape(label)}}};")
+        if index:
+            edges.append(rf"\draw[core process edge] (step{index-1}) -- (step{index});")
+    picture = "\n".join(nodes + edges)
+    checks = tex_escape("; ".join(spec["strategy_variation"]))
+    examples = tex_escape("; ".join(spec["comparator_setup"]))
+    return rf"""\noindent\begin{{tikzpicture}}[core process distance]
+{picture}
+\end{{tikzpicture}}\par
+\CoreWithinGroup
+\TermInline{{Limit}}{{{tex_escape(spec['current_limit'])}}}\par
+\CoreWithinGroup
+\CoreEqualColumns{{\TermBlock{{Checks}}{{{checks}}}}}{{\TermBlock{{Examples}}{{{examples}}}}}
+\CoreWithinGroup
+\TermInline{{Decision}}{{{tex_escape(spec['decision_criterion'])}}}\par
+\CoreWithinGroup
+\noindent {tex_escape(spec['annotation'])}\par
+\CoreCaption{{{tex_escape(spec['caption'])}}}"""
+
+
 def emit_frame(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str, str]) -> str:
+    native_flow = True
     if spec["content_kind"] == "equation":
-        body = emit_equation(spec, layout)
-    elif spec["content_kind"] == "result_figure":
+        body = emit_equation(spec)
+    elif spec["content_kind"] == "figure" and spec.get("dominant_object") != "negative_evidence_plot":
+        body = emit_figure(spec, asset_map)
+    elif spec.get("dominant_object") == "source_interpretation_reasoning" and 2 <= len(spec.get("nodes", [])) <= 4:
+        body = emit_interpretation(spec)
+    else:
+        native_flow = False
+        body = emit_positioned_science(spec, layout, asset_map)
+    if native_flow and (transition := spec.get("storyline_transition")):
+        body = (
+            rf"\TermInline{{Research direction}}{{{tex_escape(transition['label'])}: "
+            rf"{tex_escape(transition.get('audience_text') or '')}}}\par\CoreBetweenGroups" + "\n" + body
+        )
+    return rf"""\begin{{frame}}[t]{{{tex_escape(spec['title'])}}}
+{body}
+\end{{frame}}
+"""
+
+
+def emit_positioned_science(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str, str]) -> str:
+    if spec["content_kind"] == "result_figure":
         body = emit_result_figure(spec, layout)
     elif spec["content_kind"] == "figure":
-        body = emit_figure(spec, layout, asset_map)
+        body = emit_negative_evidence_plot(spec, layout, asset_map)
     elif spec["content_kind"] == "image_panel":
         body = emit_image_panel(spec, layout, asset_map)
     else:
@@ -1286,9 +1339,9 @@ def emit_frame(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str
     if transition := spec.get("storyline_transition"):
         audience_text = transition.get("audience_text") or ""
         transition_label = transition["label"]
-        cue_text = rf"\scriptsize\textbf{{{tex_escape(transition_label)}}}."
+        cue_text = rf"\CoreCaptionFont\textbf{{{tex_escape(transition_label)}}}."
         if audience_text:
-            cue_text = rf"\scriptsize\textbf{{{tex_escape(transition_label)}}}: {tex_escape(audience_text)}."
+            cue_text = rf"\CoreCaptionFont\textbf{{{tex_escape(transition_label)}}}: {tex_escape(audience_text)}."
         compact = transition.get("cue_variant") == "compact"
         cue_y = 0.1580 if compact else 0.1580
         cue_y2 = 0.2020 if compact else 0.2140
@@ -1298,19 +1351,28 @@ def emit_frame(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str
         cue = (
             rf"\StageThreePanel{{0.0600}}{{0.1450}}{{0.9400}}{{{cue_y2:.4f}}};"
             "\n"
-            rf"\StageThreeNode{{0.0780}}{{{cue_y:.4f}}}{{{label_w:.4f}}}{{left}}{{\scriptsize\textbf{{Research direction}}}};"
+            rf"\StageThreeNode{{0.0780}}{{{cue_y:.4f}}}{{{label_w:.4f}}}{{left}}{{\CoreCaptionFont\textbf{{Research direction}}}};"
             "\n"
             rf"\StageThreeNode{{{text_x:.4f}}}{{{cue_y:.4f}}}{{{text_w:.4f}}}{{left}}{{{cue_text}}};"
         )
         body = cue + "\n" + body
-    return rf"""\section{{{tex_escape(spec['section'])}}}
-\begin{{frame}}[t]{{{tex_escape(spec['title'])}}}
-\begin{{tikzpicture}}[x=\paperwidth,y=-\paperheight]
-\path[use as bounding box] (0,0.12) rectangle (1,0.82);
+    return rf"""\noindent\begin{{tikzpicture}}[x=\paperwidth,y=-\paperheight]
+\path[use as bounding box] (\CoreBodyRail,.145) rectangle (\dimexpr\paperwidth-\CoreBodyRail\relax,.855);
 {body}
 \end{{tikzpicture}}
-\end{{frame}}
 """
+
+
+def emit_frames(specs: list[dict[str, Any]], layouts: list[dict[str, Any]], asset_map: dict[str, str]) -> str:
+    parts = []
+    previous = None
+    for spec, layout in zip(specs, layouts, strict=True):
+        section = spec["section"]
+        if section != previous:
+            parts.append(rf"\section{{{tex_escape(section)}}}")
+            previous = section
+        parts.append(emit_frame(spec, layout, asset_map))
+    return "\n".join(parts)
 
 
 def scientific_layout_macros() -> str:
@@ -1326,7 +1388,7 @@ def scientific_layout_macros() -> str:
 
 
 def build_main_tex(specs: list[dict[str, Any]], layouts: list[dict[str, Any]], asset_map: dict[str, str]) -> str:
-    frames = "\n".join(emit_frame(spec, layout, asset_map) for spec, layout in zip(specs, layouts))
+    frames = emit_frames(specs, layouts, asset_map)
     return rf"""% Generated Stage 3 integration deck.
 \documentclass[aspectratio=169]{{beamer}}
 \usepackage{{amsfonts,amsmath,amssymb,booktabs,graphicx}}
@@ -1334,7 +1396,6 @@ def build_main_tex(specs: list[dict[str, Any]], layouts: list[dict[str, Any]], a
 \def\input@path{{{{styles/}}}}
 \makeatother
 \usetheme{{sintef}}
-\titlebackground*{{assets/background}}
 \input{{scientific_layouts.tex}}
 \setbeameroption{{hide notes}}
 \bibliographystyle{{unsrt}}
@@ -1518,16 +1579,13 @@ def copy_assets(specs: list[dict[str, Any]], build_dir: Path) -> dict[str, str]:
 
 
 def find_tex_engine() -> dict[str, Any] | None:
-    for command in ["xelatex", "lualatex", "pdflatex", "tectonic"]:
-        probe = find_command(command)
-        if probe["available"]:
-            return {"command": command, **probe}
-    return None
+    probe = find_command("xelatex")
+    return {"command": "xelatex", **probe} if probe["available"] else None
 
 
 def dependency_probe() -> dict[str, Any]:
     commands = {command: find_command(command) for command in ["xelatex", "lualatex", "pdflatex", "tectonic", "pdftoppm", "pdfinfo", "pdftotext", "pdffonts"]}
-    tex_engine_available = any(commands[command]["available"] for command in ["xelatex", "lualatex", "pdflatex", "tectonic"])
+    tex_engine_available = commands["xelatex"]["available"]
     font_binding = font_resource_binding()
     return {
         "schema": "RESEARCH_CUHK_STAGE3_BUILD_DEPENDENCY_PROBE_V1",
@@ -1558,7 +1616,7 @@ def compile_pdf(build_dir: Path) -> dict[str, Any]:
             "font_binding": font_binding,
             "pdf": None,
             "log": None,
-            "message": "No xelatex, lualatex, pdflatex, or tectonic executable is available through PATH.",
+            "message": "The shared Beamer core requires XeLaTeX.",
         }
     font_binding = materialize_font_binding(build_dir)
     if font_binding.get("status") != "READY":
@@ -1571,13 +1629,11 @@ def compile_pdf(build_dir: Path) -> dict[str, Any]:
             "log": None,
             "message": "Canonical presentation font resource binding is incomplete.",
         }
-    if engine["command"] == "tectonic":
-        cmd = [engine["path"], "main.tex"]
-    else:
-        cmd = [engine["path"], "-interaction=nonstopmode", "-halt-on-error", "main.tex"]
+    cmd = [engine["path"], "-interaction=nonstopmode", "-halt-on-error", "main.tex"]
     env = os.environ.copy()
     env["PATH"] = render_search_path()
     resource_dir = Path(font_binding["resource_dir"])
+    env["TEXMFHOME"] = str(resource_dir / "texmf")
     env["OSFONTDIR"] = os.pathsep.join(
         [
             str(resource_dir / "fonts/texgyre-termes"),
@@ -1586,8 +1642,7 @@ def compile_pdf(build_dir: Path) -> dict[str, Any]:
     )
     env.update(tex_cache_env())
     runs = []
-    pass_count = 1 if engine["command"] == "tectonic" else 2
-    for pass_index in range(pass_count):
+    for pass_index in range(2):
         run = subprocess.run(cmd, cwd=build_dir, check=False, capture_output=True, text=True, env=env)
         runs.append((pass_index + 1, run))
         if run.returncode != 0:
@@ -1843,7 +1898,7 @@ def generate(
     build_dir = out_dir / "cuhk_stage3_build"
     if build_dir.exists():
         shutil.rmtree(build_dir)
-    shutil.copytree(CANONICAL_CUHK, build_dir)
+    copy_beamer_source(CANONICAL_CUHK, build_dir)
     specs = page_specs()
     asset_map = copy_assets(specs, build_dir)
     layouts = [resolve_layout(spec) for spec in specs]

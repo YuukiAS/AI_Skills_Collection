@@ -1,0 +1,151 @@
+\setbeamercolor{section in head/foot}{fg=white,bg=coreBand}
+\setbeamercolor{mini frame}{fg=white,bg=white}
+\setbeamercolor{mini frame in current subsection}{fg=white,bg=coreBand}
+\setbeamercolor{mini frame in other subsection}{fg=coreMarker,bg=coreBand}
+\setbeamercolor{footline}{fg=coreAccent,bg=white}
+\setbeamercolor{navigation symbols}{fg=coreAccent,bg=white}
+\setbeamercolor{navigation symbols dimmed}{fg=coreRule,bg=white}
+\setbeamertemplate{mini frame}[default]
+
+\makeatletter
+\newlength\CoreHeaderHeight
+\setlength\CoreHeaderHeight{16.26pt}
+\newlength\CoreFooterHeight
+\setlength\CoreFooterHeight{8.325pt}
+\newlength\CoreFooterRule
+\setlength\CoreFooterRule{.55pt}
+\newsavebox\core@credit
+\newsavebox\core@pagecounter
+\newsavebox\core@label
+\newsavebox\core@navrow
+\newcount\core@largest
+\newcount\core@frames
+\newdimen\core@cap
+\newtoks\core@sectiontokens
+\newcommand\core@slidecredit{}
+\newcommand\slidefoot[1]{\gdef\core@slidecredit{#1}}
+\newcommand\footlinepayoff[1]{\renewcommand\PresentationCredit{#1}}
+\AtBeginEnvironment{frame}{\gdef\core@slidecredit{}}
+
+% Collect the nav stream before making boxes. Beamer's iterator and
+% the section/slide counters must remain in the same TeX group.
+\newcommand\core@collectnavigation{%
+  \core@largest=1\relax
+  \core@sectiontokens={}%
+  \def\sectionentry##1##2##3##4##5{%
+    \ifnum##5=\c@part\relax
+      \core@sectiontokens=\expandafter{\the\core@sectiontokens\core@navsection{##1}{##2}{##3}}%
+    \fi}%
+  \def\slideentry##1##2##3##4##5##6{%
+    \ifnum##6=\c@part\ifnum##1>0\ifnum##3>0\relax
+      \ifcsname core@count@##1\endcsname\else\expandafter\def\csname core@count@##1\endcsname{0}\fi
+      \core@frames=\numexpr\csname core@count@##1\endcsname+1\relax
+      \expandafter\edef\csname core@count@##1\endcsname{\the\core@frames}%
+      \ifnum\core@frames>\core@largest\core@largest=\core@frames\fi
+      \csappto{core@markers@##1}{\core@navlink{##1}{##2}{##3}{##4}}%
+    \fi\fi\fi}%
+  \dohead
+}
+\newcommand\core@navlabel[3]{%
+  \sbox\core@label{\usebeamerfont{section in head/foot}#2}%
+  \ifcsname core@count@#1\endcsname
+    \core@cap=34bp\advance\core@cap by \dimexpr38bp*\csname core@count@#1\endcsname/\core@largest\relax
+    \ifcsname core@reported@\the\c@part @#1\endcsname\else
+      \ifdim\wd\core@label>\core@cap
+        \PackageError{beamer-core-v1}{Section label #1 exceeds its width budget}{Use a shorter optional section label.}%
+      \else
+        \ifdim\wd\core@label>.90\core@cap
+          \PackageWarningNoLine{beamer-core-v1}{Section label #1 uses at least 90 percent of its width budget}%
+        \fi
+      \fi
+      \expandafter\gdef\csname core@reported@\the\c@part @#1\endcsname{}%
+    \fi
+  \fi
+  \hyperlink{Navigation#3}{{%
+    \ifnum\c@section=#1\relax\color{white}\else\color{coreInactive}\fi
+    \usebox\core@label}}%
+}
+\newif\ifcore@insection
+\newcommand\core@marker[3]{%
+  \ifnum\c@section=#1\relax
+    \ifnum\c@subsection=#2\relax
+      \ifnum\c@subsectionslide=#3\relax
+        \usebeamercolor[fg]{mini frame}\usebeamertemplate{mini frame}%
+      \else
+        \usebeamercolor[fg]{mini frame in current subsection}\usebeamertemplate{mini frame in current subsection}%
+      \fi
+    \else
+      \usebeamercolor[fg]{mini frame in other subsection}\usebeamertemplate{mini frame in other subsection}%
+    \fi
+  \else
+    \usebeamercolor[fg]{mini frame in other subsection}\usebeamertemplate{mini frame in other subsection}%
+  \fi
+}
+\newcommand\core@navlink[4]{%
+  % XeLaTeX needs material at both corners to annotate a vector-only box.
+  % Use a zero-ink space from the deck font instead of a second font family.
+  {\renewcommand\XeTeXLink@space{{\fontsize{1sp}{1sp}\selectfont\char32}}%
+   \beamer@link(#4){\XeTeXLinkBox{\core@marker{#1}{#2}{#3}}}}%
+  \kern .95bp%
+}
+\newcommand\core@navsection[3]{%
+  \ifcore@insection\hskip 3bp plus 1fil\fi
+  \core@insectiontrue
+  \vtop{%
+    \hbox{\core@navlabel{#1}{#2}{#3}}%
+    \nointerlineskip\kern 2bp\hbox{\csuse{core@markers@#1}}%
+  }%
+}
+\newcommand\core@sequences{%
+  \begingroup
+  \core@collectnavigation
+  \core@insectionfalse
+  \the\core@sectiontokens
+  \endgroup
+}
+\setbeamertemplate{headline}{%
+  \leavevmode\begin{beamercolorbox}[wd=\paperwidth,ht=\CoreHeaderHeight,dp=0pt]{section in head/foot}%
+    \sbox\core@navrow{\core@sequences}%
+    \ifdim\wd\core@navrow>\dimexpr\paperwidth-13mm\relax
+      \PackageError{beamer-core-v1}{Section navigation does not fit the header}{Use fewer sections or shorter labels.}%
+    \fi
+    \rlap{\PresentationHeaderBrand}%
+    \hskip3mm%
+    \raisebox{\dimexpr\CoreHeaderHeight-7.97bp\relax}[0pt][0pt]{%
+      \hbox to \dimexpr\paperwidth-13mm\relax{\unhbox\core@navrow\hfil}}%
+  \end{beamercolorbox}%
+}
+\newcommand\core@centerfooter[2]{%
+  \raisebox{\dimexpr(\CoreFooterHeight-\ht#1+\dp#1)/2+#2\relax}[0pt][0pt]{\usebox#1}%
+}
+\setbeamertemplate{footline}{%
+  \leavevmode\textcolor{coreBand}{\rule{\paperwidth}{\CoreFooterRule}}\par\nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=\CoreFooterHeight,dp=0pt,
+    leftskip=\CoreBodyRail,rightskip=\CoreBodyRail]{footline}%
+    \CoreCaptionFont
+    \color{coreMuted}%
+    \sbox\core@credit{\ifdefempty{\core@slidecredit}{\PresentationCredit}{\core@slidecredit}}%
+    \sbox\core@pagecounter{\insertframenumber/\inserttotalframenumber}%
+    \core@centerfooter\core@credit{.34pt}\hfill
+    \raisebox{.54pt}[0pt][0pt]{\insertslidenavigationsymbol\hspace{.25em}\insertsectionnavigationsymbol}%
+    \core@centerfooter\core@pagecounter{0pt}%
+  \end{beamercolorbox}%
+}
+\makeatother
+
+% Positioning is core-owned. Skins only select the asset.
+\renewcommand\PresentationHeaderBrand{%
+  \ifdefined\PresentationHeaderBrandAsset
+    \hspace*{\dimexpr\paperwidth-8mm\relax}%
+    \raisebox{1pt}[0pt][0pt]{\includegraphics[width=5mm,height=5mm,keepaspectratio]{\PresentationHeaderBrandAsset}}%
+  \fi
+}
+\renewcommand\PresentationTitleBrand{%
+  \ifdefined\PresentationTitleBrandAsset
+    \vbox to \paperheight{%
+      \vfil\hbox to \paperwidth{\hfil
+        \includegraphics[width=35mm,height=18mm,keepaspectratio]{\PresentationTitleBrandAsset}%
+        \kern3mm}%
+      \kern6mm}%
+  \fi
+}

@@ -760,6 +760,7 @@ project-specific context: `T01-*` PageIDs, the 38-page Tutorial sequence, exact-
 - Exact CUHK Beamer/PDF 仍是默认 desktop research route。
 - Source fidelity、scientific layout、真实 render/contact-sheet review 和 bounded repair contract 已建立。
 - Theory 页面按“解决了什么问题 / 提供什么保证”组织，而不是按 theorem 数量炫技。
+- V19 promotion 已建立 Validator V2 和共享 Beamer core：course-standard/CUHK 只保留品牌 skin，11 页同内容 parity 为 0.0 px / 0.0 PDF pt；Validator 作为克制的安全网保留 REVIEW 与 NOT_VERIFIED，不替代人工成品判断。
 
 ## Do not do
 
