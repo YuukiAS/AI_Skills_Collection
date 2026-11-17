@@ -735,3 +735,157 @@ Generic rule:
 - simplification must be evidence-based, not deletion-by-omission.
 
 This should be enforced before visible-copy freeze and again in the final semantic diff.
+
+## 20. Reader-facing Markdown must bind to the actual rendering surface
+
+The CAT-TRACE synthesis incident on 2026-11-17 exposed a document-production failure that is not covered by source correctness alone: mathematically valid-looking Markdown source was repeatedly delivered without checking how the actual GitHub blob page rendered it. The reader then became the rendering-debug loop.
+
+The failure sequence included several variants of the same mistake:
+
+- writing ChatGPT/LaTeX delimiters such as \`\\(...\\)\` and \`\\[...\\]\` into a GitHub-facing Markdown document;
+- replacing them with \`$$\` without checking the rendered page;
+- moving simple values and one-line relationships into display-math blocks even though they had no independent reading value;
+- replacing one math delimiter with another after a source-level check instead of first verifying the target surface;
+- leaving reader-visible source tokens such as \`$\\gamma$\`, \`\\,\`, or raw math fences for the user to discover.
+
+This is a Research Authoring failure, not merely a Markdown-syntax mistake. The document passed source-level checks while failing its reader job.
+
+### 20.1 Bind the target surface before choosing Markdown syntax
+
+Every reader-facing Markdown artifact must declare its actual consumption surface before copy is frozen:
+
+\`\`\`text
+TARGET_SURFACE = github_blob_markdown | chat_markdown | local_markdown_renderer | docs_export | other
+TARGET_RENDER_URL_OR_RUNTIME = <exact surface or renderer>
+MATH_PRESENTATION_MODE = PLAIN_UNICODE | VERIFIED_INLINE_MATH | VERIFIED_DISPLAY_MATH
+TARGET_RENDER_INSPECTION_REQUIRED = YES
+\`\`\`
+
+Markdown is not one universal rendering environment. Syntax that works in ChatGPT, a local preview, Pandoc, Quarto, or one GitHub context must not be assumed to render identically in another target surface.
+
+A syntax specification or documentation page establishes capability, not reader acceptance. The exact target artifact still needs rendered inspection.
+
+### 20.2 Default rule for simple mathematics: write for the reader, not for the parser
+
+For reader-facing Markdown, ordinary variables, parameter values, short definitions, one-step relationships, simple rates, asymptotic orders, and short numeric sequences should normally remain in the prose.
+
+Prefer directly readable forms such as:
+
+\`\`\`text
+γ≈487，p=1404
+ψ=1
+2.7×10⁻⁴
+p=max(2p*, p*+100)
+O(log log p / log p)
+λ(a)=γe^(−a−1/2)
+261 / 107 / 137 / 96 / 101
+\`\`\`
+
+Use Unicode mathematical symbols when they make the text immediately readable: \`γ\`, \`ψ\`, \`ν\`, \`λ\`, \`≈\`, \`×\`, \`−\`, superscript digits, and similar common symbols.
+
+Do not introduce LaTeX merely because the source calculation used LaTeX. A reader-facing Markdown explanation is not a TeX source file.
+
+In particular:
+
+- a single scalar value is not a display equation;
+- a five-number frequency spectrum is not a display equation;
+- a short parameter tuple is not a display equation;
+- a one-step definition that reads naturally inside a sentence is not a display equation;
+- Big-O notation that remains legible inline does not need a display block.
+
+### 20.3 Display math is a semantic role, not a decoration
+
+Display math is justified only when separating the mathematics materially reduces reader effort, for example:
+
+- a central model or objective function that the following text refers back to;
+- a multi-line derivation;
+- a long probability, matrix, integral, or optimization expression that becomes hard to parse inline;
+- a theorem-level relationship whose terms need a nearby walkthrough.
+
+The authoring planner must be able to state why the formula needs independent visual reading. “It is mathematical” is not sufficient.
+
+Reject display math used only to make a short result look important.
+
+### 20.4 Do not debug rendering by cycling through delimiter styles
+
+When the target render shows raw math markup, do not blindly cycle through:
+
+\`\`\`text
+\\(...\\)
+\\[...\\]
+$...$
+$$...$$
+\`\`\`
+
+or fenced-math variants.
+
+Instead:
+
+1. inspect the actual target rendering surface;
+2. determine whether mathematical rendering is needed at all;
+3. if the expression is simple, degrade to reader-readable Unicode/plain text;
+4. if real mathematical typesetting is necessary, use only a syntax proven on that exact target surface;
+5. re-open the rendered artifact and inspect it again.
+
+A fallback to plain readable text is preferable to shipping visible markup.
+
+### 20.5 Rendered-page QA is mandatory for Markdown too
+
+Research Authoring must treat a GitHub Markdown page, README, technical note, or research synthesis as a rendered artifact. Source lint is not final QA.
+
+Before surfacing a Markdown document to the user, inspect the actual target rendering and verify at least:
+
+- the opening section;
+- the first mathematical expression;
+- the longest or most complex mathematical expression;
+- any numeric sequence that was transformed from source math;
+- at least one table;
+- links/citations where present;
+- the closing section.
+
+Reject the candidate if the rendered page visibly exposes source-only notation such as:
+
+\`\`\`text
+$\\gamma$
+$$
+\\gamma
+\\,
+\\left
+\\frac
+\`\`\`
+
+unless the document is explicitly teaching or comparing source markup.
+
+A source check that reports “no old delimiters remain” is insufficient if the rendered page was not inspected.
+
+### 20.6 Reader effort outranks source-style fidelity
+
+For a research synthesis, advisor note, README, or explanatory Markdown document, preserving the scientific relationship does not require preserving the source notation container.
+
+For example, converting a source expression from TeX into \`γ≈487\` preserves the scientific meaning while reducing reader effort. This is the correct transformation when the target document is explanatory prose and no downstream machine consumer requires the TeX string.
+
+Exact TeX syntax remains protected only when it is itself the object being documented, copied, executed, compared, or consumed by another tool.
+
+### 20.7 A user-reported rendering defect becomes a regression guard
+
+If the user reports visible raw markup, unnecessary display equations, broken math rendering, or parser syntax leaking into prose:
+
+1. repair the same authoritative artifact unless the user requests a new version;
+2. add the failure class to the document-family regression guards;
+3. scan the complete artifact for the same failure, not only the reported location;
+4. inspect the actual rendered target again;
+5. do not declare completion from source inspection alone.
+
+Required acceptance fields for reader-facing Markdown with mathematics:
+
+\`\`\`text
+TARGET_SURFACE_BOUND = YES
+SIMPLE_MATH_READER_READABLE = YES
+UNNECESSARY_DISPLAY_MATH = 0
+RAW_MATH_MARKUP_VISIBLE = NO
+TARGET_RENDER_INSPECTED = YES
+USER_USED_AS_RENDER_QA = NO
+\`\`\`
+
+The intended reader must not have to explain Markdown rendering rules repeatedly. Recurrent exposure of raw math syntax after a prior correction is a workflow regression and should trigger repair of the generic Research Authoring layer, not another one-off document patch.
+
