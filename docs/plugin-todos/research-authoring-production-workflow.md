@@ -792,6 +792,19 @@ By contrast, production state such as who ran a task, which branch contains it, 
 
 The target surface is part of the artifact definition. A Markdown, PDF, slide deck or document is not accepted merely because its source syntax is valid.
 
+For GitHub-facing Markdown, use a GitHub-specific authoring profile rather than copying chat or TeX notation into the file:
+
+- write ordinary explanation as normal paragraphs;
+- use headings only for real sections, not every short thought;
+- use bullets only for genuine parallel items or steps;
+- use tables for aligned numeric or method comparisons;
+- use fenced code only for real code, commands, configuration or literal machine text;
+- keep short mathematical quantities and one-step relations inline when they remain readable;
+- treat display equations as exceptional: use them only when the relationship is central, long, structured or multi-line enough to benefit from independent visual reading;
+- never move a scalar, short parameter tuple, short asymptotic statement or numeric sequence into a display equation merely to emphasize it;
+- do not assume chat-style or TeX-style delimiters will render correctly on GitHub; if mathematical rendering is needed, verify the exact syntax on the actual GitHub page;
+- if a simple expression does not render reliably, prefer a directly readable Unicode/plain-text form over exposing raw markup.
+
 Before delivery, inspect the actual reader-facing rendering and confirm that the chosen forms still perform their intended jobs: prose reads as prose, comparisons scan correctly, mathematics renders cleanly, tables remain legible, and no source or implementation syntax leaks into the reading experience.
 
 If a representation fails on the target surface, reconsider whether that representation is needed before trying alternative syntax.
