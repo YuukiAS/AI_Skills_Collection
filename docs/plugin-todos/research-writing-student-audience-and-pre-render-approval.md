@@ -97,6 +97,10 @@ A source item belongs in the reader-facing artifact only when at least one of th
 
 A source item does not belong merely because it is true, available, internally important or easy to copy.
 
+Content selection is **positive**, not blacklist-driven. The author should not draft by copying the source bundle and then deleting forbidden-looking items. Build the reader artifact from the reader task: include only the claims, evidence, conditions, uncertainty and actions needed for that task; summarize supporting material only when it changes interpretation; move reproducibility material to a separate layer only when the reader actually needs to reproduce; omit the rest.
+
+Specific failure patterns such as repository paths, workflow labels, raw markup, audit state or implementation tokens are regression checks, not the content model. A new kind of internal metadata should still be excluded when it fails the reader-action test even if it is not named on any blacklist.
+
 ### 3.2 Audience separation
 
 At minimum distinguish:
