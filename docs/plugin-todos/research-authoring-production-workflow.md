@@ -736,284 +736,86 @@ Generic rule:
 
 This should be enforced before visible-copy freeze and again in the final semantic diff.
 
-## 20. Reader-facing Markdown must bind to the actual rendering surface
+## 20. Build the artifact from the reader task, then choose the lightest form that carries the meaning
 
-The CAT-TRACE synthesis incident on 2026-11-17 exposed a document-production failure that is not covered by source correctness alone: mathematically valid-looking Markdown source was repeatedly delivered without checking how the actual GitHub blob page rendered it. The reader then became the rendering-debug loop.
+Research Authoring should not be governed by an expanding blacklist of bad-looking tokens. The content model is positive: start from the reader task and include only material that helps the reader understand the question, evaluate the evidence, interpret the conclusion correctly, or make the requested decision.
 
-The failure sequence included several variants of the same mistake:
+Everything else is supporting infrastructure. It may remain in source files, implementation notes, reproducibility records or QA evidence without becoming reader-facing copy.
 
-- writing ChatGPT/LaTeX delimiters such as \`\\(...\\)\` and \`\\[...\\]\` into a GitHub-facing Markdown document;
-- replacing them with \`$$\` without checking the rendered page;
-- moving simple values and one-line relationships into display-math blocks even though they had no independent reading value;
-- replacing one math delimiter with another after a source-level check instead of first verifying the target surface;
-- leaving reader-visible source tokens such as \`$\\gamma$\`, \`\\,\`, or raw math fences for the user to discover.
+### 20.1 Main narrative selection
 
-This is a Research Authoring failure, not merely a Markdown-syntax mistake. The document passed source-level checks while failing its reader job.
+For every candidate detail, ask what job it performs for the reader.
 
-### 20.1 Bind the target surface before choosing Markdown syntax
+Keep it in the main narrative when it is needed to:
 
-Every reader-facing Markdown artifact must declare its actual consumption surface before copy is frozen:
+- state the scientific or technical question;
+- explain a comparison, result or mechanism;
+- preserve a condition, limitation or uncertainty that changes interpretation;
+- support a decision or next action the reader is expected to make.
 
-\`\`\`text
-TARGET_SURFACE = github_blob_markdown | chat_markdown | local_markdown_renderer | docs_export | other
-TARGET_RENDER_URL_OR_RUNTIME = <exact surface or renderer>
-MATH_PRESENTATION_MODE = PLAIN_UNICODE | VERIFIED_INLINE_MATH | VERIFIED_DISPLAY_MATH
-TARGET_RENDER_INSPECTION_REQUIRED = YES
-\`\`\`
+If it performs none of these jobs, omit it from the main narrative. Do not keep material merely because it is exact, available, traceable, difficult to compute, or useful to the implementation team.
 
-Markdown is not one universal rendering environment. Syntax that works in ChatGPT, a local preview, Pandoc, Quarto, or one GitHub context must not be assumed to render identically in another target surface.
+Reproducibility is a separate reader task. When the artifact is explicitly meant to support reproduction, include the minimum exact implementation identities needed for reproduction in a dedicated section or companion artifact. Do not turn every research summary into a reproducibility handoff by default.
 
-A syntax specification or documentation page establishes capability, not reader acceptance. The exact target artifact still needs rendered inspection.
+### 20.2 Form follows information shape
 
-### 20.2 Default rule for simple mathematics: write for the reader, not for the parser
+Choose the form that minimizes reader inference:
 
-For reader-facing Markdown, ordinary variables, parameter values, short definitions, one-step relationships, simple rates, asymptotic orders, and short numeric sequences should normally remain in the prose.
+- prose for judgments, explanations, causal or logical relationships, uncertainty and decisions;
+- tables for aligned comparisons across methods, conditions, groups or multiple numeric results;
+- inline mathematics for compact relationships that are clearer symbolically than verbally;
+- display mathematics only when a central, long, structured or multi-line relationship benefits from independent visual reading;
+- code, commands, paths and machine tokens only when the reader must copy, execute, locate or verify that exact object;
+- citations and references for source identity, not as a dump of internal evidence locations.
 
-Prefer directly readable forms such as:
+Do not elevate information into a table, equation, code block, appendix or separate section simply because that form is available.
 
-\`\`\`text
-γ≈487，p=1404
-ψ=1
-2.7×10⁻⁴
-p=max(2p*, p*+100)
-O(log log p / log p)
-λ(a)=γe^(−a−1/2)
-261 / 107 / 137 / 96 / 101
-\`\`\`
+### 20.3 Progressive disclosure
 
-Use Unicode mathematical symbols when they make the text immediately readable: \`γ\`, \`ψ\`, \`ν\`, \`λ\`, \`≈\`, \`×\`, \`−\`, superscript digits, and similar common symbols.
+A substantial research artifact may have three layers:
 
-Do not introduce LaTeX merely because the source calculation used LaTeX. A reader-facing Markdown explanation is not a TeX source file.
+1. the main reader narrative;
+2. optional supporting detail needed by this reader for interpretation or reproduction;
+3. internal implementation and QA evidence.
 
-In particular:
+The second layer is not a dumping ground. Every appendix item must still have a reader job. Material with no reader job remains internal.
 
-- a single scalar value is not a display equation;
-- a five-number frequency spectrum is not a display equation;
-- a short parameter tuple is not a display equation;
-- a one-step definition that reads naturally inside a sentence is not a display equation;
-- Big-O notation that remains legible inline does not need a display block.
+A good main narrative should remain understandable when implementation metadata, repository state, audit state and production history are hidden.
 
-### 20.3 Display math is a semantic role, not a decoration
+### 20.4 Scientific limitations stay; workflow limitations stay internal
 
-Display math is justified only when separating the mathematics materially reduces reader effort, for example:
+Do not remove real scientific limitations in the name of readability. Keep boundaries such as dataset scope, extrapolation range, approximation error, missing uncertainty, incomplete external validation or unresolved alternative explanations when they constrain the claim.
 
-- a central model or objective function that the following text refers back to;
-- a multi-line derivation;
-- a long probability, matrix, integral, or optimization expression that becomes hard to parse inline;
-- a theorem-level relationship whose terms need a nearby walkthrough.
+By contrast, production state such as who ran a task, which branch contains it, whether a validator has passed, or which correction round produced it is normally not a scientific limitation. Use that information internally to establish authority, but do not substitute it for the scientific boundary.
 
-The authoring planner must be able to state why the formula needs independent visual reading. “It is mathematical” is not sufficient.
+### 20.5 Actual rendering is part of artifact acceptance
 
-Reject display math used only to make a short result look important.
+The target surface is part of the artifact definition. A Markdown, PDF, slide deck or document is not accepted merely because its source syntax is valid.
 
-### 20.4 Do not debug rendering by cycling through delimiter styles
+Before delivery, inspect the actual reader-facing rendering and confirm that the chosen forms still perform their intended jobs: prose reads as prose, comparisons scan correctly, mathematics renders cleanly, tables remain legible, and no source or implementation syntax leaks into the reading experience.
 
-When the target render shows raw math markup, do not blindly cycle through:
+If a representation fails on the target surface, reconsider whether that representation is needed before trying alternative syntax.
 
-\`\`\`text
-\\(...\\)
-\\[...\\]
-$...$
-$$...$$
-\`\`\`
+### 20.6 Regression checks are guards, not the writing model
 
-or fenced-math variants.
+Known failures should become automated or manual QA checks, but they should not expand into the primary authoring policy.
 
-Instead:
+For example, scans for repository paths, workflow labels, raw math markup, audit tokens, stray code fences, isolated numeric paragraphs or unnecessary display equations are useful after those failures have occurred. They catch recurrence.
 
-1. inspect the actual target rendering surface;
-2. determine whether mathematical rendering is needed at all;
-3. if the expression is simple, degrade to reader-readable Unicode/plain text;
-4. if real mathematical typesetting is necessary, use only a syntax proven on that exact target surface;
-5. re-open the rendered artifact and inspect it again.
+They do not answer the authoring question: what should the reader see?
 
-A fallback to plain readable text is preferable to shipping visible markup.
+The governing rule remains the reader-task test plus information-shape choice. A new form of irrelevant internal material must still be removed even if no existing regression check knows its token pattern.
 
-### 20.5 Rendered-page QA is mandatory for Markdown too
+### 20.7 Final reader test
 
-Research Authoring must treat a GitHub Markdown page, README, technical note, or research synthesis as a rendered artifact. Source lint is not final QA.
+Before surfacing a substantial artifact, answer these questions from the intended reader's perspective:
 
-Before surfacing a Markdown document to the user, inspect the actual target rendering and verify at least:
+- Can the reader identify the question or decision quickly?
+- Is the decisive evidence visible without reconstructing the implementation history?
+- Are the necessary conditions and uncertainty attached to the claims they constrain?
+- Does every visible section, table, formula, appendix item and technical token have a reader-facing job?
+- If internal workflow and repository metadata are hidden, does the scientific or technical argument remain complete?
+- Is any visible element present mainly because the author had access to it rather than because the reader needs it?
 
-- the opening section;
-- the first mathematical expression;
-- the longest or most complex mathematical expression;
-- any numeric sequence that was transformed from source math;
-- at least one table;
-- links/citations where present;
-- the closing section.
-
-Reject the candidate if the rendered page visibly exposes source-only notation such as:
-
-\`\`\`text
-$\\gamma$
-$$
-\\gamma
-\\,
-\\left
-\\frac
-\`\`\`
-
-unless the document is explicitly teaching or comparing source markup.
-
-A source check that reports “no old delimiters remain” is insufficient if the rendered page was not inspected.
-
-### 20.6 Reader effort outranks source-style fidelity
-
-For a research synthesis, advisor note, README, or explanatory Markdown document, preserving the scientific relationship does not require preserving the source notation container.
-
-For example, converting a source expression from TeX into \`γ≈487\` preserves the scientific meaning while reducing reader effort. This is the correct transformation when the target document is explanatory prose and no downstream machine consumer requires the TeX string.
-
-Exact TeX syntax remains protected only when it is itself the object being documented, copied, executed, compared, or consumed by another tool.
-
-### 20.7 A user-reported rendering defect becomes a regression guard
-
-If the user reports visible raw markup, unnecessary display equations, broken math rendering, or parser syntax leaking into prose:
-
-1. repair the same authoritative artifact unless the user requests a new version;
-2. add the failure class to the document-family regression guards;
-3. scan the complete artifact for the same failure, not only the reported location;
-4. inspect the actual rendered target again;
-5. do not declare completion from source inspection alone.
-
-Required acceptance fields for reader-facing Markdown with mathematics:
-
-\`\`\`text
-TARGET_SURFACE_BOUND = YES
-SIMPLE_MATH_READER_READABLE = YES
-UNNECESSARY_DISPLAY_MATH = 0
-RAW_MATH_MARKUP_VISIBLE = NO
-TARGET_RENDER_INSPECTED = YES
-USER_USED_AS_RENDER_QA = NO
-\`\`\`
-
-The intended reader must not have to explain Markdown rendering rules repeatedly. Recurrent exposure of raw math syntax after a prior correction is a workflow regression and should trigger repair of the generic Research Authoring layer, not another one-off document patch.
-
-## 21. Reader-facing research reports must exclude implementation and QA trace by default
-
-The CAT-TRACE synthesis incident on 2026-11-17 also exposed a content-selection failure. A document intended for the research owner included repository paths, result-directory inventories, execution/audit state, internal stage labels and implementation-detail traces even though none of them were needed to understand the scientific conclusion.
-
-This is a direct violation of the reader contract. It must be treated as a generic regression class, not as a project-local style preference.
-
-### 21.1 Four-layer separation is mandatory
-
-For research reports, advisor updates, group-meeting notes and scientific syntheses, classify material into four layers before drafting:
-
-1. **reader-facing scientific content** — scientific question, experiment, comparison, result, interpretation, uncertainty and decision;
-2. **author/research-owner content** — reasoning needed to understand or decide the science;
-3. **implementation/reproducibility content** — scripts, repository paths, configuration, commands and execution mechanics;
-4. **QA/release evidence** — branch, commit, hashes, manifests, logs, audit/review state, validator output and release status.
-
-The main reader-facing document must not silently combine all four layers.
-
-### 21.2 Default exclusion rule
-
-Unless the user explicitly asks for a reproducibility appendix, repository handoff, audit log or implementation note, the main research narrative must exclude:
-
-- repository paths such as \`docs/...\`, \`results/...\`, \`analysis/...\`, \`package/...\`;
-- branch names, commit hashes, pull requests, job IDs, allocation IDs and worktree state;
-- manifest paths, hashes, validator reports, CI/test state and release status;
-- Planner/Reviewer/Executor labels, audit gates, round numbers and workflow status;
-- internal task names, correction rounds, debug chronology and “this run/this round” narration;
-- implementation-only numerical settings that do not change the reader's scientific interpretation;
-- exhaustive evidence inventories that merely prove where the information came from.
-
-These items remain available in the repository and internal evidence layer. Their existence is not a reason to surface them to the reader.
-
-### 21.3 Reader-action test is a hard inclusion gate
-
-Before any technical detail enters the main document, ask:
-
-- Does the reader need this to understand the scientific question?
-- Does it change interpretation of the evidence?
-- Does it change the decision or next action?
-- Would omitting it create a material scientific ambiguity?
-
-If all answers are no, the item must be moved internal or omitted.
-
-“Useful for provenance”, “available in the repository”, “exact”, “helpful for debugging”, or “good to have for completeness” are not sufficient reasons for inclusion.
-
-### 21.4 Reproducibility details belong in a separate layer
-
-A small amount of implementation detail may remain reader-facing only when the scientific argument depends on it, for example:
-
-- the exact training/test split when it defines the estimand;
-- the exact model or metric name when methods are being compared;
-- a numerical tolerance when the conclusion depends on approximation error;
-- a script/config identity when the document's explicit purpose is reproducibility.
-
-Otherwise, reproducibility details belong in a short appendix or separate internal note, not interleaved with the scientific narrative.
-
-A research-owner document must still be understandable if all repository paths, commit IDs, job IDs and audit tokens are hidden.
-
-### 21.5 Scientific narrative must not follow workflow chronology
-
-Do not organize a research report as:
-
-\`\`\`text
-Pro 1 -> Pro 2 -> Pro 3 -> round 1 -> round 2 -> debug -> rerun -> audit
-\`\`\`
-
-unless that chronology itself changes the scientific interpretation.
-
-Prefer:
-
-\`\`\`text
-scientific question
--> comparison/experiment
--> decisive result
--> interpretation
--> remaining uncertainty
--> next scientific decision
-\`\`\`
-
-Internal stages can be used to establish authority while drafting, but they must not become the reader-facing story.
-
-### 21.6 Evidence boundary must describe science, not workflow state
-
-A reader-facing limitation may say:
-
-- “this result comes from one dataset”;
-- “the time split extrapolates beyond the training weeks”;
-- “the comparison does not yet include posterior uncertainty”;
-- “the model extension has not yet been tested on the real data”.
-
-Do not substitute workflow statements such as:
-
-- “executor self-check only”;
-- “not independently audited”;
-- “branch not merged”;
-- “result pending reviewer”;
-- “commit not pushed”.
-
-Workflow state belongs to the internal QA layer unless the user explicitly asks for project status.
-
-### 21.7 Full-document scan is required after a content-layer failure
-
-If the user reports that implementation/QA material leaked into a reader-facing document, repair the whole artifact rather than only the cited paragraph.
-
-The repair must scan for:
-
-- repository-path patterns;
-- commit/branch/job identifiers;
-- audit/review/validator state;
-- internal stage/round labels;
-- debug chronology;
-- implementation settings without reader value;
-- evidence inventories that do not support the reader task.
-
-Required acceptance fields:
-
-\`\`\`text
-READER_TASK_VISIBLE = YES
-REPO_PATHS_IN_MAIN_NARRATIVE = 0
-IMPLEMENTATION_TRACE_IN_MAIN_NARRATIVE = 0
-QA_RELEASE_TRACE_IN_MAIN_NARRATIVE = 0
-WORKFLOW_CHRONOLOGY_AS_SCIENTIFIC_STRUCTURE = NO
-UNNEEDED_IMPLEMENTATION_DETAIL = 0
-SCIENTIFIC_LIMITATIONS_PRESERVED = YES
-FULL_ARTIFACT_RELEVANCE_SCAN = PASS
-\`\`\`
-
-The reader must not have to repeatedly identify material that belongs to the implementation or QA layer. Once this failure class has occurred, it is a persistent regression guard for future Research Authoring outputs.
+If the last answer is yes, the artifact is not ready for reader review.
 
