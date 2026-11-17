@@ -4,6 +4,50 @@ Canonical maintenance inbox for the `research-writing` plugin.
 
 ## Open candidates
 
+### Markdown 科研文档必须把“目标平台实际渲染”作为交付验收，而不是只检查源码
+status: NEW
+source: `YuukiAS/CAT-TRACE` 技术综合 Markdown 返修，2026-11-17。用户在 GitHub 实际页面连续发现公式乱码和公式源码直接外露；两轮问题都发生在正文科学内容已经基本稳定之后。
+evidence:
+- 第一轮失败：写入 Markdown 时，宿主语言字符串转义吞掉 LaTeX 反斜杠，导致 `\beta`、`\Phi`、`\frac`、`\left` 等命令在仓库源文件中变成控制字符或残缺文本。源文件一度含多个不可见控制字符，GitHub 页面出现乱码。
+- 第二轮失败：提交 `f97ca37a0429520c7067fd796f0266136d5107ae` 已把反斜杠和控制字符修复，源码扫描也通过，但 GitHub 实际页面仍把部分 `$` 和行内 `$...# research-writing — Long-Term TODO
+
+Canonical maintenance inbox for the `research-writing` plugin.
+
+ 数学源码直接显示给用户。说明“源码中的 LaTeX 字符串完整”仍不足以证明目标 Markdown 渲染器会按预期显示。
+- 用户提供的 GitHub 实际页面截图直接显示：正文中部分数学片段仍以 `$\widetilde x_i...# research-writing — Long-Term TODO
+
+Canonical maintenance inbox for the `research-writing` plugin.
+
+、`$ L_j(b_j)`、`\prod_i\Phi...` 等源码形式出现。该截图是最终读者实际看到的 artifact 证据。
+- 后续修订 `YuukiAS/CAT-TRACE@8608dcfa68927776e54df4b07b23c0cb08620b5b` 改用 GitHub 官方支持的更稳健数学语法：行内采用 `$\`...\`# research-writing — Long-Term TODO
+
+Canonical maintenance inbox for the `research-writing` plugin.
+
+，独立公式采用 fenced ```math` block。
+
+problem:
+- **Markdown 本身就是交付 artifact，不是“内容写完后的中间文本”。** Research Authoring 不能只保证科学内容、LaTeX 字符串或 Markdown 源码看起来正确；目标平台上的实际阅读结果才是用户拿到的文档。
+- **先冻结目标渲染器，再选 Markdown/数学语法。** GitHub Markdown、Notion、Pandoc、Quarto、Jupyter 等支持的数学定界符和扩展并不完全相同。不能把某个平台可用的语法直接假定为另一个平台也会稳定渲染。
+- **写入通道本身也可能破坏公式。** 经过 JavaScript/Python/shell/JSON/YAML/connector 等中间层写 Markdown 时，反斜杠、美元符号、反引号、换行和 Unicode 都可能被转义或重编码。作者必须验证“最终存储后的实际源码”，不能只检查写入前的内存字符串。
+- **源码完整性检查和渲染验收是两个独立 gate。** 源码 gate 至少检查控制字符、替换字符、未闭合数学定界符、关键反斜杠命令、代码围栏和表格结构；渲染 gate 检查目标平台实际页面里公式、标题、表格、链接和段落是否按读者预期显示。任一失败都不能交付。
+- **不能把 connector/read-back 或字符串扫描冒充视觉验收。** 远端回读只能证明保存了什么文本；只有真实 target renderer 的页面、预览或等价渲染产物才能证明最终显示。当前工具无法查看目标平台实际渲染时，必须明确写“render 未验”，不能宣称正式冻结或 artifact PASS。
+- **数学文档要做最小渲染烟测。** 至少覆盖一个行内公式、一个独立公式、一个含上下标/希腊字母/反斜杠命令的公式、一个表格内数学片段；这些代表性结构在目标平台渲染正确后，才允许把同类语法用于整篇。
+- **大规模写入后要重新读取已保存文件。** 检查的对象必须是远端/最终文件版本，而不是生成前草稿。若写入层使用字符串转义，额外扫描不可见控制字符和异常 Unicode；发现一个公式被转义破坏时，应按同一路径审计全文，不做单点修补后直接交付。
+- **目标平台规则应优先于通用 Markdown 习惯。** Research Authoring 应读取当前平台官方语法或已验证项目规范；若平台提供更稳健的原生公式写法，应优先采用，不依赖“理论上 Markdown/MathJax 应该支持”的猜测。
+- **正式冻结的定义必须包含 artifact QA。** “科学内容已冻结”“源 Markdown 已保存”“目标页面已渲染验收”是三个不同状态。只有用户请求的最终交付 surface 已通过相应验收，才能称为正式冻结文档。
+
+candidate rules:
+1. 写 Markdown 前先确定目标渲染器与其官方数学/表格/链接语法；不同平台不共享未经验证的默认定界符。
+2. 通过代码、连接器或模板写入含 LaTeX 的 Markdown 时，必须防宿主语言转义，并在写回后读取最终文件做源码完整性扫描。
+3. 源码 QA 至少检查控制字符、替换字符、数学定界符配对、关键反斜杠命令、fence 配对和表格结构。
+4. 目标平台至少做一次代表性渲染烟测：行内公式、独立公式、复杂 LaTeX、表格内数学；失败则停止整篇交付。
+5. 把 `SOURCE PASS` 与 `RENDER PASS` 分开；没有真实 renderer evidence 时，只能报告源码通过，不能宣称 artifact/final freeze 通过。
+6. 用户提供的实际页面截图或渲染结果优先于源码/connector 自检；看到乱码、源码外露、错位或未渲染公式，应按 artifact failure 处理并审计同类结构全文。
+7. 长篇科研 Markdown 正式冻结前，除科学身份/证据审计外，再做一次 target-renderer 全文抽查，重点看公式密集段、表格、标题层级和链接。
+
+project-specific context: CAT-TRACE、具体 TRACE 公式、GitHub 分支和提交号只作为真实失败证据。可迁移问题是：任何面向读者的科研 Markdown 都需要把“最终存储源码是否完整”和“目标平台是否实际渲染正确”作为独立交付责任，不能让内容正确掩盖 artifact 失败。
+
+
 ### 面向研究者的技术综合文档：先冻结方法身份、计算语义和比较资格，再写结果与表格
 status: NEW
 source: `YuukiAS/CAT-TRACE` 的 TRACE / Laplace / 原事件积分 / 无限 TRACE 综合说明返修，2026-11-17。用户连续指出：方法名混乱、先给结果后补“到底怎么算”、固定参数诊断被误读成完整方法、表格把不同科学身份的数字并列后诱导错误结论；同一份综合 Markdown 因这些问题多次重写。
