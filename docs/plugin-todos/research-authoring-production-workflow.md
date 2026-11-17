@@ -889,3 +889,131 @@ USER_USED_AS_RENDER_QA = NO
 
 The intended reader must not have to explain Markdown rendering rules repeatedly. Recurrent exposure of raw math syntax after a prior correction is a workflow regression and should trigger repair of the generic Research Authoring layer, not another one-off document patch.
 
+## 21. Reader-facing research reports must exclude implementation and QA trace by default
+
+The CAT-TRACE synthesis incident on 2026-11-17 also exposed a content-selection failure. A document intended for the research owner included repository paths, result-directory inventories, execution/audit state, internal stage labels and implementation-detail traces even though none of them were needed to understand the scientific conclusion.
+
+This is a direct violation of the reader contract. It must be treated as a generic regression class, not as a project-local style preference.
+
+### 21.1 Four-layer separation is mandatory
+
+For research reports, advisor updates, group-meeting notes and scientific syntheses, classify material into four layers before drafting:
+
+1. **reader-facing scientific content** — scientific question, experiment, comparison, result, interpretation, uncertainty and decision;
+2. **author/research-owner content** — reasoning needed to understand or decide the science;
+3. **implementation/reproducibility content** — scripts, repository paths, configuration, commands and execution mechanics;
+4. **QA/release evidence** — branch, commit, hashes, manifests, logs, audit/review state, validator output and release status.
+
+The main reader-facing document must not silently combine all four layers.
+
+### 21.2 Default exclusion rule
+
+Unless the user explicitly asks for a reproducibility appendix, repository handoff, audit log or implementation note, the main research narrative must exclude:
+
+- repository paths such as \`docs/...\`, \`results/...\`, \`analysis/...\`, \`package/...\`;
+- branch names, commit hashes, pull requests, job IDs, allocation IDs and worktree state;
+- manifest paths, hashes, validator reports, CI/test state and release status;
+- Planner/Reviewer/Executor labels, audit gates, round numbers and workflow status;
+- internal task names, correction rounds, debug chronology and “this run/this round” narration;
+- implementation-only numerical settings that do not change the reader's scientific interpretation;
+- exhaustive evidence inventories that merely prove where the information came from.
+
+These items remain available in the repository and internal evidence layer. Their existence is not a reason to surface them to the reader.
+
+### 21.3 Reader-action test is a hard inclusion gate
+
+Before any technical detail enters the main document, ask:
+
+- Does the reader need this to understand the scientific question?
+- Does it change interpretation of the evidence?
+- Does it change the decision or next action?
+- Would omitting it create a material scientific ambiguity?
+
+If all answers are no, the item must be moved internal or omitted.
+
+“Useful for provenance”, “available in the repository”, “exact”, “helpful for debugging”, or “good to have for completeness” are not sufficient reasons for inclusion.
+
+### 21.4 Reproducibility details belong in a separate layer
+
+A small amount of implementation detail may remain reader-facing only when the scientific argument depends on it, for example:
+
+- the exact training/test split when it defines the estimand;
+- the exact model or metric name when methods are being compared;
+- a numerical tolerance when the conclusion depends on approximation error;
+- a script/config identity when the document's explicit purpose is reproducibility.
+
+Otherwise, reproducibility details belong in a short appendix or separate internal note, not interleaved with the scientific narrative.
+
+A research-owner document must still be understandable if all repository paths, commit IDs, job IDs and audit tokens are hidden.
+
+### 21.5 Scientific narrative must not follow workflow chronology
+
+Do not organize a research report as:
+
+\`\`\`text
+Pro 1 -> Pro 2 -> Pro 3 -> round 1 -> round 2 -> debug -> rerun -> audit
+\`\`\`
+
+unless that chronology itself changes the scientific interpretation.
+
+Prefer:
+
+\`\`\`text
+scientific question
+-> comparison/experiment
+-> decisive result
+-> interpretation
+-> remaining uncertainty
+-> next scientific decision
+\`\`\`
+
+Internal stages can be used to establish authority while drafting, but they must not become the reader-facing story.
+
+### 21.6 Evidence boundary must describe science, not workflow state
+
+A reader-facing limitation may say:
+
+- “this result comes from one dataset”;
+- “the time split extrapolates beyond the training weeks”;
+- “the comparison does not yet include posterior uncertainty”;
+- “the model extension has not yet been tested on the real data”.
+
+Do not substitute workflow statements such as:
+
+- “executor self-check only”;
+- “not independently audited”;
+- “branch not merged”;
+- “result pending reviewer”;
+- “commit not pushed”.
+
+Workflow state belongs to the internal QA layer unless the user explicitly asks for project status.
+
+### 21.7 Full-document scan is required after a content-layer failure
+
+If the user reports that implementation/QA material leaked into a reader-facing document, repair the whole artifact rather than only the cited paragraph.
+
+The repair must scan for:
+
+- repository-path patterns;
+- commit/branch/job identifiers;
+- audit/review/validator state;
+- internal stage/round labels;
+- debug chronology;
+- implementation settings without reader value;
+- evidence inventories that do not support the reader task.
+
+Required acceptance fields:
+
+\`\`\`text
+READER_TASK_VISIBLE = YES
+REPO_PATHS_IN_MAIN_NARRATIVE = 0
+IMPLEMENTATION_TRACE_IN_MAIN_NARRATIVE = 0
+QA_RELEASE_TRACE_IN_MAIN_NARRATIVE = 0
+WORKFLOW_CHRONOLOGY_AS_SCIENTIFIC_STRUCTURE = NO
+UNNEEDED_IMPLEMENTATION_DETAIL = 0
+SCIENTIFIC_LIMITATIONS_PRESERVED = YES
+FULL_ARTIFACT_RELEVANCE_SCAN = PASS
+\`\`\`
+
+The reader must not have to repeatedly identify material that belongs to the implementation or QA layer. Once this failure class has occurred, it is a persistent regression guard for future Research Authoring outputs.
+
