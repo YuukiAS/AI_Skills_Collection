@@ -8,6 +8,22 @@ Current capability status: `baseline`.
 
 ## Incoming real-use feedback
 
+### Research progress decks need a belief-update storyline gate before slide planning
+status: NEW
+source: Distributed Imaging Inference supervisor-deck restructuring, 2026-11-17
+evidence: `YuukiAS/Distributed_Imaging_Inference@515c2f5696b7bb678d8311027c51b6b4ca693f05`; `docs/research/decks/2026-11-18_supervisor_deck/DECK_SKELETON_ZH.md`; `docs/research/decks/2026-11-18_supervisor_deck/PROMPT_PRO_DECK_ZH.md`; the prior skeleton mixed hypothesis histories, workflow summaries, literature inventory, data inventory and experiment details before a manual restructure into one decision narrative.
+problem: Research-progress decks can remain exhausting even when every source fact is correct, because presentation generation often compresses the source/report structure instead of reconstructing how scientific belief changed. The generic workflow needs a pre-slide **belief-update / decision-story gate** for supervisor, group-meeting and research-progress decks. Before page planning, it should identify the durable scientific question, each major hypothesis or direction that was considered, the evidence that specifically bears on that hypothesis, why the evidence narrowed or redirected the question, the current unresolved capability, and the next discriminating decision. Evidence from one hypothesis must not be reused to reject a different hypothesis merely because both appear in the same project history. AI workflow names, review rounds and search chronology should stay in provenance/speaker notes unless they themselves change the scientific conclusion.
+
+The same gate should also reshape common slide types around decision value:
+- **direction-history slides:** use `why this was plausible -> what new evidence showed -> why it was insufficient -> what the question became`, not a chronological activity log;
+- **prior-work slides:** organize by capabilities already obtained vs the remaining capability, not paper-by-paper bibliography order;
+- **data slides:** organize by what current data can identify/test and what new datasets would add to generalizability, not download/institution/DUA inventory;
+- **experiment slides:** present the experiment as a discriminating chain and outcome decision tree; full training contracts, QA details and compute ledgers belong in appendix unless they change the decision;
+- **method-inspiration slides:** advisor or canonical methods should be shown as conditional interfaces after simpler explanations/baselines are considered, not retrofitted as the reason the problem exists;
+- **closing slide:** ask for concrete advisor decisions and show the consequence of each decision, rather than ending with a generic summary.
+
+project-specific context: The DII specialty-hospital, annotation-heterogeneity, rare-target-population sequence; exact Dice values; MoSAiC; named datasets; Experiment 5; and the 18-page supervisor deck remain project-specific. The reusable issue is that a research deck must reconstruct scientific belief updates and decision boundaries before slide-level compression, with hypothesis-evidence attribution kept correct.
+
 ### a private research project v13/v14 follow-up feedback is consolidated into the canonical inbox
 status: NEW
 tracking: #29
