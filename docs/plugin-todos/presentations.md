@@ -8,6 +8,20 @@ Current capability status: `baseline`.
 
 ## Incoming real-use feedback
 
+### 内容规格和渲染成品分别进行独立冷读
+status: NEW
+source: user feedback on research decks, 2026-11-18
+evidence: private repo, not linked
+problem: 冷读须分两轮：第一轮在内容规格阶段进行，不渲染；第二轮检查渲染成品。每轮冷读者都须使用全新会话，不读取讲者备注与修订记录。
+project-specific context: 仅记录通用要求，不保留任何私有内容。
+
+### 页脚仅保留必要出处说明
+status: NEW
+source: user feedback on research decks, 2026-11-18
+evidence: private repo, not linked
+problem: 页脚只允许必要的出处说明（数据、图片、引用），禁止作者名、会议名、日期等内容。
+project-specific context: 仅记录通用要求，不保留任何私有内容。
+
 ### Research progress decks need a belief-update storyline gate before slide planning
 status: NEW
 source: Distributed Imaging Inference supervisor-deck restructuring, 2026-11-17
@@ -331,6 +345,14 @@ problem: Caption existence is not the goal. Scientific figures need enough expla
 candidate_action: Replace boolean caption-presence QA with a semantic caption-role check: REQUIRED / OPTIONAL / REMOVE. Require captions for ambiguous scientific plots; permit no caption when axes/legend + nearby prose already fully explain an obvious object; always retain source attribution separately when needed.
 promotion_gate: replay where a technically present but useless meta-caption is rejected and a meaningful statistical caption passes.
 
+#### 缺少正文解释的表图须有 caption
+status: NEW
+source: user feedback on research decks, 2026-11-18
+evidence: private repo, not linked
+problem: 无正文解释的表或图必须有 caption；caption 单行居中、多行左对齐。
+project-specific context: 仅记录通用要求，不保留任何私有内容。
+
+
 ### Teaching/course-standard route should freeze a reusable standard Beamer separate from CUHK research and commercial PPT
 status: NEW
 tracking: #62
@@ -358,6 +380,12 @@ problem: Clear Writing/source prose checks alone are insufficient if the final s
 candidate_action: Couple Presentations with Clear Writing at the final rendered-artifact stage, but keep presentation-specific anti-meta checks in the reviewer. Ordinary academic titles should be preferred over slogan-like generated headings.
 promotion_gate: replay across teaching and research decks where the gate catches functionally similar AI/meta prose without relying only on a phrase blacklist.
 
+#### 冷读须专门检查并拒绝 AI 套话
+status: NEW
+source: user feedback on research decks, 2026-11-18
+evidence: private repo, not linked
+problem: 冷读须专门检查“不是…而是 / not X but Y”句式、标签式短语、元说明（如 scope transition）、结尾无信息句，以及保守免责句（does not mean / does not imply）；出现上述表达一律判不合格。
+project-specific context: 仅记录通用要求，不保留任何私有内容。
 
 
 ### Reviewer runtime contract must include agent type, model, reasoning and image capability
@@ -490,6 +518,14 @@ candidate_action:
 - Final independent reviewer must separately answer “looks acceptable?” and “matches the frozen repair contract?”. Either failure blocks release.
 - A claimed `ALL_PAGES_VIEWED=YES` must be backed by unique page-level notes; executor self-review is not independent acceptance.
 promotion_gate: replay the Rich v2 failed candidate so the strengthened gate rejects it for both source-contract drift and visual composition; then pass the bounded repair candidate plus one unrelated deck without requiring project-specific page logic.
+
+#### 模板冻结规则须逐条列出并独立核实
+status: NEW
+source: user feedback on research decks, 2026-11-18
+evidence: private repo, not linked
+problem: 渲染者必须先把模板冻结规则逐条列成核对清单，并逐页对照。渲染后，须由未参与渲染的独立执行者按规则原件核实。
+project-specific context: 仅记录通用要求，不保留任何私有内容。
+
 
 ### Beamer header miniframe markers need native-size projection QA
 status: NEW
