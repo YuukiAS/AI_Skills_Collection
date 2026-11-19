@@ -40,5 +40,9 @@
 - 正文只写用户需要知道和决定的东西；证据、行号、推导放附录。
 - 不写"不是 X 而是 Y"式套话、口号、免责尾巴；不要整页"已核对/已检查"类审计说明。
 
-## 回复格式
-直接回复完整设计书 Markdown（一个文件）。用户会把它保存到上面写明的路径并提交。
+## 回复与写回
+完成设计后，直接将完整设计书写入：
+
+`docs/design/plugin-reset-2026-11/designs/REASONED_DECISION_DESIGN_V0_1.md`
+
+写入当前分支 `design/plugin-reset-triage-20261119`，commit 并 push；随后回复设计书的简短结论、最终 commit 和文件路径。不要只把设计书留在聊天里。
