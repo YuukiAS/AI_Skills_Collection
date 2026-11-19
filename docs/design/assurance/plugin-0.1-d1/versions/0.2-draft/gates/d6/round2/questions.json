@@ -1,0 +1,82 @@
+[
+  {
+    "id": "D6-R2-Q01",
+    "nodeId": "role-D1",
+    "question": "D1 的短描述是否已经从“写冻结说明”改为把冻结审阅内容写入 Blueprint 的 freeze-review 节点组，并与 D1 正文一致？",
+    "answerLocation": "role-D1.description；role-D1.terminal.mechanism 中“用户在 Blueprint 中审阅并批准冻结”“D6 像审其他组件一样审 freeze-review”的相关段落",
+    "gap": null,
+    "impact": "第 1 轮阻塞 1 已关闭；D1 的职责载体与 0.2 冻结审阅方案一致。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R2-Q02",
+    "nodeId": "role-D6",
+    "question": "D6 的短描述是否已经从“核对冻结说明”改为核对 freeze-review 节点内容与设计一致，并与 D6 正文一致？",
+    "answerLocation": "role-D6.description；role-D6.terminal.mechanism 中 freeze-review 核对段落",
+    "gap": null,
+    "impact": "第 1 轮阻塞 2 已关闭；D6 不再恢复独立冻结说明或其旧四项检查。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R2-Q03",
+    "nodeId": "gates",
+    "question": "本轮关卡范围是否已经改为真实差异范围，而不是只限 freeze-review、D1 澄清节点和冻结节点；wr-gates.technical.action 是否同步？",
+    "answerLocation": "gates.terminal.mechanism“本次 0.2 关卡与收口”；wr-gates.technical.action",
+    "gap": null,
+    "impact": "第 1 轮阻塞 3 已关闭；D6 按自身字段差异覆盖，D8 按读者文字差异及受影响相邻单位覆盖。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R2-Q04",
+    "nodeId": "gates",
+    "question": "新增 D5 废弃语义扫描是否明确了扫描范围、历史例外、失败行为和与原检查器的关系？",
+    "answerLocation": "gates.terminal.mechanism“D5 前置扫描”；PROMPT 内嵌 scan_deprecated_semantics.py；本轮 D5 证据摘要",
+    "gap": null,
+    "impact": "对本轮已批准的 0.2 旧语义替换，进入条件、失败条件和历史保留边界已经可执行；D6 可在所给 D5 零残留证据上继续定向复核。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R2-Q05",
+    "nodeId": "fr-roles",
+    "question": "freeze-review 的角色分工摘要是否准确保持“用户批准快照、D1 取得用户批准并冻结”的决定权边界？",
+    "answerLocation": "fr-roles.relevant_mechanism_paragraphs[1]；role-D1.terminal.mechanism；c-gates-to-freeze；fr-decisions",
+    "gap": "fr-roles 写成“D1 负责澄清、汇总、四关卡和批准冻结”，会直接读成 D1 负责批准；但 role-D1 明确“不代用户批准”，c-gates-to-freeze 与 fr-decisions 也明确由用户批准 snapshot_sha256。",
+    "impact": "冻结审阅是给用户直接阅读并批准的载体；这里把批准权转述给 D1，会造成冻结决定权的直接矛盾，不能在当前文字下判为一致。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R2-Q06",
+    "nodeId": "gates",
+    "question": "本轮整体完成条件中对 D7 的要求是否与 D7 的既定角色和 wr-gates 的冷读动作一致？",
+    "answerLocation": "gates 关卡表的 D7 行；role-D7.description；wr-gates.action；gates“本轮整体完成条件”；wr-gates.expectedResult；wr-gates.technical.expectedResult",
+    "gap": "D7 被定义为只读 Blueprint 的新执行者冷读，输出开工阻塞问题和执行顺序；但新增整体完成条件及 wr-gates 结果字段却要求“D7 全部 9 个回归用例通过”。同一关卡因此同时被定义为冷读和回归执行者，而提示词还明确说明实际回归尚未运行。",
+    "impact": "冻结条件无法被唯一解释：可能错误地把未运行的产品回归记到 D7，也可能让冻结永久等待一个 D7 职责中不存在的结果。必须先统一 D7 的完成语义，才能可靠判断四关卡是否完成。",
+    "blocking": true,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R2-Q07",
+    "nodeId": "role-D1",
+    "question": "D1 正文中两处几乎相同的 freeze-review/D6 说明是否会改变职责或判定？",
+    "answerLocation": "role-D1.terminal.mechanism 中连续两段 D6 审 freeze-review 的说明",
+    "gap": "存在重复转述，但两段语义一致。",
+    "impact": "不影响本轮冻结语义；可留到 0.3 做文字去重。",
+    "blocking": false,
+    "owner": "D1"
+  },
+  {
+    "id": "D6-R2-Q08",
+    "nodeId": "gates",
+    "question": "新增废弃语义扫描是否需要在本轮之外增强对同义改写和枚举式旧语义的识别？",
+    "answerLocation": "PROMPT 内嵌 scan_deprecated_semantics.py 的 RULES 与 PERMITTED",
+    "gap": "扫描器主要匹配已知旧字符串和少量固定模式，对未来出现的同义改写或仅用 R1–R7、S1 这类枚举表达旧范围的情况不保证捕获。",
+    "impact": "当前候选已有零残留执行证据且 D6 仍做语义核对，因此不阻塞 0.2；可作为 0.3 的扫描鲁棒性改进。",
+    "blocking": false,
+    "owner": "D1"
+  }
+]
