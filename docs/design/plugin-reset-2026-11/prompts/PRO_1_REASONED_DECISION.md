@@ -15,7 +15,7 @@
 `docs/design/plugin-reset-2026-11/designs/REASONED_DECISION_DESIGN_V0_1.md`
 
 ## 补充说明
-**用户已明确：本插件只做 GPT 端，不做 Codex 端。** 需要核实设备、仓库或配置事实时，由 GPT 端写出要用户或其他工具执行的最小核实步骤，不设计 Codex skill。COVERAGE 中标为"两端"的条目一律改由 GPT 端负责。
+**用户已明确：本插件只做 GPT 端，不做 Codex 端。** 需要核实设备、仓库、配置或外部事实时，GPT 端应优先自行使用当前可用的网页、连接器和其他工具完成核实；只有当前 GPT 确实无法取得、且需要用户权限或现场操作的事实，才要求用户执行最小必要动作。不因此设计 Codex skill。COVERAGE 中标为"两端"的条目一律由 GPT 端负责判断与协调，所需事实可以来自 GPT 工具或外部观测。
 
 ## 仓库与读取方式
 - 仓库：`YuukiAS/AI_Skills_Collection`（公开），分支 `design/plugin-reset-triage-20261119`。
