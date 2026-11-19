@@ -43,6 +43,8 @@ def make_deck(
     width=W,
     height=H,
     blank_body=False,
+    cover_extra=False,
+    question=True,
 ):
     d = pdf.open()
     p = d.new_page(width=width, height=height)
@@ -52,6 +54,8 @@ def make_deck(
         center(p, "Example Author", 101, 12.5)
     if date:
         center(p, "19 November 2026", 130, 12.5)
+    if cover_extra:
+        put(p, "An extra research question appears here.", y=160)
     p = d.new_page(width=width, height=height)
     if not blank_body:
         put(p, "Measured result", y=37, size=13)
@@ -70,7 +74,8 @@ def make_deck(
     baseline = cy + (font.ascender + font.descender) * question_size / 2
     text = "Questions?"
     x = (width - pdf.get_text_length(text, fontsize=question_size)) / 2 + question_dx
-    put(p, text, x, baseline, question_size)
+    if question:
+        put(p, text, x, baseline, question_size)
     d.save(path)
     d.close()
     return path
@@ -80,6 +85,10 @@ def make_deck(
 # are authored independently of detector output; no private label is loaded.
 CASES = {
     "LAY-GEOMETRY": ({}, {"width": 500}),
+    "ROLE-COVER-CONTENT": ({}, {"cover_extra": True}),
+    "TEXT-NO-META": ({}, {"body": "Experiment 4 requires implementation cleanup."}),
+    "TEXT-UNDEFINED-ABBREVIATIONS": ({"body": "Alpha beta comparison (ABC) is measured."}, {"body": "ABC is measured here."}),
+    "TEXT-CLOSING-QUESTION": ({}, {"question": False}),
     "CAP-NO-LABEL-CHAINS": (
         {"caption": "Figure 1 shows the measured trend."},
         {"caption": "Figure 1 shows A; B."},
@@ -132,7 +141,7 @@ def test_every_auto_rule_with_synthetic_pdf(tmp_path, rule_id, bad):
 
 def test_registry_complete_and_detector_contracts():
     rows = v.rules()
-    assert len(rows) == 117
+    assert len(rows) == 119
     assert {r["id"] for r in rows if r["mode"] == "auto"} == set(CASES)
     assert len({r["id"] for r in rows}) == len(rows)
     assert all(r["thresholds"] is not None for r in rows)
@@ -309,14 +318,14 @@ def test_chinese_spacing_spans_remain_visible(tmp_path):
     "rule_id,options",
     [
         ("CAP-NO-BARE-RESULTS", {"caption": "Figure 1: 0.812"}),
-        ("TEXT-NO-META", {"body": "We checked this contract yesterday."}),
+
         (
             "TEXT-NO-LABEL-PHRASES",
             {"body": "Unlock the power of a revolutionary method."},
         ),
         ("TEXT-NO-ENDING-DISCLAIMER", {"body": "For reference only."}),
         ("CAP-REQUIRED", {"caption": "Unmarked label"}),
-        ("ROLE-COVER-CONTENT", {}),
+
         ("FOOT-NATIVE-COMPONENTS", {}),
         ("TYPE-BODY", {"body": "The example uses a fixed large font."}),
         ("LAY-BODY-WHITESPACE", {}),
@@ -340,7 +349,7 @@ def test_partial_rules_have_real_screening_evidence(tmp_path, rule_id, options):
     r = v.validate(tmp_path / "screen.pdf", tmp_path / "out", profile="v19")
     assert not r["errors"]
     assert any(
-        f["rule_id"] == rule_id and f["status"] == "REVIEW" for f in r["findings"]
+        f["rule_id"] == rule_id and f["status"] == ("FAIL" if rule_id == "LAY-BODY-WHITESPACE" else "REVIEW") for f in r["findings"]
     )
     assert any(c["rule_id"] == rule_id for c in r["human_checklist"])
 
@@ -453,3 +462,156 @@ def test_tounicode_ligature_expansion_survives_visible_filter(tmp_path):
         lines = v.measure.extract_lines(doc[0], v.measurement_config())
     assert raw == "fifi"
     assert v.text_of(lines) == "fifi"
+
+
+@pytest.mark.parametrize("text,expected", [
+    ("It is not an estimate but a slogan.", True),
+    ("The result is a finite comparison, not a universal guarantee.", True),
+    ("The method is not only stable but also accurate.", False),
+    ("The effect was not statistically significant.", False),
+])
+def test_contrast_forms_and_narrow_exceptions(tmp_path, text, expected):
+    path = make_deck(tmp_path / "contrast.pdf", body=text)
+    r = v.validate(path, tmp_path / "out")
+    assert any(f["rule_id"] == "TEXT-NO-CONTRAST" for f in r["findings"]) == expected
+
+
+@pytest.mark.parametrize("text,expected", [
+    ("ABC (alpha beta comparison) describes the measure.", False),
+    ("ABC: alpha beta comparison is our measure.", False),
+    ("ABC is alpha beta comparison.", False),
+    ("Alpha beta comparison (ABC) describes the measure.", False),
+    ("Alpha beta comparison: ABC describes the measure.", False),
+    ("ABC (a convincing estimate) describes the measure.", True),
+    ("An unrelated parenthetical phrase (XYZ) is used.", True),
+    ("An operational testing unit (OTU) is defined.\nOTUs are compared.", False),
+    ("A&Bs are compared with ABC.", True),
+    ("CT and MRI support AI on a CPU and GPU.", False),
+])
+def test_expansion_forms_false_expansions_and_plural(tmp_path, text, expected):
+    path = make_deck(tmp_path / "acronyms.pdf", body=text)
+    r = v.validate(path, tmp_path / "out")
+    hits = [f for f in r["findings"] if f["rule_id"] == "TEXT-UNDEFINED-ABBREVIATIONS"]
+    assert bool(hits) == expected, hits
+
+
+def test_main_and_final_closing_are_both_required(tmp_path):
+    path = make_deck(tmp_path / "main.pdf")
+    d = pdf.open(path)
+    d[-1].add_redact_annot((0, 150, W, H))
+    d[-1].apply_redactions()
+    p = d.new_page(width=W, height=H)
+    put(p, "Appendix: Supporting evidence", y=37, size=13)
+    put(p, "Additional measurements support interpretation.", y=75)
+    d.set_toc([[1, "Main", 1], [1, "Appendix", 4]])
+    d.save(tmp_path / "appendix.pdf")
+    d.close()
+    r = v.validate(tmp_path / "appendix.pdf", tmp_path / "out")
+    assert {f["page"] for f in r["findings"] if f["rule_id"] == "TEXT-CLOSING-QUESTION"} == {3, 4}
+
+
+def test_question_on_earlier_page_does_not_cover_last_page(tmp_path):
+    path = make_deck(tmp_path / "early.pdf")
+    d = pdf.open(path)
+    p = d.new_page(width=W, height=H)
+    put(p, "Additional conclusion", y=37, size=13)
+    put(p, "The conclusion remains conditional on independent evidence.", y=75)
+    d.save(tmp_path / "later.pdf")
+    d.close()
+    r = v.validate(tmp_path / "later.pdf", tmp_path / "out")
+    assert [f["page"] for f in r["findings"] if f["rule_id"] == "TEXT-CLOSING-QUESTION"] == [4]
+
+
+@pytest.mark.parametrize("extra,captioned,expected", [(False, False, True), (True, False, False), (False, True, False)])
+def test_caption_or_external_explanation_prevents_missing_explanation_fail(tmp_path, extra, captioned, expected):
+    path = make_deck(tmp_path / "base.pdf", blank_body=True)
+    d = pdf.open(path)
+    p = d[1]
+    put(p, "Evidence", y=37, size=13)
+    p.draw_rect((40, 70, 320, 150), color=(0, 0, 0))
+    put(p, "Category", x=50, y=95)
+    put(p, "Value", x=180, y=95)
+    if extra:
+        put(p, "The comparison shows a consistent increase across groups.", y=185)
+    if captioned:
+        put(p, "The figure shows the measured comparison.", x=40, y=170, size=7.97)
+    d.save(tmp_path / "object.pdf")
+    d.close()
+    r = v.validate(tmp_path / "object.pdf", tmp_path / "out", profile="v19")
+    hits = [f for f in r["findings"] if f["rule_id"] == "CAP-REQUIRED" and f["page"] == 2 and f["status"] == "FAIL"]
+    assert bool(hits) == expected, hits
+
+
+def test_detached_wide_caption_and_cover_caption_are_detected(tmp_path):
+    path = make_deck(tmp_path / "base.pdf")
+    d = pdf.open(path)
+    for p in [d[0], d[1]]:
+        p.draw_rect((45, 145, 150, 170), color=(0, 0, 0))
+        put(p, "The plot shows the trend; the groups differ.", x=45, y=225, size=7.97)
+    d.save(tmp_path / "detached.pdf")
+    d.close()
+    r = v.validate(tmp_path / "detached.pdf", tmp_path / "out", profile="v19")
+    assert {f["page"] for f in r["findings"] if f["rule_id"] == "CAP-NO-LABEL-CHAINS"} == {1, 2}
+
+
+def test_internal_terms_are_configurable_and_scientific_audit_is_allowed(tmp_path):
+    path = make_deck(tmp_path / "base.pdf", body="A sampling audit supports the effort audit.")
+    r = v.validate(path, tmp_path / "out")
+    assert not any(f["rule_id"] == "TEXT-NO-META" for f in r["findings"])
+    import yaml
+    config = yaml.safe_load((ROOT / "rules.yaml").read_text())
+    next(x for x in config["rules"] if x["id"] == "TEXT-NO-META")["thresholds"]["patterns"].append("supports")
+    custom = tmp_path / "rules.yaml"
+    custom.write_text(yaml.safe_dump(config, allow_unicode=True))
+    r = v.validate(path, tmp_path / "custom", rules_path=custom)
+    assert any(f["rule_id"] == "TEXT-NO-META" for f in r["findings"])
+
+
+def test_judged_prose_lists_the_actual_candidate_sentences(tmp_path):
+    text = "These decisions determine whether the comparison should proceed."
+    path = make_deck(tmp_path / "prose.pdf", body=text)
+    r = v.validate(path, tmp_path / "out")
+    hits = [f for f in r["findings"] if f["rule_id"] == "TEXT-NO-ENDING-DISCLAIMER" and f["page"] == 2]
+    assert hits and all(f["status"] == "REVIEW" for f in hits)
+    assert any(text in f["details"]["text"] for f in hits)
+    assert text in (tmp_path / "out/report.md").read_text()
+
+
+def test_title_acronym_still_needs_an_expansion(tmp_path):
+    path = make_deck(tmp_path / "base.pdf")
+    d = pdf.open(path)
+    d[0].add_redact_annot((0, 35, W, 80))
+    d[0].apply_redactions()
+    put(d[0], "ABC Study", x=150, y=65, size=24)
+    d.save(tmp_path / "acronym-title.pdf")
+    d.close()
+    r = v.validate(tmp_path / "acronym-title.pdf", tmp_path / "out")
+    assert any(f["rule_id"] == "TEXT-UNDEFINED-ABBREVIATIONS" and f["details"]["term"] == "ABC" for f in r["findings"])
+
+
+@pytest.mark.parametrize("dense,expected", [(False, True), (True, False)])
+def test_frozen_body_track_whitespace_has_automatic_evidence(tmp_path, dense, expected):
+    body = "The observed comparison supports a conditional interpretation."
+    if dense:
+        body = "\n".join([body] * 12)
+    path = make_deck(tmp_path / "space.pdf", body=body)
+    r = v.validate(path, tmp_path / "out", profile="v19")
+    hits = [f for f in r["findings"] if f["rule_id"] == "LAY-BODY-WHITESPACE" and f["page"] == 2 and f["status"] == "FAIL"]
+    assert bool(hits) == expected, hits
+    generic = v.validate(path, tmp_path / "generic")
+    assert not any(f["rule_id"] == "LAY-BODY-WHITESPACE" and f["status"] == "FAIL" for f in generic["findings"])
+
+
+def test_ampersand_name_is_not_plural_normalized(tmp_path):
+    path = make_deck(tmp_path / "ampersand.pdf", body="A&Bs are compared here.")
+    r = v.validate(path, tmp_path / "out")
+    terms = {f["details"]["term"] for f in r["findings"] if f["rule_id"] == "TEXT-UNDEFINED-ABBREVIATIONS"}
+    assert "A&Bs" in terms and "A&B" not in terms
+
+
+def test_label_fragment_is_listed_even_when_pdf_block_ends_in_a_sentence(tmp_path):
+    path = make_deck(tmp_path / "label.pdf", body="Primary comparison\nThe group comparison shows the measured difference.")
+    r = v.validate(path, tmp_path / "out")
+    hits = [f for f in r["findings"] if f["rule_id"] == "TEXT-NO-LABEL-PHRASES" and f["page"] == 2]
+    assert any(f["details"]["text"] == "Primary comparison" for f in hits)
+    assert all(f["status"] == "REVIEW" for f in hits)

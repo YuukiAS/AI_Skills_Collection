@@ -27,7 +27,7 @@ rules:
   review: 正文左右各 8 mm；结束页沿用标准 rail，不得 full-bleed。
 - id: ROLE-COVER-CONTENT
   rule: Limit the title page to the title, author and date.
-  mode: partial
+  mode: auto
   profile: all
   thresholds:
     unit: null
@@ -35,7 +35,7 @@ rules:
     specification: Confirm against the declared template; no unspecified hard threshold
       is inferred.
   detector: screen_cover
-  review: 标题页只放题目、作者和日期。
+  review: null
 - id: TYPE-COVER-TITLE
   rule: Center the bold cover title using the V19 title role.
   mode: partial
@@ -951,34 +951,44 @@ rules:
     - 不是…而是
     allowed: 0
     unit: occurrence
+    patterns:
+    - '不是[^。！？]{1,160}而是|并非[^。！？]{1,160}而是'
+    - '\bnot\s+[^.!?]{1,160}?\s+but\s+(?!also\b)'
+    - '[,，]\s*not\s+[^.!?;]{1,160}'
+    allow_patterns:
+    - '\bnot only\b[^.!?]{0,100}?\bbut also\b'
+    - '\bnot statistically significant\b'
   detector: check_contrast
   review: null
 - id: TEXT-NO-LABEL-PHRASES
   rule: Flag label-like fragments that replace explanation.
-  mode: partial
+  mode: judged
   profile: all
   thresholds:
     unit: null
     value: null
     specification: Confirm against the declared template; no unspecified hard threshold
       is inferred.
-  detector: screen_prose
+  detector: null
   review: 逐处标出用标签式短语代替解释的文字。
 - id: TEXT-NO-META
-  rule: Keep narrator meta-statements and internal execution labels out of visible
-    explanation.
-  mode: partial
+  rule: Flag configured narrator meta-statements and internal execution labels.
+  mode: auto
   profile: all
   thresholds:
-    unit: null
-    value: null
-    specification: Confirm against the declared template; no unspecified hard threshold
-      is inferred.
-  detector: screen_prose
-  review: 可见解释中禁止元说明、内部执行标签和面向作者的流程口吻。
+    patterns:
+    - '\bexperiment\s+\d+\b'
+    - '\bcurrent\s+v\d+(?:\.\d+)*\b'
+    - '\b(?:implementation|cleanup|audit|readiness|receipt|contract)\b'
+    - '(?-i:\b(?:PASS|FAIL)\b)'
+    - '本页|本次汇报|执行合同|任务合同|已完成审计|已验收'
+    allow_patterns:
+    - '\b(?:effort|sampling|financial|clinical)\s+audit\b'
+  detector: check_meta
+  review: null
 - id: TEXT-NO-ENDING-DISCLAIMER
   rule: Flag information-free endings and formulaic defensive disclaimers.
-  mode: partial
+  mode: judged
   profile: all
   thresholds:
     examples:
@@ -987,7 +997,7 @@ rules:
     - remains pending
     allowed: 0
     unit: occurrence
-  detector: screen_prose
+  detector: null
   review: 逐处标出结尾无信息句及模板式保守免责句。
 - id: PROC-REPAIR-TARGET-PAGES
   rule: Change only the pages named in the current repair request.
@@ -1375,5 +1385,27 @@ rules:
   thresholds:
     max_sentences: 1
   detector: check_caption_sentences
+  review: null
+- id: TEXT-UNDEFINED-ABBREVIATIONS
+  rule: Require a visible expansion at or before the first use of an acronym candidate.
+  mode: auto
+  profile: all
+  thresholds:
+    whitelist: [CT, MRI, AI, CPU, GPU, PDF, DNA, RNA, URL, HTTP, HTTPS, HTML, API, USB, RGB, UTC, PASS, FAIL]
+    definition_forms: [expansion (ABC), ABC (expansion), 'ABC: expansion', ABC is expansion]
+    unit: abbreviation
+    allowed: 0
+  detector: screen_abbreviations
+  review: null
+- id: TEXT-CLOSING-QUESTION
+  rule: Require a visible question block on both the main closing page and the deck closing page.
+  mode: auto
+  profile: all
+  thresholds:
+    boundaries: [deck_end, main_before_appendix]
+    main_end_evidence: PDF outline or visible appendix heading
+    unit: missing question block
+    allowed: 0
+  detector: check_closing_question
   review: null
 review_language: zh-CN

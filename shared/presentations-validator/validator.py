@@ -54,7 +54,9 @@ SOURCE = re.compile(
     r"^(?:Data|Source|Sources|Credit|Photo|Reference|References|数据|来源|参考|图片来源)\s*[:：]|doi\s*:|https?://|\b10\.\d{4,9}/|\[\d+\]",
     re.IGNORECASE,
 )
-ABBR = re.compile(r"(?<![A-Za-z])(?:[A-Z][A-Z0-9-]{1,9})(?![A-Za-z])")
+ABBR = re.compile(
+    r"(?<![A-Za-z0-9])(?:[A-Z]&[A-Za-z]+|[A-Z][a-z]+[A-Z][A-Za-z]*|[A-Z]{2,}[a-z]?)(?:-(?:[A-Z]{2,}[a-z]?|[A-Z][a-z]+[A-Z][A-Za-z]*|[0-9]+(?:\.[0-9]+)*))*"
+)
 
 
 def rules(path=ROOT / "rules.yaml"):
@@ -183,7 +185,7 @@ def extract(page, number, total, profile, tex=None):
         pass
     objects += vector_regions
     bullet_blocks = {l["block"] for l in lines if l["bullet"]}
-    for l in candidates if number != 1 else []:
+    for l in candidates:
         if l["block"] in bullet_blocks:
             l["role"] = "body"
             continue
@@ -200,7 +202,24 @@ def extract(page, number, total, profile, tex=None):
             and l["bbox"][2] <= o[2] + 3
             for o in objects
         )
-        if l["role"] != "frame_title" and (prefix or below and l["size"] < 9):
+        inside = any(
+            o[0] - 1 <= l["bbox"][0] and l["bbox"][2] <= o[2] + 1
+            and o[1] - 1 <= l["bbox"][1] and l["bbox"][3] <= o[3] + 1
+            for o in objects
+        )
+        prose = len(re.findall(r"[A-Za-z]+", l["text"])) >= 4 or len(re.findall(r"[\u3400-\u9fff]", l["text"])) >= 8
+        caption_style = (
+            abs(l["size"] - cfg["font_pdf_pt"]["caption"]) <= cfg["limits"]["font_tolerance_pt"]
+            if profile == "v19" else l["size"] < cfg["font_pdf_pt"]["body"] * 0.8
+        )
+        detached = (
+            caption_style and prose and not inside
+            and l["bbox"][1] > page.rect.height * 0.45
+            and bool(re.search(r"[。.!?！？]$", l["text"]))
+        )
+        if l["role"] == "caption" and inside and not prefix:
+            l["role"] = "body"  # plot tick/legend labels are inside the object
+        if l["role"] != "frame_title" and (prefix or below and l["size"] < 9 and not inside or detached):
             l["role"] = "caption"
         elif (
             l["role"] == "body"
@@ -385,16 +404,38 @@ def check_internal_versions(p, r, ctx):
     return pattern_findings(p, VERSION, "可见内部版本标记")
 
 
-def check_contrast(p, r, ctx):
+def text_blocks(p, include_footer=False):
     groups = defaultdict(list)
     for l in p["lines"]:
-        if l["role"] not in {"navigation", "footer"}:
+        if l["role"] != "navigation" and (include_footer or l["role"] != "footer"):
             groups[l["block"]].append(l)
-    blocks = [
-        {"text": text_of(ls), "bbox": measure.union([l["bbox"] for l in ls])}
+    return [
+        {"text": text_of(ls), "bbox": measure.union([l["bbox"] for l in ls]), "lines": ls}
         for ls in groups.values()
     ]
-    return pattern_findings(p, CONTRAST, "模板化对比句式", blocks)
+
+
+def configured_patterns(p, r, label):
+    t = r["thresholds"]
+    pattern = re.compile("|".join(t["patterns"]), re.IGNORECASE)
+    allowed = [re.compile(x, re.IGNORECASE) for x in t.get("allow_patterns", [])]
+    out = []
+    for block in text_blocks(p):
+        masked = block["text"]
+        for pat in allowed:
+            masked = pat.sub(lambda m: " " * len(m[0]), masked)
+        for m in pattern.finditer(masked):
+            out.append(result(p, f"{label}：{block['text'][m.start():m.end()]}",
+                              text=block["text"], bbox=block["bbox"]))
+    return out
+
+
+def check_contrast(p, r, ctx):
+    return configured_patterns(p, r, "模板化对比句式")
+
+
+def check_meta(p, r, ctx):
+    return configured_patterns(p, r, "可见元说明或内部执行标签")
 
 
 def check_word_budget(p, r, ctx):
@@ -517,18 +558,27 @@ def screen_cover(p, r, ctx):
         for key in ["cover_titles", "cover_authors", "cover_dates"]
         for l in p[key]
     }
-    extras = [l for l in by_role(p, "cover") if id(l) not in allowed]
+    extras = [l for l in p["lines"] if l["role"] not in {"navigation", "footer"} and id(l) not in allowed]
     return (
         [
-            review(
+            result(
                 p,
-                "首页存在未归入标题、作者、日期的文字，确认是否为多余内容。",
-                text=text_of(extras),
+                "首页含标题、作者、日期之外的文字或图表。",
+                text=text_of(extras), objects=p["objects"],
             )
         ]
         if extras or p["objects"]
         else []
     )
+
+
+def check_closing_question(p, r, ctx):
+    if p["number"] not in ctx["closing_pages"]:
+        return []
+    if by_role(p, "closing_question"):
+        return []
+    return [result(p, "末页缺少可见 Questions? 问题块。",
+                   boundary=ctx["closing_pages"][p["number"]])]
 
 
 def screen_closing(p, r, ctx):
@@ -579,33 +629,36 @@ def screen_prose(p, r, ctx):
         )
     for f in pattern_findings(p, pat, "需判断的套话、过程用语或免责陈述"):
         out.append({**f, "status": "REVIEW"})
+    if ident == "TEXT-NO-LABEL-PHRASES":
+        for line in p["lines"]:
+            if line["role"] not in {"body", "short_label", "subhead", "table", "caption"}:
+                continue
+            words = re.findall(r"[A-Za-z]+", line["text"])
+            han = re.findall(r"[\u3400-\u9fff]", line["text"])
+            if (1 <= len(words) <= 14 or 1 <= len(han) <= 28) and not re.search(r"[.!?。！？]$", line["text"]):
+                out.append(review(p, "检查标签式短语是否缺少对象、关系或解释。",
+                                  text=line["text"], bbox=line["bbox"]))
+    elif ident == "TEXT-NO-ENDING-DISCLAIMER":
+        blocks = [b for b in text_blocks(p) if any(l["role"] not in {"frame_title", "closing_question"} for l in b["lines"])]
+        if blocks:
+            last = max(blocks, key=lambda b: b["bbox"][3])
+            out.append(review(p, "核对本页末句是否增加信息，或仅重复标题、作空泛免责。",
+                              text=last["text"], bbox=last["bbox"]))
     return out
 
 
 def screen_abbreviations(p, r, ctx):
+    caption_only = r["id"] == "CAP-NO-UNDEFINED-TERMS"
     out = []
-    seen = set()
-    lines = by_role(p, "caption") if r["id"] == "CAP-NO-UNDEFINED-TERMS" else p["lines"]
-    for l in lines:
-        if l["role"] in {"navigation", "footer"}:
+    for term, first in ctx["first_abbreviation"].items():
+        if first["page"] != p["number"] or first["defined"]:
             continue
-        for m in ABBR.finditer(l["text"]):
-            term = m[0]
-            if term in seen:
-                continue
-            seen.add(term)
-            if term in {"PASS", "FAIL"}:
-                continue  # independently reported as an audit-token failure
-            first = ctx["first_abbreviation"].get(term)
-            if first and first[0] == p["number"] and not first[1]:
-                out.append(
-                    review(
-                        p,
-                        f"缩写 {term} 首次出现前未找到明确释义。",
-                        text=l["text"],
-                        term=term,
-                    )
-                )
+        if caption_only and first["role"] != "caption":
+            continue
+        hit = result if r["id"] == "TEXT-UNDEFINED-ABBREVIATIONS" else review
+        out.append(hit(p, f"缩写 {term} 首次出现处或之前未找到展开定义。",
+                       term=term, text=first["text"], bbox=first["bbox"],
+                       definition_policy="Explicit expansion at or before first occurrence; later definitions do not repair it."))
     return out
 
 
@@ -616,11 +669,18 @@ def screen_captions(p, r, ctx):
     if ident == "CAP-REQUIRED":
         for o in p["objects"]:
             if not any(0 <= c["bbox"][1] - o[3] <= 20 for c in p["captions"]):
-                out.append(
-                    review(
-                        p, "图表下方未识别到独立图注；确认正文是否已充分解释。", bbox=o
-                    )
-                )
+                outside = [
+                    l for l in p["lines"]
+                    if l["role"] in {"body", "subhead"}
+                    and measure.intersection(l["bbox"], o) <= 0
+                    and (len(re.findall(r"[A-Za-z]+", l["text"])) >= 5
+                         or len(re.findall(r"[\u3400-\u9fff]", l["text"])) >= 10)
+                ]
+                if not outside and not p["captions"]:
+                    out.append(result(p, "图表既无关联图注，也无可识别的正文解释。", bbox=o))
+                else:
+                    out.append(review(p, "图表未配关联图注；核对外部正文是否充分解释。",
+                                      bbox=o, candidates=[l["text"] for l in outside]))
     for c in p["captions"]:
         below = [o for o in p["objects"] if -0.5 <= c["bbox"][1] - o[3] <= 20]
         if ident == "CAP-BELOW-OBJECT" and not below:
@@ -646,11 +706,9 @@ def screen_captions(p, r, ctx):
             c["text"],
         ):
             out.append(review(p, "图注含独立数字结果片段。", text=c["text"]))
-        if ident == "CAP-NATURAL-SENTENCE" and (
-            not re.search(r"[。.!?！？]$", c["text"]) or len(c["text"].split()) < 4
-        ):
+        if ident == "CAP-NATURAL-SENTENCE":
             out.append(
-                review(p, "图注可能不是解释对象的一句自然语言。", text=c["text"])
+                review(p, "检查这句是否说明图表展示什么、比较什么，或只是元判断。", text=c["text"])
             )
     return out
 
@@ -1072,11 +1130,15 @@ def screen_layout(p, r, ctx):
             or fractions[1] > t["top_blank_max"]
             or fractions[2] > t["bottom_blank_max"]
         ):
+            # Only an explicitly selected template supplies a frozen body
+            # track. Generic pages retain REVIEW for unknown template intent.
+            hit = result if p["profile"] == "v19" else review
             out.append(
-                review(
+                hit(
                     p,
-                    f"正文纵向跨度 {fractions[0]:.1%}，上/下留白 {fractions[1]:.1%}/{fractions[2]:.1%}；核对普通页角色及空容器。",
-                    fractions=fractions,
+                    f"正文纵向跨度 {fractions[0]:.1%}，上/下留白 {fractions[1]:.1%}/{fractions[2]:.1%}；要求跨度 ≥{t['span_min']:.0%}，外留白各 ≤{t['top_blank_max']:.0%}/{t['bottom_blank_max']:.0%}。",
+                    fractions=fractions, track_pdf_pt=[top, bottom],
+                    thresholds={k: t[k] for k in ["span_min", "top_blank_max", "bottom_blank_max"]},
                 )
             )
     elif (
@@ -1321,36 +1383,68 @@ def screen_diagram(p, r, ctx):
     return out
 
 
-def build_context(pages):
+def expansion_matches(term, expansion):
+    words = re.findall(r"[A-Za-z]+", expansion)
+    key = re.sub(r"[^A-Za-z]", "", term).upper()
+    initials = "".join(w[0] for w in words).upper()
+    # Match a suffix so introductory prose before an expansion is harmless.
+    stop = {"a", "an", "the", "of", "and", "for", "in", "on", "with"}
+    significant = "".join(w[0] for w in words if w.lower() not in stop).upper()
+    return len(words) >= 2 and (initials.endswith(key) or significant.endswith(key))
+
+
+def abbreviation_defined(term, before, tail):
+    # Expansion (ABC), ABC (expansion), ABC: expansion, ABC is/means expansion.
+    left = re.search(r"([^.!?;:()（）]{3,160})(?:[（(]|[:：])\s*$", before)
+    if left and (expansion_matches(term, left[1]) or re.search(r"[\u3400-\u9fff]{2,}", left[1])):
+        return True
+    right = re.match(r"\s*(?:[（(]([^()（）]+)[)）]|[:：]\s*([^.!?;]+)|(?:is|means|stands for)\s+(?:the\s+)?([^.!?;]+))", tail, re.IGNORECASE)
+    if right:
+        expansion = next(x for x in right.groups() if x is not None)
+        return bool(expansion_matches(term, expansion) or re.search(r"[\u3400-\u9fff]{2,}", expansion))
+    # A fully written expansion before the term also counts when colon syntax
+    # places the long name first. Arbitrary parentheses do not define a term.
+    return False
+
+
+def build_context(pages, rows=None, outline=None):
+    rows = rows or rules()
+    config = next(r["thresholds"] for r in rows if r["id"] == "TEXT-UNDEFINED-ABBREVIATIONS")
+    whitelist = set(config["whitelist"])
     first = {}
     prior = ""
     role_sizes = defaultdict(list)
     for p in pages:
-        for l in p["lines"]:
-            if l["role"] in {"navigation", "footer"}:
-                continue
+        visible = [l for l in p["lines"] if l["role"] not in {"navigation", "footer", "code"}]
+        page_text = text_of(visible)
+        offset = 0
+        for l in visible:
             for m in ABBR.finditer(l["text"]):
                 term = m[0]
-                if term in first:
+                if re.fullmatch(r"[A-Z]{2,}s", term):
+                    term = term[:-1]  # ordinary acronym plural, e.g. ABCs -> ABC
+                if term in first or term in whitelist or re.fullmatch(r"[A-Z]\d+", term):
                     continue
-                # An expansion must precede its first use; a definition on a
-                # later slide cannot retroactively make the first use valid.
-                before = (prior + " " + l["text"][: m.start()])[-300:]
-                expanded = bool(
-                    re.search(r"(?:[A-Za-z][A-Za-z-]+\s+){2,8}\(\s*$", before)
-                    or re.search(r"[\u4e00-\u9fff]{2,}\s*[（(]\s*$", before)
-                )
-                tail = l["text"][m.end() :]
-                expanded = expanded or bool(
-                    re.match(r"\s*[（(][^()（）]{4,}[)）]", tail)
-                )
-                first[term] = (p["number"], expanded)
-            prior += " " + l["text"]
+                before = (prior + " " + page_text[:offset + m.start()])[-400:]
+                tail = page_text[offset + m.end():offset + m.end() + 180]
+                defined = abbreviation_defined(term, before, tail)
+                first[term] = {"page": p["number"], "defined": defined, "text": l["text"],
+                               "bbox": l["bbox"], "role": l["role"]}
+            offset += len(l["text"]) + 1
             role_sizes[l["role"]].append(l["size"])
+        prior = (prior + " " + page_text)[-1000:]
+    closing = {p["total"]: "deck_end" for p in pages}
+    appendix = re.compile(r"^(?:appendi(?:x|ces)|backup|supplement(?:ary)?|附录|备用)(?:\b|[:：])", re.IGNORECASE)
+    starts = [row[2] for row in (outline or []) if appendix.search(row[1]) and row[2] > 1]
+    starts += [p["number"] for p in pages if p["number"] > 1
+               and any(appendix.search(l["text"]) for l in by_role(p, "frame_title"))]
+    if starts:
+        closing[min(starts) - 1] = "main_before_appendix"
     return {
         "first_abbreviation": first,
         "role_sizes": {k: statistics.median(v) for k, v in role_sizes.items()},
         "has_question": any(by_role(p, "closing_question") for p in pages),
+        "closing_pages": closing,
     }
 
 
@@ -1360,8 +1454,10 @@ def applicable(r, p, profile):
     ident = r["id"]
     if "COVER-" in ident:
         return p["number"] == 1
+    if ident == "TEXT-CLOSING-QUESTION":
+        return True
     if ident.startswith("CAP-") or ident == "TYPE-CAPTION":
-        return p["number"] != 1
+        return p["number"] != 1 or bool(p["captions"])
     if "CLOSING" in ident:
         return bool(by_role(p, "closing_question")) or p["number"] == p["total"]
     return True
@@ -1400,7 +1496,7 @@ def validate(
                 pages.append(extract(page, i, len(doc), profile, tex))
             except Exception as exc:  # noqa: BLE001 -- preserve page failure evidence
                 errors.append({"page": i, "error": f"{type(exc).__name__}: {exc}"})
-        ctx = build_context(pages)
+        ctx = build_context(pages, rows, doc.get_toc())
         findings = []
         coverage = []
         manual = defaultdict(list)
@@ -1418,6 +1514,9 @@ def validate(
                     )
                     continue
                 if r["mode"] == "judged":
+                    if r["id"] in {"TEXT-NO-LABEL-PHRASES", "TEXT-NO-ENDING-DISCLAIMER"}:
+                        for hit in screen_prose(p, r, ctx):
+                            findings.append({**hit, "rule_id": r["id"], "mode": "judged", "rule": r["rule"]})
                     manual[r["id"]].append(p["number"])
                     coverage.append(
                         {"rule_id": r["id"], "page": p["number"], "status": "REVIEW"}
@@ -1566,7 +1665,12 @@ def markdown(r):
             if len(hits) > 1
             else ""
         )
-        lines.append(f"| {rule_id} | {page} | {escape(hits[0]['evidence'])}{more} |")
+        if rule_id in {"CAP-NATURAL-SENTENCE", "TEXT-NO-LABEL-PHRASES", "TEXT-NO-ENDING-DISCLAIMER"}:
+            for hit in hits:
+                candidate = hit["details"].get("text", "")
+                lines.append(f"| {rule_id} | {page} | {escape(hit['evidence'])} {escape(candidate)} |")
+        else:
+            lines.append(f"| {rule_id} | {page} | {escape(hits[0]['evidence'])}{more} |")
     return "\n".join(lines) + "\n"
 
 
