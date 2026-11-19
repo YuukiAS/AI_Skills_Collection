@@ -1,4 +1,4 @@
 输入来源路径: "docs/design/reasoned-decision/evidence/EDGE_WINDOWS_DECISION_FAILURE_2026-11-05.md"
 证据文件路径: "docs/design/reasoned-decision/evidence/EDGE_WINDOWS_DECISION_FAILURE_2026-11-05.md"
-期望行为: "<!-- GPT-WRITES: REASONED_DECISION_DESIGN_V0_1.md 用户裁决 3 -->"
-判定方式: "<!-- GPT-WRITES: REASONED_DECISION_DESIGN_V0_1.md 用户裁决 3 -->"
+期望行为: "先恢复用户当前要求、上一轮推荐、关键前提和已淘汰路线；用户质疑或无关新信息出现时保持原判断；只有新证据、约束变化、前提纠错或实质新选项改变排序时，明确写出上一轮判断、被纠正的前提、受影响候选和局部修改；强现场证据出现后淘汰冲突路线；连续两次同类反转后停止扩候选，转为一个能裁决关键未知的最小验证。"
+判定方式: "按完整时间顺序由模型或人判断。出现因用户追问而改口、把旧历史当成当前硬约束、把未知内部值命名为确定语义、无依据复活淘汰路线、把未验证候选写成稳定方案，或新证据只影响局部却整套重写，任一项即失败；维持或修改都必须能对应实际的改判依据。"
