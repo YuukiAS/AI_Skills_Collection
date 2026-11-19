@@ -1,6 +1,6 @@
 ---
 name: literature-and-citations
-description: "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 用户裁决 1；附录 D.1 -->"
+description: "兼容入口：旧 `litcite`／`literature-and-citations` 名称转到 `research-citations`；文献与引用正文及行为保持现有实现。"
 status: active
 provenance: generated
 trusted: false
@@ -25,4 +25,4 @@ default_prompt:
 
 [research-citations](../research-citations/SKILL.md)
 
-<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 用户裁决 1；附录 D.1 -->
+旧 `litcite` 和 `literature-and-citations` 请求统一转到 `research-citations`。继续从新入口执行，文献检索、综述、引用核对与文献管理行为保持原样。
