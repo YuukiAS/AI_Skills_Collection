@@ -1,0 +1,22 @@
+{
+  "authority": "Current user instruction: Claude adjudication; R8 approved as ninth case; mechanical consistency only.",
+  "changes": [
+    {
+      "pointer": "/nodes/3/children/4/validators/1/criteria/0/value",
+      "before": 8,
+      "after": 9
+    },
+    {
+      "pointer": "/nodes/3/children/4/validators/1/method/command",
+      "before": "按第 10.2a 节 D1 写定的输入、逐条检查、判定者和旧表现依据执行 R1–R8、S1；先由 X2 生成机械文件，X1 首次运行前核对并记录哈希后冻结；最终在同一个最终版本完整跑一遍。这是拟定操作说明，不是已运行记录。 分组按检查条统计：新能力 12、要修的真实问题 3、受影响的旧能力 1、冒烟 2；每条只属一类。",
+      "after": "按第 10.2a 节 D1 写定的输入、逐条检查、判定者和旧表现依据执行 R1–R8、S1；先由 X2 生成机械文件，X1 首次运行前核对并记录哈希后冻结；最终在同一个最终版本完整跑一遍。这是拟定操作说明，不是已运行记录。 分组按检查条统计：新能力 14、要修的真实问题 3、受影响的旧能力 1、冒烟 2；每条只属一类。"
+    },
+    {
+      "pointer": "/walkthroughs/1/steps/3/action",
+      "before": "交付负责人使用同一最终包安排实际运行插件的工具（宿主，如 Claude Code、Codex 或 GPT 网页端）任务，按设计中的 8 个回归用例（R1–R8、S1）逐条检查。",
+      "after": "交付负责人使用同一最终包安排实际运行插件的工具（宿主，如 Claude Code、Codex 或 GPT 网页端）任务，按设计中的 9 个回归用例（R1–R8、S1）逐条检查。"
+    }
+  ],
+  "before_sha256": "6ade03081fffbfb59a13791c7e48f3c7eb84d7e62937087244e5d92036ced582",
+  "after_sha256": "c4a7d00cb74207179ec7e0b38a87d1590d6f83875a3f3fa4bea44003c9c340e5"
+}

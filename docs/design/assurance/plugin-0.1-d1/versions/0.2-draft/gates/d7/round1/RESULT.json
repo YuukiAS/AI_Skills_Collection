@@ -1,0 +1,29 @@
+{
+  "gate": "D7",
+  "source_sha256": "6ade03081fffbfb59a13791c7e48f3c7eb84d7e62937087244e5d92036ced582",
+  "status": "failed",
+  "blocking_count": 1,
+  "blockers": [
+    {
+      "id": "D7-B1",
+      "node_ids": [
+        "capability-check",
+        "contract-regression",
+        "fr-validation",
+        "sign"
+      ],
+      "fields": [
+        "capability-check.terminal.mechanism (10.2a)",
+        "capability-check.validators[id=v-regression-set].criteria[0]",
+        "capability-check.validators[id=v-regression-set].oracle.description",
+        "capability-check.validators[id=v-regression-set].method.command",
+        "walkthroughs[id=walk-built].steps[id=wb-capability].action"
+      ],
+      "problem": "回归正文及验收器参考要求 R1–R8、S1 共 9 个用例、20 条检查全部通过，但必需验收器 v-regression-set 的通过用例数判据为 eq 8；执行说明仍计新能力 12 条而正文为 14 条，走查也残留 8 个用例。9 个全过会违反 eq 8，8 个通过又违反全量通过和零未执行要求。实施者无权自行选择或修改验收尺子。",
+      "options": [
+        "保留 R1–R8、S1 全量范围，由 D1 统一为 9 个用例全部通过，并同步机器判据、执行说明、分组及走查。",
+        "若本版本确实只验 8 个，由 D1 明确调整用例与能力范围、分组、判据和签发条件，依修订规则处理，不由实施者自行漏跑。"
+      ]
+    }
+  ]
+}
