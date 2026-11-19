@@ -1,6 +1,6 @@
 ---
 name: scientific-rewrite
-description: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 6.1 节 -->"
+description: "兼容入口：科研与技术长稿的保真结构重组已经并入 clear-writing；使用该入口时转到连续成稿规则并消费 content-selection 计划。"
 status: active
 provenance: local
 trusted: false
@@ -21,4 +21,4 @@ redirect_to: ../clear-writing/SKILL.md
 [clear-writing](../clear-writing/SKILL.md)
 [longform.md](../clear-writing/references/longform.md)
 
-<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 6.1 节 -->
+该入口已并入 `clear-writing`。结构重组任务读取 `longform.md`，内容去向与顺序使用 `content-selection` 已完成的计划。

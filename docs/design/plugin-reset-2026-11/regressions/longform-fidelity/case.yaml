@@ -1,4 +1,6 @@
 输入来源路径: "tests/test_scientific_rewrite.py"
 证据文件路径: "tests/test_scientific_rewrite.py"
-期望行为: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 用户裁决 4 -->"
-判定方式: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 用户裁决 4 -->"
+期望行为: >-
+  GPT 端按读者问题重组测试中的科研长稿，保留 FedFisher、MMs、Dice=0.81、一次通信的证据限制、CARE 比较所需的通信轮数与客户端数量及后处理条件、公式 $L=L_{seg}+0.2L_{reg}$ 只属于 FedFisher 消融实验的归属、引用 [12]，以及 scripts/run_fedfisher.sh 和 configs/mm_fedfisher.yaml 的复现身份；复现细节可以移到合适位置，主张强度与完成状态保持不变。
+判定方式: >-
+  通过条件：逐项对照来源和执行证据，数值、公式、引用、比较条件、限制、归属与复现身份全部保持，全文的阅读顺序更清楚。失败条件：遗漏或改写数值和公式，把公式误归给 CARE，丢掉一次通信限制，增强结论，隐藏必要信息，改变完成状态，或仅凭字符串仍然存在就宣称语义保真。

@@ -1,6 +1,6 @@
 ---
 name: response-clarity
-description: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 6.1 节 -->"
+description: "兼容入口：普通解释、结论、诊断、建议和结果说明已经并入 clear-writing；使用该入口时转到解释与答复规则。"
 status: active
 provenance: user-authored
 trusted: false
@@ -20,4 +20,4 @@ redirect_to: ../clear-writing/SKILL.md
 [clear-writing](../clear-writing/SKILL.md)
 [explanation-and-response.md](../clear-writing/references/explanation-and-response.md)
 
-<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 6.1 节 -->
+该入口已并入 `clear-writing`。普通回答、诊断、建议和结果说明读取 `explanation-and-response.md`。

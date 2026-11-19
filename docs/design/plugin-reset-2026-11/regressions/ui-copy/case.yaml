@@ -1,4 +1,6 @@
 输入来源路径: "skills/writing/core/product-ui-copy/evals/trigger_queries.json"
 证据文件路径: "skills/writing/core/product-ui-copy/evals/trigger_queries.json"
-期望行为: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 用户裁决 4 -->"
-判定方式: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 用户裁决 4 -->"
+期望行为: >-
+  GPT 端从给定设置页、浏览器插件 popup、登录页或引导文案中读取控件角色、真实产品状态、用户后果、相邻文字、目标地区和受保护含义；先识别需要保留、移层或交回产品负责人的内容，再写出自然的状态、按钮、帮助和权限文案。zh-Hans 与 zh-Hant-HK 分别实现，隐私、删除、付款、可逆性、数据使用和开关含义保持完整。
+判定方式: >-
+  通过条件：候选文案明确当前状态、操作后果和下一动作，未知、当前无结果、尚未就绪和已经就绪没有混淆，必要披露与可访问名称得到保留，执行证据定位 UI 与 FI 规则。失败条件：只做简繁字符转换，改变开关、删除、隐私、付款或权限含义，把一种状态写成另一种状态，用改词掩盖内容架构问题，或由 Codex 作措辞判断。
