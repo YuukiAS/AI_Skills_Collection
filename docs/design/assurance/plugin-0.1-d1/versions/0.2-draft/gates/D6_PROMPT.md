@@ -15,7 +15,14 @@
 
 基线 Blueprint 原始字节 SHA-256：`6ade03081fffbfb59a13791c7e48f3c7eb84d7e62937087244e5d92036ced582`；本机完成三处替换后的完整文件原始字节 SHA-256：`c4a7d00cb74207179ec7e0b38a87d1590d6f83875a3f3fa4bea44003c9c340e5`；内容快照 `snapshot_sha256`：`b5391abe78519612324ab229cf5f338af465783b9f4d6ecb99b215dc9c9df484`。原始文件的其他字节保持原样，替换数字时只定位上述 Pointer。若你通过工具重新序列化 JSON，字节哈希可能改变，必须分别报告实际字节哈希和输入声明值，不得冒称已核验。用户也可附上本机 `codex-runs/assurance-02-gates/d6/blueprint.json` 的同一草稿副本；有附件时先核对三处值，勿再应用第二次。无法取得完整两份材料时报告 `NOT_RUN` 和缺失路径，不用常识补全。
 
-回复后由用户转交执行端，只将真实返回内容保存到工作区证据目录 `codex-runs/assurance-02-gates/d6/questions.json` 和 `codex-runs/assurance-02-gates/d6/RESULT.md`。这些是本地落盘位置，不是公开仓库内路径；GPT 网页端只返回文件内容，不尝试远端写入。
+完成检查后，必须使用已连接的 GitHub 直接把真实结果写入当前任务分支 `design/assurance-plugins-0.1-merged`：
+
+- `docs/design/assurance/plugin-0.1-d1/versions/0.2-draft/gates/d6/round1/questions.json`
+- `docs/design/assurance/plugin-0.1-d1/versions/0.2-draft/gates/d6/round1/RESULT.md`
+
+如果目标文件不存在就直接创建；存在则先读取当前内容和 SHA，再按实际本轮结果更新。不得要求用户下载、复制、上传或手工转存结果。不得把本地 `codex-runs/` 当成最终证据位置。
+
+GitHub 写入成功后，聊天里不要粘贴完整 `questions.json` 或 `RESULT.md`，只回复简短摘要：是否写入成功、blocking 数量、non-blocking 数量、两个 GitHub 路径。只有已连接 GitHub 确实不可写时，才报告 `WRITE_BLOCKED` 及真实失败原因；不要在写权限可用时退化为把完整机器结果交给用户搬运。
 
 本轮只检查下列相对冻结基线 9e5943f33440587e0b220474caa89e41a5d0d697 新增或改写的节点。新增 8 个；既有 54 个均改变过自身字段（包括 category、roleTier、接口和短描述），因此本轮恰好覆盖当前 62 个节点。这是按差异得到的范围，不追加未变节点或旧冻结说明的四项审查。冻结审阅已在 Blueprint 中，检查其节点内答案及跨节点一致性；不要求恢复单独冻结说明。
 
@@ -24,8 +31,10 @@
 
 每节点至少逐项检查：怎么进入、需要什么输入；产出什么、交给谁；谁有权决定；失败或缺证据怎么办；怎样验收；中断后怎样恢复；会不会让既有能力变差。共 62×7=434 项。答案必须定位到 blueprint.json 的节点 id 与字段；找不到、含糊或互相矛盾时记缺口，并给影响及 owner=D1 或 user。仅将真实影响使用、开工或验收的缺口标为 blocking=true。不要为了凑数制造缺口；不要把未冻结/未实现自身当新问题。
 
-只输出两份结果的内容，不向远端写入，不 commit：
-- questions.json：数组；每项 id,nodeId,question,answerLocation（无答案为 null）,gap（无缺口为 null）,impact,blocking,owner。
-- RESULT.md：结论、阻塞问题与关闭条件、非阻塞问题、实际覆盖节点与未覆盖原因、受审文件原始 SHA-256。
+写入 GitHub 的两份结果格式：
+- `questions.json`：数组；每项 `id,nodeId,question,answerLocation`（无答案为 null）、`gap`（无缺口为 null）、`impact,blocking,owner`。
+- `RESULT.md`：结论、阻塞问题与关闭条件、非阻塞问题、实际覆盖节点与未覆盖原因、受审文件原始 SHA-256。
+
+写完后必须从同一分支重新读取这两个文件，确认内容真实存在且与本轮结果一致，再在聊天里只给摘要。
 
 只发现转述偏差时定位原文，交 D1 按原文改正后机械核对，不发起无边界的新轮。改变责任、权限、费用、签发标准的问题交 D1 决定，不自行修改。
