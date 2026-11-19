@@ -1,0 +1,1379 @@
+schema: generic-deck-rules-v1
+language: en
+rules:
+- id: LAY-GEOMETRY
+  rule: Use a 160 by 90 mm slide with a 16:9 aspect ratio.
+  mode: auto
+  profile: v19
+  thresholds:
+    width: 160
+    height: 90
+    unit: mm
+    aspect_ratio: '16:9'
+    tolerance_pdf_pt: 0.5
+    tolerance_origin: Engineering default for PDF export rounding; not a source-authored
+      design margin.
+  detector: check_geometry
+  review: null
+- id: LAY-RAILS
+  rule: Keep both body rails at 8 mm, including the closing page.
+  mode: partial
+  profile: v19
+  thresholds:
+    left: 8
+    right: 8
+    unit: mm
+  detector: screen_layout
+  review: 正文左右各 8 mm；结束页沿用标准 rail，不得 full-bleed。
+- id: ROLE-COVER-CONTENT
+  rule: Limit the title page to the title, author and date.
+  mode: partial
+  profile: all
+  thresholds:
+    unit: null
+    value: null
+    specification: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_cover
+  review: 标题页只放题目、作者和日期。
+- id: TYPE-COVER-TITLE
+  rule: Center the bold cover title using the V19 title role.
+  mode: partial
+  profile: v19
+  thresholds:
+    font_tex_pt: 24
+    baseline_tex_pt: 27
+    alignment: center
+    weight: bold
+    color_role: title_dark
+  detector: screen_typography
+  review: 题目居中；24 TeX pt / 27 pt baseline，bold，模板规定的标题深色。
+- id: TYPE-COVER-BYLINE
+  rule: Center author and date lines at 12.5/15 TeX pt.
+  mode: partial
+  profile: v19
+  thresholds:
+    font_tex_pt: 12.5
+    baseline_tex_pt: 15
+    alignment: center
+  detector: screen_typography
+  review: 作者、日期居中；12.5 TeX pt / 15 pt baseline。
+- id: LAY-COVER-SPACING
+  rule: Use shared V19 cover spacing without adding a subtitle.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: cm
+    lead: 1.0
+    byline: 0.52
+    date: 0.18
+    historical_subtitle: 0.18
+  detector: screen_layout
+  review: 标题页沿用共享lead、byline与date间距，历史subtitle间距不授权新增副标题。
+- id: TYPE-FRAME-TITLE
+  rule: Use the V19 frame_title role at 13/15.5 TeX pt with a 12.951 PDF pt size target.
+  mode: partial
+  profile: v19
+  thresholds:
+    font_tex_pt: 13
+    baseline_tex_pt: 15.5
+    font_pdf_pt: 12.951
+    tolerance_pdf_pt: 0.1
+    weight: bold
+  detector: screen_typography
+  review: frame title 13/15.5 TeX pt，bold；目标 12.951 PDF pt，容差 0.1。
+- id: TYPE-BODY
+  rule: Use the V19 body role at 11/13.5 TeX pt with a 10.959 PDF pt size target.
+  mode: partial
+  profile: v19
+  thresholds:
+    font_tex_pt: 11
+    baseline_tex_pt: 13.5
+    font_pdf_pt: 10.959
+    tolerance_pdf_pt: 0.1
+    weight: null
+  detector: screen_typography
+  review: body 11/13.5 TeX pt；10.959 PDF pt；同角色统一；禁止页内缩字、缩放文字。
+- id: TYPE-SUBHEAD
+  rule: Use the V19 subhead role at 11/13.5 TeX pt with a 10.959 PDF pt size target.
+  mode: partial
+  profile: v19
+  thresholds:
+    font_tex_pt: 11
+    baseline_tex_pt: 13.5
+    font_pdf_pt: 10.959
+    tolerance_pdf_pt: 0.1
+    weight: bold
+  detector: screen_typography
+  review: subhead 11/13.5 TeX pt，bold；10.959 PDF pt。
+- id: TYPE-TABLE
+  rule: Use the V19 table role at 10/12.2 TeX pt with a 9.963 PDF pt size target.
+  mode: partial
+  profile: v19
+  thresholds:
+    font_tex_pt: 10
+    baseline_tex_pt: 12.2
+    font_pdf_pt: 9.963
+    tolerance_pdf_pt: 0.1
+    weight: null
+  detector: screen_typography
+  review: table 10/12.2 TeX pt；9.963 PDF pt，容差 0.1。
+- id: TYPE-CODE
+  rule: Use the V19 code role at 8/9.6 TeX pt with a 7.97 PDF pt size target.
+  mode: partial
+  profile: v19
+  thresholds:
+    font_tex_pt: 8
+    baseline_tex_pt: 9.6
+    font_pdf_pt: 7.97
+    tolerance_pdf_pt: 0.1
+    weight: null
+  detector: screen_typography
+  review: code 8/9.6 TeX pt；7.970 PDF pt。
+- id: TYPE-CAPTION
+  rule: Use the V19 caption role at 8/9.6 TeX pt with a 7.97 PDF pt size target.
+  mode: partial
+  profile: v19
+  thresholds:
+    font_tex_pt: 8
+    baseline_tex_pt: 9.6
+    font_pdf_pt: 7.97
+    tolerance_pdf_pt: 0.1
+    weight: null
+  detector: screen_typography
+  review: caption 8/9.6 TeX pt；7.970 PDF pt；必须按图注角色使用。
+- id: TYPE-FOOTER
+  rule: Use the V19 footer role at 8/9.6 TeX pt with a 7.97 PDF pt size target.
+  mode: partial
+  profile: v19
+  thresholds:
+    font_tex_pt: 8
+    baseline_tex_pt: 9.6
+    font_pdf_pt: 7.97
+    tolerance_pdf_pt: 0.1
+    weight: null
+  detector: screen_typography
+  review: footer 8/9.6 TeX pt；7.970 PDF pt。
+- id: TYPE-FONT-FAMILIES
+  rule: Use the file-bound V19 font families for Latin, mathematics, CJK and code.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: font family
+    latin: TeX Gyre Termes
+    math: TeX Gyre Termes Math
+    cal: New Computer Modern Math
+    cjk:
+    - Noto Serif SC
+    - Noto Sans SC
+    code: Latin Modern Mono
+    file_bound: true
+  detector: screen_typography
+  review: Latin=TeX Gyre Termes；math=TeX Gyre Termes Math；cal=New Computer Modern
+    Math；CJK=Noto Serif/Sans SC；code=Latin Modern Mono；固定字体文件。
+- id: TYPE-DECK-CONSISTENCY
+  rule: Keep every typography role consistent across the deck and forbid page-local
+    shrinking or text scaling.
+  mode: partial
+  profile: all
+  thresholds:
+    allowed_page_local_overrides: 0
+    unit: occurrence
+  detector: screen_typography
+  review: 同一字号角色全套统一，禁止逐页缩字或缩放含文字对象。
+- id: TYPE-NORMAL-LEADING
+  rule: Keep normal body leading at 13.5 TeX pt without local compression.
+  mode: partial
+  profile: v19
+  thresholds:
+    body_baseline_tex_pt: 13.5
+    pdf_conversion: TeX pt * 72 / 72.27
+    source_override_allowed: false
+  detector: screen_typography
+  review: 正文正常 baseline=13.5 TeX pt；禁止局部 reduced baselineskip。
+- id: TYPE-LIST-PARAMETERS
+  rule: Use one shared list parameter set throughout the V19 deck.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: TeX pt
+    itemsep: 1.15
+    topsep: 2
+    parsep: 0
+    parskip: 0
+    body_baseline: 13.5
+  detector: screen_tex
+  review: V19全套列表共享itemsep=1.15、topsep=2、parsep=parskip=0 TeX pt，保持body baseline=13.5
+    TeX pt。
+- id: TYPE-LIST-STYLE
+  rule: Use one left-aligned list style per group with normal wrapped-line leading
+    and body-sized levels.
+  mode: partial
+  profile: all
+  thresholds:
+    alignment: left
+    body_role_for_all_levels: true
+    mixed_peer_list_styles_allowed: false
+  detector: screen_typography
+  review: 换行 item 正常行距；各层正文沿用 body 字号；同组同一种列表形式。
+- id: LAY-SPACE-LIST-ITEM-GAP
+  rule: Measure list_item_gap from visible semantic-object edges using the frozen
+    projection spacing band.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: PDF pt
+    target:
+    - 3
+    - 7
+    fail_below: 2
+    review_above: 9
+    outside_target: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_spacing
+  review: list_item_gap：可见对象间距目标 3–7 PDF pt；低于 2 FAIL；从实际墨迹/对象边缘测量。
+- id: LAY-SPACE-PARAGRAPH-TO-LIST
+  rule: Measure paragraph_to_list from visible semantic-object edges using the frozen
+    projection spacing band.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: PDF pt
+    target:
+    - 5
+    - 12
+    fail_below: 3
+    outside_target: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_spacing
+  review: paragraph_to_list：可见对象间距目标 5–12 PDF pt；低于 3 FAIL；从实际墨迹/对象边缘测量。
+- id: LAY-SPACE-PARAGRAPH-TO-TABLE
+  rule: Measure paragraph_to_table from visible semantic-object edges using the frozen
+    projection spacing band.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: PDF pt
+    target:
+    - 7
+    - 14
+    fail_below: 4
+    outside_target: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_spacing
+  review: paragraph_to_table：可见对象间距目标 7–14 PDF pt；低于 4 FAIL；从实际墨迹/对象边缘测量。
+- id: LAY-SPACE-PARAGRAPH-TO-FIGURE
+  rule: Measure paragraph_to_figure from visible semantic-object edges using the frozen
+    projection spacing band.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: PDF pt
+    target:
+    - 7
+    - 14
+    fail_below: 4
+    outside_target: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_spacing
+  review: paragraph_to_figure：可见对象间距目标 7–14 PDF pt；低于 4 FAIL；从实际墨迹/对象边缘测量。
+- id: LAY-SPACE-PARAGRAPH-TO-DISPLAY-MATH
+  rule: Measure paragraph_to_display_math from visible semantic-object edges using
+    the frozen projection spacing band.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: PDF pt
+    target:
+    - 5
+    - 12
+    fail_below: 3
+    outside_target: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_spacing
+  review: paragraph_to_display_math：可见对象间距目标 5–12 PDF pt；低于 3 FAIL；从实际墨迹/对象边缘测量。
+- id: LAY-SPACE-DISPLAY-MATH-TO-TABLE
+  rule: Measure display_math_to_table from visible semantic-object edges using the
+    frozen projection spacing band.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: PDF pt
+    target:
+    - 7
+    - 14
+    fail_below: 4
+    outside_target: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_spacing
+  review: display_math_to_table：可见对象间距目标 7–14 PDF pt；低于 4 FAIL；从实际墨迹/对象边缘测量。
+- id: LAY-SPACE-DISPLAY-MATH-TO-BODY
+  rule: Measure display_math_to_body from visible semantic-object edges using the
+    frozen projection spacing band.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: PDF pt
+    target:
+    - 5
+    - 12
+    fail_below: 3
+    outside_target: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_spacing
+  review: display_math_to_body：可见对象间距目标 5–12 PDF pt；低于 3 FAIL；从实际墨迹/对象边缘测量。
+- id: LAY-SPACE-TABLE-TO-INTERPRETATION
+  rule: Measure table_to_interpretation from visible semantic-object edges using the
+    frozen projection spacing band.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: PDF pt
+    target:
+    - 7
+    - 17
+    fail_below: 5
+    outside_target: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_spacing
+  review: table_to_interpretation：可见对象间距目标 7–17 PDF pt；低于 5 FAIL；从实际墨迹/对象边缘测量。
+- id: LAY-SPACE-CAPTION-TO-BODY
+  rule: Measure caption_to_body from visible semantic-object edges using the frozen
+    projection spacing band.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: PDF pt
+    target:
+    - 6
+    - 12
+    fail_below: 4
+    outside_target: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_spacing
+  review: caption_to_body：可见对象间距目标 6–12 PDF pt；低于 4 FAIL；从实际墨迹/对象边缘测量。
+- id: LAY-SPACE-QUESTION-TO-NEXT
+  rule: Measure question_to_next from visible semantic-object edges using the frozen
+    projection spacing band.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: PDF pt
+    target:
+    - 8
+    - 15
+    fail_below: 6
+    outside_target: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_spacing
+  review: question_to_next：可见对象间距目标 8–15 PDF pt；低于 6 FAIL；从实际墨迹/对象边缘测量。
+- id: LAY-SPACE-WITHIN-GROUP
+  rule: Measure within_group from visible semantic-object edges using the frozen projection
+    spacing band.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: PDF pt
+    target:
+    - 5
+    - 15
+    fail_below: 4
+    outside_target: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_spacing
+  review: within_group：可见对象间距目标 5–15 PDF pt；低于 4 FAIL；从实际墨迹/对象边缘测量。
+- id: LAY-SPACE-BETWEEN-GROUP
+  rule: Measure between_group from visible semantic-object edges using the frozen
+    projection spacing band.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: PDF pt
+    target:
+    - 9
+    - 22
+    fail_below: 7
+    outside_target: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_spacing
+  review: between_group：可见对象间距目标 9–22 PDF pt；低于 7 FAIL；从实际墨迹/对象边缘测量。
+- id: LAY-SPACE-MAJOR-SECTION
+  rule: Use the frozen major_section visible-edge spacing band.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: PDF pt
+    A_compact:
+    - 13
+    - 22
+    B_projection:
+    - 15
+    - 27
+    fail_below: 13
+  detector: screen_spacing
+  review: major_section按可见对象边缘测量，B_projection目标为15–27 PDF pt，低于13 PDF pt失败。
+- id: LAY-SPACE-TITLE-TO-QUESTION
+  rule: Use the frozen title_to_question visible-edge spacing band.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: PDF pt
+    A_compact:
+    - 8
+    - 20
+    B_projection:
+    - 10
+    - 23
+    fail_below: 8
+  detector: screen_spacing
+  review: title_to_question按可见对象边缘测量，B_projection目标为10–23 PDF pt，低于8 PDF pt失败。
+- id: LAY-SPACING-ROLES
+  rule: Declare a spacing role for every adjacent semantic-block pair and measure
+    visible edges instead of raw glue.
+  mode: partial
+  profile: v19
+  thresholds:
+    unmapped_adjacent_pairs_allowed: 0
+    raw_vspace_substitution_allowed: false
+    unit: pair
+  detector: screen_layout
+  review: 每对相邻语义块声明 spacing role；从可见边缘测量；禁止用 raw vspace 假造间距。
+- id: LAY-CONTINUATION-ANCHOR
+  rule: Align continuation text to the bullet text anchor rather than the bullet glyph.
+  mode: partial
+  profile: all
+  thresholds:
+    anchor_error_max: 2
+    unit: px@1920x1080
+  detector: screen_layout
+  review: 同组段落、list continuation 以 bullet 正文而非圆点为左锚，误差 ≤2px（1920×1080）。
+- id: LAY-TABLE-ATOMS
+  rule: Keep semantic atoms unbroken and make peer-header wrapping deliberate and
+    consistent.
+  mode: partial
+  profile: all
+  thresholds:
+    unit: line break
+    unintended_atom_splits_allowed: 0
+    unintentional_short_tail_lines_allowed: 0
+  detector: screen_layout
+  review: 表格单元格保留模型名、变量、公式、单位语义原子；短尾词不单独成行；同级表头换行有意且一致。
+- id: LAY-COLUMN-REASON
+  rule: Use columns for justified parallel comparison and keep sequential reasoning
+    vertical.
+  mode: partial
+  profile: all
+  thresholds:
+    parallel_comparison_default: true
+    heterogeneous_layout_requires_reading_order_and_approval: true
+  detector: screen_layout
+  review: 平行比较才默认并栏；顺序推理沿纵向排；异质同排必须说明读法并获准页型。
+- id: LAY-COLUMN-PRESETS
+  rule: Use approved column-width presets and a 3–4 percent gutter.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: fraction of body width
+    presets:
+    - - 0.48
+      - 0.48
+    - - 0.57
+      - 0.39
+    - - 0.39
+      - 0.57
+    gutter:
+    - 0.03
+    - 0.04
+  detector: screen_layout
+  review: 全局栏宽预设 .48/.48、.57/.39、.39/.57，gutter 3–4%。
+- id: LAY-COLUMN-ANCHORS
+  rule: Honor the declared top or baseline anchor within 2 pixels and prevent horizontal
+    overlap.
+  mode: partial
+  profile: v19
+  thresholds:
+    anchor_error_max: 2
+    unit: px@1920x1080
+    horizontal_overlap_allowed: false
+  detector: screen_layout
+  review: 并栏声明同顶/同基线锚点，误差 ≤2px；不得横向重叠。
+- id: LAY-COLUMN-BOTTOMS
+  rule: Review peer-column bottom differences above 100 pixels and inspect unused
+    space in each column.
+  mode: partial
+  profile: all
+  thresholds:
+    review_above: 100
+    unit: px@1920x1080
+  detector: screen_layout
+  review: peer 下缘差 >100px 需复核；孤栏下方大空白不得仅按总占用率通过。
+- id: ROLE-FULL-WIDTH-TRANSITION
+  rule: Give post-column full-width text an approved transition role and a 9–22 PDF
+    pt visible gap.
+  mode: partial
+  profile: v19
+  thresholds:
+    gap:
+    - 9
+    - 22
+    unit: PDF pt
+    macros:
+    - shared takeaway
+    - shared note
+    - shared conclusion
+  detector: screen_layout
+  review: 并栏结束后的全宽结语用 共享结论组件/共享说明组件/共享结论组件 角色宏；间距 B 9–22 PDF pt。
+- id: PROC-DENSITY-REPAIR
+  rule: Recompose with fixed roles before asking the content owner to split or delete
+    content.
+  mode: judged
+  profile: all
+  thresholds:
+    unit: null
+    value: null
+    specification: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: null
+  review: 固定字号/间距下先重排，再由内容负责人决定拆页/删减；不逐页缩字。
+- id: TYPE-NO-COMPRESSION
+  rule: Forbid negative body spacing, body nointerlineskip, arraystretch below one
+    and local tabcolsep below 3 TeX pt.
+  mode: partial
+  profile: v19
+  thresholds:
+    negative_body_vspace_allowed: false
+    body_nointerlineskip_allowed: false
+    arraystretch_min: 1
+    tabcolsep_min_tex_pt: 3
+  detector: screen_tex
+  review: 禁止负 vspace、nointerlineskip 用于正文压缩、arraystretch<1、局部 tabcolsep<3pt。
+- id: LAY-BODY-WHITESPACE
+  rule: Require ordinary-page content span of at least 60 percent and each outer blank
+    band at most 25 percent of the body track.
+  mode: partial
+  profile: all
+  thresholds:
+    unit: fraction of body-track height
+    span_min: 0.6
+    top_blank_max: 0.25
+    bottom_blank_max: 0.25
+    v19_track_pdf_pt:
+    - 46
+    - 245
+    v19_track_height_pdf_pt: 199
+    v19_span_min_pdf_pt: 119.4
+    v19_blank_max_pdf_pt: 49.75
+    exclude_page_types:
+    - title
+    - dedicated_closing
+    objects: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_layout
+  review: 普通页实际语义对象纵向跨度至少占正文轨道60%，上下连续空白各不超过25%。
+- id: CAP-NATURAL-SENTENCE
+  rule: Write one natural sentence explaining what the figure or table shows or compares.
+  mode: partial
+  profile: all
+  thresholds:
+    unit: null
+    value: null
+    specification: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_captions
+  review: caption用一句自然话说明图表展示什么、比较什么。
+- id: CAP-BELOW-OBJECT
+  rule: Place each figure or table caption directly below its own object.
+  mode: partial
+  profile: all
+  thresholds:
+    relative_position: below own object
+    unit: object pair
+  detector: screen_captions
+  review: 所有图注和表注均放所属对象正下方。
+- id: CAP-LINE-AWARE-ALIGNMENT
+  rule: Center a single rendered caption line and left-align multiple lines to the
+    actual object width.
+  mode: partial
+  profile: all
+  thresholds:
+    line_count: actual rendered lines
+    single_line: center
+    multiple_lines: left
+    anchor_error_max: 2
+    unit: px@1920x1080
+  detector: screen_captions
+  review: 以对象实际宽度排版后计行，单行caption居中、多行caption左对齐。
+- id: CAP-MULTILINE-ANCHOR
+  rule: Keep all multiline caption lines ragged-right at the object left anchor without
+    guessing line count from characters.
+  mode: partial
+  profile: all
+  thresholds:
+    anchor_error_max: 2
+    unit: px@1920x1080
+    character_count_proxy_allowed: false
+  detector: screen_captions
+  review: 多行caption每行共用对象左锚并右侧不齐，不能按字符数猜行数。
+- id: LAY-DIAGRAM-SHAFT
+  rule: Require each semantic shaft to be at least 6 mm, review lengths below 8 mm
+    and prefer 8–10 mm for process edges.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: mm
+    fail_below: 6
+    review_interval:
+    - 6
+    - 8
+    review_upper_exclusive: true
+    pass_min: 8
+    preferred:
+    - 8
+    - 10
+    pass_requires_other_geometry: true
+  detector: screen_layout
+  review: 每条语义连接线可见箭杆 <6mm FAIL；6≤L<8mm REVIEW；L≥8mm 且几何合格 PASS；流程优选8–10mm。
+- id: LAY-DIAGRAM-BOUNDARIES
+  rule: Connect edges at node boundaries within 2 pixels without text collisions or
+    unintended clipping.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: px@1920x1080
+    boundary_error_max: 2
+    collisions_allowed: false
+    unintended_clipping_allowed: false
+  detector: screen_layout
+  review: 端点接在节点边界；boundary tolerance ≤2px；不可穿字、碰撞、无意裁切。
+- id: LAY-DIAGRAM-PEER-EDGES
+  rule: Keep peer edges evenly spaced and equal in visible length within 2 pixels.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: px@1920x1080
+    peer_length_error_max: 2
+    equal_peer_gaps_required: true
+  detector: screen_layout
+  review: 同类平行边等距/等长，peer length tolerance ≤2px。
+- id: LAY-DIAGRAM-SHARED-STYLES
+  rule: Use the shared V19 node and edge styles without resizing diagram text.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: TeX pt
+    node_stroke: 0.55
+    rounded_corners: 2
+    inner_xsep: 6
+    inner_ysep: 3
+    body_font: 11
+    body_baseline: 13.5
+    edge_stroke: 0.65
+    arrowhead_length: 3
+    arrowhead_width: 4
+    arrowhead: Latex
+  detector: screen_layout
+  review: 共享节点和边样式：node .55pt、圆角2pt、inner xsep6pt/inner ysep3pt、body11/13.5；edge .65pt，Latex
+    head length3pt/width4pt。
+- id: LAY-DIAGRAM-PADDING
+  rule: Keep node padding at least 3 TeX pt and forbid arbitrary shorten or inconsistent
+    local styles.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: TeX pt
+    node_min_padding: 3
+    arbitrary_shorten_allowed: false
+  detector: screen_layout
+  review: node minimum padding3pt；不允许任意 shorten 或局部不一致样式。
+- id: COMP-DIAGRAM-SEMANTICS
+  rule: Use arrows only for real relationships and distinguish diagram edges from
+    axes and mathematical mappings.
+  mode: judged
+  profile: all
+  thresholds:
+    decorative_arrow_columns_allowed: false
+    semantic_edge_inventory_required: true
+  detector: null
+  review: 箭头须表达真实流程/关系；纯装饰箭头列违规；坐标轴、数学映射符号分别按语义识别。
+- id: FOOT-NECESSARY-SOURCES
+  rule: Use the left footer only for necessary sources and leave it empty when no
+    source is needed.
+  mode: partial
+  profile: all
+  thresholds:
+    unit: null
+    value: null
+    specification: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_footer
+  review: 页脚来源区只保留必要出处，无出处时留空，不放作者、会议标签、日期或运行记录。
+- id: FOOT-NATIVE-COMPONENTS
+  rule: Preserve the divider, native controls, page counter and links through the
+    shared footer component.
+  mode: partial
+  profile: v19
+  thresholds:
+    divider_required: true
+    native_controls_required: true
+    page_counter_format: current/total
+    links_preserved: true
+    per_page_patch_allowed: false
+  detector: screen_footer
+  review: 保留蓝 divider、原生导航、页码与链接；共享 footline 修复，禁止逐页补丁。
+- id: FOOT-OPTICAL-CENTERS
+  rule: Keep every footer group within 1.5 pixels of the band center and of its peers.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: px@1920x1080
+    center_error_max: 1.5
+    peer_center_spread_max: 1.5
+    band: Confirm against the declared template; no unspecified hard threshold is
+      inferred.
+  detector: screen_footer
+  review: divider 到物理页底为 footer band；source/native control/page counter 各组光学中心误差 ≤1.5px；组间≤1.5px。
+- id: FOOT-SOURCE-REFINEMENT
+  rule: Keep the source center within 0.5 pixels of the band center and within 0.75
+    pixels of the page counter.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: px@1920x1080
+    source_to_band_max: 0.5
+    source_to_counter_max: 0.75
+  detector: screen_footer
+  review: 最终 left source 细化：到 band 中心≤0.5px；与页码光学中心差≤0.75px。
+- id: ROLE-CLOSING-CONTENT
+  rule: End with the existing takeaway above Questions? rather than a Questions-only
+    page.
+  mode: partial
+  profile: all
+  thresholds:
+    unit: null
+    value: null
+    specification: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_closing
+  review: 结尾页上方保留已有takeaway，下方放Questions?，不新增结论。
+- id: LAY-CLOSING-ZONES
+  rule: Use a 68/32 upper-body and question split with standard 8 mm body rails.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: body-height fraction
+    upper: 0.68
+    lower: 0.32
+    body_margin_mm: 8
+  detector: screen_layout
+  review: 上/下功能分区68/32；上区正文沿标准8mm rail。
+- id: TYPE-CLOSING-QUESTION
+  rule: Set Questions? to 16±0.2 PDF pt and center it horizontally within 2 pixels.
+  mode: auto
+  profile: v19
+  thresholds:
+    font_pdf_pt: 16
+    tolerance_pdf_pt: 0.2
+    horizontal_error_max_px: 2
+    reference_pixels: 1920x1080
+    adapter_tex_pt: 16.06
+    baseline_tex_pt: 19.2
+  detector: check_question_style
+  review: null
+- id: LAY-CLOSING-QUESTION-Y
+  rule: Center Questions? at 78±4 percent of the body height.
+  mode: auto
+  profile: v19
+  thresholds:
+    unit: body-height fraction
+    center_target: 0.78
+    tolerance: 0.04
+  detector: check_question_y
+  review: null
+- id: ROLE-CLOSING-NO-EXTRAS
+  rule: Keep name, email, QR, LMS and resource links off the closing page while preserving
+    native chrome.
+  mode: partial
+  profile: v19
+  thresholds:
+    extra_contact_resource_blocks_allowed: 0
+    unit: block
+  detector: screen_closing
+  review: 不加入姓名、email、QR、LMS、资源链接；保留原生header/footer。
+- id: TYPE-NAVIGATION
+  rule: Keep navigation labels bold, single-line and at 6.8/7.4 TeX pt without compression.
+  mode: partial
+  profile: v19
+  thresholds:
+    font_tex_pt: 6.8
+    baseline_tex_pt: 7.4
+    weight: bold
+    lines_max: 1
+    font_tolerance_pdf_pt: 0.02
+  detector: screen_typography
+  review: section label 6.8 TeX pt bold /7.4 baseline；单行；不得缩字、缩放、两行或压间距。
+- id: LAY-NAVIGATION-BUDGET
+  rule: Limit each section label to 34+38×n_s/n_max PDF pt and review utilization
+    at 90 percent.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: PDF pt
+    formula: 34 + 38 * n_s / n_max
+    absolute_cap: 72
+    review_utilization_min: 0.9
+    fail_utilization_above: 1
+    n_s: Confirm against the declared template; no unspecified hard threshold is inferred.
+    n_max: Confirm against the declared template; no unspecified hard threshold is
+      inferred.
+  detector: screen_layout
+  review: label cap=34+38×n_s/n_max PDF pt；≥90% REVIEW，超cap FAIL；max72 PDF pt。
+- id: LAY-NAVIGATION-GAPS
+  rule: Keep neighboring navigation labels at least 12 pixels apart and aligned with
+    their dot runs without clipping.
+  mode: partial
+  profile: v19
+  thresholds:
+    unit: px@1920x1080
+    neighbor_gap_min: 12
+    label_dot_alignment_required: true
+    overflow_crop_allowed: false
+  detector: screen_layout
+  review: 相邻section可见gap≥12px；label与dot-run上下对应；header不得overflow/crop。
+- id: ROLE-EXACTLY-ONE
+  rule: Assign each visible text passage to exactly one of title, body, caption, source
+    footer or question block.
+  mode: partial
+  profile: all
+  thresholds:
+    roles:
+    - title
+    - body
+    - caption
+    - source_footer
+    - question_block
+    roles_per_passage: 1
+    unit: role per passage
+  detector: screen_layout
+  review: 每段可见文字必须且只能属于标题、正文、caption、页脚出处或问题框之一。
+- id: ROLE-QUESTION-PRIMITIVE
+  rule: Use the original V19 TeachingQuestion or StatQABlock primitive for questions.
+  mode: partial
+  profile: v19
+  thresholds:
+    components:
+    - shared question
+    - shared question-answer
+    blue_rule: true
+    label: true
+    italic_body: true
+    invented_card_allowed: false
+  detector: screen_tex
+  review: 问题使用原V19 共享问题组件或共享问答组件的蓝色规则线、标签与斜体正文样式。
+- id: CAP-REQUIRED
+  rule: Give every figure or table without an adequate body explanation its own caption.
+  mode: partial
+  profile: all
+  thresholds:
+    unexplained_uncaptioned_objects_allowed: 0
+    unit: figure/table
+  detector: screen_captions
+  review: 没有正文解释的图表必须配caption。
+- id: CAP-NO-LABEL-CHAINS
+  rule: Do not join caption labels or facts with middle dots or semicolons.
+  mode: auto
+  profile: all
+  thresholds:
+    forbidden_joiners:
+    - ·
+    - ;
+    - ；
+    unit: occurrence
+    allowed: 0
+  detector: check_caption_joiners
+  review: null
+- id: CAP-NO-UNDEFINED-TERMS
+  rule: Do not use undefined abbreviations in captions.
+  mode: partial
+  profile: all
+  thresholds:
+    undefined_abbreviations_allowed: 0
+    unit: term
+  detector: screen_abbreviations
+  review: caption不得使用未定义缩写。
+- id: CAP-NO-BARE-RESULTS
+  rule: Keep standalone result numbers out of captions.
+  mode: partial
+  profile: all
+  thresholds:
+    standalone_result_fragments_allowed: 0
+    unit: fragment
+  detector: screen_captions
+  review: 裸结果数字和独立结果不得占用caption角色。
+- id: CAP-NO-RUNTIME
+  rule: Keep computation runtime out of captions.
+  mode: auto
+  profile: all
+  thresholds:
+    runtime_statements_allowed: 0
+    unit: statement
+  detector: check_caption_runtime
+  review: null
+- id: CAP-NO-DATA-VERSION
+  rule: Keep data-version and source-accounting statements out of captions.
+  mode: auto
+  profile: all
+  thresholds:
+    data_version_or_source_accounting_statements_allowed: 0
+    unit: statement
+  detector: check_caption_version
+  review: null
+- id: PROC-CAPTION-RELOCATION
+  rule: Record every caption rewrite and preserve necessary information in its authorized
+    body or source destination.
+  mode: judged
+  profile: all
+  thresholds:
+    required_fields:
+    - old_text
+    - new_text
+    - object
+    - destination
+    unmapped_information_loss_allowed: false
+  detector: null
+  review: 逐条记录caption旧文、新文、关联对象与迁移去向，保留必要数字、单位和限定。
+- id: TEXT-NO-CONTRAST
+  rule: Flag formulaic not-X-but-Y constructions.
+  mode: auto
+  profile: all
+  thresholds:
+    patterns:
+    - not X but Y
+    - 不是…而是
+    allowed: 0
+    unit: occurrence
+  detector: check_contrast
+  review: null
+- id: TEXT-NO-LABEL-PHRASES
+  rule: Flag label-like fragments that replace explanation.
+  mode: partial
+  profile: all
+  thresholds:
+    unit: null
+    value: null
+    specification: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_prose
+  review: 逐处标出用标签式短语代替解释的文字。
+- id: TEXT-NO-META
+  rule: Keep narrator meta-statements and internal execution labels out of visible
+    explanation.
+  mode: partial
+  profile: all
+  thresholds:
+    unit: null
+    value: null
+    specification: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_prose
+  review: 可见解释中禁止元说明、内部执行标签和面向作者的流程口吻。
+- id: TEXT-NO-ENDING-DISCLAIMER
+  rule: Flag information-free endings and formulaic defensive disclaimers.
+  mode: partial
+  profile: all
+  thresholds:
+    examples:
+    - does not mean
+    - does not imply
+    - remains pending
+    allowed: 0
+    unit: occurrence
+  detector: screen_prose
+  review: 逐处标出结尾无信息句及模板式保守免责句。
+- id: PROC-REPAIR-TARGET-PAGES
+  rule: Change only the pages named in the current repair request.
+  mode: judged
+  profile: all
+  thresholds:
+    out_of_scope_changed_pages_allowed: 0
+    unit: page
+  detector: null
+  review: 返修只改本轮指定页。
+- id: PROC-REPAIR-PROTECTED-TEXT
+  rule: Do not alter text outside the current issue list.
+  mode: judged
+  profile: all
+  thresholds:
+    unlisted_text_changes_allowed: 0
+    unit: change
+  detector: null
+  review: 不在本轮问题清单内的文字不得改。
+- id: PROC-REPAIR-DIFF
+  rule: Check the final diff against the authorized repair scope.
+  mode: judged
+  profile: all
+  thresholds:
+    unexplained_diff_hunks_allowed: 0
+    unit: hunk
+  detector: null
+  review: 改后核对最终diff，逐处确认变动均在授权范围内。
+- id: COMP-DATA-COMPARISON
+  rule: Identify the data, comparison groups and metric from the page itself.
+  mode: judged
+  profile: all
+  thresholds:
+    required_statement_count: 1
+    unit: sentence
+    missing_information_verdict: Confirm against the declared template; no unspecified
+      hard threshold is inferred.
+  detector: null
+  review: 仅凭页面内容说清数据或样本、比较组及指标。
+- id: COMP-TERMS
+  rule: Inventory every visible symbol, abbreviation, term and variable with its local
+    or earlier definition.
+  mode: partial
+  profile: all
+  thresholds:
+    undefined_terms_allowed: 0
+    unit: term
+  detector: screen_abbreviations
+  review: 逐页列出每个符号、缩写、术语和变量，注明本页或第几页定义，任何未定义项均不合格。
+- id: COMP-NUMBERS
+  rule: Explain the meaning and unit of every visible number.
+  mode: judged
+  profile: all
+  thresholds:
+    unexplained_numbers_allowed: 0
+    unit: number
+  detector: null
+  review: 逐一说明页面上每个数字的含义与单位，说不清即不合格。
+- id: COMP-REASONING
+  rule: Keep each page on one reasoning level and make fact-to-interpretation-to-conclusion
+    steps explicit.
+  mode: judged
+  profile: all
+  thresholds:
+    unit: null
+    value: null
+    specification: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: null
+  review: 逐句检查事实、解释、推论和结论是否依次推进，指出任何跳层。
+- id: COMP-RETELL
+  rule: Retell each page in two sentences and flag a title mismatch.
+  mode: judged
+  profile: all
+  thresholds:
+    retelling_sentences: 2
+    title_disagreement: MISMATCH
+    unit: sentence
+  detector: null
+  review: 用两句话复述本页内容及其意义，写不出则不合格，与标题不一致则标MISMATCH。
+- id: COMP-DECK-STORY
+  rule: Retell the whole deck in five sentences and rank the five most serious comprehension
+    problems.
+  mode: judged
+  profile: all
+  thresholds:
+    story_sentences: 5
+    ranked_problems: 5
+    unit: count
+  detector: null
+  review: 用5句话复述全套故事，并按严重程度列出最影响理解的5处。
+- id: PROC-COLD-READ-BLIND
+  rule: Run cold reading with a fresh reader who sees only the specified visible slide
+    content.
+  mode: judged
+  profile: all
+  thresholds:
+    fresh_reader: true
+    hidden_context_allowed: false
+  detector: null
+  review: 冷读使用全新会话，只看指定可见幻灯片内容，不读备注、来源材料、修订记录、旧冷读或其他仓库文件。
+- id: PROC-COLD-READ-CHECKLIST
+  rule: Start every page as unqualified and complete all eight checks before accepting
+    it.
+  mode: judged
+  profile: all
+  thresholds:
+    checks_per_page: 8
+    bare_OK_allowed: false
+    unit: check
+  detector: null
+  review: 每页默认不合格，逐项填完8项检查并给出理由后才可判合格。
+- id: PROC-COLD-READ-REWRITES
+  rule: Provide directly replaceable plain-English revisions for failed pages within
+    the cold-read report.
+  mode: judged
+  profile: all
+  thresholds:
+    body_lines:
+    - 3
+    - 4
+    unit: line
+  detector: null
+  review: 冷读报告为不合格页给出可直接替换的标题及3–4行平实英文正文。
+- id: PROC-COLD-READ-SCOPE
+  rule: Keep cold-read judgments to comprehension rather than visual taste, new experiments
+    or factual verification.
+  mode: judged
+  profile: all
+  thresholds:
+    scope: comprehension only
+  detector: null
+  review: 冷读只判断理解，不评价配色字体美感，不建议新实验，不核查事实。
+- id: COMP-TALK-DURATION-REVIEW
+  rule: Identify pages that could be merged or removed to fit the cold-read prompt’s
+    15-minute talk.
+  mode: judged
+  profile: cold_read_v2_15min
+  thresholds:
+    duration: 15
+    unit: minute
+  detector: null
+  review: 按冷读v2的15分钟场景指出可合并或删除的页面。
+- id: PROC-VISIBLE-OVERFLOW
+  rule: Keep visible text, images and vector objects within the page and the declared
+    body region.
+  mode: partial
+  profile: all
+  thresholds:
+    unit: px@1920x1080
+    boundary_tolerance: 2
+    body_envelope: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_overflow
+  review: 可见文字、图像和矢量对象不得越过物理页或声明的正文边界。
+- id: PROC-IDENTITY-INDEPENDENCE
+  rule: Keep filenames, versions, page ordinals, hashes and oracle labels out of measurement
+    verdicts.
+  mode: judged
+  profile: all
+  thresholds:
+    identity_based_verdict_branches_allowed: 0
+    unit: branch
+    project_specific_name_selectors_allowed: false
+  detector: null
+  review: 检测判决不得利用文件名、版本、页序、哈希或oracle标签作为答案。
+- id: PROC-DEFERRED-NOT-PASS
+  rule: Return human review for unimplemented categories without manufacturing automatic
+    acceptance.
+  mode: judged
+  profile: all
+  thresholds:
+    automatic_pass_for_deferred_allowed: false
+  detector: null
+  review: 未实现类别必须交人审，不能以统一REVIEW或缺陷命中率宣称自动通过。
+- id: PROC-REFERENCE-NOT-INDEPENDENT
+  rule: Treat positive-reference replay as calibration evidence rather than independent
+    generalization.
+  mode: judged
+  profile: all
+  thresholds:
+    calibration_as_independent_validation_allowed: false
+  detector: null
+  review: 正参考的无FAIL回测只算校准证据，不算独立泛化验收。
+- id: PROC-REAL-COVERAGE
+  rule: Preserve measurement failures and missing pages rather than inventing coverage.
+  mode: judged
+  profile: all
+  thresholds:
+    fabricated_covered_pages_allowed: 0
+    unit: page
+  detector: null
+  review: 测量失败及缺页如实保留，不伪造覆盖。
+- id: COMP-FIRST-USE-ORDER
+  rule: Introduce concepts only after their prerequisites and allowed first-use anchor.
+  mode: partial
+  profile: all
+  thresholds:
+    unit: null
+    value: null
+    specification: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_abbreviations
+  review: 概念须在先决背景和允许的首次引入位置之后使用。
+- id: FOOT-SAFE-ZONE
+  rule: Measure body-to-source and source-to-footer safety gaps in the final render.
+  mode: partial
+  profile: all
+  thresholds:
+    unit: renderer-calibrated length
+    minimum: null
+    specification: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_footer
+  review: 在最终渲染中测量正文到出处、出处到底部控件的安全间距。
+- id: COMP-INFORMATION-COMPOSITION
+  rule: Give an information slide one main reading path and allocate usable space
+    by scientific importance.
+  mode: judged
+  profile: all
+  thresholds:
+    visual_regions_guidance:
+    - 2
+    - 3
+    unit: region
+    guidance_is_hard_limit: false
+  detector: null
+  review: 信息页保持一个主阅读路径，按科学重要性分配可用空间。
+- id: LAY-FIGURE-INTERNAL-READABILITY
+  rule: Judge internal axes, ticks, legends and panel text at projected slide size
+    rather than by image-box size.
+  mode: partial
+  profile: all
+  thresholds:
+    unit: visual font size
+    minimum: null
+    specification: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_layout
+  review: 按最终投影尺寸判断坐标轴、刻度、图例和分面文字可读性，不能仅凭图片外框够大判通过。
+- id: PROC-ENGLISH-FINAL-PASS
+  rule: Make the English scientific-prose final pass a delivery requirement after
+    meaning and structure are frozen.
+  mode: judged
+  profile: all
+  thresholds:
+    unit: null
+    value: null
+    specification: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: null
+  review: 科学含义和结构固定后，把英文科研文字终审作为交付要求。
+- id: LAY-SPARSE-RECOMPOSITION
+  rule: Recompose sparse content at fixed role sizes before balancing outer whitespace
+    without stretching internal lists.
+  mode: partial
+  profile: all
+  thresholds:
+    unit: null
+    value: null
+    specification: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: screen_layout
+  review: 稀疏页先保持固定字级重排主对象，再平衡外部留白，不能拉伸列表内部间距。
+- id: PROC-ACCEPTED-COMPONENT-REGRESSION
+  rule: Preserve accepted components against their own baseline evidence and rebind
+    review after byte changes.
+  mode: judged
+  profile: all
+  thresholds:
+    unapproved_component_regressions_allowed: 0
+    unit: component
+  detector: null
+  review: 获接受组件沿自身基线保留回归证据，候选字节变化后重新绑定审阅。
+- id: PROC-NO-FIXED-STORYLINE
+  rule: Keep generic validation free from fixed page-type quotas and prescribed storylines.
+  mode: judged
+  profile: all
+  thresholds:
+    hardcoded_page_type_quotas_allowed: false
+    fixed_storyline_required: false
+  detector: null
+  review: 通用验收不得硬编码固定页面种类配额或固定故事线。
+- id: PROC-HOLDOUT-HONESTY
+  rule: Do not call a holdout unseen after using it to tune the system.
+  mode: judged
+  profile: all
+  thresholds:
+    tuned_holdout_as_unseen_allowed: false
+  detector: null
+  review: 已用于调系统的holdout不得再称为unseen。
+- id: PROC-EXISTING-DECK-BASELINE
+  rule: Revise an existing deck against the reviewer-seen baseline and preserve accepted
+    elements.
+  mode: judged
+  profile: all
+  thresholds:
+    reviewer_seen_baseline_required: true
+    accepted_element_ledger_required: true
+    regeneration_as_repair_allowed: false
+  detector: null
+  review: 返修现有deck时与用户真正看过的基线比较，保留已接受页面和元素。
+- id: COMP-THEORY-GUARANTEES
+  rule: Explain theory pages through the problem solved and the guarantee provided.
+  mode: judged
+  profile: all
+  thresholds:
+    unit: null
+    value: null
+    specification: Confirm against the declared template; no unspecified hard threshold
+      is inferred.
+  detector: null
+  review: 理论页说明解决什么问题、提供什么保证，不按theorem数量堆叠。
+- id: TEXT-COVER-TITLE
+  rule: The first slide must contain a visible title.
+  mode: auto
+  profile: all
+  thresholds:
+    minimum_title_characters: 2
+  detector: check_cover_title
+  review: null
+- id: TEXT-COVER-AUTHOR
+  rule: The first slide must contain a visible author byline.
+  mode: auto
+  profile: all
+  thresholds:
+    required: true
+  detector: check_cover_author
+  review: null
+- id: TEXT-COVER-DATE
+  rule: The first slide must contain a visible date.
+  mode: auto
+  profile: all
+  thresholds:
+    required: true
+  detector: check_cover_date
+  review: null
+- id: TEXT-NO-AUDIT-TOKENS
+  rule: Keep explicit audit receipts, hashes and PASS/FAIL status labels out of slide
+    prose.
+  mode: auto
+  profile: all
+  thresholds:
+    allowed: 0
+  detector: check_audit_tokens
+  review: null
+- id: TEXT-NO-FILE-PATHS
+  rule: Keep machine file paths out of slide prose.
+  mode: auto
+  profile: all
+  thresholds:
+    allowed: 0
+  detector: check_file_paths
+  review: null
+- id: TEXT-NO-INTERNAL-VERSIONS
+  rule: Keep internal revision identifiers out of slide prose.
+  mode: auto
+  profile: all
+  thresholds:
+    allowed: 0
+  detector: check_internal_versions
+  review: null
+- id: TEXT-WORD-BUDGET
+  rule: Keep each slide within the configured visible prose budget.
+  mode: auto
+  profile: all
+  thresholds:
+    max_units: 180
+    unit: Latin words + half the CJK characters
+    origin: Engineering default; configurable, not a historical frozen threshold.
+  detector: check_word_budget
+  review: null
+- id: TEXT-EXTRACTION-COVERAGE
+  rule: Require visible extractable text before claiming text checks cover a slide.
+  mode: auto
+  profile: all
+  thresholds:
+    min_visible_characters: 1
+  detector: check_extractability
+  review: null
+- id: CAP-SINGLE-SENTENCE
+  rule: Use at most one sentence in each identified caption.
+  mode: auto
+  profile: all
+  thresholds:
+    max_sentences: 1
+  detector: check_caption_sentences
+  review: null
+review_language: zh-CN
