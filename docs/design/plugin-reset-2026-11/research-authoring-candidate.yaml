@@ -1,0 +1,7 @@
+plugin: research-writing
+display_name: Research Authoring
+candidate_version: "0.1"
+release: false
+repository_bump_decision: NONE
+released_version: "0.2"
+content: "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 用户裁决 1；第 5 节；附录 D.4 -->"

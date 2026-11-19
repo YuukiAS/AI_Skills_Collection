@@ -795,8 +795,24 @@ def copy_configured_plugin_assets(plugin: dict[str, Any], plugin_root: Path, con
 
 def generate_copy_skill(entry: dict[str, Any], skills_dir: Path, context: str) -> int:
     source_dir = resolve_skill_dir(str(entry.get("source") or ""), context)
-    read_required_skill_metadata(source_dir, context)
-    copy_source_tree(source_dir, skills_dir / copy_entry_artifact_id(entry, source_dir, context))
+    metadata = read_required_skill_metadata(source_dir, context)
+    entrypoint = entry.get("entrypoint")
+    if entrypoint:
+        entry_path = (source_dir / entrypoint).resolve()
+        if entry_path.parent != source_dir.resolve() or entry_path.suffix != ".md" or not entry_path.is_file():
+            raise BuildError(f"{context}: entrypoint must be a Markdown file directly inside the source skill")
+        entry_metadata, _ = read_frontmatter(entry_path)
+        if entry_metadata.get("secrets_needed") in (None, "", {}):
+            entry_metadata["secrets_needed"] = []
+        if any(entry_metadata.get(key) != value for key, value in metadata.items() if key != "description"):
+            raise BuildError(f"{context}: entrypoint metadata must match the source skill except description")
+        if not entry_metadata.get("description"):
+            raise BuildError(f"{context}: entrypoint description is required")
+    dest = skills_dir / copy_entry_artifact_id(entry, source_dir, context)
+    copy_source_tree(source_dir, dest)
+    if entrypoint:
+        shutil.copy2(entry_path, dest / "SKILL.md")
+        (dest / entrypoint).unlink()
     return 1
 
 
@@ -1002,6 +1018,8 @@ def validate_plugin_json(plugin_dir: Path, plugin: dict[str, Any], errors: list[
     skills_dir = plugin_dir / "skills"
     expected_dirs = [skill_entry_generated_dir(entry, f"plugin {plugin_name}")
                      for entry in plugin_skill_entries(plugin) + compatibility_skill_entries(plugin)]
+    expected_dirs += [Path(item["target"]).parts[1] for item in config_copy_items(plugin.get("shared"), plugin_name)
+                      if re.fullmatch(r"skills/[^/]+/SKILL\.md", item["target"])]
     expected_skill_dirs = [skills_dir / name for name in expected_dirs]
     found_skill_md = sorted(skills_dir.glob("*/SKILL.md")) if skills_dir.exists() else []
     if not found_skill_md:

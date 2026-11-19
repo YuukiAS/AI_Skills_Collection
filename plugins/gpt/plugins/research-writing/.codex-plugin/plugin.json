@@ -1,0 +1,32 @@
+{
+  "name": "research-writing",
+  "version": "0.1",
+  "description": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 2.1～2.3、3.1 节；附录 D.4 -->",
+  "author": {
+    "name": "YuukiAS",
+    "email": "humc2013@gmail.com",
+    "url": "https://github.com/YuukiAS"
+  },
+  "homepage": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "keywords": [
+    "codex",
+    "research",
+    "skills",
+    "writing"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Research Authoring",
+    "shortDescription": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 2.1～2.3、3.1 节；附录 D.4 -->",
+    "longDescription": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 2.1～2.3、3.1 节；附录 D.4 -->",
+    "developerName": "YuukiAS",
+    "category": "Research",
+    "capabilities": [
+      "Skills"
+    ],
+    "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
+    "defaultPrompt": [],
+    "brandColor": "#2563EB"
+  }
+}

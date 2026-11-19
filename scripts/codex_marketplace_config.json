@@ -144,9 +144,9 @@
     },
     {
       "name": "research-writing",
-      "version": "0.2",
+      "version": "0.1",
       "displayName": "Research Authoring",
-      "description": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization.",
+      "description": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 1、3.1～3.4 节；附录 D.4 -->",
       "category": "Research",
       "brandColor": "#1D4ED8",
       "composerIcon": "./assets/codex/plugin-icons/research-writing/composer.svg",
@@ -155,18 +155,36 @@
         {
           "source": "skills/writing/research/shared",
           "target": "shared"
+        },
+        {
+          "source": "skills/writing/research/shared/compatibility/paper.md",
+          "target": "skills/paper/SKILL.md"
+        },
+        {
+          "source": "skills/writing/research/shared/compatibility/litcite.md",
+          "target": "skills/litcite/SKILL.md"
         }
       ],
-      "defaultPrompt": [
-        "Write a repo-grounded research report.",
-        "Plan this paper workflow.",
-        "Check literature and citations.",
-        "Plan this manuscript with a claim-evidence workflow.",
-        "Create a single-paper evidence card.",
-        "Run a pre-submission reviewer-style acceptance-risk check.",
-        "Check whether these results support the manuscript claims."
-      ],
+      "defaultPrompt": [],
       "skills": [
+        {
+          "type": "copy",
+          "source": "skills/writing/research/research-notes",
+          "artifact_id": "research-notes",
+          "entrypoint": "codex-entry.md"
+        },
+        {
+          "type": "copy",
+          "source": "skills/writing/research/research-story",
+          "artifact_id": "research-story",
+          "entrypoint": "codex-entry.md"
+        },
+        {
+          "type": "copy",
+          "source": "skills/writing/research/student-materials",
+          "artifact_id": "student-materials",
+          "entrypoint": "codex-entry.md"
+        },
         {
           "type": "copy",
           "source": "skills/writing/research/research-reporting",
@@ -174,8 +192,8 @@
         },
         {
           "type": "aggregate",
-          "name": "research-paper-workflow",
-          "artifact_id": "paper",
+          "name": "research-paper",
+          "artifact_id": "research-paper",
           "description": "Formal manuscript planning, drafting, revision, reviewer-style critique, rubric scoring, rebuttal, supplement, venue, and LaTeX coordination; route literature discovery and citation checks to literature-and-citations.",
           "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
           "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
@@ -212,8 +230,8 @@
         },
         {
           "type": "aggregate",
-          "name": "literature-and-citations",
-          "artifact_id": "litcite",
+          "name": "research-citations",
+          "artifact_id": "research-citations",
           "description": "Current paper lookup, literature synthesis, single-paper evidence cards, citation support checks, BibTeX and reference metadata hygiene, and Zotero-oriented workflows.",
           "icon_small": "assets/codex/app-skill-icons/aggregate.svg",
           "icon_large": "assets/codex/app-skill-icons/aggregate.svg",
@@ -240,7 +258,9 @@
             }
           ]
         }
-      ]
+      ],
+      "releaseStatus": "candidate",
+      "releasedVersion": "0.2"
     },
     {
       "name": "presentations",

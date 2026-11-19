@@ -47,49 +47,32 @@ class ResearchWritingRoutingTests(unittest.TestCase):
         serialized = json.dumps(research)
         self.assertNotIn("skills/tools/documents-media/render-chinese-math-pdf", serialized)
 
-    def test_research_reporting_formal_pdf_handoff_fails_closed_without_companion(self) -> None:
+    def test_legacy_report_routes_to_three_reader_entries(self) -> None:
         text = read_skill("skills/writing/research/research-reporting")
-        self.assertIn("skills/tools/documents-media/render-chinese-math-pdf", text)
-        self.assertIn("fail closed", text)
-        self.assertIn("markdown-only research authoring requests remain markdown-only", text)
-        self.assertIn("formal pdf", text)
+        self.assertIn("gpt-writes", text)
+        for name in ["research-notes", "research-story", "student-materials"]:
+            self.assertIn(f"../{name}/skill.md", text)
+        self.assertNotIn("default report structure", text)
 
-    def test_research_main_agents_notes_route_report_pdf_through_reporting_first(self) -> None:
-        profile = json.loads((REPO_ROOT / "profiles/research-main.json").read_text(encoding="utf-8"))
-        notes = "\n".join(profile.get("routing_notes", [])).lower()
-        self.assertIn("research-reporting", notes)
-        self.assertIn("render-chinese-math-pdf", notes)
-        self.assertLess(notes.index("research-reporting"), notes.index("render-chinese-math-pdf"))
-
+    def test_research_main_installs_three_reader_entries_and_renderer(self) -> None:
+        profile = json.loads((REPO_ROOT / "profiles/research-main.json").read_text())
+        for name in ["research-notes", "research-story", "student-materials"]:
+            self.assertIn(f"skills/writing/research/{name}", profile["skills"])
+        self.assertIn("skills/tools/documents-media/render-chinese-math-pdf", profile["skills"])
+        self.assertNotIn("skills/writing/research/research-reporting", profile["skills"])
         with tempfile.TemporaryDirectory() as tmp:
-            args = argparse.Namespace(
-                profile=["research-main"],
-                domain=[],
-                category=[],
-                skill=[],
-                target="repo",
-                project=tmp,
-                mode="copy",
-                dry_run=False,
-                json=True,
-                write_agents_md=True,
-                prune_managed=False,
-            )
+            args = argparse.Namespace(profile=["research-main"], domain=[], category=[], skill=[],
+                                      target="repo", project=tmp, mode="copy", dry_run=False,
+                                      json=True, write_agents_md=True, prune_managed=False)
             skills.install_result(args)
-            agents = (Path(tmp) / "AGENTS.md").read_text(encoding="utf-8")
-
+            agents = (Path(tmp) / "AGENTS.md").read_text()
         self.assertIn("## Profile Routing Notes", agents)
-        self.assertIn("first read and apply `research-reporting`", agents)
-        self.assertIn("then use `render-chinese-math-pdf`", agents)
-        self.assertLess(
-            agents.index("first read and apply `research-reporting`"),
-            agents.index("then use `render-chinese-math-pdf`"),
-        )
+        self.assertIn("RESEARCH_AUTHORING_DESIGN_V0_1.md", agents)
 
     def test_research_writing_aggregate_keeps_internal_paper_boundaries(self) -> None:
         data = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
         research = next(plugin for plugin in data["plugins"] if plugin["name"] == "research-writing")
-        paper = next(skill for skill in research["skills"] if skill.get("name") == "research-paper-workflow")
+        paper = next(skill for skill in research["skills"] if skill.get("name") == "research-paper")
         self.assertIn("literature-and-citations", paper["description"])
         self.assertEqual(
             {entry["source"] for entry in paper["source_skills"]},
@@ -107,7 +90,7 @@ class ResearchWritingRoutingTests(unittest.TestCase):
     def test_literature_and_citation_aggregate_keeps_lookup_verify_bibtex_split(self) -> None:
         data = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
         research = next(plugin for plugin in data["plugins"] if plugin["name"] == "research-writing")
-        litcite = next(skill for skill in research["skills"] if skill.get("name") == "literature-and-citations")
+        litcite = next(skill for skill in research["skills"] if skill.get("name") == "research-citations")
         self.assertIn("citation support checks", litcite["description"])
         self.assertEqual(
             {entry["source"] for entry in litcite["source_skills"]},

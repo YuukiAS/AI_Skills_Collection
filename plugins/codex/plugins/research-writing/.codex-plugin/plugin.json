@@ -1,7 +1,7 @@
 {
   "name": "research-writing",
-  "version": "0.2",
-  "description": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization.",
+  "version": "0.1",
+  "description": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 1、3.1～3.4 节；附录 D.4 -->",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,19 +18,15 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Research Authoring",
-    "shortDescription": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization.",
-    "longDescription": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization. This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 1、3.1～3.4 节；附录 D.4 -->",
+    "longDescription": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 1、3.1～3.4 节；附录 D.4 --> This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [
       "Skills"
     ],
     "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
-    "defaultPrompt": [
-      "Write a repo-grounded research report.",
-      "Plan this paper workflow.",
-      "Check literature and citations."
-    ],
+    "defaultPrompt": [],
     "brandColor": "#1D4ED8",
     "composerIcon": "./.codex-plugin/assets/composer.svg",
     "logo": "./.codex-plugin/assets/logo.svg"

@@ -26,7 +26,7 @@ class PluginResetSkeletonTests(unittest.TestCase):
         codex = build.load_marketplace_config()
         self.assertNotIn('reasoned-decision', build.plugin_names(codex))
         manifests = {p['name']: p for p in gpt.config()['plugins']}
-        self.assertEqual(set(manifests), {'reasoned-decision', 'content-selection', 'writing-style'})
+        self.assertEqual(set(manifests), {'reasoned-decision', 'content-selection', 'writing-style', 'research-writing'})
         for name in ['reasoned-decision', 'content-selection']:
             manifest = json.loads((ROOT / gpt.OUTPUT / name / '.codex-plugin/plugin.json').read_text())
             self.assertEqual(manifest['version'], '0.1')
@@ -76,7 +76,7 @@ class PluginResetSkeletonTests(unittest.TestCase):
 
     def test_seven_cases_keep_private_locators_out_of_public_yaml(self):
         cases = ROOT / 'docs/design/plugin-reset-2026-11/regressions'
-        self.assertEqual({p.name for p in cases.iterdir()}, {'edge-revision', 'obsidian-existing-capability', 'keychron-object-evidence', 'deck-v7-content', 'reexplain-after-confusion', 'longform-fidelity', 'ui-copy'})
+        self.assertEqual({p.name for p in cases.iterdir()}, {'edge-revision', 'obsidian-existing-capability', 'keychron-object-evidence', 'deck-v7-content', 'reexplain-after-confusion', 'longform-fidelity', 'ui-copy', 'notes-formula-explanation', 'supervisor-story', 'student-brief', 'accepted-material-minor-edit'})
         for path in cases.glob('*/case.yaml'):
             text = path.read_text()
             self.assertNotIn('/users/', text)

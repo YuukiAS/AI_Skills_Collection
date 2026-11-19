@@ -48,7 +48,7 @@ EXPECTED_PLUGIN_VERSIONS = {
     "workflow-core": "0.5",
     "ai-skills-core": "0.5",
     "writing-style": "0.5",
-    "research-writing": "0.2",
+    "research-writing": "0.1",
     "presentations": "0.4",
     "scientific-visualization": "0.1",
     "web-development": "0.4",

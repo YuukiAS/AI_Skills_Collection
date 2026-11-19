@@ -1,0 +1,184 @@
+{
+  "baseline_commit": "727f6c0d",
+  "files": [
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/SKILL.md",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/SKILL.md",
+      "before_sha256": "ef24406b3e9aab040620a2ec68aa33d08213f528fc6bd722544980e9fa87a05d",
+      "after_sha256": "c21b76ead73fe090bd760d4a53327dab6903e3568d66fdfd63fc437ee38dffa1",
+      "name_before": "research-paper-workflow",
+      "name_after": "research-paper"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/flow/assets/app-facing.svg",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/flow/assets/app-facing.svg",
+      "before_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "after_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/flow/evals/trigger_queries.json",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/flow/evals/trigger_queries.json",
+      "before_sha256": "135b45466c9497c4855af04ab6e8849d3be04e591adde175e3e8afff6938071f",
+      "after_sha256": "135b45466c9497c4855af04ab6e8849d3be04e591adde175e3e8afff6938071f"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/flow/source.md",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/flow/source.md",
+      "before_sha256": "9e0a9eb9cacdc8b15d3ef725d76040dbc2d0f9062828c5f18bff2d287383c3bb",
+      "after_sha256": "9e0a9eb9cacdc8b15d3ef725d76040dbc2d0f9062828c5f18bff2d287383c3bb"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/latex/assets/app-facing.svg",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/latex/assets/app-facing.svg",
+      "before_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "after_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/latex/source.md",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/latex/source.md",
+      "before_sha256": "8737228f999dd0c13acd8039418a418e604e305b01263077d664781c1abfec2c",
+      "after_sha256": "8737228f999dd0c13acd8039418a418e604e305b01263077d664781c1abfec2c"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/nature/assets/app-facing.svg",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/nature/assets/app-facing.svg",
+      "before_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "after_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/nature/source.md",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/nature/source.md",
+      "before_sha256": "0fcf2f0529d21e5025a05c869d75cc40773f42b69aeb4865caad22c7cabb4552",
+      "after_sha256": "0fcf2f0529d21e5025a05c869d75cc40773f42b69aeb4865caad22c7cabb4552"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/review/assets/app-facing.svg",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/review/assets/app-facing.svg",
+      "before_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "after_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/review/evals/trigger_queries.json",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/review/evals/trigger_queries.json",
+      "before_sha256": "e922f7137a4c08abd846d5918dc5221a5c8b51202fc9c224ea97787188080d8f",
+      "after_sha256": "e922f7137a4c08abd846d5918dc5221a5c8b51202fc9c224ea97787188080d8f"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/review/source.md",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/review/source.md",
+      "before_sha256": "71ff8ba6dc9c13fb92c579e7b05365607d88844d08e932829aa08c2e9d9487a3",
+      "after_sha256": "71ff8ba6dc9c13fb92c579e7b05365607d88844d08e932829aa08c2e9d9487a3"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/score/assets/app-facing.svg",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/score/assets/app-facing.svg",
+      "before_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "after_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/score/source.md",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/score/source.md",
+      "before_sha256": "0bcf96112a77e11d1057928036ce7c00c20eff7d4045f67c43ca27988309e8b1",
+      "after_sha256": "0bcf96112a77e11d1057928036ce7c00c20eff7d4045f67c43ca27988309e8b1"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/venue/assets/app-facing.svg",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/venue/assets/app-facing.svg",
+      "before_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "after_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/venue/source.md",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/venue/source.md",
+      "before_sha256": "11ec0afdca3aa200bcd7ad6b945d7f7a7e5ce82fe1d3daf5e46ed24d7feb3203",
+      "after_sha256": "11ec0afdca3aa200bcd7ad6b945d7f7a7e5ce82fe1d3daf5e46ed24d7feb3203"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/write/assets/app-facing.svg",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/write/assets/app-facing.svg",
+      "before_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "after_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/write/evals/trigger_queries.json",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/write/evals/trigger_queries.json",
+      "before_sha256": "e6448fda14c38ef4a96dbc52e5e62a36dfd053da8f30cbab26e7bc56ee76d41e",
+      "after_sha256": "e6448fda14c38ef4a96dbc52e5e62a36dfd053da8f30cbab26e7bc56ee76d41e"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/paper/_src/write/source.md",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-paper/_src/write/source.md",
+      "before_sha256": "f3bd5df54bf326d8b49f8a116a1a6605dc2e3f32c7f1c30733178027832243d3",
+      "after_sha256": "f3bd5df54bf326d8b49f8a116a1a6605dc2e3f32c7f1c30733178027832243d3"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/litcite/SKILL.md",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-citations/SKILL.md",
+      "before_sha256": "44846ecabce6e4f69891bb989ee703a5c26959b11ca020cf90890123cbbfb7d8",
+      "after_sha256": "bba935ed4a6cf1d2bb4683bed46a0a0a33fe6c31bf8b7f0a71efcd701ab20361",
+      "name_before": "literature-and-citations",
+      "name_after": "research-citations"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/litcite/_src/cite/assets/app-facing.svg",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-citations/_src/cite/assets/app-facing.svg",
+      "before_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "after_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/litcite/_src/cite/source.md",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-citations/_src/cite/source.md",
+      "before_sha256": "08938526cecd3347e658e3d9b608bc1e23e724bddf50ce5693f49b496cdb71c8",
+      "after_sha256": "08938526cecd3347e658e3d9b608bc1e23e724bddf50ce5693f49b496cdb71c8"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/litcite/_src/lit/assets/app-facing.svg",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-citations/_src/lit/assets/app-facing.svg",
+      "before_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "after_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/litcite/_src/lit/source.md",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-citations/_src/lit/source.md",
+      "before_sha256": "0589864dc32ebecbbd4df6eaedb37bc68e7dff935b3c83f8eeebc6b56760b849",
+      "after_sha256": "0589864dc32ebecbbd4df6eaedb37bc68e7dff935b3c83f8eeebc6b56760b849"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/litcite/_src/lookup/assets/app-facing.svg",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-citations/_src/lookup/assets/app-facing.svg",
+      "before_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "after_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/litcite/_src/lookup/source.md",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-citations/_src/lookup/source.md",
+      "before_sha256": "dd20c4ba2944b9ae579453f4f8af87ed0992a17499d6420116b7fe843b6887b6",
+      "after_sha256": "dd20c4ba2944b9ae579453f4f8af87ed0992a17499d6420116b7fe843b6887b6"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/litcite/_src/verify/assets/app-facing.svg",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-citations/_src/verify/assets/app-facing.svg",
+      "before_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "after_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/litcite/_src/verify/source.md",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-citations/_src/verify/source.md",
+      "before_sha256": "48b7c1dfea5b0e598bf471e063222aa473e2c7825ad4a06d918419c9deccf2d8",
+      "after_sha256": "48b7c1dfea5b0e598bf471e063222aa473e2c7825ad4a06d918419c9deccf2d8"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/litcite/_src/zotero/assets/app-facing.svg",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-citations/_src/zotero/assets/app-facing.svg",
+      "before_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908",
+      "after_sha256": "bbdddda35bea2be4d4ce4b6bbdbec031967e96644b209baa81ab7331ef087908"
+    },
+    {
+      "old_path": "plugins/codex/plugins/research-writing/skills/litcite/_src/zotero/source.md",
+      "new_path": "plugins/codex/plugins/research-writing/skills/research-citations/_src/zotero/source.md",
+      "before_sha256": "dd088f72d12e0e6074d01a329beacc8a29d2fc4c35e741d269568736f744164a",
+      "after_sha256": "dd088f72d12e0e6074d01a329beacc8a29d2fc4c35e741d269568736f744164a"
+    }
+  ],
+  "content_equal_except_skill_name": true
+}

@@ -34,7 +34,7 @@ EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
     "workflow-core": "0.5",
     "ai-skills-core": "0.5",
     "writing-style": "0.5",
-    "research-writing": "0.2",
+    "research-writing": "0.1",
     "presentations": "0.4",
     "web-development": "0.4",
 }
@@ -385,7 +385,8 @@ class CodexMarketplaceTests(unittest.TestCase):
             text = (changelog_root / f"{plugin_name}.md").read_text(encoding="utf-8")
             latest = re.search(r"^## ([0-9]+\.[0-9]+)\b", text, flags=re.MULTILINE)
             self.assertIsNotNone(latest, plugin_name)
-            self.assertEqual(latest.group(1), version)
+            released = next(p for p in config["plugins"] if p["name"] == plugin_name)
+            self.assertEqual(latest.group(1), released.get("releasedVersion", version))
             self.assertIn("Earlier `4.x` values were legacy lockstep release metadata", text)
 
     def test_readme_human_facing_plugin_gallery_matches_sources(self) -> None:
@@ -403,7 +404,7 @@ class CodexMarketplaceTests(unittest.TestCase):
             self.assertIn(f'src="{plugin["logo"]}"', readme)
             self.assertIn(plugin["displayName"], readme)
             self.assertIn(f"<code>{plugin['name']}</code>", readme)
-            self.assertIn(f"v`{plugin['version']}`", readme)
+            self.assertIn(f"v`{plugin.get('releasedVersion', plugin['version'])}`", readme)
 
     def test_any_readme_change_requires_clear_writing_contract(self) -> None:
         agents = (REPO_ROOT / "AGENTS.md").read_text(encoding="utf-8")

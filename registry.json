@@ -3,7 +3,7 @@
   "generated_at": "2026-11-19T16:25:53+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
-  "skill_count": 160,
+  "skill_count": 163,
   "selectors": {
     "domains": [
       "ai-ml",
@@ -5863,6 +5863,45 @@
       ]
     },
     {
+      "id": "writing.research-writing.research-notes",
+      "name": "research-notes",
+      "path": "skills/writing/research/research-notes",
+      "flat_name": "writing-research-research-notes",
+      "scope": "writing",
+      "domain": "research-writing",
+      "category": "research",
+      "subcategory": "research",
+      "slug": "research-notes",
+      "install_selector": "writing/research/research-notes",
+      "description": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 2.1～2.3、3.1 节；用户裁决 2 -->",
+      "status": "active",
+      "provenance": "user-authored",
+      "source_repo_url": "",
+      "source_path": "",
+      "source_ref": "",
+      "source_imported_at": "",
+      "source_license": "",
+      "source_note": "",
+      "source_skills": [],
+      "trusted": false,
+      "requires_network": false,
+      "writes_files": true,
+      "executes_code": false,
+      "secrets_needed": [],
+      "last_reviewed": "2026-11-19",
+      "profile_tags": [
+        "research-writing"
+      ],
+      "recommended_scope": "project",
+      "selectors": [
+        "research-notes",
+        "skills/writing/research/research-notes",
+        "writing-research-research-notes",
+        "writing/research-notes",
+        "writing/research/research-notes"
+      ]
+    },
+    {
       "id": "writing.research-writing.research-reporting",
       "name": "research-reporting",
       "path": "skills/writing/research/research-reporting",
@@ -5873,7 +5912,7 @@
       "subcategory": "research",
       "slug": "research-reporting",
       "install_selector": "writing/research/research-reporting",
-      "description": "Create repo-grounded research reports, milestone summaries, experiment reviews, technical notes, advisor/group-meeting reports, and result retrospectives from project evidence. Use for report semantics even when the final deliverable is a formal PDF; rendering mechanics belong to companion document skills.",
+      "description": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 附录 D.1：兼容转接 -->",
       "status": "active",
       "provenance": "user-authored",
       "source_repo_url": "",
@@ -5899,6 +5938,45 @@
         "writing-research-research-reporting",
         "writing/research-reporting",
         "writing/research/research-reporting"
+      ]
+    },
+    {
+      "id": "writing.research-writing.research-story",
+      "name": "research-story",
+      "path": "skills/writing/research/research-story",
+      "flat_name": "writing-research-research-story",
+      "scope": "writing",
+      "domain": "research-writing",
+      "category": "research",
+      "subcategory": "research",
+      "slug": "research-story",
+      "install_selector": "writing/research/research-story",
+      "description": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 2.1～2.3、3.1 节；用户裁决 2 -->",
+      "status": "active",
+      "provenance": "user-authored",
+      "source_repo_url": "",
+      "source_path": "",
+      "source_ref": "",
+      "source_imported_at": "",
+      "source_license": "",
+      "source_note": "",
+      "source_skills": [],
+      "trusted": false,
+      "requires_network": false,
+      "writes_files": true,
+      "executes_code": false,
+      "secrets_needed": [],
+      "last_reviewed": "2026-11-19",
+      "profile_tags": [
+        "research-writing"
+      ],
+      "recommended_scope": "project",
+      "selectors": [
+        "research-story",
+        "skills/writing/research/research-story",
+        "writing-research-research-story",
+        "writing/research-story",
+        "writing/research/research-story"
       ]
     },
     {
@@ -5973,6 +6051,45 @@
         "writing-research-scientific-writing",
         "writing/research/scientific-writing",
         "writing/scientific-writing"
+      ]
+    },
+    {
+      "id": "writing.research-writing.student-materials",
+      "name": "student-materials",
+      "path": "skills/writing/research/student-materials",
+      "flat_name": "writing-research-student-materials",
+      "scope": "writing",
+      "domain": "research-writing",
+      "category": "research",
+      "subcategory": "research",
+      "slug": "student-materials",
+      "install_selector": "writing/research/student-materials",
+      "description": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 2.1～2.3、3.1 节；用户裁决 2 -->",
+      "status": "active",
+      "provenance": "user-authored",
+      "source_repo_url": "",
+      "source_path": "",
+      "source_ref": "",
+      "source_imported_at": "",
+      "source_license": "",
+      "source_note": "",
+      "source_skills": [],
+      "trusted": false,
+      "requires_network": false,
+      "writes_files": true,
+      "executes_code": false,
+      "secrets_needed": [],
+      "last_reviewed": "2026-11-19",
+      "profile_tags": [
+        "research-writing"
+      ],
+      "recommended_scope": "project",
+      "selectors": [
+        "skills/writing/research/student-materials",
+        "student-materials",
+        "writing-research-student-materials",
+        "writing/research/student-materials",
+        "writing/student-materials"
       ]
     },
     {

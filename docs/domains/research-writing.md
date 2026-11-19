@@ -1,6 +1,6 @@
 # research-writing
 
-Active skills: 13
+Active skills: 16
 
 ## Install
 
@@ -35,11 +35,24 @@ Complete domain installs are supported. If an audit reports high description len
 - `paper-workflow-orchestrator` (`skills/writing/research/paper-workflow-orchestrator`): Orchestrate research paper workflows: manuscript plan, claim-evidence spine, result-to-claim gate, section contracts, figure/text sync, pre-submission acceptance checks, rebuttal planning, final artifact QA, and paper-structure rescue rather than paragraph polishing.
 - `peer-review` (`skills/writing/research/peer-review`): Reviewer-style manuscript or grant critique and acceptance-risk assessment. Use for pre-submission self-review, paper验收, likely objections, rebuttal assessment, claim-evidence audit, methods/statistics critique, reporting standards, and concern ledgers. Route prose drafting to scientific-writing and scoring to scholar-evaluation.
 - `research-grants` (`skills/writing/research/research-grants`): Write competitive research proposals for NSF, NIH, DOE, DARPA, and Taiwan NSTC. Agency-specific formatting, review criteria, budget preparation, broader impacts, significance statements, innovation narratives, and compliance with submission requirements.
-- `research-reporting` (`skills/writing/research/research-reporting`): Create repo-grounded research reports, milestone summaries, experiment reviews, technical notes, advisor/group-meeting reports, and result retrospectives from project evidence. Use for report semantics even when the final deliverable is a formal PDF; rendering mechanics belong to companion document skills.
+- `research-notes` (`skills/writing/research/research-notes`): <!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 2.1～2.3、3.1 节；用户裁决 2 -->
+- `research-reporting` (`skills/writing/research/research-reporting`): <!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 附录 D.1：兼容转接 -->
+- `research-story` (`skills/writing/research/research-story`): <!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 2.1～2.3、3.1 节；用户裁决 2 -->
 - `scholar-evaluation` (`skills/writing/research/scholar-evaluation`): Quantitatively evaluate scholarly work with a fixed rubric or ScholarEval-style dimensions. Use for rubric assessment, benchmarked quality scoring, numbered ratings, and dimension-by-dimension evaluation. Route ordinary reviewer-style critique to peer-review and prose revision to scientific-writing.
 - `scientific-writing` (`skills/writing/research/scientific-writing`): Draft and revise scientific manuscript prose: abstracts, IMRaD sections, reviewer-response wording, claim-supported paragraphs, and reporting-guideline text. Route whole-paper planning, reviewer-risk critique, literature discovery, citation verification, BibTeX, figures, venue formatting, and LaTeX issues to neighboring skills.
+- `student-materials` (`skills/writing/research/student-materials`): <!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 2.1～2.3、3.1 节；用户裁决 2 -->
 - `venue-templates` (`skills/writing/research/venue-templates`): This skill should be used when preparing manuscripts for journal submission, conference papers, research posters, or grant proposals and need venue-specific formatting requirements and templates.
 
 ## Main References
 
+- `skills/writing/research/research-notes/references/production-contract.md`
+- `skills/writing/research/research-notes/references/research-notes.md`
 - `skills/writing/research/research-reporting/references/group-meeting-advisor-reports.md`
+- `skills/writing/research/research-story/references/group-meeting-advisor-reports.md`
+- `skills/writing/research/research-story/references/production-contract.md`
+- `skills/writing/research/research-story/references/research-story.md`
+- `skills/writing/research/student-materials/references/production-contract.md`
+- `skills/writing/research/student-materials/references/student-assessment-cumulative-acceptance-contract.md`
+- `skills/writing/research/student-materials/references/student-assessment-delivery-closure-amendment-v1.md`
+- `skills/writing/research/student-materials/references/student-assessment-end-to-end-pre-execution-runbook.md`
+- `skills/writing/research/student-materials/references/student-assessment-hw1-nonrecurrence-amendment-v1.md`

@@ -1,0 +1,65 @@
+{
+  "plugin": "research-writing",
+  "candidate_version": "0.1",
+  "released_version": "0.2",
+  "release": false,
+  "git_mutations": false,
+  "checks": {
+    "full_unittest": {
+      "status": "PASS",
+      "run": 439,
+      "passed": 436,
+      "skipped": 3,
+      "elapsed_seconds": 237.49
+    },
+    "skills_validate": "PASS",
+    "marketplace_validate_check_path_report": "PASS",
+    "gpt_packages_check": "PASS",
+    "mechanical_tests": {
+      "run": 16,
+      "status": "PASS"
+    },
+    "empty_handoff": {
+      "exit_code": 1,
+      "reader_review": "未观察"
+    },
+    "paper_citations_rename": {
+      "files": 29,
+      "byte_identical_snapshots": 27,
+      "content_equal_except_skill_name": true
+    },
+    "skills_audit_all": {
+      "status": "PASS",
+      "budget_warnings": true
+    }
+  },
+  "real_regressions": {
+    "notes-formula-explanation": "未观察",
+    "supervisor-story": "未观察",
+    "student-brief": "未观察",
+    "accepted-material-minor-edit": "未观察"
+  },
+  "private_map": "私有，见本地映射",
+  "production_install": "未观察",
+  "publication": "未观察",
+  "log_sha256": {
+    "full_unittest": "5c67def978bd455eae7a19b853b86efd714d1e9f4a3183f4a61903bba7c637a1",
+    "skills_validate": "ddf80c479a80fc6db11437c84a89b0f4b1bf6c7c95ca13fbc3b63e8a99236ffe",
+    "marketplace_validate_check_path_report": "96abaf219067072fa6c304a27b9bdc1f703db90c4b9d0cfe18d2f1657b99ceee",
+    "gpt_packages_check": "275300272b183518a3ff24b7094ebda6cf84c8143b178b88ed92abc3fc8b4adc",
+    "skills_audit_all": "388364493cd385e4b7d12464da52a0fa8881612c7a6c7ee0de726f612a4f65c0"
+  },
+  "scope": {
+    "protected_files_unchanged": 124,
+    "other_plugin_config_entries": "unchanged",
+    "unrelated_registry_records": "unchanged",
+    "repository_bump_decision": "NONE"
+  },
+  "file_counts": {
+    "new_including_27_relocated_files": 129,
+    "modified": 18,
+    "relocated_old_paths": 27,
+    "local_map_appended": 1,
+    "placeholders_including_generated": 139
+  }
+}

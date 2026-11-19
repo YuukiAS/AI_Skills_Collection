@@ -1,0 +1,11 @@
+插件/技能与版本: "research-writing 0.1 candidate"
+规则编号:
+  - "RESEARCH_AUTHORING_DESIGN_V0_1.md 附录 C.2、C.3"
+  - "RESEARCH_AUTHORING_DESIGN_V0_1.md 附录 D.3、D.4"
+成品中的原句或位置:
+  - "docs/design/plugin-reset-2026-11/research-authoring-rename-proof.diff"
+  - "docs/design/plugin-reset-2026-11/research-authoring-rename-proof.json"
+  - "docs/design/plugin-reset-2026-11/research-authoring-mechanical-results.json"
+改前→改后:
+  改前: ["paper", "litcite", "report/research-reporting"]
+  改后: ["research-paper", "research-citations", "research-notes/research-story/student-materials"]

@@ -1,0 +1,36 @@
+--- plugins/codex/plugins/research-writing/skills/paper/SKILL.md
++++ plugins/codex/plugins/research-writing/skills/research-paper/SKILL.md
+@@ -1,5 +1,5 @@
+ ---
+-name: research-paper-workflow
++name: research-paper
+ description: Formal manuscript planning, drafting, revision, reviewer-style critique, rubric scoring, rebuttal, supplement, venue, and LaTeX coordination; route literature discovery and citation checks to literature-and-citations.
+ status: active
+ provenance: generated
+@@ -24,7 +24,7 @@
+ default_prompt:
+ ---
+ 
+-# research-paper-workflow
++# research-paper
+ 
+ ## Trigger Boundary
+ 
+--- plugins/codex/plugins/research-writing/skills/litcite/SKILL.md
++++ plugins/codex/plugins/research-writing/skills/research-citations/SKILL.md
+@@ -1,5 +1,5 @@
+ ---
+-name: literature-and-citations
++name: research-citations
+ description: Current paper lookup, literature synthesis, single-paper evidence cards, citation support checks, BibTeX and reference metadata hygiene, and Zotero-oriented workflows.
+ status: active
+ provenance: generated
+@@ -25,7 +25,7 @@
+ default_prompt:
+ ---
+ 
+-# literature-and-citations
++# research-citations
+ 
+ ## Trigger Boundary
+ 

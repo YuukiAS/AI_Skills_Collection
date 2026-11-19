@@ -79,6 +79,69 @@
           "target": "skills/clear-writing/references/execution-evidence.yaml"
         }
       ]
+    },
+    {
+      "name": "research-writing",
+      "version": "0.1",
+      "displayName": "Research Authoring",
+      "description": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 2.1～2.3、3.1 节；附录 D.4 -->",
+      "category": "Research",
+      "defaultPrompt": [],
+      "skills": [
+        {
+          "type": "copy",
+          "source": "skills/writing/research/research-notes",
+          "artifact_id": "research-notes"
+        },
+        {
+          "type": "copy",
+          "source": "skills/writing/research/research-story",
+          "artifact_id": "research-story"
+        },
+        {
+          "type": "copy",
+          "source": "skills/writing/research/student-materials",
+          "artifact_id": "student-materials"
+        }
+      ],
+      "shared": [
+        {
+          "source": "skills/writing/research/shared/production-contract.md",
+          "target": "skills/research-notes/references/production-contract.md"
+        },
+        {
+          "source": "skills/writing/research/shared/handoff.template.json",
+          "target": "skills/research-notes/references/handoff.template.json"
+        },
+        {
+          "source": "shared/templates/plugin-execution-evidence.yaml",
+          "target": "skills/research-notes/references/execution-evidence.yaml"
+        },
+        {
+          "source": "skills/writing/research/shared/production-contract.md",
+          "target": "skills/research-story/references/production-contract.md"
+        },
+        {
+          "source": "skills/writing/research/shared/handoff.template.json",
+          "target": "skills/research-story/references/handoff.template.json"
+        },
+        {
+          "source": "shared/templates/plugin-execution-evidence.yaml",
+          "target": "skills/research-story/references/execution-evidence.yaml"
+        },
+        {
+          "source": "skills/writing/research/shared/production-contract.md",
+          "target": "skills/student-materials/references/production-contract.md"
+        },
+        {
+          "source": "skills/writing/research/shared/handoff.template.json",
+          "target": "skills/student-materials/references/handoff.template.json"
+        },
+        {
+          "source": "shared/templates/plugin-execution-evidence.yaml",
+          "target": "skills/student-materials/references/execution-evidence.yaml"
+        }
+      ]
     }
   ]
 }
