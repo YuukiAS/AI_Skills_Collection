@@ -1,5 +1,12 @@
 # Research Authoring 重设计 v0.1
 
+> **用户裁决（2026-11-19，优先于本文正文）**
+>
+> 1. **命名**：`paper` 改名 `research-paper`，`litcite` 改名 `research-citations`；内容与行为一律不动，旧名保留转接。插件安装标识 v0.1 暂保留 `research-writing`，展示名 Research Authoring。
+> 2. 三个新技能按本文：`research-notes`、`research-story`、`student-materials`。
+> 3. 第 3.4 节"留白、密度不设硬阈值"只适用于文档类 PDF；幻灯片仍按通用 deck 验收器的硬规则（用户已裁决的阈值）执行。
+
+
 ## 1. 一页结论
 
 **Research Authoring 按“给谁读”组织能力：本人研究笔记、导师与合作者的研究故事、学生材料，以及预留的论文读者入口。首版实现前三类，让研究文档讲清问题、方法怎样计算、证据支持什么，以及读者需要理解或完成什么。** 同一类读者需要的 Markdown、PDF 和双语版本，都在同一个技能内处理。
