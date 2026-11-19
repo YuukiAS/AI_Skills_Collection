@@ -20,9 +20,7 @@
     "skills/tools/documents-media/render-chinese-math-pdf",
     "skills/tools/documents-media/docx",
     "skills/tools/documents-media/markitdown",
-    "skills/writing/core/writing-fidelity",
-    "skills/writing/core/scientific-prose",
-    "skills/writing/core/chinese-prose",
+    "skills/writing/core/clear-writing",
     "skills/tools/visualization/matplotlib",
     "skills/tools/visualization/plotly"
   ],

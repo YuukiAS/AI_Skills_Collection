@@ -70,9 +70,10 @@ class ServerInstallationSmokeTests(unittest.TestCase):
         report = smoke.build_report(args)
         try:
             self.assertTrue(report["ok"], report)
-            self.assertEqual(report["installed_skill_count"], 7)
+            self.assertEqual(report["installed_skill_count"], 5)
             manifest = json.loads(Path(report["manifest_path"]).read_text(encoding="utf-8"))
             installed_paths = {item["path"] for item in manifest["installed_skills"]}
+            self.assertIn("skills/writing/core/clear-writing", installed_paths)
             self.assertIn("skills/tools/documents-media/render-chinese-math-pdf", installed_paths)
             self.assertIn("skills/writing/research/citation-verification", installed_paths)
         finally:

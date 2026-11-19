@@ -1,0 +1,4 @@
+输入来源路径: "tests/test_scientific_rewrite.py"
+证据文件路径: "tests/test_scientific_rewrite.py"
+期望行为: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 用户裁决 4 -->"
+判定方式: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 用户裁决 4 -->"

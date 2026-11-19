@@ -476,6 +476,23 @@ def plugin_skill_entries(plugin: dict[str, Any]) -> list[dict[str, Any]]:
     return entries
 
 
+def compatibility_skill_entries(plugin: dict[str, Any]) -> list[dict[str, Any]]:
+    entries = plugin.get("compatibility_skills", [])
+    if not isinstance(entries, list):
+        raise BuildError(f"plugin {plugin.get('name')}: compatibility_skills must be a list")
+    for entry in entries:
+        if not isinstance(entry, dict) or entry.get("type") != "copy":
+            raise BuildError("compatibility_skills entries must be copy entries")
+        source = resolve_skill_dir(str(entry.get("source") or ""), "compatibility entry")
+        meta = read_required_skill_metadata(source, "compatibility entry")
+        target = meta.get("redirect_to")
+        active_sources = [resolve_skill_dir(str(item.get("source") or ""), "redirect target")
+                          for item in plugin_skill_entries(plugin) if item.get("type") == "copy"]
+        if not isinstance(target, str) or (source / target).resolve().parent not in active_sources:
+            raise BuildError(f"compatibility entry {source.name}: redirect_to must target an active skill")
+    return entries
+
+
 def validate_artifact_id(value: str, context: str) -> str:
     if not ARTIFACT_ID_RE.match(value):
         raise BuildError(f"{context}: artifact_id must be lowercase kebab-case and <=32 characters")
@@ -566,7 +583,7 @@ def aggregate_coordinator_artifact_id(entry: dict[str, Any], sources: list[dict[
 def artifact_dirs_for_plugin(plugin: dict[str, Any], context: str) -> dict[str, str]:
     used: dict[str, str] = {}
     result: dict[str, str] = {}
-    for entry in plugin_skill_entries(plugin):
+    for entry in plugin_skill_entries(plugin) + compatibility_skill_entries(plugin):
         entry_type = entry.get("type")
         if entry_type == "copy":
             source = str(entry.get("source") or "")
@@ -909,11 +926,16 @@ def generate_layer(target_root: Path) -> dict[str, Any]:
                 source_skill_snapshot_count += source_delta
             else:
                 raise BuildError(f"{context}: unknown skill entry type {entry.get('type')}")
+        for entry in compatibility_skill_entries(plugin):
+            generate_copy_skill(entry, skills_dir, f"plugin {plugin_name} compatibility")
+
     if active_skill_count > MAX_ACTIVE_SKILLS:
         raise BuildError(f"Codex marketplace has {active_skill_count} active skills; maximum is {MAX_ACTIVE_SKILLS}")
 
     marketplace = build_marketplace(config)
-    marketplace_path.write_text(json_dump(marketplace), encoding="utf-8")
+    marketplace_text = json_dump(marketplace)
+    if not marketplace_path.exists() or marketplace_path.read_text(encoding="utf-8") != marketplace_text:
+        marketplace_path.write_text(marketplace_text, encoding="utf-8")
     assert_path_budget(target_root)
     return {
         "plugin_count": len(plugins),
@@ -978,7 +1000,8 @@ def validate_plugin_json(plugin_dir: Path, plugin: dict[str, Any], errors: list[
                     errors.append(f"{relative(plugin_json_path)}: defaultPrompt[{index}] exceeds 128 characters")
 
     skills_dir = plugin_dir / "skills"
-    expected_dirs = [skill_entry_generated_dir(entry, f"plugin {plugin_name}") for entry in plugin_skill_entries(plugin)]
+    expected_dirs = [skill_entry_generated_dir(entry, f"plugin {plugin_name}")
+                     for entry in plugin_skill_entries(plugin) + compatibility_skill_entries(plugin)]
     expected_skill_dirs = [skills_dir / name for name in expected_dirs]
     found_skill_md = sorted(skills_dir.glob("*/SKILL.md")) if skills_dir.exists() else []
     if not found_skill_md:
@@ -1014,7 +1037,7 @@ def validate_plugin_json(plugin_dir: Path, plugin: dict[str, Any], errors: list[
                 errors.append(f"{relative(active_skill)}: missing source workflow reference {ref}")
             if not (active_dir / ref).exists():
                 errors.append(f"{relative(active_dir / ref)}: aggregate source workflow file is missing")
-    return len(found_skill_md)
+    return len(found_skill_md) - len(compatibility_skill_entries(plugin))
 
 
 def resolve_marketplace_source_path(root: Path, source: Any, plugin_name: str, errors: list[str]) -> Path | None:

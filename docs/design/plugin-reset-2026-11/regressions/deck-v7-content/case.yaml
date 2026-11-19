@@ -1,0 +1,6 @@
+输入来源路径: "私有，见本地映射"
+证据文件路径: "私有，见本地映射"
+期望行为: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 用户裁决 4 -->"
+判定方式: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 用户裁决 4 -->"
+验收器: shared/presentations-validator/
+依赖分支: validator/presentations-generic-20261119

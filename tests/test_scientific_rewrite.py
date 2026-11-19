@@ -796,21 +796,19 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
         config = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
         profile = json.loads((REPO_ROOT / "profiles/codex-writing-style.json").read_text(encoding="utf-8"))
         writing_style = next(plugin for plugin in config["plugins"] if plugin["name"] == "writing-style")
-        skill_sources = [entry["source"] for entry in writing_style["skills"]]
+        skill_sources = [entry["source"] for entry in writing_style["compatibility_skills"]]
 
         self.assertIn("skills/writing/core/scientific-prose", skill_sources)
         self.assertIn("skills/writing/core/scientific-rewrite", skill_sources)
+        self.assertIn("skills/writing/core/clear-writing", profile["skills"])
+        self.assertEqual([entry["artifact_id"] for entry in writing_style["skills"]], ["clear-writing"])
         self.assertIn("skills/writing/core/chinese-prose", skill_sources)
         self.assertIn("skills/writing/core/response-clarity", skill_sources)
-        self.assertIn("skills/writing/core/scientific-prose", profile["skills"])
-        self.assertIn("skills/writing/core/scientific-rewrite", profile["skills"])
-        self.assertIn("skills/writing/core/response-clarity", profile["skills"])
-        self.assertIn("skills/writing/core/product-ui-copy", profile["skills"])
 
-    def test_routing_text_sends_structural_scientific_rewrite_to_heavy_route(self) -> None:
-        scientific = (REPO_ROOT / "skills/writing/core/scientific-rewrite/SKILL.md").read_text(encoding="utf-8")
-        chinese = (REPO_ROOT / "skills/writing/core/chinese-prose/SKILL.md").read_text(encoding="utf-8")
-        fidelity = (REPO_ROOT / "skills/writing/core/writing-fidelity/SKILL.md").read_text(encoding="utf-8")
+    def test_preserved_history_routing_text_sends_structural_scientific_rewrite_to_heavy_route(self) -> None:
+        scientific = (REPO_ROOT / "skills/writing/core/scientific-rewrite/history/legacy-skill.md").read_text(encoding="utf-8")
+        chinese = (REPO_ROOT / "skills/writing/core/chinese-prose/history/legacy-skill.md").read_text(encoding="utf-8")
+        fidelity = (REPO_ROOT / "skills/writing/core/writing-fidelity/history/legacy-skill.md").read_text(encoding="utf-8")
 
         self.assertIn("existing Chinese or Chinese-dominant scientific/technical material", scientific)
         self.assertIn("asks to reorganize", scientific)

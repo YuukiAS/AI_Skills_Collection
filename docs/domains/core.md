@@ -1,6 +1,6 @@
 # core
 
-Active skills: 13
+Active skills: 15
 
 ## Install
 
@@ -30,6 +30,7 @@ Complete domain installs are supported. If an audit reports high description len
 - `bridge-kit-maintainer` (`skills/core/codex-system/bridge-kit-maintainer`): Internal AI Skills Maintainer capability for Bridge Kit source, version, distribution, formal release-channel maintenance, editable package refresh, runtime identity checks, and delegation to canonical ai-bridge commands.
 - `codex-workflow-protocol` (`skills/core/codex-system/codex-workflow-protocol`): Use for complex or risky Codex tasks that require source-of-truth discovery, phased planning, specialist routing, gate-driven verification, live-state supervision, integration ownership, or honest final status reporting.
 - `imagegen` (`skills/core/codex-system/system-skills/imagegen`): Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts.
+- `judgment-integrity` (`skills/core/reasoned-decision/judgment-integrity`): <!-- GPT-WRITES: REASONED_DECISION_DESIGN_V0_1.md 第 3.2 节；附录 B.1、B.2 -->
 - `machine-update-orchestrator` (`skills/core/codex-system/machine-update-orchestrator`): Normal AI Skills Maintainer entry for current-machine update requests such as update presentations, update workflow-core, update AI Skills, update Bridge Kit, and sync this machine. Discovers formal release state, selects the bounded route, delegates to the owning maintainer, and verifies reload/session boundaries.
 - `mcp-builder` (`skills/core/codex-system/mcp-builder`): Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).
 - `openai-docs` (`skills/core/codex-system/system-skills/openai-docs`): Use for openai docs workflows when the task directly names this tool or domain. Prefer narrower project skills or umbrella retrieval skills when the task is only a lookup.
@@ -39,6 +40,7 @@ Complete domain installs are supported. If an audit reports high description len
 - `skill-creator` (`skills/core/codex-system/system-skills/skill-creator`): Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codex's capabilities with specialized knowledge, workflows, or tool integrations.
 - `skill-installer` (`skills/core/codex-system/system-skills/skill-installer`): Install external Codex skills from curated lists or GitHub repo paths. Use for third-party skill downloads; for AI_Skills_Collection installs prefer ai-skills repo/user targets and treat codex-home as explicit legacy compatibility.
 - `skill-library-analysis` (`skills/core/codex-system/skill-library-analysis`): Analyze, deduplicate, cluster, and select skills from a large skill library or cloned upstream sources. Use when maintaining AI_Skills_Collection, comparing external skill repos, or deciding whether to merge, add, archive, or ignore skills.
+- `solution-design` (`skills/core/reasoned-decision/solution-design`): <!-- GPT-WRITES: REASONED_DECISION_DESIGN_V0_1.md 第 3.3 节；附录 B.1、B.2 -->
 
 ## Main References
 
@@ -64,3 +66,5 @@ Complete domain installs are supported. If an audit reports high description len
 - `skills/core/codex-system/system-skills/openai-docs/references/upgrade-guide.md`
 - `skills/core/codex-system/system-skills/plugin-creator/references/plugin-json-spec.md`
 - `skills/core/codex-system/system-skills/skill-creator/references/openai_yaml.md`
+- `skills/core/reasoned-decision/judgment-integrity/references/task-state-contract.md`
+- `skills/core/reasoned-decision/solution-design/references/task-state-contract.md`

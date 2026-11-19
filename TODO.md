@@ -15,6 +15,7 @@ docs/plugin-todos/<plugin>.md
 | `reasoned-decision` | [docs/plugin-todos/reasoned-decision.md](docs/plugin-todos/reasoned-decision.md) |
 | `workflow-core` | [docs/plugin-todos/workflow-core.md](docs/plugin-todos/workflow-core.md) |
 | `ai-skills-core` | [docs/plugin-todos/ai-skills-core.md](docs/plugin-todos/ai-skills-core.md) |
+| `content-selection` | [docs/plugin-todos/content-selection.md](docs/plugin-todos/content-selection.md) |
 | `writing-style` | [docs/plugin-todos/writing-style.md](docs/plugin-todos/writing-style.md) |
 | `research-writing` | [docs/plugin-todos/research-writing.md](docs/plugin-todos/research-writing.md) |
 | `presentations` | [docs/plugin-todos/presentations.md](docs/plugin-todos/presentations.md) |

@@ -11,19 +11,19 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
     def test_runtime_text_audit_passes(self):
         self.assertEqual(audit(), [])
 
-    def test_chinese_prose_requires_automatic_final_pass(self):
-        text = (REPO_ROOT / "skills/writing/core/chinese-prose/SKILL.md").read_text(encoding="utf-8")
+    def test_preserved_history_chinese_prose_requires_automatic_final_pass(self):
+        text = (REPO_ROOT / "skills/writing/core/chinese-prose/history/legacy-skill.md").read_text(encoding="utf-8")
         self.assertIn("任何中文 Markdown/PDF/报告/README/面向读者的文档型中文内容都应自动触发", text)
         self.assertIn("用户不需要显式说“说人话”", text)
         self.assertIn("第一段必须先给人能读懂的判断", text)
         self.assertIn("应交给 `product-ui-copy`", text)
 
-    def test_generated_plugin_exposes_chinese_final_pass_trigger(self):
-        text = (REPO_ROOT / "plugins/codex/plugins/writing-style/skills/zh/SKILL.md").read_text(encoding="utf-8")
+    def test_preserved_history_generated_plugin_exposes_chinese_final_pass_trigger(self):
+        text = (REPO_ROOT / "plugins/codex/plugins/writing-style/skills/zh/history/legacy-skill.md").read_text(encoding="utf-8")
         self.assertIn("任何中文 Markdown/PDF/报告/README/面向读者的文档型中文内容都应自动触发", text)
 
-    def test_response_clarity_owns_ordinary_explanations_not_documents_or_machine_output(self):
-        text = (REPO_ROOT / "skills/writing/core/response-clarity/SKILL.md").read_text(encoding="utf-8")
+    def test_preserved_history_response_clarity_owns_ordinary_explanations_not_documents_or_machine_output(self):
+        text = (REPO_ROOT / "skills/writing/core/response-clarity/history/legacy-skill.md").read_text(encoding="utf-8")
         self.assertIn("ordinary answers to the user", text)
         self.assertIn("after the relevant domain work", text)
         self.assertIn("Route formal Chinese documents", text)
@@ -31,19 +31,19 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
         self.assertIn("Preserve", text)
         self.assertIn("permission/authorization boundaries", text)
 
-    def test_generated_plugin_exposes_response_clarity_route(self):
+    def test_preserved_history_generated_plugin_exposes_response_clarity_route(self):
         text = (
-            REPO_ROOT / "plugins/codex/plugins/writing-style/skills/response-clarity/SKILL.md"
+            REPO_ROOT / "plugins/codex/plugins/writing-style/skills/response-clarity/history/legacy-skill.md"
         ).read_text(encoding="utf-8")
         self.assertIn("Use this skill for ordinary answers to the user", text)
         self.assertIn("pure JSON, YAML, code, commands, raw logs", text)
 
-    def test_response_clarity_stops_at_the_answer_and_separates_source_consensus(self):
-        source = (REPO_ROOT / "skills/writing/core/response-clarity/SKILL.md").read_text(
+    def test_preserved_history_response_clarity_stops_at_the_answer_and_separates_source_consensus(self):
+        source = (REPO_ROOT / "skills/writing/core/response-clarity/history/legacy-skill.md").read_text(
             encoding="utf-8"
         )
         generated = (
-            REPO_ROOT / "plugins/codex/plugins/writing-style/skills/response-clarity/SKILL.md"
+            REPO_ROOT / "plugins/codex/plugins/writing-style/skills/response-clarity/history/legacy-skill.md"
         ).read_text(encoding="utf-8")
 
         for text in (source, generated):
@@ -53,12 +53,12 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
             self.assertIn("Present any assistant recommendation afterward", text)
             self.assertIn("source consensus", text)
 
-    def test_response_clarity_groups_reasoning_units_and_builds_reader_models(self):
-        source = (REPO_ROOT / "skills/writing/core/response-clarity/SKILL.md").read_text(
+    def test_preserved_history_response_clarity_groups_reasoning_units_and_builds_reader_models(self):
+        source = (REPO_ROOT / "skills/writing/core/response-clarity/history/legacy-skill.md").read_text(
             encoding="utf-8"
         )
         generated = (
-            REPO_ROOT / "plugins/codex/plugins/writing-style/skills/response-clarity/SKILL.md"
+            REPO_ROOT / "plugins/codex/plugins/writing-style/skills/response-clarity/history/legacy-skill.md"
         ).read_text(encoding="utf-8")
 
         for text in (source, generated):
@@ -74,15 +74,15 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
             self.assertIn("the definition is missing", normalized)
             self.assertIn("Do not guess a scientific meaning", normalized)
 
-    def test_writing_fidelity_fails_unreadable_chinese_final_artifacts(self):
-        text = (REPO_ROOT / "skills/writing/core/writing-fidelity/SKILL.md").read_text(encoding="utf-8")
+    def test_preserved_history_writing_fidelity_fails_unreadable_chinese_final_artifacts(self):
+        text = (REPO_ROOT / "skills/writing/core/writing-fidelity/history/legacy-skill.md").read_text(encoding="utf-8")
         self.assertIn("classify the deliverable as `qa_failed`", text)
         self.assertIn("Chinese Markdown/PDF/slide/report", text)
 
-    def test_writing_style_phase_two_boundaries(self):
-        fidelity = (REPO_ROOT / "skills/writing/core/writing-fidelity/SKILL.md").read_text(encoding="utf-8")
-        chinese = (REPO_ROOT / "skills/writing/core/chinese-prose/SKILL.md").read_text(encoding="utf-8")
-        scientific = (REPO_ROOT / "skills/writing/core/scientific-prose/SKILL.md").read_text(encoding="utf-8")
+    def test_preserved_history_writing_style_phase_two_boundaries(self):
+        fidelity = (REPO_ROOT / "skills/writing/core/writing-fidelity/history/legacy-skill.md").read_text(encoding="utf-8")
+        chinese = (REPO_ROOT / "skills/writing/core/chinese-prose/history/legacy-skill.md").read_text(encoding="utf-8")
+        scientific = (REPO_ROOT / "skills/writing/core/scientific-prose/history/legacy-skill.md").read_text(encoding="utf-8")
 
         self.assertIn("This is the preservation layer, not the style layer", fidelity)
         self.assertIn("Route Chinese natural-prose passes to chinese-prose", fidelity)

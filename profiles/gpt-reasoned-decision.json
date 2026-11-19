@@ -1,0 +1,10 @@
+{
+  "name": "gpt-reasoned-decision",
+  "description": "<!-- GPT-WRITES: REASONED_DECISION_DESIGN_V0_1.md 附录 B.1 -->",
+  "max_active_skills": 2,
+  "skills": [
+    "skills/core/reasoned-decision/judgment-integrity",
+    "skills/core/reasoned-decision/solution-design"
+  ],
+  "secondary_skills": []
+}

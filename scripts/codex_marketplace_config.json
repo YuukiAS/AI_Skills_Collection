@@ -101,6 +101,13 @@
       "skills": [
         {
           "type": "copy",
+          "source": "skills/writing/core/clear-writing",
+          "artifact_id": "clear-writing"
+        }
+      ],
+      "compatibility_skills": [
+        {
+          "type": "copy",
           "source": "skills/writing/core/writing-fidelity",
           "artifact_id": "fidelity"
         },

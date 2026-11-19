@@ -1,0 +1,32 @@
+{
+  "name": "content-selection",
+  "version": "0.1",
+  "description": "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 2.1 节；附录 C -->",
+  "author": {
+    "name": "YuukiAS",
+    "email": "humc2013@gmail.com",
+    "url": "https://github.com/YuukiAS"
+  },
+  "homepage": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
+  "keywords": [
+    "codex",
+    "content",
+    "selection",
+    "skills"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "content-selection",
+    "shortDescription": "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 2.1 节；附录 C -->",
+    "longDescription": "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 2.1 节；附录 C -->",
+    "developerName": "YuukiAS",
+    "category": "Productivity",
+    "capabilities": [
+      "Skills"
+    ],
+    "websiteURL": "https://github.com/YuukiAS/AI_Skills_Collection",
+    "defaultPrompt": [],
+    "brandColor": "#2563EB"
+  }
+}

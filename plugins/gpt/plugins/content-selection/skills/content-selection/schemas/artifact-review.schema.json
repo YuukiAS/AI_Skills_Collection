@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 附录 C.2",
+  "type": "object",
+  "properties": {
+    "candidate_identity": {},
+    "visible_text": {},
+    "rendered_views": {},
+    "observed_surfaces": {},
+    "unobserved_surfaces": {},
+    "findings": {},
+    "mechanical_results": {},
+    "reader_review": {}
+  }
+}

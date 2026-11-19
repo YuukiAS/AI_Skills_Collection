@@ -187,10 +187,11 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertIn("Update Bridge Kit through canonical ai-bridge delegation.", core["defaultPrompt"])
         self.assertIn("Sync this machine's participating AI Research Stack.", core["defaultPrompt"])
 
-    def test_writing_style_exposes_response_clarity_without_renaming_existing_skills(self) -> None:
+    def test_writing_style_exposes_clear_writing_with_six_compatibility_entries(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         writing = next(plugin for plugin in data["plugins"] if plugin["name"] == "writing-style")
-        sources = {entry["artifact_id"]: entry["source"] for entry in writing["skills"]}
+        sources = {entry["artifact_id"]: entry["source"] for entry in writing["compatibility_skills"]}
+        self.assertEqual(writing["skills"], [{"type": "copy", "source": "skills/writing/core/clear-writing", "artifact_id": "clear-writing"}])
 
         self.assertEqual(writing["version"], "0.5")
         self.assertEqual(

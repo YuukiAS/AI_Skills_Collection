@@ -9,8 +9,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 class ProductUiCopyCrossPluginTests(unittest.TestCase):
-    def test_product_ui_copy_skill_defines_protected_handoff_and_boundaries(self) -> None:
-        text = (REPO_ROOT / "skills/writing/core/product-ui-copy/SKILL.md").read_text(encoding="utf-8")
+    def test_preserved_history_product_ui_copy_skill_defines_protected_handoff_and_boundaries(self) -> None:
+        text = (REPO_ROOT / "skills/writing/core/product-ui-copy/history/legacy-skill.md").read_text(encoding="utf-8")
 
         for field in [
             "SURFACE",
@@ -40,8 +40,8 @@ class ProductUiCopyCrossPluginTests(unittest.TestCase):
         self.assertIn("Character conversion alone is not localization", text)
         self.assertIn("Do not turn this handoff into a schema", text)
 
-    def test_chinese_prose_frontmatter_routes_ui_microcopy_away(self) -> None:
-        text = (REPO_ROOT / "skills/writing/core/chinese-prose/SKILL.md").read_text(encoding="utf-8")
+    def test_preserved_history_chinese_prose_frontmatter_routes_ui_microcopy_away(self) -> None:
+        text = (REPO_ROOT / "skills/writing/core/chinese-prose/history/legacy-skill.md").read_text(encoding="utf-8")
         frontmatter = text.split("---", 2)[1]
 
         self.assertIn("文档型中文内容", frontmatter)
@@ -50,8 +50,8 @@ class ProductUiCopyCrossPluginTests(unittest.TestCase):
         self.assertIn("报告、README", frontmatter)
         self.assertIn("不要因为文本是中文就留在 `chinese-prose`", text)
 
-    def test_writing_fidelity_protects_product_ui_semantics(self) -> None:
-        text = (REPO_ROOT / "skills/writing/core/writing-fidelity/SKILL.md").read_text(encoding="utf-8")
+    def test_preserved_history_writing_fidelity_protects_product_ui_semantics(self) -> None:
+        text = (REPO_ROOT / "skills/writing/core/writing-fidelity/history/legacy-skill.md").read_text(encoding="utf-8")
 
         self.assertIn("Use `product-ui-copy`", text)
         self.assertIn("Product UI Copy Handoff", text)
@@ -92,7 +92,7 @@ class ProductUiCopyCrossPluginTests(unittest.TestCase):
         writing = plugins["writing-style"]
         self.assertEqual(writing["version"], "0.5")
         self.assertIn("Product UI Copy", writing["description"])
-        writing_sources = {skill["artifact_id"]: skill["source"] for skill in writing["skills"]}
+        writing_sources = {skill["artifact_id"]: skill["source"] for skill in writing["compatibility_skills"]}
         self.assertEqual(writing_sources["product-ui-copy"], "skills/writing/core/product-ui-copy")
         self.assertEqual(writing_sources["response-clarity"], "skills/writing/core/response-clarity")
 

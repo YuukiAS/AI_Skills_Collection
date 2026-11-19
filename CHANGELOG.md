@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-No unreleased changes.
+- 三个插件 v0.1 的机械骨架：目录、清单、转接、schema、执行证据文件模板与 7 个回归案例占位（未发布）。
 
 ## 5.5.2 - 2026-10-21
 

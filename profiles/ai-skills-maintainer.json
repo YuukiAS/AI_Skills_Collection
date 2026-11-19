@@ -11,7 +11,6 @@
     "skills/core/codex-system/codex-workflow-protocol"
   ],
   "secondary_skills": [
-    "skills/writing/core/writing-fidelity",
-    "skills/writing/core/chinese-prose"
+    "skills/writing/core/clear-writing"
   ]
 }

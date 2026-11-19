@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 附录 C.1",
+  "type": "object",
+  "properties": {
+    "target_id": {},
+    "target_kind": {},
+    "reader": {},
+    "reader_task": {},
+    "locale": {},
+    "source_refs": {},
+    "accepted_base": {},
+    "edit_scope": {},
+    "required_meanings": {},
+    "exact_items": {},
+    "rejected_content": {},
+    "content_units": {},
+    "required_relations": {}
+  }
+}

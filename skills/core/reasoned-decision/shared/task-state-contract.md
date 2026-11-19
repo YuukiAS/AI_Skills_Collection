@@ -1,0 +1,1 @@
+<!-- GPT-WRITES: REASONED_DECISION_DESIGN_V0_1.md 第 3.1 节；附录 B.2、B.3 -->

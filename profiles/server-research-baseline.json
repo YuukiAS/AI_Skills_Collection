@@ -4,9 +4,7 @@
   "max_active_skills": 12,
   "skills": [
     "skills/core/codex-system/codex-workflow-protocol",
-    "skills/writing/core/writing-fidelity",
-    "skills/writing/core/scientific-prose",
-    "skills/writing/core/chinese-prose",
+    "skills/writing/core/clear-writing",
     "skills/writing/research/research-reporting",
     "skills/tools/documents-media/render-chinese-math-pdf",
     "skills/tools/hpc/slurm-workflows"

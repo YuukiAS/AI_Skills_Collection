@@ -1,0 +1,9 @@
+{
+  "name": "gpt-content-selection",
+  "description": "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 2.1 节；附录 C -->",
+  "max_active_skills": 1,
+  "skills": [
+    "skills/writing/core/content-selection"
+  ],
+  "secondary_skills": []
+}

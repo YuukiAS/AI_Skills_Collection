@@ -1,0 +1,84 @@
+{
+  "plugins": [
+    {
+      "name": "reasoned-decision",
+      "version": "0.1",
+      "displayName": "Reasoned Decision",
+      "description": "<!-- GPT-WRITES: REASONED_DECISION_DESIGN_V0_1.md 附录 B.1 -->",
+      "category": "Productivity",
+      "defaultPrompt": [],
+      "skills": [
+        {
+          "type": "copy",
+          "source": "skills/core/reasoned-decision/judgment-integrity",
+          "artifact_id": "judgment-integrity"
+        },
+        {
+          "type": "copy",
+          "source": "skills/core/reasoned-decision/solution-design",
+          "artifact_id": "solution-design"
+        }
+      ],
+      "shared": [
+        {
+          "source": "shared/templates/plugin-execution-evidence.yaml",
+          "target": "skills/judgment-integrity/references/execution-evidence.yaml"
+        },
+        {
+          "source": "shared/templates/plugin-execution-evidence.yaml",
+          "target": "skills/solution-design/references/execution-evidence.yaml"
+        },
+        {
+          "source": "skills/core/reasoned-decision/shared/task-state-contract.md",
+          "target": "skills/judgment-integrity/references/task-state-contract.md"
+        },
+        {
+          "source": "skills/core/reasoned-decision/shared/task-state-contract.md",
+          "target": "skills/solution-design/references/task-state-contract.md"
+        }
+      ]
+    },
+    {
+      "name": "content-selection",
+      "version": "0.1",
+      "displayName": "content-selection",
+      "description": "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 2.1 节；附录 C -->",
+      "category": "Productivity",
+      "defaultPrompt": [],
+      "skills": [
+        {
+          "type": "copy",
+          "source": "skills/writing/core/content-selection",
+          "artifact_id": "content-selection"
+        }
+      ],
+      "shared": [
+        {
+          "source": "shared/templates/plugin-execution-evidence.yaml",
+          "target": "skills/content-selection/references/execution-evidence.yaml"
+        }
+      ]
+    },
+    {
+      "name": "writing-style",
+      "version": "0.5",
+      "displayName": "Clear Writing",
+      "description": "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 2.4、6.1 节 -->",
+      "category": "Productivity",
+      "defaultPrompt": [],
+      "skills": [
+        {
+          "type": "copy",
+          "source": "skills/writing/core/clear-writing",
+          "artifact_id": "clear-writing"
+        }
+      ],
+      "shared": [
+        {
+          "source": "shared/templates/plugin-execution-evidence.yaml",
+          "target": "skills/clear-writing/references/execution-evidence.yaml"
+        }
+      ]
+    }
+  ]
+}
