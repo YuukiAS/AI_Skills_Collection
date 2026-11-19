@@ -365,3 +365,11 @@ status: NEW
 source: 某私有统计研究项目的技术讲解返修反馈，2026-11-11。
 evidence: 被拒稿件原文留在私有项目仓库，此处不保存。
 problem: 首页先放用途声明、版本依据、代码位置与执行说明，读者真正需要的概念对照和阅读结构却分散在后文。信息准确不代表适合放进正文：正文优先保留帮助读者理解和行动的内容，内部记录移到附录或省略；必要的对照表与语义图应直接帮助阅读。这里只记录内容取舍和版式问题，不保存模型、公式或私有定位，也不授权新的生产实现。
+
+
+### AI Instructions Release drafting repeatedly lost the reader's verification task
+status: NEW
+source: Project Atlas / AI Instructions first confirmed-configuration Release drafting, 2026-11-19
+evidence: user-provided exported ChatGPT thread from the 2026-11-19 Project Atlas conversation; the private transcript remains with the user and is not copied wholesale into this public repository.
+problem: A short Release note for the first confirmed AI Instructions configuration snapshot went through repeated rewrites without a stable reader model. The longest draft mixed useful verification content with maintainer-facing material: exact configuration surfaces and the full confirmed Project list were surrounded by release mechanics, exclusion lists, manifest explanations, future-work status and repeated baseline rationale. After the user asked to remove waste, later drafts overcorrected by deleting concrete information a human could actually use to verify the release — especially which Projects were included and which exact configuration surfaces were frozen — while preserving abstract counts, lifecycle language and repository-state summaries. Subsequent rewrites oscillated between these two extremes instead of first deciding what the reader was trying to verify. Even the near-final draft still ended by sending the reader to `manifest.yaml` after the human-facing content was already complete. The observed failure is therefore not simply verbosity or insufficient brevity: the artifact repeatedly optimized amount of text without correctly ranking reader-relevant verification content against maintainer metadata.
+project-specific context: The specific release id, repository names, confirmed Project list, dates and configuration paths belong to the AI Instructions task and are evidence only. They should not become hard-coded generic content. The reusable failure pattern is the loss of reader purpose during content selection and compression.
