@@ -1,0 +1,24 @@
+{
+  "blueprint_scalar_changes": 4,
+  "node_own_field_changes": [
+    "gates",
+    "fr-roles"
+  ],
+  "roles_unchanged": true,
+  "regression_cases_criteria_and_owners_unchanged": true,
+  "connections_requirements_and_evidence_unchanged": true,
+  "embedded_versions_unchanged": true,
+  "inventory_non_source_fields_unchanged": true,
+  "changed_reader_units": [
+    "wr-gates"
+  ],
+  "failure_paths_unchanged": true,
+  "same_step_or_failure_neighbors_requiring_new_paraphrase": [],
+  "d8_round3_units": [
+    "wr-gates"
+  ],
+  "d8_reader_text_matches_pinned_checker": true,
+  "d8_textHash": "a3ff68fbf8b4c11450f21eff918758ec481d926fa38df8f2190baedeb750d3ea",
+  "d8_executed": false,
+  "actual_regression_cases_run": 0
+}

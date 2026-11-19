@@ -1,0 +1,1185 @@
+{
+  "checkedAt": "2026-11-19T06:08:56.508Z",
+  "mode": "local-only",
+  "files": [
+    {
+      "file": "docs/design/assurance/plugin-0.1-d1/blueprint.json",
+      "nodes": 62,
+      "errors": [
+        {
+          "rule": "freeze",
+          "path": "versions",
+          "message": "最新冻结快照与当前内容不同；请完整冻结本次内容后再交付"
+        },
+        {
+          "rule": "reader-current-hash",
+          "path": "wb-capability",
+          "message": "当前文字没有对应的独立读者通过记录"
+        },
+        {
+          "rule": "reader-current-hash",
+          "path": "wr-gates",
+          "message": "当前文字没有对应的独立读者通过记录"
+        },
+        {
+          "rule": "reader-current-hash",
+          "path": "wr-freeze",
+          "message": "当前文字没有对应的独立读者通过记录"
+        },
+        {
+          "rule": "reader-current-hash",
+          "path": "fail-freeze-explanation-whole",
+          "message": "当前文字没有对应的独立读者通过记录"
+        },
+        {
+          "rule": "reader-current-hash",
+          "path": "fail-freeze-explanation-step-1",
+          "message": "当前文字没有对应的独立读者通过记录"
+        }
+      ],
+      "reviews": [
+        {
+          "rule": "support-review",
+          "path": "current.nodes[state].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "单一当前状态 (state)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[writer].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "写者交接与恢复 (writer)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[record-check].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "记录结构检查 (record-check)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[record-check]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "记录结构检查 (record-check)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[dispatch].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "按条件派发 (dispatch)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[prompts].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "自包含提示词 (prompts)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[prompts]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "自包含提示词 (prompts)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[revision].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "修订与告知 (revision)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[metrics].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "三项衡量 (metrics)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[metrics]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "三项衡量 (metrics)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[role-D1].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D1：负责人 (role-D1)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[role-D1]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D1：负责人 (role-D1)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[role-D2].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D2：独立甲 (role-D2)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[role-D2]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D2：独立甲 (role-D2)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[role-D3].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D3：独立乙 (role-D3)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[role-D3]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D3：独立乙 (role-D3)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[role-D4].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D4：现实核查 (role-D4)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[role-D4]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D4：现实核查 (role-D4)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[role-D5].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D5：格式检查 (role-D5)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[role-D5]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D5：格式检查 (role-D5)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[role-D6].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D6：用户追问 (role-D6)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[role-D6]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D6：用户追问 (role-D6)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[role-D7].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D7：冷读开工 (role-D7)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[role-D7]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D7：冷读开工 (role-D7)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[role-D8].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D8：逐步复述 (role-D8)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[role-D8]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D8：逐步复述 (role-D8)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[clarify].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "澄清与需求落图 (clarify)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[clarify]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "澄清与需求落图 (clarify)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[gates].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "四项冻结关卡 (gates)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[contract-capability].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "能力与声明 (contract-capability)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[contract-capability]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "能力与声明 (contract-capability)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[contract-entry].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "正常入口与成品 (contract-entry)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[contract-entry]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "正常入口与成品 (contract-entry)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[contract-outcomes].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "成功失败与未知 (contract-outcomes)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[contract-outcomes]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "成功失败与未知 (contract-outcomes)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[contract-fidelity].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "证据真实度 (contract-fidelity)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[contract-fidelity]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "证据真实度 (contract-fidelity)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[contract-forbidden].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "禁止替代 (contract-forbidden)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[contract-forbidden]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "禁止替代 (contract-forbidden)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[contract-regression].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "已有能力保护 (contract-regression)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[contract-regression]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "已有能力保护 (contract-regression)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[contract-controls].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "三类控制例 (contract-controls)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[contract-controls]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "三类控制例 (contract-controls)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[contract-changes].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "交付修改与退回 (contract-changes)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[contract-changes]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "交付修改与退回 (contract-changes)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[contract-authorization].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "资源与授权 (contract-authorization)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[contract-authorization]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "资源与授权 (contract-authorization)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[freeze].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "批准与冻结交接 (freeze)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[q-checker].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "草稿与冻结检查 (q-checker)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[q-checker]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "草稿与冻结检查 (q-checker)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[q-inheritance].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "小修批准继承 (q-inheritance)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[q-inheritance]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "小修批准继承 (q-inheritance)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[role-X1].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "X1：负责人 (role-X1)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[role-X1]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "X1：负责人 (role-X1)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[role-X2].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "X2：实现者 (role-X2)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[role-X2]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "X2：实现者 (role-X2)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[role-X3].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "X3：独立验收 (role-X3)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[role-X3]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "X3：独立验收 (role-X3)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[role-X4].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "X4：专项检查 (role-X4)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[role-X4]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "X4：专项检查 (role-X4)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[role-X5].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "X5：专业裁判 (role-X5)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[role-X5]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "X5：专业裁判 (role-X5)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[acceptance].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "验收资产分级 (acceptance)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[acceptance]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "验收资产分级 (acceptance)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[calibration].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "验收器三类校准 (calibration)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[calibration]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "验收器三类校准 (calibration)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[candidate].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "最终候选身份 (candidate)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[evidence].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "三态原始证据 (evidence)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[deviation].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "偏离和设计退回 (deviation)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[deviation]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "偏离和设计退回 (deviation)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[sign].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "亲读后唯一签发 (sign)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[source-layout].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "唯一源目录 (source-layout)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[source-layout]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "唯一源目录 (source-layout)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[planning-entry].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "同源规划入口 (planning-entry)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[planning-entry]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "同源规划入口 (planning-entry)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[execution-package].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "执行插件入口 (execution-package)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[execution-package]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "执行插件入口 (execution-package)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[minimum].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "完整最小范围 (minimum)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[minimum]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "完整最小范围 (minimum)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[capability-check].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "正常入口验收 (capability-check)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[capability-check]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "正常入口验收 (capability-check)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[web-later].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "网页端打包与验收 (web-later)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[web-later]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "网页端打包与验收 (web-later)"
+        },
+        {
+          "rule": "support-review",
+          "path": "current.nodes[q-capacity].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "市场容量调整 (q-capacity)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[q-capacity]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "市场容量调整 (q-capacity)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[freeze-review]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "冻结审阅 (freeze-review)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[fr-decisions]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "决定与默认做法 (fr-decisions)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[fr-asks]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "何时请你决定 (fr-asks)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[fr-costs]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "工作量费用权限 (fr-costs)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[fr-roles]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "角色分工 (fr-roles)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[fr-validation]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "验收与回归 (fr-validation)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[fr-downloads]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "下载与安装 (fr-downloads)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "current.nodes[fr-nongoals]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "不做与不保证 (fr-nongoals)"
+        },
+        {
+          "rule": "excerpt-review",
+          "path": "current.evidence[e-claude].sources[0]",
+          "message": "需核对摘录能否支持决定，以及版本与查阅日期是否合适：Claude Code技能以SKILL.md和支持资料组织。"
+        },
+        {
+          "rule": "excerpt-review",
+          "path": "current.evidence[e-openai-skills].sources[0]",
+          "message": "需核对摘录能否支持决定，以及版本与查阅日期是否合适：OpenAI技能使用同类文件布局与支持资源。"
+        },
+        {
+          "rule": "excerpt-review",
+          "path": "current.evidence[e-openai-plugins].sources[0]",
+          "message": "需核对摘录能否支持决定，以及版本与查阅日期是否合适：官方资料保留既有Codex插件兼容布局。"
+        },
+        {
+          "rule": "excerpt-review",
+          "path": "current.evidence[e-jsonschema].sources[0]",
+          "message": "需核对摘录能否支持决定，以及版本与查阅日期是否合适：jsonschema4.26.0提供所选记录结构检查基础。"
+        },
+        {
+          "rule": "excerpt-review",
+          "path": "current.evidence[e-jsonschema].sources[1]",
+          "message": "需核对摘录能否支持决定，以及版本与查阅日期是否合适：jsonschema4.26.0提供所选记录结构检查基础。"
+        },
+        {
+          "rule": "excerpt-review",
+          "path": "current.evidence[e-jsonschema].sources[2]",
+          "message": "需核对摘录能否支持决定，以及版本与查阅日期是否合适：jsonschema4.26.0提供所选记录结构检查基础。"
+        },
+        {
+          "rule": "failure-count",
+          "path": "failurePaths",
+          "message": "超过五条，请检查是否可以合并为同一种设计决定"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[state].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "单一当前状态 (state)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[writer].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "写者交接与恢复 (writer)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[record-check].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "记录结构检查 (record-check)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[record-check]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "记录结构检查 (record-check)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[dispatch].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "按条件派发 (dispatch)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[prompts].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "自包含提示词 (prompts)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[prompts]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "自包含提示词 (prompts)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[revision].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "修订与告知 (revision)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[metrics].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "三项衡量 (metrics)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[metrics]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "三项衡量 (metrics)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[role-D1].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D1：负责人 (role-D1)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[role-D1]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D1：负责人 (role-D1)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[role-D2].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D2：独立甲 (role-D2)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[role-D2]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D2：独立甲 (role-D2)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[role-D3].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D3：独立乙 (role-D3)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[role-D3]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D3：独立乙 (role-D3)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[role-D4].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D4：现实核查 (role-D4)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[role-D4]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D4：现实核查 (role-D4)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[role-D5].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D5：格式检查 (role-D5)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[role-D5]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D5：格式检查 (role-D5)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[role-D6].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D6：用户追问 (role-D6)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[role-D6]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D6：用户追问 (role-D6)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[role-D7].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D7：冷读开工 (role-D7)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[role-D7]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D7：冷读开工 (role-D7)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[role-D8].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "D8：逐步复述 (role-D8)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[role-D8]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "D8：逐步复述 (role-D8)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[clarify].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "澄清与需求落图 (clarify)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[clarify]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "澄清与需求落图 (clarify)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[gates].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "四项冻结关卡 (gates)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[contract-capability].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "能力与声明 (contract-capability)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[contract-capability]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "能力与声明 (contract-capability)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[contract-entry].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "正常入口与成品 (contract-entry)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[contract-entry]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "正常入口与成品 (contract-entry)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[contract-outcomes].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "成功失败与未知 (contract-outcomes)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[contract-outcomes]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "成功失败与未知 (contract-outcomes)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[contract-fidelity].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "证据真实度 (contract-fidelity)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[contract-fidelity]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "证据真实度 (contract-fidelity)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[contract-forbidden].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "禁止替代 (contract-forbidden)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[contract-forbidden]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "禁止替代 (contract-forbidden)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[contract-regression].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "已有能力保护 (contract-regression)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[contract-regression]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "已有能力保护 (contract-regression)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[contract-controls].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "三类控制例 (contract-controls)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[contract-controls]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "三类控制例 (contract-controls)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[contract-changes].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "交付修改与退回 (contract-changes)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[contract-changes]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "交付修改与退回 (contract-changes)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[contract-authorization].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "资源与授权 (contract-authorization)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[contract-authorization]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "资源与授权 (contract-authorization)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[freeze].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "批准与冻结交接 (freeze)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[q-checker].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "草稿与冻结检查 (q-checker)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[q-checker]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "草稿与冻结检查 (q-checker)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[q-inheritance].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "小修批准继承 (q-inheritance)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[q-inheritance]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "小修批准继承 (q-inheritance)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[role-X1].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "X1：负责人 (role-X1)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[role-X1]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "X1：负责人 (role-X1)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[role-X2].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "X2：实现者 (role-X2)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[role-X2]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "X2：实现者 (role-X2)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[role-X3].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "X3：独立验收 (role-X3)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[role-X3]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "X3：独立验收 (role-X3)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[role-X4].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "X4：专项检查 (role-X4)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[role-X4]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "X4：专项检查 (role-X4)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[role-X5].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "X5：专业裁判 (role-X5)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[role-X5]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "X5：专业裁判 (role-X5)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[acceptance].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "验收资产分级 (acceptance)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[acceptance]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "验收资产分级 (acceptance)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[calibration].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "验收器三类校准 (calibration)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[calibration]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "验收器三类校准 (calibration)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[candidate].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "最终候选身份 (candidate)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[evidence].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "三态原始证据 (evidence)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[deviation].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "偏离和设计退回 (deviation)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[deviation]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "偏离和设计退回 (deviation)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[sign].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "亲读后唯一签发 (sign)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[source-layout].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "唯一源目录 (source-layout)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[source-layout]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "唯一源目录 (source-layout)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[planning-entry].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "同源规划入口 (planning-entry)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[planning-entry]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "同源规划入口 (planning-entry)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[execution-package].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "执行插件入口 (execution-package)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[execution-package]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "执行插件入口 (execution-package)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[minimum].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "完整最小范围 (minimum)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[minimum]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "完整最小范围 (minimum)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[capability-check].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "正常入口验收 (capability-check)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[capability-check]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "正常入口验收 (capability-check)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[web-later].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "网页端打包与验收 (web-later)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[web-later]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "网页端打包与验收 (web-later)"
+        },
+        {
+          "rule": "support-review",
+          "path": "versions[1].nodes[q-capacity].claims[0]",
+          "message": "需审查证据是否真正支持：本候选采用以下具体设计；并未声称实现、安装、专业验收或冻结已完成。",
+          "node": "市场容量调整 (q-capacity)"
+        },
+        {
+          "rule": "authority-review",
+          "path": "versions[1].nodes[q-capacity]",
+          "message": "需人工确认此节点没有从两处读取同一事实；机器不能从自然语言判断遗漏的重复来源",
+          "node": "市场容量调整 (q-capacity)"
+        },
+        {
+          "rule": "excerpt-review",
+          "path": "versions[1].evidence[e-claude].sources[0]",
+          "message": "需核对摘录能否支持决定，以及版本与查阅日期是否合适：Claude Code技能以SKILL.md和支持资料组织。"
+        },
+        {
+          "rule": "excerpt-review",
+          "path": "versions[1].evidence[e-openai-skills].sources[0]",
+          "message": "需核对摘录能否支持决定，以及版本与查阅日期是否合适：OpenAI技能使用同类文件布局与支持资源。"
+        },
+        {
+          "rule": "excerpt-review",
+          "path": "versions[1].evidence[e-openai-plugins].sources[0]",
+          "message": "需核对摘录能否支持决定，以及版本与查阅日期是否合适：官方资料保留既有Codex插件兼容布局。"
+        },
+        {
+          "rule": "excerpt-review",
+          "path": "versions[1].evidence[e-jsonschema].sources[0]",
+          "message": "需核对摘录能否支持决定，以及版本与查阅日期是否合适：jsonschema4.26.0提供所选记录结构检查基础。"
+        },
+        {
+          "rule": "excerpt-review",
+          "path": "versions[1].evidence[e-jsonschema].sources[1]",
+          "message": "需核对摘录能否支持决定，以及版本与查阅日期是否合适：jsonschema4.26.0提供所选记录结构检查基础。"
+        },
+        {
+          "rule": "excerpt-review",
+          "path": "versions[1].evidence[e-jsonschema].sources[2]",
+          "message": "需核对摘录能否支持决定，以及版本与查阅日期是否合适：jsonschema4.26.0提供所选记录结构检查基础。"
+        }
+      ],
+      "unresolved": [
+        {
+          "rule": "offline",
+          "path": "docs/design/assurance/plugin-0.1-d1/blueprint.json",
+          "message": "使用 --offline，未核实 Git、外部链接和 npm"
+        }
+      ],
+      "readerIsolation": "single-thread-batch"
+    }
+  ]
+}

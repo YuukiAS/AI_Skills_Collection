@@ -1,0 +1,82 @@
+{
+  "repository": "YuukiAS/Asteria-Blueprint",
+  "commit": "229e1736f445bdecffd84773ad543e5f452d65df",
+  "files": [
+    {
+      "file": "blueprint.schema.json",
+      "sha256": "90cdf92854cdf74d79a77027b44dad136adcae222c32d071c2d302a960b6b53d",
+      "copy_sha256": "90cdf92854cdf74d79a77027b44dad136adcae222c32d071c2d302a960b6b53d"
+    },
+    {
+      "file": "check.mjs",
+      "sha256": "2890f97a4bde4bc0cffb89213083c44225198af347b1eed2d6f4ba775a3fc187",
+      "copy_sha256": "2890f97a4bde4bc0cffb89213083c44225198af347b1eed2d6f4ba775a3fc187"
+    },
+    {
+      "file": "compat.ts",
+      "sha256": "c5e19fa6a8fcf87d527f67c01af973aebf6d47c61881a384165e51571c9f8e36",
+      "copy_sha256": "c5e19fa6a8fcf87d527f67c01af973aebf6d47c61881a384165e51571c9f8e36"
+    },
+    {
+      "file": "history.ts",
+      "sha256": "ed7feb2657b8b43c63137da961bebe25c4023c98ac52a3ea73f28132e99297e1",
+      "copy_sha256": "ed7feb2657b8b43c63137da961bebe25c4023c98ac52a3ea73f28132e99297e1"
+    },
+    {
+      "file": "legacy-schema.ts",
+      "sha256": "846437540aa34f125550e321240f8d437abeffbf0a986806f8529207128ea449",
+      "copy_sha256": "846437540aa34f125550e321240f8d437abeffbf0a986806f8529207128ea449"
+    },
+    {
+      "file": "package-lock.json",
+      "sha256": "7afc8cc32592475d567b3e17003edb9ad516a241ebfc039be68b16aba9a2b3a9",
+      "copy_sha256": "7afc8cc32592475d567b3e17003edb9ad516a241ebfc039be68b16aba9a2b3a9"
+    },
+    {
+      "file": "package.json",
+      "sha256": "aa05267a8a87d87db29b670a1dbcbfba9326e7c9c8c02e04064e5aac938e5688",
+      "copy_sha256": "aa05267a8a87d87db29b670a1dbcbfba9326e7c9c8c02e04064e5aac938e5688"
+    },
+    {
+      "file": "progress.ts",
+      "sha256": "85eaa0a738cadc02427d6bc707b513c4466ddb3b65cd84732e091b584ee6b0d2",
+      "copy_sha256": "85eaa0a738cadc02427d6bc707b513c4466ddb3b65cd84732e091b584ee6b0d2"
+    },
+    {
+      "file": "readability.ts",
+      "sha256": "6367fa33dd93f622e9ed386395bcc5c916393787dfa67f14d6acb8fce825d7be",
+      "copy_sha256": "6367fa33dd93f622e9ed386395bcc5c916393787dfa67f14d6acb8fce825d7be"
+    },
+    {
+      "file": "round7.ts",
+      "sha256": "643e4d9783511a8d68a0d4a3af1768a09333463e528cfedb9f48b6f840b512a5",
+      "copy_sha256": "643e4d9783511a8d68a0d4a3af1768a09333463e528cfedb9f48b6f840b512a5"
+    },
+    {
+      "file": "schema.ts",
+      "sha256": "13944c7daf7ff7ee85a9b81049ade5b5ee9849e1077ddc486e5ddcc59a812bfd",
+      "copy_sha256": "13944c7daf7ff7ee85a9b81049ade5b5ee9849e1077ddc486e5ddcc59a812bfd"
+    },
+    {
+      "file": "source-locations.ts",
+      "sha256": "15457fa26df0311f187cfeb415faca09042b431bbe67120ab9c4469144d6cf9d",
+      "copy_sha256": "15457fa26df0311f187cfeb415faca09042b431bbe67120ab9c4469144d6cf9d"
+    },
+    {
+      "file": "validation-live.ts",
+      "sha256": "b29c436e4facaf19fbc3d6695b7fd76eb2697aa293d453910af3360d3de4a937",
+      "copy_sha256": "b29c436e4facaf19fbc3d6695b7fd76eb2697aa293d453910af3360d3de4a937"
+    },
+    {
+      "file": "validation-round5.ts",
+      "sha256": "2a70beb733f02dfcccc9b7067b80c9d4746579126ac1a9164b4738e6d11a2370",
+      "copy_sha256": "2a70beb733f02dfcccc9b7067b80c9d4746579126ac1a9164b4738e6d11a2370"
+    },
+    {
+      "file": "validation.ts",
+      "sha256": "2d5ec6f34fd7f716b0b682acd3bbead94dcebc81a6f07044ccc397f927151ee3",
+      "copy_sha256": "2d5ec6f34fd7f716b0b682acd3bbead94dcebc81a6f07044ccc397f927151ee3"
+    }
+  ],
+  "checker_rules_unchanged": true
+}

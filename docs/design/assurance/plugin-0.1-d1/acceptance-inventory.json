@@ -2,9 +2,9 @@
   "source": {
     "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
     "branch": "design/assurance-plugins-0.1-merged",
-    "head": "6c21bff4e83c26058d68f3f4680efe099cb1daba",
+    "head": "ad388c4f39dbc51db4494e7f43ebcd1856ca28b2",
     "path": "docs/design/assurance/plugin-0.1-d1/blueprint.json",
-    "sha256": "d7c4055ca4485862230e8a3ab9edb4fc55e1bba4ca18c4a0e12f44d330ca8e9d",
+    "sha256": "2d6efbe759fa40202a385eca53dec8cb2250930e1574c3b7c424d686af790ec9",
     "working_tree_uncommitted": true
   },
   "counting": {

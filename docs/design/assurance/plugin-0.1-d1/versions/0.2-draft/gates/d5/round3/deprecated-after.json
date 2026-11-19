@@ -1,0 +1,350 @@
+{
+  "scope": "all current strings including all node fields, walkthroughs and evidence; excludes versions",
+  "nodes_checked": 62,
+  "strings_checked": 8062,
+  "residual_count": 0,
+  "permitted_migration_or_history_count": 39,
+  "findings": [],
+  "permitted": [
+    {
+      "rule": "old-blueprint-identity",
+      "pointer": "/nodes/0/children/3/terminal/mechanism",
+      "offset": 5579,
+      "match": "blueprint_sha256",
+      "authority": "MERGE_DECISIONS.md §22、§30；SPEC.md §6.5：区分快照、语义及完整包身份",
+      "context": "freeze.json`，回到 D1 查明原因。`freeze.json` 的必填字段 `blueprint_sha256` 以 `snapshot_sha256` 和 `bundle_sha256` 两项代替。\n\n**`semantic_hash` "
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/1/children/0/children/0/outputs/0/description",
+      "offset": 206,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "256 及打开“冻结审阅”视图的方式；用户只批准该快照，freeze.json 不再包含 explanation_sha256。；回归用例集由 D1 写入合同。"
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/1/children/0/children/0/validators/0/method/description",
+      "offset": 1065,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "256 及打开“冻结审阅”视图的方式；用户只批准该快照，freeze.json 不再包含 explanation_sha256。；验收器数量与分类、回归用例数与按检查条的分组由界面从 Blueprint 自动统计；正文只写规则与例外。每条检查只属一类，合并"
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/1/children/0/children/0/interface/format",
+      "offset": 617,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "256 及打开“冻结审阅”视图的方式；用户只批准该快照，freeze.json 不再包含 explanation_sha256。；回归用例集由 D1 写入合同。；负责人把需求和独立设计收敛为带九项语义的Blueprint。"
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/nodes/1/children/0/children/0/terminal/mechanism",
+      "offset": 2179,
+      "match": "冻结说明",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": "阅在 Blueprint 中进行\n\n用户在 Blueprint 中审阅并批准冻结，不再另写冻结说明。批准对象只有 `snapshot_sha256`；`freeze.json` 不再包含 `explanation_sha256`"
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/nodes/1/children/0/children/0/terminal/mechanism",
+      "offset": 2256,
+      "match": "FREEZE_EXPLANATION.md/.pdf",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": "reeze.json` 不再包含 `explanation_sha256`。0.1 的 `FREEZE_EXPLANATION.md/.pdf` 与 `versions/0.1/` 只作历史保留，不作为新草稿的批准对象。\n\nBlueprint 增加顶层节点组 `freez"
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/nodes/1/children/0/children/0/terminal/mechanism",
+      "offset": 2844,
+      "match": "冻结说明",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": "e-review`：答案是否在 Blueprint 中、是否与其他节点矛盾；取消原来对单独冻结说明的四项检查。正文写给用户看，不以文件名、路径、哈希开头或堆砌；具体规则和来源通过节点 id 定位。\n\nBlueprint 应用新增"
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/1/children/0/children/0/terminal/mechanism",
+      "offset": 2229,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "批准对象只有 `snapshot_sha256`；`freeze.json` 不再包含 `explanation_sha256`。0.1 的 `FREEZE_EXPLANATION.md/.pdf` 与 `versions/0.1/` 只作历史保留，不作为"
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/1/children/0/children/0/terminal/mechanism",
+      "offset": 3293,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "256 及打开“冻结审阅”视图的方式；用户只批准该快照，freeze.json 不再包含 explanation_sha256。\n\n回归用例集由 D1 写入合同。验收器数量与分类、回归用例数与按检查条的分组由界面从 Blueprint 自动统计；正文只写规"
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/1/children/0/children/0/terminal/acceptance/7",
+      "offset": 78,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "256 及打开“冻结审阅”视图的方式；用户只批准该快照，freeze.json 不再包含 explanation_sha256。"
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/1/children/0/children/5/terminal/mechanism",
+      "offset": 1574,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "256 及打开“冻结审阅”视图的方式；用户只批准该快照，freeze.json 不再包含 explanation_sha256。"
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/1/children/2/terminal/mechanism",
+      "offset": 6575,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "256 及打开“冻结审阅”视图的方式；用户只批准该快照，freeze.json 不再包含 explanation_sha256。\n\n**本次 0.2 关卡与收口：** 按修订规则属于大改，在新快照上重跑：D5（机械，全量）、D7（Codex，全量）。D6 "
+    },
+    {
+      "rule": "old-blueprint-identity",
+      "pointer": "/nodes/1/children/2/terminal/mechanism",
+      "offset": 2830,
+      "match": "blueprint_sha256",
+      "authority": "MERGE_DECISIONS.md §22、§30；SPEC.md §6.5：区分快照、语义及完整包身份",
+      "context": "freeze.json`，回到 D1 查明原因。`freeze.json` 的必填字段 `blueprint_sha256` 以 `snapshot_sha256` 和 `bundle_sha256` 两项代替。\n\n**`semantic_hash` "
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/nodes/1/children/4/validators/0/method/description",
+      "offset": 3922,
+      "match": "冻结说明",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": "实现任务。；批准对象只有 Blueprint 的 snapshot_sha256，不再另有冻结说明文件身份。；批准请求写明当前 Blueprint 的 snapshot_sha256 及打开“冻结审阅”视图的方式；用户只批准该快"
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/1/children/4/validators/0/method/description",
+      "offset": 112,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "sha256、semantic_hash，不再用旧 blueprint_sha256 或 explanation_sha256。；没有真实批准时不产生已批准记录，没有X1接收不称交接完成。；冻结记录只引用语义，不创第二份合同。；依据冻结合同的工作（X1 接"
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/1/children/4/validators/0/method/description",
+      "offset": 4010,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "256 及打开“冻结审阅”视图的方式；用户只批准该快照，freeze.json 不再包含 explanation_sha256。；Blueprint 检查后改动导致批准对象与检查对象不一致时，拒绝冻结并按修订规则重跑关卡。；回归用例集全部通过才算本版本做完"
+    },
+    {
+      "rule": "old-blueprint-identity",
+      "pointer": "/nodes/1/children/4/validators/0/method/description",
+      "offset": 93,
+      "match": "blueprint_sha256",
+      "authority": "MERGE_DECISIONS.md §22、§30；SPEC.md §6.5：区分快照、语义及完整包身份",
+      "context": "256，冻结记录另保存 bundle_sha256、semantic_hash，不再用旧 blueprint_sha256 或 explanation_sha256。；没有真实批准时不产生已批准记录，没有X1接收不称交接完成。；冻结记录只引用语义，不创"
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/nodes/1/children/4/terminal/mechanism",
+      "offset": 7473,
+      "match": "冻结说明",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": "阅在 Blueprint 中进行\n\n用户在 Blueprint 中审阅并批准冻结，不再另写冻结说明。批准对象只有 `snapshot_sha256`；`freeze.json` 不再包含 `explanation_sha256`"
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/nodes/1/children/4/terminal/mechanism",
+      "offset": 7550,
+      "match": "FREEZE_EXPLANATION.md/.pdf",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": "reeze.json` 不再包含 `explanation_sha256`。0.1 的 `FREEZE_EXPLANATION.md/.pdf` 与 `versions/0.1/` 只作历史保留，不作为新草稿的批准对象。\n\nBlueprint 增加顶层节点组 `freez"
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/nodes/1/children/4/terminal/mechanism",
+      "offset": 8138,
+      "match": "冻结说明",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": "e-review`：答案是否在 Blueprint 中、是否与其他节点矛盾；取消原来对单独冻结说明的四项检查。正文写给用户看，不以文件名、路径、哈希开头或堆砌；具体规则和来源通过节点 id 定位。\n\nBlueprint 应用新增"
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/1/children/4/terminal/mechanism",
+      "offset": 7523,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "批准对象只有 `snapshot_sha256`；`freeze.json` 不再包含 `explanation_sha256`。0.1 的 `FREEZE_EXPLANATION.md/.pdf` 与 `versions/0.1/` 只作历史保留，不作为"
+    },
+    {
+      "rule": "old-blueprint-identity",
+      "pointer": "/nodes/1/children/4/terminal/mechanism",
+      "offset": 3836,
+      "match": "blueprint_sha256",
+      "authority": "MERGE_DECISIONS.md §22、§30；SPEC.md §6.5：区分快照、语义及完整包身份",
+      "context": "freeze.json`，回到 D1 查明原因。`freeze.json` 的必填字段 `blueprint_sha256` 以 `snapshot_sha256` 和 `bundle_sha256` 两项代替。\n\n**`semantic_hash` "
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/1/children/4/terminal/acceptance/0",
+      "offset": 107,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "sha256、semantic_hash，不再用旧 blueprint_sha256 或 explanation_sha256。"
+    },
+    {
+      "rule": "old-blueprint-identity",
+      "pointer": "/nodes/1/children/4/terminal/acceptance/0",
+      "offset": 88,
+      "match": "blueprint_sha256",
+      "authority": "MERGE_DECISIONS.md §22、§30；SPEC.md §6.5：区分快照、语义及完整包身份",
+      "context": "256，冻结记录另保存 bundle_sha256、semantic_hash，不再用旧 blueprint_sha256 或 explanation_sha256。"
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/nodes/1/children/4/terminal/acceptance/17",
+      "offset": 39,
+      "match": "冻结说明",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": "批准对象只有 Blueprint 的 snapshot_sha256，不再另有冻结说明文件身份。"
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/1/children/4/terminal/acceptance/18",
+      "offset": 78,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "256 及打开“冻结审阅”视图的方式；用户只批准该快照，freeze.json 不再包含 explanation_sha256。"
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/nodes/3/children/4/validators/0/method/description",
+      "offset": 1022,
+      "match": "冻结说明",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": "按冻结审阅规则逐条判；② 脚本｜旧表现依据：① 本仓库提交 `2965b008` 的第一版冻结说明和 MERGE_DECISIONS 第 20 节，另加第 30 节（D6 第 10–17 轮转述走样）；② 新能力；R3｜输入（D"
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/3/children/4/validators/0/method/description",
+      "offset": 1302,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "ndle_sha256`、`semantic_hash` 与第 6.5 节一致（不再有 `explanation_sha256`）；② B 拒绝并指出缺 D7；③ C 拒绝，指出批准对象与检查对象不一致，需按修订规则重跑关卡｜谁判：脚本｜旧表现依据：③ M"
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/nodes/3/children/4/validators/1/method/description",
+      "offset": 825,
+      "match": "冻结说明",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": " X5 按冻结审阅规则逐条判；② 脚本 | ① 本仓库提交 `2965b008` 的第一版冻结说明和 MERGE_DECISIONS 第 20 节，另加第 30 节（D6 第 10–17 轮转述走样）；② 新能力 |\n| R3 "
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/3/children/4/validators/1/method/description",
+      "offset": 1094,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "ndle_sha256`、`semantic_hash` 与第 6.5 节一致（不再有 `explanation_sha256`）；② B 拒绝并指出缺 D7；③ C 拒绝，指出批准对象与检查对象不一致，需按修订规则重跑关卡 | 脚本 | ③ MERGE_"
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/nodes/3/children/4/terminal/mechanism",
+      "offset": 3201,
+      "match": "冻结说明",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": " X5 按冻结审阅规则逐条判；② 脚本 | ① 本仓库提交 `2965b008` 的第一版冻结说明和 MERGE_DECISIONS 第 20 节，另加第 30 节（D6 第 10–17 轮转述走样）；② 新能力 |\n| R3 "
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/3/children/4/terminal/mechanism",
+      "offset": 3470,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "ndle_sha256`、`semantic_hash` 与第 6.5 节一致（不再有 `explanation_sha256`）；② B 拒绝并指出缺 D7；③ C 拒绝，指出批准对象与检查对象不一致，需按修订规则重跑关卡 | 脚本 | ③ MERGE_"
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/nodes/3/children/4/terminal/acceptance/7",
+      "offset": 271,
+      "match": "冻结说明",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": "按冻结审阅规则逐条判；② 脚本｜旧表现依据：① 本仓库提交 `2965b008` 的第一版冻结说明和 MERGE_DECISIONS 第 20 节，另加第 30 节（D6 第 10–17 轮转述走样）；② 新能力"
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/nodes/3/children/4/terminal/acceptance/8",
+      "offset": 218,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "ndle_sha256`、`semantic_hash` 与第 6.5 节一致（不再有 `explanation_sha256`）；② B 拒绝并指出缺 D7；③ C 拒绝，指出批准对象与检查对象不一致，需按修订规则重跑关卡｜谁判：脚本｜旧表现依据：③ M"
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/nodes/4/interface/boundaries/0",
+      "offset": 24,
+      "match": "冻结说明",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": "本组保存直接参与快照身份计算的设计内容，不另生成冻结说明；界面由单独实现任务提供。"
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/nodes/4/children/0/terminal/mechanism",
+      "offset": 1742,
+      "match": "冻结说明",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": "阅直接在 Blueprint 进行，只批准 snapshot_sha256，不再转述成单独冻结说明。来源节点：clarify、freeze、gates。"
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/evidence/1/doesNotProve",
+      "offset": 63,
+      "match": "冻结说明",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": "明 Blueprint 未提交改动已发布，也不证明实现、关卡通过或用户批准冻结。 其中单独冻结说明的规则已由 0.2 修订计划和 MERGE_DECISIONS 第 30 节取代，回归用例以本轮工作树的第 10.2a 节为准。"
+    },
+    {
+      "rule": "separate-freeze-explanation",
+      "pointer": "/evidence/10/doesNotProve",
+      "offset": 41,
+      "match": "冻结说明",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review",
+      "context": "裁决依据不是 D5–D8 通过、批准冻结、插件实现或正常入口验收的证据。 其中单独冻结说明的规则已由 0.2 修订计划和 MERGE_DECISIONS 第 30 节取代，回归用例以本轮工作树的第 10.2a 节为准。"
+    },
+    {
+      "rule": "explanation-identity",
+      "pointer": "/walkthroughs/3/steps/2/technical/expectedResult",
+      "offset": 15,
+      "match": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256",
+      "context": "freeze.json 不含 explanation_sha256；三种身份符合第 6.5 节，gate_refs 和用户实际批准可回读，X1 接收后完成写者交接。"
+    }
+  ],
+  "source_sha256": "2d6efbe759fa40202a385eca53dec8cb2250930e1574c3b7c424d686af790ec9",
+  "rules": [
+    {
+      "id": "separate-freeze-explanation",
+      "pattern": "冻结说明|FREEZE_EXPLANATION(?:\\.md(?:/\\.pdf)?|\\.pdf)?",
+      "authority": "REVISION_0.2_PLAN.md#修订二；MERGE_DECISIONS.md §30：改为 Blueprint freeze-review"
+    },
+    {
+      "id": "explanation-identity",
+      "pattern": "explanation_sha256",
+      "authority": "REVISION_0.2_PLAN.md#修订二 第2项；MERGE_DECISIONS.md §30：只批准 snapshot_sha256"
+    },
+    {
+      "id": "old-regression-count",
+      "pattern": "(?:共\\s*)?[8八]\\s*个(?:回归)?用例|新能力\\s*12|(?:共\\s*)?18\\s*条检查",
+      "authority": "REVISION_0.2_PLAN.md#补充决定 第1项；MERGE_DECISIONS.md §30：9用例，14+3+1+2=20条"
+    },
+    {
+      "id": "old-gate-scope",
+      "pattern": "D6、D8\\s*只针对新增和改写的节点（[^）]+）",
+      "authority": "MERGE_DECISIONS.md §30；D1 本轮裁决：D6 按自身字段差异，D8 按读者文字差异"
+    },
+    {
+      "id": "old-blueprint-identity",
+      "pattern": "blueprint_sha256",
+      "authority": "MERGE_DECISIONS.md §22、§30；SPEC.md §6.5：区分快照、语义及完整包身份"
+    }
+  ]
+}

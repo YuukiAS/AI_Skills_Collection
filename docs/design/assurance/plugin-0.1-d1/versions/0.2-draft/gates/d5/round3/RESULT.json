@@ -1,0 +1,38 @@
+{
+  "gate": "D5",
+  "status": "PASS_WITH_DECLARED_EXCLUSIONS",
+  "meaning": "按既有 D1 口径，排除冻结快照差异及待 D8 记录后通过；原始检查器退出码仍为 1。",
+  "source_sha256": "2d6efbe759fa40202a385eca53dec8cb2250930e1574c3b7c424d686af790ec9",
+  "snapshot_sha256": "dc6953587e95044854b914447effacaaa9edc9187b2a63fa4315dd999238a886",
+  "baseline_snapshot_sha256": "8cd6ae62f6cbadf2a6a8776e900986d593d6ae93963e1f9460bd9d5c72ded733",
+  "schema_parse_success": true,
+  "checker_commit": "229e1736f445bdecffd84773ad543e5f452d65df",
+  "nodes_checked": 62,
+  "deprecated_residuals": 0,
+  "raw_runs": {
+    "offline": {
+      "exitCode": 1,
+      "startedAt": "2026-11-19T06:08:56.353Z",
+      "completedAt": "2026-11-19T06:08:56.509Z",
+      "source_sha256": "2d6efbe759fa40202a385eca53dec8cb2250930e1574c3b7c424d686af790ec9",
+      "snapshot_sha256": "dc6953587e95044854b914447effacaaa9edc9187b2a63fa4315dd999238a886",
+      "baseline_snapshot_sha256": "8cd6ae62f6cbadf2a6a8776e900986d593d6ae93963e1f9460bd9d5c72ded733",
+      "schema_parse_success": true
+    },
+    "online": {
+      "exitCode": 1,
+      "startedAt": "2026-11-19T06:08:56.510Z",
+      "completedAt": "2026-11-19T06:08:59.456Z",
+      "source_sha256": "2d6efbe759fa40202a385eca53dec8cb2250930e1574c3b7c424d686af790ec9",
+      "snapshot_sha256": "dc6953587e95044854b914447effacaaa9edc9187b2a63fa4315dd999238a886",
+      "baseline_snapshot_sha256": "8cd6ae62f6cbadf2a6a8776e900986d593d6ae93963e1f9460bd9d5c72ded733",
+      "schema_parse_success": true
+    }
+  },
+  "new_mechanical_errors": 0,
+  "online_unresolved": 0,
+  "reviews_requiring_role_judgment": 191,
+  "reader_records_added": 0,
+  "actual_regression_cases_run": 0,
+  "public_report_path_normalization": "只将 file 与 offline.path 的执行位置改为受审文件的仓库相对路径；检查条目及时间原样保留。"
+}
