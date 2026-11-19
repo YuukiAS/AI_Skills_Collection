@@ -1,6 +1,8 @@
 输入来源路径: "私有，见本地映射"
 证据文件路径: "私有，见本地映射"
-期望行为: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 用户裁决 4 -->"
-判定方式: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 用户裁决 4 -->"
+期望行为: >-
+  GPT 端使用 content-selection 检查完整的 DII 导师 deck v7，明确标出面向导师正文中的审计、验收和执行流程用语，首页与导师阅读任务无关的多余内容，以及跨页重复和删减后需要重新平衡的位置；同时保留科学问题、方法、结果、限制和必要操作信息。Codex 端只运行通用 deck 验收器并回读渲染结果，content-selection 的读者判断与验收器结果共同进入案例证据。
+判定方式: >-
+  通过条件：执行证据按 CS 规则编号定位审计或内部用语、首页多余内容和组合后问题，分别给出保留、压缩、移层或删除建议及返修负责人，并引用通用 deck 验收器的实际结果。失败条件：遗漏任一类已知问题，只改措辞而保留应退出的整块内容，用验收器通过替代读者判断，擅自改变科学主线，或由 Codex 作内容与表达判断。
 验收器: shared/presentations-validator/
 依赖分支: validator/presentations-generic-20261119

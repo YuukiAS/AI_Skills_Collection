@@ -1,4 +1,6 @@
 输入来源路径: "docs/design/plugin-reset-2026-11/COVERAGE_clear-writing.md"
 证据文件路径: "docs/design/plugin-reset-2026-11/COVERAGE_clear-writing.md"
-期望行为: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 用户裁决 4 -->"
-判定方式: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 用户裁决 4 -->"
+期望行为: >-
+  第一次解释收到“没听懂”反馈后，GPT 先定位读者卡住的对象、层级、因果环节或公式含义，再改用具体映射、缩小示例、实际数字、逐步因果链、图景或另一种准确类比中的至少一种重新建立理解；事实、正式术语和证据边界保持不变，并直接给出修正版。
+判定方式: >-
+  通过条件：第二次解释的信息组织或表征方式与第一次有实质差异，能够说清对象、动作、变化和结果，执行证据定位 ER-04 及相关规则。失败条件：只替换同义词，重复原抽象定义，增加免责声明或自我检讨，压缩成口号，遗漏原问题，或改变事实与正式含义。
