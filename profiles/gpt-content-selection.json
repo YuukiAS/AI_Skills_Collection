@@ -1,6 +1,6 @@
 {
   "name": "gpt-content-selection",
-  "description": "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 2.1 节；附录 C -->",
+  "description": "GPT 端用于在制作前决定读者需要的内容、顺序与可见层级，并在真实成品出现后复审整件作品；Codex 端只按已批准计划渲染、运行验收器、发布和回读。",
   "max_active_skills": 1,
   "skills": [
     "skills/writing/core/content-selection"

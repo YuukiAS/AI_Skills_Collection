@@ -1,6 +1,6 @@
 {
   "name": "gpt-reasoned-decision",
-  "description": "<!-- GPT-WRITES: REASONED_DECISION_DESIGN_V0_1.md 附录 B.1 -->",
+  "description": "在比较、推荐、最终确认或新证据出现时，核对对象、证据和跨轮状态，给出稳定且可纠正的明确判断。 在改善、配置、修复或实现方案前，调查现实已有能力和失败经验，优先复用并只设计有证据的剩余缺口。",
   "max_active_skills": 2,
   "skills": [
     "skills/core/reasoned-decision/judgment-integrity",

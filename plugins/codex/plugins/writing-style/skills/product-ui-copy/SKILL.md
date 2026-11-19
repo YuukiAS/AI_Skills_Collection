@@ -1,6 +1,6 @@
 ---
 name: product-ui-copy
-description: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 6.1 节 -->"
+description: "兼容入口：按钮、标签、状态、帮助、权限、隐私和地区化界面文字已经并入 clear-writing 的界面文字规则。"
 status: active
 provenance: user-authored
 trusted: false
@@ -20,4 +20,4 @@ redirect_to: ../clear-writing/SKILL.md
 [clear-writing](../clear-writing/SKILL.md)
 [ui-copy.md](../clear-writing/references/ui-copy.md)
 
-<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 6.1 节 -->
+该入口已并入 `clear-writing`。产品界面微文案读取 `ui-copy.md`，涉及既有状态与后果时同时应用公共保真规则。

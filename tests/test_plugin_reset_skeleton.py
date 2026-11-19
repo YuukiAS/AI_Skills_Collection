@@ -55,12 +55,11 @@ class PluginResetSkeletonTests(unittest.TestCase):
                 self.assertIn(meta['redirect_to'], body)
                 self.assertTrue((base / 'history/legacy-skill.md').is_file())
 
-    def test_new_skill_bodies_contain_only_placeholders_and_links(self):
+    def test_completed_skill_sources_have_no_placeholders(self):
         for plugin in gpt.config()['plugins']:
             for entry in plugin['skills']:
-                _, body = read_frontmatter(ROOT / entry['source'] / 'SKILL.md')
-                for line in body.splitlines():
-                    self.assertTrue(not line.strip() or line.startswith('<!-- GPT-WRITES: ') or re.fullmatch(r'\[[^]]+\]\([^)]+\)', line), line)
+                text = (ROOT / entry['source'] / 'SKILL.md').read_text()
+                self.assertNotIn('GPT-WRITES', text, entry['source'])
 
     def test_content_selection_schema_fields_match_appendix_c(self):
         design = (ROOT / 'docs/design/plugin-reset-2026-11/designs/CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md').read_text()

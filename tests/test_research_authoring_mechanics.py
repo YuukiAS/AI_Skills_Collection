@@ -154,12 +154,12 @@ class ResearchAuthoringSkeleton(unittest.TestCase):
                          ("0.1", "candidate", "0.2"))
         self.assertEqual(research["displayName"], "Research Authoring")
 
-    def test_new_entries_have_placeholders_and_resolving_reference_links(self):
+    def test_completed_entries_have_no_placeholders_and_resolving_reference_links(self):
         for name in NEW:
             for base in [SOURCE / name, ROOT / "plugins/codex/plugins/research-writing/skills" / name,
                          ROOT / "plugins/gpt/plugins/research-writing/skills" / name]:
                 text = (base / "SKILL.md").read_text()
-                self.assertIn("<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md", text)
+                self.assertNotIn("GPT-WRITES", text)
                 for target in re.findall(r"\]\(([^)]+)\)", text):
                     self.assertTrue((base / target).is_file(), (base, target))
                 self.assertEqual((base / "references/execution-evidence.yaml").read_bytes(),

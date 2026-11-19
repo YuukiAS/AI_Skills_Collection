@@ -1,6 +1,6 @@
 ---
 name: research-paper-workflow
-description: "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 用户裁决 1；附录 D.1 -->"
+description: "兼容入口：旧 `paper`／`research-paper-workflow` 名称转到 `research-paper`；论文正文与行为保持现有实现。"
 status: active
 provenance: generated
 trusted: false
@@ -24,4 +24,4 @@ default_prompt:
 
 [research-paper](../research-paper/SKILL.md)
 
-<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 用户裁决 1；附录 D.1 -->
+旧 `paper` 和 `research-paper-workflow` 请求统一转到 `research-paper`。继续从新入口执行，论文内容与行为保持原样。

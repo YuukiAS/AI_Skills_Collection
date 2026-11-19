@@ -1,7 +1,7 @@
 {
   "name": "research-writing",
   "version": "0.1",
-  "description": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 1、3.1～3.4 节；附录 D.4 -->",
+  "description": "为用户本人撰写可复习的研究笔记和方法说明，讲清对象、公式、计算链、证据边界与项目用途；GPT 完成内容判断和写作，Codex 仅承接制作。 为导师、组会听众、合作者和跨领域读者撰写完整研究故事，串联问题、价值、方法、数据、证据、实验转向与下一决定；GPT 写作，Codex 仅承接制作。 根据课程权威材料撰写学生作业、项目简报、讲义和普通检查表，完整交代任务、必要背景、产出与公开规则，并保护累计批注和接受版式；GPT 写作，Codex 仅承接制作。",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Research Authoring",
-    "shortDescription": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 1、3.1～3.4 节；附录 D.4 -->",
-    "longDescription": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 1、3.1～3.4 节；附录 D.4 --> This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
+    "shortDescription": "为用户本人撰写可复习的研究笔记和方法说明，讲清对象、公式、计算链、证据边界与项目用途；GPT 完成内容判断和写作，Codex 仅承接制作。 为导师、组会听众、合作者和跨领域读者撰写完整研究故事，串联问题、价值、方法、数据、证据、实验转向与下一决定；GPT 写作，Codex 仅承接制作。 根据课程权威材料撰写学生作业、项目简报、讲义和普通检查表，完整交代任务、必要背景、产出与公开规则，并保护累计批注和接受版式；GPT 写作，Codex 仅承接制作。",
+    "longDescription": "为用户本人撰写可复习的研究笔记和方法说明，讲清对象、公式、计算链、证据边界与项目用途；GPT 完成内容判断和写作，Codex 仅承接制作。 为导师、组会听众、合作者和跨领域读者撰写完整研究故事，串联问题、价值、方法、数据、证据、实验转向与下一决定；GPT 写作，Codex 仅承接制作。 根据课程权威材料撰写学生作业、项目简报、讲义和普通检查表，完整交代任务、必要背景、产出与公开规则，并保护累计批注和接受版式；GPT 写作，Codex 仅承接制作。 This plugin is generated from the Codex App marketplace configuration and contains a self-contained skill snapshot.",
     "developerName": "YuukiAS",
     "category": "Research",
     "capabilities": [

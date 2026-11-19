@@ -4,7 +4,7 @@
       "name": "reasoned-decision",
       "version": "0.1",
       "displayName": "Reasoned Decision",
-      "description": "<!-- GPT-WRITES: REASONED_DECISION_DESIGN_V0_1.md 附录 B.1 -->",
+      "description": "在比较、推荐、最终确认或新证据出现时，核对对象、证据和跨轮状态，给出稳定且可纠正的明确判断。 在改善、配置、修复或实现方案前，调查现实已有能力和失败经验，优先复用并只设计有证据的剩余缺口。",
       "category": "Productivity",
       "defaultPrompt": [],
       "skills": [
@@ -42,7 +42,7 @@
       "name": "content-selection",
       "version": "0.1",
       "displayName": "content-selection",
-      "description": "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 2.1 节；附录 C -->",
+      "description": "GPT 端用于在制作前决定读者需要的内容、顺序与可见层级，并在真实成品出现后复审整件作品；Codex 端只按已批准计划渲染、运行验收器、发布和回读。",
       "category": "Productivity",
       "defaultPrompt": [],
       "skills": [
@@ -63,7 +63,7 @@
       "name": "writing-style",
       "version": "0.5",
       "displayName": "Clear Writing",
-      "description": "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 2.4、6.1 节 -->",
+      "description": "GPT 端通过一个入口处理解释与答复、连续成稿和界面文字，并在改写中保护事实、公式、引用、状态与已确认内容；Codex 端只执行渲染、验收、发布和回读。",
       "category": "Productivity",
       "defaultPrompt": [],
       "skills": [
@@ -84,7 +84,7 @@
       "name": "research-writing",
       "version": "0.1",
       "displayName": "Research Authoring",
-      "description": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 2.1～2.3、3.1 节；附录 D.4 -->",
+      "description": "为用户本人撰写可复习的研究笔记和方法说明，讲清对象、公式、计算链、证据边界与项目用途；GPT 完成内容判断和写作，Codex 仅承接制作。 为导师、组会听众、合作者和跨领域读者撰写完整研究故事，串联问题、价值、方法、数据、证据、实验转向与下一决定；GPT 写作，Codex 仅承接制作。 根据课程权威材料撰写学生作业、项目简报、讲义和普通检查表，完整交代任务、必要背景、产出与公开规则，并保护累计批注和接受版式；GPT 写作，Codex 仅承接制作。",
       "category": "Research",
       "defaultPrompt": [],
       "skills": [

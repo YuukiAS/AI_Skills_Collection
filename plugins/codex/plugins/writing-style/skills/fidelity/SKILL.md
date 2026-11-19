@@ -1,6 +1,6 @@
 ---
 name: writing-fidelity
-description: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 6.1 节 -->"
+description: "兼容入口：事实、公式、引用、状态、修正历史和成品身份的保护已经并入 clear-writing 的公共保真规则。"
 status: active
 provenance: user-authored
 trusted: false
@@ -20,4 +20,4 @@ redirect_to: ../clear-writing/SKILL.md
 [clear-writing](../clear-writing/SKILL.md)
 [fidelity.md](../clear-writing/references/fidelity.md)
 
-<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 6.1 节 -->
+该入口已并入 `clear-writing`。所有既有内容的改写、重组和局部返修读取 `fidelity.md`。

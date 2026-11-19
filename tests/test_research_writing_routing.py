@@ -49,7 +49,7 @@ class ResearchWritingRoutingTests(unittest.TestCase):
 
     def test_legacy_report_routes_to_three_reader_entries(self) -> None:
         text = read_skill("skills/writing/research/research-reporting")
-        self.assertIn("gpt-writes", text)
+        self.assertNotIn("gpt-writes", text)
         for name in ["research-notes", "research-story", "student-materials"]:
             self.assertIn(f"../{name}/skill.md", text)
         self.assertNotIn("default report structure", text)
@@ -67,7 +67,10 @@ class ResearchWritingRoutingTests(unittest.TestCase):
             skills.install_result(args)
             agents = (Path(tmp) / "AGENTS.md").read_text()
         self.assertIn("## Profile Routing Notes", agents)
-        self.assertIn("RESEARCH_AUTHORING_DESIGN_V0_1.md", agents)
+        self.assertNotIn("GPT-WRITES", agents)
+        self.assertTrue(profile["routing_notes"])
+        for note in profile["routing_notes"]:
+            self.assertIn(note, agents)
 
     def test_research_writing_aggregate_keeps_internal_paper_boundaries(self) -> None:
         data = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))

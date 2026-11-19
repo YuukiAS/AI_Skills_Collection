@@ -1,6 +1,6 @@
 ---
 name: chinese-prose
-description: "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 6.1 节 -->"
+description: "兼容入口：中文文档、报告和长文的自然表达已经并入 clear-writing；使用该入口时转到 clear-writing 的连续成稿规则。"
 status: active
 provenance: local
 trusted: true
@@ -19,4 +19,4 @@ redirect_to: ../clear-writing/SKILL.md
 [clear-writing](../clear-writing/SKILL.md)
 [longform.md](../clear-writing/references/longform.md)
 
-<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 6.1 节 -->
+该入口已并入 `clear-writing`。中文文档、报告和长文任务读取 `longform.md`，涉及既有内容时同时读取公共保真规则。

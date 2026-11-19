@@ -1,9 +1,9 @@
 {
   "name": "research-main",
-  "description": "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 附录 D.4：profiles/research-main.json -->",
+  "description": "为用户本人撰写可复习的研究笔记和方法说明，讲清对象、公式、计算链、证据边界与项目用途；GPT 完成内容判断和写作，Codex 仅承接制作。 为导师、组会听众、合作者和跨领域读者撰写完整研究故事，串联问题、价值、方法、数据、证据、实验转向与下一决定；GPT 写作，Codex 仅承接制作。 根据课程权威材料撰写学生作业、项目简报、讲义和普通检查表，完整交代任务、必要背景、产出与公开规则，并保护累计批注和接受版式；GPT 写作，Codex 仅承接制作。",
   "max_active_skills": 24,
   "routing_notes": [
-    "<!-- GPT-WRITES: RESEARCH_AUTHORING_DESIGN_V0_1.md 第 3.1 节；附录 C、D.4 -->"
+    "本合同适用于 `research-notes`、`research-story` 和 `student-materials` 的 Codex 制作入口。内容判断、读者判断、科研或教学论证和文字写作由 GPT 完成；Codex 接收确定正文，只负责渲染、机械检查、发布和回读。"
   ],
   "skills": [
     "skills/core/codex-system/codex-workflow-protocol",

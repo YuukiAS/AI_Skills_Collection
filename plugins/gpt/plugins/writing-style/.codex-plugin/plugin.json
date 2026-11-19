@@ -1,7 +1,7 @@
 {
   "name": "writing-style",
   "version": "0.5",
-  "description": "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 2.4、6.1 节 -->",
+  "description": "GPT 端通过一个入口处理解释与答复、连续成稿和界面文字，并在改写中保护事实、公式、引用、状态与已确认内容；Codex 端只执行渲染、验收、发布和回读。",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Clear Writing",
-    "shortDescription": "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 2.4、6.1 节 -->",
-    "longDescription": "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 2.4、6.1 节 -->",
+    "shortDescription": "GPT 端通过一个入口处理解释与答复、连续成稿和界面文字，并在改写中保护事实、公式、引用、状态与已确认内容；Codex 端只执行渲染、验收、发布和回读。",
+    "longDescription": "GPT 端通过一个入口处理解释与答复、连续成稿和界面文字，并在改写中保护事实、公式、引用、状态与已确认内容；Codex 端只执行渲染、验收、发布和回读。",
     "developerName": "YuukiAS",
     "category": "Productivity",
     "capabilities": [

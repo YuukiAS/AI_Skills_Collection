@@ -1,7 +1,7 @@
 {
   "name": "content-selection",
   "version": "0.1",
-  "description": "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 2.1 节；附录 C -->",
+  "description": "GPT 端用于在制作前决定读者需要的内容、顺序与可见层级，并在真实成品出现后复审整件作品；Codex 端只按已批准计划渲染、运行验收器、发布和回读。",
   "author": {
     "name": "YuukiAS",
     "email": "humc2013@gmail.com",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "content-selection",
-    "shortDescription": "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 2.1 节；附录 C -->",
-    "longDescription": "<!-- GPT-WRITES: CONTENT_SELECTION_AND_CLEAR_WRITING_DESIGN_V0_1.md 第 2.1 节；附录 C -->",
+    "shortDescription": "GPT 端用于在制作前决定读者需要的内容、顺序与可见层级，并在真实成品出现后复审整件作品；Codex 端只按已批准计划渲染、运行验收器、发布和回读。",
+    "longDescription": "GPT 端用于在制作前决定读者需要的内容、顺序与可见层级，并在真实成品出现后复审整件作品；Codex 端只按已批准计划渲染、运行验收器、发布和回读。",
     "developerName": "YuukiAS",
     "category": "Productivity",
     "capabilities": [
