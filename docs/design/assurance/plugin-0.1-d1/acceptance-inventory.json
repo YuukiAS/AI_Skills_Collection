@@ -2,9 +2,9 @@
   "source": {
     "repository": "https://github.com/YuukiAS/AI_Skills_Collection",
     "branch": "design/assurance-plugins-0.1-merged",
-    "head": "38f7aace61d4e352b6407e989962192f2949bba7",
+    "head": "6c21bff4e83c26058d68f3f4680efe099cb1daba",
     "path": "docs/design/assurance/plugin-0.1-d1/blueprint.json",
-    "sha256": "c4a7d00cb74207179ec7e0b38a87d1590d6f83875a3f3fa4bea44003c9c340e5",
+    "sha256": "d7c4055ca4485862230e8a3ab9edb4fc55e1bba4ca18c4a0e12f44d330ca8e9d",
     "working_tree_uncommitted": true
   },
   "counting": {
@@ -1724,7 +1724,7 @@
       "node_title": "澄清与需求落图",
       "acceptance_index": 3,
       "source_pointer": "/nodes/1/children/1/terminal/acceptance/3",
-      "text": "每个用户回答记为带出处的需求；前沿为空、无静默假设分支且用户确认共同理解才进入设计；影响能力、开工、验收、授权的开放问题在冻结前关闭。",
+      "text": "每个用户回答记为带出处的需求；前沿为空、无静默假设分支且用户确认共同理解才进入设计；影响能力、开工、验收、授权的开放问题在冻结前关闭。 依赖未核实事实、但会影响当前设计的用户决定，进入设计前必须关闭；若用户明确接受以假设推进，则记入假设清单，逐项记录假设内容、用户接受依据、核实负责人和核实时点，并在冻结审阅时逐条复查。不能仅因当前暂时没有可问的问题就结束澄清。",
       "needs": "unclear",
       "needs_reason": "本条按 D1 修订新增或改写，涉及正文、实际入口或用户/专业判断，不能用单一机械观察代替全部。",
       "big_download": null,

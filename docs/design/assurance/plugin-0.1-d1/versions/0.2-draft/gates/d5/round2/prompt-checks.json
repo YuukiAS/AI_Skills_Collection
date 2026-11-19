@@ -1,0 +1,39 @@
+{
+  "base_commit": "6c21bff4e83c26058d68f3f4680efe099cb1daba",
+  "source_sha256": "d7c4055ca4485862230e8a3ab9edb4fc55e1bba4ca18c4a0e12f44d330ca8e9d",
+  "snapshot_sha256": "3efb23ecf3d77ba81a1243d6d7b442f9878f876459941fae9c083a064b6a3b8d",
+  "baseline_snapshot_sha256": "8cd6ae62f6cbadf2a6a8776e900986d593d6ae93963e1f9460bd9d5c72ded733",
+  "schema_parse_success": true,
+  "d6_primary_nodes": [
+    "gates",
+    "role-D1",
+    "role-D6"
+  ],
+  "d6_direct_reference_nodes": [
+    "contract",
+    "fr-decisions",
+    "fr-downloads",
+    "fr-roles",
+    "revision",
+    "role-D2",
+    "role-D3",
+    "role-D4",
+    "role-D5",
+    "role-D7",
+    "role-D8",
+    "role-X1"
+  ],
+  "d6_prompt_sha256": "c3720b579c94c8ea90f9b820515c7023030e4e5998a59b9d64a9e28e146654e2",
+  "d6_prompt_bytes": 55123,
+  "d8_subjects": [
+    "wr-gates",
+    "supp-clarify-0.2"
+  ],
+  "d8_hashes": {
+    "wr-gates": "b45c2b73486333941a4bf13af5308d666d6e9dedc4d03d4ed70d9da58114a851",
+    "supp-clarify-0.2": "07655582b8a0c486605d9a999f96ecf24a925a1c400d70710011e86b64f7bde1"
+  },
+  "d8_prompt_sha256": "f409abbc259ec50980f68bc47e522887e55e1fe2cc7c41f2a7be5e14c7129e35",
+  "review_status": "PREPARED_NOT_RUN",
+  "adjudicator": "Claude as D1"
+}

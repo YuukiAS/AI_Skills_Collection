@@ -1,0 +1,64 @@
+{
+  "gate": "D5",
+  "status": "PASS_WITH_DECLARED_EXCLUSIONS",
+  "meaning": "按本轮 D1 口径，排除冻结快照差异与待 D8 项后机械检查通过；原始检查器未返回零",
+  "checker_commit": "229e1736f445bdecffd84773ad543e5f452d65df",
+  "source_sha256": "d7c4055ca4485862230e8a3ab9edb4fc55e1bba4ca18c4a0e12f44d330ca8e9d",
+  "snapshot_sha256": "3efb23ecf3d77ba81a1243d6d7b442f9878f876459941fae9c083a064b6a3b8d",
+  "baseline_snapshot_sha256": "8cd6ae62f6cbadf2a6a8776e900986d593d6ae93963e1f9460bd9d5c72ded733",
+  "schema_parse_success": true,
+  "nodes_checked": 62,
+  "scan_initial_residuals": 10,
+  "scan_final_residuals": 0,
+  "raw_exit_codes": {
+    "offline": 1,
+    "online": 1
+  },
+  "raw_error_count": 6,
+  "excluded_snapshot_differences": [
+    {
+      "rule": "freeze",
+      "path": "versions",
+      "message": "最新冻结快照与当前内容不同；请完整冻结本次内容后再交付"
+    }
+  ],
+  "excluded_pending_reader_records": [
+    {
+      "rule": "reader-current-hash",
+      "path": "wb-capability",
+      "message": "当前文字没有对应的独立读者通过记录"
+    },
+    {
+      "rule": "reader-current-hash",
+      "path": "wr-gates",
+      "message": "当前文字没有对应的独立读者通过记录"
+    },
+    {
+      "rule": "reader-current-hash",
+      "path": "wr-freeze",
+      "message": "当前文字没有对应的独立读者通过记录"
+    },
+    {
+      "rule": "reader-current-hash",
+      "path": "fail-freeze-explanation-whole",
+      "message": "当前文字没有对应的独立读者通过记录"
+    },
+    {
+      "rule": "reader-current-hash",
+      "path": "fail-freeze-explanation-step-1",
+      "message": "当前文字没有对应的独立读者通过记录"
+    }
+  ],
+  "new_mechanical_errors": 0,
+  "online_unresolved": 0,
+  "reviews_requiring_role_judgment": 191,
+  "record_note": "未追加或伪造 D8 记录；已返回的首轮复述仍保存在 d8/round1，待 D1 正式登记。",
+  "d6_d8_round2": "PREPARED_NOT_RUN",
+  "handoff": {
+    "committed": false,
+    "pushed": false,
+    "failure_action": "git add task-owned paths",
+    "error": "Read-only file system creating worktree index.lock",
+    "recovery": "make the exact current worktree Git administrative directory writable, then stage/review/commit and publish the same branch"
+  }
+}

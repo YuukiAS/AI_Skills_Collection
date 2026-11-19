@@ -1,0 +1,187 @@
+{
+  "tests": [
+    {
+      "name": "old input rejected with 10 actual residues",
+      "passed": true
+    },
+    {
+      "name": "corrected input accepted",
+      "passed": true
+    },
+    {
+      "name": "nested-node mutation rejected: explanation",
+      "passed": true
+    },
+    {
+      "name": "nested-node mutation rejected: hash",
+      "passed": true
+    },
+    {
+      "name": "nested-node mutation rejected: count",
+      "passed": true
+    },
+    {
+      "name": "nested-node mutation rejected: group",
+      "passed": true
+    },
+    {
+      "name": "nested-node mutation rejected: checks",
+      "passed": true
+    },
+    {
+      "name": "nested-node mutation rejected: scope",
+      "passed": true
+    },
+    {
+      "name": "nested-node mutation rejected: identity",
+      "passed": true
+    },
+    {
+      "name": "negative phrase does not hide positive phrase in same field",
+      "passed": true
+    },
+    {
+      "name": "frozen historical snapshot excluded",
+      "passed": true
+    },
+    {
+      "name": "all 62 nodes scanned",
+      "passed": true
+    },
+    {
+      "name": "39 precise migration/history mentions retained",
+      "passed": true
+    },
+    {
+      "name": "325 inventory pointers match current acceptance text",
+      "passed": true
+    },
+    {
+      "name": "inventory source hash matches",
+      "passed": true
+    },
+    {
+      "name": "embedded versions unchanged",
+      "passed": true
+    },
+    {
+      "name": "historical files unchanged",
+      "passed": true
+    },
+    {
+      "name": "D8 exactly two units",
+      "passed": true
+    },
+    {
+      "name": "wr-gates exactly matches checker readerText",
+      "passed": true
+    },
+    {
+      "name": "D8 entrypoint matches round2 prompt",
+      "passed": true
+    },
+    {
+      "name": "d6 scope convergence present",
+      "passed": true
+    },
+    {
+      "name": "d8 scope convergence present",
+      "passed": true
+    },
+    {
+      "name": "pinned checker unchanged blueprint.schema.json",
+      "passed": true
+    },
+    {
+      "name": "pinned checker unchanged check.mjs",
+      "passed": true
+    },
+    {
+      "name": "pinned checker unchanged compat.ts",
+      "passed": true
+    },
+    {
+      "name": "pinned checker unchanged history.ts",
+      "passed": true
+    },
+    {
+      "name": "pinned checker unchanged legacy-schema.ts",
+      "passed": true
+    },
+    {
+      "name": "pinned checker unchanged package-lock.json",
+      "passed": true
+    },
+    {
+      "name": "pinned checker unchanged package.json",
+      "passed": true
+    },
+    {
+      "name": "pinned checker unchanged progress.ts",
+      "passed": true
+    },
+    {
+      "name": "pinned checker unchanged readability.ts",
+      "passed": true
+    },
+    {
+      "name": "pinned checker unchanged round7.ts",
+      "passed": true
+    },
+    {
+      "name": "pinned checker unchanged schema.ts",
+      "passed": true
+    },
+    {
+      "name": "pinned checker unchanged source-locations.ts",
+      "passed": true
+    },
+    {
+      "name": "pinned checker unchanged validation-live.ts",
+      "passed": true
+    },
+    {
+      "name": "pinned checker unchanged validation-round5.ts",
+      "passed": true
+    },
+    {
+      "name": "pinned checker unchanged validation.ts",
+      "passed": true
+    },
+    {
+      "name": "offline no new mechanical errors",
+      "passed": true
+    },
+    {
+      "name": "offline 62 nodes",
+      "passed": true
+    },
+    {
+      "name": "online no new mechanical errors",
+      "passed": true
+    },
+    {
+      "name": "online 62 nodes",
+      "passed": true
+    },
+    {
+      "name": "all live sources resolved",
+      "passed": true
+    },
+    {
+      "name": "no reader records fabricated",
+      "passed": true
+    }
+  ],
+  "passed": 43,
+  "protected_files": [
+    "docs/design/assurance/plugin-0.1-d1/FREEZE_EXPLANATION.md",
+    "docs/design/assurance/plugin-0.1-d1/FREEZE_EXPLANATION.pdf",
+    "docs/design/assurance/plugin-0.1-d1/versions/0.1/FREEZE_REPORT_ZH.md",
+    "docs/design/assurance/plugin-0.1-d1/versions/0.1/freeze.json"
+  ],
+  "reader_records_added": 0,
+  "d6_executed": false,
+  "d8_executed": false,
+  "actual_regression_cases_run": 0
+}
