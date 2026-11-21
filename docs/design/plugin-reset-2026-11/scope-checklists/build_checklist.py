@@ -4,6 +4,8 @@
 Usage: python build_checklist.py INPUT.yaml OUTPUT.pdf
 Dependencies: WeasyPrint >= 63, PyYAML, pypdf >= 5, PyMuPDF.
 Optional: --font-regular FILE --font-bold FILE (Noto/Source Han SC).
+Optional item fields: rule_id, rule_quote, why, proposal; legacy status_note
+continues to render inline after the status badge when present.
 Writes OUTPUT.pdf and previews/page-N.png beside it; prints mechanical QA as JSON.
 No HTML, selected test PDF, or other intermediate artifacts are written to disk.
 """
@@ -35,6 +37,7 @@ import yaml
 
 
 OPTIONS = ("0.1", "0.2", "搁置")
+ITEM_TEXT_FIELDS = ("need", "case", "status_note", "rule_id", "rule_quote", "why", "proposal")
 PALETTE = {
     "写硬了": ("#1a7f37", "#e6f4ea"),
     "写软了": ("#9a6700", "#fff4d6"),
@@ -126,7 +129,7 @@ def font_url(path, text):
 
 
 def make_html(source, regular, bold):
-    all_characters = json.dumps(source, ensure_ascii=False) + "案例：现在：0.10.2搁置0123456789 / "
+    all_characters = json.dumps(source, ensure_ascii=False) + "案例：现在：为什么：建议：0.10.2搁置0123456789 / "
     css = """
     @font-face {font-family: Checklist; src: url(REGULAR); font-weight: 400}
     @font-face {font-family: Checklist; src: url(BOLD); font-weight: 700}
@@ -157,6 +160,12 @@ def make_html(source, regular, bold):
     .need {font-size: 11pt; font-weight: 700; margin: 0; line-height: 1.45}
     .case {font-size: 10pt; color: #444; margin: 1mm 0 0; line-height: 1.45}
     .status {font-size: 9.5pt; color: #555; margin: 1mm 0 0; line-height: 1.45}
+    .rule-id {font-size: 9pt; color: #888}
+    .rule-quote {font-size: 9.5pt; color: #555; margin: 1mm 0 0;
+        padding-left: 2mm; border-left: 2pt solid #ddd; line-height: 1.45}
+    .why {font-size: 10pt; color: #333; margin: 1mm 0 0; line-height: 1.45}
+    .proposal {font-size: 10pt; color: #000; margin: 1mm 0 0;
+        padding-left: 2mm; border-left: 2pt solid #2563eb; line-height: 1.45}
     .badge {font-size: 9pt; font-weight: 400; line-height: 1.45;
         border-radius: 3mm; padding: .25mm 1.4mm; white-space: nowrap}
     .regression-name {font-size: 11pt; font-weight: 700; margin: 0; line-height: 1.45}
@@ -182,12 +191,23 @@ def make_html(source, regular, bold):
         output.append(f'<section class="section"><h2>{escape(section["heading"])}</h2>'
                       f'<table>{columns}<tbody>')
         for item in section["items"]:
+            status_note = (" " + escape(item["status_note"])) if "status_note" in item else ""
+            rule_id = (f' <span class="rule-id">{escape(item["rule_id"])}</span>'
+                       if "rule_id" in item else "")
+            details = []
+            if "rule_quote" in item:
+                details.append(f'<p class="rule-quote">{escape(item["rule_quote"])}</p>')
+            if "why" in item:
+                details.append(f'<p class="why">为什么：{escape(item["why"])}</p>')
+            if "proposal" in item:
+                details.append(f'<p class="proposal"><strong>建议：</strong>'
+                               f'{escape(item["proposal"])}</p>')
             output.append(
                 f'<tr id="row-{item["id"]}"><td class="number">{item["id"]}</td>'
                 f'<td class="content"><p class="need">{escape(item["need"])}</p>'
                 f'<p class="case">案例：{escape(item["case"])}</p>'
-                f'<p class="status">现在：{badge(item["status"])} '
-                f'{escape(item["status_note"])}</p></td>{choices(item["id"])}</tr>')
+                f'<p class="status">现在：{badge(item["status"])}{status_note}{rule_id}</p>'
+                f'{"".join(details)}</td>{choices(item["id"])}</tr>')
         output.append('</tbody></table></section>')
     regression = source["regressions"]
     output.append(f'<section><h2>{escape(regression["heading"])}</h2>'
@@ -251,7 +271,7 @@ def source_strings(source):
         values.append((f"sections.{index}.heading", section["heading"]))
         for item in section["items"]:
             values.extend((f'item_{item["id"]}.{key}', item[key])
-                          for key in ("need", "case", "status_note"))
+                          for key in ITEM_TEXT_FIELDS if key in item)
     regression = source["regressions"]
     values.extend((f"regressions.{key}", regression[key]) for key in ("heading", "note"))
     for item in regression["items"]:
@@ -286,6 +306,10 @@ def verify(source, document, pdf_bytes, output):
     for section in source["sections"]:
         for item in section["items"]:
             expected.extend((str(item["id"]), "案例：", "现在：", item["status"], *OPTIONS))
+            if "why" in item:
+                expected.append("为什么：")
+            if "proposal" in item:
+                expected.append("建议：")
     for item in source["regressions"]["items"]:
         expected.extend((str(item["id"]), item["origin"], *OPTIONS))
     expected.extend(f"{index + 1} / {len(pdf)}" for index in range(len(pdf)))
@@ -344,7 +368,9 @@ def verify(source, document, pdf_bytes, output):
     for item in rows(source):
         placement = placements[f'row-{item["id"]}'][0]
         page_index = placement["page"] - 1
-        for key in ("need", "case", "status_note") if "need" in item else ("name", "tests"):
+        for key in ITEM_TEXT_FIELDS if "need" in item else ("name", "tests"):
+            if key not in item:
+                continue
             assert norm(item[key]) in content_texts[page_index], (item["id"], key)
     blank = [round((page.rect.height - bottom) / page.rect.height * 100, 2)
              for page, bottom in zip(pdf, content_bottoms)]
@@ -353,7 +379,7 @@ def verify(source, document, pdf_bytes, output):
     preview_dir = output.parent / "previews"
     preview_dir.mkdir(exist_ok=True)
     for old in preview_dir.glob("page-*.png"):
-        if re.fullmatch(r"page-\d+\.png", old.name):
+        if old.is_file():
             old.unlink()
     for index, page in enumerate(pdf, 1):
         page.get_pixmap(dpi=150).save(str(preview_dir / f"page-{index}.png"))
