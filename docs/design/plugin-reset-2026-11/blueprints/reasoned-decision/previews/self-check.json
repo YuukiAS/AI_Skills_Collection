@@ -1,0 +1,68 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "browser_path": "Playwright / /users/a/e/aereinh/AISC-wt-impl/docs/design/plugin-reset-2026-11/blueprints/.runtime/browsers/chromium_headless_shell-1255/chrome-headless-shell-linux64/chrome-headless-shell",
+  "browser_plugin": "Browser plugin not available",
+  "source_identity": {
+    "todos": 16,
+    "supplement": 1,
+    "regression_test_texts": 6,
+    "regression_judgments": 3,
+    "rule_locations": 47,
+    "available_source_and_dom_comparisons": "PASS",
+    "missing_test_sources": [
+      "R4"
+    ],
+    "missing_judgment_sources": [
+      "R4",
+      "R5",
+      "R6",
+      "R7"
+    ]
+  },
+  "service_choices_and_restoration": "PASS",
+  "initial_decisions_bytes_restored": true,
+  "offline_warning_export_and_persistence": "PASS",
+  "screenshots": [
+    "full-1440.png",
+    "expanded-full-1440.png",
+    "offline-full-1440.png"
+  ],
+  "console_errors": [],
+  "cards": [
+    "2",
+    "16 + 1",
+    "7",
+    "0",
+    "0"
+  ],
+  "self_checks": [
+    {
+      "id": 1,
+      "status": "不通过",
+      "result": "全部已有来源与页面逐字一致；R4 缺少测什么的来源原文，无法核对。"
+    },
+    {
+      "id": 2,
+      "status": "通过",
+      "result": "R1=0.1、R2=搁置、T03=0.2 写入并读回，随后恢复初始文件。"
+    },
+    {
+      "id": 3,
+      "status": "通过",
+      "result": "file:// 黄色提示、浏览器保存、导出和重新打开均已验证。"
+    },
+    {
+      "id": 4,
+      "status": "通过",
+      "result": "1440 宽整页截图共三张。"
+    }
+  ],
+  "font": {
+    "source": "https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/Variable/TTF/Subset/NotoSansSC-VF.ttf",
+    "sha256": "d68bafcb48a2707749396aa12bbbd833cb70401f3a9a689fd2902c7e0d295964",
+    "license": "NotoSansSC.LICENSE"
+  }
+}
