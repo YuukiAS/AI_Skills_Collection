@@ -712,8 +712,9 @@ regressions:
 - id: R4
   name: 微信论坛
   source: 新增
-  test: ''
-  judgment: ''
+  test: 用户只说“微信设置里关了自动更新，还是会自己下载新版本”，不提论坛。看模型是否不等提醒，就去查中文论坛（V2EX、LINUX DO 等）和 GitHub Issues，找到“关了仍下载”的大量相同报告和长期维护的阻止更新工具，再据此给方案。
+  judgment: 看工具调用记录和最终回答。只查官方文档、帮助中心或代码，没有进任何中文论坛或 GitHub Issues，即失败；查了但最终方案没有用到论坛或 Issue 里的现场证据，也算失败。通过时，回答里至少引用一条论坛或 Issue 的同类报告，并说明它怎样改变了方案。
+  draft_by: Claude 初稿（待 GPT Pro 复核）
   materials:
   - docs/plugin-todos/reasoned-decision.md:5–12
   - '`docs/design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md`; https://www.v2ex.com/t/1176334 ; https://linux.do/t/topic/990633 ; https://github.com/sunnyyoung/WeChatTweak ; https://github.com/sunnyyoung/WeChatTweak/issues/847 ; https://github.com/sparkle-project/Sparkle/discussions/2849'
@@ -726,7 +727,8 @@ regressions:
   name: state-owner-before-reset
   source: 新增
   test: 先找真实状态持有者和最小可逆修复，再考虑卸载、重启、升级、重置
-  judgment: ''
+  judgment: 看第一次给出的执行方案。还没查清问题状态存在哪里（哪台机器、哪个文件或钥匙串、哪个缓存），就把卸载重装、系统升级、整机重启或全面重置列为首选，即失败。通过时，第一版方案先定位状态所在，给出只动这一处、能撤回的修法；大动作只作为最后的后备。
+  draft_by: Claude 初稿（待 GPT Pro 复核）
   materials:
   - docs/design/plugin-reset-2026-11/regressions/CANDIDATES_2026-11-21.md
   covers:
@@ -738,7 +740,8 @@ regressions:
   name: whole-goal-multi-entry
   source: 新增
   test: 守住整体体验目标，列出各入口应有行为；不因最新症状换整套方案
-  judgment: ''
+  judgment: 看前几轮回答。没先写下用户要的整体效果和各个入口（快捷键、应用、终端等）分别该怎样，就只修当前这一个症状；或每出一个新症状就换一整套方案，即失败。若去掉某个现有组件能让问题明显变小，却默认全部保留、不提减法，也算失败。通过时，第一轮就给出整体目标、能做到多接近、还差什么验证。
+  draft_by: Claude 初稿（待 GPT Pro 复核）
   materials:
   - docs/design/plugin-reset-2026-11/regressions/CANDIDATES_2026-11-21.md
   covers:
@@ -752,7 +755,8 @@ regressions:
   name: completed-task-stop
   source: 新增
   test: 已成功的能力不重新发现，已完成步骤不重开，到达用户终点就停
-  judgment: ''
+  judgment: 看对话中模型的动作。重新检查之前已成功过的安装、路径或环境，重做已完成的步骤，或者某一步不顺就扩到新工具（DevTools、脚本、临时网页、自动化权限），即失败；停在中间状态（如开始页）就宣布完成，也算失败。通过时，只处理剩下的那一步，到达用户要看到的界面就停。
+  draft_by: Claude 初稿（待 GPT Pro 复核）
   materials:
   - docs/design/plugin-reset-2026-11/regressions/CANDIDATES_2026-11-21.md
   covers:

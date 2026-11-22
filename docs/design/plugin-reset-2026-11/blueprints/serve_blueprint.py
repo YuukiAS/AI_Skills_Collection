@@ -27,8 +27,7 @@ def main():
     if embedded is None:
         parser.error("build index.html before starting the server")
     data = json.loads(embedded[1])
-    ids = {"todos": {t["id"] for t in data["todos"]},
-           "regressions": {r["id"] for r in data["regressions"]}}
+    ids = {"regressions": {r["id"] for r in data["regressions"]}}
     decisions_path = directory / "decisions.yaml"
     lock = threading.Lock()
 

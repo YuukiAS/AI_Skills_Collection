@@ -2,63 +2,124 @@
   "self_checks": [
     {
       "id": 1,
-      "status": "不通过",
-      "result": "全部已有来源与页面逐字一致，17 条 assessment 的 8 个字段逐字一致；R4 缺少测什么的来源原文，无法核对。"
+      "status": "通过",
+      "result": "全部待办来源与页面、17 条 assessment 的全部字段逐字一致；7 条回归 test / judgment 与当前 blueprint.yaml 逐字一致，已有来源另行核对；4 条 draft_by 如实展示。"
     },
     {
       "id": 2,
       "status": "通过",
-      "result": "R1=0.1、R2=搁置、T03=0.2 写入并读回，随后恢复初始文件。"
+      "result": "R1=0.1、R2=搁置写入并读回，随后恢复；待办选择已按 v3 删除，T03 写入被拒绝。"
     },
     {
       "id": 3,
       "status": "通过",
-      "result": "file:// 黄色提示、浏览器保存、导出和重新打开均已验证。"
+      "result": "file:// 黄色提示、旧本地数据迁移、仅回归导出和重新打开均已验证。"
     },
     {
       "id": 4,
       "status": "通过",
-      "result": "1440 宽整页截图共三张。"
+      "result": "桌面首屏、原文高亮、待办展开、手机首屏及前两版整页截图。"
     }
   ],
-  "viewport": {
-    "width": 1440,
-    "height": 1000
-  },
-  "browser_path": "Playwright / /users/a/e/aereinh/AISC-wt-impl/.local-runtime/blueprint-v2/browsers/chromium_headless_shell-1255/chrome-headless-shell-linux64/chrome-headless-shell",
   "browser_plugin": "Browser plugin not available",
+  "browser_path": "Playwright / /users/a/e/aereinh/AISC-wt-impl/.local-runtime/blueprint-v2/browsers/chromium_headless_shell-1255/chrome-headless-shell-linux64/chrome-headless-shell",
+  "viewport": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
   "source_identity": {
     "todos": 16,
     "supplement": 1,
-    "regression_test_texts": 6,
-    "regression_judgments": 3,
+    "regression_test_texts": 7,
+    "regression_judgments": 7,
     "rule_locations": 47,
-    "available_source_and_dom_comparisons": "PASS",
+    "source_files": 7,
+    "source_lines": 163,
+    "source_files_sha256": {
+      "skills/core/reasoned-decision/judgment-integrity/SKILL.md": "b68f24c4985f4fc98e649d0ce8018d98ad13ba51690587b02f259691b0ae3aeb",
+      "skills/core/reasoned-decision/judgment-integrity/references/execution-evidence.yaml": "4217bb02bc716289ee6e98d530d43c47c5ed56e647f3e24d116efd45ce19bbe8",
+      "skills/core/reasoned-decision/judgment-integrity/references/task-state-contract.md": "0460b57e805d4a89decc44980183969154e50fe0f2e059eec90e1c0105a81854",
+      "skills/core/reasoned-decision/solution-design/SKILL.md": "ae02ccfe24e053ad86d274169f8c1400862e3b2e868be8f9c0e0eacdaa4bafc9",
+      "skills/core/reasoned-decision/solution-design/references/execution-evidence.yaml": "4217bb02bc716289ee6e98d530d43c47c5ed56e647f3e24d116efd45ce19bbe8",
+      "skills/core/reasoned-decision/solution-design/references/task-state-contract.md": "0460b57e805d4a89decc44980183969154e50fe0f2e059eec90e1c0105a81854",
+      "skills/core/reasoned-decision/shared/task-state-contract.md": "0460b57e805d4a89decc44980183969154e50fe0f2e059eec90e1c0105a81854"
+    },
     "assessment_fields": 136,
     "assessment_exact_dom_comparisons": "PASS",
-    "blueprint_sha256_before_and_after": "98e3512d00fc9de3133a644b228251c0d477943039a8b54adae3d8f65d30c8ae",
-    "missing_test_sources": [
-      "R4"
-    ],
-    "missing_judgment_sources": [
-      "R4",
-      "R5",
-      "R6",
-      "R7"
-    ]
+    "blueprint_sha256_before_and_after": "f3d3d35b9337e469c4dea5bebd80da64ca17823e0e0945d23a998e0aa4848d91",
+    "new_draft_authority": "blueprint.yaml, R4 test / R4-R7 judgment; draft_by retained; no semantic review"
+  },
+  "mechanical_checks": [
+    {
+      "status": "通过",
+      "result": "待办逐条对应：16 / 16。"
+    },
+    {
+      "status": "通过",
+      "result": "每条待办都有 assessment：是。"
+    },
+    {
+      "status": "通过",
+      "result": "规则第一句逐字存在：47 / 47 个文件位置。"
+    },
+    {
+      "status": "通过",
+      "result": "未被任何回归覆盖的待办：无。"
+    },
+    {
+      "status": "待下一轮",
+      "result": "已选 0.1 的待办，其目标规则写在 skill 正文。"
+    },
+    {
+      "status": "通过",
+      "result": "回归 test / judgment 非空：7 / 7。"
+    },
+    {
+      "status": "通过",
+      "result": "待办 rule_id 对应原文段落：全部找到。"
+    },
+    {
+      "status": "通过",
+      "result": "页面编号链接：195 / 195。"
+    }
+  ],
+  "navigation": {
+    "T10_to_rule_with_1500ms_flash": "PASS",
+    "source_badge_to_T10": "PASS",
+    "home_cards_desktop_and_mobile": "PASS",
+    "zero_uncovered_card_inert": "PASS",
+    "soft_todo_capsules_need_and_expand": "PASS",
+    "selected_count_live_and_reload": "PASS",
+    "R4_to_T01": "PASS",
+    "todo_to_regression": "PASS",
+    "browser_back_and_scroll": "PASS",
+    "file_tree_and_direct_deep_link": "PASS",
+    "back_to_top": "PASS",
+    "mobile_links_and_overflow": "PASS"
   },
   "service_choices_and_restoration": "PASS",
   "initial_decisions_bytes_restored": true,
   "offline_warning_export_and_persistence": "PASS",
   "screenshots": [
+    "first-screen-1440.png",
     "full-1440.png",
+    "todo-expanded-1440.png",
+    "rule-flashing-1440.png",
+    "source-highlight-1440.png",
     "expanded-full-1440.png",
+    "first-screen-mobile-390.png",
     "offline-full-1440.png"
   ],
   "console_errors": [],
   "cards": [
     "2",
-    "16 + 1",
+    "17",
     "7",
     "0",
     "0",
