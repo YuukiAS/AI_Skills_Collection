@@ -43,18 +43,24 @@ def check_data(data, root):
     third = {"status": "不通过" if uncovered or unknown else "通过",
              "result": "未被任何回归覆盖的待办：" + ("、".join(uncovered) if uncovered else "无") + "。" + ("未知待办编号：" + "、".join(unknown) if unknown else "")}
     fourth = {"status": "待下一轮", "result": "已选 0.1 的待办，其目标规则写在 skill 正文。"}
-    return [first, second, third, fourth]
+    fields = {"by", "need", "case", "status", "rule_id", "rule_quote", "why", "proposal"}
+    assessed = all(isinstance(t.get("assessment"), dict) and fields <= t["assessment"].keys()
+                   and all(isinstance(t["assessment"][key], str) and t["assessment"][key] for key in fields)
+                   for t in data["todos"])
+    assessment = {"status": "通过" if assessed else "不通过",
+                  "result": "每条待办都有 assessment：" + ("是" if assessed else "否") + "。"}
+    return [first, assessment, second, third, fourth]
 
 
 if __name__ == "__main__":
-    from build_blueprint import build, repo_root
+    from build_blueprint import build, load, repo_root
     parser = argparse.ArgumentParser()
     parser.add_argument("plugin")
     args = parser.parse_args()
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", args.plugin):
         parser.error("invalid plugin")
     path = BASE / args.plugin / "blueprint.yaml"
-    data = json.loads(path.read_text(encoding="utf-8"))
+    data = load(path)
     checks = check_data(data, repo_root())
     for i, check in enumerate(checks, 1):
         print(f'{i}. {check["status"]}：{check["result"]}')

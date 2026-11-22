@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Full source/DOM comparison and local/offline browser acceptance checks."""
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -23,6 +24,7 @@ def main():
     output = directory / "previews"
     output.mkdir(exist_ok=True)
     data = load(directory / "blueprint.yaml")
+    blueprint_hash = hashlib.sha256((directory / "blueprint.yaml").read_bytes()).hexdigest()
     original = initial_decisions(data)
     decisions_file = directory / "decisions.yaml"
     assert load(decisions_file) == original, "acceptance starts with initial decisions"
@@ -93,10 +95,35 @@ def main():
         assert page.locator("main").evaluate("e=>getComputedStyle(e).maxWidth") == "1100px"
         assert page.locator("body").evaluate("e=>getComputedStyle(e).fontSize") == "15px"
         assert page.locator("body").evaluate("e=>getComputedStyle(e).lineHeight") == "24px"
+        assert page.locator("main>h2").all_text_contents() == ["待办", "回归", "Skill", "机械检查"]
+        assert not page.locator("#all-rules").evaluate("e=>e.open")
+        assert page.locator(".todo-original[open]").count() == 0
+        assert page.locator("#rules .first-sentence:visible").count() == 0
+        assert page.locator(".check").count() == 5
+        assert page.locator(".check-result").nth(1).text_content() == "每条待办都有 assessment：是。"
+        embedded = json.loads(page.locator("#blueprint-data").text_content())
+        assert embedded == data
+        assessed_fields = {"by", "need", "case", "status", "rule_id", "rule_quote", "why", "proposal"}
         for todo in data["todos"]:
-            assert page.locator(f'[data-todo="{todo["id"]}"] .todo-title').inner_text() == todo["title"]
+            row = page.locator(f'[data-todo="{todo["id"]}"]')
+            assessment = todo["assessment"]
+            assert assessed_fields == assessment.keys()
+            assert row.locator(".todo-need").text_content() == assessment["need"]
+            assert row.locator(".assessment-status").text_content() == assessment["status"]
+            status_colors = row.locator(".assessment-status").evaluate("e=>[getComputedStyle(e).color,getComputedStyle(e).backgroundColor]")
+            assert status_colors == (["rgb(154, 103, 0)", "rgb(255, 244, 214)"] if assessment["status"] == "写软了" else ["rgb(26, 127, 55)", "rgb(230, 244, 234)"])
+            ids = re.findall(r"(?:JI|SD|TS)-\d+", assessment["rule_id"])
+            reference = any(r["id"] in ids and r["location_type"] == "引用文件" for r in data["rules"])
+            assert row.locator(".rule-location").count() == int(reference)
+            assert row.locator(".pill").all_text_contents() == [r["id"] for r in data["regressions"] if todo["id"] in r["covers"]]
             detail = page.locator(f'#detail-{todo["id"]}')
             page.locator(f'[data-detail="detail-{todo["id"]}"]').click()
+            assert detail.locator(".todo-title").text_content() == todo["title"]
+            for field in ("by", "case", "rule_quote", "rule_id", "why", "proposal"):
+                assert detail.locator(".assessment-" + field.replace("_", "-")).text_content() == assessment[field], (todo["id"], field)
+            assert detail.locator(".assessment-block>strong").all_text_contents() == ["案例：", "现在怎么写的：", "为什么：", "建议改成："]
+            assert not detail.locator(".todo-original").evaluate("e=>e.open")
+            detail.locator(".todo-original>summary").click()
             if todo.get("problem"):
                 assert detail.locator(".problem").text_content() == todo["problem"]
             if todo.get("source_text"):
@@ -111,8 +138,20 @@ def main():
             assert page.locator(f'[data-regression="{case["id"]}"] .test-text').text_content() == (case["test"] or "—")
             page.locator(f'[data-detail="detail-{case["id"]}"]').click()
             assert page.locator(f'#detail-{case["id"]} .judgment').text_content() == (case["judgment"] or "—")
-        assert page.locator(".first-sentence").all_text_contents() == [r["first_sentence"] for s in data["skills"] for r in data["rules"] if r["file"] in s["rule_files"]] + [r["first_sentence"] for r in data["rules"] if r["file"] in data["shared_files"]]
+        shared = [r for r in data["rules"] if r["id"].startswith("TS-")]
+        shared_unique = list({r["id"]: r for r in shared}.values())
+        # All three locations have identical quoted rule text; show one copy.
+        assert len({r["file"] for r in shared}) == 3
+        for id_ in {r["id"] for r in shared}:
+            assert len({r["first_sentence"] for r in shared if r["id"] == id_}) == 1
+        page.locator("#all-rules>summary").click()
+        assert page.locator(".first-sentence").all_text_contents() == [r["first_sentence"] for s in data["skills"] for r in data["rules"] if not r["id"].startswith("TS-") and r["file"] in s["rule_files"]] + [r["first_sentence"] for r in shared_unique]
+        assert page.locator("tr[data-rule]").count() == len({r["id"] for r in data["rules"]})
         assert page.locator(".description").all_text_contents() == [s["description"] for s in data["skills"]]
+        for skill in data["skills"] + [{"name": "TS"}]:
+            ids = {r["id"] for r in data["rules"] if (r["id"].startswith("TS-") if skill["name"] == "TS" else not r["id"].startswith("TS-") and r["file"] in skill["rule_files"])}
+            expected = [t["id"] for t in data["todos"] if ids.intersection(re.findall(r"(?:JI|SD|TS)-\d+", t["assessment"]["rule_id"]))]
+            assert page.locator(f'[data-skill="{skill["name"]}"] .pill').all_text_contents() == expected
         page.screenshot(path=str(output / "expanded-full-1440.png"), full_page=True)
         page.locator('[data-group="regressions"][data-id="R1"][data-value="0.1"]').click()
         page.locator('[data-group="regressions"][data-id="R2"][data-value="搁置"]').click()
@@ -140,7 +179,9 @@ def main():
         page.reload()
         page.evaluate("window.blueprintReady")
         page.evaluate("document.fonts.ready")
-        assert page.locator(".number").all_text_contents() == ["2", "16 + 1", "7", "0", "0"]
+        expected_cards = ["2", "16 + 1", "7", "0", "0", str(sum(t["assessment"]["status"] == "写软了" for t in data["todos"]))]
+        assert page.locator(".number").all_text_contents() == expected_cards
+        assert page.locator('[data-card="5"]').evaluate("e=>getComputedStyle(e).color") == "rgb(154, 103, 0)"
         page.screenshot(path=str(output / "full-1440.png"), full_page=True)
         offline_context = browser.new_context(viewport={"width": 1440, "height": 1000}, accept_downloads=True)
         offline = offline_context.new_page()
@@ -170,9 +211,10 @@ def main():
         assert load(decisions_file) == original
         assert not console_errors, console_errors
         browser.close()
+    assert hashlib.sha256((directory / "blueprint.yaml").read_bytes()).hexdigest() == blueprint_hash
     result = {
         "self_checks": [
-            {"id": 1, "status": "不通过", "result": "全部已有来源与页面逐字一致；R4 缺少测什么的来源原文，无法核对。"},
+            {"id": 1, "status": "不通过", "result": "全部已有来源与页面逐字一致，17 条 assessment 的 8 个字段逐字一致；R4 缺少测什么的来源原文，无法核对。"},
             {"id": 2, "status": "通过", "result": "R1=0.1、R2=搁置、T03=0.2 写入并读回，随后恢复初始文件。"},
             {"id": 3, "status": "通过", "result": "file:// 黄色提示、浏览器保存、导出和重新打开均已验证。"},
             {"id": 4, "status": "通过", "result": "1440 宽整页截图共三张。"}
@@ -184,11 +226,13 @@ def main():
                             "regression_test_texts": len(source_tests), "regression_judgments": 3,
                             "rule_locations": len(expected_rule_positions),
                             "available_source_and_dom_comparisons": "PASS",
+                            "assessment_fields": 17 * 8, "assessment_exact_dom_comparisons": "PASS",
+                            "blueprint_sha256_before_and_after": blueprint_hash,
                             "missing_test_sources": ["R4"], "missing_judgment_sources": ["R4", "R5", "R6", "R7"]},
         "service_choices_and_restoration": "PASS", "initial_decisions_bytes_restored": True,
         "offline_warning_export_and_persistence": "PASS", "screenshots": ["full-1440.png", "expanded-full-1440.png", "offline-full-1440.png"],
         "console_errors": console_errors,
-        "cards": ["2", "16 + 1", "7", "0", "0"]}
+        "cards": expected_cards}
     (output / "self-check.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps(result, ensure_ascii=False, indent=2))
 

@@ -20,7 +20,13 @@ def main():
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", args.plugin):
         parser.error("invalid plugin")
     directory = BASE / args.plugin
-    data = json.loads((directory / "blueprint.yaml").read_text(encoding="utf-8"))
+    # Read the rendered page's data so the server remains standard-library-only
+    # even when the source blueprint uses general YAML syntax.
+    page = (directory / "index.html").read_text(encoding="utf-8")
+    embedded = re.search(r'<script id="blueprint-data" type="application/json">(.*?)</script>', page, re.S)
+    if embedded is None:
+        parser.error("build index.html before starting the server")
+    data = json.loads(embedded[1])
     ids = {"todos": {t["id"] for t in data["todos"]},
            "regressions": {r["id"] for r in data["regressions"]}}
     decisions_path = directory / "decisions.yaml"
