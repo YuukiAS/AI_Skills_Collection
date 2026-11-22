@@ -1,11 +1,73 @@
 {
   "schema_version": 1,
+  "version": "Reasoned Decision v0.1 候选版",
+  "model": "GPT-5.6 Sol Pro",
+  "plugins": [
+    "reasoned-decision"
+  ],
+  "attachments": [],
   "id": "RD-R4",
-  "name": "R4（待编写）",
-  "version": "",
-  "model": "",
-  "plugins": null,
-  "attachments": null,
-  "turns": [],
-  "criteria": []
+  "name": "产品故障要主动查相关中英文社区和问题记录",
+  "scenario": "用户只报告微信关闭自动更新后仍会下载新版，不提醒模型去论坛。案例重点看第一轮是否主动进入该产品生态里的中文社区、英文社区和问题记录，并把重复现场与成熟办法用于改变方案，同时又不把社区说法当成已证实根因。",
+  "environment": {
+    "端": "GPT 网页",
+    "网络": "必须可访问网页搜索",
+    "插件": "启用 reasoned-decision，主要使用 solution-design",
+    "附件": "无需"
+  },
+  "source_notes": [
+    "docs/plugin-todos/reasoned-decision.md 第一个待办",
+    "docs/design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md 中现实解空间调查要求"
+  ],
+  "turns": [
+    {
+      "n": 1,
+      "prompt": "请使用 reasoned-decision 的 solution-design。\n\n我在 macOS 微信设置里已经关闭自动更新，但它还是会自己下载新版本，重启后还可能直接升级。请先查清这种现象在现实中怎么发生、别人长期遇到过什么、目前有哪些成熟办法，再给我一个尽量少折腾、能长期用的处理方案；先不要执行任何修改。",
+      "conversation": {
+        "mode": "new"
+      },
+      "source_note": "改写自微信自动更新真实案例；题面故意不提醒搜索论坛。"
+    },
+    {
+      "n": 2,
+      "prompt": "把你实际查过的来源类型和它们怎样改变方案说清楚。社区里的重复报告和临时办法可以帮助发现线索，但关键结论仍要和官方能力、实现机制或当前机器验证核对。",
+      "conversation": {
+        "mode": "continue"
+      },
+      "source_note": "改写自用户要求“不要每次都要我提醒搜论坛”和待办中的交叉核对边界。"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "C1",
+      "text": "出现即失败：第一轮只查官方帮助、普通产品文档或代码搜索，没有主动进入任何相关中文社区、英文社区以及 GitHub Issues 或 Discussions。",
+      "kind": "failure_condition"
+    },
+    {
+      "id": "C2",
+      "text": "出现即失败：机械凑固定站点而不判断该社区是否与问题相关，或把单条论坛说法直接当成确定根因和长期方案。",
+      "kind": "failure_condition"
+    },
+    {
+      "id": "C3",
+      "text": "通过时必须有：在该生态确有活跃讨论的前提下，第一轮至少覆盖一个相关中文社区、一个相关英文社区，以及问题记录或讨论区；V2EX、NGA、LINUX DO、Reddit、Stack Exchange、厂商论坛只是可选例子。",
+      "kind": "requirement"
+    },
+    {
+      "id": "C4",
+      "text": "通过时必须有：至少一条重复现场、长期失败经验或成熟工具实际改变候选、排序或验证方案，而不是只在文末列链接。",
+      "kind": "requirement"
+    },
+    {
+      "id": "C5",
+      "text": "通过时必须有：说明社区材料用于发现什么，并用官方能力、代码或实现、同型问题记录或当前机器验证交叉核对关键结论；没有找到时也如实说明。",
+      "kind": "requirement"
+    }
+  ],
+  "coverage": [
+    "T01",
+    "U1"
+  ],
+  "why_v0_1": "这是用户反复遇到的真实触发缺口，能直接检验“先调查现实经验”是否默认发生，而不是等用户提醒后才补搜索。",
+  "top_three": false
 }
