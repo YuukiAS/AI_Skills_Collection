@@ -9,6 +9,11 @@ from pathlib import Path
 
 BASE = Path(__file__).resolve().parent
 ID_PATTERN = re.compile(r"(?<![A-Za-z0-9_])(?:(?:JI|SD|TS)-\d+|T\d+|R\d+|U\d+)(?![A-Za-z0-9_])")
+ASSESSMENT_STATUSES = {
+    "约束不足": ("insufficient", "规则是可选的、覆盖太窄、太抽象或有漏洞，模型可以合法跳过"),
+    "约束适当": ("appropriate", "已能起作用，内容不需要实质改动"),
+    "约束过度": ("excessive", "写得太死或绑定具体案例，会在其他正当场景误伤"),
+}
 
 
 def load(path):
@@ -25,7 +30,8 @@ def write_yaml(path, value):
 
 
 def initial_decisions(data):
-    return {"regressions": {r["id"]: None for r in data["regressions"]}}
+    return {"regressions": {r["id"]: None for r in data["regressions"]},
+            "todos": {t["id"]: {"stance": None, "note": ""} for t in data["todos"]}}
 
 
 def normalize_decisions(data, value):
@@ -33,7 +39,35 @@ def normalize_decisions(data, value):
     for id_, choice in value.get("regressions", {}).items():
         if id_ in result["regressions"] and choice in (None, "0.1", "0.2", "搁置"):
             result["regressions"][id_] = choice
+    for id_, choice in value.get("todos", {}).items():
+        if id_ in result["todos"] and isinstance(choice, dict):
+            result["todos"][id_] = {
+                "stance": choice.get("stance") if choice.get("stance") in (None, "同意", "不同意", "有疑问") else None,
+                "note": choice.get("note") if isinstance(choice.get("note"), str) else ""}
     return result
+
+
+def regression_prompts(data, root):
+    """Match case identities/names only; never infer or author missing prompts."""
+    directory = root / "tools/regression-runner/examples" / data["plugin"]
+    cases = [(p, load(p)) for p in sorted(directory.rglob("case.yaml"))]
+    matched, audit = {}, []
+    for regression in data["regressions"]:
+        candidates = [(p, c) for p, c in cases if c.get("id") in
+                      (regression["id"], "RD-" + regression["id"])
+                      or c.get("name") == regression["name"]]
+        if len(candidates) != 1:
+            audit.append({"id": regression["id"], "matched": False,
+                          "candidates": [str(p.relative_to(root)) for p, _ in candidates]})
+            matched[regression["id"]] = []
+            continue
+        path, case = candidates[0]
+        turns = case.get("turns", [])
+        matched[regression["id"]] = turns
+        audit.append({"id": regression["id"], "matched": True,
+                      "path": str(path.relative_to(root)), "turns": len(turns),
+                      "prompt_turns": [t["n"] for t in turns if t.get("prompt", "").strip()]})
+    return matched, audit
 
 
 def repo_root():
@@ -72,7 +106,7 @@ def source_files(data, root):
     return result
 
 
-def render_body(data, files, checks):
+def render_body(data, files, prompts):
     esc = html.escape
     targets = {t["id"]: "todo-" + t["id"] for t in data["todos"]}
     targets.update({r["id"]: "reg-" + r["id"] for r in data["regressions"]})
@@ -100,15 +134,18 @@ def render_body(data, files, checks):
 
     existing = sum(r["source"] == "已有" for r in data["regressions"])
     uncovered = [t for t in data["todos"] if not any(t["id"] in r["covers"] for r in data["regressions"])]
-    soft_todos = [t for t in data["todos"] if t["assessment"]["status"] == "写软了"]
-    soft = len(soft_todos)
+    rewrite_todos = [t for t in data["todos"] if t["assessment"]["status"] in ("约束不足", "约束过度")]
+    insufficient = sum(t["assessment"]["status"] == "约束不足" for t in data["todos"])
+    excessive = sum(t["assessment"]["status"] == "约束过度" for t in data["todos"])
+    rewrite_count = len(rewrite_todos)
     cards = [(len(data["skills"]), "Skill", " · ".join(s["name"] for s in data["skills"]), ""),
              (len(data["todos"]), f'待办 {len(data["todos"])} 条（全部在 0.1 解决）', "", ""),
              (len(data["regressions"]), "回归", f'已有 {existing} · 新增 {len(data["regressions"])-existing}', ""),
              (len(uncovered), "未被回归覆盖的待办", "", "danger" if uncovered else "zero"),
-             (0, "已选 0.1 的回归", "", ""), (soft, "写软了", "", "soft" if soft else "zero")]
+             (0, "已选 0.1 的回归", "", ""),
+             (rewrite_count, f"约束不足 {insufficient} · 过度 {excessive}", "", "attention" if rewrite_count else "zero")]
     output = ['<div class="cards" id="cards">']
-    card_targets = ["structure", "todos", "regressions", "todos" if uncovered else None, "regressions", "soft-todos"]
+    card_targets = ["structure", "todos", "regressions", "todos" if uncovered else None, "regressions", "rewrite-todos"]
     for i, (number, label, sub, class_) in enumerate(cards):
         target = card_targets[i]
         opening = f'<a class="card" href="#{target}">' if target else '<div class="card">'
@@ -116,8 +153,9 @@ def render_body(data, files, checks):
         output.append(f'{opening}<div class="number {class_}" data-card="{i}">{number}</div><div>{label}</div><div class="small">{text(sub)}</div>{closing}')
     output.append('</div><section id="actions"><h2>你要做的</h2>')
     output.append(f'<p>选 {len(data["regressions"])} 个回归的版本（0.1 / 0.2 / 搁置），已选 <span id="selected-count">0</span> 个 <a href="#regressions">去选</a></p>')
-    soft_pills = ''.join(f'<a class="pill" href="#todo-{esc(t["id"])}" title="{esc(t["assessment"]["need"], quote=True)}">{esc(t["id"])}</a>' for t in soft_todos)
-    output.append(f'<p id="soft-todos">写软了的 {soft} 条待办，下一轮由 GPT Pro 改写：{soft_pills}</p></section>')
+    rewrite_pills = ''.join(f'<a class="pill" href="#todo-{esc(t["id"])}" title="{esc(t["assessment"]["need"], quote=True)}">{esc(t["id"])}</a>' for t in rewrite_todos)
+    output.append(f'<p id="rewrite-todos">约束不足或过度的 {rewrite_count} 条待办，下一轮由 GPT Pro 改写：{rewrite_pills}</p>')
+    output.append(f'<p id="todo-progress">对 {len(data["todos"])} 条待办的建议表态，已表态 <span id="stance-count">0</span> 条，其中不同意 <span id="disagree-count">0</span>、有疑问 <span id="question-count">0</span> <a href="#todos">去表态</a></p></section>')
     output.append('<h2>插件结构与原文</h2><section id="structure">')
     by_path = {f["path"]: f for f in files}
 
@@ -158,13 +196,19 @@ def render_body(data, files, checks):
     output.append('</section><h2>待办</h2><div id="todos">')
     for t in data["todos"]:
         id_, a = t['id'], t['assessment']
+        status_class, definition = ASSESSMENT_STATUSES[a['status']]
         rs = [r["id"] for r in data["regressions"] if id_ in r["covers"]]
         reference = any(r["id"] in rule_ids(t) and r["location_type"] == "引用文件" for r in data["rules"])
-        output.append(f'<article class="entry" id="todo-{id_}" data-todo="{id_}"><div class="todo-row"><span class="id">{link(id_)}</span><span class="todo-need">{text(a["need"])}</span><div><span class="assessment-status {"soft" if a["status"] == "写软了" else "hard"}">{esc(a["status"])}</span>{"<span class=\"rule-location\">规则只在附带文件里</span>" if reference else ""}{"<span class=\"tag\">用户补充</span>" if t.get("supplement") else ""}</div><div class="coverage">{pills(rs) if rs else "<span class=\"danger\">无</span>"}</div><button class="toggle" data-detail="detail-{id_}" aria-expanded="false" aria-controls="detail-{id_}" aria-label="展开 {id_}">⌄</button></div><div class="detail" id="detail-{id_}" hidden>')
+        output.append(f'<article class="entry" id="todo-{id_}" data-todo="{id_}"><div class="todo-row"><span class="id">{link(id_)}</span><span class="todo-need">{text(a["need"])}</span><div><span class="assessment-labels"><span class="assessment-status {status_class}" title="{esc(definition, quote=True)}">{esc(a["status"])}</span><span class="assessment-change-summary">改动：{esc(a["change"])}</span></span>{"<span class=\"rule-location\">规则只在附带文件里</span>" if reference else ""}{"<span class=\"tag\">用户补充</span>" if t.get("supplement") else ""}</div><div class="coverage">{pills(rs) if rs else "<span class=\"danger\">无</span>"}</div>')
+        output.append(f'<div class="segments todo-stance" role="group" aria-label="{id_} 建议改成">')
+        for stance in ('同意', '不同意', '有疑问'):
+            output.append(f'<button data-group="todos" data-id="{id_}" data-value="{stance}" aria-pressed="false">{stance}</button>')
+        output.append(f'</div><button class="toggle" data-detail="detail-{id_}" aria-expanded="false" aria-controls="detail-{id_}" aria-label="展开 {id_}">⌄</button></div><div class="todo-note" id="note-{id_}" hidden><textarea data-note="{id_}" rows="3" placeholder="写具体原因" aria-label="{id_} 写具体原因"></textarea></div><div class="detail" id="detail-{id_}" hidden>')
         output.append(block('案例：', a['case'], 'assessment-case'))
         output.append(block('现在怎么写的：', a['rule_quote'], 'assessment-rule-quote'))
         output.append(f'<div class="assessment-rule-id">{text(a["rule_id"])}</div>')
         output.append(block('为什么：', a['why'], 'assessment-why'))
+        output.append(block('改动：', a['change'], 'assessment-change'))
         output.append(block('建议改成：', a['proposal'], 'assessment-proposal'))
         output.append(f'<div class="todo-meta"><span class="assessment-by">{text(a["by"])}</span> · <span class="todo-title">{text(t["title"])}</span> · ')
         output.append(f'<span class="note">{text(t["note"])}</span>' if t.get('supplement') else f'<span class="path">{esc(t["lines"])}</span>')
@@ -190,10 +234,22 @@ def render_body(data, files, checks):
             output.append(f'<button data-group="regressions" data-id="{id_}" data-value="{v}" aria-pressed="false">{v}</button>')
         output.append(f'</div><button class="toggle" data-detail="detail-{id_}" aria-expanded="false" aria-controls="detail-{id_}" aria-label="展开 {id_}">⌄</button></div></div><div class="detail" id="detail-{id_}" hidden><p class="path">')
         output.append('<br>'.join(text(m) for m in r['materials']))
-        output.append('</p></div></article>')
-    output.append('</div><h2>机械检查</h2><div id="checks">')
-    for c in checks:
-        output.append(f'<div class="check"><span class="check-status">{esc(c["status"])}</span><span class="check-result">{text(c["result"])}</span></div>')
+        output.append('</p><div class="prompt-section"><strong>Prompt</strong>')
+        turns = prompts.get(id_, [])
+        if not any(turn.get('prompt', '').strip() for turn in turns):
+            output.append('<p class="small prompt-empty">尚未设计 prompt</p>')
+        else:
+            for turn in turns:
+                conversation = turn['conversation']
+                position = {'new': '新对话', 'continue': '接着上一轮',
+                            'branch': f'从第 {conversation.get("after_turn")} 轮分支'}[conversation['mode']]
+                output.append(f'<details class="prompt-turn"><summary>第 {turn["n"]} 轮 · {position}</summary>')
+                if turn.get('prompt', '').strip():
+                    output.append(f'<pre class="prompt-text"><code>{text(turn["prompt"])}</code></pre>')
+                else:
+                    output.append('<p class="small prompt-empty">本轮 prompt 待补</p>')
+                output.append('</details>')
+        output.append('</div></div></article>')
     output.append('</div>')
     return ''.join(output)
 
@@ -202,8 +258,11 @@ TEMPLATE = r'''<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>__TITLE__</title><style>
 @font-face{font-family:'Noto Sans SC Local';src:url('__FONT__') format('truetype');font-weight:100 900;font-display:swap}
-*{box-sizing:border-box}body{margin:0;background:#fafafa;color:#202020;font:15px/1.6 'Noto Sans SC','Noto Sans SC Local',sans-serif}main{max-width:1100px;margin:44px auto 80px}h1{font-size:30px;line-height:1.4;margin:0 0 8px}h2{font-size:21px;margin:38px 0 16px}a{color:inherit;text-underline-offset:3px}a:hover{text-decoration-thickness:2px}.updated{margin:0 0 24px;font-size:13px;color:#707070}.cards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.card{background:white;border:1px solid #ddd;border-radius:8px;padding:15px 16px;min-height:132px}a.card{display:block;text-decoration:none}a.card:hover{border-color:#888}#actions p{margin:10px 0}#soft-todos{scroll-margin-top:22px}.number{font-size:30px;line-height:1.35;font-weight:700;margin-bottom:6px}.small{font-size:12px;color:#707070;margin-top:5px;overflow-wrap:anywhere}.zero{color:#888}.danger{color:#b42318}.soft{color:#9a6700}.tree{border:1px solid #ddd;border-radius:8px;background:white;padding:22px 26px;margin-bottom:22px}.tree ul{list-style:none;padding-left:22px;border-left:1px solid #ddd}.tree li{margin:12px 0}.tree li li{margin:5px 0;font-size:13px}.tree .description{color:#555;font-size:13px;max-width:800px;margin:3px 0 10px}.source-file{background:white;border:1px solid #ddd;border-radius:6px;margin-bottom:10px;scroll-margin-top:20px}.source-file>summary{padding:14px 18px;cursor:pointer;font-size:12px;overflow-wrap:anywhere}.file-path{font-family:monospace}.file-todos{display:block;margin:6px 0 0 16px;color:#777}.source-lines{border-top:1px solid #ddd;padding:12px 0}.source-line{display:grid;grid-template-columns:125px 38px minmax(0,1fr);position:relative;padding:2px 16px 2px 8px;min-height:24px}.source-text{white-space:pre-wrap;overflow-wrap:anywhere;font:11.5px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace}.line-number{font:11px/2 monospace;color:#888;text-align:right;padding-right:12px;user-select:none}.line-todos{display:flex;flex-wrap:wrap;align-content:start}.highlighted{background:#fff9e5}.rule-anchor{position:absolute;top:0;scroll-margin-top:24px}.source-line.flashing{animation:rule-flash .5s ease-in-out 3}@keyframes rule-flash{0%,100%{box-shadow:inset 4px 0 #b79b52;background:#fff4d6}50%{box-shadow:inset 4px 0 #333;background:#ead79c}}.entry{background:white;border:1px solid #ddd;border-radius:7px;margin-bottom:10px;scroll-margin-top:22px}.todo-row{display:grid;grid-template-columns:40px minmax(0,1fr) 155px 130px 26px;gap:12px;padding:17px 16px;align-items:start}.id{font-size:12px;color:#777;white-space:nowrap}.todo-need,.name{font-weight:700}.pill{display:inline-block;padding:1px 6px;border:1px solid #ddd;border-radius:12px;font-size:12px;color:#444;background:#fafafa;margin:2px 3px 2px 0;text-decoration:none}.pill:hover{border-color:#555;text-decoration:underline}.assessment-status{display:inline-block;border-radius:12px;padding:2px 9px;font-size:12px;white-space:nowrap}.assessment-status.hard{color:#1a7f37;background:#e6f4ea}.assessment-status.soft{color:#9a6700;background:#fff4d6}.rule-location{display:block;color:#9a6700;font-size:12px;margin-top:5px}.tag{display:inline-block;font-size:11px;line-height:1.8;padding:0 6px;border-radius:4px;background:#eee;color:#555;margin-top:5px}.tag.new{background:#e0ecff;color:#1d4ed8}button{font:inherit;cursor:pointer;color:#333;background:white;border:1px solid #ccc;border-radius:4px;padding:5px 10px}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #333;outline-offset:3px}.toggle{border:0;background:none;font-size:17px;padding:0 3px;color:#666}.detail{padding:22px;background:#fafafa;border-top:1px solid #ddd}.detail[hidden]{display:none}.detail p{margin:12px 0}.assessment-block{margin-bottom:16px}.assessment-block strong{display:block;margin-bottom:4px}.assessment-text,.quote,.source{white-space:pre-wrap;overflow-wrap:anywhere}.assessment-rule-quote{border-left:2px solid #ddd;padding-left:12px;font-size:9.5pt;color:#555}.assessment-proposal,.quote{border-left:2px solid #2563eb;padding-left:12px}.assessment-rule-id,.todo-meta,.path{color:#777;font-size:12px;overflow-wrap:anywhere}.assessment-rule-id{margin:-8px 0 16px}.todo-meta{margin-top:18px}.todo-original{margin-top:14px}.todo-original summary{cursor:pointer;color:#555}.source{border-left:2px solid #ddd;padding-left:12px;font-size:13px;color:#777}.known-note{margin-top:14px}.reg-row,.reg-head{display:grid;grid-template-columns:32px 142px minmax(0,1fr) minmax(0,1fr) 106px 138px;gap:12px;padding:17px 16px;font-size:13px;overflow-wrap:anywhere}.reg-head{font-size:12px;color:#777;padding-top:0;padding-bottom:9px}.segments{display:inline-flex;border:1px solid #ccc;border-radius:5px;overflow:hidden;white-space:nowrap}.segments button{font-size:12px;border:0;border-right:1px solid #ddd;border-radius:0;padding:5px 8px;line-height:1.5}.segments button:last-child{border:0}.segments button[aria-pressed=true][data-value="0.1"]{color:white;background:#252525}.segments button[aria-pressed=true][data-value="0.2"]{background:#e6e6e6}.segments button[aria-pressed=true][data-value="搁置"]{text-decoration:line-through;color:#777}.check{padding:12px 0;border-bottom:1px solid #ddd;display:flex;gap:16px}.check-status{min-width:70px;font-weight:600}.check-result{flex:1;overflow-wrap:anywhere}#offline{background:#fff3cd;border:1px solid #e4cf84;color:#65521a;padding:12px 16px;margin:0 0 24px;border-radius:5px;display:flex;justify-content:space-between;align-items:center;gap:20px}#offline[hidden],#saved[hidden]{display:none}#saved{position:fixed;top:18px;right:24px;background:white;border:1px solid #ddd;border-radius:5px;padding:5px 12px;z-index:2}#back-top{position:fixed;bottom:18px;right:18px;background:white;border:1px solid #ccc;border-radius:5px;padding:7px 12px;font-size:12px;text-decoration:none;z-index:2}
+*{box-sizing:border-box}body{margin:0;background:#fafafa;color:#202020;font:15px/1.6 'Noto Sans SC','Noto Sans SC Local',sans-serif}main{max-width:1100px;margin:44px auto 80px}h1{font-size:30px;line-height:1.4;margin:0 0 8px}h2{font-size:21px;margin:38px 0 16px}a{color:inherit;text-underline-offset:3px}a:hover{text-decoration-thickness:2px}.updated{margin:0 0 24px;font-size:13px;color:#707070}.cards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.card{background:white;border:1px solid #ddd;border-radius:8px;padding:15px 16px;min-height:132px}a.card{display:block;text-decoration:none}a.card:hover{border-color:#888}#actions p{margin:10px 0}#rewrite-todos{scroll-margin-top:22px}.number{font-size:30px;line-height:1.35;font-weight:700;margin-bottom:6px}.small{font-size:12px;color:#707070;margin-top:5px;overflow-wrap:anywhere}.zero{color:#888}.danger{color:#b42318}.attention{color:#9a6700}.tree{border:1px solid #ddd;border-radius:8px;background:white;padding:22px 26px;margin-bottom:22px}.tree ul{list-style:none;padding-left:22px;border-left:1px solid #ddd}.tree li{margin:12px 0}.tree li li{margin:5px 0;font-size:13px}.tree .description{color:#555;font-size:13px;max-width:800px;margin:3px 0 10px}.source-file{background:white;border:1px solid #ddd;border-radius:6px;margin-bottom:10px;scroll-margin-top:20px}.source-file>summary{padding:14px 18px;cursor:pointer;font-size:12px;overflow-wrap:anywhere}.file-path{font-family:monospace}.file-todos{display:block;margin:6px 0 0 16px;color:#777}.source-lines{border-top:1px solid #ddd;padding:12px 0}.source-line{display:grid;grid-template-columns:125px 38px minmax(0,1fr);position:relative;padding:2px 16px 2px 8px;min-height:24px}.source-text{white-space:pre-wrap;overflow-wrap:anywhere;font:11.5px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace}.line-number{font:11px/2 monospace;color:#888;text-align:right;padding-right:12px;user-select:none}.line-todos{display:flex;flex-wrap:wrap;align-content:start}.highlighted{background:#fff9e5}.rule-anchor{position:absolute;top:0;scroll-margin-top:24px}.source-line.flashing{animation:rule-flash .5s ease-in-out 3}@keyframes rule-flash{0%,100%{box-shadow:inset 4px 0 #b79b52;background:#fff4d6}50%{box-shadow:inset 4px 0 #333;background:#ead79c}}.entry{background:white;border:1px solid #ddd;border-radius:7px;margin-bottom:10px;scroll-margin-top:22px}.todo-row{display:grid;grid-template-columns:40px minmax(0,1fr) 155px 130px 26px;gap:12px;padding:17px 16px;align-items:start}.id{font-size:12px;color:#777;white-space:nowrap}.todo-need,.name{font-weight:700}.pill{display:inline-block;padding:1px 6px;border:1px solid #ddd;border-radius:12px;font-size:12px;color:#444;background:#fafafa;margin:2px 3px 2px 0;text-decoration:none}.pill:hover{border-color:#555;text-decoration:underline}.assessment-status{display:inline-block;border-radius:12px;padding:2px 9px;font-size:12px;white-space:nowrap}.assessment-labels{display:flex;flex-wrap:wrap;align-items:center;gap:5px 7px}.assessment-change-summary{font-size:12px;color:#777;overflow-wrap:anywhere}.assessment-status.appropriate{color:#1a7f37;background:#e6f4ea}.assessment-status.insufficient{color:#9a6700;background:#fff4d6}.assessment-status.excessive{color:#b42318;background:#fde8e8}.rule-location{display:block;color:#9a6700;font-size:12px;margin-top:5px}.tag{display:inline-block;font-size:11px;line-height:1.8;padding:0 6px;border-radius:4px;background:#eee;color:#555;margin-top:5px}.tag.new{background:#e0ecff;color:#1d4ed8}button{font:inherit;cursor:pointer;color:#333;background:white;border:1px solid #ccc;border-radius:4px;padding:5px 10px}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #333;outline-offset:3px}.toggle{border:0;background:none;font-size:17px;padding:0 3px;color:#666}.detail{padding:22px;background:#fafafa;border-top:1px solid #ddd}.detail[hidden]{display:none}.detail p{margin:12px 0}.assessment-block{margin-bottom:16px}.assessment-block strong{display:block;margin-bottom:4px}.assessment-text,.quote,.source{white-space:pre-wrap;overflow-wrap:anywhere}.assessment-rule-quote{border-left:2px solid #ddd;padding-left:12px;font-size:9.5pt;color:#555}.assessment-proposal,.quote{border-left:2px solid #2563eb;padding-left:12px}.assessment-rule-id,.todo-meta,.path{color:#777;font-size:12px;overflow-wrap:anywhere}.assessment-rule-id{margin:-8px 0 16px}.todo-meta{margin-top:18px}.todo-original{margin-top:14px}.todo-original summary{cursor:pointer;color:#555}.source{border-left:2px solid #ddd;padding-left:12px;font-size:13px;color:#777}.known-note{margin-top:14px}.reg-row,.reg-head{display:grid;grid-template-columns:32px 142px minmax(0,1fr) minmax(0,1fr) 106px 138px;gap:12px;padding:17px 16px;font-size:13px;overflow-wrap:anywhere}.reg-head{font-size:12px;color:#777;padding-top:0;padding-bottom:9px}.segments{display:inline-flex;border:1px solid #ccc;border-radius:5px;overflow:hidden;white-space:nowrap}.segments button{font-size:12px;border:0;border-right:1px solid #ddd;border-radius:0;padding:5px 8px;line-height:1.5}.segments button:last-child{border:0}.segments button[aria-pressed=true][data-value="0.1"]{color:white;background:#252525}.segments button[aria-pressed=true][data-value="0.2"]{background:#e6e6e6}.segments button[aria-pressed=true][data-value="搁置"]{text-decoration:line-through;color:#777}.check{padding:12px 0;border-bottom:1px solid #ddd;display:flex;gap:16px}.check-status{min-width:70px;font-weight:600}.check-result{flex:1;overflow-wrap:anywhere}#offline{background:#fff3cd;border:1px solid #e4cf84;color:#65521a;padding:12px 16px;margin:0 0 24px;border-radius:5px;display:flex;justify-content:space-between;align-items:center;gap:20px}#offline[hidden],#saved[hidden]{display:none}#saved{position:fixed;top:18px;right:24px;background:white;border:1px solid #ddd;border-radius:5px;padding:5px 12px;z-index:2}#back-top{position:fixed;bottom:18px;right:18px;background:white;border:1px solid #ccc;border-radius:5px;padding:7px 12px;font-size:12px;text-decoration:none;z-index:2}
 @media(max-width:1150px){main{margin:28px 20px 60px}}@media(max-width:760px){main{margin:22px 16px 70px}h1{font-size:25px}.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.card{min-height:108px;padding:12px}.number{font-size:27px}.tree{padding:16px}.tree ul{padding-left:15px}.source-file>summary{padding:12px}.source-line{grid-template-columns:65px 28px minmax(0,1fr);padding-right:9px;padding-left:4px}.line-number{padding-right:6px}.line-todos .pill{font-size:10px;padding:0 4px}.todo-row{grid-template-columns:32px minmax(0,1fr) 22px;gap:9px;padding:14px 12px}.todo-row>.id{grid-column:1;grid-row:1}.todo-need{grid-column:2;grid-row:1}.todo-row>div:not(.coverage){grid-column:2;grid-row:2}.todo-row>.coverage{grid-column:2;grid-row:3}.todo-row>.toggle{grid-column:3;grid-row:1}.detail{padding:16px}.reg-head{display:none}.reg-row{grid-template-columns:30px minmax(0,1fr);gap:12px;padding:14px 12px}.reg-row>div{grid-column:2}.reg-row>.id{grid-column:1;grid-row:1}.reg-row .test-text:before{content:'测什么';display:block;font-weight:700;margin-bottom:4px}.reg-row .judgment:before{content:'怎么判';display:block;font-weight:700;margin-bottom:4px}.file-todos{margin-left:0}}
+.todo-row{grid-template-columns:32px minmax(0,1fr) 190px 98px 194px 22px}.todo-stance button{padding:5px 10px}.todo-stance button[aria-pressed=true]{background:#252525;color:white}.todo-note{padding:0 16px 16px}.todo-note[hidden]{display:none}.todo-note textarea{display:block;width:100%;resize:vertical;min-height:90px;border:1px solid #ccc;border-radius:5px;padding:10px;font:inherit;line-height:1.6}.prompt-section>strong{display:block;margin-bottom:10px}.prompt-turn{border:1px solid #ddd;border-radius:5px;background:white;margin:8px 0}.prompt-turn>summary{padding:10px 12px;cursor:pointer;font-size:13px}.prompt-text{white-space:pre-wrap;overflow-wrap:anywhere;user-select:text;font:12px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;padding:12px;margin:0;border-top:1px solid #ddd}.prompt-turn .prompt-empty{padding:0 12px}
+@media(max-width:760px){.todo-row{grid-template-columns:32px minmax(0,1fr) 22px}.todo-row>.todo-stance{grid-column:2;grid-row:4;justify-self:start}}
+.todo-stance{justify-self:start}
 </style></head><body><main id="top">
 <div id="offline" role="status" hidden><span>未连接本地服务，选择只存在本浏览器</span><button id="export">导出选择</button></div>
 <h1>__TITLE__</h1><p class="updated">更新于 __TIME__</p>
@@ -211,18 +270,23 @@ __BODY__
 </main><div id="saved" role="status" hidden>已保存</div><a id="back-top" href="#top">回到顶部</a>
 <script id="blueprint-data" type="application/json">__DATA__</script>
 <script id="decisions-data" type="application/json">__DECISIONS__</script>
-<script id="checks-data" type="application/json">__CHECKS__</script>
 <script>
 'use strict';
 const data=JSON.parse(document.getElementById('blueprint-data').textContent);
 const storageKey='plugin-blueprint:'+data.plugin;
-const normalize=value=>({regressions:Object.fromEntries(data.regressions.map(r=>[r.id,[null,'0.1','0.2','搁置'].includes(value?.regressions?.[r.id])?value.regressions[r.id]:null]))});
+const normalize=value=>({regressions:Object.fromEntries(data.regressions.map(r=>[r.id,[null,'0.1','0.2','搁置'].includes(value?.regressions?.[r.id])?value.regressions[r.id]:null])),todos:Object.fromEntries(data.todos.map(t=>{const v=value?.todos?.[t.id];return [t.id,{stance:[null,'同意','不同意','有疑问'].includes(v?.stance)?v.stance:null,note:typeof v?.note==='string'?v.note:''}];}))});
 let decisions=normalize(JSON.parse(document.getElementById('decisions-data').textContent));
 let online=false,saveQueue=Promise.resolve(),savedTimer,flashTimer;
+const noteTimers=new Map();
 function updateChoices(){
- document.querySelectorAll('button[data-value]').forEach(b=>b.setAttribute('aria-pressed',String(decisions.regressions[b.dataset.id]===b.dataset.value)));
+ document.querySelectorAll('button[data-value]').forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.group==='todos'?decisions.todos[b.dataset.id].stance:decisions.regressions[b.dataset.id])===b.dataset.value)));
+ document.querySelectorAll('textarea[data-note]').forEach(input=>{const value=decisions.todos[input.dataset.note];document.getElementById('note-'+input.dataset.note).hidden=!['不同意','有疑问'].includes(value.stance);if(input.value!==value.note)input.value=value.note;});
  document.querySelector('[data-card="4"]').textContent=Object.values(decisions.regressions).filter(v=>v==='0.1').length;
  document.getElementById('selected-count').textContent=Object.values(decisions.regressions).filter(v=>v!==null).length;
+ const stances=Object.values(decisions.todos).map(v=>v.stance);
+ document.getElementById('stance-count').textContent=stances.filter(v=>v!==null).length;
+ document.getElementById('disagree-count').textContent=stances.filter(v=>v==='不同意').length;
+ document.getElementById('question-count').textContent=stances.filter(v=>v==='有疑问').length;
 }
 function openDetail(id){const d=document.getElementById('detail-'+id),b=document.querySelector('[data-detail="detail-'+id+'"]');if(d&&b){d.hidden=false;b.setAttribute('aria-expanded','true');b.textContent='⌃';}}
 function followHash(restore=true){
@@ -255,10 +319,16 @@ document.addEventListener('click',e=>{
  const toggle=e.target.closest('[data-detail]');
  if(toggle){const detail=document.getElementById(toggle.dataset.detail);detail.hidden=!detail.hidden;toggle.setAttribute('aria-expanded',String(!detail.hidden));toggle.textContent=detail.hidden?'⌄':'⌃';return;}
  const button=e.target.closest('button[data-value]');if(!button)return;
- const {id,value}=button.dataset,next=decisions.regressions[id]===value?null:value;
- decisions.regressions[id]=next;updateChoices();localSave();
- saveQueue=saveQueue.then(async()=>{if(online){try{await request('api/decisions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({group:'regressions',id,value:next})});clearTimeout(savedTimer);document.getElementById('saved').hidden=false;savedTimer=setTimeout(()=>document.getElementById('saved').hidden=true,2000);}catch{offline();localSave();}}});
+ const {group,id,value}=button.dataset;
+ if(group==='todos'){const current=decisions.todos[id];current.stance=current.stance===value?null:value;clearTimeout(noteTimers.get(id));noteTimers.delete(id);}
+ else decisions.regressions[id]=decisions.regressions[id]===value?null:value;
+ updateChoices();persist(group,id);
 });
+document.addEventListener('input',e=>{const input=e.target.closest('textarea[data-note]');if(!input)return;const id=input.dataset.note;decisions.todos[id].note=input.value;localSave();clearTimeout(noteTimers.get(id));noteTimers.set(id,setTimeout(()=>{noteTimers.delete(id);persist('todos',id);},1000));});
+function persist(group,id){
+ localSave();const value=structuredClone(decisions[group][id]);
+ saveQueue=saveQueue.then(async()=>{if(online){try{await request('api/decisions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({group,id,value})});clearTimeout(savedTimer);document.getElementById('saved').hidden=false;savedTimer=setTimeout(()=>document.getElementById('saved').hidden=true,2000);}catch{offline();localSave();}}});
+}
 // Links inside a file summary navigate without toggling that file closed.
 document.querySelectorAll('.source-file>summary a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();if(a.hash===location.hash)followHash(false);else location.hash=a.hash;}));
 function offline(){online=false;document.getElementById('offline').hidden=false;}
@@ -286,21 +356,23 @@ def build(path, checks=None):
     if not decisions_file.exists() or previous != decisions:
         write_yaml(decisions_file, decisions)
     files = source_files(data, repo_root())
+    prompts, prompt_sources = regression_prompts(data, repo_root())
     checks = list(checks if checks is not None else check_data(data, repo_root()))
     json_text = lambda value: json.dumps(value, ensure_ascii=False).replace("<", "\\u003c")
     values = {"TITLE": html.escape(data["title"]), "FONT": html.escape(data.get("font", "NotoSansSC.ttf"), quote=True),
               "TIME": datetime.now().astimezone().isoformat(timespec="seconds"),
-              "BODY": render_body(data, files, checks), "DATA": json_text(data),
-              "DECISIONS": json_text(decisions), "CHECKS": json_text(checks)}
+              "BODY": render_body(data, files, prompts), "DATA": json_text(data),
+              "DECISIONS": json_text(decisions)}
     def output():
         return re.sub(r"__(TITLE|FONT|TIME|BODY|DATA|DECISIONS|CHECKS)__", lambda m: values[m[1]], TEMPLATE)
     # Scan the actual generated HTML, excluding scripts/styles and attributes.
     scan = check_html_ids(output())
     checks.append(scan)
-    values['BODY'] = render_body(data, files, checks)
-    values['CHECKS'] = json_text(checks)
     destination = path.with_name("index.html")
     destination.write_text(output(), encoding="utf-8")
+    report = path.parent / 'previews/self-check.json'
+    report.parent.mkdir(exist_ok=True)
+    write_yaml(report, {'mechanical_checks': checks, 'prompt_sources': prompt_sources})
     return destination
 
 

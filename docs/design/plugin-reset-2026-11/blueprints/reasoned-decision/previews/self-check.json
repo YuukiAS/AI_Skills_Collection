@@ -8,17 +8,17 @@
     {
       "id": 2,
       "status": "通过",
-      "result": "R1=0.1、R2=搁置写入并读回，随后恢复；待办选择已按 v3 删除，T03 写入被拒绝。"
+      "result": "R1=0.1、R2=搁置写入读回；待办不同意、1 秒防抖保存、多行输入刷新保留、同意收起且文件保留、有疑问与统计均实测，随后清空恢复。"
     },
     {
       "id": 3,
       "status": "通过",
-      "result": "file:// 黄色提示、旧本地数据迁移、仅回归导出和重新打开均已验证。"
+      "result": "file:// 黄色提示、旧本地数据迁移、回归与待办表态和备注导出、重新打开均已验证。"
     },
     {
       "id": 4,
       "status": "通过",
-      "result": "桌面首屏、原文高亮、待办展开、手机首屏及前两版整页截图。"
+      "result": "1440 宽首屏、待办展开区两张截图；390 宽导航、表态与无溢出实测。"
     }
   ],
   "browser_plugin": "Browser plugin not available",
@@ -50,9 +50,9 @@
       "skills/core/reasoned-decision/solution-design/references/task-state-contract.md": "0460b57e805d4a89decc44980183969154e50fe0f2e059eec90e1c0105a81854",
       "skills/core/reasoned-decision/shared/task-state-contract.md": "0460b57e805d4a89decc44980183969154e50fe0f2e059eec90e1c0105a81854"
     },
-    "assessment_fields": 136,
+    "assessment_fields": 153,
     "assessment_exact_dom_comparisons": "PASS",
-    "blueprint_sha256_before_and_after": "f3d3d35b9337e469c4dea5bebd80da64ca17823e0e0945d23a998e0aa4848d91",
+    "blueprint_sha256_before_and_after": "cc80994628ade1601e0247dfc8eaa9504e01d873ac04ec3bf2d9b2f39a242011",
     "new_draft_authority": "blueprint.yaml, R4 test / R4-R7 judgment; draft_by retained; no semantic review"
   },
   "mechanical_checks": [
@@ -63,6 +63,10 @@
     {
       "status": "通过",
       "result": "每条待办都有 assessment：是。"
+    },
+    {
+      "status": "通过",
+      "result": "assessment.status / assessment.change：通过。"
     },
     {
       "status": "通过",
@@ -86,15 +90,93 @@
     },
     {
       "status": "通过",
-      "result": "页面编号链接：195 / 195。"
+      "result": "回归 prompt 案例对应：全部找到。"
+    },
+    {
+      "status": "通过",
+      "result": "页面编号链接：199 / 199。"
     }
   ],
+  "prompt_sources": [
+    {
+      "id": "R1",
+      "matched": true,
+      "path": "tools/regression-runner/examples/reasoned-decision/R1/case.yaml",
+      "turns": 0,
+      "prompt_turns": []
+    },
+    {
+      "id": "R2",
+      "matched": true,
+      "path": "tools/regression-runner/examples/reasoned-decision/R2/case.yaml",
+      "turns": 0,
+      "prompt_turns": []
+    },
+    {
+      "id": "R3",
+      "matched": true,
+      "path": "tools/regression-runner/examples/reasoned-decision/R3/case.yaml",
+      "turns": 0,
+      "prompt_turns": []
+    },
+    {
+      "id": "R4",
+      "matched": true,
+      "path": "tools/regression-runner/examples/reasoned-decision/R4/case.yaml",
+      "turns": 0,
+      "prompt_turns": []
+    },
+    {
+      "id": "R5",
+      "matched": true,
+      "path": "tools/regression-runner/examples/reasoned-decision/R5/case.yaml",
+      "turns": 0,
+      "prompt_turns": []
+    },
+    {
+      "id": "R6",
+      "matched": true,
+      "path": "tools/regression-runner/examples/reasoned-decision/R6/case.yaml",
+      "turns": 0,
+      "prompt_turns": []
+    },
+    {
+      "id": "R7",
+      "matched": true,
+      "path": "tools/regression-runner/examples/reasoned-decision/R7/case.yaml",
+      "turns": 0,
+      "prompt_turns": []
+    }
+  ],
+  "prompt_source_sha256": {
+    "tools/regression-runner/examples/reasoned-decision/R1/case.yaml": "c1d7ea98ac0100fe6744603886b746826042c52236cf35fad1bad68997fead7c",
+    "tools/regression-runner/examples/reasoned-decision/R2/case.yaml": "628a3ff525cab84f6edd0a8344f78a57cc9f6599c7b6ce9b9f6e11e5b0ee6e6e",
+    "tools/regression-runner/examples/reasoned-decision/R3/case.yaml": "287211b672f0a7bb3eb6e2c6e6acb26d87189b5a5e252e50a0cb66dcd43b1b69",
+    "tools/regression-runner/examples/reasoned-decision/R4/case.yaml": "0132785ce5ad15554557607b3a6bda23232ad348a21b372fdc2a372bf82d9255",
+    "tools/regression-runner/examples/reasoned-decision/R5/case.yaml": "7b146f7121974ac6721a74baac7d80893865e6a5d267ff91d17091516ce37f4a",
+    "tools/regression-runner/examples/reasoned-decision/R6/case.yaml": "d5fe9bd4a6fdb23d69a8ca47a0e342508b87da47c0fad6b0935b0939f6b4f802",
+    "tools/regression-runner/examples/reasoned-decision/R7/case.yaml": "cbf5e2971f7181893d895580687449ae62612c0da2b7a4a0a35492ab81aba555"
+  },
+  "prompt_rendering": {
+    "real_case_fidelity": "PASS",
+    "synthetic_new_continue_branch_partial_gap": "PASS",
+    "fixture_source_files_modified": false,
+    "real_cases_without_prompts": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "R6",
+      "R7"
+    ]
+  },
   "navigation": {
     "T10_to_rule_with_1500ms_flash": "PASS",
     "source_badge_to_T10": "PASS",
     "home_cards_desktop_and_mobile": "PASS",
     "zero_uncovered_card_inert": "PASS",
-    "soft_todo_capsules_need_and_expand": "PASS",
+    "rewrite_todo_capsules_need_and_expand": "PASS",
     "selected_count_live_and_reload": "PASS",
     "R4_to_T01": "PASS",
     "todo_to_regression": "PASS",
@@ -108,13 +190,7 @@
   "offline_warning_export_and_persistence": "PASS",
   "screenshots": [
     "first-screen-1440.png",
-    "full-1440.png",
-    "todo-expanded-1440.png",
-    "rule-flashing-1440.png",
-    "source-highlight-1440.png",
-    "expanded-full-1440.png",
-    "first-screen-mobile-390.png",
-    "offline-full-1440.png"
+    "todo-expanded-1440.png"
   ],
   "console_errors": [],
   "cards": [
@@ -123,6 +199,29 @@
     "7",
     "0",
     "0",
-    "6"
-  ]
+    "9"
+  ],
+  "validation_workspace": {
+    "mode": "disposable repository copy",
+    "path": "/tmp/blueprint-v41-qa-b_vvkszf",
+    "workspace_decisions_written_by_browser_tests": false
+  },
+  "protected_workspace_files": {
+    "blueprint.yaml": {
+      "sha256_before_and_after": "cc80994628ade1601e0247dfc8eaa9504e01d873ac04ec3bf2d9b2f39a242011",
+      "bytes_unchanged": true
+    },
+    "decisions.yaml": {
+      "sha256_before_and_after": "5879d5f49ec00bd94cbc2960a9729e812c582159d7a8c4f3b75367f03e3d1d35",
+      "bytes_unchanged": true
+    }
+  },
+  "assessment_validation": {
+    "status_enum_and_change_restrictions": "PASS",
+    "positive_and_negative_cases": 10,
+    "insufficient": 9,
+    "appropriate": 8,
+    "excessive": 0,
+    "excessive_render_and_rewrite_link_fixture": "PASS"
+  }
 }

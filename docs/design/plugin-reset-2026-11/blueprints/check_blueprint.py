@@ -44,12 +44,24 @@ def check_data(data, root):
     third = {"status": "不通过" if uncovered or unknown else "通过",
              "result": "未被任何回归覆盖的待办：" + ("、".join(uncovered) if uncovered else "无") + "。" + ("未知待办编号：" + "、".join(unknown) if unknown else "")}
     fourth = {"status": "待下一轮", "result": "已选 0.1 的待办，其目标规则写在 skill 正文。"}
-    fields = {"by", "need", "case", "status", "rule_id", "rule_quote", "why", "proposal"}
+    fields = {"by", "need", "case", "status", "change", "rule_id", "rule_quote", "why", "proposal"}
     assessed = all(isinstance(t.get("assessment"), dict) and fields <= t["assessment"].keys()
                    and all(isinstance(t["assessment"][key], str) and t["assessment"][key] for key in fields)
                    for t in data["todos"])
     assessment = {"status": "通过" if assessed else "不通过",
                   "result": "每条待办都有 assessment：" + ("是" if assessed else "否") + "。"}
+    invalid_assessments = []
+    for todo in data["todos"]:
+        a = todo.get("assessment")
+        a = a if isinstance(a, dict) else {}
+        changes = a.get("change")
+        changes = [c.strip() for c in changes.split("；")] if isinstance(changes, str) else []
+        if (a.get("status") not in ("约束不足", "约束适当", "约束过度")
+                or not changes or any(c not in ("不改", "只改措辞", "补充", "重写", "挪进正文") for c in changes)
+                or (a.get("status") == "约束适当" and any(c not in ("不改", "只改措辞", "挪进正文") for c in changes))):
+            invalid_assessments.append(todo["id"])
+    assessment_values = {"status": "不通过" if invalid_assessments else "通过",
+                         "result": "assessment.status / assessment.change：" + ("、".join(invalid_assessments) if invalid_assessments else "通过") + "。"}
     incomplete = [r["id"] for r in data["regressions"]
                   if not str(r.get("test") or "").strip() or not str(r.get("judgment") or "").strip()]
     regression = {"status": "不通过" if incomplete else "通过",
@@ -59,7 +71,12 @@ def check_data(data, root):
     missing_paragraphs = [f'{t["id"]} → {id_}' for t in data["todos"] for id_ in rule_ids(t) if id_ not in available]
     paragraphs = {"status": "不通过" if missing_paragraphs else "通过",
                   "result": "待办 rule_id 对应原文段落：" + ("、".join(missing_paragraphs) if missing_paragraphs else "全部找到") + "。"}
-    return [first, assessment, second, third, fourth, regression, paragraphs]
+    from build_blueprint import regression_prompts
+    _, sources = regression_prompts(data, root)
+    unmatched = [s['id'] for s in sources if not s['matched']]
+    prompts = {'status': '不通过' if unmatched else '通过',
+               'result': '回归 prompt 案例对应：' + ('、'.join(unmatched) if unmatched else '全部找到') + '。'}
+    return [first, assessment, assessment_values, second, third, fourth, regression, paragraphs, prompts]
 
 
 def check_html_ids(source):

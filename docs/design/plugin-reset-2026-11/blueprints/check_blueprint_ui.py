@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Full source/DOM comparison and local/offline browser acceptance checks."""
 import argparse
+from copy import deepcopy
 import hashlib
 import json
 import re
@@ -10,7 +11,7 @@ from pathlib import Path
 import yaml
 from playwright.sync_api import sync_playwright
 
-from build_blueprint import BASE, initial_decisions, load, repo_root
+from build_blueprint import BASE, initial_decisions, load, repo_root, regression_prompts, render_body
 from check_blueprint import coverage_rows
 
 
@@ -82,9 +83,29 @@ def main():
     from urllib.request import Request, urlopen
     from urllib.error import HTTPError
     files = source_files(data, root)
+    prompts, prompt_sources = regression_prompts(data, root)
+    prompt_hashes = {s['path']: hashlib.sha256((root / s['path']).read_bytes()).hexdigest()
+                     for s in prompt_sources if s['matched']}
     source_hashes = {f['path']: hashlib.sha256((root / f['path']).read_bytes()).hexdigest() for f in files}
     assert check_html_ids((directory / 'index.html').read_text())['status'] == '通过'
     assert all(c['status'] != '不通过' for c in check_data(data, root))
+    # Validate the new enums and the restricted changes for an appropriate rule.
+    for status, change, valid in [
+            ('约束不足', '补充；挪进正文', True),
+            ('约束过度', '重写', True),
+            ('约束适当', '不改', True),
+            ('约束适当', '只改措辞；挪进正文', True),
+            ('未知', '不改', False),
+            ('约束适当', '补充', False),
+            ('约束适当', '重写；挪进正文', False),
+            ('约束不足', '未知', False),
+            ('约束不足', '补充；', False),
+            ('约束不足', '', False)]:
+        variant = deepcopy(data)
+        variant['todos'][0]['assessment'].update(status=status, change=change)
+        value_check = next(c for c in check_data(variant, root)
+                           if c['result'].startswith('assessment.status / assessment.change：'))
+        assert (value_check['status'] == '通过') == valid, (status, change)
     console_errors = []
     screenshots = []
     with sync_playwright() as playwright:
@@ -107,37 +128,43 @@ def main():
         assert page.locator('main').evaluate('e=>getComputedStyle(e).maxWidth') == '1100px'
         assert page.locator('body').evaluate('e=>getComputedStyle(e).fontSize') == '15px'
         assert page.locator('body').evaluate('e=>getComputedStyle(e).lineHeight') == '24px'
-        assert page.locator('main>h2').all_text_contents() == ['插件结构与原文', '待办', '回归', '机械检查']
-        assert page.locator('#all-rules, #skills, #todos .segments').count() == 0
+        assert page.locator('main>h2').all_text_contents() == ['插件结构与原文', '待办', '回归']
+        assert page.locator('#all-rules, #skills, #checks, #checks-data').count() == 0
+        assert page.locator('#todos .segments').count() == 17
+        assert page.locator('#todos button[data-value][aria-pressed="true"]').count() == 0
+        assert not re.search(r'(?<!\d)0\.[12](?!\d)', page.locator('#todos').text_content())
         assert page.locator('.source-file[open], .todo-original[open]').count() == 0
-        assert page.locator('.check').count() == 8
-        assert page.locator('.check-status').all_text_contents() == ['通过'] * 4 + ['待下一轮'] + ['通过'] * 3
+        assert page.locator('.check').count() == 0
         assert json.loads(page.locator('#blueprint-data').text_content()) == data
         assert page.locator('.description').all_text_contents() == [s['description'] for s in data['skills']]
         assert '待办 17 条（全部在 0.1 解决）' in page.locator('#cards').text_content()
-        soft_todos = [t for t in data['todos'] if t['assessment']['status'] == '写软了']
-        expected_cards = ['2', '17', '7', '0', '0', str(len(soft_todos))]
+        rewrite_todos = [t for t in data['todos'] if t['assessment']['status'] in ('约束不足', '约束过度')]
+        insufficient = sum(t['assessment']['status'] == '约束不足' for t in data['todos'])
+        excessive = sum(t['assessment']['status'] == '约束过度' for t in data['todos'])
+        expected_cards = ['2', '17', '7', '0', '0', str(len(rewrite_todos))]
+        assert page.locator('#cards .card').nth(5).locator('div').nth(1).inner_text() == f'约束不足 {insufficient} · 过度 {excessive}'
         assert page.locator('.number').all_text_contents() == expected_cards
         assert page.locator('[data-card="5"]').evaluate('e=>getComputedStyle(e).color') == 'rgb(154, 103, 0)'
 
         def shot(name, full=False):
-            page.screenshot(path=str(output / name), full_page=full)
-            screenshots.append(name)
+            if name in {'first-screen-1440.png', 'todo-expanded-1440.png'}:
+                page.screenshot(path=str(output / name), full_page=full)
+                screenshots.append(name)
 
         shot('first-screen-1440.png')
         shot('full-1440.png', True)
 
         def check_home_navigation(tab):
             assert tab.locator('#actions h2').inner_text() == '你要做的'
-            assert tab.locator('#actions>p').count() == 2
+            assert tab.locator('#actions>p').count() == 3
             assert tab.locator('#actions>p').first.inner_text() == '选 7 个回归的版本（0.1 / 0.2 / 搁置），已选 0 个 去选'
             assert tab.evaluate('''() => {
                 const cards=document.getElementById('cards'), actions=document.getElementById('actions');
                 return cards.nextElementSibling===actions && actions.nextElementSibling.textContent==='插件结构与原文';
             }''')
-            assert tab.locator('#soft-todos').inner_text().startswith(f'写软了的 {len(soft_todos)} 条待办，下一轮由 GPT Pro 改写：')
-            assert tab.locator('#soft-todos .pill').all_text_contents() == [t['id'] for t in soft_todos]
-            for i, target in [(0, 'structure'), (1, 'todos'), (2, 'regressions'), (4, 'regressions'), (5, 'soft-todos')]:
+            assert tab.locator('#rewrite-todos').inner_text().startswith(f'约束不足或过度的 {len(rewrite_todos)} 条待办，下一轮由 GPT Pro 改写：')
+            assert tab.locator('#rewrite-todos .pill').all_text_contents() == [t['id'] for t in rewrite_todos]
+            for i, target in [(0, 'structure'), (1, 'todos'), (2, 'regressions'), (4, 'regressions'), (5, 'rewrite-todos')]:
                 card = tab.locator('#cards .card').nth(i)
                 assert card.get_attribute('href') == '#' + target
                 # Click the card padding to exercise the whole card hit area.
@@ -152,13 +179,16 @@ def main():
             assert tab.evaluate('location.hash') == before_hash
             tab.locator('#actions a[href="#regressions"]').click()
             tab.wait_for_function('location.hash === "#regressions"')
-            for todo in soft_todos:
-                capsule = tab.locator(f'#soft-todos a[href="#todo-{todo["id"]}"]')
+            assert tab.locator('#todo-progress').inner_text() == '对 17 条待办的建议表态，已表态 0 条，其中不同意 0、有疑问 0 去表态'
+            tab.locator('#todo-progress a').click()
+            tab.wait_for_function('location.hash === "#todos"')
+            for todo in rewrite_todos:
+                capsule = tab.locator(f'#rewrite-todos a[href="#todo-{todo["id"]}"]')
                 capsule.hover()
                 assert capsule.get_attribute('title') == todo['assessment']['need']
                 capsule.click()
                 tab.wait_for_function('hash=>location.hash===hash', arg='#todo-' + todo['id'])
-                assert tab.locator('#detail-' + todo['id']).is_visible()
+                tab.locator('#detail-' + todo['id']).wait_for(state='visible')
                 assert tab.locator(f'#todo-{todo["id"]} .toggle').get_attribute('aria-expanded') == 'true'
             assert tab.evaluate('document.documentElement.scrollWidth <= innerWidth')
             tab.goto(url)
@@ -185,7 +215,7 @@ def main():
         assert page.locator('.rule-anchor').count() == len(data['rules'])
         assert page.locator('.rule-anchor[id^="rule-"]').count() == len({r['id'] for r in data['rules']})
 
-        # Full v1/v2 DOM fidelity, including all eight assessment fields.
+        # Full DOM fidelity, including all nine assessment fields.
         for todo in data['todos']:
             id_, a = todo['id'], todo['assessment']
             row = page.locator(f'#todo-{id_}')
@@ -193,16 +223,29 @@ def main():
             assert row.locator('.todo-need').text_content() == a['need']
             assert row.locator('.assessment-status').text_content() == a['status']
             colors = row.locator('.assessment-status').evaluate('e=>[getComputedStyle(e).color,getComputedStyle(e).backgroundColor]')
-            assert colors == (['rgb(154, 103, 0)', 'rgb(255, 244, 214)'] if a['status'] == '写软了' else ['rgb(26, 127, 55)', 'rgb(230, 244, 234)'])
+            assert colors == {
+                '约束不足': ['rgb(154, 103, 0)', 'rgb(255, 244, 214)'],
+                '约束适当': ['rgb(26, 127, 55)', 'rgb(230, 244, 234)'],
+                '约束过度': ['rgb(180, 35, 24)', 'rgb(253, 232, 232)'],
+            }[a['status']]
+            row.locator('.assessment-status').hover()
+            assert row.locator('.assessment-status').get_attribute('title') == {
+                '约束不足': '规则是可选的、覆盖太窄、太抽象或有漏洞，模型可以合法跳过',
+                '约束适当': '已能起作用，内容不需要实质改动',
+                '约束过度': '写得太死或绑定具体案例，会在其他正当场景误伤',
+            }[a['status']]
+            assert row.locator('.assessment-change-summary').text_content() == '改动：' + a['change']
+            assert row.locator('.assessment-change-summary').evaluate('e=>getComputedStyle(e).color') == 'rgb(119, 119, 119)'
+            assert row.locator('.assessment-change-summary').evaluate('e=>getComputedStyle(e).fontSize') == '12px'
             reference = any(r['id'] in rule_ids(todo) and r['location_type'] == '引用文件' for r in data['rules'])
             assert row.locator('.rule-location').count() == int(reference)
             assert row.locator('.coverage .pill').all_text_contents() == [r['id'] for r in data['regressions'] if id_ in r['covers']]
             row.locator('.toggle').click()
             assert detail.is_visible()
             assert detail.locator('.todo-title').text_content() == todo['title']
-            for field in ('by', 'case', 'rule_quote', 'rule_id', 'why', 'proposal'):
+            for field in ('by', 'case', 'rule_quote', 'rule_id', 'why', 'change', 'proposal'):
                 assert detail.locator('.assessment-' + field.replace('_', '-')).text_content() == a[field], (id_, field)
-            assert detail.locator('.assessment-block>strong').all_text_contents() == ['案例：', '现在怎么写的：', '为什么：', '建议改成：']
+            assert detail.locator('.assessment-block>strong').all_text_contents() == ['案例：', '现在怎么写的：', '为什么：', '改动：', '建议改成：']
             assert not detail.locator('.todo-original').evaluate('e=>e.open')
             detail.locator('.todo-original>summary').click()
             for key, class_ in [('problem', 'problem'), ('source_text', 'source')]:
@@ -227,6 +270,25 @@ def main():
                 assert row.locator('.draft-by').evaluate('e=>getComputedStyle(e).fontSize') == '12px'
             row.locator('.toggle').click()
             assert page.locator(f'#detail-{case["id"]}').is_visible()
+            section = row.locator('.prompt-section')
+            assert section.locator('strong').inner_text() == 'Prompt'
+            turns = prompts[case['id']]
+            if not any(t.get('prompt', '').strip() for t in turns):
+                assert section.locator('.prompt-empty').inner_text() == '尚未设计 prompt'
+                assert section.locator('.prompt-turn').count() == 0
+            else:
+                assert section.locator('.prompt-turn').count() == len(turns)
+                for index, turn in enumerate(turns):
+                    fold = section.locator('.prompt-turn').nth(index)
+                    assert not fold.evaluate('e=>e.open')
+                    fold.locator('summary').click()
+                    if turn.get('prompt', '').strip():
+                        assert fold.locator('.prompt-text').text_content() == turn['prompt']
+                    else:
+                        assert fold.locator('.prompt-empty').inner_text() == '本轮 prompt 待补'
+            if case['id'] == 'R1':
+                row.evaluate('e=>e.scrollIntoView({block:"start"})')
+                shot('regression-prompt-1440.png')
             row.locator('.toggle').click()
 
         # Real clicks: todo -> source + 1.5s flash -> todo, with browser back.
@@ -298,12 +360,12 @@ def main():
         assert check_html_ids(page.content())['status'] == '通过'
         assert page.evaluate('''() => [...document.querySelectorAll('a[href^="#"]')].every(a=>document.getElementById(a.hash.slice(1)))''')
 
-        # Persist regression choices; the removed todo API must reject writes.
+        # Persist regression choices; legacy todo version writes remain invalid.
         for id_, value in [('R1', '0.1'), ('R2', '搁置')]:
             page.locator(f'[data-id="{id_}"][data-value="{value}"]').click()
         page.evaluate('saveQueue')
         persisted = load(decisions_file)
-        assert set(persisted) == {'regressions'}
+        assert set(persisted) == {'regressions', 'todos'}
         assert persisted['regressions']['R1'] == '0.1' and persisted['regressions']['R2'] == '搁置'
         assert page.locator('[data-card="4"]').inner_text() == '1'
         assert page.locator('#selected-count').inner_text() == '2'
@@ -313,7 +375,7 @@ def main():
         rejected = Request(url + 'api/decisions', data=json.dumps({'group': 'todos', 'id': 'T03', 'value': '0.2'}).encode(), headers={'Content-Type': 'application/json'})
         try:
             urlopen(rejected)
-            raise AssertionError('removed todo writes must fail')
+            raise AssertionError('legacy todo version writes must fail')
         except HTTPError as error:
             assert error.code == 400
         assert load(decisions_file) == persisted
@@ -327,6 +389,52 @@ def main():
         assert load(decisions_file) == original
         assert decisions_file.read_bytes() == initial_bytes
         assert page.locator('#selected-count').inner_text() == '0'
+
+        # Stance controls, one-second debounce, multiline note, reload and retention.
+        choice = page.locator('#todo-T01')
+        note = choice.locator('textarea')
+        assert not note.is_visible()
+        choice.locator('[data-value="不同意"]').click()
+        page.evaluate('saveQueue')
+        assert note.is_visible() and note.get_attribute('placeholder') == '写具体原因'
+        assert load(decisions_file)['todos']['T01'] == {'stance': '不同意', 'note': ''}
+        assert page.locator('#stance-count').inner_text() == '1'
+        assert page.locator('#disagree-count').inner_text() == '1'
+        posts = []
+        page.on('request', lambda r: posts.append(r.post_data_json) if r.method == 'POST' else None)
+        text = '自动保存验证：请明确建议的适用范围。\n第二行仅用于验证。'
+        note.fill(text)
+        page.wait_for_timeout(600)
+        assert not posts and load(decisions_file)['todos']['T01']['note'] == ''
+        note.fill(text + '（停止输入后保存）')
+        page.wait_for_timeout(600)
+        assert not posts
+        page.wait_for_function('!noteTimers.size')
+        page.evaluate('saveQueue')
+        assert len(posts) == 1
+        text += '（停止输入后保存）'
+        assert load(decisions_file)['todos']['T01']['note'] == text
+        page.reload()
+        page.evaluate('window.blueprintReady')
+        assert note.is_visible() and note.input_value() == text
+        choice.locator('[data-value="同意"]').click()
+        page.evaluate('saveQueue')
+        assert not note.is_visible()
+        assert load(decisions_file)['todos']['T01'] == {'stance': '同意', 'note': text}
+        choice.locator('[data-value="有疑问"]').click()
+        page.evaluate('saveQueue')
+        assert note.is_visible() and note.input_value() == text
+        assert page.locator('#todo-progress').inner_text() == '对 17 条待办的建议表态，已表态 1 条，其中不同意 0、有疑问 1 去表态'
+        choice.locator('.toggle').click()
+        choice.evaluate('e=>e.scrollIntoView({block:"start"})')
+        shot('todo-stance-1440.png')
+        note.fill('')
+        # Immediate stance change also flushes the pending note without restoring an old stance.
+        choice.locator('[data-value="有疑问"]').click()
+        page.evaluate('saveQueue')
+        page.wait_for_timeout(1100)
+        assert load(decisions_file) == original
+        assert decisions_file.read_bytes() == initial_bytes
         page.goto(url)
         page.evaluate('window.blueprintReady')
         page.evaluate('document.fonts.ready')
@@ -342,8 +450,6 @@ def main():
         mobile.evaluate('window.blueprintReady')
         mobile.evaluate('document.fonts.ready')
         assert mobile.evaluate('document.documentElement.scrollWidth <= innerWidth')
-        mobile.screenshot(path=str(output / 'first-screen-mobile-390.png'))
-        screenshots.append('first-screen-mobile-390.png')
         check_home_navigation(mobile)
         mobile.locator('#todo-T10 .id a').click()
         mobile.wait_for_function('location.hash === "#todo-T10"')
@@ -353,8 +459,15 @@ def main():
         assert mobile.evaluate('document.documentElement.scrollWidth <= innerWidth')
         mobile.locator('#rule-SD-06').locator('xpath=..').locator('a[href="#todo-T10"]').click()
         mobile.locator('#todo-T10 .coverage a').first.click()
-        assert mobile.locator('#detail-R5').is_visible()
+        mobile.locator('#detail-R5').wait_for(state='visible')
         assert mobile.evaluate('document.documentElement.scrollWidth <= innerWidth')
+        mobile.locator('#todo-T10 [data-value="有疑问"]').click()
+        mobile.evaluate('saveQueue')
+        assert mobile.locator('#todo-T10 textarea').is_visible()
+        assert mobile.evaluate('document.documentElement.scrollWidth <= innerWidth')
+        mobile.locator('#todo-T10 [data-value="有疑问"]').click()
+        mobile.evaluate('saveQueue')
+        assert load(decisions_file) == original
         mobile_context.close()
 
         offline_context = browser.new_context(viewport={'width': 1440, 'height': 1000}, accept_downloads=True)
@@ -366,14 +479,24 @@ def main():
         assert offline.locator('#offline').is_visible()
         assert offline.locator('#offline span').inner_text() == '未连接本地服务，选择只存在本浏览器'
         assert offline.locator('#export').is_enabled()
-        # Upgrade old local storage in place, retaining regression choices only.
+        # Upgrade old local storage without interpreting obsolete todo versions as stances.
         old_local = {'todos': {'T03': '0.2'}, 'regressions': {'R3': '0.2'}}
         offline.evaluate('(value)=>localStorage.setItem(storageKey,JSON.stringify(value))', old_local)
         offline.reload()
         offline.evaluate('window.blueprintReady')
-        assert set(offline.evaluate('JSON.parse(localStorage.getItem(storageKey))')) == {'regressions'}
+        migrated = offline.evaluate('JSON.parse(localStorage.getItem(storageKey))')
+        assert set(migrated) == {'regressions', 'todos'}
+        assert migrated['todos'] == original['todos']
         assert offline.locator('[data-id="R3"][data-value="0.2"]').get_attribute('aria-pressed') == 'true'
         assert offline.locator('#selected-count').inner_text() == '1'
+        offline.locator('#todo-T03 [data-value="有疑问"]').click()
+        offline.locator('#todo-T03 textarea').fill('离线验证\n保留换行')
+        offline.wait_for_function('!noteTimers.size')
+        offline.evaluate('saveQueue')
+        offline.reload()
+        offline.evaluate('window.blueprintReady')
+        assert offline.locator('#todo-T03 textarea').input_value() == '离线验证\n保留换行'
+        assert offline.locator('#todo-T03 [data-value="有疑问"]').get_attribute('aria-pressed') == 'true'
         with offline.expect_download() as event:
             offline.locator('#export').click()
         download = event.value
@@ -381,39 +504,86 @@ def main():
         exported_path = output / 'export-selfcheck.yaml'
         download.save_as(str(exported_path))
         exported = load(exported_path)
-        assert set(exported) == {'regressions'} and exported['regressions']['R3'] == '0.2'
+        assert set(exported) == {'regressions', 'todos'} and exported['regressions']['R3'] == '0.2'
+        assert exported['todos']['T03'] == {'stance': '有疑问', 'note': '离线验证\n保留换行'}
         exported_path.unlink()
         offline.reload()
         offline.evaluate('window.blueprintReady')
         assert offline.locator('[data-id="R3"][data-value="0.2"]').get_attribute('aria-pressed') == 'true'
         offline.locator('[data-id="R3"][data-value="0.2"]').click()
+        offline.locator('#todo-T03 textarea').fill('')
+        offline.locator('#todo-T03 [data-value="有疑问"]').click()
         offline.evaluate('saveQueue')
-        offline.screenshot(path=str(output / 'offline-full-1440.png'), full_page=True)
-        screenshots.append('offline-full-1440.png')
+        assert offline.evaluate('JSON.parse(localStorage.getItem(storageKey))') == original
         assert load(decisions_file) == original
+
+        # Isolated renderer/browser fixture: real sources currently have no turns.
+        # Exercise all conversation modes and partial gaps without editing a case file.
+        fixture_prompts = {**prompts, 'R1': [
+            {'n': 1, 'prompt': '\n第一行\n第二行 <原文> & 可复制\n', 'conversation': {'mode': 'new'}},
+            {'n': 2, 'prompt': '', 'conversation': {'mode': 'continue'}},
+            {'n': 3, 'prompt': '从第一轮分支。', 'conversation': {'mode': 'branch', 'after_turn': 1}}]}
+        source = (directory / 'index.html').read_text()
+        start, end = source.index('<div class="cards"'), source.index('</main>')
+        fixture_data = deepcopy(data)
+        fixture_data['todos'][0]['assessment']['status'] = '约束过度'
+        fixture_html = source[:start] + render_body(fixture_data, files, fixture_prompts) + source[end:]
+        fixture = context.new_page()
+        fixture.route('**/prompt-fixture', lambda route: route.fulfill(body=fixture_html, content_type='text/html'))
+        fixture.goto(url + 'prompt-fixture')
+        fixture.evaluate('window.blueprintReady')
+        badge = fixture.locator('#todo-T01 .assessment-status')
+        badge.hover()
+        assert badge.inner_text() == '约束过度'
+        assert badge.get_attribute('title') == '写得太死或绑定具体案例，会在其他正当场景误伤'
+        assert badge.evaluate('e=>[getComputedStyle(e).color,getComputedStyle(e).backgroundColor]') == ['rgb(180, 35, 24)', 'rgb(253, 232, 232)']
+        assert fixture.locator('[data-card="5"]').inner_text() == str(len(rewrite_todos))
+        assert fixture.locator('#cards .card').nth(5).locator('div').nth(1).inner_text() == f'约束不足 {insufficient - 1} · 过度 {excessive + 1}'
+        fixture.locator('#rewrite-todos a[href="#todo-T01"]').click()
+        fixture.locator('#detail-T01').wait_for(state='visible')
+        fixture.locator('#reg-R1 .toggle').click()
+        folds = fixture.locator('#reg-R1 .prompt-turn')
+        assert folds.count() == 3
+        assert folds.locator('summary').all_text_contents() == ['第 1 轮 · 新对话', '第 2 轮 · 接着上一轮', '第 3 轮 · 从第 1 轮分支']
+        assert folds.evaluate_all('es=>es.every(e=>!e.open)')
+        for index, turn in enumerate(fixture_prompts['R1']):
+            fold = folds.nth(index)
+            fold.locator('summary').click()
+            if turn['prompt']:
+                assert fold.locator('.prompt-text').text_content() == turn['prompt']
+                assert fold.locator('.prompt-text').evaluate('e=>getComputedStyle(e).whiteSpace') == 'pre-wrap'
+            else:
+                assert fold.locator('.prompt-empty').inner_text() == '本轮 prompt 待补'
+        assert fixture.locator('#reg-R1 textarea,input,[contenteditable]').count() == 0
+        fixture.close()
         assert not console_errors, console_errors
         browser.close()
     assert hashlib.sha256((directory / 'blueprint.yaml').read_bytes()).hexdigest() == blueprint_hash
     assert all(hashlib.sha256((root / path).read_bytes()).hexdigest() == value for path, value in source_hashes.items())
+    assert all(hashlib.sha256((root / path).read_bytes()).hexdigest() == value for path, value in prompt_hashes.items())
     result = {
         'self_checks': [
             {'id': 1, 'status': '通过', 'result': '全部待办来源与页面、17 条 assessment 的全部字段逐字一致；7 条回归 test / judgment 与当前 blueprint.yaml 逐字一致，已有来源另行核对；4 条 draft_by 如实展示。'},
-            {'id': 2, 'status': '通过', 'result': 'R1=0.1、R2=搁置写入并读回，随后恢复；待办选择已按 v3 删除，T03 写入被拒绝。'},
-            {'id': 3, 'status': '通过', 'result': 'file:// 黄色提示、旧本地数据迁移、仅回归导出和重新打开均已验证。'},
-            {'id': 4, 'status': '通过', 'result': '桌面首屏、原文高亮、待办展开、手机首屏及前两版整页截图。'}],
+            {'id': 2, 'status': '通过', 'result': 'R1=0.1、R2=搁置写入读回；待办不同意、1 秒防抖保存、多行输入刷新保留、同意收起且文件保留、有疑问与统计均实测，随后清空恢复。'},
+            {'id': 3, 'status': '通过', 'result': 'file:// 黄色提示、旧本地数据迁移、回归与待办表态和备注导出、重新打开均已验证。'},
+            {'id': 4, 'status': '通过', 'result': '1440 宽首屏、待办展开区两张截图；390 宽导航、表态与无溢出实测。'}],
         'browser_plugin': 'Browser plugin not available', 'browser_path': 'Playwright / ' + args.browser,
         'viewport': [{'width': 1440, 'height': 1000}, {'width': 390, 'height': 844}],
         'source_identity': {'todos': len(rows), 'supplement': len(supplemental),
                             'regression_test_texts': len(source_tests), 'regression_judgments': 7,
                             'rule_locations': len(expected_rule_positions), 'source_files': len(files),
                             'source_lines': sum(len(f['lines']) for f in files), 'source_files_sha256': source_hashes,
-                            'assessment_fields': 17 * 8, 'assessment_exact_dom_comparisons': 'PASS',
+                            'assessment_fields': len(data['todos']) * 9, 'assessment_exact_dom_comparisons': 'PASS',
                             'blueprint_sha256_before_and_after': blueprint_hash,
                             'new_draft_authority': 'blueprint.yaml, R4 test / R4-R7 judgment; draft_by retained; no semantic review'},
         'mechanical_checks': check_data(data, root) + [check_html_ids((directory / 'index.html').read_text())],
+        'prompt_sources': prompt_sources, 'prompt_source_sha256': prompt_hashes,
+        'prompt_rendering': {'real_case_fidelity': 'PASS', 'synthetic_new_continue_branch_partial_gap': 'PASS',
+                             'fixture_source_files_modified': False,
+                             'real_cases_without_prompts': [s['id'] for s in prompt_sources if s['matched'] and not s['prompt_turns']]},
         'navigation': {'T10_to_rule_with_1500ms_flash': 'PASS', 'source_badge_to_T10': 'PASS',
                        'home_cards_desktop_and_mobile': 'PASS', 'zero_uncovered_card_inert': 'PASS',
-                       'soft_todo_capsules_need_and_expand': 'PASS', 'selected_count_live_and_reload': 'PASS',
+                       'rewrite_todo_capsules_need_and_expand': 'PASS', 'selected_count_live_and_reload': 'PASS',
                        'R4_to_T01': 'PASS', 'todo_to_regression': 'PASS', 'browser_back_and_scroll': 'PASS',
                        'file_tree_and_direct_deep_link': 'PASS', 'back_to_top': 'PASS', 'mobile_links_and_overflow': 'PASS'},
         'service_choices_and_restoration': 'PASS', 'initial_decisions_bytes_restored': True,

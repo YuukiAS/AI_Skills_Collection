@@ -27,16 +27,24 @@ def main():
     if embedded is None:
         parser.error("build index.html before starting the server")
     data = json.loads(embedded[1])
-    ids = {"regressions": {r["id"] for r in data["regressions"]}}
+    ids = {"regressions": {r["id"] for r in data["regressions"]},
+           "todos": {t["id"] for t in data["todos"]}}
     decisions_path = directory / "decisions.yaml"
     lock = threading.Lock()
+
+    def valid_choice(group, value):
+        if group == "regressions":
+            return value in (None, "0.1", "0.2", "搁置")
+        return (isinstance(value, dict) and set(value) == {"stance", "note"}
+                and value["stance"] in (None, "同意", "不同意", "有疑问")
+                and isinstance(value["note"], str))
 
     def read_decisions():
         result = json.loads(decisions_path.read_text(encoding="utf-8"))
         if set(result) != set(ids):
             raise ValueError("invalid decision groups")
         for group, keys in ids.items():
-            if set(result[group]) != keys or any(value not in (None, "0.1", "0.2", "搁置") for value in result[group].values()):
+            if set(result[group]) != keys or any(not valid_choice(group, value) for value in result[group].values()):
                 raise ValueError("invalid decisions")
         return result
 
@@ -86,13 +94,13 @@ def main():
                 return self.respond(404, {"error": "not found"})
             try:
                 length = int(self.headers.get("Content-Length", "0"))
-                if not 0 < length <= 4096 or self.headers.get_content_type() != "application/json":
+                if not 0 < length <= 1048576 or self.headers.get_content_type() != "application/json":
                     raise ValueError("invalid request")
                 change = json.loads(self.rfile.read(length))
                 if set(change) != {"group", "id", "value"}:
                     raise ValueError("invalid fields")
                 group, id_, value = change["group"], change["id"], change["value"]
-                if group not in ids or id_ not in ids[group] or value not in (None, "0.1", "0.2", "搁置"):
+                if group not in ids or id_ not in ids[group] or not valid_choice(group, value):
                     raise ValueError("invalid choice")
             except (ValueError, TypeError):
                 return self.respond(400, {"error": "invalid choice"})
