@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "SYN-BRANCH",
+  "name": "SYN-BRANCH",
+  "version": "synthetic-v1",
+  "model": "模拟模型",
+  "plugins": [],
+  "attachments": [],
+  "turns": [
+    {
+      "n": 1,
+      "prompt": "请回复数字一。\n这是模拟题面第二行。",
+      "conversation": {
+        "mode": "new"
+      }
+    },
+    {
+      "n": 2,
+      "prompt": "再回复数字二。",
+      "conversation": {
+        "mode": "continue"
+      }
+    },
+    {
+      "n": 3,
+      "prompt": "换个问法，回复数字三。",
+      "conversation": {
+        "mode": "branch",
+        "after_turn": 1
+      }
+    }
+  ],
+  "criteria": [
+    {
+      "id": "C1",
+      "text": "回答包含所问数字。",
+      "kind": "requirement"
+    }
+  ]
+}

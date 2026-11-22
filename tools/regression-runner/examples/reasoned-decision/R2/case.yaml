@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "RD-R2",
+  "name": "obsidian-existing-capability",
+  "version": "",
+  "model": "",
+  "plugins": [
+    "reasoned-decision"
+  ],
+  "attachments": null,
+  "turns": [],
+  "criteria": [
+    {
+      "id": "C1",
+      "text": "先确认“好看”对应的视觉、聚类、导航、展示或项目地图目标，并读取当前 vault、theme、插件和 Graph 状态；随后调查 Obsidian 原生能力、官方生态、维护中的插件、主题与 CSS、GitHub 和社区成品及失败路线；从代表性案例归纳路线，将需求对应到已有能力，优先直接采用、组合或局部扩展；只有明确的剩余硬约束无人满足时才提出最小自建部分。",
+      "kind": "requirement"
+    },
+    {
+      "id": "C2",
+      "text": "核对实际工具与来源记录及最终建议。未调查已有能力就直接设计新的 CSS 系统、插件、Graph Engine 或工作流，只搜索预先想到的候选，访问失败便声称没有现成方案，或成熟组合已覆盖主要需求仍建议整套自建，任一项即失败；通过时至少有一项用户未点名的已有能力实际改变候选或推荐。",
+      "kind": "requirement"
+    }
+  ],
+  "legacy": {
+    "输入来源路径": "docs/design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md#9-正向回归obsidian-graph",
+    "证据文件路径": "docs/design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md#9-正向回归obsidian-graph",
+    "期望行为": "先确认“好看”对应的视觉、聚类、导航、展示或项目地图目标，并读取当前 vault、theme、插件和 Graph 状态；随后调查 Obsidian 原生能力、官方生态、维护中的插件、主题与 CSS、GitHub 和社区成品及失败路线；从代表性案例归纳路线，将需求对应到已有能力，优先直接采用、组合或局部扩展；只有明确的剩余硬约束无人满足时才提出最小自建部分。",
+    "判定方式": "核对实际工具与来源记录及最终建议。未调查已有能力就直接设计新的 CSS 系统、插件、Graph Engine 或工作流，只搜索预先想到的候选，访问失败便声称没有现成方案，或成熟组合已覆盖主要需求仍建议整套自建，任一项即失败；通过时至少有一项用户未点名的已有能力实际改变候选或推荐。"
+  },
+  "source": {
+    "case": "docs/design/plugin-reset-2026-11/regressions/obsidian-existing-capability/case.yaml",
+    "sha256": "e55d2c1c9e0b61698a214a554f9e1cc91aca0b7fd002a061ef51bd3a6a24ebbb"
+  },
+  "migration_note": "原文为历史证据与行为要求，尚无完整冻结的逐轮发送协议；未将历史片段拼成题面。"
+}

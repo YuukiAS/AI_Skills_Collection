@@ -1,0 +1,13 @@
+[
+  {
+    "criterion": "C1",
+    "status": "通过",
+    "reason": "假回答给出数字。",
+    "evidence": [
+      {
+        "turn": 3,
+        "quote": "数字三。"
+      }
+    ]
+  }
+]

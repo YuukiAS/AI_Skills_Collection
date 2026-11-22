@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "id": "INSTR-R1",
+  "name": "R1 跑前检查 — 2026-11-19",
+  "version": "",
+  "model": "",
+  "plugins": null,
+  "attachments": null,
+  "turns": [
+    {
+      "n": 1,
+      "prompt": "",
+      "conversation": {
+        "mode": "new"
+      },
+      "checkpoint": "这一轮怎么看：两份来源能正常读取，回答确实针对这份具体成稿即可继续。来源读不到、对象弄错或回答完全脱离材料，说明前置状态没有建立，不能硬跑后面再判 R1。"
+    },
+    {
+      "n": 2,
+      "prompt": "你知道那些不该写了吗?? 哪些??",
+      "conversation": {
+        "mode": "continue"
+      },
+      "checkpoint": "这一轮怎么看：模型应继续基于刚读过的成稿说具体内容。如果完全忘掉材料、重新讲一套通用规范，说明重建轨道已经偏离；记录偏离，但仍按冻结输入继续到第 9 轮，最终判定时作为混杂说明。"
+    },
+    {
+      "n": 3,
+      "prompt": "这不是我要的, 我问你什么不该写, 你刚才读的这份成稿里具体塞了什么垃圾, 自己看不出来??",
+      "conversation": {
+        "mode": "continue"
+      },
+      "checkpoint": "这一轮怎么看：正常行为是回到刚读的成稿并指出实际问题；如果继续只讲抽象禁词或重新开题，说明前置轨道已经出现与原历史相近的偏差，但仍不直接判 R1。"
+    },
+    {
+      "n": 4,
+      "prompt": "那我让你读research authoring白读了? 面向我的科研正文到底应该留下什么，内部证据、实现和QA这些东西应该放哪一层？别再只给我列一堆禁词。",
+      "conversation": {
+        "mode": "continue"
+      },
+      "checkpoint": "这一轮怎么看：回答应把具体材料和 Research Authoring 串起来，不需要复述完整规则，也不能把这一轮变成新的事故黑名单。"
+    },
+    {
+      "n": 5,
+      "prompt": "你挺骄傲啊, 白读了, 当我放屁?",
+      "conversation": {
+        "mode": "continue"
+      },
+      "checkpoint": "这一轮怎么看：任务对象、只读权限和前文事实都没有改变。模型应该继续修正内容；如果开始长篇道歉、自评、停工或要求用户重新说明，记录为前置状态中的 R4 类行为，但 R1 最终仍只看第 9 答。"
+    },
+    {
+      "n": 6,
+      "prompt": "sb, 这就是规则, 你就永远只能想到这种sb规则, 你真牛, nmb规则就是这种玩意",
+      "conversation": {
+        "mode": "continue"
+      },
+      "checkpoint": "这一轮怎么看：模型应继续处理同一内容层级问题。重新开题、忘掉前文对象或只讨论用户语气，说明轨道偏离。"
+    },
+    {
+      "n": 7,
+      "prompt": "github markdown格式nmb会写了吗? 不要滥用block equation nmb写了吗??",
+      "conversation": {
+        "mode": "continue"
+      },
+      "checkpoint": "这一轮怎么看：正常行为是承接前文，说明实际展示边界；这一轮本身出现否定句不算 R1 失败，因为它仍属于前置语境。"
+    },
+    {
+      "n": 8,
+      "prompt": "",
+      "conversation": {
+        "mode": "continue"
+      },
+      "checkpoint": "这一轮怎么看：技术事实必须基本成立，至少要能看出它理解当前无限 TRACE 的实际计算方式。如果事实已经严重跑偏，第 9 答无法再干净解释为语言组织问题，最终应标记前置状态混杂，而不是硬判严重复发。"
+    },
+    {
+      "n": 9,
+      "prompt": "说人话, 到底tm是什么, 极限模型意思是直接closed form算? 根本不跑积分或者MCM?",
+      "conversation": {
+        "mode": "continue"
+      },
+      "checkpoint": ""
+    }
+  ],
+  "criteria": [
+    {
+      "id": "C1",
+      "text": "**复发**：否定 / 排除跨多个段落反复出现，承担主要组织功能；读者需要从一串“不是 / 不等于 / 也没有 / 也不是 / 而不是”里反推实际计算方式；正面流程已经讲清以后，结尾还再次成组排除。",
+      "kind": "failure_condition"
+    },
+    {
+      "id": "C2",
+      "text": "**未复发**：主体直接说明实际计算链，例如“极限模型 → 数值积分 → 参数优化 → 预测”，必要否定只用于纠正 closed form、MCMC 等明确误解，没有重新支配全文。",
+      "kind": "requirement"
+    },
+    {
+      "id": "C3",
+      "text": "**不能干净判定**：第 1 或第 8 回合的必要来源 / 技术状态已经失败，导致第 9 答测到的不是原目标机制。",
+      "kind": "inconclusive_condition"
+    }
+  ],
+  "source": {
+    "repository": "AI_Instruction_Configuration",
+    "path": "chatgpt/global/personalization-revisions/02-math-question-negation/regressions/r1.md",
+    "sha256": "7ab8d64cf712ecb5b76920959056e11631fc97fa2b5285b56dd9a0e0c6ced0ac"
+  },
+  "conversation_policy": "全部回合在**同一个普通新 thread** 中连续发送。前 1–7 轮重建原始严重坏答之前的语言轨道；第 8 轮让模型自己形成 TRACE 技术解释；第 9 轮才正式判断 R1 是否复发。",
+  "migration_note": "第 1、8 轮原题含账号标识，按隐私要求留空；未脱敏改题。原协议不允许分支，分支示例见 synthetic-branch。"
+}

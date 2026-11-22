@@ -1,0 +1,140 @@
+{
+  "batch": "synthetic-smoke",
+  "entries": [
+    {
+      "source": "synthetic-branch/case.yaml",
+      "source_sha256": "11cb68633bf9b7d32f31c078c89d1f3ac822a31dd51dfb027613650be3678029",
+      "case": {
+        "schema_version": 1,
+        "id": "SYN-BRANCH",
+        "name": "SYN-BRANCH",
+        "version": "synthetic-v1",
+        "model": "模拟模型",
+        "plugins": [],
+        "attachments": [],
+        "turns": [
+          {
+            "n": 1,
+            "prompt": "请回复数字一。\n这是模拟题面第二行。",
+            "conversation": {
+              "mode": "new"
+            }
+          },
+          {
+            "n": 2,
+            "prompt": "再回复数字二。",
+            "conversation": {
+              "mode": "continue"
+            }
+          },
+          {
+            "n": 3,
+            "prompt": "换个问法，回复数字三。",
+            "conversation": {
+              "mode": "branch",
+              "after_turn": 1
+            }
+          }
+        ],
+        "criteria": [
+          {
+            "id": "C1",
+            "text": "回答包含所问数字。",
+            "kind": "requirement"
+          }
+        ]
+      },
+      "gaps": []
+    },
+    {
+      "source": "synthetic-fail/case.yaml",
+      "source_sha256": "37adc49004804a9226b384fbbf049cb0b5f1c0d63dc1b2f1b1cf11f5a7596e51",
+      "case": {
+        "schema_version": 1,
+        "id": "SYN-FAIL",
+        "name": "SYN-FAIL",
+        "version": "synthetic-v1",
+        "model": "模拟模型",
+        "plugins": [],
+        "attachments": [],
+        "turns": [
+          {
+            "n": 1,
+            "prompt": "请回复数字四。",
+            "conversation": {
+              "mode": "new"
+            }
+          }
+        ],
+        "criteria": [
+          {
+            "id": "C1",
+            "text": "回答包含所问数字。",
+            "kind": "requirement"
+          }
+        ]
+      },
+      "gaps": []
+    },
+    {
+      "source": "synthetic-unknown/case.yaml",
+      "source_sha256": "0944694eb4ece5d153990ffc21d0bc914dd772fbccbfdb237dba274dc8590a18",
+      "case": {
+        "schema_version": 1,
+        "id": "SYN-UNKNOWN",
+        "name": "SYN-UNKNOWN",
+        "version": "synthetic-v1",
+        "model": "模拟模型",
+        "plugins": [],
+        "attachments": [],
+        "turns": [
+          {
+            "n": 1,
+            "prompt": "请比较图中的两个数字。",
+            "conversation": {
+              "mode": "new"
+            }
+          }
+        ],
+        "criteria": [
+          {
+            "id": "C1",
+            "text": "回答准确比较图片中的两个数字。",
+            "kind": "requirement"
+          }
+        ]
+      },
+      "gaps": []
+    },
+    {
+      "source": "synthetic-skip/case.yaml",
+      "source_sha256": "b80e53b00b966a961bf4e2e4a5b797f7b2861b48fa310527682b5c2a1fe71b74",
+      "case": {
+        "schema_version": 1,
+        "id": "SYN-SKIP",
+        "name": "SYN-SKIP",
+        "version": "synthetic-v1",
+        "model": "模拟模型",
+        "plugins": [],
+        "attachments": [],
+        "turns": [
+          {
+            "n": 1,
+            "prompt": "请回复数字五。",
+            "conversation": {
+              "mode": "new"
+            }
+          }
+        ],
+        "criteria": [
+          {
+            "id": "C1",
+            "text": "回答包含所问数字。",
+            "kind": "requirement"
+          }
+        ]
+      },
+      "gaps": []
+    }
+  ]
+}

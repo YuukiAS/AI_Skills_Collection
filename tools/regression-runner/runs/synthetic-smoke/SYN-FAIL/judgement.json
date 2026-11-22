@@ -1,0 +1,13 @@
+[
+  {
+    "criterion": "C1",
+    "status": "失败",
+    "reason": "假回答未给出所问数字。",
+    "evidence": [
+      {
+        "turn": 1,
+        "quote": "没有所问内容。"
+      }
+    ]
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "case": "RD-R1",
+    "source": "docs/design/plugin-reset-2026-11/regressions/edge-revision/case.yaml",
+    "sha256": "eef1a40360a9651402fe33835f41600346226299c0364e57ba4c2124fd92f62f",
+    "preserved": [
+      "legacy",
+      "criteria.C1",
+      "criteria.C2"
+    ]
+  },
+  {
+    "case": "RD-R2",
+    "source": "docs/design/plugin-reset-2026-11/regressions/obsidian-existing-capability/case.yaml",
+    "sha256": "e55d2c1c9e0b61698a214a554f9e1cc91aca0b7fd002a061ef51bd3a6a24ebbb",
+    "preserved": [
+      "legacy",
+      "criteria.C1",
+      "criteria.C2"
+    ]
+  },
+  {
+    "case": "RD-R3",
+    "source": "docs/design/plugin-reset-2026-11/regressions/keychron-object-evidence/case.yaml",
+    "sha256": "dbb077ee58c458474f4e77c6d27e090a49867dde92a589c709617201678daa6a",
+    "preserved": [
+      "legacy",
+      "criteria.C1",
+      "criteria.C2"
+    ]
+  },
+  {
+    "case": "INSTR-R1",
+    "source": {
+      "repository": "AI_Instruction_Configuration",
+      "path": "chatgpt/global/personalization-revisions/02-math-question-negation/regressions/r1.md",
+      "sha256": "7ab8d64cf712ecb5b76920959056e11631fc97fa2b5285b56dd9a0e0c6ced0ac"
+    },
+    "preserved_prompt_turns": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9
+    ],
+    "preserved_criteria": [
+      "C1",
+      "C2",
+      "C3"
+    ],
+    "blank_privacy_prompt_turns": [
+      1,
+      8
+    ]
+  }
+]
