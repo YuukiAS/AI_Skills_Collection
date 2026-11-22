@@ -6,6 +6,10 @@ import hashlib
 import json
 import re
 import sys
+import shutil
+import subprocess
+import tempfile
+import time
 from pathlib import Path
 
 import yaml
@@ -58,18 +62,13 @@ def main():
             cells = [c.strip() for c in line.strip("|").split("|")]
             candidate_rows[cells[1].strip("`")] = cells[2]
     source_tests = {}
-    for case in data["regressions"]:
-        if case["source"] == "已有":
-            source = yaml.safe_load((root / case["test_source"]).read_text())
-            assert case["test"] == source["期望行为"]
-            assert case["judgment"] == source["判定方式"]
-            source_tests[case["id"]] = source["期望行为"]
-        elif case["name"] in candidate_rows:
-            assert case["test"] == candidate_rows[case["name"]]
-            source_tests[case["id"]] = candidate_rows[case["name"]]
-        else:
-            assert case["id"] == "R4" and case["test"] and case["judgment"] and case["draft_by"]
-            source_tests[case["id"]] = case["test"]  # v3 canonical draft is blueprint.yaml.
+    for case in data['regressions']:
+        draft = case['old_draft']
+        if case['source'] == '已有':
+            source = yaml.safe_load((root / case['test_source']).read_text())
+            assert draft['test'] == source['期望行为']
+            assert draft['judgment'] == source['判定方式']
+        source_tests[case['id']] = draft['test']
     expected_rule_positions = set()
     for source in (root / data["sources"]["skill_root"]).rglob("*"):
         if source.is_file() and source.suffix in (".md", ".yaml"):
@@ -79,7 +78,7 @@ def main():
                     expected_rule_positions.add((match[1], str(source.relative_to(root)), n))
     assert {(r["id"], r["file"], r["line"]) for r in data["rules"]} == expected_rule_positions
     from build_blueprint import source_files, rule_ids
-    from check_blueprint import check_data, check_html_ids
+    from check_blueprint import check_data, check_html_ids, check_visible_language
     from urllib.request import Request, urlopen
     from urllib.error import HTTPError
     files = source_files(data, root)
@@ -137,17 +136,18 @@ def main():
         assert page.locator('.check').count() == 0
         assert json.loads(page.locator('#blueprint-data').text_content()) == data
         assert page.locator('.description').all_text_contents() == [s['description'] for s in data['skills']]
-        assert '待办 17 条（全部在 0.1 解决）' in page.locator('#cards').text_content()
-        rewrite_todos = [t for t in data['todos'] if t['assessment']['status'] in ('约束不足', '约束过度')]
-        insufficient = sum(t['assessment']['status'] == '约束不足' for t in data['todos'])
-        excessive = sum(t['assessment']['status'] == '约束过度' for t in data['todos'])
-        expected_cards = ['2', '17', '7', '0', '0', str(len(rewrite_todos))]
+        assert '待办 15 条（全部在 0.1 解决）' in page.locator('#cards').text_content()
+        active_todos = [t for t in data['todos'] if not t.get('merged_into')]
+        rewrite_todos = [t for t in active_todos if t['assessment']['status'] in ('约束不足', '约束过度')]
+        insufficient = sum(t['assessment']['status'] == '约束不足' for t in active_todos)
+        excessive = sum(t['assessment']['status'] == '约束过度' for t in active_todos)
+        expected_cards = ['2', '15', '7', '0', '0', str(len(rewrite_todos))]
         assert page.locator('#cards .card').nth(5).locator('div').nth(1).inner_text() == f'约束不足 {insufficient} · 过度 {excessive}'
         assert page.locator('.number').all_text_contents() == expected_cards
         assert page.locator('[data-card="5"]').evaluate('e=>getComputedStyle(e).color') == 'rgb(154, 103, 0)'
 
         def shot(name, full=False):
-            if name in {'first-screen-1440.png', 'todo-expanded-1440.png'}:
+            if name in {'first-screen-1440.png', 'todo-expanded-1440.png', 'regression-expanded-1440.png'}:
                 page.screenshot(path=str(output / name), full_page=full)
                 screenshots.append(name)
 
@@ -156,7 +156,7 @@ def main():
 
         def check_home_navigation(tab):
             assert tab.locator('#actions h2').inner_text() == '你要做的'
-            assert tab.locator('#actions>p').count() == 3
+            assert tab.locator('#actions>p').count() == 4
             assert tab.locator('#actions>p').first.inner_text() == '选 7 个回归的版本（0.1 / 0.2 / 搁置），已选 0 个 去选'
             assert tab.evaluate('''() => {
                 const cards=document.getElementById('cards'), actions=document.getElementById('actions');
@@ -170,7 +170,8 @@ def main():
                 # Click the card padding to exercise the whole card hit area.
                 card.click(position={'x': 5, 'y': 5})
                 tab.wait_for_function('hash=>location.hash===hash', arg='#' + target)
-                assert abs(tab.locator('#' + target).bounding_box()['y']) < 50
+                target_y = tab.locator('#' + target).bounding_box()['y']
+                assert abs(target_y) < 50 or (0 <= target_y < tab.viewport_size['height'] and tab.evaluate('scrollY + innerHeight >= document.documentElement.scrollHeight - 2')), (target, target_y)
             disabled = tab.locator('#cards .card').nth(3)
             assert disabled.evaluate('e=>e.tagName') == 'DIV'
             assert disabled.locator('a,button').count() == 0
@@ -179,7 +180,7 @@ def main():
             assert tab.evaluate('location.hash') == before_hash
             tab.locator('#actions a[href="#regressions"]').click()
             tab.wait_for_function('location.hash === "#regressions"')
-            assert tab.locator('#todo-progress').inner_text() == '对 17 条待办的建议表态，已表态 0 条，其中不同意 0、有疑问 0 去表态'
+            assert tab.locator('#todo-progress').inner_text() == '对 15 条待办的建议表态，已表态 0 条，其中不同意 0、有疑问 0 去表态'
             tab.locator('#todo-progress a').click()
             tab.wait_for_function('location.hash === "#todos"')
             for todo in rewrite_todos:
@@ -220,14 +221,14 @@ def main():
             id_, a = todo['id'], todo['assessment']
             row = page.locator(f'#todo-{id_}')
             detail = page.locator(f'#detail-{id_}')
-            assert row.locator('.todo-need').text_content() == a['need']
+            assert row.locator('.todo-need').text_content() == (f'已并入 {todo["merged_into"]} · ' if todo.get('merged_into') else '') + a['need']
             assert row.locator('.assessment-status').text_content() == a['status']
             colors = row.locator('.assessment-status').evaluate('e=>[getComputedStyle(e).color,getComputedStyle(e).backgroundColor]')
-            assert colors == {
+            assert colors == ({
                 '约束不足': ['rgb(154, 103, 0)', 'rgb(255, 244, 214)'],
                 '约束适当': ['rgb(26, 127, 55)', 'rgb(230, 244, 234)'],
                 '约束过度': ['rgb(180, 35, 24)', 'rgb(253, 232, 232)'],
-            }[a['status']]
+            }[a['status']] if not todo.get('merged_into') else ['rgb(136, 136, 136)', 'rgb(229, 229, 229)'])
             row.locator('.assessment-status').hover()
             assert row.locator('.assessment-status').get_attribute('title') == {
                 '约束不足': '规则是可选的、覆盖太窄、太抽象或有漏洞，模型可以合法跳过',
@@ -235,7 +236,7 @@ def main():
                 '约束过度': '写得太死或绑定具体案例，会在其他正当场景误伤',
             }[a['status']]
             assert row.locator('.assessment-change-summary').text_content() == '改动：' + a['change']
-            assert row.locator('.assessment-change-summary').evaluate('e=>getComputedStyle(e).color') == 'rgb(119, 119, 119)'
+            assert row.locator('.assessment-change-summary').evaluate('e=>getComputedStyle(e).color') == ('rgb(136, 136, 136)' if todo.get('merged_into') else 'rgb(119, 119, 119)')
             assert row.locator('.assessment-change-summary').evaluate('e=>getComputedStyle(e).fontSize') == '12px'
             reference = any(r['id'] in rule_ids(todo) and r['location_type'] == '引用文件' for r in data['rules'])
             assert row.locator('.rule-location').count() == int(reference)
@@ -245,7 +246,12 @@ def main():
             assert detail.locator('.todo-title').text_content() == todo['title']
             for field in ('by', 'case', 'rule_quote', 'rule_id', 'why', 'change', 'proposal'):
                 assert detail.locator('.assessment-' + field.replace('_', '-')).text_content() == a[field], (id_, field)
-            assert detail.locator('.assessment-block>strong').all_text_contents() == ['案例：', '现在怎么写的：', '为什么：', '改动：', '建议改成：']
+            assert detail.locator('.assessment-block>strong').all_text_contents() == ['案例：', '现在怎么写的：', '为什么：', '改动：', '建议改成：'] + (['GPT Pro 意见：'] if todo['pro'] else [])
+            assert row.locator('.pro-badge').count() == bool(todo['pro'])
+            if todo['pro']:
+                expected_pro = [re.sub(r'(?m)^(?:### |> ?)', '', chunk) for chunk in todo['pro'].split('\n\n')]
+                assert detail.locator('.pro-opinion>*').all_text_contents() == expected_pro
+                assert detail.locator('.pro-opinion').evaluate('e=>getComputedStyle(e).borderLeft') == '2px solid rgb(124, 58, 237)'
             assert not detail.locator('.todo-original').evaluate('e=>e.open')
             detail.locator('.todo-original>summary').click()
             for key, class_ in [('problem', 'problem'), ('source_text', 'source')]:
@@ -259,17 +265,29 @@ def main():
                 assert detail.locator('.note').text_content() == todo['note']
             detail.locator('.todo-original>summary').click()
             row.locator('.toggle').click()
-        assert page.locator('#detail-T14 .known-note').text_content() == '与 T13 的需求文字相同，待 GPT Pro 拆分'
-        assert page.locator('#detail-U1 .known-note').text_content() == '与 T01 相同，U1 是用户原话'
+        for merged_id, target_id in [('T14', 'T13'), ('U1', 'T01')]:
+            row = page.locator('#todo-' + merged_id)
+            assert row.locator('.todo-need a').inner_text() == target_id
+            assert row.locator('.todo-stance button:disabled').count() == 3
+            row.locator('.todo-need a').click()
+            page.locator('#detail-' + target_id).wait_for(state='visible')
         for case in data['regressions']:
             row = page.locator(f'#reg-{case["id"]}')
-            assert row.locator('.test-text').text_content() == case['test']
-            assert row.locator('.judgment').text_content() == case['judgment']
-            if case.get('draft_by'):
-                assert row.locator('.draft-by').text_content() == case['draft_by']
-                assert row.locator('.draft-by').evaluate('e=>getComputedStyle(e).fontSize') == '12px'
+            assert row.locator('.test-text, .judgment, .draft-by').count() == 0
+            assert row.locator('.name').text_content() == case['name']
+            assert row.locator('.reg-scenario').text_content() == case['scenario']
+            assert row.locator('.pro-pick').count() == int(case['pro_pick'])
+            for label, value in case['environment'].items():
+                assert row.locator(f'[data-environment="{label}"]').text_content() == value
+            assert row.locator('.reg-criteria li').all_text_contents() == [c['text'] for kind in ('failure_condition', 'requirement') for c in case['criteria'] if c['kind'] == kind]
+            assert row.locator('.reg-why').text_content() == case['why_01']
+            assert row.locator('.pro-pick').count() == int(case['pro_pick'])
+            assert row.locator('.reg-criteria li').all_text_contents() == [c['text'] for kind in ('failure_condition', 'requirement') for c in case['criteria'] if c['kind'] == kind]
+            for label, value in case['environment'].items():
+                assert row.locator(f'[data-environment="{label}"]').text_content() == value
+            assert row.locator('.detail>div>strong').all_text_contents() == ['场景：', '环境：', 'Prompt', '怎么判：', '为什么放进 0.1：']
             row.locator('.toggle').click()
-            assert page.locator(f'#detail-{case["id"]}').is_visible()
+            page.locator(f'#detail-{case["id"]}').wait_for(state='visible')
             section = row.locator('.prompt-section')
             assert section.locator('strong').inner_text() == 'Prompt'
             turns = prompts[case['id']]
@@ -288,7 +306,7 @@ def main():
                         assert fold.locator('.prompt-empty').inner_text() == '本轮 prompt 待补'
             if case['id'] == 'R1':
                 row.evaluate('e=>e.scrollIntoView({block:"start"})')
-                shot('regression-prompt-1440.png')
+                shot('regression-expanded-1440.png')
             row.locator('.toggle').click()
 
         # Real clicks: todo -> source + 1.5s flash -> todo, with browser back.
@@ -316,28 +334,28 @@ def main():
         source_y = page.evaluate('scrollY')
         target.locator('xpath=..').locator('a[href="#todo-T10"]').click()
         page.wait_for_function('location.hash === "#todo-T10"')
-        assert page.locator('#detail-T10').is_visible()
+        page.locator('#detail-T10').wait_for(state='visible')
         page.go_back()
         page.wait_for_function('location.hash === "#rule-SD-06"')
         assert file.evaluate('e=>e.open')
         assert abs(page.evaluate('scrollY') - source_y) < 5
         page.go_back()
         page.wait_for_function('location.hash === "#todo-T10"')
-        assert page.locator('#detail-T10').is_visible()
+        page.locator('#detail-T10').wait_for(state='visible')
         assert abs(page.locator('#todo-T10').bounding_box()['y'] - origin_top) < 5
         # Todo regression capsule expands its destination; regression -> todo.
         page.locator('#todo-T10 .coverage a[href="#reg-R5"]').click()
         page.wait_for_function('location.hash === "#reg-R5"')
-        assert page.locator('#detail-R5').is_visible()
+        page.locator('#detail-R5').wait_for(state='visible')
         page.locator('#reg-R4 .id a').click()
-        page.wait_for_function('location.hash === "#reg-R4"')
-        assert page.locator('#detail-R4').is_visible()
+        page.wait_for_function('location.hash === "#reg-R4" && !document.getElementById("detail-R4").hidden')
+        page.locator('#detail-R4').wait_for(state='visible')
         page.locator('#reg-R4 .coverage a[href="#todo-T01"]').click()
         page.wait_for_function('location.hash === "#todo-T01"')
-        assert page.locator('#detail-T01').is_visible()
+        page.locator('#detail-T01').wait_for(state='visible')
         page.go_back()
         page.wait_for_function('location.hash === "#reg-R4"')
-        assert page.locator('#detail-R4').is_visible()
+        page.locator('#detail-R4').wait_for(state='visible')
         page.locator('#back-top').click()
         page.wait_for_function('location.hash === "#top"')
         assert page.evaluate('scrollY') < 50
@@ -348,7 +366,7 @@ def main():
         assert page.locator(tree_hash).evaluate('e=>e.open')
         page.locator(tree_hash + ' summary .pill').first.click()
         page.wait_for_function('location.hash === "#todo-T07"')
-        assert page.locator('#detail-T07').is_visible()
+        page.locator('#detail-T07').wait_for(state='visible')
         assert page.locator(tree_hash).evaluate('e=>e.open')
         # Direct deep links open the file even in a fresh browser page.
         deep = context.new_page()
@@ -369,7 +387,7 @@ def main():
         assert persisted['regressions']['R1'] == '0.1' and persisted['regressions']['R2'] == '搁置'
         assert page.locator('[data-card="4"]').inner_text() == '1'
         assert page.locator('#selected-count').inner_text() == '2'
-        assert page.locator('#saved').is_visible()
+        page.locator('#saved').wait_for(state='visible')
         page.wait_for_timeout(2200)
         assert not page.locator('#saved').is_visible()
         rejected = Request(url + 'api/decisions', data=json.dumps({'group': 'todos', 'id': 'T03', 'value': '0.2'}).encode(), headers={'Content-Type': 'application/json'})
@@ -424,7 +442,7 @@ def main():
         choice.locator('[data-value="有疑问"]').click()
         page.evaluate('saveQueue')
         assert note.is_visible() and note.input_value() == text
-        assert page.locator('#todo-progress').inner_text() == '对 17 条待办的建议表态，已表态 1 条，其中不同意 0、有疑问 1 去表态'
+        assert page.locator('#todo-progress').inner_text() == '对 15 条待办的建议表态，已表态 1 条，其中不同意 0、有疑问 1 去表态'
         choice.locator('.toggle').click()
         choice.evaluate('e=>e.scrollIntoView({block:"start"})')
         shot('todo-stance-1440.png')
@@ -463,7 +481,7 @@ def main():
         assert mobile.evaluate('document.documentElement.scrollWidth <= innerWidth')
         mobile.locator('#todo-T10 [data-value="有疑问"]').click()
         mobile.evaluate('saveQueue')
-        assert mobile.locator('#todo-T10 textarea').is_visible()
+        mobile.locator('#todo-T10 textarea').wait_for(state='visible')
         assert mobile.evaluate('document.documentElement.scrollWidth <= innerWidth')
         mobile.locator('#todo-T10 [data-value="有疑问"]').click()
         mobile.evaluate('saveQueue')
@@ -476,7 +494,7 @@ def main():
         offline.goto((directory / 'index.html').as_uri())
         offline.evaluate('window.blueprintReady')
         offline.evaluate('document.fonts.ready')
-        assert offline.locator('#offline').is_visible()
+        offline.locator('#offline').wait_for(state='visible')
         assert offline.locator('#offline span').inner_text() == '未连接本地服务，选择只存在本浏览器'
         assert offline.locator('#export').is_enabled()
         # Upgrade old local storage without interpreting obsolete todo versions as stances.
@@ -563,7 +581,7 @@ def main():
     assert all(hashlib.sha256((root / path).read_bytes()).hexdigest() == value for path, value in prompt_hashes.items())
     result = {
         'self_checks': [
-            {'id': 1, 'status': '通过', 'result': '全部待办来源与页面、17 条 assessment 的全部字段逐字一致；7 条回归 test / judgment 与当前 blueprint.yaml 逐字一致，已有来源另行核对；4 条 draft_by 如实展示。'},
+            {'id': 1, 'status': '通过', 'result': '全部待办来源与页面、17 条 assessment 的全部字段逐字一致；7 条回归场景、环境、Prompt、判据与理由逐字核对；旧稿仅存数据。'},
             {'id': 2, 'status': '通过', 'result': 'R1=0.1、R2=搁置写入读回；待办不同意、1 秒防抖保存、多行输入刷新保留、同意收起且文件保留、有疑问与统计均实测，随后清空恢复。'},
             {'id': 3, 'status': '通过', 'result': 'file:// 黄色提示、旧本地数据迁移、回归与待办表态和备注导出、重新打开均已验证。'},
             {'id': 4, 'status': '通过', 'result': '1440 宽首屏、待办展开区两张截图；390 宽导航、表态与无溢出实测。'}],
@@ -575,8 +593,8 @@ def main():
                             'source_lines': sum(len(f['lines']) for f in files), 'source_files_sha256': source_hashes,
                             'assessment_fields': len(data['todos']) * 9, 'assessment_exact_dom_comparisons': 'PASS',
                             'blueprint_sha256_before_and_after': blueprint_hash,
-                            'new_draft_authority': 'blueprint.yaml, R4 test / R4-R7 judgment; draft_by retained; no semantic review'},
-        'mechanical_checks': check_data(data, root) + [check_html_ids((directory / 'index.html').read_text())],
+                            'new_draft_authority': 'PRO_R1_REVIEW.md and regression-runner R1-R7 case.yaml'},
+        'mechanical_checks': check_data(data, root) + [check_html_ids((directory / 'index.html').read_text()), check_visible_language((directory / 'index.html').read_text())],
         'prompt_sources': prompt_sources, 'prompt_source_sha256': prompt_hashes,
         'prompt_rendering': {'real_case_fidelity': 'PASS', 'synthetic_new_continue_branch_partial_gap': 'PASS',
                              'fixture_source_files_modified': False,
@@ -593,5 +611,116 @@ def main():
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
 
+def isolated_acceptance():
+    """Exercise writes on a disposable copy; inspect and capture real choices read-only."""
+    parser = argparse.ArgumentParser()
+    parser.add_argument('plugin')
+    parser.add_argument('--port', type=int, default=18765)
+    parser.add_argument('--browser', default='/usr/bin/chromium-browser')
+    args = parser.parse_args()
+    from build_blueprint import build
+    directory = BASE / args.plugin
+    decisions_path = directory / 'decisions.yaml'
+    before = decisions_path.read_bytes()
+    original = load(decisions_path)
+    build(directory / 'blueprint.yaml')
+    data = load(directory / 'blueprint.yaml')
+    from check_blueprint import check_visible_language
+    scan_fixture = check_visible_language('<p id="bad">BAD_STATE one-two-three</p><pre>CODE_STATE</pre><p>docs/FILE_NAME/one-two-three.md</p>')
+    assert scan_fixture['count'] == 2 and {h['location'] for h in scan_fixture['hits']} == {'bad'}
+    root = repo_root()
+    root_copy = Path(tempfile.mkdtemp(prefix='blueprint-v5-qa-'))
+    (root_copy / 'AGENTS.md').write_text('# Isolated Blueprint acceptance fixture\n')
+    relative = BASE.relative_to(root)
+    copied_base = root_copy / relative
+    shutil.copytree(BASE, copied_base, ignore=shutil.ignore_patterns('previews', '__pycache__'))
+    for relative_source in [data['sources']['coverage'], data['sources']['todo'], data['sources']['candidates']]:
+        destination = root_copy / relative_source
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(root / relative_source, destination)
+    for relative_source in [data['sources']['skill_root'], 'tools/regression-runner/examples/' + args.plugin,
+                            'docs/design/plugin-reset-2026-11/regressions']:
+        destination = root_copy / relative_source
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(root / relative_source, destination, dirs_exist_ok=True)
+    copied_directory = copied_base / args.plugin
+    (copied_directory / 'decisions.yaml').write_text(json.dumps(initial_decisions(data), ensure_ascii=False, indent=2) + '\n')
+    processes = []
+    try:
+        for base, port in [(copied_base, args.port + 1), (BASE, args.port)]:
+            log = (root_copy / f'server-{port}.log').open('w')
+            process = subprocess.Popen([sys.executable, str(base / 'serve_blueprint.py'), args.plugin, '--port', str(port)], stdout=log, stderr=log)
+            processes.append(process)
+            from urllib.request import urlopen
+            for _ in range(50):
+                if process.poll() is not None:
+                    raise RuntimeError('QA server failed; see ' + str(root_copy))
+                try:
+                    urlopen(f'http://127.0.0.1:{port}/', timeout=1).close()
+                    break
+                except OSError:
+                    time.sleep(.1)
+            else:
+                raise RuntimeError('QA server did not start')
+        subprocess.run([sys.executable, str(copied_base / 'check_blueprint_ui.py'), args.plugin,
+                        '--port', str(args.port + 1), '--browser', args.browser],
+                       env={**__import__('os').environ, 'BLUEPRINT_ISOLATED_QA': '1'}, check=True,
+                       stdout=(root_copy / 'ui-check.log').open('w'))
+        result = load(copied_directory / 'previews/self-check.json')
+        errors = []
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch(executable_path=args.browser, headless=True,
+                                                 args=['--no-sandbox', '--disable-dev-shm-usage'])
+            page = browser.new_page(viewport={'width': 1440, 'height': 1000})
+            page.on('pageerror', lambda error: errors.append(str(error)))
+            page.on('console', lambda msg: errors.append(msg.text) if msg.type == 'error' else None)
+            page.goto(f'http://127.0.0.1:{args.port}/')
+            page.evaluate('window.blueprintReady')
+            page.evaluate('document.fonts.ready')
+            for id_, choice in original['todos'].items():
+                assert page.locator(f'#todo-{id_} textarea').input_value() == choice['note']
+                if choice['stance']:
+                    assert page.locator(f'#todo-{id_} [data-value="{choice["stance"]}"]').get_attribute('aria-pressed') == 'true'
+            assert page.locator('#stance-count').inner_text() == str(sum(v['stance'] is not None for k, v in original['todos'].items() if k not in ('T14', 'U1')))
+            assert page.locator('#pro-picks a').all_text_contents() == ['R1', 'R3', 'R5']
+            for id_ in ['R1', 'R3', 'R5']:
+                page.locator(f'#pro-picks a[href="#reg-{id_}"]').click()
+                page.locator('#detail-' + id_).wait_for(state='visible')
+            page.goto(f'http://127.0.0.1:{args.port}/')
+            page.evaluate('window.blueprintReady')
+            page.screenshot(path=str(directory / 'previews/first-screen-1440.png'))
+            page.set_viewport_size({'width': 1440, 'height': 1500})
+            page.locator('#todo-T02 .toggle').click()
+            page.locator('#todo-T02').evaluate('e=>e.scrollIntoView({block:"start"})')
+            page.screenshot(path=str(directory / 'previews/todo-expanded-1440.png'))
+            page.locator('#reg-R4 .toggle').click()
+            page.locator('#reg-R4 .prompt-turn summary').first.click()
+            page.locator('#reg-R4').evaluate('e=>e.scrollIntoView({block:"start"})')
+            page.screenshot(path=str(directory / 'previews/regression-expanded-1440.png'))
+            assert not errors, errors
+            browser.close()
+        assert decisions_path.read_bytes() == before
+        result['user_decisions'] = {'byte_identical': True, 'sha256_before': hashlib.sha256(before).hexdigest(),
+                                    'sha256_after': hashlib.sha256(decisions_path.read_bytes()).hexdigest(),
+                                    'existing_stances_and_notes_dom': 'PASS', 'write_tests': 'disposable copy only'}
+        result['screenshots'] = ['first-screen-1440.png', 'todo-expanded-1440.png', 'regression-expanded-1440.png']
+        from check_blueprint import check_visible_language
+        result['language_scan'] = check_visible_language((directory / 'index.html').read_text(), original)
+        from check_blueprint import check_data, check_html_ids
+        result['mechanical_checks'] = check_data(data, root) + [check_html_ids((directory / 'index.html').read_text()), result['language_scan']]
+        result['self_checks'][3]['result'] = '1440 宽首屏、Pro 待办展开、回归展开截图已更新；390 宽交互与无溢出实测。'
+        (directory / 'previews/self-check.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
+        print(json.dumps({'click_checks': 'PASS', 'decisions_byte_identical': True, 'language_scan_hits': result['language_scan']['count'], 'qa_log': str(root_copy / 'ui-check.log')}, ensure_ascii=False))
+        if result['language_scan']['count']:
+            raise SystemExit(1)
+    finally:
+        for process in processes:
+            process.terminate()
+            process.wait(timeout=10)
+
+
 if __name__ == '__main__':
-    main()
+    if __import__('os').environ.get('BLUEPRINT_ISOLATED_QA') == '1':
+        main()
+    else:
+        isolated_acceptance()

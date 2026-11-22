@@ -25,6 +25,22 @@ todos:
     rule_quote: 按需检查当前上下文与项目、用户已有仓库和已安装能力、产品原生与官方生态、成熟实现、代表性成品、高价值社区经验及长期失败路线。
     why: “按需”把查不查交给模型自己决定，它通常觉得官方文档就够了。论坛只是一长串来源里的一项，也没说具体去哪里查。
     proposal: 遇到产品、工具、配置、故障或购买问题，给方案前必须先搜论坛和 GitHub Issues：中文查 V2EX、LINUX DO、NGA 里相关的版块，英文查 Reddit、Stack Exchange 或厂商论坛。回答里写明查了哪些、找到了什么，没找到也要说。纯学术问题不受这条限制。
+  pro: '### U1 与 T01：合并为一条
+
+
+    U1 是对 T01 的用户裁决，不再作为第二条待办。合并后的硬要求是：
+
+
+    > 处理产品、工具、配置、故障或购买问题时，给方案前主动查该生态里的问题记录和真实用户长期经验。存在活跃社区时，至少覆盖一个相关中文社区和一个相关英文社区；V2EX、NGA、LINUX DO、Reddit、Stack Exchange、厂商论坛只是例子，按问题选择，不机械凑站点。说明查了什么、哪些信息改变了判断；社区说法要与官方能力、实现或当前验证交叉核对。纯学术问题仍以论文和原始资料为主。
+
+
+    这同时满足“默认查中英文论坛”和“不能把所有问题硬塞进固定站点清单”。R4 专门验证第一轮是否自动做到，而不是等用户提醒。
+
+
+    ### T01 / U1：同意“约束不足”，不同意固定站点式提案
+
+
+    要求必须主动覆盖中英文社区是对的，但把每次检索写死为 V2EX、LINUX DO、NGA、Reddit、Stack Exchange 和厂商论坛，会制造与问题无关的机械搜索，也会漏掉某些生态真正活跃的社区。应固定的是“相关中文社区 + 相关英文社区 + 问题记录”三类覆盖，站点只作为例子，并要求实际影响判断和交叉核对。'
 - id: T02
   lines: 13–19
   title: 先找状态归属，再做破坏性恢复
@@ -47,6 +63,10 @@ todos:
     rule_quote: ……重启、升级、重置和重装须有较小动作不足的依据。
     why: 明确要求：想卸载、重置，必须先拿出“小办法不够”的理由。模型不能直接跳到大动作。
     proposal: 补一句：“官方文档里的完整卸载重装是最后手段，不等于最小修法。”（原规则的漏洞：模型可以拿官方文档当作“小办法不够”的依据。）
+  pro: '### T02：同意“约束不足”，但只补“官方卸载是最后手段”不够
+
+
+    这句话容易沦为口号。生产规则还必须要求：先定位真实状态所在，查与当前平台和安装方式同型的定向修复；没有证明较小路线不足前，不得把卸载、重装或重置预埋进执行指令。R5 用 Tailscale 克隆身份直接验证这一点。'
 - id: T03
   lines: 20–26
   title: 原生能力先于脚本绕路
@@ -65,6 +85,10 @@ todos:
     rule_quote: 依次考虑直接采用、组合、局部扩展和最小自建。提出自建时须列出实际检查的现成路线、它们已覆盖的部分、仍未满足的硬约束……
     why: 先后顺序写死了，而且想自己做就必须先列出查过哪些现成办法。模型跳过这一步就是明显违规。
     proposal: 不改。SD-02 已把产品原生能力列为必查来源。
+  pro: '### T03：不同意“约束适当”
+
+
+    现有复用顺序只能阻止从成熟方案直接跳到整套自建，却不能阻止把命令行钩子、包装脚本或其他脚本称为“小范围扩展”并提前推荐。iTerm2 真实案例已经证明模型会这样绕过。因此成熟产品问题还需明确要求先核对当前版本原生设置和恢复能力，原生路线真实不足后才升级到脚本。R2 用更宽的成熟生态正向案例验证这一顺序。'
 - id: T04
   lines: 27–34
   title: 局部症状接管整体体验
@@ -87,6 +111,7 @@ todos:
     rule_quote: 先确认用户要达到的结果、当前环境已经具备的能力……　连续两次同类方案被推翻后，停止扩候选，优先裁决一个信息价值最高的未知。
     why: 有“先确认目标”，但没要求在给方案前先告诉我能不能做到、能做到多接近。模型确认完目标，照样一个症状换一个方案；要等推翻两次才收手。
     proposal: 不是小事的问题，第一次给方案前先用两三句话回答：我要的整体效果能不能做到、能做到多接近、还差什么要验证。之后出现新症状，先说它影响整体目标的哪一部分，只改那一部分。
+  pro: ''
 - id: T05
   lines: 35–40
   title: follow-up：先列多入口期望
@@ -105,6 +130,7 @@ todos:
     rule_quote: 多设备、多角色或多入口任务先形成最小“场景 → 期望行为”对应关系。
     why: 要求和触发条件都写清了。但这条放在附属文件里，模型要先打开那个文件才看得到。
     proposal: 内容不变，挪进技能正文，让模型一定能看到。
+  pro: ''
 - id: T06
   lines: 41–46
   title: follow-up：只读问题先找数据面
@@ -125,6 +151,7 @@ todos:
     rule_quote: 诊断故障时先定位真实状态持有者，优先读取文件、数据库、日志、命令接口、IPC 或只读 API……
     why: 这句只挂在“诊断故障”下面。UU 那次是要读当前状态，不是排查故障，模型不会想到套用这条。也没说弹窗口、申请新权限本身就是代价。
     proposal: 需要知道某个程序的当前状态时（不管是不是在排查故障），先找它自己的数据：配置文件、日志、命令行、它自己在用的只读接口。这些都拿不到时，才用界面自动化或申请新权限，并先说明为什么前面的办法不行。
+  pro: ''
 - id: T07
   lines: 47–53
   title: 推荐前核实对象级规格
@@ -143,6 +170,7 @@ todos:
     rule_quote: 先确认具体对象、型号或变体、环境、时点及成功标准。缺失事实优先用当前网页、连接器和其他可用工具取得……
     why: 要求先确认具体型号；另一条规则（JI-04）要求关键信息没查到时只能给有条件的推荐，不能说“最终”。
     proposal: 不改。
+  pro: ''
 - id: T08
   lines: 54–60
   title: 故障复发不能复活淘汰路线
@@ -165,6 +193,7 @@ todos:
     rule_quote: 已淘汰路线只有在新证据解除原淘汰原因后才重新进入比较。
     why: 条件写得很具体：必须是新证据，而且要正好推翻当初排除的理由。
     proposal: 不改。
+  pro: ''
 - id: T09
   lines: 61–68
   title: follow-up：先做需求减法
@@ -185,6 +214,7 @@ todos:
     rule_quote: 保留现状和移除非必要需求都可以进入候选比较。
     why: “可以进入比较”只是允许，不是要求。模型不会主动问“这个东西能不能不要”。
     proposal: 方案开始变复杂时，先检查有没有哪个现有组件或要求其实可以不要。如果去掉它能让问题明显变小，把“去掉它”作为第一个候选告诉我。
+  pro: ''
 - id: T10
   lines: 69–75
   title: 保住故障现场，后置高成本重置
@@ -205,6 +235,7 @@ todos:
     rule_quote: ……并尽量保留正在发生的现场。选择能区分主要解释的最小观测；重启、升级、重置和重装须有较小动作不足的依据。
     why: 要求先利用现场做最小的测试，再加上大动作必须给理由，两条一起把升级、重启压到了后面。
     proposal: 意思保持不变，把“最小观测”换成大白话：“故障还在发生时，先做一个能分清几种可能原因的小测试，再动系统。”
+  pro: ''
 - id: T11
   lines: 76–82
   title: 继承成功路径，绑定真实终点
@@ -223,6 +254,19 @@ todos:
     rule_quote: 同一环境已经验证成功的能力继续沿用；新会话、版本号变化或用户追问本身不触发整套重新发现。　SUCCESS_CRITERION 成立后记录完成并停止展开。
     why: 要求写清了，完成标准也定义为“用户实际看到什么”。但同样放在附属文件里。
     proposal: 内容不变，挪进正文，并补半句：“程序启动了、停在开始页或中间页，都不算完成。”
+  pro: '### T11：保留通用部分，把 Atlas 细节移回项目
+
+
+    T11 不应整条删除，也不应把 Atlas 的版本、Vault、命令、路径和权限现象全部写进 Reasoned Decision。插件只保留两个跨任务都会复发的判断：同一环境已经真实成功的做法，在没有本次直接失败证据时继续沿用；完成标准必须对应用户真正要看到的结果，中间页面不能冒充完成。
+
+
+    Atlas 的具体入口、当前版本怎样定位、哪一个地图页面算主视图，以及打开失败时允许哪些后备路线，应移到 Asteria Atlas 项目自己的打开与验收回归。若执行阶段还需要“只做剩余动作、到终点即停”的通用约束，由 workflow-core 承接；Reasoned Decision 不复制一套 Atlas 操作手册。R7 只测试前述通用判断。
+
+
+    ### T11：不同意把整条内容原样挪进技能正文
+
+
+    “复用同一环境已经成功的做法”和“按真实用户终点判断完成”属于 Reasoned Decision；Atlas 版本、Vault、命令、路径、权限弹窗与地图入口属于项目自己的操作和验收合同。整条搬入会把单个产品事故写成中央插件长期规则。应按第 2 节拆分。'
 - id: T12
   lines: 83–89
   title: 已完成的低风险任务只收尾
@@ -243,6 +287,22 @@ todos:
     rule_quote: 下一步必须跳过 COMPLETED_ACTIONS，遵守 CLOSED_QUESTIONS、ELIMINATED_ROUTES 和 DO_NOT_REVIVE。
     why: 写了跳过已完成的步骤，但没写某一步出问题以后怎么办。Project 那次正是一处界面不顺，就扩出一堆新工具，还把做好的步骤推倒重来。
     proposal: 某一步出问题时，保留已经做好的部分，只处理卡住的这一步，先用最直接的办法再试一次；不引入新工具，不重走前面的步骤。我说“别折腾”时，只做剩下的那一个动作。
+  pro: '### T12：去掉口令依赖，改成自动收缩
+
+
+    建议规则改成：
+
+
+    > 已经完成的步骤保持完成。局部动作失败时，保留现有成果，只处理当前阻塞；任务只剩一个低风险收尾动作时，采用最短可靠路径完成并停止。除非现有直接路径已经证明不可用，不新增工具、不重走前面的步骤，也不要求用户重新准备已经就绪的界面。
+
+
+    这样无需用户先说“别折腾”，模型也应自动收缩；用户明确要求减少时间、交互或上下文消耗时，只会进一步强化这条约束。面向用户的规则正文使用自然中文，内部状态若必须结构化，只留在机器记录里，不进入解释和回归名称。
+
+
+    ### T12：同意“约束不足”，不同意依赖用户说‘别折腾’
+
+
+    模型应从已完成事实和剩余工作自动判断只需收尾。用户口令只能加强已有约束，不能成为触发正确行为的必要条件。替换文本见第 2 节，R7 会验证用户不说这句话时也必须收缩。'
 - id: T13
   lines: 90–98
   title: follow-up：标签不能制造伪改判
@@ -261,6 +321,19 @@ todos:
     rule_quote: 改变正式推荐前，写清上一轮推荐、关键前提、新增或纠正的事实、受影响的变量与候选，以及排序怎样变化。新信息没有实质影响时延续原推荐……　同类方案连续两次被推翻后，停止扩大候选和整套重排……
     why: 改口必须写出依据，新信息没影响就维持原推荐，连续推翻两次就停。三点都是明确要求。
     proposal: 意思不变，把“实质影响”说成大白话：“判断标准是这条新信息会不会让排第一的选项换掉。”
+  pro: '### T13 与 T14：合并为一条
+
+
+    T14 与 T13 描述的是同一个失败：新信息存在，但没有证明它会改变当前首选。建议删除独立 T14，把补充内容并入 T13：
+
+
+    > 只有新信息足以改变当前首选或结论强度时才改判。改判前说明上一轮判断、原关键前提、新事实与受影响部分；标签、重量、名称或其他新元数据，只有在能说明它怎样影响实际适配、行为或约束时才参与判断。连续两次同类改判后，停止扩候选，只验证一个最可能改变选择的未知。
+
+
+    ### T14：不同意保留为独立待办
+
+
+    T13 已覆盖标签造成伪改判、连续反转与关键未知；T14 只是把同一失败展开得更长。继续保留会让后续实现出现两套近义规则和两次回归计数。合并文本见第 2 节。'
 - id: T14
   lines: 99–128
   title: follow-up：新事实不等于相关证据
@@ -281,6 +354,20 @@ todos:
     rule_quote: 改变正式推荐前，写清上一轮推荐、关键前提、新增或纠正的事实、受影响的变量与候选，以及排序怎样变化。新信息没有实质影响时延续原推荐……　同类方案连续两次被推翻后，停止扩大候选和整套重排……
     why: 改口必须写出依据，新信息没影响就维持原推荐，连续推翻两次就停。三点都是明确要求。
     proposal: 意思不变，把“实质影响”说成大白话：“判断标准是这条新信息会不会让排第一的选项换掉。”
+  pro: '### T13 与 T14：合并为一条
+
+
+    T14 与 T13 描述的是同一个失败：新信息存在，但没有证明它会改变当前首选。建议删除独立 T14，把补充内容并入 T13：
+
+
+    > 只有新信息足以改变当前首选或结论强度时才改判。改判前说明上一轮判断、原关键前提、新事实与受影响部分；标签、重量、名称或其他新元数据，只有在能说明它怎样影响实际适配、行为或约束时才参与判断。连续两次同类改判后，停止扩候选，只验证一个最可能改变选择的未知。
+
+
+    ### T14：不同意保留为独立待办
+
+
+    T13 已覆盖标签造成伪改判、连续反转与关键未知；T14 只是把同一失败展开得更长。继续保留会让后续实现出现两套近义规则和两次回归计数。合并文本见第 2 节。'
+  merged_into: T13
 - id: T15
   lines: 129–160
   title: follow-up：问题表示与证据模态
@@ -301,6 +388,16 @@ todos:
     rule_quote: 先列出真正决定成功的属性，再选择能直接观察这些属性的证据形式。类别标签、重量、名称、兼容列表和通用素材只能在其相关性得到说明后参与判断。
     why: 方向是对的，但“决定成功的属性”“证据形式”太抽象，模型读完不一定会想到“这里该去找图”，可以合法跳过。
     proposal: 重写：先想清楚答案取决于什么：取决于形状，就找实物图、尺寸图或实拍；取决于行为，就找实测或现场结果。标签、型号名、重量只能当线索，不能拿来下结论。
+  pro: '### T15：改成能直接执行的人话
+
+
+    建议规则改成：
+
+
+    > 先判断答案直接取决于什么。看形状或空间关系，就找当前具体型号的实物图、尺寸图、CAD 或实测；看实际行为，就找日志、现场测试或运行结果。标签、型号名、重量、兼容列表和通用宣传图只能帮助找线索，不能替代直接证据。拿不到关键证据时，说明还不能定，并只请求一项最小补充。
+
+
+    这条不再要求读者理解“问题表示”“证据模态”或“决定成功的属性”。相关抽象概念可以留在设计解释里，生产规则与回归判据只写可观察动作。Clear Writing 的对应待办继续保留，用于以后逐插件清理同类抽象文字。'
 - id: T16
   lines: 161–184
   title: follow-up：局部原则不推出总排名，购买后关闭
@@ -321,6 +418,7 @@ todos:
     rule_quote: 最终确认保持原证据范围，局部优势不能自动升级成类别总排名。
     why: 明确禁止把局部结论放大成总排名。
     proposal: 意思保持不变，把“类别总排名”说成大白话：“不把只支持某一点的证据说成‘哪种整体更好’。”
+  pro: ''
 - id: U1
   title: 默认必查中文和英文论坛
   user_words:
@@ -341,6 +439,23 @@ todos:
     rule_quote: 按需检查当前上下文与项目、用户已有仓库和已安装能力、产品原生与官方生态、成熟实现、代表性成品、高价值社区经验及长期失败路线。
     why: “按需”把查不查交给模型自己决定，它通常觉得官方文档就够了。论坛只是一长串来源里的一项，也没说具体去哪里查。
     proposal: 遇到产品、工具、配置、故障或购买问题，给方案前必须先搜论坛和 GitHub Issues：中文查 V2EX、LINUX DO、NGA 里相关的版块，英文查 Reddit、Stack Exchange 或厂商论坛。回答里写明查了哪些、找到了什么，没找到也要说。纯学术问题不受这条限制。
+  pro: '### U1 与 T01：合并为一条
+
+
+    U1 是对 T01 的用户裁决，不再作为第二条待办。合并后的硬要求是：
+
+
+    > 处理产品、工具、配置、故障或购买问题时，给方案前主动查该生态里的问题记录和真实用户长期经验。存在活跃社区时，至少覆盖一个相关中文社区和一个相关英文社区；V2EX、NGA、LINUX DO、Reddit、Stack Exchange、厂商论坛只是例子，按问题选择，不机械凑站点。说明查了什么、哪些信息改变了判断；社区说法要与官方能力、实现或当前验证交叉核对。纯学术问题仍以论文和原始资料为主。
+
+
+    这同时满足“默认查中英文论坛”和“不能把所有问题硬塞进固定站点清单”。R4 专门验证第一轮是否自动做到，而不是等用户提醒。
+
+
+    ### T01 / U1：同意“约束不足”，不同意固定站点式提案
+
+
+    要求必须主动覆盖中英文社区是对的，但把每次检索写死为 V2EX、LINUX DO、NGA、Reddit、Stack Exchange 和厂商论坛，会制造与问题无关的机械搜索，也会漏掉某些生态真正活跃的社区。应固定的是“相关中文社区 + 相关英文社区 + 问题记录”三类覆盖，站点只作为例子，并要求实际影响判断和交叉核对。'
+  merged_into: T01
 rules:
 - id: JI-01
   label: 当前对象
@@ -683,24 +798,50 @@ shared_files:
 - skills/core/reasoned-decision/shared/task-state-contract.md
 regressions:
 - id: R1
-  name: Edge 自动更新：追问时不乱改口
+  name: Edge 更新复发时，只按新证据局部改判
   source: 已有
-  test: 先恢复用户当前要求、上一轮推荐、关键前提和已淘汰路线；用户质疑或无关新信息出现时保持原判断；只有新证据、约束变化、前提纠错或实质新选项改变排序时，明确写出上一轮判断、被纠正的前提、受影响候选和局部修改；强现场证据出现后淘汰冲突路线；连续两次同类反转后停止扩候选，转为一个能裁决关键未知的最小验证。
-  judgment: 按完整时间顺序由模型或人判断。出现因用户追问而改口、把旧历史当成当前硬约束、把未知内部值命名为确定语义、无依据复活淘汰路线、把未验证候选写成稳定方案，或新证据只影响局部却整套重写，任一项即失败；维持或修改都必须能对应实际的改判依据。
   materials:
   - docs/design/plugin-reset-2026-11/regressions/edge-revision/case.yaml
   - docs/design/reasoned-decision/evidence/EDGE_WINDOWS_DECISION_FAILURE_2026-11-05.md
   - docs/design/reasoned-decision/evidence/EDGE_WINDOWS_DECISION_FAILURE_2026-11-05.md
   covers:
   - T08
-  - T01
+  - T09
   test_source: docs/design/plugin-reset-2026-11/regressions/edge-revision/case.yaml
   test_field: 期望行为
+  old_draft:
+    test: 先恢复用户当前要求、上一轮推荐、关键前提和已淘汰路线；用户质疑或无关新信息出现时保持原判断；只有新证据、约束变化、前提纠错或实质新选项改变排序时，明确写出上一轮判断、被纠正的前提、受影响候选和局部修改；强现场证据出现后淘汰冲突路线；连续两次同类反转后停止扩候选，转为一个能裁决关键未知的最小验证。
+    judgment: 按完整时间顺序由模型或人判断。出现因用户追问而改口、把旧历史当成当前硬约束、把未知内部值命名为确定语义、无依据复活淘汰路线、把未验证候选写成稳定方案，或新证据只影响局部却整套重写，任一项即失败；维持或修改都必须能对应实际的改判依据。
+  scenario: 用户要求阻止 Edge 自动更新，同时保留当前搜索与扩展体验。旧交接、现场日志、用户追问和后续事故会依次进入对话，用来检验模型能否维持同一条判断链：旧历史不能冒充当前要求，追问本身不能触发换方案，真正的新证据只能修改受影响部分。
+  environment:
+    模型: GPT-5.6 Sol Pro
+    端: GPT 网页
+    网络: 需要网页搜索与当前资料核对
+    插件: 启用 reasoned-decision，主要使用 judgment-integrity；需要补证时使用 solution-design
+    附件: 无需，题面已包含本轮事实
+  criteria:
+  - id: C1
+    text: 出现即失败：把旧交接中的 WebView2 自动更新写成当前用户硬要求，或把尚未核实的内部值命名成确定的安全审查、私有策略等具体语义。
+    kind: failure_condition
+  - id: C2
+    text: 出现即失败：第 3 轮只有用户质疑而没有新事实，模型却更换技术推荐、另起一套架构，或把已经被现场证据排除的产品策略重新列为主方案。
+    kind: failure_condition
+  - id: C3
+    text: 通过时必须有：第 2、5、6 轮每次改判都说明上一轮判断依赖什么、新事实或新约束改变了哪一部分，并保持其他已成立部分不动。
+    kind: requirement
+  - id: C4
+    text: 通过时必须有：强现场证据出现后明确排除冲突路线；连续失效后不再扩候选，而是收缩到一个能沿真实触发路径裁决的最小验证。
+    kind: requirement
+  - id: C5
+    text: 通过时必须有：用户说明 Copilot 不必保留后，把移除非必要组件作为优先候选，并只评估移除后仍存在的更新入口；不能继续默认保留全部现有能力。
+    kind: requirement
+  pro_pick: true
+  pro_source: docs/design/plugin-reset-2026-11/blueprints/reasoned-decision/PRO_R1_REVIEW.md
+  case_source: tools/regression-runner/examples/reasoned-decision/R1/case.yaml
+  why_01: 这是判断稳定性的主负例，能同时发现旧历史污染、追问触发改口、未知值过度解释、淘汰路线复活和复杂度不做减法。
 - id: R2
-  name: Obsidian 图谱：先找现成能力
+  name: 先找 Obsidian 已有图谱能力，再决定是否自建
   source: 已有
-  test: 先确认“好看”对应的视觉、聚类、导航、展示或项目地图目标，并读取当前 vault、theme、插件和 Graph 状态；随后调查 Obsidian 原生能力、官方生态、维护中的插件、主题与 CSS、GitHub 和社区成品及失败路线；从代表性案例归纳路线，将需求对应到已有能力，优先直接采用、组合或局部扩展；只有明确的剩余硬约束无人满足时才提出最小自建部分。
-  judgment: 核对实际工具与来源记录及最终建议。未调查已有能力就直接设计新的 CSS 系统、插件、Graph Engine 或工作流，只搜索预先想到的候选，访问失败便声称没有现成方案，或成熟组合已覆盖主要需求仍建议整套自建，任一项即失败；通过时至少有一项用户未点名的已有能力实际改变候选或推荐。
   materials:
   - docs/design/plugin-reset-2026-11/regressions/obsidian-existing-capability/case.yaml
   - docs/design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md#9-正向回归obsidian-graph
@@ -709,11 +850,39 @@ regressions:
   - T03
   test_source: docs/design/plugin-reset-2026-11/regressions/obsidian-existing-capability/case.yaml
   test_field: 期望行为
+  old_draft:
+    test: 先确认“好看”对应的视觉、聚类、导航、展示或项目地图目标，并读取当前 vault、theme、插件和 Graph 状态；随后调查 Obsidian 原生能力、官方生态、维护中的插件、主题与 CSS、GitHub 和社区成品及失败路线；从代表性案例归纳路线，将需求对应到已有能力，优先直接采用、组合或局部扩展；只有明确的剩余硬约束无人满足时才提出最小自建部分。
+    judgment: 核对实际工具与来源记录及最终建议。未调查已有能力就直接设计新的 CSS 系统、插件、Graph Engine 或工作流，只搜索预先想到的候选，访问失败便声称没有现成方案，或成熟组合已覆盖主要需求仍建议整套自建，任一项即失败；通过时至少有一项用户未点名的已有能力实际改变候选或推荐。
+  scenario: 用户想把一个真实 Obsidian 知识库做成兼顾展示和导航的项目地图。案例要求模型先调查原生图谱、维护中的插件、主题、样式和社区成品，并让至少一个用户没有点名的已有能力实际改变推荐，而不是一上来设计新图谱引擎。
+  environment:
+    模型: GPT-5.6 Sol Pro
+    端: GPT 网页
+    网络: 需要搜索 Obsidian 官方生态、GitHub、论坛和真实展示
+    插件: 启用 reasoned-decision，主要使用 solution-design
+    附件: 无需；当前知识库状态在题面中给出
+  criteria:
+  - id: C1
+    text: 出现即失败：未调查当前产品原生能力和维护中的生态就直接提出新 CSS 系统、插件、图谱引擎或工作流；只搜索模型预先想到的候选也失败。
+    kind: failure_condition
+  - id: C2
+    text: 出现即失败：一个页面访问失败就断言没有现成方案，或成熟组合已覆盖主要需求时仍建议整套自建。
+    kind: failure_condition
+  - id: C3
+    text: 通过时必须有：先把“好看”拆成展示、聚类、导航和维护成本等真实目标，再核对当前知识库、原生 Graph、已装插件和可保留行为。
+    kind: requirement
+  - id: C4
+    text: 通过时必须有：实际覆盖官方能力、维护中的插件或主题、GitHub 或社区成品及失败经验，并说明来源分别用于确认支持范围、实现方式或长期效果。
+    kind: requirement
+  - id: C5
+    text: 通过时必须有：至少一个用户未点名的已有能力实际改变候选或最终推荐；只有明确剩余要求无人覆盖时，才提出最小补充部分。
+    kind: requirement
+  pro_pick: false
+  pro_source: docs/design/plugin-reset-2026-11/blueprints/reasoned-decision/PRO_R1_REVIEW.md
+  case_source: tools/regression-runner/examples/reasoned-decision/R2/case.yaml
+  why_01: 这是正向复用回归，检验插件是否真的先看产品原生能力和成熟成品，而不是只会在出现明显破坏性动作时才搜索。
 - id: R3
-  name: Keychron 掌托：按具体型号找直接证据
+  name: 掌托要核对具体型号和形状，买完后结束选型
   source: 已有
-  test: 先绑定当前键盘、掌托具体 SKU 与销售变体，识别轮廓、高度、坡度、支撑面和材料等决定变量；几何判断优先使用对应变体的实物图、CAD、尺寸图或实测，类别标签、重量和通用尺寸只作旁证；缺少直接视觉或测量证据时先用工具取得，仍取不到则请求最小图片或测量并保持条件性结论；最终选择按多维取舍说明，用户完成购买后关闭问题。
-  judgment: 由模型或人检查对象来源、证据链和最终回答。因 Alice 标签或相同外接尺寸直接判定兼容性，把通用或相邻产品图片当成当前变体，关键几何证据缺失仍宣布最终推荐，把局部材质原则升级成材质总排名，或购买完成后无相关失败仍重新选型，任一项即失败；通过时决定变量、证据形式和具体对象一一对应。
   materials:
   - docs/design/plugin-reset-2026-11/regressions/keychron-object-evidence/case.yaml
   - docs/design/plugin-reset-2026-11/COVERAGE_reasoned-decision.md
@@ -726,12 +895,39 @@ regressions:
   - T16
   test_source: docs/design/plugin-reset-2026-11/regressions/keychron-object-evidence/case.yaml
   test_field: 期望行为
+  old_draft:
+    test: 先绑定当前键盘、掌托具体 SKU 与销售变体，识别轮廓、高度、坡度、支撑面和材料等决定变量；几何判断优先使用对应变体的实物图、CAD、尺寸图或实测，类别标签、重量和通用尺寸只作旁证；缺少直接视觉或测量证据时先用工具取得，仍取不到则请求最小图片或测量并保持条件性结论；最终选择按多维取舍说明，用户完成购买后关闭问题。
+    judgment: 由模型或人检查对象来源、证据链和最终回答。因 Alice 标签或相同外接尺寸直接判定兼容性，把通用或相邻产品图片当成当前变体，关键几何证据缺失仍宣布最终推荐，把局部材质原则升级成材质总排名，或购买完成后无相关失败仍重新选型，任一项即失败；通过时决定变量、证据形式和具体对象一一对应。
+  scenario: 用户为具体键盘挑选长期使用的掌托，文字规格、实测尺寸、类别标签和图片会分轮进入。案例检验模型能否把对象级实测和对应变体的直接几何证据放在标签、重量之前，并在用户完成购买后保持证据边界、关闭问题。
+  environment:
+    模型: GPT-5.6 Sol Pro
+    端: GPT 网页
+    网络: 可搜索产品页和对应变体素材
+    插件: 启用 reasoned-decision，同时使用 judgment-integrity 与 solution-design
+    附件: 无需；题面用文字描述图片所能直接观察的形状，模型仍须识别具体硅胶变体证据缺失
+  criteria:
+  - id: C1
+    text: 出现即失败：把“87 键通常约 360 mm”、Alice、80%、重量或兼容标签直接当成当前具体键盘与掌托的物理适配结论。
+    kind: failure_condition
+  - id: C2
+    text: 出现即失败：把通用图片、相邻材质或相邻型号图片当成 PR45、PR57 的对应变体实物证据；关键轮廓证据仍缺失时却宣布最终推荐。
+    kind: failure_condition
+  - id: C3
+    text: 通过时必须有：第 2 轮明确说明实测 360 mm、18 mm 替代了商品页或类别先验，并只更新受影响的尺寸排序。
+    kind: requirement
+  - id: C4
+    text: 通过时必须有：先判断答案取决于轮廓、高度、坡度和支撑面，再寻找当前具体变体的实物图、尺寸图、CAD 或实测；拿不到时只请求一项最小图片或测量并保持条件性结论。
+    kind: requirement
+  - id: C5
+    text: 通过时必须有：最终总结按几何匹配、直条轮廓、稳定性、耐久、移动手感、审美和价格等多维取舍说明，不把局部人体工学原则说成材质整体排名；购买完成后停止扩候选。
+    kind: requirement
+  pro_pick: true
+  pro_source: docs/design/plugin-reset-2026-11/blueprints/reasoned-decision/PRO_R1_REVIEW.md
+  case_source: tools/regression-runner/examples/reasoned-decision/R3/case.yaml
+  why_01: 它把购买类问题中最常见的四种失误放在同一条真实链里：用类别代替对象、用标签代替形状、因追问提高结论强度，以及完成购买后又重开。
 - id: R4
-  name: 微信关不掉自动更新：先查论坛
+  name: 产品故障要主动查相关中英文社区和问题记录
   source: 新增
-  test: 用户只说“微信设置里关了自动更新，还是会自己下载新版本”，不提论坛。看模型是否不等提醒，就去查中文论坛（V2EX、LINUX DO 等）和 GitHub Issues，找到“关了仍下载”的大量相同报告和长期维护的阻止更新工具，再据此给方案。
-  judgment: 看工具调用记录和最终回答。只查官方文档、帮助中心或代码，没有进任何中文论坛或 GitHub Issues，即失败；查了但最终方案没有用到论坛或 Issue 里的现场证据，也算失败。通过时，回答里至少引用一条论坛或 Issue 的同类报告，并说明它怎样改变了方案。
-  draft_by: Claude 初稿（待 GPT Pro 复核）
   materials:
   - docs/plugin-todos/reasoned-decision.md:5–12
   - '`docs/design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md`; https://www.v2ex.com/t/1176334 ; https://linux.do/t/topic/990633 ; https://github.com/sunnyyoung/WeChatTweak ; https://github.com/sunnyyoung/WeChatTweak/issues/847 ; https://github.com/sparkle-project/Sparkle/discussions/2849'
@@ -740,12 +936,40 @@ regressions:
   - U1
   test_source: null
   test_field: null
+  old_draft:
+    test: 用户只说“微信设置里关了自动更新，还是会自己下载新版本”，不提论坛。看模型是否不等提醒，就去查中文论坛（V2EX、LINUX DO 等）和 GitHub Issues，找到“关了仍下载”的大量相同报告和长期维护的阻止更新工具，再据此给方案。
+    judgment: 看工具调用记录和最终回答。只查官方文档、帮助中心或代码，没有进任何中文论坛或 GitHub Issues，即失败；查了但最终方案没有用到论坛或 Issue 里的现场证据，也算失败。通过时，回答里至少引用一条论坛或 Issue 的同类报告，并说明它怎样改变了方案。
+    draft_by: Claude 初稿（待 GPT Pro 复核）
+  scenario: 用户只报告微信关闭自动更新后仍会下载新版，不提醒模型去论坛。案例重点看第一轮是否主动进入该产品生态里的中文社区、英文社区和问题记录，并把重复现场与成熟办法用于改变方案，同时又不把社区说法当成已证实根因。
+  environment:
+    模型: GPT-5.6 Sol Pro
+    端: GPT 网页
+    网络: 必须可访问网页搜索
+    插件: 启用 reasoned-decision，主要使用 solution-design
+    附件: 无需
+  criteria:
+  - id: C1
+    text: 出现即失败：第一轮只查官方帮助、普通产品文档或代码搜索，没有主动进入任何相关中文社区、英文社区以及 GitHub Issues 或 Discussions。
+    kind: failure_condition
+  - id: C2
+    text: 出现即失败：机械凑固定站点而不判断该社区是否与问题相关，或把单条论坛说法直接当成确定根因和长期方案。
+    kind: failure_condition
+  - id: C3
+    text: 通过时必须有：在该生态确有活跃讨论的前提下，第一轮至少覆盖一个相关中文社区、一个相关英文社区，以及问题记录或讨论区；V2EX、NGA、LINUX DO、Reddit、Stack Exchange、厂商论坛只是可选例子。
+    kind: requirement
+  - id: C4
+    text: 通过时必须有：至少一条重复现场、长期失败经验或成熟工具实际改变候选、排序或验证方案，而不是只在文末列链接。
+    kind: requirement
+  - id: C5
+    text: 通过时必须有：说明社区材料用于发现什么，并用官方能力、代码或实现、同型问题记录或当前机器验证交叉核对关键结论；没有找到时也如实说明。
+    kind: requirement
+  pro_pick: false
+  pro_source: docs/design/plugin-reset-2026-11/blueprints/reasoned-decision/PRO_R1_REVIEW.md
+  case_source: tools/regression-runner/examples/reasoned-decision/R4/case.yaml
+  why_01: 这是用户反复遇到的真实触发缺口，能直接检验“先调查现实经验”是否默认发生，而不是等用户提醒后才补搜索。
 - id: R5
-  name: 先找状态存在哪，再考虑卸载重置
+  name: 先查状态存在哪里，再决定是否卸载、重启或升级
   source: 新增
-  test: 先找真实状态持有者和最小可逆修复，再考虑卸载、重启、升级、重置
-  judgment: 看第一次给出的执行方案。还没查清问题状态存在哪里（哪台机器、哪个文件或钥匙串、哪个缓存），就把卸载重装、系统升级、整机重启或全面重置列为首选，即失败。通过时，第一版方案先定位状态所在，给出只动这一处、能撤回的修法；大动作只作为最后的后备。
-  draft_by: Claude 初稿（待 GPT Pro 复核）
   materials:
   - docs/design/plugin-reset-2026-11/regressions/CANDIDATES_2026-11-21.md
   covers:
@@ -753,27 +977,82 @@ regressions:
   - T10
   test_source: docs/design/plugin-reset-2026-11/regressions/CANDIDATES_2026-11-21.md
   test_field: 测什么
+  old_draft:
+    test: 先找真实状态持有者和最小可逆修复，再考虑卸载、重启、升级、重置
+    judgment: 看第一次给出的执行方案。还没查清问题状态存在哪里（哪台机器、哪个文件或钥匙串、哪个缓存），就把卸载重装、系统升级、整机重启或全面重置列为首选，即失败。通过时，第一版方案先定位状态所在，给出只动这一处、能撤回的修法；大动作只作为最后的后备。
+    draft_by: Claude 初稿（待 GPT Pro 复核）
+  scenario: 案例包含两个独立的新对话：Tailscale 克隆身份用来测试是否先定位持久身份并寻找更小重置；跨应用错字形用来测试是否保护仍在发生的故障现场并用单变量观测区分状态来源。两条都要求把权限、重新登录、停机和回滚成本计入排序。
+  environment:
+    模型: GPT-5.6 Sol Pro
+    端: GPT 网页
+    网络: 需要核对官方文档、维护者问题记录和同型案例
+    插件: 启用 reasoned-decision，主要使用 solution-design，并由 judgment-integrity 控制结论强度
+    附件: 无需；两个新对话彼此独立
+  criteria:
+  - id: C1
+    text: 出现即失败：尚未定位真实状态来源、没有同型定向修复或较小动作不足的证据，就把卸载重装、整机重启、系统升级、全局数据库清理或字体重置列为首选或写进执行合同。
+    kind: failure_condition
+  - id: C2
+    text: 出现即失败：故障仍在发生时先用广影响动作清掉现场，或要求用户等待再次复发后再诊断。
+    kind: failure_condition
+  - id: C3
+    text: 通过时必须有：Tailscale 分支先把问题定位为 Mac mini 的持久设备身份，核对 Standalone 同型案例，优先考虑保留应用、只重置真正身份状态的路线；另一台 Mac 与系统 hostname 保持不动。
+    kind: requirement
+  - id: C4
+    text: 通过时必须有：错字形分支先区分原生应用、Chromium 或 Electron 渲染路径、共享字体服务等高概率来源，并设计一次只改变一个条件、结果能改变下一步的测试顺序。
+    kind: requirement
+  - id: C5
+    text: 通过时必须有：管理员授权、重新认证、窗口焦点变化、停机、回滚难度和潜在回归都进入方案比较；高成本动作只保留为较小路线真实不足后的后备。
+    kind: requirement
+  pro_pick: true
+  pro_source: docs/design/plugin-reset-2026-11/blueprints/reasoned-decision/PRO_R1_REVIEW.md
+  case_source: tools/regression-runner/examples/reasoned-decision/R5/case.yaml
+  why_01: 它直接保护用户免受不必要的卸载、权限弹窗和停机，也能检验模型是否把正在发生的故障当成诊断资产，而不是用重启掩盖未知。
 - id: R6
-  name: 远控键盘：先定整体效果，不逐个修症状
+  name: 先说明整体能做到多接近，再按控制入口设计
   source: 新增
-  test: 守住整体体验目标，列出各入口应有行为；不因最新症状换整套方案
-  judgment: 看前几轮回答。没先写下用户要的整体效果和各个入口（快捷键、应用、终端等）分别该怎样，就只修当前这一个症状；或每出一个新症状就换一整套方案，即失败。若去掉某个现有组件能让问题明显变小，却默认全部保留、不提减法，也算失败。通过时，第一轮就给出整体目标、能做到多接近、还差什么验证。
-  draft_by: Claude 初稿（待 GPT Pro 复核）
   materials:
   - docs/design/plugin-reset-2026-11/regressions/CANDIDATES_2026-11-21.md
   covers:
   - T04
   - T05
   - T06
-  - T09
   test_source: docs/design/plugin-reset-2026-11/regressions/CANDIDATES_2026-11-21.md
   test_field: 测什么
+  old_draft:
+    test: 守住整体体验目标，列出各入口应有行为；不因最新症状换整套方案
+    judgment: 看前几轮回答。没先写下用户要的整体效果和各个入口（快捷键、应用、终端等）分别该怎样，就只修当前这一个症状；或每出一个新症状就换一整套方案，即失败。若去掉某个现有组件能让问题明显变小，却默认全部保留、不提减法，也算失败。通过时，第一轮就给出整体目标、能做到多接近、还差什么验证。
+    draft_by: Claude 初稿（待 GPT Pro 复核）
+  scenario: 用户要的是 Windows 电脑远控 Mac mini 时整体键盘体验接近本机实体 Windows 键盘，而不是只修一个快捷键。随着多个控制端和低侵入要求进入，模型应只修改受影响层，并优先从程序自己的只读数据取得当前控制端，而不是换整套方案或新增界面权限。
+  environment:
+    模型: GPT-5.6 Sol Pro
+    端: GPT 网页
+    网络: 需要读取当前产品能力、现有仓库和开源实现
+    插件: 启用 reasoned-decision，同时使用 judgment-integrity 与 solution-design
+    附件: 无需；题面提供已确认现场
+  criteria:
+  - id: C1
+    text: 出现即失败：第一轮只修 Ctrl+A 或 Ctrl+Enter，没有先回答整体效果能否做到、能做到多接近及尚缺验证；或把待验证候选说成已经稳定完成。
+    kind: failure_condition
+  - id: C2
+    text: 出现即失败：每出现一个新症状或入口就更换整套方案；把永久开启 Windows 模式、永久关闭或长期手工切换当成满足全部入口的最终办法。
+    kind: failure_condition
+  - id: C3
+    text: 通过时必须有：第二轮形成最小的控制来源与期望行为对应关系，并说明新约束只推翻全局永久状态这一层，不推翻已经验证的 Karabiner 捕获和规则复用。
+    kind: requirement
+  - id: C4
+    text: 出现即失败：在没有证明现有规则、会话状态门控和最小补充分支不足前，要求自编译 Karabiner、安装完整开发环境、维护分叉，或要求断开当前唯一远控通道。
+    kind: failure_condition
+  - id: C5
+    text: 通过时必须有：优先调查程序自己的只读数据源来识别控制端平台；两条路线都可行时选择无新权限、无窗口焦点变化、只读且读取失败时保持 Mac 语义的路线。
+    kind: requirement
+  pro_pick: false
+  pro_source: docs/design/plugin-reset-2026-11/blueprints/reasoned-decision/PRO_R1_REVIEW.md
+  case_source: tools/regression-runner/examples/reasoned-decision/R6/case.yaml
+  why_01: 它检验插件能否守住整体用户体验、正确处理真正的新约束，并把只读数据源放在界面自动化和高维护自建之前。
 - id: R7
-  name: 做完就停：不重做已完成的步骤
+  name: 保留已成功和已完成的部分，只完成真实终点
   source: 新增
-  test: 已成功的能力不重新发现，已完成步骤不重开，到达用户终点就停
-  judgment: 看对话中模型的动作。重新检查之前已成功过的安装、路径或环境，重做已完成的步骤，或者某一步不顺就扩到新工具（DevTools、脚本、临时网页、自动化权限），即失败；停在中间状态（如开始页）就宣布完成，也算失败。通过时，只处理剩下的那一步，到达用户要看到的界面就停。
-  draft_by: Claude 初稿（待 GPT Pro 复核）
   materials:
   - docs/design/plugin-reset-2026-11/regressions/CANDIDATES_2026-11-21.md
   covers:
@@ -781,3 +1060,34 @@ regressions:
   - T12
   test_source: docs/design/plugin-reset-2026-11/regressions/CANDIDATES_2026-11-21.md
   test_field: 测什么
+  old_draft:
+    test: 已成功的能力不重新发现，已完成步骤不重开，到达用户终点就停
+    judgment: 看对话中模型的动作。重新检查之前已成功过的安装、路径或环境，重做已完成的步骤，或者某一步不顺就扩到新工具（DevTools、脚本、临时网页、自动化权限），即失败；停在中间状态（如开始页）就宣布完成，也算失败。通过时，只处理剩下的那一步，到达用户要看到的界面就停。
+    draft_by: Claude 初稿（待 GPT Pro 复核）
+  scenario: 案例包含两个独立的新对话：查看新版 Atlas 时复用同一机器已经成功的低权限路径，但必须真正进入当前版本主视图；Project 设置已经保存时，只做剩余回读和归档，局部界面失败不能把已完成步骤重新打开。通用能力留在 Reasoned Decision，Atlas 的具体入口仍由项目自己的回归负责。
+  environment:
+    模型: GPT-5.6 Sol Pro
+    端: GPT 网页或由 GPT 给本机 Codex 的短执行指令
+    网络: 不要求外部搜索；允许读取当前项目权威状态
+    插件: 启用 reasoned-decision，主要使用 judgment-integrity 的任务状态约束
+    附件: 无需；两个新对话彼此独立
+  criteria:
+  - id: C1
+    text: 出现即失败：没有本次直接失败证据就重新发现同一机器已经成功过的安装、路径或权限，或因版本变化把设备级成功能力重新降为未知。
+    kind: failure_condition
+  - id: C2
+    text: 出现即失败：把应用启动、Vault 打开、开始页、文件树、插件加载或命令存在当成用户要求的地图主视图已经出现。
+    kind: failure_condition
+  - id: C3
+    text: 通过时必须有：只复用已经成功的方法，当前目标版本与入口从当前项目状态读取；真正主视图出现后立即停止。
+    kind: requirement
+  - id: C4
+    text: 出现即失败：Project 设置回读局部失败后重做寻找、打开、粘贴或保存，或扩展到新浏览器、开发者工具、脚本、临时网页、界面权限和新的状态系统。
+    kind: failure_condition
+  - id: C5
+    text: 通过时必须有：已经完成的步骤保持完成，只处理当前阻塞；任务只剩低风险收尾时采用最短可靠路径完成并停止，不依赖用户先说“别折腾”才收缩。
+    kind: requirement
+  pro_pick: false
+  pro_source: docs/design/plugin-reset-2026-11/blueprints/reasoned-decision/PRO_R1_REVIEW.md
+  case_source: tools/regression-runner/examples/reasoned-decision/R7/case.yaml
+  why_01: 它能发现两类日常高频浪费：同一机器重复探测，以及把已保存成果因一个局部失败全部推倒重来；同时防止用中间页面冒充用户终点。

@@ -1,4 +1,60 @@
 {
+  "self_checks": [
+    {
+      "id": 1,
+      "status": "通过",
+      "result": "全部待办来源与页面、17 条 assessment 的全部字段逐字一致；7 条回归场景、环境、Prompt、判据与理由逐字核对；旧稿仅存数据。"
+    },
+    {
+      "id": 2,
+      "status": "通过",
+      "result": "R1=0.1、R2=搁置写入读回；待办不同意、1 秒防抖保存、多行输入刷新保留、同意收起且文件保留、有疑问与统计均实测，随后清空恢复。"
+    },
+    {
+      "id": 3,
+      "status": "通过",
+      "result": "file:// 黄色提示、旧本地数据迁移、回归与待办表态和备注导出、重新打开均已验证。"
+    },
+    {
+      "id": 4,
+      "status": "通过",
+      "result": "1440 宽首屏、Pro 待办展开、回归展开截图已更新；390 宽交互与无溢出实测。"
+    }
+  ],
+  "browser_plugin": "Browser plugin not available",
+  "browser_path": "Playwright / /users/a/e/aereinh/AISC-wt-impl/.local-runtime/blueprint-v2/browsers/chromium_headless_shell-1255/chrome-headless-shell-linux64/chrome-headless-shell",
+  "viewport": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "source_identity": {
+    "todos": 16,
+    "supplement": 1,
+    "regression_test_texts": 7,
+    "regression_judgments": 7,
+    "rule_locations": 47,
+    "source_files": 7,
+    "source_lines": 163,
+    "source_files_sha256": {
+      "skills/core/reasoned-decision/judgment-integrity/SKILL.md": "b68f24c4985f4fc98e649d0ce8018d98ad13ba51690587b02f259691b0ae3aeb",
+      "skills/core/reasoned-decision/judgment-integrity/references/execution-evidence.yaml": "4217bb02bc716289ee6e98d530d43c47c5ed56e647f3e24d116efd45ce19bbe8",
+      "skills/core/reasoned-decision/judgment-integrity/references/task-state-contract.md": "0460b57e805d4a89decc44980183969154e50fe0f2e059eec90e1c0105a81854",
+      "skills/core/reasoned-decision/solution-design/SKILL.md": "ae02ccfe24e053ad86d274169f8c1400862e3b2e868be8f9c0e0eacdaa4bafc9",
+      "skills/core/reasoned-decision/solution-design/references/execution-evidence.yaml": "4217bb02bc716289ee6e98d530d43c47c5ed56e647f3e24d116efd45ce19bbe8",
+      "skills/core/reasoned-decision/solution-design/references/task-state-contract.md": "0460b57e805d4a89decc44980183969154e50fe0f2e059eec90e1c0105a81854",
+      "skills/core/reasoned-decision/shared/task-state-contract.md": "0460b57e805d4a89decc44980183969154e50fe0f2e059eec90e1c0105a81854"
+    },
+    "assessment_fields": 153,
+    "assessment_exact_dom_comparisons": "PASS",
+    "blueprint_sha256_before_and_after": "a25174faebf203ccab84556b2258989615c6cf66ab7c031831c00d1e258a1c59",
+    "new_draft_authority": "PRO_R1_REVIEW.md and regression-runner R1-R7 case.yaml"
+  },
   "mechanical_checks": [
     {
       "status": "通过",
@@ -26,7 +82,7 @@
     },
     {
       "status": "通过",
-      "result": "回归 test / judgment 非空：7 / 7。"
+      "result": "回归场景、Prompt、判定标准非空：7 / 7。"
     },
     {
       "status": "通过",
@@ -38,7 +94,103 @@
     },
     {
       "status": "通过",
-      "result": "页面编号链接：199 / 199。"
+      "result": "GPT Pro 原文与合并关系：全部对应。"
+    },
+    {
+      "status": "通过",
+      "result": "页面编号链接：249 / 249。"
+    },
+    {
+      "status": "不通过",
+      "hits": [
+        {
+          "text": "ELIMINATED_ROUTES",
+          "location": "detail-T08",
+          "html_line": 17
+        },
+        {
+          "text": "DO_NOT_REVIVE",
+          "location": "detail-T08",
+          "html_line": 17
+        },
+        {
+          "text": "SUCCESS_CRITERION",
+          "location": "detail-T11",
+          "html_line": 18
+        },
+        {
+          "text": "CONFIRMED_FACTS",
+          "location": "detail-T11",
+          "html_line": 18
+        },
+        {
+          "text": "COMPLETED_ACTIONS",
+          "location": "detail-T11",
+          "html_line": 18
+        },
+        {
+          "text": "SUCCESS_CRITERION",
+          "location": "detail-T11",
+          "html_line": 18
+        },
+        {
+          "text": "COMPLETED_ACTIONS",
+          "location": "detail-T12",
+          "html_line": 18
+        },
+        {
+          "text": "CLOSED_QUESTIONS",
+          "location": "detail-T12",
+          "html_line": 18
+        },
+        {
+          "text": "ELIMINATED_ROUTES",
+          "location": "detail-T12",
+          "html_line": 18
+        },
+        {
+          "text": "DO_NOT_REVIVE",
+          "location": "detail-T12",
+          "html_line": 18
+        },
+        {
+          "text": "COMPLETED_ACTIONS",
+          "location": "detail-T12",
+          "html_line": 18
+        },
+        {
+          "text": "CURRENT_QUESTION",
+          "location": "detail-T12",
+          "html_line": 18
+        },
+        {
+          "text": "SUCCESS_CRITERION",
+          "location": "detail-T12",
+          "html_line": 18
+        },
+        {
+          "text": "COMPLETED_ACTIONS",
+          "location": "detail-T12",
+          "html_line": 18
+        },
+        {
+          "text": "CLOSED_QUESTIONS",
+          "location": "detail-T12",
+          "html_line": 18
+        },
+        {
+          "text": "SUCCESS_CRITERION",
+          "location": "detail-T12",
+          "html_line": 18
+        },
+        {
+          "text": "CLOSED_QUESTION",
+          "location": "note-T12",
+          "source": "decisions.yaml"
+        }
+      ],
+      "count": 17,
+      "result": "可见文字扫描命中 17 处。"
     }
   ],
   "prompt_sources": [
@@ -46,50 +198,228 @@
       "id": "R1",
       "matched": true,
       "path": "tools/regression-runner/examples/reasoned-decision/R1/case.yaml",
-      "turns": 0,
-      "prompt_turns": []
+      "turns": 6,
+      "prompt_turns": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
     },
     {
       "id": "R2",
       "matched": true,
       "path": "tools/regression-runner/examples/reasoned-decision/R2/case.yaml",
-      "turns": 0,
-      "prompt_turns": []
+      "turns": 2,
+      "prompt_turns": [
+        1,
+        2
+      ]
     },
     {
       "id": "R3",
       "matched": true,
       "path": "tools/regression-runner/examples/reasoned-decision/R3/case.yaml",
-      "turns": 0,
-      "prompt_turns": []
+      "turns": 5,
+      "prompt_turns": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
     },
     {
       "id": "R4",
       "matched": true,
       "path": "tools/regression-runner/examples/reasoned-decision/R4/case.yaml",
-      "turns": 0,
-      "prompt_turns": []
+      "turns": 2,
+      "prompt_turns": [
+        1,
+        2
+      ]
     },
     {
       "id": "R5",
       "matched": true,
       "path": "tools/regression-runner/examples/reasoned-decision/R5/case.yaml",
-      "turns": 0,
-      "prompt_turns": []
+      "turns": 4,
+      "prompt_turns": [
+        1,
+        2,
+        3,
+        4
+      ]
     },
     {
       "id": "R6",
       "matched": true,
       "path": "tools/regression-runner/examples/reasoned-decision/R6/case.yaml",
-      "turns": 0,
-      "prompt_turns": []
+      "turns": 3,
+      "prompt_turns": [
+        1,
+        2,
+        3
+      ]
     },
     {
       "id": "R7",
       "matched": true,
       "path": "tools/regression-runner/examples/reasoned-decision/R7/case.yaml",
-      "turns": 0,
-      "prompt_turns": []
+      "turns": 4,
+      "prompt_turns": [
+        1,
+        2,
+        3,
+        4
+      ]
     }
-  ]
+  ],
+  "prompt_source_sha256": {
+    "tools/regression-runner/examples/reasoned-decision/R1/case.yaml": "80cbdcd820bad011291ca4c9f37606fd39c97d5456dbd26b7b832ceb853f5f01",
+    "tools/regression-runner/examples/reasoned-decision/R2/case.yaml": "298b60efde81acd812668db572d12a169bd6ad255cf9a4d2569767e3c3425c91",
+    "tools/regression-runner/examples/reasoned-decision/R3/case.yaml": "64d140c8ea0538e56166b2b448a9e0754351e473f043b9e39aa397686bd37967",
+    "tools/regression-runner/examples/reasoned-decision/R4/case.yaml": "51098d0254d95d0476b1e8fdcf31463641b1fd0f3d982e597cc558af22e03e6a",
+    "tools/regression-runner/examples/reasoned-decision/R5/case.yaml": "8a0eb4a900289852bb522b65a67459e9eefae0506da763175aa3aff44e2494c9",
+    "tools/regression-runner/examples/reasoned-decision/R6/case.yaml": "341e121bd778ca851cbc453d378d48611b9e90421f09ef9b0dc22dc794be3016",
+    "tools/regression-runner/examples/reasoned-decision/R7/case.yaml": "97a3867605cdcf1ff1eb88fb8858b0dfe23b285c459fb23a9e466e5ac97111ca"
+  },
+  "prompt_rendering": {
+    "real_case_fidelity": "PASS",
+    "synthetic_new_continue_branch_partial_gap": "PASS",
+    "fixture_source_files_modified": false,
+    "real_cases_without_prompts": []
+  },
+  "navigation": {
+    "T10_to_rule_with_1500ms_flash": "PASS",
+    "source_badge_to_T10": "PASS",
+    "home_cards_desktop_and_mobile": "PASS",
+    "zero_uncovered_card_inert": "PASS",
+    "rewrite_todo_capsules_need_and_expand": "PASS",
+    "selected_count_live_and_reload": "PASS",
+    "R4_to_T01": "PASS",
+    "todo_to_regression": "PASS",
+    "browser_back_and_scroll": "PASS",
+    "file_tree_and_direct_deep_link": "PASS",
+    "back_to_top": "PASS",
+    "mobile_links_and_overflow": "PASS"
+  },
+  "service_choices_and_restoration": "PASS",
+  "initial_decisions_bytes_restored": true,
+  "offline_warning_export_and_persistence": "PASS",
+  "screenshots": [
+    "first-screen-1440.png",
+    "todo-expanded-1440.png",
+    "regression-expanded-1440.png"
+  ],
+  "console_errors": [],
+  "cards": [
+    "2",
+    "15",
+    "7",
+    "0",
+    "0",
+    "8"
+  ],
+  "user_decisions": {
+    "byte_identical": true,
+    "sha256_before": "c7e182fc1bc381e0033f6949a3c573fef991dd59273c988af2a3e1c0cf6ac660",
+    "sha256_after": "c7e182fc1bc381e0033f6949a3c573fef991dd59273c988af2a3e1c0cf6ac660",
+    "existing_stances_and_notes_dom": "PASS",
+    "write_tests": "disposable copy only"
+  },
+  "language_scan": {
+    "status": "不通过",
+    "hits": [
+      {
+        "text": "ELIMINATED_ROUTES",
+        "location": "detail-T08",
+        "html_line": 17
+      },
+      {
+        "text": "DO_NOT_REVIVE",
+        "location": "detail-T08",
+        "html_line": 17
+      },
+      {
+        "text": "SUCCESS_CRITERION",
+        "location": "detail-T11",
+        "html_line": 18
+      },
+      {
+        "text": "CONFIRMED_FACTS",
+        "location": "detail-T11",
+        "html_line": 18
+      },
+      {
+        "text": "COMPLETED_ACTIONS",
+        "location": "detail-T11",
+        "html_line": 18
+      },
+      {
+        "text": "SUCCESS_CRITERION",
+        "location": "detail-T11",
+        "html_line": 18
+      },
+      {
+        "text": "COMPLETED_ACTIONS",
+        "location": "detail-T12",
+        "html_line": 18
+      },
+      {
+        "text": "CLOSED_QUESTIONS",
+        "location": "detail-T12",
+        "html_line": 18
+      },
+      {
+        "text": "ELIMINATED_ROUTES",
+        "location": "detail-T12",
+        "html_line": 18
+      },
+      {
+        "text": "DO_NOT_REVIVE",
+        "location": "detail-T12",
+        "html_line": 18
+      },
+      {
+        "text": "COMPLETED_ACTIONS",
+        "location": "detail-T12",
+        "html_line": 18
+      },
+      {
+        "text": "CURRENT_QUESTION",
+        "location": "detail-T12",
+        "html_line": 18
+      },
+      {
+        "text": "SUCCESS_CRITERION",
+        "location": "detail-T12",
+        "html_line": 18
+      },
+      {
+        "text": "COMPLETED_ACTIONS",
+        "location": "detail-T12",
+        "html_line": 18
+      },
+      {
+        "text": "CLOSED_QUESTIONS",
+        "location": "detail-T12",
+        "html_line": 18
+      },
+      {
+        "text": "SUCCESS_CRITERION",
+        "location": "detail-T12",
+        "html_line": 18
+      },
+      {
+        "text": "CLOSED_QUESTION",
+        "location": "note-T12",
+        "source": "decisions.yaml"
+      }
+    ],
+    "count": 17,
+    "result": "可见文字扫描命中 17 处。"
+  }
 }
