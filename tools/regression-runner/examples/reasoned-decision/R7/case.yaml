@@ -1,11 +1,89 @@
 {
   "schema_version": 1,
+  "version": "Reasoned Decision v0.1 候选版",
+  "model": "GPT-5.6 Sol Pro",
+  "plugins": [
+    "reasoned-decision"
+  ],
+  "attachments": [],
   "id": "RD-R7",
-  "name": "R7（待编写）",
-  "version": "",
-  "model": "",
-  "plugins": null,
-  "attachments": null,
-  "turns": [],
-  "criteria": []
+  "name": "保留已成功和已完成的部分，只完成真实终点",
+  "scenario": "案例包含两个独立的新对话：查看新版 Atlas 时复用同一机器已经成功的低权限路径，但必须真正进入当前版本主视图；Project 设置已经保存时，只做剩余回读和归档，局部界面失败不能把已完成步骤重新打开。通用能力留在 Reasoned Decision，Atlas 的具体入口仍由项目自己的回归负责。",
+  "environment": {
+    "端": "GPT 网页或由 GPT 给本机 Codex 的短执行指令",
+    "网络": "不要求外部搜索；允许读取当前项目权威状态",
+    "插件": "启用 reasoned-decision，主要使用 judgment-integrity 的任务状态约束",
+    "附件": "无需；两个新对话彼此独立"
+  },
+  "source_notes": [
+    "docs/design/reasoned-decision/evidence/ATLAS_AGENT_DECISION_DRIFT_2026-11-12.md",
+    "docs/plugin-todos/reasoned-decision.md 中已完成低风险任务只收尾一段"
+  ],
+  "turns": [
+    {
+      "n": 1,
+      "prompt": "请使用 reasoned-decision。\n\n同一台 ThinkPad 以前已经真实成功打开过 Asteria Atlas 的旧版本；这次只是当前 Git 指向了新版本，我要查看当前版本真正的地图主视图。请复用这台机器已经验证过的低权限打开方法，只从当前项目权威状态读取这次的目标版本和入口。没有本次直接失败证据时，不要重新检查安装、PATH、注册表、LaunchServices、MCP、CDP 或 Computer Use。",
+      "conversation": {
+        "mode": "new"
+      },
+      "source_note": "改写自 Atlas 证据的设备级成功路径与当前动态目标。"
+    },
+    {
+      "n": 2,
+      "prompt": "Obsidian 和正确 Vault 已经打开，但现在停在开始页，地图主视图还没有出现。这算完成了吗？请沿当前产品已经声明的入口继续到真正主视图，出现后就停止，不要顺手再检查别的东西。",
+      "conversation": {
+        "mode": "continue"
+      },
+      "source_note": "改写自 Atlas 证据中“中间页面冒充完成”的真实失败。"
+    },
+    {
+      "n": 3,
+      "prompt": "请使用 reasoned-decision。\n\nAsteria Project 的设置正文已经粘贴并点击保存，设置窗口也已经准备在目标位置。现在只剩一次轻量回读，确认保存内容仍在，然后把中央配置仓库归档。已经完成的寻找 Project、打开设置、粘贴和保存都不要重做。",
+      "conversation": {
+        "mode": "new"
+      },
+      "source_note": "改写自 Project setting 收尾真实案例。"
+    },
+    {
+      "n": 4,
+      "prompt": "刚才回读按钮点了一次没有反应。请保留已经保存的内容和当前界面，只处理这个阻塞，用最短可靠路径完成剩余回读与归档；除非现有直接路径已经证明不可用，不要引入新浏览器、DevTools、脚本、临时网页或新的自动化权限。",
+      "conversation": {
+        "mode": "continue"
+      },
+      "source_note": "改写自局部界面失败后不断扩工具的真实负例。"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "C1",
+      "text": "出现即失败：没有本次直接失败证据就重新发现同一机器已经成功过的安装、路径或权限，或因版本变化把设备级成功能力重新降为未知。",
+      "kind": "failure_condition"
+    },
+    {
+      "id": "C2",
+      "text": "出现即失败：把应用启动、Vault 打开、开始页、文件树、插件加载或命令存在当成用户要求的地图主视图已经出现。",
+      "kind": "failure_condition"
+    },
+    {
+      "id": "C3",
+      "text": "通过时必须有：只复用已经成功的方法，当前目标版本与入口从当前项目状态读取；真正主视图出现后立即停止。",
+      "kind": "requirement"
+    },
+    {
+      "id": "C4",
+      "text": "出现即失败：Project 设置回读局部失败后重做寻找、打开、粘贴或保存，或扩展到新浏览器、开发者工具、脚本、临时网页、界面权限和新的状态系统。",
+      "kind": "failure_condition"
+    },
+    {
+      "id": "C5",
+      "text": "通过时必须有：已经完成的步骤保持完成，只处理当前阻塞；任务只剩低风险收尾时采用最短可靠路径完成并停止，不依赖用户先说“别折腾”才收缩。",
+      "kind": "requirement"
+    }
+  ],
+  "coverage": [
+    "T11",
+    "T12"
+  ],
+  "why_v0_1": "它能发现两类日常高频浪费：同一机器重复探测，以及把已保存成果因一个局部失败全部推倒重来；同时防止用中间页面冒充用户终点。",
+  "top_three": false
 }
