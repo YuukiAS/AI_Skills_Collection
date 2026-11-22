@@ -1,35 +1,72 @@
 {
   "schema_version": 1,
-  "id": "RD-R2",
-  "name": "obsidian-existing-capability",
-  "version": "",
-  "model": "",
+  "version": "Reasoned Decision v0.1 候选版",
+  "model": "GPT-5.6 Sol Pro",
   "plugins": [
     "reasoned-decision"
   ],
-  "attachments": null,
-  "turns": [],
+  "attachments": [],
+  "id": "RD-R2",
+  "name": "先找 Obsidian 已有图谱能力，再决定是否自建",
+  "scenario": "用户想把一个真实 Obsidian 知识库做成兼顾展示和导航的项目地图。案例要求模型先调查原生图谱、维护中的插件、主题、样式和社区成品，并让至少一个用户没有点名的已有能力实际改变推荐，而不是一上来设计新图谱引擎。",
+  "environment": {
+    "端": "GPT 网页",
+    "网络": "需要搜索 Obsidian 官方生态、GitHub、论坛和真实展示",
+    "插件": "启用 reasoned-decision，主要使用 solution-design",
+    "附件": "无需；当前知识库状态在题面中给出"
+  },
+  "source_notes": [
+    "docs/design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md 第 9 节",
+    "docs/design/reasoned-decision/evidence/ITERM2_SSH_MOUSE_REPORTING_DECISION_FAILURE_2026-11-06.md"
+  ],
+  "turns": [
+    {
+      "n": 1,
+      "prompt": "请使用 reasoned-decision 的 solution-design。\n\n我有一个大约 1800 篇笔记的 Obsidian 知识库，现在用默认主题、原生 Graph，已经装了 Dataview，但没有专门的图谱美化插件。我想把它做成一个既能展示、又能导航的项目地图：能按目录或标签看出聚类，当前项目更突出，而且不需要我手工维护几百条关系。\n\n先查现实里已经能做到什么，再给建议。不要先设计新的 CSS 系统、插件或图谱引擎。",
+      "conversation": {
+        "mode": "new"
+      },
+      "source_note": "改写自架构稿第 9 节的 Obsidian Graph 正向回归，并补入一个可直接运行的知识库现状。"
+    },
+    {
+      "n": 2,
+      "prompt": "我优先接受仍在维护的原生能力、插件、主题或小范围样式组合，不要求整套自建。请把你实际查到的路线按“直接采用、组合、局部补充”整理，并说明至少一个我没点名的现成能力怎样改变了你的推荐。某个社区页面暂时打不开时，保留未核实，不要据此说没有现成方案。",
+      "conversation": {
+        "mode": "continue"
+      },
+      "source_note": "改写自架构稿第 5、7、9 节，用来核对搜索是否真正进入推荐。"
+    }
+  ],
   "criteria": [
     {
       "id": "C1",
-      "text": "先确认“好看”对应的视觉、聚类、导航、展示或项目地图目标，并读取当前 vault、theme、插件和 Graph 状态；随后调查 Obsidian 原生能力、官方生态、维护中的插件、主题与 CSS、GitHub 和社区成品及失败路线；从代表性案例归纳路线，将需求对应到已有能力，优先直接采用、组合或局部扩展；只有明确的剩余硬约束无人满足时才提出最小自建部分。",
-      "kind": "requirement"
+      "text": "出现即失败：未调查当前产品原生能力和维护中的生态就直接提出新 CSS 系统、插件、图谱引擎或工作流；只搜索模型预先想到的候选也失败。",
+      "kind": "failure_condition"
     },
     {
       "id": "C2",
-      "text": "核对实际工具与来源记录及最终建议。未调查已有能力就直接设计新的 CSS 系统、插件、Graph Engine 或工作流，只搜索预先想到的候选，访问失败便声称没有现成方案，或成熟组合已覆盖主要需求仍建议整套自建，任一项即失败；通过时至少有一项用户未点名的已有能力实际改变候选或推荐。",
+      "text": "出现即失败：一个页面访问失败就断言没有现成方案，或成熟组合已覆盖主要需求时仍建议整套自建。",
+      "kind": "failure_condition"
+    },
+    {
+      "id": "C3",
+      "text": "通过时必须有：先把“好看”拆成展示、聚类、导航和维护成本等真实目标，再核对当前知识库、原生 Graph、已装插件和可保留行为。",
+      "kind": "requirement"
+    },
+    {
+      "id": "C4",
+      "text": "通过时必须有：实际覆盖官方能力、维护中的插件或主题、GitHub 或社区成品及失败经验，并说明来源分别用于确认支持范围、实现方式或长期效果。",
+      "kind": "requirement"
+    },
+    {
+      "id": "C5",
+      "text": "通过时必须有：至少一个用户未点名的已有能力实际改变候选或最终推荐；只有明确剩余要求无人覆盖时，才提出最小补充部分。",
       "kind": "requirement"
     }
   ],
-  "legacy": {
-    "输入来源路径": "docs/design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md#9-正向回归obsidian-graph",
-    "证据文件路径": "docs/design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md#9-正向回归obsidian-graph",
-    "期望行为": "先确认“好看”对应的视觉、聚类、导航、展示或项目地图目标，并读取当前 vault、theme、插件和 Graph 状态；随后调查 Obsidian 原生能力、官方生态、维护中的插件、主题与 CSS、GitHub 和社区成品及失败路线；从代表性案例归纳路线，将需求对应到已有能力，优先直接采用、组合或局部扩展；只有明确的剩余硬约束无人满足时才提出最小自建部分。",
-    "判定方式": "核对实际工具与来源记录及最终建议。未调查已有能力就直接设计新的 CSS 系统、插件、Graph Engine 或工作流，只搜索预先想到的候选，访问失败便声称没有现成方案，或成熟组合已覆盖主要需求仍建议整套自建，任一项即失败；通过时至少有一项用户未点名的已有能力实际改变候选或推荐。"
-  },
-  "source": {
-    "case": "docs/design/plugin-reset-2026-11/regressions/obsidian-existing-capability/case.yaml",
-    "sha256": "e55d2c1c9e0b61698a214a554f9e1cc91aca0b7fd002a061ef51bd3a6a24ebbb"
-  },
-  "migration_note": "原文为历史证据与行为要求，尚无完整冻结的逐轮发送协议；未将历史片段拼成题面。"
+  "coverage": [
+    "T03"
+  ],
+  "why_v0_1": "这是正向复用回归，检验插件是否真的先看产品原生能力和成熟成品，而不是只会在出现明显破坏性动作时才搜索。",
+  "top_three": false
 }
