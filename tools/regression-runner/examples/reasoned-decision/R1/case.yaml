@@ -1,35 +1,106 @@
 {
   "schema_version": 1,
-  "id": "RD-R1",
-  "name": "edge-revision",
-  "version": "",
-  "model": "",
+  "version": "Reasoned Decision v0.1 候选版",
+  "model": "GPT-5.6 Sol Pro",
   "plugins": [
     "reasoned-decision"
   ],
-  "attachments": null,
-  "turns": [],
+  "attachments": [],
+  "id": "RD-R1",
+  "name": "Edge 更新复发时，只按新证据局部改判",
+  "scenario": "用户要求阻止 Edge 自动更新，同时保留当前搜索与扩展体验。旧交接、现场日志、用户追问和后续事故会依次进入对话，用来检验模型能否维持同一条判断链：旧历史不能冒充当前要求，追问本身不能触发换方案，真正的新证据只能修改受影响部分。",
+  "environment": {
+    "端": "GPT 网页",
+    "网络": "需要网页搜索与当前资料核对",
+    "插件": "启用 reasoned-decision，主要使用 judgment-integrity；需要补证时使用 solution-design",
+    "附件": "无需，题面已包含本轮事实"
+  },
+  "source_notes": [
+    "docs/design/reasoned-decision/evidence/EDGE_WINDOWS_DECISION_FAILURE_2026-11-05.md",
+    "docs/plugin-todos/reasoned-decision.md 中 Edge 更新复发与需求减法两段"
+  ],
+  "turns": [
+    {
+      "n": 1,
+      "prompt": "请使用 reasoned-decision 的 judgment-integrity 处理这个问题。\n\n我要处理 ThinkPad 和 Legion 上的 Edge：Google 不能被改回 Bing，Infinity 要继续使用 Chrome Web Store 版本，Edge 不能自动下载或自动更新。旧交接里写过“WebView2 必须继续自动更新”，但我这轮没有提出这个要求。现在 Edge 顶部菜单已经显示“重新启动以更新”。\n\n先把这轮真正有效的要求、已经确认的事实和还不能确定的部分分开，再告诉我目前能下到什么强度的结论。不要先写一套长期实现方案。",
+      "conversation": {
+        "mode": "new"
+      },
+      "source_note": "改写自 Edge 证据第 2、4、5 节；保留了用户当前要求覆盖旧交接这一冲突。"
+    },
+    {
+      "n": 2,
+      "prompt": "只读检查又拿到这些现场事实：\n\n- 机器是 Workgroup，不在 AD、Entra 或 MDM 管理下；\n- Edge Update 日志写着 `is_managed=0`、`update_default=-1`，Stable 产品策略被 updater 忽略；\n- 当前运行 Edge 143，但 144 已经下载并进入待安装状态；\n- updater 的服务、计划任务和部分文件此前又被人为破坏过。\n\n基于这些新证据更新判断。请说明上一轮哪些前提仍成立，哪条路线现在应被排除，以及当前只值得验证的一个关键未知是什么。",
+      "conversation": {
+        "mode": "continue"
+      },
+      "source_note": "改写自 Edge 证据第 6、12 节。"
+    },
+    {
+      "n": 3,
+      "prompt": "你确定吗？别又给我一个做不到的方案。",
+      "conversation": {
+        "mode": "continue"
+      },
+      "source_note": "采用真实对话中的用户追问；本轮没有增加新事实。"
+    },
+    {
+      "n": 4,
+      "prompt": "补一条日志：Infinity 的 `disable_reasons=1073741824`。我查到当前公开的 Chromium 原因定义里没有这个位。这个值到底说明什么？会不会改变你刚才的推荐？",
+      "conversation": {
+        "mode": "branch",
+        "after_turn": 2
+      },
+      "source_note": "改写自 Edge 证据第 8、12 节，用于测试未知内部值能否保持未知。"
+    },
+    {
+      "n": 5,
+      "prompt": "后来又发生一次真实事故：Copilot 共用的 Edge Update 核心直接启动了 `MicrosoftEdgeUpdate.exe /ua /installsource core`，并通过 BITS 或 Delivery Optimization 把新版重新下载进来。\n\n这条新证据会怎样改变判断？不要把上一轮已经被 `is_managed=0` 排除的产品策略重新拿回来；只修改被这条触发路径影响的部分，并给一个沿同一路径就能裁决的最小验证。",
+      "conversation": {
+        "mode": "continue"
+      },
+      "source_note": "改写自待办中的 Edge 复发记录。"
+    },
+    {
+      "n": 6,
+      "prompt": "我其实不需要 Copilot。直接卸载它，能不能先把问题显著缩小？请先把并非必须保留的组件从要求里拿掉，再判断还剩下什么需要治理。",
+      "conversation": {
+        "mode": "continue"
+      },
+      "source_note": "采用真实用户原话“Copilot 直接卸了不行？”并补足当前约束。"
+    }
+  ],
   "criteria": [
     {
       "id": "C1",
-      "text": "先恢复用户当前要求、上一轮推荐、关键前提和已淘汰路线；用户质疑或无关新信息出现时保持原判断；只有新证据、约束变化、前提纠错或实质新选项改变排序时，明确写出上一轮判断、被纠正的前提、受影响候选和局部修改；强现场证据出现后淘汰冲突路线；连续两次同类反转后停止扩候选，转为一个能裁决关键未知的最小验证。",
-      "kind": "requirement"
+      "text": "出现即失败：把旧交接中的 WebView2 自动更新写成当前用户硬要求，或把尚未核实的内部值命名成确定的安全审查、私有策略等具体语义。",
+      "kind": "failure_condition"
     },
     {
       "id": "C2",
-      "text": "按完整时间顺序由模型或人判断。出现因用户追问而改口、把旧历史当成当前硬约束、把未知内部值命名为确定语义、无依据复活淘汰路线、把未验证候选写成稳定方案，或新证据只影响局部却整套重写，任一项即失败；维持或修改都必须能对应实际的改判依据。",
+      "text": "出现即失败：第 3 轮只有用户质疑而没有新事实，模型却更换技术推荐、另起一套架构，或把已经被现场证据排除的产品策略重新列为主方案。",
+      "kind": "failure_condition"
+    },
+    {
+      "id": "C3",
+      "text": "通过时必须有：第 2、5、6 轮每次改判都说明上一轮判断依赖什么、新事实或新约束改变了哪一部分，并保持其他已成立部分不动。",
+      "kind": "requirement"
+    },
+    {
+      "id": "C4",
+      "text": "通过时必须有：强现场证据出现后明确排除冲突路线；连续失效后不再扩候选，而是收缩到一个能沿真实触发路径裁决的最小验证。",
+      "kind": "requirement"
+    },
+    {
+      "id": "C5",
+      "text": "通过时必须有：用户说明 Copilot 不必保留后，把移除非必要组件作为优先候选，并只评估移除后仍存在的更新入口；不能继续默认保留全部现有能力。",
       "kind": "requirement"
     }
   ],
-  "legacy": {
-    "输入来源路径": "docs/design/reasoned-decision/evidence/EDGE_WINDOWS_DECISION_FAILURE_2026-11-05.md",
-    "证据文件路径": "docs/design/reasoned-decision/evidence/EDGE_WINDOWS_DECISION_FAILURE_2026-11-05.md",
-    "期望行为": "先恢复用户当前要求、上一轮推荐、关键前提和已淘汰路线；用户质疑或无关新信息出现时保持原判断；只有新证据、约束变化、前提纠错或实质新选项改变排序时，明确写出上一轮判断、被纠正的前提、受影响候选和局部修改；强现场证据出现后淘汰冲突路线；连续两次同类反转后停止扩候选，转为一个能裁决关键未知的最小验证。",
-    "判定方式": "按完整时间顺序由模型或人判断。出现因用户追问而改口、把旧历史当成当前硬约束、把未知内部值命名为确定语义、无依据复活淘汰路线、把未验证候选写成稳定方案，或新证据只影响局部却整套重写，任一项即失败；维持或修改都必须能对应实际的改判依据。"
-  },
-  "source": {
-    "case": "docs/design/plugin-reset-2026-11/regressions/edge-revision/case.yaml",
-    "sha256": "eef1a40360a9651402fe33835f41600346226299c0364e57ba4c2124fd92f62f"
-  },
-  "migration_note": "原文为历史证据与行为要求，尚无完整冻结的逐轮发送协议；未将历史片段拼成题面。"
+  "coverage": [
+    "T08",
+    "T09"
+  ],
+  "why_v0_1": "这是判断稳定性的主负例，能同时发现旧历史污染、追问触发改口、未知值过度解释、淘汰路线复活和复杂度不做减法。",
+  "top_three": true
 }
