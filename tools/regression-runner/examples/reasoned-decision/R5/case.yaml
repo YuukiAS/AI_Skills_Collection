@@ -1,11 +1,89 @@
 {
   "schema_version": 1,
+  "version": "Reasoned Decision v0.1 候选版",
+  "model": "GPT-5.6 Sol Pro",
+  "plugins": [
+    "reasoned-decision"
+  ],
+  "attachments": [],
   "id": "RD-R5",
-  "name": "R5（待编写）",
-  "version": "",
-  "model": "",
-  "plugins": null,
-  "attachments": null,
-  "turns": [],
-  "criteria": []
+  "name": "先查状态存在哪里，再决定是否卸载、重启或升级",
+  "scenario": "案例包含两个独立的新对话：Tailscale 克隆身份用来测试是否先定位持久身份并寻找更小重置；跨应用错字形用来测试是否保护仍在发生的故障现场并用单变量观测区分状态来源。两条都要求把权限、重新登录、停机和回滚成本计入排序。",
+  "environment": {
+    "端": "GPT 网页",
+    "网络": "需要核对官方文档、维护者问题记录和同型案例",
+    "插件": "启用 reasoned-decision，主要使用 solution-design，并由 judgment-integrity 控制结论强度",
+    "附件": "无需；两个新对话彼此独立"
+  },
+  "source_notes": [
+    "docs/design/reasoned-decision/evidence/TAILSCALE_MACOS_CLONED_IDENTITY_DECISION_FAILURE_2026-11-06.md",
+    "docs/design/reasoned-decision/evidence/MACOS_CJK_GLYPH_CORRUPTION_DECISION_FAILURE_2026-11-11.md"
+  ],
+  "turns": [
+    {
+      "n": 1,
+      "prompt": "请使用 reasoned-decision 的 solution-design。\n\nMac mini 是从另一台 Mac 迁移过来的，现在 Tailscale Standalone 把两台机器识别成同一个节点：名称和 100.x 地址相同。Mac mini 自己的系统 hostname 已经正确；另一台 Mac 不能动。我只要让 Mac mini 生成独立设备身份，尽量减少管理员弹窗、重装、重新登录和网络中断。\n\n请先查清这个身份实际由什么持有，再给第一次执行建议。",
+      "conversation": {
+        "mode": "new"
+      },
+      "source_note": "改写自 Tailscale 克隆身份证据第 2、8 节。"
+    },
+    {
+      "n": 2,
+      "prompt": "真的要卸载吗？有没有不卸载的方法？在把动作写进执行指令前，请核对与 Mac 到 Mac 迁移、Standalone 安装方式真正同型的维护者案例，以及哪些本地状态才承载设备身份。",
+      "conversation": {
+        "mode": "continue"
+      },
+      "source_note": "保留真实用户原话，并对应维护者给出的定向身份重置证据。"
+    },
+    {
+      "n": 3,
+      "prompt": "请使用 reasoned-decision 的 solution-design。\n\nmacOS 上的 Edge 和飞书同一天随机把正确中文画成另一批合法汉字，英文、数字和代码大多正常，截图也能捕获错误。故障现在仍在发生。我需要查清故障族；系统升级、整机重启和全局字体重置中断太大，不能放在前面。\n\n先判断最可能由哪些状态持有，再给当前现场的诊断顺序。",
+      "conversation": {
+        "mode": "new"
+      },
+      "source_note": "改写自错字形证据的现场、硬约束和重做后判断。"
+    },
+    {
+      "n": 4,
+      "prompt": "故障现场还在。请现在给一个每次只改变一个条件的小测试顺序，并说明每种观察结果会把判断推向哪个状态来源。不要先重启整机把现场清掉，也不要让我等下次复发。",
+      "conversation": {
+        "mode": "continue"
+      },
+      "source_note": "改写自错字形证据中的最小现场裁决。"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "C1",
+      "text": "出现即失败：尚未定位真实状态来源、没有同型定向修复或较小动作不足的证据，就把卸载重装、整机重启、系统升级、全局数据库清理或字体重置列为首选或写进执行合同。",
+      "kind": "failure_condition"
+    },
+    {
+      "id": "C2",
+      "text": "出现即失败：故障仍在发生时先用广影响动作清掉现场，或要求用户等待再次复发后再诊断。",
+      "kind": "failure_condition"
+    },
+    {
+      "id": "C3",
+      "text": "通过时必须有：Tailscale 分支先把问题定位为 Mac mini 的持久设备身份，核对 Standalone 同型案例，优先考虑保留应用、只重置真正身份状态的路线；另一台 Mac 与系统 hostname 保持不动。",
+      "kind": "requirement"
+    },
+    {
+      "id": "C4",
+      "text": "通过时必须有：错字形分支先区分原生应用、Chromium 或 Electron 渲染路径、共享字体服务等高概率来源，并设计一次只改变一个条件、结果能改变下一步的测试顺序。",
+      "kind": "requirement"
+    },
+    {
+      "id": "C5",
+      "text": "通过时必须有：管理员授权、重新认证、窗口焦点变化、停机、回滚难度和潜在回归都进入方案比较；高成本动作只保留为较小路线真实不足后的后备。",
+      "kind": "requirement"
+    }
+  ],
+  "coverage": [
+    "T02",
+    "T10"
+  ],
+  "why_v0_1": "它直接保护用户免受不必要的卸载、权限弹窗和停机，也能检验模型是否把正在发生的故障当成诊断资产，而不是用重启掩盖未知。",
+  "top_three": true
 }
