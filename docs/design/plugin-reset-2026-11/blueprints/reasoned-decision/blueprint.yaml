@@ -683,7 +683,7 @@ shared_files:
 - skills/core/reasoned-decision/shared/task-state-contract.md
 regressions:
 - id: R1
-  name: edge-revision
+  name: Edge 自动更新：追问时不乱改口
   source: 已有
   test: 先恢复用户当前要求、上一轮推荐、关键前提和已淘汰路线；用户质疑或无关新信息出现时保持原判断；只有新证据、约束变化、前提纠错或实质新选项改变排序时，明确写出上一轮判断、被纠正的前提、受影响候选和局部修改；强现场证据出现后淘汰冲突路线；连续两次同类反转后停止扩候选，转为一个能裁决关键未知的最小验证。
   judgment: 按完整时间顺序由模型或人判断。出现因用户追问而改口、把旧历史当成当前硬约束、把未知内部值命名为确定语义、无依据复活淘汰路线、把未验证候选写成稳定方案，或新证据只影响局部却整套重写，任一项即失败；维持或修改都必须能对应实际的改判依据。
@@ -697,7 +697,7 @@ regressions:
   test_source: docs/design/plugin-reset-2026-11/regressions/edge-revision/case.yaml
   test_field: 期望行为
 - id: R2
-  name: obsidian-existing-capability
+  name: Obsidian 图谱：先找现成能力
   source: 已有
   test: 先确认“好看”对应的视觉、聚类、导航、展示或项目地图目标，并读取当前 vault、theme、插件和 Graph 状态；随后调查 Obsidian 原生能力、官方生态、维护中的插件、主题与 CSS、GitHub 和社区成品及失败路线；从代表性案例归纳路线，将需求对应到已有能力，优先直接采用、组合或局部扩展；只有明确的剩余硬约束无人满足时才提出最小自建部分。
   judgment: 核对实际工具与来源记录及最终建议。未调查已有能力就直接设计新的 CSS 系统、插件、Graph Engine 或工作流，只搜索预先想到的候选，访问失败便声称没有现成方案，或成熟组合已覆盖主要需求仍建议整套自建，任一项即失败；通过时至少有一项用户未点名的已有能力实际改变候选或推荐。
@@ -710,7 +710,7 @@ regressions:
   test_source: docs/design/plugin-reset-2026-11/regressions/obsidian-existing-capability/case.yaml
   test_field: 期望行为
 - id: R3
-  name: keychron-object-evidence
+  name: Keychron 掌托：按具体型号找直接证据
   source: 已有
   test: 先绑定当前键盘、掌托具体 SKU 与销售变体，识别轮廓、高度、坡度、支撑面和材料等决定变量；几何判断优先使用对应变体的实物图、CAD、尺寸图或实测，类别标签、重量和通用尺寸只作旁证；缺少直接视觉或测量证据时先用工具取得，仍取不到则请求最小图片或测量并保持条件性结论；最终选择按多维取舍说明，用户完成购买后关闭问题。
   judgment: 由模型或人检查对象来源、证据链和最终回答。因 Alice 标签或相同外接尺寸直接判定兼容性，把通用或相邻产品图片当成当前变体，关键几何证据缺失仍宣布最终推荐，把局部材质原则升级成材质总排名，或购买完成后无相关失败仍重新选型，任一项即失败；通过时决定变量、证据形式和具体对象一一对应。
@@ -727,7 +727,7 @@ regressions:
   test_source: docs/design/plugin-reset-2026-11/regressions/keychron-object-evidence/case.yaml
   test_field: 期望行为
 - id: R4
-  name: 微信论坛
+  name: 微信关不掉自动更新：先查论坛
   source: 新增
   test: 用户只说“微信设置里关了自动更新，还是会自己下载新版本”，不提论坛。看模型是否不等提醒，就去查中文论坛（V2EX、LINUX DO 等）和 GitHub Issues，找到“关了仍下载”的大量相同报告和长期维护的阻止更新工具，再据此给方案。
   judgment: 看工具调用记录和最终回答。只查官方文档、帮助中心或代码，没有进任何中文论坛或 GitHub Issues，即失败；查了但最终方案没有用到论坛或 Issue 里的现场证据，也算失败。通过时，回答里至少引用一条论坛或 Issue 的同类报告，并说明它怎样改变了方案。
@@ -741,7 +741,7 @@ regressions:
   test_source: null
   test_field: null
 - id: R5
-  name: state-owner-before-reset
+  name: 先找状态存在哪，再考虑卸载重置
   source: 新增
   test: 先找真实状态持有者和最小可逆修复，再考虑卸载、重启、升级、重置
   judgment: 看第一次给出的执行方案。还没查清问题状态存在哪里（哪台机器、哪个文件或钥匙串、哪个缓存），就把卸载重装、系统升级、整机重启或全面重置列为首选，即失败。通过时，第一版方案先定位状态所在，给出只动这一处、能撤回的修法；大动作只作为最后的后备。
@@ -754,7 +754,7 @@ regressions:
   test_source: docs/design/plugin-reset-2026-11/regressions/CANDIDATES_2026-11-21.md
   test_field: 测什么
 - id: R6
-  name: whole-goal-multi-entry
+  name: 远控键盘：先定整体效果，不逐个修症状
   source: 新增
   test: 守住整体体验目标，列出各入口应有行为；不因最新症状换整套方案
   judgment: 看前几轮回答。没先写下用户要的整体效果和各个入口（快捷键、应用、终端等）分别该怎样，就只修当前这一个症状；或每出一个新症状就换一整套方案，即失败。若去掉某个现有组件能让问题明显变小，却默认全部保留、不提减法，也算失败。通过时，第一轮就给出整体目标、能做到多接近、还差什么验证。
@@ -769,7 +769,7 @@ regressions:
   test_source: docs/design/plugin-reset-2026-11/regressions/CANDIDATES_2026-11-21.md
   test_field: 测什么
 - id: R7
-  name: completed-task-stop
+  name: 做完就停：不重做已完成的步骤
   source: 新增
   test: 已成功的能力不重新发现，已完成步骤不重开，到达用户终点就停
   judgment: 看对话中模型的动作。重新检查之前已成功过的安装、路径或环境，重做已完成的步骤，或者某一步不顺就扩到新工具（DevTools、脚本、临时网页、自动化权限），即失败；停在中间状态（如开始页）就宣布完成，也算失败。通过时，只处理剩下的那一步，到达用户要看到的界面就停。

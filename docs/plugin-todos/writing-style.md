@@ -854,3 +854,10 @@ status: NEW
 source: 该项目的技术讲解返修反馈，2026-11-11。
 evidence: 被拒稿件原文留在私有项目仓库，此处不保存。
 problem: 读者已要求自然中文，稿件仍以内部来源说明开场，频繁使用否定对照，普通概念保留英文，缩写首次出现缺少解释，短关系式也过度独立排版。结构性例子是先写“本节讨论的并不是……”再说明主题，或让一个缩写承担整段解释。应直接说明对象与作用，首次解释必要缩写，并从头检查整篇读起来是否自然。这里不保存原句中的模型内容、公式或私有仓库定位。
+
+### 插件与规则文字里的内部记号和抽象说法
+status: NEW
+source: Reasoned Decision v0.1 Blueprint 用户审阅，2026-11-22。
+evidence: `docs/design/plugin-reset-2026-11/blueprints/reasoned-decision/decisions.yaml`（T12、T15 的用户备注）；`skills/core/reasoned-decision/` 现有规则。
+problem: GPT 写出的规则里满是 `COMPLETED_ACTIONS`、`CLOSED_QUESTIONS` 这类全大写状态名，`state-owner-before-reset` 这类英文短横线名称，以及“决定成功的属性”“证据形式”这类不是人话的抽象名词。用户原话：“必须以后设计任何插件、规则都不允许用”“我不希望以后做什么插件 GPT 每次产出都是一堆垃圾 token 和……根本不是人话的玩意”。仓库级禁令已写进 `AGENTS.md` 1.1.1；机械扫描能抓前两类，第三类（抽象说法）需要 Clear Writing 在规则文字上也能检查并给出具体改法。
+project-specific context: 例子来自 Reasoned Decision，但同类写法遍布其他插件（全仓约 1100 处全大写下划线词）。
