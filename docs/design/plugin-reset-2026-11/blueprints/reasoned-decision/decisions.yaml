@@ -10,72 +10,72 @@
   },
   "todos": {
     "T01": {
-      "stance": null,
+      "stance": "同意",
       "note": ""
     },
     "T02": {
-      "stance": null,
+      "stance": "同意",
       "note": ""
     },
     "T03": {
-      "stance": null,
+      "stance": "同意",
       "note": ""
     },
     "T04": {
-      "stance": null,
+      "stance": "同意",
       "note": ""
     },
     "T05": {
-      "stance": null,
+      "stance": "同意",
       "note": ""
     },
     "T06": {
-      "stance": null,
+      "stance": "同意",
       "note": ""
     },
     "T07": {
-      "stance": null,
+      "stance": "同意",
       "note": ""
     },
     "T08": {
-      "stance": null,
+      "stance": "同意",
       "note": ""
     },
     "T09": {
-      "stance": null,
+      "stance": "同意",
       "note": ""
     },
     "T10": {
-      "stance": null,
+      "stance": "同意",
       "note": ""
     },
     "T11": {
-      "stance": null,
-      "note": ""
+      "stance": "有疑问",
+      "note": "这个我认为需要思考到底要不要做, 因为主要是asteria atlas自己的问题, reasoned decision通常是解决单个具体问题比如买什么, 某个问题如何解决之类"
     },
     "T12": {
-      "stance": null,
-      "note": ""
+      "stance": "有疑问",
+      "note": "我说“别折腾”时，只做剩下的那一个动作。 这个不太好; 然后COMPLETD-ACTIONS, CLOSED_QUESTION这种垃圾token一看就是gpt搞得, 必须以后设计任何插件、规则都不允许用, 看看落实到哪里"
     },
     "T13": {
-      "stance": null,
+      "stance": "同意",
       "note": ""
     },
     "T14": {
-      "stance": null,
-      "note": ""
+      "stance": "不同意",
+      "note": "这个重复了, 要去重"
     },
     "T15": {
-      "stance": null,
-      "note": ""
+      "stance": "有疑问",
+      "note": "我赞同, 这个和之前那个token一样, 我不希望以后做什么插件GPT每次产出都是一堆垃圾token和决定成功的属性这种根本不是人话的玩意, 看看落实到哪里, 实在不行作为clear writing TODO等这个做好"
     },
     "T16": {
-      "stance": null,
+      "stance": "同意",
       "note": ""
     },
     "U1": {
-      "stance": null,
-      "note": ""
+      "stance": "不同意",
+      "note": "重复了, 要去重"
     }
   }
 }
