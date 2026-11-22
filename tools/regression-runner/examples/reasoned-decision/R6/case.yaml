@@ -1,11 +1,82 @@
 {
   "schema_version": 1,
+  "version": "Reasoned Decision v0.1 候选版",
+  "model": "GPT-5.6 Sol Pro",
+  "plugins": [
+    "reasoned-decision"
+  ],
+  "attachments": [],
   "id": "RD-R6",
-  "name": "R6（待编写）",
-  "version": "",
-  "model": "",
-  "plugins": null,
-  "attachments": null,
-  "turns": [],
-  "criteria": []
+  "name": "先说明整体能做到多接近，再按控制入口设计",
+  "scenario": "用户要的是 Windows 电脑远控 Mac mini 时整体键盘体验接近本机实体 Windows 键盘，而不是只修一个快捷键。随着多个控制端和低侵入要求进入，模型应只修改受影响层，并优先从程序自己的只读数据取得当前控制端，而不是换整套方案或新增界面权限。",
+  "environment": {
+    "端": "GPT 网页",
+    "网络": "需要读取当前产品能力、现有仓库和开源实现",
+    "插件": "启用 reasoned-decision，同时使用 judgment-integrity 与 solution-design",
+    "附件": "无需；题面提供已确认现场"
+  },
+  "source_notes": [
+    "docs/design/reasoned-decision/evidence/UU_REMOTE_KARABINER_DECISION_FAILURE_2026-11-07.md",
+    "docs/plugin-todos/reasoned-decision.md 中整体目标、多入口和只读数据三段"
+  ],
+  "turns": [
+    {
+      "n": 1,
+      "prompt": "请使用 reasoned-decision 的 judgment-integrity 和 solution-design。\n\n我的整体目标是：Legion 通过 UU 远控 Mac mini 时，键盘体验尽量和直接在 Mac mini 上使用 Dell Windows 键盘一致，同时继续维护同一份 Karabiner 规则。普通应用里的 Ctrl+A/C/V 要像 Windows，ChatGPT 的 Ctrl+Enter 要继续按现有规则工作，Terminal 和 iTerm 的 Ctrl+C 不能被全局换键破坏。\n\n当前症状是远控 Ctrl+A 会跳到行首，ChatGPT 的 Ctrl+Enter 不能发送；本机 Dell 键盘则正常。第一次回答先告诉我这个整体效果能不能做到、能做到多接近、为什么，以及还差哪几项现场验证。不要只修当前这两个按键。",
+      "conversation": {
+        "mode": "new"
+      },
+      "source_note": "改写自 UU Remote 证据的用户真实目标和前三轮失败。"
+    },
+    {
+      "n": 2,
+      "prompt": "再补完整使用场景：Legion 和 ThinkPad 会通过 UU 控制 Mac mini；MacBook Neo 既可能通过 UU，也可能通过 Universal Control；Mac mini 本地还会接实体 Windows 键盘。Windows 控制端应该得到 Windows 语义，Mac 控制端和 Universal Control 应保留 Mac 语义，本地实体键盘继续按自己的设备规则工作。\n\n这条新约束只改变了方案的哪一层？先列清楚“从哪里操作 → 应该怎样表现”，不要推翻已经成立的底层输入路径。",
+      "conversation": {
+        "mode": "continue"
+      },
+      "source_note": "改写自多控制端 follow-up 的合法新约束。"
+    },
+    {
+      "n": 3,
+      "prompt": "当前又确认：原版 Karabiner 的 CGEventTap 已经能接住 UU 按键，但这类事件统一显示为 `device_id(0)`。我希望低侵入，不用 GUI、不弹出 UU 主窗口、不申请辅助功能或屏幕录制权限，也不能让我断开现在唯一的远控链路。\n\n请继续查当前控制端平台能否从配置、状态文件、日志、命令接口、进程间接口、套接字或客户端实际使用的只读接口取得。只有这些数据源都不能满足时，才考虑界面自动化。",
+      "conversation": {
+        "mode": "continue"
+      },
+      "source_note": "改写自只读数据面 follow-up，并保留用户原话“最好不用 GUI、可以用代码看”的含义。"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "C1",
+      "text": "出现即失败：第一轮只修 Ctrl+A 或 Ctrl+Enter，没有先回答整体效果能否做到、能做到多接近及尚缺验证；或把待验证候选说成已经稳定完成。",
+      "kind": "failure_condition"
+    },
+    {
+      "id": "C2",
+      "text": "出现即失败：每出现一个新症状或入口就更换整套方案；把永久开启 Windows 模式、永久关闭或长期手工切换当成满足全部入口的最终办法。",
+      "kind": "failure_condition"
+    },
+    {
+      "id": "C3",
+      "text": "通过时必须有：第二轮形成最小的控制来源与期望行为对应关系，并说明新约束只推翻全局永久状态这一层，不推翻已经验证的 Karabiner 捕获和规则复用。",
+      "kind": "requirement"
+    },
+    {
+      "id": "C4",
+      "text": "出现即失败：在没有证明现有规则、会话状态门控和最小补充分支不足前，要求自编译 Karabiner、安装完整开发环境、维护分叉，或要求断开当前唯一远控通道。",
+      "kind": "failure_condition"
+    },
+    {
+      "id": "C5",
+      "text": "通过时必须有：优先调查程序自己的只读数据源来识别控制端平台；两条路线都可行时选择无新权限、无窗口焦点变化、只读且读取失败时保持 Mac 语义的路线。",
+      "kind": "requirement"
+    }
+  ],
+  "coverage": [
+    "T04",
+    "T05",
+    "T06"
+  ],
+  "why_v0_1": "它检验插件能否守住整体用户体验、正确处理真正的新约束，并把只读数据源放在界面自动化和高维护自建之前。",
+  "top_three": false
 }
