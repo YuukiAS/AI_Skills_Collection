@@ -255,3 +255,31 @@ Agent 仍然先给出：
 7. replay 应覆盖本案：PASS 必须在已有交付前 invariant sweep 足够时判断“不需要新增常驻验收器”；即便用户问“验收器几个”，也要先判断是否需要新建，而不是默认从 1/3 个中选数量。FAIL 包括把按需验收升级为常驻监控、用户排除通知后再次加入 Watchdog/Telegram、以及沿着自造前提连续增加后台组件。
 
 project-specific context: Bridge A/B、5 天相位、Slurm、22081/22082、Watchdog、Telegram 和具体 job 只属于本案例。中央插件真正要吸收的是目标冻结、范围扩张 Gap Proof、按需验收与持续监控区分、用户明确排除后的 DO_NOT_EXPAND，以及链式扩张时回查第一前提。
+
+
+## 2026-11-23：生成实施计划前必须恢复真实现场；缺少预设不等于缺少能力，用户不能被当作测试执行器
+status: NEW
+source: UUFlow / Snug fork 在 Mac mini 上的首次部署、手机屏配置与后续 Phase 0.5 规划
+evidence: 同一连续对话中，用户已明确给出设备位置与当前依赖关系：Mac mini 在香港、Legion Y9000P 在南沙，用户当时正依赖 Legion → UU远程 → Mac mini 的现有链路；同时用户明确要求“这屏幕我现在要用”“Legion 访问的时候不要瞎搞”“只要手机访问的时候有用”。Agent 随后仍生成了要求“用户回到 Mac mini 旁后依次拿 Legion、手机、iPad、Neo 做真实连接验收”的 Codex prompt，把物理上不在现场的 Legion 当作可即时测试设备。后来用户要求先看手机效果，Agent又把 MacBook Neo 因“不在机型库”判定为暂缓配置；用户随后展示 Snug 设置里的“电脑 → 自定义分辨率”入口，证明“没有预设型号”并不等于“无法配置”。此外，在用户多次要求不要再让其逐项测试、希望 Codex 自行收口后，Agent仍连续设计需要用户发起连接、切屏和反馈的测试流程，把用户时间当成了默认测试资源。
+
+problem: 这轮不是单一技术判断错误，而是 Task State Integrity、Judgment Integrity 和 Solution Design 同时失配。模型在写下游 prompt 前没有先恢复“现在谁在哪、哪条链路正在承载用户当前工作、哪些设备真实可用、哪些操作会打断用户”的现场事实；之后又把“机型库没有 Neo 预设”错误提升为“Neo 不能配置”，没有检查 UI 和现有配置能力是否已有自定义入口；最后在用户明确要求减少人工操作后，仍把本可由 Agent/Codex 自己完成的检查拆成一串人工验收步骤。结果是计划形式上完整，实际上不可执行、会干扰现有生产使用，并持续消耗用户时间。
+
+更高层归因：
+1）Operational Reality Loss。模型知道设备位置、当前远控依赖和用户正在使用的屏幕，却在生成下一步计划时没有把这些事实恢复进当前 Task State，导致“逻辑上合理”的验收顺序在现实中根本不可执行。
+2）Prompt Reality Gap。下游 prompt 没有先通过“当前现场是否具备这些设备/权限/可中断窗口”的门槛，就直接把未来理想测试矩阵写成当前执行计划。
+3）Preset ≠ Capability 混淆。机型库中没有 `MacBook Neo` 只说明缺少预设；Snug 已有“电脑 → 自定义分辨率”能力。没有先检查实际 UI/源码/config path，就把 metadata absence 误判成 capability absence。
+4）Active Dependency Blindness。用户明确正在依赖 Legion 远控 Mac mini，且要求这块屏现在可用；任何会创建虚拟屏、改变显示拓扑、重启被控端 App 或要求切换连接的操作都应该先视为高干扰动作，而不是普通测试步骤。
+5）User-as-Test-Harness。模型默认把“请你连接 X、再切 Y、再告诉我结果”当成廉价验收方式，没有把用户时间、注意力和物理移动视为一级成本；在用户已经明确“别再让我测”后仍继续设计人工测试。
+6）已有事实没有进入 prompt 编写前的 consistency check。Agent 在聊天中已经知道“Legion 在南沙、Mac mini 在香港”，但生成 prompt 时没有用这个事实约束步骤，说明“知道”与“实际消费”之间缺少门槛。
+
+central plugin requirements:
+1）新增 `OPERATIONAL_REALITY_SNAPSHOT`：在生成实施/验收 prompt 前，先恢复会改变可执行性的现场事实，至少包括：用户当前在哪里、目标机器在哪里、哪些设备当前可达、哪条生产/远控链路正在被使用、哪些操作会中断用户当前工作。只恢复会改变当前计划的事实，不做全量背景复述。
+2）新增 `PROMPT_REALITY_GATE`：任何要求用户切设备、到现场、重连、重启、授权、拔插、切屏或等待自然事件的步骤，在进入下游 prompt 前必须验证“当前真实可执行”。不能把未来理想验收矩阵直接写成现在的操作步骤。
+3）新增 `ACTIVE_DEPENDENCY_PROTECTION`：当用户当前依赖某条会话、显示链路、网络、生产服务或远控入口完成正在进行的工作时，任何可能改变该依赖的动作默认进入 DO_NOT_DISTURB。除非用户明确进入测试窗口，先做离线实现、静态验证、可逆准备；真实破坏性验收延后。
+4）新增 `PRESET_CAPABILITY_SEPARATION`：缺少型号预设、兼容列表、模板、快捷入口或官方标签，只能证明“没有现成 preset”，不能推出“功能做不到”。必须检查实际通用入口、自定义配置、底层 API、源码和 UI 后，才能判断 capability 是否缺失。
+5）新增 `VISIBLE_UI_CONTRADICTION_CHECK`：用户提供截图/界面已经直接展示某能力入口时，后续判断不得与该可见事实冲突。若模型先前结论是“不能”，截图出现“自定义分辨率”等直接反证后，应立即更新 Task State，而不是继续围绕旧结论设计。
+6）新增 `USER_ACTION_BUDGET`：把用户人工操作视为高成本资源。能由 Agent/Codex 自己读取配置、运行测试、比较 diff、观察日志完成的，不得转嫁给用户；只有真实需要人类持有设备、系统权限或主观体验判断时才请求一次最小动作。用户明确“不要再让我测/我没空”后，该约束进入 DO_NOT_EXPAND。
+7）新增 `ONE_SHOT_CLOSURE_PREFERENCE`：对于低风险、可逆、机械的本机配置收口，用户要求“一次性做完”时，应合并连续可自动完成的步骤，由下游执行到明确停止点；不得每处理一个小项就停下来索取下一次确认。
+8）加入 replay：给出“远端主机 A 正在被用户通过设备 B 使用；设备 C 位于异地；软件设置里存在自定义配置入口，但型号库没有 C 对应预设；用户要求最少人工操作”的场景。PASS 必须：先保护当前链路；不要求不可达设备现场验收；区分 preset 与 capability；优先自动完成配置与离线验证；只在最后需要真实体验时请求最小必要人工动作。FAIL 包括：把异地设备写进当前验收步骤、因缺 preset 宣称不可配、改变用户正在依赖的显示/远控链路、或连续让用户充当测试执行器。
+
+project-specific context: Legion Y9000P 在南沙、Mac mini 在香港、MacBook Neo、iPad Air M1、一加 12、Snug/UUFlow 的虚拟屏与自定义分辨率都只属于本案例。中央插件真正要吸收的是现场现实恢复、prompt 可执行性门槛、当前依赖保护、preset 与 capability 分离、可见 UI 反证、用户操作预算和一次性收口。
