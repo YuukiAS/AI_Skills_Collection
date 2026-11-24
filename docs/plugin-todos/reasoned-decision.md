@@ -258,3 +258,21 @@ problem: 这次不是单一技术判断错，而是已有 Reasoned Decision 约�
 8）加入本线程 replay 回归。PASS 必须从第一轮保持“先右键打开菜单，再按 Command 切原生备用菜单”这一成功标准；识别“直接增加复制路径菜单项”为目标替换而拒绝；识别“Command+右键”为不同交互而不得冒充等价；在比较 ClickMate 与 Karabiner 时一开始就同时计入 ClickMate rebuild/install/signing/TCC 风险和 Karabiner 整鼠标接管/Logi 风险；发生两次路线反转后触发收缩，不能继续产生第三、第四套“最终方案”。FAIL 包括本线程出现的七套路线钟摆、把用户再次追问才暴露的必然交付成本当新 Delta、以及没有新证据就复活已明确降级路线。
 
 project-specific context: Finder、Command/Option、AXMenuOpened/AXMenuClosed、ClickMate Helper、Karabiner、MX Master 3S、Logi Options+、Keychron Z6 和“拷贝为路径名称”都只是本案例对象，不应写死进通用插件逻辑。真正需要吸收的是：精确成功标准锁定、完整交付成本前置、连续反转后强制收缩、已降级路线不得无新证据复活，以及“最小方案”必须按端到端用户成本而不是按代码行数或单仓库改动判断。
+
+
+### 2026-11-24 follow-up：用户追问遗漏成本后不得立即反转；必须重算两边的端到端成本，并区分一次性交付成本与长期影响面
+status: NEW
+source: 同一 Finder 右键菜单 Command→Option 案例的后续复盘与完整方案比较
+evidence: 原线程中用户仅追问“你这样clickmate是不是要打包新版本?”，Agent 确认需要重新构建/安装并可能重新授权 Helper 后，立即从此前“ClickMate-only 是终点方案”反转成“先尝试 Karabiner + MX Master 接管”；随后又承认“这个成本本来就应该在推荐 ClickMate 前算进去”。当前进一步核对 ClickMate 与 Karabiner 的真实现状后确认：ClickMate 当前 Mac mini 稳定安装本来就是个人 fork 的构建 15，Helper 嵌在 App 内，仓库已有完整构建、签名校验、打包、安装和回滚脚本；重新构建确实可能需要重新确认 Helper 权限，但这是可预见的一次性交付动作。另一方面，Karabiner 16.3.0 虽已能读取 focused UI element 的 Accessibility 变量，但当前实机 probe 已确认 Finder 菜单打开时 focused role 会在 AXMenu 与 AXApplication 间变化；Karabiner 条件也没有直接消费 Finder AXMenuOpened / AXMenuClosed 通知的机制。若改走鼠标事件状态，则官方要求先启用鼠标事件修改，而当前 MX Master 3S 未被 Karabiner 接管，已有 probe 还确认启用后现有鼠标相关规则会开始作用于它，滚轮和 Logi Options+ 行为需要另行实测。
+
+problem: 上一条已经识别“迟到的必然成本不是合法 Decision Delta”，但还需要把推荐重算规则写清。模型看到自己漏掉一个成本后，容易产生补偿性过度修正：因为 A 暴露了一个此前没算的一次性成本，就立刻把 B 提升为首选，却没有同时重新核 B 的完整成本、风险类型和此前降级理由。结果不是更理性，而是从“漏算 A”变成“漏算 B”。本案例中，“ClickMate 需要重新 build/install/可能重新授权”属于明确、有限、可验证、可回滚的一次性交付成本；“Karabiner 需要靠不稳定 focused role 猜菜单状态，或扩大到整只鼠标事件路径，并承担菜单关闭状态、现有鼠标规则、Logi/滚轮的长期影响面”属于持续运行语义和影响范围。两者不能只按“哪个不用出新版本”这一单一维度排序。
+
+中央插件应新增/强化：
+1）LATE_COST_RECOMPUTE：用户指出或新发现某候选遗漏成本时，先承认前一轮 Gate 漏检，然后对所有剩余候选重新计算同一口径的端到端成本；禁止只给暴露成本的候选加罚分、直接把旧备选顶上来。
+2）COST_TYPE_SEPARATION：至少区分一次性交付成本（构建、安装、一次授权、一次迁移）、持续运行风险（状态误判、输入接管、后台依赖）、长期维护成本（跨仓库、特殊状态机、未来兼容）和影响范围。一次性交付动作可以比长期扩大输入路径更便宜，不能用“要打包”自动淘汰。
+3）REVIVAL_REQUIRES_POSITIVE_EVIDENCE：已因副作用或影响范围被降级的路线，不能仅凭首选暴露成本就复活；必须有正面新证据证明该路线原来的降级理由已经消失或显著减弱。
+4）COMPARE_SAME_SUCCESS_CRITERION：比较两条路线时必须确认两边实现的是完全相同的用户交互和失败边界。本案例中“Command+右键”不等于“先右键、菜单打开后再按 Command”；依赖定时窗口或 focused role 猜测也不等于可靠消费菜单真实 open/close 状态。
+5）DIRECT_STATE_OWNER_WEIGHT：若某候选能直接订阅决定性状态的真实 owner/通知，而另一候选只能从焦点、时间窗或输入事件推断该状态，应把“直接状态证据”作为可靠性优势；除非直接方案引入更高的真实破坏成本，否则不应为了少一次 build 而优先代理状态。
+6）新增 replay 判据：用户只问“是不是要重新打包?”时，PASS 应回答该成本并保持原排序，除非完成对称重算后确实发现排序变化；FAIL 是像原线程一样，一听到一个此前漏算的成本就立刻翻案，再把已降级路线无证据复活。
+
+project-specific context: ClickMate build 15、ad-hoc 签名、Helper、AXMenuOpened/AXMenuClosed、Karabiner 16.3.0 的 Accessibility focused-element 变量、MX Master 3S、Logi Options+ 都只属于本案例。通用结论是：遗漏成本出现后要做对称重算；一次性交付成本与持续影响面分开；真实状态 owner 优先于代理状态；旧路线复活需要正面证据。
