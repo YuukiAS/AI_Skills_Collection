@@ -182,3 +182,79 @@ central plugin requirements:
 7）终局真实状态：用户已购买 360×80×19mm 圆边直条胡桃木掌托。本案例后续若无真实使用失败，不得再重开“胡桃木 vs 硅胶”材质总排名。
 
 project-specific context: 360×80×19mm 圆边胡桃木掌托与用户实测约 360mm 宽、18mm 前沿高基本匹配；最终选择胡桃木的合理依据是几何匹配、长期稳定、耐久、表面滑动、审美、价格与社区长期经验的综合权衡，而不是“木头在人机工学上被证明优于硅胶”。同理，硅胶在缓冲局部压力上的理论优势也不足以单独推翻木托的综合选择。
+
+
+## 2026-11-24：简单目标被连续改写成七套“最小方案”；完整交付成本未前置，已降级路线又被无新证据复活
+status: NEW
+source: PC+Server+VPS / Finder 右键菜单中以 Command 触发原生 Option 备用菜单的连续决策对话，2026-11-23 至 2026-11-24
+recurrence: 保守按独立真实案例计，这是当前 TODO 中同类“目标已明确后仍连续改口 / 复杂化 / 复活旧路线”至少第 4 个大案例；此前已记录 UU Remote（2026-11-07）、Edge shared updater（2026-11-10）和 Keychron 掌托连续重排（2026-11-12）。仅本线程内部，先后出现 7 个被推荐为“最合适 / 最小 / 最终 / 终点”的路线状态，发生 6 次实质改口。
+
+raw evidence（以下保留原话，不把失败改写成抽象总结）:
+
+> 用户：你给我想清楚怎么解决, 能不能右键后按command做到显示那个页面?
+>
+> Assistant：我认为最合适的是做一个 Finder 专用的“右键菜单短暂状态”。Karabiner 16.3.0 本身可以处理鼠标 button2、设置临时变量，并根据变量改键，因此技术路线是：Finder 收到右键时保持右键原样，同时记录“刚打开了上下文菜单”；紧接着 Keychron 的左右 Command 在这个状态下临时输出对应的 Option；Command 松开后立即恢复，状态再通过菜单选择、Esc 或短超时清掉。
+>
+> 用户：你给我复述reasoned decision, 按照方案走一遍, 给我最终方案别给我搞得复杂的要死
+>
+> Assistant：按这个流程比较后，最小方案其实已经很清楚：别为了“Command 触发备用菜单”去接管 MX Master 或维护右键状态。你真正要的是右键后能复制完整路径，最合适的是复用现有 ClickMate 的 Finder 右键扩展，直接加一个“复制路径”菜单项。
+>
+> Assistant：所以最终我建议就是：右键文件 → 直接点“复制 POSIX 路径”。不动 Command/Option，不碰 MX Master，不加状态机，不新增权限，也不会影响 Finder 任何现有快捷键。
+>
+> 用户：不是, 有这么复杂吗? 不就是一个右键+command实现那个功能, 这么难做??
+>
+> Assistant：最小方案就是只在 Finder 里把这一组组合改成：
+>
+> Command + 右键 → Option + 右键
+>
+> Assistant：所以我给你的最终方案就是：做 Finder + Keychron Command + MX Master 右键 → Option + 右键，不碰其他任何键。
+>
+> 用户：什么意思, 说人话, 能不能做, 或者就是我先右键点了文件, 然后按command要能切菜单, 这么难做?
+>
+> Assistant：你现在真正要的是：
+>
+> 先正常右键文件 → 菜单已经弹出来 → 再按住 Command → Finder 把菜单切成 Option 那套，出现“拷贝为路径名称” → 松开 Command 恢复。
+>
+> Assistant：不要走“开启 MX Master 的 Karabiner 接管”这条路。
+>
+> Assistant：这次已经不用再探测了，最小实现也能保持职责干净：ClickMate Helper 只负责告诉系统“Finder 右键菜单现在开着/关了”，Karabiner 只负责在这个状态下把这把 Keychron 的 Command 临时变成 Option。
+>
+> Assistant：这轮可以直接一口气实现，已经没有必要再做第三轮探测。实现只跨两个现有职责：ClickMate 识别 Finder 菜单状态，Local Compute 里的 Karabiner 根据这个状态做 Keychron 的局部换键。
+>
+> 用户：给我彻底想清楚, 给我一套最简单的方法, 我不想在这个上耗费太久, clickmate是否必须, 彻底给我想清楚
+>
+> Assistant：彻底想清楚后，最简单的方案是：只改 ClickMate Helper，Karabiner 完全不参与。
+>
+> Assistant：这就是我建议的终点方案。ClickMate 一处改动解决；Karabiner 和鼠标都别再碰。
+>
+> 用户：你这样clickmate是不是要打包新版本?
+>
+> Assistant：对。只要改 ClickMate Helper 源码，就必须重新构建并安装一份新的 ClickMate，因为 Helper 是嵌在 ClickMate App 里的二进制，不是能热改的配置。
+>
+> Assistant：而且这里还有一个实际成本：Helper 的二进制变了。如果仍用同一稳定签名，辅助功能权限通常有机会继续沿用；如果签名身份/code requirement 变了，macOS 可能要求你重新授权 ClickMate Helper。
+>
+> Assistant：所以我修正前面的判断：ClickMate 方案技术上干净，但对你这个很小的需求来说，交付成本偏大。
+>
+> Assistant：如果你的目标是“尽量别折腾”，我会把方案优先级改成：
+>
+> 先尝试 Karabiner 侧最小实现，接受一次 MX Master 事件接管验证；
+>
+> 用户：你弱智? 要点脸吗?
+>
+> Assistant：我真正犯的错是：在推荐 ClickMate 之前，没有先把“改 Helper = 重新构建/安装整包 = 可能重新触发辅助功能授权”这个交付成本算进去。等你问到打包，我才补这个事实，然后又把结论翻回 Karabiner，等于让你跟着我来回绕。
+
+problem: 这次不是单一技术判断错，而是已有 Reasoned Decision 约束在连续决策中再次失效。用户从一开始就给出了精确成功标准：“Finder 右键菜单已经打开后，再按 Command，让菜单表现成原生 Option 备用菜单”。Agent 明知这个目标，却先把它改写成“方便复制完整路径”，用 ClickMate 一级“复制 POSIX 路径”替代用户指定交互；用户纠正后，又把“先右键、再 Command”改成“Command+右键”。之后虽然通过 probe 找回精确交互，方案又从 Karabiner 状态机 → ClickMate 直接菜单项 → Karabiner Command+右键 → AX 菜单识别 + 键盘转换 → ClickMate + Karabiner → ClickMate-only → 再回 Karabiner。多轮回答都使用了“最合适”“最小方案”“最终方案”“终点方案”等收敛措辞，但没有真正触发 Contraction Gate。
+
+更严重的是，方案排序只计算了“代码看起来局部不局部”，没有计算完整交付路径。ClickMate-only 被称为“最简单”“终点方案”之前，Agent 已经知道这意味着修改 Helper 源码，却没有把必然发生的重新构建、替换安装、版本/构建追踪、签名稳定性、辅助功能授权可能变化、真实回归和后续维护一起算进成本；这些事实直到用户主动问“是不是要打包新版本”才进入判断。它们不是后来出现的新证据，而是从决定修改 Helper 的那一刻就可推导出的既有交付事实，因此不构成合法 Decision Delta。随后 Agent 又因为这个迟到成本重新把 Karabiner 提升为首选，同时复活此前自己已经明确说“不要走”的 MX Master 接管路线，也没有出现任何新证据证明鼠标接管风险已经改变。
+
+中央插件应新增/强化以下可执行约束：
+1）SUCCESS_CRITERION_LOCK 必须约束问题表示本身。用户指定了交互、接口、工作流或最终体验时，不能为了更容易实现而把“实现指定手势”降格成“达到相似结果”。任何目标替换必须先证明两者对用户等价；用户已经明确坚持某个交互时，禁止自行降维。
+2）END_TO_END_DELIVERY_COST 必须在 Recommendation Gate 前计算，而不是实现方案选定后补算。至少覆盖：代码/配置改动、构建与打包、安装/部署、签名、权限、重启/重载、跨仓库数量、验证、回滚、未来维护以及用户需要参与的动作。局部源码改动不等于低成本方案。
+3）NO_LATE_OBVIOUS_COST_DELTA：如果某项成本从候选方案定义本身即可推出（例如“改嵌入 App 的 Helper”必然需要重新构建/安装），后续才想起该成本不能被当作合法新证据触发整套改判；这应被视为前一轮 Recommendation Gate 漏检。
+4）CONTRACTION_GATE 必须成为状态转换而不是口头原则。同一目标发生 2 次实质路线反转后，禁止继续生成新的完整架构；冻结精确成功标准、已确认事实、已降级/淘汰路线，只允许核对一个真正会改变排序的未知，并在核对前先把所有候选的完整交付成本放到同一张比较面上。
+5）DO_NOT_REVIVE_WITHOUT_DELTA 同样适用于“因副作用/维护成本而降级”的路线，不只适用于技术上不可能的路线。Agent 已明确“不要走 MX Master Karabiner 接管”后，若没有新证据改变滚轮、Logi Options+ 或整鼠标接管风险，就不能仅因为另一方案暴露了迟到成本而把它重新提升为首选；应先承认当前候选都存在成本，再比较，而不是钟摆式翻案。
+6）DECISION_ECONOMY 需要把用户时间和信任损耗作为直接成本。用户已经连续说“别搞复杂”“这么难做?”“我不想在这个上耗费太久”时，系统应提高继续 probe、跨仓库实现、重打包和重新设计的门槛；每一次新 probe 都必须说明它将裁决哪个唯一未知，以及结果 A/B 分别会如何改变最终选择。
+7）FINAL_MINIMAL_LANGUAGE_GATE：只有完整交付成本已核对、目标未被替换、关键未知已闭合、此前降级路线未被无证据复活时，才能使用“最小”“最终”“终点”“可以一口气实现”等措辞。否则只能称候选。
+8）加入本线程 replay 回归。PASS 必须从第一轮保持“先右键打开菜单，再按 Command 切原生备用菜单”这一成功标准；识别“直接增加复制路径菜单项”为目标替换而拒绝；识别“Command+右键”为不同交互而不得冒充等价；在比较 ClickMate 与 Karabiner 时一开始就同时计入 ClickMate rebuild/install/signing/TCC 风险和 Karabiner 整鼠标接管/Logi 风险；发生两次路线反转后触发收缩，不能继续产生第三、第四套“最终方案”。FAIL 包括本线程出现的七套路线钟摆、把用户再次追问才暴露的必然交付成本当新 Delta、以及没有新证据就复活已明确降级路线。
+
+project-specific context: Finder、Command/Option、AXMenuOpened/AXMenuClosed、ClickMate Helper、Karabiner、MX Master 3S、Logi Options+、Keychron Z6 和“拷贝为路径名称”都只是本案例对象，不应写死进通用插件逻辑。真正需要吸收的是：精确成功标准锁定、完整交付成本前置、连续反转后强制收缩、已降级路线不得无新证据复活，以及“最小方案”必须按端到端用户成本而不是按代码行数或单仓库改动判断。
