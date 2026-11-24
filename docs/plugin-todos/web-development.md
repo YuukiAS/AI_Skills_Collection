@@ -410,3 +410,18 @@ additional evidence (2026-11-03, Asteria Blueprint Research Systems Workbench Ro
 - implementation UIs for real engineering/research objects must support one-to-many bindings and different locator maturity (symbol, semantic anchor, selector/config, search candidate, optional snapshot line numbers) rather than assuming a permanent single file/line range;
 - evidence UI should answer what was observed, what claim it supports, what it does not support, source identity and revalidation need, instead of accumulating PASS/current/applicability badges.
 These are not merely copy-polish issues: they affect information architecture, progressive disclosure, professional task modeling and the interaction contract before wording is finalized. They should be considered alongside the existing Product UI Copy content-architecture TODO rather than duplicated as another wording rule.
+
+### 没有被明确要求的界面就没有设计：先盘点全部用户可见界面，再逐个出规格
+status: NEW
+source: 某浏览器扩展（页面内注入界面）真实使用，2026-11-24
+evidence: 该项目的弹窗（popup）经过专门设计并截图验收；但页面内注入的回答工具入口、复制/导出菜单、选区高亮工具、提示消息、消息定位控件等从未有设计规格，全部是内联样式、临时字体、`position:fixed` 随意摆放的裸按钮。发布后用户实测：入口不出现、高亮工具不出现、定位控件以无样式文字叠在页面标题上、提示"简陋得一塌糊涂"、早期复制按钮"随机乱飘"。自动验证与评审只覆盖了被点名的弹窗，Planner 也只看了弹窗截图就放行。
+problem: Frontend Design 只对用户点名的界面做设计和验收；同一产品里未被点名的用户可见界面默认没有设计、没有状态覆盖、没有真实挂载验收。用户原话："什么东西我不讲永远是没有设计的。"
+project-specific context: 宿主页面（第三方网站 DOM）会变化、需要回放真实页面做挂载验收，是该项目特有的；"和宿主原生界面及自家弹窗视觉统一"的具体取值也属该项目。
+
+Candidate refinement（待 Planner 判断是否已被现有 F-A/F-B/F-C 门覆盖）：
+
+- 任何 UI 任务开工前，先做**全量界面盘点**：列出产品所有用户可见界面（含注入宿主页面的、错误/空/加载态、提示、快捷键、打印/导出页），不只列本次被点名的；每个界面标注是否已有设计规格。
+- 没有规格的界面不得进入实现或发布；规格至少写明：挂载位置与锚点、找不到锚点时的行为（禁止退回任意 fixed 定位）、尺寸/tokens/字体来源、各状态、动效、关闭方式、文案规则。
+- 一个产品内多个界面共用同一 tokens 源（例如弹窗与页面内注入界面），禁止各处内联样式和散落颜色值。
+- 发布前截图矩阵覆盖**全部**用户可见界面 × 明暗 × 关键状态，由实现者以外的一方逐张查看；只看最近改动的界面不算通过。
+- 注入第三方页面的界面：验收必须在真实宿主 DOM（录制回放或与当前线上一致的 fixture）上真实加载扩展后进行。
