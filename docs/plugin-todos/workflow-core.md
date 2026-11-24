@@ -319,3 +319,30 @@ promotion gate:
 - Do not use workflow-core to make domain judgments for writing, Presentation, statistics or imaging.
 - Do not add watcher/polling daemon/Persistent Run/tmux/Control/ledger/new state machine to simulate a persistent user prompt.
 - Do not maintain a custom Codex fork as the default solution when the supported transcript wait/resume path suffices.
+
+
+### UAC / macOS 系统授权必须自动触发 workflow-core 权限敏感执行路径，不得等用户点名插件
+
+status: NEW  
+source: 2026-11-24 macOS 系统部署真实失败；同日 AI Instruction Configuration 已记录 `codex/global/evidence/cases/2026-11-24-repeated-admin-auth-after-preflight-failure.md`  
+target layer: workflow-core trigger / routing / approval-sensitive execution
+
+problem: 当前全局 `AGENTS.md` 已经明确规定“已有明确授权不要重复索取”“管理员授权只承担授权，不承担设计、调试或验收”“不要通过反复授权弹窗进行试错或让用户替 Codex 验收”，但真实 Codex 执行仍会在第一次管理员授权暴露自身脚本/解析问题后，再次触发 macOS 系统授权。用户不得每次额外提醒“按 workflow-core 走”“调用插件”“先自己验完再弹授权”。如果这类高代价边界只有用户点名插件才会触发，插件就没有承担正常执行路由职责。
+
+本项要求把 **权限敏感事件本身** 变成 workflow-core 的自动触发信号，而不是靠用户关键词触发：
+
+1. **自动触发条件**：任务将要进入 Windows UAC、macOS 管理员授权、系统权限弹窗、sudo/提权、辅助功能/屏幕录制/自动化控制等需要用户批准的系统边界时，workflow-core 必须自动进入 approval-sensitive execution 路径；用户无需说“用 workflow-core”“按插件规则处理”。
+2. **授权前自动收敛**：在第一次系统授权出现前，先完成所有不需要该权限即可完成的分析、代码修复、参数/输入检查、兼容性验证、局部测试和回归。系统授权只承载已经形成的最终受保护动作。
+3. **失败后自动断路**：一次 UAC / macOS 授权后的执行如果因为 Agent 自己的脚本、解析、参数、兼容性或预检错误失败，必须自动回到无权限修复路径；在对应内部问题尚未通过无权限验证前，不得再次请求同类授权。
+4. **用户不是调试器**：不得用第二次、第三次 UAC/macOS 弹窗验证“刚才修得对不对”；不得让用户通过反复点击授权、观察系统写入结果来替 Executor 完成本可内部完成的调试与验收。
+5. **插件路由必须可证明实际发生**：回归不能只检查文档里“应该调用 workflow-core”。必须证明真实执行在没有用户点名插件的情况下，自动消费了 workflow-core 的权限敏感路径，并改变了后续动作顺序。
+6. **与 Bridge Kit 的边界**：workflow-core 负责自动触发、动作顺序、失败分类和重试断路；`YuukiAS/GPT_Codex_AI_Bridge_Kit` 继续拥有 Host Policy、execpolicy、hooks、bounded helper 与主机级硬拦截实现。workflow-core 不复制第二套授权数据库、守护进程或 Host Policy。
+7. **优先消费硬闸门**：如果 Bridge Kit 已提供可用的 `PermissionRequest` / `PreToolUse` / Host Policy 等硬门槛，workflow-core 应把它们视为正常执行入口的一部分，而不是继续只靠自然语言自律；插件负责正确路由到这些能力，不重新实现一套相同机制。
+8. **普通任务不误触发**：纯仓库内 build/test、普通文件写入、无系统权限要求的小改动不能因为本规则被升级成 approval-sensitive workflow。触发条件必须是真实即将跨越 OS/管理员/系统权限边界。
+
+promotion / replay gate:
+
+- Windows 场景：任务最终确实需要一次 UAC；第一次授权后因 Agent 自己的脚本参数错误失败。PASS 是自动回到普通权限修复与测试，期间不再弹 UAC；修复和无权限验证通过后，只有最终受保护动作再请求一次 UAC。FAIL 是连续弹窗试错，或必须用户提醒“调用 workflow-core”才停止。
+- macOS 场景：任务最终需要管理员授权或系统控制权限；第一次授权前仍存在可由普通权限发现的 plist/输入/解析问题。PASS 是先自动消费 workflow-core 完成预检，避免无意义系统弹窗；如果第一次授权后发现自身 bug，同样触发断路。FAIL 是把用户当现场验收器。
+- 触发精度场景：普通 repo-local 脚本修复没有任何系统权限需求时，不进入该流程、不增加审批或插件负担。
+- actual-consumption gate：候选发布前至少一次 fresh-runtime replay 必须证明用户没有说“workflow-core”或任何插件名，仍然由权限敏感事件自动触发对应插件路径；仅仅因为 `AGENTS.md` 中存在相同规则而行为碰巧正确，不算完成自动路由验证。
