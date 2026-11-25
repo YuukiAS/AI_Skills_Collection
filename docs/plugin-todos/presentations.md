@@ -794,6 +794,20 @@ evidence: `YuukiAS/STAT5060-TA@tutorial`; frozen V14 candidate commit `ec4dc9bdc
 problem: The latest real use shows that the reusable capability is broader than a reviewer prompt or a collection of local QA scripts. A production presentation acceptance controller needs one exact-candidate chain that binds immutable source/PDF/page-render/contact-sheet identity, clean rebuild/reproducibility, authority conformance, protected-object and numerical/source checks, historical regression replay, oracle/reviewer isolation, canonical independent-review packaging, fail-closed review-result ingestion, and final acceptance aggregation. The STAT5060 hardening also shows why this should be split into a generic core plus project/deck adapters instead of copying the course controller wholesale. The generic core should own candidate identity, reproducibility, review transport/package contracts, isolation, historical-regression interfaces, result ingestion, and acceptance-state semantics; a project adapter should supply deck-specific PageIDs, visible-copy authority parsing, protected-object contracts, numerical checks, and historical-corpus mapping. Extraction should extend/converge the existing `validator_v1` and Presentation independent-review contracts, not replace them with a second framework.
 project-specific context: `T01-*` PageIDs, the 38-page Tutorial sequence, exact-copy V1/V2/V3 course authorities, the P26 `beta_width_c` posterior check, the 515-row Tutorial historical review corpus, course assessment wording, and all STAT5060-specific thresholds/fixtures remain in `YuukiAS/STAT5060-TA`. Only the reusable interfaces, trust boundaries, package/ingestion protocol, historical-regression semantics, and acceptance controller belong in the central Presentations plugin. Before promotion, the extracted core should preserve the final human-accepted STAT5060 behavior through an adapter and also pass at least one unrelated real deck so Tutorial-specific assumptions are not mistaken for generic presentation rules.
 
+### 2026-11-25：组会更新页重复违反已定版式规则（长标题、裸图、图上方说明、卡片、拥挤公式页）
+status: NEW
+source: CAT-TRACE 组会 deck 的"本周更新"一节（约 10 页），由 Codex 分多轮追加，Claude 只看单页截图即交付。
+evidence: 私有仓库 `YuukiAS/CAT-TRACE` 分支 `deck/group-meeting-20261125`；用户否决的版本到 `db5ebd26`，Claude 重写后的版本 `54f6465d`。
+problem:
+- 标题写成两行的结论长句；用户要一行短标题。
+- 图页只有一张图，没有图下说明和结论正文，无法据此讲解。
+- 把"同样本、同硬件"一类说明画在图的上方（图内副标题），而规则要求说明放在图下 caption。
+- 用卡片/方框图表达进度状态，文字本可说清。
+- 公式页把三四组公式、定义和先验塞进一页，字距被撑开、公式溢出；用户给出的参照是一页"引言一句 + 两栏（小标题 + 一个公式 + 一两句白话）+ 结论一句"的版式。
+- 这些规则上一周已多次口头确认并写入 v19 规则清单（P01/P02 图注、C01 并栏、D01 先重排后拆页），执行方仍逐页自检 PASS；交付方未拼联排截图逐页对照规则。
+candidate action: 追加页到既有 deck 时，把"图页必须有图下 caption + takeaway、图内不得有副标题、标题单行、状态页用文字、公式页每栏一个公式"做成可机检的页面契约；交付前强制生成联排截图并按规则逐页核对，而不是只看执行者的 QA 报告。
+project-specific context: 页面主题、公式与数据属于该项目，不是通用模板；本条只记录真实失败，不决定通用规则写法。
+
 ## Current real-use focus
 
 现在不继续做 synthetic challenge chain。
