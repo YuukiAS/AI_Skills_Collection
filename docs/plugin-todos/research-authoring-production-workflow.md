@@ -852,7 +852,7 @@ Preferred order:
 5. only then the general notation or formula;
 6. implementation constants and code details last.
 
-Do not open an explanatory subsection with notation such as \`Q_l\`, \`\Delta_l\`, \`Q_{\mathrm{high}}\`, a Hessian, or a transformed coordinate unless the reader already knows the role of that object from the immediately preceding text.
+Do not open an explanatory subsection with notation such as `Q_l`, `\Delta_l`, `Q_{\mathrm{high}}`, a Hessian, or a transformed coordinate unless the reader already knows the role of that object from the immediately preceding text.
 
 ### 21.2 Preserve causal bridges between neighboring methods
 
@@ -868,7 +868,7 @@ When method B appears because method A hits a limitation, say so explicitly. The
 Example from CAT-TRACE:
 
 - Gauss--Hermite works naturally for low-dimensional Gaussian expectations;
-- tensor products require \`K^d\` node combinations;
+- tensor products require `K^d` node combinations;
 - that growth motivates sparse-grid or RQMC alternatives at higher dimension.
 
 Without this bridge, later methods look like an unrelated catalogue.
@@ -891,12 +891,12 @@ A new section should not force the reader to rediscover these identities.
 
 When the difficulty is combinatorial, geometric or hierarchical, a small example is part of the explanation, not optional decoration.
 
-Example: before defining Smolyak increments \`\Delta_l=Q_l-Q_{l-1}\`, show a two-dimensional, three-level picture:
+Example: before defining Smolyak increments `\Delta_l=Q_l-Q_{l-1}`, show a two-dimensional, three-level picture:
 
 - each coordinate can use levels 1, 2 or 3;
-- a full tensor rule includes combinations up to \`(3,3)\`;
-- a sparse construction can first keep combinations such as \`(1,1),(1,2),(2,1),(1,3),(2,2),(3,1)\`;
-- only after the reader sees what is being omitted should \`Q_l\`, \`\Delta_l\` and multi-index notation be introduced.
+- a full tensor rule includes combinations up to `(3,3)`;
+- a sparse construction can first keep combinations such as `(1,1),(1,2),(2,1),(1,3),(2,2),(3,1)`;
+- only after the reader sees what is being omitted should `Q_l`, `\Delta_l` and multi-index notation be introduced.
 
 The example must run the same object through the whole mechanism. Do not substitute an unrelated analogy that creates a second thing to understand.
 
@@ -908,10 +908,10 @@ After introducing a symbol, give its operational meaning in the same paragraph w
 
 Examples:
 
-- \`Q_l\`: the integral approximation produced by the level-\`l\` one-dimensional rule;
-- \`\Delta_l=Q_l-Q_{l-1}\`: the new integral contribution obtained by upgrading from level \`l-1\` to \`l\`;
-- \`Q_{\mathrm{high}}-Q_{\mathrm{low}}\`: a local disagreement used as an error/refinement signal;
-- \`H=-\nabla^2 h(\hat\theta)\`: local curvature that determines the width and correlation of the Gaussian approximation.
+- `Q_l`: the integral approximation produced by the level-`l` one-dimensional rule;
+- `\Delta_l=Q_l-Q_{l-1}`: the new integral contribution obtained by upgrading from level `l-1` to `l`;
+- `Q_{\mathrm{high}}-Q_{\mathrm{low}}`: a local disagreement used as an error/refinement signal;
+- `H=-\nabla^2 h(\hat\theta)`: local curvature that determines the width and correlation of the Gaussian approximation.
 
 Do not leave a formula standing as a vocabulary definition when its role is the actual missing conceptual link.
 
@@ -925,17 +925,17 @@ Bad sequence:
 - finite interval constants;
 - segment width;
 - node count;
-- \`log_mass\`;
+- `log_mass`;
 - mixed Gauss--Legendre/Gauss--Hermite weights;
 - only later the meaning of the integral.
 
 Preferred sequence:
 - continuous species intensity;
-- probability of one occurrence history conditional on \`(a,\beta)\`;
-- integrate their product over intercept \`a\`;
+- probability of one occurrence history conditional on `(a,\beta)`;
+- integrate their product over intercept `a`;
 - explain why a finite numerical interval is introduced;
 - explain why Gauss--Legendre fits that finite ordinary integral;
-- put \`[-12,14]\`-style coverage constants, segment width, node count and code expressions in optional implementation detail.
+- put `[-12,14]`-style coverage constants, segment width, node count and code expressions in optional implementation detail.
 
 This rule is an application of Section 20.3 progressive disclosure; the new requirement is to preserve the mathematical object before exposing the tuning.
 
@@ -946,11 +946,11 @@ Do not use a loose “approximately equal” sign when the omitted terms matter 
 Distinguish:
 
 - exact equality;
-- asymptotic equivalence \`\sim\`;
+- asymptotic equivalence `\sim`;
 - same leading logarithmic/exponential order;
 - informal intuition.
 
-CAT-TRACE regression case: from Mills' ratio, \`\Phi(-z_p)\sim\phi(z_p)/z_p\` and \`q_p\sim\gamma/p\`. It is acceptable to use these facts to obtain the leading scale \`z_p\sim\sqrt{2\log p}\`. It is not acceptable to write \`e^{-z_p^2/2}\sim1/p\` as a strict asymptotic equivalence, because the fixed \`\gamma\` and the \`z_p\` factor were dropped. Those factors are needed later to recover \`A_p\to\gamma e^{-1/2}\`.
+CAT-TRACE regression case: from Mills' ratio, `\Phi(-z_p)\sim\phi(z_p)/z_p` and `q_p\sim\gamma/p`. It is acceptable to use these facts to obtain the leading scale `z_p\sim\sqrt{2\log p}`. It is not acceptable to write `e^{-z_p^2/2}\sim1/p` as a strict asymptotic equivalence, because the fixed `\gamma` and the `z_p` factor were dropped. Those factors are needed later to recover `A_p\to\gamma e^{-1/2}`.
 
 When a coarse relation is used only for scale intuition, label it as such in prose.
 
@@ -969,7 +969,7 @@ These cases should be retained as positive/negative authoring fixtures when the 
 **Gauss--Kronrod**
 
 Failure:
-- opens with \`Q_7,Q_{15}\` without explaining that \`Q\` is a generic quadrature result;
+- opens with `Q_7,Q_{15}` without explaining that `Q` is a generic quadrature result;
 - does not reconnect the 7-point Gauss rule to the previously learned Gauss--Legendre/Golub--Welsch construction;
 - says “shared nodes” without showing what is shared.
 
@@ -981,7 +981,7 @@ Repair:
 **Genz--Malik**
 
 Failure:
-- opens with a multidimensional integral and \`Q_{\mathrm{high}},Q_{\mathrm{low}}\`;
+- opens with a multidimensional integral and `Q_{\mathrm{high}},Q_{\mathrm{low}}`;
 - the reader has not yet been told that the method is multidimensional adaptive integration.
 
 Repair:
@@ -992,13 +992,13 @@ Repair:
 **Smolyak**
 
 Failure:
-- opens with \`Q_l\`, \`\Delta_l\` and multi-indices;
+- opens with `Q_l`, `\Delta_l` and multi-indices;
 - “lower total level” has no concrete meaning yet.
 
 Repair:
-- start from the already-known \`K^d\` tensor-product explosion;
+- start from the already-known `K^d` tensor-product explosion;
 - use a two-dimensional three-level combination example;
-- then define \`Q_l\` and \`\Delta_l\` as the level rule and its incremental contribution.
+- then define `Q_l` and `\Delta_l` as the level rule and its incremental contribution.
 
 **AGHQ**
 
