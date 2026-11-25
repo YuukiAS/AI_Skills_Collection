@@ -832,3 +832,221 @@ Before surfacing a substantial artifact, answer these questions from the intende
 
 If the last answer is yes, the artifact is not ready for reader review.
 
+## 21. Technical-explanation continuity for mathematically capable readers
+
+Status: **TODO / promote into the Research Authoring reader model after regression review**
+
+Evidence: repeated user-facing rewrites of the CAT-TRACE numerical-method notes on 2026-11-24--25. The mathematics was often correct, but the reader repeatedly had to ask what a method was for, how it connected to the previous method, what a new symbol meant, or why an implementation detail appeared before the statistical object was understood.
+
+This section does not replace Section 20. It specializes the existing reader-task and information-shape rules for technical learning notes aimed at a mathematically capable reader who does not need elementary prerequisites re-taught, but does need every new conceptual bridge made explicit.
+
+### 21.1 Explain the job before the machinery
+
+Before introducing a new method, acronym, operator or family of symbols, state in ordinary prose what problem it solves in the current story.
+
+Preferred order:
+
+1. what object or computation is currently needed;
+2. why the previous method or naive extension becomes insufficient;
+3. what the new method changes operationally;
+4. one concrete low-dimensional example when the mechanism is abstract;
+5. only then the general notation or formula;
+6. implementation constants and code details last.
+
+Do not open an explanatory subsection with notation such as (Q_l), (Delta_l), (Q_{\mathrm{high}}), a Hessian, or a transformed coordinate unless the reader already knows the role of that object from the immediately preceding text.
+
+### 21.2 Preserve causal bridges between neighboring methods
+
+A sequence of individually correct method descriptions is still hard to read when the transition is missing.
+
+When method B appears because method A hits a limitation, say so explicitly. The reader should be able to answer:
+
+- what worked in the previous method;
+- what new difficulty appeared;
+- why that difficulty motivates the next method;
+- what part of the previous construction is retained.
+
+Example from CAT-TRACE:
+
+- Gauss--Hermite works naturally for low-dimensional Gaussian expectations;
+- tensor products require (K^d) node combinations;
+- that growth motivates sparse-grid or RQMC alternatives at higher dimension.
+
+Without this bridge, later methods look like an unrelated catalogue.
+
+### 21.3 Expand unfamiliar names and reconnect them to known objects
+
+On first substantive use, expand an acronym or specialist name when the expansion helps the reader place the method.
+
+Do not merely write “AGHQ”. Write **Adaptive Gauss--Hermite Quadrature** once, then explain that it starts from ordinary Gauss--Hermite and relocates/rescales its nodes using the target's mode and local curvature.
+
+Likewise, when a later method reuses an earlier object, reconnect it explicitly:
+
+- the 7-point “Gauss” rule inside a 7/15 Gauss--Kronrod pair is the earlier Gauss--Legendre rule on the standard interval;
+- Golub--Welsch is the computational route that produced those Gauss--Legendre nodes and weights;
+- Kronrod augments that existing Gauss node set rather than introducing an unrelated quadrature family.
+
+A new section should not force the reader to rediscover these identities.
+
+### 21.4 Use a concrete mechanism example before abstract multidimensional notation
+
+When the difficulty is combinatorial, geometric or hierarchical, a small example is part of the explanation, not optional decoration.
+
+Example: before defining Smolyak increments (Delta_l=Q_l-Q_{l-1}), show a two-dimensional, three-level picture:
+
+- each coordinate can use levels 1, 2 or 3;
+- a full tensor rule includes combinations up to ((3,3));
+- a sparse construction can first keep combinations such as ((1,1),(1,2),(2,1),(1,3),(2,2),(3,1));
+- only after the reader sees what is being omitted should (Q_l), (Delta_l) and multi-index notation be introduced.
+
+The example must run the same object through the whole mechanism. Do not substitute an unrelated analogy that creates a second thing to understand.
+
+### 21.5 Translate symbols into actions immediately
+
+A mathematical definition is incomplete as explanation when the reader still cannot say what the symbol does.
+
+After introducing a symbol, give its operational meaning in the same paragraph when that meaning is not obvious.
+
+Examples:
+
+- (Q_l): the integral approximation produced by the level-(l) one-dimensional rule;
+- (Delta_l=Q_l-Q_{l-1}): the new integral contribution obtained by upgrading from level (l-1) to (l);
+- (Q_{\mathrm{high}}-Q_{\mathrm{low}}): a local disagreement used as an error/refinement signal;
+- (H=-\nabla^2 h(\hat\theta)): local curvature that determines the width and correlation of the Gaussian approximation.
+
+Do not leave a formula standing as a vocabulary definition when its role is the actual missing conceptual link.
+
+### 21.6 Separate the mathematical story from implementation tuning
+
+Reader-facing technical notes should first establish what is being integrated, approximated or optimized. Numerical constants, code paths and tuning settings come only after that object is clear.
+
+CAT-TRACE regression case:
+
+Bad sequence:
+- finite interval constants;
+- segment width;
+- node count;
+- `log_mass`;
+- mixed Gauss--Legendre/Gauss--Hermite weights;
+- only later the meaning of the integral.
+
+Preferred sequence:
+- continuous species intensity;
+- probability of one occurrence history conditional on ((a,\beta));
+- integrate their product over intercept (a);
+- explain why a finite numerical interval is introduced;
+- explain why Gauss--Legendre fits that finite ordinary integral;
+- put ([-12,14])-style coverage constants, segment width, node count and code expressions in optional implementation detail.
+
+This rule is an application of Section 20.3 progressive disclosure; the new requirement is to preserve the mathematical object before exposing the tuning.
+
+### 21.7 Use asymptotic notation at the precision actually justified
+
+Do not use a loose “approximately equal” sign when the omitted terms matter to the next derivation.
+
+Distinguish:
+
+- exact equality;
+- asymptotic equivalence (sim);
+- same leading logarithmic/exponential order;
+- informal intuition.
+
+CAT-TRACE regression case: from Mills' ratio, (\Phi(-z_p)\sim \phi(z_p)/z_p\) and (q_p\sim\gamma/p). It is acceptable to use these facts to obtain the leading scale (z_p\sim\sqrt{2\log p}). It is not acceptable to write (e^{-z_p^2/2}\sim1/p) as a strict asymptotic equivalence, because the fixed (gamma) and the (z_p) factor were dropped. Those factors are needed later to recover (A_p\to\gamma e^{-1/2}).
+
+When a coarse relation is used only for scale intuition, label it as such in prose.
+
+### 21.8 Prefer affirmative explanation over repeated contrastive correction
+
+Technical prose should normally state what an object is, what it does and why it is used.
+
+Use “not X but Y” only when the reader is likely to hold the specific X misconception and the correction materially prevents an error. Repeated contrastive sentences create defensive prose and force the reader to track rejected alternatives.
+
+Example: for Laplace, first state that it uses the posterior mode and local Hessian to form a Gaussian approximation and to approximate the corresponding marginal integral. Mention prior/posterior distinctions only where that distinction changes interpretation; do not repeat negative contrasts as filler.
+
+### 21.9 Regression cases from the CAT-TRACE numerical-method notes
+
+These cases should be retained as positive/negative authoring fixtures when the plugin gains explanatory-writing tests.
+
+**Gauss--Kronrod**
+
+Failure:
+- opens with (Q_7,Q_{15}) without explaining that (Q) is a generic quadrature result;
+- does not reconnect the 7-point Gauss rule to the previously learned Gauss--Legendre/Golub--Welsch construction;
+- says “shared nodes” without showing what is shared.
+
+Repair:
+- identify the 7-point rule as Gauss--Legendre;
+- state that Kronrod keeps those 7 nodes and adds 8 new ones;
+- give a concrete standard-interval node example before returning to generic notation.
+
+**Genz--Malik**
+
+Failure:
+- opens with a multidimensional integral and (Q_{\mathrm{high}},Q_{\mathrm{low}});
+- the reader has not yet been told that the method is multidimensional adaptive integration.
+
+Repair:
+- first say that it is the multidimensional analogue of adaptive interval refinement;
+- use a two-dimensional rectangle: evaluate two rules, compare them, then split the difficult region along the direction with stronger variation;
+- introduce the high/low cubature notation afterward.
+
+**Smolyak**
+
+Failure:
+- opens with (Q_l), (Delta_l) and multi-indices;
+- “lower total level” has no concrete meaning yet.
+
+Repair:
+- start from the already-known (K^d) tensor-product explosion;
+- use a two-dimensional three-level combination example;
+- then define (Q_l) and (Delta_l) as the level rule and its incremental contribution.
+
+**AGHQ**
+
+Failure:
+- acronym appears unexplained;
+- mode, Hessian and node mapping appear before the reader knows why ordinary Gauss--Hermite wastes nodes.
+
+Repair:
+- expand Adaptive Gauss--Hermite Quadrature;
+- state the ordinary-rule mismatch first;
+- explain “mode chooses center, curvature chooses width, then the Hermite nodes are moved/rescaled”;
+- give the formula only after that story.
+
+**Infinite TRACE intercept integration**
+
+Failure:
+- theoretical intensity, finite numerical truncation, node count, segment width and code-level log weights appear in the same layer.
+
+Repair:
+- first establish “species intensity × occurrence-history probability, integrated over intercept”;
+- then explain finite numerical coverage and Gauss--Legendre;
+- move tuning constants and code expressions to optional implementation detail.
+
+**Laplace**
+
+Failure:
+- formula-first prose plus repeated English labels and repeated “not X but Y” corrections.
+
+Repair:
+- state the object, mode, curvature and resulting Gaussian approximation in natural prose;
+- use the marginal-integral formula only where it adds new information;
+- keep short relations inline and avoid display equations used only for emphasis, consistent with Section 20.2/20.5.
+
+### 21.10 Reader-side acceptance check for technical explanations
+
+Before surfacing a technical-learning section, ask:
+
+- Can the intended reader say what the method is for before seeing its first nontrivial formula?
+- Is the reason for moving from the previous method to this one explicit?
+- Are unfamiliar acronyms and reused objects connected to what the reader already learned?
+- If the mechanism is abstract, has one small concrete example run through the complete mechanism?
+- Does each new symbol have an operational meaning, not only a definition?
+- Are mathematical objects explained before code constants and implementation tuning?
+- Are exact, asymptotic and heuristic relations distinguished at the precision needed downstream?
+- Could the section still be understood if code paths, node counts, tolerances and repository details were hidden?
+- Is contrastive correction used only where it prevents a real misconception?
+- Are display equations reserved for relationships that genuinely benefit from independent visual reading?
+
+If the reader repeatedly has to ask “what is this for?”, “is this the same object as before?”, “why did this method suddenly appear?”, or “can you give me one concrete example before the symbols?”, the section has failed even when every formula is mathematically correct.
+
