@@ -15,25 +15,6 @@
 
 旧聊天、旧计划、旧 benchmark PASS 不能覆盖当前 repo。
 
-## 1.1 README 永远写给人看
-
-根 `README.md` 是给用户和未来维护者看的，不是内部流程日志。
-
-修改 README 时必须：
-
-- 只要当前任务修改根 `README.md`，无论修改大小，结束前都必须实际调用当前安装的 Clear Writing（`writing-style`）做读者可见语言检查；只读 `SKILL.md`、在提示词里声称遵守规则或做字符串扫描，都不算调用；
-- 检查至少覆盖受影响的读者区域；如果局部修改造成上下文语言不一致，扩大到相关章节，不只看 diff 里新增的几个词；
-- 默认用自然中文解释“这是做什么、什么时候用、文件放哪里、下一步怎么办”；
-- 先说人能直接理解的结论，再给命令、路径和内部文档；
-- 不把 `provenance`、`promotion`、`bounded batch`、`source of truth`、状态机名、内部 reviewer 字段等词直接堆给普通读者；确实需要时先用中文解释；
-- 产品正式名称、插件名称、代码、命令、路径、文件名、字段、配置键、版本、协议值、状态值和其他必须精确匹配的机器字符串可以保留；Clear Writing 不得改变事实、安装方法、版本、命令、技术语义或仓库状态；
-- 如果本次 README 修改只有版本、链接或其他机器字符串，Clear Writing 检查后可以原样放行，不得为了证明调用而强行改文案；
-- README 的事实、版本、命令、架构和范围由当前任务负责人 / repository maintainer 负责；Clear Writing 只负责最终面向读者的语言质量；
-- 不写 audit/CI/commit/run 的流水账，除非这些本身就是用户要查的内容；
-- 历史实现细节优先放 CHANGELOG 或内部 docs，不让 README 越写越像维护日志。
-
-如果一次 README 修改技术上正确但普通用户读不明白，视为需要继续改。
-
 ## 1.2 任务规模必须和读取规模匹配
 
 `Source of truth` 是读取优先级，不是“每个任务都把所有 source 全读一遍”。Planner、Executor、Reviewer 和普通 Codex 必须先判断当前任务规模，再决定读取范围。上下文过大不仅浪费 token，也会把旧设计、历史失败和无关规则重新带进当前判断。
@@ -470,12 +451,7 @@ handoff 引用的 artifact / evidence，必须在 cleanup 前提升或复制到 
 
 #### Central-plugin replay / evaluation interaction policy
 
-1. **Resume / state refresh.** 任何 wait/resume、Scheduled GPT transition、
-   human decision、CI/review 完成后，在启动新的 candidate replay、
-   production replay、paid review、install smoke 或 implementation-choice
-   prompt 之前，Executor 必须先 `git fetch origin main` 并重新读取当前 task
-   branch 的 `CURRENT.json`。如果 `CURRENT` 已经不是 Executor-owned 状态，
-   不得启动 stale operation，也不得拿旧问题询问用户。
+1. **恢复和更新任务状态。** 恢复任务、结束等待或收到新决策后，在启动新的候选或生产重放、付费评审、安装冒烟测试或询问前，读取与当前任务绑定的分支及最新可核实的 `CURRENT.json`。本轮已有同一远端分支头的结果时直接沿用。只有即将执行的动作依赖当前 `origin/main` 时才刷新它。确认当前状态仍由执行者负责后继续。
 2. **Candidate replay.** Central-plugin refinement 必须优先遵守
    `docs/workflows/CANDIDATE_PLUGIN_REPLAY.md`。当 canonical existing-account
    replay path 可用时，不得默认发明 isolated `CODEX_HOME`、复制 credential
@@ -540,7 +516,7 @@ PRODUCT / ARTIFACT PASS
 
 CI、schema、protected-span、Executor summary、本地测试或 control-plane transaction PASS，只能证明对应 process gate。凡验收依赖真实 artifact 质量，Reviewer 必须读取或查看最终 artifact 本身：writing output、PDF/report、presentation render、scientific figure、frontend render 或其他真实交付物都适用。
 
-Private/text artifact review 的底层 owner 是 `GPT_Codex_AI_Bridge_Kit` 的 Text Review 能力。046 不自行实现另一套 artifact transport/reviewer。等 Bridge Kit Text Review 落地后，AI Skills Maintainer / Reviewed Handoff 只负责消费其 evidence、locator 和 artifact identity。Text Review 未落地或 Reviewer 无法访问决定 PASS 所需 artifact 时，只能按 `WAITING_FOR_EVIDENCE / NEEDS_REVIEW` 处理；在当前 state graph 中表现为不写 PASS，并要求补 Bridge Kit Text Review evidence 或返回 Planner。不得用 Executor 摘要替代 artifact。
+私有文本复核由 `GPT_Codex_AI_Bridge_Kit` 的 Text Review 提供。AI Skills Maintainer 和 Reviewed Handoff 采用本任务适用的复核证据、定位信息和产物身份。当前环境缺少该能力，或审阅者无法访问决定验收所需的产物时，按 `WAITING_FOR_EVIDENCE / NEEDS_REVIEW` 处理。补齐可核实的 Text Review 证据，或按现有流程退回规划者。审阅结果须以产物本身为依据。
 
 Planner / Reviewer 能依据 frozen requirement 自行判断的明显问题，必须自行 `REVISE` 或按真实不可恢复条件 `BLOCKED`；不得推给 `AWAIT_HUMAN_DECISION`。Human gate 默认只用于真正互斥的产品/科研选择、frozen criteria 无法决定的主观偏好、用户必须亲自授权的外部动作、显著风险/成本/隐私/许可决定，或 frozen Plan 明确要求的最终人工验收。明显违反用户明确规则、明显机器腔、明显 layout failure、明显 artifact regression，不属于 human judgment。
 
@@ -606,17 +582,7 @@ implementation candidate frozen
 
 ### 8.5 Review PASS 后默认集成收口
 
-独立 task branch 通过 required CI 和 required Reviewer PASS，且没有真实 human gate 时，默认执行：
-
-```text
-task branch
--> CI PASS
--> required Reviewer PASS
--> integration preflight
--> 合回 `main`
--> push
--> 删除 task branch
-```
+独立任务分支通过所需的 CI 和审阅，且没有待用户决定的事项时，默认完成集成前检查、合回 `main`，并按机器规则推送到现有同名远端分支。删除本地或远端任务分支前，须取得用户对相应删除动作的明确同意。
 
 默认不要求 PR。只有 merge conflict、`main` 在同一 shared runtime/source area 有竞争性修改、branch protection 要求、release/migration/breaking change、真实高风险 integration，或用户明确要求 PR 时，才升级为 PR / Planner / human decision。
 

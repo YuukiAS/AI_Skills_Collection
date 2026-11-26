@@ -4,6 +4,14 @@ Canonical maintenance inbox for the `writing-style` plugin.
 
 ## Incoming real-use feedback
 
+### 2026-11-26：按实质文字改动触发 Clear Writing
+
+status: NEW
+
+source: 用户对各仓库 `AGENTS.md` 审查的裁决。
+
+凡任何仓库中写给人看的文字有实质改动，都调用 Clear Writing；只改版本号、链接或其他机器字符串时跳过。
+
 
 ### 2026-11-17：复杂技术解释事实大体正确，但长期呈现“讲义腔”，用户必须反复追问才能得到真正的人话因果链
 
