@@ -24,7 +24,7 @@ Do not route explicitly requested editable PPTX/Slides work to Beamer only becau
 | User-supplied or locked Beamer template | The supplied template |
 | Explicit editable PPTX or Google Slides | The existing editable Presentation/Slides route |
 
-The two built-in templates share the title, body, navigation and closing geometry in `templates/_shared/beamer-core-v1/`. Body pages use the same blue chrome. CUHK may add approved school artwork only on the title page. Build either editable template with `scripts/build_beamer_template.py`. The CUHK PPTX reference and design-token JSON are separate scaffolds.
+The two built-in templates share the title, body, navigation and closing geometry in `templates/_shared/beamer-core-v1/`. CUHK keeps its purple school palette, title bar, school logo and school footer while sharing the standard template's typography and layout metrics. Build either editable template with `scripts/build_beamer_template.py`. The CUHK PPTX reference and design-token JSON are separate scaffolds.
 
 
 ## Canonical Beamer Font Contract
@@ -33,4 +33,4 @@ All formal Beamer routes must read and obey `shared/font-policy.md`.
 
 The font set is fixed. Presentation generation must not choose fonts from the host at runtime and must not use Times New Roman, Liberation, DejaVu, Windows font mounts, or fontconfig substitution as a fallback.
 
-Both `cuhk-research` and `course-standard` use the same generated-text font identities and body-page styling. Their only built-in Beamer difference is approved CUHK title-page identity.
+Both `cuhk-research` and `course-standard` use the same generated-text font identities, role sizes, leading, margins, grid, caption alignment, list spacing and formula sizing. Their template-specific colours, title-bar treatment, branding and footer identity remain distinct.

@@ -52,12 +52,9 @@ class SharedBeamerSourceTests(unittest.TestCase):
                         self.assertIn(macro.group(1), allowed)
                     self.assertNotRegex(line, r"\\(?:input|include|fontsize|selectfont|setbeamerfont|setlength|setbeamersize|vspace|setbeamertemplate|geometry)\b")
         cuhk = (SHARED / "templates/cuhk/beamer/source/skin.tex").read_text()
-        self.assertNotIn("PresentationHeaderBrandAsset", cuhk)
-        self.assertEqual(
-            [line for line in (SHARED / "templates/course-standard/beamer/source/skin.tex").read_text().splitlines()
-             if line.startswith(r"\definecolor")],
-            [line for line in cuhk.splitlines() if line.startswith(r"\definecolor")],
-        )
+        self.assertIn(r"\newcommand\PresentationHeaderBrandAsset{\CUHKAssets/logo_RGB.png}", cuhk)
+        self.assertIn(r"\definecolor{coreBand}{HTML}{72256D}", cuhk)
+        self.assertIn(r"\newcommand\PresentationCredit{CUHK research}", cuhk)
 
     def test_all_cuhk_assets_keep_the_frozen_bytes(self):
         expected = {
@@ -110,7 +107,8 @@ class SharedBeamerSourceTests(unittest.TestCase):
         freeze = (SHARED / "templates/FREEZE.md").read_text()
         self.assertIn("Template family version: `1.0`", freeze)
         self.assertIn("Status: `FROZEN`", freeze)
-        self.assertIn("CUHK template may differ only on the first page", freeze)
+        self.assertIn("CUHK school template retains its own appearance", freeze)
+        self.assertIn("styles align with `course-standard`", freeze)
 
     def test_audience_lint_ignores_graphic_filenames_and_keeps_visible_copy(self):
         tex = r"\includegraphics[width=\linewidth]{study_workflow.png}\CoreCaption{fixture label}"
