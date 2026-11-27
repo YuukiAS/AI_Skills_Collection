@@ -19,7 +19,7 @@ TARGET_ICONS = {
 }
 
 TARGET_PLUGIN_VERSIONS = {
-    "presentations": "0.4",
+    "presentations": "0.5",
     "scientific-visualization": "0.1",
     "frontend-design": "0.4",
     "statistical-modeling": "0.1",

@@ -36,7 +36,7 @@ EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
     "clear-writing": "0.5",
     "research-authoring": "0.2",
     "presentations": "0.5",
-    "web-development": "0.4",
+    "frontend-design": "0.4",
 }
 REPOSITORY_SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 PLUGIN_VERSION_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)$")

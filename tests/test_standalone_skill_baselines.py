@@ -49,7 +49,7 @@ EXPECTED_PLUGIN_VERSIONS = {
     "ai-skills-core": "0.5",
     "clear-writing": "0.5",
     "research-authoring": "0.2",
-    "presentations": "0.4",
+    "presentations": "0.5",
     "scientific-visualization": "0.1",
     "frontend-design": "0.4",
     "statistical-modeling": "0.1",

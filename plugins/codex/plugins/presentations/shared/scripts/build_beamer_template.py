@@ -11,7 +11,7 @@ import sys
 import generate_research_standard_scientific_layout_stage3 as renderer
 
 TEMPLATES = renderer.SHARED / "templates"
-SKINS = ("research_standard",)
+SKINS = ("course-standard", "cuhk", "research_standard")
 
 
 def build(skin: str, destination: Path, source: Path | None = None, document: Path | None = None) -> dict:

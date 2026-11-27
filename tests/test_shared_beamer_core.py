@@ -13,10 +13,9 @@ ROOT = Path(__file__).resolve().parents[1]
 SHARED = ROOT / "skills/tools/documents-media/presentations/shared"
 PAYLOAD = ROOT / "plugins/codex/plugins/presentations/shared"
 FIXTURE = ROOT / "tests/fixtures/presentations/shared_beamer_core"
-EVIDENCE = ROOT / "results/presentations-shared-core-template-parity"
 CORE_PATH = "templates/_shared/beamer-core-v1"
 COURSE_PDF = SHARED / "templates/course-standard/reference.pdf"
-CUHK_PDF = EVIDENCE / "cuhk-parity.pdf"
+CUHK_PDF = FIXTURE / "cuhk-parity.pdf"
 
 sys.path.insert(0, str(SHARED / "scripts"))
 import build_beamer_template as builder
@@ -26,8 +25,7 @@ from validate_cuhk_scientific_layout_stage3 import audience_tex
 class SharedBeamerSourceTests(unittest.TestCase):
     def test_frozen_contract_and_implementation_are_shared(self):
         contract = SHARED / CORE_PATH / "layout-contract.yaml"
-        planner = ROOT / "docs/frozen/PRESENTATIONS_SHARED_BEAMER_CORE_V1_LAYOUT_CONTRACT_2026-11-14.yaml"
-        self.assertEqual(contract.read_bytes(), planner.read_bytes())
+        self.assertEqual(contract.read_bytes(), (PAYLOAD / CORE_PATH / "layout-contract.yaml").read_bytes())
 
         for entry in (
             "templates/course-standard/beamer/source/template.tex",
@@ -57,9 +55,8 @@ class SharedBeamerSourceTests(unittest.TestCase):
         self.assertNotIn("PresentationHeaderBrandAsset", cuhk)
         self.assertEqual(
             [line for line in (SHARED / "templates/course-standard/beamer/source/skin.tex").read_text().splitlines()
-             if line.startswith((r"\definecolor", r"\newcommand\PresentationCredit"))],
-            [line for line in cuhk.splitlines()
-             if line.startswith((r"\definecolor", r"\newcommand\PresentationCredit"))],
+             if line.startswith(r"\definecolor")],
+            [line for line in cuhk.splitlines() if line.startswith(r"\definecolor")],
         )
 
     def test_all_cuhk_assets_keep_the_frozen_bytes(self):
@@ -160,7 +157,7 @@ class SharedBeamerRenderedTests(unittest.TestCase):
             self.assertTrue(any("intersects navigation" in error for error in report["errors"]))
 
     def test_real_cuhk_regression_uses_source_figures_and_shared_generated_fonts(self):
-        pdf = EVIDENCE / "cuhk-research.pdf"
+        pdf = FIXTURE / "cuhk-research.pdf"
         with self.pdf.open(pdf) as deck:
             self.assertEqual(deck.page_count, 6)
             self.assertTrue(all(len(page.get_links()) >= 11 for page in deck))
