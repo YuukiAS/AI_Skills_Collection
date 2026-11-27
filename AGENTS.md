@@ -2,6 +2,19 @@
 
 本文件是仓库级 AI/Codex 约束。任何在本仓库工作的 Planner、Executor、Reviewer 或普通 Codex 都必须先遵守这里，再读取具体 skill / task / workflow 文档。
 
+## 0. 本仓库放什么（公开）
+
+本仓库公开，只放插件发布和使用需要的东西：
+
+- 插件源和生成层；
+- TODO：`TODO.md`、`docs/plugin-todos/`；
+- 发布：README、CHANGELOG、`docs/plugin-changelogs/`、LICENSE、版本规则；
+- 让机器能安装和跑验收：安装器、profile、tests、CI、回归用例的公开输入。
+
+设计过程放私有仓库 `YuukiAS/Asteria-Blueprint` 的 `instances/plugin/<插件名>/`：裁决页、插件现行决定、设计输入和好坏例子、GPT Pro 设计稿、推荐稿、对照 PDF、补跑清单、审阅页、运行结果和证据。设计在 Blueprint 定稿后，把技能正文、参考和回归写进本仓库发布。
+
+私人或项目内容（课程、学生、研究项目名和数据、个人路径、账户信息）一律放私有仓库。
+
 ## 1. Source of truth
 
 涉及真实系统或发布时，优先读取：
