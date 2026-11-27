@@ -13,6 +13,7 @@ from zipfile import ZipFile
 
 REPO_ROOT = Path(__file__).resolve().parents[6]
 TASK_KEY = "023_research_presentation_deck_design_system_integration"
+ARTIFACT_ROOT: Path | None = None
 
 FORBIDDEN_AUDIENCE_TERMS = [
     "RRL-",
@@ -37,6 +38,13 @@ def load_json(path: Path) -> dict[str, Any]:
 
 
 def resolve(path: str) -> Path:
+    if ARTIFACT_ROOT is not None:
+        legacy_generated = f"results/{TASK_KEY}/generated/"
+        legacy_task = f"results/{TASK_KEY}/"
+        if path.startswith(legacy_generated):
+            return ARTIFACT_ROOT / path.removeprefix(legacy_generated)
+        if path.startswith(legacy_task):
+            return ARTIFACT_ROOT / path.removeprefix(legacy_task)
     return REPO_ROOT / path
 
 
@@ -199,10 +207,15 @@ def validate_outputs(path: Path) -> list[str]:
 
 
 def main() -> int:
+    global ARTIFACT_ROOT
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--outputs", default=f"results/{TASK_KEY}/generated/OUTPUTS.json")
     args = parser.parse_args()
-    errors = validate_outputs(resolve(args.outputs) if not Path(args.outputs).is_absolute() else Path(args.outputs))
+    outputs_path = Path(args.outputs)
+    if not outputs_path.is_absolute():
+        outputs_path = REPO_ROOT / outputs_path
+    ARTIFACT_ROOT = outputs_path.parent
+    errors = validate_outputs(outputs_path)
     if errors:
         for error in errors:
             print(error, file=sys.stderr)

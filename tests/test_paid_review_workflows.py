@@ -6,6 +6,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+REVIEWED_HANDOFF_FIXTURE = REPO_ROOT / "tests/fixtures/reviewed_handoff"
 BRIDGE_KIT_TEXT_REVIEW_COMMIT = "cb77b1cc5a1fce097a38066d2db452291e359852"
 BRIDGE_KIT_VISUAL_REVIEW_COMMIT = "5c894d98d3053c39cbda79cdbd0b8dfb4fbec4c0"
 
@@ -26,8 +27,6 @@ class PaidReviewWorkflowPolicyTests(unittest.TestCase):
             {
                 "ai-bridge-text-review.yml",
                 "ai-bridge-visual-review.yml",
-                "research-presentation-candidate-visual-finish-review.yml",
-                "research-presentation-comparative-visual-review.yml",
             },
         )
         for path in workflows:
@@ -90,8 +89,8 @@ class PaidReviewWorkflowPolicyTests(unittest.TestCase):
 
     def test_paid_review_contracts_document_budget_and_no_tools(self) -> None:
         policy = (REPO_ROOT / "docs/workflows/PAID_EXTERNAL_REVIEW_POLICY.md").read_text(encoding="utf-8")
-        executor = (REPO_ROOT / "automation/reviewed_handoff/prompts/CODEX_EXECUTOR.md").read_text(encoding="utf-8")
-        planner = (REPO_ROOT / "automation/reviewed_handoff/prompts/PLANNER.md").read_text(encoding="utf-8")
+        executor = (REVIEWED_HANDOFF_FIXTURE / "CODEX_EXECUTOR.md").read_text(encoding="utf-8")
+        planner = (REVIEWED_HANDOFF_FIXTURE / "PLANNER.md").read_text(encoding="utf-8")
         visual_doc = (REPO_ROOT / "docs/AI_BRIDGE_VISUAL_REVIEW.md").read_text(encoding="utf-8")
         combined = "\n".join([policy, executor, planner, visual_doc])
         for required in [

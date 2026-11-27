@@ -51,7 +51,7 @@ EXPECTED_PLUGIN_VERSIONS = {
     "research-authoring": "0.2",
     "presentations": "0.4",
     "scientific-visualization": "0.1",
-    "web-development": "0.4",
+    "frontend-design": "0.4",
     "statistical-modeling": "0.1",
     "bioinformatics": "0.1",
     "medical-imaging": "0.1",
@@ -91,15 +91,16 @@ class StandaloneSkillBaselineTests(unittest.TestCase):
         for info in STANDALONE_SKILLS.values():
             self.assertNotIn(info["path"].as_posix(), serialized)
 
-    def test_repository_version_and_contact_sheet_are_stable(self) -> None:
+    def test_repository_version_and_public_icon_assets_are_stable(self) -> None:
         self.assertEqual((REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip(), "5.5.2")
 
-        sheet = (REPO_ROOT / "docs" / "audits" / "ICON_CONTACT_SHEET.svg").read_text(encoding="utf-8")
+        readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
         for slug, info in STANDALONE_SKILLS.items():
-            self.assertIn((info["path"] / info["icon"]).as_posix(), sheet)
-            self.assertRegex(sheet, rf">{re.escape(slug)}<")
+            icon = REPO_ROOT / info["path"] / info["icon"]
+            self.assertTrue(icon.is_file(), icon)
+            self.assertIn(slug, readme)
         for plugin in ["workflow-core", "ai-skills-core", "clear-writing", "presentations"]:
-            self.assertIn(f"assets/codex/plugin-icons/{plugin}/composer.svg", sheet)
+            self.assertTrue((REPO_ROOT / f"assets/codex/plugin-icons/{plugin}/composer.svg").is_file())
 
 
 if __name__ == "__main__":

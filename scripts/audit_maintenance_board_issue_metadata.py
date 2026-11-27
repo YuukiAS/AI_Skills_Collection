@@ -34,7 +34,7 @@ def _run_gh_graphql(query: str, variables: Mapping[str, Any]) -> Dict[str, Any]:
 def collect_tracking_map(root: Path) -> Dict[int, List[Dict[str, str]]]:
     """Return canonical TODO entries that already contain tracking issue locators."""
     mapping: Dict[int, List[Dict[str, str]]] = {}
-    for dirname in ("docs/plugin-todos", "docs/skill-todos"):
+    for dirname in ("docs/plugin-todos",):
         base = root / dirname
         if not base.exists():
             continue

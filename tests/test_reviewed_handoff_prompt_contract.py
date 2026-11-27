@@ -6,11 +6,12 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+FIXTURE_ROOT = ROOT / "tests/fixtures/reviewed_handoff"
 
 
 class ReviewedHandoffPromptContractTests(unittest.TestCase):
     def test_future_plan_template_uses_goal_fidelity_v2(self) -> None:
-        template = (ROOT / "automation/reviewed_handoff/templates/PLAN.md").read_text(encoding="utf-8")
+        template = (FIXTURE_ROOT / "PLAN.md").read_text(encoding="utf-8")
 
         self.assertIn("schema: AI_BRIDGE_REVIEWED_PLAN_V2", template)
         for heading in [
@@ -29,7 +30,7 @@ class ReviewedHandoffPromptContractTests(unittest.TestCase):
         self.assertIn("model/source, budget, or quality bar", template)
 
     def test_scheduled_reviewer_requires_plan_frozen_preflight(self) -> None:
-        prompt = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(encoding="utf-8")
+        prompt = (FIXTURE_ROOT / "REVIEWER_SCHEDULED_TASK.md").read_text(encoding="utf-8")
 
         self.assertIn("automation/reviewed_handoff/templates/PLAN.md", prompt)
         self.assertIn("重新读取刚写出的 `PLAN.md`", prompt)
@@ -49,9 +50,9 @@ class ReviewedHandoffPromptContractTests(unittest.TestCase):
         self.assertIn("不得 freeze", prompt)
 
     def test_goal_fidelity_prompts_preserve_ai_skills_custom_contracts(self) -> None:
-        planner = (ROOT / "automation/reviewed_handoff/prompts/PLANNER.md").read_text(encoding="utf-8")
-        executor = (ROOT / "automation/reviewed_handoff/prompts/CODEX_EXECUTOR.md").read_text(encoding="utf-8")
-        scheduled = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(
+        planner = (FIXTURE_ROOT / "PLANNER.md").read_text(encoding="utf-8")
+        executor = (FIXTURE_ROOT / "CODEX_EXECUTOR.md").read_text(encoding="utf-8")
+        scheduled = (FIXTURE_ROOT / "REVIEWER_SCHEDULED_TASK.md").read_text(
             encoding="utf-8"
         )
 
@@ -71,8 +72,8 @@ class ReviewedHandoffPromptContractTests(unittest.TestCase):
         self.assertIn("process evidence", scheduled)
 
     def test_scheduled_reviewer_requires_final_report_preflight(self) -> None:
-        prompt = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(encoding="utf-8")
-        template = (ROOT / "automation/reviewed_handoff/templates/FINAL_REPORT.md").read_text(encoding="utf-8")
+        prompt = (FIXTURE_ROOT / "REVIEWER_SCHEDULED_TASK.md").read_text(encoding="utf-8")
+        template = (FIXTURE_ROOT / "FINAL_REPORT.md").read_text(encoding="utf-8")
         template_headings = re.findall(r"^## .+$", template, flags=re.MULTILINE)
 
         self.assertIn("automation/reviewed_handoff/templates/FINAL_REPORT.md", prompt)
@@ -86,8 +87,8 @@ class ReviewedHandoffPromptContractTests(unittest.TestCase):
             self.assertIn(f"`{heading}`", prompt)
 
     def test_planner_prompts_prevent_adaptive_holdout_chasing(self) -> None:
-        planner = (ROOT / "automation/reviewed_handoff/prompts/PLANNER.md").read_text(encoding="utf-8")
-        scheduled = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(encoding="utf-8")
+        planner = (FIXTURE_ROOT / "PLANNER.md").read_text(encoding="utf-8")
+        scheduled = (FIXTURE_ROOT / "REVIEWER_SCHEDULED_TASK.md").read_text(encoding="utf-8")
 
         for prompt in (planner, scheduled):
             self.assertIn("complete holdout batch freeze", prompt)
@@ -101,9 +102,9 @@ class ReviewedHandoffPromptContractTests(unittest.TestCase):
         maintainer = (ROOT / "skills/core/codex-system/ai-skills-repository-maintainer/SKILL.md").read_text(
             encoding="utf-8"
         )
-        planner = (ROOT / "automation/reviewed_handoff/prompts/PLANNER.md").read_text(encoding="utf-8")
-        executor = (ROOT / "automation/reviewed_handoff/prompts/CODEX_EXECUTOR.md").read_text(encoding="utf-8")
-        scheduled = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(
+        planner = (FIXTURE_ROOT / "PLANNER.md").read_text(encoding="utf-8")
+        executor = (FIXTURE_ROOT / "CODEX_EXECUTOR.md").read_text(encoding="utf-8")
+        scheduled = (FIXTURE_ROOT / "REVIEWER_SCHEDULED_TASK.md").read_text(
             encoding="utf-8"
         )
 
@@ -147,9 +148,9 @@ class ReviewedHandoffPromptContractTests(unittest.TestCase):
         maintainer = (ROOT / "skills/core/codex-system/ai-skills-repository-maintainer/SKILL.md").read_text(
             encoding="utf-8"
         )
-        planner = (ROOT / "automation/reviewed_handoff/prompts/PLANNER.md").read_text(encoding="utf-8")
-        executor = (ROOT / "automation/reviewed_handoff/prompts/CODEX_EXECUTOR.md").read_text(encoding="utf-8")
-        scheduled = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(
+        planner = (FIXTURE_ROOT / "PLANNER.md").read_text(encoding="utf-8")
+        executor = (FIXTURE_ROOT / "CODEX_EXECUTOR.md").read_text(encoding="utf-8")
+        scheduled = (FIXTURE_ROOT / "REVIEWER_SCHEDULED_TASK.md").read_text(
             encoding="utf-8"
         )
 
@@ -178,8 +179,8 @@ class ReviewedHandoffPromptContractTests(unittest.TestCase):
         self.assertIn("Private/text artifact review is owned by `GPT_Codex_AI_Bridge_Kit` Text Review", maintainer)
 
     def test_text_review_packet_plaintext_excludes_workflow_wrappers(self) -> None:
-        executor = (ROOT / "automation/reviewed_handoff/prompts/CODEX_EXECUTOR.md").read_text(encoding="utf-8")
-        scheduled = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(
+        executor = (FIXTURE_ROOT / "CODEX_EXECUTOR.md").read_text(encoding="utf-8")
+        scheduled = (FIXTURE_ROOT / "REVIEWER_SCHEDULED_TASK.md").read_text(
             encoding="utf-8"
         )
 
@@ -197,7 +198,7 @@ class ReviewedHandoffPromptContractTests(unittest.TestCase):
 
     def test_private_artifact_durability_before_worktree_cleanup(self) -> None:
         agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
-        executor = (ROOT / "automation/reviewed_handoff/prompts/CODEX_EXECUTOR.md").read_text(encoding="utf-8")
+        executor = (FIXTURE_ROOT / "CODEX_EXECUTOR.md").read_text(encoding="utf-8")
 
         for text in (agents, executor):
             self.assertIn("Task-owned `/tmp` worktree", text)
@@ -232,8 +233,8 @@ class ReviewedHandoffPromptContractTests(unittest.TestCase):
 
     def test_review_pass_defaults_to_integration_closure_without_human_gate(self) -> None:
         agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
-        planner = (ROOT / "automation/reviewed_handoff/prompts/PLANNER.md").read_text(encoding="utf-8")
-        scheduled = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(
+        planner = (FIXTURE_ROOT / "PLANNER.md").read_text(encoding="utf-8")
+        scheduled = (FIXTURE_ROOT / "REVIEWER_SCHEDULED_TASK.md").read_text(
             encoding="utf-8"
         )
 
@@ -250,8 +251,8 @@ class ReviewedHandoffPromptContractTests(unittest.TestCase):
         version_policy = (ROOT / "docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md").read_text(
             encoding="utf-8"
         )
-        planner = (ROOT / "automation/reviewed_handoff/prompts/PLANNER.md").read_text(encoding="utf-8")
-        scheduled = (ROOT / "automation/reviewed_handoff/prompts/REVIEWER_SCHEDULED_TASK.md").read_text(
+        planner = (FIXTURE_ROOT / "PLANNER.md").read_text(encoding="utf-8")
+        scheduled = (FIXTURE_ROOT / "REVIEWER_SCHEDULED_TASK.md").read_text(
             encoding="utf-8"
         )
 
@@ -265,19 +266,6 @@ class ReviewedHandoffPromptContractTests(unittest.TestCase):
         self.assertIn("Baseline replay", version_policy)
         self.assertIn("docs-only", planner)
         self.assertIn("tests-only", scheduled)
-
-    def test_program_goal_requires_frozen_four_paper_batch(self) -> None:
-        goal = (ROOT / "automation/reviewed_handoff/tasks/RESEARCH_PRESENTATION_CORPUS_PROGRAM_GOAL.md").read_text(
-            encoding="utf-8"
-        )
-
-        self.assertIn("Frozen Batch Real-Paper Generalization Acceptance + Human Closure", goal)
-        self.assertIn("一次性冻结", goal)
-        self.assertIn("两篇 statistics / biostatistics / methodology papers", goal)
-        self.assertIn("两篇 medical-imaging papers", goal)
-        self.assertIn("4/4 Terra + Planner PASS", goal)
-        self.assertIn("四套真实 rendered decks", goal)
-
 
 if __name__ == "__main__":
     unittest.main()

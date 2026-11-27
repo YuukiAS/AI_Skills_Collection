@@ -21,7 +21,7 @@ docs/plugin-todos/<plugin>.md
 | `research-authoring` | [docs/plugin-todos/research-authoring.md](docs/plugin-todos/research-authoring.md) |
 | `presentations` | [docs/plugin-todos/presentations.md](docs/plugin-todos/presentations.md) |
 | `scientific-visualization` | [docs/plugin-todos/scientific-visualization.md](docs/plugin-todos/scientific-visualization.md) |
-| `web-development` | [docs/plugin-todos/web-development.md](docs/plugin-todos/web-development.md) |
+| `frontend-design` | [docs/plugin-todos/frontend-design.md](docs/plugin-todos/frontend-design.md) |
 | `statistical-modeling` | [docs/plugin-todos/statistical-modeling.md](docs/plugin-todos/statistical-modeling.md) |
 | `bioinformatics` | [docs/plugin-todos/bioinformatics.md](docs/plugin-todos/bioinformatics.md) |
 | `medical-imaging` | [docs/plugin-todos/medical-imaging.md](docs/plugin-todos/medical-imaging.md) |
@@ -29,19 +29,14 @@ docs/plugin-todos/<plugin>.md
 
 详细规则见 [docs/plugin-todos/README.md](docs/plugin-todos/README.md)。
 
+## 独立技能 TODO 入口
 
-## Standalone skill TODO 入口
-
-中央 Marketplace plugin 继续使用 `docs/plugin-todos/<plugin>.md`。少数本身不是中央 plugin、但会被独立安装和跨项目复用的 support skill，如果真实问题无法合理归到某个 plugin，不应为了记 TODO 硬塞进无关 plugin，也不应把 maintenance 文档放进 skill runtime 目录。
-
-当前单独维护：
+少数本身不是中央 plugin、但会被独立安装和跨项目复用的技能，其维护项也统一放在 `docs/plugin-todos/`：
 
 | Skill | TODO |
 |---|---|
-| `render-chinese-math-pdf` | [docs/skill-todos/render-chinese-math-pdf.md](docs/skill-todos/render-chinese-math-pdf.md) |
-| `project-instructions-editor` | [docs/skill-todos/project-instructions-editor.md](docs/skill-todos/project-instructions-editor.md) |
-| `slurm-workflows` | [docs/skill-todos/slurm-workflows.md](docs/skill-todos/slurm-workflows.md) |
-| `course-assessment-authoring` | [docs/skill-todos/course-assessment-authoring.md](docs/skill-todos/course-assessment-authoring.md) |
+| `render-chinese-math-pdf` | [docs/plugin-todos/render-chinese-math-pdf.md](docs/plugin-todos/render-chinese-math-pdf.md) |
+| `project-instructions-editor` | [docs/plugin-todos/project-instructions-editor.md](docs/plugin-todos/project-instructions-editor.md) |
 
 这里仍然沿用真实项目反馈的原则：项目 thread 先记录 `status: NEW` 的事实和证据；是否抽象成通用规则、如何修改实现、验收标准和 release 决策，留给后续 AI_Skills Planner / maintainer。
 
@@ -69,7 +64,7 @@ docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md
 
 ### 项目本身的问题 → 留在项目 repo
 
-例如 TRACE 里：
+例如某个研究项目里：
 
 - 某私有统计研究项目 还要补哪个实验；
 - 某个 theorem 到底应该怎么写；
@@ -77,11 +72,11 @@ docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md
 - 下一步模型要不要加新 prior；
 - 某段代码本身有 bug。
 
-这些属于 TRACE，自然继续写 TRACE 的 `ROADMAP.md`、任务结果、模型/数据文档等合适位置。
+这些属于项目本身，自然继续写项目的 `ROADMAP.md`、任务结果、模型/数据文档等合适位置。
 
 ### Plugin 做得不好 → 直接写回 AI_Skills_Collection
 
-例如在 TRACE 里调用 `presentations` 后发现：
+例如在真实研究项目里调用 `presentations` 后发现：
 
 - 箭头穿过文字；
 - 已经接受的页面被返修时又改坏；
@@ -89,7 +84,7 @@ docs/workflows/AI_SKILLS_MAINTENANCE_BOARD.md
 - 图太小，投影时看不清；
 - 本来要求“继续改现有 PPT”，plugin 却重新生成了一套。
 
-这些问题本质上是 `presentations` 的问题，所以**不要再把它们当成 TRACE 的科研 TODO 保存一份**。直接读取：
+这些问题本质上是 `presentations` 的问题，所以**不要再把它们当成项目科研 TODO 保存一份**。直接读取：
 
 ```text
 AI_Skills_Collection/TODO.md
@@ -120,7 +115,7 @@ project-specific context: <哪些细节只属于当前项目，不应该变成�
 ```text
 ### Existing-deck revision changed an accepted slide
 status: NEW
-source: TRACE / a private research project group-meeting revision
+source: a private research project group-meeting revision
 evidence: <实际 PDF / render / task 路径>
 problem: 用户只要求修改 P10，但上轮已经接受的 P9 也发生了明显变化。
 project-specific context: P9/P10 的 该项目 科学内容本身不应成为通用规则。

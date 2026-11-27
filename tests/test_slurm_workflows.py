@@ -78,7 +78,7 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
             REPO_ROOT / "skills" / "tools" / "hpc" / "slurm-workflows" / "SKILL.md",
             HELPER_PATH,
         ]
-        forbidden = ["htzhulab", "volta-gpu", "longleaf", "cuhk"]
+        forbidden = ["private-account", "private-partition", "private-cluster", "private-org"]
         combined = "\n".join(path.read_text(encoding="utf-8").lower() for path in source_paths)
         for value in forbidden:
             self.assertNotIn(value, combined)
@@ -817,11 +817,11 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
             project = Path(tmp) / "project"
             override = Path(tmp) / "local-overrides.toml"
             override.write_text(
-                "[sites.unc-longleaf]\nlocal_site_id = \"private-lab-site\"\npartition_priority = \"pi-fast\"\n",
+                "[sites.example-cluster]\nlocal_site_id = \"private-lab-site\"\npartition_priority = \"pi-fast\"\n",
                 encoding="utf-8",
             )
             args = argparse.Namespace(
-                site="unc-longleaf",
+                site="example-cluster",
                 target="repo",
                 project=str(project),
                 hostname=None,
@@ -835,13 +835,13 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
             reference = (
                 skills.environment_target_root(args) / "slurm-workflows" / "references" / "_generated" / "site-profile.md"
             ).read_text(encoding="utf-8")
-        self.assertEqual(plan["requested_site_id"], "unc-longleaf")
+        self.assertEqual(plan["requested_site_id"], "example-cluster")
         self.assertEqual(plan["local_site_id"], "private-lab-site")
-        self.assertEqual(plan["policy_overlay_id"], "unc-longleaf")
+        self.assertEqual(plan["policy_overlay_id"], "example-cluster")
         self.assertEqual(manifest["local_site_id"], "private-lab-site")
-        self.assertEqual(manifest["policy_overlay_id"], "unc-longleaf")
+        self.assertEqual(manifest["policy_overlay_id"], "example-cluster")
         self.assertIn("local_site_id: private-lab-site", reference)
-        self.assertIn("policy_overlay_id: unc-longleaf", reference)
+        self.assertIn("policy_overlay_id: example-cluster", reference)
 
     def test_legacy_race_defaults_and_site_aware_doctor(self) -> None:
         fresh = skills.environment_blank_site_override("fresh-site")
@@ -852,9 +852,9 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             project = Path(tmp) / "project"
             override = Path(tmp) / "local-overrides.toml"
-            override.write_text("[sites.unc-longleaf]\naccount = \"\"\n", encoding="utf-8")
+            override.write_text("[sites.example-cluster]\naccount = \"\"\n", encoding="utf-8")
             args = argparse.Namespace(
-                site="unc-longleaf",
+                site="example-cluster",
                 target="repo",
                 project=str(project),
                 hostname=None,
@@ -875,7 +875,7 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
             project = Path(tmp) / "project"
             override = Path(tmp) / "local-overrides.toml"
             override.write_text(
-                "[sites.third-party]\npolicy_overlay_id = \"unc-longleaf\"\naccelerator_priority = \"h100,a100\"\n",
+                "[sites.third-party]\npolicy_overlay_id = \"example-cluster\"\naccelerator_priority = \"h100,a100\"\n",
                 encoding="utf-8",
             )
             args = argparse.Namespace(
@@ -894,11 +894,11 @@ class SlurmWorkflowsRoutingTests(unittest.TestCase):
                 skills.environment_target_root(args) / "slurm-workflows" / "references" / "_generated" / "site-profile.md"
             ).read_text(encoding="utf-8")
         self.assertEqual(plan["local_site_id"], "third-party")
-        self.assertEqual(plan["policy_overlay_id"], "unc-longleaf")
+        self.assertEqual(plan["policy_overlay_id"], "example-cluster")
         self.assertEqual(manifest["local_site_id"], "third-party")
-        self.assertEqual(manifest["policy_overlay_id"], "unc-longleaf")
+        self.assertEqual(manifest["policy_overlay_id"], "example-cluster")
         self.assertIn("local_site_id: third-party", reference)
-        self.assertIn("policy_overlay_id: unc-longleaf", reference)
+        self.assertIn("policy_overlay_id: example-cluster", reference)
 
 
 if __name__ == "__main__":

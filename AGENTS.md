@@ -28,6 +28,12 @@
 
 旧聊天、旧计划、旧 benchmark PASS 不能覆盖当前 repo。
 
+## 1.1 README 永远写给人看
+
+只要当前任务修改根 `README.md`，无论修改大小，都必须实际调用当前安装的 Clear Writing（`clear-writing`）做最终读者语言检查。只读 `SKILL.md`、在提示词里声称遵守规则或做字符串扫描，都不算调用。
+
+README 的事实、版本、命令、架构和范围由当前任务负责人 / repository maintainer 负责；Clear Writing 只负责最终面向读者的语言质量。版本、链接或其他机器字符串，以及代码、命令、路径、文件名、字段、配置键、版本等技术字面量应原样放行，不得为追求文风改写其含义。
+
 ## 1.2 任务规模必须和读取规模匹配
 
 `Source of truth` 是读取优先级，不是“每个任务都把所有 source 全读一遍”。Planner、Executor、Reviewer 和普通 Codex 必须先判断当前任务规模，再决定读取范围。上下文过大不仅浪费 token，也会把旧设计、历史失败和无关规则重新带进当前判断。

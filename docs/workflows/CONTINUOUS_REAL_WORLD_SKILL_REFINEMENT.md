@@ -156,7 +156,7 @@ Promotion 前必须明确：
 
 ## 7. 不要把一个真实页面问题直接写成永久规则
 
-例如 TRACE 某页出现“两栏高度不一致”。真实项目 thread 只需把这个问题直接写进 `presentations` TODO，状态先是 `NEW`。
+例如某研究项目的一页出现“两栏高度不一致”。真实项目 thread 只需把这个问题直接写进 `presentations` TODO，状态先是 `NEW`。
 
 中央 Planner 再判断：
 
@@ -246,7 +246,7 @@ docs/workflows/PLUGIN_VERSIONING_AND_CHANGELOGS.md
 docs/plugin-todos/presentations.md
 ```
 
-不要把“Presentation 插件的问题”继续堆进 TRACE 的科研 TODO。
+不要把“Presentation 插件的问题”继续堆进项目自己的科研 TODO。
 
 ### Reporting
 

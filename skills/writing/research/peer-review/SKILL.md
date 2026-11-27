@@ -77,7 +77,7 @@ Report skeleton:
 Source distilled from `Haoran-98/ICLR-reviewer` at
 `3a105ae9270f`; no license file was observed in the clone, and the integration
 uses locally rewritten workflow rules per user instruction. See
-`docs/provenance/WRITING_SKILL_REPOS_2026_07_28.md`.
+`docs/SKILL_PROVENANCE.md`.
 
 ## When to Use This Skill
 

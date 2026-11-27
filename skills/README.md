@@ -8,7 +8,7 @@
 - A repeatable workflow with clear triggers and boundaries.
 - A tool or library workflow users directly name, such as `scanpy`, `pydicom`,
   `PyMC`, `pptx`, or React/Tailwind implementation.
-- A project-specific workflow with local conventions, such as CardiacNexus
+- A project-specific workflow with local conventions
   pipeline refactors.
 - A system workflow used by the installer or skill maintenance profiles.
 
@@ -36,7 +36,7 @@ not include archived skills.
   global guardrails; `writing/research/` is heavier and usually project-scoped.
 - `science/`: research discovery, ideation, communication, and presentation
   workflows that are not themselves clear-writing guardrails.
-- `projects/`: repo- or product-specific workflows, such as CardiacNexus/CMR.
+- `projects/`: repo- or product-specific workflows.
 - `core/`: skill library maintenance, installer support, and Codex system
   compatibility workflows.
 - `archive/`: retained material that should not appear in the default active

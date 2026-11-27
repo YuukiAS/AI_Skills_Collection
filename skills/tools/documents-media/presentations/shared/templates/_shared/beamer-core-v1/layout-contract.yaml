@@ -1,7 +1,7 @@
 schema: presentations-shared-beamer-core-v1
 status: FROZEN_PLANNER_AUTHORITY
 source_oracle:
-  repo: YuukiAS/STAT5060-TA
+  repo: YuukiAS/PUBLIC_COURSE_FIXTURE-TA
   artifact_commit: 62678cd22409906797474752ae4f304f867d96cc
   style_freeze_commit: d019fd53513682004c154d6d0e6ea76b2099296b
   pdf_sha256: 88eae6b2073715729abd9c2b004d1d0f31541c4314c2b64cd49194346b35d6e1

@@ -15,7 +15,7 @@ icon_small: assets/app-facing.svg
 icon_large: assets/app-facing.svg
 license: Apache-2.0
 metadata:
-  skill-author: CardiacNexus maintainers
+  skill-author: AI Skills Collection maintainers
 allowed-tools:
 ---
 # Bayesian PPL and diagnostics

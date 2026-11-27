@@ -49,11 +49,11 @@ class SkillProvenanceTests(unittest.TestCase):
         self.assertEqual(errors, [])
 
     def test_integration_history_pending_rows_have_closure(self) -> None:
-        errors = provenance_audit.audit_history(REPO_ROOT / "docs/provenance/INTEGRATION_HISTORY.md")
+        errors = provenance_audit.audit_history(REPO_ROOT / "tests/fixtures/provenance/INTEGRATION_HISTORY.md")
         self.assertFalse([error for error in errors if "pending-" in error])
 
     def test_v36_ai_resources_intake_is_consistent(self) -> None:
-        errors = provenance_audit.audit_intake_table(REPO_ROOT / "docs/provenance/AI_RESOURCES_INTAKE_V3_6.md")
+        errors = provenance_audit.audit_intake_table(REPO_ROOT / "tests/fixtures/provenance/AI_RESOURCES_INTAKE_V3_6.md")
         self.assertEqual(errors, [])
 
 

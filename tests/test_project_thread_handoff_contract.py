@@ -166,7 +166,7 @@ class ProjectThreadHandoffContractTests(unittest.TestCase):
 
         self.assertIn("private_project", fixture)
         self.assertEqual(fixture["private_project"]["project_name"], "PRIVATE-PROJECT-X")
-        self.assertIn("cardiacnexus", fixture)
+        self.assertIn("repository_grounded_recovery", fixture)
         self.assertIn("ambiguous_target", fixture)
         self.assertIn("unsourced_recall", fixture)
         self.assertIn("missing_route_provenance", fixture)
@@ -180,7 +180,7 @@ class ProjectThreadHandoffContractTests(unittest.TestCase):
         self.assertNotIn("DII", body)
         self.assertNotIn("CARE", body)
         self.assertNotIn(fixture["private_project"]["project_name"], body)
-        self.assertNotIn("CardiacNexus", body)
+        self.assertNotIn("PRIVATE-PROJECT-X", body)
 
     def test_canonical_icon_bytes_are_unchanged(self) -> None:
         digest = hashlib.sha256(ICON_FILE.read_bytes()).hexdigest()

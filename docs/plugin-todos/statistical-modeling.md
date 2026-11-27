@@ -9,7 +9,7 @@ Canonical maintenance inbox for the `statistical-modeling` plugin.
 status: READY_FOR_PROMOTION_AFTER_LANGUAGE_LAYER
 tracking: #73
 source: cross-plugin communication boundary audit, 2026-09-05
-proposal: Keep `statistical-modeling` as the owner of model choice, assumptions, inferential target/estimand semantics, uncertainty, diagnostics, comparison and statistical conclusion. After those semantics are frozen, use the canonical generic language layer for reader-facing result interpretation, assumption/diagnostic explanations, table/figure captions, bounded conclusions and limitation wording. See `docs/design/READER_FACING_COMMUNICATION_PLUGIN_BOUNDARIES.md`.
+proposal: Keep `statistical-modeling` as the owner of model choice, assumptions, inferential target/estimand semantics, uncertainty, diagnostics, comparison and statistical conclusion. After those semantics are frozen, use the canonical generic language layer for reader-facing result interpretation, assumption/diagnostic explanations, table/figure captions, bounded conclusions and limitation wording. See `README.md` (design source archived in Blueprint).
 required boundary: the language layer may translate ordinary English scaffolding and improve explanation, but must not change the estimand/parameter meaning, conditioning set, comparator, uncertainty, calibration statement or conclusion strength. Statistical tables/plots remain statistically owned here even when their captions are rewritten elsewhere.
 promotion gate: after task 050 closes and the generic language layer identity is settled, replay one real statistical analysis handoff with a caption/result/conclusion package and verify zero statistical-semantic drift.
 

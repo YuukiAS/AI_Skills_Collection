@@ -83,11 +83,11 @@
         "item_level_judgement": "PASS",
         "visual_review_item_id": "item_D",
         "visual_review_evidence_id": "visual-review-025_research_presentation_gold_scientific_composition_library-1b0ba053dfa0",
-        "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json",
-        "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/review_identity_map.json",
+        "visual_review_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_admission/VISUAL_REVIEW.json",
+        "identity_map_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_admission/review_identity_map.json",
         "evidence_paths": [
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json",
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/review_identity_map.json"
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_admission/VISUAL_REVIEW.json",
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_admission/review_identity_map.json"
         ],
         "why_admitted": "Admit. This is a mature scientific introduction composition with a clear object, useful visual relationships, and coherent conference-talk hierarchy."
       },
@@ -184,11 +184,11 @@
         "item_level_judgement": "PASS",
         "visual_review_item_id": "item_H",
         "visual_review_evidence_id": "visual-review-025_research_presentation_gold_scientific_composition_library-1b0ba053dfa0",
-        "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json",
-        "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/review_identity_map.json",
+        "visual_review_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_admission/VISUAL_REVIEW.json",
+        "identity_map_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_admission/review_identity_map.json",
         "evidence_paths": [
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/VISUAL_REVIEW.json",
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_admission/review_identity_map.json"
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_admission/VISUAL_REVIEW.json",
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_admission/review_identity_map.json"
         ],
         "why_admitted": "Admit. This is a strong, mature visual comparison page with clear scientific-object prominence and a projection-ready grouping hierarchy."
       },
@@ -286,11 +286,11 @@
         "item_level_judgement": "PASS",
         "visual_review_item_id": "item_C",
         "visual_review_evidence_id": "visual-review-025_research_presentation_gold_scientific_composition_library-2fba9c5deb45",
-        "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
-        "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json",
+        "visual_review_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/VISUAL_REVIEW.json",
+        "identity_map_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/review_identity_map.json",
         "evidence_paths": [
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json"
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/VISUAL_REVIEW.json",
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/review_identity_map.json"
         ],
         "why_admitted": "Mature scientific workflow composition with useful panel and annotation relationships."
       },
@@ -387,11 +387,11 @@
         "item_level_judgement": "PASS",
         "visual_review_item_id": "item_D",
         "visual_review_evidence_id": "visual-review-025_research_presentation_gold_scientific_composition_library-2fba9c5deb45",
-        "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
-        "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json",
+        "visual_review_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/VISUAL_REVIEW.json",
+        "identity_map_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/review_identity_map.json",
         "evidence_paths": [
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json"
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/VISUAL_REVIEW.json",
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/review_identity_map.json"
         ],
         "why_admitted": "Strong explanatory comparison slide suitable as a gold composition reference."
       },
@@ -487,11 +487,11 @@
         "item_level_judgement": "PASS",
         "visual_review_item_id": "item_F",
         "visual_review_evidence_id": "visual-review-025_research_presentation_gold_scientific_composition_library-2fba9c5deb45",
-        "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
-        "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json",
+        "visual_review_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/VISUAL_REVIEW.json",
+        "identity_map_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/review_identity_map.json",
         "evidence_paths": [
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json"
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/VISUAL_REVIEW.json",
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/review_identity_map.json"
         ],
         "why_admitted": "Mature quantitative figure slide with a clear analytical object."
       },
@@ -589,11 +589,11 @@
         "item_level_judgement": "PASS",
         "visual_review_item_id": "item_G",
         "visual_review_evidence_id": "visual-review-025_research_presentation_gold_scientific_composition_library-2fba9c5deb45",
-        "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
-        "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json",
+        "visual_review_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/VISUAL_REVIEW.json",
+        "identity_map_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/review_identity_map.json",
         "evidence_paths": [
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json"
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/VISUAL_REVIEW.json",
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/review_identity_map.json"
         ],
         "why_admitted": "Strong results composition centered on interpretable statistical evidence."
       },
@@ -691,11 +691,11 @@
         "item_level_judgement": "PASS",
         "visual_review_item_id": "item_H",
         "visual_review_evidence_id": "visual-review-025_research_presentation_gold_scientific_composition_library-2fba9c5deb45",
-        "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
-        "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json",
+        "visual_review_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/VISUAL_REVIEW.json",
+        "identity_map_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/review_identity_map.json",
         "evidence_paths": [
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json"
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/VISUAL_REVIEW.json",
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/review_identity_map.json"
         ],
         "why_admitted": "Mature conference-style quantitative comparison slide."
       },
@@ -791,11 +791,11 @@
         "item_level_judgement": "PASS",
         "visual_review_item_id": "item_J",
         "visual_review_evidence_id": "visual-review-025_research_presentation_gold_scientific_composition_library-2fba9c5deb45",
-        "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
-        "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json",
+        "visual_review_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/VISUAL_REVIEW.json",
+        "identity_map_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/review_identity_map.json",
         "evidence_paths": [
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json"
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/VISUAL_REVIEW.json",
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/review_identity_map.json"
         ],
         "why_admitted": "Clear, mature equation-focused research slide."
       },
@@ -892,11 +892,11 @@
         "item_level_judgement": "PASS",
         "visual_review_item_id": "item_K",
         "visual_review_evidence_id": "visual-review-025_research_presentation_gold_scientific_composition_library-2fba9c5deb45",
-        "visual_review_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
-        "identity_map_path": "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json",
+        "visual_review_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/VISUAL_REVIEW.json",
+        "identity_map_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/review_identity_map.json",
         "evidence_paths": [
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/VISUAL_REVIEW.json",
-          "results/025_research_presentation_gold_scientific_composition_library/visual_review/gold_recovery_1/review_identity_map.json"
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/VISUAL_REVIEW.json",
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_recovery_1/review_identity_map.json"
         ],
         "why_admitted": "Strong table-centric results slide suitable for gold reuse."
       },
@@ -1012,11 +1012,11 @@
         "item_level_judgement": "PASS",
         "visual_review_item_id": "item_C",
         "visual_review_evidence_id": "visual-review-026_discussion_gold_admission-a47e7662341b",
-        "visual_review_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/VISUAL_REVIEW.json",
-        "identity_map_path": "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/review_identity_map.json",
+        "visual_review_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_admission_2/VISUAL_REVIEW.json",
+        "identity_map_path": "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_admission_2/review_identity_map.json",
         "evidence_paths": [
-          "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/VISUAL_REVIEW.json",
-          "results/026_research_presentation_discussion_next_experiment_gold_recovery/visual_review/gold_admission_2/review_identity_map.json"
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_admission_2/VISUAL_REVIEW.json",
+          "tests/fixtures/presentations/audit_samples/gold_visual_reviews/gold_admission_2/review_identity_map.json"
         ],
         "why_admitted": "Mature, visually grounded next-methods page that uses comparative scientific objects to support specific next selection strategies."
       },

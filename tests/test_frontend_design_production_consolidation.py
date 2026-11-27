@@ -7,9 +7,9 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-RESULT_ROOT = REPO_ROOT / "results/web-development--frontend-design-production-consolidation"
-SCENARIO_PATH = RESULT_ROOT / "candidate_visible_regressions/scenarios.json"
-RUBRIC_PATH = RESULT_ROOT / "candidate_visible_regressions/adjudication_rubric.md"
+FIXTURE_ROOT = REPO_ROOT / "tests/fixtures/frontend_design"
+SCENARIO_PATH = FIXTURE_ROOT / "scenarios.json"
+RUBRIC_PATH = FIXTURE_ROOT / "adjudication_rubric.md"
 
 ANSWER_SHAPED_PATTERN = re.compile(
     r"\bP[0-4]\b|\bF-[A-D]\b|\bS[1-3]\b|coordinator-first|EXPECTED|PASS|FAIL|rubric|adjudication",
@@ -51,12 +51,12 @@ class FrontendDesignProductionConsolidationTests(unittest.TestCase):
         self.assertIn("generated Frontend Design coordinator first", rubric)
 
     def test_generated_frontend_design_payload_is_coordinator_first(self) -> None:
-        skill = (REPO_ROOT / "plugins/codex/plugins/web-development/skills/visual/SKILL.md").read_text(
+        skill = (REPO_ROOT / "plugins/codex/plugins/frontend-design/skills/visual/SKILL.md").read_text(
             encoding="utf-8"
         )
         plugin_skill_dirs = {
             path.parent.name
-            for path in (REPO_ROOT / "plugins/codex/plugins/web-development/skills").glob("*/SKILL.md")
+            for path in (REPO_ROOT / "plugins/codex/plugins/frontend-design/skills").glob("*/SKILL.md")
         }
         self.assertEqual(plugin_skill_dirs, {"refs", "visual"})
         self.assertIn('routing_mode: "coordinator-first"', skill)

@@ -21,7 +21,8 @@ repository authority layer first:
 
 - `skills/`
 - `profiles/`
-- `docs/provenance/`
+- `docs/SKILL_PROVENANCE.md`
+- `docs/skill_provenance_audit.json`
 - `tests/`
 - `scripts/codex_marketplace_config.json`
 
@@ -62,9 +63,9 @@ phase and must be handled later in a separate workflow.
 
 Before reading upstream content for any candidate, Planner must check:
 
-- `docs/provenance/INTEGRATION_HISTORY.md`
+- `tests/fixtures/provenance/INTEGRATION_HISTORY.md`
 - skill frontmatter provenance
-- existing reference and intake docs under `docs/provenance/`
+- `docs/SKILL_PROVENANCE.md` and the generated provenance audit
 
 If the candidate source was already handled with one of these decisions, do not
 import it again because Notion still says `Utilized=false`:

@@ -8,10 +8,10 @@ Canonical maintenance inbox for the `workflow-core` plugin.
 
 ### Loaded workflow-core still misclassified capability/route availability and attempted broader fallback
 status: PROMOTED
-source: STAT5060 Tutorial 1 V7 materialization on Longleaf, 2026-09-29 to 2026-09-30; workflow-core 0.5 real execution/approval incident, 2026-10-01
-evidence: first incident: before the bad fallback decision, Codex explicitly said it would use `codex-workflow-protocol` and then read `/users/a/e/aereinh/.codex/skills/core-codex-system-codex-workflow-protocol/SKILL.md`. It then checked only the default shell `python` / `Rscript`, treated missing packages/commands on the default PATH as proof that the toolchain was unavailable, and proposed a Node/stdlib SVG/PNG plotting route. A follow-up check found Longleaf modules `python/3.12.4` and `r/4.5.0`; after loading them, the required Python/R toolchain was available. Second incident: during Chinese-math PDF work, bare `xelatex` missing `ctexart.cls` led Codex to search ad hoc conda/TeX locations and prepare an HTML/Chromium fallback before the user forced it to consume the already-installed `render-chinese-math-pdf` specialist, whose formal resource/probe route already covered the task. Third incident, 2026-10-01: a normal repository task exposed the same failure class at the authority boundary. Repo-local build/test/render/QA effects were achievable inside the current workspace, yet the execution path selected escalated commands unnecessarily; after approval rejection it continued trying approval-sensitive alternatives instead of reassessing the route. A bounded/canonical publication path then failed at its own authority/transport preflight, and the workflow needed to preserve the already-successful local artifacts/commit while refusing a broader raw publication fallback. Optional generated-cache cleanup was not required for completion and should not have driven further privilege escalation.
+source: the private course Tutorial 1 V7 materialization on a private cluster, 2026-09-29 to 2026-09-30; workflow-core 0.5 real execution/approval incident, 2026-10-01
+evidence: first incident: before the bad fallback decision, Codex explicitly said it would use `codex-workflow-protocol` and then read `<private path>`. It then checked only the default shell `python` / `Rscript`, treated missing packages/commands on the default PATH as proof that the toolchain was unavailable, and proposed a Node/stdlib SVG/PNG plotting route. A follow-up check found a private cluster modules `python/3.12.4` and `r/4.5.0`; after loading them, the required Python/R toolchain was available. Second incident: during Chinese-math PDF work, bare `xelatex` missing `ctexart.cls` led Codex to search ad hoc conda/TeX locations and prepare an HTML/Chromium fallback before the user forced it to consume the already-installed `render-chinese-math-pdf` specialist, whose formal resource/probe route already covered the task. Third incident, 2026-10-01: a normal repository task exposed the same failure class at the authority boundary. Repo-local build/test/render/QA effects were achievable inside the current workspace, yet the execution path selected escalated commands unnecessarily; after approval rejection it continued trying approval-sensitive alternatives instead of reassessing the route. A bounded/canonical publication path then failed at its own authority/transport preflight, and the workflow needed to preserve the already-successful local artifacts/commit while refusing a broader raw publication fallback. Optional generated-cache cleanup was not required for completion and should not have driven further privilege escalation.
 problem: the reusable defect is broader than environment discovery. workflow-core currently does not make "choose the least-privilege normal entry first" and "a failed bounded route cannot be replaced automatically by a broader-privilege raw route" operational enough. Local PATH/package/flag absence, approval rejection, and bounded publisher failure are different evidence surfaces, but they share one workflow failure: the executor can treat a local obstacle as permission to improvise a wider route instead of first consuming the canonical/specialist entry, classifying whether the effect is required, and preserving already-achieved work. Repeated same-class approval rejection also needs to trigger W4 route reassessment rather than another escalated attempt.
-project-specific context: Longleaf module names, STAT5060 files, CJK/TeX resources, user names, machine paths, and any one publisher implementation are evidence only and must not become production hardcode. The generic workflow contract is capability/route discovery, least-privilege normal-entry selection, approval-aware privilege-non-increasing recovery, effect-scoped failure accounting, and a repeat-rejection circuit breaker.
+project-specific context: a private cluster module names, the private course files, CJK/TeX resources, user names, machine paths, and any one publisher implementation are evidence only and must not become production hardcode. The generic workflow contract is capability/route discovery, least-privilege normal-entry selection, approval-aware privilege-non-increasing recovery, effect-scoped failure accounting, and a repeat-rejection circuit breaker.
 target layer: workflow-core normal-entry routing / failure recovery / evidence fidelity. Bridge-owned publisher, Host Policy, runtime identity, askpass handling, and installation hygiene remain outside workflow-core implementation.
 candidate action:
 - preserve the approved trigger-precision design;
@@ -35,7 +35,7 @@ bridge follow-up ownership: Bridge Kit runtime identity diagnostics, duplicate e
 status: PROMOTE_NOW
 tracking: #5
 source: 042/043 Reviewed Handoff pause; 044 clear-writing production replay
-evidence: AI_Skills validation previously exposed a stale-review/implementation binding blocker for 042; task 044 then exposed a second generic runtime problem when an otherwise authorized plugin replay had to launch a fresh `codex exec` on a private local artifact and the Host Policy approval reviewer stopped it before the plugin could be tested. The generic runtime source of truth is `YuukiAS/GPT_Codex_AI_Bridge_Kit`; the bounded Host Policy design is now recorded there in `docs/design/host_policy_plugin_replay_authorization.md`.
+evidence: AI_Skills validation previously exposed a stale-review/implementation binding blocker for 042; task 044 then exposed a second generic runtime problem when an otherwise authorized plugin replay had to launch a fresh `codex exec` on a private local artifact and the Host Policy approval reviewer stopped it before the plugin could be tested. The generic runtime source of truth is `<private repository>`; the bounded Host Policy design is now recorded there in `README.md` (design source archived in Blueprint).
 target layer: external-runtime
 problem: project workflows can be tempted to patch local history, add project-specific approval exceptions, or duplicate generic Reviewed Handoff / Host Policy runtime code when the defect actually belongs to Bridge Kit. Plugin-repair tasks also need a stable production-replay path; raw nested `codex exec` should not become an ad hoc per-task approval negotiation.
 candidate action: keep generic validator and Host Policy fixes in Bridge Kit. For plugin production replay, use the Bridge-owned bounded replay path once implemented, rather than broad raw `codex exec` allow rules or AI_Skills-local Host Policy copies. After the Bridge Kit behavior is stable, make the AI_Skills Executor guidance prefer that path for plugin-repair replay without changing Planner/Reviewer authority.
@@ -53,12 +53,12 @@ promotion gate: apply to the next AI_Skills maintenance batch without creating a
 
 ### Review admission、Human Gate 与真实交付止损
 status: PROMOTED / RELEASED_IN_5.0.7
-source: 2026-09-13 to 2026-09-15 official ChatGPT Data Export audit covering Mica, Bobbio, Lucerna, Asteria plus secondary projects; strengthened by Lucerna 01033/01034/01035, the 056 persistent-user-input host probe, Bridge Kit local-repo source-resolution feedback, and CUHK Date Questionnaire V4 real-project failures
-evidence: [Planner v6 proposal](../design/PRODUCT_DELIVERY_DISCIPLINE_V6_PROPOSAL_2026-09-16.md), [post-probe addendum](../design/PRODUCT_DELIVERY_DISCIPLINE_V6_POST_PROBE_ADDENDUM_2026-09-17.md), [probe result](../design/056_PERSISTENT_PROMPT_CAPABILITY_PROBE_RESULT_2026-09-17.md), [CUHK Date feedback](../design/PRODUCT_DELIVERY_DISCIPLINE_V6_CUHK_DATE_REAL_FEEDBACK_2026-09-17.md). The private historical export audit parsed all 27 `conversations-*.json` shards with 0 parse failures and produced curated high-signal project threads; its automatic incident classifier is not treated as ground truth.
+source: 2026-09-13 to 2026-09-15 official ChatGPT Data Export audit covering a private extension, a private product, a private product, a private design project plus secondary projects; strengthened by a private product 01033/01034/01035, the 056 persistent-user-input host probe, Bridge Kit local-repo source-resolution feedback, and a private product Questionnaire V4 real-project failures
+evidence: [Planner v6 proposal](../../README.md), [post-probe addendum](../../README.md), [probe result](../../README.md), [a private product feedback](../../README.md). The private historical export audit parsed all 27 `conversations-*.json` shards with 0 parse failures and produced curated high-signal project threads; its automatic incident classifier is not treated as ground truth.
 problem: 真实项目反复暴露的是执行机制没有把“producer 自己做完、真实入口证明、只有真正 human-only 才问人、失败后不盲重跑”变成正常入口，而不是缺更多口号。典型表现包括：半成品过早交 GPT Work/用户；mock/browser/helper PASS 冒充真实 surface；用户被当 integration/UI debugger；agent 可解决的 repo/source/environment friction 被包装成 Human Gate；Default-mode prompt 自动过期；broad tests 绿但 catalog/locale/provider/interaction/material branch/hosted lifecycle 未闭环；rewrite 又破坏已接受 interaction。
 
-additional evidence (2026-10-04): Lucerna 01055 showed a completion-claim fidelity failure even after native evidence infrastructure existed. The executor result claimed the Windows frontend TODO scope closed and `P1=0/P2=0`, while the source TODO remained unchecked, the visual review itself admitted that real 125%/150% DPI evidence was not available, and independent GPT Work later found design-authority contradictions plus mislabeled state evidence. The generic workflow lesson is not a new UI rule: completion/readiness claims must be derived from the authoritative checklist/closure matrix and evidence class, and an explicit coverage gap must not be collapsed into PASS by a blanket result field.
-project-specific context: Lucerna provider/Longleaf、Bobbio Zotero/Figma、Mica authenticated ChatGPT DOM、Asteria graph grammar、CUHK Programme/GeoNames/YuNet/provider names 等只作为 evidence；通用 workflow 不编码项目产品细节。
+additional evidence (2026-10-04): a private product 01055 showed a completion-claim fidelity failure even after native evidence infrastructure existed. The executor result claimed the Windows frontend TODO scope closed and `P1=0/P2=0`, while the source TODO remained unchecked, the visual review itself admitted that real 125%/150% DPI evidence was not available, and independent GPT Work later found design-authority contradictions plus mislabeled state evidence. The generic workflow lesson is not a new UI rule: completion/readiness claims must be derived from the authoritative checklist/closure matrix and evidence class, and an explicit coverage gap must not be collapsed into PASS by a blanket result field.
+project-specific context: a private product provider/a private cluster、a private product Zotero/Figma、a private extension authenticated ChatGPT DOM、a private design project graph grammar、a private institution Programme/GeoNames/YuNet/provider names 等只作为 evidence；通用 workflow 不编码项目产品细节。
 
 维护者处理要求（已在 5.0.7 发布；后续只按新的真实反馈另行评估）：
 
@@ -72,7 +72,7 @@ project-specific context: Lucerna provider/Longleaf、Bobbio Zotero/Figma、Mica
 - **Hosted/external provider claim -> real configured evidence**：mock adapter tests 仍有价值，但 hosted capability claim 需要安全、bounded、实际 configured target evidence 和 normal entry confirmation；不因这条自动引入不必要 paid calls。
 - **Interaction sequence fidelity**：controlled number input、typeahead、rank/drag、多步 selection、autosave 等在 intermediate state 会被转换时，验证真实 user sequence，而不只 final-value schema。例如 `1 -> 17 -> 178`、paste、backspace/replace、blur/commit。
 - **State lifecycle closure**：对 upload/save/setup/configured 等持久 user state，风险需要时验证 action -> visible result -> navigation -> refresh/re-entry -> same authoritative state，而不是只看 mutation immediate success。
-- **Repeat-failure circuit breaker / human-time budget**：相同症状再次出现、测试一直绿但真实路径再次失败、同一 reviewer/user 再次指出同类问题、或 active rule 再次被违反时，先核 candidate identity、rule/plugin loading、fixture fidelity、evidence surface、root cause；没有新信息不得重复 full suite/Atlas/GPT Work/真人验收。
+- **Repeat-failure circuit breaker / human-time budget**：相同症状再次出现、测试一直绿但真实路径再次失败、同一 reviewer/user 再次指出同类问题、或 active rule 再次被违反时，先核 candidate identity、rule/plugin loading、fixture fidelity、evidence surface、root cause；没有新信息不得重复 full suite/a private product/GPT Work/真人验收。
 - **Protect accepted / adjacent behavior**：修共享 UI/state/runtime 或 rewrite 组件时保护已接受行为；不能未经明确产品决策把成熟 structured interaction 降级为 generic/free-text fallback。具体视觉一致性由 Frontend Design。
 - **Source discovery 必须优先复用正确本地 source**：task 指向已知 repo 时先定位 existing canonical checkout/worktree/clone，核 branch/ref/origin/dirty state。unrelated dirty work 要保护，但不能仅因 dirty 就默认另起 `/tmp` clone；需要 isolation 时优先 canonical local repo 的 clean worktree或机器上已有正确 clone；确实没有可用 local source 才 network clone。不要通过 local clone -> remote remap 制造额外 provenance/授权风险；修改 Git remote 仍需独立授权。这是 existing source-discovery refinement，不新增 workflow capability。
 - 设计完整性、Figma 往返、图标/motion/design-system/localization surface quality 由 Frontend Design；科学图示语义由 Scientific Visualization；workflow-core 负责 gate、routing、evidence 与 completion semantics，不决定具体 style。
@@ -85,7 +85,7 @@ project-specific context: Lucerna provider/Longleaf、Bobbio Zotero/Figma、Mica
 3. `AGENT_RESOLVABLE` local repo/source/environment issue 不 prompt 用户；`UNSUPPORTED_WITH_EVIDENCE` truthful close；
 4. user action 后由 Executor 完成 integration closure，human action 本身不算 feature completion；
 5. 原真实失败由 faithful targeted validation 捕获，修复后 final candidate 通过对应 surface；
-6. CUHK-Date-like candidate 即使 broad tests 绿，只要存在 demo catalog 冒充 breadth、mock-only hosted provider、material branch 缺失、raw locale token、interaction sequence bug、fallback-only primary feature或hosted config 未消费 backend capability，`READY_FOR_USER_REVIEW` 必须失败；
+6. a private institution-Date-like candidate 即使 broad tests 绿，只要存在 demo catalog 冒充 breadth、mock-only hosted provider、material branch 缺失、raw locale token、interaction sequence bug、fallback-only primary feature或hosted config 未消费 backend capability，`READY_FOR_USER_REVIEW` 必须失败；
 7. rewrite 场景保护已有 accepted structured interaction；
 8. existing canonical local repo + unrelated dirty state 时复用 local source/clean worktree，不重复 clone/remap remote；
 9. docs-only/server-only/small nonvisual fix 不被强制进入 locale/catalog/provider/Figma/GPT Work/full E2E。
@@ -94,8 +94,8 @@ project-specific context: Lucerna provider/Longleaf、Bobbio Zotero/Figma、Mica
 ### Approval-sensitive handoff should emit one bounded kickoff before execution
 status: DEFER_AFTER_056_WORKFLOW_CORE
 tracking: #7
-source: CUHK Date release-candidate staging incidents, 2026-09-21
-evidence: a frozen CUHK Date Goal and repo-level AGENTS explicitly authorized a staging-only workstation catalog service and Cloudflare tunnel work, but Codex/auto-review still stopped because repository text was treated as scope evidence rather than current-user-visible authorization. The user had to repeat the same approval in chat. Bridge Kit already has the correct runtime principle in its upfront-authorization guidance: the current user message may authorize a bounded frozen effect and the same effect should not be requested again later. Persistent Run additionally has a specialized kickoff generator, but ordinary approval-sensitive execution has no equally convenient handoff surface.
+source: a private product release-candidate staging incidents, 2026-09-21
+evidence: a frozen a private product Goal and repo-level AGENTS explicitly authorized a staging-only workstation catalog service and Cloudflare tunnel work, but Codex/auto-review still stopped because repository text was treated as scope evidence rather than current-user-visible authorization. The user had to repeat the same approval in chat. Bridge Kit already has the correct runtime principle in its upfront-authorization guidance: the current user message may authorize a bounded frozen effect and the same effect should not be requested again later. Persistent Run additionally has a specialized kickoff generator, but ordinary approval-sensitive execution has no equally convenient handoff surface.
 target layer: workflow-core task authoring / execution handoff; consume Bridge runtime semantics rather than creating a second authorization engine.
 problem: complex deployment/provider/resource tasks can be perfectly planned yet still block late because the workflow hands Codex a Goal but does not hand the user a short, copy-ready current-session authorization for the foreseeable gated effects. Repo policy cannot safely impersonate current-user approval, but forcing the user to discover and rewrite the required authorization after Codex blocks wastes founder time.
 candidate action:
@@ -115,8 +115,8 @@ promotion gate:
 
 ### Least-privilege equivalent recovery before Human Gate
 status: PROMOTED / RELEASED_IN_5.0.7
-source: CUHK Date catalog staging incidents, 2026-09-21
-evidence: after a staging workstation catalog architecture was approved, Codex selected a named Cloudflare Tunnel + cuhkdate.com DNS route. The existing durable Cloudflare credential correctly continued to deploy the established staging Workers but lacked the extra Tunnel Write / DNS Edit permissions needed only by that chosen route. Codex repeatedly reported a credential blocker and asked the founder to broaden the token. The same frozen staging goal could instead be met by an already-authorized Cloudflare Quick Tunnel with the existing application Bearer-secret boundary, avoiding new founder credential maintenance. This was an implementation-route problem, not a missing product decision.
+source: a private product catalog staging incidents, 2026-09-21
+evidence: after a staging workstation catalog architecture was approved, Codex selected a named Cloudflare Tunnel + private.example DNS route. The existing durable Cloudflare credential correctly continued to deploy the established staging Workers but lacked the extra Tunnel Write / DNS Edit permissions needed only by that chosen route. Codex repeatedly reported a credential blocker and asked the founder to broaden the token. The same frozen staging goal could instead be met by an already-authorized Cloudflare Quick Tunnel with the existing application Bearer-secret boundary, avoiding new founder credential maintenance. This was an implementation-route problem, not a missing product decision.
 target layer: workflow-core Human-Gate eligibility / recovery routing.
 problem: current Human-Gate triage distinguishes HUMAN_ONLY from AGENT_RESOLVABLE, but it does not explicitly require the executor/controller to ask whether the blocker is caused by an unnecessarily privileged implementation choice. That permits “preferred route lacks permission -> ask user for more privilege” even when an equivalent lower-privilege route already satisfies the frozen completion contract.
 candidate action:
@@ -142,8 +142,8 @@ promotion gate:
 ### Subagent browser capability checks must use rendered-page semantics, not foreground-window assumptions
 status: NEW
 tracking: #8
-source: CUHK Date one-parent Work orchestration probe and first targeted parent-run incident, 2026-09-21
-evidence: a native Work subagent A could use the in-app browser and establish visible SauceDemo login/cart state. A second subagent initially reported browser inability because the prompt's "visible browser/UI" wording was interpreted as requiring a foreground / `visible:true` mode. A diagnostic rerun with corrected wording used the same native in-app browser, saw the login form, and proved no inherited A session/cart state. The first real CUHK Date parent run then repeated the same failure pattern: original P01 child and one replacement both stopped pre-auth after trying foreground/visibility modes, while primary handoff remained unconsumed. This is a workflow/runtime-prompt defect, not product failure or absence of browser capability.
+source: a private product one-parent Work orchestration probe and first targeted parent-run incident, 2026-09-21
+evidence: a native Work subagent A could use the in-app browser and establish visible SauceDemo login/cart state. A second subagent initially reported browser inability because the prompt's "visible browser/UI" wording was interpreted as requiring a foreground / `visible:true` mode. A diagnostic rerun with corrected wording used the same native in-app browser, saw the login form, and proved no inherited A session/cart state. The first real a private product parent run then repeated the same failure pattern: original P01 child and one replacement both stopped pre-auth after trying foreground/visibility modes, while primary handoff remained unconsumed. This is a workflow/runtime-prompt defect, not product failure or absence of browser capability.
 target layer: workflow-core / agent orchestration / actual-surface browser runtime discipline.
 problem: browser-capable subagents can falsely classify themselves as blocked when a prompt conflates "user-visible rendered webpage state" with a literal foreground desktop window or a special `visible:true` flag. That can terminate an otherwise valid serial campaign before authentication and waste human time even though the same native browser can navigate, click, read accessibility state and capture rendered evidence.
 candidate action:
@@ -167,10 +167,10 @@ promotion gate:
 ### Task-local prohibitions must expire with their task instead of becoming accidental global policy
 status: DEFER_AFTER_056_WORKFLOW_CORE
 tracking: #9
-source: Lucerna 01037 product-polish continuation, 2026-09-17
+source: a private product 01037 product-polish continuation, 2026-09-17
 evidence: the current objective explicitly required creating `01037_product_polish_closure` task/result artifacts, but execution was repeatedly blocked because a prior task's local instruction said not to create a successor Goal; the user had to explicitly authorize that the current objective superseded the stale old boundary
 problem: Historical task-local prohibitions are being treated as indefinitely persistent safety constraints even after the task that introduced them has ended and a newer user-approved objective explicitly requires the opposite action. This turns stale context into a false Human Gate, forces the user to resolve non-substantive instruction history, and can cause repeated approval loops even when the current task scope is clear.
-project-specific context: The exact `01037` filenames and Lucerna successor-Goal wording are project-specific. The reusable workflow issue is instruction lifetime and scope: task-local restrictions need an explicit expiry/scope model, while true repository-level, persistent safety, security, destructive-action, or user-preference constraints must remain durable until explicitly changed.
+project-specific context: The exact `01037` filenames and a private product successor-Goal wording are project-specific. The reusable workflow issue is instruction lifetime and scope: task-local restrictions need an explicit expiry/scope model, while true repository-level, persistent safety, security, destructive-action, or user-preference constraints must remain durable until explicitly changed.
 
 ### Post-056 acceptance artifact packaging / comparison-review fidelity
 status: DEFER_UNTIL_056_COMPLETE
@@ -211,7 +211,7 @@ Expected mapping after 056 completion, to verify rather than assume:
 ### Final delivery must consume domain-owned self-QA before user-ready completion
 status: NEW
 tracking: #107
-source: Bridge Kit `docs/TODO_LOCAL_AUTONOMOUS_ACCEPTANCE_WORKFLOW.md` closure on 2026-10-12; Lucerna native/UI acceptance failures; Frontend Design producer-self-QA evidence; Presentation and Research Authoring delivery experience
+source: Bridge Kit `docs/TODO_LOCAL_AUTONOMOUS_ACCEPTANCE_WORKFLOW.md` closure on 2026-10-12; a private product native/UI acceptance failures; Frontend Design producer-self-QA evidence; Presentation and Research Authoring delivery experience
 evidence: Bridge Kit closed its proposed Local Autonomous Acceptance workflow at commit `89fa1e2469cb83a1d5f02e556b00e7bdf97ca750` and explicitly transferred the reusable delivery requirement here instead of creating a fourth Bridge workflow. Existing AI_Skills evidence already shows the same failure class across domains: Frontend Design records that external reviewers/users should confirm quality rather than discover obvious producer-visible P1/P2 defects; presentation production requires rendered-artifact inspection rather than file/build success; research-authoring exposes pre-submission acceptance, claim/evidence, citation and final-artifact QA capabilities. The repeated product failure is that process/build/test PASS can still be reported as user-ready before the domain owner has actually inspected the final consumed artifact.
 target layer: workflow-core delivery admission / domain routing / completion semantics.
 problem: Codex can complete implementation or generation, pass mechanical tests, and hand the result to the user while obvious product/artifact defects remain. The user then becomes the first real QA pass. A generic workflow cannot judge UI composition, slide quality, manuscript evidence, statistics or imaging semantics itself, but it must require the correct domain owner to perform that judgment before a user-ready/release-ready claim. Making a new Bridge `local-review` workflow would duplicate orchestration and still lack domain expertise; making every task launch a fresh Reviewer would overburden small work and blur Lite/Reviewed/Control boundaries.
@@ -229,7 +229,7 @@ candidate action:
 - permit a frozen Goal to require a fresh local Reviewer for higher assurance, but do not create a new default Reviewer loop, watcher, state machine, CLI mode or hard-coded review-pass budget;
 - preserve existing Reviewed/Control semantics: external GPT review and high-risk separated verification remain stronger optional layers, not substitutes for producer/domain self-QA and not mandatory for ordinary delivery.
 promotion gate:
-1. a Lucerna-like UI task with passing tests but visible/interaction defects cannot reach user-ready until the exact final native/actual-surface candidate passes Frontend Design-owned QA;
+1. a a private product-like UI task with passing tests but visible/interaction defects cannot reach user-ready until the exact final native/actual-surface candidate passes Frontend Design-owned QA;
 2. a Presentation task cannot reach delivery readiness from PPTX/build success alone; the final rendered deck must pass Presentation-owned artifact QA;
 3. a Research Authoring task cannot reach delivery readiness from Markdown/LaTeX compilation alone; the applicable writing/research owner must inspect the final manuscript/report and required evidence/citation/render surfaces;
 4. after an acceptance-relevant source/artifact change, stale prior acceptance cannot be reused for the new candidate;
@@ -237,11 +237,11 @@ promotion gate:
 6. a task-level Goal can request one fresh local Reviewer and bind it to the exact candidate, while the same task without that requirement can complete after sufficient domain-owner self-QA;
 7. no new Bridge workflow, workflow-core state machine, watcher/daemon, generic quality scorer or domain-specific quality rules are introduced in workflow-core.
 
-#### 2026-10-12 Lucerna 补充：本地完成不等于集成交付，安装副作用也属于交付质量
+#### 2026-10-12 a private product 补充：本地完成不等于集成交付，安装副作用也属于交付质量
 
 status: ADDENDUM_TO_EXISTING_CANDIDATE / NOT_NEW_WORKFLOW
-source: Lucerna 01057 治理后续与 2026-10-12 实际产品交付；源仓库 `YuukiAS/Lucerna`，治理基线 `99a1637e4bcb9bb3de54428d244304dea92827fb`
-evidence: 已通过源码测试和独立审查的产品提交 `7c5c82bc51571ff00219cd7d4522af50325e35f1` 仍在 detached 隔离工作树中，报告 `PUSHED=NO`，尚不能等同远端主线集成。Windows「启动应用」实际显示两个名称相同、图标不同的 Lucerna 条目（一项启用、一项禁用）；截图只能证明重复条目存在，不能确定哪一项是残留。Lucerna 当前 `enable_login_startup()` 将 `current_exe()` 写入 `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` 的 `Lucerna` 值，代码层尚缺正式安装身份校验；重复启动项的具体来源必须在真实机器上逐项取证，不能由这一代码片段直接推断。Lucerna 01055/01056 还反复出现 GPT Work 从 Producer 已持有的证据发现明显 P1/P2，造成用户成为第一线质量检查者。
+source: a private product 01057 治理后续与 2026-10-12 实际产品交付；源仓库 `<private repository>`，治理基线 `99a1637e4bcb9bb3de54428d244304dea92827fb`
+evidence: 已通过源码测试和独立审查的产品提交 `7c5c82bc51571ff00219cd7d4522af50325e35f1` 仍在 detached 隔离工作树中，报告 `PUSHED=NO`，尚不能等同远端主线集成。Windows「启动应用」实际显示两个名称相同、图标不同的 a private product 条目（一项启用、一项禁用）；截图只能证明重复条目存在，不能确定哪一项是残留。a private product 当前 `enable_login_startup()` 将 `current_exe()` 写入 `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` 的 `a private product` 值，代码层尚缺正式安装身份校验；重复启动项的具体来源必须在真实机器上逐项取证，不能由这一代码片段直接推断。a private product 01055/01056 还反复出现 GPT Work 从 Producer 已持有的证据发现明显 P1/P2，造成用户成为第一线质量检查者。
 
 本项既有的「领域自检与交付准入」扩展为以下**有条件的交付后置条件**，不另设状态机或独立审查产品：
 
@@ -253,11 +253,11 @@ evidence: 已通过源码测试和独立审查的产品提交 `7c5c82bc51571ff00
 本补充的验收场景：
 
 1. 已审查并测试通过的 detached-worktree 提交仍未集成：`LOCAL_SOURCE_PASS` 可为真，远端/用户交付仍必须显示未完成；若已授权安全集成，则应由执行者完成或精确记录唯一剩余影响。
-2. Windows 启动应用出现两个同名条目：安装/启动领域先依据路径、注册来源、身份和启用状态调查，保留用户设置，只在精确归属确定后安全清理；不能用「两个条目已关闭」「删除所有 Lucerna」或 UI build PASS 宣称清理成功。
+2. Windows 启动应用出现两个同名条目：安装/启动领域先依据路径、注册来源、身份和启用状态调查，保留用户设置，只在精确归属确定后安全清理；不能用「两个条目已关闭」「删除所有 a private product」或 UI build PASS 宣称清理成功。
 3. 现有截图已含重复布局、失效按钮或错误聚合：Producer 自检不得仅凭主观零缺陷声明进入正式外部验收；缺少安全原生环境时只能如实保留该表面覆盖缺口，不能用 fixture 顶替。
 4. 后端、文档或单一局部修改没有安装/原生 UI 副作用：既有轻量测试可正常结束，不强制运行安装扫描、原生完整验收或 GPT Work。
 
-职责归属保持原样：workflow-core 管交付声明与路由；Frontend Design 管受影响的 UI/原生视觉和交互质量；Lucerna/Tauri 等产品 owner 管启动项、安装器、单实例与进程生命周期；Bridge Kit 管安全 Git、运行身份及恢复。没有新增通用本机清理 daemon、Review 模式或强制系统升级。
+职责归属保持原样：workflow-core 管交付声明与路由；Frontend Design 管受影响的 UI/原生视觉和交互质量；a private product/Tauri 等产品 owner 管启动项、安装器、单实例与进程生命周期；Bridge Kit 管安全 Git、运行身份及恢复。没有新增通用本机清理 daemon、Review 模式或强制系统升级。
 
 
 ### Reviewed Handoff exact sibling worktree authorization can still be unexecutable under Host sandbox
@@ -288,11 +288,11 @@ promotion gate:
 ### Design Assurance 在要求用户运行执行包前，必须给出可审阅的“关键变化与落实点”
 
 status: NEW  
-source: Asteria Blueprint 视觉设计收敛，2026-11-03。用户在连续收到低质量视觉候选后明确要求：不能只给一个长 prompt 或声称“已经加强”，必须在每次准备让用户运行 GPT Work / Pro / Codex 前，先列出本轮真正改变了什么、这些变化具体落实在哪里，让用户能够据此判断这次执行包是否值得信任。  
-evidence: Asteria Blueprint 已完成三份独立 Deep Research，均找到 20+ 个直接相关成熟参考，但早期制作任务没有把研究消费变成硬约束，最终仍产出 React Flow demo 感、大片空白、小字、默认蓝/绿、机器状态泄漏和弱动效的视觉候选。只有在后续 prompt 明确列出并落实以下变化后，用户才认为“至少有东西可以看着判断信任度”：真实参考截图先取得并进入 Figma；上一版失败作为负控制；先锁视觉目标再制作；字体/色板不被旧 token 机械锁死；用户可见文案在制作前逐句 ACCEPT / REVISE / REJECT；动效作为真实 Gate；最终与成熟参考并排 QA；单次只做一个核心 surface，不能靠额外功能抵消核心视觉失败。相关执行证据位于 `YuukiAS/Asteria-Blueprint` 的 `design/visual-adoption-contract-20261103` / `prototype/figma-system-architecture-20261103-work`。  
+source: a private design project Blueprint 视觉设计收敛，2026-11-03。用户在连续收到低质量视觉候选后明确要求：不能只给一个长 prompt 或声称“已经加强”，必须在每次准备让用户运行 GPT Work / Pro / Codex 前，先列出本轮真正改变了什么、这些变化具体落实在哪里，让用户能够据此判断这次执行包是否值得信任。
+evidence: a private design project Blueprint 已完成三份独立 Deep Research，均找到 20+ 个直接相关成熟参考，但早期制作任务没有把研究消费变成硬约束，最终仍产出 React Flow demo 感、大片空白、小字、默认蓝/绿、机器状态泄漏和弱动效的视觉候选。只有在后续 prompt 明确列出并落实以下变化后，用户才认为“至少有东西可以看着判断信任度”：真实参考截图先取得并进入 Figma；上一版失败作为负控制；先锁视觉目标再制作；字体/色板不被旧 token 机械锁死；用户可见文案在制作前逐句 ACCEPT / REVISE / REJECT；动效作为真实 Gate；最终与成熟参考并排 QA；单次只做一个核心 surface，不能靠额外功能抵消核心视觉失败。相关执行证据位于 `<private repository>` 的 `design/visual-adoption-contract-20261103` / `prototype/figma-system-architecture-20261103-work`。
 problem: Design Assurance 当前如果只把最终 Proposal / prompt / handoff 直接交给用户，用户很难判断“这轮到底吸收了哪些失败、哪些研究结论真正变成了不可绕过的执行约束、哪些旧问题仍可能复发”。这会造成两个坏结果：一是用户只能重新通读长 prompt 才能发现关键变化；二是 Agent 可以在文字上声称“参考了研究/加强了 QA”，但实际执行合同仍允许同类失败。对于高成本、多轮、需要用户投入时间的设计任务，这种不可审阅性本身会消耗信任和用户时间。
 
-project-specific context: Asteria Blueprint 的 LikeC4 / IcePanel / Dagster / DataHub、Figma、React Flow、字体、色板、文案和动效只是本次真实回归样例，不应被硬编码成 Design Assurance 的通用规则。可复用要求是：**在让用户启动下一执行者之前，把上一轮失败如何转化为本轮可执行约束，以短、可审阅、可定位的方式明确展示。**
+project-specific context: a private design project Blueprint 的 LikeC4 / IcePanel / Dagster / DataHub、Figma、React Flow、字体、色板、文案和动效只是本次真实回归样例，不应被硬编码成 Design Assurance 的通用规则。可复用要求是：**在让用户启动下一执行者之前，把上一轮失败如何转化为本轮可执行约束，以短、可审阅、可定位的方式明确展示。**
 
 candidate action:
 - Design Assurance 的每次实质执行包在“可运行”前生成一个简短的 **关键变化与落实点** 摘要，面向用户阅读，不替代完整 Proposal / Goal / prompt；
@@ -306,7 +306,7 @@ candidate action:
 - 对普通小改动不机械生成长摘要；只有实质设计 round、昂贵执行、用户明确要求可信度说明、或存在前轮重大失败时触发。
 
 promotion gate:
-1. 用 Asteria Blueprint 视觉失败作为回归：新执行包在启动 Work 前能直接列出真实参考捕获、负控制、视觉目标锁定、文案审计、动效 Gate、并排 QA、单-surface scope 等关键变化，并能定位到实际合同，而不是只说“prompt 加强了”；
+1. 用 a private design project Blueprint 视觉失败作为回归：新执行包在启动 Work 前能直接列出真实参考捕获、负控制、视觉目标锁定、文案审计、动效 Gate、并排 QA、单-surface scope 等关键变化，并能定位到实际合同，而不是只说“prompt 加强了”；
 2. 换到非 UI 的复杂设计任务时，同一机制仍能自然表达“失败 → 改动 → 落实 → 可验证效果 → 未证明边界”，不会硬编码视觉术语；
 3. 如果 Deep Research 只存在报告而没有被执行包消费，摘要必须明确显示“尚未落实”，不能让用户误以为研究已经影响实现；
 4. 执行包没有实质变化时，不允许制造一份看似很长的变化摘要来增加虚假可信度；
@@ -336,7 +336,7 @@ problem: 当前全局 `AGENTS.md` 已经明确规定“已有明确授权不要�
 3. **失败后自动断路**：一次 UAC / macOS 授权后的执行如果因为 Agent 自己的脚本、解析、参数、兼容性或预检错误失败，必须自动回到无权限修复路径；在对应内部问题尚未通过无权限验证前，不得再次请求同类授权。
 4. **用户不是调试器**：不得用第二次、第三次 UAC/macOS 弹窗验证“刚才修得对不对”；不得让用户通过反复点击授权、观察系统写入结果来替 Executor 完成本可内部完成的调试与验收。
 5. **插件路由必须可证明实际发生**：回归不能只检查文档里“应该调用 workflow-core”。必须证明真实执行在没有用户点名插件的情况下，自动消费了 workflow-core 的权限敏感路径，并改变了后续动作顺序。
-6. **与 Bridge Kit 的边界**：workflow-core 负责自动触发、动作顺序、失败分类和重试断路；`YuukiAS/GPT_Codex_AI_Bridge_Kit` 继续拥有 Host Policy、execpolicy、hooks、bounded helper 与主机级硬拦截实现。workflow-core 不复制第二套授权数据库、守护进程或 Host Policy。
+6. **与 Bridge Kit 的边界**：workflow-core 负责自动触发、动作顺序、失败分类和重试断路；`<private repository>` 继续拥有 Host Policy、execpolicy、hooks、bounded helper 与主机级硬拦截实现。workflow-core 不复制第二套授权数据库、守护进程或 Host Policy。
 7. **优先消费硬闸门**：如果 Bridge Kit 已提供可用的 `PermissionRequest` / `PreToolUse` / Host Policy 等硬门槛，workflow-core 应把它们视为正常执行入口的一部分，而不是继续只靠自然语言自律；插件负责正确路由到这些能力，不重新实现一套相同机制。
 8. **普通任务不误触发**：纯仓库内 build/test、普通文件写入、无系统权限要求的小改动不能因为本规则被升级成 approval-sensitive workflow。触发条件必须是真实即将跨越 OS/管理员/系统权限边界。
 

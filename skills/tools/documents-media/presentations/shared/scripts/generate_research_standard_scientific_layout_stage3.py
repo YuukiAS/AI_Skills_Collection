@@ -1,0 +1,2010 @@
+#!/usr/bin/env python3
+"""Generate Stage 3 RESEARCH_STANDARD scientific-layout integration artifacts."""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+import build_gold_composition_recipe
+
+
+SHARED = Path(__file__).resolve().parents[1]
+REPO_ROOT = Path(__file__).resolve().parents[6]
+DEFAULT_TASK_KEY = "027_research_presentation_executable_research_standard_scientific_layout_system"
+RECOVERY_TASK_KEY = "030_stage3_visual_recovery"
+TASK_KEY = DEFAULT_TASK_KEY
+CANONICAL_RESEARCH_STANDARD = SHARED / "templates" / "research_standard" / "beamer" / "source"
+CANONICAL_BEAMER_CORE = SHARED / "templates" / "_shared" / "beamer-core-v1"
+DEFAULT_OUT = REPO_ROOT / "tests" / "fixtures" / "presentations" / "generated" / "research_standard_scientific_layout_stage3"
+
+SLIDE_W = 16.0
+SLIDE_H = 9.0
+SAFE_REGION = {"x": 0.060, "y": 0.185, "w": 0.880, "h": 0.675}
+LOCAL_TINYTEX_BIN = Path.home() / ".TinyTeX/bin/x86_64-linux"
+REQUIRED_FONT_FILES = {
+    "texgyretermes_regular": Path("fonts/texgyre-termes/texgyretermes-regular.otf"),
+    "texgyretermes_bold": Path("fonts/texgyre-termes/texgyretermes-bold.otf"),
+    "texgyretermes_italic": Path("fonts/texgyre-termes/texgyretermes-italic.otf"),
+    "texgyretermes_bolditalic": Path("fonts/texgyre-termes/texgyretermes-bolditalic.otf"),
+    "texgyretermes_math": Path("fonts/texgyre-termes-math/texgyretermes-math.otf"),
+    "newcm_math_calligraphic": Path("fonts/newcomputermodern/NewCMMath-Regular.otf"),
+    **{
+        name.lower().replace("-", "_"): Path(f"texmf/fonts/opentype/public/noto-cjk/{name}.otf")
+        for family in ("NotoSerifSC", "NotoSansSC")
+        for face in ("Regular", "Bold")
+        for name in (f"{family}-{face}",)
+    },
+}
+ALLOWED_PDF_FONT_PREFIXES = ("texgyretermes", "newcmmath", "notoserifsc", "notosanssc", "lmmono")
+FORBIDDEN_AUDIENCE_TERMS = [
+    "RRL-",
+    "SRC-",
+    "GSC-",
+    "Reference retrieval",
+    "EVIDENCE_MANIFEST",
+    "Diagram contract",
+    "QA",
+    "repo path",
+    "run ID",
+    "implementation commit",
+    "implementation language",
+    "production regression",
+    "source bundle",
+    "provenance",
+    "review target",
+    "fixture",
+    "workflow",
+]
+MEDICAL_ERROR_COLORS = {
+    "tp": (0, 120, 112),
+    "fp": (205, 20, 20),
+    "fn": (225, 126, 0),
+}
+
+
+def stable_sha(payload: Any) -> str:
+    text = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def file_sha(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def rel(path: Path) -> str:
+    resolved = path.resolve()
+    try:
+        return str(resolved.relative_to(REPO_ROOT))
+    except ValueError:
+        return str(resolved)
+
+
+def tex_escape(text: str) -> str:
+    replacements = {
+        "\\": r"\textbackslash{}",
+        "&": r"\&",
+        "%": r"\%",
+        "$": r"\$",
+        "#": r"\#",
+        "_": r"\_",
+        "{": r"\{",
+        "}": r"\}",
+        "~": r"\textasciitilde{}",
+        "^": r"\textasciicircum{}",
+    }
+    return "".join(replacements.get(ch, ch) for ch in text)
+
+
+def clamp(value: float, lower: float, upper: float) -> float:
+    return max(lower, min(upper, value))
+
+
+def spread_positions(top: float, bottom: float, count: int) -> list[float]:
+    if count <= 0:
+        return []
+    if count == 1:
+        return [round((top + bottom) / 2, 4)]
+    step = (bottom - top) / (count - 1)
+    return [round(top + index * step, 4) for index in range(count)]
+
+
+def fit_bbox(source_bbox: dict[str, float], capacity: dict[str, Any]) -> tuple[dict[str, float], list[str]]:
+    """Map a source-normalized bbox into the RESEARCH_STANDARD safe content region."""
+
+    transforms = ["source primary_bbox mapped into canonical RESEARCH_STANDARD content safe region"]
+    safe = SAFE_REGION
+    bbox = {
+        "x": safe["x"] + float(source_bbox["x"]) * safe["w"],
+        "y": safe["y"] + float(source_bbox["y"]) * safe["h"],
+        "w": float(source_bbox["w"]) * safe["w"],
+        "h": float(source_bbox["h"]) * safe["h"],
+    }
+    min_area = float(capacity.get("primary_object_min_area") or 0.12) * safe["w"] * safe["h"]
+    current_area = bbox["w"] * bbox["h"]
+    if current_area < min_area:
+        scale = (min_area / max(current_area, 0.001)) ** 0.5
+        bbox["w"] *= min(scale, 1.55)
+        bbox["h"] *= min(scale, 1.55)
+        transforms.append("primary object enlarged to satisfy recipe content_capacity minimum area")
+    bbox["w"] = clamp(bbox["w"], 0.24, safe["w"])
+    bbox["h"] = clamp(bbox["h"], 0.16, safe["h"])
+    bbox["x"] = clamp(bbox["x"], safe["x"], safe["x"] + safe["w"] - bbox["w"])
+    bbox["y"] = clamp(bbox["y"], safe["y"], safe["y"] + safe["h"] - bbox["h"])
+    return ({key: round(value, 4) for key, value in bbox.items()}, transforms)
+
+
+def expand_bbox_for_content(primary: dict[str, float], content_kind: str, transforms: list[str]) -> dict[str, float]:
+    floors = {
+        "equation": (0.62, 0.20),
+        "figure": (0.78, 0.42),
+        "result_figure": (0.82, 0.46),
+        "image_panel": (0.86, 0.50),
+        "flow": (0.86, 0.52),
+        "next_experiment": (0.86, 0.52),
+    }
+    min_w, min_h = floors.get(content_kind, (primary["w"], primary["h"]))
+    safe = SAFE_REGION
+    if primary["w"] >= min_w and primary["h"] >= min_h:
+        return primary
+    center_x = primary["x"] + primary["w"] / 2
+    center_y = primary["y"] + primary["h"] / 2
+    width = min(max(primary["w"], min_w), safe["w"])
+    height = min(max(primary["h"], min_h), safe["h"])
+    expanded = {
+        "x": clamp(center_x - width / 2, safe["x"], safe["x"] + safe["w"] - width),
+        "y": clamp(center_y - height / 2, safe["y"], safe["y"] + safe["h"] - height),
+        "w": width,
+        "h": height,
+    }
+    transforms.append(f"{content_kind} primary object expanded to projection-readable floor")
+    return {key: round(value, 4) for key, value in expanded.items()}
+
+
+def job_primary_geometry(spec: dict[str, Any], primary: dict[str, float], transforms: list[str]) -> dict[str, float]:
+    safe = SAFE_REGION
+    page_job = spec["page_job"]
+    if page_job == "STATISTICAL_MODEL":
+        target = {
+            "w": clamp(primary["w"] + 0.060, 0.66, 0.780),
+            "h": clamp(primary["h"] + 0.045, 0.235, 0.295),
+            "x": primary["x"] + primary["w"] * 0.010,
+            "y": 0.245 + (primary["y"] - safe["y"]) * 0.060,
+        }
+        transforms.append("statistical-model equation remains primary while source-grounded supporting roles fill the page")
+    elif page_job == "REAL_DATA_APPLICATION":
+        target = {"w": 0.84, "h": 0.47, "y": 0.230}
+        transforms.append("quantitative-result plot receives dominant projection-scale figure region")
+    elif page_job == "NEGATIVE_RESULT":
+        target = {"w": 0.66, "h": 0.46, "x": safe["x"], "y": 0.285}
+        transforms.append("negative-result evidence keeps a right diagnostic column without text overlap")
+    elif page_job == "MEDICAL_IMAGE_COMPARISON":
+        target = {"w": safe["w"], "h": 0.58, "x": safe["x"], "y": 0.235}
+        transforms.append("four-panel medical comparison receives full-width projection-scale image band")
+    elif page_job == "EXPERIMENT_DESIGN":
+        target = {"w": safe["w"], "h": 0.595, "x": safe["x"], "y": 0.205}
+        transforms.append("experiment design uses full-width projection-scale scientific-factor diagram region")
+    elif page_job == "NEXT_EXPERIMENT":
+        target = {"w": safe["w"], "h": 0.595, "x": safe["x"], "y": 0.205}
+        transforms.append("next-experiment reasoning uses full-width projection-scale decision-and-comparator diagram region")
+    else:
+        return primary
+    target.setdefault("x", primary["x"] + primary["w"] / 2 - target["w"] / 2)
+    target.setdefault("y", primary["y"] + primary["h"] / 2 - target["h"] / 2)
+    return {
+        "x": round(clamp(target["x"], safe["x"], safe["x"] + safe["w"] - target["w"]), 4),
+        "y": round(clamp(target["y"], safe["y"], safe["y"] + safe["h"] - target["h"]), 4),
+        "w": round(min(target["w"], safe["w"]), 4),
+        "h": round(min(target["h"], safe["h"]), 4),
+    }
+
+
+def apply_quality_repair_geometry(spec: dict[str, Any], primary: dict[str, float], transforms: list[str]) -> dict[str, float]:
+    safe = SAFE_REGION
+    repaired = dict(primary)
+    if spec.get("primary_object_scale_hint"):
+        bottom_limit = 0.724 if spec["page_job"] in {"REAL_DATA_APPLICATION", "NEGATIVE_RESULT"} else safe["y"] + safe["h"]
+        target_w = min(safe["w"], max(repaired["w"] * 1.10, repaired["w"] + 0.045))
+        target_h = min(bottom_limit - safe["y"], max(repaired["h"] * 1.08, repaired["h"] + 0.035))
+        center_x = repaired["x"] + repaired["w"] / 2
+        center_y = repaired["y"] + repaired["h"] / 2
+        repaired = {
+            "x": clamp(center_x - target_w / 2, safe["x"], safe["x"] + safe["w"] - target_w),
+            "y": clamp(center_y - target_h / 2, safe["y"], bottom_limit - target_h),
+            "w": target_w,
+            "h": target_h,
+        }
+        transforms.append("deck-quality repair enlarged primary scientific object while preserving a support band")
+    if spec.get("compatible_layout_reflow_hint") and spec["page_job"] in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"}:
+        repaired = {
+            "x": safe["x"],
+            "y": 0.195,
+            "w": safe["w"],
+            "h": 0.552,
+        }
+        transforms.append("deck-quality repair used source-faithful compatible reflow geometry for diagram collision")
+    return {key: round(value, 4) for key, value in repaired.items()}
+
+
+def support_bbox(primary: dict[str, float], role: str) -> dict[str, float]:
+    safe = SAFE_REGION
+    if role == "left":
+        available = primary["x"] - safe["x"] - 0.025
+        w = min(0.28, max(0.0, available))
+        return {"x": safe["x"], "y": primary["y"], "w": w, "h": min(primary["h"], 0.42)}
+    if role == "right":
+        x = primary["x"] + primary["w"] + 0.025
+        available = safe["x"] + safe["w"] - x
+        w = min(0.28, max(0.0, available))
+        return {"x": x, "y": primary["y"], "w": w, "h": min(primary["h"], 0.42)}
+    if role == "below":
+        y = primary["y"] + primary["h"] + 0.025
+        if y + 0.08 > safe["y"] + safe["h"]:
+            y = max(safe["y"], primary["y"] - 0.105)
+        h = min(0.12, max(0.08, safe["y"] + safe["h"] - y))
+        return {"x": primary["x"], "y": y, "w": primary["w"], "h": h}
+    return {"x": safe["x"], "y": safe["y"], "w": safe["w"], "h": 0.09}
+
+
+def support_geometry(spec: dict[str, Any], primary: dict[str, float]) -> dict[str, dict[str, float]]:
+    safe = SAFE_REGION
+    page_job = spec["page_job"]
+    if page_job == "REAL_DATA_APPLICATION":
+        if spec.get("legend_repair_hint") or spec.get("primary_object_scale_hint"):
+            return {
+                "annotation": {"x": 0.080, "y": 0.755, "w": 0.470, "h": 0.047},
+                "caption": {"x": 0.575, "y": 0.755, "w": 0.365, "h": 0.047},
+            }
+        return {
+            "annotation": {"x": 0.08, "y": 0.735, "w": 0.52, "h": 0.055},
+            "caption": {"x": 0.64, "y": 0.735, "w": 0.30, "h": 0.055},
+        }
+    if page_job == "STATISTICAL_MODEL":
+        return {
+            "annotation": {"x": 0.120, "y": 0.470, "w": 0.760, "h": 0.070},
+            "caption": {"x": 0.120, "y": 0.790, "w": 0.760, "h": 0.038},
+        }
+    if page_job == "NEGATIVE_RESULT":
+        if spec.get("legend_repair_hint") or spec.get("primary_object_scale_hint"):
+            return {
+                "annotation": {"x": 0.755, "y": 0.270, "w": 0.175, "h": 0.170},
+                "caption": {"x": 0.755, "y": 0.482, "w": 0.175, "h": 0.195},
+            }
+        return {
+            "annotation": {"x": 0.745, "y": 0.300, "w": 0.185, "h": 0.195},
+            "caption": {"x": 0.745, "y": 0.535, "w": 0.185, "h": 0.170},
+        }
+    if page_job == "MEDICAL_IMAGE_COMPARISON":
+        if spec.get("legend_repair_hint"):
+            return {
+                "annotation": {"x": safe["x"], "y": 0.812, "w": safe["w"], "h": 0.035},
+                "caption": {"x": safe["x"], "y": 0.812, "w": safe["w"], "h": 0.035},
+            }
+        return {
+            "annotation": {"x": safe["x"], "y": 0.832, "w": safe["w"], "h": 0.024},
+            "caption": {"x": safe["x"], "y": 0.832, "w": safe["w"], "h": 0.024},
+        }
+    if page_job in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"}:
+        if spec.get("compatible_layout_reflow_hint"):
+            y = 0.775
+            height = 0.055
+        else:
+            y = min(primary["y"] + primary["h"] + 0.012, safe["y"] + safe["h"] - 0.043)
+            height = 0.043
+        return {
+            "annotation": {"x": safe["x"], "y": round(y, 4), "w": safe["w"], "h": height},
+            "caption": {"x": safe["x"], "y": round(y, 4), "w": safe["w"], "h": height},
+        }
+    annotation = annotation_bbox(primary)
+    caption = {key: round(value, 4) for key, value in support_bbox(primary, "below").items()}
+    return {"annotation": annotation, "caption": caption}
+
+
+def bbox_overlap(a: dict[str, float], b: dict[str, float]) -> bool:
+    return not (
+        a["x"] + a["w"] <= b["x"] + 0.0001
+        or b["x"] + b["w"] <= a["x"] + 0.0001
+        or a["y"] + a["h"] <= b["y"] + 0.0001
+        or b["y"] + b["h"] <= a["y"] + 0.0001
+    )
+
+
+def annotation_bbox(primary: dict[str, float]) -> dict[str, float]:
+    right = support_bbox(primary, "right")
+    if right["w"] >= 0.16:
+        return {key: round(value, 4) for key, value in right.items()}
+    left = support_bbox(primary, "left")
+    if left["w"] >= 0.16:
+        return {key: round(value, 4) for key, value in left.items()}
+    below = support_bbox(primary, "below")
+    return {key: round(value, 4) for key, value in below.items()}
+
+
+def bbox_signature(bbox: dict[str, float]) -> str:
+    return ",".join(f"{bbox[key]:.4f}" for key in ["x", "y", "w", "h"])
+
+
+def capacity_status(spec: dict[str, Any], recipe: dict[str, Any]) -> dict[str, Any]:
+    capacity = recipe["composition_constraints"]["content_capacity"]
+    requested_panels = int(spec.get("required_panel_count") or 0)
+    capacity_panels = int(capacity.get("panel_count") or 0)
+    if requested_panels > capacity_panels + 2:
+        return {
+            "status": "SPLIT_REQUIRED",
+            "reason": f"requested {requested_panels} panels exceeds selected layout capacity {capacity_panels}",
+        }
+    return {
+        "status": "FIT",
+        "reason": "requested content fits selected gold content_capacity",
+    }
+
+
+def tex_cache_env() -> dict[str, str]:
+    user = os.environ.get("USER", "codex")
+    return {
+        "TEXMFVAR": f"/tmp/tex-cache-{user}/var",
+        "TEXMFCONFIG": f"/tmp/tex-cache-{user}/config",
+        "TEXMFCACHE": f"/tmp/tex-cache-{user}/cache",
+    }
+
+
+def render_search_path() -> str:
+    path_parts = [os.environ.get("PATH", "")]
+    if LOCAL_TINYTEX_BIN.exists():
+        path_parts.insert(0, str(LOCAL_TINYTEX_BIN))
+    return os.pathsep.join(part for part in path_parts if part)
+
+
+def render_probe_script() -> Path | None:
+    candidates = [
+        REPO_ROOT / "skills/tools/documents-media/render-chinese-math-pdf/scripts/probe_pdf_render_env.py",
+        Path.home() / ".agents/skills/tools-documents-media-render-chinese-math-pdf/scripts/probe_pdf_render_env.py",
+        Path(os.environ.get("CODEX_HOME", "~/.codex")).expanduser()
+        / "skills/tools-documents-media-render-chinese-math-pdf/scripts/probe_pdf_render_env.py",
+    ]
+    return next((path for path in candidates if path.is_file()), None)
+
+
+def font_resource_binding() -> dict[str, Any]:
+    probe = render_probe_script()
+    if probe is None:
+        return {"status": "BLOCKED_MISSING_RENDER_SKILL_PROBE", "resource_dir": None, "fonts": {}}
+    run = subprocess.run(
+        [sys.executable, str(probe), "--root", str(REPO_ROOT), "--pretty"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    try:
+        payload = json.loads(run.stdout)
+    except json.JSONDecodeError:
+        payload = {}
+    resource_dir = Path(payload["resource_dir"]) if payload.get("resource_dir") else None
+    fonts = {}
+    missing = []
+    for name, relative in REQUIRED_FONT_FILES.items():
+        path = resource_dir / relative if resource_dir else None
+        available = bool(path and path.is_file())
+        if not available:
+            missing.append(str(path or relative))
+        fonts[name] = {
+            "path": str(path) if path else None,
+            "available": available,
+            "sha256": file_sha(path) if available and path else None,
+        }
+    return {
+        "status": "READY" if run.returncode == 0 and resource_dir and not missing else "BLOCKED_MISSING_CANONICAL_FONT_RESOURCE",
+        "probe": str(probe),
+        "probe_returncode": run.returncode,
+        "resource_dir": str(resource_dir) if resource_dir else None,
+        "fonts": fonts,
+        "missing": missing,
+    }
+
+
+def materialize_font_binding(build_dir: Path) -> dict[str, Any]:
+    binding = font_resource_binding()
+    if binding["status"] != "READY":
+        return binding
+    target = build_dir / "beamer-font-root.tex"
+    resource = binding["resource_dir"]
+    if any(character in resource for character in "\n\r{}%\\"):
+        return {**binding, "status": "BLOCKED_UNSUPPORTED_TEX_RESOURCE_PATH"}
+    target.write_text(r"\def\PresentationFontResourceDir{\detokenize{" + resource + "}}\n", encoding="utf-8")
+    return {**binding, "materialized_font_binding": rel(target), "materialized_font_binding_sha256": file_sha(target)}
+
+
+def copy_beamer_source(source: Path, build_dir: Path) -> None:
+    def skip_previous_outputs(directory: str, names: list[str]) -> set[str]:
+        if Path(directory) != source:
+            return set()
+        prior_outputs = {
+            CANONICAL_BEAMER_CORE.name, "beamer-font-root.tex", "build-receipt.json", "compile.log",
+            "main.aux", "main.log", "main.nav", "main.out", "main.pdf", "main.snm", "main.toc", "main.vrb",
+        }
+        return prior_outputs.intersection(names)
+
+    shutil.copytree(source, build_dir, ignore=skip_previous_outputs)
+    shutil.copytree(CANONICAL_BEAMER_CORE, build_dir / CANONICAL_BEAMER_CORE.name)
+
+
+def pdf_font_qa(pdf: Path) -> dict[str, Any]:
+    command = shutil.which("pdffonts")
+    if not command:
+        return {"status": "BLOCKED_MISSING_PDFFONTS", "command": None, "fonts": [], "unexpected": []}
+    run = subprocess.run([command, str(pdf)], check=False, capture_output=True, text=True)
+    rows = [line for line in run.stdout.splitlines()[2:] if line.strip()]
+    names = [line.split()[0] for line in rows]
+    unexpected = [name for name in names if not name.split("+")[-1].lower().startswith(ALLOWED_PDF_FONT_PREFIXES)]
+    return {
+        "status": "PASS" if run.returncode == 0 and not unexpected else "FAIL_UNEXPECTED_PDF_FONT",
+        "command": command,
+        "returncode": run.returncode,
+        "fonts": names,
+        "unexpected": unexpected,
+        "stdout": run.stdout,
+        "stderr": run.stderr,
+    }
+
+
+def find_command(command: str) -> dict[str, Any]:
+    path = shutil.which(command, path=render_search_path())
+    return {
+        "available": path is not None,
+        "path": path,
+        "source": "PATH" if path else None,
+    }
+
+
+def render_skill_probe() -> dict[str, Any]:
+    probe = render_probe_script()
+    if probe is None:
+        return {
+            "schema": "RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1",
+            "status": "MISSING_RENDER_SKILL_PROBE",
+            "probe": None,
+        }
+    run = subprocess.run(
+        [sys.executable, str(probe), "--root", str(REPO_ROOT), "--pretty"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    try:
+        payload = json.loads(run.stdout)
+    except json.JSONDecodeError:
+        payload = {"raw_stdout": run.stdout}
+    return {
+        "schema": "RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1",
+        "status": "ok" if run.returncode == 0 else "PROBE_FAILED",
+        "probe": str(probe),
+        "returncode": run.returncode,
+        "stderr": run.stderr,
+        "payload": payload,
+    }
+
+
+def page_specs() -> list[dict[str, Any]]:
+    stat_assets = "tests/fixtures/presentations/synthetic_research_bundle/assets"
+    stat_simulation = f"{stat_assets}/simulation_summary.csv"
+    med_assets = stat_assets
+    return [
+        {
+            "page_id": "equation_statistical_model",
+            "page_job": "STATISTICAL_MODEL",
+            "section": "Model",
+            "title": "Clustered outcomes separate center and individual variation",
+            "query": {
+                "page_function": "STATISTICAL_MODEL",
+                "scientific_object": "medical imaging objective equation mathematical model variance components",
+                "domain_family": "medical_imaging",
+                "dominant_object_type": "equation",
+                "evidence_type": "mathematical model",
+                "density": "low",
+                "panel_count": 0,
+            },
+            "content_kind": "equation",
+            "dominant_object": "native_latex_math",
+            "math": r"Y_{ij}=\beta_0+\beta_1T_{ij}+u_j+\varepsilon_{ij},\quad u_j\sim N(0,\tau^2),\quad \varepsilon_{ij}\sim N(0,\sigma^2)",
+            "annotation": r"Center effects set \(\rho=\tau^2/(\tau^2+\sigma^2)\), so interval calibration depends on cluster count.",
+            "required_panel_count": 0,
+        },
+        {
+            "page_id": "quantitative_result_uncertainty",
+            "page_job": "REAL_DATA_APPLICATION",
+            "section": "Results",
+            "title": "Cluster-robust intervals recover coverage as ICC increases",
+            "query": {
+                "page_function": "REAL_DATA_APPLICATION",
+                "scientific_object": "biostatistics quantitative model comparison result table figure coverage uncertainty",
+                "domain_family": "biostatistics",
+                "dominant_object_type": "plot table",
+                "evidence_type": "quantitative comparison result",
+                "density": "moderate",
+                "panel_count": 1,
+            },
+            "content_kind": "result_figure",
+            "dominant_object": "presentation_native_coverage_figure",
+            "data_source": stat_simulation,
+            "figure_filter": {"imbalance": "imbalanced"},
+            "methods": [
+                {"id": "naive_iid_ols_z", "label": "naive iid", "color": "red!72!black"},
+                {"id": "cluster_robust_z", "label": "cluster-robust", "color": "teal!70!black"},
+            ],
+            "nominal_coverage": 0.95,
+            "callout": {"G": 8, "rho": 0.5, "label": "small-G stress"},
+            "annotation": "Small-G, high-ICC imbalance still suppresses coverage; center-robust intervals recover toward nominal as clusters increase.",
+            "caption": "Synthetic clustered-data example; intervals compared on coverage, width, and bias.",
+            "required_panel_count": 1,
+        },
+        {
+            "page_id": "method_experiment_design",
+            "page_job": "EXPERIMENT_DESIGN",
+            "section": "Design",
+            "title": "Simulation varies clustering before interval procedures are compared",
+            "query": {
+                "page_function": "EXPERIMENT_DESIGN",
+                "scientific_object": "medical imaging task map experiment design clustered simulation procedure comparison",
+                "domain_family": "medical_imaging",
+                "dominant_object_type": "diagram",
+                "evidence_type": "experiment design",
+                "density": "moderate",
+                "panel_count": 4,
+            },
+            "content_kind": "flow",
+            "dominant_object": "scientific_relation_diagram",
+            "nodes": ["DGP knobs", "Clustered samples", "Interval procedures", "Coverage diagnostics"],
+            "design_factors": [
+                r"centers \(G=8,20,50\)",
+                r"ICC \(\rho=0,.1,.3,.5\)",
+                "balanced or imbalanced clusters",
+            ],
+            "procedures": [
+                "naive iid OLS z interval",
+                "cluster-robust z interval with center scores",
+            ],
+            "endpoints": [
+                "Coverage target 0.95",
+                "mean interval width",
+                "treatment-effect bias",
+            ],
+            "annotation": "The connector direction encodes data generation before interval estimation and coverage diagnostics.",
+            "required_panel_count": 4,
+        },
+        {
+            "page_id": "negative_failure_model_check",
+            "page_job": "NEGATIVE_RESULT",
+            "section": "Failure",
+            "title": "Small-G settings remain anti-conservative after robustification",
+            "query": {
+                "page_function": "NEGATIVE_RESULT",
+                "scientific_object": "negative result failure analysis finite sample model check coverage comparison",
+                "domain_family": "statistics",
+                "dominant_object_type": "plot",
+                "evidence_type": "failure evidence",
+                "density": "moderate",
+                "panel_count": 2,
+            },
+            "content_kind": "figure",
+            "dominant_object": "negative_evidence_plot",
+            "asset": f"{stat_assets}/small_sample_negative_result.png",
+            "annotation": "The failure region is adjacent to the diagnostic explanation instead of hidden in a note.",
+            "caption": "Negative evidence is completed; CR2 and wild cluster bootstrap remain the next test.",
+            "required_panel_count": 2,
+        },
+        {
+            "page_id": "medical_image_aligned_comparison",
+            "page_job": "MEDICAL_IMAGE_COMPARISON",
+            "section": "Medical Image",
+            "title": "Same-case panels keep the segmentation error interpretable",
+            "query": {
+                "page_function": "MEDICAL_IMAGE_COMPARISON",
+                "scientific_object": "medical image lesion samples task applications visual comparison same case overlay error",
+                "domain_family": "medical_imaging",
+                "dominant_object_type": "medical_image",
+                "evidence_type": "representative image comparison",
+                "density": "high",
+                "panel_count": 4,
+            },
+            "content_kind": "image_panel",
+            "dominant_object": "same_case_medical_panels",
+            "assets": [
+                f"{med_assets}/image_input.png",
+                f"{med_assets}/image_reference.png",
+                f"{med_assets}/image_prediction.png",
+                f"{med_assets}/image_error.png",
+            ],
+            "panel_labels": ["Input", "GT", "Prediction", "Error"],
+            "roi_source_asset": f"{med_assets}/image_error.png",
+            "roi_crop_assets": [
+                f"{med_assets}/image_reference.png",
+                f"{med_assets}/image_prediction.png",
+                f"{med_assets}/image_error.png",
+            ],
+            "roi_crop_labels": ["GT crop", "Prediction crop", "Error crop"],
+            "annotation": "All panels and zoom crops come from one case and one ROI; TP/FP/FN colors remain adjacent to the error crop.",
+            "required_panel_count": 4,
+        },
+        {
+            "page_id": "discussion_next_experiment",
+            "page_job": "NEXT_EXPERIMENT",
+            "section": "Next",
+            "title": "Next experiment tests whether batch selection reduces fragile coverage",
+            "query": {
+                "page_function": "NEXT_EXPERIMENT",
+                "scientific_object": "discussion next experiment batch query bayesian optimization active learning DPP Mondrian diverse selection partition",
+                "domain_family": "statistics",
+                "dominant_object_type": "diagram plot comparison",
+                "evidence_type": "next-query experimental design",
+                "density": "moderate",
+                "panel_count": 4,
+            },
+            "content_kind": "next_experiment",
+            "dominant_object": "next_experiment_reasoning",
+            "nodes": ["Small-G limit", "DPP batch query", "Mondrian partition", "CR2 / wild bootstrap"],
+            "current_limit": "G=8, ICC=.5 and imbalanced clusters remain below nominal coverage.",
+            "strategy_variation": [
+                "DPP diverse batch",
+                "random batch",
+                "Mondrian partition",
+            ],
+            "comparator_setup": [
+                "CR2 small-sample correction",
+                "wild cluster bootstrap",
+            ],
+            "decision_criterion": "Go if coverage >= .94 with controlled width; no-go stratifies by Mondrian cell.",
+            "annotation": "Coverage evidence determines which batch-query strategy to validate next; CR2 and wild bootstrap remain proposed comparators.",
+            "required_panel_count": 4,
+        },
+    ]
+
+
+def resolve_layout(spec: dict[str, Any], *, recipe_override: dict[str, Any] | None = None) -> dict[str, Any]:
+    recipe = recipe_override or build_gold_composition_recipe.build_recipe(spec["query"])
+    constraints = recipe["composition_constraints"]
+    primary, transforms = fit_bbox(constraints["primary_bbox"], constraints["content_capacity"])
+    primary = expand_bbox_for_content(primary, spec["content_kind"], transforms)
+    primary = job_primary_geometry(spec, primary, transforms)
+    primary = apply_quality_repair_geometry(spec, primary, transforms)
+    supporting = support_geometry(spec, primary)
+    annotation = {key: round(value, 4) for key, value in supporting["annotation"].items()}
+    caption = {key: round(value, 4) for key, value in supporting["caption"].items()}
+    capacity = capacity_status(spec, recipe)
+    model_blocks = model_support_blocks(spec) if spec["page_job"] == "STATISTICAL_MODEL" else []
+    emitted_text_regions = [annotation]
+    if spec.get("caption"):
+        emitted_text_regions.append(caption)
+    emitted_text_regions.extend(block["bbox"] for block in model_blocks)
+    text_overlap_free = all(
+        not bbox_overlap(left, right)
+        for idx, left in enumerate(emitted_text_regions)
+        for right in emitted_text_regions[idx + 1 :]
+    )
+    objects = [
+        {
+            "object_id": f"{spec['page_id']}_primary",
+            "role": "primary_scientific_object",
+            "native_type": {
+                "equation": "equation",
+                "figure": "figure",
+                "result_figure": "presentation_native_result_figure",
+                "flow": "tikz_connector_diagram",
+                "image_panel": "image_panel",
+                "next_experiment": "tikz_reasoning_diagram",
+            }[spec["content_kind"]],
+            "bbox": primary,
+        },
+        {
+            "object_id": f"{spec['page_id']}_annotation",
+            "role": "annotation",
+            "native_type": "text_callout",
+            "bbox": annotation,
+        },
+        {
+            "object_id": f"{spec['page_id']}_caption",
+            "role": "caption",
+            "native_type": "text_caption",
+            "bbox": caption,
+        },
+    ]
+    if spec["page_job"] == "STATISTICAL_MODEL":
+        objects.extend(
+            {
+                "object_id": f"{spec['page_id']}_{block['suffix']}",
+                "role": block["role"],
+                "native_type": "text_explanation_block",
+                "source_fields": block["source_fields"],
+                "bbox": block["bbox"],
+            }
+            for block in model_blocks
+        )
+    if spec.get("same_case_roi_zoom"):
+        objects.append(
+            {
+                "object_id": f"{spec['page_id']}_same_case_roi_zoom",
+                "role": "same_case_error_roi_zoom",
+                "native_type": "same_case_roi_crop_image",
+                "source_assets": spec.get("roi_crop_assets", []),
+                "roi_source_asset": spec.get("roi_source_asset"),
+                "roi_xywh": spec["same_case_roi_zoom"]["roi_xywh"],
+                "crop_records": spec["same_case_roi_zoom"]["crop_records"],
+                "same_case_coordinate_space": True,
+                "bbox": {
+                    "x": round(primary["x"] + primary["w"] * 0.42, 4),
+                    "y": round(primary["y"] + primary["h"] * 0.56, 4),
+                    "w": round(primary["w"] * 0.42, 4),
+                    "h": round(primary["h"] * 0.32, 4),
+                },
+            }
+        )
+    consumed = [
+        "primary_bbox",
+        "primary_object_area_ratio",
+        "visual_hierarchy",
+        "alignment_groups",
+        "reading_flow",
+        "annotation_legend_caption_panel_relations",
+        "content_capacity",
+    ]
+    for hint in ["primary_object_scale_hint", "legend_repair_hint", "compatible_layout_reflow_hint", "split_overdense_page_hint"]:
+        if spec.get(hint):
+            consumed.append(hint)
+    resolved = {
+        "schema": "RESEARCH_RESEARCH_STANDARD_SCIENTIFIC_RESOLVED_LAYOUT_V1",
+        "task_key": TASK_KEY,
+        "page_id": spec["page_id"],
+        "page_job": spec["page_job"],
+        "dominant_scientific_object": spec["dominant_object"],
+        "executable_layout_family": {
+            "REAL_DATA_APPLICATION": "presentation_native_quantitative_result",
+            "EXPERIMENT_DESIGN": "typed_experiment_design_hierarchy",
+            "MEDICAL_IMAGE_COMPARISON": "same_case_medical_roi_zoom",
+            "NEXT_EXPERIMENT": "evidence_to_decision_next_experiment",
+        }.get(spec["page_job"], "accepted_stage3_foundation"),
+        "selected_gold_id": recipe["selected_gold_id"],
+        "selected_reference_id": recipe["selected_reference_id"],
+        "recipe_sha256": recipe["recipe_sha256"],
+        "compatibility_trace": recipe["runtime_trace"]["selection"]["matches"][0]["compatibility_reasons"],
+        "exact_research_standard_content_safe_region": SAFE_REGION,
+        "source_recipe_fields_consumed": consumed,
+        "source_to_research_standard_transform": transforms,
+        "resolved_primary_object_geometry": primary,
+        "resolved_supporting_object_geometry": {
+            "annotation": annotation,
+            "caption": caption,
+        },
+        "visual_hierarchy_mapping": constraints["visual_hierarchy"],
+        "alignment_mapping": constraints["alignment_groups"],
+        "reading_flow_mapping": constraints["reading_flow"],
+        "annotation_legend_caption_panel_mapping": constraints["annotation_legend_caption_panel_relations"],
+        "content_capacity_check": capacity,
+        "job_specific_runtime_contract": {
+            "primitive": {
+                "REAL_DATA_APPLICATION": "csv_driven_tikz_result_figure",
+                "EXPERIMENT_DESIGN": "typed_scientific_hierarchy_relation_map",
+                "MEDICAL_IMAGE_COMPARISON": "same_case_roi_crop_zoom",
+                "NEXT_EXPERIMENT": "evidence_manipulation_comparator_decision_map",
+            }.get(spec["page_job"], "accepted_foundation"),
+            "source_fields_consumed": [
+                key
+                for key in [
+                    "data_source",
+                    "figure_filter",
+                    "roi_source_asset",
+                    "same_case_roi_zoom",
+                    "key_message",
+                    "annotation",
+                    "caption",
+                    "scientific_objects",
+                ]
+                if key in spec
+            ],
+            "same_case_roi_zoom": spec.get("same_case_roi_zoom"),
+            "quality_repair_hints": {
+                key: spec[key]
+                for key in ["primary_object_scale_hint", "legend_repair_hint", "compatible_layout_reflow_hint", "split_overdense_page_hint", "audience_copy_repair_trace"]
+                if key in spec
+            },
+        },
+        "text_region_packing": {
+            "emitted_text_region_count": len(emitted_text_regions),
+            "non_overlapping": text_overlap_free,
+        },
+        "native_objects": objects,
+        "audience_safe_output_contract": {
+            "internal_ids_exposed": False,
+            "source_pixels_or_branding_reused": False,
+            "forbidden_terms": FORBIDDEN_AUDIENCE_TERMS,
+        },
+    }
+    resolved["resolved_layout_sha256"] = stable_sha(resolved)
+    return resolved
+
+
+def tex_node(x: float, y: float, w: float, body: str, *, align: str = "left") -> str:
+    return rf"\StageThreeNode{{{x:.4f}}}{{{y:.4f}}}{{{w:.4f}}}{{{align}}}{{{body}}};"
+
+
+def model_support_blocks(spec: dict[str, Any]) -> list[dict[str, Any]]:
+    blocks: list[dict[str, Any]] = []
+    scientific_objects = [
+        str(item).strip()
+        for item in spec.get("scientific_objects", [])[:3]
+        if str(item).strip()
+    ]
+    if scientific_objects:
+        role_lines = [
+            rf"\CoreCaptionFont\textbullet\ {tex_escape(item)}"
+            for item in scientific_objects
+        ]
+        blocks.append(
+            {
+                "suffix": "model_components",
+                "role": "source_field_model_components",
+                "label": "Model components",
+                "source_fields": ["scientific_objects"],
+                "bbox": {"x": 0.1050, "y": 0.6000, "w": 0.3850, "h": 0.1500},
+                "tex_body": r"\\".join(role_lines),
+            }
+        )
+    if key_message := str(spec.get("key_message") or "").strip():
+        blocks.append(
+            {
+                "suffix": "model_interpretation",
+                "role": "source_field_model_interpretation",
+                "label": "Interpretation",
+                "source_fields": ["key_message"],
+                "bbox": {"x": 0.5100, "y": 0.6000, "w": 0.3850, "h": 0.1500},
+                "tex_body": tex_escape(key_message),
+            }
+        )
+    return blocks
+
+
+def emit_equation(spec: dict[str, Any]) -> str:
+    # Let the native display use the full text rail. Supporting roles use
+    # normal-flow boxes so they grow with the source copy.
+    parts = [rf"\[\displaystyle {spec['math']}\]"]
+    if caption_text := str(spec.get("caption") or "").strip():
+        parts.append(rf"\CoreCaption{{{tex_escape(caption_text)}}}\CoreCaptionToBody")
+    else:
+        parts.append(r"\CoreDisplayMathToBody")
+    parts.append(rf"\noindent {spec['annotation']}\par")
+    blocks = [
+        rf"\TermBlock{{{block['label']}}}{{{block['tex_body']}}}"
+        for block in model_support_blocks(spec)
+    ]
+    if blocks:
+        parts.append(r"\CoreBetweenGroups")
+        parts.append(rf"\CoreEqualColumns{{{blocks[0]}}}{{{blocks[1]}}}" if len(blocks) == 2 else blocks[0])
+    return "\n".join(parts)
+
+
+def load_result_series(spec: dict[str, Any]) -> dict[int, dict[str, list[dict[str, float]]]]:
+    source = REPO_ROOT / spec["data_source"]
+    filtered: dict[int, dict[str, list[dict[str, float]]]] = {}
+    with source.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            if row.get("imbalance") != spec["figure_filter"]["imbalance"]:
+                continue
+            center_count = int(row["G"])
+            method = row["method"]
+            filtered.setdefault(center_count, {}).setdefault(method, []).append(
+                {
+                    "rho": float(row["rho"]),
+                    "coverage": float(row["coverage"]),
+                    "mc_se": float(row["mc_se"]),
+                }
+            )
+    for methods in filtered.values():
+        for points in methods.values():
+            points.sort(key=lambda item: item["rho"])
+    return filtered
+
+
+def emit_result_figure(spec: dict[str, Any], layout: dict[str, Any]) -> str:
+    primary = layout["resolved_primary_object_geometry"]
+    annotation = layout["resolved_supporting_object_geometry"]["annotation"]
+    caption = layout["resolved_supporting_object_geometry"]["caption"]
+    data = load_result_series(spec)
+    x = primary["x"]
+    y = primary["y"]
+    w = primary["w"]
+    h = primary["h"]
+    plot_x = x + 0.070
+    plot_y = y + 0.065
+    plot_h = h * 0.58
+    legend_x = x + w * 0.805
+    legend_w = x + w - legend_x
+    gap = 0.026
+    facet_w = (legend_x - plot_x - gap * 2 - 0.020) / 3
+    ymin = 0.50
+    ymax = 1.00
+    rho_min = 0.0
+    rho_max = 0.5
+
+    def px(facet_index: int, rho: float) -> float:
+        fx = plot_x + facet_index * (facet_w + gap)
+        return fx + (rho - rho_min) / (rho_max - rho_min) * facet_w
+
+    def py(coverage: float) -> float:
+        return plot_y + (1.0 - (coverage - ymin) / (ymax - ymin)) * plot_h
+
+    def point_chain(facet_index: int, points: list[dict[str, float]]) -> str:
+        return " -- ".join(f"({px(facet_index, item['rho']):.4f},{py(item['coverage']):.4f})" for item in points)
+
+    parts = [
+        tex_node(x, y + 0.005, w, r"\small\textbf{Coverage by ICC under imbalanced clusters}", align="center"),
+        tex_node(x, y + h - 0.038, w * 0.62, r"\CoreCaptionFont Data source: 400 simulation replicates per cell; y-axis shows 95\% interval coverage.", align="left"),
+    ]
+    nominal_y = py(float(spec["nominal_coverage"]))
+    center_counts = sorted(data)
+    for facet_index, center_count in enumerate(center_counts):
+        fx = plot_x + facet_index * (facet_w + gap)
+        parts.extend(
+            [
+                rf"\draw[line width=0.55pt,draw=black!55] ({fx:.4f},{plot_y:.4f}) rectangle ({fx+facet_w:.4f},{plot_y+plot_h:.4f});",
+                rf"\draw[line width=0.75pt,draw=orange!85!black] ({fx:.4f},{nominal_y:.4f}) -- ({fx+facet_w:.4f},{nominal_y:.4f});",
+                tex_node(fx, plot_y - 0.032, facet_w, rf"\CoreTableFont\textbf{{G={center_count}}}", align="center"),
+            ]
+        )
+        for tick, label in [(0.50, "0.50"), (0.75, "0.75"), (0.95, "0.95"), (1.00, "1.00")]:
+            ty = py(tick)
+            parts.append(rf"\draw[line width=0.35pt,draw=black!22] ({fx:.4f},{ty:.4f}) -- ({fx+facet_w:.4f},{ty:.4f});")
+            if facet_index == 0:
+                parts.append(tex_node(fx - 0.038, ty - 0.008, 0.032, rf"\CoreCaptionFont {label}", align="right"))
+        for rho, label in [(0.0, "0"), (0.1, ".1"), (0.3, ".3"), (0.5, ".5")]:
+            tx = px(facet_index, rho)
+            parts.extend(
+                [
+                    rf"\draw[line width=0.4pt,draw=black!45] ({tx:.4f},{plot_y+plot_h:.4f}) -- ({tx:.4f},{plot_y+plot_h+0.008:.4f});",
+                    tex_node(tx - 0.011, plot_y + plot_h + 0.014, 0.030, rf"\CoreCaptionFont {label}", align="center"),
+                ]
+            )
+        for method in spec["methods"]:
+            points = data[center_count][method["id"]]
+            parts.append(rf"\draw[line width=1.15pt,draw={method['color']}] {point_chain(facet_index, points)};")
+            for item in points:
+                parts.append(rf"\fill[fill={method['color']}] ({px(facet_index, item['rho']):.4f},{py(item['coverage']):.4f}) circle (1.45pt);")
+                err = item["mc_se"]
+                parts.append(
+                    rf"\draw[line width=0.45pt,draw={method['color']}] "
+                    rf"({px(facet_index, item['rho']):.4f},{py(item['coverage'] - err):.4f}) -- "
+                    rf"({px(facet_index, item['rho']):.4f},{py(item['coverage'] + err):.4f});"
+                )
+
+    callout = spec["callout"]
+    callout_facet = center_counts.index(int(callout["G"]))
+    callout_x = px(callout_facet, float(callout["rho"]))
+    callout_y = py(data[int(callout["G"])]["cluster_robust_z"][-1]["coverage"])
+    label_x = callout_x - 0.122
+    label_y = callout_y - 0.125
+    parts.extend(
+        [
+            rf"\draw[-{{Latex[length=2mm]}},line width=0.75pt,draw=maincolor!80] ({label_x+0.114:.4f},{label_y+0.032:.4f}) -- ({callout_x:.4f},{callout_y:.4f});",
+            tex_node(label_x, label_y, 0.142, rf"\CoreCaptionFont\textbf{{{tex_escape(callout['label'])}}}\\cluster robust = 0.78", align="left"),
+            tex_node(legend_x, plot_y + 0.010, legend_w, r"\CoreTableFont\textbf{Method key}", align="left"),
+        ]
+    )
+    for idx, method in enumerate(spec["methods"]):
+        ly = plot_y + 0.064 + idx * 0.054
+        parts.append(rf"\draw[line width=1.4pt,draw={method['color']}] ({legend_x:.4f},{ly:.4f}) -- ({legend_x+0.032:.4f},{ly:.4f});")
+        parts.append(rf"\fill[fill={method['color']}] ({legend_x+0.016:.4f},{ly:.4f}) circle (1.5pt);")
+        parts.append(tex_node(legend_x + 0.041, ly - 0.015, legend_w - 0.045, rf"\CoreTableFont {tex_escape(method['label'])}", align="left"))
+    parts.extend(
+        [
+            rf"\draw[line width=1.0pt,draw=orange!85!black] ({legend_x:.4f},{plot_y+0.174:.4f}) -- ({legend_x+0.032:.4f},{plot_y+0.174:.4f});",
+            tex_node(legend_x + 0.041, plot_y + 0.159, legend_w - 0.045, r"\CoreTableFont nominal 0.95", align="left"),
+            tex_node(plot_x + facet_w * 1.12, plot_y + plot_h + 0.040, facet_w, r"\CoreTableFont ICC \(\rho\)", align="center"),
+            tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\CoreTableFont {tex_escape(spec['annotation'])}"),
+            tex_node(caption["x"], caption["y"], caption["w"], rf"\CoreCaptionFont {tex_escape(spec['caption'])}"),
+        ]
+    )
+    return "\n".join(parts)
+
+
+def emit_figure(spec: dict[str, Any], asset_map: dict[str, str]) -> str:
+    asset = asset_map[spec["asset"]]
+    trim = f",trim={spec['image_trim']},clip" if spec.get("image_trim") else ""
+    return rf"""\CoreEvidenceLeft{{%
+  \CoreCaptioned{{\includegraphics[width=\linewidth,height=.62\textheight,keepaspectratio{trim}]{{{asset}}}}}
+                {{{tex_escape(spec['caption'])}}}%
+}}{{\noindent {tex_escape(spec['annotation'])}\par}}"""
+
+
+def emit_negative_evidence_plot(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str, str]) -> str:
+    primary = layout["resolved_primary_object_geometry"]
+    annotation = layout["resolved_supporting_object_geometry"]["annotation"]
+    caption = layout["resolved_supporting_object_geometry"]["caption"]
+    asset = asset_map[spec["asset"]]
+    plot_x = primary["x"] + 0.148
+    plot_y = primary["y"] + 0.078
+    plot_h = primary["h"] * 0.642
+    ymin = 0.45
+    ymax = 1.00
+
+    def py(coverage: float) -> float:
+        return plot_y + (1.0 - (coverage - ymin) / (ymax - ymin)) * plot_h
+
+    parts = [
+        tex_node(primary["x"], primary["y"], primary["w"], rf"\includegraphics[width={primary['w']:.4f}\paperwidth,height={primary['h']:.4f}\paperheight,keepaspectratio]{{{asset}}}", align="center"),
+        rf"\draw[line width=0.7pt,draw=black!62] ({plot_x:.4f},{plot_y:.4f}) -- ({plot_x:.4f},{plot_y+plot_h:.4f});",
+    ]
+    for tick, label in [(0.50, "0.50"), (0.75, "0.75"), (0.95, "0.95"), (1.00, "1.00")]:
+        ty = py(tick)
+        parts.extend(
+            [
+                rf"\draw[line width=0.55pt,draw=black!62] ({plot_x-0.006:.4f},{ty:.4f}) -- ({plot_x+0.006:.4f},{ty:.4f});",
+                tex_node(plot_x - 0.050, ty - 0.010, 0.040, rf"\CoreCaptionFont {label}", align="right"),
+            ]
+        )
+    parts.extend(
+        [
+            tex_node(plot_x - 0.072, plot_y + plot_h + 0.012, 0.066, r"\CoreCaptionFont coverage", align="right"),
+            tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\CoreTableFont {tex_escape(spec['annotation'])}"),
+            tex_node(caption["x"], caption["y"], caption["w"], rf"\CoreCaptionFont {tex_escape(spec['caption'])}"),
+        ]
+    )
+    return "\n".join(parts)
+
+
+def emit_flow(spec: dict[str, Any], layout: dict[str, Any]) -> str:
+    if spec["page_job"] == "EXPERIMENT_DESIGN":
+        return emit_experiment_design(spec, layout)
+    if spec["page_job"] == "NEXT_EXPERIMENT":
+        return emit_next_experiment(spec, layout)
+    primary = layout["resolved_primary_object_geometry"]
+    nodes = spec["nodes"]
+    gap = 0.018
+    node_w = (primary["w"] - gap * (len(nodes) - 1)) / len(nodes)
+    node_h = min(primary["h"] * 0.42, 0.105)
+    y = primary["y"] + primary["h"] * 0.20
+    parts = []
+    centers: list[tuple[float, float]] = []
+    for idx, label in enumerate(nodes):
+        x = primary["x"] + idx * (node_w + gap)
+        centers.append((x + node_w, y + node_h / 2))
+        parts.append(rf"\StageThreeBox{{{x:.4f}}}{{{y:.4f}}}{{{x+node_w:.4f}}}{{{y+node_h:.4f}}};")
+        parts.append(tex_node(x + 0.008, y + 0.027, node_w - 0.016, rf"\CoreTableFont {tex_escape(label)}", align="center"))
+    for idx in range(len(centers) - 1):
+        x1 = centers[idx][0] + 0.004
+        y1 = centers[idx][1]
+        x2 = primary["x"] + (idx + 1) * (node_w + gap) - 0.006
+        parts.append(rf"\StageThreeArrow{{{x1:.4f}}}{{{y1:.4f}}}{{{x2:.4f}}}{{{y1:.4f}}};")
+    annotation = layout["resolved_supporting_object_geometry"]["annotation"]
+    parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\small {tex_escape(spec['annotation'])}"))
+    return "\n".join(parts)
+
+
+def emit_experiment_design(spec: dict[str, Any], layout: dict[str, Any]) -> str:
+    primary = layout["resolved_primary_object_geometry"]
+    nodes = list(spec.get("nodes", []))
+    section_labels = [
+        nodes[0] if len(nodes) > 0 else "Design factors",
+        nodes[1] if len(nodes) > 1 else "Study hierarchy",
+        nodes[2] if len(nodes) > 2 else "Procedures",
+        nodes[3] if len(nodes) > 3 else "Endpoints",
+    ]
+    x = primary["x"]
+    y = primary["y"]
+    w = primary["w"]
+    h = primary["h"]
+    factor_x = x + w * 0.018
+    factor_w = w * 0.245
+    hierarchy_x = x + w * 0.318
+    proc_x = x + w * 0.540
+    endpoint_x = x + w * 0.748
+    top = y + 0.020
+    center_y = y + h * 0.470
+    parts = [
+        tex_node(factor_x, top, factor_w, rf"\small\textbf{{{tex_escape(section_labels[0])}}}", align="left"),
+        tex_node(hierarchy_x - 0.040, top, 0.200, rf"\small\textbf{{{tex_escape(section_labels[1])}}}", align="center"),
+        tex_node(proc_x - 0.022, top, 0.185, rf"\small\textbf{{{tex_escape(section_labels[2])}}}", align="center"),
+        tex_node(endpoint_x - 0.010, top, 0.175, rf"\small\textbf{{{tex_escape(section_labels[3])}}}", align="center"),
+    ]
+    factor_rows = spread_positions(y + h * 0.185, y + h * 0.560, len(spec["design_factors"]))
+    for factor, fy in zip(spec["design_factors"], factor_rows):
+        parts.extend(
+            [
+                rf"\fill[fill=maincolor!75] ({factor_x:.4f},{fy+0.007:.4f}) circle (2.7pt);",
+                tex_node(factor_x + 0.018, fy - 0.007, factor_w - 0.018, rf"\CoreTableFont {factor}", align="left"),
+            ]
+        )
+    parts.extend(
+        [
+            rf"\draw[line width=1.0pt,draw=maincolor!60] ({hierarchy_x+0.048:.4f},{center_y-0.094:.4f}) ellipse (0.068 and 0.090);",
+            rf"\draw[line width=1.0pt,draw=maincolor!60] ({hierarchy_x+0.048:.4f},{center_y+0.094:.4f}) ellipse (0.068 and 0.090);",
+            tex_node(hierarchy_x - 0.038, center_y + 0.205, 0.185, rf"\CoreTableFont {tex_escape(section_labels[1])}", align="center"),
+        ]
+    )
+    for base_y in [center_y - 0.094, center_y + 0.094]:
+        for offset in [-0.029, 0.0, 0.029]:
+            parts.append(rf"\fill[fill=teal!70!black] ({hierarchy_x+0.048+offset:.4f},{base_y+0.024:.4f}) circle (2.0pt);")
+            parts.append(rf"\fill[fill=red!70!black] ({hierarchy_x+0.048+offset:.4f},{base_y-0.024:.4f}) circle (2.0pt);")
+    procedure_rows = spread_positions(y + h * 0.245, y + h * 0.510, len(spec["procedures"]))
+    for procedure, py in zip(spec["procedures"], procedure_rows):
+        parts.append(rf"\draw[line width=1.15pt,draw=maincolor!75] ({proc_x:.4f},{py:.4f}) -- ({proc_x+0.160:.4f},{py:.4f});")
+        parts.append(rf"\fill[fill=white,draw=maincolor!75,line width=1.0pt] ({proc_x+0.080:.4f},{py:.4f}) circle (9.6pt);")
+        parts.append(tex_node(proc_x - 0.006, py + 0.026, 0.172, rf"\CoreTableFont {tex_escape(procedure)}", align="center"))
+    endpoint_rows = spread_positions(y + h * 0.190, y + h * 0.565, len(spec["endpoints"]))
+    for endpoint, ey in zip(spec["endpoints"], endpoint_rows):
+        parts.append(rf"\draw[line width=1.35pt,draw=orange!80!black] ({endpoint_x:.4f},{ey:.4f}) -- ({endpoint_x+0.035:.4f},{ey:.4f});")
+        parts.append(rf"\draw[line width=0.70pt,draw=black!50] ({endpoint_x:.4f},{ey-0.015:.4f}) -- ({endpoint_x:.4f},{ey+0.015:.4f});")
+        parts.append(tex_node(endpoint_x + 0.043, ey - 0.026, 0.170, rf"\CoreTableFont {tex_escape(endpoint)}", align="left"))
+    mid_y = center_y
+    parts.extend([
+        rf"\StageThreeConnector{{{factor_x+factor_w+0.010:.4f}}}{{{mid_y:.4f}}}{{{hierarchy_x-0.014:.4f}}}{{{mid_y:.4f}}};",
+        rf"\StageThreeConnector{{{hierarchy_x+0.135:.4f}}}{{{mid_y:.4f}}}{{{proc_x-0.020:.4f}}}{{{mid_y:.4f}}};",
+        rf"\StageThreeConnector{{{proc_x+0.162:.4f}}}{{{mid_y:.4f}}}{{{endpoint_x-0.012:.4f}}}{{{mid_y:.4f}}};",
+    ])
+    annotation = layout["resolved_supporting_object_geometry"]["annotation"]
+    parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\small {tex_escape(spec['annotation'])}", align="left"))
+    return "\n".join(parts)
+
+
+def emit_next_experiment(spec: dict[str, Any], layout: dict[str, Any]) -> str:
+    primary = layout["resolved_primary_object_geometry"]
+    nodes = list(spec.get("nodes", []))
+    evidence_label = nodes[0] if nodes else "Observed limit"
+    x = primary["x"]
+    y = primary["y"]
+    w = primary["w"]
+    h = primary["h"]
+    if spec.get("compatible_layout_reflow_hint"):
+        evidence_x = x + w * 0.012
+        strategy_x = x + w * 0.282
+        comparator_x = x + w * 0.560
+        decision_x = x + w * 0.770
+        decision_text_w = 0.185
+        connector_label_y = -0.092
+    else:
+        evidence_x = x + w * 0.016
+        strategy_x = x + w * 0.300
+        comparator_x = x + w * 0.605
+        decision_x = x + w * 0.792
+        decision_text_w = 0.170
+        connector_label_y = -0.070
+    mid_y = y + h * 0.460
+    parts = [
+        tex_node(evidence_x, y + 0.020, 0.230, r"\small\textbf{Failure evidence}", align="left"),
+        tex_node(evidence_x, y + 0.082, 0.238, rf"\CoreTableFont {tex_escape(spec['current_limit'])}", align="left"),
+        rf"\draw[line width=1.35pt,draw=red!70!black] ({evidence_x:.4f},{mid_y+0.064:.4f}) -- ({evidence_x+0.198:.4f},{mid_y+0.064:.4f});",
+        rf"\draw[line width=1.35pt,draw=orange!80!black] ({evidence_x:.4f},{mid_y+0.021:.4f}) -- ({evidence_x+0.198:.4f},{mid_y+0.021:.4f});",
+        rf"\draw[line width=1.35pt,draw=teal!70!black] ({evidence_x:.4f},{mid_y-0.021:.4f}) -- ({evidence_x+0.198:.4f},{mid_y-0.021:.4f});",
+        tex_node(evidence_x + 0.010, mid_y + 0.088, 0.210, rf"\CoreTableFont {tex_escape(evidence_label)}", align="left"),
+        tex_node(strategy_x, y + 0.020, 0.230, r"\small\textbf{Manipulate sampling}", align="center"),
+    ]
+    strategy_rows = spread_positions(y + h * 0.205, y + h * 0.575, len(spec["strategy_variation"]))
+    for strategy, sy in zip(spec["strategy_variation"], strategy_rows):
+        parts.append(rf"\draw[line width=1.05pt,draw=maincolor!70] ({strategy_x:.4f},{mid_y:.4f}) -- ({strategy_x+0.082:.4f},{sy+0.012:.4f});")
+        parts.append(rf"\fill[fill=white,draw=maincolor!70,line width=1.0pt] ({strategy_x+0.104:.4f},{sy+0.012:.4f}) circle (8.8pt);")
+        parts.append(tex_node(strategy_x + 0.128, sy - 0.010, 0.142, rf"\CoreTableFont {tex_escape(strategy)}", align="left"))
+    parts.append(tex_node(comparator_x, y + 0.020, 0.188, r"\small\textbf{Comparator arms}", align="center"))
+    comparator_rows = spread_positions(y + h * 0.300, y + h * 0.535, len(spec["comparator_setup"]))
+    for comparator, cy in zip(spec["comparator_setup"], comparator_rows):
+        parts.append(rf"\draw[line width=1.05pt,draw=teal!65!black] ({comparator_x:.4f},{mid_y:.4f}) -- ({comparator_x+0.060:.4f},{cy:.4f});")
+        parts.append(rf"\draw[line width=1.35pt,draw=teal!65!black] ({comparator_x+0.060:.4f},{cy:.4f}) -- ({comparator_x+0.180:.4f},{cy:.4f});")
+        parts.append(tex_node(comparator_x + 0.056, cy + 0.012, 0.145, rf"\CoreTableFont {tex_escape(comparator)}", align="center"))
+    parts.extend(
+        [
+            tex_node(decision_x - 0.005, y + 0.020, decision_text_w, r"\small\textbf{Decision rule}", align="center"),
+            rf"\draw[line width=1.1pt,draw=orange!85!black] ({decision_x+0.075:.4f},{mid_y-0.080:.4f}) -- ({decision_x+0.150:.4f},{mid_y:.4f}) -- ({decision_x+0.075:.4f},{mid_y+0.080:.4f}) -- ({decision_x:.4f},{mid_y:.4f}) -- cycle;",
+            tex_node(decision_x + 0.020, mid_y - 0.020, 0.110, r"\CoreTableFont go/no-go", align="center"),
+            tex_node(decision_x - 0.002, mid_y + 0.108, decision_text_w, rf"\CoreTableFont {tex_escape(spec['decision_criterion'])}", align="left"),
+        ]
+    )
+    parts.extend([
+        rf"\StageThreeConnector{{{evidence_x+0.218:.4f}}}{{{mid_y:.4f}}}{{{strategy_x-0.022:.4f}}}{{{mid_y:.4f}}};",
+        tex_node(evidence_x + 0.220, mid_y + connector_label_y, 0.075, r"\CoreTableFont motivates", align="center"),
+        rf"\StageThreeConnector{{{strategy_x+0.165:.4f}}}{{{mid_y:.4f}}}{{{comparator_x-0.018:.4f}}}{{{mid_y:.4f}}};",
+        rf"\StageThreeConnector{{{comparator_x+0.115:.4f}}}{{{mid_y:.4f}}}{{{decision_x-0.018:.4f}}}{{{mid_y:.4f}}};",
+    ])
+    annotation = layout["resolved_supporting_object_geometry"]["annotation"]
+    parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\small {tex_escape(spec['annotation'])}", align="left"))
+    return "\n".join(parts)
+
+
+def emit_image_panel(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str, str]) -> str:
+    primary = layout["resolved_primary_object_geometry"]
+    labels = spec["panel_labels"]
+    assets = [asset_map[item] for item in spec["assets"]]
+    gap = 0.010
+    panel_w = min((primary["w"] - gap * 3) / 4, 0.170)
+    panel_h = panel_w * SLIDE_W / SLIDE_H
+    row_x = primary["x"] + (primary["w"] - (panel_w * 4 + gap * 3)) / 2
+    y = primary["y"] + 0.048
+    parts = []
+    for idx, (label, asset) in enumerate(zip(labels, assets)):
+        x = row_x + idx * (panel_w + gap)
+        parts.append(tex_node(x, y - 0.037, panel_w, rf"\CoreTableFont\textbf{{{tex_escape(label)}}}", align="center"))
+        parts.append(tex_node(x, y, panel_w, rf"\includegraphics[width={panel_w:.4f}\paperwidth,height={panel_h:.4f}\paperheight,keepaspectratio]{{{asset}}}", align="center"))
+    roi = spec["same_case_roi_zoom"]["roi_xywh"]
+    source_w = spec["same_case_roi_zoom"]["crop_records"][0]["source_image_size"]["w"]
+    source_h = spec["same_case_roi_zoom"]["crop_records"][0]["source_image_size"]["h"]
+    error_panel_x = row_x + 3 * (panel_w + gap)
+    roi_x = error_panel_x + roi["x"] / source_w * panel_w
+    roi_y = y + roi["y"] / source_h * panel_h
+    roi_w = roi["w"] / source_w * panel_w
+    roi_h = roi["h"] / source_h * panel_h
+    zoom_y = y + panel_h + 0.030
+    if spec.get("legend_repair_hint"):
+        zoom_panel_w = 0.086
+        zoom_gap = 0.016
+        zoom_x = primary["x"] + 0.045
+        legend_x = primary["x"] + primary["w"] - 0.214
+        legend_y = zoom_y + 0.002
+    else:
+        zoom_panel_w = 0.098
+        zoom_gap = 0.020
+        zoom_x = primary["x"] + 0.072
+        legend_x = zoom_x + 3 * (zoom_panel_w + zoom_gap) + 0.020
+        legend_y = zoom_y + 0.006
+    zoom_panel_h = zoom_panel_w * SLIDE_W / SLIDE_H
+    parts.extend(
+        [
+            rf"\draw[line width=0.9pt,draw=orange!85!black] ({roi_x:.4f},{roi_y:.4f}) rectangle ({roi_x+roi_w:.4f},{roi_y+roi_h:.4f});",
+            rf"\StageThreeConnector{{{roi_x+roi_w:.4f}}}{{{roi_y+roi_h:.4f}}}{{{zoom_x+zoom_panel_w*2+zoom_gap*2:.4f}}}{{{zoom_y - (0.016 if spec.get('legend_repair_hint') else 0.0):.4f}}};",
+            tex_node(zoom_x, zoom_y - 0.030, 0.435, r"\CoreTableFont\textbf{Same-case ROI zoom}", align="left"),
+        ]
+    )
+    for idx, (label, raw) in enumerate(zip(spec["roi_crop_labels"], spec["roi_crop_assets"])):
+        zx = zoom_x + idx * (zoom_panel_w + zoom_gap)
+        crop_asset = asset_map[f"{raw}#roi_zoom"]
+        parts.append(tex_node(zx, zoom_y, zoom_panel_w, rf"\includegraphics[width={zoom_panel_w:.4f}\paperwidth,height={zoom_panel_h:.4f}\paperheight,keepaspectratio]{{{crop_asset}}}", align="center"))
+        parts.append(tex_node(zx, zoom_y + zoom_panel_h + 0.008, zoom_panel_w, rf"\CoreCaptionFont {tex_escape(label)}", align="center"))
+    parts.extend(
+        [
+            tex_node(legend_x, legend_y, 0.205, r"\CoreTableFont\textbf{Overlay legend}", align="left"),
+            rf"\fill[fill=teal!70!black] ({legend_x+0.010:.4f},{legend_y+0.054:.4f}) circle (2.4pt);",
+            tex_node(legend_x + 0.025, legend_y + 0.041, 0.145, r"\CoreCaptionFont TP: overlap", align="left"),
+            rf"\fill[fill=red!70!black] ({legend_x+0.010:.4f},{legend_y+0.095:.4f}) circle (2.4pt);",
+            tex_node(legend_x + 0.025, legend_y + 0.082, 0.145, r"\CoreCaptionFont FP: prediction only", align="left"),
+            rf"\fill[fill=orange!85!black] ({legend_x+0.010:.4f},{legend_y+0.136:.4f}) circle (2.4pt);",
+            tex_node(legend_x + 0.025, legend_y + 0.123, 0.145, r"\CoreCaptionFont FN: missed GT", align="left"),
+        ]
+    )
+    annotation = layout["resolved_supporting_object_geometry"]["caption"]
+    parts.append(tex_node(annotation["x"], annotation["y"], annotation["w"], rf"\CoreCaptionFont {tex_escape(spec['annotation'])}", align="center"))
+    return "\n".join(parts)
+
+
+def emit_interpretation(spec: dict[str, Any]) -> str:
+    nodes = []
+    edges = []
+    for index, label in enumerate(spec["nodes"]):
+        preceding = f",right=of step{index-1}" if index else ""
+        nodes.append(rf"\node[core process node,text width=.16\linewidth{preceding}] (step{index}) {{{tex_escape(label)}}};")
+        if index:
+            edges.append(rf"\draw[core process edge] (step{index-1}) -- (step{index});")
+    picture = "\n".join(nodes + edges)
+    checks = tex_escape("; ".join(spec["strategy_variation"]))
+    examples = tex_escape("; ".join(spec["comparator_setup"]))
+    return rf"""\noindent\begin{{tikzpicture}}[core process distance]
+{picture}
+\end{{tikzpicture}}\par
+\CoreWithinGroup
+\TermInline{{Limit}}{{{tex_escape(spec['current_limit'])}}}\par
+\CoreWithinGroup
+\CoreEqualColumns{{\TermBlock{{Checks}}{{{checks}}}}}{{\TermBlock{{Examples}}{{{examples}}}}}
+\CoreWithinGroup
+\TermInline{{Decision}}{{{tex_escape(spec['decision_criterion'])}}}\par
+\CoreWithinGroup
+\noindent {tex_escape(spec['annotation'])}\par
+\CoreCaption{{{tex_escape(spec['caption'])}}}"""
+
+
+def emit_frame(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str, str]) -> str:
+    native_flow = True
+    if spec["content_kind"] == "equation":
+        body = emit_equation(spec)
+    elif spec["content_kind"] == "figure" and spec.get("dominant_object") != "negative_evidence_plot":
+        body = emit_figure(spec, asset_map)
+    elif spec.get("dominant_object") == "source_interpretation_reasoning" and 2 <= len(spec.get("nodes", [])) <= 4:
+        body = emit_interpretation(spec)
+    else:
+        native_flow = False
+        body = emit_positioned_science(spec, layout, asset_map)
+    if native_flow and (transition := spec.get("storyline_transition")):
+        body = (
+            rf"\TermInline{{Research direction}}{{{tex_escape(transition['label'])}: "
+            rf"{tex_escape(transition.get('audience_text') or '')}}}\par\CoreBetweenGroups" + "\n" + body
+        )
+    return rf"""\begin{{frame}}[t]{{{tex_escape(spec['title'])}}}
+{body}
+\end{{frame}}
+"""
+
+
+def emit_positioned_science(spec: dict[str, Any], layout: dict[str, Any], asset_map: dict[str, str]) -> str:
+    if spec["content_kind"] == "result_figure":
+        body = emit_result_figure(spec, layout)
+    elif spec["content_kind"] == "figure":
+        body = emit_negative_evidence_plot(spec, layout, asset_map)
+    elif spec["content_kind"] == "image_panel":
+        body = emit_image_panel(spec, layout, asset_map)
+    else:
+        body = emit_flow(spec, layout)
+    if transition := spec.get("storyline_transition"):
+        audience_text = transition.get("audience_text") or ""
+        transition_label = transition["label"]
+        cue_text = rf"\CoreCaptionFont\textbf{{{tex_escape(transition_label)}}}."
+        if audience_text:
+            cue_text = rf"\CoreCaptionFont\textbf{{{tex_escape(transition_label)}}}: {tex_escape(audience_text)}."
+        compact = transition.get("cue_variant") == "compact"
+        cue_y = 0.1580 if compact else 0.1580
+        cue_y2 = 0.2020 if compact else 0.2140
+        label_w = 0.1500 if compact else 0.1850
+        text_x = 0.2380 if compact else 0.2700
+        text_w = 0.6670 if compact else 0.6350
+        cue = (
+            rf"\StageThreePanel{{0.0600}}{{0.1450}}{{0.9400}}{{{cue_y2:.4f}}};"
+            "\n"
+            rf"\StageThreeNode{{0.0780}}{{{cue_y:.4f}}}{{{label_w:.4f}}}{{left}}{{\CoreCaptionFont\textbf{{Research direction}}}};"
+            "\n"
+            rf"\StageThreeNode{{{text_x:.4f}}}{{{cue_y:.4f}}}{{{text_w:.4f}}}{{left}}{{{cue_text}}};"
+        )
+        body = cue + "\n" + body
+    return rf"""\noindent\begin{{tikzpicture}}[x=\paperwidth,y=-\paperheight]
+\path[use as bounding box] (\CoreBodyRail,.145) rectangle (\dimexpr\paperwidth-\CoreBodyRail\relax,.855);
+{body}
+\end{{tikzpicture}}
+"""
+
+
+def emit_frames(specs: list[dict[str, Any]], layouts: list[dict[str, Any]], asset_map: dict[str, str]) -> str:
+    parts = []
+    previous = None
+    for spec, layout in zip(specs, layouts, strict=True):
+        section = spec["section"]
+        if section != previous:
+            parts.append(rf"\section{{{tex_escape(section)}}}")
+            previous = section
+        parts.append(emit_frame(spec, layout, asset_map))
+    return "\n".join(parts)
+
+
+def scientific_layout_macros() -> str:
+    return r"""\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\newcommand{\StageThreeNode}[5]{\node[anchor=north west,align=#4,text width=#3\paperwidth,inner sep=0pt] at (#1,#2) {#5}}
+\newcommand{\StageThreeBox}[4]{\draw[rounded corners=1.5pt,line width=0.7pt,draw=maincolor!75,fill=white] (#1,#2) rectangle (#3,#4)}
+\newcommand{\StageThreeArrow}[4]{\draw[-{Latex[length=2mm]},line width=0.8pt,draw=maincolor!75] (#1,#2) -- (#3,#4)}
+\newcommand{\StageThreePanel}[4]{\draw[rounded corners=1pt,line width=0.7pt,draw=maincolor!70,fill=maincolor!3] (#1,#2) rectangle (#3,#4)}
+\newcommand{\StageThreeSubPanel}[4]{\draw[rounded corners=0.8pt,line width=0.55pt,draw=maincolor!45,fill=white] (#1,#2) rectangle (#3,#4)}
+\newcommand{\StageThreeConnector}[4]{\draw[-{Latex[length=2.2mm]},line width=0.9pt,draw=maincolor!80] (#1,#2) -- (#3,#4)}
+"""
+
+
+def build_main_tex(specs: list[dict[str, Any]], layouts: list[dict[str, Any]], asset_map: dict[str, str]) -> str:
+    frames = emit_frames(specs, layouts, asset_map)
+    return rf"""% Generated Stage 3 integration deck.
+\documentclass[aspectratio=169]{{beamer}}
+\usepackage{{amsfonts,amsmath,amssymb,booktabs,graphicx}}
+\input{{template.tex}}
+\input{{scientific_layouts.tex}}
+\setbeameroption{{hide notes}}
+\bibliographystyle{{unsrt}}
+
+\title{{Research-standard Scientific Layout Families}}
+\subtitle{{Model, evidence, imaging, and next-experiment pages}}
+\author{{Research team}}
+\institute{{Research seminar}}
+\date{{\today}}
+
+\begin{{document}}
+\maketitle
+{frames}
+\end{{document}}
+"""
+
+
+def detect_colored_roi(path: Path, *, pad: int = 42) -> dict[str, int]:
+    from PIL import Image
+
+    image = Image.open(path).convert("RGB")
+    xs: list[int] = []
+    ys: list[int] = []
+    for py in range(image.height):
+        for px in range(image.width):
+            red, green, blue = image.getpixel((px, py))
+            if max(red, green, blue) > 40 and max(red, green, blue) - min(red, green, blue) > 20:
+                xs.append(px)
+                ys.append(py)
+    if not xs or not ys:
+        raise RuntimeError(f"cannot locate colored error ROI in {path}")
+    left = max(0, min(xs) - pad)
+    right = min(image.width, max(xs) + 1 + pad)
+    top = max(0, min(ys) - pad)
+    bottom = min(image.height, max(ys) + 1 + pad)
+    width = right - left
+    height = bottom - top
+    if width > height:
+        extra = width - height
+        top = max(0, top - extra // 2)
+        bottom = min(image.height, bottom + extra - extra // 2)
+    elif height > width:
+        extra = height - width
+        left = max(0, left - extra // 2)
+        right = min(image.width, right + extra - extra // 2)
+    return {"x": left, "y": top, "w": right - left, "h": bottom - top, "source_w": image.width, "source_h": image.height}
+
+
+def classify_medical_error_pixel(pixel: tuple[int, int, int]) -> str | None:
+    red, green, blue = pixel
+    if max(pixel) < 70 or max(pixel) - min(pixel) <= 18:
+        return None
+    if green > red + 18 and green > blue + 18:
+        return "tp"
+    if red > 95 and red > green + 18 and red > blue + 18:
+        if green >= 72 and blue <= 105 and red - green <= 88:
+            return "fn"
+        return "fp"
+    return None
+
+
+def classified_medical_error_points(error_image: Any, roi: dict[str, int]) -> dict[str, set[tuple[int, int]]]:
+    points: dict[str, set[tuple[int, int]]] = {"tp": set(), "fp": set(), "fn": set()}
+    for py in range(roi["y"], roi["y"] + roi["h"]):
+        for px in range(roi["x"], roi["x"] + roi["w"]):
+            label = classify_medical_error_pixel(error_image.getpixel((px, py)))
+            if label:
+                points[label].add((px, py))
+    return points
+
+
+def semantic_medical_overlay(source: Any, points: dict[str, set[tuple[int, int]]], visible_classes: set[str]) -> Any:
+    from PIL import Image
+
+    base = source.convert("RGBA")
+    overlay = Image.new("RGBA", base.size, (0, 0, 0, 0))
+    overlay_pixels = overlay.load()
+    radius = 3
+    for class_name in MEDICAL_ERROR_COLORS:
+        if class_name not in visible_classes:
+            continue
+        color = MEDICAL_ERROR_COLORS[class_name]
+        for px, py in points[class_name]:
+            for dx in range(-radius, radius + 1):
+                for dy in range(-radius, radius + 1):
+                    if dx * dx + dy * dy > radius * radius:
+                        continue
+                    tx = px + dx
+                    ty = py + dy
+                    if 0 <= tx < source.width and 0 <= ty < source.height:
+                        overlay_pixels[tx, ty] = (*color, 218)
+    return Image.alpha_composite(base, overlay).convert("RGB")
+
+
+def build_medical_semantic_display_assets(spec: dict[str, Any], asset_dir: Path, asset_map: dict[str, str], roi: dict[str, int]) -> dict[str, dict[str, Any]]:
+    from PIL import Image
+
+    assets = spec.get("assets", [])
+    labels = [label.lower() for label in spec.get("panel_labels", [])]
+    by_label = dict(zip(labels, assets))
+    gt_raw = by_label.get("gt")
+    pred_raw = by_label.get("prediction")
+    error_raw = spec.get("roi_source_asset")
+    if not gt_raw or not pred_raw or not error_raw:
+        return {}
+    error_image = Image.open(REPO_ROOT / error_raw).convert("RGB")
+    points = classified_medical_error_points(error_image, roi)
+    display_specs = {
+        gt_raw: {"classes": {"tp", "fn"}, "role": "gt_with_overlap_and_missed_gt"},
+        pred_raw: {"classes": {"tp", "fp"}, "role": "prediction_with_overlap_and_prediction_only"},
+        error_raw: {"classes": {"tp", "fp", "fn"}, "role": "error_classification_overlay"},
+    }
+    display_records: dict[str, dict[str, Any]] = {}
+    for raw, contract in display_specs.items():
+        visible = {class_name for class_name in contract["classes"] if points[class_name]}
+        if not visible:
+            continue
+        source = Image.open(REPO_ROOT / raw).convert("RGB")
+        target = asset_dir / f"{Path(raw).stem}_semantic_overlay.png"
+        semantic_medical_overlay(source, points, visible).save(target)
+        asset_map[raw] = f"stage3_assets/{target.name}"
+        display_records[raw] = {
+            "display_asset": asset_map[raw],
+            "semantic_overlay": True,
+            "overlay_role": contract["role"],
+            "visible_error_classes": sorted(visible),
+        }
+    return display_records
+
+
+def crop_same_case_roi(spec: dict[str, Any], asset_dir: Path, asset_map: dict[str, str]) -> None:
+    from PIL import Image
+
+    roi_source = REPO_ROOT / spec["roi_source_asset"]
+    roi = detect_colored_roi(roi_source)
+    display_records = build_medical_semantic_display_assets(spec, asset_dir, asset_map, roi)
+    crop_records = []
+    for raw in spec["roi_crop_assets"]:
+        display_source = asset_dir / Path(asset_map[raw]).name
+        target = asset_dir / f"{display_source.stem}_roi_zoom.png"
+        image = Image.open(display_source).convert("RGB")
+        box = (roi["x"], roi["y"], roi["x"] + roi["w"], roi["y"] + roi["h"])
+        resampling = getattr(getattr(Image, "Resampling", Image), "BICUBIC")
+        image.crop(box).resize((320, 320), resampling).save(target)
+        crop_key = f"{raw}#roi_zoom"
+        asset_map[crop_key] = f"stage3_assets/{target.name}"
+        crop_records.append({
+            "source_asset": raw,
+            "display_asset": asset_map[raw],
+            "zoom_asset": asset_map[crop_key],
+            "roi_source_asset": spec["roi_source_asset"],
+            "roi_xywh": {key: roi[key] for key in ["x", "y", "w", "h"]},
+            "source_image_size": {"w": roi["source_w"], "h": roi["source_h"]},
+            "same_case_coordinate_space": True,
+            **display_records.get(raw, {}),
+        })
+    spec["same_case_roi_zoom"] = {
+        "roi_source_asset": spec["roi_source_asset"],
+        "roi_xywh": {key: roi[key] for key in ["x", "y", "w", "h"]},
+        "crop_records": crop_records,
+    }
+
+
+def copy_assets(specs: list[dict[str, Any]], build_dir: Path) -> dict[str, str]:
+    asset_dir = build_dir / "stage3_assets"
+    asset_dir.mkdir(parents=True, exist_ok=True)
+    asset_map: dict[str, str] = {}
+    for spec in specs:
+        paths = []
+        if spec.get("asset"):
+            paths.append(spec["asset"])
+        paths.extend(spec.get("assets", []))
+        for raw in paths:
+            source = REPO_ROOT / raw
+            target = asset_dir / source.name
+            shutil.copy2(source, target)
+            asset_map[raw] = f"stage3_assets/{target.name}"
+        if spec.get("roi_crop_assets"):
+            crop_same_case_roi(spec, asset_dir, asset_map)
+    return asset_map
+
+
+def find_tex_engine() -> dict[str, Any] | None:
+    probe = find_command("xelatex")
+    return {"command": "xelatex", **probe} if probe["available"] else None
+
+
+def dependency_probe() -> dict[str, Any]:
+    commands = {command: find_command(command) for command in ["xelatex", "lualatex", "pdflatex", "tectonic", "pdftoppm", "pdfinfo", "pdftotext", "pdffonts"]}
+    tex_engine_available = commands["xelatex"]["available"]
+    font_binding = font_resource_binding()
+    return {
+        "schema": "RESEARCH_RESEARCH_STANDARD_STAGE3_BUILD_DEPENDENCY_PROBE_V1",
+        "task_key": TASK_KEY,
+        "commands": commands,
+        "local_render_resources": {
+            "source": "render-chinese-math-pdf probe / host-local render resources",
+            "font_binding": font_binding,
+            "tinytex_bin": str(LOCAL_TINYTEX_BIN),
+            "tinytex_bin_exists": LOCAL_TINYTEX_BIN.exists(),
+            "tex_cache_env": tex_cache_env(),
+        },
+        "tex_engine_available": tex_engine_available,
+        "pdf_renderer_available": commands["pdftoppm"]["available"],
+        "preferred_route": "latex_to_pdf_to_png" if tex_engine_available else "blocked_missing_dependency",
+    }
+
+
+def compile_pdf(build_dir: Path) -> dict[str, Any]:
+    engine = find_tex_engine()
+    pdf = build_dir / "main.pdf"
+    if not engine:
+        font_binding = font_resource_binding()
+        return {
+            "status": "BLOCKED_MISSING_TEX_ENGINE",
+            "engine": None,
+            "engine_path": None,
+            "font_binding": font_binding,
+            "pdf": None,
+            "log": None,
+            "message": "The shared Beamer core requires XeLaTeX.",
+        }
+    font_binding = materialize_font_binding(build_dir)
+    if font_binding.get("status") != "READY":
+        return {
+            "status": font_binding.get("status", "BLOCKED_MISSING_CANONICAL_FONT_RESOURCE"),
+            "engine": engine["command"] if engine else None,
+            "engine_path": engine["path"] if engine else None,
+            "font_binding": font_binding,
+            "pdf": None,
+            "log": None,
+            "message": "Canonical presentation font resource binding is incomplete.",
+        }
+    cmd = [engine["path"], "-interaction=nonstopmode", "-halt-on-error", "main.tex"]
+    env = os.environ.copy()
+    env["PATH"] = render_search_path()
+    resource_dir = Path(font_binding["resource_dir"])
+    env["TEXMFHOME"] = str(resource_dir / "texmf")
+    env["OSFONTDIR"] = os.pathsep.join(
+        [
+            str(resource_dir / "fonts/texgyre-termes"),
+            str(resource_dir / "fonts/texgyre-termes-math"),
+        ]
+    )
+    env.update(tex_cache_env())
+    runs = []
+    for pass_index in range(2):
+        run = subprocess.run(cmd, cwd=build_dir, check=False, capture_output=True, text=True, env=env)
+        runs.append((pass_index + 1, run))
+        if run.returncode != 0:
+            break
+    log_path = build_dir / "compile.log"
+    log_path.write_text(
+        "\n".join(
+            f"===== pass {pass_index} stdout =====\n{run.stdout}\n===== pass {pass_index} stderr =====\n{run.stderr}"
+            for pass_index, run in runs
+        ),
+        encoding="utf-8",
+    )
+    final_run = runs[-1][1]
+    if final_run.returncode != 0 or not pdf.exists():
+        missing_latex_file = None
+        for line in (final_run.stdout + "\n" + final_run.stderr).splitlines():
+            marker = "! LaTeX Error: File `"
+            if line.startswith(marker) and "' not found." in line:
+                missing_latex_file = line.removeprefix(marker).split("' not found.", 1)[0]
+                break
+        if missing_latex_file:
+            return {
+                "status": "BLOCKED_MISSING_TEX_PACKAGE",
+                "engine": engine["command"],
+                "engine_path": engine["path"],
+                "compile_passes": len(runs),
+                "font_binding": font_binding,
+                "missing_file": missing_latex_file,
+                "pdf": rel(pdf) if pdf.exists() else None,
+                "log": rel(log_path),
+                "message": f"LaTeX package/file is missing: {missing_latex_file}",
+            }
+        return {
+            "status": "COMPILE_FAILED",
+            "engine": engine["command"],
+            "engine_path": engine["path"],
+            "compile_passes": len(runs),
+            "font_binding": font_binding,
+            "pdf": rel(pdf) if pdf.exists() else None,
+            "log": rel(log_path),
+            "message": "LaTeX compilation failed.",
+        }
+    font_qa = pdf_font_qa(pdf)
+    if font_qa["status"] != "PASS":
+        return {
+            "status": font_qa["status"],
+            "engine": engine["command"],
+            "engine_path": engine["path"],
+            "compile_passes": len(runs),
+            "font_binding": font_binding,
+            "font_qa": font_qa,
+            "pdf": rel(pdf),
+            "pdf_sha256": file_sha(pdf),
+            "log": rel(log_path),
+            "message": "Rendered PDF contains a font outside the canonical allowlist.",
+        }
+    return {
+        "status": "COMPILED",
+        "engine": engine["command"],
+        "engine_path": engine["path"],
+        "compile_passes": len(runs),
+        "font_binding": font_binding,
+        "font_qa": font_qa,
+        "pdf": rel(pdf),
+        "pdf_sha256": file_sha(pdf),
+        "log": rel(log_path),
+    }
+
+
+def render_pdf(build_dir: Path, compile_status: dict[str, Any]) -> dict[str, Any]:
+    if compile_status.get("status") != "COMPILED":
+        return {
+            "status": compile_status["status"],
+            "png_count": 0,
+            "rendered_png": [],
+            "message": compile_status.get("message"),
+        }
+    if not shutil.which("pdftoppm"):
+        return {
+            "status": "BLOCKED_MISSING_PDF_RENDERER",
+            "png_count": 0,
+            "rendered_png": [],
+            "message": "pdftoppm is not available.",
+        }
+    rendered_dir = build_dir / "rendered"
+    rendered_dir.mkdir(exist_ok=True)
+    prefix = rendered_dir / "slide"
+    run = subprocess.run(["pdftoppm", "-png", "-r", "160", "main.pdf", str(prefix)], cwd=build_dir, check=False, capture_output=True, text=True)
+    if run.returncode != 0:
+        return {
+            "status": "RENDER_FAILED",
+            "png_count": 0,
+            "rendered_png": [],
+            "message": run.stderr or run.stdout,
+        }
+    pngs = sorted(rendered_dir.glob("slide-*.png"))
+    return {
+        "status": "ok",
+        "png_count": len(pngs),
+        "rendered_png": [{"path": rel(path), "sha256": file_sha(path)} for path in pngs],
+    }
+
+
+def clean_latex_intermediates(build_dir: Path) -> list[str]:
+    removed: list[str] = []
+    for suffix in [".aux", ".nav", ".out", ".snm", ".toc"]:
+        path = build_dir / f"main{suffix}"
+        if path.exists():
+            path.unlink()
+            removed.append(rel(path))
+    return removed
+
+
+def normalize_generated_logs(build_dir: Path) -> list[str]:
+    normalized: list[str] = []
+    for name in ["compile.log", "main.log"]:
+        path = build_dir / name
+        if not path.exists():
+            continue
+        lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+        path.write_text("\n".join(line.rstrip() for line in lines) + "\n", encoding="utf-8")
+        normalized.append(rel(path))
+    return normalized
+
+
+def mutation_regression(spec: dict[str, Any], baseline_layout: dict[str, Any]) -> dict[str, Any]:
+    baseline_recipe = build_gold_composition_recipe.build_recipe(spec["query"])
+    mutated_recipe = json.loads(json.dumps(baseline_recipe))
+    bbox = mutated_recipe["composition_constraints"]["primary_bbox"]
+    bbox["x"] = clamp(float(bbox["x"]) + 0.08, 0.02, 0.72)
+    bbox["w"] = clamp(float(bbox["w"]) * 0.86, 0.18, 0.86)
+    mutated_recipe["recipe_sha256"] = stable_sha(mutated_recipe)
+    mutated_layout = resolve_layout(spec, recipe_override=mutated_recipe)
+    return {
+        "schema": "RESEARCH_RESEARCH_STANDARD_STAGE3_MUTATION_REGRESSION_V1",
+        "task_key": TASK_KEY,
+        "status": "PASS" if baseline_layout["resolved_primary_object_geometry"] != mutated_layout["resolved_primary_object_geometry"] else "FAIL",
+        "mutated_field": "composition_constraints.primary_bbox",
+        "baseline_gold_id": baseline_layout["selected_gold_id"],
+        "baseline_recipe_sha256": baseline_layout["recipe_sha256"],
+        "mutated_recipe_sha256": mutated_layout["recipe_sha256"],
+        "baseline_geometry_signature": bbox_signature(baseline_layout["resolved_primary_object_geometry"]),
+        "mutated_geometry_signature": bbox_signature(mutated_layout["resolved_primary_object_geometry"]),
+        "checks": {
+            "source_geometry_changed": True,
+            "resolved_geometry_changed": baseline_layout["resolved_primary_object_geometry"] != mutated_layout["resolved_primary_object_geometry"],
+            "emitted_geometry_changes_with_recipe": baseline_layout["resolved_primary_object_geometry"] != mutated_layout["resolved_primary_object_geometry"],
+            "page_job_unchanged": baseline_layout["page_job"] == mutated_layout["page_job"],
+        },
+    }
+
+
+def capacity_failure_contract(spec: dict[str, Any]) -> dict[str, Any]:
+    overloaded = json.loads(json.dumps(spec))
+    overloaded["required_panel_count"] = int(spec.get("required_panel_count") or 0) + 8
+    recipe = build_gold_composition_recipe.build_recipe(spec["query"])
+    status = capacity_status(overloaded, recipe)
+    return {
+        "schema": "RESEARCH_RESEARCH_STANDARD_STAGE3_CAPACITY_FAILURE_CONTRACT_V1",
+        "task_key": TASK_KEY,
+        "page_id": spec["page_id"],
+        "selected_gold_id": recipe["selected_gold_id"],
+        "requested_panel_count": overloaded["required_panel_count"],
+        "selected_layout_panel_capacity": recipe["composition_constraints"]["content_capacity"]["panel_count"],
+        "status": status["status"],
+        "reason": status["reason"],
+        "fallback_used": "SPLIT_REQUIRED" if status["status"] == "SPLIT_REQUIRED" else "UNEXPECTED",
+        "generic_layout_fallback_used": False,
+    }
+
+
+def visual_review_manifest(
+    *,
+    render_status: dict[str, Any],
+    specs: list[dict[str, Any]],
+    layouts: list[dict[str, Any]],
+    build_manifest: dict[str, Any],
+    build_manifest_path: Path,
+    implementation_commit: str | None = None,
+) -> dict[str, Any]:
+    rendered = render_status.get("rendered_png", [])
+    inputs = []
+    page_jobs: dict[str, str] = {}
+    dominant_objects: dict[str, str] = {}
+    selected_gold: dict[str, str] = {}
+    png_sha: dict[str, str] = {}
+    for idx, item in enumerate(rendered, start=1):
+        if idx < 2 or idx - 2 >= len(specs):
+            continue
+        spec = specs[idx - 2]
+        layout = layouts[idx - 2]
+        logical_id = f"slide_{idx}_{spec['page_job'].lower()}"
+        inputs.append(
+            {
+                "logical_id": logical_id,
+                "path": item["path"],
+                "mime_type": "image/png",
+                "sha256": item["sha256"],
+                "description": f"Rendered exact-RESEARCH_STANDARD content page for {spec['page_job']} with {spec['dominant_object']} as the main scientific object.",
+            }
+        )
+        page_jobs[logical_id] = spec["page_job"]
+        dominant_objects[logical_id] = spec["dominant_object"]
+        selected_gold[logical_id] = layout["selected_gold_id"]
+        png_sha[logical_id] = item["sha256"]
+    return {
+        "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
+        "task_key": TASK_KEY,
+        "workflow_type": "reviewed_handoff",
+        "review_kind": f"{TASK_KEY}-stage3-research_standard-scientific-layout-item-page-review",
+        "privacy_policy": "PUBLIC_SAFE_ONLY",
+        "prompt_version": "ai-bridge.visual-review.v1",
+        "external_upload_authorization": "",
+        "rubric": {
+            "instructions": (
+                "You are reviewing rendered pixels from the Stage 3 exact-RESEARCH_STANDARD scientific layout integration deck. "
+                "Judge each content page independently at item/page level. PASS for an item only if the visible page reaches a mature doctoral research-group meeting or strong conference-talk bar for its page job. "
+                "Check that the RESEARCH_STANDARD Beamer identity is visible; the main scientific object is prominent and projection-readable; math is genuinely typeset rather than source-like text; result figures use readable native axes, ticks, facets, method legend, nominal line, and callout; experiment design shows typed hierarchy, DGP factors, procedures, endpoints, and directional scientific relations; medical comparison uses same-case ROI crop/zoom imagery with adjacent TP/FP/FN legend; discussion/next-experiment content shows evidence-to-decision research reasoning rather than generic future-work boxes. "
+                "Mark REVISE for any page that looks like a generic card/dashboard/box-arrow fixture, has internal provenance or QA language, has source-like math, hides the evidence in a tiny figure, clips content, uses meaningless whitespace, or repeats one template face without scientific specificity. "
+                "Top-level PASS means all six content items pass; top-level REVISE if any item has a blocking visual maturity issue. Do not infer quality from filenames, hashes, metadata, or presumed provenance; inspect the actual pixels."
+            ),
+            "source_contracts": [
+                "Stage 2 gold/reference pixels are evidence only and are not runtime assets.",
+                "This is a Stage 3 engineering integration deck, not a final real-paper holdout.",
+            ],
+        },
+        "identity_bindings": {
+            "task_key": TASK_KEY,
+            "implementation_commit": implementation_commit,
+            "build_manifest": rel(build_manifest_path),
+            "build_manifest_sha256": file_sha(build_manifest_path),
+            "pdf_sha256": build_manifest.get("compile_status", {}).get("pdf_sha256"),
+            "page_job_by_logical_id": page_jobs,
+            "dominant_object_by_logical_id": dominant_objects,
+            "selected_gold_id_by_logical_id": selected_gold,
+            "rendered_png_sha256_by_logical_id": png_sha,
+        },
+        "inputs": inputs,
+    }
+
+
+def generate(
+    out_dir: Path,
+    *,
+    write_result_visual_inputs: bool = False,
+    task_key: str = DEFAULT_TASK_KEY,
+    implementation_commit: str | None = None,
+) -> dict[str, Any]:
+    global TASK_KEY
+    TASK_KEY = task_key
+    out_dir = out_dir.resolve()
+    out_dir.mkdir(parents=True, exist_ok=True)
+    build_dir = out_dir / "research_standard_stage3_build"
+    if build_dir.exists():
+        shutil.rmtree(build_dir)
+    copy_beamer_source(CANONICAL_RESEARCH_STANDARD, build_dir)
+    specs = page_specs()
+    asset_map = copy_assets(specs, build_dir)
+    layouts = [resolve_layout(spec) for spec in specs]
+    (build_dir / "scientific_layouts.tex").write_text(scientific_layout_macros(), encoding="utf-8")
+    (build_dir / "main.tex").write_text(build_main_tex(specs, layouts, asset_map), encoding="utf-8")
+    trace = {
+        "schema": "RESEARCH_RESEARCH_STANDARD_STAGE3_TRACE_V1",
+        "task_key": TASK_KEY,
+        "fixture_boundary": "Stage 3 engineering integration fixture; not a real-paper holdout and not ONE_SHOT_QUALITY_PASS.",
+        "canonical_research_standard_source": rel(CANONICAL_RESEARCH_STANDARD),
+        "build_workspace": rel(build_dir),
+        "slides": [
+            {
+                "page_id": spec["page_id"],
+                "page_job": spec["page_job"],
+                "selector_query": spec["query"],
+                "selected_gold_id": layout["selected_gold_id"],
+                "recipe_sha256": layout["recipe_sha256"],
+                "resolved_layout_sha256": layout["resolved_layout_sha256"],
+                "emitted_tex_object_ids": [item["object_id"] for item in layout["native_objects"]],
+                "executable_layout_family": layout["executable_layout_family"],
+                "job_specific_runtime_contract": layout["job_specific_runtime_contract"],
+                "content_capacity_check": layout["content_capacity_check"],
+            }
+            for spec, layout in zip(specs, layouts)
+        ],
+    }
+    (out_dir / "resolved_layouts.json").write_text(json.dumps({"schema": "RESEARCH_RESEARCH_STANDARD_STAGE3_RESOLVED_LAYOUTS_V1", "task_key": TASK_KEY, "layouts": layouts}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    (out_dir / "runtime_trace.json").write_text(json.dumps(trace, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    mutation = mutation_regression(specs[0], layouts[0])
+    (out_dir / "mutation_regression.json").write_text(json.dumps(mutation, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    capacity_failure = capacity_failure_contract(specs[4])
+    (out_dir / "capacity_failure_contract.json").write_text(json.dumps(capacity_failure, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    dependencies = dependency_probe()
+    (out_dir / "dependency_probe.json").write_text(json.dumps(dependencies, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    render_probe = render_skill_probe()
+    (out_dir / "render_chinese_math_pdf_probe.json").write_text(json.dumps(render_probe, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    compile_status = compile_pdf(build_dir)
+    render_status = render_pdf(build_dir, compile_status)
+    cleaned_intermediates = clean_latex_intermediates(build_dir)
+    normalized_logs = normalize_generated_logs(build_dir)
+    manifest = {
+        "schema": "RESEARCH_RESEARCH_STANDARD_STAGE3_BUILD_MANIFEST_V1",
+        "task_key": TASK_KEY,
+        "implementation_commit": implementation_commit,
+        "canonical_research_standard_source": rel(CANONICAL_RESEARCH_STANDARD),
+        "canonical_files": {
+            rel(path): file_sha(path)
+            for path in sorted(CANONICAL_RESEARCH_STANDARD.rglob("*"))
+            if path.is_file()
+        },
+        "build_workspace": rel(build_dir),
+        "tex": rel(build_dir / "main.tex"),
+        "scientific_layout_include": rel(build_dir / "scientific_layouts.tex"),
+        "compile_status": compile_status,
+        "render_status": render_status,
+        "mechanical_qa": {
+            "status": "MECHANICAL_PASS" if render_status.get("status") == "ok" and render_status.get("png_count", 0) >= 7 else "BLOCKED_RENDER_QA",
+            "checks": {
+                "canonical_source_copied": True,
+                "scientific_layout_include_loaded": True,
+                "six_content_page_jobs": len(specs) == 6,
+                "title_plus_content_pages_expected": 7,
+                "rendered_pages_available": render_status.get("status") == "ok",
+            },
+        },
+        "cleaned_latex_intermediates": cleaned_intermediates,
+        "normalized_generated_logs": normalized_logs,
+        "resolved_layouts": rel(out_dir / "resolved_layouts.json"),
+        "runtime_trace": rel(out_dir / "runtime_trace.json"),
+        "mutation_regression": rel(out_dir / "mutation_regression.json"),
+        "capacity_failure_contract": rel(out_dir / "capacity_failure_contract.json"),
+        "dependency_probe": rel(out_dir / "dependency_probe.json"),
+        "render_chinese_math_pdf_probe": rel(out_dir / "render_chinese_math_pdf_probe.json"),
+    }
+    build_manifest_path = out_dir / "BUILD_MANIFEST.json"
+    build_manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    visual_inputs = visual_review_manifest(
+        render_status=render_status,
+        specs=specs,
+        layouts=layouts,
+        build_manifest=manifest,
+        build_manifest_path=build_manifest_path,
+        implementation_commit=implementation_commit,
+    )
+    (out_dir / "visual_inputs.json").write_text(json.dumps(visual_inputs, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    if write_result_visual_inputs:
+        result_visual_review_dir = REPO_ROOT / "results" / task_key / "visual_review"
+        result_visual_review_dir.mkdir(parents=True, exist_ok=True)
+        (result_visual_review_dir / "visual_inputs.json").write_text(json.dumps(visual_inputs, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return manifest
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT)
+    parser.add_argument("--write-result-visual-inputs", action="store_true")
+    parser.add_argument("--task-key", default=DEFAULT_TASK_KEY)
+    parser.add_argument("--implementation-commit")
+    args = parser.parse_args()
+    manifest = generate(
+        args.out_dir,
+        write_result_visual_inputs=args.write_result_visual_inputs,
+        task_key=args.task_key,
+        implementation_commit=args.implementation_commit,
+    )
+    print(json.dumps({"status": manifest["mechanical_qa"]["status"], "out_dir": rel(args.out_dir), "render_status": manifest["render_status"]["status"]}, indent=2))
+    return 0 if manifest["mechanical_qa"]["status"] == "MECHANICAL_PASS" else 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

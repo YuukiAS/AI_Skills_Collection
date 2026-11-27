@@ -13,7 +13,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 TARGET_ICONS = {
     "presentations": Path("assets/codex/plugin-icons/presentations/composer.svg"),
     "scientific-visualization": Path("assets/codex/plugin-icons/scientific-visualization/composer.svg"),
-    "web-development": Path("assets/codex/plugin-icons/web-development/composer.svg"),
+    "frontend-design": Path("assets/codex/plugin-icons/frontend-design/composer.svg"),
     "statistical-modeling": Path("assets/codex/plugin-icons/statistical-modeling/composer.svg"),
     "medical-imaging": Path("assets/codex/plugin-icons/medical-imaging/composer.svg"),
 }
@@ -21,7 +21,7 @@ TARGET_ICONS = {
 TARGET_PLUGIN_VERSIONS = {
     "presentations": "0.4",
     "scientific-visualization": "0.1",
-    "web-development": "0.4",
+    "frontend-design": "0.4",
     "statistical-modeling": "0.1",
     "medical-imaging": "0.1",
 }
@@ -30,7 +30,7 @@ PROTECTED_REFERENCE_ICON_SHA256 = {
     "ai-skills-core": "f00921b5fa304780870501dfe6dead055bf22d4814a578cb62693d53fddb6ea4",
     "presentations": "6bc8ccfe0025d00207610b9f96f50e385afd305634d2681d1d11cf937ae43c94",
     "scientific-visualization": "2f08f6e84d6e449a04c7574351d308c5a4e7dba9f5d67b894f4df84f618fb8df",
-    "web-development": "9aef902b4ce9dc8dafa2f7a6eb42e136bc54d016efe41af6446de664b15ca682",
+    "frontend-design": "9aef902b4ce9dc8dafa2f7a6eb42e136bc54d016efe41af6446de664b15ca682",
     "workflow-core": "43fa29d8afd649a5f585d4b99f69df7495dd6826e88412beff64dd0d1ac0ccde",
 }
 
@@ -67,16 +67,12 @@ class CentralPluginIconAssetTests(unittest.TestCase):
             self.assertNotIn("href=", raw)
             self.assertNotIn("font", raw)
 
-    def test_readme_and_contact_sheet_reference_target_icons(self) -> None:
+    def test_readme_references_target_icons(self) -> None:
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
-        sheet = (REPO_ROOT / "docs" / "audits" / "ICON_CONTACT_SHEET.svg").read_text(encoding="utf-8")
 
         for path in TARGET_ICONS.values():
             readme_path = f"./{path.as_posix()}"
-            sheet_path = f"../../{path.as_posix()}"
             self.assertIn(readme_path, readme)
-            self.assertRegex(sheet, rf'href="{re.escape(sheet_path)}"[^>]*width="56"')
-            self.assertRegex(sheet, rf'href="{re.escape(sheet_path)}"[^>]*width="40"')
 
     def test_other_central_plugin_icons_are_unchanged(self) -> None:
         for slug, expected in (PROTECTED_REFERENCE_ICON_SHA256 | UNCHANGED_ICON_SHA256).items():

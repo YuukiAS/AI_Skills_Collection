@@ -1,6 +1,6 @@
 {
   "name": "medical-imaging-project",
-  "description": "General medical imaging project profile without project-specific CardiacNexus skills.",
+  "description": "General medical imaging project profile.",
   "max_active_skills": 14,
   "skills": [
     "skills/domains/medical-imaging/cardiac-mri",

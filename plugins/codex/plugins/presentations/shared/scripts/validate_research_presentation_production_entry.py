@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from validate_cuhk_scientific_layout_stage3 import audience_tex, validate_cuhk_brand_import
+from validate_research_standard_scientific_layout_stage3 import audience_tex, validate_research_standard_brand_import
 
 REPO_ROOT = Path(__file__).resolve().parents[6]
 DEFAULT_TASK_KEY = "031_research_presentation_one_call_production_entry"
@@ -107,8 +107,8 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         errors.append("BUILD_MANIFEST.json: task_key mismatch")
     if "storyline_trace" not in manifest:
         errors.append("BUILD_MANIFEST.json: storyline_trace not recorded")
-    if "templates/cuhk/beamer/source" not in manifest.get("canonical_cuhk_source", ""):
-        errors.append("BUILD_MANIFEST.json: canonical exact CUHK source not recorded")
+    if "templates/research_standard/beamer/source" not in manifest.get("canonical_research_standard_source", ""):
+        errors.append("BUILD_MANIFEST.json: canonical exact RESEARCH_STANDARD source not recorded")
     if not re.fullmatch(r"[0-9a-f]{64}", str(manifest.get("render_input_identity_sha256", ""))):
         errors.append("BUILD_MANIFEST.json: missing render-input identity sha")
     if manifest.get("render_input_identity", {}).get("sha256") != manifest.get("render_input_identity_sha256"):
@@ -344,7 +344,7 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         if layout.get("content_capacity_check", {}).get("status") not in {"FIT", "SPLIT_REQUIRED", "NO_COMPATIBLE_LAYOUT"}:
             errors.append(f"resolved_layouts.json: invalid capacity status for {layout.get('page_id')}")
 
-    if dependency.get("schema") != "RESEARCH_CUHK_STAGE3_BUILD_DEPENDENCY_PROBE_V1":
+    if dependency.get("schema") != "RESEARCH_RESEARCH_STANDARD_STAGE3_BUILD_DEPENDENCY_PROBE_V1":
         errors.append("dependency_probe.json: invalid schema")
     if render_probe.get("schema") != "RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1":
         errors.append("render_chinese_math_pdf_probe.json: invalid schema")
@@ -356,10 +356,10 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
         errors.append("BUILD_MANIFEST.json: generated tex missing")
     else:
         tex = tex_path.read_text(encoding="utf-8")
-        for required_text in [r"\usetheme{sintef}", r"\input{scientific_layouts.tex}"]:
+        for required_text in [r"\input{template.tex}", r"\input{scientific_layouts.tex}"]:
             if required_text not in tex:
                 errors.append(f"{tex_path}: missing {required_text}")
-        errors.extend(validate_cuhk_brand_import(tex_path, tex))
+        errors.extend(validate_research_standard_brand_import(tex_path, tex))
         visible = audience_tex(tex)
         for forbidden in FORBIDDEN_AUDIENCE_TERMS:
             if forbidden in visible:
@@ -378,7 +378,7 @@ def validate(out_dir: Path, *, task_key: str = DEFAULT_TASK_KEY, allow_missing_r
     if visual_inputs.get("task_key") != task_key:
         errors.append("visual_inputs.json: task_key mismatch")
     rubric = visual_inputs.get("rubric", {}).get("instructions", "")
-    for required_text in ["source-specific content", "exact CUHK", "internal RRL/GSC/SRC", "coherent research update", "deck_contact_sheet", "top-level package PASS is not enough"]:
+    for required_text in ["source-specific content", "exact RESEARCH_STANDARD", "internal RRL/GSC/SRC", "coherent research update", "deck_contact_sheet", "top-level package PASS is not enough"]:
         if required_text not in rubric:
             errors.append(f"visual_inputs.json: rubric missing {required_text}")
     if render_status.get("status") == "ok" and len(visual_inputs.get("inputs", [])) != len(trace.get("slides", [])) + 1:

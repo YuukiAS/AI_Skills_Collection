@@ -11,7 +11,7 @@ from pathlib import Path
 from skill_utils import ROOT
 
 
-DEFAULT_HISTORY = ROOT / "docs" / "provenance" / "INTEGRATION_HISTORY.md"
+DEFAULT_HISTORY = ROOT / "tests" / "fixtures" / "provenance" / "INTEGRATION_HISTORY.md"
 DEFAULT_ADAPTER = ROOT / "docs" / "workflows" / "REVIEWED_HANDOFF_SKILL_INTAKE.md"
 
 PROCESSED_DECISIONS = {

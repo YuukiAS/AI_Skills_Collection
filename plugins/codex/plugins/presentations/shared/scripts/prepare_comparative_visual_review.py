@@ -23,7 +23,7 @@ COMPOSITION_INDEX = SHARED / "references" / "research_slide_composition_index.js
 TASK_KEY = "021_research_presentation_comparative_reference_calibrated_visual_review"
 VISIBLE_TASK_KEY = "021_visual_comparison"
 VISIBLE_WORKFLOW_TYPE = "generic"
-DEFAULT_CANDIDATE_ROOT = "docs/audits/research_presentation_candidate_search/generated"
+DEFAULT_CANDIDATE_ROOT = "tests/fixtures/presentations/audit_samples/research_presentation_candidate_search/generated"
 SOURCE_CACHE = REPO_ROOT / ".cache" / "research-presentation-reference-library" / "sources"
 
 CASES = {

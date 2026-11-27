@@ -15,7 +15,7 @@ from presentations_validator_v2.render import Drawing, Rect, Render, Text
 
 def contract_path():
     for parent in Path(__file__).resolve().parents:
-        path = parent / "docs/frozen/PRESENTATIONS_SHARED_BEAMER_CORE_V1_LAYOUT_CONTRACT_2026-11-14.yaml"
+        path = Path(__file__).parent / "fixtures/shared_beamer_core_layout_contract.yaml"
         if path.is_file():
             return path
     raise FileNotFoundError("Frozen contract")

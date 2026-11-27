@@ -7,7 +7,7 @@
     "purpose": "group-meeting",
     "duration_minutes": 8,
     "language": "mixed",
-    "template": "cuhk-default",
+    "template": "research_standard-default",
     "output": "tex",
     "editability": "source-editable",
     "source_files": []

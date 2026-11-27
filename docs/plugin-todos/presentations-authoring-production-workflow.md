@@ -13,9 +13,9 @@ Canonical runtime contracts:
 
 Historical design inputs remain evidence and must not be discarded:
 
-- `docs/design/PRESENTATIONS_EXISTING_DECK_CONVERGENCE_ARCHITECTURE_V1_2026-10-06.md`
-- `docs/design/PRESENTATIONS_CUMULATIVE_HUMAN_FEEDBACK_AND_TEACHING_DECK_AUTHORING_TODO_2026-10-06.md`
-- `docs/design/PRESENTATIONS_HISTORY_PREFLIGHT_PAGE_LOCK_AND_MATH_FIGURE_TODO_2026-10-06.md`
+- `README.md` (design source archived in Blueprint)
+- `README.md` (design source archived in Blueprint)
+- `README.md` (design source archived in Blueprint)
 - later anti-self-certification and independent-review design documents.
 
 ## 0. P0 — Mandatory read-before-work gate

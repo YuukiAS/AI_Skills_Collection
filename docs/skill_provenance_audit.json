@@ -1,6 +1,6 @@
 {
   "license_counts": {
-    "(missing)": 52,
+    "(missing)": 53,
     "3-clause BSD license": 1,
     "Apache License, Version 2.0": 1,
     "Apache-2.0": 4,
@@ -31,12 +31,11 @@
     "https://github.com/sympy/sympy/blob/master/LICENSE": 1
   },
   "metadata_skill_author_counts": {
-    "(missing)": 50,
+    "(missing)": 51,
     "AHK Strategies (ashrafkahoush-ux)": 2,
-    "AI Skills Collection maintainers": 3,
+    "AI Skills Collection maintainers": 5,
     "AI Skills Collection maintainers with recorded upstream sources": 11,
     "BGPT": 1,
-    "CardiacNexus maintainers": 2,
     "Clayton Young / Superior Byte Works, LLC (@borealBytes)": 2,
     "Jeremy Leipzig": 1,
     "K-Dense Inc.": 80,
@@ -47,18 +46,18 @@
     "external-adapted": 11,
     "local": 7,
     "unknown": 114,
-    "user-authored": 23
+    "user-authored": 24
   },
   "provenance_counts": {
     "external-adapted": 11,
     "local": 7,
     "unknown": 114,
-    "user-authored": 23
+    "user-authored": 24
   },
   "rows_with_license_files_count": 11,
   "rows_with_urls_count": 66,
   "scope": "active_and_non_archived",
-  "skill_count": 155,
+  "skill_count": 156,
   "skills": [
     {
       "license": "",
@@ -264,7 +263,7 @@
     {
       "license": "Apache-2.0",
       "license_files": [],
-      "metadata_skill_author": "CardiacNexus maintainers",
+      "metadata_skill_author": "AI Skills Collection maintainers",
       "name": "bayesian-ppl-diagnostics",
       "path": "skills/domains/bayesian/bayesian-ppl-diagnostics",
       "provenance": "unknown",
@@ -746,7 +745,7 @@
     {
       "license": "Apache-2.0",
       "license_files": [],
-      "metadata_skill_author": "CardiacNexus maintainers",
+      "metadata_skill_author": "AI Skills Collection maintainers",
       "name": "medical-imaging-classical-features",
       "path": "skills/domains/medical-imaging/medical-imaging-classical-features",
       "provenance": "unknown",
@@ -2252,6 +2251,19 @@
       "urls": []
     },
     {
+      "license": "",
+      "license_files": [],
+      "metadata_skill_author": "",
+      "name": "response-clarity",
+      "path": "skills/writing/core/response-clarity",
+      "provenance": "user-authored",
+      "provenance_category": "user-authored",
+      "source_fields": {},
+      "status": "active",
+      "url_count": 0,
+      "urls": []
+    },
+    {
       "license": "MIT-compatible synthesis from cited public/academic writing guidance",
       "license_files": [],
       "metadata_skill_author": "",
@@ -2411,7 +2423,7 @@
       "source_fields": {
         "source_imported_at": "2026-07-09",
         "source_license": "MIT",
-        "source_note": "Distilled from recorded paper-workflow sources; see docs/provenance/INTEGRATION_HISTORY.md.",
+        "source_note": "Distilled from recorded paper-workflow sources; see docs/SKILL_PROVENANCE.md.",
         "source_path": ".",
         "source_ref": "d4529208cda72aa075767611b0265b95b709b550",
         "source_repo_url": "https://github.com/WUBING2023/PaperSpine"

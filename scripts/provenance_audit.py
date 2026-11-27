@@ -11,8 +11,8 @@ from pathlib import Path
 from skill_utils import ROOT
 
 
-DEFAULT_HISTORY = ROOT / "docs" / "provenance" / "INTEGRATION_HISTORY.md"
-DEFAULT_INTAKE = ROOT / "docs" / "provenance" / "AI_RESOURCES_INTAKE_V3_6.md"
+DEFAULT_HISTORY = ROOT / "tests" / "fixtures" / "provenance" / "INTEGRATION_HISTORY.md"
+DEFAULT_INTAKE = ROOT / "tests" / "fixtures" / "provenance" / "AI_RESOURCES_INTAKE_V3_6.md"
 EXPECTED_COLUMNS = [
     "date",
     "source_type",

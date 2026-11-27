@@ -727,7 +727,7 @@ class ReplayMechanismTests(unittest.TestCase):
             replay.run_child_exec(
                 codex,
                 root / "candidate-marketplace",
-                ["web-development@ai-skills-candidate", "clear-writing@ai-skills-candidate"],
+                ["frontend-design@ai-skills-candidate", "clear-writing@ai-skills-candidate"],
                 workspace,
                 output_dir,
                 "Plan product interface copy.",
@@ -739,7 +739,7 @@ class ReplayMechanismTests(unittest.TestCase):
 
             captured = json.loads(args_file.read_text(encoding="utf-8"))
 
-        self.assertIn("plugins.web-development@ai-skills-candidate.enabled=true", captured)
+        self.assertIn("plugins.frontend-design@ai-skills-candidate.enabled=true", captured)
         self.assertIn("plugins.clear-writing@ai-skills-candidate.enabled=true", captured)
 
     def test_parser_accepts_repeated_plugin_arguments_for_same_session_replay(self) -> None:
@@ -749,7 +749,7 @@ class ReplayMechanismTests(unittest.TestCase):
             [
                 "replay",
                 "--plugin",
-                "web-development",
+                "frontend-design",
                 "--plugin",
                 "clear-writing",
                 "--candidate-commit",
@@ -761,7 +761,7 @@ class ReplayMechanismTests(unittest.TestCase):
             ]
         )
 
-        self.assertEqual(args.plugin, ["web-development", "clear-writing"])
+        self.assertEqual(args.plugin, ["frontend-design", "clear-writing"])
 
 
 if __name__ == "__main__":

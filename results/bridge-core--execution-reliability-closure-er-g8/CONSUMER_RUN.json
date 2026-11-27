@@ -1,6 +1,0 @@
-{
-  "pre_task_head": "72f43c4ec43970ec02f497a2c01dcd54068b508c",
-  "command": "python scripts/skills.py list --json",
-  "result_status": "success",
-  "skill_count": 154
-}

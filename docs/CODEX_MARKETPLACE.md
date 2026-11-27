@@ -32,7 +32,7 @@ The generated marketplace currently publishes ten curated plugins. This is the r
 - `research-authoring` (`Research Authoring`)
 - `presentations`
 - `scientific-visualization`
-- `web-development` (`Frontend Design`)
+- `frontend-design` (`Frontend Design`)
 - `statistical-modeling`
 - `bioinformatics`
 - `medical-imaging`

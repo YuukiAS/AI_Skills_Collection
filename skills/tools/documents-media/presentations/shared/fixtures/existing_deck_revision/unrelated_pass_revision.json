@@ -5,46 +5,46 @@
   "deck_identity": {
     "title": "Synthetic Statistical Group Meeting",
     "candidate_commit": "ffffffffffffffffffffffffffffffffffffffff",
-    "source_path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/statistical_method_group_meeting_benchmark.pptx",
+    "source_path": "tests/fixtures/presentations/synthetic_existing_deck/source.pptx",
     "source_sha256": "d3f3eccf64244209021924e0f5fc063219702ef9cf59d5c614f49d3cd497876d",
-    "pdf_path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/pdf/statistical_method_group_meeting_benchmark.pdf",
+    "pdf_path": "tests/fixtures/presentations/synthetic_existing_deck/pdf/source.pdf",
     "pdf_sha256": "0f496e39284811fbe0c07b52ec3f4a398eb004976c6c91d5f67e615e074140cf",
     "page_count": 5,
     "page_images": [
       {
         "page": 1,
-        "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-1.png",
+        "path": "tests/fixtures/presentations/synthetic_existing_deck/rendered/slide-1.png",
         "sha256": "5193c27de468a38b8aa4284474262a1d4dcaea09d89d1cf0f8d0c62ad7dc7117"
       },
       {
         "page": 2,
-        "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-2.png",
+        "path": "tests/fixtures/presentations/synthetic_existing_deck/rendered/slide-2.png",
         "sha256": "4fd2da3db5be4eb45054855621ceef5addb26361f24b3ecca9fc99624d490406"
       },
       {
         "page": 3,
-        "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-3.png",
+        "path": "tests/fixtures/presentations/synthetic_existing_deck/rendered/slide-3.png",
         "sha256": "c7f08151deca50d477e73779f4fcd8b6b2b2b8e6d4d9ca876c9302d4d87d60c2"
       },
       {
         "page": 4,
-        "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-4.png",
+        "path": "tests/fixtures/presentations/synthetic_existing_deck/rendered/slide-4.png",
         "sha256": "9b0dd1ba796eb26f47ed08c5b0868fdcb549d14804def9cd5129df00984837a1"
       },
       {
         "page": 5,
-        "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-5.png",
+        "path": "tests/fixtures/presentations/synthetic_existing_deck/rendered/slide-5.png",
         "sha256": "d9dbfdc696e9ab0582dbdc3593436a740f77ef381685778639470caef0a76821"
       }
     ],
     "contact_sheet": {
-      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/contact-sheet.png",
+      "path": "tests/fixtures/presentations/synthetic_existing_deck/rendered/contact-sheet.png",
       "sha256": "22d4fef39271ae8e760aa4e8759b41340610fed2c11cf68eb7860d059d8a80a6"
     }
   },
   "revision_entry": {
     "reviewer_seen_baseline": {
-      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/pdf/statistical_method_group_meeting_benchmark.pdf",
+      "path": "tests/fixtures/presentations/synthetic_existing_deck/pdf/source.pdf",
       "status": "PASS",
       "sha256": "0f496e39284811fbe0c07b52ec3f4a398eb004976c6c91d5f67e615e074140cf"
     },
@@ -68,14 +68,14 @@
     ],
     "rerender": {
       "status": "PASS",
-      "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/pdf/statistical_method_group_meeting_benchmark.pdf",
+      "path": "tests/fixtures/presentations/synthetic_existing_deck/pdf/source.pdf",
       "sha256": "0f496e39284811fbe0c07b52ec3f4a398eb004976c6c91d5f67e615e074140cf"
     },
     "high_resolution_problem_pages": [
       {
         "page": 3,
         "status": "AVAILABLE",
-        "path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/rendered/slide-3.png",
+        "path": "tests/fixtures/presentations/synthetic_existing_deck/rendered/slide-3.png",
         "sha256": "c7f08151deca50d477e73779f4fcd8b6b2b2b8e6d4d9ca876c9302d4d87d60c2"
       }
     ]
