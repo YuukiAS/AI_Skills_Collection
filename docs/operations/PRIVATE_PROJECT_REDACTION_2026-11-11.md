@@ -11,7 +11,7 @@
 - `docs/plugin-todos/research-writing.md`：定义和说明分散、实现记录挤占正文、常规章节被写成问答。
 - `docs/plugin-todos/scientific-visualization.md`：通用方框串掩盖分支、关系语义和阅读路径。
 - `docs/plugin-todos/writing-style.md`：中英混杂、未解释缩写、机械否定句与过度独立排版。
-- `docs/skill-todos/artifact-content-design.md`：内部记录占据首页，读者需要的对照与结构不足。
+- `docs/plugin-todos/artifact-content-design.md`：内部记录占据首页，读者需要的对照与结构不足。
 
 旧讲解之外的相关写作示例、图稿反馈和逐页批注，也已移除私有计算过程、参数、结果及模型结构，只保留通用的表达与版式反馈。原先进入写作参考的私有数学示例改成明确标注的合成骰子算例。
 
@@ -408,7 +408,7 @@ git diff --check
 | `docs/provenance/RESEARCH_GROUP_MEETING_WRITING_REVIEW_2026_08_29.md` | DII 项目标识或研究记录：7；CARE 名称或数据相关描述（候选）：95、111、131 |
 | `docs/provenance/RESEARCH_PRESENTATION_REFERENCE_LIBRARY_2026_08_17.md` | CARE 名称或数据相关描述（候选）：47 |
 | `docs/provenance/RESEARCH_PRESENTATION_REVIEWED_HANDOFF_REVIEW_2026_08_17.md` | CARE 名称或数据相关描述（候选）：42 |
-| `docs/skill-todos/artifact-content-design.md` | DII 项目标识或研究记录：16–17、21、45、254、361；其他仓库地址或项目名（隐私属性待确认）：17、36、41 |
+| `docs/plugin-todos/artifact-content-design.md` | DII 项目标识或研究记录：16–17、21、45、254、361；其他仓库地址或项目名（隐私属性待确认）：17、36、41 |
 | `docs/skill-todos/course-assessment-authoring-student-audience-gate.md` | 其他仓库地址或项目名（隐私属性待确认）：4、153 |
 | `docs/skill-todos/course-assessment-authoring.md` | 其他仓库地址或项目名（隐私属性待确认）：13、15、35 |
 | `docs/skill-todos/project-instructions-editor.md` | 其他仓库地址或项目名（隐私属性待确认）：87、95、142、813、826；CARE 名称或数据相关描述（候选）：95 |

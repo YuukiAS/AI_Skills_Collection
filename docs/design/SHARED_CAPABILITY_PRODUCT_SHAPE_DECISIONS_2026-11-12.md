@@ -28,13 +28,12 @@
 
 ### Artifact Content Design
 
-- 形态：共享 standalone Skill，不做独立 Plugin。
-- 定位：被所有适用的产物型 Plugin / Skill 消费，而不是要求用户额外记住一个顶级入口。
+- 形态：独立 Plugin，和 Clear Writing 同层。
+- 定位：被所有适用的产物型 Plugin 调用，调用方式与 Clear Writing 相同。
 - 适用对象包括但不限于报告、论文/科研文档、演示文稿、网站/UI、科研图、生成图像、项目页和其他读者可见产物。
 - 制作前职责：判断哪些内容值得出现、出现到什么粒度、处于什么层级，以及应当 KEEP / COMPRESS / VISUALIZE / DEMOTE / REMOVE。
 - 制作后职责：必须复审真实渲染后的整件作品。单个元素分别合理不代表组合后合理；删除内容后造成的空洞、层级失衡、重复说明、内部过程泄漏和整体过度解释都属于该复审范围。
 - 它不取代领域正确性、Clear Writing、媒介专属布局/交互/视觉能力或最终领域验收。
-- 未来只有在真实使用证明它已经长成多项独立用户任务时，才重新评估是否升级为更大的 Artifact Director Plugin；当前不推进该形态。
 
 ### Warm Response
 
@@ -63,12 +62,11 @@
 ├─ Reasoned Decision
 ├─ Design Assurance
 ├─ Delivery Assurance
-└─ Clear Writing
-
-共享产物能力
+├─ Clear Writing
 └─ Artifact Content Design
-   └─ 被 Research Authoring / Presentations / Frontend Design /
-      Scientific Visualization / Documents / Image generation 等适用消费者调用
+
+Clear Writing 与 Artifact Content Design 同层，都被 Research Authoring / Presentations /
+Frontend Design / Scientific Visualization / Documents / Image generation 等产物插件调用。
 ```
 
-后续新增相近能力时，优先判断它是“完整用户任务”“跨产品共享的窄能力”还是“所有对话默认生效的协作姿态”，避免把所有好行为都堆进 Clear Writing，也避免为每条规则新增 Plugin。
+后续新增相近能力时，优先判断它是独立插件还是“所有对话默认生效的协作姿态”，避免把所有好行为都堆进 Clear Writing，也避免为每条规则新增 Plugin。

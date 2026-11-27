@@ -25,6 +25,7 @@ docs/plugin-todos/<plugin>.md
 | `statistical-modeling` | [docs/plugin-todos/statistical-modeling.md](docs/plugin-todos/statistical-modeling.md) |
 | `bioinformatics` | [docs/plugin-todos/bioinformatics.md](docs/plugin-todos/bioinformatics.md) |
 | `medical-imaging` | [docs/plugin-todos/medical-imaging.md](docs/plugin-todos/medical-imaging.md) |
+| `artifact-content-design` | [docs/plugin-todos/artifact-content-design.md](docs/plugin-todos/artifact-content-design.md) |
 
 详细规则见 [docs/plugin-todos/README.md](docs/plugin-todos/README.md)。
 
@@ -41,7 +42,6 @@ docs/plugin-todos/<plugin>.md
 | `project-instructions-editor` | [docs/skill-todos/project-instructions-editor.md](docs/skill-todos/project-instructions-editor.md) |
 | `slurm-workflows` | [docs/skill-todos/slurm-workflows.md](docs/skill-todos/slurm-workflows.md) |
 | `course-assessment-authoring` | [docs/skill-todos/course-assessment-authoring.md](docs/skill-todos/course-assessment-authoring.md) |
-| `artifact-content-design` | [docs/skill-todos/artifact-content-design.md](docs/skill-todos/artifact-content-design.md) |
 
 这里仍然沿用真实项目反馈的原则：项目 thread 先记录 `status: NEW` 的事实和证据；是否抽象成通用规则、如何修改实现、验收标准和 release 决策，留给后续 AI_Skills Planner / maintainer。
 
