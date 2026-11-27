@@ -5,9 +5,9 @@ This report records what can be proven from files currently in this repository. 
 ## Summary
 
 - Scope: `active_and_non_archived`
-- Skills audited: 155
+- Skills audited: 156
 - Skills with explicit source fields: 11
-- User-authored skills: 23
+- User-authored skills: 24
 - External adapted skills: 11
 - External vendored skills: 0
 - Generated skills: 0
@@ -23,7 +23,7 @@ This report records what can be proven from files currently in this repository. 
 | external-adapted | 11 |
 | local | 7 |
 | unknown | 114 |
-| user-authored | 23 |
+| user-authored | 24 |
 
 ## User Authored
 
@@ -50,6 +50,7 @@ This report records what can be proven from files currently in this repository. 
 | research-product-frontend | skills/tools/frontend/research-product-frontend | user-authored |  |
 | slurm-workflows | skills/tools/hpc/slurm-workflows | user-authored |  |
 | product-ui-copy | skills/writing/core/product-ui-copy | user-authored |  |
+| response-clarity | skills/writing/core/response-clarity | user-authored |  |
 | writing-fidelity | skills/writing/core/writing-fidelity | user-authored |  |
 | research-reporting | skills/writing/research/research-reporting | user-authored |  |
 
@@ -67,7 +68,7 @@ This report records what can be proven from files currently in this repository. 
 | citation-verification | skills/writing/research/citation-verification | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from citation-check-skill, Nature-Paper-Skills citation-verifier/reference-audit, claude-scholar citation-verification, and paperpipe verification workflows.", "source_path": ".", "source_ref": "b9deb7077099f56b05c9b6ecea744c2ca0a6d324", "source_repo_url": "https://github.com/serenakeyitan/citation-check-skill"} |
 | latex-paper-authoring | skills/writing/research/latex-paper-authoring | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from latex-paper-skills, latex-document-skill, claude-scholar LaTeX template organizer, and existing render-chinese-math-pdf practice.", "source_path": ".", "source_ref": "d0f106108cb09e448604a56ce973d35b340cf497", "source_repo_url": "https://github.com/yunshenwuchuxun/latex-paper-skills"} |
 | nature-manuscript-workflow | skills/writing/research/nature-manuscript-workflow | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from Nature-Paper-Skills, nature-skills, and claude-scholar Nature writing/response/data skills.", "source_path": ".", "source_ref": "44cff42ac22a5ac4dcfb7ba01b2e81c21d689ea6", "source_repo_url": "https://github.com/Boom5426/Nature-Paper-Skills"} |
-| paper-workflow-orchestrator | skills/writing/research/paper-workflow-orchestrator | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from recorded paper-workflow sources; see docs/provenance/INTEGRATION_HISTORY.md.", "source_path": ".", "source_ref": "d4529208cda72aa075767611b0265b95b709b550", "source_repo_url": "https://github.com/WUBING2023/PaperSpine"} |
+| paper-workflow-orchestrator | skills/writing/research/paper-workflow-orchestrator | external-adapted | {"source_imported_at": "2026-07-09", "source_license": "MIT", "source_note": "Distilled from recorded paper-workflow sources; see docs/SKILL_PROVENANCE.md.", "source_path": ".", "source_ref": "d4529208cda72aa075767611b0265b95b709b550", "source_repo_url": "https://github.com/WUBING2023/PaperSpine"} |
 
 ## External Vendored
 

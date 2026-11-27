@@ -1,8 +1,0 @@
-{
-  "repository": "YuukiAS/STAT5060-TA",
-  "locators": [{
-    "id": "legacy-v4-review",
-    "commit": "a255e716cf7a846208a62edc82132c3752a16417",
-    "path": "docs/reviews/2026-27/STAT5060_TUTORIAL_01_RECOVERY_GOVERNANCE_V4_PLANNER_REVIEW_V1.md"
-  }]
-}

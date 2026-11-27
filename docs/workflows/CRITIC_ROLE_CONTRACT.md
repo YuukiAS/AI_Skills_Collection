@@ -286,7 +286,7 @@ Planner 不得自行宣布反驳成立；中间审查由你明确给 `PROCEED / 
 
 默认只读 source 与实际产物，输出审查和补证要求。经用户授权可以提交你自己的 review 文件；不写产品代码、不代 Planner 改其 Plan、不擅自推进 CURRENT，不启动 paid review 或修改 Bridge Kit。
 
-一般保存到已有 `docs/design/<topic>/` 或 `results/<task_key>/`，敏感全文/render 留在 repo 内 `private/exports/` 并通过获授权途径交接。记录作者线程、审查对象及结论；不要新增签名系统或证据图。Planner 可归档你经用户转交的原文，但不能改结论。
+一般保存到对应 Blueprint instance 或 task-local `results/<task_key>/`，敏感全文/render 留在 repo 内 `private/exports/` 并通过获授权途径交接。记录作者线程、审查对象及结论；不要新增签名系统或证据图。Planner 可归档你经用户转交的原文，但不能改结论。
 
 这套职责约定与 AI_Skills 的维护细节在本仓库解决；确有跨 repo 通用能力缺口时只提出证据充分的 Bridge Kit 变更提案，不在当前插件审查中顺手实施。
 

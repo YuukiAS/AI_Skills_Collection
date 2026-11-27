@@ -18,8 +18,8 @@
 `Project Thread Handoff` 和 `Project Instructions Editor` 都可以通过 `skills-only` ChatGPT 个人 Plugin 封装使用。封装只是分发入口，不含 MCP，也不是第二份能力来源。
 
 更新说明：
-- [Project Thread Handoff](docs/operations/prompts/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md)
-- [Project Instructions Editor](docs/operations/prompts/PROJECT_INSTRUCTIONS_EDITOR_CHATGPT_PLUGIN_UPDATE.md)
+- [Project Thread Handoff](docs/operations/PROJECT_THREAD_HANDOFF_CHATGPT_PLUGIN_UPDATE.md)
+- [Project Instructions Editor](docs/operations/PROJECT_INSTRUCTIONS_EDITOR_CHATGPT_PLUGIN_UPDATE.md)
 
 ## 中央插件
 
@@ -31,7 +31,7 @@
 | <img src="./assets/codex/plugin-icons/research-authoring/composer.svg" width="40" alt="Research Authoring 图标"> | <strong>Research Authoring</strong><br><code>research-authoring</code> · v`0.2`<br>支持研究报告、论文、文献、引用和证据组织；正式 PDF 会交给配套渲染器处理。 |
 | <img src="./assets/codex/plugin-icons/presentations/composer.svg" width="40" alt="Presentations 图标"> | <strong>Presentations</strong><br><code>presentations</code> · v`0.3`<br>规划和返修科研组会、研究汇报与商务演示文稿。 |
 | <img src="./assets/codex/plugin-icons/scientific-visualization/composer.svg" width="40" alt="Scientific Visualization 图标"> | <strong>Scientific Visualization</strong><br><code>scientific-visualization</code> · v`0.1`<br>处理科研图、配色、示意图、海报和视觉检查。 |
-| <img src="./assets/codex/plugin-icons/web-development/composer.svg" width="40" alt="Frontend Design 图标"> | <strong>Frontend Design</strong><br><code>web-development</code> · v`0.4`<br>让前端设计先进入统一协调入口，并能把界面内容架构交给 Clear Writing 做安全文案。 |
+| <img src="./assets/codex/plugin-icons/frontend-design/composer.svg" width="40" alt="Frontend Design 图标"> | <strong>Frontend Design</strong><br><code>frontend-design</code> · v`0.4`<br>围绕审美方向、版式、视觉系统和真实界面验收组织前端设计，并把界面内容架构交给 Clear Writing 完成文案。 |
 | <img src="./assets/codex/plugin-icons/statistical-modeling/composer.svg" width="40" alt="Statistical Modeling 图标"> | <strong>Statistical Modeling</strong><br><code>statistical-modeling</code> · v`0.1`<br>支持统计建模、Bayesian 工作流、诊断和数据分析。 |
 | <img src="./assets/codex/plugin-icons/bioinformatics/composer.svg" width="40" alt="Bioinformatics 图标"> | <strong>Bioinformatics</strong><br><code>bioinformatics</code> · v`0.1`<br>覆盖数据库、单细胞、GWAS 和组学分析工作流。 |
 | <img src="./assets/codex/plugin-icons/medical-imaging/composer.svg" width="40" alt="Medical Imaging 图标"> | <strong>Medical Imaging</strong><br><code>medical-imaging</code> · v`0.1`<br>支持 DICOM/NIfTI、分割、配准和影像 AI 工作流。 |

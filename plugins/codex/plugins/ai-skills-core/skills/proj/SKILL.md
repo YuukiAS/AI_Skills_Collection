@@ -61,9 +61,9 @@ Examples:
   route to `research-main`.
 - Building a website, frontend, dashboard, React/Next.js app, or Tailwind UI
   should route to `frontend-research-product`.
-- Bayesian, JSDM, HMSC, Stan, PyMC, MCMC, or simulation projects should route
-  to `codex-bayesian-jsdm`.
-- CMR, CardiacNexus, DICOM, NIfTI, MONAI, nnU-Net, or medical imaging projects
+- Bayesian, Stan, PyMC, MCMC, or simulation projects should install the matching
+  Bayesian domain or skill selector directly.
+- CMR, DICOM, NIfTI, MONAI, nnU-Net, or medical imaging projects
   should route to `medical-imaging-project`.
 - Bioinformatics, single-cell, RNA-seq, VCF/BAM/GTF, scanpy, or scvi projects
   should route to `bioinformatics-project`.

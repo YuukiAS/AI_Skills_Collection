@@ -13,7 +13,7 @@ Do not commit private overrides, hostnames, tokens, account names, or personal p
 1. Create the local template:
 
 ```bash
-ai-skills environment init --site cuhk-central-cluster
+ai-skills environment init --site example-cluster
 ```
 
 For a third-party Slurm cluster that has no committed profile, choose a safe local id and initialize it directly:
@@ -27,28 +27,28 @@ ai-skills environment init --site my-local-slurm
 3. Inspect local state without writing project files:
 
 ```bash
-ai-skills environment doctor --site cuhk-central-cluster
-ai-skills environment plan --site cuhk-central-cluster --target user
+ai-skills environment doctor --site example-cluster
+ai-skills environment plan --site example-cluster --target user
 ```
 
 4. Preview materialization:
 
 ```bash
-ai-skills environment apply --site cuhk-central-cluster --target user --dry-run
+ai-skills environment apply --site example-cluster --target user --dry-run
 ```
 
 5. Apply only after reviewing the plan:
 
 ```bash
-ai-skills environment apply --site cuhk-central-cluster --target user
+ai-skills environment apply --site example-cluster --target user
 ```
 
 6. Compare or refresh later:
 
 ```bash
-ai-skills environment diff --site cuhk-central-cluster --target user
-ai-skills environment sync --site cuhk-central-cluster --target user --dry-run
-ai-skills environment sync --site cuhk-central-cluster --target user
+ai-skills environment diff --site example-cluster --target user
+ai-skills environment sync --site example-cluster --target user --dry-run
+ai-skills environment sync --site example-cluster --target user
 ```
 
 7. Remove only manifest-managed environment skills:
@@ -74,7 +74,7 @@ No-profile Slurm sites can plan/apply/doctor without adding a repository profile
 | `accelerator_priority` | Optional | Comma-separated local accelerator preference among legal compatible routes. Hard accelerator requirements still win. |
 | `qos` | Usually | Slurm QoS or queue class. Leave blank until confirmed. |
 | `scratch_root` | Usually | Private writable scratch/work directory for temporary outputs. |
-| `render_resource_dirs` | Optional | Comma-separated local CJK render resource directories, for example `$HOME/render_resources/chinese_math_pdf`; on the YuukiAS workstation the current TRACE-compatible location is `/home/yuukias/render_resources/chinese_math_pdf`. |
+| `render_resource_dirs` | Optional | Comma-separated local CJK render resource directories, for example `/path/to/render-resources/chinese-math-pdf`. |
 | `texlive_path` | Optional | Private TeX Live root/bin path when modules do not expose TeX. |
 | `python_path` | Optional | Preferred Python executable or environment path. |
 | `module_init` | Usually | Shell snippet or script path needed before `module load`. |

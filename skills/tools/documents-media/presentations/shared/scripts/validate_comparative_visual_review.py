@@ -130,9 +130,10 @@ def main() -> int:
     parser.add_argument("--cache-key", default=CACHE_KEY)
     parser.add_argument("--require-review", action="store_true")
     parser.add_argument("--require-bytes", action="store_true")
+    parser.add_argument("--review-root")
     args = parser.parse_args()
     cases = args.case or ["statistical", "medical"]
-    result_root = REPO_ROOT / "results" / args.task_key / "visual_review"
+    result_root = Path(args.review_root) if args.review_root else REPO_ROOT / "results" / args.task_key / "visual_review"
     errors: list[str] = []
     for case in cases:
         errors.extend(validate_case(result_root / case, args.cache_key, args.visible_task_key, require_review=args.require_review, require_bytes=args.require_bytes))

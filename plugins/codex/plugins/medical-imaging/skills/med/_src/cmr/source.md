@@ -22,7 +22,7 @@ icon_large: assets/app-facing.svg
 
 Use this skill for cardiac MRI domain reasoning that should transfer across projects. This includes cine short-axis and long-axis imaging, ED/ES timing, LV/RV function, myocardial strain, tagged MRI, feature tracking, and cardiac phenotype validation.
 
-Do not use this skill for CardiacNexus repo paths, UKB folder layout, local scripts, or docs routes; those belong in CardiacNexus project skills.
+Do not use this skill for project-specific repo paths, dataset folder layouts, local scripts, or docs routes; those belong in project-local skills.
 
 ## Workflow inheritance
 

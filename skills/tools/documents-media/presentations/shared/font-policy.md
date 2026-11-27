@@ -5,8 +5,8 @@ Status: ACTIVE_CANONICAL_POLICY
 
 This policy applies to all formal Beamer outputs produced by the Presentations plugin, including both built-in adapters:
 
-- `cuhk-research`
-- `course-standard`
+- `research_standard-research`
+- `research_standard`
 
 It follows the deterministic font architecture already validated by `render-chinese-math-pdf`: fixed font identities, resolved through the renderer-owned resource environment, with no host font guessing and no silent fallback.
 
@@ -84,7 +84,7 @@ Formal Presentations output must not use or resolve any of the following as an a
 - arbitrary system fonts
 - another font chosen because the canonical font is missing
 
-Both built-in skins load the allowlist from the shared Beamer core. CUHK's compatibility import loads the same core and retains the approved CUHK brand assets.
+Both built-in skins load the allowlist from the shared Beamer core. RESEARCH_STANDARD's compatibility import loads the same core and retains the approved RESEARCH_STANDARD brand assets.
 
 ## 3. Resource ownership
 
@@ -115,7 +115,7 @@ If a canonical bundled font file is genuinely missing, the correct fix is to rep
 
 ## 5. Template parity
 
-`cuhk-research` and `course-standard` use the same font contract.
+`research_standard-research` and `research_standard` use the same font contract.
 
 They may differ in:
 - theme/accent colour;

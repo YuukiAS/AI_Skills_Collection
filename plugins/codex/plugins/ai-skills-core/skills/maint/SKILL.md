@@ -140,7 +140,7 @@ behavior.
 2. For Notion or GitHub intake, record the evidence boundary first: source page or repo, readable text/images/attachments, public-source verification, processing decision, target skill/reference, integration commit, and whether the external tracker has already been reconciled.
 3. Decide whether each external item is `merged`, `partially-merged`, `reference-only`, `reviewed-not-adopted`, `unresolved-asset`, or `rejected`. Do not collapse several weak-evidence items into a single `merge-selected` claim.
 4. Route domain judgment to the right domain plugin or official capability. This skill controls repository maintenance; it does not decide frontend taste, PPT content, bioinformatics workflows, statistics, or medical-imaging methods by itself.
-5. Edit source files first: `skills/`, `profiles/`, `docs/provenance/`, `docs/plugin-todos/`, `docs/plugin-changelogs/`, tests, and public docs.
+5. Edit source files first: `skills/`, `profiles/`, `docs/SKILL_PROVENANCE.md`, `docs/plugin-todos/`, `docs/plugin-changelogs/`, tests, and public docs.
 6. Regenerate derived registry/catalog/marketplace files only after source-layer changes are complete.
 7. Run repository validation gates with the local runtime Python when `python` is not on `PATH`.
 8. Commit after validation, then reconcile external trackers only if the user requested it.

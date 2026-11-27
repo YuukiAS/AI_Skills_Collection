@@ -808,7 +808,7 @@ def composition_signature_distance(a: dict[str, Any], b: dict[str, Any]) -> floa
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--request", action="append", required=True, help="Path to a candidate request JSON. Can be repeated.")
-    parser.add_argument("--out-dir", default="docs/audits/research_presentation_candidate_search/generated")
+    parser.add_argument("--out-dir", default="tests/fixtures/presentations/audit_samples/research_presentation_candidate_search/generated")
     args = parser.parse_args()
     output_root = REPO_ROOT / args.out_dir
     output_root.mkdir(parents=True, exist_ok=True)

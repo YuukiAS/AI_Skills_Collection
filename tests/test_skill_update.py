@@ -81,17 +81,17 @@ class SkillUpdateTests(unittest.TestCase):
         self.assertEqual(temporary_codex_home, str(root / "home"))
 
     def test_environment_detects_public_site_profile(self) -> None:
-        args = argparse.Namespace(site=None, hostname="login01.cuhk.example", path="/project/demo")
+        args = argparse.Namespace(site=None, hostname="login01.cluster.example", path="/project/demo")
         profile, matches = skills.environment_detect_profile(args, skills.load_site_profiles())
         self.assertIsNotNone(profile)
-        self.assertEqual(profile["id"], "cuhk-central-cluster")
-        self.assertEqual([item["id"] for item in matches], ["cuhk-central-cluster"])
+        self.assertEqual(profile["id"], "example-cluster")
+        self.assertEqual([item["id"] for item in matches], ["example-cluster"])
 
     def test_environment_plan_is_read_only(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             project = Path(tmp)
             args = argparse.Namespace(
-                site="unc-longleaf",
+                site="example-cluster",
                 target="repo",
                 project=str(project),
                 hostname=None,
@@ -99,7 +99,7 @@ class SkillUpdateTests(unittest.TestCase):
                 local_override=str(project / "local-overrides.toml"),
             )
             plan = skills.environment_plan_payload(args)
-            self.assertEqual(plan["site_id"], "unc-longleaf")
+            self.assertEqual(plan["site_id"], "example-cluster")
             self.assertFalse((project / ".agents").exists())
             self.assertEqual([action["action"] for action in plan["actions"]], ["materialize-skill", "materialize-skill"])
 
@@ -107,7 +107,7 @@ class SkillUpdateTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             project = Path(tmp)
             args = argparse.Namespace(
-                site="cuhk-central-cluster",
+                site="example-cluster",
                 target="repo",
                 project=str(project),
                 hostname=None,
@@ -121,19 +121,18 @@ class SkillUpdateTests(unittest.TestCase):
             target_root = skills.environment_target_root(args)
             manifest_path = target_root / skills.ENV_MANIFEST_NAME
             self.assertTrue(manifest_path.exists())
-            self.assertEqual(first["site_id"], "cuhk-central-cluster")
-            self.assertEqual(second["site_id"], "cuhk-central-cluster")
+            self.assertEqual(first["site_id"], "example-cluster")
+            self.assertEqual(second["site_id"], "example-cluster")
             self.assertEqual(first["target_root"], "repo:.agents/skills")
             self.assertTrue((target_root / "slurm-workflows" / "references" / "_generated" / "site-profile.md").exists())
 
     def test_environment_init_site_writes_only_selected_section_and_refuses_overwrite(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             override = Path(tmp) / "local-overrides.toml"
-            args = argparse.Namespace(site="cuhk-central-cluster", local_override=str(override), dry_run=False, force=False)
+            args = argparse.Namespace(site="example-cluster", local_override=str(override), dry_run=False, force=False)
             self.assertEqual(skills.command_environment_init(args), 0)
             text = override.read_text(encoding="utf-8")
-            self.assertIn("[sites.cuhk-central-cluster]", text)
-            self.assertNotIn("[sites.unc-longleaf]", text)
+            self.assertIn("[sites.example-cluster]", text)
             with self.assertRaises(SystemExit):
                 skills.command_environment_init(args)
 
@@ -144,7 +143,7 @@ class SkillUpdateTests(unittest.TestCase):
             override.write_text(
                 "\n".join(
                     [
-                        "[sites.cuhk-central-cluster]",
+                        "[sites.example-cluster]",
                         'account = ""',
                         'unknown_field = "x"',
                         f'scratch_root = "{Path(tmp) / "missing-scratch"}"',
@@ -157,7 +156,7 @@ class SkillUpdateTests(unittest.TestCase):
                 encoding="utf-8",
             )
             args = argparse.Namespace(
-                site="cuhk-central-cluster",
+                site="example-cluster",
                 target="repo",
                 project=str(project),
                 hostname=None,
@@ -179,9 +178,9 @@ class SkillUpdateTests(unittest.TestCase):
     def test_environment_doctor_reports_site_mismatch(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             override = Path(tmp) / "local-overrides.toml"
-            override.write_text("[sites.unc-longleaf]\naccount = \"abc\"\n", encoding="utf-8")
+            override.write_text("[sites.unknown-cluster]\naccount = \"abc\"\n", encoding="utf-8")
             args = argparse.Namespace(
-                site="cuhk-central-cluster",
+                site="example-cluster",
                 target="user",
                 project=None,
                 hostname=None,
@@ -196,7 +195,7 @@ class SkillUpdateTests(unittest.TestCase):
     def test_environment_local_override_parser_reports_invalid_lines(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             override = Path(tmp) / "local-overrides.toml"
-            override.write_text("account = \"outside\"\n[sites.cuhk-central-cluster]\nnot-a-field\n", encoding="utf-8")
+            override.write_text("account = \"outside\"\n[sites.example-cluster]\nnot-a-field\n", encoding="utf-8")
             _data, errors = skills.parse_environment_local_override(override)
             self.assertTrue(any("outside" in error for error in errors))
             self.assertTrue(any("expected key = value" in error for error in errors))

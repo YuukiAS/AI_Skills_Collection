@@ -6,8 +6,8 @@ Canonical maintenance inbox for the `ai-skills-core` plugin and repository-maint
 
 ### 已有规则仍失效时，先核实实际调用并去重沉淀
 status: PROMOTED
-source: 2026-09-14 Bobbio / Lucerna / Mica / SeminarArc 跨项目开发反馈；用户要求以后开发不再反复依赖人工提醒，并询问是否自动沉淀 repo-specific TODO
-evidence: [完整修订提案](../design/PRODUCT_DELIVERY_DISCIPLINE_V2_2026-09-14.md)；本仓库现有 `AGENTS.md` 2.1–2.2、`docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md` 及下方已推广的 direct-feedback / production-refinement 条目。Lucerna、Mica 已有真实交互/回归/有限测试规则，Frontend Design 的 Figma 闭环反馈也已存在。
+source: 2026-09-14 a private product / a private product / a private extension / SeminarArc 跨项目开发反馈；用户要求以后开发不再反复依赖人工提醒，并询问是否自动沉淀 repo-specific TODO
+evidence: [完整修订提案](../../README.md)；本仓库现有 `AGENTS.md` 2.1–2.2、`docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md` 及下方已推广的 direct-feedback / production-refinement 条目。a private product、a private extension 已有真实交互/回归/有限测试规则，Frontend Design 的 Figma 闭环反馈也已存在。
 problem: 规则可能已写入源文件或 TODO，却未被实际安装版本、任务入口或执行者消费；继续添加同义规则容易造成文档膨胀而没有用户可见改善。另一方面，把每次产品故障都自动变成通用插件规则，或把中央插件问题再记进项目 TODO，会制造重复维护。
 project-specific context: 具体关闭语义、数据源、平台限制、当前 Figma 文件和具体产品 bug 属于各项目。本条不声称每次事故都已确认加载过该插件，不将用户不满意直接归因为中央 production runtime 缺陷。
 
@@ -24,7 +24,7 @@ project-specific context: 具体关闭语义、数据源、平台限制、当前
 推广前须证明：一个已有规则失效的真实案例被正确定位并回放；同一问题的新案例合并而非复制；纯项目 bug 未误写中央插件；无新教训的正常任务没有额外长篇复盘；中央不可写时诚实报告未记录而非创建影子 TODO。本轮仅记录，不修改 production、不 bump 版本。
 
 
-additional evidence (2026-09-24): Lucerna task 01050 again reached user review with obvious frontend hierarchy/collapse/copy defects despite this repository already containing Frontend Design production gates and earlier Lucerna/Bobbio TODOs for self-review, actionability and whole-screen composition. Treat this as a consumer-path/invocation/version/compliance diagnostic case first; do not respond by adding another generic “review screenshots” rule unless replay proves the current production entry did not actually carry the existing behavior.
+additional evidence (2026-09-24): a private product task 01050 again reached user review with obvious frontend hierarchy/collapse/copy defects despite this repository already containing Frontend Design production gates and earlier a private product/a private product TODOs for self-review, actionability and whole-screen composition. Treat this as a consumer-path/invocation/version/compliance diagnostic case first; do not respond by adding another generic “review screenshots” rule unless replay proves the current production entry did not actually carry the existing behavior.
 
 ## Recently promoted / established
 
@@ -58,10 +58,10 @@ boundary: do not modify the private 044 scientific text in this maintenance task
 
 ### Direct plugin-use feedback to the central plugin TODO
 status: PROMOTED
-source: user correction on 2026-08-31 after TRACE / Presentation real-workflow setup
-evidence: root `README.md`, root `TODO.md`, `AGENTS.md`, `docs/plugin-todos/README.md`, `docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md`, Planner contract; TRACE `AGENTS.md` follows the same rule
+source: user correction on 2026-08-31 after the private research project / Presentation real-workflow setup
+evidence: root `README.md`, root `TODO.md`, `AGENTS.md`, `docs/plugin-todos/README.md`, `docs/workflows/CONTINUOUS_REAL_WORLD_SKILL_REFINEMENT.md`, Planner contract; the private research project `AGENTS.md` follows the same rule
 target layer: distribution / maintenance workflow
-problem: keeping Presentation/plugin problems first in TRACE or another project repo mixes plugin maintenance with the project's own scientific TODOs and creates duplicate records.
+problem: keeping Presentation/plugin problems first in the private research project or another project repo mixes plugin maintenance with the project's own scientific TODOs and creates duplicate records.
 current behavior: project-owned research/product/code issues stay in the project repo; issues caused by an AI_Skills plugin are written directly to the corresponding central `docs/plugin-todos/<plugin>.md` as `status: NEW`. The project thread records the real failure and project-specific context; AI_Skills Planner/maintainer later deduplicates, abstracts, and decides whether the item is project-local, a generic candidate, or ready for implementation.
 boundary: do not move project science, model choices, dataset interpretation, or project code TODOs into AI_Skills_Collection. Do not require project threads to invent a generic rule before recording a plugin failure.
 

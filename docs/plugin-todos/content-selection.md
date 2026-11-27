@@ -1,6 +1,6 @@
 # content-selection — Long-Term TODO
 
-> 产品形态：独立 Plugin，和 Clear Writing 同层，被产物插件调用。见 `docs/design/SHARED_CAPABILITY_PRODUCT_SHAPE_DECISIONS_2026-11-12.md`。
+> 产品形态：独立 Plugin，和 Clear Writing 同层，被产物插件调用。当前公开产品列表见 [README](../../README.md)，设计依据保存在 Blueprint。
 
 Planned dedicated plugin for deciding what a reader-facing artifact should visibly contain before or alongside rendering.
 
@@ -8,15 +8,15 @@ Planned dedicated plugin for deciding what a reader-facing artifact should visib
 
 ### Cross-artifact content restraint and whitespace
 status: NEW
-source: repeated user feedback across DII Notion, generated images and product/UI artifacts; a private research project Numerical Atlas full-copy audit and user acceptance, 2026-10-27
-evidence: `YuukiAS/AI_Research_Toolkit` branch `research/complex-system-showcase-20261026-r2-comparison`, `docs/history/notion/distributed-imaging-inference-version-history-2026-10-24-to-2026-10-27.md`; 另一私有项目的界面文案反馈（原始材料留在私有项目仓库，此处不保存）
+source: repeated user feedback across a private research project Notion, generated images and product/UI artifacts; a private research project Numerical a private product full-copy audit and user acceptance, 2026-10-27
+evidence: `<private repository>` branch `research/complex-system-showcase-20261026-r2-comparison`, `docs/history/notion/distributed-imaging-inference-version-history-2026-10-24-to-2026-10-27.md`; 另一私有项目的界面文案反馈（原始材料留在私有项目仓库，此处不保存）
 problem: Different artifact types repeatedly become over-authored even when the underlying content is correct. The model adds explanatory text, labels, guidance, metadata, sections or decorative structure after the user already has enough information to understand or act. The missing capability is not ordinary prose polishing or low-level rendering; it is deciding what should be visible at all, at what granularity, and when the artifact should stop explaining and leave space.
 scope examples: Notion/project pages, UI, generated visual artifacts, documents and presentations where content selection and visual restraint matter before final rendering.
 boundary: Clear Writing owns prose quality; product-ui-copy owns interface wording; research-authoring owns research-document semantics; presentations and visualization own their domain composition; renderers own faithful layout. This future capability should not silently absorb those responsibilities.
-project-specific context: DII page history and current Notion cleanup are evidence only. a private research project method identities, formulas, accepted-versus-candidate method boundaries and unpublished-data boundary are also project-specific. Do not encode either project's sections, terminology or research workflow as generic behavior.
+project-specific context: a private research project page history and current Notion cleanup are evidence only. a private research project method identities, formulas, accepted-versus-candidate method boundaries and unpublished-data boundary are also project-specific. Do not encode either project's sections, terminology or research workflow as generic behavior.
 next research step: product shape is now fixed as a shared standalone Skill. Formal design should define the smallest reusable pre-production content-admission contract, the post-render whole-artifact review behavior, and how existing artifact-producing plugins consume it without duplicating domain-specific semantics. Do not implement production behavior until that bounded design and its consumer contract are reviewed.
 
-#### Accepted real-use evidence: a private research project Numerical Atlas
+#### Accepted real-use evidence: a private research project Numerical a private product
 
 A rendered-state inventory covered 11 routes plus desktop, mobile, filtering, selection, expansion and primary interaction states. It found 420 unique baseline copy units. The final checklist contained 423 disposition rows: 360 `KEEP`, 52 `REVISE` and 11 `DELETE`; the accepted render contained 403 unique visible copy units.
 
@@ -27,17 +27,17 @@ The final user correction also exposed a boundary between content admission and 
 
 
 
-### Accepted real-use evidence: Project Atlas — content admission must finish before first delivery
-complete itemized evidence: `docs/design/product-ui-copy/evidence/PROJECT_ATLAS_COPY_REVIEW_HISTORY_2026-11-03.md` — preserves every Atlas A/B first-round REVISE/REJECT row, every second-round changed row, and every third-round independent finding with exact before/after text.
+### Accepted real-use evidence: Project a private product — content admission must finish before first delivery
+complete itemized evidence: `README.md` (design source archived in Blueprint) — preserves every a private product A/B first-round REVISE/REJECT row, every second-round changed row, and every third-round independent finding with exact before/after text.
 
 
 status: NEW
-source: Project Atlas A/B user-visible content review, 2026-11-03
-evidence: `YuukiAS/Project_Atlas` branches `prototype/atlas-a` and `prototype/atlas-b`; first complete reviews at commits `086801e26543f2932233657b5682a460d4aec9eb` and `52d07fbea43addf5292d6fba6cc111d6cdadb88a`; independent follow-up revisions at `a9d4fd4e5e5f1db9a49fee187b9b04e14cb5fe7b` and `2b534c63c648e71f1bf3bd1160804c61b13437e1`.
-problem: Two visually mature Project Atlas candidates reached review with large amounts of content that should have been decided before delivery. The first full inventory classified A as 2174 ACCEPT / 472 REVISE / 36 REJECT and B as 203 ACCEPT / 139 REVISE / 39 REJECT. An independent follow-up still found 72 additional A revisions and 25 B revisions. The user therefore had to act as the first effective whole-product editor even though content admission and wording should have been completed before the candidates were presented.
+source: Project a private product A/B user-visible content review, 2026-11-03
+evidence: `<private repository>` branches `prototype/atlas-a` and `prototype/atlas-b`; first complete reviews at commits `086801e26543f2932233657b5682a460d4aec9eb` and `52d07fbea43addf5292d6fba6cc111d6cdadb88a`; independent follow-up revisions at `a9d4fd4e5e5f1db9a49fee187b9b04e14cb5fe7b` and `2b534c63c648e71f1bf3bd1160804c61b13437e1`.
+problem: Two visually mature Project a private product candidates reached review with large amounts of content that should have been decided before delivery. The first full inventory classified A as 2174 ACCEPT / 472 REVISE / 36 REJECT and B as 203 ACCEPT / 139 REVISE / 39 REJECT. An independent follow-up still found 72 additional A revisions and 25 B revisions. The user therefore had to act as the first effective whole-product editor even though content admission and wording should have been completed before the candidates were presented.
 
 The strongest evidence was not wording-only:
-- B listed future DII, Mica and Lucerna decisions under “需要我” before those actions were ready. The correct artifact decision was REMOVE, not better phrasing.
+- B listed future a private research project, a private extension and a private product decisions under “需要我” before those actions were ready. The correct artifact decision was REMOVE, not better phrasing.
 - A/B exposed maintenance/source-process concepts such as source freshness, candidate identity and internal validation language that did not deserve primary user attention.
 - Removing rejected “需要我” rows left a large empty region in B until the follow-up review also repaired the composition. Content deletion therefore changes layout and must feed back into the artifact producer.
 - Repeated rendered occurrences inflated the review count. A future capability should distinguish **unique semantic content identities** from repeated DOM/theme/view occurrences: editorial judgment happens on the semantic unit, while rendering verification proves every occurrence uses the approved unit.
@@ -246,7 +246,7 @@ Again, this section is only a starting hypothesis. It may be substantially revis
 
 ## Additional research note — human-operational information is valid artifact content
 
-**Status of this section: PRELIMINARY ONLY.** This extends the concept above with a concrete lesson from the DII Notion history study. Notion is only one evidence case; the principle should be researched across project workbenches, documents, dashboards, UI, presentations, READMEs and other reader-facing artifacts.
+**Status of this section: PRELIMINARY ONLY.** This extends the concept above with a concrete lesson from the a private research project Notion history study. Notion is only one evidence case; the principle should be researched across project workbenches, documents, dashboards, UI, presentations, READMEs and other reader-facing artifacts.
 
 ### Do not confuse workflow content with machine-only content
 
@@ -353,7 +353,7 @@ A future implementation should be tested on whether it can:
 - prefer a canonical-source link over duplicated detail when the user does not need the full text in place;
 - avoid both failure modes: over-authored artifacts and over-minimal artifacts that leave the user unable to resume work.
 
-The DII Notion case is evidence for this distinction, not a Notion-specific specification. Formal architecture research should test the same judgment across other artifact classes before deciding ownership or implementation.
+The a private research project Notion case is evidence for this distinction, not a Notion-specific specification. Formal architecture research should test the same judgment across other artifact classes before deciding ownership or implementation.
 
 ### 私有技术讲解让内部记录挤占了正文
 status: NEW
@@ -364,11 +364,11 @@ problem: 首页先放用途声明、版本依据、代码位置与执行说明�
 
 ### AI Instructions Release drafting repeatedly lost the reader's verification task
 status: NEW
-source: Project Atlas / AI Instructions first confirmed-configuration Release drafting, 2026-11-19
-evidence: user-provided exported ChatGPT thread from the 2026-11-19 Project Atlas conversation; the private transcript remains with the user and is not copied wholesale into this public repository.
+source: Project a private product / AI Instructions first confirmed-configuration Release drafting, 2026-11-19
+evidence: user-provided exported ChatGPT thread from the 2026-11-19 Project a private product conversation; the private transcript remains with the user and is not copied wholesale into this public repository.
 problem: A short Release note for the first confirmed AI Instructions configuration snapshot went through repeated rewrites without a stable reader model. The longest draft mixed useful verification content with maintainer-facing material: exact configuration surfaces and the full confirmed Project list were surrounded by release mechanics, exclusion lists, manifest explanations, future-work status and repeated baseline rationale. After the user asked to remove waste, later drafts overcorrected by deleting concrete information a human could actually use to verify the release — especially which Projects were included and which exact configuration surfaces were frozen — while preserving abstract counts, lifecycle language and repository-state summaries. Subsequent rewrites oscillated between these two extremes instead of first deciding what the reader was trying to verify. Even the near-final draft still ended by sending the reader to `manifest.yaml` after the human-facing content was already complete. The observed failure is therefore not simply verbosity or insufficient brevity: the artifact repeatedly optimized amount of text without correctly ranking reader-relevant verification content against maintainer metadata.
 project-specific context: The specific release id, repository names, confirmed Project list, dates and configuration paths belong to the AI Instructions task and are evidence only. They should not become hard-coded generic content. The reusable failure pattern is the loss of reader purpose during content selection and compression.
 
-follow-up evidence: The failure continued after the user isolated one concrete editorial judgment. The user asked whether the final section was something a human reader cared about; the model correctly answered that the whole trailing “current version boundary” material was low-value because the reader had already finished the release-verification task. When the user then asked for the final version, however, the next answer removed only the final `manifest.yaml` sentence and left the entire unwanted section in place. Later rewrites repeatedly renamed or compressed the same material — second-round status, Project Atlas v2 candidate state, future release mechanics — instead of removing it. The user had to state explicitly that “what I wanted deleted is still there” before the model finally recognized that the whole section, not one sentence, was the problem.
+follow-up evidence: The failure continued after the user isolated one concrete editorial judgment. The user asked whether the final section was something a human reader cared about; the model correctly answered that the whole trailing “current version boundary” material was low-value because the reader had already finished the release-verification task. When the user then asked for the final version, however, the next answer removed only the final `manifest.yaml` sentence and left the entire unwanted section in place. Later rewrites repeatedly renamed or compressed the same material — second-round status, Project a private product v2 candidate state, future release mechanics — instead of removing it. The user had to state explicitly that “what I wanted deleted is still there” before the model finally recognized that the whole section, not one sentence, was the problem.
 
 This follow-up also shows why simple brevity heuristics are insufficient. The full confirmed Project list and concrete configuration surfaces were long but useful because they let a human verify the snapshot. The shorter candidate-status paragraphs were less useful even though they contained true information. The failure was therefore prioritization at the artifact level: the model treated “true, relevant to the repository” as equivalent to “worth visible space in this Release,” and then applied deletion locally rather than re-evaluating the whole artifact against the reader's task.

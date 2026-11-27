@@ -14,7 +14,8 @@ INDEX = REFERENCES / "research_gold_composition_index.json"
 REFERENCE_INDEX = REFERENCES / "research_slide_reference_index.csv"
 COMPOSITION_INDEX = REFERENCES / "research_slide_composition_index.json"
 REPO_ROOT = ROOT.parents[4]
-ADMISSION_REPORT = REPO_ROOT / "docs" / "audits" / "research_presentation_gold_composition_library" / "gold_admission_report.json"
+AUDIT_FIXTURES = REPO_ROOT / "tests" / "fixtures" / "presentations" / "audit_samples"
+ADMISSION_REPORT = AUDIT_FIXTURES / "research_presentation_gold_composition_library" / "gold_admission_report.json"
 ALLOWED_RIGHTS = {"COMPOSITION_ONLY", "COMPARATIVE_GOLD"}
 FORBIDDEN_AUDIENCE_TERMS = ["RRL-", "SRC-", "GSC-", "gold", "QA", "provenance", "review"]
 
@@ -49,11 +50,12 @@ def _bbox_valid(bbox: dict) -> bool:
 def _admission_decisions() -> dict[str, dict]:
     repo_root = REPO_ROOT
     decisions: dict[str, dict] = {}
+    review_root = AUDIT_FIXTURES / "gold_visual_reviews"
     for folder in [
-        repo_root / "results" / "025_research_presentation_gold_scientific_composition_library" / "visual_review" / "gold_admission",
-        repo_root / "results" / "025_research_presentation_gold_scientific_composition_library" / "visual_review" / "gold_recovery_1",
-        repo_root / "results" / "026_research_presentation_discussion_next_experiment_gold_recovery" / "visual_review" / "gold_admission_1",
-        repo_root / "results" / "026_research_presentation_discussion_next_experiment_gold_recovery" / "visual_review" / "gold_admission_2",
+        review_root / "gold_admission",
+        review_root / "gold_recovery_1",
+        review_root / "gold_admission_1",
+        review_root / "gold_admission_2",
     ]:
         review_path = folder / "VISUAL_REVIEW.json"
         identity_path = folder / "review_identity_map.json"

@@ -1,0 +1,427 @@
+# frontend-design — Long-Term TODO
+
+Canonical maintenance inbox for the `frontend-design` plugin.
+
+## Recently promoted / established
+
+### Frontend Design F-A/F-B/F-C production gates
+status: PROMOTED
+source: 056 Product Delivery Discipline v0.3 implementation
+evidence: `web-development 0.2`, `skills/tools/frontend/frontend-visual-systems/SKILL.md`, and Marketplace wiring that adds existing `figma-design-to-code` and `motion-interaction` to the Frontend Design production aggregate.
+current behavior: Frontend Design now requires canonical design authority/state coverage when a current design source exists, coherent component/tokens/icons/motion/localization treatment, and actual-surface convergence before production/user-ready claims. It does not force Figma, provider, locale, full-E2E, or native-smoke gates onto docs-only, backend/server-only, or tiny nonvisual work.
+boundary: the detailed desktop-native, icon-registry, whole-product taste, and Figma round-trip candidates below remain follow-up evidence unless a frozen task explicitly promotes them.
+
+## Open candidates
+
+### Production icon sourcing and icon-registry discipline
+status: SUPERSEDED
+tracking: #55
+resolution: Merged into #55. Retained icon-source/registry/provenance semantics are implemented in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product / Windows tray panel production polish, 2026-09-13
+evidence: `<private repository>` real-shell iterations through commits `e81fa0807d4282b0552fabb0b92ca8287acb4037`, `23a98d33acafb9ffc5fe40ecd3b75abe3df095a2`, plus the user-provided production screenshots in the a private product project thread
+problem: Frontend work repeatedly allowed ad-hoc inline SVG/placeholders and generic status dots to survive into a production-looking interface. The resulting icons had inconsistent geometry, stroke/fill weight, optical size, and platform feel; controls looked AI-generated even after spacing/typography polish. A mature frontend-design workflow should choose and freeze an icon source/system early instead of letting the model improvise each glyph.
+project-specific context: a private product is a compact Windows tray utility and will likely use Fluent System Icons for generic Windows UI/actions/status plus a separate approved brand-icon source for vendor marks. That exact library choice is a private product-specific and must not become a universal plugin rule.
+
+Candidate refinement for the Frontend Design / visual-system workflow:
+
+- Before drawing any generic UI icon, inspect whether the project already has a canonical icon library or platform-native system.
+- If none exists, explicitly choose one coherent UI icon family based on platform/product constraints (for example Fluent System Icons for Fluent/Windows surfaces, Lucide or Phosphor for neutral cross-platform/web surfaces) and record the choice.
+- Treat brand/provider marks separately from generic UI icons: prefer official vendor assets or a maintained brand set such as Simple Icons, subject to the provider's trademark/usage guidance.
+- Do not hand-author generic inline SVG icons when an appropriate maintained icon exists. Custom SVG should be reserved for product identity, genuinely domain-specific symbols, or a documented gap.
+- Avoid mixing multiple generic icon families in the same visual layer. If multiple sources are necessary, separate them by role (e.g. generic controls vs brand marks) and normalize optical size, box size, alignment, and semantic color treatment.
+- Introduce a central icon registry/component instead of scattering raw SVG strings through render code. The registry should own icon source, size, regular/filled state, accessibility labeling, and theme/currentColor behavior.
+- Add a production review check for placeholder icons: before calling a UI production-ready, scan for ad-hoc SVGs, emoji, arbitrary circles/dots standing in for semantic icons, or temporary glyphs that should be replaced by the canonical system.
+- Record source/license/provenance for vendored or third-party icon assets so later packaging does not depend on undocumented downloads.
+
+Planner note: first verify whether existing `visual-direction`, `design-system-tokens`, or related Frontend Design references already imply this discipline. If they do, the fix may belong in execution/review gates rather than adding another overlapping skill.
+
+### Desktop-native acceptance must not be inferred from browser fixtures
+status: PROMOTED
+tracking: #53
+resolution: Promoted in web-development 0.3; browser/native evidence separation is part of the coordinator evidence contract; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: research desktop reader native acceptance feedback, 2026-09-13
+target layer: frontend QA / acceptance / desktop-shell review
+problem: A browser-fixture review can close obvious layout/copy defects while still missing desktop-only failures: executable/taskbar/sidebar icon mismatch, native WebView jank, slow panel switching, scrollbar hitching, hover/focus feel, titlebar/layout differences, and empty-state flows that depend on native integrations. Declaring a desktop app review-ready from static browser screenshots creates false confidence.
+candidate_action:
+- When the target is Tauri/Electron/native-WebView desktop, require a native release build evidence class before final product review.
+- Distinguish `BROWSER_FIXTURE_VISUAL` from `NATIVE_DESKTOP_VISUAL`; browser evidence may supplement but must not substitute for native desktop proof.
+- Require at least one native full-window capture showing titlebar/taskbar/app-shell branding and one native interaction recording/trace for motion-sensitive flows.
+- Require the reviewer to return `INSUFFICIENT_NATIVE_EVIDENCE` / not-ready when a desktop-only concern is represented only by browser fixtures.
+- Prepare a simple launch path/shortcut before user acceptance so the user tests the exact release candidate rather than localhost/dev mode.
+- For desktop products, acceptance should include real empty-state/startup/navigation behavior, not only pre-populated fixture states.
+promotion_gate: validate this rule on at least two desktop/WebView projects before promoting it from TODO into generic Frontend Design production review gates.
+
+### Motion, hover grammar, and performance budgets belong to the design system
+status: PROMOTED
+tracking: #54
+resolution: Promoted in web-development 0.3; motion intent is separated from runtime latency/jank without a universal numeric budget; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: research desktop reader interaction/performance feedback, 2026-09-13
+target layer: frontend implementation / interaction QA
+problem: A visually polished UI can still feel unfinished when tabs switch synchronously with long stalls, buttons have no hover/press feedback, panels remount with flicker, or scrolling janks. Adding animation after the fact can hide rather than solve the underlying state/render bottleneck. Frontend Design currently needs a stronger rule that motion and responsiveness are measurable product qualities, not optional polish.
+candidate_action:
+- Separate **latency** from **animation duration**: state change should begin immediately; a 160–220 ms transition is acceptable only after input-to-visible-response is already fast.
+- Establish project-specific performance budgets for key interactions (e.g. panel/tab switch p95, scroll frame stability, no repeated >50 ms main-thread long tasks).
+- Profile before animating. Check polling, whole-tree state replacement, unbounded DOM lists, unnecessary remounts, layout-heavy CSS, and callback/prop churn.
+- Prefer event-driven state updates over coarse polling when the platform exposes events.
+- Use one motion grammar. For React, evaluate Motion for React (`motion` / `motion/react`) for enter/exit/shared-layout transitions and gestures; use CSS transitions for simple hover when cheaper.
+- Keep hover/press effects subtle and compositor-friendly; respect reduced-motion preferences.
+- Require representative hover, keyboard-focus, tab transition, scroll, loading and error states in visual QA rather than judging only static screenshots.
+- Treat brand/app icons as one canonical asset source across executable shell and in-app brand mark.
+promotion_gate: verify these thresholds and motion patterns on real desktop/web apps; avoid freezing exact numeric budgets universally when hardware/product constraints differ.
+
+### Component craftsmanship must be part of the definition of done
+status: PROMOTED
+tracking: #55
+resolution: Promoted in web-development 0.3 as the component/system grammar anchor; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product native desktop review after performance repair, 2026-09-13
+target layer: frontend design-system execution / visual QA
+problem: Individual controls were technically functional and even had hover transitions, yet the native app still looked under-designed because button hierarchy, padding, icon alignment, grouping, repeated CTAs, empty-state composition, and cross-component spacing were not reviewed as one system. “No overflow + clickable + hover exists” is too low a production bar.
+candidate_action:
+- Define component completion as all applicable states: default, hover, pressed, focus-visible, disabled, loading/busy, selected/current, destructive.
+- Review button anatomy explicitly: semantic role, height, horizontal padding, icon optical size/baseline, icon-to-label gap, radius, border/background, hit target, and relationship to adjacent controls.
+- Review control clusters for hierarchy: primary action vs secondary/recovery/maintenance actions must not all have equal visual weight.
+- Treat spacing as information architecture, not just collision avoidance: group related controls, separate unrelated actions, avoid both cramped utility bars and large unexplained dead zones.
+- Add overlay/clipping/layout-shift checks while hovering, focusing, pressing and animating controls; motion must not change container geometry or collide with adjacent components.
+- Require native recordings/frame sequences for interactive-state craft; static default-state screenshots cannot prove hover/press/focus quality.
+- During final visual review, allow a repeated “functional but visibly placeholder/basic” component pattern to be P2 when it materially lowers product confidence, even if each control works.
+- Add an explicit whole-screen composition pass: repeated labels, duplicated CTAs, over-promoted maintenance buttons, unbalanced empty states, panel hierarchy and scrollbar behavior must be reviewed together.
+promotion_gate: validate on a private product plus at least one additional desktop/web product before turning the exact checklist into a mandatory generic production gate; the principle that all control states/hierarchy are part of done can be promoted earlier if independent evidence repeats.
+
+
+additional evidence (2026-09-24): a private product task 01050 showed sibling status treatments with visibly different chrome for equivalent prominence (for example a plain Installed state beside a pill-backed NORMAL state), plus setup forms and maintenance controls that were individually functional but visually accumulated rather than composed as one system.
+
+### External review should confirm quality, not discover obvious local P2 defects
+status: PROMOTED
+tracking: #56
+resolution: Promoted in web-development 0.3 through producer self-QA / review-admission rules; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product repeated native GPT Work repair cycles, 2026-09-14
+target layer: frontend implementation workflow / pre-review QA
+problem: External review was repeatedly asked to identify defects that the implementation agent could have found itself by inspecting the same native evidence: nearly indistinguishable pressed/focus states, destructive controls that still looked neutral, contradictory healthy-flow screenshots containing PDF errors, and missing shell/state proof. This wastes review cycles and trains the development loop to outsource first-line quality control.
+candidate_action:
+- Add an explicit adversarial producer self-review before external review. The implementation agent should use the same P1/P2 rubric as the reviewer and try to reject its own build.
+- External review should only be requested after the producer records `P1=0`, `P2=0`, required evidence complete, and no contradictory main-path states.
+- Treat evidence integrity as part of implementation quality: a healthy-flow screenshot that contains an unrelated error banner should fail capture/validation before it reaches a reviewer.
+- Require side-by-side state discrimination checks for default/hover/pressed/focus/disabled/busy/active/destructive, judging native rendered results rather than CSS rule existence.
+- Require a claim-to-evidence matrix so each review claim has the correct evidence class; missing native proof should be detected locally.
+- Prefer deterministic assertions and fail-closed capture helpers for known state prerequisites; do not generate nominally “healthy” evidence when the required native state was not reached.
+- Use external reviewers for independent product judgment and blind spots after local QA, not for routine defect discovery that can be settled by local screenshots, recordings, performance traces, or state assertions.
+promotion_gate: replay this workflow on a private product 0.3 and at least one additional UI-heavy project; if it reduces external review loops without lowering quality, promote it into the Frontend Design production review workflow.
+
+
+additional evidence (2026-09-24): a private product task 01050 reached a screenshot handoff with obvious full-screen hierarchy, density, collapse-state and copy problems that the producer could have found by inspecting its own native screenshots. The user again became the first-line visual reviewer. This is independent evidence beyond a private product for the same failure mode.
+
+additional evidence (2026-10-04): a private product task 01055 reproduced the same failure after web-development 0.4 was already active. The Producer froze a Product Design V2, generated exact native screenshots, and still declared `PRODUCER_P1=0`, `PRODUCER_P2=0` and the Windows frontend TODO scope closed while the source TODO remained unchecked, the real first screen contradicted explicit design-authority requirements, a `needs-sign-in` fixture had no visible auth boundary, real 125%/150% DPI evidence was absent, and independent GPT Work found P1/P2 defects. Treat this as a production-regression signal for producer self-QA / review admission rather than a new parallel rule: candidate admission must cross-check design authority + source TODO/closure matrix + screenshot semantics, and required-but-unverified evidence must stay open instead of being converted into a completion claim.
+
+### Freeze whole-screen visual direction before implementation polish
+status: PROMOTED
+tracking: #57
+resolution: Promoted in web-development 0.3 through whole-screen direction and hierarchy-before-polish rules; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product 0.3 repeated native UI rejection after locally green functional/performance gates, 2026-09-14
+target layer: Frontend Design planning / full-screen composition / implementation handoff
+problem: Repeated local repairs optimized individual defects without first freezing the whole-screen composition and component grammar. This produced obviously arbitrary visual decisions in an otherwise functional app: a large decorative `Choose a paper` circle with no semantic role, sibling controls such as `Change paper` and `Retry PDF` rendered in visibly unrelated styles despite adjacent placement, duplicated `Choose a paper` messaging, mismatched control weights, and locally polished components that still did not form a coherent product. The user was repeatedly forced into the role of art director, pointing out visual incoherence one screenshot at a time. The failure is not one bad button; it is the absence of a mandatory design-before-code gate for the entire screen.
+candidate_action:
+- Before implementation polish, freeze a **screen-level visual brief** for every primary state: shell, empty Reader/paper picker, loaded Reader, current selection, Explanation, Candidate/history, annotation mode, loading/error/recovery. The brief must define visual hierarchy, dominant task, control grouping, spacing rhythm, density, and what is intentionally absent.
+- Require one canonical component grammar before coding: button families, size scale, icon family, border/radius system, surfaces, pills, tabs, inputs, destructive treatment, and motion. Adjacent controls of the same semantic level must use the same family unless a documented hierarchy difference justifies otherwise.
+- Ban arbitrary decorative geometry in production UI. A circle/blob/card/accent shape must have a clear semantic, navigational, status, branding, or interaction role. “It fills empty space” is not a valid reason. Decorative shapes that call attention without meaning are a production defect.
+- Add a **sibling-control consistency** check: controls that are spatially grouped must be compared side-by-side for height, padding, icon treatment, radius, border, typography, and interaction states. `Change paper` beside `Retry PDF` cannot accidentally look like two unrelated design systems.
+- Treat repeated labels/CTAs as a whole-screen defect. One action should not appear as header copy, pill, title, and button unless each occurrence serves a distinct user need.
+- Require a full-window native screenshot review at normal scale before accepting component-level evidence. The reviewer must answer: does this look intentionally designed as one product, or like individually repaired widgets accumulated over time?
+- Use the canonical design artifact (Figma/reference frame/design board) as the implementation target when one exists. Implementation should compare native screenshots against the approved reference, not improvise during coding.
+- Introduce a **visual freeze → implementation → native comparison** loop. Do not ask the user to review until the producer has compared every primary native screen to the frozen visual direction and found zero obvious composition/component inconsistencies.
+- External review should happen only after the producer can defend every visible shape/control: why it exists, why it has that visual weight, and why neighboring controls differ. If the answer is “because that was the easiest CSS/markup,” the screen is not review-ready.
+- Add an explicit ban on using the user as iterative visual QA. The product team/agent must perform the full-screen design pass first; user review is for final taste/product judgment, not discovering arbitrary circles, inconsistent siblings, repeated CTAs, or basic spacing mistakes.
+promotion_gate: treat this as immediately applicable to a private product; validate on at least one additional UI-heavy project before promoting the exact checklist into the generic Frontend Design production contract. The underlying principle—freeze whole-screen visual direction before code polish and never use the user as first-line art direction—should be considered high-priority for promotion.
+
+
+additional evidence (2026-09-24): a private product task 01050 independently reproduced the same whole-product failure: locally repaired cards, status chips, setup forms, diagnostics and extension panels remained visually inconsistent and over-expanded despite passing implementation gates. This supplies the additional UI-heavy project evidence requested by the original promotion gate; central Planner should now reassess whether the principle is ready for generic promotion rather than creating another near-duplicate rule.
+
+### Canonical design artifacts must gate production implementation
+status: PROMOTED
+tracking: #58
+resolution: Promoted in web-development 0.3 as the design-authority / canonical-design anchor, while preserving no-Figma completion; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product 0.3 Figma rebase after whole-screen UI rejection, 2026-09-14
+target layer: Frontend Design source-of-truth governance / Figma-to-code / visual regression
+problem: A project can already have an approved Figma/component system and still drift badly if implementation treats it as inspirational rather than normative. a private product had a canonical Figma Reading Focus direction, yet production code invented missing states directly in React/CSS. The result was local functional success but system-level visual drift: arbitrary decorative geometry, inconsistent sibling controls, random spacing values, repeated CTAs, and different component grammars across states. The missing workflow rule is that canonical design artifacts must block implementation until the required states and components actually exist in the design source of truth.
+candidate_action:
+- When a canonical Figma/design file exists, classify it explicitly as **production visual source of truth**, not a moodboard. Production UI changes that materially alter hierarchy, component grammar, spacing, or primary states must be represented there first.
+- Before coding a UI milestone, build a **primary-state coverage matrix**. Every user-visible state that will be shipped (empty, loaded, selection, explanation, candidate/history, active tools, loading, error/recovery, responsive variants, important transitions) must have a design target. Missing states are a design gap, not permission for implementation improvisation.
+- Require a **Figma/design freeze gate** before production implementation: whole-screen hierarchy, component families, spacing scale, typography, surfaces, colors, motion intent, and responsive behavior must be internally coherent and self-reviewed at normal window scale.
+- Freeze shared design tokens before coding. Avoid selector-by-selector arbitrary values for spacing, radius, control height, borders, typography, and motion. New values outside the token system require an explicit reason rather than convenience.
+- Require full-screen Figma-to-native comparison after implementation. Compare complete screens, not only component crops, and record layout, typography, spacing, hierarchy, component family, responsive behavior, and intentional deviations.
+- Treat unrecorded visual deviation from canonical design as a defect. “Roughly similar” is not sufficient when the project has a deliberate source-of-truth artifact.
+- Add a **design debt fail-fast** rule: if the implementation needs a production state absent from Figma, stop and extend the canonical design first. Do not encode the missing state directly in CSS and promise to reconcile it later.
+- Require final design convergence to cover at least one compact/laptop viewport and the canonical desktop viewport before external review; a design that only works at one screenshot size is incomplete.
+- Preserve functional and accessibility contracts during Figma rebase, but do not let legacy DOM/CSS structure dictate the visual solution. Existing implementation is a behavior substrate, not a design constraint.
+- The goal should be end-to-end: **design update → internal design self-review → production implementation → native full-screen comparison → adversarial self-review → external confirmation**. Do not terminate a UI goal after only Figma or only code is complete.
+promotion_gate: immediately use this workflow for a private product 0.3. Validate the exact gate on at least one other project with a canonical design artifact before making every clause mandatory across Frontend Design.
+
+### Visual acceptance must include a whole-product taste gate, not only defect checklists
+status: PROMOTED
+tracking: #59
+resolution: Promoted in web-development 0.3 through observable whole-product taste and first-glance rejection checks; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product 0.3 weekend UI convergence failure, 2026-09-14
+target layer: Frontend Design final visual QA / product taste / user handoff
+problem: Even increasingly strict defect checklists can still produce an interface that technically passes local gates while obviously looking incoherent or unfinished at first glance. The missing layer is a deliberate whole-product taste review: does the screen feel intentional, calm, balanced, and like one product? Users should not be forced to identify elementary visual problems one screenshot at a time after the producer has already declared readiness.
+candidate_action:
+- Add a final **whole-product taste gate** after functional, component-state, and evidence-integrity checks. Review complete native screens at normal scale and ask whether the interface looks intentionally designed without reading implementation rationale.
+- Require the producer to explicitly search for arbitrary visual gestures: circles/blobs used only to fill space, over-large empty regions, repeated CTA language, mismatched sibling controls, over-promoted maintenance actions, excessive pills/cards/borders, accidental typography mixing, and inconsistent density.
+- A whole-screen UI with zero overflow and correct hover states can still fail P2 if its composition visibly looks ad hoc, placeholder-like, or AI-generated.
+- Require a **visual hierarchy explanation** for each primary screen: dominant task, primary action, secondary actions, quiet content, historical content, and intentionally absent controls. If hierarchy cannot be explained simply, the screen is not frozen.
+- Add an explicit “first-glance rejection” pass: inspect each screen for 2–5 seconds at normal scale. If an experienced reviewer immediately notices something obviously arbitrary or inconsistent, do not proceed to user review even if detailed checklists are green.
+- User review should be reserved for final product/taste judgment and preference decisions, not elementary design-system cleanup. The producer must reach zero obvious P2 visual defects before asking the user to look again.
+- When a user has explicitly rejected iterative visual QA, treat further user-facing screenshots as blocked until the producer completes the full design → implementation → native comparison loop.
+promotion_gate: high-priority candidate for Frontend Design. Validate whether this reduces repeated UI repair loops on a private product and at least one other design-heavy product, then promote into the generic final visual-review contract.
+
+### Design corrections must round-trip through the canonical Figma before code changes
+status: SUPERSEDED
+tracking: #58
+resolution: Merged into #58. Design-defect / implementation-drift / product-semantic / runtime-only repair routing is retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product 0.3 canonical-Figma drift and repeated code-only visual repair, 2026-09-14
+target layer: Frontend Design repair workflow / Figma governance / implementation discipline
+problem: Having a canonical Figma file is not enough if later visual feedback is repaired directly in React/CSS. That creates two sources of truth: Figma remains nominally approved while production becomes a sequence of undocumented visual patches. a private product repeatedly hit exactly this failure mode: a screen was rejected, the code was patched locally, but the canonical design was not updated first, so the next state inherited fresh inconsistencies. A mature workflow needs a mandatory round-trip rule whenever a visual defect is found after implementation begins.
+candidate_action:
+- Classify every UI defect before editing code: **design defect**, **implementation drift**, **product/interaction semantics defect**, or **runtime-only defect**.
+- For a **design defect** (hierarchy, composition, spacing system, component family, typography, visual weight, responsive layout, motion grammar), update and re-review the canonical Figma first. Production code may change only after the corrected design is frozen.
+- For **implementation drift** (production differs from an already-correct frozen Figma), keep Figma unchanged and change code only to converge to the canonical design.
+- For a **product/interaction semantics defect**, update the product contract and Figma state/flow first, then implement. Do not let code silently redefine the interaction model.
+- For a **runtime-only defect** (race, stale state, integration failure, performance bug) that does not change intended visual semantics, fix code directly but re-run native visual regression afterward.
+- After any visually material repair, the workflow must loop back through **Figma design state → production implementation → native full-screen comparison**. A code-only patch that materially changes appearance without a corresponding design decision is not review-ready.
+- Record intentional deviations in the Figma/native comparison artifact. If a deviation cannot be explained as a platform constraint, accessibility requirement, or explicit product decision, treat it as drift.
+- Do not mark a design milestone “done” while production still implements an older visual revision, and do not mark production “done” while Figma still describes a rejected screen. Design and implementation must converge in the same goal.
+- Require the final handoff to identify the exact canonical Figma frames/states used to implement each primary production screen so later repair work knows which design artifact must be updated first.
+- Prefer Code Connect/component mapping or an equivalent explicit component-to-design mapping where it materially reduces drift; the point is not tool ceremony but preserving one component grammar across design and code.
+promotion_gate: treat as immediately mandatory for a private product. Validate on another Figma-driven product before promoting the exact defect-classification taxonomy as universal, but preserve the core rule now: material visual repairs must round-trip through the canonical design source rather than bypass it in CSS.
+
+### “Figma complete” needs an explicit definition of done
+status: SUPERSEDED
+tracking: #58
+resolution: Merged into #58. Figma-complete state/variant/responsive/interaction coverage semantics are retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product 0.3 redesign/implementation mismatch, 2026-09-14
+target layer: Frontend Design planning / Figma completion / handoff quality
+problem: Teams can say “the Figma is done” when only hero/default screens are polished, while production still needs empty, error, loading, history, transition, compact viewport, focus/pressed, or recovery states that were never designed. The implementation then invents those states ad hoc, and the canonical design becomes incomplete the moment coding starts. The definition of Figma completion must therefore be state- and interaction-complete, not screenshot-complete.
+candidate_action:
+- Define Figma completion as **coverage + grammar + interaction intent + responsiveness + self-review**, not the existence of a few attractive frames.
+- Require a primary-state matrix before implementation: default, empty, loaded, current selection, output/result, history/persistence, loading/busy, error/recovery, important transitions, destructive actions, and any active-tool modes that will ship.
+- Require at least the canonical desktop viewport and one compact/laptop viewport for each layout that materially changes with size. Responsive notes alone are insufficient when the compact state changes hierarchy or control density.
+- Include component interaction states where they affect perceived behavior: hover, pressed, focus-visible, disabled, busy/loading, selected/active, destructive. They may live in component variants rather than separate whole-screen frames, but they must be frozen before implementation.
+- Include motion intent in the design handoff: which transitions animate, approximate duration/easing class, what remains stationary, and reduced-motion behavior. Motion must not be invented after implementation is otherwise complete.
+- Include content density/long-content examples for panels, lists, inspectors, history, and error text; a design that only works with short placeholder copy is not complete.
+- Include platform-shell constraints for desktop products when titlebar/taskbar/shortcut/native chrome materially affect the final composition.
+- Require an internal Figma self-review at normal scale before coding. The producer should attempt to reject the design for repeated CTAs, arbitrary decoration, mismatched sibling controls, dead space, over-carded layout, typography drift, and weak hierarchy.
+- Figma completion must produce a durable handoff record: canonical frames, component families, tokens, responsive states, interaction states, intentional omissions, and any states explicitly deferred from the current milestone.
+- Implementation may start only when the Figma self-review is P1=0/P2=0 for the current milestone. If a missing state is discovered later, implementation pauses and the design source is extended first.
+promotion_gate: high-priority generic candidate. The exact list of mandatory states can vary by product, but the rule that “Figma done” means all shipped primary states and interaction grammar are covered should be promoted broadly.
+
+### Design-to-code goals must not stop at either Figma or implementation
+status: SUPERSEDED
+tracking: #58
+resolution: Merged into #58 as maintenance tracking only. End-to-end authority -> implementation -> actual surface -> producer QA -> confirmation remains independently retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product 0.3 weekend redesign failure and repeated review loops, 2026-09-14
+target layer: Frontend Design goal construction / delivery workflow / visual QA
+problem: Splitting UI work into “design first, implementation later, QA later” allows each phase to declare success while the product remains visibly inconsistent. Conversely, jumping directly to implementation produces design drift. For design-heavy milestones, the useful unit of completion is the entire closed loop, not one artifact.
+candidate_action:
+- Construct UI goals as one closed loop: **Figma update → Figma self-review → production implementation → release/native capture → Figma/native full-screen comparison → adversarial producer review → external confirmation**.
+- Do not allow the goal to return success after only Figma is polished, after only code compiles, or after only browser screenshots look correct.
+- If native comparison reveals a **design problem**, return to Figma, update the canonical design, re-freeze it, then re-implement. If it reveals **implementation drift**, keep Figma fixed and repair code. Do not patch both arbitrarily until screenshots “look better.”
+- Require whole-screen comparison for every primary state, not only representative component crops. Components can pass individually while the screen still fails composition, hierarchy, density, or spacing.
+- Require functional/performance regression in the same goal: visual redesign cannot be accepted if it reintroduces jank, flicker, overflow, stale state, or broken integration flows.
+- The producer should not ask the user to review until this closed loop is locally green. User review is a final product judgment, not a phase transition between Figma and implementation.
+- External reviewers should confirm the converged result, not discover that the design and code describe different products.
+promotion_gate: immediately mandatory for a private product; strong candidate for generic Frontend Design workflows where a canonical design artifact exists.
+
+### Normal UI must have a human-readable presentation boundary
+status: PROMOTED
+tracking: #63
+resolution: Promoted in web-development 0.3 as the normal-UI presentation boundary; natural-language copy refinement remains deferred to Clear Writing; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product production acceptance review, 2026-09-17
+evidence: `<private repository>@461dcea4015434f90d50922d9b7ae054286c98bc` plus user-provided release screenshots showing raw a private cluster/Slurm/recovery text such as `status=online`, `controller=available; partition=mixed`, `private-cluster-bridge`, raw exit-code details, and internal recovery IDs in the normal UI
+problem: The frontend rendered backend/runtime diagnostic strings directly into production copy. Technically truthful provider fields became unreadable user-facing prose, forcing the user to understand implementation contracts instead of product state.
+project-specific context: a private cluster, Slurm, Bridge A/B and their exact contract fields are a private product-specific. The reusable frontend issue is the missing presentation layer between structured runtime state and normal product copy.
+
+### Primary surfaces should optimize for actionability, not implementation completeness
+status: PROMOTED
+tracking: #64
+resolution: Promoted in web-development 0.3 through primary-task/actionability and lifecycle disclosure rules; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product production acceptance review, 2026-09-17
+evidence: user-provided release screenshots where healthy/usable a private cluster status was followed by expanded recovery, scheduler, Bridge internals and other low-actionability operational detail in the main information flow
+problem: The interface promoted diagnostic and maintenance information merely because it existed. Routine status, actionable exceptions, recovery tools, scheduler diagnostics and extensions were not separated by user need, so the compact utility became an operations dashboard that increased cognitive load during normal use.
+project-specific context: a private product specifically wants recovery, diagnostics and optional extensions under a collapsed bottom area. Other products may choose different placement, but the generic issue is that low-frequency maintenance tooling should not compete with the primary task unless it is currently actionable.
+
+
+additional evidence (2026-09-24): a private product task 01050 release screenshots again showed healthy/configured OpenAI, recovery, Overleaf and Zotero setup/maintenance surfaces expanded directly in the normal scroll flow. Already-configured balance and credential inputs remained visible even when no action was needed. The user explicitly rejected this as a software-product hierarchy failure rather than a copy-only defect.
+
+### Metric labels and rankings must be backed by the data semantics they imply
+status: PROMOTED
+tracking: #65
+resolution: Promoted in web-development 0.3; visible metric/ranking labels require explicit scope/denominator/order semantics from the owning data/domain layer; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product GitHub Actions resource review, 2026-09-17
+evidence: `<private repository>` GitHub Actions implementation used a deduplicated alphabetically sorted repository list and displayed the first item as `Top`, while the user expected actual usage ranking and separate overall/private views
+problem: The frontend presented a strong analytical label (`Top`) without a matching aggregation/ranking contract. A visually plausible label hid a semantic data error. Frontend/product work needs to treat ranking, filtering, scope and denominator as part of the visible UI contract, not as incidental backend details.
+project-specific context: a private product's public-vs-private GitHub Actions quota semantics are product-specific. The generic issue is that labels such as `top`, `highest`, `remaining`, `share`, or `risk` must correspond to explicit computed semantics and must not be inferred from array order or convenience fields.
+
+### Comparable resource cards need one coherent progress and reset grammar
+status: SUPERSEDED
+tracking: #55
+resolution: Merged into #55. Comparable resource/status component grammar is retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product resource-card polish, 2026-09-17
+evidence: user-provided release screenshots showing Codex, GitHub Actions, VPS bandwidth and a private cluster lease information using inconsistent combinations of bucket labels, percentages, reset text, remaining values and progress bars
+problem: Comparable quota/lease resources were each rendered with different copy and visual conventions. Some exposed provider bucket names, some duplicated usage text, and reset/expiry meaning was not visually standardized. The user had to relearn the same concept for every card.
+project-specific context: a private product prefers a compact used-versus-remaining status bar plus a consistent reset/expiry line. The exact colors and card density are project-local; the generic issue is that semantically comparable resources should share a stable visual/copy grammar.
+
+### Opaque identifiers and formatting artifacts must not leak into glanceable UI
+status: SUPERSEDED
+tracking: #63
+resolution: Merged into #63. Human labels, zero normalization and deliberate date/time presentation are retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product OpenAI/resource acceptance review, 2026-09-17
+evidence: user-provided release screenshots showing raw `proj_...` project identifiers, mixed time formats/timezones, and negative-zero currency such as `-$0.00` in glanceable production UI
+problem: Machine-oriented identifiers and low-level formatting artifacts were technically valid but visually noisy and confusing. The normal UI did not distinguish human labels from diagnostic identifiers, and formatting normalization was treated as optional polish rather than part of production quality.
+project-specific context: OpenAI project IDs and a private product's exact time/currency fields are project-specific. The reusable issue is that primary UI should prefer human-readable aliases/names, normalized zero values, and one deliberate date/time convention, while raw IDs remain available only in details/diagnostics when needed.
+
+### Severity colors must encode one stable semantic meaning
+status: SUPERSEDED
+tracking: #55
+resolution: Merged into #55. Stable semantic color/severity meaning is retained in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product Usage card visual acceptance review, 2026-09-17
+evidence: user-provided release screenshots where an OpenAI Usage card labeled `NORMAL` used an amber/yellow warning treatment while other healthy states used green
+problem: Status text and status color communicated different meanings. Reusing an attention/warning palette for a normal state weakens the entire severity system because users can no longer infer whether color reflects health, category branding, or decoration.
+project-specific context: a private product specifically prefers green for normal, amber for attention and red for critical. Exact hues are project-local; the generic issue is that semantic status colors must be globally consistent and should not be repurposed decoratively on the same surface.
+
+### Native interaction acceptance must prove the intended control path, not only the final window state
+status: SUPERSEDED
+tracking: #53
+resolution: Merged into #53 as maintenance tracking only. Interaction-causality semantics remain retained in F-C: stronger cause proof only for competing-route/control-path claims; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product titlebar-close false-positive acceptance, 2026-09-17
+evidence: `<private repository>@461dcea4015434f90d50922d9b7ae054286c98bc` reported physical close PASS from a coordinate-based smoke because the window became hidden, while the user still could not close the release by clicking the visible X; the app also had focus-loss/outside-click hide routes that could satisfy the same final-state assertion
+problem: The black-box test verified an outcome (`window hidden`) but not its cause (`the visible X received real pointer input and triggered the canonical close path`). Multiple valid hide routes allowed a false positive to pass and prematurely moved the product to user acceptance.
+project-specific context: a private product's hide-to-tray titlebar control and exact coordinates are project-specific. The reusable frontend QA issue is that interaction acceptance should identify the actual rendered hit target and, when competing routes can produce the same final state, prove the intended control/event path rather than infer causality from the outcome alone.
+
+
+### Configured surfaces must collapse from setup mode to status mode
+status: SUPERSEDED
+tracking: #64
+resolution: Merged into #64. Configured/healthy surfaces collapse from setup to status/action, with setup/recovery disclosed on demand; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product task 01050 OpenAI attribution/UI closure, 2026-09-24
+evidence: private-project release screenshot set reviewed by the user after OpenAI setup was already live; the normal panel still exposed current-balance editing, Admin API key replacement, connection maintenance, recovery details and other setup-oriented controls inline
+problem: The frontend treated configuration controls as permanent content instead of lifecycle-specific UI. A completed setup continued to look like an onboarding/admin form, forcing routine users to scan edit fields and maintenance actions that matter only when changing configuration or recovering from failure.
+project-specific context: OpenAI Admin keys, a private product balance calibration, Overleaf paper setup and Zotero first sync are a private product-specific. The reusable issue is progressive disclosure by lifecycle: healthy/configured state should present a compact summary and an explicit edit/manage affordance; setup forms, credential replacement, diagnostics and repair controls should expand only when needed.
+
+### Typography governance must define semantic roles and hierarchy, not only token values
+status: SUPERSEDED
+tracking: #55
+resolution: Merged into #55. Semantic typography roles remain linked to whole-screen hierarchy in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product task 01050 full-panel visual review, 2026-09-24
+evidence: the project already had typography/token cleanup work, yet the release surface still mixed headings, metric labels, status text, explanatory prose, form labels and maintenance copy without a sufficiently clear product-wide hierarchy
+problem: Merely having font-size/weight variables does not produce a coherent interface. Frontend Design needs a role-level typography contract that defines which reader-facing roles exist, how they relate, where each role may appear, and how hierarchy is checked across a complete screen. Otherwise components can all use “approved tokens” and still look unrelated.
+project-specific context: a private product's exact type sizes and compact tray density are project-local. The reusable issue is semantic typography roles and whole-screen enforcement, not a universal numeric scale.
+
+### Status chrome must follow one coherent visual grammar
+status: SUPERSEDED
+tracking: #55
+resolution: Merged into #55. Status chrome follows semantic-role grammar in web-development 0.3; production integration: c232f2ea906277f2217c4bbce4f56df1ebd5827c.
+source: a private product task 01050 full-panel visual review, 2026-09-24
+evidence: equivalent high-level states were presented with inconsistent container treatment, including plain text states alongside pill-backed/bordered states at comparable hierarchy levels
+problem: A product cannot use background fills, pills, borders and bare labels arbitrarily for sibling status semantics. The inconsistency makes visual weight reflect implementation history instead of meaning and makes the interface look assembled component-by-component rather than designed as one system.
+project-specific context: a private product's Installed, Normal, Checking, Ready and other labels are project-specific. The reusable issue is to freeze status-component families by semantic role and severity, then require sibling-state comparison during full-screen review.
+
+### Sensitive form lifecycle and contract-backed capability acceptance
+status: NEW
+source: a private product 01056r1 full-product GPT Work failure, 2026-10-06
+target layer: Frontend Design product-state QA / secure setup flows / external-provider acceptance
+evidence: `<private repository>@b010e7dfe6d879ee72c50e66b78a4b9d09b9668f`, user-provided native screenshots, and `results/01056r1_full_product_repair` review evidence
+problem: A visually mature desktop surface still passed Producer review while sensitive setup drafts survived Cancel/Hide/surface switching, provider capability closure outran real configured/error evidence, frozen section order drifted in production, one status icon carried several unrelated meanings, and external API parsing relied on heuristic field searching despite a published structured schema. These are not project-specific styling preferences; they are recurring frontend/product acceptance gaps at the boundary between UI state, provider contracts, and secure forms.
+candidate_action:
+- Treat sensitive form drafts as ephemeral state. On Cancel, Hide, management-surface switch, successful save, and failed save, clear secret/token/seed/recovery-key drafts unless an explicit product requirement says otherwise.
+- For forms that persist both secure secret material and ordinary metadata/config, require transactional or compensating semantics; frontend acceptance must include partial-failure behavior rather than only success.
+- For external providers, require a canonical-schema fixture derived from the published API/owner contract plus configured-normal, partial, auth-failure, and provider-error states before capability closure.
+- Do not accept setup UI + parser skeleton as `implemented`; require an explicit capability depth matrix covering backend/runtime, real contract path, user entrypoint, state/error semantics, actions/boundaries, and evidence.
+- Compare rendered section order/grouping/disclosure directly against the frozen design authority; implementation may not silently reorder the information architecture because each component looks acceptable in isolation.
+- Add a semantic-icon matrix to sibling-state review. `online`, `checking`, `stale`, `unknown`, `needs setup`, and `needs sign-in` should remain visually distinguishable without relying on color alone.
+- Require actionability truth: a known-unavailable backend must not expose an enabled primary action that deterministically fails.
+- For identity/presence UIs, distinguish multiple roles that share the same hostname/display name and minimize raw infrastructure identifiers in default/external-review surfaces.
+promotion_gate: validate on a private product repair plus one independent secure/provider-heavy product before promoting the exact checklist. The core draft-lifecycle and design-authority drift checks are strong candidates for the next Frontend Design production release.
+## Watch boundaries
+
+- One product's visual taste is project-local unless repeated or explicitly adopted as a long-term cross-project preference.
+- Runtime bugs belong to the app/repo or build capability, not automatically to this plugin.
+
+additional evidence (2026-10-06, a private product 01056r2): the next candidate fixed frontend Cancel/management-switch cleanup but GPT Work still found that tray-toggle, light-dismiss and outside-click native hide paths bypassed that JavaScript cleanup. The same review also found capability matrices overstating setup/preflight surfaces as operational completion, a Tailnet provider hard-coding a developer-machine Workstation alias instead of reusing canonical discovery, and external-review PNGs tracking real private repo/account/infrastructure metadata. This strengthens the candidate in four generic directions:
+- sensitive draft lifecycle must bind to native window lifecycle, not only button handlers;
+- provider/capability acceptance must require portable discovery and operational depth, not setup/parser presence;
+- cross-provider aggregation must preserve checking/presence-only/partial truth rather than gate it away by `LIVE` status;
+- external review evidence needs privacy minimization as a first-class acceptance artifact distinct from local real-live validation.
+
+additional evidence (2026-10-06, a private product 01056r2 review): after frontend Cancel/surface-switch cleanup was added, native tray-toggle/light-dismiss/outside-click still bypassed the JavaScript scrub path; controlled-state coverage still bypassed the production aggregate; a `Tailnet devices` status label conflated local backend connectivity with fleet/device presence; and the external review pack tracked private repo/account/infrastructure metadata despite no literal secret leak. Generic implications:
+- sensitive lifecycle acceptance must include every native window-hide cause and reopen-after-hide verification;
+- controlled-state QA must start from provider/component inputs and exercise the production aggregate/presentation chain;
+- status labels need scope/denominator truth (control plane vs device fleet vs host presence vs full health);
+- privacy-safe external evidence is a separate deliverable from local real-live validation, not merely a token/OTP redaction pass;
+- action-ledger/evidence artifacts require referential integrity and mechanical reconciliation with actual rendered controls.
+
+### Product UI copy needs an explicit Frontend Design content-architecture contract
+status: NEW
+tracking: #89
+source: a private product / a private product production copy-naturalness audit, 2026-09-26
+evidence_path: `README.md` (design source archived in Blueprint)
+target layer: Frontend Design product-UX planning / page composition / rendered acceptance
+evidence: an anonymous production GPT Work audit of 150 Simplified/Traditional Chinese UI strings classified only 53 as fully natural, with 72 readable-but-modelish, 15 clearly unnatural, and 10 product/semantic problems. Repeated failures were not sentence grammar alone: ordinary status was turned into slogans, one product state was repeated across badge/heading/body, pages repeated symmetric `eyebrow -> heading -> paragraph` sections, explicit second person and balanced contrast structures accumulated across the screen, and internal product/legal state leaked into consumer surfaces.
+problem: Frontend Design currently has broad `content discipline` and anti-generic visual rules, but it does not yet own a sufficiently explicit decision layer for **whether a UI location needs text at all, what role that text serves, how much copy belongs on the screen, whether neighboring copy repeats the same state, and when a wording issue is actually an information-architecture/product-semantics defect**. A writing plugin cannot reliably repair a page whose content hierarchy is wrong; polishing each string independently can make a generic/AI-like screen more polished without making it more human.
+candidate_action:
+- Add a page/screen-level **content architecture pass** before wording polish. For every visible text block, classify its role (navigation, status, instruction, CTA, field label/help, empty/loading/error, trust/legal, explanatory, marketing/brand) and ask whether it is necessary on this surface.
+- Detect duplicate semantic payload across badge, hero, metric, section heading/body, CTA and footer. Prefer deleting or merging redundant text instead of asking the writing layer to create multiple distinct phrasings for the same fact.
+- Treat ordinary state as ordinary state by default. A system status such as registration-open / matching-closed should not automatically become a slogan, paired headline or decorative proof block.
+- Add a whole-page copy-rhythm check alongside the visual taste gate: repeated `not X but Y`, `first X then Y`, `only X then Y`, repeated explicit second person, repeated eyebrow/heading/body templates and repeated reassurance can make individually acceptable lines feel generated when viewed together.
+- Classify copy defects before repair: **content-architecture defect**, **wording/localization defect**, **product/semantic defect**, or **legal/trust escalation**. Only wording/localization defects should be handed directly to the writing layer.
+- Define a structured handoff to the writing plugin that includes at least: surface, UI role, product state, intended user consequence/action, neighboring visible copy, locale, protected facts, and length/viewport constraint.
+- Keep zh-Hans and zh-Hant-HK as separate locale realizations. Frontend Design owns placement and hierarchy; it must not treat mechanical Simplified/Traditional conversion as localization acceptance.
+- Rendered acceptance must re-check copy after layout. Mobile first viewport, CTA visibility, line wrapping, repeated labels, visual prominence, and the relationship between copy and controls are part of the content decision.
+- Do not create a generic ban-list or AI detector. The target is product clarity and natural UI behavior, not detector evasion.
+boundary: wording realization belongs to `clear-writing`; this item defines Frontend Design ownership and handoff. Product/legal semantics that are unsafe or internally framed must be escalated rather than cosmetically rewritten.
+promotion_gate: first stabilize the broader Frontend Design workflow/TODO consolidation so this contract lands on a reliable content/layout/state-review foundation; then validate the cross-plugin handoff on a private product and at least one independent product before treating it as a mature generic production gate.
+
+additional evidence (2026-11-03, Project a private product A/B pre-implementation review):
+complete itemized evidence: `README.md` (design source archived in Blueprint) — preserves every a private product A/B first-round REVISE/REJECT row, every second-round changed row, and every third-round independent finding with exact before/after text.
+
+- Project a private product exposed the same boundary more severely. Two visual candidates had already been designed before a full user-visible copy review was run. a private product A then required 472 REVISE and 36 REJECT decisions across its first complete inventory; a private product B required 139 REVISE and 39 REJECT. A second independent pre-implementation review still found 72 additional A revisions and 25 additional B revisions, including `设备端执行器`, `资料待复核`, `底层重建方案已确定`, `教学交付`, `ChatGPT 适配`, and a large empty “需要我” region left after deleting premature actions.
+- The most important failures were not typography or sentence grammar. B originally promoted future a private research project/a private extension/a private product decisions into “需要我” before the actions were ready, exposed source-refresh maintenance as an “异常信号”, and retained design metadata such as candidate/theme labels. Those elements should have been removed by content architecture before wording polish.
+- The repeated review cost is itself evidence of workflow failure: the user should not receive a visually finished candidate and then act as the first whole-screen copy reviewer. If tens of user-visible strings are still being rewritten after the candidate is presented as ready, the Frontend Design delivery gate failed even when every individual component rendered correctly.
+
+required production behavior to add to this TODO:
+- **Copy/content work is a pre-delivery design responsibility, not post-delivery cleanup.** Before a UI candidate may be called ready, Frontend Design must complete the page-level content-architecture pass, hand the surviving text roles to Product UI Copy / Clear Writing, consume the returned final wording, re-render the real surface, and inspect the whole screen again.
+- The final rendered pass must ask both “is this wording natural?” and “should this block still exist here?” Deleting text may require resizing/removing containers; a blank card or large empty region left behind after content rejection is still a Frontend Design failure.
+- The user must not be the normal first detector of internal-process language, fake current actions, duplicated semantic payload, or machine-maintenance status. Discovery of a substantial batch of such defects after delivery should be recorded as a failed pre-delivery gate and fed back into the shared regression set, not normalized as another routine review round.
+- Separate **semantic copy identities** from repeated rendered occurrences. Review the unique state/action/message meanings once with context, then mechanically verify that every rendered occurrence maps to an approved identity. Do not mistake thousands of DOM occurrences for thousands of independent editorial decisions.
+- Every independently presented design variant must complete this joint Frontend Design × Product UI Copy pass before user comparison. A/B independence does not justify shipping unreviewed copy.
+- User review after this gate should focus on product preference, taste and direction. It must not be required to discover basic phrases such as “本人”, “执行器”, “foundation”, “validator”, or premature “需要我” items.
+
+
+
+
+### Frontend Design 必须先从专业用户真实任务建模，再决定视觉语法；跨领域产品要通过专业迁移检验
+status: NEW
+source: a private design project Blueprint 多轮视觉方向失败与 2026-11-03 用户反馈
+evidence: a private design project Blueprint 已连续经历多轮 Deep Research、真实成熟产品参考、Figma 视觉方向和 Product Design ideation。候选从早期 React Flow demo 感提升到更精致的浅色/深色系统图，但用户仍明确拒绝：每个 block 被刻意配 SVG、节点形状为“有设计感”而变化、永久关系标签和 bottom summary bar 形成模板感、glow/流体区域看似有语义却无法解释。进一步对照 某私有统计研究项目 和 a private extension 后发现，根因不是单个视觉 token 或缺少 whole-screen polish，而是视觉设计仍从“架构图应该长什么样”出发，没有先建模统计/数值研究者、CS/软件工程师实际需要完成的专业任务。该项目 真正需要数学目标、近似/误差、采样/积分、oracle、claim/evidence、FreezeScope；a private extension 真正需要 browser/extension actor、DOM lifecycle、event/message、selector/callback、fail-open、runtime evidence。把两者都压成同一种 node-card graph 会同时损失专业语义和产品辨识度。
+problem: Frontend Design 现有 P0-P4、whole-screen visual direction、canonical design authority、whole-product taste gate 已能防止明显随意的页面和实现漂移，但还不足以保证“视觉方向本身源自专业工作”。对于科研、工程、医学、生信、统计等专业产品，一个画面可以在普通 UI 审美上漂亮、完整、通过组件/动效/whole-product taste 检查，却仍然让领域专业人士觉得“这不是我的工作方式”。如果系统先选定通用 UI archetype（dashboard、node graph、cards、generic IDE）再把领域内容塞进去，之后再精修图标、颜色、motion 也无法补回丢失的专业任务结构。
+project-specific context: a private design project Blueprint 的 该项目、a private extension、semantic lenses、Research Systems Workbench、是否使用 SVG/节点形状只是本次真实案例。可复用缺口是：复杂专业产品在 P1 visual direction 前，需要先确认核心用户的真实任务、领域对象、证据/失败/完成语义，以及同一交互语法能否迁移到产品承诺覆盖的不同专业场景；最终视觉质量既要通过设计师视角，也要通过目标领域 professional 的“这符合我真实工作方式”判断。该反馈不否定已推广的 whole-screen visual direction / taste gate，而是暴露其更上游的专业任务建模与跨领域迁移缺口。
+
+
+additional evidence (2026-11-03, a private design project Blueprint Research Systems Workbench Round 1): after the design process was explicitly redirected away from “pretty architecture graphs” toward a research-systems workbench, four new candidates still overloaded the selected-object state with mechanism, formula, implementation, evidence, applicability/scope, revision, system context and status at once. The same run also exposed internal model vocabulary such as FreezeScope / dependency closure / applicability / repeated “current” directly in user-facing surfaces, assumed one-file/one-symbol/fixed-line implementation bindings, and treated evidence mainly as status cards rather than support boundaries. This strengthens the professional-task-first gap in four reusable ways:
+- one screen/state should have one primary work question; professional complexity should unfold by task, not by showing every model layer simultaneously;
+- canonical/internal model terms may remain valid implementation concepts but need a user-task language projection before becoming UI labels;
+- implementation UIs for real engineering/research objects must support one-to-many bindings and different locator maturity (symbol, semantic anchor, selector/config, search candidate, optional snapshot line numbers) rather than assuming a permanent single file/line range;
+- evidence UI should answer what was observed, what claim it supports, what it does not support, source identity and revalidation need, instead of accumulating PASS/current/applicability badges.
+These are not merely copy-polish issues: they affect information architecture, progressive disclosure, professional task modeling and the interaction contract before wording is finalized. They should be considered alongside the existing Product UI Copy content-architecture TODO rather than duplicated as another wording rule.
+
+### 没有被明确要求的界面就没有设计：先盘点全部用户可见界面，再逐个出规格
+status: NEW
+source: 某浏览器扩展（页面内注入界面）真实使用，2026-11-24
+evidence: 该项目的弹窗（popup）经过专门设计并截图验收；但页面内注入的回答工具入口、复制/导出菜单、选区高亮工具、提示消息、消息定位控件等从未有设计规格，全部是内联样式、临时字体、`position:fixed` 随意摆放的裸按钮。发布后用户实测：入口不出现、高亮工具不出现、定位控件以无样式文字叠在页面标题上、提示"简陋得一塌糊涂"、早期复制按钮"随机乱飘"。自动验证与评审只覆盖了被点名的弹窗，Planner 也只看了弹窗截图就放行。
+problem: Frontend Design 只对用户点名的界面做设计和验收；同一产品里未被点名的用户可见界面默认没有设计、没有状态覆盖、没有真实挂载验收。用户原话："什么东西我不讲永远是没有设计的。"
+project-specific context: 宿主页面（第三方网站 DOM）会变化、需要回放真实页面做挂载验收，是该项目特有的；"和宿主原生界面及自家弹窗视觉统一"的具体取值也属该项目。
+
+Candidate refinement（待 Planner 判断是否已被现有 F-A/F-B/F-C 门覆盖）：
+
+- 任何 UI 任务开工前，先做**全量界面盘点**：列出产品所有用户可见界面（含注入宿主页面的、错误/空/加载态、提示、快捷键、打印/导出页），不只列本次被点名的；每个界面标注是否已有设计规格。
+- 没有规格的界面不得进入实现或发布；规格至少写明：挂载位置与锚点、找不到锚点时的行为（禁止退回任意 fixed 定位）、尺寸/tokens/字体来源、各状态、动效、关闭方式、文案规则。
+- 一个产品内多个界面共用同一 tokens 源（例如弹窗与页面内注入界面），禁止各处内联样式和散落颜色值。
+- 发布前截图矩阵覆盖**全部**用户可见界面 × 明暗 × 关键状态，由实现者以外的一方逐张查看；只看最近改动的界面不算通过。
+- 注入第三方页面的界面：验收必须在真实宿主 DOM（录制回放或与当前线上一致的 fixture）上真实加载扩展后进行。

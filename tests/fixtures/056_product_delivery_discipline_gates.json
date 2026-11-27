@@ -5,7 +5,7 @@
     {
       "gate": "G2",
       "name": "Acceptance Admission",
-      "fixture": "cuhk_date_broad_green_negative",
+      "fixture": "dated_ui_broad_green_negative",
       "producer_evidence_complete": false,
       "human_blocked": true,
       "advisory_review_requested": true,
@@ -46,7 +46,7 @@
     {
       "gate": "G6",
       "name": "Frontend design consumption",
-      "fixture": "bobbio_read_only_design_authority",
+      "fixture": "synthetic_read_only_design_authority",
       "canonical_design_source_read_only": true,
       "production_payload_requires_figma": true,
       "production_payload_requires_motion": true,

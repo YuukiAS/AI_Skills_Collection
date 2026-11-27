@@ -909,7 +909,7 @@ Unchanged plugin versions: `workflow-core 0.1`, `ai-skills-core 0.2`, `writing-s
 
 Changed repository behavior:
 
-- <private repository> Beamer/PDF guidance now preserves `/home/yuukias/render_resources/chinese_math_pdf` as the local render-resource location when the probe reports it.
+- <private repository> Beamer/PDF guidance now preserves a user-local render-resource directory as the local render-resource location when the probe reports it.
 - Render failures now require reporting exact missing resources, TinyTeX, TeX packages, fonts, or PDF QA tools for user installation approval.
 - A regression test now guards tracked guidance against retired server render paths.
 

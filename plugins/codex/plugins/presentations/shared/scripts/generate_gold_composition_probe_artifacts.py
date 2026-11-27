@@ -10,9 +10,10 @@ import build_gold_composition_recipe
 
 
 REPO_ROOT = Path(__file__).resolve().parents[6]
-OUT_DIR = REPO_ROOT / "docs" / "audits" / "research_presentation_gold_composition_library"
-VISUAL_REVIEW_DIR = REPO_ROOT / "results" / "025_research_presentation_gold_scientific_composition_library" / "visual_review"
-VISUAL_REVIEW_026_DIR = REPO_ROOT / "results" / "026_research_presentation_discussion_next_experiment_gold_recovery" / "visual_review"
+AUDIT_FIXTURES = REPO_ROOT / "tests" / "fixtures" / "presentations" / "audit_samples"
+OUT_DIR = AUDIT_FIXTURES / "research_presentation_gold_composition_library"
+VISUAL_REVIEW_DIR = AUDIT_FIXTURES / "gold_visual_reviews"
+VISUAL_REVIEW_026_DIR = VISUAL_REVIEW_DIR
 
 
 PROBES = [
@@ -162,7 +163,7 @@ def main() -> int:
             for decision in decisions
             if decision["decision"] == "PASS"
         ],
-        "runtime_probe_artifact": "docs/audits/research_presentation_gold_composition_library/runtime_probe_traces.json",
+        "runtime_probe_artifact": "tests/fixtures/presentations/audit_samples/research_presentation_gold_composition_library/runtime_probe_traces.json",
         "coverage_summary": [
             "motivation / research question",
             "estimator / mathematical identity",

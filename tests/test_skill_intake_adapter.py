@@ -34,7 +34,7 @@ def valid_routing_contract() -> dict[str, object]:
 
 class SkillIntakeAdapterTests(unittest.TestCase):
     def test_notion_false_existing_partially_merged_is_already_processed(self) -> None:
-        history = adapter.parse_history(REPO_ROOT / "docs/provenance/INTEGRATION_HISTORY.md")
+        history = adapter.parse_history(REPO_ROOT / "tests/fixtures/provenance/INTEGRATION_HISTORY.md")
         result = adapter.history_gate(
             adapter.Candidate(
                 name="ICLR reviewer open source collection",

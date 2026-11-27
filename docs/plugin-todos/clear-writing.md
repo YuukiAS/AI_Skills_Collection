@@ -16,11 +16,11 @@ source: 用户对各仓库 `AGENTS.md` 审查的裁决。
 ### 2026-11-17：复杂技术解释事实大体正确，但长期呈现“讲义腔”，用户必须反复追问才能得到真正的人话因果链
 
 status: NEW  
-source: CAT-TRACE 相关 ChatGPT 直接回答与随后对回答质量的连续复盘；本条只记录 reader-facing 表达失败，不裁决 CAT-TRACE 科学结论。
+source: a private research project 相关 ChatGPT 直接回答与随后对回答质量的连续复盘；本条只记录 reader-facing 表达失败，不裁决 a private research project 科学结论。
 
 evidence:
 - `docs/plugin-todos/evidence/ChatGPT_回答太绕的原因_20261117-1703.txt`：完整原始对话导出，集中记录“读得累、没有建立 idea、核心一直绕、每轮都要继续追问”等反馈，以及同一技术关系被多轮重讲后才逐渐说清的过程。
-- `docs/plugin-todos/evidence/ChatGPT_评估两份Pro提示词_20261117-1623.txt`：更长的完整原始对话导出，包含 Pro 研究汇报、TRACE / Laplace / 无限 TRACE 等直接回答；同类问题跨不同问题持续出现，说明不是单一术语或单轮措辞造成。
+- `docs/plugin-todos/evidence/ChatGPT_评估两份Pro提示词_20261117-1623.txt`：更长的完整原始对话导出，包含 Pro 研究汇报、the private research project / Laplace / 无限 the private research project 等直接回答；同类问题跨不同问题持续出现，说明不是单一术语或单轮措辞造成。
 
 problem:
 - **回答像在按知识体系授课，而不是像一个已经想明白的人在给同伴解释。** 常见结构是“这里要分清 → 第一层/第二层 → 更准确地说 → 所以你可以记成 → 再补一个边界”。这些教学路标本身占据大量注意力，真正的对象、动作和因果关系反而出现得晚。
@@ -34,23 +34,23 @@ problem:
 - **完成标准必须看读者是否形成稳定理解。** 如果一轮回答结束后，读者仍然需要追问“到底是什么”“到底哪一步变了”“为什么”“一个个来”，即使每句话单独都正确，也应判为 Clear Writing 失败。
 - **现有 TODO 已经有自然度、动作句、具体对象、例子、读者任务与停止条件等相关规则，本案例更像真实执行仍未稳定压住的问题。** 后续 maintainer 应先判断这是已有规则的 production regression，还是确实缺少对“讲义腔 / textbook-style explanation”的更高层抽象；不要机械再加一串句式黑名单。
 
-project-specific context: TRACE、Laplace、\(\gamma\)、有限 \(p\)、无限 TRACE、具体预测数字和 Pro 研究内容只用于提供真实失败证据，不进入通用写作规则。可迁移问题是：复杂技术解释事实正确时，仍可能因为“按知识体系授课、缺少具体对象—动作—因果链、没有重音与心智模型”而极难阅读。
+project-specific context: the private research project、Laplace、\(\gamma\)、有限 \(p\)、无限 the private research project、具体预测数字和 Pro 研究内容只用于提供真实失败证据，不进入通用写作规则。可迁移问题是：复杂技术解释事实正确时，仍可能因为“按知识体系授课、缺少具体对象—动作—因果链、没有重音与心智模型”而极难阅读。
 
 
 #### 2026-11-19 follow-up：实际操作问题已经判断正确，但正文仍先讲抽象方法论，只有最后的 bullet list 像人话
 
 feedback_status: NEW  
-source: Project Atlas 回归设计讨论。用户问的是一个直接操作选择：以后这类回归到底应该从旧聊天创建分支，还是新开 thread 把完整案例重演一遍，以及为什么。
+source: Project a private product 回归设计讨论。用户问的是一个直接操作选择：以后这类回归到底应该从旧聊天创建分支，还是新开 thread 把完整案例重演一遍，以及为什么。
 
 negative example / failure:
-- 回答的实质判断基本正确：TRACE、R4、R5 依赖旧聊天里已经形成的上下文和任务状态，应从真实历史位置分支；R2、R3 这类独立任务可以新开 thread。
+- 回答的实质判断基本正确：the private research project、R4、R5 依赖旧聊天里已经形成的上下文和任务状态，应从真实历史位置分支；R2、R3 这类独立任务可以新开 thread。
 - 但正文先后使用“既有上下文”“状态转换”“回归输入冻结”“安全隔离层”“因果结构”等抽象标签解释一个本来可以两三句话说清的操作选择。
 - 用户需要先把这些方法论术语翻译回“旧聊天本身会影响模型，所以要从旧聊天接着测；前情无关的题才新开聊天”，才能知道实际该怎么做。
 - 最后列出的 R1/R4/R5 与 R2/R3 bullet list 反而是整条回答中最容易直接使用的部分。用户明确反馈：“除了 bullet list 写的是人话吗？”并要求按 Clear Writing TODO 重写。
 - 这说明现有 2026-11-17“讲义腔”问题仍在普通项目决策解释中复发：模型已经想明白结论，却把内部抽象和方法论层直接暴露给读者，导致正确答案仍然不好读。
 
 positive rewrite / target behavior:
-- 先直接回答操作选择：**“像 TRACE、R4、R5，旧聊天本身就是出错条件的一部分，所以从旧聊天的正确位置另开分支；R2、R3 前情无关，才新开聊天。”**
+- 先直接回答操作选择：**“像 the private research project、R4、R5，旧聊天本身就是出错条件的一部分，所以从旧聊天的正确位置另开分支；R2、R3 前情无关，才新开聊天。”**
 - 再用一句具体原因解释：**“把旧聊天复制进新 thread 后，模型是在读一段贴过来的材料，不是在继续刚才那段对话，测试条件已经变了。”**
 - 如果后续确实需要讨论“状态”“权限”“因果结构”等方法论，再放在这两句之后；这些术语不能成为读者理解实际操作的前置条件。
 
@@ -64,7 +64,7 @@ acceptance:
 ### 2026-11-06：双路 Pro 收敛汇报事实正确，但按来源复述导致读者承担比较工作；改成直白叙述后未损失忠实度
 
 status: NEW  
-source: STAT5060 Tutorial 验收器两路 Pro 实施冻结研究收敛汇报。用户要求 Codex 汇报 PRO_A / PRO_B 并决定如何收敛。原回答事实基本正确，也做出了“事实以 A 为准、工程骨架以 B 为准”的裁决，但用户明确反馈阅读非常累。随后把同一材料完全改写为自然、直白、按裁决路径推进的叙述，用户反馈“不是完美但是好了不少”。
+source: the private course Tutorial 验收器两路 Pro 实施冻结研究收敛汇报。用户要求 Codex 汇报 PRO_A / PRO_B 并决定如何收敛。原回答事实基本正确，也做出了“事实以 A 为准、工程骨架以 B 为准”的裁决，但用户明确反馈阅读非常累。随后把同一材料完全改写为自然、直白、按裁决路径推进的叙述，用户反馈“不是完美但是好了不少”。
 
 negative example:
 - 原回答先完整讲 PRO_A，再完整讲 PRO_B，再列“两者一致的部分”，最后才进入“我建议怎样收敛”。
@@ -96,12 +96,12 @@ desired behavior / acceptance:
 - 回归应同时检查两件事：一是 claim/evidence/uncertainty 零实质漂移；二是用户是否还需要自行完成来源间比较。前者通过而后者失败，仍判 Clear Writing 失败。
 - 正例判据不是“更短”，而是**协调者替读者完成了该由协调者完成的综合工作**。
 
-project-specific context: PRO_A / PRO_B、STAT5060、324 页、oracle、guard 等只作为真实回归背景。通用问题是：多路研究收敛时，模型可能把“忠于研究”误解成“忠于研究报告的结构和术语”，结果事实正确却极难阅读。
+project-specific context: PRO_A / PRO_B、the private course、324 页、oracle、guard 等只作为真实回归背景。通用问题是：多路研究收敛时，模型可能把“忠于研究”误解成“忠于研究报告的结构和术语”，结果事实正确却极难阅读。
 
 #### 2026-11-07 follow-up：用户确认真正需要的不是“报告压缩”，而是从用户目标反推完整交付说明
 
 feedback_status: NEW
-source: 同一 STAT5060 Tutorial 验收器线程。用户继续追问：先弄清楚其需求是什么、最终想看到什么；验收器应覆盖哪些方面；怎样开发才不会一轮轮返修；历史版本应逐版做还是全部做完再一起测。协调者据此重写后，用户明确确认“这个是我要的回答”，并要求把该正例及其原因写回 AI Skills Collection。
+source: 同一 the private course Tutorial 验收器线程。用户继续追问：先弄清楚其需求是什么、最终想看到什么；验收器应覆盖哪些方面；怎样开发才不会一轮轮返修；历史版本应逐版做还是全部做完再一起测。协调者据此重写后，用户明确确认“这个是我要的回答”，并要求把该正例及其原因写回 AI Skills Collection。
 
 positive example:
 - 第一层先说明用户真正要的结果不是“再写一套验收器框架”，而是尽快把 Tutorial 做出来，同时用一套能真实挡住复发问题的验收器缩短后续返修。
@@ -167,16 +167,16 @@ additional generic rules from this case:
 ### 2026-11-03：用户只问“下一步先做什么”，回答却用否定式依赖分析开场，第一句话即失去阅读兴趣
 
 status: NEW  
-source: Design Assurance / Asteria Blueprint 下一步顺序讨论。用户问“先把 Design Assurance 做了？做插件？等 Asteria Blueprint 做完？”；模型已经查清真实仓库状态，但回答第一句写成“下一步不是‘先把 Design Assurance 插件写出来’，也不是‘等 Asteria Blueprint 做完’。正确顺序是……”，随后继续解释循环依赖、阶段关系和并行条件。用户明确反馈：“第一句话就没兴趣看了”，并显式调用 Clear Writing 要求重写。
+source: Design Assurance / a private design project Blueprint 下一步顺序讨论。用户问“先把 Design Assurance 做了？做插件？等 a private design project Blueprint 做完？”；模型已经查清真实仓库状态，但回答第一句写成“下一步不是‘先把 Design Assurance 插件写出来’，也不是‘等 a private design project Blueprint 做完’。正确顺序是……”，随后继续解释循环依赖、阶段关系和并行条件。用户明确反馈：“第一句话就没兴趣看了”，并显式调用 Clear Writing 要求重写。
 
 evidence:
-- 旧回答其实已经得到足够明确的结论：先冻结 Design Assurance 的权威设计合同；Asteria Blueprint 当前继续做候选裁决；合同冻结后，Design Assurance Plugin 核心实现与 Asteria Blueprint 可并行推进。
+- 旧回答其实已经得到足够明确的结论：先冻结 Design Assurance 的权威设计合同；a private design project Blueprint 当前继续做候选裁决；合同冻结后，Design Assurance Plugin 核心实现与 a private design project Blueprint 可并行推进。
 - 但答案没有把这个结论直接放在第一句，而是先用“不是 A，也不是 B”的排除式句型和“正确顺序是”元叙述开场，让用户先处理模型的纠错过程，而不是直接得到行动建议。
 - 后文继续展开“循环依赖”“合同冻结后分叉”“Grill Me 的职责”“Blueprint 现在继续做什么”等多个章节。内容大体正确，但用户当前只想知道下一步和先后顺序，阅读负担明显超过问题本身。
 - 这类失败不是事实错误，而是**结论没有被加工成读者当前需要的行动顺序**。模型把后台依赖分析原样带到了前台。
 
 negative example:
-> “下一步不是‘先把 Design Assurance 插件写出来’，也不是‘等 Asteria Blueprint 做完’。正确顺序是：先冻结 Design Assurance 的权威设计合同，然后 Design Assurance 核心实现和 Asteria Blueprint 可以并行推进，最后再接起来。”
+> “下一步不是‘先把 Design Assurance 插件写出来’，也不是‘等 a private design project Blueprint 做完’。正确顺序是：先冻结 Design Assurance 的权威设计合同，然后 Design Assurance 核心实现和 a private design project Blueprint 可以并行推进，最后再接起来。”
 
 problem:
 - **第一句先否定两个错误选项，而不是直接给行动。** 用户问“下一步做什么”，首句应直接回答“先冻结 Design Assurance 设计”，不需要先听模型排除什么。
@@ -186,40 +186,40 @@ problem:
 
 desired behavior / acceptance:
 - 对“下一步做什么 / 先后顺序是什么”这类问题，第一句直接给唯一动作，不用“不是……也不是……”“正确顺序是……”等元叙述铺垫。
-- 本案例的合格开头应类似：**“下一步先冻结 Design Assurance 的设计；Asteria Blueprint 同时继续做候选裁决，不用等它做完。”**
+- 本案例的合格开头应类似：**“下一步先冻结 Design Assurance 的设计；a private design project Blueprint 同时继续做候选裁决，不用等它做完。”**
 - 后续只补会改变执行顺序的理由：Blueprint 的 domain model 依赖 Design Assurance contract；但视觉/交互裁决不依赖，可以继续。
 - 若用户还问 Grill Me，再用一段说明它只是 Design Assurance 的按需澄清工具，不扩写外部生态或完整产品职责史。
 - 全文应让用户在第一屏直接知道：现在做什么、Blueprint 是否要等、什么时候开始写 Plugin。若还需要从多个标题中自己提炼顺序，判为失败。
 
-project-specific context: Design Assurance、Asteria Blueprint、Grill Me 是本次真实案例。通用问题是：复杂依赖已经分析清楚后，普通用户只问“下一步”，回答仍以排除式论证和后台依赖结构开场，导致正确结论失去可读性。
+project-specific context: Design Assurance、a private design project Blueprint、Grill Me 是本次真实案例。通用问题是：复杂依赖已经分析清楚后，普通用户只问“下一步”，回答仍以排除式论证和后台依赖结构开场，导致正确结论失去可读性。
 
 
 ### 2026-11-01：技术判断正确，但回答把“关系是什么”写成“为什么不能替代”的长篇论证
 
 status: NEW  
-source: Asteria Next / Grill Me 关系讨论。用户要求研究 Grill Me，并判断它与当前 Asteria Next 的关系；模型事实判断基本正确，但首轮回答过长，之后即使显式调用 Clear Writing，仍需要用户再次指出“我就知道不能替代，具体呢”“你之前回答说到重点了吗”。
+source: a private design project Next / Grill Me 关系讨论。用户要求研究 Grill Me，并判断它与当前 a private design project Next 的关系；模型事实判断基本正确，但首轮回答过长，之后即使显式调用 Clear Writing，仍需要用户再次指出“我就知道不能替代，具体呢”“你之前回答说到重点了吗”。
 
 evidence:
-- 首轮回答已经得到核心事实：`grill-me` 用连续追问暴露尚未做出的关键决定；`grill-with-docs` 把部分决定沉淀到文档/ADR/spec；Asteria 负责长期连接系统结构、机制、真实实现、证据、修订与设计—实现漂移。
-- 但回答把大量篇幅用在证明“Grill Me 不能替代 Asteria”，展开 Wayfinder、代码架构检查、多个长期能力列表和大量示例；用户真正需要的三者职责边界与接口反而没有在开头一次说清。
-- 用户随后显式调用 Clear Writing，要求“组织清楚语言再告诉我”。第二版明显缩短，但仍把主要篇幅放在“为什么不能替代”与长期价值辩护上。用户再次指出：他已经知道不能替代，真正想问的是两个 Grill 能力与 Asteria 到底是什么关系。
+- 首轮回答已经得到核心事实：`grill-me` 用连续追问暴露尚未做出的关键决定；`grill-with-docs` 把部分决定沉淀到文档/ADR/spec；a private design project 负责长期连接系统结构、机制、真实实现、证据、修订与设计—实现漂移。
+- 但回答把大量篇幅用在证明“Grill Me 不能替代 a private design project”，展开 Wayfinder、代码架构检查、多个长期能力列表和大量示例；用户真正需要的三者职责边界与接口反而没有在开头一次说清。
+- 用户随后显式调用 Clear Writing，要求“组织清楚语言再告诉我”。第二版明显缩短，但仍把主要篇幅放在“为什么不能替代”与长期价值辩护上。用户再次指出：他已经知道不能替代，真正想问的是两个 Grill 能力与 a private design project 到底是什么关系。
 - 这说明失败不是事实错误，而是**没有识别用户的判别问题**：用户要的是三者的职责分工、前后关系和数据/产物怎样交接，而不是替代性辩论。
 
 problem:
 - **回答了一个更容易的问题，而不是用户真正的问题。** “能不能替代”只需一句结论；核心应是“各自负责什么、产物是什么、谁消费谁”。
-- **正确内容没有形成最小关系模型。** 三者本可用一条链说明：Grill Me 形成决定 → Grill with Docs 把决定落成可引用文档 → Asteria 把已冻结决定连接到系统对象、实现、证据和修订。回答却拆成大量章节，增加阅读负担。
-- **重复证明已知结论。** 用户已经接受“不能替代”后，继续论证长期时间尺度、Mica/private-project 示例和工具生态，不再增加当前决策价值。
+- **正确内容没有形成最小关系模型。** 三者本可用一条链说明：Grill Me 形成决定 → Grill with Docs 把决定落成可引用文档 → a private design project 把已冻结决定连接到系统对象、实现、证据和修订。回答却拆成大量章节，增加阅读负担。
+- **重复证明已知结论。** 用户已经接受“不能替代”后，继续论证长期时间尺度、a private extension/private-project 示例和工具生态，不再增加当前决策价值。
 - **显式调用 Clear Writing 后仍未完全执行停止条件。** 第二版虽更清楚，但没有把“用户到底要比较什么”放到第一屏并立即收敛。
 - **内部研究过程泄漏到成品答案。** 对周边工具的调查是形成判断所需的后台工作，不等于都应该出现在最终正文。
 
 desired behavior / acceptance:
-- 第一段直接给三者关系，不先证明替代性：**Grill Me 负责把未决定的问题问出来；Grill with Docs 负责把已回答的关键决定沉淀成文档/ADR/spec；Asteria 负责把这些已冻结决定长期绑定到系统结构、机制、源码、证据、修订和漂移。**
-- 明确产物接口：Asteria 可以把 Grill with Docs 产生的 ADR/spec 作为来源或修订依据；Grill Me 本身不成为 Asteria 的运行时模块。
-- 若用户只问关系，最多再解释一个关键边界：Grill 系列管理“决策形成”，Asteria 管理“决策落地后的系统真相与演进”。
-- 不再展开 Wayfinder、代码健康工具或完整 Asteria 能力清单，除非它们会改变当前判断。
+- 第一段直接给三者关系，不先证明替代性：**Grill Me 负责把未决定的问题问出来；Grill with Docs 负责把已回答的关键决定沉淀成文档/ADR/spec；a private design project 负责把这些已冻结决定长期绑定到系统结构、机制、源码、证据、修订和漂移。**
+- 明确产物接口：a private design project 可以把 Grill with Docs 产生的 ADR/spec 作为来源或修订依据；Grill Me 本身不成为 a private design project 的运行时模块。
+- 若用户只问关系，最多再解释一个关键边界：Grill 系列管理“决策形成”，a private design project 管理“决策落地后的系统真相与演进”。
+- 不再展开 Wayfinder、代码健康工具或完整 a private design project 能力清单，除非它们会改变当前判断。
 - 显式调用 Clear Writing 后，验收不仅看语言是否自然，还要看回答是否围绕**用户真正的判别问题**重组，并在答案成立后停止。
 
-project-specific context: Asteria、Grill Me、Grill with Docs、ADR/spec 是本次真实案例。通用问题是：复杂研究已经获得正确事实后，回答仍可能因为抓错用户的判别问题而过长；Clear Writing 必须帮助把“调查得到的全部信息”压缩成“用户当前需要作出的区分”。
+project-specific context: a private design project、Grill Me、Grill with Docs、ADR/spec 是本次真实案例。通用问题是：复杂研究已经获得正确事实后，回答仍可能因为抓错用户的判别问题而过长；Clear Writing 必须帮助把“调查得到的全部信息”压缩成“用户当前需要作出的区分”。
 
 
 ### 2026-10-31：BWG baseline 复盘即使显式调用 Clear Writing，仍写成冗长审计报告，用户需要连续两次纠偏
@@ -372,22 +372,22 @@ evidence: 用户连续追问具体数字从哪里来，以及图的横纵轴含�
 problem: 回答先讲结论、公式和限定，迟迟没有解释输入、固定条件、计算路径和视觉编码；压缩回答时又删掉必要的轴解释。连续否定也让读者自行猜测实际机制。
 desired behavior / acceptance: 先说明数据或参数来自哪里、固定了什么，再依次解释横轴、纵轴、点或格子、颜色；之后说明为何能作比较和怎样理解趋势。具体数字应给出正面的生成链。对专家可以简短，但读者仍应在一次回答后指出任意视觉元素代表什么。
 
-### 2026-10-26：DII 22题报告连续两次中文返修仍有术语障碍与整篇模板腔
+### 2026-10-26：a private research project 22题报告连续两次中文返修仍有术语障碍与整篇模板腔
 status: NEW
 source: 2026-10-26 `Distributed_Imaging_Inference` 第八轮科研问题排序报告的连续两次中文返修；用户先要求“照着 Clear Writing 彻底重写”，后又明确指出“缺如是什么东西”“SIMEX 又是啥”“读完自己不审核的”，继续要求用自然中文并去掉没有读者价值的模型归属。
 evidence:
-- **失败返修一（已经宣称按照 Clear Writing 重写）**：同一 DII 报告提交 `dc39942bde4654eb3c8086c10b494a0dfb213da1`（blob `4e0b23f72395fe7446ddca45ea222d6fb4edb614`）。开头对科研方向的解释已有改善，22个问题也齐全；但第2题标题仍写“真的缺如吗”，第15题直接列 `SIMEX`，第9题罗列 `AFAPE`、`ICYM2I`、`Knockout`，没有告诉研究者这些方法在当前比较中做了什么。用户直接指出术语无法理解，要求再次返修。
+- **失败返修一（已经宣称按照 Clear Writing 重写）**：同一 a private research project 报告提交 `dc39942bde4654eb3c8086c10b494a0dfb213da1`（blob `4e0b23f72395fe7446ddca45ea222d6fb4edb614`）。开头对科研方向的解释已有改善，22个问题也齐全；但第2题标题仍写“真的缺如吗”，第15题直接列 `SIMEX`，第9题罗列 `AFAPE`、`ICYM2I`、`Knockout`，没有告诉研究者这些方法在当前比较中做了什么。用户直接指出术语无法理解，要求再次返修。
 - **失败返修二（再次声称已完成全文重写和自查）**：提交 `f5b618b7a91ee38f022f18af47034478853b6a80`（blob `1b558c329a620e2fd7154d9052169ada6224f539`）。去掉前述部分术语之后，正文22题又全部以“**我的评价：……**”作为统一段落开头，仍保留未经解释的 `AFAPE`、`ICYM2I`、`Knockout` 等名称。用户再次表示不满意，要求结合 Research Authoring TODO 继续重写。随后再清理重复标签和普通术语，说明“已检查22题完整性”远不足以验收阅读质量。
 problem:
 - **第一次出现的专业词不解释作用。** 医学术语虽准确，读者仍可能需要“患者天生没有这段血管”等普通中文；统计方法如果只列缩写，读者无法知道其解决了什么、为什么构成强对手。正式方法名为检索可以保留，但必须先给具体作用。
 - **局部句子清楚，整篇仍机械。** 22次相同“我的评价”标签让学术判断读起来像自动填写的审核表；清除一个被指出的词后，仍有其他类似术语和句式残留。读者需要直接看到判断和依据的连续段落，不能靠固定表头制造“逐题完成”的表象。
 - **交付前自查只测形式与禁词，用户仍在承担自然语言验收。** 作者反复声称“已按 Clear Writing 重写/逐题审核”，实际可见标题与正文中的陌生词、重复句式没有消除。需要维护者复查正常入口的全文可读性检查是否真正起作用，而非继续添加一个针对 `SIMEX` 的词语黑名单。
-- 与此前2026-10-16 DII 的“陌生术语首次解释”和2026-10-15的“整篇重复结构”真实反馈属于同类能力要求。本条补充**同一22题成稿连续返修后仍反复暴露缺陷的版本对照**；不创设第二套术语规则，也不代替 Research Authoring 对正文该不该出现作者归属、文献表及内部流程的内容取舍责任。
-project-specific context: DII 的22题排序、具体方法及文献名字、示例医学对象只用于定位失败。原文件及版本留在 DII 的 Git 历史，不复制私人研究正文至本中央 TODO。此处能确认用户明确要求按 Clear Writing 要求处理，但不能从 GitHub 产物单独确认正式安装的 Clear Writing 入口或最终检查器确实运行过，因此只记真实用户可见的失败，不宣布已验证的插件生产回归。
+- 与此前2026-10-16 a private research project 的“陌生术语首次解释”和2026-10-15的“整篇重复结构”真实反馈属于同类能力要求。本条补充**同一22题成稿连续返修后仍反复暴露缺陷的版本对照**；不创设第二套术语规则，也不代替 Research Authoring 对正文该不该出现作者归属、文献表及内部流程的内容取舍责任。
+project-specific context: a private research project 的22题排序、具体方法及文献名字、示例医学对象只用于定位失败。原文件及版本留在 a private research project 的 Git 历史，不复制私人研究正文至本中央 TODO。此处能确认用户明确要求按 Clear Writing 要求处理，但不能从 GitHub 产物单独确认正式安装的 Clear Writing 入口或最终检查器确实运行过，因此只记真实用户可见的失败，不宣布已验证的插件生产回归。
 
 ### 2026-10-26：技术汇报改写后仍向用户暴露内部缺陷编号
 status: NEW
-source: 2026-10-26 用户对 STAT5060-TA 三套课程验证器独立验收的原始回答与明确调用 Clear Writing 后的中文改写进行比较，并直接反馈不应继续看到 `IVA-P` 一类内部编号。
+source: 2026-10-26 用户对 the private course repository 三套课程验证器独立验收的原始回答与明确调用 Clear Writing 后的中文改写进行比较，并直接反馈不应继续看到 `IVA-P` 一类内部编号。
 evidence:
 - 原回答按内部编号和状态码组织问题；改写版已改善开头结论、任务顺序及重复证据，但正文仍以 `IVA-P-001（P1）：三条规则永远无法正常通过`、`IVA-H-001（P1）` 等作为问题标题，并混入验证规则编号和内部状态。这些标识主要服务开发定位，读者只需理解缺陷、严重程度、影响和修复责任。
 - 同一改写版也保留了必要的准确交付文件名（如 `SID_Project.pdf` 与 `SID_Project_source.zip`）；这类名称直接决定课程材料如何修复或提交，有明确的读者行动价值。原始验收报告及三份修复清单仍保存完整追踪编号，正文不展示编号不会丢失可定位证据。
@@ -400,7 +400,7 @@ desired behavior / acceptance:
 - 对同一份复杂验收材料执行普通中文结果汇报：开头给出真实完成度、主要缺陷、能否验收及修复顺序；保留事实数量、严重性、责任边界和不确定性；未经用户要求不把 `IVA-*`、规则 ID 和机器状态码当作正文标题或阅读前提。
 - 加入成对回归：普通读者汇报应隐藏无当前行动价值的缺陷编号；明确要求“按修复单 ID 逐条指派 Codex”时必须准确展示原编号；学生/教师必须使用的实际交付文件名则始终正确保留。
 - 检查最终完整回答与实际呈现的表格，不以“第一段清楚”或“所有字符串均被保留”作为通过条件。若正常入口仍失效，排查已存在的 `response-clarity` 内容取舍和全篇应用问题，而非追加一份编号禁词表。
-project-specific context: `STAT5060-TA` 的内部 `IVA` 编号、课程规则、真实文件命名及修复判断仅是本次证据；不得固定为 Clear Writing 的领域规则。本条为用户观察到的 Clear Writing 调用前后对比，尚未取得独立的插件入口执行轨迹，不声称已定位内部平台路由原因。
+project-specific context: `the private course repository` 的内部 `IVA` 编号、课程规则、真实文件命名及修复判断仅是本次证据；不得固定为 Clear Writing 的领域规则。本条为用户观察到的 Clear Writing 调用前后对比，尚未取得独立的插件入口执行轨迹，不声称已定位内部平台路由原因。
 
 ### 2026-10-26：普通回答中的图片、卡片和流程图缺少必要性判断
 status: NEW
@@ -417,7 +417,7 @@ desired behavior / acceptance:
 - 对同三类情境分别做正反回放：验证课程 PDF 时，若需图片，只展示与当前检验对象真实对应且有证据价值的页面；连续三步且只有一步需用户操作时，允许紧凑的步骤清单并突出行动；简单线性因果关系默认自然段，只有存在真实复杂结构才使用流程图。
 - 在用户可见成稿层评估“看过组件后，用户是否获得纯文本无法同样高效获得的信息”，同时检查视觉权重、滚屏成本、图文对应关系、真实文件身份和误导风险。不要靠图片数量、卡片数量、图标禁用名单或外观审美评分单独验收。
 - Clear Writing 负责读者相关性、表达与呈现建议；实际界面组件是否可选择、图片检索与渲染、应用自动插入的组件需按平台和上游界面能力划清控制边界。不能把无法被插件直接控制的宿主 UI 行为宣称为已经由修改写作规则解决。
-project-specific context: STAT5060 项目验收、MacBook Neo 上的软件验收安排及 DII 研究循环是三个具体反例/对照，不成为固定通用版式；本条与既有“伪结构化”“整篇阅读负担”反馈关联维护，不升级为全面的 UI 禁令。
+project-specific context: the private course 项目验收、MacBook Neo 上的软件验收安排及 a private research project 研究循环是三个具体反例/对照，不成为固定通用版式；本条与既有“伪结构化”“整篇阅读负担”反馈关联维护，不升级为全面的 UI 禁令。
 
 
 ### ChatGPT 网页端中文长回答的阅读层混排和冗余问题
@@ -478,31 +478,31 @@ boundary: Presentation validator 的具体 B1/B2、mutant、oracle、Bridge 权�
 feedback_status: NEW
 source: `Distributed_Imaging_Inference` 方法阅读讨论；用户连续阅读两份 ChatGPT Web 中文解释后直接反馈“这两次回答不行，换行太多了”，并要求记录进 Clear Writing。
 evidence:
-- 第一份回答继续解释 DII 报告第 5–8 章，科学逻辑和比较关系基本完整，但从“第10点”一直拆到“第21点”，大量小标题、短段和单句判断分别占行；同一因果链被切成许多视觉块。
+- 第一份回答继续解释 a private research project 报告第 5–8 章，科学逻辑和比较关系基本完整，但从“第10点”一直拆到“第21点”，大量小标题、短段和单句判断分别占行；同一因果链被切成许多视觉块。
 - 第二份回答解释 (t_v(z)) 与“目标组成量”，把一个本可连续说明的推导拆成 8 个编号小节，并频繁把一句解释、一个短公式、一个结论分别独立成段。公式本身正确并不能抵消过度分页式写法造成的阅读负担。
 problem:
 - **一句一段不是清晰**：当相邻句子共同解释同一个概念、同一因果链或同一公式时，应组成自然段。把每个判断单独换行，会迫使读者反复重新进入上下文，并人为拉长页面。
 - **标题数量必须服从信息层级**：不能因为内容较长就按“10、10.1、11、11.1……”持续切分。只有读者真的需要跳转、比较或区分独立问题时才增加标题；连续推导优先用少量段落完成。
 - **公式不应机械独占一段**：简短定义、一步关系和局部推导优先行内；只有核心公式、复杂多行表达或需要被后文反复引用的关系才独立展示。公式前后的解释应尽量留在同一语义段附近。
 - **阅读负担是整篇属性**：单个短段可能清楚，但几十个短段连续出现会形成“卡片流／讲义碎片”式阅读体验。QA 需要检查整屏和整篇的段落密度、滚动长度和视觉切换次数，而不是只判断每句是否可懂。
-- **正例不能机械复制外形**：前一轮 DII 方法解释被用户认可，成功原因是先建立直觉、真实对照和证据边界；后续回答错误地继承了大量编号和短块形式。应保留解释逻辑，而不是把“分层解释”误实现成“每层都单独起标题、每句话都换行”。
+- **正例不能机械复制外形**：前一轮 a private research project 方法解释被用户认可，成功原因是先建立直觉、真实对照和证据边界；后续回答错误地继承了大量编号和短块形式。应保留解释逻辑，而不是把“分层解释”误实现成“每层都单独起标题、每句话都换行”。
 desired behavior: 对复杂科研解释，优先使用连贯自然段；一段处理一个完整问题或推理单元。必要时保留少量标题和一个比较表，但不要把普通说明拆成列表式、卡片式或逐句换行。长答案可以详细，但视觉节奏应紧凑、连续。
-boundary: DII、(t_v(z))、FedFisher、Dice 等属于项目内容，不进入通用规则。Clear Writing 只吸收“段落应按语义单元而非句子切分、标题/公式独立展示需要真实阅读价值、整篇纵向阅读成本需要验收”的通用问题。本例未证明正式 Clear Writing production path 已被调用，故记录为真实用户反馈，不作为插件运行回归或发布证据。
+boundary: a private research project、(t_v(z))、FedFisher、Dice 等属于项目内容，不进入通用规则。Clear Writing 只吸收“段落应按语义单元而非句子切分、标题/公式独立展示需要真实阅读价值、整篇纵向阅读成本需要验收”的通用问题。本例未证明正式 Clear Writing production path 已被调用，故记录为真实用户反馈，不作为插件运行回归或发布证据。
 
-#### 2026-10-16：DII 融合方案评估仍存在过度断行与非必要英文
+#### 2026-10-16：a private research project 融合方案评估仍存在过度断行与非必要英文
 feedback_status: NEW
 source: `Distributed_Imaging_Inference` 融合方案评估 Markdown；用户于 2026-10-16 明确要求“处理这份 markdown 里的非必要换行和英文”，并指定 `philosophy` 这类普通概念应改成中文，同时要求把原稿作为 Clear Writing negative sample。
 evidence:
 - 用户提供的原稿共 595 行。内容和数学论证已经基本完整，但大量相邻句子各自单独成段；同一个因果链会连续出现“一句判断 → 空行 → 一句解释 → 空行 → 下一句”，导致页面被人为拉长。
 - 中文正文持续混用 `decoder`、`loss`、`memory`、`optimizer`、`objective`、`audit`、`held-out validation`、`inclusion probability`、`penalty`、`regularizer`、`philosophy`、`surrogate`、`trade-off`、`dataset compression`、`feature coreset`、`rare pathology`、`optimal allocation` 等普通技术或逻辑词。它们在当前语境中并不承担正式专名、代码、检索定位或逐字核对作用，可以直接用自然中文表达。
-- 同一文档也包含确有保留价值的英文/缩写，如 `GPT-5.6 Pro`、`GPT-6 Pro`、`GPT Work`、`HAMP`、`DII`、`PSMR`、`MFAC`、`M&Ms`、`CARE`、`Dice`、`Transformer`、`U-Net`、`JPEG`、`Markdown` 以及数学变量。问题不是“出现英文”，而是没有逐项判断英文是否真的有当前阅读价值。
+- 同一文档也包含确有保留价值的英文/缩写，如 `GPT-5.6 Pro`、`GPT-6 Pro`、`GPT Work`、`HAMP`、`a private research project`、`PSMR`、`MFAC`、`M&Ms`、`a private project`、`Dice`、`Transformer`、`U-Net`、`JPEG`、`Markdown` 以及数学变量。问题不是“出现英文”，而是没有逐项判断英文是否真的有当前阅读价值。
 problem:
-- **语义连续却视觉碎片化**：相邻句子共同完成一个解释单元时，应优先组成自然段；不能把“每句话都能独立理解”误当成“每句话都应该独立成段”。这与前一条 DII 过度断行反馈相互印证。
+- **语义连续却视觉碎片化**：相邻句子共同完成一个解释单元时，应优先组成自然段；不能把“每句话都能独立理解”误当成“每句话都应该独立成段”。这与前一条 a private research project 过度断行反馈相互印证。
 - **普通技术词不应靠英文制造精确感**：当中文译法不会妨碍复制、搜索、执行或精确核对时，应直接中文化。保留 `philosophy`、`memory`、`audit` 之类词不会增加科学精度，只会增加语言切换和阅读成本。
 - **专名与普通概念必须分开处理**：不能把“减少非必要英文”实现成全局翻译。正式模型/方法名、稳定缩写、公式符号和文件格式仍需保留；普通概念则不应因为来源文档使用英文就机械继承。
 - **清理必须保持内容保真**：本例的修复范围应限于合并非必要断行、中文化非必要英文和删除无读者价值的内部来源残片，不应趁机改变数学结论、公式、比较关系、方法选择或实验建议。
 desired behavior: 对中文或中文主导的科研解释，在最终输出前做一次整篇阅读层检查：按语义单元合并段落；逐项审查保留的英文是否承担正式专名、机器字符串、检索定位或逐字核对作用；若没有，就用自然中文替换。长回答仍可保留必要标题、公式、引文和列表，但不能让这些结构退化成逐句分页。
-boundary: DII、HAMP、PSMR、MFAC、M&Ms、CARE 及该文档的数学判断属于项目内容，不进入通用写作规则。当前样本是用户确认的真实负例；尚未证明正式安装的 Clear Writing production path 已处理过该文本，因此不作为插件运行回归或发布失败证据。
+boundary: a private research project、HAMP、PSMR、MFAC、M&Ms、a private project 及该文档的数学判断属于项目内容，不进入通用写作规则。当前样本是用户确认的真实负例；尚未证明正式安装的 Clear Writing production path 已处理过该文本，因此不作为插件运行回归或发布失败证据。
 
 2026-10-17 follow-up：与 DSFedMed / D3S2 比较时再次退回英文概念堆叠。用户先要求“说人话”，助手上一条回答却在中文科研解释中重新大量使用 `patient structure`、`hierarchical multi-fidelity allocation`、`downstream reuse`、`independent high-fidelity audit`、`patient coreset`、`spatial-only memory`、`memory artifact`、`benchmark`、`feature memory` 等普通英文组合来承担核心论证。用户随即指出“又开始非必要英文了”，并要求作为 Clear Writing negative example 记录。
 
@@ -512,13 +512,13 @@ boundary: DII、HAMP、PSMR、MFAC、M&Ms、CARE 及该文档的数学判断属�
 - 对用户已经连续要求“说人话、减少非必要英文”的项目，普通 Web 回复仍然反复回退到英文术语栈，说明这不是一次偶发措辞问题，而是**最终输出前缺少整篇语言层复查**。
 - 正确修复不是把所有英文逐字翻译，而是保留正式方法/模型名和必要检索身份，把“我们到底比别人多做了什么”重新写成自然中文因果关系。
 
-#### 2026-10-15：DII 方法解释成为可复用的 Clear Writing 正例
+#### 2026-10-15：a private research project 方法解释成为可复用的 Clear Writing 正例
 feedback_status: NEW
 source: `Distributed_Imaging_Inference` / 用户阅读导师研究提案 PDF 后，要求“用人话解释我们到底要做什么、是否真的比 FedFisher 更有意义、是否真正受导师三个想法启发，以及应该怎样读方法”；用户随后明确反馈“我很喜欢你这个回答”，并要求作为 Clear Writing 正例记录。
 evidence: 当前对话中的完整回答；不复制私人科研原文，只记录表达结构和用户确认的阅读体验。
 positive:
 - **先给一句可复述的主线**：开头不用术语堆叠，而把整项研究压成“医院不再每轮重新训练和上传模型，而是在一次参与窗口里告诉服务器：当前强模型附近，本地分割目标会怎样变化；服务器据此继续做几步适配”。读者先获得 mental model，再进入论文和公式。
-- **用真实强基线解释‘为什么需要新方法’**：没有泛泛说“现有方法不足”，而是直接拿 FedFisher 对照，分别说明它“给服务器一个最终答案”和候选 DII“想给服务器一张局部地图”的使用场景差异；同时明确写出“目前不能说我们的东西比 FedFisher 更有意义”。这让价值判断与证据强度同时可读。
+- **用真实强基线解释‘为什么需要新方法’**：没有泛泛说“现有方法不足”，而是直接拿 FedFisher 对照，分别说明它“给服务器一个最终答案”和候选 a private research project“想给服务器一张局部地图”的使用场景差异；同时明确写出“目前不能说我们的东西比 FedFisher 更有意义”。这让价值判断与证据强度同时可读。
 - **把导师三个想法落到算法里的不同角色**：MOSAiC 对应“传什么对象”；Dice/CE 等目标结构对应“哪些信息不能丢、怎样组合”；影像/组织/边界冗余对应“怎样把有限预算放到真正未知的非线性变化”。没有把三个想法并列成口号，也明确第三个想法仍是最需要验证的假设。
 - **先解释一个公式，再逐层扩展**：读者先只需要理解 `局部目标 = 当前值 + 一阶变化 + 非线性余项`，把它理解成“切线 + 偏离切线的部分”；随后才解释 Dice、二次代理、NTK-FL 和空间响应。数学被用来固定已经建立的直觉，而不是让符号承担全部解释工作。
 - **主动提供阅读路线而不增加新内容**：把 6 页 PDF 分成三遍阅读：先理解问题/前作/主意，再读目标与余项公式，最后看成本和实验。这个结构降低了第一次阅读的认知负担，但没有删掉详细数学、限制或竞争方法。
@@ -527,12 +527,12 @@ positive:
 why this is a useful positive sample:
 - 这是“复杂科研方法解释”而不是简单短答，说明 Clear Writing 的目标不是把答案压短，而是让每一层细节都有明确进入顺序。
 - 正向模式可以概括为：**一句人话问题/方法主线 → 一个真实对照说明为什么值得考虑 → 机制分解 → 单个核心公式的直觉 → 分层阅读路径 → 证据边界和停止条件**。这只是成功样例，不应被机械固定成所有科研回答的模板。
-boundary: FedFisher、MOSAiC、NTK-FL、Dice、CARE、M&Ms 和具体方法判断属于 DII 科研内容，不能进入通用 Clear Writing 规则。Clear Writing 可复用的是读者负担管理、对比方式、公式引入顺序、证据强度与语言层次。当前回答未证明经过正式安装的 Clear Writing production path，因此记录为真实用户确认的正例，不作为插件运行 PASS 或版本发布证据。
+boundary: FedFisher、MOSAiC、NTK-FL、Dice、a private project、M&Ms 和具体方法判断属于 a private research project 科研内容，不能进入通用 Clear Writing 规则。Clear Writing 可复用的是读者负担管理、对比方式、公式引入顺序、证据强度与语言层次。当前回答未证明经过正式安装的 Clear Writing production path，因此记录为真实用户确认的正例，不作为插件运行 PASS 或版本发布证据。
 
 
-#### 2026-10-16：DII 三方案对比形成正例，原始研究文档暴露术语与公式解释负担
+#### 2026-10-16：a private research project 三方案对比形成正例，原始研究文档暴露术语与公式解释负担
 feedback_status: NEW
-source: `Distributed_Imaging_Inference` / 用户要求比较两份 GPT Pro 与一份 Deep Research 的 DII 设计，并明确要求“控制非必要英文和非必要换行，多用段落文本”；用户阅读后反馈“好了不少”，要求把该回答作为 Clear Writing 正例，同时把三份原始研究文档中的典型可读性问题作为反例记录。
+source: `Distributed_Imaging_Inference` / 用户要求比较两份 GPT Pro 与一份 Deep Research 的 a private research project 设计，并明确要求“控制非必要英文和非必要换行，多用段落文本”；用户阅读后反馈“好了不少”，要求把该回答作为 Clear Writing 正例，同时把三份原始研究文档中的典型可读性问题作为反例记录。
 evidence:
 - 正例：当前对话中对三份方案的比较回答。回答分别用自然段解释 GPT-5.6 Pro、GPT-6 Pro 和 Deep Research 的核心设计，先说明“相比旧方案到底改了什么”，再给一个紧凑比较表和最终倾向；没有把数据集、文献清单或执行细节放在主叙事前面。
 - 反例 1：原始研究文档中直接使用 `provenance`、`halo`、`tile`、`estimand` 等英文词承载关键概念，却没有在第一次出现时用自然中文解释其具体角色。用户明确反馈这些词“对我理解非常困难，完全没有意义”。其中 `halo` 实际指局部特征块周围为保证感受野而额外保留的上下文边缘，`tile` 是局部特征块；若读者不知道这些角色，保留英文不会增加精确性，只会增加术语切换成本。
@@ -550,7 +550,7 @@ problem:
 - **Clear Writing 不应擅自补科学定义**：如果上游 Research Authoring 没有说明某个符号究竟是患者损失、组成量还是中心摘要，语言层应标记“对象未定义清楚”并要求补足，而不是凭上下文猜测并润色成确定含义。
 - **少英文、少换行的目标是降低推理负担，不是机械禁令**：正式模型名、论文名、代码 token、确实有稳定身份的术语可以保留；复杂公式和真正独立的比较也可以单独展示。判断标准是读者是否能沿着一个连续推理单元理解，而不是英文词数或段落数本身。
 desired behavior: 对复杂科研方法解释，优先采用“先用一句自然中文定义对象/机制 → 给必要直觉或对照 → 再给公式/正式术语 → 紧接着解释公式如何进入下一步”的顺序。一个段落尽量完成一个完整推理单元；只有独立比较、真正的新问题或需要跳转时才起新标题。数学式出现后，正文应立刻回答“这个式子算出来以后拿来做什么”。
-boundary: DII 的 PSMR、MFAC、双保真记忆、具体公式和科研判断属于项目内容，不进入通用 Clear Writing 规则。可迁移的是术语首次解释、符号对象定义、公式与直觉的顺序、英文密度、段落连续性和比较后的决策表达。本例来自 ChatGPT Web/用户附件，未证明正式 Clear Writing production path 已实际调用，因此作为真实用户确认的正反例，不作为插件运行 PASS 或版本发布证据。
+boundary: a private research project 的 PSMR、MFAC、双保真记忆、具体公式和科研判断属于项目内容，不进入通用 Clear Writing 规则。可迁移的是术语首次解释、符号对象定义、公式与直觉的顺序、英文密度、段落连续性和比较后的决策表达。本例来自 ChatGPT Web/用户附件，未证明正式 Clear Writing production path 已实际调用，因此作为真实用户确认的正反例，不作为插件运行 PASS 或版本发布证据。
 
 #### 2026-10-15：研究综合回答退化为小型方案文档，重复结论与结构化包装压过决策
 feedback_status: NEW
@@ -569,7 +569,7 @@ problem:
 - **项目设置/普通入口的消费可靠性是独立问题**：用户明确指出其长期 Project 设置已反复要求中文、先结论、减少非必要英文、避免机械分节和内部状态堆砌，而该普通 Web 回答仍明显回到“完整架构 memo”风格。这可以作为 Project 设置或普通回复语言层未稳定生效的真实证据；但在没有插件实际调用身份前，不能声称正式 Clear Writing candidate 本身已经运行失败。
 - **正向回归目标不是强制短答**：同类综合回答应优先压成少量自然段，先交代完成状态、共同结论、真正分歧和是否需要动作；只有确有比较价值时再用一个紧凑列表或表格。若用户明确要求完整研究综述、逐份报告比较或可执行设计，较长结构仍然合法。
 regression use: 该样本在 ChatGPT Web 正式验收前已经暴露，因此只能进入 `response-clarity` / G5 的 known regression bank，不能以后再冒充 G7 unseen/fresh holdout。
-project-specific context: AI Research Stack、Bridge、CARE、Lucerna 及三份报告的具体架构结论属于项目内容，不进入通用写作规则；通用规则只保留“结论后的信息增量、来源共识与助手建议分层、普通综合回答不要自动膨胀为内部方案文档、Project 设置是否真实约束普通回复”这些可迁移失败模式。
+project-specific context: AI Research Stack、Bridge、a private project、a private product 及三份报告的具体架构结论属于项目内容，不进入通用写作规则；通用规则只保留“结论后的信息增量、来源共识与助手建议分层、普通综合回答不要自动膨胀为内部方案文档、Project 设置是否真实约束普通回复”这些可迁移失败模式。
 
 #### 2026-10-20 follow-up：已证明 response-clarity 加载后仍发生整篇失控
 feedback_status: NEW
@@ -610,8 +610,8 @@ promotion_gate: 已满足。当前推广条件由用户明确确认的长期跨�
 ### Promote `clear-writing` into the generic content-preserving language layer
 status: READY_FOR_PROMOTION_AFTER_050
 tracking: #13
-source: 050 Deep Research rewrite failures + Distributed Imaging report v2 + a private research project presentation reviews + cross-plugin boundary audit, 2026-09-05
-evidence: `docs/design/READER_FACING_COMMUNICATION_PLUGIN_BOUNDARIES.md`; task 050 smoke/replay evidence; `docs/plugin-todos/research-authoring.md`; `docs/plugin-todos/presentations.md`
+source: 050 Deep Research rewrite failures + a private research project report v2 + a private research project presentation reviews + cross-plugin boundary audit, 2026-09-05
+evidence: `README.md` (design source archived in Blueprint); task 050 smoke/replay evidence; `docs/plugin-todos/research-authoring.md`; `docs/plugin-todos/presentations.md`
 release evidence (2026-10-19): Clear Writing `0.5` / repository `5.5.1` formally released at `fd79c4be54fc50bd66d9a51bbc1e681f361f6a77` and integrated into main at `57c5a2c8124752587688475b3ebc09c198d35186`. The user confirmed the existing USER / PRIVATE ChatGPT plugin is `0.5.0`, with all 27 files read back and compared against the formal generated payload, no drift beyond version normalization `0.5 -> 0.5.0`. This completes the bounded release, not this item's broader promotion gate. Required statistical result/caption adaptation remains pending in `docs/plugin-todos/statistical-modeling.md`, heading `Delegate reader-facing wording without giving away statistical semantics`, tracking `#73`; scientific-visualization caption/annotation adaptation remains pending in `docs/plugin-todos/scientific-visualization.md`, heading `Delegate captions/annotations without giving away visual semantics`, tracking `#49`. Keep the original promotion gate and source maturity unchanged until those handoffs and the remaining required evidence are satisfied. Release closure evidence: `results/clear-writing--release-closure/STAGE_B_CLOSURE.md`.
 target layer: routing/language/fidelity
 problem: the old `Clear Writing` display name undersold the product and was easy to confuse with `research-authoring`. The current display-name decision is now settled as `Clear Writing`, while the canonical plugin slug remains `clear-writing` and no slug migration is planned in this cleanup. The remaining capability TODO is broader and still unresolved: make this plugin the reusable content-preserving reader-facing language layer that can be called by research reports, presentations, statistical analysis, scientific visualization, medical imaging, bioinformatics and other domain plugins for captions, conclusions, table/figure wording, slide copy, technical explanations and long source-faithful rewrites. It must improve clarity without taking ownership of domain semantics.
@@ -630,9 +630,9 @@ promotion gate: do not treat the display-name cleanup as resolving this capabili
 status: NEW
 tracking: #14
 source: Distributed_Imaging_Inference / MOSAiC group-meeting report rewrite, 2026-09-19
-evidence: DII advisor-facing draft at commit \`fcf3713ede17afbcfebce2c070dd6e888608edae\`; user-supplied independent style review; revised DII report at commit \`55acbcdcb7253da34a6167be35661e40fba74805\`
+evidence: a private research project advisor-facing draft at commit \`fcf3713ede17afbcfebce2c070dd6e888608edae\`; user-supplied independent style review; revised a private research project report at commit \`55acbcdcb7253da34a6167be35661e40fba74805\`
 target layer: scientific-prose / advisor-facing English / document-level QA
-problem: A technically accurate English report can still feel obviously LLM-shaped when the entire document is built from repeated rhetorical templates. The DII draft had correct facts and careful evidence boundaries, but the prose repeatedly used highly regular patterns such as \`What ...?\`, \`Why ...?\`, \`How ...?\`, \`The key conceptual shift is...\`, \`The important point is...\`, \`The purpose is therefore...\`, and repeated \`not X, but Y\` corrections. Sections had similar length and internal grammar: announce thesis -> define -> contrast -> explain why it matters -> summarize. An independent fresh-thread review identified exactly this uniformity, rather than grammar or vocabulary, as the strongest AI-writing signal. The Chinese explanatory notes felt more natural because they followed the researcher's actual thought process and allowed uneven emphasis.
+problem: A technically accurate English report can still feel obviously LLM-shaped when the entire document is built from repeated rhetorical templates. The a private research project draft had correct facts and careful evidence boundaries, but the prose repeatedly used highly regular patterns such as \`What ...?\`, \`Why ...?\`, \`How ...?\`, \`The key conceptual shift is...\`, \`The important point is...\`, \`The purpose is therefore...\`, and repeated \`not X, but Y\` corrections. Sections had similar length and internal grammar: announce thesis -> define -> contrast -> explain why it matters -> summarize. An independent fresh-thread review identified exactly this uniformity, rather than grammar or vocabulary, as the strongest AI-writing signal. The Chinese explanatory notes felt more natural because they followed the researcher's actual thought process and allowed uneven emphasis.
 candidate_action:
 - Do **not** use \`What / Why / How\` question headings as a default outline generator. Prefer headings that name the actual scientific object: \`Tensor Train as the compression layer\`, \`M&Ms cardiac MRI\`, \`The first imaging version of MOSAiC\`, \`Information sent by each site\`.
 - Do not force every section into the same rhetorical shape. Allocate detail according to scientific importance. A dataset section may be factual; a method section may need intuition + formula; a limitation may need only one sentence.
@@ -646,14 +646,14 @@ candidate_action:
 - A final English QA pass should ask: **Does this sound like a PhD student explaining the project to an advisor, or like a polished research brief generated from a prompt?** Flag repeated rhetorical templates across the whole document, not only locally awkward sentences.
 - This is **not** detector-evasion. Do not inject mistakes, slang, random inconsistency, fake personal anecdotes, or arbitrary sentence variation. The objective is reader fit and authorial voice while keeping all facts, numbers, formulas, citations, uncertainty and claim strength unchanged.
 observed_handling:
-- The revised DII report removed the repeated question-heading skeleton, collapsed several meta transitions, reduced \`not X but Y\` usage, and reused the user's earlier plain-language explanation of the imaging bridge.
+- The revised a private research project report removed the repeated question-heading skeleton, collapsed several meta transitions, reduced \`not X but Y\` usage, and reused the user's earlier plain-language explanation of the imaging bridge.
 - The new English version begins from the advisor's prior question, explains MOSAiC in the same order the researcher would speak, gives dataset background before project-specific splits, and lets equations appear only where they clarify the actual statistical object.
 promotion_gate: replay on at least one additional advisor-facing English research report and one manuscript-like technical summary. Promote only if the same over-symmetry / over-signposting pattern recurs; do not build a fixed banned-phrase list.
 
 ### English scientific slide microcopy and full-deck prose remain cognitively heavy after a nominal final pass
 status: NEW
 tracking: #15
-source: TRACE / a private research project group-meeting deck v4–v8 reviews
+source: the private research project / a private research project group-meeting deck v4–v8 reviews
 evidence: `<private repository>` commits `<private commit>`, `<private commit>`, `<private commit>` and `<private commit>`. Earlier rounds exposed `Failure prevented`, mechanical `Example.` language, `What it measures`, `Focal method`, `Backbone` and `Rare fit`. The 33-page v8 deck still contains first-use domain terms that are expanded but not placed in enough context for a statistics audience (`COI`, `Metabarcoding`, `VicFlora`, `MGP`), source-note-like wording such as `That threshold is an implementation choice, not a private-project theoretical constant.`, and dense table/slide language that is grammatically valid but unnecessarily hard to parse. The v8 English-final-pass record explicitly says that it only reviewed visible wording touched in v8, so untouched but still difficult language could survive.
 problem: `scientific-prose` / presentation handoff needs to distinguish grammatical correctness from reader effort. A research slide should let a first-time expert reader understand what an unfamiliar term is, why it appears here, and what the sentence is asking them to retain. Expanding an acronym alone is insufficient when the term remains contextless. Final slide prose review also cannot be limited only to source lines modified in the current round: layout changes alter wrapping and old wording may still be cognitively heavy. The desired behavior is a full-deck audience-facing pass after scientific freeze: direct sentences, explicit local context for unfamiliar terms, natural action labels, short explanatory bridges where needed, and removal of internal/defensive/meta wording. This is not detector evasion and must not weaken scientific precision.
 project-specific context: The exact scientific objects and slide sentences remain in the private project repository and are not retained here. Do not create project-specific banned-word list, and do not let clear-writing alter equations, scientific claims, dataset values, theorem status, citations or slide layout.
@@ -661,8 +661,8 @@ project-specific context: The exact scientific objects and slide sentences remai
 ### Versioned Chinese technical documents can regress into English-keyword scaffolding during content-preserving revision
 status: NEW
 tracking: #16
-source: TRACE / a private research project canonical architecture and code implementation plan, 2026-09-09
-evidence: compare `<private repository>` with `...20260909.md`, and `<private document>` with `...20260909.md`; user review of the rendered 20260909 PDFs found the newer technical content substantially stronger but the reader-facing Chinese markedly worse. Examples include prose such as `TRACE continuity + 按组标记的开放尾部 + residual structure`, `极端 rare-tail / scale stress test`, `production inference`, `composite 后验 interval`, `independent-residual`, `working set`, `source script`, `taxonomy-proxy variant`, `structured dependence`, `large-p engine`, and many sentences built from English noun chains joined by `/` or `+`. The 20260908 versions were easier to read despite containing older scientific decisions.
+source: the private research project / a private research project canonical architecture and code implementation plan, 2026-09-09
+evidence: compare `<private repository>` with `...20260909.md`, and `<private document>` with `...20260909.md`; user review of the rendered 20260909 PDFs found the newer technical content substantially stronger but the reader-facing Chinese markedly worse. Examples include prose such as `the private research project continuity + 按组标记的开放尾部 + residual structure`, `极端 rare-tail / scale stress test`, `production inference`, `composite 后验 interval`, `independent-residual`, `working set`, `source script`, `taxonomy-proxy variant`, `structured dependence`, `large-p engine`, and many sentences built from English noun chains joined by `/` or `+`. The 20260908 versions were easier to read despite containing older scientific decisions.
 problem: content-preserving revision of an existing Chinese technical document needs a version-aware prose contract: the newest version is authoritative for scientific content, notation, numbers and decisions, while an earlier accepted version may be the style/readability baseline. A revision pass must compare the full document, not only newly changed lines, and must prevent ordinary reasoning words from drifting back into English merely because the executor is editing technical content. Exact code identifiers, library names, method names and necessary acronyms should remain unchanged, but ordinary connective logic, section prose, role descriptions, implementation explanations and phase descriptions should be natural Chinese. This is a readability/fidelity problem, not a request to ban English globally or to alter domain semantics.
 project-specific context: The project-specific notation, computation and implementation details remain in the private repository. Do not promote those details into generic wording rules. The general reusable lesson is to support `current content authority + prior accepted prose baseline + full-document readability diff`, while preserving formulas, code fields, filenames, method/library names, citations and scientific claim strength.
 
@@ -670,10 +670,10 @@ project-specific context: The project-specific notation, computation and impleme
 ### Product UI microcopy should state user consequence, not internal implementation reassurance
 status: NEW
 tracking: #17
-source: Lucerna task 01050 full-panel user review, 2026-09-24
+source: a private product task 01050 full-panel user review, 2026-09-24
 evidence: normal UI copy included implementation-facing reassurance and verbose maintenance prose such as force-push disclaimers, repair-visibility explanations, and dense first-sync file-operation summaries even when the primary user question was simply whether the feature was ready and what action was available
 problem: Technically accurate microcopy can still be poor product language when it narrates implementation policy, defensive guarantees or exhaustive operation detail that the user did not ask for. Normal UI needs a strict reader-value filter: say the current state, consequence and next action first; move low-frequency implementation guarantees, diagnostics and detailed change summaries behind details/help/confirmation surfaces.
-project-specific context: Lucerna's Overleaf, recovery and Zotero wording is project-specific. Frontend Design owns placement, progressive disclosure and visual hierarchy; clear-writing owns the reusable wording discipline once the UI role is frozen.
+project-specific context: a private product's Overleaf, recovery and Zotero wording is project-specific. Frontend Design owns placement, progressive disclosure and visual hierarchy; clear-writing owns the reusable wording discipline once the UI role is frozen.
 
 ## Open candidates
 
@@ -700,7 +700,7 @@ promotion_gate: only add new style rules when repeated across independent real a
 #### 2026-09-11：导师文稿需要摆脱内部策划口吻，而不只是减少英文
 feedback_status: NEW
 source: Distributed_Imaging_Inference / 将研究记录改写为上次会议纪要和下次会议报告。
-evidence: DII内部记录 `docs/research/DII_FEW_SHOT_ADAPTATION_LITERATURE_POSITIONING_2026-09-11.md`（`59e45ed0d2abbccf4e5090ad960e24c0e1388db4`）；两份新草稿位于DII `deliverables/group_meeting_2026-09-05/meeting_minutes_2026-09-05.md` 与 `deliverables/group_meeting_2026-09-12/group_meeting_report_v1.md`（`6d295317cdcbc0d02958d5f0bf6ca9b90c77defd`）。
+evidence: a private research project内部记录 `docs/research/DII_FEW_SHOT_ADAPTATION_LITERATURE_POSITIONING_2026-09-11.md`（`59e45ed0d2abbccf4e5090ad960e24c0e1388db4`）；两份新草稿位于a private research project `deliverables/group_meeting_2026-09-05/meeting_minutes_2026-09-05.md` 与 `deliverables/group_meeting_2026-09-12/group_meeting_report_v1.md`（`6d295317cdcbc0d02958d5f0bf6ca9b90c77defd`）。
 problem: 用户明确指出，“如果DGST后gap仍存在”“最终论文需要怎样的benchmark结构”“明日组会的完整叙事”不是面向老师的表达。即使把gap和benchmark逐词译成中文，句子仍在指导写作者如何准备材料，而不是直接向读者解释研究对象、证据和问题。
 observed handling: 在研究文体、章节职责和证据范围先确定后，改写为“相关文献把问题推进到了哪里”“DGST：本次直接比较的方法”“下一阶段拟研究的问题”等直接讨论内容的句子。用完整中文解释参考病例、模型更新和测量修正之间的关系；保留正式方法名、指标及单位，不用内部状态代替结论。正文先说明实际含义，再在表注或附录交代可比性限制；删除的是面向执行者的措辞，不是尚未验证的事实边界。
 project-specific context: 本例与Research Authoring的文体、时间线和来源工作分开记录，不重复接管证据选择、数据解释或会议归因。原文是有意保留的内部记录，不能因目标读者后来变化而追认其为原任务失败。当前没有正式Clear Writing插件调用或生产回放证据，新草稿也尚未获得用户认可；此处仅补充现有候选的真实需求和人工改写案例，等待后续回放，不修改正式插件规则。
@@ -719,7 +719,7 @@ manual_rewrite_lessons:
 - **方法综述表应服务一个决策问题。** 原始大表同时混合 venue、通信、server data、heterogeneity、objective relation、工程难度，读者很难抓主线。人工版先问“client 到底传了什么信息”，再按机制分组，最后保留完整方法表。插件应允许在零事实丢失前提下重建表格/段落层级，而不是逐行润色。
 - **科研缩写与专有名词应保留，但普通逻辑必须中文化。** `FedFisher`、`FedLPA`、`M&Ms`、`LoRA` 等需要保留；`scientific gap`、`method gap`、`resource contract`、`testbed`、`axis` 等普通逻辑词应优先改成自然中文。关键判据不是“英文多不多”，而是删除英文后是否损失定位能力。
 - **结论不能被“谨慎语气”埋掉。** 原文经常先写 provenance/法律式免责声明，再到真正结论。人工版将证据边界保留在结论之后或同段后半，使第一屏先回答“这对研究意味着什么”。这不是削弱谨慎性，而是调整信息顺序。
-project-specific context: PDF 的具体研究对象是 one-shot federated medical segmentation、CARE、M&Ms、FedFisher/FedLPA 等；这些算法、数据集、公式和研究判断属于项目内容，不应被写成通用风格规则。该 PDF 只能作为已知 replay/stress case，不能在反复迭代后再冒充 unseen/generalization holdout。人工重写全文本身不得提交到 repository。
+project-specific context: PDF 的具体研究对象是 one-shot federated medical segmentation、a private project、M&Ms、FedFisher/FedLPA 等；这些算法、数据集、公式和研究判断属于项目内容，不应被写成通用风格规则。该 PDF 只能作为已知 replay/stress case，不能在反复迭代后再冒充 unseen/generalization holdout。人工重写全文本身不得提交到 repository。
 candidate_action: 下一步不再先扩规则，而是把 2026-09-03 人工版作为 readability reference，使用当前 production `clear-writing` 对原 PDF 做完整 replay；Reviewer 只比较通用维度：claim/evidence 零漂移、段落重组能力、中文逻辑、公式解释、表格重构、非必要英文清理、未验证事项保留。若 production 输出明显只能做 sentence-local paraphrase，优先检查 `writing-fidelity` 是否过度限制结构级重写，再检查 `chinese-prose` / routing；不要为该项目增加词汇禁表。
 promotion_gate: 当前 `clear-writing` 在该真实 replay 上无法同时满足“内容/证据零漂移”和“阅读难度显著下降”，或随后另一个独立真实中文科研材料复现同类问题；若当前 plugin 已经能达到人工 baseline，则不为了制造 diff 修改 production skill。
 
@@ -727,7 +727,7 @@ promotion_gate: 当前 `clear-writing` 在该真实 replay 上无法同时满足
 ### Reader-facing artifacts from upstream plugins need an automatic Clear Writing handoff before copy freeze
 status: NEW
 tracking: UNASSIGNED
-source: STAT5060 Project final human-facing assessment production, 2026-10-08
+source: the private course Project final human-facing assessment production, 2026-10-08
 evidence: the Project workflow produced Chinese/English Question Bank, examiner-guide and marking-guide copy under Research Authoring, then froze exact copy and sent it to Codex for production. The first human-facing Chinese PDFs contained machine-facing mixed language such as `pre-read`, `PRIMARY_FAMILY_UNCLEAR`, `private log`, malformed token splicing, and schema-like wording even though `chinese-prose` already declares that any reader-facing Chinese Markdown/PDF/report should automatically receive its final pass. The current Marketplace topology keeps `clear-writing` and `research-authoring` as separate plugins; the released Research Authoring plugin does not bundle or automatically dispatch to Clear Writing, while `research-main` includes the underlying writing skills only when that profile is actually used.
 target layer: clear-writing normal routing / cross-plugin handoff / Research Authoring integration
 problem:
@@ -751,8 +751,8 @@ promotion_gate: replay on one new bilingual assessment artifact and one advisor-
 ### Product UI copy naturalness needs a dedicated microcopy capability, not more long-form prose rules
 status: NEW
 tracking: #90
-source: CUHK Date / Meet at CU production copy-naturalness audit + founder calibration, 2026-09-26
-evidence_path: `docs/design/product-ui-copy/evidence/CUHK_DATE_PRODUCT_COPY_NATURALNESS_AUDIT_2026-09-26.md`
+source: a private product / a private product production copy-naturalness audit + founder calibration, 2026-09-26
+evidence_path: `README.md` (design source archived in Blueprint)
 target layer: clear-writing routing / Chinese product microcopy / cross-plugin frontend handoff
 evidence: anonymous production audit classified 150 public-facing zh-Hans/zh-Hant-HK strings as A=53 natural, B=72 readable-but-modelish, C=15 clearly unnatural, D=10 product/semantic problems. Repeated B/C patterns included product self-definition before user action, unnecessary explicit second person, over-balanced `not X but Y / only X then Y / first X then Y` rhetoric, ordinary status turned into slogans, internal product-state nouns, over-complete reassurance, and mechanical Simplified/Traditional adaptation. Founder independently identified examples such as `你先完成资料` and `只开放注册 / 先把资料准备好` as readable but not like mature product UI.
 problem: current `chinese-prose` already performs well for reports, README, technical/scientific documents and general Chinese de-template cleanup. Its unit of reasoning is primarily prose/document-level readability. UI microcopy requires a different unit: **one text role inside a rendered product state, with neighboring copy and spatial/interaction context**. Expanding `chinese-prose` with many UI-specific rules risks regressing its now-useful long-form behavior while still failing to decide when a string should be deleted rather than rewritten.
@@ -764,16 +764,16 @@ candidate_action:
 - Add a page-level rhythm pass after line realization. Detect accumulated rhetorical symmetry, repeated explicit pronouns, sloganization of state, repeated reassurance, repeated internal nouns, and multiple differently worded copies of one state.
 - Realize zh-Hans and zh-Hant-HK independently from the same protected meaning. Do not implement localization as character conversion.
 - Prefer state/action/consequence-first copy over product self-definition when the UI role is transactional or status-bearing; however do not create a universal `please` rule or phrase ban-list.
-- Build evaluation from abstracted real-project patterns plus independent holdouts. CUHK Date exact strings may be retained as maintenance evidence/replay cases, but project-specific tone must not become a universal house style.
+- Build evaluation from abstracted real-project patterns plus independent holdouts. a private product exact strings may be retained as maintenance evidence/replay cases, but project-specific tone must not become a universal house style.
 - Add positive/negative/near-miss trigger tests so long-form Chinese reports continue to route to `chinese-prose`, while labels/help/status/CTA/empty/error/landing microcopy route to the dedicated UI capability.
 - Do not build AI-detector evasion or a generic humanizer.
 boundary: Frontend Design decides whether/where/how much to say and owns rendered hierarchy; the writing layer realizes natural language after UI role and product meaning are frozen.
 promotion_gate: do not implement this as an isolated Clear Writing patch while Frontend Design remains an unstable upstream owner. First establish a usable Frontend Design baseline; then run one cross-plugin Planner/Critic task that freezes ownership, routing, handoff schema and shared evaluation before implementation.
 
-additional evidence (2026-11-03, Project Atlas A/B pre-implementation review):
-complete itemized evidence: `docs/design/product-ui-copy/evidence/PROJECT_ATLAS_COPY_REVIEW_HISTORY_2026-11-03.md` — preserves every Atlas A/B first-round REVISE/REJECT row, every second-round changed row, and every third-round independent finding with exact before/after text.
+additional evidence (2026-11-03, Project a private product A/B pre-implementation review):
+complete itemized evidence: `README.md` (design source archived in Blueprint) — preserves every a private product A/B first-round REVISE/REJECT row, every second-round changed row, and every third-round independent finding with exact before/after text.
 
-- Project Atlas showed that line-level legality is insufficient. After a complete first copy review, a second independent pass still found 72 additional A revisions and 25 B revisions. Surviving examples included `只显示已经准备好、现在必须由本人完成的事项`, `可由本人调整`, `TA 本人逾期`, and `是否需要你处理还没有确认`. These strings were semantically defensible but still sounded like internal policy or model prose rather than mature personal-product copy.
+- Project a private product showed that line-level legality is insufficient. After a complete first copy review, a second independent pass still found 72 additional A revisions and 25 B revisions. Surviving examples included `只显示已经准备好、现在必须由本人完成的事项`, `可由本人调整`, `TA 本人逾期`, and `是否需要你处理还没有确认`. These strings were semantically defensible but still sounded like internal policy or model prose rather than mature personal-product copy.
 - The same case also exposed state-semantics drift. “没有需要你处理的事情”, “是否需要你处理未知”, “以后可能需要但条件未准备好”, and “现在已经准备好需要你处理” are four different product states. Naturalness must never collapse or swap them.
 - Internal workflow language also survived literal translation attempts: `foundation`, `validator`, `candidate`, `执行器`, `验收`, and similar process nouns must be realized as the concrete user-facing state/action when that meaning belongs on screen, not merely translated into a different internal noun.
 - This review happened before Codex implementation only because the user explicitly forced repeated inspection. The desired production contract is the opposite: the writing capability must finish its work before the candidate is presented to the user.
@@ -791,7 +791,7 @@ required production behavior to add to this TODO:
 
 ### 2026-11-04：复杂路线讨论被 Markdown 层级、重复状态和反复改口放大阅读负担
 status: NEW
-source: Asteria Blueprint / Atlas 恢复路线、Frontend Design vNext 与 Claude 使用顺序讨论，2026-11-04
+source: a private design project Blueprint / a private product 恢复路线、Frontend Design vNext 与 Claude 使用顺序讨论，2026-11-04
 target layer: Clear Writing / response structure / complex planning communication
 evidence:
 - 用户已经多次明确要求“段落化讲重点”，但回答仍反复使用长标题、表格、状态块、编号列表和多层 Markdown，把一个本应一句话串联的流程拆成大量视觉层级。
@@ -834,20 +834,20 @@ candidate_action:
 promotion_gate: 在后续真实复杂决策/架构讨论中，用户不需要再通过连续追问才能拿到完整关系；回答能在一轮内同时做到“第一屏先给结论”和“保留足够结构让用户知道具体怎么做”，且不会在显式 Clear Writing 调用后一轮又回退。
 
 
-### 2026-11-10：Atlas 第二轮与第三轮解释——用“博物馆”“地图地名”把抽象内容架构讲成读者可立即理解的心智模型
+### 2026-11-10：a private product 第二轮与第三轮解释——用“博物馆”“地图地名”把抽象内容架构讲成读者可立即理解的心智模型
 
 status: NEW  
-source: Asteria Atlas 第三轮内容收敛后的用户解释。用户问“第二轮和第三轮的区别有哪些？什么二级类、常驻名字，为什么要改？”；下面保留当轮获用户明确正反馈的 assistant 回答原文，作为 Clear Writing good example。
+source: a private design project a private product 第三轮内容收敛后的用户解释。用户问“第二轮和第三轮的区别有哪些？什么二级类、常驻名字，为什么要改？”；下面保留当轮获用户明确正反馈的 assistant 回答原文，作为 Clear Writing good example。
 
 positive example (verbatim):
 
-一句话说，第二轮是在“把架子搭对、把论文狠删一遍”，第三轮是在同一套架子上“把删过头的论文收回来，同时把真正需要你一眼看到的重点论文压少”。所以第三轮不是又换了一套 Atlas，而是在修第二轮两个相反的问题：论文太少，但醒目的名字又太多。
+一句话说，第二轮是在“把架子搭对、把论文狠删一遍”，第三轮是在同一套架子上“把删过头的论文收回来，同时把真正需要你一眼看到的重点论文压少”。所以第三轮不是又换了一套 a private product，而是在修第二轮两个相反的问题：论文太少，但醒目的名字又太多。
 
-第二轮最主要的成果其实是把 Atlas 的结构定下来了。以前容易按“联邦分割、域泛化、个性化、半监督……”这种方法名一路分叉，最后很像文献分类树。第二轮改成先问“这篇论文最终在干什么”，比如分割、诊断、重建、预后；然后再问“跨医院到底想得到什么”。这里后一个就是你问的“二级类”。例如“分割”是一级类，下面现在截图里的四个二级类是：共同模型、共享结构加站点特异、参与医院个体化、未见医院泛化。它们对应的不是四种算法，而是四种完全不同的研究目标：大家一起训一个模型；大家共享一部分但各医院保留自己的部分；每个参与医院最后拿到更适合自己的模型；或者训练完之后要求模型直接去从没见过的新医院也能工作。这样你看图时能马上知道“这些论文到底在解决哪一种跨院问题”，而不是先被 FedXXX、蒸馏、对比学习之类的方法名淹没。
+第二轮最主要的成果其实是把 a private product 的结构定下来了。以前容易按“联邦分割、域泛化、个性化、半监督……”这种方法名一路分叉，最后很像文献分类树。第二轮改成先问“这篇论文最终在干什么”，比如分割、诊断、重建、预后；然后再问“跨医院到底想得到什么”。这里后一个就是你问的“二级类”。例如“分割”是一级类，下面现在截图里的四个二级类是：共同模型、共享结构加站点特异、参与医院个体化、未见医院泛化。它们对应的不是四种算法，而是四种完全不同的研究目标：大家一起训一个模型；大家共享一部分但各医院保留自己的部分；每个参与医院最后拿到更适合自己的模型；或者训练完之后要求模型直接去从没见过的新医院也能工作。这样你看图时能马上知道“这些论文到底在解决哪一种跨院问题”，而不是先被 FedXXX、蒸馏、对比学习之类的方法名淹没。
 
 这个“一级类 → 二级类”的架构第三轮其实没改，第二轮就已经定了。第三轮改的是里面放多少论文。第二轮从 103 个去重后的候选里只留了 53 篇，删了 50 篇，其中很多理由是“这个角色已经有更好的代表，所以这篇不要了”。结果就有点像博物馆只留每个流派一件代表作：图非常干净，但你想用它理解领域、看证据积累、找研究空缺时，信息就不够了。比如两个方法可能科学目标一样，但一个只有公开数据实验，另一个做了真正的多医院协作；后者并不是因为“方法不新”就没价值，它告诉你这个方向真实落地到哪一步了。所以第三轮废掉了“已有更好代表就不收”这个理由，特别把真实多院、外院验证、未见医院验证、大规模多中心应用这类“经验锚点”收回来。最终从 53 篇变成 60 篇。不是为了把图塞满，而是让同一个研究问题能看见从方法到真实证据的厚度。
 
-“常驻名字”解决的是另一个问题。Atlas 里的所有 60 个点当然都存在，但如果 60 个名字一直印在屏幕上，地图马上又变成一坨字。所以所谓“常驻名字”，就是无论你有没有放大，这几篇论文的名字都一直显示，相当于地图上的北京、上海，而其他论文更像普通城市，放大或查看时再读。第二轮这里标得太宽了：53 篇里有 15 篇被标成“问题重定义”，25 篇被标成“信息结构改变”，这两种角色当时都会让名字常驻。结果虽然论文删得只剩 53 篇，屏幕上却还是一堆论文名字——也就是说，“重点”多到已经不再是重点。
+“常驻名字”解决的是另一个问题。a private product 里的所有 60 个点当然都存在，但如果 60 个名字一直印在屏幕上，地图马上又变成一坨字。所以所谓“常驻名字”，就是无论你有没有放大，这几篇论文的名字都一直显示，相当于地图上的北京、上海，而其他论文更像普通城市，放大或查看时再读。第二轮这里标得太宽了：53 篇里有 15 篇被标成“问题重定义”，25 篇被标成“信息结构改变”，这两种角色当时都会让名字常驻。结果虽然论文删得只剩 53 篇，屏幕上却还是一堆论文名字——也就是说，“重点”多到已经不再是重点。
 
 第三轮因此把“常驻名字”的标准收得非常狠：只有真正“把领域问题改写了”的论文才因为角色而常驻，而且每个一级类最多两篇；“信息结构改变”仍然是一个有意义的学术标签，但不再自动把名字钉在图上。现在一共只有 12 个常驻名字，其中 8 个是真正的“问题重定义”，另外 4 个是引用量特别高的论文。于是你第一眼看到的是少数必须认识的路标，而不是几十个方法名。比如一篇论文只是把“传参数”改成“传风险函数”，它可能很重要，可以标“信息结构改变”；但只有当它进一步把大家研究的问题从“A”变成了“B”，才值得成为地图上的永久大地名。
 
@@ -855,7 +855,7 @@ positive example (verbatim):
 
 所以你可以把三轮关系理解成：第一轮是“我手里有哪些论文”；第二轮是“这张知识地图应该按照什么科学逻辑组织”，但为了突出结构删得过猛、重点标签又给得太多；第三轮没有推翻第二轮结构，而是把内容密度和视觉重点调回合理位置——论文从 53 补到 60，代表领域有一定厚度；常驻名字压到 12，代表第一眼仍然看得懂；二级类继续告诉你“同一个任务下面研究目标有什么根本不同”；主线则只告诉你“哪些工作真的沿着前作往前走”。
 
-这也是为什么现在这版比第二轮更像你真正想要的 Atlas：不是一张“精选 50 篇必读论文海报”，也不是一张“100 篇论文全摊开的蜘蛛网”，而是你先能看懂领域骨架，继续放大以后又确实有足够的论文和证据让你研究。
+这也是为什么现在这版比第二轮更像你真正想要的 a private product：不是一张“精选 50 篇必读论文海报”，也不是一张“100 篇论文全摊开的蜘蛛网”，而是你先能看懂领域骨架，继续放大以后又确实有足够的论文和证据让你研究。
 
 ### 私有技术讲解仍有中英混杂与机械句式
 status: NEW
@@ -866,10 +866,10 @@ problem: 读者已要求自然中文，稿件仍以内部来源说明开场，�
 
 ### 2026-11-20：实验结果汇报——先抓住真正改变研究判断的现象，再用数据拆掉表面解释
 status: NEW
-source: UK Biobank CMR / Distributed Imaging Inference 实验 5 结果讨论，2026-11-20
-evidence: `YuukiAS/Distributed_Imaging_Inference@04178e38cca6243eeaf9abd4e782228cecd26c50`; `results/fets/dii-20261119-exp5-screen/`
+source: UK Biobank CMR / a private research project Inference 实验 5 结果讨论，2026-11-20
+evidence: `<private repository>@04178e38cca6243eeaf9abd4e782228cecd26c50`; `results/fets/dii-20261119-exp5-screen/`
 problem: 需要保留一条正向案例，说明复杂实验汇报怎样同时做到“先讲真正发现了什么、把各对照的科学含义分清、主动纠正容易误读的指标、最后给出最小下一步”，而不是把结果表、统计字段和实验流程逐项复述给用户。
-project-specific context: FeTS 成人到 BraTS-PEDs 儿童分割、WT/ET、具体数值与候选组只属于当前 DII 实验，不应直接抽象成通用科研规则。
+project-specific context: FeTS 成人到 BraTS-PEDs 儿童分割、WT/ET、具体数值与候选组只属于当前 a private research project 实验，不应直接抽象成通用科研规则。
 
 positive example (verbatim):
 

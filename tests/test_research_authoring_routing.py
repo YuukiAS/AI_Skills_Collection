@@ -31,7 +31,7 @@ class ResearchWritingRoutingTests(unittest.TestCase):
                 "research-authoring",
                 "presentations",
                 "scientific-visualization",
-                "web-development",
+                "frontend-design",
                 "statistical-modeling",
                 "bioinformatics",
                 "medical-imaging",

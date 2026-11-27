@@ -1,11 +1,15 @@
 # Reasoned Decision — Plugin TODO
 
-> Planned dedicated Marketplace plugin. The design is currently converged for review but not yet implemented in production. Canonical design entry: `docs/design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md`.
+> Planned dedicated Marketplace plugin. The current public product list is in the [README](../../README.md); design authority lives in Blueprint.
+
+## Evidence-backed decisions need one recommendation and a stop condition
+status: NEW
+problem: Practical decisions can end as symmetric pros and cons that force the user to synthesize the answer. The capability should separate verified evidence from reports, recommend one option when the evidence supports it, state the confidence boundary, and give a concrete stop or escalation condition.
 
 ## 2026-11-05：现实解空间调查不能漏掉论坛、社区与本地语言长期讨论
 status: NEW
 source: Local Compute Infrastructure / macOS 微信自动更新真实排查
-evidence: `docs/design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md`; https://www.v2ex.com/t/1176334 ; https://linux.do/t/topic/990633 ; https://github.com/sunnyyoung/WeChatTweak ; https://github.com/sunnyyoung/WeChatTweak/issues/847 ; https://github.com/sparkle-project/Sparkle/discussions/2849
+evidence: `README.md` (design source archived in Blueprint); https://www.v2ex.com/t/1176334 ; https://linux.do/t/topic/990633 ; https://github.com/sunnyyoung/WeChatTweak ; https://github.com/sunnyyoung/WeChatTweak/issues/847 ; https://github.com/sparkle-project/Sparkle/discussions/2849
 problem: 冻结架构已经要求先做 Solution-Space Discovery，但真实回答仍可能把“查已有方案”执行得过窄，只看当前仓库、官方文档和普通 GitHub 代码搜索，没有主动进入该生态真正承载长期用户经验的论坛、Issue/Discussion 和本地语言社区。对于依赖未文档化产品行为、版本回归、真实兼容性或长期 workaround 的问题，这会漏掉高信号证据，并使 Agent 过早进入自行诊断或 Build。微信案例中，V2EX 与 LINUX DO 很快就出现了“设置里关闭仍自动下载/重启升级”的重复现场报告，GitHub 也存在长期维护的 WeChatTweak“阻止自动更新”能力及相关自动更新 issue；这些证据如果一开始不查，真实解空间就是残缺的。
 project-specific context: 微信具体下载域名、PF 规则、缓存目录、WeChatTweak patch、App Store 版本差异都只是本案例候选证据，不应直接提升为 Reasoned Decision 的通用规则。通用要求应是：按问题生态主动覆盖高信号社区来源，包括但不限于 GitHub Issues/Discussions、V2EX、LINUX DO、Reddit、厂商论坛、Stack Exchange、专业社区、博客/配置仓库等；来源集合必须问题驱动、允许多语言，不能机械硬编码成固定站点清单。论坛经验用于发现重复现场、失败模式和成熟 workaround，关键结论仍需与官方能力、代码/实现或真实验证交叉核对。
 
@@ -13,21 +17,21 @@ project-specific context: 微信具体下载域名、PF 规则、缓存目录、
 ## 2026-11-06：破坏性恢复前必须先找到真实 state owner 与更小同型修复
 status: NEW
 source: PC+Server+VPS / macOS Tailscale 迁移后重复设备身份真实排查
-evidence: `docs/design/reasoned-decision/evidence/TAILSCALE_MACOS_CLONED_IDENTITY_DECISION_FAILURE_2026-11-06.md`; https://tailscale.com/docs/reference/troubleshooting/network-configuration/multiple-devices-same-100-x-ip-address ; https://github.com/tailscale/tailscale/issues/14913 ; https://github.com/tailscale/tailscale/issues/18308 ; https://tailscale.com/docs/features/client/uninstall
+evidence: `README.md` (design source archived in Blueprint); https://tailscale.com/docs/reference/troubleshooting/network-configuration/multiple-devices-same-100-x-ip-address ; https://github.com/tailscale/tailscale/issues/14913 ; https://github.com/tailscale/tailscale/issues/18308 ; https://tailscale.com/docs/features/client/uninstall
 problem: Agent 已确认 Mac mini 与另一台 Mac 共用 Tailscale node identity，却在只读调查尚未覆盖 macOS Standalone 的同型迁移案例和持久身份实际存储位置时，就把官方“完整卸载、清状态、重装”的通用兜底流程升级成首选，并写进 Codex 执行合同，导致系统权限请求已经出现。用户必须继续追问“真的要卸载吗”“有没有不卸载的方法”，Agent 才找到 Tailscale maintainer 已验证的更小恢复路径：保留 App，只重置 Standalone 的 system-wide identity state，必要时再清该机 Tailscale-specific System Keychain identity 后重新认证。新证据足以合法撤销“卸载是必要条件”，但这些证据本应在第一次形成生产方案前由 Agent 主动发现。这里暴露的是 Solution-Space Discovery、方案状态强度、execution contract 中立性和 human-time/disruption cost 的共同缺口：官方兜底流程不能自动等于当前最小必要动作，管理员授权、重装、重新登录和网络中断也不能被当成免费成本。
 project-specific context: Mac mini / MacBook Neo 名称、Tailscale 具体 100.x 地址、`/Library/Tailscale`、具体 keychain item、Standalone 版本和 Remote Compute 拓扑只属于本案例，不应直接编码成通用规则。中央插件后续只需要吸收“先定位真实 state owner、在 destructive action 前完成同型现实解空间调查、不要把尚未证明必要的卸载/重装预埋进执行合同、用合法 Decision Delta 局部改判、把用户授权与中断成本纳入方案排序”这些跨项目能力。
 
 ## 2026-11-06：成熟产品的原生能力调查必须先于 shell/dotfile workaround
 status: NEW
 source: PC+Server+VPS / iTerm2 SSH 异常断开后残留 mouse reporting 真实排查
-evidence: `docs/design/reasoned-decision/evidence/ITERM2_SSH_MOUSE_REPORTING_DECISION_FAILURE_2026-11-06.md`; https://iterm2.com/documentation-preferences-profiles-terminal.html ; https://iterm2.com/feature-reporting/ ; https://iterm2.com/documentation-tmux-integration.html ; https://iterm2.com/documentation-shell-integration.html
+evidence: `README.md` (design source archived in Blueprint); https://iterm2.com/documentation-preferences-profiles-terminal.html ; https://iterm2.com/feature-reporting/ ; https://iterm2.com/documentation-tmux-integration.html ; https://iterm2.com/documentation-shell-integration.html
 problem: Agent 正确识别 SSH/tmux/TUI 异常结束后 iTerm2 mouse reporting 状态残留这一故障族，却在没有完成当前 iTerm2 原生 Profile 能力调查时，直接把本地 zsh `precmd` 中发送 DECRST 1000/1002/1003/1006 的 hook 升级为长期推荐。继续开放式调查后发现 iTerm2 已提供 `Restrict mouse reporting to alternate screen mode`，它能在保留 tmux/TUI alternate-screen mouse reporting 的同时，把普通 shell prompt 排除在 mouse report 注入之外。新证据构成合法 Decision Delta：原生设置应先作为 Adopt 方案验证，zsh hook 只能降级为原生方案不足时的 Extend fallback。该案例要求插件把“当前产品版本的原生设置/恢复能力”明确纳入成熟产品问题的早期 Solution-Space Discovery，并要求 fallback 有明确升级条件，避免把用户不需要维护的 workaround 提前固化。
-project-specific context: MX Master 3S、Mac mini、当前 iTerm2 Profile、Longleaf 和具体 SGR 坐标串只属于本案例。通用规则应是：成熟产品先查原生能力；逻辑可行的 workaround 在原生能力未调查完前不能升级为推荐；修局部状态不能顺手关闭用户仍需要的正常能力；用户拒绝主动破坏健康系统时使用无损验证。
+project-specific context: MX Master 3S、Mac mini、当前 iTerm2 Profile、a private cluster 和具体 SGR 坐标串只属于本案例。通用规则应是：成熟产品先查原生能力；逻辑可行的 workaround 在原生能力未调查完前不能升级为推荐；修局部状态不能顺手关闭用户仍需要的正常能力；用户拒绝主动破坏健康系统时使用无损验证。
 
 ## 2026-11-07：连续追着局部症状换方案，导致“能不能实现整体体验”一直没有被真正回答
 status: NEW
 source: PC+Server+VPS / Legion Y9000P 通过 UU Remote 操作 Mac mini 的键盘体验对齐
-evidence: `docs/design/reasoned-decision/evidence/UU_REMOTE_KARABINER_DECISION_FAILURE_2026-11-07.md`
+evidence: `README.md` (design source archived in Blueprint)
 problem: 用户真正要的是“Legion 远控 Mac mini 时，键盘体验尽量与直接使用 Mac mini 上的 Dell Windows 键盘一致，同时不把现有 Karabiner 搞成两套难维护配置”。Agent 前几轮却依次把问题缩成 ChatGPT 的 `Ctrl+Enter`、建议 UU 全局 `Ctrl -> Command`、再转向“只开 CGEventTap fallback”，每轮都抓住了一个局部机制，却没有先冻结整体成功标准，也没有在连续方案被新事实推翻后收缩到唯一关键未知。用户因此必须不断补充 `Ctrl+A`、Terminal 语义和“我要和实体操作一样”的要求，最后显式要求按 Reasoned Decision 重做。重新读取 Local Compute canonical、调查 Karabiner 原生能力和设备身份限制后，才收敛为“优先复用现有 Windows 键盘语义，只解决 UU 输入如何进入同一处理体系以及无设备身份的残余差距”，并正确把它保持为待现场验证的候选，而不是已经完成的长期方案。该案例要求 Reasoned Decision 在非平凡故障中把用户的整体体验目标当作 Task State，而不是让最新症状接管问题；连续两次路线被推翻后必须停止继续生成完整新方案，先找唯一真正改变选择的未知；成熟产品和已有 canonical 必须先做能力映射，再决定 Extend；用户可见结论必须先回答“能不能做到、能做到多接近、为什么、还差什么验证”，不能用实现细节代替决策。
 project-specific context: Legion Y9000P、UU Remote、Mac mini、Dell/Xiaomi VID/PID、ChatGPT bundle、具体 Karabiner 规则、CGEventTap 和未来可能采用的会话检测方式都属于本案例技术背景。中央插件应吸收的是“整体成功标准优先于局部症状、连续失败后收缩关键未知、先复用当前 canonical/原生能力、候选状态不能冒充 production、最终回答必须让用户直接知道能否实现及边界”这些通用判断行为。
 
@@ -54,7 +58,7 @@ project-specific context: Z6-87 Ultra、329×148×42mm、PR47/PR67、PR50、Hype
 ## 2026-11-10：同一故障复发时不得复活已淘汰路线；现实解空间必须覆盖社区失败经验，并收缩到一个现场裁决点
 status: NEW
 source: PC+Server+VPS / ThinkPad E16 Microsoft Edge shared updater 再次绕过既有冻结
-evidence: `docs/design/reasoned-decision/evidence/EDGE_WINDOWS_DECISION_FAILURE_2026-11-05.md`; `YuukiAS/Local_Compute_Infrastructure/windows/edge/` 现有治理与 2026-11-10 实机记录；本轮 2026-11-10 连续决策对话
+evidence: `README.md` (design source archived in Blueprint); `<private repository>/windows/edge/` 现有治理与 2026-11-10 实机记录；本轮 2026-11-10 连续决策对话
 problem: 11 月 5 日已经通过真实现场证据确认该 ThinkPad 为 Workgroup、Edge Update 日志为 `is_managed=0`，并因此淘汰依赖受管 Windows 条件的 Edge Stable 产品级 `Update{GUID}` 路线。11 月 10 日新的事故证明旧治理仍有旁路：Copilot/shared Edge Update core 可以直接启动 `MicrosoftEdgeUpdate.exe /ua /installsource core`，并把下载交给 BITS / Delivery Optimization，从而在服务、计划任务和 updater 自身出站防火墙都被冻结的情况下重新 stage Edge。Agent 面对这条新证据时，第一反应却再次提出已经被前一轮现场证据淘汰的产品级策略，违反了 `ELIMINATED_ROUTES / DO_NOT_REVIVE`；随后又把 AppLocker 提升为可能主路线，在用户要求按 Reasoned Decision 重做后才回到旧证据并撤回。继续调查时，Agent 又过度集中于微软官方文档，没有主动覆盖 GitHub Issues/Discussions、Reddit、ElevenForum、Microsoft Community、Stack Exchange 等真实长期使用与失败经验，直到用户明确指出“Reasoned Decision 没写查论坛？”才补齐社区证据。最终判断才收缩为一个真正会改变选择的未知：当前机器、当前 updater、当前真实事故命令在 updater 级自动检查关闭后，是否仍能进行检查、下载并重新 stage Edge；这个未知可以由同路径现场实验直接裁决，而不需要继续生成新的完整架构。
 project-specific context: Edge 143/157、Copilot、WebView2、`MicrosoftEdgeUpdate.exe /ua /installsource core`、BITS/Delivery Optimization、`AutoUpdateCheckPeriodMinutes`、AppLocker/App Control、具体 GUID 和 Local Compute 脚本都只属于本案例。中央插件应吸收以下通用要求：1）新事故只允许重新打开被新证据直接影响的判断，不能把已经由强现场证据淘汰的路线自动复活；若确需复活，必须先写明原淘汰证据为何失效；2）现实解空间调查必须按问题生态覆盖官方资料、代码/仓库、Issue/Discussion、论坛、Reddit、Stack Exchange、本地语言社区和重复失败案例，不能把“查官网”误当成完整 prior-art；3）证据排序应保持“当前对象真实现场 > 当前 canonical/实现证据 > 官方适用范围 > 社区重复经验 > 模型推断”，社区用于发现旁路、长期失败和成熟 workaround，但不能压过当前机器已经证明的事实；4）此前已经宣称 production-worthy 的方案若被真实事故穿透，应首先做 premise correction，明确“之前验收覆盖了什么、漏了哪类真实触发路径、因此哪项结论失效”，而不是悄悄在原方案上再堆一层；5）连续两次以上改口后必须停止继续扩候选，冻结目标、已确认事实、已淘汰路线和唯一关键未知，用最小的同型真实验证裁决；6）面向用户先用人话说明“原来系统靠什么挡、为什么会漏、现在要把控制点移到哪里、成功后日常会变成什么样”，不要先交付长 prompt、策略名和审计字段让用户自己理解架构；7）一旦现场验证通过并冻结推荐，后续只有合法 Decision Delta 才允许再次改口，用户的“你确定吗”本身不构成 Decision Delta。
 
@@ -69,23 +73,23 @@ project-specific context: Windows Copilot、Edge 143/157、WebView2、shared Edg
 ## 2026-11-11：高成本“重置一切”不能抢在 state owner 诊断前；正在发生的故障应先用于最小裁决
 status: NEW
 source: PC+Server+VPS / macOS Edge + 飞书跨应用随机 CJK 错字形排查
-evidence: `docs/design/reasoned-decision/evidence/MACOS_CJK_GLYPH_CORRUPTION_DECISION_FAILURE_2026-11-11.md`; https://bugzilla.mozilla.org/show_bug.cgi?id=2085623 ; https://chromium.googlesource.com/chromium/src/+/905d03b3f6c35ec2e6dafd879fa3defe8e10b24c ; https://github.com/ghostty-org/ghostty/discussions/15018
+evidence: `README.md` (design source archived in Blueprint); https://bugzilla.mozilla.org/show_bug.cgi?id=2085623 ; https://chromium.googlesource.com/chromium/src/+/905d03b3f6c35ec2e6dafd879fa3defe8e10b24c ; https://github.com/ghostty-org/ghostty/discussions/15018
 problem: 用户现场已经同时观察到 Edge 与飞书把正确中文随机绘制成另一批合法汉字，而英文、数字、代码片段大多正常。Agent 虽然逐步识别到这更像 glyph/font-face 映射或渲染缓存状态错误，却在尚未区分“macOS 字体注册 / renderer font cache 状态失配”和“Chromium/Electron GPU glyph atlas / renderer cache 损坏”这两个高概率根因族时，就把系统升级、整机重启和广泛字体重置提升到主路径。用户明确指出系统更新与重启的中断成本很高，这类动作只能是保底。继续开放式调查发现：Mozilla 已有同型 macOS ARM64 错字形案例，应用级清缓存和软件渲染均无效而 `killall fontd` + 重开应用立即恢复；Chromium 2026 年已经专门修过 macOS 字体注册变化未可靠传到 renderer、需要主动失效字体缓存的问题；同期 Ghostty 也有 CJK codepoint 被绘成另一字体同编号 glyph、改变字号即可恢复的现场。这些证据共同说明当前最需要裁决的不是“要不要升级系统”，而是故障状态到底由共享字体服务/字体面映射还是 renderer/GPU 路径持有。中央插件应新增并强化以下通用要求：1）系统升级、整机重启、重新登录、全局数据库重建等广影响 reset 必须显式计入 human-time、停机、中断、回滚和潜在回归成本，默认不得排在局部、可逆、单变量诊断之前；2）如果故障当前仍在发生，故障现场本身是诊断资产，应先利用现状做最小 A/B 裁决，禁止先用重启/升级把现场抹掉再要求用户等待复发；3）存在两个以上高概率 state owner 时，先冻结唯一会改变路线的未知，再设计一次只改变一个变量的验证，不得任选一个根因直接宣称“长期修复”；4）外部同型案例只能提升候选概率，不能替代当前机器验证；5）高成本 fallback 需要 Gap Proof——只有更小、可逆、局部动作已经证明不足，或上游证据明确表明只有系统级变更能解决，才允许升级；6）用户明确给出的“不要把系统升级/整机重启当优先动作”属于 Task State 硬约束，不能被通用排障模板覆盖。
 project-specific context: Microsoft Edge、飞书、`fontd`、Chromium/Electron、Ghostty、具体 CJK 错字形截图、硬件加速开关和 `atsutil` 都属于本案例。中央插件应吸收的是“先找 state owner、故障现场优先用于最小裁决、高中断动作必须后置且需要 Gap Proof、disruption cost 是一级成本”这些跨项目判断规则，而不是把某个具体字体命令固化成所有 macOS 文本问题的通用修复。
 
 ## 2026-11-12：重复成功任务不得因版本或新会话重新发现；完成条件必须绑定真实用户终点
 status: NEW
-source: Project Atlas / Asteria Atlas 本地快速查看连续对话
-evidence: `docs/design/reasoned-decision/evidence/ATLAS_AGENT_DECISION_DRIFT_2026-11-12.md`
-problem: 同一台机器此前已经真实成功打开过 Asteria Atlas / Obsidian，后续只是继续查看新版本，Codex 却重新检查安装、路径和环境，并扩散到 MCP、CDP、GUI automation 与 Computer Use 权限；随后又把“Vault 已打开、停在开始页”接近当作“Atlas 已打开”，而真实地图主视图尚未出现。负责防复发的 GPT 又连续多轮追着症状重写 Prompt：先加历史优先，再加禁止 Computer Use，再加主视图完成条件，再把当前 v4 / Vault / 命令误写成长期合同，被用户纠正后才改成跨版本，随后又扩张到其他仓库和新的本机状态机制。大量改动没有对应新的合法 Decision Delta，本质是没有先区分长期不变量、动态参数和当前实例，也没有在连续同类修订后收敛。该案例要求 Reasoned Decision 强化：1）已经实际成功的设备级能力进入 CONFIRMED_FACTS / COMPLETED_ACTIONS，默认跨版本、分支、worktree 和新会话继承，直到本次直接失败证据推翻；2）当前要打开什么始终从当前权威状态动态读取，旧成功记录只复用“怎么做”，不能复用旧目标；3）SUCCESS_CRITERION 必须对应用户真正要求的最终产品界面，应用启动、Vault、开始页、README、插件加载或命令存在都不能冒充完成；4）形成长期方案前显式区分长期不变量、动态参数和本次实例，不把版本号、设备名、路径或一次权限弹窗升级成永久合同；5）没有新证据、约束变化、前提纠错或候选集合实质变化时，不得因为用户追问或出现同源症状重做整套方案；连续两次同类修订后必须停止生成下一套完整补丁，退回 Task State 收敛不变量；6）低权限已验证路径能完成时，Computer Use / Accessibility / GUI control 不得作为快速只读任务的正常 fallback，权限和人工干扰属于一级成本；7）达到真实用户终点立即停止，不再用“多检查一次”扩大风险；8）局部失败不构成扩张到其他仓库、新守护机制或新状态系统的理由，除非有 Gap Proof。
-project-specific context: ThinkPad、Legion、Mac mini、MacBook、具体 Atlas Vault 版本、插件命令、view type、分支名和某次权限 UI 只属于本案例。中央插件应吸收的是“已验证能力继承、动态目标读取、终点完整性、事实分层、合法 Decision Delta、连续修订收敛、最小权限、成功即停和范围纪律”。
+source: Project a private product / a private design project a private product 本地快速查看连续对话
+evidence: `README.md` (design source archived in Blueprint)
+problem: 同一台机器此前已经真实成功打开过 a private design project a private product / Obsidian，后续只是继续查看新版本，Codex 却重新检查安装、路径和环境，并扩散到 MCP、CDP、GUI automation 与 Computer Use 权限；随后又把“Vault 已打开、停在开始页”接近当作“a private product 已打开”，而真实地图主视图尚未出现。负责防复发的 GPT 又连续多轮追着症状重写 Prompt：先加历史优先，再加禁止 Computer Use，再加主视图完成条件，再把当前 v4 / Vault / 命令误写成长期合同，被用户纠正后才改成跨版本，随后又扩张到其他仓库和新的本机状态机制。大量改动没有对应新的合法 Decision Delta，本质是没有先区分长期不变量、动态参数和当前实例，也没有在连续同类修订后收敛。该案例要求 Reasoned Decision 强化：1）已经实际成功的设备级能力进入 CONFIRMED_FACTS / COMPLETED_ACTIONS，默认跨版本、分支、worktree 和新会话继承，直到本次直接失败证据推翻；2）当前要打开什么始终从当前权威状态动态读取，旧成功记录只复用“怎么做”，不能复用旧目标；3）SUCCESS_CRITERION 必须对应用户真正要求的最终产品界面，应用启动、Vault、开始页、README、插件加载或命令存在都不能冒充完成；4）形成长期方案前显式区分长期不变量、动态参数和本次实例，不把版本号、设备名、路径或一次权限弹窗升级成永久合同；5）没有新证据、约束变化、前提纠错或候选集合实质变化时，不得因为用户追问或出现同源症状重做整套方案；连续两次同类修订后必须停止生成下一套完整补丁，退回 Task State 收敛不变量；6）低权限已验证路径能完成时，Computer Use / Accessibility / GUI control 不得作为快速只读任务的正常 fallback，权限和人工干扰属于一级成本；7）达到真实用户终点立即停止，不再用“多检查一次”扩大风险；8）局部失败不构成扩张到其他仓库、新守护机制或新状态系统的理由，除非有 Gap Proof。
+project-specific context: ThinkPad、Legion、Mac mini、MacBook、具体 a private product Vault 版本、插件命令、view type、分支名和某次权限 UI 只属于本案例。中央插件应吸收的是“已验证能力继承、动态目标读取、终点完整性、事实分层、合法 Decision Delta、连续修订收敛、最小权限、成功即停和范围纪律”。
 
 ## 2026-11-12：已完成的低风险任务不得重新展开；局部 GUI 失败后必须收缩到唯一剩余动作
 status: NEW
-source: Asteria ChatGPT Project setting 最终保存与归档收尾
-evidence: `YuukiAS/AI_Instruction_Configuration@4f731cdb9aaef93efab2372804a01a926e44ac92` 的 Asteria setting candidate；2026-11-12 当前 ChatGPT/Codex 实际操作记录
-problem: 用户已经创建 Asteria Project，完整 setting 已准备好，随后实际正文已经粘贴并点击保存；此时剩余任务最多只是重新打开设置做一次轻量回读，再把中央配置仓库归档。Agent 却没有持续消费 COMPLETED_ACTIONS / CURRENT_QUESTION / SUCCESS_CRITERION，而是反复把已完成的“寻找 Project、打开设置、粘贴正文、选择浏览器”重新变成当前问题。第一次 Edge/UI 操作不顺后，又不断扩张到 DevTools、Accessibility、DOM、临时 HTML 校验页、Python 中转、标签页恢复和重新发现项目入口，甚至把用户已经准备好的设置窗口退出后再要求用户重新打开。用户多次明确要求“不要再折腾、只收尾、尽快完成”，这些新的硬约束也没有真正进入后续决策。该案例要求 Reasoned Decision 强化：1）每次动作后必须更新并真实消费 COMPLETED_ACTIONS、CLOSED_QUESTIONS 与唯一剩余动作；已经完成的步骤没有直接失败证据时不得复活；2）SUCCESS_CRITERION 一旦只剩一个低风险机械终点，应自动降级为最短可靠路径，不得继续沿用前一阶段的重型审计或设计流程；3）局部 GUI/工具失败后的默认恢复是保留已有成果、收缩到当前最小阻塞，不是增加新的浏览器、DOM、脚本、校验器、自动化框架或重新发现整条入口；4）如果用户已经把界面准备到目标位置，Agent 必须消费该现场状态，禁止为了“可重复性”重新导航或重建入口；5）用户明确要求降低交互、时间和 token 消耗时，human-time、attention 和 context cost 是当前 Task State 的一级硬约束，不得被“再验证一次更稳”覆盖；6）已经存在可见、直接、低风险的验收方式时，不得为机械回读额外造校验工具；7）达到真实终点后立即停止，不再为证明完成继续扩验证；8）同一任务连续两次因为恢复动作而离终点更远时，必须停止继续尝试新工具，回到 Task State，仅保留“已完成什么、唯一还差什么、最短动作是什么”三项，再执行一次。
-project-specific context: Asteria、ChatGPT Project 设置、Microsoft Edge、DevTools、Accessibility、临时 HTML、Python、具体浏览器焦点和中央配置仓库路径都属于本案例。中央插件应吸收的是“完成状态单调推进、成功条件降级、失败后收缩、现场状态优先、用户时间是一级成本、简单验收禁止过度工程化、成功即停”这些跨任务判断行为，而不是任何特定浏览器操作规则。
+source: a private design project ChatGPT Project setting 最终保存与归档收尾
+evidence: `<private repository>@4f731cdb9aaef93efab2372804a01a926e44ac92` 的 a private design project setting candidate；2026-11-12 当前 ChatGPT/Codex 实际操作记录
+problem: 用户已经创建 a private design project Project，完整 setting 已准备好，随后实际正文已经粘贴并点击保存；此时剩余任务最多只是重新打开设置做一次轻量回读，再把中央配置仓库归档。Agent 却没有持续消费 COMPLETED_ACTIONS / CURRENT_QUESTION / SUCCESS_CRITERION，而是反复把已完成的“寻找 Project、打开设置、粘贴正文、选择浏览器”重新变成当前问题。第一次 Edge/UI 操作不顺后，又不断扩张到 DevTools、Accessibility、DOM、临时 HTML 校验页、Python 中转、标签页恢复和重新发现项目入口，甚至把用户已经准备好的设置窗口退出后再要求用户重新打开。用户多次明确要求“不要再折腾、只收尾、尽快完成”，这些新的硬约束也没有真正进入后续决策。该案例要求 Reasoned Decision 强化：1）每次动作后必须更新并真实消费 COMPLETED_ACTIONS、CLOSED_QUESTIONS 与唯一剩余动作；已经完成的步骤没有直接失败证据时不得复活；2）SUCCESS_CRITERION 一旦只剩一个低风险机械终点，应自动降级为最短可靠路径，不得继续沿用前一阶段的重型审计或设计流程；3）局部 GUI/工具失败后的默认恢复是保留已有成果、收缩到当前最小阻塞，不是增加新的浏览器、DOM、脚本、校验器、自动化框架或重新发现整条入口；4）如果用户已经把界面准备到目标位置，Agent 必须消费该现场状态，禁止为了“可重复性”重新导航或重建入口；5）用户明确要求降低交互、时间和 token 消耗时，human-time、attention 和 context cost 是当前 Task State 的一级硬约束，不得被“再验证一次更稳”覆盖；6）已经存在可见、直接、低风险的验收方式时，不得为机械回读额外造校验工具；7）达到真实终点后立即停止，不再为证明完成继续扩验证；8）同一任务连续两次因为恢复动作而离终点更远时，必须停止继续尝试新工具，回到 Task State，仅保留“已完成什么、唯一还差什么、最短动作是什么”三项，再执行一次。
+project-specific context: a private design project、ChatGPT Project 设置、Microsoft Edge、DevTools、Accessibility、临时 HTML、Python、具体浏览器焦点和中央配置仓库路径都属于本案例。中央插件应吸收的是“完成状态单调推进、成功条件降级、失败后收缩、现场状态优先、用户时间是一级成本、简单验收禁止过度工程化、成功即停”这些跨任务判断行为，而不是任何特定浏览器操作规则。
 
 ### 2026-11-12 follow-up：对象实测已充分后不得再用产品标签制造伪 Decision Delta
 status: NEW
@@ -99,7 +103,7 @@ project-specific context: Z6-87 Ultra、Q8/V8、Q3/V3、PR45/PR50/PR57 只属于
 ### 2026-11-12 follow-up：连续改口的主因是“证据相关性判定失败”，不是单纯信息不足
 status: NEW
 source: PC+Server+VPS / Z6-87 Ultra 掌托选型完整连续对话复盘
-evidence: 当前完整连续对话 Markdown `sb-gpt.md`（287 行）；`docs/design/reasoned-decision/REASONED_DECISION_V0_1_ARCHITECTURE_2026-11-05.md`；本文件前述“对象实测已充分后不得再用产品标签制造伪 Decision Delta”条目
+evidence: 当前完整连续对话 Markdown `sb-gpt.md`（287 行）；`README.md` (design source archived in Blueprint)；本文件前述“对象实测已充分后不得再用产品标签制造伪 Decision Delta”条目
 problem: 对完整对话逐轮回放后，连续改口不能归因成“资料一点点补齐，所以答案自然变化”。其中只有一部分属于合法 Decision Delta：最初基于商品页 329mm 宽度选择 337mm K14，随后用户直接实测整机前沿约 360mm、前沿高度约 18mm，这条对象级现场证据足以推翻旧宽度假设，因此 K14 → 358/365mm 候选的重排是合理的。真正失控发生在实测事实已经足够稳定之后：Agent 先因“Q8/V8 = Alice 65%”把 358mm 改成 365mm Q3/V3，却没有证明 Alice 标签对应的实体形状、接口或支撑轮廓会破坏直板键盘适配；随后发现普通 80% 也存在 358×79.5×18mm SKU 后又改回 358mm；接着找到普通 80% 的 K8 版 358mm 后本应收敛，却又在没有新尺寸、形状或真实使用失败证据时重新回到 Q8；之后又把“同尺寸 SKU 重量不同”误当成足以证明适配不同的证据。这里反复出现的不是“缺信息”，而是把“新事实”自动等同于“会改变决策的事实”，缺少 Evidence Relevance / Decision Delta Gate。
 
 归因分析：
@@ -129,7 +133,7 @@ project-specific context: K14 337mm 在 360mm 实测出现后被淘汰属于合�
 ### 2026-11-12 follow-up：先选对问题表示和证据模态；在错误信息空间里继续搜索只会制造“高置信度错判”
 status: NEW
 source: PC+Server+VPS / Z6-87 Ultra 掌托选型，两条连续线程在 K8/Q8/Q3/K14 间反复改口，用户补两张商品图后一眼暴露遗漏变量
-evidence: `docs/design/reasoned-decision/evidence/KEYCHRON_WRIST_REST_VISUAL_COMPATIBILITY_FAILURE_2026-11-12.md`；用户上传 K8/C1 胡桃木掌托商品图（直条矩形）与 Q8/V8 胡桃木掌托商品图（明显随 Alice 前缘弯曲）；此前完整连续对话 `sb-gpt.md`；京东当前把 `Q8M\V8M\Q8P 硅胶掌托` 与 `K8Max\K8Pro 硅胶掌托` 作为独立销售变体；Keychron 官方为 PR45/PR66 与 PR57 给出相同 358×79.5×18mm 外接尺寸但不同系列/重量
+evidence: `README.md` (design source archived in Blueprint)；用户上传 K8/C1 胡桃木掌托商品图（直条矩形）与 Q8/V8 胡桃木掌托商品图（明显随 Alice 前缘弯曲）；此前完整连续对话 `sb-gpt.md`；京东当前把 `Q8M\V8M\Q8P 硅胶掌托` 与 `K8Max\K8Pro 硅胶掌托` 作为独立销售变体；Keychron 官方为 PR45/PR66 与 PR57 给出相同 358×79.5×18mm 外接尺寸但不同系列/重量
 
 problem: 本案例真正失败的层级高于“漏看形状”或“少查一张图”。两条线程从一开始就选错了问题表示：用户要解决的是“一个实体掌托能否与当前键盘前缘形成合适的几何与支撑关系”，Agent 却把任务压缩成了长度、高度、SKU 标签、布局分类和重量这些文字/标量字段的比较。于是后续虽然不断增加资料，看起来越来越严谨，实际上始终在一个缺失关键维度的信息空间里做推理。358mm、18mm、Alice、300g/265g 都是真实信息，但它们不是决定“实体轮廓如何贴合”的直接观测。用户补的两张图之所以能一眼指出问题，不是因为图片比文字“更直观”，而是因为图片恰好观测到了真正决定兼容性的几何变量；这是一种 Evidence-Modality Mismatch，而不是普通的搜索不足。
 
@@ -185,9 +189,9 @@ project-specific context: 360×80×19mm 圆边胡桃木掌托与用户实测约 
 
 ## 2026-11-22：进入未来事件等待前必须先证明完整过渡路径，验收不能承担设计发现
 status: NEW
-source: PC+Server+VPS / Longleaf_Backup_Codex 与 Cloudflare B 2026-11-15 至 2026-11-22 连续修复、部署和自然换代验收
+source: PC+Server+VPS / a private cluster service 与 Cloudflare B 2026-11-15 至 2026-11-22 连续修复、部署和自然换代验收
 problem: 这条真实生产链连续暴露出一种比“测试不充分”更具体的流程失败。长期新换代逻辑已经完成设计、仓库测试和 B-only 部署后，Agent 多次把任务推进到“等待下一次自然 Slurm 换代验收”；真正等到第一代新协议 successor 9921640 即将启动时，才从当前仍在运行的旧 owner 9157825 与新代码的静态实现中发现：第一班是“旧协议 owner → 新协议 candidate”，旧 owner 不会生成新版要求的 retirement grant，而新版又拒绝在缺少该授权时接管。随后提出的一次性兼容方案又被重新读代码发现存在顺序竞争：旧版退场会删除新版仍需要读取的 pending 交接文件。用户因此经历了“等待自然验收 → 验收发现本可事前发现的设计缺口 → 再补方案 → 再等待”的循环。真正的问题不是自然事件不可预测，而是进入等待前没有把可由当前代码、运行版本和状态直接证明的过渡路径验证完。
-project-specific context: 9157825、9921640、Cloudflare B、Slurm、pending/internal_grant/verified 文件名以及 OVERFLOW socket 都只属于本案例。中央插件应吸收的是下面这些跨项目能力，而不是任何 Longleaf 专用状态文件：
+project-specific context: 9157825、9921640、Cloudflare B、Slurm、pending/internal_grant/verified 文件名以及 OVERFLOW socket 都只属于本案例。中央插件应吸收的是下面这些跨项目能力，而不是任何 a private cluster 专用状态文件：
 1）在把任务推进到“等待未来真实事件/定时窗口/自然轮换/外部触发再验收”之前，先显式区分两类证据：现在就能通过代码、配置、版本、状态和模拟得到的证据；只有未来事件实际发生后才能知道的证据。前一类必须在等待前消耗完，后一类才允许留给生产验收。
 2）凡是部署会跨越旧实现与新实现，必须单独验证“当前真实版本 → 第一代新版本 → 后续新版本稳态”三段。新版本对新版本的回归不能替代第一次旧→新的过渡证明；第一代迁移/交接是独立成功标准。
 3）方案设计在冻结前必须检查过渡顺序和资源生命周期：谁先写状态、谁消费、谁清理、谁释放锁/所有权、清理动作会不会删除下一步仍需要的证据。不能只验证每个局部函数分别合理，而要验证整条时序在真实旧/新版本组合下可完成。
@@ -198,7 +202,7 @@ project-specific context: 9157825、9921640、Cloudflare B、Slurm、pending/int
 
 ### 2026-11-22 follow-up：连续同类生产验收失败后禁止继续安排下一次自然等待
 status: NEW
-source: PC+Server+VPS / Cloudflare B 与 Longleaf_Backup_Codex 首次旧版→新版交接连续失败
+source: PC+Server+VPS / Cloudflare B 与 a private cluster service 首次旧版→新版交接连续失败
 evidence: 同一真实生产链已经先后暴露“首次旧版 owner 无法按新版规则签发接班许可”“旧版退场清理会删除新版仍需读取的状态”“successor 提交端导出 `CLOUDFLARED_HANDOFF_COMPONENT`，候选稳定期却读取 `CLOUDFLARED_HANDOFF_FROM_COMPONENT`”三个均可由现有代码和测试环境提前发现的问题；字段错误又连续打死 `9921640`、`10214470`、`10218095` 三代候选，而正式 owner 始终被安全保留。
 problem: 前一条 2026-11-22 TODO 已要求“进入未来事件等待前先证明完整过渡路径”，但本次后续暴露出还缺一个更强的行为门槛：当已经出现一次“等待自然事件后才发现本可提前发现的静态缺口”，下一步不能只修当前缺口后再次安排同型自然等待；必须把该失败视为对前置验证充分性的直接反证，重新检查当前方案的剩余静态接口、真实生产者/消费者合同和第一代过渡路径。否则 Agent 会形成“修一个洞→再等一次→再发现一个洞”的无上限循环，把用户时间当作调试资源。
 project-specific context: 具体 Slurm job、Cloudflare B、字段名和 OVERFLOW 只属于本案例。中央插件应吸收：1）第一次同类“未来验收发现静态缺口”后立即降低方案成熟度，撤销“只剩等待验收”的表述；2）同类失败再次发生时触发强制收敛，不得继续排下一次自然等待，直到重新完成 pre-event proof；3）用户等待时间、日历窗口和真实生产事件属于一级成本，不能被当作免费的测试循环；4）只有真正无法通过当前代码、模拟、配置或受控测试获得的运行时事实，才允许保留给下一次自然事件；5）面向用户必须明确区分“修复已写完”“前置门槛已通过”“只剩真实事件验证”三个状态，任何静态未知存在时都不能宣称最后一步只是等待。
@@ -206,9 +210,9 @@ project-specific context: 具体 Slurm job、Cloudflare B、字段名和 OVERFLO
 
 ## 2026-11-23：目标已经收敛后，执行过程中不得自行扩张长期职责
 status: NEW
-source: PC+Server+VPS / Longleaf Bridge 相位修复完成后的收口判断与后续验收讨论
+source: PC+Server+VPS / a private cluster Bridge 相位修复完成后的收口判断与后续验收讨论
 evidence: 用户导出的 2026-11-23 同一 ChatGPT thread 原文
-problem: 用户真正要求已经收敛为“Longleaf 明确出故障并修复时，交付前把已有生产不变量检查清楚；平时不需要持续状态展示、失败通知或额外常驻验收”。仓库随后已经把 owner 唯一性、future coverage、约 5 天 A/B phase、节点冗余、锁与交接、稳定端点、存储边界和 replenisher/timer 连续性写入交付前 invariant sweep。但 Agent 在后续验收中自行把“交付前按需完成完整验收”改写成“生产中必须持续运行一个最终验收器”，再从这个新增前提继续推导周期 timer、current.json、状态机、自监控、Watchdog、Telegram 和长期无人值守监控。用户没有要求这些长期职责，其中一部分还被明确排除；任务仍沿着模型自己新造的成功标准继续扩张。
+problem: 用户真正要求已经收敛为“a private cluster 明确出故障并修复时，交付前把已有生产不变量检查清楚；平时不需要持续状态展示、失败通知或额外常驻验收”。仓库随后已经把 owner 唯一性、future coverage、约 5 天 A/B phase、节点冗余、锁与交接、稳定端点、存储边界和 replenisher/timer 连续性写入交付前 invariant sweep。但 Agent 在后续验收中自行把“交付前按需完成完整验收”改写成“生产中必须持续运行一个最终验收器”，再从这个新增前提继续推导周期 timer、current.json、状态机、自监控、Watchdog、Telegram 和长期无人值守监控。用户没有要求这些长期职责，其中一部分还被明确排除；任务仍沿着模型自己新造的成功标准继续扩张。
 
 ### 原文证据
 
@@ -238,7 +242,7 @@ Agent 没有回到“这个验收器是否本来就有必要”，而是沿着�
 
 Agent 仍然先给出：
 
-> 当前任务：把本次 Longleaf Bridge A/B 续代、相位恢复、下一代自动验收和长期无人值守监控一次性做完。
+> 当前任务：把本次 a private cluster Bridge A/B 续代、相位恢复、下一代自动验收和长期无人值守监控一次性做完。
 
 直到用户再次明确要求停止 Watchdog/通知扩张后，Agent 才承认：
 

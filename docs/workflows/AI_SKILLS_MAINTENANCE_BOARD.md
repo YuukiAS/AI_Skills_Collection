@@ -25,7 +25,7 @@
 
 ```text
 docs/plugin-todos/<plugin>.md
-docs/skill-todos/<standalone-skill>.md
+docs/plugin-todos/<plugin-or-standalone-skill>.md
 ```
 
 这些 inbox 保存：
@@ -436,7 +436,7 @@ area:clear-writing
 area:research-authoring
 area:presentations
 area:scientific-visualization
-area:web-development
+area:frontend-design
 area:statistical-modeling
 area:bioinformatics
 area:medical-imaging

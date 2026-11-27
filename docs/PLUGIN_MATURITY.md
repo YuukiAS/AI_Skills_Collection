@@ -31,7 +31,7 @@ Status 只能由真实任务、真实 artifact/render 和用户验收改变。Sy
 | `workflow-core` | `unclassified` | 尚未做统一跨项目状态判断。 |
 | `ai-skills-core` | `unclassified` | 等待独立 version/changelog/maintenance workflow 在真实长期维护中验证。 |
 | `scientific-visualization` | `unclassified` | 尚未做统一跨项目状态判断。 |
-| `web-development` | `unclassified` | 尚未做统一跨项目状态判断。 |
+| `frontend-design` | `unclassified` | 尚未做统一跨项目状态判断。 |
 | `statistical-modeling` | `unclassified` | 尚未做统一跨项目状态判断。 |
 | `bioinformatics` | `unclassified` | 尚未做统一跨项目状态判断。 |
 | `medical-imaging` | `unclassified` | 尚未做统一跨项目状态判断。 |

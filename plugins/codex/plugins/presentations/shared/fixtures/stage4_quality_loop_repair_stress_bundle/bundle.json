@@ -14,24 +14,24 @@
   "source_material": {
     "primary_markdown": "skills/tools/documents-media/presentations/shared/fixtures/stage4_quality_loop_repair_stress_bundle/source.md",
     "evidence_assets": [
-      "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/simulation/simulation_summary.csv",
-      "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/small_g_negative_result.png",
-      "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_input.png",
-      "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_gt.png",
-      "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
-      "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png"
+      "tests/fixtures/presentations/synthetic_research_bundle/assets/simulation_summary.csv",
+      "tests/fixtures/presentations/synthetic_research_bundle/assets/small_sample_negative_result.png",
+      "tests/fixtures/presentations/synthetic_research_bundle/assets/image_input.png",
+      "tests/fixtures/presentations/synthetic_research_bundle/assets/image_reference.png",
+      "tests/fixtures/presentations/synthetic_research_bundle/assets/image_prediction.png",
+      "tests/fixtures/presentations/synthetic_research_bundle/assets/image_error.png"
     ]
   },
   "research_state": {
     "previous_question": "Can the accepted Stage 1-3 components produce a source-faithful research update from one ordinary input bundle?",
-    "prior_belief": "Stage 3 can render mature exact-CUHK pages when driven by engineering integration specs.",
+    "prior_belief": "Stage 3 can render mature exact-RESEARCH_STANDARD pages when driven by engineering integration specs.",
     "new_evidence": "The bundle contains model text, simulation data, negative evidence, same-case segmentation images, and next-experiment rationale.",
     "evidence_quality": "Public-safe synthetic engineering regression evidence; suitable for integration testing but excluded from final holdouts.",
     "belief_update": "The production path should be judged on orchestration fidelity, not on final program maturity.",
     "successes": "Model, result, experiment design, negative evidence, medical comparison, and next-experiment jobs are all supported by source anchors.",
     "failures": "Small-G high-ICC imbalance remains anti-conservative, motivating the next experiment.",
     "largest_uncertainty": "Whether deck rhythm and visual repair loops can make this production output final-quality across unseen real papers.",
-    "frozen_items": "Use exact CUHK Beamer source, normal gold retrieval, and Stage 3 executable layouts.",
+    "frozen_items": "Use exact RESEARCH_STANDARD Beamer source, normal gold retrieval, and Stage 3 executable layouts.",
     "stop_items": "Do not use Stage 5 holdouts or benchmark generators as the production entrypoint.",
     "next_discriminating_experiment": "Run a bounded visual-review and repair task on the production deck.",
     "decision_needed": "Decide which page-level visual findings should feed the next Stage 4 quality-loop task."
@@ -51,7 +51,7 @@
       "id": "EV-RESULT-001",
       "board": "quantitative_plots",
       "type": "csv",
-      "source_path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/simulation/simulation_summary.csv",
+      "source_path": "tests/fixtures/presentations/synthetic_research_bundle/assets/simulation_summary.csv",
       "source_anchor": "columns G,rho,imbalance,method,coverage,mc_se",
       "supports": "Coverage differs by center count, ICC, imbalance, and interval method.",
       "consumed_as": "presentation-native quantitative result figure",
@@ -71,7 +71,7 @@
       "id": "EV-NEGATIVE-001",
       "board": "failed_experiments",
       "type": "png",
-      "source_path": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/small_g_negative_result.png",
+      "source_path": "tests/fixtures/presentations/synthetic_research_bundle/assets/small_sample_negative_result.png",
       "source_anchor": "small-G negative result figure",
       "supports": "Small-G high-ICC imbalance remains anti-conservative.",
       "consumed_as": "negative-evidence plot",
@@ -81,7 +81,7 @@
       "id": "EV-MEDICAL-001",
       "board": "medical_images",
       "type": "png_set",
-      "source_path": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/",
+      "source_path": "tests/fixtures/presentations/synthetic_research_bundle/assets/",
       "source_anchor": "failure_input/failure_gt/failure_pred/failure_error same-case image set",
       "supports": "Same-case segmentation error pattern with TP/FP/FN colors.",
       "consumed_as": "same-case medical image panel and ROI crop",
@@ -167,7 +167,7 @@
       },
       "content_kind": "result_figure",
       "dominant_object": "presentation_native_coverage_figure",
-      "data_source": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/simulation/simulation_summary.csv",
+      "data_source": "tests/fixtures/presentations/synthetic_research_bundle/assets/simulation_summary.csv",
       "figure_filter": {"imbalance": "imbalanced"},
       "methods": [
         {"id": "naive_iid_ols_z", "label": "naive iid", "color": "red!72!black"},
@@ -250,7 +250,7 @@
       },
       "content_kind": "figure",
       "dominant_object": "negative_evidence_plot",
-      "asset": "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets/small_g_negative_result.png",
+      "asset": "tests/fixtures/presentations/synthetic_research_bundle/assets/small_sample_negative_result.png",
       "annotation": "The failure region is adjacent to the diagnostic explanation instead of hidden in a note.",
       "caption": "Negative evidence is completed; CR2 and wild cluster bootstrap remain the next test.",
       "required_panel_count": 2
@@ -288,17 +288,17 @@
       "content_kind": "image_panel",
       "dominant_object": "same_case_medical_panels",
       "assets": [
-        "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_input.png",
-        "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_gt.png",
-        "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
-        "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png"
+        "tests/fixtures/presentations/synthetic_research_bundle/assets/image_input.png",
+        "tests/fixtures/presentations/synthetic_research_bundle/assets/image_reference.png",
+        "tests/fixtures/presentations/synthetic_research_bundle/assets/image_prediction.png",
+        "tests/fixtures/presentations/synthetic_research_bundle/assets/image_error.png"
       ],
       "panel_labels": ["Input", "GT", "Prediction", "Error"],
-      "roi_source_asset": "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png",
+      "roi_source_asset": "tests/fixtures/presentations/synthetic_research_bundle/assets/image_error.png",
       "roi_crop_assets": [
-        "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_gt.png",
-        "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_pred.png",
-        "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets/failure_error.png"
+        "tests/fixtures/presentations/synthetic_research_bundle/assets/image_reference.png",
+        "tests/fixtures/presentations/synthetic_research_bundle/assets/image_prediction.png",
+        "tests/fixtures/presentations/synthetic_research_bundle/assets/image_error.png"
       ],
       "roi_crop_labels": ["GT crop", "Prediction crop", "Error crop"],
       "annotation": "All panels and zoom crops come from one case and one ROI; TP/FP/FN colors remain adjacent to the error crop.",

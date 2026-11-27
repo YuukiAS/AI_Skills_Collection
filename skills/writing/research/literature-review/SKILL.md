@@ -57,7 +57,7 @@ Use this sub-workflow when the user asks to deeply read one difficult paper, bui
 7. Label external context explicitly as `paper-only`, `targeted external check`, or `externally verified`. Do not present the paper's own related-work framing as independently verified field history.
 8. Treat generated research ideas as hypotheses. For each idea, include originating limitation or observation, core hypothesis, delta from the paper, initial method, validation plan, failure modes, and novelty status (`unverified`, `partially checked`, or `prior-art checked`).
 
-Source distilled from `Yuan1z0825/nature-skills` `nature-paper-card` at `1562ab71e5ae`; see `docs/provenance/RESEARCH_SKILL_REPOS_2026_07_28.md`.
+Source distilled from `Yuan1z0825/nature-skills` `nature-paper-card` at `1562ab71e5ae`; see `docs/SKILL_PROVENANCE.md`.
 
 ## Visual and Diagram Routing
 

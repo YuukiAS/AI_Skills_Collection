@@ -25,7 +25,7 @@ CENTRAL_PLUGIN_NAMES = [
     "research-authoring",
     "presentations",
     "scientific-visualization",
-    "web-development",
+    "frontend-design",
     "statistical-modeling",
     "bioinformatics",
     "medical-imaging",
@@ -36,7 +36,7 @@ EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
     "clear-writing": "0.5",
     "research-authoring": "0.2",
     "presentations": "0.4",
-    "web-development": "0.4",
+    "frontend-design": "0.4",
 }
 REPOSITORY_SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 PLUGIN_VERSION_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)$")
@@ -282,12 +282,12 @@ class CodexMarketplaceTests(unittest.TestCase):
 
     def test_056_product_delivery_discipline_sources_are_wired(self) -> None:
         config = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
-        web = next(plugin for plugin in config["plugins"] if plugin["name"] == "web-development")
+        web = next(plugin for plugin in config["plugins"] if plugin["name"] == "frontend-design")
         visual = next(skill for skill in web["skills"] if skill.get("artifact_id") == "visual")
         visual_sources = {entry["source"] for entry in visual["source_skills"]}
 
         self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "workflow-core")["version"], "0.5")
-        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "web-development")["version"], "0.4")
+        self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "frontend-design")["version"], "0.4")
         self.assertEqual(next(plugin for plugin in config["plugins"] if plugin["name"] == "ai-skills-core")["version"], "0.5")
         self.assertIn("skills/tools/frontend/figma-design-to-code", visual_sources)
         self.assertIn("skills/tools/frontend/motion-interaction", visual_sources)
@@ -332,7 +332,7 @@ class CodexMarketplaceTests(unittest.TestCase):
                     "clear-writing",
                     "research-authoring",
                     "presentations",
-                    "web-development",
+                    "frontend-design",
                 }
             },
             {
@@ -345,7 +345,7 @@ class CodexMarketplaceTests(unittest.TestCase):
                     "clear-writing",
                     "research-authoring",
                     "presentations",
-                    "web-development",
+                    "frontend-design",
                 }
             },
         )
@@ -493,23 +493,20 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertNotIn("git push", workflow)
         self.assertNotIn("[skip codex-marketplace]", workflow)
 
-    def test_historical_visual_packet_is_manual_only(self) -> None:
-        workflow = (REPO_ROOT / ".github/workflows/research-presentation-visual-packet.yml").read_text(encoding="utf-8")
-        self.assertIn("workflow_dispatch:", workflow)
-        self.assertNotIn("\n  push:", workflow)
-        self.assertIn("pages: write", workflow)
+    def test_historical_visual_packet_workflow_is_removed(self) -> None:
+        self.assertFalse((REPO_ROOT / ".github/workflows/research-presentation-visual-packet.yml").exists())
 
-    def test_repository_config_keeps_cardiacnexus_out_of_marketplace(self) -> None:
+    def test_repository_config_keeps_project_specific_exports_out_of_marketplace(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         plugin_names = [plugin["name"] for plugin in data["plugins"]]
-        self.assertNotIn("cardiacnexus", plugin_names)
-        self.assertFalse((REPO_ROOT / "exports/cardiacnexus-repo-local").exists())
-        self.assertFalse((REPO_ROOT / "skills/projects/cmr/cardiacnexus-feature-contracts/SKILL.md").exists())
+        self.assertNotIn("private-project", plugin_names)
+        self.assertFalse((REPO_ROOT / "exports/private-project").exists())
+        self.assertFalse((REPO_ROOT / "skills/projects/private-project/SKILL.md").exists())
 
     def test_restored_plugins_are_published_for_marketplace_set(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
         plugin_names = {plugin["name"] for plugin in data["plugins"]}
-        self.assertTrue({"presentations", "scientific-visualization", "web-development", "statistical-modeling"} <= plugin_names)
+        self.assertTrue({"presentations", "scientific-visualization", "frontend-design", "statistical-modeling"} <= plugin_names)
 
     def test_render_and_slurm_are_not_central_marketplace_skills(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
@@ -519,17 +516,15 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertTrue((REPO_ROOT / "skills/tools/hpc/slurm-workflows/SKILL.md").exists())
 
     def test_restored_plugin_payload_directories_are_present(self) -> None:
-        for name in ["presentations", "scientific-visualization", "web-development", "statistical-modeling"]:
+        for name in ["presentations", "scientific-visualization", "frontend-design", "statistical-modeling"]:
             self.assertTrue((REPO_ROOT / "plugins/codex/plugins" / name / ".codex-plugin" / "plugin.json").exists())
 
-    def test_canonical_integration_history_exists(self) -> None:
-        history = REPO_ROOT / "docs/provenance/INTEGRATION_HISTORY.md"
+    def test_public_provenance_fixture_exists(self) -> None:
+        history = REPO_ROOT / "tests/fixtures/provenance/INTEGRATION_HISTORY.md"
         text = history.read_text(encoding="utf-8")
         self.assertIn("| date | source_type | source | revision | permission/license | decision | target | integration_commit | note |", text)
-        self.assertIn("CardiacNexus repo-local skills", text)
-        self.assertIn("migrated-repo-local", text)
-        self.assertIn("repo-local-canonical", text)
-        self.assertFalse((REPO_ROOT / "docs/provenance/CLONED_SKILL_SOURCES.md").exists())
+        self.assertIn("Synthetic public parser fixture", text)
+        self.assertFalse((REPO_ROOT / "docs/provenance").exists())
 
     def test_v36_profiles_exist_and_server_profile_carries_overlay_skills(self) -> None:
         for name in [
@@ -547,13 +542,13 @@ class CodexMarketplaceTests(unittest.TestCase):
         self.assertIn("skills/tools/hpc/slurm-workflows", server["skills"])
         self.assertIn("skills/tools/documents-media/render-chinese-math-pdf", server["skills"])
 
-    def test_cuhk_payload_excludes_nonessential_zip_assets(self) -> None:
-        root = REPO_ROOT / "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source"
+    def test_research_standard_payload_excludes_nonessential_assets(self) -> None:
+        root = REPO_ROOT / "skills/tools/documents-media/presentations/shared/templates/research_standard/beamer/source"
         self.assertFalse((root / ".vscode/settings.json").exists())
         self.assertFalse(any((root / "assets").glob("*.xcf")))
         self.assertFalse(any((root / "images").glob("Fig*.png")))
         self.assertFalse(any((root / "images").glob("Table*.png")))
-        self.assertTrue((root / "assets/logo_RGB.png").exists())
+        self.assertTrue((root / "main.tex").exists())
 
     def test_marketplace_app_facing_skills_have_icon_metadata(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
@@ -745,7 +740,7 @@ class CodexMarketplaceTests(unittest.TestCase):
 
     def test_frontend_design_marketplace_uses_coordinator_first_topology(self) -> None:
         config = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
-        web = next(plugin for plugin in config["plugins"] if plugin["name"] == "web-development")
+        web = next(plugin for plugin in config["plugins"] if plugin["name"] == "frontend-design")
         entries = web["skills"]
         visual = next(entry for entry in entries if entry.get("artifact_id") == "visual")
 

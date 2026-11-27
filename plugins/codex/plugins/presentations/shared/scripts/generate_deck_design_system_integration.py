@@ -259,7 +259,7 @@ def deck_design_profile() -> dict[str, Any]:
 
 
 def base_request(request_name: str) -> dict[str, Any]:
-    path = REPO_ROOT / "docs/audits/research_presentation_candidate_search/requests" / request_name
+    path = REPO_ROOT / "tests/fixtures/presentations/audit_samples/research_presentation_candidate_search/requests" / request_name
     return json.loads(path.read_text(encoding="utf-8"))
 
 
@@ -521,8 +521,8 @@ def build_deck(deck_key: str, specs: list[dict[str, Any]], profile: dict[str, An
         del prs.slides._sldIdLst[0]
 
     slides: list[dict[str, Any]] = []
-    stat_assets = REPO_ROOT / "tests/fixtures/presentations/statistical_method_group_meeting/visual_review_packet_source/assets"
-    med_assets = REPO_ROOT / "tests/fixtures/presentations/medical_imaging_group_meeting/visual_review_packet_source/assets"
+    stat_assets = REPO_ROOT / "tests/fixtures/presentations/synthetic_research_bundle/assets"
+    med_assets = stat_assets
     for spec in specs:
         if spec["slide_id"] == "stat_s01":
             slides.append(add_equation_slide(prs, profile, spec))
@@ -531,13 +531,13 @@ def build_deck(deck_key: str, specs: list[dict[str, Any]], profile: dict[str, An
         elif spec["slide_id"] == "stat_s03":
             slides.append(add_plot_slide(prs, profile, spec, reference_id="RRL-030", image_path=stat_assets / "coverage_by_icc.png", annotation="Coverage improves after center-level aggregation, with visible stress at low center counts."))
         elif spec["slide_id"] == "stat_s04":
-            slides.append(add_plot_slide(prs, profile, spec, reference_id="RRL-025", image_path=stat_assets / "small_g_negative_result.png", annotation="The failure region is the small-G corner; the next experiment should target finite-sample correction."))
+            slides.append(add_plot_slide(prs, profile, spec, reference_id="RRL-025", image_path=stat_assets / "small_sample_negative_result.png", annotation="The failure region is the small-sample corner; the next experiment should target finite-sample correction."))
         elif spec["slide_id"] == "med_s01":
             slides.append(add_medical_slide(prs, profile, spec, strategy="controlled_wildcard"))
         elif spec["slide_id"] == "med_s02":
             slides.append(add_flow_slide(prs, profile, spec, reference_id="RRL-019", nodes=["Input image", "GT / prediction", "Endpoint summary", "Failure review"], caption=spec["caption"]))
         elif spec["slide_id"] == "med_s03":
-            slides.append(add_plot_slide(prs, profile, spec, reference_id="RRL-023", image_path=med_assets / "slide5_lesion_size_recall.png", annotation="Recall drops most sharply for the smallest lesions in this deterministic fixture."))
+            slides.append(add_plot_slide(prs, profile, spec, reference_id="RRL-023", image_path=med_assets / "lesion_size_recall.png", annotation="Recall drops most sharply for the smallest lesions in this deterministic fixture."))
         elif spec["slide_id"] == "med_s04":
             slides.append(add_medical_slide(prs, profile, spec, strategy="alternative_composition"))
         else:

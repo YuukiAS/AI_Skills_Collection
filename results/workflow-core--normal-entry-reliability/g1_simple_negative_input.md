@@ -1,5 +1,0 @@
-# Words
-
-ALPHA
-BETA
-GAMMA

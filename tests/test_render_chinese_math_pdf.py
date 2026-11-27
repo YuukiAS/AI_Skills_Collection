@@ -61,9 +61,7 @@ class RenderChineseMathPdfTests(unittest.TestCase):
 
     def test_reusable_source_contains_no_private_resource_paths(self) -> None:
         forbidden = [
-            "/" + "home/yuukias/render_resources/chinese_math_pdf",
-            "/" + "overflow/htzhu/mingcheng_new/render_resources/chinese_math_pdf",
-            "/" + "users/a/e/aereinh/render_resources/chinese_math_pdf",
+            "/" + "render_resources/chinese_math_pdf",
             "/" + "mnt/c/Windows/Fonts",
             "fc-match " + '"Times New Roman"',
         ]

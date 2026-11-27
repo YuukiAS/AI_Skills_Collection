@@ -8,10 +8,10 @@ import json
 from pathlib import Path
 import sys
 
-import generate_cuhk_scientific_layout_stage3 as renderer
+import generate_research_standard_scientific_layout_stage3 as renderer
 
 TEMPLATES = renderer.SHARED / "templates"
-SKINS = ("course-standard", "cuhk")
+SKINS = ("research_standard",)
 
 
 def build(skin: str, destination: Path, source: Path | None = None, document: Path | None = None) -> dict:

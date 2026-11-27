@@ -132,7 +132,7 @@ Plugin version 只回答：**这个 plugin 是否形成了一次值得正式发�
 以下默认 **不 bump plugin version**：
 
 - Baseline replay 证明当前 plugin 已经够用；
-- 只更新 `docs/provenance/`；
+- 只更新 `docs/SKILL_PROVENANCE.md` 或 provenance fixture；
 - 只更新 `docs/plugin-todos/`；
 - 只更新未进入 runtime payload 的维护文档；
 - 只新增 tests / benchmark / audit metadata，但 production behavior 未改变；

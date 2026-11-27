@@ -8,7 +8,7 @@ source_path: .
 source_ref: d4529208cda72aa075767611b0265b95b709b550
 source_imported_at: 2026-07-09
 source_license: MIT
-source_note: Distilled from recorded paper-workflow sources; see docs/provenance/INTEGRATION_HISTORY.md.
+source_note: Distilled from recorded paper-workflow sources; see docs/SKILL_PROVENANCE.md.
 trusted: false
 requires_network: false
 writes_files: true

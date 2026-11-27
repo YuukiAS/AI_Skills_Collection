@@ -4,50 +4,50 @@ from pathlib import Path
 from scripts.audit_maintenance_board_issue_metadata import audit_issues, collect_tracking_map
 
 
-def issue(number=1, labels=None, state="OPEN", state_reason=None, status="TODO", area="web-development", resolution=""):
+def issue(number=1, labels=None, state="OPEN", state_reason=None, status="TODO", area="frontend-design", resolution=""):
     return {
         "number": number,
         "title": f"Issue {number}",
         "state": state,
         "stateReason": state_reason,
-        "labels": labels or ["maintenance-track", "kind:enhancement", "scope:plugin", "area:web-development"],
+        "labels": labels or ["maintenance-track", "kind:enhancement", "scope:plugin", "area:frontend-design"],
         "project": {"Status": status, "Area": area, "Resolution commit": resolution},
     }
 
 
 class MaintenanceBoardIssueMetadataAuditTests(unittest.TestCase):
     def test_valid_plugin_issue_passes(self):
-        result = audit_issues([issue()], {1: [{"source": "docs/plugin-todos/web-development.md"}]})
+        result = audit_issues([issue()], {1: [{"source": "docs/plugin-todos/frontend-design.md"}]})
         self.assertTrue(result["ok"], result["violations"])
 
     def test_missing_kind_fails(self):
-        result = audit_issues([issue(labels=["maintenance-track", "scope:plugin", "area:web-development"])], {1: [{"source": "docs/plugin-todos/web-development.md"}]})
+        result = audit_issues([issue(labels=["maintenance-track", "scope:plugin", "area:frontend-design"])], {1: [{"source": "docs/plugin-todos/frontend-design.md"}]})
         self.assertFalse(result["ok"])
         self.assertEqual(result["violations"][0]["code"], "kind-count")
 
     def test_multiple_kind_fails(self):
-        labels = ["maintenance-track", "kind:enhancement", "kind:regression", "scope:plugin", "area:web-development"]
-        result = audit_issues([issue(labels=labels)], {1: [{"source": "docs/plugin-todos/web-development.md"}]})
+        labels = ["maintenance-track", "kind:enhancement", "kind:regression", "scope:plugin", "area:frontend-design"]
+        result = audit_issues([issue(labels=labels)], {1: [{"source": "docs/plugin-todos/frontend-design.md"}]})
         self.assertIn("kind-count", {v["code"] for v in result["violations"]})
 
     def test_area_mismatch_fails(self):
-        result = audit_issues([issue(labels=["maintenance-track", "kind:enhancement", "scope:plugin", "area:presentations"])], {1: [{"source": "docs/plugin-todos/web-development.md"}]})
+        result = audit_issues([issue(labels=["maintenance-track", "kind:enhancement", "scope:plugin", "area:presentations"])], {1: [{"source": "docs/plugin-todos/frontend-design.md"}]})
         self.assertIn("area-mismatch", {v["code"] for v in result["violations"]})
 
     def test_triage_and_lifecycle_labels_fail(self):
-        labels = ["maintenance-track", "triage:needed", "status:todo", "kind:enhancement", "scope:plugin", "area:web-development"]
-        result = audit_issues([issue(labels=labels)], {1: [{"source": "docs/plugin-todos/web-development.md"}]})
+        labels = ["maintenance-track", "triage:needed", "status:todo", "kind:enhancement", "scope:plugin", "area:frontend-design"]
+        result = audit_issues([issue(labels=labels)], {1: [{"source": "docs/plugin-todos/frontend-design.md"}]})
         self.assertIn("triage-leak", {v["code"] for v in result["violations"]})
         self.assertIn("lifecycle-label", {v["code"] for v in result["violations"]})
 
     def test_completed_close_requires_done_and_resolution_commit(self):
-        result = audit_issues([issue(state="CLOSED", state_reason="COMPLETED", status="TODO")], {1: [{"source": "docs/plugin-todos/web-development.md"}]})
+        result = audit_issues([issue(state="CLOSED", state_reason="COMPLETED", status="TODO")], {1: [{"source": "docs/plugin-todos/frontend-design.md"}]})
         codes = {v["code"] for v in result["violations"]}
         self.assertIn("completed-not-done", codes)
         self.assertIn("completed-missing-resolution", codes)
 
     def test_non_completion_close_must_not_be_done(self):
-        result = audit_issues([issue(state="CLOSED", state_reason="NOT_PLANNED", status="DONE", resolution="abc123")], {1: [{"source": "docs/plugin-todos/web-development.md"}]})
+        result = audit_issues([issue(state="CLOSED", state_reason="NOT_PLANNED", status="DONE", resolution="abc123")], {1: [{"source": "docs/plugin-todos/frontend-design.md"}]})
         self.assertIn("not-planned-false-done", {v["code"] for v in result["violations"]})
 
     def test_plugin_issue_requires_source_backlink(self):

@@ -79,7 +79,7 @@ Use this pass when a draft sounds apologetic, self-undermining, or organized lik
 7. In reviewer responses, admit real errors cleanly, describe the fix, and return to evidence. Avoid over-apology and avoid conceding claims the paper never made.
 8. Before returning a revision, check whether any sentence gives readers a broader attack surface than the evidence requires.
 
-Source distilled from `Tina0514/prevent-defensive-ai-writing-skill` at `9686ccbacad5`; see `docs/provenance/WRITING_SKILL_REPOS_2026_07_28.md`.
+Source distilled from `Tina0514/prevent-defensive-ai-writing-skill` at `9686ccbacad5`; see `docs/SKILL_PROVENANCE.md`.
 
 ## Report Paragraph Pattern
 

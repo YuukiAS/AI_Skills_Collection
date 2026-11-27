@@ -117,7 +117,7 @@ def markdown_to_deck_plan(markdown: str, title: str, output: str = "tex", mode: 
             "purpose": "group-meeting",
             "duration_minutes": max(5, len(slides) * 2),
             "language": "mixed",
-            "template": "cuhk-default",
+            "template": "research_standard-default",
             "output": output,
             "editability": editability_for_output(output),
             "source_files": [],

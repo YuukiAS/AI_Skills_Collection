@@ -1,6 +1,6 @@
 # Delivery Assurance — Plugin TODO
 
-> Planned dedicated Marketplace plugin. Product shape is already frozen as an independent plugin in `docs/design/SHARED_CAPABILITY_PRODUCT_SHAPE_DECISIONS_2026-11-12.md`. This inbox records real post-freeze delivery and acceptance failures before the plugin is implemented.
+> Planned dedicated Marketplace plugin. The current public product list is in the [README](../../README.md); design authority lives in Blueprint. This inbox records real post-freeze delivery and acceptance failures before the plugin is implemented.
 
 ## 2026-11-22：跨组件接口必须用真实生产者输出驱动真实消费者回归，不能靠双方各自伪造测试输入
 status: NEW

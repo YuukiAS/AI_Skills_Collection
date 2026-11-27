@@ -1,10 +1,10 @@
 # Design Assurance — Plugin TODO
 
-> Planned dedicated Marketplace plugin. Product shape is already frozen as an independent plugin in `docs/design/SHARED_CAPABILITY_PRODUCT_SHAPE_DECISIONS_2026-11-12.md`. This inbox records real design-readiness failures before the plugin is implemented.
+> Planned dedicated Marketplace plugin. The current public product list is in the [README](../../README.md); design authority lives in Blueprint. This inbox records real design-readiness failures before the plugin is implemented.
 
 ## 2026-11-22：实现就绪审查必须单独证明“当前版本 → 第一代新版 → 后续稳态”
 status: NEW
-source: PC+Server+VPS / Cloudflare B 与 Longleaf_Backup_Codex 首次旧版→新版自然交接
+source: PC+Server+VPS / Cloudflare B 与 a private cluster service 首次旧版→新版自然交接
 evidence: 长期新版换代机制完成设计、仓库测试和 B-only 部署后，直到第一代新版 successor 即将自然启动才发现：当前正式 owner 仍运行旧协议，无法按新版方式签发接班许可；随后又发现旧版退场会删除新版候选仍需要的交接状态。两项都属于部署前即可通过当前运行版本与新版代码进行时序审查发现的设计缺口。
 problem: 复杂设计的“实现就绪”不能只证明稳态架构、单个模块和新版→新版流程合理。只要部署会跨越旧实现与新实现，就必须把第一次迁移/接班视为独立设计对象，明确证明当前生产状态如何进入新稳态。局部函数分别正确、长期稳态设计正确，仍可能因为过渡顺序、所有权释放、状态清理和版本能力差异而无法实际到达稳态。
 project-specific context: 具体 job ID、Cloudflare B、Slurm、pending/grant 文件都只属于本案例。通用设计门槛应覆盖：

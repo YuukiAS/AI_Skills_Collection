@@ -2,7 +2,7 @@
 
 根目录 [`TODO.md`](../../TODO.md) 是统一导航页；本目录保存中央 Marketplace plugin，以及已经进入正式插件设计阶段的 planned plugin 的具体长期 TODO。
 
-这里记录的是 **plugin 自己的问题**。如果用户在 TRACE、CARE、Distributed Imaging 或其他真实项目里调用某个 plugin，发现 plugin 的输出、路由、返修、检查或工作方式有问题，应该直接把这次真实问题记到对应的 `docs/plugin-todos/<plugin>.md`，不要先在项目 repo 再维护一份“插件问题清单”。
+这里记录的是 **plugin 自己的问题**。如果用户在真实项目里调用某个 plugin，发现 plugin 的输出、路由、返修、检查或工作方式有问题，应该直接把这次真实问题记到对应的 `docs/plugin-todos/<plugin>.md`，不要先在项目 repo 再维护一份“插件问题清单”。
 
 - `reasoned-decision.md` — planned dedicated Reasoned Decision plugin；当前设计已收敛但尚未生产实现
 - `design-assurance.md` — planned dedicated Design Assurance plugin；当前仅建立真实失败 inbox，尚未生产实现
@@ -12,18 +12,19 @@
 - `clear-writing.md`
 - `research-authoring.md`
 - `presentations.md`
-- `presentations-core-history-lock.md` — presentations 的 P0 历史预检、已验收页面锁、共享组件锁和图内数学符号要求
 - `scientific-visualization.md`
-- `web-development.md`
+- `frontend-design.md`
 - `statistical-modeling.md`
 - `bioinformatics.md`
 - `medical-imaging.md`
+- `project-instructions-editor.md` — standalone skill maintenance inbox
+- `render-chinese-math-pdf.md` — standalone skill maintenance inbox
 
 ## 先分清：项目问题还是 plugin 问题
 
 项目自己的科学、产品、代码和实验问题继续留在项目 repo。
 
-例如 TRACE 的新实验、theorem 写法、数据解释、模型选择，属于 TRACE。
+例如某个研究项目的新实验、theorem 写法、数据解释、模型选择，属于该项目。
 
 但如果问题是“我用了 `presentations`，结果箭头穿字 / 已接受页面被改坏 / 没按要求继续改现有 PPT”，那就是 `presentations` 的问题，应直接写这里。
 

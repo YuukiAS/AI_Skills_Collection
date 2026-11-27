@@ -251,7 +251,7 @@ Critic 对 Proposal/Plan + Goal + Kickoff Draft 同版给出唯一 execution-rea
 
 批准后给用户的必须是**短 Codex handoff**，而不是把 Kickoff Draft artifact 整份重贴。handoff 明确当前任务、Proposal/Goal/Critic review/Kickoff source locator、approved commit、必要的执行定位与授权边界、停止条件即可；已有固定规则引用 source。不要把长期 roadmap、批准前状态、审查说明或仓库内部防误执行文本塞进 Executor 指令。
 
-可追踪文件使用现有 `docs/design/<topic>/`、`docs/goals/` 或 `results/<task_key>/`；敏感/大文件在 repo 内 `private/exports/`。审查记录由 Critic 负责原始结论；Planner 可以忠实归档用户转交的全文并注明来源，不能代签 PASS。提交需交接的文件后核对远端；报告 commit 放提交后的回复，不要求文件自含自身 commit。
+可追踪文件使用对应 Blueprint instance；task-local 运行证据使用 `results/<task_key>/`；敏感/大文件在 repo 内 `private/exports/`。审查记录由 Critic 负责原始结论；Planner 可以忠实归档用户转交的全文并注明来源，不能代签 PASS。提交需交接的文件后核对远端；报告 commit 放提交后的回复，不要求文件自含自身 commit。
 
 正常等外部角色应等待或让出执行；不无限轮询人工门，也不为结束 run 宣布整体 achieved。架构不稳不启动自动化。任何已有规则未生效的重复失败，先修入口/消费方式，再经 Critic 判断是否补 AGENTS/长期合同；不能仅加一句规则就称复发已解决。
 

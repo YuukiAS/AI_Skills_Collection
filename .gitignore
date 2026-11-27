@@ -13,9 +13,6 @@ Thumbs.db
 .agents/plugins/*
 !.agents/plugins/marketplace.json
 !exports/
-!exports/cardiacnexus-repo-local/
-!exports/cardiacnexus-repo-local/.agents/
-!exports/cardiacnexus-repo-local/.agents/**
 exports/private/
 private/exports/
 .codex/
@@ -73,4 +70,3 @@ archive/provenance/
 build/skill-intake/
 skills/.system/
 skills-*.zip
-**/templates/cuhk/private-fonts/

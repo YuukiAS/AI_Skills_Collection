@@ -14,7 +14,7 @@ Independent plugin versioning starts at `0.1` with AI_Skills_Collection reposito
 | `research-authoring` | [research-authoring.md](research-authoring.md) |
 | `presentations` | [presentations.md](presentations.md) |
 | `scientific-visualization` | [scientific-visualization.md](scientific-visualization.md) |
-| `web-development` | [web-development.md](web-development.md) |
+| `frontend-design` | [frontend-design.md](frontend-design.md) |
 | `statistical-modeling` | [statistical-modeling.md](statistical-modeling.md) |
 | `bioinformatics` | [bioinformatics.md](bioinformatics.md) |
 | `medical-imaging` | [medical-imaging.md](medical-imaging.md) |

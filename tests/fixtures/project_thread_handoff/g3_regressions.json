@@ -11,7 +11,7 @@
       "obsolete routes as active candidates"
     ]
   },
-  "cardiacnexus": {
+  "repository_grounded_recovery": {
     "scenario": "A project thread includes code, pipeline, and experiment discussion, but the new thread should recover concrete runtime facts from the current repository.",
     "must_preserve": [
       "recent judgment",

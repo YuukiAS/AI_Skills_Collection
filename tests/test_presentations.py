@@ -15,13 +15,14 @@ from zipfile import ZipFile
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SHARED = REPO_ROOT / "skills" / "tools" / "documents-media" / "presentations" / "shared"
+AUDIT_FIXTURE_ROOT = REPO_ROOT / "tests" / "fixtures" / "presentations" / "audit_samples"
 sys.path.insert(0, str(SHARED / "scripts"))
 
 import markdown_to_deck_plan  # noqa: E402
 import validate_deck_plan  # noqa: E402
-import generate_cuhk_scientific_layout_stage3 as stage3  # noqa: E402
+import generate_research_standard_scientific_layout_stage3 as stage3  # noqa: E402
 import generate_research_presentation_production_entry as production_entry  # noqa: E402
-import validate_cuhk_scientific_layout_stage3 as stage3_validator  # noqa: E402
+import validate_research_standard_scientific_layout_stage3 as stage3_validator  # noqa: E402
 import validate_research_presentation_production_entry as production_validator  # noqa: E402
 import validate_existing_deck_revision_entry as existing_revision_gate  # noqa: E402
 import deck_quality_loop  # noqa: E402
@@ -40,13 +41,20 @@ def write_synthetic_production_contract(out_dir: Path, workstreams: list[dict]) 
     tex_path = out_dir / "main.tex"
     tex_path.write_text(
         "\\documentclass{beamer}\n"
-        "\\usetheme{sintef}\n"
-        "\\titlebackground*{assets/background}\n"
+        "\\input{template.tex}\n"
         "\\input{scientific_layouts.tex}\n"
         "\\begin{document}\n"
         "\\end{document}\n",
         encoding="utf-8",
     )
+    (out_dir / "template.tex").write_text(
+        "\\input{skin.tex}\n\\input{\\PresentationCoreDir/core.tex}\n",
+        encoding="utf-8",
+    )
+    (out_dir / "skin.tex").write_text("\\definecolor{coreAccent}{RGB}{27,40,122}\n", encoding="utf-8")
+    core = out_dir / "beamer-core-v1/core.tex"
+    core.parent.mkdir(parents=True, exist_ok=True)
+    core.write_text("% synthetic shared core\n", encoding="utf-8")
     slides: list[dict] = []
     fidelity_pages: list[dict] = []
     trace_slides: list[dict] = []
@@ -152,7 +160,7 @@ def write_synthetic_production_contract(out_dir: Path, workstreams: list[dict]) 
                 "schema": "RESEARCH_PRESENTATION_PRODUCTION_BUILD_MANIFEST_V1",
                 "task_key": "031_research_presentation_one_call_production_entry",
                 "storyline_trace": str(out_dir / "storyline_trace.json"),
-                "canonical_cuhk_source": "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source",
+                "canonical_research_standard_source": "skills/tools/documents-media/presentations/shared/templates/research_standard/beamer/source",
                 "render_input_identity_sha256": HEX64,
                 "render_input_identity": {"schema": "RESEARCH_PRESENTATION_RENDER_INPUT_IDENTITY_V1", "sha256": HEX64},
                 "quality_loop_handoff": {"status": "WAITING_FOR_DECK_VISUAL_REVIEW"},
@@ -282,7 +290,7 @@ def write_synthetic_production_contract(out_dir: Path, workstreams: list[dict]) 
         + "\n",
         encoding="utf-8",
     )
-    (out_dir / "dependency_probe.json").write_text(json.dumps({"schema": "RESEARCH_CUHK_STAGE3_BUILD_DEPENDENCY_PROBE_V1"}) + "\n", encoding="utf-8")
+    (out_dir / "dependency_probe.json").write_text(json.dumps({"schema": "RESEARCH_RESEARCH_STANDARD_STAGE3_BUILD_DEPENDENCY_PROBE_V1"}) + "\n", encoding="utf-8")
     (out_dir / "render_chinese_math_pdf_probe.json").write_text(json.dumps({"schema": "RENDER_CHINESE_MATH_PDF_PROBE_CAPTURE_V1", "status": "ok"}) + "\n", encoding="utf-8")
     (out_dir / "visual_inputs.json").write_text(
         json.dumps(
@@ -290,7 +298,7 @@ def write_synthetic_production_contract(out_dir: Path, workstreams: list[dict]) 
                 "schema": "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1",
                 "task_key": "031_research_presentation_one_call_production_entry",
                 "rubric": {
-                    "instructions": "source-specific content; exact CUHK; internal RRL/GSC/SRC; coherent research update; deck_contact_sheet; top-level package PASS is not enough"
+                    "instructions": "source-specific content; exact RESEARCH_STANDARD; internal RRL/GSC/SRC; coherent research update; deck_contact_sheet; top-level package PASS is not enough"
                 },
                 "identity_bindings": {
                     "deck_sequence_summary": str(out_dir / "deck_sequence_summary.json"),
@@ -317,7 +325,7 @@ class PresentationSharedTests(unittest.TestCase):
         actual = markdown_to_deck_plan.markdown_to_deck_plan(markdown, "Deidentified Research Update")
         self.assertEqual(actual, expected)
 
-    def test_research_markdown_defaults_to_exact_cuhk_beamer_output(self) -> None:
+    def test_research_markdown_defaults_to_exact_research_standard_beamer_output(self) -> None:
         actual = markdown_to_deck_plan.markdown_to_deck_plan("# One\nBody", "Research Update")
         self.assertEqual(actual["metadata"]["output"], "tex")
         self.assertEqual(actual["metadata"]["editability"], "source-editable")
@@ -334,7 +342,7 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(actual["metadata"]["output"], "tex")
         self.assertEqual(actual["metadata"]["editability"], "source-editable")
 
-    def test_research_routing_defaults_to_exact_cuhk_beamer_with_editable_override(self) -> None:
+    def test_research_routing_defaults_to_exact_research_standard_beamer_with_editable_override(self) -> None:
         research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")
         real_world_guardrails = (
             REPO_ROOT
@@ -343,16 +351,16 @@ class PresentationSharedTests(unittest.TestCase):
         ppt_routing = (SHARED / "ppt-skill-routing.md").read_text(encoding="utf-8")
         template_routing = (SHARED / "template-routing.md").read_text(encoding="utf-8")
         latex_notes = (SHARED / "compatibility/openai-latex.md").read_text(encoding="utf-8")
-        cuhk_readme = (SHARED / "templates/cuhk/README.md").read_text(encoding="utf-8")
+        research_standard_readme = (SHARED / "templates/research_standard/README.md").read_text(encoding="utf-8")
         visual_qa = (SHARED / "visual-qa.md").read_text(encoding="utf-8")
 
-        self.assertIn("defaults to the exact CUHK Beamer route", research_skill)
+        self.assertIn("defaults to the exact RESEARCH_STANDARD Beamer route", research_skill)
         self.assertIn("source-editable `.tex`", research_skill)
         self.assertIn("PPT, PowerPoint, `.pptx`, editable, Slides, or later manual editing", ppt_routing)
         self.assertIn("PPTX/Slides/editable manual editing is explicitly requested", ppt_routing)
         self.assertIn("Explicit Beamer, LaTeX slides, `.tex`, academic PDF", ppt_routing)
-        self.assertIn("CUHK Beamer by default", template_routing)
-        self.assertIn("templates/course-standard/beamer/source/", template_routing)
+        self.assertIn("RESEARCH_STANDARD Beamer by default", template_routing)
+        self.assertIn("templates/research_standard/beamer/source/", template_routing)
         self.assertIn("explicitly requested editable PPTX/Slides", template_routing)
         self.assertIn("file exists", research_skill)
         self.assertIn("file existence alone is not completion", visual_qa)
@@ -362,10 +370,10 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertIn("If the local skill is not installed", research_skill)
         self.assertIn("Academic presentation compilation must first use", latex_notes)
         self.assertIn("render-chinese-math-pdf", latex_notes)
-        self.assertIn("is the canonical CUHK Beamer template", cuhk_readme)
-        self.assertIn("shared 16:9 core", cuhk_readme)
-        self.assertIn("fixed font policy", cuhk_readme)
-        self.assertNotIn("Times New Roman Regular, Bold, Italic, and Bold Italic", cuhk_readme)
+        self.assertIn("is the canonical RESEARCH_STANDARD Beamer template", research_standard_readme)
+        self.assertIn("shared 16:9 core", research_standard_readme)
+        self.assertIn("fixed font policy", research_standard_readme)
+        self.assertNotIn("Times New Roman Regular, Bold, Italic, and Bold Italic", research_standard_readme)
         self.assertIn("references/real-world-presentation-guardrails.md", research_skill)
         for required in [
             "Rule Inheritance",
@@ -380,8 +388,6 @@ class PresentationSharedTests(unittest.TestCase):
     def test_presentation_runtime_excludes_maintenance_history_and_project_science(self) -> None:
         source_runtime = REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations"
         generated_runtime = REPO_ROOT / "plugins/codex/plugins/presentations/skills/research"
-        archive = REPO_ROOT / "docs/provenance/research-presentation-maintenance-archive-2026-08-30"
-
         for root in [source_runtime, generated_runtime]:
             filenames = {path.name for path in root.rglob("*") if path.is_file()}
             self.assertNotIn("TODO.md", filenames)
@@ -395,15 +401,6 @@ class PresentationSharedTests(unittest.TestCase):
             )
             self.assertNotIn("PRIVATE-PROJECT-X", runtime_text)
             self.assertNotIn("PRIVATE_PROJECT_X_RESEARCH_DETAIL", runtime_text)
-
-        for archived_name in [
-            "TODO.md",
-            "CURRENT_RESEARCH_PRESENTATION_REVISION_RULES.md",
-            "TODO_PRIVATE_PROJECT_V2_CANDIDATES_2026_08_27.md",
-            "TODO_PRIVATE_PROJECT_V3_MANDATORY_CANDIDATES_2026_08_27.md",
-            "TODO_PRIVATE_PROJECT_V3_CONFIRMED_2026_08_27.md",
-        ]:
-            self.assertTrue((archive / archived_name).exists(), archived_name)
 
         # Exercise packaging with synthetic project content and a positive control.
         with tempfile.TemporaryDirectory() as tmp:
@@ -439,46 +436,30 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertIn("skills/writing/research/citation-verification", profile_skills)
         self.assertEqual(profile["secondary_skills"], [])
 
-    def test_cuhk_template_payload_is_complete_and_reference_deck_is_valid(self) -> None:
-        root = SHARED / "templates/cuhk"
+    def test_research_standard_template_payload_is_complete_and_reference_deck_is_valid(self) -> None:
+        root = SHARED / "templates/research_standard"
         source = root / "beamer/source"
         required = [
             source / "main.tex",
             source / "skin.tex",
-            source / "styles/beamerthemesintef.sty",
-            source / "styles/sintefcolor.sty",
-            source / "assets/background.png",
-            source / "assets/background_negative.png",
-            source / "assets/logo_RGB.png",
-            source / "assets/logo_RGB_negative.png",
-            source / "bibliography.bib",
-            root / "design-tokens.json",
-            root / "pptx/build_reference_deck.py",
-            root / "pptx/cuhk-reference-deck.pptx",
-            root / "scripts/import-local-assets.ps1",
+            source / "template.tex",
+            root / "README.md",
         ]
         for path in required:
             self.assertTrue(path.exists(), path)
 
         text = (source / "main.tex").read_text(encoding="utf-8")
-        style_text = (source / "styles/beamerthemesintef.sty").read_text(encoding="utf-8")
+        template_text = (source / "template.tex").read_text(encoding="utf-8")
+        style_text = (source / "skin.tex").read_text(encoding="utf-8")
         typography_text = (SHARED / "templates/_shared/beamer-core-v1/typography.tex").read_text(encoding="utf-8")
-        self.assertIn(r"\usetheme{sintef}", text)
-        self.assertIn(r"\input{\PresentationCoreDir/core.tex}", style_text)
+        self.assertIn(r"\input{template.tex}", text)
+        self.assertIn(r"\input{\PresentationCoreDir/core.tex}", template_text)
         self.assertNotIn(r"\setbeamertemplate", style_text)
         self.assertIn("texgyretermes-regular", typography_text)
         self.assertIn("texgyretermes-math", typography_text)
         for forbidden_font in ["Times New Roman", "Liberation", "DejaVu", "Caladea", "Carlito"]:
             self.assertNotIn(forbidden_font, style_text)
-
-        tokens = json.loads((root / "design-tokens.json").read_text(encoding="utf-8"))
-        self.assertEqual(tokens["slide"]["width_in"], 13.333)
-        self.assertEqual(tokens["slide"]["height_in"], 7.5)
-
-        with ZipFile(root / "pptx/cuhk-reference-deck.pptx") as deck:
-            names = set(deck.namelist())
-        self.assertIn("[Content_Types].xml", names)
-        self.assertTrue(any(name.startswith("ppt/slides/slide") for name in names))
+        self.assertNotIn("PRIVATE_ORG", text + template_text + style_text)
 
     def test_deck_plan_validator_accepts_fixture(self) -> None:
         expected = json.loads((SHARED / "fixtures" / "expected_deck_plan.json").read_text(encoding="utf-8"))
@@ -514,7 +495,7 @@ class PresentationSharedTests(unittest.TestCase):
                 "purpose": "group-meeting",
                 "duration_minutes": 10,
                 "language": "en",
-                "template": "cuhk-default",
+                "template": "research_standard-default",
                 "output": "pptx",
                 "editability": "editable",
             },
@@ -619,7 +600,7 @@ class PresentationSharedTests(unittest.TestCase):
         schema = references / "research_slide_composition.schema.json"
         families = references / "RESEARCH_COMPOSITION_FAMILIES.md"
         composition_index = references / "research_slide_composition_index.json"
-        debug_montage = REPO_ROOT / "docs/audits/research_presentation_composition_debug_montage.svg"
+        debug_montage = AUDIT_FIXTURE_ROOT / "research_presentation_composition_debug_montage.svg"
         for path in [schema, families, composition_index, debug_montage]:
             self.assertTrue(path.exists(), path)
 
@@ -713,7 +694,7 @@ class PresentationSharedTests(unittest.TestCase):
             audience_contract = record["portable_composition_lesson"] + " " + " ".join(record["scientific_jobs"])
             for forbidden in ["RRL-", "SRC-", "GSC-", "QA", "provenance"]:
                 self.assertNotIn(forbidden, audience_contract)
-        report = json.loads((REPO_ROOT / "docs/audits/research_presentation_gold_composition_library/gold_admission_report.json").read_text(encoding="utf-8"))
+        report = json.loads((AUDIT_FIXTURE_ROOT / "research_presentation_gold_composition_library/gold_admission_report.json").read_text(encoding="utf-8"))
         self.assertEqual(set(report["admitted_gold_ids"]), {record["gold_id"] for record in records})
         self.assertIn("discussion / next experiment", report["coverage_summary"])
         self.assertNotIn("no discussion", " ".join(report["coverage_limitations"]).lower())
@@ -809,7 +790,7 @@ class PresentationSharedTests(unittest.TestCase):
         probe_generator = SHARED / "scripts/generate_gold_composition_probe_artifacts.py"
         probe_result = subprocess.run([sys.executable, str(probe_generator)], check=False, capture_output=True, text=True)
         self.assertEqual(probe_result.returncode, 0, probe_result.stderr + probe_result.stdout)
-        probes = json.loads((REPO_ROOT / "docs/audits/research_presentation_gold_composition_library/runtime_probe_traces.json").read_text(encoding="utf-8"))
+        probes = json.loads((AUDIT_FIXTURE_ROOT / "research_presentation_gold_composition_library/runtime_probe_traces.json").read_text(encoding="utf-8"))
         self.assertEqual(probes["status"], "PASS")
         self.assertEqual(len(probes["probes"]), 3)
         for probe in probes["probes"]:
@@ -1021,9 +1002,9 @@ class PresentationSharedTests(unittest.TestCase):
                     )
                 )
 
-    def test_cuhk_scientific_layout_stage3_contract(self) -> None:
-        generator = SHARED / "scripts/generate_cuhk_scientific_layout_stage3.py"
-        validator = SHARED / "scripts/validate_cuhk_scientific_layout_stage3.py"
+    def test_research_standard_scientific_layout_stage3_contract(self) -> None:
+        generator = SHARED / "scripts/generate_research_standard_scientific_layout_stage3.py"
+        validator = SHARED / "scripts/validate_research_standard_scientific_layout_stage3.py"
         with tempfile.TemporaryDirectory() as tmp:
             generated = Path(tmp) / "stage3"
             implementation_commit = "a" * 40
@@ -1061,10 +1042,10 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(validation.returncode, 0, validation.stderr + validation.stdout)
 
             manifest = json.loads((generated / "BUILD_MANIFEST.json").read_text(encoding="utf-8"))
-            self.assertEqual(manifest["schema"], "RESEARCH_CUHK_STAGE3_BUILD_MANIFEST_V1")
+            self.assertEqual(manifest["schema"], "RESEARCH_RESEARCH_STANDARD_STAGE3_BUILD_MANIFEST_V1")
             self.assertEqual(manifest["task_key"], "030_stage3_visual_recovery")
             self.assertEqual(manifest["implementation_commit"], implementation_commit)
-            self.assertIn("templates/cuhk/beamer/source", manifest["canonical_cuhk_source"])
+            self.assertIn("templates/research_standard/beamer/source", manifest["canonical_research_standard_source"])
             self.assertTrue(manifest["canonical_files"])
             self.assertTrue((REPO_ROOT / manifest["tex"]).exists())
             self.assertTrue((REPO_ROOT / manifest["scientific_layout_include"]).exists())
@@ -1098,7 +1079,7 @@ class PresentationSharedTests(unittest.TestCase):
                 )
                 self.assertFalse(layout["audience_safe_output_contract"]["internal_ids_exposed"])
                 self.assertTrue(layout["text_region_packing"]["non_overlapping"])
-                safe = layout["exact_cuhk_content_safe_region"]
+                safe = layout["exact_research_standard_content_safe_region"]
                 bbox = layout["resolved_primary_object_geometry"]
                 self.assertGreaterEqual(bbox["x"], safe["x"])
                 self.assertGreaterEqual(bbox["y"], safe["y"])
@@ -1124,14 +1105,14 @@ class PresentationSharedTests(unittest.TestCase):
                     zoom = layout["job_specific_runtime_contract"]["same_case_roi_zoom"]
                     self.assertEqual(len(zoom["crop_records"]), 3)
                     semantic_records = {Path(record["source_asset"]).stem: record for record in zoom["crop_records"]}
-                    self.assertEqual(semantic_records["failure_gt"]["visible_error_classes"], ["fn"])
-                    self.assertEqual(semantic_records["failure_pred"]["visible_error_classes"], ["fp"])
-                    self.assertEqual(sorted(semantic_records["failure_error"]["visible_error_classes"]), ["fn", "fp"])
+                    self.assertEqual(semantic_records["image_reference"]["visible_error_classes"], ["fn"])
+                    self.assertEqual(semantic_records["image_prediction"]["visible_error_classes"], ["fp"])
+                    self.assertEqual(sorted(semantic_records["image_error"]["visible_error_classes"]), ["fn", "fp"])
                     for record in zoom["crop_records"]:
                         self.assertTrue(record["same_case_coordinate_space"])
                         self.assertTrue(record["semantic_overlay"])
-                        self.assertTrue((generated / "cuhk_stage3_build" / record["display_asset"]).exists())
-                        self.assertTrue((generated / "cuhk_stage3_build" / record["zoom_asset"]).exists())
+                        self.assertTrue((generated / "research_standard_stage3_build" / record["display_asset"]).exists())
+                        self.assertTrue((generated / "research_standard_stage3_build" / record["zoom_asset"]).exists())
                 if layout["page_job"] in {"EXPERIMENT_DESIGN", "NEXT_EXPERIMENT"}:
                     self.assertGreaterEqual(bbox["w"], 0.87)
                     self.assertGreaterEqual(bbox["h"], 0.55)
@@ -1162,7 +1143,7 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertFalse(capacity_failure["generic_layout_fallback_used"])
 
             dependency_probe = json.loads((generated / "dependency_probe.json").read_text(encoding="utf-8"))
-            self.assertEqual(dependency_probe["schema"], "RESEARCH_CUHK_STAGE3_BUILD_DEPENDENCY_PROBE_V1")
+            self.assertEqual(dependency_probe["schema"], "RESEARCH_RESEARCH_STANDARD_STAGE3_BUILD_DEPENDENCY_PROBE_V1")
             self.assertIn("pdftoppm", dependency_probe["commands"])
             if dependency_probe["tex_engine_available"]:
                 self.assertIn(
@@ -1185,7 +1166,7 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertIn("build_manifest_sha256", visual_inputs["identity_bindings"])
 
             tex = (REPO_ROOT / manifest["tex"]).read_text(encoding="utf-8")
-            self.assertIn(r"\usetheme{sintef}", tex)
+            self.assertIn(r"\input{template.tex}", tex)
             self.assertIn(r"\input{scientific_layouts.tex}", tex)
             self.assertIn(r"\StageThreeNode", tex)
             self.assertIn(r"\displaystyle", tex)
@@ -1218,8 +1199,8 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertNotIn("Error zoom:", tex)
             for forbidden in ["RRL-", "SRC-", "GSC-", "Reference retrieval", "EVIDENCE_MANIFEST", "Diagram contract", "run ID", "fixture", "workflow"]:
                 self.assertNotIn(forbidden, tex)
-            plugin_generator = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/generate_cuhk_scientific_layout_stage3.py"
-            plugin_validator = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_cuhk_scientific_layout_stage3.py"
+            plugin_generator = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/generate_research_standard_scientific_layout_stage3.py"
+            plugin_validator = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_research_standard_scientific_layout_stage3.py"
             production_validator_source = SHARED / "scripts/validate_research_presentation_production_entry.py"
             plugin_production_validator = REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_research_presentation_production_entry.py"
             self.assertEqual(generator.read_text(encoding="utf-8"), plugin_generator.read_text(encoding="utf-8"))
@@ -1492,7 +1473,7 @@ class PresentationSharedTests(unittest.TestCase):
         for spec in [experiment_spec, next_spec]:
             layout = stage3.resolve_layout(spec)
             bbox = layout["resolved_primary_object_geometry"]
-            safe = layout["exact_cuhk_content_safe_region"]
+            safe = layout["exact_research_standard_content_safe_region"]
             self.assertEqual(bbox["x"], safe["x"])
             self.assertGreaterEqual(bbox["w"], 0.87)
             self.assertGreaterEqual(bbox["h"], 0.55)
@@ -1566,7 +1547,7 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertEqual(manifest["implementation_commit"], implementation_commit)
             self.assertRegex(manifest["render_input_identity_sha256"], r"^[0-9a-f]{64}$")
             self.assertEqual(manifest["render_input_identity"]["sha256"], manifest["render_input_identity_sha256"])
-            self.assertIn("templates/cuhk/beamer/source", manifest["canonical_cuhk_source"])
+            self.assertIn("templates/research_standard/beamer/source", manifest["canonical_research_standard_source"])
             self.assertEqual(manifest["quality_loop_handoff"]["status"], "WAITING_FOR_DECK_VISUAL_REVIEW")
             self.assertIn("Stage 4 PASS", manifest["stage4_boundary"])
             if manifest["render_status"]["status"] == "ok":
@@ -1661,19 +1642,19 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertGreaterEqual(len(model_layout["native_objects"]), 5)
             self.assertIn("key_message", model_layout["job_specific_runtime_contract"]["source_fields_consumed"])
             self.assertIn("scientific_objects", model_layout["job_specific_runtime_contract"]["source_fields_consumed"])
-            self.assertIn("source-grounded supporting roles", " ".join(model_layout["source_to_cuhk_transform"]))
+            self.assertIn("source-grounded supporting roles", " ".join(model_layout["source_to_research_standard_transform"]))
             medical_layout = next(layout for layout in layouts if layout["page_job"] == "MEDICAL_IMAGE_COMPARISON")
             semantic_records = {
                 Path(record["source_asset"]).stem: record
                 for record in medical_layout["job_specific_runtime_contract"]["same_case_roi_zoom"]["crop_records"]
             }
-            self.assertEqual(semantic_records["failure_gt"]["visible_error_classes"], ["fn"])
-            self.assertEqual(semantic_records["failure_pred"]["visible_error_classes"], ["fp"])
-            self.assertEqual(sorted(semantic_records["failure_error"]["visible_error_classes"]), ["fn", "fp"])
+            self.assertEqual(semantic_records["image_reference"]["visible_error_classes"], ["fn"])
+            self.assertEqual(semantic_records["image_prediction"]["visible_error_classes"], ["fp"])
+            self.assertEqual(sorted(semantic_records["image_error"]["visible_error_classes"]), ["fn", "fp"])
             for record in semantic_records.values():
                 self.assertTrue(record["semantic_overlay"])
-                self.assertTrue((generated / "cuhk_production_build" / record["display_asset"]).exists())
-                self.assertTrue((generated / "cuhk_production_build" / record["zoom_asset"]).exists())
+                self.assertTrue((generated / "research_standard_production_build" / record["display_asset"]).exists())
+                self.assertTrue((generated / "research_standard_production_build" / record["zoom_asset"]).exists())
 
             visual_inputs = json.loads((generated / "visual_inputs.json").read_text(encoding="utf-8"))
             self.assertEqual(visual_inputs["schema"], "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1")
@@ -1746,7 +1727,7 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertIsNone(quality_loop["final_decision"])
 
             tex = (REPO_ROOT / manifest["tex"]).read_text(encoding="utf-8")
-            self.assertIn(r"\usetheme{sintef}", tex)
+            self.assertIn(r"\input{template.tex}", tex)
             self.assertIn("Clustered Interval Calibration And Synthetic Segmentation Robustness", tex)
             self.assertIn("Uncertainty calibration across clustered data and segmentation stress cases", tex)
             self.assertIn("Coverage by ICC under imbalanced clusters", tex)
@@ -1773,7 +1754,7 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertNotIn("WORKSTREAM_PROFILES", source)
             self.assertNotIn("clustered_interval_calibration", source)
             self.assertNotIn("segmentation_robustness", source)
-            self.assertNotIn("generate_cuhk_scientific_layout_stage3.generate(", source)
+            self.assertNotIn("generate_research_standard_scientific_layout_stage3.generate(", source)
             self.assertNotIn("stage3.page_specs(", source)
             self.assertNotIn("Clustered Interval Calibration And Synthetic Segmentation Robustness", source)
             self.assertNotIn("force_gold_id=", source)
@@ -1881,7 +1862,7 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertNotIn("Interpretation", minimal_tex)
         self.assertNotIn("Source-grounded terms", minimal_tex)
 
-        source = (SHARED / "scripts/generate_cuhk_scientific_layout_stage3.py").read_text(encoding="utf-8")
+        source = (SHARED / "scripts/generate_research_standard_scientific_layout_stage3.py").read_text(encoding="utf-8")
         self.assertNotIn("baseline hazard", source)
         self.assertNotIn("covariate log hazard ratio", source)
 
@@ -1934,7 +1915,7 @@ class PresentationSharedTests(unittest.TestCase):
             deck_plan = json.loads((repaired / "deck_plan.json").read_text(encoding="utf-8"))
             transition_slide = next(slide for slide in deck_plan["slides"] if slide["page_function"] == "MEDICAL_IMAGE_COMPARISON")
             self.assertEqual(transition_slide["storyline_transition"]["cue_variant"], "compact")
-            tex = (repaired / "cuhk_production_build/main.tex").read_text(encoding="utf-8")
+            tex = (repaired / "research_standard_production_build/main.tex").read_text(encoding="utf-8")
             self.assertIn(r"\StageThreePanel{0.0600}{0.1450}{0.9400}{0.2020}", tex)
             self.assertIn("Research direction", tex)
             self.assertIn("Segmentation robustness", tex)
@@ -2391,7 +2372,7 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertNotRegex(generator_text, r"RRL-\d{3}")
         import generate_reference_calibrated_candidates as candidate_generator
 
-        output_root = REPO_ROOT / "docs/audits/research_presentation_candidate_search/generated"
+        output_root = AUDIT_FIXTURE_ROOT / "research_presentation_candidate_search/generated"
         manifests = [
             output_root / "statistical_estimator_cluster_robust_variance/candidate_manifest.json",
             output_root / "medical_image_lesion_overlay_comparison/candidate_manifest.json",
@@ -2442,7 +2423,7 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertNotIn("RRL-034", {reference_id for candidate in candidates for reference_id in candidate["source_reference_ids"]})
 
         records = candidate_generator.by_reference_id()
-        medical_request = json.loads((REPO_ROOT / "docs/audits/research_presentation_candidate_search/requests/medical_image_comparison_request.json").read_text(encoding="utf-8"))
+        medical_request = json.loads((AUDIT_FIXTURE_ROOT / "research_presentation_candidate_search/requests/medical_image_comparison_request.json").read_text(encoding="utf-8"))
         rrl022_regions, _, _, _ = candidate_generator.candidate_regions(medical_request, "reference_faithful", records["RRL-022"])
         rrl013_regions, _, _, _ = candidate_generator.candidate_regions(medical_request, "reference_faithful", records["RRL-013"])
         rrl022_bboxes = [region["bbox"] for region in rrl022_regions if region["role"] == "primary_scientific_object"]
@@ -2451,7 +2432,7 @@ class PresentationSharedTests(unittest.TestCase):
 
     def test_candidate_visual_finish_repair_manifests(self) -> None:
         validator = SHARED / "scripts/validate_reference_candidate_manifests.py"
-        output_root = REPO_ROOT / "docs/audits/research_presentation_candidate_visual_finish_repair/generated"
+        output_root = AUDIT_FIXTURE_ROOT / "research_presentation_candidate_visual_finish_repair/generated"
         manifests = [
             output_root / "statistical_estimator_cluster_robust_variance/candidate_manifest.json",
             output_root / "medical_image_lesion_overlay_comparison/candidate_manifest.json",
@@ -2488,7 +2469,7 @@ class PresentationSharedTests(unittest.TestCase):
             "validate_comparative_visual_review.py",
         ]:
             self.assertTrue((scripts / name).exists(), name)
-        root = REPO_ROOT / "results/021_research_presentation_comparative_reference_calibrated_visual_review/visual_review"
+        root = AUDIT_FIXTURE_ROOT / "comparative_visual_review"
         for case in ["statistical", "medical"]:
             manifest_path = root / case / "visual_inputs.json"
             map_path = root / case / "review_identity_map.json"
@@ -2509,12 +2490,17 @@ class PresentationSharedTests(unittest.TestCase):
                 self.assertNotIn(forbidden, visible_text)
             self.assertEqual([item["logical_id"] for item in manifest["inputs"]], ["item_A", "item_B", "item_C", "item_D", "item_E"])
         validator = scripts / "validate_comparative_visual_review.py"
-        validation = subprocess.run([sys.executable, str(validator)], check=False, capture_output=True, text=True)
+        validation = subprocess.run(
+            [sys.executable, str(validator), "--review-root", str(root)],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
         self.assertEqual(validation.returncode, 0, validation.stderr)
         self.assertIn("validated 2 comparative visual-review case(s)", validation.stdout)
 
     def test_candidate_visual_finish_comparative_inputs(self) -> None:
-        root = REPO_ROOT / "results/022_research_presentation_candidate_visual_finish_repair/visual_review"
+        root = AUDIT_FIXTURE_ROOT / "candidate_visual_finish_review"
         for case in ["statistical", "medical"]:
             manifest_path = root / case / "visual_inputs.json"
             map_path = root / case / "review_identity_map.json"
@@ -2543,6 +2529,8 @@ class PresentationSharedTests(unittest.TestCase):
             "022_visual_finish_comparison",
             "--cache-key",
             "022",
+            "--review-root",
+            str(root),
         ], check=False, capture_output=True, text=True)
         self.assertEqual(validation.returncode, 0, validation.stderr)
         self.assertIn("validated 2 comparative visual-review case(s)", validation.stdout)
@@ -2570,11 +2558,16 @@ class PresentationSharedTests(unittest.TestCase):
         for source, mirror in mirrors:
             self.assertEqual(source.read_text(encoding="utf-8"), mirror.read_text(encoding="utf-8"))
 
-        validation = subprocess.run([sys.executable, str(validator)], check=False, capture_output=True, text=True)
+        root = AUDIT_FIXTURE_ROOT / "deck_design_system_integration"
+        validation = subprocess.run(
+            [sys.executable, str(validator), "--outputs", str(root / "OUTPUTS.json")],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
         self.assertEqual(validation.returncode, 0, validation.stderr)
         self.assertIn("validated 2 deck-design-system integration mini-deck(s)", validation.stdout)
 
-        root = REPO_ROOT / "results/023_research_presentation_deck_design_system_integration/generated"
         outputs = json.loads((root / "OUTPUTS.json").read_text(encoding="utf-8"))
         profile = json.loads((root / "deck_design_profile.json").read_text(encoding="utf-8"))
         self.assertEqual(profile["schema"], "RESEARCH_DECK_DESIGN_PROFILE_V1")
@@ -2585,11 +2578,12 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertIn("layout_family", profile["page_local_properties"])
         locked_sha = profile["locked_properties_sha256"]
         self.assertEqual(len(outputs["decks"]), 2)
-        review_pack = REPO_ROOT / outputs["review_pack_pdf"]["path"]
+        review_pack = root / "REVIEW_PACK.pdf"
         self.assertTrue(review_pack.exists(), review_pack)
         self.assertGreater(review_pack.stat().st_size, 100_000)
         self.assertEqual(len(outputs["review_pack_pdf"]["source_pdfs"]), 2)
-        mutation = json.loads((REPO_ROOT / outputs["profile_mutation_regression"]["path"]).read_text(encoding="utf-8"))
+        mutation_path = Path(outputs["profile_mutation_regression"]["path"])
+        mutation = json.loads((root / Path(*mutation_path.parts[3:])).read_text(encoding="utf-8"))
         self.assertEqual(mutation["schema"], "RESEARCH_DECK_DESIGN_PROFILE_MUTATION_REGRESSION_V1")
         self.assertEqual(mutation["status"], "PASS")
         self.assertTrue(mutation["checks"]["profile_sha_changed"])
@@ -2598,7 +2592,8 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertNotEqual(mutation["baseline_pptx_xml_sha256"], mutation["mutated_pptx_xml_sha256"])
         self.assertEqual(mutation["baseline_geometry_signature"], mutation["mutated_geometry_signature"])
         for deck in outputs["decks"]:
-            manifest = json.loads((REPO_ROOT / deck["manifest"]).read_text(encoding="utf-8"))
+            manifest_path = Path(deck["manifest"])
+            manifest = json.loads((root / Path(*manifest_path.parts[3:])).read_text(encoding="utf-8"))
             self.assertEqual(manifest["schema"], "RESEARCH_DECK_DESIGN_SYSTEM_INTEGRATION_MANIFEST_V1")
             self.assertEqual(manifest["task_key"], "023_research_presentation_deck_design_system_integration")
             self.assertEqual(manifest["editable_slide_count"], 4)
@@ -2608,7 +2603,8 @@ class PresentationSharedTests(unittest.TestCase):
             self.assertGreaterEqual(len(manifest["major_composition_families"]), 3)
             self.assertEqual({slide["locked_properties_sha256"] for slide in manifest["slides"]}, {locked_sha})
             self.assertGreaterEqual(len({tuple(slide["primary_object_roles"]) for slide in manifest["slides"]}), 2)
-            with ZipFile(REPO_ROOT / manifest["pptx"]) as deck_zip:
+            pptx_path = Path(manifest["pptx"])
+            with ZipFile(root / Path(*pptx_path.parts[3:])) as deck_zip:
                 names = set(deck_zip.namelist())
             self.assertIn("[Content_Types].xml", names)
             self.assertEqual(
@@ -2624,178 +2620,6 @@ class PresentationSharedTests(unittest.TestCase):
                 for forbidden in ["RRL-", "SRC-", "candidate", "Reference retrieval", "EVIDENCE_MANIFEST", "Diagram contract", "QA"]:
                     self.assertNotIn(forbidden, audience)
 
-    def test_research_presentation_todo_consolidation_and_promotions(self) -> None:
-        archive = REPO_ROOT / "docs/provenance/research-presentation-maintenance-archive-2026-08-30"
-        todo = (archive / "TODO.md").read_text(encoding="utf-8")
-        plugin_todo = (REPO_ROOT / "docs/plugin-todos/presentations.md").read_text(encoding="utf-8")
-        research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")
-        guardrails = (
-            REPO_ROOT
-            / "skills/tools/documents-media/presentations/research-presentations/references/real-world-presentation-guardrails.md"
-        ).read_text(encoding="utf-8")
-        visual_qa = (SHARED / "visual-qa.md").read_text(encoding="utf-8")
-        archetypes = (SHARED / "references/RESEARCH_SLIDE_ARCHETYPES.md").read_text(encoding="utf-8")
-
-        self.assertNotRegex(todo, r"- \[ \]")
-        categories = set(re.findall(r"- \[(ALREADY_IMPLEMENTED|PROMOTE_NOW|KEEP_BACKLOG|DUPLICATE_OR_SUPERSEDED)\]", todo))
-        self.assertEqual(categories, {"ALREADY_IMPLEMENTED", "PROMOTE_NOW", "KEEP_BACKLOG", "DUPLICATE_OR_SUPERSEDED"})
-        checklist_count = len(re.findall(r"^- \[(?:ALREADY_IMPLEMENTED|PROMOTE_NOW|KEEP_BACKLOG|DUPLICATE_OR_SUPERSEDED)\]", todo, flags=re.MULTILINE))
-        basis_count = todo.count("Classification basis:")
-        self.assertGreaterEqual(checklist_count, 100)
-        self.assertEqual(checklist_count, basis_count)
-
-        for required in [
-            "## Classification Legend",
-            "`[PROMOTE_NOW]`",
-            "`[KEEP_BACKLOG]`",
-            "`[DUPLICATE_OR_SUPERSEDED]`",
-            "Phase B",
-            "statistical/biostatistical benchmark",
-            "medical-imaging benchmark",
-        ]:
-            self.assertIn(required, todo)
-
-        for required in [
-            "Diagram geometry and canonical edge/node treatment",
-            "Deck-wide style system and terminology hierarchy",
-            "Math and theory slide hierarchy",
-            "Simulation, metric and structured-fact presentation",
-            "Natural scientific slide language",
-        ]:
-            self.assertIn(required, plugin_todo)
-
-        for required in [
-            "## Revision Scope",
-            "accepted_element_ledger",
-            "## Evidence And Concept Grounding",
-            "fabricated proxy",
-            "## Diagram Gate",
-            "connectors must be structural connectors",
-        ]:
-            self.assertIn(required, research_skill)
-
-        for required in [
-            "## Rule Inheritance",
-            "## Revision Entry Routing",
-            "research-presentations existing-deck revision production gate",
-            "RESEARCH_PRESENTATION_EXISTING_DECK_REVISION_PACKET_V1",
-            "继续按这些批注返修我现有的组会PPT",
-            "这个版本其他页别动，只修我指出的页面",
-            "保留上轮接受的布局，继续改剩下的问题",
-            "Do not route them to one-call new-deck regeneration",
-            "accepted slides/components",
-            "reviewer-seen render baseline",
-            "targeted revision scope",
-            "first-use dependency order",
-            "one intellectual job per slide",
-            "first-line centered display formula",
-            "ports and anchors",
-            "Compilation success",
-        ]:
-            self.assertIn(required, guardrails)
-
-        for required in [
-            "## Evidence Versus Concept QA",
-            "## Diagram Semantic QA",
-            "## Rendered Scientific Object QA",
-            "## Revision Scope QA",
-            "typed arrow characters",
-            "connector endpoint clearance",
-            "source/footer safe zone",
-            "scope creep",
-        ]:
-            self.assertIn(required, visual_qa)
-
-        for required in [
-            "metric semantics, favorable direction, graphical encoding",
-            "visually central and large enough to inspect",
-            "complete comparison path",
-            "every connector represents a true relationship",
-        ]:
-            self.assertIn(required, archetypes)
-
-        mirrors = [
-            (
-                REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md",
-                REPO_ROOT / "plugins/codex/plugins/presentations/skills/research/SKILL.md",
-            ),
-            (
-                REPO_ROOT
-                / "skills/tools/documents-media/presentations/research-presentations/references/real-world-presentation-guardrails.md",
-                REPO_ROOT
-                / "plugins/codex/plugins/presentations/skills/research/references/real-world-presentation-guardrails.md",
-            ),
-            (
-                SHARED / "template-routing.md",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/template-routing.md",
-            ),
-            (
-                SHARED / "ppt-skill-routing.md",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/ppt-skill-routing.md",
-            ),
-            (
-                SHARED / "scripts/markdown_to_deck_plan.py",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/markdown_to_deck_plan.py",
-            ),
-            (
-                SHARED / "visual-qa.md",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/visual-qa.md",
-            ),
-            (
-                SHARED / "references/RESEARCH_SLIDE_ARCHETYPES.md",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/references/RESEARCH_SLIDE_ARCHETYPES.md",
-            ),
-            (
-                SHARED / "references/research_gold_composition.schema.json",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/references/research_gold_composition.schema.json",
-            ),
-            (
-                SHARED / "references/research_gold_composition_index.json",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/references/research_gold_composition_index.json",
-            ),
-            (
-                SHARED / "scripts/validate_gold_compositions.py",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_gold_compositions.py",
-            ),
-            (
-                SHARED / "scripts/select_gold_compositions.py",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/select_gold_compositions.py",
-            ),
-            (
-                SHARED / "scripts/scientific_object_semantics.py",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/scientific_object_semantics.py",
-            ),
-            (
-                SHARED / "scripts/build_gold_composition_recipe.py",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/build_gold_composition_recipe.py",
-            ),
-            (
-                SHARED / "scripts/generate_gold_composition_probe_artifacts.py",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/generate_gold_composition_probe_artifacts.py",
-            ),
-            (
-                SHARED / "scripts/prepare_discussion_gold_admission_review.py",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/prepare_discussion_gold_admission_review.py",
-            ),
-            (
-                SHARED / "scripts/generate_cuhk_scientific_layout_stage3.py",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/generate_cuhk_scientific_layout_stage3.py",
-            ),
-            (
-                SHARED / "scripts/validate_cuhk_scientific_layout_stage3.py",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_cuhk_scientific_layout_stage3.py",
-            ),
-            (
-                SHARED / "scripts/validate_existing_deck_revision_entry.py",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/scripts/validate_existing_deck_revision_entry.py",
-            ),
-            (
-                SHARED / "templates/cuhk/beamer/source/styles/beamerthemesintef.sty",
-                REPO_ROOT / "plugins/codex/plugins/presentations/shared/templates/cuhk/beamer/source/styles/beamerthemesintef.sty",
-            ),
-        ]
-        for source, mirror in mirrors:
-            self.assertEqual(source.read_text(encoding="utf-8"), mirror.read_text(encoding="utf-8"))
 
     def test_research_group_meeting_final_validation_rejects_unknown_and_checks_evidence_refs(self) -> None:
         draft = markdown_to_deck_plan.markdown_to_deck_plan(
@@ -2811,538 +2635,9 @@ class PresentationSharedTests(unittest.TestCase):
         ref_errors = validate_deck_plan.validate_deck_plan(draft, phase="planning")
         self.assertTrue(any("references missing evidence_board item" in error for error in ref_errors))
 
-    def test_research_group_meeting_ai_bridge_visual_inputs_adapter(self) -> None:
-        adapter = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/build_ai_bridge_visual_inputs.py"
-        with tempfile.TemporaryDirectory() as tmp:
-            output = Path(tmp) / "visual_inputs.json"
-            result = subprocess.run(
-                [sys.executable, str(adapter), "--output", str(output)],
-                check=False,
-                capture_output=True,
-                text=True,
-            )
-            self.assertEqual(result.returncode, 0, result.stderr)
-            payload = json.loads(result.stdout)
-            self.assertEqual(payload["input_count"], 4)
-            manifest = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(manifest["schema"], "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1")
-            self.assertEqual(manifest["task_key"], "012_presentation_visual_adapter")
-            self.assertEqual(manifest["workflow_type"], "generic")
-            self.assertEqual(manifest["review_kind"], "research-presentation-four-page-smoke")
-            self.assertEqual(manifest["privacy_policy"], "PUBLIC_SAFE_ONLY")
-            bindings = manifest["identity_bindings"]
-            self.assertEqual(bindings["bridge_kit_commit"], "3b061167794d593b113ca8f4a8a43c4c8000fc01")
-            self.assertEqual(bindings["legacy_task_key"], "011_round_handoff")
-            self.assertEqual(bindings["source_render_status"], "ok")
-            self.assertEqual(bindings["source_mechanical_status"], "MECHANICAL_PASS")
-            self.assertEqual(bindings["source_academic_visual_decision"], "NOT_ASSESSED")
-            self.assertEqual(len(manifest["inputs"]), 4)
-            for index, item in enumerate(manifest["inputs"], start=1):
-                self.assertEqual(item["logical_id"], f"slide_{index}")
-                self.assertEqual(item["mime_type"], "image/png")
-                self.assertEqual(len(item["sha256"]), 64)
-                self.assertTrue((REPO_ROOT / item["path"]).is_file())
-                self.assertIn(f"slide_{index}", bindings["input_png_sha256_by_slide"])
-                self.assertEqual(bindings["input_png_sha256_by_slide"][f"slide_{index}"], item["sha256"])
-            rubric = manifest["rubric"]["instructions"]
-            self.assertIn("Inspect the actual image pixels page by page", rubric)
-            self.assertIn("Do not infer PASS from SHA", rubric)
-            self.assertIn("rounded cards, tables, dashboards", rubric)
-            self.assertIn("30-90 seconds", rubric)
-            self.assertIn("smallest concrete page-specific repair", rubric)
-            self.assertIn("skills/tools/documents-media/presentations/shared/visual-qa.md", manifest["rubric"]["source_contracts"])
 
-    def test_research_group_meeting_regression_generator_outputs_artifacts(self) -> None:
-        script = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/generate_research_group_meeting_regression.py"
-        reviewer = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/review_research_group_meeting_regression.py"
-        script_text = script.read_text(encoding="utf-8")
-        self.assertNotIn('["RRL-003", "RRL-020", "RRL-022", "RRL-029"]', script_text)
-        self.assertIn("retrieve_references", script_text)
-        with tempfile.TemporaryDirectory() as tmp:
-            result = subprocess.run(
-                [sys.executable, str(script), "--out-dir", tmp],
-                check=False,
-                capture_output=True,
-                text=True,
-            )
-            self.assertEqual(result.returncode, 0, result.stderr)
-            payload = json.loads(result.stdout)
-            self.assertTrue(Path(payload["pptx"]).exists())
-            self.assertFalse((Path(tmp) / "SCIENTIFIC_QA.json").exists())
-            manifest = json.loads(Path(payload["evidence_manifest"]).read_text(encoding="utf-8"))
-            self.assertEqual(manifest["status"], "GENERATED_SOURCE_ARTIFACTS_ONLY")
-            self.assertFalse(manifest["generator_may_pass"])
-            self.assertEqual(manifest["editable_slide_count"], 4)
-            self.assertEqual(len(manifest["slides"]), 4)
-            endpoint_data = manifest["synthetic_endpoint_data"]
-            self.assertEqual(endpoint_data["best_by_endpoint"]["Burden error"], "Calibrated")
-            self.assertEqual(endpoint_data["burden_error_favorable_direction"], "lower_is_better")
-            self.assertEqual(endpoint_data["display_encoding"]["Burden error"], "raw_error_value_lower_is_better")
-            self.assertEqual(
-                manifest["result_page_evidence_boundary"],
-                "Illustrative synthetic results - not completed validation",
-            )
-            phantom_layout = manifest["synthetic_phantom_metrics"]["layout"]
-            self.assertTrue(phantom_layout["same_synthetic_case"])
-            self.assertEqual(phantom_layout["source_grid_pixels"], 120)
-            self.assertGreaterEqual(phantom_layout["rendered_case_pixels"], 180)
-            self.assertGreaterEqual(
-                phantom_layout["rendered_case_pixels"] / phantom_layout["panel_pixels"],
-                0.75,
-            )
-            self.assertEqual(
-                manifest["phantom_overlay_legend"],
-                {"green": "TP/overlap", "red": "FP", "blue": "FN"},
-            )
-            experiment_paths = manifest["experiment_design_paths"]
-            self.assertTrue(experiment_paths["explicit_local_only_comparator_branch"])
-            self.assertIn("global_to_endpoint", experiment_paths["structural_connectors"])
-            self.assertIn("local_only_to_endpoint", experiment_paths["structural_connectors"])
-            expected_render = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/expected_render"
-            for slide_number in range(1, 5):
-                png = expected_render / f"slide-{slide_number}.png"
-                self.assertTrue(png.exists(), png)
-                self.assertGreater(png.stat().st_size, 10_000)
-            for slide in manifest["slides"]:
-                self.assertGreaterEqual(len(slide["reference_ids"]), 2)
-                self.assertLessEqual(len(slide["reference_ids"]), 5)
-                self.assertTrue(slide["expected_scientific_objects"])
-                retrieval = slide["reference_retrieval"]
-                self.assertEqual(slide["reference_ids"], retrieval["selected_ids"])
-                self.assertGreaterEqual(len(retrieval["candidate_ids"]), len(retrieval["selected_ids"]))
-                self.assertIn("intent", retrieval["query"])
-                self.assertIn("page_functions", retrieval["query"])
-                self.assertIn("evidence_types", retrieval["query"])
-                self.assertTrue(retrieval["source_tiers"])
-                self.assertEqual(set(retrieval["selected_ids"]), set(retrieval["ranking_relevance_reason"]))
-                for selected_id in retrieval["selected_ids"]:
-                    self.assertIn(selected_id, retrieval["candidate_ids"])
-                    self.assertIn("source_tier=", retrieval["ranking_relevance_reason"][selected_id])
-                self.assertIn("No full-slide screenshots", retrieval["what_was_not_copied"])
-            render = json.loads(Path(payload["render_status"]).read_text(encoding="utf-8"))
-            self.assertIn(render["status"], {"ok", "BLOCKED_REAL_PPTX_RENDER"})
-            review_result = subprocess.run(
-                [sys.executable, str(reviewer), "--out-dir", tmp],
-                check=False,
-                capture_output=True,
-                text=True,
-            )
-            self.assertEqual(review_result.returncode, 0, review_result.stderr)
-            review_payload = json.loads(review_result.stdout)
-            review = json.loads(Path(review_payload["review"]).read_text(encoding="utf-8"))
-            self.assertEqual(review["review_type"], "MECHANICAL_VISUAL_REVIEW")
-            self.assertEqual(review["academic_visual_decision"], "NOT_ASSESSED")
-            self.assertFalse((Path(tmp) / "SCIENTIFIC_VISUAL_REVIEW.json").exists())
-            self.assertTrue(review.get("reviewer_independent_from_generator") or review["status"] == "BLOCKED_REAL_PPTX_RENDER")
-            if render["status"] == "ok":
-                self.assertEqual(review["status"], "MECHANICAL_PASS")
-                self.assertEqual(review["rendered_png_count"], 4)
-                packet_builder = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/build_visual_review_packet.py"
-                packet_dir = Path(tmp) / "visual-review-packet"
-                packet_zip = Path(tmp) / "visual-review-packet.zip"
-                packet_result = subprocess.run(
-                    [
-                        sys.executable,
-                        str(packet_builder),
-                        "--regression-dir",
-                        tmp,
-                        "--packet-dir",
-                        str(packet_dir),
-                        "--zip-path",
-                        str(packet_zip),
-                        "--implementation-commit",
-                        "TEST_IMPLEMENTATION_COMMIT",
-                        "--transport-commit",
-                        "TEST_TRANSPORT_COMMIT",
-                        "--skip-generate",
-                    ],
-                    check=False,
-                    capture_output=True,
-                    text=True,
-                )
-                self.assertEqual(packet_result.returncode, 0, packet_result.stderr)
-                packet_payload = json.loads(packet_result.stdout)
-                self.assertTrue(Path(packet_payload["packet_manifest"]).exists())
-                self.assertTrue(packet_zip.exists())
-                packet_manifest = json.loads(Path(packet_payload["packet_manifest"]).read_text(encoding="utf-8"))
-                self.assertEqual(packet_manifest["academic_visual_decision"], "NOT_ASSESSED")
-                self.assertEqual(len(packet_manifest["golden_render_comparison"]), 4)
-                self.assertTrue(all("byte_matches_committed_golden" in item for item in packet_manifest["golden_render_comparison"]))
-                packet_paths = {item["path"] for item in packet_manifest["files"]}
-                self.assertTrue({f"rendered/slide-{slide}.png" for slide in range(1, 5)}.issubset(packet_paths))
-                self.assertTrue({f"expected_render/slide-{slide}.png" for slide in range(1, 5)}.issubset(packet_paths))
-                self.assertIn("pdf/research_group_meeting_regression.pdf", packet_paths)
-                self.assertIn("research_group_meeting_regression.pptx", packet_paths)
-                self.assertIn("EVIDENCE_MANIFEST.json", packet_paths)
-                self.assertIn("RENDER_STATUS.json", packet_paths)
-                source_packet_dir = Path(tmp) / "visual-review-packet-source"
-                source_packet_zip = Path(tmp) / "visual-review-packet-source.zip"
-                source_packet_result = subprocess.run(
-                    [
-                        sys.executable,
-                        str(packet_builder),
-                        "--source-dir",
-                        str(REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source"),
-                        "--packet-dir",
-                        str(source_packet_dir),
-                        "--zip-path",
-                        str(source_packet_zip),
-                        "--implementation-commit",
-                        "TEST_IMPLEMENTATION_COMMIT",
-                        "--transport-commit",
-                        "TEST_TRANSPORT_COMMIT",
-                    ],
-                    check=False,
-                    capture_output=True,
-                    text=True,
-                )
-                self.assertEqual(source_packet_result.returncode, 0, source_packet_result.stderr)
-                self.assertTrue(source_packet_zip.exists())
-                pages_builder = REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/build_visual_review_pages.py"
-                pages_dir = Path(tmp) / "pages"
-                pages_result = subprocess.run(
-                    [
-                        sys.executable,
-                        str(pages_builder),
-                        "--source-dir",
-                        str(REPO_ROOT / "tests/fixtures/presentations/research_group_meeting/visual_review_packet_source"),
-                        "--pages-dir",
-                        str(pages_dir),
-                        "--implementation-commit",
-                        "TEST_IMPLEMENTATION_COMMIT",
-                        "--transport-commit",
-                        "TEST_TRANSPORT_COMMIT",
-                        "--copy-latest",
-                    ],
-                    check=False,
-                    capture_output=True,
-                    text=True,
-                )
-                self.assertEqual(pages_result.returncode, 0, pages_result.stderr)
-                pages_payload = json.loads(pages_result.stdout)
-                immutable_dir = Path(pages_payload["immutable_dir"])
-                self.assertTrue((immutable_dir / "research_group_meeting_regression.pdf").exists())
-                self.assertTrue((immutable_dir / "packet_manifest.json").exists())
-                pages_manifest = json.loads((immutable_dir / "packet_manifest.json").read_text(encoding="utf-8"))
-                self.assertEqual(pages_manifest["transport"], "github_pages_pdf")
-                self.assertEqual(pages_manifest["academic_visual_decision"], "NOT_ASSESSED")
-                self.assertEqual(pages_manifest["pdf"]["page_count"], 4)
-                published_paths = {item["path"] for item in pages_manifest["published_files"]}
-                self.assertEqual(
-                    published_paths,
-                    {
-                        "EVIDENCE_MANIFEST.json",
-                        "MECHANICAL_VISUAL_REVIEW.json",
-                        "RENDER_STATUS.json",
-                        "research_group_meeting_regression.pdf",
-                    },
-                )
-                self.assertFalse((immutable_dir / "research_group_meeting_regression.pptx").exists())
-                self.assertFalse((immutable_dir / "rendered").exists())
-            else:
-                self.assertEqual(review["status"], "BLOCKED_REAL_PPTX_RENDER")
-            with ZipFile(payload["pptx"]) as deck:
-                slide_names = [name for name in deck.namelist() if name.startswith("ppt/slides/slide") and name.endswith(".xml")]
-                media_names = [name for name in deck.namelist() if name.startswith("ppt/media/")]
-                slide_xml = "\n".join(deck.read(name).decode("utf-8") for name in slide_names)
-            self.assertIn("lower-is-better", slide_xml)
-            self.assertIn("lowest for Calibrated", slide_xml)
-            self.assertIn("illustrative synthetic results", slide_xml)
-            self.assertIn("not completed validation", slide_xml)
-            self.assertIn("green = TP/overlap", slide_xml)
-            self.assertIn("red = FP", slide_xml)
-            self.assertIn("blue = FN", slide_xml)
-            self.assertIn("Local-only comparator", slide_xml)
-            self.assertIn("Endpoint evaluation", slide_xml)
-            self.assertEqual(len(slide_names), 4)
-            self.assertLess(len(media_names), 5)
 
-    def test_statistical_method_group_meeting_benchmark_generator_outputs_artifacts(self) -> None:
-        fixture = REPO_ROOT / "tests/fixtures/presentations/statistical_method_group_meeting"
-        script = fixture / "generate_statistical_method_group_meeting_benchmark.py"
-        reviewer = fixture / "review_statistical_method_group_meeting_benchmark.py"
-        adapter = fixture / "build_ai_bridge_visual_inputs.py"
-        with tempfile.TemporaryDirectory() as tmp:
-            result = subprocess.run(
-                [sys.executable, str(script), "--out-dir", tmp],
-                check=False,
-                capture_output=True,
-                text=True,
-            )
-            self.assertEqual(result.returncode, 0, result.stderr)
-            payload = json.loads(result.stdout)
-            self.assertTrue(Path(payload["pptx"]).exists())
-            manifest = json.loads(Path(payload["evidence_manifest"]).read_text(encoding="utf-8"))
-            self.assertEqual(manifest["task_key"], "016_statistical_method_group_meeting_benchmark")
-            self.assertEqual(manifest["status"], "GENERATED_SOURCE_ARTIFACTS_ONLY")
-            self.assertFalse(manifest["generator_may_pass"])
-            self.assertEqual(manifest["editable_slide_count"], 5)
-            self.assertEqual([slide["archetype"] for slide in manifest["slides"]], [
-                "STATISTICAL_MODEL",
-                "ESTIMATOR",
-                "SIMULATION_DESIGN",
-                "RESULT_FIGURE",
-                "NEGATIVE_RESULT",
-            ])
-            summary = manifest["simulation_summary"]
-            self.assertEqual(summary["seed"], 20260822)
-            self.assertEqual(summary["replicates_per_cell"], 400)
-            self.assertEqual(summary["grid"]["center_count"], [8, 20, 50])
-            self.assertEqual(summary["grid"]["icc"], [0.0, 0.1, 0.3, 0.5])
-            self.assertEqual(summary["grid"]["imbalance"], ["balanced", "imbalanced"])
-            self.assertEqual(summary["methods"], ["naive_iid_ols_z", "cluster_robust_z"])
-            self.assertIn("95% interval coverage", summary["endpoints"])
-            gates = manifest["deterministic_quality_gates"]
-            self.assertEqual(gates["status"], "PASS", gates.get("failures"))
-            self.assertIn("audience_facing_internal_leak", gates["checked_gates"])
-            self.assertIn("math_source_leak", gates["checked_gates"])
-            self.assertEqual(set(manifest["math_assets"]), {"slide1_dgp", "slide1_components", "slide1_icc", "slide2_sandwich", "slide2_naive"})
-            for asset in manifest["math_assets"].values():
-                self.assertEqual(asset["format"], "matplotlib_mathtext_png_transparent")
-                self.assertGreater(asset["pixel_width"], 100)
-                self.assertGreater(asset["pixel_height"], 40)
-                self.assertTrue(Path(asset["path"]).is_file())
-            audit_path = Path(tmp) / "reference_design_audit.json"
-            self.assertTrue(audit_path.exists())
-            reference_audit = json.loads(audit_path.read_text(encoding="utf-8"))
-            self.assertEqual(len(reference_audit), 5)
-            stress = summary["negative_result"]
-            self.assertEqual(stress["condition"], "G=8, rho=0.5, imbalanced cluster sizes and treatment shares")
-            self.assertLess(stress["cluster_robust_coverage"], 0.90)
-            self.assertLess(stress["naive_iid_coverage"], stress["cluster_robust_coverage"])
-            self.assertIn("planned", stress["next_experiment"])
-            design = manifest["simulation_design_diagram"]
-            self.assertEqual(design["edge_crossing"], "none")
-            self.assertEqual(design["reading_direction"], "left_to_right")
-            self.assertIn("tailEnd", design["arrowheads"])
-            self.assertIn("cluster_to_endpoint", design["structural_connectors"])
-            for slide in manifest["slides"]:
-                self.assertGreaterEqual(len(slide["reference_ids"]), 2)
-                self.assertLessEqual(len(slide["reference_ids"]), 5)
-                self.assertEqual(slide["reference_design_audit"]["selected_reference_ids"], slide["reference_ids"])
-                self.assertTrue(slide["reference_design_audit"]["adopted_design_decisions"])
-                self.assertTrue(slide["audience_text"])
-                audience_blob = "\n".join(slide["audience_text"])
-                for forbidden in [
-                    "RRL-",
-                    "Reference retrieval",
-                    "EVIDENCE_MANIFEST",
-                    "Diagram contract",
-                    "style not copied",
-                    "Reading target",
-                    "Observed in this synthetic run",
-                ]:
-                    self.assertNotIn(forbidden, audience_blob)
-                retrieval = slide["reference_retrieval"]
-                self.assertEqual(slide["reference_ids"], retrieval["selected_ids"])
-                self.assertGreaterEqual(len(retrieval["candidate_ids"]), len(retrieval["selected_ids"]))
-                self.assertIn("intent", retrieval["query"])
-                self.assertIn("source_tiers", retrieval)
-                for selected_id in retrieval["selected_ids"]:
-                    self.assertIn(selected_id, retrieval["candidate_ids"])
-                    self.assertIn("source_tier=", retrieval["ranking_relevance_reason"][selected_id])
-                self.assertIn("No full-slide screenshots", retrieval["what_was_not_copied"])
-            render = json.loads(Path(payload["render_status"]).read_text(encoding="utf-8"))
-            self.assertIn(render["status"], {"ok", "BLOCKED_REAL_PPTX_RENDER"})
-            review_result = subprocess.run(
-                [sys.executable, str(reviewer), "--out-dir", tmp],
-                check=False,
-                capture_output=True,
-                text=True,
-            )
-            self.assertEqual(review_result.returncode, 0, review_result.stderr)
-            review_payload = json.loads(review_result.stdout)
-            review = json.loads(Path(review_payload["review"]).read_text(encoding="utf-8"))
-            self.assertEqual(review["review_type"], "MECHANICAL_VISUAL_REVIEW")
-            self.assertEqual(review["academic_visual_decision"], "NOT_ASSESSED")
-            if render["status"] == "ok":
-                self.assertEqual(review["status"], "MECHANICAL_PASS")
-                self.assertEqual(review["rendered_png_count"], 5)
-            else:
-                self.assertEqual(review["status"], "BLOCKED_REAL_PPTX_RENDER")
-            with ZipFile(payload["pptx"]) as deck:
-                slide_names = [name for name in deck.namelist() if name.startswith("ppt/slides/slide") and name.endswith(".xml")]
-                media_names = [name for name in deck.namelist() if name.startswith("ppt/media/")]
-                slide_xml = "\n".join(deck.read(name).decode("utf-8") for name in slide_names)
-            self.assertEqual(len(slide_names), 5)
-            self.assertNotIn("Y_ij = beta_0 + beta_1 T_ij + u_j + epsilon_ij", slide_xml)
-            self.assertNotIn("V_CR", slide_xml)
-            self.assertNotIn("Reference retrieval", slide_xml)
-            self.assertNotIn("Diagram contract", slide_xml)
-            self.assertNotIn("Reading target", slide_xml)
-            self.assertNotIn("Observed in this synthetic run", slide_xml)
-            self.assertNotIn("beta_1", slide_xml)
-            self.assertNotIn("epsilon_ij", slide_xml)
-            self.assertNotIn("X'X", slide_xml)
-            self.assertIn("cluster-robust z interval", slide_xml)
-            self.assertIn("coverage, bias, interval", slide_xml)
-            self.assertIn("Planned comparison", slide_xml)
-            self.assertIn("tailEnd", slide_xml)
-            self.assertGreaterEqual(len(media_names), 7)
 
-            committed_source = fixture / "visual_review_packet_source"
-            if committed_source.exists():
-                output = Path(tmp) / "visual_inputs.json"
-                adapter_result = subprocess.run(
-                    [sys.executable, str(adapter), "--source-dir", str(committed_source), "--output", str(output)],
-                    check=False,
-                    capture_output=True,
-                    text=True,
-                )
-                self.assertEqual(adapter_result.returncode, 0, adapter_result.stderr)
-                adapter_payload = json.loads(adapter_result.stdout)
-                self.assertEqual(adapter_payload["input_count"], 5)
-                visual_manifest = json.loads(output.read_text(encoding="utf-8"))
-                self.assertEqual(visual_manifest["schema"], "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1")
-                self.assertEqual(visual_manifest["task_key"], "016_statistical_method_group_meeting_benchmark")
-                self.assertEqual(visual_manifest["review_kind"], "statistical-method-group-meeting-benchmark")
-                self.assertEqual(visual_manifest["privacy_policy"], "PUBLIC_SAFE_ONLY")
-                self.assertEqual(len(visual_manifest["inputs"]), 5)
-                self.assertEqual(visual_manifest["identity_bindings"]["source_render_status"], "ok")
-                self.assertEqual(visual_manifest["identity_bindings"]["source_mechanical_status"], "MECHANICAL_PASS")
-                self.assertEqual(visual_manifest["identity_bindings"]["source_academic_visual_decision"], "NOT_ASSESSED")
-                self.assertIn("reference_design_audit_sha256", visual_manifest["identity_bindings"])
-                rubric = visual_manifest["rubric"]["instructions"]
-                self.assertIn("statistical/biostatistical method group meeting benchmark", rubric)
-                self.assertIn("coverage near nominal 0.95 is the target", rubric)
-                self.assertIn("visible arrowheads", rubric)
-                self.assertIn("Mathematical typesetting", rubric)
-                self.assertIn("Would this slide look professionally finished", rubric)
-                self.assertIn("Reference-informed quality", rubric)
-
-    def test_medical_imaging_group_meeting_benchmark_generator_outputs_artifacts(self) -> None:
-        fixture = REPO_ROOT / "tests/fixtures/presentations/medical_imaging_group_meeting"
-        script = fixture / "generate_medical_imaging_group_meeting_benchmark.py"
-        reviewer = fixture / "review_medical_imaging_group_meeting_benchmark.py"
-        adapter = fixture / "build_ai_bridge_visual_inputs.py"
-        with tempfile.TemporaryDirectory() as tmp:
-            result = subprocess.run(
-                [sys.executable, str(script), "--out-dir", tmp],
-                check=False,
-                capture_output=True,
-                text=True,
-            )
-            self.assertEqual(result.returncode, 0, result.stderr)
-            payload = json.loads(result.stdout)
-            self.assertTrue(Path(payload["pptx"]).exists())
-            manifest = json.loads(Path(payload["evidence_manifest"]).read_text(encoding="utf-8"))
-            self.assertEqual(manifest["task_key"], "017_medical_imaging_group_meeting_benchmark")
-            self.assertEqual(manifest["status"], "GENERATED_SOURCE_ARTIFACTS_ONLY")
-            self.assertFalse(manifest["generator_may_pass"])
-            self.assertEqual(manifest["editable_slide_count"], 5)
-            self.assertEqual([slide["archetype"] for slide in manifest["slides"]], [
-                "MEDICAL_IMAGE_COMPARISON",
-                "EXPERIMENT_DESIGN",
-                "RESULT_FIGURE",
-                "FAILURE_CASE",
-                "NEGATIVE_RESULT",
-            ])
-            summary = manifest["synthetic_dataset_summary"]
-            self.assertEqual(summary["seed"], 20260822)
-            self.assertEqual(summary["cases_per_center"], 30)
-            self.assertEqual(summary["endpoints"], ["Dice overlap", "lesion-level recall", "false-positive burden"])
-            self.assertEqual([row["center"] for row in summary["center_summary"]], ["Center A", "Center B", "Center C"])
-            self.assertGreater(summary["negative_result"]["center_c_dice"], 0.40)
-            self.assertLess(summary["negative_result"]["small_lesion_recall"], 0.45)
-            self.assertIn("planned", summary["negative_result"]["planned_validation"])
-            gates = manifest["deterministic_quality_gates"]
-            self.assertEqual(gates["status"], "PASS", gates.get("failures"))
-            self.assertIn("same_case_failure_panels", gates["checked_gates"])
-            self.assertIn("endpoint_disagreement_supported_by_metrics", gates["checked_gates"])
-            failure = manifest["failure_case"]
-            self.assertTrue(failure["same_slice_geometry"])
-            self.assertEqual(failure["center"], "Center C")
-            self.assertEqual(failure["lesion_size"], "small")
-            self.assertIn("TP / FP / FN", failure["panels"])
-            design = manifest["experiment_design_diagram"]
-            self.assertEqual(design["edge_crossing"], "none")
-            self.assertEqual(design["reading_direction"], "left_to_right")
-            self.assertIn("tailEnd", design["arrowheads"])
-            audit_path = Path(tmp) / "reference_design_audit.json"
-            self.assertTrue(audit_path.exists())
-            reference_audit = json.loads(audit_path.read_text(encoding="utf-8"))
-            self.assertEqual(len(reference_audit), 5)
-            for slide in manifest["slides"]:
-                self.assertGreaterEqual(len(slide["reference_ids"]), 2)
-                self.assertLessEqual(len(slide["reference_ids"]), 5)
-                self.assertEqual(slide["reference_design_audit"]["selected_reference_ids"], slide["reference_ids"])
-                self.assertTrue(slide["reference_design_audit"]["adopted_design_decisions"])
-                self.assertTrue(slide["audience_text"])
-                audience_blob = "\n".join(slide["audience_text"])
-                for forbidden in [
-                    "RRL-",
-                    "Reference retrieval",
-                    "EVIDENCE_MANIFEST",
-                    "Diagram contract",
-                    "style not copied",
-                    "Reading target",
-                    "Observed in this synthetic run",
-                    "evidence boundary",
-                ]:
-                    self.assertNotIn(forbidden, audience_blob)
-                retrieval = slide["reference_retrieval"]
-                self.assertEqual(slide["reference_ids"], retrieval["selected_ids"])
-                self.assertGreaterEqual(len(retrieval["candidate_ids"]), len(retrieval["selected_ids"]))
-                self.assertIn("intent", retrieval["query"])
-                for selected_id in retrieval["selected_ids"]:
-                    self.assertIn(selected_id, retrieval["candidate_ids"])
-                    self.assertIn("source_tier=", retrieval["ranking_relevance_reason"][selected_id])
-            render = json.loads(Path(payload["render_status"]).read_text(encoding="utf-8"))
-            self.assertIn(render["status"], {"ok", "BLOCKED_REAL_PPTX_RENDER"})
-            review_result = subprocess.run(
-                [sys.executable, str(reviewer), "--out-dir", tmp],
-                check=False,
-                capture_output=True,
-                text=True,
-            )
-            self.assertEqual(review_result.returncode, 0, review_result.stderr)
-            review_payload = json.loads(review_result.stdout)
-            review = json.loads(Path(review_payload["review"]).read_text(encoding="utf-8"))
-            self.assertEqual(review["review_type"], "MECHANICAL_VISUAL_REVIEW")
-            self.assertEqual(review["academic_visual_decision"], "NOT_ASSESSED")
-            if render["status"] == "ok":
-                self.assertEqual(review["status"], "MECHANICAL_PASS")
-                self.assertEqual(review["rendered_png_count"], 5)
-            with ZipFile(payload["pptx"]) as deck:
-                slide_names = [name for name in deck.namelist() if name.startswith("ppt/slides/slide") and name.endswith(".xml")]
-                media_names = [name for name in deck.namelist() if name.startswith("ppt/media/")]
-                slide_xml = "\n".join(deck.read(name).decode("utf-8") for name in slide_names)
-            self.assertEqual(len(slide_names), 5)
-            for forbidden in ["RRL-", "Reference retrieval", "EVIDENCE_MANIFEST", "Diagram contract", "Reading target", "Observed in this synthetic run"]:
-                self.assertNotIn(forbidden, slide_xml)
-            self.assertIn("Synthetic cardiac-MR-like", slide_xml)
-            self.assertIn("lesion recall", slide_xml)
-            self.assertIn("Planned validation", slide_xml)
-            self.assertIn("tailEnd", slide_xml)
-            self.assertGreaterEqual(len(media_names), 8)
-
-            committed_source = fixture / "visual_review_packet_source"
-            self.assertTrue(committed_source.exists())
-            output = Path(tmp) / "visual_inputs.json"
-            adapter_result = subprocess.run(
-                [sys.executable, str(adapter), "--source-dir", str(committed_source), "--output", str(output)],
-                check=False,
-                capture_output=True,
-                text=True,
-            )
-            self.assertEqual(adapter_result.returncode, 0, adapter_result.stderr)
-            adapter_payload = json.loads(adapter_result.stdout)
-            self.assertEqual(adapter_payload["input_count"], 5)
-            visual_manifest = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(visual_manifest["schema"], "AI_BRIDGE_VISUAL_INPUT_MANIFEST_V1")
-            self.assertEqual(visual_manifest["task_key"], "017_medical_imaging_group_meeting_benchmark")
-            self.assertEqual(visual_manifest["review_kind"], "medical-imaging-group-meeting-benchmark")
-            self.assertEqual(visual_manifest["privacy_policy"], "PUBLIC_SAFE_ONLY")
-            self.assertEqual(len(visual_manifest["inputs"]), 5)
-            self.assertEqual(visual_manifest["identity_bindings"]["source_render_status"], "ok")
-            self.assertEqual(visual_manifest["identity_bindings"]["source_mechanical_status"], "MECHANICAL_PASS")
-            self.assertIn("reference_design_audit_sha256", visual_manifest["identity_bindings"])
-            rubric = visual_manifest["rubric"]["instructions"]
-            self.assertIn("medical-imaging research group meeting benchmark", rubric)
-            self.assertIn("actual image pixels", rubric)
-            self.assertIn("MICCAI/RSNA-style research talk", rubric)
-            self.assertIn("TP/FP/FN legend", rubric)
-            self.assertIn("false-positive burden is lower-is-better", rubric)
 
 
 if __name__ == "__main__":

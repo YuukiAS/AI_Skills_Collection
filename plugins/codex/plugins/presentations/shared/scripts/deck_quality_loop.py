@@ -410,7 +410,7 @@ def map_finding_to_directive(finding: dict[str, Any], sequence_summary: dict[str
             "may_invent_source_relationships": False,
             "may_force_gold_id": False,
             "may_override_scores": False,
-            "must_preserve_cuhk_identity": True,
+            "must_preserve_research_standard_identity": True,
         },
     }
     if finding.get("normalized_repair_mapping"):

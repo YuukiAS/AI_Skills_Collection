@@ -14,9 +14,9 @@ Use whole-slide images only when the user explicitly asks for image/PDF/social-c
 |---|---|
 | Professional editable PowerPoint with conventional layouts | Editable PPTX through official Presentation/Slides or ChatGPT for PowerPoint, with this repo providing deck plan and QA |
 | PPT, PowerPoint, `.pptx`, editable, Slides, or later manual editing | Editable PPTX/Slides through official Presentation/Slides or ChatGPT for PowerPoint, with this repo providing deck plan, source fidelity, and QA |
-| Group meeting, research update, journal club, seminar, defense, paper talk, or technical research slides with no format specified in `presentation-desktop` | Exact CUHK Beamer route by default; produce source-editable `.tex` from `shared/templates/cuhk/beamer/source/` plus rendered PDF |
-| Explicit or repository-selected course-standard Beamer or teaching LaTeX | Source-editable Beamer from `shared/templates/course-standard/beamer/source/` plus rendered PDF |
-| PhD group meeting, supervisor discussion, or research progress update with failures, uncertainty, next experiment, or advisor decision | `research-presentations` with `metadata.mode: research-group-meeting`; build Research State and Evidence Board before slide plan, then use exact CUHK Beamer unless PPTX/Slides/editable manual editing is explicitly requested |
+| Group meeting, research update, journal club, seminar, defense, paper talk, or technical research slides with no format specified in `presentation-desktop` | Exact RESEARCH_STANDARD Beamer route by default; produce source-editable `.tex` from `shared/templates/research_standard/beamer/source/` plus rendered PDF |
+| Explicit or repository-selected research_standard Beamer or teaching LaTeX | Source-editable Beamer from `shared/templates/research_standard/beamer/source/` plus rendered PDF |
+| PhD group meeting, supervisor discussion, or research progress update with failures, uncertainty, next experiment, or advisor decision | `research-presentations` with `metadata.mode: research-group-meeting`; build Research State and Evidence Board before slide plan, then use exact RESEARCH_STANDARD Beamer unless PPTX/Slides/editable manual editing is explicitly requested |
 | Explicit Beamer, LaTeX slides, `.tex`, academic PDF, or venue/project-locked TeX template | LaTeX plus Beamer; create `.tex` and PDF, then render and QA |
 | High visual ceiling, multi-format visual outputs, or poster-like pages | Visual direction first, then confirm whether the user accepts image-heavy slides |
 | Narrative, storyline, decision logic, or quality control | `research-presentations` or `business-presentations` deck plan before file creation |
@@ -40,7 +40,7 @@ Python PowerPoint libraries are not the default implementation path for producti
 
 ## Research Group Meeting Fallback
 
-If the user has a real urgent group meeting and no stronger local template is supplied, prefer the exact CUHK Beamer source route or the user's older working template for that delivery. Keep PPTX experimentation in fixtures or drafts unless the user explicitly needs PowerPoint/Slides editability.
+If the user has a real urgent group meeting and no stronger local template is supplied, prefer the exact RESEARCH_STANDARD Beamer source route or the user's older working template for that delivery. Keep PPTX experimentation in fixtures or drafts unless the user explicitly needs PowerPoint/Slides editability.
 
 ## Prompt Intake Pattern
 

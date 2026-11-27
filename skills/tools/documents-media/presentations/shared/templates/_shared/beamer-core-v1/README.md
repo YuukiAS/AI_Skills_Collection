@@ -1,6 +1,6 @@
 # Shared Beamer core v1
 
-The course-standard and CUHK templates load this 16:9 core. Both reserve an 8 mm body rail and use the same fixed fonts, page chrome and components. A skin supplies colours, the default credit and optional artwork in the shared brand slots.
+The research_standard and RESEARCH_STANDARD templates load this 16:9 core. Both reserve an 8 mm body rail and use the same fixed fonts, page chrome and components. A skin supplies colours, the default credit and optional artwork in the shared brand slots.
 
 | File | Owns |
 |---|---|
