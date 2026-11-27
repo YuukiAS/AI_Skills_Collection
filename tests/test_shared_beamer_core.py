@@ -53,6 +53,14 @@ class SharedBeamerSourceTests(unittest.TestCase):
                     if macro := re.match(r"\\(?:new|provide)command\\([a-zA-Z]+)", line):
                         self.assertIn(macro.group(1), allowed)
                     self.assertNotRegex(line, r"\\(?:input|include|fontsize|selectfont|setbeamerfont|setlength|setbeamersize|vspace|setbeamertemplate|geometry)\b")
+        cuhk = (SHARED / "templates/cuhk/beamer/source/skin.tex").read_text()
+        self.assertNotIn("PresentationHeaderBrandAsset", cuhk)
+        self.assertEqual(
+            [line for line in (SHARED / "templates/course-standard/beamer/source/skin.tex").read_text().splitlines()
+             if line.startswith((r"\definecolor", r"\newcommand\PresentationCredit"))],
+            [line for line in cuhk.splitlines()
+             if line.startswith((r"\definecolor", r"\newcommand\PresentationCredit"))],
+        )
 
     def test_all_cuhk_assets_keep_the_frozen_bytes(self):
         expected = {
@@ -93,8 +101,8 @@ class SharedBeamerSourceTests(unittest.TestCase):
                         routing.index("explicit user-supplied template"))
         self.assertLess(routing.index("explicit user-supplied template"), routing.index("built-in skins"))
         expected_rows = {
-            "Course-standard Beamer": "templates/course-standard/beamer/source/",
-            "CUHK research": "templates/cuhk/beamer/source/",
+            "Standard Beamer": "templates/course-standard/beamer/source/",
+            "Explicit CUHK request": "templates/cuhk/beamer/source/",
             "Explicit editable PPTX or Google Slides": "existing editable Presentation/Slides route",
         }
         for label, destination in expected_rows.items():
@@ -102,6 +110,10 @@ class SharedBeamerSourceTests(unittest.TestCase):
             self.assertIn(destination, row)
         for name in ("course-standard", "cuhk"):
             self.assertTrue((SHARED / f"templates/{name}/beamer/source/main.tex").is_file())
+        freeze = (SHARED / "templates/FREEZE.md").read_text()
+        self.assertIn("Template family version: `1.0`", freeze)
+        self.assertIn("Status: `FROZEN`", freeze)
+        self.assertIn("CUHK template may differ only on the first page", freeze)
 
     def test_audience_lint_ignores_graphic_filenames_and_keeps_visible_copy(self):
         tex = r"\includegraphics[width=\linewidth]{study_workflow.png}\CoreCaption{fixture label}"
@@ -121,7 +133,7 @@ class SharedBeamerRenderedTests(unittest.TestCase):
         report = self.parity.compare(COURSE_PDF, CUHK_PDF, FIXTURE / "brand-masks.json")
         self.assertEqual(report["errors"], [])
         self.assertEqual(len(report["pages"]), 11)
-        self.assertEqual([row["matched_brand_images"] for row in report["pages"]], [2] + [1] * 10)
+        self.assertEqual([row["matched_brand_images"] for row in report["pages"]], [1] + [0] * 10)
         self.assertTrue(all(row["links"] >= 19 for row in report["pages"]))
 
     def test_comparator_rejects_extra_generated_objects_and_a_mask_covering_text(self):
@@ -139,7 +151,7 @@ class SharedBeamerRenderedTests(unittest.TestCase):
             self.assertTrue(any("vector objects" in error for error in report["errors"]))
 
             config = json.loads((FIXTURE / "brand-masks.json").read_text())
-            config["cuhk"][0]["rect"][0] = 0
+            config["cuhk"][0]["rect"] = [0, 0, 1920, 1080]
             masks = scratch / "unsafe-mask.json"
             masks.write_text(json.dumps(config))
             report = self.parity.compare(COURSE_PDF, CUHK_PDF, masks)
@@ -156,9 +168,9 @@ class SharedBeamerRenderedTests(unittest.TestCase):
             self.assertTrue(any(name.startswith("TeXGyreTermesMath") for name in embedded))
             self.assertTrue(all(name.startswith("TeXGyreTermes") for name in embedded))
             images = [i for page in deck for i in page.get_image_info(hashes=True)]
-            self.assertEqual(sum(i["digest"].hex() == "359407a08e058b1ccd3c360df195d4d8" for i in images), 6)
+            self.assertEqual(sum(i["digest"].hex() == "359407a08e058b1ccd3c360df195d4d8" for i in images), 0)
             self.assertEqual(sum(i["digest"].hex() == "d0cbf2e6d3284c73d0f757d262367183" for i in images), 1)
-            self.assertEqual(len(images), 10)
+            self.assertEqual(len(images), 4)
             self.assertIn("Stan-ready", deck[1].get_text())
             self.assertIn("LKJ", deck[1].get_text())
 

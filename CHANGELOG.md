@@ -2,7 +2,17 @@
 
 ## Unreleased
 
-No unreleased changes.
+Repository bump decision: NONE
+Reason: this branch prepares a bounded Presentations plugin release candidate;
+it does not publish a formal repository release.
+
+Affected central plugins:
+- `presentations`: `0.4` -> `0.5`
+  Reason: the default built-in Beamer route is now the standard blue template,
+  while explicitly selected CUHK decks share identical body-page styling and
+  retain school identity only on the title page.
+
+All other central plugins and standalone skills: NO_BUMP.
 
 ## 5.5.2 - 2026-10-21
 

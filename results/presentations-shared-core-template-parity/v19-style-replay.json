@@ -17,7 +17,7 @@
     }
   },
   "fixture_sha256": "ff7f6448b12d9572aa2d201f20fb832b879874de3e67e9d3d797900c4470bae9",
-  "pdf_sha256": "381579aaa0fbc0dcdbd461ad12c4f7d80262e12568eeaad215aaba142b3bea0e",
+  "pdf_sha256": "2fbd2a79ec97988b6f75270e27b5fddf45549f48554d30300a2176a6d87635c9",
   "status": "PASS_WITH_REVIEW",
   "checks": [
     {
@@ -209,22 +209,22 @@
     },
     {
       "check": "Inter-item glue stays at the shared token",
-      "measured": 3.984426344019983,
-      "expected": 3.985056039850561,
+      "measured": 1.145429456812952,
+      "expected": 1.145703611457036,
       "tolerance": 0.12,
       "units": "PDF pt",
       "status": "PASS"
     },
     {
       "check": "list_item_gap",
-      "measured": 7.559000142415371,
+      "measured": 4.724375089009612,
       "target": [
         3,
         7
       ],
       "hard_minimum": 2,
       "units": "PDF pt",
-      "status": "REVIEW"
+      "status": "PASS"
     },
     {
       "check": "paragraph_to_list",

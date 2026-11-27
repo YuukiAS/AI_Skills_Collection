@@ -334,7 +334,7 @@ class PresentationSharedTests(unittest.TestCase):
         self.assertEqual(actual["metadata"]["output"], "tex")
         self.assertEqual(actual["metadata"]["editability"], "source-editable")
 
-    def test_research_routing_defaults_to_exact_cuhk_beamer_with_editable_override(self) -> None:
+    def test_research_routing_defaults_to_standard_beamer_with_explicit_overrides(self) -> None:
         research_skill = (REPO_ROOT / "skills/tools/documents-media/presentations/research-presentations/SKILL.md").read_text(encoding="utf-8")
         real_world_guardrails = (
             REPO_ROOT
@@ -346,12 +346,12 @@ class PresentationSharedTests(unittest.TestCase):
         cuhk_readme = (SHARED / "templates/cuhk/README.md").read_text(encoding="utf-8")
         visual_qa = (SHARED / "visual-qa.md").read_text(encoding="utf-8")
 
-        self.assertIn("defaults to the exact CUHK Beamer route", research_skill)
+        self.assertIn("defaults to the standard blue Beamer route", research_skill)
         self.assertIn("source-editable `.tex`", research_skill)
         self.assertIn("PPT, PowerPoint, `.pptx`, editable, Slides, or later manual editing", ppt_routing)
-        self.assertIn("PPTX/Slides/editable manual editing is explicitly requested", ppt_routing)
+        self.assertIn("unless CUHK or an editable PPTX/Slides route is explicitly requested", ppt_routing)
         self.assertIn("Explicit Beamer, LaTeX slides, `.tex`, academic PDF", ppt_routing)
-        self.assertIn("CUHK Beamer by default", template_routing)
+        self.assertIn("standard blue Beamer by default", template_routing)
         self.assertIn("templates/course-standard/beamer/source/", template_routing)
         self.assertIn("explicitly requested editable PPTX/Slides", template_routing)
         self.assertIn("file exists", research_skill)

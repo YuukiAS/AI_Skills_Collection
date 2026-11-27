@@ -1,6 +1,6 @@
 # Shared Beamer core v1
 
-The course-standard and CUHK templates load this 16:9 core. Both reserve an 8 mm body rail and use the same fixed fonts, page chrome and components. A skin supplies colours, the default credit and optional artwork in the shared brand slots.
+The course-standard and CUHK templates load this 16:9 core. Both reserve an 8 mm body rail and use the same fixed fonts, page chrome and components. Their body pages are identical; the CUHK skin may add approved school artwork only on the title page.
 
 | File | Owns |
 |---|---|
@@ -10,6 +10,8 @@ The course-standard and CUHK templates load this 16:9 core. Both reserve an 8 mm
 | `semantic-components.tex` | Lists, spacing, Q&A, captions, tables, code, columns, diagrams and closing |
 | `navigation.tex` | Section labels and clickable frame markers, footer, brand slots |
 | `layout-contract.yaml` | Byte copy of the frozen Planner contract |
+
+The current template-family version and freeze boundary are recorded in [the template freeze](../FREEZE.md).
 
 Build through `shared/scripts/build_beamer_template.py`. The builder stages a source-editable copy with the shared core and asks the companion PDF renderer for exact font paths. It writes `beamer-font-root.tex` to the build directory. XeLaTeX runs twice to resolve the frame count, links and outlines. Build from the staged directory when editing locally so TeX can find the assets and relative imports.
 

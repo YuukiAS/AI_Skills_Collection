@@ -2,74 +2,23 @@
   "input_bundle": "results/038_research_presentation_two_real_paper_holdouts/statistics/source_bundle.json",
   "input_bundle_sha256": "32d1a9d1241ff8b4c77b6a98fe5b20b5b88ed04f3d60b0b10f9897304f15421b",
   "output_pdf": "results/presentations-shared-core-template-parity/cuhk-research.pdf",
-  "pdf_sha256": "84c4bc87c62970a3fa2a7bd9091583b12b8d561c3cc5076955b3625417267a9f",
+  "pdf_sha256": "655ccaf43923ba1d123fc45e028a7c57d8038e6822618b190d9c29992b4ce770",
   "compile_status": "COMPILED",
   "compiler": "xelatex",
   "mechanical_status": "MECHANICAL_PASS",
   "overfull_warnings": 0,
-  "fonts": {
-    "resource_dir": "/users/a/e/aereinh/render_resources/chinese_math_pdf",
-    "files": {
-      "texgyretermes_regular": {
-        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-regular.otf",
-        "available": true,
-        "sha256": "cc3fe7c707b81428d23d54df3eadd9228a2bf6a4d43125d94df56f5f63134659"
-      },
-      "texgyretermes_bold": {
-        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-bold.otf",
-        "available": true,
-        "sha256": "2fb3e952065fa153c7e4e64e04b98b9d79225739b6025aa3f0f0782d299ff61e"
-      },
-      "texgyretermes_italic": {
-        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-italic.otf",
-        "available": true,
-        "sha256": "6dd103a1672e50568cd2f8a706ccd48443d44d7d073a59d2286f4e6f746575d6"
-      },
-      "texgyretermes_bolditalic": {
-        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes/texgyretermes-bolditalic.otf",
-        "available": true,
-        "sha256": "1bf6af99cb0e26c12951317032d79b96ae009551e59ccf02a5b24f325ecfec87"
-      },
-      "texgyretermes_math": {
-        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/texgyre-termes-math/texgyretermes-math.otf",
-        "available": true,
-        "sha256": "e5ce42b4fe826b7ea4c0874359decf0b294439355c511a4794107a9924e2cd5a"
-      },
-      "newcm_math_calligraphic": {
-        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/fonts/newcomputermodern/NewCMMath-Regular.otf",
-        "available": true,
-        "sha256": "d66ac1cc91c55c24d3636ae2df1238076debdff51841f9893fc5419cc2df3df7"
-      },
-      "notoserifsc_regular": {
-        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSerifSC-Regular.otf",
-        "available": true,
-        "sha256": "e8f396decc1f0963a016a989c3d8852e863d1350996f573860a80767c83a1cd3"
-      },
-      "notoserifsc_bold": {
-        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSerifSC-Bold.otf",
-        "available": true,
-        "sha256": "24693d48bdb9152f0a06b02af625638a1097abd6de4010ebba027f6e82710527"
-      },
-      "notosanssc_regular": {
-        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSansSC-Regular.otf",
-        "available": true,
-        "sha256": "faa6c9df652116dde789d351359f3d7e5d2285a2b2a1f04a2d7244df706d5ea9"
-      },
-      "notosanssc_bold": {
-        "path": "/users/a/e/aereinh/render_resources/chinese_math_pdf/texmf/fonts/opentype/public/noto-cjk/NotoSansSC-Bold.otf",
-        "available": true,
-        "sha256": "c6cb5a93abaa9edc8ee7463b7ebb7f42d618d40e6ed2f7a5371c97b0b64767c0"
-      }
-    },
-    "pdffonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nSEFNNF+TeXGyreTermes-Bold-Identity-H CID Type 0C       Identity-H       yes yes yes      9  0\nHCXYQU+TeXGyreTermes-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes     13  0\nHSTKGQ+TeXGyreTermesMath-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes     44  0\n"
-  },
+  "embedded_fonts": [
+    "KTLAUJ+TeXGyreTermes-Bold-Identity-H",
+    "PVTCZC+TeXGyreTermes-Regular-Identity-H",
+    "PMIVQB+TeXGyreTermesMath-Regular-Identity-H"
+  ],
   "shared_core_input_sha256": {
-    "README.md": "9a679e825a3402e26fb5f2ecf2dd3058033798ac8e0bb1c00255a26c673d3fb2",
+    "README.md": "abc442dd09eab82d8518ef92db78f1e05a3b1516f6168540d7c0f6d6b2d2ac94",
     "core.tex": "21e30d311f5b49d6aa4cc1ed29170bef9fe4ca5f38acb282fd4bfcae37f7f019",
     "geometry.tex": "4011eed82d37551cd3470c96ec76424a1d0c110fd0ee85ff63bdb8a28d3e3589",
-    "layout-contract.yaml": "1ccb4bcfb320fc9151317d23251a6943c86e590891c3929d20cd2c3eef5027c0",
+    "layout-contract.yaml": "465a4a7fa13e343d2c05a9876f1517f3e11f7f62adb2ce50c5312974536cbb15",
     "navigation.tex": "24b48d6098ad941a8147e0fc7dbd527521c6182913a19cdcbc8b403a04d9beb3",
-    "semantic-components.tex": "d4f5f90f089cf5fdbf33728721e5f34394307fdd84bf337582bb32ef393c0b89",
+    "semantic-components.tex": "4cd70bf5080f146c6090d82b9ae9ab716a8d4434d6f550350fb5947c1d8b3967",
     "typography.tex": "3dbb3fb61d1d751520d654ebe790387833c9071fb0cde2a44d6dea8f29681396"
   },
   "brand_assets": {
@@ -79,94 +28,51 @@
     "skills/tools/documents-media/presentations/shared/templates/cuhk/beamer/source/assets/logo_RGB_negative.png": "b243d1965fb604ea59f4653cc2f1eca27e54464838ac64291aacbddccd11a516"
   },
   "source_figures": {
-    "results/038_research_presentation_two_real_paper_holdouts/statistics/assets/brms_figure1_fitting_workflow.png": "e02b0bf5c5c6141d244605a7ba73adc6",
-    "results/038_research_presentation_two_real_paper_holdouts/statistics/assets/brms_figure3_kidney_marginal_effects.png": "6913250b93ad4655ad288c2b6aeed1d5",
-    "results/038_research_presentation_two_real_paper_holdouts/statistics/assets/brms_table1_package_capabilities.png": "d033189c70f6f4a6d0ea246820e83c71"
+    "results/038_research_presentation_two_real_paper_holdouts/statistics/assets/brms_figure1_fitting_workflow.png": "c65ec915e202962686705d7043dcae35",
+    "results/038_research_presentation_two_real_paper_holdouts/statistics/assets/brms_figure3_kidney_marginal_effects.png": "17c009f6ff5624694f09687ec5516269",
+    "results/038_research_presentation_two_real_paper_holdouts/statistics/assets/brms_table1_package_capabilities.png": "ccec1ec4155d0e545f30a9cf403a23e7"
   },
   "pages": [
     {
       "page": 1,
       "link_count": 16,
-      "body_text_bbox_pdf_pt": null,
       "image_pixel_md5s": [
-        "d0cbf2e6d3284c73d0f757d262367183",
-        "359407a08e058b1ccd3c360df195d4d8"
-      ],
-      "brand_region_overlaps_generated_text": false
+        "d0cbf2e6d3284c73d0f757d262367183"
+      ]
     },
     {
       "page": 2,
       "link_count": 16,
-      "body_text_bbox_pdf_pt": [
-        22.676998138427734,
-        28.808635711669922,
-        430.87115478515625,
-        218.06907653808594
-      ],
-      "image_pixel_md5s": [
-        "359407a08e058b1ccd3c360df195d4d8"
-      ],
-      "brand_region_overlaps_generated_text": false
+      "image_pixel_md5s": []
     },
     {
       "page": 3,
       "link_count": 16,
-      "body_text_bbox_pdf_pt": [
-        22.676998138427734,
-        28.808635711669922,
-        430.8730163574219,
-        228.60450744628906
-      ],
       "image_pixel_md5s": [
-        "359407a08e058b1ccd3c360df195d4d8",
         "6913250b93ad4655ad288c2b6aeed1d5"
-      ],
-      "brand_region_overlaps_generated_text": false
+      ]
     },
     {
       "page": 4,
       "link_count": 16,
-      "body_text_bbox_pdf_pt": [
-        22.676998138427734,
-        28.808635711669922,
-        430.8620910644531,
-        228.6165008544922
-      ],
       "image_pixel_md5s": [
-        "359407a08e058b1ccd3c360df195d4d8",
         "e02b0bf5c5c6141d244605a7ba73adc6"
-      ],
-      "brand_region_overlaps_generated_text": false
+      ]
     },
     {
       "page": 5,
       "link_count": 16,
-      "body_text_bbox_pdf_pt": [
-        22.676998138427734,
-        28.808635711669922,
-        430.8730163574219,
-        228.6165008544922
-      ],
       "image_pixel_md5s": [
-        "359407a08e058b1ccd3c360df195d4d8",
         "d033189c70f6f4a6d0ea246820e83c71"
-      ],
-      "brand_region_overlaps_generated_text": false
+      ]
     },
     {
       "page": 6,
       "link_count": 16,
-      "body_text_bbox_pdf_pt": [
-        22.676998138427734,
-        28.808635711669922,
-        430.8712463378906,
-        230.80751037597656
-      ],
-      "image_pixel_md5s": [
-        "359407a08e058b1ccd3c360df195d4d8"
-      ],
-      "brand_region_overlaps_generated_text": false
+      "image_pixel_md5s": []
     }
   ],
-  "legacy_copy_check": "REVISE: the unmodified real-paper fixture contains one benchmark-internal word, fixture, in the kidney example annotation."
+  "body_brand_chrome": "NONE",
+  "title_brand_images": 1,
+  "legacy_copy_check": "REVISE: the frozen unrelated fixture retains one benchmark-internal word; template behavior is unaffected."
 }

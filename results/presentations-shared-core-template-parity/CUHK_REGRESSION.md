@@ -4,11 +4,11 @@ The generated plugin's normal one-call research entry rebuilt the repository's e
 
 | Pages | What the render demonstrates |
 |---|---|
-| 1 | CUHK logo and artwork, editable title metadata, active navigation and footer |
+| 1 | CUHK title artwork, editable title metadata, active navigation and footer |
 | 2 | Full native covariance equation and LKJ term, followed by distinct model components and interpretation |
 | 3–5 | Same three source images, captions at the owning images, and separate explanation |
 | 6 | A four-step scientific sequence, with its checks, examples and decision legible beneath it |
 
-The compiler rendered all six pages with zero overfull warnings. All six pages have 16 clickable links each. The [build evidence](cuhk-research.json) binds the fixed Termes and Termes Math font files, shared-core files, and PDF by hash. All four CUHK source PNGs retain their original bytes. The rendered logo and title image match the approved assets, all three scientific images match the input pixels, and none of the brand regions touches generated text.
+The compiler rendered all six pages with zero overfull warnings. All six pages have 16 clickable links each. The [build evidence](cuhk-research.json) binds the fixed Termes and Termes Math font files, shared-core files, and PDF by hash. All four CUHK source PNGs retain their original bytes. The rendered title image matches the approved asset, the three body-page scientific images match the input pixels, and no body page contains CUHK-specific chrome.
 
 The legacy audience-copy check still flags one inherited benchmark reference in the kidney example annotation on page 3. The strict copy gate therefore remains open for this fixture. The render demonstrates the template and research layout regression. It is evidence for integration review rather than an independently approved research deck.

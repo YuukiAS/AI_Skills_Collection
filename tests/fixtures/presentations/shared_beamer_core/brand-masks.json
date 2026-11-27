@@ -3,19 +3,6 @@
   "coordinate_space": "1920x1080",
   "cuhk": [
     {
-      "id": "cuhk-header-logo",
-      "kind": "logo",
-      "pages": "all",
-      "rect": [
-        1823,
-        4,
-        1876,
-        66
-      ],
-      "asset": "assets/logo_RGB.png",
-      "pixel_md5": "359407a08e058b1ccd3c360df195d4d8"
-    },
-    {
       "id": "cuhk-title-art",
       "kind": "title-background",
       "pages": [

@@ -12,7 +12,7 @@ Extract the human-accepted STAT5060 V19 presentation style into one generic Beam
 - `course-standard`
 - `cuhk`
 
-This specification governs generated slide geometry and component behavior. Skins may brand the core; they may not independently redefine typography, spacing, body geometry, semantic components, or validator semantics.
+This specification governs generated slide geometry and component behavior. The 2026-11-27 amendment confines CUHK branding to the title page; body pages may not independently redefine palette, typography, spacing, body geometry, semantic components, chrome or validator semantics.
 
 Exact source authority:
 
@@ -77,14 +77,10 @@ Compatibility wrappers may preserve existing public paths, but production typogr
 
 ### Skin may own only
 
-- palette;
-- logo and approved brand assets;
-- title-page brand background;
-- default brand/identity text;
-- brand-specific source/credit text;
-- approved decorative brand regions that do not move shared text geometry.
+- title-page logo and approved brand artwork;
+- title-page brand identity text.
 
-A skin must not change body rail, font size, line height, caption alignment, semantic spacing, section-label budget, Q/A geometry, footer height, or closing geometry.
+A skin must not change the body-page palette or brand chrome, body rail, font size, line height, caption alignment, semantic spacing, section-label budget, Q/A geometry, footer height, or closing geometry.
 
 ## 4. Typography
 
@@ -171,7 +167,7 @@ Same-role peers must share declared optical anchors within 2 px at 1920×1080.
 - left-aligned to that object within 2 px;
 - multiline remains ragged-right;
 - caption explains identity/reading, not the main scientific conclusion;
-- no “short caption centered” exception exists in the final core.
+- one-line captions are centered; multi-line captions are left aligned.
 
 ## 10. Question / Answer
 
@@ -198,7 +194,7 @@ Shared structure:
 - same shared band height and insets;
 - left source/identity is optically vertically centred;
 - native right-side navigation remains clickable;
-- skin changes colour/identity, not geometry.
+- the CUHK skin changes title-page identity only, not body-page colour or geometry.
 
 ## 12. Section navigation
 
@@ -290,9 +286,8 @@ Given identical visible content and the same 16:9 archetype, `course-standard` a
 
 Allowed skin differences:
 
-- colour values;
-- logo/background/decorative brand pixels;
-- default brand identity/source text.
+- approved title-page artwork pixels;
+- title-page brand identity text.
 
 Brand masks must be explicit in parity tests; they may not hide generated text geometry.
 

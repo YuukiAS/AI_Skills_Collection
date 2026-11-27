@@ -49,8 +49,8 @@ spacing_pdf_pt:
   within_group: {target: [5, 15], fail_below: 4}
   between_group: {target: [9, 22], fail_below: 7}
 teaching_list:
-  itemsep_tex_pt: 4
-  allowed_itemsep_tex_pt: [3, 6]
+  itemsep_tex_pt: 1.15
+  allowed_itemsep_tex_pt: [1, 2]
   body_leading_tex_pt: 13.5
 columns:
   equal: [0.48, 0.48]
@@ -59,7 +59,7 @@ columns:
   optical_anchor_tolerance_px: 2
 caption:
   below_object: true
-  alignment: left
+  alignment: single_line_centered_multi_line_left
   left_anchor_tolerance_px: 2
 qa:
   answer_label_outside_rule: true
@@ -98,8 +98,5 @@ density_whitespace:
   large_void_with_objective_crowding_or_undersizing: FAIL_WHEN_MEASURABLE
 skins:
   allowed_differences:
-    - palette
-    - logo
-    - title_background
-    - brand_identity_text
-    - brand_source_credit
+    - title_page_brand_artwork
+    - title_page_brand_identity_text

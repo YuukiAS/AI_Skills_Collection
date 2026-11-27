@@ -4,6 +4,19 @@
 
 No pending released changes.
 
+## 0.5 - 2026-11-27
+
+- Made the blue `course-standard` Beamer source the default built-in Beamer
+  route for research and teaching presentations; CUHK is now selected only
+  when the user or repository explicitly requests it.
+- Froze `course-standard` and CUHK as one shared body-page system. They now use
+  identical fonts, role sizes, leading, title bar, 8 mm margins, captions,
+  lists, formulas, tables, footer and navigation; CUHK school identity is
+  confined to approved title-page artwork.
+- Aligned the shared list spacing and automatic one-line/multi-line caption
+  behavior with the accepted standard Beamer reference, and added a versioned
+  template-family freeze plus same-content parity regression.
+
 ## 0.4 - 2026-10-15
 
 - Bound the canonical CUHK Beamer route to the packaged TeX Gyre Termes text

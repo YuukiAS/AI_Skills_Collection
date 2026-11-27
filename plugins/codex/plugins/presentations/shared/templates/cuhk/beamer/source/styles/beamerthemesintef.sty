@@ -12,10 +12,8 @@
 \NewDocumentCommand\titlebackground{s m}{\CUHKSetBrandBackground{#2}}
 \newcommand\themecolor[1]{%
   \ifstrequal{#1}{main}{%
-    \renewcommand\PresentationHeaderBrandAsset{\CUHKAssets/logo_RGB_negative.png}%
     \renewcommand\PresentationTitleBrandAsset{\CUHKAssets/background.png}%
   }{%
-    \renewcommand\PresentationHeaderBrandAsset{\CUHKAssets/logo_RGB.png}%
     \renewcommand\PresentationTitleBrandAsset{\CUHKAssets/background_negative.png}%
   }%
 }

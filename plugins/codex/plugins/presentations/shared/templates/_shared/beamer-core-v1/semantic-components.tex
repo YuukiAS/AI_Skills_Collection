@@ -16,7 +16,7 @@
   \setlength\abovedisplayshortskip{3pt}\setlength\belowdisplayshortskip{4pt}%
 }
 \newcommand\CoreListSpacing{%
-  \setlength\itemsep{4pt}\setlength\parskip{0pt}%
+  \setlength\itemsep{1.15pt}\setlength\parskip{0pt}%
   \setlength\parsep{0pt}\setlength\topsep{2pt}%
 }
 \makeatletter
@@ -58,8 +58,34 @@
   \par\noindent\hspace*{\dimexpr1.1pt+.42em\relax}\CoreQALabel{Answer}\par
   \CoreQABody{{\upshape #1}}%
 }
+\newsavebox\CoreCaptionMeasure
+\newsavebox\CoreCaptionLineBox
+\newcount\CoreCaptionLineCount
+\newcommand\CoreCountCaptionLines{%
+  \let\CoreCaptionCountNext\relax
+  \ifnum\lastnodetype=1\relax
+    \setbox\CoreCaptionLineBox=\lastbox
+    \global\advance\CoreCaptionLineCount by 1
+    \let\CoreCaptionCountNext\CoreCountCaptionLines
+  \else\ifnum\lastnodetype=11\relax
+    \unskip\let\CoreCaptionCountNext\CoreCountCaptionLines
+  \else\ifnum\lastnodetype=12\relax
+    \unkern\let\CoreCaptionCountNext\CoreCountCaptionLines
+  \else\ifnum\lastnodetype=13\relax
+    \unpenalty\let\CoreCaptionCountNext\CoreCountCaptionLines
+  \fi\fi\fi\fi
+  \CoreCaptionCountNext
+}
 \newcommand\CoreCaption[1]{%
-  \par\vspace{2pt}{\noindent\raggedright\CoreCaptionFont\color{coreMuted}#1\par}%
+  \par\vspace{2pt}\begingroup
+  \CoreCaptionFont\color{coreMuted}%
+  \setbox\CoreCaptionMeasure=\vbox{%
+    \hsize=\linewidth\raggedright\noindent#1\par}%
+  \global\CoreCaptionLineCount=0
+  \setbox\CoreCaptionMeasure=\vbox{%
+    \unvbox\CoreCaptionMeasure\CoreCountCaptionLines}%
+  \ifnum\CoreCaptionLineCount=1\relax\centering\else\raggedright\fi
+  \noindent#1\par\endgroup
 }
 \let\ShortCaption\CoreCaption
 \let\LongCaption\CoreCaption

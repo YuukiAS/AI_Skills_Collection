@@ -10,7 +10,7 @@ Use the most specific trustworthy template available.
 Default routing:
 
 - Explicit PPT, PowerPoint, `.pptx`, editable, Slides, Google Slides, or "I will edit it later" -> editable Presentation/Slides route.
-- Group meeting, research update, paper talk, seminar, journal club, defense, method/result update, "research slides", or "deck" in the `presentation-desktop` context without a specified format -> CUHK Beamer by default, producing source-editable `.tex` plus PDF.
+- Group meeting, research update, paper talk, seminar, journal club, defense, method/result update, "research slides", or "deck" in the `presentation-desktop` context without a specified format -> standard blue Beamer by default, producing source-editable `.tex` plus PDF from `course-standard`.
 - Explicit "Beamer", "Overleaf", "LaTeX slides", ".tex", academic PDF, or a venue/project-locked TeX template -> `.tex` plus PDF.
 - Business, teaching, operations, marketing, or executive decision decks -> editable `.pptx` through official Presentation/Slides or ChatGPT for PowerPoint unless the user asks for another format.
 - Existing PPTX/Google Slides minor edit -> official Presentation/Slides only.
@@ -19,12 +19,12 @@ Do not route explicitly requested editable PPTX/Slides work to Beamer only becau
 
 | Request or repository selection | Canonical source |
 |---|---|
-| Course-standard Beamer, teaching LaTeX or a repository selection of `course-standard` for Beamer | `templates/course-standard/beamer/source/` |
-| CUHK research, CUHK group meeting, or a repository selection of `cuhk` / `cuhk-research` for Beamer | `templates/cuhk/beamer/source/` |
+| Standard Beamer, unspecified built-in Beamer, teaching LaTeX or a repository selection of `course-standard` | `templates/course-standard/beamer/source/` |
+| Explicit CUHK request or a repository selection of `cuhk` / `cuhk-research` | `templates/cuhk/beamer/source/` |
 | User-supplied or locked Beamer template | The supplied template |
 | Explicit editable PPTX or Google Slides | The existing editable Presentation/Slides route |
 
-The two built-in skins share the title, body, navigation and closing geometry in `templates/_shared/beamer-core-v1/`. For CUHK, keep the approved assets in their template slots and edit the title metadata in the source. Build either editable template with `scripts/build_beamer_template.py`. The CUHK PPTX reference and design-token JSON are separate scaffolds.
+The two built-in templates share the title, body, navigation and closing geometry in `templates/_shared/beamer-core-v1/`. Body pages use the same blue chrome. CUHK may add approved school artwork only on the title page. Build either editable template with `scripts/build_beamer_template.py`. The CUHK PPTX reference and design-token JSON are separate scaffolds.
 
 
 ## Canonical Beamer Font Contract
@@ -33,4 +33,4 @@ All formal Beamer routes must read and obey `shared/font-policy.md`.
 
 The font set is fixed. Presentation generation must not choose fonts from the host at runtime and must not use Times New Roman, Liberation, DejaVu, Windows font mounts, or fontconfig substitution as a fallback.
 
-Both `cuhk-research` and `course-standard` use the same generated-text font identities; their differences belong to colour, brand assets, and template skin.
+Both `cuhk-research` and `course-standard` use the same generated-text font identities and body-page styling. Their only built-in Beamer difference is approved CUHK title-page identity.
