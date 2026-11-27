@@ -1,72 +1,59 @@
-# 共享能力产品形态决定 — 2026-11-12
+# 插件现行决定
 
-本文件记录用户已经明确确认的产品边界，供后续 Planner、Critic、Codex 和维护者引用。它只冻结“能力放在哪一层、由谁消费”的产品形态，不代表相关实现已经完成，也不替代正式能力设计、验收或发布流程。
+这里只记现行决定。决定变了就直接改这一页，旧说法删掉。
 
-## 已确认决定
+## 共同规则
 
-### Reasoned Decision
+- 下面七个能力都是独立插件：Research Authoring、Presentations、Artifact Content Design、Clear Writing、Reasoned Decision、Design Assurance、Delivery Assurance。
+- GPT 写稿、做取舍、定措辞、判断成品。Codex 只做机械执行：渲染、建站、写代码、跑验收器、发布并回读。内容问题交回 GPT。
+- 调用了插件，交付时附上或推送一份执行证据：规则编号对应成品里的原句或位置，改写附前后对照。
+- v0.1 是骨架加少量必要回归，之后按版本加。
+- 新设计按 `YuukiAS/AI_Instruction_Configuration` 的 `SPEC_DESIGN_WORKFLOW.md`：两路 GPT Pro 独立设计，合并成推荐稿，出对照 PDF，用户裁决。
 
-- 形态：独立 Plugin。
-- 原因：它本身是完整用户任务，负责定义问题、调查现实解空间、核证据、比较方案、形成推荐以及决定何时停止或改判。
-- 不并入 Clear Writing。
+## 产物插件
 
-### Design Assurance
+### Research Authoring（安装标识 `research-writing`）
 
-- 形态：独立 Plugin。
-- 当前正式设计由其独立设计流程继续推进；本文件不重做其架构。
+- 四个技能，按读者分：`research-notes`（作者本人）、`research-story`（导师与组会）、`student-materials`（一份作业及其答案和评分说明）、`research-paper`（正式论文）。
+- `research-citations` 负责检索、引用和核验。旧名 `paper` → `research-paper`，`litcite` → `research-citations`，旧名保留转接。
+- GPT 端和 Codex 端分开写，各有各的职责。
+- 动笔前调用 Artifact Content Design 做取舍，内容定了调用 Clear Writing 写清，成品出来再调用 Artifact Content Design 复看整件。
 
-### Delivery Assurance
+### Presentations
 
-- 形态：独立 Plugin。
-- 当前正式设计由其独立设计流程继续推进；本文件不重做其架构。
+- v0.1 带上现行规则、验收器（`validator_v2`）和模板。
+- 讲者备注只写给内容重的页，一份 PPT 配一个 Markdown，按页排序。讲解稿和会后自读稿共用一套幻灯片。
+- 先走通 Beamer PDF，可编辑 PPTX 等真实需求出现再做。
+- 调用方式同 Research Authoring：排页前取舍，渲染后复看，选定内容交 Clear Writing。
 
-### Clear Writing
-
-- 形态：保持独立 Plugin。
-- 边界：负责已经决定要表达的内容如何被准确、自然、清楚地写给读者，并保持事实、科学语义和机器字符串等必要保真。
-- 不接管决策、情绪关系姿态或“内容是否应该出现在作品里”的判断。
+## 被调用的插件
 
 ### Artifact Content Design
 
-- 形态：独立 Plugin，和 Clear Writing 同层。
-- 定位：被所有适用的产物型 Plugin 调用，调用方式与 Clear Writing 相同。
-- 适用对象包括但不限于报告、论文/科研文档、演示文稿、网站/UI、科研图、生成图像、项目页和其他读者可见产物。
-- 制作前职责：判断哪些内容值得出现、出现到什么粒度、处于什么层级，以及应当 KEEP / COMPRESS / VISUALIZE / DEMOTE / REMOVE。
-- 制作后职责：必须复审真实渲染后的整件作品。单个元素分别合理不代表组合后合理；删除内容后造成的空洞、层级失衡、重复说明、内部过程泄漏和整体过度解释都属于该复审范围。
-- 它不取代领域正确性、Clear Writing、媒介专属布局/交互/视觉能力或最终领域验收。
+- 独立插件，和 Clear Writing 同层。
+- 制作前：按读者要理解、核验或完成的事，决定保留、压缩、可视化、降级或删除。内部审计说明、哈希、内部编号和页码、文件路径、新旧稿对照、自检通过说明、待确认、重复规定一律拦掉，直接删除，不留档。
+- 成品后：按读者实际打开的方式看完整件，查缺漏、删后空洞、层级失衡、重复和内部过程外泄。
+- 关键取舍写在原提纲或制作说明里。
+- 调用方：Research Authoring、Presentations、Frontend Design、科研可视化、文档和图像生成。
 
-### Warm Response
+### Clear Writing（安装标识 `writing-style`）
 
-- 形态：ChatGPT 全局协作指令，不做 AI_Skills Plugin，也不做 standalone Skill。
-- 主要消费场景：普通 ChatGPT 网页对话中的明显人际/情绪情境。
-- Codex / GPT Work 默认不需要承担同等的人际回应职责；不得为了统一产品形态把它强行注入机器执行或正式产物。
-- 现有 AI_Skills warm-response seed、TODO 和真实对话继续作为失败证据与指令设计素材，不再作为独立 Plugin 的实现入口。
+- 独立插件。三个技能：`response-clarity`（聊天回复）、`clear-artifact`（文档、报告、幻灯片文字）、`interface-text`（界面文字）。
+- 只管已选定内容怎么写清；内容该不该出现归 Artifact Content Design。
+- `interface-text` 以后和 Frontend Design 对接：前端定布局和交互，`interface-text` 定措辞。
 
-### Anti-Conservative
+## 任务型插件
 
-- 形态：ChatGPT 全局协作指令，不做 AI_Skills Plugin 或 Skill。
-- 作用：规定默认协作姿态，例如不过度审计已足够工作的前提、不强制正反平衡、审慎程度与真实风险匹配、目标明确后完成判断和默认推荐。
-- 当前候选来源继续由 `YuukiAS/AI_Instruction_Configuration` 管理。
-- 若未来某个具体行为被证明属于 Reasoned Decision 或 Clear Writing，可把该局部能力下沉到对应 owner；不把整个 Anti-Conservative 产品化。
+### Reasoned Decision
 
-## 组合边界
+- 独立插件，负责定义问题、调查现实解空间、核证据、比较方案、给出推荐，以及决定何时停止或改判。
+- “被质疑就改口”这类问题归这里。
 
-正常情况下：
+### Design Assurance 与 Delivery Assurance
 
-```text
-全局协作姿态
-├─ Warm Response
-└─ Anti-Conservative
+- 两个独立插件，Design Assurance 管设计到冻结，Delivery Assurance 管冻结到交付。
+- 先用 Clear Writing 把现有文档改成读得懂的版本，再继续 0.2。
 
-独立任务型能力
-├─ Reasoned Decision
-├─ Design Assurance
-├─ Delivery Assurance
-├─ Clear Writing
-└─ Artifact Content Design
+## 全局指令（不做插件）
 
-Clear Writing 与 Artifact Content Design 同层，都被 Research Authoring / Presentations /
-Frontend Design / Scientific Visualization / Documents / Image generation 等产物插件调用。
-```
-
-后续新增相近能力时，优先判断它是独立插件还是“所有对话默认生效的协作姿态”，避免把所有好行为都堆进 Clear Writing，也避免为每条规则新增 Plugin。
+- Warm Response 和 Anti-Conservative 写进 ChatGPT 全局协作指令，由 `YuukiAS/AI_Instruction_Configuration` 管理。
