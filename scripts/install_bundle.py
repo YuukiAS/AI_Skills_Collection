@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 COMMAND_HINTS = {
     "base": "python scripts/skills.py install --target repo --profile global-baseline --mode symlink --write-agents-md",
     "full": "python scripts/skills.py install --target repo --profile research-main --mode symlink --write-agents-md",
-    "research-writing": "python scripts/skills.py install --target repo --profile research-main --mode symlink --write-agents-md",
+    "research-authoring": "python scripts/skills.py install --target repo --profile research-main --mode symlink --write-agents-md",
     "frontend": "python scripts/skills.py install --target repo --profile frontend-research-product --mode symlink --write-agents-md",
     "bioinformatics": "python scripts/skills.py install --target repo --profile bioinformatics-project --mode symlink --write-agents-md",
     "cmr": "python scripts/skills.py install --target repo --profile medical-imaging-project --mode symlink --write-agents-md",

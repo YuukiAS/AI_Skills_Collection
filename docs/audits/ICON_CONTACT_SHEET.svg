@@ -14,16 +14,16 @@
 <text x="400" y="90" font-size="10" font-family="Arial, sans-serif" fill="#111827">project-skill-installer</text>
 <image href="../../skills/core/codex-system/ai-skills-repository-maintainer/assets/app-facing.svg" x="528" y="12" width="56" height="56"/>
 <text x="528" y="90" font-size="10" font-family="Arial, sans-serif" fill="#111827">ai-skills-repository-maintainer</text>
-<image href="../../assets/codex/plugin-icons/writing-style/composer.svg" x="16" y="140" width="56" height="56"/>
-<text x="16" y="218" font-size="10" font-family="Arial, sans-serif" fill="#111827">writing-style</text>
+<image href="../../assets/codex/plugin-icons/clear-writing/composer.svg" x="16" y="140" width="56" height="56"/>
+<text x="16" y="218" font-size="10" font-family="Arial, sans-serif" fill="#111827">clear-writing</text>
 <image href="../../skills/writing/core/writing-fidelity/assets/app-facing.svg" x="144" y="140" width="56" height="56"/>
 <text x="144" y="218" font-size="10" font-family="Arial, sans-serif" fill="#111827">writing-fidelity</text>
 <image href="../../skills/writing/core/scientific-prose/assets/app-facing.svg" x="272" y="140" width="56" height="56"/>
 <text x="272" y="218" font-size="10" font-family="Arial, sans-serif" fill="#111827">scientific-prose</text>
 <image href="../../skills/writing/core/chinese-prose/assets/app-facing.svg" x="400" y="140" width="56" height="56"/>
 <text x="400" y="218" font-size="10" font-family="Arial, sans-serif" fill="#111827">chinese-prose</text>
-<image href="../../assets/codex/plugin-icons/research-writing/composer.svg" x="528" y="140" width="56" height="56"/>
-<text x="528" y="218" font-size="10" font-family="Arial, sans-serif" fill="#111827">research-writing</text>
+<image href="../../assets/codex/plugin-icons/research-authoring/composer.svg" x="528" y="140" width="56" height="56"/>
+<text x="528" y="218" font-size="10" font-family="Arial, sans-serif" fill="#111827">research-authoring</text>
 <image href="../../skills/writing/research/research-reporting/assets/app-facing.svg" x="16" y="268" width="56" height="56"/>
 <text x="16" y="346" font-size="10" font-family="Arial, sans-serif" fill="#111827">research-reporting</text>
 <image href="../../assets/codex/app-skill-icons/aggregate.svg" x="144" y="268" width="56" height="56"/>

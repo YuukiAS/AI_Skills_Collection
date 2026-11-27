@@ -32,9 +32,9 @@ ai-skills install --target repo --skill domain/bayesian/pymc --mode symlink --wr
 - `codex-core-global`
 - `codex-workflow-core`
 - `codex-webdev`
-- `codex-research-writing`
+- `codex-research-authoring`
 - `codex-scientific-diagrams`
-- `codex-writing-style`
+- `codex-clear-writing`
 - `codex-bayesian-jsdm`
 - `codex-cardiacnexus`
 - `codex-bioinformatics-light`

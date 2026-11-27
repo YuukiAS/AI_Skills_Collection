@@ -193,7 +193,7 @@ class ReviewedHandoffPromptContractTests(unittest.TestCase):
             self.assertIn("自然文档标题", text)
             self.assertIn("REVIEW_PACKET_CONSTRUCTION_FAILURE", text)
 
-        self.assertIn("不得把 wrapper label failure\n当成 writing-style product failure", scheduled)
+        self.assertIn("不得把 wrapper label failure\n当成 clear-writing product failure", scheduled)
 
     def test_private_artifact_durability_before_worktree_cleanup(self) -> None:
         agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")

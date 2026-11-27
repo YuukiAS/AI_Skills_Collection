@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Mechanical support for the writing-style heavy Chinese rewrite route.
+"""Mechanical support for the clear-writing heavy Chinese rewrite route.
 
 The helper validates host-authored semantic artifacts. It deliberately does not
 write reader-facing prose, derive meanings from source excerpts, or score
@@ -130,7 +130,7 @@ WORKFLOW_TRACE_LITERAL_PATTERNS = [
     r"(?:^|/)exports/private(?:/|$)",
     r"(?:^|/)\.local-runtime(?:/|$)",
     r"(?:^|/)\.github/workflows(?:/|$)",
-    r"(?:^|/)plugins/cache/[^/\s]+/writing-style/[^\s，。；,]*",
+    r"(?:^|/)plugins/cache/[^/\s]+/clear-writing/[^\s，。；,]*",
     r"\b(?:CURRENT|RESULT|FINAL_REPORT|TEXT_REVIEW)\.json\b",
     r"\b(?:RESULT|FINAL_REPORT)\.md\b",
 ]
@@ -337,7 +337,7 @@ def validate_reader_facing_formula_rendering(candidate: str) -> dict[str, Any]:
 
 
 def classify_writing_style_route(prompt: str, source: str) -> dict[str, Any]:
-    """Return a deterministic smoke-test route classification for writing-style."""
+    """Return a deterministic smoke-test route classification for clear-writing."""
 
     prompt_l = prompt.lower()
     source_l = source.lower()
@@ -368,7 +368,7 @@ def classify_writing_style_route(prompt: str, source: str) -> dict[str, Any]:
         route = "writing-fidelity"
     return {
         "schema": ROUTE_SELECTION_SCHEMA,
-        "selector_owner": "writing-style",
+        "selector_owner": "clear-writing",
         "selected_route": route,
         "forced_route": False,
         "ordinary_user_prompt": True,
@@ -390,8 +390,8 @@ def validate_route_selection(payload: dict[str, Any], source: str, *, prompt: st
     if payload.get("schema") != ROUTE_SELECTION_SCHEMA:
         raise ValidationError("route selection schema mismatch")
     assert_no_raw_source_fields(payload, context="route selection")
-    if payload.get("selector_owner") != "writing-style":
-        raise ValidationError("route selection must be owned by writing-style")
+    if payload.get("selector_owner") != "clear-writing":
+        raise ValidationError("route selection must be owned by clear-writing")
     if payload.get("selected_route") != "scientific-rewrite":
         raise ValidationError("ordinary route did not select scientific-rewrite")
     if payload.get("forced_route"):

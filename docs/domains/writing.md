@@ -26,7 +26,7 @@ Complete domain installs are supported. If an audit reports high description len
 
 ## Skills
 
-- `academic-paper-writer-pro` (`skills/writing/research/academic-paper-writer-pro`): 学术论文排版、OCR恢复、DOCX/Markdown整理和模板化交付工作流。用于扫描 PDF、DOC/DOCX、Markdown 到 Word/PDF 的结构修复、断点恢复、参考文献整理和最终文件验收；内容写作、审稿和事实保真应路由到 research-writing 与 writing-fidelity。
+- `academic-paper-writer-pro` (`skills/writing/research/academic-paper-writer-pro`): 学术论文排版、OCR恢复、DOCX/Markdown整理和模板化交付工作流。用于扫描 PDF、DOC/DOCX、Markdown 到 Word/PDF 的结构修复、断点恢复、参考文献整理和最终文件验收；内容写作、审稿和事实保真应路由到 research-authoring 与 writing-fidelity。
 - `chinese-prose` (`skills/writing/core/chinese-prose`): 中文报告、README、Markdown/PDF 成稿、技术文档、科研说明、组会材料和长文“说人话”终审。任何中文 Markdown/PDF/报告/README/面向读者的文档型中文内容都应自动触发本 skill，用于普通中文润色、中文为主、降低 AI 味/翻译腔/模板腔/宣传腔，并保护事实、数字、术语、命令、引用、实验结果和证据边界。普通聊天解释、诊断结论、进度/完成汇报和行动建议应路由到 response-clarity；产品界面标签、按钮、状态、帮助、信任/隐私披露和 locale-specific UI microcopy 应路由到 product-ui-copy。
 - `citation-verification` (`skills/writing/research/citation-verification`): Verify academic citations, references, BibTeX entries, DOI/PMID metadata, citation claims, and figure/table evidence before manuscript submission, review response, or report delivery. Use when citation existence or claim support matters more than citation formatting alone.
 - `latex-paper-authoring` (`skills/writing/research/latex-paper-authoring`): Author, organize, repair, and prepare LaTeX research papers for arXiv, Overleaf, conference templates, or journal submission. Use when manuscript structure, LaTeX source hygiene, compilation, figures, bibliography, or template cleanup is central.
@@ -51,6 +51,9 @@ Complete domain installs are supported. If an audit reports high description len
 - `skills/writing/core/chinese-prose/references/chinese-prose-checklist.md`
 - `skills/writing/core/chinese-prose/references/group-meeting-chinese-report-prompt.md`
 - `skills/writing/core/chinese-prose/references/source-notes.md`
+- `skills/writing/core/response-clarity/references/karabiner-audit-human-decision-positive-example.md`
+- `skills/writing/core/response-clarity/references/math-stat-method-explanation-positive-example.md`
+- `skills/writing/core/response-clarity/references/reasoned-decision-summary-architecture-negative-example-2026-11-05.md`
 - `skills/writing/core/scientific-prose/references/scientific-report-checklist.md`
 - `skills/writing/core/scientific-prose/references/source-notes.md`
 - `skills/writing/core/writing-fidelity/references/failure-summary.md`

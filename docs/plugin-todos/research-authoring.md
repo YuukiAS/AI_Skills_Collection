@@ -1,0 +1,752 @@
+# research-authoring — Long-Term TODO
+
+Canonical maintenance inbox for the `research-authoring` plugin.
+
+## Open candidates
+
+### 作者难以从现有材料弄懂项目并参与决策
+status: NEW
+source: 私有研究项目的作者阅读与讨论，2026-11-26。
+evidence: `Distributed_Imaging_Inference/docs/research/review-packs/2026-11-26/`
+side: 整套材料中的 Markdown 总结和整合读本由 Codex 端产出，其中收录的 GPT Pro 观点来自 GPT 端。将结论压成少数方向的答复由哪一端产出，待确认。
+
+problem: 作者还没理解项目全貌，希望通过阅读逐步弄清情况，再参与尚未定下的决策。实验、数据集、前作和多个模型的观点都要消化，AI 找材料的速度远快于作者读懂材料的速度。
+
+- 一次交付了按来源分章的整套材料，包括 Markdown 总结、模型观点和读本。用户反馈“一大堆根本无从下手的资料”。
+- 另一次把结论压成少数几个方向，用户反馈“上来拍脑袋给我几个不咋样的方向，别的啥也不知道”。用户也反馈表格读起来累。
+- 用户问：“怎么站在读者视角让我弄懂，然后我能真正弄懂参与决策，又不会花太多时间绕在里面？”并指出“codex能去一下子搜一堆，我消化也要时间啊”。
+- 已有的导师报告规则处理作者已熟悉研究后如何讲给导师。该场景的作者自己还在建立对整个项目的理解，研究判断尚未定下。现有条目未单独记录这一场景。
+
+project-specific context: 具体研究内容、材料和待定决策属于该项目。
+
+### 科研综合稿返修必须做“保留性修订”：修错不能顺手删掉已经正确且有解释价值的内容
+status: NEW
+source: `YuukiAS/CAT-TRACE` TRACE 综合 Markdown 多轮返修，2026-11-17。用户提供同一文档的两份 PDF：一份较长、保留完整方法解释与实验脉络；一份较短、修正了若干方法身份和实现状态，但在重写时删掉了此前已经正确的重要解释，例如“共享参数也在这条近似链里更新”及其对 `gamma` 的具体作用。用户明确要求最终版应“正确的全部保留，错误的改掉”，而不是每次发现一个错误就重新压缩整篇。
+evidence:
+- 12 页旧版中已经完整解释：有限 Laplace TRACE 的已见列和全零列都进入局部高斯近似；共享参数也在该近似链里更新，所有列的近似后验会反馈到 `gamma`。这段解释对理解“为什么已见列近似也可能影响未来未见物种”仍然成立。
+- 7 页短版修正了“旧 CAT-TRACE 实际是已见列 Laplace + 匿名全零槽积分”“全积分有限 TRACE 尚未实现”“最大的未决近似层是开放尾部已见列”等重要身份问题，但通过整体重写缩短文档时，也删掉了旧版中仍然正确的方法机制、完整公式和若干实验解释。
+- 最终返修改为以详细版作为母版，只对已确认错误的身份、实现状态和归因做局部修改，再把短版新增的正确判断插回合适位置；最终文件保留单一方法章节、实验顺序、Pro 1/2/3、6 张有明确科学意义的表格和完整方法公式。
+- 本次还暴露了一个独立的工程风险：使用宿主语言字符串替换 Markdown 时，GitHub 行内数学的特殊字符可能触发替换语义，造成大段重复。该低层 Markdown/渲染问题已有单独 TODO；本条只记录“科学内容返修不得发生正确内容回归”。
+
+problem:
+- **发现局部错误不授权整体重写。** 当用户指出方法身份、表格语义、实验归因或实现状态有误时，默认操作应是修正受影响的语义范围；已经核实正确的公式、机制解释、实验背景和因果链应保留，除非有新的证据明确推翻它们。
+- **最新版不自动等于最佳母版。** 多版本科研文档合并时，应先判断哪一版内容最完整、哪些新版本只修正了局部事实。若新版通过压缩丢失了仍正确的解释，应以完整版本为母版，把新版修正作为补丁，而不是继续沿短版扩写。
+- **“更短”不能作为科研返修的默认成功标准。** 一段解释可能显得冗长，但其中某句承担关键机制连接，例如“单列近似如何反馈到共享参数，再影响未来未见物种”。删除这类桥梁会让文档事实仍对、理解链却断掉。
+- **每个修改点应先分类为 KEEP / FIX / DELETE / ADD。** KEEP = 已核实正确且仍有读者价值；FIX = 事实或身份需要修正；DELETE = 已被证据推翻、重复或无独立意义；ADD = 后续研究产生的新结论。只有 FIX/DELETE 区域获得改写权限，KEEP 默认受到保护。
+- **方法身份修正和机制解释是两个不同层次。** 例如“全积分有限 TRACE 尚未实现”属于方法身份修正；“有限 Laplace TRACE 的共享参数怎样受逐列近似影响”属于机制解释。修正前者不能把后者一起删掉。
+- **正式综合稿应保留被后续结论继续依赖的旧证据。** 后续判断如果仍引用某个旧机制、公式或实验，就必须让读者在最终稿里看到足够的原始解释，而不是只留下压缩后的结论标签。
+- **返修必须做内容回归审计。** 除了检查新增内容正确，还要明确比较上一版中已核实正确的关键段落/公式/表格是否仍存在；不能只做“错误是否消失”的单向验收。
+- **多版本合并应有明确母版和变更来源。** 最终稿需要能回答：哪些内容来自完整旧版并被保留；哪些事实由新版纠正；哪些判断来自最新实验。内部可做版本差异矩阵，面向读者不必暴露工作流术语。
+
+candidate rules:
+1. 科研文档返修默认采用“最小语义影响面”：先定位错误影响范围，再修改；不因一个局部错误重写整篇。
+2. 多版本合并前先选“内容母版”，选择标准优先是科学解释完整性和已验证正确内容，而不是时间最新或篇幅最短。
+3. 对关键章节建立 KEEP / FIX / DELETE / ADD 清单；KEEP 内容除非被新证据推翻，不得在润色、压缩或重构时丢失。
+4. 修正方法名、实现状态或结果身份时，单独检查与之相邻的正确机制解释是否仍完整；特别关注共享参数反馈、条件事件、预测汇总等跨步骤连接句。
+5. 最终 QA 增加“correct-content regression audit”：对上一版已核实正确的关键公式、机制句、实验结论和表格逐项确认仍存在或有等价替代表达。
+6. 若两个版本各自包含不可替代的正确内容，必须合并；不能用“新版已经更正确”为理由丢弃旧版独有且仍成立的解释。
+7. 压缩只允许删除重复和不改变理解的文字；任何承担“为什么 A 会影响 B”的因果桥梁都默认保留。
+
+project-specific context: TRACE、CAT-TRACE、gamma、具体两个 PDF 和对应句子只作为本次真实返修证据。可迁移问题是：科研综合文档的修订质量既包括“把错误改掉”，也包括“保证已经正确的知识不回归丢失”。
+
+
+### 复杂科研综合稿必须恢复实验因果顺序，并解释多路研究任务怎样改变后续判断
+status: NEW
+source: `YuukiAS/CAT-TRACE` TRACE / Laplace / 无限 TRACE 综合说明返修，2026-11-17。用户在方法定义、表格语义和 Markdown 渲染修复后继续指出：文档仍缺实验先后顺序，读者无法知道为什么先做某个诊断、后做另一个实验，也无法看出最近三份 GPT Pro 各自负责什么、提出了什么、哪些结论后来被后续研究修正。
+evidence:
+- 返修前的综合稿已经按主题分别写了固定参数诊断、有限 p 敏感性、无限 TRACE、随机留出和马达加斯加，但这些结果主要按“当前知识结构”排列，没有显式恢复 2026-11-11 → 2026-11-16 → 2026-11-17 的研究推进顺序。单个段落都可能正确，读者仍要自己猜“前一个实验暴露了什么，为什么下一步会做这个”。
+- 三份 GPT Pro 的原始任务明确分工：Pro 1 诊断预测偏离来源；Pro 2 定稿计算与推断引擎；Pro 3 研究有限截断 p、无限极限和新验收。若最终综合稿只吸收结论而不保留这种任务身份，读者会把三份研究误读成三个互斥方案或无法判断哪个结论覆盖哪个问题。
+- Pro 1 当时把“经典 TRACE/IBP 型尾部可能太轻”列为高优先级候选；Pro 3 后续证明 TRACE 的无限极限不是经典 IBP，并给出无协变量量级约 277 对经典 IBP 约 151，因此 Pro 1 的“尾部太轻”判断需要降级为候选而不是继续作为冻结主因。这个例子说明研究综合稿必须展示后续证据怎样修改前一阶段判断。
+- 修正版 `YuukiAS/CAT-TRACE@87c7648dcd7d89ad28c7973b9041b50c4756baac` 新增“实验顺序”以及 Pro 1 / Pro 2 / Pro 3 三个独立章节，按“问题 → 实验 → 结果 → 下一步”恢复研究演化。
+
+problem:
+- **按主题组织不等于研究过程可理解。** 一个科研综合稿可以把“方法、实验、结果、讨论”各自写全，却仍然让读者不知道为什么这些实验会按这个顺序发生。只给当前结论会抹掉关键因果：哪个异常触发了哪个诊断，哪个诊断又排除了什么，后面的实验为什么有必要。
+- **实验顺序应表达推理关系，不只是日期列表。** 每个关键实验至少要说明：它之前卡住的具体问题；这次只改变/检查了什么；它得到什么新证据；这个证据怎样决定下一步。时间戳只负责定位，真正需要保留的是科学决策链。
+- **历史失败、诊断和正式实验要在时间线上标明身份。** 固定参数消融、数值核对、完整重新拟合、理论量级检查和正式真实数据实验不能因为发生在相邻日期就写成同等证据；时间线需要同时保留“它是什么”和“它能证明到哪里”。
+- **多路 GPT Pro / 独立研究必须有任务身份和收敛关系。** 对每一路至少说明：它被问了什么；明确不负责什么；主要提出了哪些方案；哪些后来进入正式路线；哪些被后续证据削弱、替代或保留为候选。不能只贴最终结论，也不能按 Pro 1、Pro 2、Pro 3 机械复述原报告。
+- **后续研究修正前期判断时，最终稿应直接呈现当前稳定版本，同时保留必要的演化原因。** 例如前期基于经典 IBP 的量级判断后来被 TRACE 无限极限推导纠正，最终稿应说明“为什么当时会这样想、后面什么证据改变了它”，避免读者把早期候选和当前结论同时当真。
+- **当前结果章节应能回指时间线中的来源。** 读者看到一个数字或方案时，应能知道它属于哪个阶段：基线、固定参数诊断、Pro 设计、无限重拟合、随机重复还是另一个数据集验证。这样可以避免同一个数字在后文失去实验身份。
+- **当研究线已经出现多个重要分叉时，应在详细章节前提供一条短的主线。** 这条主线不是执行日志，而是“我们先发现什么 → 为了回答它做了什么 → 结论如何改变 → 现在还剩什么”的科学故事。详细公式、表格和各 Pro 设计再挂到对应阶段下面。
+
+candidate rules:
+1. 对跨多轮实验的研究综合稿，正式结果前必须先给一条科学推进主线；每个关键阶段写清“前置问题 → 本轮改动/检查 → 新证据 → 下一步”。
+2. 时间线只保留会改变科学判断或后续行动的实验；普通运行日志、作业状态和机械重跑不进入主线。
+3. 同一时间线中的每个结果必须同时标明证据身份：完整方法、固定参数诊断、敏感性、理论参照、实现核对或真实数据验证。
+4. 多路独立研究/Pro 任务必须分别说明任务边界、主要方案和当前命运：已采用、待实现、被后续证据修正、或仍为候选。
+5. 后续证据推翻或收窄早期判断时，最终稿不能把两版结论并排留给读者自行裁决；应给出当前结论，并简要说明是哪一步新证据改变了旧判断。
+6. 交付前做一次“研究顺序冷读”：隐藏内部文件名和日期，仅看正文时，读者是否能回答“为什么做下一个实验、每个 Pro 解决什么、今天的结论是怎样一步步得到的”。若不能，研究综合仍未完成。
+
+project-specific context: TRACE、230.6/60.5/161、Pro 1/2/3、芬兰和马达加斯加只作为本次真实回归证据。可迁移问题是：跨多轮科研探索的正式综合文档必须保留科学判断的演化链和多路研究的任务边界，而不是只把最终知识按主题重新分类。
+
+
+### Markdown 科研文档必须把“目标平台实际渲染”作为交付验收，而不是只检查源码
+status: NEW
+source: 一次技术综合 Markdown 的连续返修，2026-11-17。用户在目标平台实际页面连续发现公式乱码和数学源码直接外露；两轮问题都发生在正文科学内容已经基本稳定之后。
+evidence:
+- 第一轮失败：写入 Markdown 时，宿主语言字符串转义吞掉 LaTeX 反斜杠，导致若干数学命令在最终仓库源文件中变成控制字符或残缺文本。源文件本身已经被破坏，实际页面出现乱码。
+- 第二轮失败：反斜杠和控制字符修复后，源码扫描通过，但目标平台仍把部分数学源码直接显示给读者。说明“源码里的 LaTeX 字符串完整”仍不足以证明目标渲染器会按预期显示。
+- 用户提供的实际页面截图显示，行内数学、独立公式和反斜杠命令都可能在目标平台按普通文本暴露；真实 UI 证据必须优先于连接器回读或字符串扫描。
+- 后续修订改用目标平台官方支持、经过验证的数学语法，并把源码完整性和目标渲染验收分成两个独立检查层。
+
+problem:
+- **Markdown 本身就是交付 artifact，不是“内容写完后的中间文本”。** Research Authoring 不能只保证科学内容、LaTeX 字符串或 Markdown 源码看起来正确；目标平台上的实际阅读结果才是用户真正拿到的文档。
+- **先冻结目标渲染器，再选 Markdown/数学语法。** 不同平台支持的数学定界符、表格扩展和 Markdown 方言并不完全相同，不能把一个平台可用的语法自动假定为另一个平台也能稳定渲染。
+- **写入通道本身也可能破坏公式。** 经过 JavaScript、Python、shell、JSON、YAML、连接器或模板写 Markdown 时，反斜杠、美元符号、反引号、换行和 Unicode 都可能被转义或重编码。必须验证“最终保存后的实际源码”，不能只检查写入前的内存字符串。
+- **源码完整性检查和渲染验收是两个独立 gate。** 源码 gate 至少检查控制字符、替换字符、未闭合数学定界符、关键反斜杠命令、代码围栏和表格结构；渲染 gate 检查目标平台实际页面中的公式、标题、表格、链接和段落是否按读者预期显示。任一失败都不能交付。
+- **不能把 connector/read-back 或字符串扫描冒充视觉验收。** 远端回读只能证明保存了什么文本；只有真实目标渲染器的页面、预览或等价渲染产物才能证明最终显示。当前工具无法查看目标平台实际渲染时，必须明确说明“渲染未验”，不能宣称正式冻结或 artifact PASS。
+- **数学文档要做最小渲染烟测。** 至少覆盖一个行内公式、一个独立公式、一个含上下标/希腊字母/反斜杠命令的公式、一个表格内数学片段；代表性结构在目标平台渲染正确后，才允许把同类语法用于整篇。
+- **大规模写入后要重新读取已保存文件。** 检查对象必须是远端/最终文件版本，而不是生成前草稿。若写入层使用字符串替换或转义，额外扫描不可见控制字符和异常 Unicode；发现一个公式被破坏时，应沿同一路径审计全文，不能只修一个点就交付。
+- **目标平台规则优先于通用 Markdown 习惯。** Research Authoring 应读取当前平台官方语法或已验证项目规范；若平台提供更稳健的原生公式写法，应优先采用，不依赖“理论上应该支持”的猜测。
+- **正式冻结的定义必须包含 artifact QA。** “科学内容已稳定”“源 Markdown 已保存”“目标页面已渲染验收”是三个不同状态。只有用户请求的最终交付 surface 通过相应验收，才能称为正式冻结文档。
+
+candidate rules:
+1. 写 Markdown 前先确定目标渲染器与其官方数学、表格、链接语法；不同平台不共享未经验证的默认定界符。
+2. 通过代码、连接器或模板写入含 LaTeX 的 Markdown 时，必须防宿主语言转义，并在写回后读取最终文件做源码完整性扫描。
+3. 源码 QA 至少检查控制字符、替换字符、数学定界符配对、关键反斜杠命令、fence 配对和表格结构。
+4. 目标平台至少做一次代表性渲染烟测：行内公式、独立公式、复杂 LaTeX、表格内数学；失败则停止整篇交付。
+5. 把 SOURCE PASS 与 RENDER PASS 分开；没有真实 renderer evidence 时，只能报告源码通过，不能宣称最终 artifact 已通过。
+6. 用户提供的实际页面截图或渲染结果优先于源码/connector 自检；看到乱码、源码外露、错位或未渲染公式，应按 artifact failure 处理并审计同类结构全文。
+7. 长篇科研 Markdown 正式冻结前，除科学身份/证据审计外，再做一次目标渲染器全文抽查，重点看公式密集段、表格、标题层级和链接。
+
+project-specific context: 具体项目名、公式和提交号只作为真实失败证据。可迁移问题是：任何面向读者的科研 Markdown 都需要把“最终存储源码是否完整”和“目标平台是否实际渲染正确”作为独立交付责任，不能让内容正确掩盖 artifact 失败。
+
+
+### 面向研究者的技术综合文档：先冻结方法身份、计算语义和比较资格，再写结果与表格
+status: NEW
+source: `YuukiAS/CAT-TRACE` 的 TRACE / Laplace / 原事件积分 / 无限 TRACE 综合说明返修，2026-11-17。用户连续指出：方法名混乱、先给结果后补“到底怎么算”、固定参数诊断被误读成完整方法、表格把不同科学身份的数字并列后诱导错误结论；同一份综合 Markdown 因这些问题多次重写。
+evidence:
+- 当前修正版：`YuukiAS/CAT-TRACE@5b68e4a0a9e600c24c009f9160ed92f1a4997dfd`，`docs/decisions/synthesis/2026-11-17_trace_laplace_infinite_real_data_synthesis_ZH.md`。修正版先定义三条基础 TRACE 路线，再分别说明已见列、全零/未见部分、共享参数拟合与未来新增公式，并将固定参数积分结果明确降为诊断。
+- 前一版 `149168605959c02e3008c11792288f6b16efb0a7` 已经尝试统一名称，但仍需要继续返修：用户要求去掉面向读者无意义的 `TRACEref` / `ref` 命名，先把每种方法怎么算讲清楚，并重新审查全部表格的真实科学意义。
+- 本轮还发现一个实质性表格解释错误：固定 γ 的 p、2p、4p、8p 扫描曾被写成“增大 p 就逐渐接近真实新增”；重新核对后发现训练已见期望也随之从约 750 增至 1587。即使逐档调 γ 匹配训练已见 702，未来新增也只是约 57、88、110、126。因此该表只能证明截断敏感性，不能证明“增大 p 就修复预测”。
+problem:
+- **科研方法必须有稳定的读者身份。** 同一个对象在正文、表格、标题和讨论中不能轮流叫“原始 TRACE”“TRACEref”“Laplace 版”“有限 TRACE”“精确积分版”等相互重叠的名字。读者名应描述真正改变统计对象或计算目标的差异；代码内部的 `ref`、实验标签和历史别名不能替代正式方法名。
+- **完整方法、固定参数诊断、消融、敏感性扫描、理论量级检查和数据集专用混合配置必须分开命名。** 一个数字只有在训练目标、共享参数拟合和预测规则都按该方法完整执行后，才有资格称为该方法的结果。冻结另一方法的参数、只替换最后一段计算得到的数字，只能叫诊断/消融结果。
+- **方法级结果必须来自同一套方法定义下的完整计算闭环。** 只要上游任何会影响下游结果的定义发生改变——模型、目标函数、先验、似然、估计方式、数据处理或近似方式——所有依赖它产生的参数、后验、预测和评价量都应在新定义下重新得到。跨方法沿用旧中间结果、只替换后半段计算得到的结果，只能作为诊断或消融，不能冒充完整方法结果。
+- **方法结果出现前，正文必须先把“到底怎么算”讲完整。** 对统计/机器学习方法，至少应让读者看见：训练数据里有哪些对象；已观测/已见对象怎么处理；全零、未见、缺失或潜在对象怎么处理；共享参数从哪里来；预测针对哪些对象；最终预测量怎样由这些对象汇总。必要公式应出现在相应动作附近，而不是等读者看完结果以后再补算法定义。
+- **公式要解释角色，而不只是展示。** 方法介绍中的核心公式应能直接回答“输入是什么、积分/平均的是谁、输出是什么、这一步为什么进入训练或预测”。尤其是条件概率、边际积分、首次发现、新增总量等容易混淆的量，正文必须把条件事件和汇总对象说出来。
+- **比较表必须先有明确的科学问题，再决定是否值得存在。** 一张表中的行应当具有可比较的语义身份。若一行是完整重拟合方法、一行是固定参数诊断、一行是理论量级检查，把它们并列成“方法结果”会制造错误结论；此时应拆表、改成诊断表，或直接用正文解释。
+- **每张 reader-facing 科研表格都应有一句 caption / lead-in 说明“这张表真正回答什么”。** caption 还应说明关键边界：是在比较端到端方法、固定参数下的单组件差异、训练期拟合、预测表现、敏感性，还是理论量级。表格不能靠列名让读者自己猜比较资格。
+- **表格和正文不能做超过实验设计的归因。** 两条路线同时改变有限/无限模型、训练目标和预测算法时，表格可以比较端到端表现，但不能把差值归给 Laplace、p 或某个共享参数。只改变一个组件的固定参数消融可以说明该组件在该参数点的影响，但不能自动推广成完整方法误差。
+- **敏感性实验首先证明“敏感”，不自动证明“哪一个设置更接近真值”。** 参数扫描若同时改变训练拟合程度、先验校准或其他模型量，就不能根据结果靠近真实数据而宣称找到了根因。若需要因果解释，应另外设计保持其他统计目标可比的实验。
+- **“真实值”与“模型参数真值”要分开。** 真实数据可以直接给出未来新增数、频率谱等观测量，却通常不给出 γ 等潜在模型参数的真值。不同模型/目标下估计出的共享参数不能直接排成“谁更接近真实参数”的排行榜，除非有独立可识别真值或模拟设计。
+- **最终冻结稿必须做一次方法身份全局审计。** 从头搜索每个方法名、关键结果数字、表格标题和 caption，确认同一结果的身份没有漂移；诊断不会在后文被简称成方法；缺失的完整方法结果不会被别的消融数字填上；项目总名不会被拿来代指某一具体算法。
+- **方法说明与结果叙事要保持同一对象一路走到底。** 如果预测未来新增，最好先跟着一个训练全零/未见对象走完“训练信息 → 后验/积分 → 未来首次出现概率 → 汇总新增”的链，再扩展到共享参数和整体模型；不要在这条链闭合前反复切到历史版本、数值引擎、理论极限和别的数据集。
+candidate rules:
+1. **先冻结读者方法名，再写正文。** 方法名应反映真实的模型、推断或计算差异；代码内部别名、历史缩写、实验标签和项目总名不能替代面向读者的正式方法名。同一方法在标题、正文、图表和结论中保持同一名称。
+2. **方法级结果必须来自同一套方法定义下的完整计算闭环。** 只要上游会影响下游结果的定义发生变化——包括模型、目标函数、先验、似然、估计方式、数据处理或近似方式——依赖它的参数、后验、预测和评价量都应在新定义下重新得到。跨方法复用旧中间结果的结果，只能作为诊断或消融。
+3. **方法结果出现前，先让读者知道“它到底怎么算”。** 至少说明训练对象是什么、已观测/已见对象如何处理、全零/未见/缺失/潜在对象如何处理、共享参数怎样得到、预测针对哪些对象、最终量怎样汇总。必要公式应贴着对应动作出现。
+4. **公式必须交代计算角色。** 对核心公式，正文应能直接回答：输入是谁、积分/平均/条件化的是谁、输出是什么、为什么这一步属于训练或预测。条件概率、边际积分、首次发现、累计新增等容易混淆的量尤其需要说明事件含义。
+5. **完整方法、诊断、消融、敏感性扫描、理论量级检查和数据集专用混合配置必须分开命名。** 一个数字只有在完整方法链条都按该方法执行后，才有资格称为该方法结果；固定别的方法参数只换一段计算，不能升级成新方法结果。
+6. **比较表先回答“这张表有什么科学问题”，再决定是否存在。** 只有语义上可比较的对象才放在同一张表里。完整方法、固定参数诊断和理论量级检查若回答不同问题，应拆表或改用正文说明。
+7. **每张面向研究者的表格都要有一句明确的 caption/lead-in。** 说明它是在比较端到端方法、检查训练拟合、隔离单个组件、做敏感性分析，还是展示理论量级；同时写出限制解释的关键边界。
+8. **归因不能超过实验设计。** 两条路线同时改变模型、训练目标和预测算法时，只能比较端到端结果，不能把差值归给其中某一个组件。只有真正控制其他条件的消融，才能支持对应的局部归因，而且结论只在该控制条件下成立。
+9. **敏感性首先证明“敏感”，不自动证明根因或正确方向。** 参数扫描若同时改变训练拟合程度、先验校准或别的模型量，结果更接近观测值也不能直接解释成“这个参数就是问题来源”。需要因果判断时，另做保持其他统计目标可比的设计。
+10. **观测真值和潜在模型参数真值分开。** 真实数据通常能给出观测量的实际值，却不给出潜在参数真值。不同模型或目标下估计出的共享参数不能直接排成“谁更接近真实值”的排行榜，除非有独立可识别真值或模拟设计。
+11. **正式冻结前做一次全局方法身份审计。** 从头检查方法名、关键数字、公式、图表标题和 caption：同一结果的身份不能漂移；诊断不能在后文被简称成完整方法；缺失的方法结果不能由别的消融数字顶替；项目总名不能被拿来代指具体算法。
+12. **复杂方法说明尽量让同一个具体对象走完整条链。** 先让读者看到一个对象怎样从训练信息进入后验/积分，再怎样变成预测概率和最终汇总；不要在这条链闭合前频繁切换到历史版本、数值实现、理论极限或另一个数据集。
+
+project-specific context: TRACE、Laplace、有限 p、γ、60.5/230.6/161、芬兰和马达加斯加都是本次真实失败的证据，不应写成通用 Research Authoring 固定模板。可迁移的问题是：复杂科研综合稿如果没有先冻结方法身份、完整方法资格、重新拟合边界和表格比较语义，即使每个数字和公式单独正确，也会让读者得到错误的方法关系和因果解释。
+
+
+
+### 写给研究者本人的科研学习笔记：技术摘要不能替代推导与理解
+status: NEW
+source: 某私有统计研究项目的 Notion 技术学习页；2026-10-14 用户提供三份按时间顺序的完整草稿及三张亲自手写批注的截图。
+evidence: 本次对话内的 两组技术小节 第一、第二、第三版完整文本与手写截图。当前 Notion 页面对应第三版附近的内容；连接无法直接取回原生版本历史，三个早期/中期文本来自用户明确提供，不能再把「无法读取历史」作为不比较的理由。原文和截图是私人研究材料，不复制到中央仓库。
+problem:
+- 写作任务是作者本人学习和日后复习：理解为什么提出一个数学量、它如何从前一步推出来、问题在哪些情形出现、为什么相应表达式或近似有效；不是给导师看的进展报告、执行级方案摘要或版本审查记录。阅读者已具备部分专业背景，不应机械从零铺课，也不能省掉其标注的关键推导。
+- 第一版按「作用—数值问题—三段算法—验证与实现」组织。第一组技术小节 直接给逆 Mills 比率及一、二阶导数结论，第二组技术小节 直接给牛顿方程、Cholesky 用途和拉普拉斯积分公式；相关「为什么」和计算中间环节几乎没有。材料能概括决策，不能帮助作者重建理解。
+- 第二版增加概率/密度定义、极端负尾与对数运算的具体数字、一维牛顿法类比、Mills 比率辨析等，确有进步，但仍直接陈述关键求导结果，跳过 `expm1` 稳定差值的代数变形，未用众数处二阶泰勒展开真正连接拉普拉斯正态近似。增加术语、例子和字数不等于恢复推导链。
+- 第三版首次明确写出复合函数、商法则、梯度泰勒展开和众数处二次展开，实质吸收了用户标注的知识链，不能与前两版笼统算成同等失败。仍可见需要进一步解释的接续点（如为何有 `expm1` 表达式、补偿求和的直觉、相关曲率度量的意义）；「已实现与验证」、测试路径和边界应服从笔记用途，不反过来主导文章。第三版尚无用户明确通过的证据。
+- 用户的手写箭头、公式、例子与边注是理解需求和缺失环节的线索，不是需要逐字贴进稿件的素材，更不应生成「手写笔记指出」这样的元叙事。应先理解这些标记提出了哪些问题，再在正文中自然回答，并保持重要数学推导、符号关系和最终可渲染表达完整。
+- 用户明确要求「写给自己」的材料包含：必要的背景与符号定义、问题为何出现、重要公式的中间推导、相邻步骤的因果与等价变换、能建立直觉的具体例子、相近概念辨析、成立条件及日后易忘之处；组织深度跟随本人手写批注揭示的真实疑问，简单处简明、难点不能跳步。实际质量标准是隔一段时间重读仍能沿笔记重建核心推理，而非字数、覆盖的术语数量或最终公式数量。
+- 用户明确拒绝的写法：只复述最终算法和修订结论；为了看似专业而堆实现路径、测试细节、审查轮次和版本历史；只对公式补一两句定义却省略关键过渡；机械把手写内容归档为「笔记摘录」；每句拆成列表或不必要地压缩推导。第三版的改进必须被真实承认，但仍须检查如从 \(g(-x)=\lambda(-x)-x\) 到 \(x\operatorname{expm1}(\log\lambda(-x)-\log x)\) 这样的必要变形是否能被读者自行理解，不能仅凭写得更长就宣布完成。
+project-specific context: probit 下尾、逆 Mills 比率、单列牛顿法、Cholesky 与拉普拉斯近似只是本次学习笔记的真实例子；它们的具体数学内容不是跨学科固定提纲。这是有逐版文本证据的研究写作反馈；尚未核实三版由正式安装的 Research Authoring 正常入口产生，不能直接称为已发布插件的生产回归。先由后续中央维护者与已有读者任务、表达保真 TODO 去重，再决定是否需要正式能力变更与验收。
+
+
+#### 2026-10-21：逐节技术解释的好坏对照
+
+feedback_status: NEW / USER_CONFIRMED_POSITIVE_EXAMPLE
+source: 某私有统计研究项目的技术学习讨论，2026-10-20–21。
+evidence: 用户确认逐节解释帮助其理解原先读不懂的材料。原回答、公式、数值和截图留在私有项目仓库，此处不保存。
+reader/task: 有专业背景、希望日后能沿笔记重建推理的作者。
+
+失败写法先堆结论与术语，关键推导只留名称。被认可的写法先解释具体问题，再说明相邻步骤为何成立，最后给出必要的适用边界。章节收尾应自然交代已解决什么，以及为什么需要下一节；不能机械追加“下一节我们将”。读者能否复述推理关系，比长度或公式数量更能说明是否讲清。
+
+这仅是用户认可的聊天解释，尚未证明正式插件正常调用或自动回归通过，不改变发布状态。
+
+**2026-10-28 follow-up — two additional failures in a self-study numerical-methods note:**
+
+本次反馈来自同一私人 该项目 项目的 Notion 学习页技术学习页。用户要求页面帮助本人复习 numerical analysis、bigMVP 与当前模型计算。以下只记录可泛化的写作失败，不复制私人页面全文或截图。
+
+**Failure A — citation/link substitution for explanation**
+- 第一版出现类似“你在某课程页学过节点与正交多项式的关系；某代码页记录了 Golub–Welsch”的句子，但正文没有真正解释这条关系。读者若想知道“为什么 Gaussian quadrature 节点是正交多项式的根、Jacobi 矩阵怎样产生节点和权重”，仍被迫在多个 Notion 页面之间来回跳转。
+- 这类写法表面上“有来源、有引用”，实际上把核心教学责任外包给引用。**引用应证明来源或提供进一步阅读，不应成为理解当前文档所必需的缺失段落。**
+- 对个人科研学习笔记，凡是正文依赖的概念关系、推导桥梁或算法机制，都应在当前文档中给出足够解释；外链只负责 provenance、扩展细节或原始材料定位。
+- 验收问题应是：**隐藏所有链接后，读者是否仍能理解这一节的核心论证？** 若不能，正文仍不自洽。
+
+**Failure B — symbols and reading order were not audited after drafting**
+- 修订版虽然加入了更多公式，但仍出现“新符号第一次出现没有当场定义”的问题，例如 quadrature 公式中的节点数、节点、权重，以及 posterior/Laplace 段落中的参数向量、Hessian、共享超参数等，需要读者自行从上下文猜测。
+- 更严重的是，页面开头一度出现“先找到后验众数、再用 Hessian 构造近似”的解释，排在参数向量和 likelihood 的定义之前。单句都正确，但**阅读顺序错误会让局部正确内容仍然不可读**。
+- 仅有 notation table 也不够。对学习型技术文档，关键符号应在**首次实际使用处**就近解释；尤其是一个公式中新出现的每个非显然对象，都应说明“它是什么、维度/角色是什么、为什么此处需要它”。
+- 同时要区分容易撞名的对象，例如连续积分权函数与离散 quadrature weight、不同章节重复使用的 \(L\)、\(U\)、\(H\) 等。作者自己知道上下文，不代表隔几个月后的读者还能自动补全。
+
+**应推广的交付前检查：**
+1. **First-use notation audit**：从头顺读，记录每个数学符号第一次出现的位置；若首次出现时无法用当前位置理解含义，就补定义或调整顺序。
+2. **Equation role audit**：每个重要公式后至少能回答“这行在算什么、输入是什么、输出是什么、为什么下一步需要它”；不能只给公式和名称。
+3. **Reader-order audit**：不能先解释“怎么计算”再定义“计算对象是什么”。变量、目标、方法、结果的先后必须符合读者实际建立理解的顺序。
+4. **Link-independence audit**：暂时忽略所有外链 / cross-reference，确认主文仍能独立完成核心解释。
+5. **Cold reread**：完成稿后以“几个月没看过项目的作者本人”视角从头读一次，而不是只检查 Markdown、公式是否存在或段落是否覆盖主题。
+
+**本次返工后的正向模式：**例如不再只写
+\[
+\int f(t)\,dt\approx\sum_{\ell=1}^{K}w_\ell f(t_\ell),
+\]
+而是在公式附近立即说明 \(K\) 是节点数、\(t_\ell\) 是实际评估被积函数的位置、\(w_\ell\) 是该节点代表的面积权重，并继续解释“不同求积法的核心差别就是节点怎样选、权重怎样选、误差怎样判断”。同理，在 Newton–Laplace 链条中先定义物种参数向量与 likelihood，再定义 posterior log-kernel、mode、Hessian，最后才写
+\[
+Y_j\to h_j(\theta_j)\to\widehat\theta_j\to H_j\to N(\widehat\theta_j,H_j^{-1}).
+\]
+这类顺序比单纯增加公式数量更重要。
+
+**feedback_status:** USER_REPORTED_FAILURE / REVISED_AFTER_SECOND_PASS。该案例说明现有“推导链完整”规则还需要补充**self-contained explanation、first-use symbol hygiene 和 post-draft cold-read**三项验收；不应把“有引用”“公式都写了”“主题覆盖了”误判为学习笔记已经可读。
+
+**2026-10-28 Notion-specific follow-up — author-facing research notes need a separate production/QA contract**
+
+本轮继续在同一私人 该项目 Notion 学习页上发生多次返工。这里记录的不是数学内容，而是 **Research Authoring 将“写给作者本人长期复习的科研笔记”交付到 Notion 时**应遵守的页面级规则。
+
+**Observed uncertainty — do not overclaim the root cause**
+- 用户在 Notion App 截图中看到标题、公式和正文块串台，例如上一节公式后突然接入下一节标题或旧块内容；连接器 fetch 返回的线性文本一度看起来顺序正常。随后用户查看网页端时又认为页面“好像倒是好了”。
+- 因此不能把这次现象直接定性为“Notion block 已损坏”或“Notion App 一定有 bug”。可能涉及客户端渲染/缓存，也可能涉及多轮局部 block mutation 后的结构差异；现有证据不足以判定根因。
+- **可泛化要求：**Research Authoring 不应把 connector read-back 当成最终视觉成品的充分证明；当用户提供实际 UI 截图时，截图中的阅读体验优先作为用户可见事实处理，同时把“内容结构正确”与“客户端显示正确”分开判断。
+
+**Rule 1 — Notion page is the reading artifact, not a storage dump**
+- 面向作者自己的 Notion 学习页，目标是打开一页即可复习，不是把多个课程页、论文页和代码页做成跳转目录。
+- 页面正文必须自足：核心定义、符号、推导关系、算法输入/输出和关键例子都在当前页；链接只承担 provenance 和进一步复习。
+- Notion 的优势是可导航、可折叠、可持续更新；不能反过来用大量 cross-link 逃避正文解释。
+
+**Rule 2 — design the heading tree before writing blocks**
+- 先确定少量顶层 section，再把方法挂到相应父节。例如“数值积分基础 → Gaussian quadrature 家族 → Laplace → 项目中的候选方法 → 优化/线性代数 → 数值误差 → Monte Carlo/MCMC → 总表 → 来源”。
+- 不允许每出现一个算法就直接升级成新的顶层标题，否则 TOC 变成算法清单，读者看不出概念关系。
+- 交付前必须检查最终 TOC，而不是只检查正文文本：顶层编号连续；子节只挂在所属父节；总结表和来源位于末尾；不存在旧标题残留或重复编号。
+
+**Rule 3 — block locality: one block must belong to one conceptual section**
+- 公式的引导句、公式本身、符号解释和该公式的结论应相邻，不能让一段公式在视觉上落到下一节标题下面。
+- 每一节结束时应有清楚的逻辑闭合，再进入下一节；尤其避免“上一节最后半句 → 下一节标题 → 上一节剩余公式”这种读者完全无法恢复的顺序。
+- 对公式密集笔记，优先用稳定、简单的 native Notion blocks；不为了视觉装饰使用复杂嵌套结构。
+
+**Rule 4 — use Notion-native authoring syntax conservatively**
+- 写入前读取当前 Notion-flavored Markdown 规范；inline math 使用单美元定界，display math 使用独立的双美元定界块。
+- 不把另一种 Markdown/LaTeX 语法（如 \(...\)）假定为 Notion 会正确渲染；也不要混用可能被保存成 literal text 的 HTML/XML heading 写法，除非规范明确支持且已验证。
+- 变量名、heading、table、mention 等结构写完后应从远端重新读取，确认保存后的 canonical text 仍符合预期。
+- 若一个页面经过多轮局部 search/replace 后出现结构不可信的迹象，**停止继续 patch**；创建干净重建页往往比继续修旧 block 更安全。旧页可以明确标记 backup，而不是继续与正式页同名。
+
+**Rule 5 — distinguish authoring QA from client-rendering QA**
+- Research Authoring 自身至少负责：
+  1. 内容是否自足；
+  2. heading/TOC 是否逻辑正确；
+  3. 符号首次出现是否定义；
+  4. 公式块是否属于正确 section；
+  5. 页面远端 canonical content 是否无残留旧块。
+- 客户端最终视觉（Notion desktop/mobile/web 的缓存、排版或渲染差异）属于另一层事实。若只有 connector，无权声称“用户 App 中一定显示正确”。
+- 当用户报告“网页端正常、App 异常”时，应明确记录为 **cross-client display discrepancy, root cause unconfirmed**，而不是继续重写科学内容来猜测修复。
+
+**Rule 6 — final acceptance for author-facing Notion notes**
+交付前至少完成以下六项：
+1. **Cold read**：从第一页顺读到末尾，不能依赖作者刚写完时的短期记忆补上下文。
+2. **TOC audit**：只看目录也能理解全页结构。
+3. **First-use notation audit**：新符号第一次出现就解释。
+4. **Block-boundary audit**：随机抽查每个 section 的开头和结尾，确认没有跨节串台。
+5. **Link-independence audit**：隐藏外链后仍可读懂。
+6. **Rendered-client caveat**：connector read-back 只能证明保存内容；若无法查看用户实际客户端，不能把它冒充视觉验收。
+
+**Positive lesson from the eventual rebuild**
+- 当多轮 patch 已经让“到底是哪一版 block 在显示”变得不可靠时，从零新建干净页面、远端读取核对、再将旧页明确改名为 backup，是比继续增量修复更稳健的恢复路径。
+- 这不是要求每次修改都新建页面；只有当页面结构可信度已经丢失、用户连续看到 block/TOC 串台时才应采用。
+- 对长期科研笔记，**可读性、稳定性和以后能复习**优先于保留每一次编辑历史在同一页面里。
+
+**2026-11-18 follow-up — method sections need a local generic-to-project closure**
+- 本次反馈来自另一轮作者本人长期复习用的技术 Notion 页面重构。已有规则已经覆盖“保护正确旧内容”“先设计 heading tree”“先定义对象再讲计算”“相关对象就近比较”“常规章节避免连续疑问句标题”，因此不再新增同义规则。
+- 新暴露的问题是：一页同时承担“学习通用数值方法”和“理解这些方法在当前研究中的实际位置”时，单纯把两类内容分开还不够。若项目实现先于方法定义出现，读者会用尚未理解的概念读实现；若把所有项目应用统一堆到文末，读者又需要跨很远距离把方法和真实用途重新配对。
+- 对方法型科研学习文档，默认让每个方法节形成一个**局部闭环**：先讲通用计算对象和方法机制，再讲与相邻方法的关键区别、适用边界或计算代价，最后用一个独立 subsection 说明该方法在当前研究中的具体对象、实现状态和证据。这样通用解释可以独立复习，项目应用又紧贴对应方法，不需要读者在整页来回找配对关系。
+- 顶层 section 的归组应按**数学 / 计算角色**判断，而不是按历史上曾经写在一起、共享几个术语或使用相同局部信息来分组。两个方法都使用 mode / curvature，并不自动说明它们属于同一种计算；一个优化器和一个线性代数分解即使在同一实现链中紧邻出现，也不必共享父节。目录本身应该让读者看出“这些方法在解决哪一类问题”。
+- 方法之间的比较应保持就近：同一家族内的变体、容易混淆但计算语义不同的方法，优先在对应方法节内直接比较。这样后面的总表只承担压缩回顾，而不是第一次解释方法差异。
+- **总结 / 关系图只负责收束已经讲清的关系。** 如果读者必须等到最后的“方法地图”才第一次明白两个方法的区别、某个工具为什么出现、或项目到底在哪里使用它，说明上游方法节仍未完成。总结节不能作为前文结构失败的补救层。
+- 对这种结构性重排，现有 KEEP / FIX / DELETE / ADD 与 correct-content regression audit 继续适用：重构权限只允许移动和改写已授权范围，不能把“重新分节”解释成删除仍正确内容的许可。
+
+**target layer:** Research Authoring 的 Notion-facing personal/research-notes workflow + artifact QA；不要把这些规则错误推广到论文正文、PDF 排版或所有 Notion 页面。
+**feedback_status:** USER_REPORTED_REPEATED_FAILURE / REBUILT_CLEAN_PAGE / CLIENT_RENDERING_ROOT_CAUSE_UNCONFIRMED。
+
+
+
+
+### Formal research reports can be scientifically correct yet still lack a coherent academic document identity
+status: PARTIALLY_PROMOTED_IN_5.2.1
+tracking: #20
+source: real supervisor / group-meeting research-report rendering, 2026-09-19
+evidence: private user-provided pair of rendered PDFs from the same report (not copied into this public repository); first render 17 pages/A4, second render 24 pages/US Letter; user feedback after the math was repaired: the report was readable and not obviously “wrong”, but still did not feel like a formal research document. Cross-reference: `docs/skill-todos/render-chinese-math-pdf.md` records the lower-level renderer/math/font failures from the same real use.
+problem:
+- Fixing equation rendering did not close the user-facing artifact-quality problem. The second PDF still looked like a generic/default document export rather than a deliberately designed supervisor-facing technical note.
+- The visible issue was not one isolated CSS value. Several choices interacted: loose page density, large/uneven whitespace, a switch from A4 to US Letter without an explicit user request, mixed font texture, generic table/title treatment, and long-document rhythm that expanded the same material from 17 to 24 pages.
+- Section hierarchy also exposed an authoring/render handoff problem. The source already contained human section numbers while the export added automatic numbering, producing forms such as `2.1 1. ...` and `8 9. ...`. The document title/TOC/title flow also repeated hierarchy instead of reading like a finished note.
+- This is distinct from prose quality. The scientific content could be understandable and the formulas could be corrected, while the final artifact still failed the user’s expectation of “formal research report” presentation.
+- Current `research-reporting` correctly says it should not implement low-level PDF/DOCX/LaTeX mechanics, and the existing TODO already keeps typography/pagination/render mechanics outside Research Authoring. This real case shows a remaining boundary gap: the document purpose still has to result in a coherent artifact-level identity (for example a formal advisor/group-meeting note rather than a generic article export) before/while the low-level renderer executes it. This NEW record intentionally does not decide whether that contract belongs in Research Authoring, the rendering layer, or a shared artifact layer.
+project-specific context: the report’s scientific topic, methods, datasets, results and exact wording are project-local/private and must not become generic Research Authoring rules. The reusable evidence is only the document-purpose/style mismatch, duplicated hierarchy, page-geometry drift and final “readable but not formal” user experience.
+
+2026-09-25 update: repository `5.2.1` keeps document semantics in Research Authoring and delegates explicitly requested formal PDF artifact mechanics to the standalone renderer companion installed by `research-main`. Standalone Marketplace Research Authoring fails closed when that companion is missing. This closes the bounded handoff/profile part of the issue; the broader academic document-identity question remains a future Research Authoring/artifact-quality refinement rather than a claim that all report design problems are solved.
+
+
+### Keep research authoring separate from the generic language layer
+status: READY_FOR_PROMOTION
+tracking: #21
+source: cross-plugin boundary audit after 050 + Distributed Imaging advisor-report revision, 2026-09-05
+evidence: `docs/design/READER_FACING_COMMUNICATION_PLUGIN_BOUNDARIES.md`; Distributed Imaging report v2; existing `research-reporting` and paper/literature aggregates
+target layer: routing/planning/qa
+problem: the old `Research Authoring` / `Clear Writing` display-name pair made two different production jobs look overlapping. The current product display names separate them as `Research Authoring` and `Clear Writing`; the canonical slug remains `research-authoring`. The remaining responsibility-boundary TODO is still active: research authoring owns scholarly/research artifact authoring, including what claims/evidence belong in a report or manuscript, how sections/tables/figures/citations are organized, and what the advisor/reviewer needs to see. The generic language layer should own content-preserving reader-facing wording after those decisions are stable.
+candidate action:
+- Keep the `research-authoring` slug. The current user-facing displayName is `Research Authoring`, which describes the real domain: research reports, manuscripts, paper workflows, literature/citations, review/rebuttal/supplement coordination and claim-evidence organization.
+- Treat reader-facing document planning as a first-class `research-authoring` responsibility: audience, document purpose, decisive evidence, section jobs, main-text vs appendix split, table/figure roles and citation/evidence authority.
+- Make table semantics an explicit research-authoring responsibility: scientific comparison rows/columns, units, metric direction, precision/rounding, missing-value notation, comparability, captions/notes and prose/table division of labor.
+- Delegate generic wording, de-translation, local formula explanation and say-it-plain final prose to the canonical generic language layer instead of duplicating a second Chinese/English style rule set.
+- Do not let the language layer choose which experiment is decisive, silently delete a secondary experiment from a newly authored report, alter manuscript contribution scope or change literature/citation authority.
+- Use the logical handoff `audience + document purpose + section job + claim/evidence boundary + table/figure role + allowed structural freedom -> generic language layer -> document-level QA`; do not invent a new schema unless a real production failure later requires one.
+promotion gate: do not treat the display-name separation as resolving this responsibility-boundary item. Promote after replay on one advisor report plus one manuscript/paper workflow; verify that `research-authoring` still owns document semantics while `Clear Writing` only changes expression.
+
+### Reader-first advisor report rewriting must change the document plan, not just the wording
+status: READY_FOR_PROMOTION
+tracking: #22
+source: Distributed_Imaging_Inference group-meeting report v1 failure; earlier Deep Research Chinese rewrite; TRACE v8→v9 reviewer feedback
+evidence: `Distributed_Imaging_Inference/deliverables/group_meeting_2026-09-05/group_meeting_report_v1.md`; human-approved rewrite `共享预训练医学分割模型_极低通信联邦适应_说人话重写版.md`; `TRACE/presentations/group_meetings/2026-07-29/REVISION_CONSTRAINTS.md`
+target layer: planning/prose/qa
+problem: a scientifically correct report can still fail badly when the writer preserves the source experiment chronology, internal labels, audit vocabulary and English abstraction stack. The v1 advisor report reproduced nearly every experiment in order and kept terms such as `local drift`, `phenotype-validity gate`, `measurement validity`, `Pattern H`, `P-SIMPLE`, `S-DICE`, `Level 2/3`, `falsification`, `transportability`, etc. The result read like a Deep Research / project log rather than something an advisor would naturally read.
+candidate action:
+- Before drafting, rebuild a **reader-facing document plan** from the scientific meaning. Protect facts, numbers, formulas, citations and claim strength, but do **not** protect the source section order, headings, experiment tokens or workflow labels.
+- Main narrative should normally answer, in this order: **what is the scientific question -> what did the decisive evidence change -> what can we now say -> why it matters -> what simpler explanations still need to be ruled out -> what decision/input is needed from the advisor**.
+- Do not narrate every experiment just because it exists. Keep only the experiments needed to establish the main claim in the body; move the rest to an appendix or a compact `question / comparison / result / implication` table.
+- Internal experiment labels (`GATE_P_PASS`, `Pattern H`, `P-SIMPLE`, `S-DICE`, job names, audit status, seed IDs) are indexing aids, not audience-facing prose. Translate them into ordinary scientific language in the main text; preserve the exact token only in appendix/cross-reference when genuinely useful.
+- Ordinary English abstractions must not carry the Chinese sentence skeleton. Keep formal method/dataset/software names, but rewrite common ideas in Chinese: explain what “local drift”, “measurement validity”, “personalization”, “transportability”, etc. mean in the specific scientific context instead of stacking labels.
+- At first use, an unfamiliar term needs **role and purpose**, not just an expansion. TRACE v8→v9 showed that one extra clear sentence is better than an acronym expansion or compressed source-note wording.
+- Prefer direct positive statements over defensive/meta phrasing (`not X but Y`, `gate`, `threat`, `closure`, `kill the paper`, `current status`). Explain the scientific reason directly.
+- Tables carry exact values and experiment contracts; prose should interpret. If detailed split counts, seeds, hyperparameters or robustness variants are necessary, put them in a later methods/appendix section rather than interrupting the main argument.
+- Advisor-facing names must match the advisor’s vocabulary. Internal project nicknames unknown to the advisor (for example a private pipeline codename) should be replaced by the broader scientific object, e.g. `UKB CMR pipeline`.
+- Final QA should explicitly ask: **Could a reader who did not watch the experiments run understand the report without knowing our internal tokens? Could the first 2–3 pages stand alone? Does each paragraph earn its place in the decision story?**
+promotion gate: incorporate into `research-reporting` and replay on the next advisor-facing report; preserve exact source fidelity while allowing large-scale structural rewriting.
+
+#### 2026-09-11：同一研究材料拆成会议纪要与下一次会议报告
+feedback_status: NEW
+source: Distributed_Imaging_Inference / 用户要求将带批注的上次组会PDF、会后转述及近期研究记录，分别整理为两份面向老师的Markdown。
+evidence: 内部记录 `YuukiAS/Distributed_Imaging_Inference/docs/research/DII_FEW_SHOT_ADAPTATION_LITERATURE_POSITIONING_2026-09-11.md`，提交 `59e45ed0d2abbccf4e5090ad960e24c0e1388db4`；用户附件 `Meeting_2026_09_05.pdf`；本次草稿 `deliverables/group_meeting_2026-09-05/meeting_minutes_2026-09-05.md` 与 `deliverables/group_meeting_2026-09-12/group_meeting_report_v1.md`，在DII提交 `6d295317cdcbc0d02958d5f0bf6ca9b90c77defd` 可定位。
+problem: 用户明确指出，内部记录中的“如果DGST后gap仍存在”“最终论文需要怎样的benchmark结构”“明日组会的完整叙事”不能直接变成给老师看的报告。同一资料还包含不同时间的数据划分、已完成实验、老师口头反馈和未完成的新实验。只换标题或翻译英文，会保留错误的文体，也可能把会后结果写进上次会议、把研究者建议写成老师决定。
+observed handling: 本次将上次纪要与未来报告分开；纪要以所供PDF为历史事实来源，老师转述与会后拟定安排另列，不补造参会者、共识或投稿期限。未来报告按科学问题、设计、有限结论、相关方法和待验证问题组织，保留必要数字及比较对象，不搬运执行日志。新结果即使在写作期间入库，也不自动纳入未经复核的科学叙述；预留结果更新位置而不生成假结果或空白图表。原PDF个别图表数字不一致时，在来源说明中保留差异，不替用户暗自统一。
+project-specific context: CARE/M&Ms、91/59与91/30/29、DGST、FedFisher、pFLFE及MICCAI安排是DII内容，不能成为通用写作模板。原文件原本就是内部记录，并非错误地交付的导师报告；本例记录的是文体转换需求和误用风险，未证实调用过当前正式插件，不标记为生产回归。两份草稿尚待用户审阅；本条补充已有候选的真实证据，不改变其推广状态，也不修改插件版本或运行规则。中文措辞层的配套记录见 `clear-writing.md` 的“Keep style cleanup downstream of scientific structure”。
+
+
+#### 2026-10-10：DII 导师研究提案把科学论证写成内部工作报告
+feedback_status: NEW
+source: `Distributed_Imaging_Inference` / 2026-10-10 导师科学与算法设计报告的中英文撰写、用户否决与结构性重写。
+evidence: 研究背景与四份原始设计方案见私有仓库 `YuukiAS/Distributed_Imaging_Inference@f5066f5760d707fa85bb326a5716c82026929c25` 的 `docs/notes/gpt/r02/`。本次实际被用户否决的对话附件为 `DII_导师科学与算法设计讨论稿_2026-10-10.md` 及英文翻译 `DII_Advisor_Scientific_and_Algorithm_Design_Discussion_2026-10-10_EN.md`；用户明确认可新的开头样稿后要求全文重写，中英文重写稿分别为 `DII_导师研究提案_重写中文版_2026-10-10.md`、`DII_Advisor_Research_Proposal_Rewritten_English_2026-10-10.md`。这些对话附件不是本中央公开仓库中的可下载文件；以上文件名仅用于定位真实反馈。
+problem:
+- 交付目标是向导师介绍一项**尚处于方法设计阶段的科学研究提案**，初稿却以“研究判断／已有证据与缺口／创新性审计／下一步决策”等内部复盘栏目为主轴。虽然包含方法、文献和数学，导师需要先穿过项目治理与自我评审文本，才知道实际研究问题、前作的关键困难和准备提出的机制。
+- 将内部工作材料整理得更完整、证据边界更审慎，误当成适合导师的叙事；没有先按读者的科学问题安排研究动机、直接前作、方法直觉、数学定义与验证逻辑。大量表格和状态式小标题进一步强化了工作报告风格。
+- 首次生成后又制作忠实英文翻译，造成两种语言同时继承同一套错误的章节架构。**翻译保真不等于篇章结构合格；润色／减少“AI 味”不能补救错误的文档任务定义。**
+- 用户指出的不是某几个术语或句子，而是“如果要向导师介绍这项研究，作者本身不会这样讲”。初稿交付前没有完成这一读者视角的篇章审核；用户不得不亲自指出整体结构失败。
+observed handling: 用户明确认可一段重新起草的提案式样稿，其论证顺序为“真实多中心医学影像问题 → 最近直接前作为什么不足 → 一个具体的方法直觉 → 数学和算法如何运行 → 怎样证明有实际学习价值”，随后要求中文与英文全文按此结构重写，并保留足够详细的公式、基准与科学限制。现有一维实验和 CARE 标签审计仍应保留事实，但按支持相关论点的需要出现，而不是作为正文工作状态目录。
+project-specific context: MOSAiC、NTK-FL、MAP、FedLAP-DP、M&Ms、CARE、中心消息及一阶余项等属于 DII 的研究内容，**不是**通用 Research Authoring 模板。报告由本对话助手起草；未证实调用了正式安装的 Research Authoring production skill，所以本条只记录可复核的真实用户反馈，不直接认定为该插件已发布版本的运行回归，也不改变已有 TODO 状态或插件版本。
+
+
+#### 2026-10-17：导师稿即使科学正确且结构合理，仍可能因“第一眼看不出为什么值得用”而失败
+feedback_status: NEW
+priority: VERY_HIGH
+source: \`Distributed_Imaging_Inference\` / HAMP advisor proposal reviewed directly by advisor on 2026-10-17.
+evidence: 当前 DII 正式导师 PDF 已经经过前一轮 reader-first 重构：不再按内部实验日志组织，方法、数学、前作和实验计划都基本完整；但导师反馈仍明确认为“还不足以和别人 communicate”。导师提出的核心要求包括：必须有一张图，让一个对 foundation model、segmentation 等几乎不了解的读者（例如普通 radiologist）也能立即理解“这东西为什么好”；必须抓住读者心理，回答“为什么我要花精力用这个，而不是已有方法”；与其给长篇方案，不如真正写成一篇自己主导的短 baseline paper，大约四页，让第一作者能够用最少篇幅把问题、方法和价值讲清楚。
+problem:
+- **reader-first 仍然不等于 value-first。** 现有规则已经要求按“科学问题 → 方法直觉 → 数学 → 验证”重构，但仍可能默认读者愿意投入时间理解研究。真实导师反馈表明，面对导师、reviewer、临床合作者或跨领域读者，第一层任务不是“把方法讲完整”，而是先让读者在几十秒内知道：现有流程哪里痛、这个方法带来什么具体新能力、为什么值得继续看。
+- **没有中心图时，复杂方法很难形成共同心智模型。** 长段落可以精确，但临床或跨领域读者不会先读完方法再决定它是否重要。图不是装饰或方法流程的事后摘要，而应承担首要沟通任务：在不了解项目内部术语的情况下，展示当前工作流的负担、 proposed capability、以及使用者最终得到什么。
+- **作者视角容易高估术语前提。** 即使 “foundation model”“segmentation”“feature interface”“audit” 对作者很自然，普通 radiologist 或相邻领域 reviewer 未必愿意先学习这些概念。面向跨领域读者时，文档必须先用场景和结果说明价值，再决定哪些技术词值得出现。
+- **“与前作不同”不能替代“为什么值得用”。** 文献定位表和 novelty list 只能回答方法学边界，不能回答采用动机。Research Authoring 应强制增加用户价值问题：如果我是目标用户，为什么要改变现有流程、承担实现/验证成本来使用这个方法？如果答案只剩“方法更一般、更统计、更可复用”，说明仍未形成可传播价值主张。
+- **长篇 proposal 不是所有研究阶段的最佳载体。** 当核心想法已经形成但仍需获得导师/合作者兴趣时，4 页左右的 paper-like baseline manuscript 可能比 10+ 页完整研究计划更有效：一张主图、一段问题、一段现有方法为什么不足、一个最小方法定义、一个最关键实验设计或结果位置、一个清楚的贡献/边界。完整数学、审计、消融和执行细节可以放补充材料或内部文档。
+- **“第一作者能自己讲出来”是重要验收标准。** 正式研究稿不能只是信息齐全；作者本人应能脱离文档，用主图和几分钟口头叙述解释：谁现在遇到什么问题、为什么已有方案不方便、我们给了什么、为什么这会改变使用者的选择、怎样最直接证明它有用。
+candidate_action:
+- 对 advisor-facing proposal、short paper、reviewer-facing introduction 增加一个 **zero-context value test**：假设读者是相关医学/科学专业人士，但不了解当前方法栈。只给标题、摘要首段和主图，读者是否能回答“问题是什么、现有做法为什么麻烦、作者给了什么、我为什么可能愿意用”。
+- 在复杂方法第一次对外沟通时，优先设计一张**价值主图**，再写正文。图的第一层表达应是使用场景和能力变化，不是内部算法模块。技术细节可以作为第二层或图中小插图。
+- 强制区分三种文档：内部完整研究计划、面向导师/合作者的短研究提案、接近投稿的短 paper。不要把前者压缩排版后冒充后两者。
+- 对 4 页左右的短 paper，建议按信息价值组织而不是平均分配章节：第 1 页必须完成问题 + 场景 + 主图 + 方法一句话；第 2 页给最小必要方法和与直接前作的关键区别；第 3 页给最能决定价值的实验 / 预期验证；第 4 页给限制、适用边界和结论。具体页数不是硬模板，但“前一页就能让人决定是否继续读”是硬验收。
+- Research Authoring 最终 QA 增加：**如果删除 80% 技术细节，核心价值是否仍然清楚？主图是否能独立讲故事？正文是否回答了‘为什么使用者愿意换方法’，而不仅是‘我们和别人哪里不同’？**
+- 对跨领域临床读者，避免把术语教学当开场。先描述其熟悉的流程、重复工作、失败风险或决策痛点，再引入方法名称。
+boundary: DII、HAMP、具体 foundation model / segmentation 内容、导师原话和四页 paper 的具体科学材料属于项目证据，不进入通用模板。可迁移的是：**value-first communication、zero-context reader、figure-first mental model、adoption motivation、short paper as a distinct artifact、first-author oral explainability**。本条来自导师对真实 advisor PDF 的直接反馈，权重高于仅由助手自评形成的写作偏好；但它不意味着所有研究报告都必须四页，也不意味着所有正式论文都应减少数学细节。
+
+#### 2026-10-23：连续研究路线复盘缺少“科学需求—额外学习能力”的决策解释
+
+feedback_status: NEW
+source: `YuukiAS/Distributed_Imaging_Inference` / 多轮分布式影像学习研究复盘、三模型科学问题审查与研究方向重新收敛（2026-10-23）。
+evidence: 项目正式来源包括 `docs/plans/2026-09-22_auditable_shared_risk_evidence/22_THREE_DAY_SCIENTIFIC_POSTMORTEM_AND_DECISION_2026-09-25.md`、`docs/results/SUPERVISOR_BRIDGE_LAYER_A_RESULT_2026-09-18.md`、`RESEARCH_FOUNDATIONS.md` 和 2026-10-23 第三轮问题证据汇总；用户直接反馈指出此前答复把十项候选机械模板化，自评、重复解释和防御性限定过多，讲“更丰富的统计信息”却无法说明医院计算什么、服务器怎样学习及其必要性。
+problem: 即使已有事实、公式和直接前作，科研决策汇报仍可能误将“数值上恢复目标”“风险信号可稳定测量”“真正改善模型训练”“改善科学或临床终点”合成一个方法成功结论；在连续多次算法转向之后仅列出新候选，不解释最初任务、已测过的简单方法、为何转向及为什么当前建议继续研究问题而非再写算法。研究内容本身已经分清时，叙事层仍可能用无信息量的自我评估、反复澄清和统一候选模板掩盖具体机制与决定性缺口。
+project-specific context: MOSAiC、ODAL、COLA、CARE、M&Ms、HAMP、PGFM、CPPM、具体 Dice、医院与日期均属于 DII 研究证据，不能进入通用 Research Authoring 模板。这是对实际回答和研究文稿的用户反馈，未证实由当前正式 research-reporting 插件生成，不判为生产回归。
+observed handling: 当前 DII 已以真实实验记录恢复完整研究沿革，区分局部信息表达保真、独立患者间统计稳定、能否改变训练、是否改善医学目标；未来导师报告应直接说出研究原问题、每轮尝试回答了什么、最强反例和当前科学决定，只有与结论相关的实验进正文。对于候选方法，须用目标受众可以理解的计算—传输—更新机制说明新信息究竟增加了什么，相同信息条件下普通梯度/校准/强算法足够时应明确写出。
+boundary: 属于 research-reporting 的科研证据组织与读者决策叙事；通用措辞修订仍由 Clear Writing 负责。先并入现有 #22 的研究汇报反馈，留给 AI Skills 维护流程评估是否需新增正式通用规则及实际回放；不在项目 thread 直接修改 production SKILL、版本或路由。
+
+#### 2026-10-26：DII 22题选题汇报把科研判断写成内部审查报告
+feedback_status: NEW
+source: 2026-10-26 `Distributed_Imaging_Inference` 第八轮三模型研究汇总；用户要求看到去重后的科研问题、完整排序、每题的学术价值与总体判断，连续指出“连提出的科学问题是什么都不知道”“如果我看不懂，区分原始科学问题和讲述方法的问题”。
+evidence:
+- **失败回答一（科研成果汇总）**：助手先讨论“本轮是否改善”、研究阶段和数学前作，再把候选切成几组；用户随后明确表示，尚不知道候选科学问题具体是什么，无法根据这份汇报选择方向。此处为当前 DII 对话可查的用户反馈。
+- **失败回答二（最初22题正式报告）**：`YuukiAS/Distributed_Imaging_Inference` 的 `docs/research/runs/dii-20261026-r08/01_DEDUP_RANKING_AND_SCIENTIFIC_JUDGMENT_ZH.md`，提交 `54b0a56a9a8ff966489b109a3f7133d6a3fdb839`（对应源内容 blob `3d43053b65d2043c9baae30843a9dcefc8cdb7b3`）。开头先列身份、研究审查和“22不是22项原创方法，也不是22篇论文”等否定性说明；各问题又展示 `G6-2` 等内部作者编号、机械的科研状态和“最大风险/先做什么”。用户要求把22项科学问题本身讲明白、逐项排序评价，并明确反对这类开头。
+problem:
+- 文档首先满足了**任务执行者的去重追踪和学术自我辩护**，却没有把用户要比较的科学问题、既有能力缺口、值得研究的原因和第一项决定性证据组织成可读的选择材料。
+- 报告大量引用内部模型归属、审查阶段和统一填空栏目。这些信息在研究原件中有追溯用途，但出现在读者正文中，会把“一个研究者是否愿意投入几个月”的判断改写成“每轮谁完成了哪些审查”。
+- 用户先后要求重新组织、再明确举出失败开头，说明这是**上游 Research Authoring 读者任务和信息架构**失败；只删掉几个英文词、换标题或增加免责声明无法修复。
+- 现有 `Reader-first advisor report rewriting`、`2026-10-23 DII 科学需求—额外学习能力` 条目已经覆盖一般原则。本条补充可定位的第八轮反例和用户的具体接受任务，供中央维护者做真实回放；**不另造近义永久规则**。
+project-specific context: 29→22 的去重数量、DII 第八轮研究、模型昵称、具体排名、论文与科研结论均属于项目事实；插件层只记录“选题比较报告如何选择证据与组织内容，使研究者能够做出决定”。尚无证据证明正式安装的 Research Authoring 生产入口在这些回答中实际被调用，不将本例标记为已证实插件运行回归。
+
+### Meaning-first rewriting should be a reusable transformation pattern
+status: READY_FOR_PROMOTION
+tracking: #23
+source: successful manual Deep Research rewrite + TRACE v8→v9 language review
+evidence: `共享预训练医学分割模型_极低通信联邦适应_说人话重写版.md`; TRACE v9 revision evidence
+ target layer: planning/prose
+problem: phrase-level cleanup is insufficient when the source prose is built from compressed noun stacks, slash-separated abstractions, audit labels or source-note language.
+candidate_action:
+- Build a claim/terminology map first, then rewrite complete argument units from meaning rather than editing sentence-by-sentence.
+- Preserve literal content only for objects that truly require literal fidelity: numbers, formulas, code identifiers, formal method names, citations. Reader-facing headings, labels and explanatory sentences usually require semantic preservation, not literal preservation.
+- Use the pattern repeatedly validated in the manual rewrite: **plain-language conclusion -> intuition / concrete example -> exact technical detail / formula -> evidence boundary**.
+- When a process is sequential, write it as a sequence. When several alternatives are parallel, use a short list/table. Do not compress everything into one long sentence merely to save space.
+- Remove repeated restatements once the role is clear. TRACE v9 repeatedly improved readability by replacing source-note repetition with one direct explanation and a short takeaway.
+promotion_gate: replay on one additional long-form scientific report and one advisor-facing report.
+
+### Cross-project replay of advisor-facing report rules
+status: CANDIDATE_GENERIC
+tracking: #24
+source: Distributed_Imaging_Inference group-meeting report revision
+evidence: `docs/provenance/RESEARCH_GROUP_MEETING_WRITING_REVIEW_2026_08_29.md`, `skills/writing/research/research-reporting/SKILL.md`, `references/group-meeting-advisor-reports.md`
+target layer: writing/qa
+problem: process-log language, invented time-boxed scripts, repeated result narration and implementation chronology were real user-facing failures; the active skill now contains fixes, but evidence is primarily one real report family.
+candidate_action: replay these rules on the next independent advisor/group-meeting report and only add further rules when a new failure appears.
+promotion_gate: at least one additional independent real report; protect current source-fidelity and claim-evidence behavior.
+
+### Distinguish research-document semantics from comparison/render packaging
+status: CANDIDATE_GENERIC
+tracking: #25
+source: ongoing real research-report use; Clear Writing 055 final user-acceptance comparison failure, 2026-09-17
+evidence: `research-reporting` already delegates low-level artifact mechanics; Clear Writing 055 then produced multiple unusable Original-vs-C6 acceptance artifacts because long-form scientific content was mechanically chunked into misaligned pages and citation/report/gate material was not separated by domain semantics. The generic packaging follow-up is recorded separately in `docs/plugin-todos/workflow-core.md`.
+target layer: research-document planning/qa boundary with workflow-core and artifact/presentation rendering
+problem: A research-document comparison is not only a rendering problem. When a rewrite legitimately reorganizes sections, condenses repeated evidence, converts prose into tables, or moves details between main text and appendix, a generic packager cannot infer correspondence by sentence count or page length. The domain owner must decide which source unit corresponds to which rewritten scientific unit, what evidence/citation material is in scope, and which formulas/tables/code/limitations/future-work blocks must stay coherent. Conversely, Research Authoring should not own slide typography, pagination, clipping, Office/PDF rendering, repo delivery paths, or retry/acceptance-state mechanics.
+candidate_action:
+- For an Original-vs-revised research report/manuscript acceptance surface, define a lightweight **semantic alignment plan** before layout: source section/paragraph group/claim-evidence unit/table/formula/code block/limitation/future-work item -> corresponding candidate unit. This is a planning responsibility, not a new persistent schema by default.
+- Align by scientific meaning rather than character count, sentence count or equal page length. One source unit may map to several candidate units, and several source units may legitimately collapse into one candidate unit when the rewrite removes repetition or reorganizes the argument.
+- Treat scientific tables, formulas, code/path snippets, limitation statements and future-work statements as coherent units. Do not split a table mid-row, a formula across unrelated comparison pages, or detach a limitation/future-work qualifier from the claim it constrains merely to make pages even.
+- Citation/reference handling belongs to research-document semantics. If the user excludes bibliography/reference bulk from the acceptance comparison, omit that bulk from the main review surface, but do not silently strip attribution or citation-bearing context when it changes claim authority, provenance or scientific meaning. Main-text vs appendix/reference handling must follow the frozen user scope.
+- The research comparison surface should contain the research content being judged, not workflow Gate history, paid-review receipts, render-proof pages or internal review packets. Those are workflow evidence unless the user explicitly asks to inspect them.
+- Research Authoring QA should ask whether the revised document's structural transformation is scientifically legitimate: claims/evidence still correspond, decisive experiments are not lost, modality/limitations/future work remain correct, and tables/figures/formulas still play the intended document role. Visual legibility/render correctness remains the artifact/presentation capability's job.
+- Handoff to the artifact layer should be `comparison scope + semantic alignment plan + inclusion/exclusion rules + atomic technical units + allowed structural freedom`; the artifact layer then decides slide/page composition without redefining scientific correspondence.
+- Keep the generic workflow concerns in workflow-core: freezing the acceptance contract, canonical repo delivery, truthful artifact identity, real-open/render evidence, repeat-failure circuit breaker, cost discipline and user handoff.
+promotion_gate: **do not modify the already-reviewed 056 architecture or implementation package for this item. Finish 056 first.** After 056 completes, map what its generic Acceptance Review / Evidence Fidelity / Actual-Surface rules already cover, then replay this domain boundary on one real advisor/report comparison and one manuscript/paper-like comparison. Promote only the residual research-specific semantics; do not duplicate workflow-core or presentation rendering rules.
+
+
+### Advisor/group-meeting reports need method and dataset orientation before project-specific results
+status: NEW
+tracking: #26
+source: Distributed_Imaging_Inference / Supervisor Bridge MOSAiC group-meeting report revision, 2026-09-19
+evidence: DII \`docs/results/SUPERVISOR_BRIDGE_GROUP_MEETING_PRELIMINARY_2026-09-19.md\`; user feedback that an advisor-facing report was not self-contained because it moved too quickly into project execution and omitted a clear explanation of MOSAiC and the two datasets.
+target layer: research-reporting planning / audience model
+problem: A group-meeting report can be scientifically correct yet still assume too much project context. The advisor should not have to infer what a newly introduced paper contributes, why its algorithmic machinery is used, what the datasets contain, or how the current experiment maps those objects into the research question. Starting from internal progress, current pipeline status or a project-specific adaptation before introducing the source method/data makes the report hard to follow and wastes meeting time.
+candidate_action:
+- For a report centered on a newly introduced method/paper, first give the minimum conceptual background required to understand the experiment: original problem, central idea, decisive properties/assumptions, why the main computational device is used, and the boundary of the original claim.
+- For every primary dataset, include a compact reader-facing data card before presenting results: scientific task, modality, patient/case count, real site/centre structure, labels/endpoints, relevant heterogeneity, and the exact subset/client definition used in the current study.
+- Clearly separate **official dataset background** from **the local artifact/current experiment subset** when counts or site coverage differ. Do not collapse “375 cases in the published dataset” and “345 subjects in the locally available artifact” into one number.
+- Explain the translation from source method to the current domain explicitly (e.g. original local likelihood/risk -> frozen segmentation logits -> low-dimensional local imaging risk -> TT message). Do not require the advisor to reconstruct this mapping from implementation details.
+- Keep the orientation section short enough to support the decision story; this is not a literature-review dump. Include only the paper properties and dataset facts needed to understand the experiment and its interpretation.
+promotion_gate: replay on one additional advisor/group-meeting report involving a new method plus at least one unfamiliar dataset; verify that a reader outside the project can understand the experiment before seeing any result.
+
+### Advisor-facing research reports should suppress execution/runtime details unless they change the scientific interpretation
+status: NEW
+tracking: #27
+source: Distributed_Imaging_Inference / Supervisor Bridge preliminary group-meeting report revision, 2026-09-19
+evidence: user rejected a report section explaining why a Longleaf run took longer than estimated; the runtime explanation was useful for internal planning but irrelevant to the advisor-facing scientific discussion.
+target layer: research-reporting inclusion/exclusion planning
+problem: Internal engineering facts are easy to retrieve and often feel concrete, so report writers over-include them. Runtime estimates, queue/allocation state, cache/I/O bottlenecks, job IDs, implementation chronology, why an executor is slower than expected, and similar details do not belong in an advisor-facing group-meeting report unless they create a scientific feasibility result, invalidate evidence, or require an advisor decision.
+candidate_action:
+- Before including an execution detail, ask: **Does this change the scientific claim, feasibility boundary, evidence quality, or decision requested from the advisor?** If not, omit it from the main report.
+- Keep operational diagnostics in internal notes / execution reports. Do not create a “why the run is slow” section merely because the run is ongoing.
+- It is acceptable to state the scientific evidence boundary concisely (“formal comparison is still running”) without narrating compute progress.
+- If computational scalability itself is the scientific question, report the measured complexity/runtime as a result; distinguish that from incidental engineering overhead.
+- Group-meeting main text should prioritize method, data, estimand, comparison, evidence and next scientific decision over implementation status.
+promotion_gate: replay on the next long-running computational research project and confirm that internal execution evidence remains available without contaminating the advisor-facing narrative.
+
+### Advisor reports drafted before experiment completion should freeze the scientific story and leave only bounded result slots
+status: NEW
+tracking: UNASSIGNED
+source: Distributed_Imaging_Inference / reusable-risk advisor report, 2026-10-02
+evidence: DII `deliverables/group_meeting_2026-10-03/group_meeting_report_v1.md` at commit `259c9fcc1821a63533401e402b9b4a6016c58916`; frozen feasibility design and execution goal in `docs/research/2026-10-02_risk_transmission/05_FIRST_REUSABLE_RISK_FEASIBILITY_PROTOCOL.md` and `jobs/GOAL_MMS_FIRST_REUSABLE_RISK_FEASIBILITY_2026-10-02.md`
+target layer: research-reporting planning / evidence-boundary / late-result update
+problem: Advisor-facing reports are often prepared before a bounded experiment finishes. A common failure mode is to make the document look “complete” by filling it with runtime status, execution chronology or speculative interpretation; the opposite failure is to leave the whole report structurally unfinished and then rewrite the narrative after seeing the result. In this real case, the scientific question, loss definitions, experimental role and decision logic were already stable before the GPU result, while only a small set of decision-relevant empirical fields was genuinely unknown.
+candidate_action:
+- When the scientific question and experiment contract are already frozen, author the advisor-facing document around the stable story first: motivation, mathematical object, estimand/loss definition, why the experiment is informative, and the exact interpretation boundary.
+- Represent unfinished evidence with a **bounded result slot**, not a generic “results coming later” section. Predeclare only the small set of quantities or decisions that the finished experiment is allowed to fill.
+- Do not use queue state, runtime progress, job IDs, partial logs or executor chronology to fill missing scientific content. A concise sentence such as “formal result pending QA” is enough unless execution feasibility itself changes the science.
+- Do not invent placeholder numbers, provisional claims, empty decorative figures or anticipated conclusions.
+- After the audited result arrives, patch the bounded result slot and the directly dependent interpretation only. Do not silently rewrite the earlier motivation or method story to make the observed result look inevitable.
+- If the result genuinely invalidates the frozen scientific framing, treat that as a research-design revision and explicitly rebuild the report rather than disguising it as a routine result insertion.
+- Preserve the distinction between **document completeness** and **evidence completeness**: an advisor report can be structurally complete before every number exists, provided the unknown evidence is clearly bounded and the claim strength remains pending.
+promotion_gate: replay on one additional advisor/group-meeting report prepared before a formal experiment completes; verify that late evidence can be inserted without execution-log filler, fabricated provisional claims, or post-hoc restructuring of the scientific story.
+
+### Bilingual advisor reports should be two audience-calibrated versions, not interleaved translation
+status: NEW
+tracking: #28
+source: Distributed_Imaging_Inference / recurring user preference for group-meeting reports, reinforced 2026-09-19
+evidence: DII \`docs/results/SUPERVISOR_BRIDGE_GROUP_MEETING_PRELIMINARY_2026-09-19.md\`; user explicitly requested English in the first half for the advisor and Chinese in the second half for personal preparation.
+target layer: research-reporting document architecture
+problem: When one artifact must serve an English-speaking research audience and the user's own Chinese preparation, line-by-line bilingual text or interleaved translation creates visual clutter and weakens both versions. The English section needs to stand alone as the advisor-facing report; the Chinese section can be more explanatory and can clarify the user's own speaking logic without changing scientific claims.
+candidate_action:
+- When the user explicitly requests this audience split, default to **complete English version first, complete Chinese version second**.
+- The two halves must share the same evidence boundary, numbers, formulas and claim strength, but they do not need sentence-level literal correspondence.
+- English should be concise and presentation-ready for the advisor. Chinese may include additional intuition, speaking cues and “how to understand this result” explanations for the user, while avoiding unsupported new claims.
+- Do not duplicate internal execution details in either half merely because the Chinese half is “for self”; personal preparation still benefits from a scientific decision narrative.
+- Make the audience role explicit in headings so downstream presentation/rendering tools can safely use only the English half when appropriate.
+promotion_gate: replay on two independent bilingual research reports and confirm semantic parity without literal translation artifacts.
+
+
+
+### Formula display and notation should follow scientific role, not a blanket inline/block rule
+status: NEW
+tracking: UNASSIGNED
+source: Distributed_Imaging_Inference / advisor-report PDF review, 2026-10-02
+evidence: DII \`deliverables/group_meeting_2026-10-03/group_meeting_report_v1.pdf\` rendered from commit \`259c9fcc1821a63533401e402b9b4a6016c58916\`; user feedback that key formulas were visually buried while difficult calligraphic notation reduced readability; revised source in DII commit \`53c910c060782ecb1e925f35cf232462654adfd4\`
+target layer: research-reporting document semantics / mathematical presentation / QA
+problem:
+- A previous anti-overuse correction pushed too many formulas into running prose. This made scientifically decisive definitions such as the centre empirical risk, cross-entropy, Dice and global Dice visually indistinguishable from ordinary notation.
+- The opposite extreme is also wrong: turning every mathematical fragment into a display equation creates unnecessary vertical breaks and destroys reading flow.
+- Decorative or difficult-to-distinguish mathematical symbols can further reduce readability in advisor-facing documents. Calligraphic symbols such as \(\mathcal V\) are inappropriate when a plain symbol such as \(V\) carries the same meaning.
+candidate_action:
+- Decide inline versus display from the **scientific role of the formula**, not from formula length alone and not from a global “prefer inline” or “prefer display” rule.
+- Use a display equation when the formula defines a central estimand, objective, model map, theorem-level relation, or other mathematical object that the reader must notice and return to.
+- Keep short definitions, parameter values, simple equalities, and one-step relations inline when they are subordinate to the prose.
+- **Never isolate a single symbol or trivial fragment such as \(x\), \(\theta\), \(n\), \(p\), \(t=0\), or \(r=5\) as a display equation.** A display equation must carry a complete mathematical statement or definition with independent reading value.
+- Avoid ornamental, calligraphic, script or otherwise hard-to-recognize notation in advisor-facing research artifacts when an ordinary Latin or Greek symbol is sufficient. Prefer \(V\) to \(\mathcal V\), and short named quantities such as \(D_{\mathrm{fg}}\) to visually dense constructions such as long textual subscripts.
+- Preserve established notation when it has genuine mathematical meaning or is required by a cited theorem/method; do not simplify notation in a way that changes semantics.
+- Research Authoring should decide **which formulas deserve emphasis and which notation is reader-appropriate**. The low-level renderer owns font embedding, spacing and actual equation layout after that semantic decision is fixed.
+promotion_gate: replay on one additional advisor-facing mathematical report and one manuscript-like artifact; confirm that important formulas are easy to locate, routine symbols stay inline, and notation simplification does not alter meaning.
+
+### Advisor-facing reports should separate reader-facing sources from internal authoring provenance
+status: NEW
+tracking: UNASSIGNED
+source: Distributed_Imaging_Inference / advisor-report PDF review, 2026-10-02
+evidence: the first rendered DII advisor PDF placed repository paths, internal source notes and authoring reminders on its final page together with real references; after review, public-facing references were kept in the report while internal paths were moved to \`deliverables/group_meeting_2026-10-03/group_meeting_report_v1_sources.md\`
+target layer: research-reporting inclusion/exclusion planning / provenance boundary
+problem:
+- Internal source tracking is useful for authorship and reproducibility, but it is not automatically useful to an advisor reading the scientific argument.
+- Repository paths, canonical filenames, rendering instructions, update reminders and “fill this after QA” notes can make a finished research report look like an internal export rather than a deliberate advisor-facing document.
+- Genuine literature references and evidence sources needed to evaluate the scientific claims must remain visible; the problem is mixing those reader-facing sources with author-only tracking material.
+candidate_action:
+- In an advisor-facing report, keep only sources that the reader may reasonably need to understand, verify or follow the scientific argument: papers, datasets, externally meaningful reports, and concise evidence references.
+- Move author-only material such as repository paths, internal filenames, canonical-source locators, rendering instructions, future-edit reminders and update rules into a companion provenance/source file or machine-readable metadata.
+- Do not expose internal research-management traces merely because they are available in the source Markdown.
+- Do not remove attribution that changes claim authority. If an internal artifact itself is the scientific evidence the advisor needs to inspect, reference it in a reader-facing form rather than hiding it.
+- The final artifact should not contain author instructions such as “insert results after QA” unless the user explicitly wants that workflow state visible.
+promotion_gate: replay on one additional advisor report and one formal manuscript/supplement workflow; verify that internal provenance remains recoverable without appearing as reader-facing scientific content.
+
+### Final research artifacts must be surfaced as actual user-openable/downloadable deliverables
+status: NEW
+tracking: #29
+source: STAT5060 Tutorial 1 Rich Edition final handoff, 2026-10-01
+evidence: `YuukiAS/STAT5060-TA` commit `511fddfda9721f00c1d8bdb3774d9a17f37c3e95` successfully produced the canonical Rich Edition PDF and full provenance/QA evidence, but the executor-facing completion report exposed repository paths/status rather than an immediate user-openable/downloadable artifact surface; the user then had to ask whether the PDF had actually been produced and how to get it.
+target layer: research-reporting -> artifact/workflow handoff -> user delivery
+problem: A canonical repository path, checksum and PASS receipt prove provenance but do not complete user delivery. When Research Authoring produces or delegates a PDF/DOCX/LaTeX artifact, the final handoff should surface the actual finished file through the host's supported attachment/file-card/download/open mechanism whenever available, while still reporting the canonical repo path/hash separately. Research Authoring should not reimplement transport or renderer mechanics, but its delivery contract must not treat a path-only response as equivalent to handing the document to the user.
+candidate_action:
+- Add a user-delivery requirement to the Research Authoring artifact handoff: `canonical identity + real artifact surface + concise open/save instruction only when needed`.
+- Prefer the host's native attachment/file reference or equivalent clickable artifact surface. Do not merely print a filesystem/repository path when a real file has been created and can be surfaced.
+- Keep provenance separate: canonical repo path, commit and SHA remain useful evidence, but they supplement rather than replace the user-facing deliverable.
+- If the current execution environment genuinely cannot expose the file directly, say so explicitly and use the nearest supported materialization/handoff mechanism; do not report a path-only artifact as fully delivered.
+- Keep low-level delivery implementation in workflow/artifact infrastructure. Research Authoring owns the requirement that a requested finished research document reaches the user as an actual artifact.
+promotion_gate: replay on one formal research-report PDF and one editable/office-style research deliverable; verify that the user can open/save the finished artifact directly without needing a second message asking where the file is.
+
+
+### Student-facing assessment documents need a minimum-sufficient information budget
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 Project Guide annotated-PDF revision, 2026-10-07
+evidence: user annotated the two-page Project Guide candidate with 14 Highlights and 6 StrikeOuts after prior Research Authoring review; repeated feedback removed duplicated deadline language, extra page-policy detail, package-engineering explanation, universal model-selection explanation, redundant AI-policy prose, and unrelated privacy/policy detail while preserving the actual statistical task.
+target layer: student-assessment planning / source-to-reader filtering / annotation handling / QA
+problem:
+- Student-facing assessment artifacts repeatedly accumulate true but unnecessary information because authoring optimizes for completeness of the source bundle instead of minimum information needed for correct student action.
+- The same rule is often repeated in metadata, a date table, and later prose (for example a hard deadline), increasing cognitive load without changing student action.
+- When a user marks text with StrikeOut, later authoring can mistakenly “repair” or paraphrase it instead of treating the deletion itself as a binding reader-facing decision.
+- Detailed implementation/package instructions, grading rationale, edge cases, and internal reasoning can leak into a student Guide merely because they are useful to instructors or QA.
+candidate_action:
+- Add an explicit **minimum-sufficient student information budget** to student-assessment authoring: include a fact only when it changes what the student must do, submit, understand, or avoid.
+- For each student-visible sentence, ask: **If this sentence is removed, can the intended student still complete the assessment correctly?** If yes, default to omission unless the sentence materially improves ambiguity, fairness, or safety.
+- Give each administrative rule one canonical visible home. Do not repeat the same due date, hard-deadline consequence, page limit, file requirement, or policy in metadata, tables, and prose unless the second occurrence serves a genuinely different action.
+- Treat raw PDF annotations as authoritative revision input. **StrikeOut means delete, not paraphrase.** Highlight comments constrain the selected region. A deleted sentence cannot return elsewhere under new wording without an explicit new human decision.
+- Distinguish **statistical task completeness** from **administrative completeness**. Preserve source-emphasized research question, model formulation, statistical inference, analysis, findings, conclusions, references, and required deliverables; aggressively compress implementation and process detail.
+- Do not make student-facing documents explain internal rubric logic, QA mechanics, package engineering, or every exception merely because these are needed by graders or executors.
+- Add a deterministic duplication check for high-salience rules such as due date, hard deadline, page limit, file count, and named required statements. The intended occurrence count should be frozen by the Planner rather than inferred by the renderer.
+- In annotated-document revisions, require a compact annotation ledger with counts by annotation type and an explicit disposition for every Highlight and StrikeOut before rendering.
+- **Cumulative annotation replay must cross rounds, not only the latest PDF.** Before authoring a new annotated revision, reread every still-active Highlight/StrikeOut from prior rounds, mark supersession explicitly, and verify that a locally correct new edit does not resurrect an older rejected phrase or erase an earlier accepted sentence. A latest-round annotation ledger is insufficient without the cumulative lifecycle view.
+- When the user says a previous version had better wording, recover that exact accepted wording/history before drafting a replacement; do not reconstruct it from memory or let an executor improvise.
+promotion_gate: replay on one additional annotated Homework/Project revision and one new student-facing assessment artifact; verify that student action remains complete while duplicate/irrelevant administrative prose decreases and no StrikeOut content recurs.
+
+
+### Student-assessment typography should allow a bounded rendered size range and preserve successful positive samples
+status: SUCCESS_SAMPLE_ACCEPTED
+tracking: UNASSIGNED
+source: STAT5060 Project Guide V6 12pt user acceptance, 2026-10-07
+evidence: private user-provided `Project-V6-12pt.pdf`, SHA256 `07978fe3cff3565663646e4d4c062df448d715c7ede44d3171e9a2f62cb70296` (2-page A4; not copied into the public repository), plus `YuukiAS/STAT5060-TA/docs/review/STAT5060_PROJECT_GUIDE_USER_ACCEPTANCE_V12.md`. The user explicitly accepted this version as the successful Project Guide baseline after cumulative annotation replay. At 12pt body text, the first page remains dense but readable and the second page has intentional rather than accidental whitespace; the larger body text improves reading comfort without forcing a third page.
+target layer: student-assessment visual planning / positive-baseline registry / rendered review
+problem:
+- A single globally hard-coded body font size is too rigid for short student-facing assessment documents. The visually best size depends on content length, page count, document family, title hierarchy and the amount of natural whitespace.
+- Earlier recovery work showed the opposite failure as well: font-size changes can invalidate pagination controls, so an executor must not freely shrink or enlarge text after seeing the render.
+- A successful artifact can be lost if it is treated only as the latest candidate rather than registered as a positive sample with the characteristics that made it work.
+candidate_action:
+- Allow the Planner to freeze a **bounded typography candidate set** rather than one exact body size when typography is still genuinely open. For a restrained A4 assessment handout, a task may for example permit `11pt / 11.5pt / 12pt`; the exact range is document-family specific, not a universal constant.
+- Hold copy, margins, typeface family, title hierarchy and information architecture fixed while comparing the permitted body sizes. Do not use font-size reduction as a hidden page-count repair.
+- Run deterministic checks first, then let fresh rendered review choose among already-valid size candidates based on legibility, hierarchy, paragraph rhythm, page balance and reading effort. Occupancy/density remains diagnostic rather than a universal hard gate.
+- Any body-size/leading change automatically reopens dependent pagination controls such as `Needspace`, keep-together rules and manual break hints, consistent with the existing non-recurrence amendment.
+- Positive-baseline metadata should record the accepted artifact plus the relevant typography envelope: page size, margins, body size/leading, title sizes, page count and any intentionally accepted whitespace pattern.
+- Treat the STAT5060 Project Guide V6 12pt PDF as a **successful positive sample** for concise postgraduate student-facing assessment guides: short two-page A4 artifact, restrained academic styling, clear title/due-date hierarchy, minimum-sufficient administrative detail, and statistical-task language dominant over policy/process language.
+- Do not generalize its information architecture to Homework or other artifact families; reuse the principles and visual calibration, not the exact layout.
+promotion_gate: replay the bounded-size selection on one additional student-facing assessment document and verify that the chosen size is selected by independent rendered review without changing approved copy, margins or page-count semantics.
+
+
+### Human-facing assessment PDFs must pass a rendered-output hygiene gate, not only source-copy review
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 Project final-consolidation Clear Writing review, 2026-10-08
+evidence: the six human-facing Project PDFs passed source-level Clear Writing and semantic audits, but Chromium rendering inserted a current timestamp, candidate filename/title header, and a local `file:///users/a/e/aereinh/...` source path on every page. The English Question Bank also rendered its title twice because document metadata and an H1 both became visible. The Chinese Written Marking Guide still exposed machine-schema fields and malformed mixed-language text despite a source-level language PASS.
+target layer: student-assessment / instructor-assessment rendering / Clear Writing QA / release-readiness
+problem:
+- Source Markdown can be reader-facing while the rendered PDF leaks browser-generated headers/footers, local filesystem paths, timestamps, candidate filenames, URLs, or duplicated metadata.
+- A source-level Clear Writing PASS can miss renderer-added text because that text did not exist in the source.
+- Text-search gates that look only for a small fixed blacklist can PASS while other machine-facing strings remain visible, such as schema field names, enum values, local-path syntax, seeds, or malformed bilingual fragments.
+- Human-facing instructor documents can accidentally include machine grading schema blocks simply because the source bundle contains them.
+candidate_action:
+- Add a **rendered-output hygiene gate** after PDF generation and before rendered-review PASS. Extract text from the final PDF and fail on local/environment leakage such as `file://`, `/users/`, `/overflow/`, `localhost`, temporary build paths, source filenames, candidate filenames, or unintended current date/time headers.
+- For Chromium/browser PDF routes, explicitly disable print headers and footers (for example `displayHeaderFooter=false` or the renderer-equivalent). Never rely on browser defaults.
+- Add a title-occurrence check so YAML/HTML metadata plus visible H1 cannot silently create duplicated document titles.
+- Inspect the top and bottom page margins visually on every page; browser-generated date/title/path/page-number furniture is a P1 release blocker even when body content is correct.
+- Run Clear Writing / reader-facing review on the **rendered text layer as well as the source layer**. Source-copy PASS must not override a rendered artifact containing machine or environment traces.
+- Separate human-facing rubric prose from machine schema. Raw field names, enum dumps, seed strings, local storage paths, repository instructions, and machine-only selection/log structures stay in supporting files unless the human marker genuinely needs them.
+- For bilingual outputs, add a post-render scan for malformed mixed-language artifacts and token-splicing (for example accidental fragments like `状态ment`, `目标ed check`, or untranslated field-name suffixes) rather than checking only a predefined blacklist.
+- Require the final rendered Reviewer to read representative full sentences from each page family, not merely confirm page count, clipping, and a handful of forbidden tokens.
+promotion_gate: replay on one additional student-facing PDF and one instructor-facing rubric/examiner PDF rendered through HTML/Chromium; verify zero local-path/timestamp/header leakage, no duplicate title, and no machine-schema text in the normal human reading flow.
+
+
+### Fixed presentation-question banks need applicability-aware selection and question-specific examiner keys
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 Project public question bank + examiner key review, 2026-10-08
+evidence: a public fixed bank correctly grouped questions by model family, but several questions only applied to a subtype or analysis state (for example a GLMM-only link/distribution question, a random-slope-only question, an offset/standardization question, a mixed-HMM/HMLVM extension question, or questions requiring fitted results). The mechanical rotation operated at model-family level only. The internal examiner key also contained templated cross-question and cross-family prose, including at least one mixed-membership answer key that incorrectly described exposure/mediator structure from the mediation chapter.
+target layer: student-assessment / oral-presentation question-bank authoring / examiner-key QA
+problem:
+- A fixed/public bank is not fair merely because selection is mechanical. A mechanically selected question can still be inapplicable to the student's actual submodel, included components, or work-in-progress state.
+- Model-family classification is often too coarse to define the eligible question pool.
+- Template-generated examiner keys can look structurally complete while the expected answer does not actually answer the corresponding public question, or contains copied concepts from another method family.
+candidate_action:
+- Give every question a machine/internal **applicability predicate** before mechanical selection, for example required model subtype, required component, required fitted-result availability, or `ALWAYS_APPLICABLE`.
+- Apply the rule in the order: `identify model family -> filter to applicable questions -> mechanically select within the applicable Q1/Q2 pools`. Never draw first and then improvise a replacement because the question does not fit.
+- The public bank should explain any material applicability condition in reader-facing language when students need it; internal predicates may remain machine-readable.
+- Work-in-progress presentations must always have a predeclared result-independent Q2 fallback pool so lack of final numerical results never creates ad hoc examiner discretion.
+- Require a deterministic cross-check that each examiner-key entry has the same Question ID/text and that its `what this tests` / expected-core content is semantically specific to that exact question.
+- Add a cross-family contamination scan: examiner-key text for one model family must not contain concepts unique to another family unless the public question itself requires that comparison.
+- During independent review, sample every question-key pair, not only the public question wording or source map. A source-fidelity PASS for the public bank does not validate the examiner key.
+promotion_gate: replay on one additional fixed oral/presentation bank with subtype-conditional questions; verify that all selected questions are applicable by construction and that no examiner-key entry contains copied content from another question or model family.
+
+
+### Student-assessment PDF production must delegate to the canonical renderer and fail closed on browser fallback
+status: NEW
+tracking: UNASSIGNED
+source: STAT5060 Project final-consolidation PDF regression, 2026-10-08
+evidence: Research Authoring produced human-facing assessment PDFs through a Chromium/browser print route even though the repository already had the canonical `render-chinese-math-pdf` companion and Research Authoring's own reporting contract requires delegation to it. The resulting PDFs exposed browser timestamps, source filenames, and `file:///users/...` paths. This duplicated a previously known scientific-PDF failure mode where browser rendering bypassed the declared Pandoc/XeLaTeX production route.
+target layer: student-assessment production / artifact handoff / renderer routing
+problem:
+- Research Authoring can stabilize content correctly yet hand PDF production to an ad hoc browser/HTML path, bypassing the installed renderer skill.
+- Browser/Chromium output may leak environment paths and timestamps, use a different typography engine, and silently diverge from the accepted course/document family.
+- A downstream rendered-review gate is too late if the production route itself violated the declared renderer authority.
+candidate_action:
+- For formal assessment PDFs, bind the production route before rendering: Research Authoring owns semantics; `render-chinese-math-pdf` owns PDF mechanics.
+- Invoke the installed canonical renderer explicitly and record its route/identity receipt. Default production is Pandoc -> LaTeX -> XeLaTeX (or the renderer skill's current canonical route); native TeX follows the renderer's direct-TeX rule.
+- Browser/Chromium rendering is diagnostic only. It must never satisfy the production gate or become an automatic fallback.
+- If the renderer companion is unavailable or its required fonts/TeX dependencies are missing, fail closed with the exact dependency blocker. Do not substitute `wkhtmltopdf`, Chromium print-to-PDF, ad hoc HTML, or a local one-off template and report PASS.
+- Preserve the accepted artifact's paper size, typography family, margins and pagination contract as resolved renderer profile inputs rather than recreating them in a second rendering stack.
+- Add a deterministic producer/engine check to final assessment PDF QA so a browser-generated PDF cannot pass when the frozen route requires the canonical renderer.
+promotion_gate: replay on one bilingual instructor rubric and one student-facing assessment handout; require canonical renderer receipts, non-browser producer identity, no local-path/timestamp leakage, and independent all-pages visual PASS.
+
+## Recently promoted / established
+
+- Advisor-facing reports organize around scientific question and decision, not run/debug chronology.
+- Internal audit/PASS/commit/job state belongs outside the scientific main narrative.
+- Minor corrections are folded into the final method when they define the valid analysis.
+- No invented 30-second/3-minute/elevator scripts without explicit user request.
+- Tables carry exact values; prose interprets rather than repeats every cell.
+- Limited evidence uses conditional conclusions rather than dramatic claims.
+
+## Do not do
+
+- Do not create a second generic “humanizer” skill for these report rules.
+- Do not move repo execution logs into advisor-facing prose just because they are easy to retrieve.
+- Do not equate source fidelity with preserving source organization, headings or internal experiment vocabulary.
+- Do not make an advisor learn project-internal tokens before they can understand the scientific argument.
+
+### Frozen assessment artifacts regress under bounded edits: HW1 full release and Final Project guide
+status: NEW
+source: `YuukiAS/STAT5060-TA` / STAT5060 2026–27 HW1 five-artifact student/instructor/final-review release, user feedback 2026-10-08
+evidence:
+- The user identified `STAT5060_HW1_Solution_R_Annotated.pdf` as the already acceptable seven-page R-route solution baseline and repeatedly instructed the executor not to damage correctly accepted content or presentation.
+- In the executor's quoted incident acknowledgment, Codex stated that it regenerated the whole solution through the Markdown/render route, expanded the R solution from seven to nine pages, and put the unapproved result in `final-release/`. This is a user-supplied incident account and executor acknowledgment; the exact input/output PDF bytes, hashes, branch commit and actual renderer diff have not been independently verified for this TODO intake.
+- The bounded requests concerned the solution header/meta text and student-style alignment, Q2(b) indentation and bullet formatting, and producing downloadable R and Python solution PDFs; several header/meta features had already been correct in the accepted annotated baseline.
+- Further primary user-provided timeline (2026-10-08, 19:08–21:35): the final bounded repair Goal explicitly prohibited changing six-question student wording, hints, or marks. The user then authorized only the Q2(b) student/instructor alignment and Poisson/negative-binomial bullet formatting, again saying other frozen material must not change. The 19:44 executor summary reported the student PDF had changed for Q2(b), but did not disclose removed hints. At 21:19–21:24 Codex acknowledged that it had **deliberately filtered `\\hwHint{...}` from the student TeX** when deriving a release student PDF from the hint candidate, misapplying an earlier context-local "remove hint" instruction meant for the instructor-answer layout. It acknowledged propagating the no-Hint output through release/Blackboard packaging despite subsequent explicit preservation instructions. At 21:26–21:35 Codex also acknowledged replacing two previously accepted seven-page instructor solutions with nine-page re-renders; its final search claimed no complete set of five correct existing files could be found. All of these execution details are user-supplied transcript and executor statements; the live worktree files/diffs and exhaustive local repository search have not been independently accessed.
+- Scope nuance: the original 19:08 Goal **did permit modest, justified semantic-pagination changes** to instructor solutions (seven pages was not a universal hard limit), and the subsequent Q2(b) reformatting was authorized. Thus page-count change alone is not a sufficient failure test. The regression is the reported degraded full-page composition, missing positive-baseline comparison, and promotion of an unaccepted candidate. By contrast, removing six student Hints is a substantive scope violation under an explicit content freeze, not a permissible consequence of Q2(b) layout work.
+- Failure propagation: the 19:44 numerical/semantic-PASS self-report, subsequent student-ZIP contents/openability checks, and SHA256 release manifests did not establish content parity with accepted source/artifacts. Hashes attest to the packaged bytes, not that the right user-approved bytes were selected. A package-only edit reused a prior no-Hint student PDF and incorrect instructor PDFs. Any investigation must inspect (1) student-source derivation/filter steps and exact Hint text/placement parity, (2) accepted R/Python solution source and whole-document render deltas, (3) candidate-to-`final-release/` selection and promotion guards, and (4) whether declared Research Authoring contracts were actually consumed by the Codex execution entry. Do not mistake the lack of committed remote artifacts for proof of deletion: the transcript repeatedly states these products were not pushed.
+- Additional user-supplied chronological excerpt (2026-10-08, 17:47–19:04): at 17:47 the user requested the solution header say only `Solution`, and the executor reported both R/Python PDFs corrected; at 17:48 the user issued a separate tightly scoped **student-package** polishing/repackaging request that expressly prohibited instructor-solution changes; at 18:06 the user identified missing visual alignment with the student PDF (italic year/term and heading spacing), and the executor reported another R/Python solution repair; at 18:15 the user had to ask it to resume the student-package request; at 19:04 the executor reported the rebuilt student ZIP and smoke-result fields. The 18:06 user instruction explicitly allowed that bounded instructor-header repair despite the 17:48 student-package exclusion; **do not falsely classify the 18:06 repair alone as unauthorized instructor-solution editing**. The 19:04 PASS fields are executor claims, not independent rendered/diff evidence. This excerpt by itself does not show the subsequent seven-to-nine-page change; that claim comes from the separately supplied executor incident acknowledgment above.
+problem:
+- Second real-use failure, 2026-10-08 Final Project: the user reports that a previously accepted two-page student Project Guide became three pages after a change limited to submission filenames. The supplied `STAT5060_Final_Project.pdf` was directly inspected: it is an A4 three-page PDF, with only the short introduction to further AI/academic-honesty guidance and two guidance links on its third page. The accepted two-page Project Guide positive sample had already been recorded under `Student-assessment typography should allow a bounded rendered size range and preserve successful positive samples`; this new three-page artifact and its user-reported trigger show that accepted page composition can regress again under a tiny text delta. The source-level causal diff against the accepted two-page PDF was not accessible in this intake; do not assert that changing the filenames alone definitively caused the spill without comparing those exact candidates.
+- Third related case: the user reports that accepted HW1 student handout pagination drifted from three to four pages after narrow formatting work, and the user had to supply precise Q4(a)/Q4(b) page placements and layout guard diagnoses to recover the three-page arrangement. A subsequent executor self-report said three pages were restored. This is a user-supplied run report rather than independently inspected final corrected bytes.
+- Explicit user capability requirement: **one ordinary natural-language edit request must automatically activate an existing-artifact preservation gate**, without requiring the user to restate page count, style, history, prior accepted locks, or checking instructions every time. Baseline authority must be recovered from actual accepted source + artifact, not from whichever generated PDF is newest. The normal production/edit entry must derive the minimal authorized delta, compare before/after semantic content and rendered layout, and reject unintended page-count changes, overflow, style drift, missing Hints, changed formulas/figures and unrelated-file mutations. Do not make a universal hard page count: distinguish a rename/layout-neutral edit from an explicitly authorized restructuring, and escalate substantive dependent reflow to independent review rather than auto-restyling.
+- Enforcement boundary: **a gate merely mentioned in instructions, produced as a self-reported PASS field, or run only during optional final QA is not sufficient**. Verify the actual normal consumer, immutable accepted baseline location, candidate-only editing, independently enforced before/after checks and controlled release promotion. Packaging-only operations must preserve all unrelated artifact bytes. If the verifier, accepted baseline or comparison is unavailable, keep the prior accepted release intact and fail closed; do not make the user reconstruct history or paginate pages manually. Prefer extending existing Research Authoring / assessment consumer and renderer/QA tools, not another policy layer, long ledger, or new top-level plugin. Share the pattern with Presentations/software only after separately confirming their native render/behavior checks.
+- Full five-artifact release-set failure, as described in the user's 21:31–21:35 transcript and the executor's last inventory (not independently verified against the local worktree): (1) `STAT5060_HW1.pdf`: current `final-release/` omitted all six accepted Hints; a separately generated with-Hints recovery candidate existed but was not the accepted production baseline. (2) `STAT5060_HW1_STUDENT_PACKAGE.zip`: the executor found a plausibly correct latest polished resource ZIP; this **does not compensate** for the broken handout, solutions or bundle. (3) `STAT5060_HW1_Solution_R.pdf` and (4) `STAT5060_HW1_Solution_Python.pdf`: previously accepted seven-page visual baseline was replaced by unsatisfactory nine-page full re-renders; the earlier seven-page V4 copies reportedly still contained the superseded `Instructor Solution` header/extra meta lines, so those copies were not an exact five-artifact-ready final set either. (5) `STAT5060_HW1_FINAL_RELEASE_REVIEW_BUNDLE_V5.zip`: packaged the no-Hint student PDF and both nine-page solutions, so the review bundle inherited invalid component identity. The executor's own final inventory concluded `ALL_5_CORRECT_EXIST_IN_REPO = NO` for the exact existing-files-only search, not that all historical files were irrecoverably erased.
+- The user repeatedly protected **both audiences and the complete release set**: student question wording/Hints/marks were frozen, R/Python answer content and already-good academic style were to survive bounded fixes, and packaging-only meant selecting and verifying correct existing artifacts rather than regenerating their bodies. The user ultimately forbade any new generation and demanded discovery of five independently correct existing files, demonstrating that preserving trustworthy approved outputs and maintaining exact release-set integrity—not just fixing one Hint or one page count—was the unmet product requirement.
+- The failure occurred *after repeated explicit user instructions to preserve already-good material*. The executor treated a narrow repair as authority for full-document reflow, lost the accepted page-flow/visual baseline, and promoted an unaccepted candidate to the release directory. The user then had to discover regressions by inspecting the artifact.
+- This failure class is **already explicitly covered** by the active Research Authoring student-assessment contracts: `student-assessment-delivery-closure-amendment-v1.md` §§4, 9–11 (positive baseline, bounded changes, user-review budget, incident mode, closure); `student-assessment-cumulative-acceptance-contract.md` Gates I, N, O, S (change allowlist, zero unrelated source/render changes, monotonic revision, full final-candidate regression, unmarked-content preservation); and `student-assessment-hw1-nonrecurrence-amendment-v1.md` §§11–12 (incident escalation and user-facing review protection).
+- Therefore do not add another synonymous "do not change accepted content" policy and do not assume the mere existence of rules proves they were consumed. A central maintainer must establish which actual HW1 executor entry loaded the active contracts, what baseline identity and permitted edit scope reached the renderer, why unrelated pagination was not caught or escalated, and how an unaccepted artifact reached `final-release/`. Distinguish an intentionally necessary full-source compilation from an **unauthorized change to the full rendered artifact**.
+project-specific context: the original seven-page layout, R/Python route names, Q2(b) list details, header wording and local `final-release/` structure belong to STAT5060 HW1. Seven pages is an accepted *case-specific baseline*, not a universal page-count rule for research/assessment PDFs. This raw feedback does not modify the ongoing 059 frozen implementation plan, approve a new plugin design, or claim a verified fix.
+
+### 私有技术讲解的正文组织未满足读者需求
+status: NEW
+source: 该项目的技术讲解返修反馈，2026-11-11。
+evidence: 被拒稿件原文留在私有项目仓库，此处不保存。
+problem: 正文先讲内部实现与历史记录，关键定义和说明分散在后文，读者无法顺着文章建立完整理解。需要先明确读者要解决的问题，集中说明必要定义，再展开计算或实现；相关对象应就近比较。常规章节用直接说明内容和用途的标题，避免把整篇技术说明写成连续问答。这里仅保留文档组织问题，不保存公式、模型细节或仓库定位。
+
+### 单篇论文相关性判断必须先做“当前项目基线 → 论文实际增量”比较
+status: NEW
+source: UK Biobank CMR / 用户提供一篇 Systems Cardiology 论文后询问“和 Reliable Imaging Inference、foundation model 构想有什么关系”，2026-11-14
+evidence: 真实对话中，assistant 已能读懂论文，也掌握当前项目长期路线，却连续多轮把论文内容、既有研究计划和新增方向混在一起解释；随后还把未收敛的理解写入 `YuukiAS/CardiacNexus` 与 `YuukiAS/Reliable_Imaging_Inference` 的根级 TODO，之后需要撤回。
+target layer: `research-authoring / literature-review` / single-paper deep reading / project-relative synthesis
+problem:
+- 当前 `literature-review` 已覆盖单篇精读、claim-evidence、方法重建、局限、与既有工作的联系和 candidate research ideas，但缺少一个稳定的 **project-relative delta** 步骤。
+- 当用户已经有明确研究路线，再问“一篇新论文对我们有什么用”时，模型容易重新总结论文和整个项目，把项目里早已存在的方向重新包装成论文带来的新启发。
+- 这会直接损害科研判断：用户需要知道“这篇论文实际改变了什么”，却被迫自己从长篇解释里区分已有内容和新增内容。
+- 更危险的失败是把尚未压缩清楚的论文解读提前固化进项目 README/TODO，使一次阅读讨论污染长期路线记录。
+
+candidate_action:
+- 为单篇论文精读增加一个可复用的“项目相关性 / 研究增量”子流程。当用户问“对我有什么用”“和我们现有计划什么关系”“要不要改路线”等问题时默认触发。
+- 先读取或恢复当前项目已经确定的研究基线，只提取与该论文相关的部分；基线可以来自当前对话、Project instructions、项目 README/roadmap、已确认研究计划或用户提供的现有文档。
+- 内部先完成最小对照：**已有内容 / 论文新增内容 / 论文只是提供更好的 framing 或证据 / 与现有计划冲突的内容 / 实际会改变的近期或长期动作**。
+- 最终回答第一段直接交付实际增量，例如：“这篇真正新增 X；Y、Z 已经在现有计划里；因此近期不变，中长期只改 A。”不要把完整论文摘要或完整项目路线重新讲一遍。
+- 论文中的 future directions、宏大框架和作者愿景不能自动记为用户项目的新方向。只有相对现有基线确有新增、且会改变理解或行动的内容才进入建议。
+- 当论文主要提供命名、医学解释框架或上层叙事，而没有新增执行任务时，明确写成“framing 增量”，不要造出新的平行研究主线。
+- 将“对项目是否有用”与“论文是否有趣/重要”分开判断。高影响力、宏大或前沿的论文也可能对当前项目只产生很小增量。
+- 在用户要求写回项目仓库前增加一道收敛检查：先用人话说清楚实际增量和拟修改项；只有已经收敛的项目级变化才写入长期 README/TODO。论文阅读过程中的候选解释留在阅读记录或对话中。
+- 回归测试至少覆盖：一篇论文 80% 内容与既有路线重叠、只新增一个方向；一篇论文只提供新的 framing；一篇论文真正推翻现有假设；一篇论文很重要但对当前项目没有行动增量。测试要求最终回答能明确区分这四种情况。
+
+project-specific context: Systems Cardiology、多器官心血管状态、CardiacNexus、Reliable Imaging Inference、foundation representation 等具体科学内容属于本次 UK Biobank CMR 案例，只作为回归证据，不进入通用规则。
+
+promotion_gate: 在后续真实“用户甩一篇论文并问对当前研究有什么用”的任务中，回答应在第一段直接说清论文相对当前项目的实际增量，并能明确区分已有计划、真正新增、仅提供 framing、以及是否需要修改近期/长期路线；用户不需要继续追问“所以到底多了什么”。
+
+#### 2026-11-25：给导师的短报告写成了审计汇总（区间、人次合计、出处清单）
+feedback_status: NEW
+source: CardiacNexus（UKB 心脏 MRI 表型流程）缺失数据说明。导师只问"为什么这么多缺失"，用户要发几句话加一份短附件。
+evidence: 私有仓库 `YuukiAS/CardiacNexus`，`docs/audits/2026-11-25_supervisor_summary/`：被否决稿现存为 `DETAIL_ZH.md`，重写稿为 `SUMMARY_ZH.md`（提交 `667a0d6`）。
+problem:
+- 稿件按审计报告写：每个数字附 95% 区间、跨表加总的"人次"、12 行 × 8 列全表、18 组上界区间、逐条出处链接。导师不需要也不会看这些，反而读不出三件事：原因是什么、能补多少、多久补完。
+- "数据为主、表格为主、不道歉"的要求被理解成"把所有数字都放进去"。
+- 交付前没有从导师视角通读一遍。
+observed handling: 重写为一页：一段原因；一张只含"现在有值 / 补齐后约 / 处理方式"三列的表，数字取整到千人；一句组 N 变化；三条时间计划。区间、出处、方法细节、失败类型分布留在内部详版。
+candidate action: research-reporting 对"短报告 / 状态说明"类导师文档增加读者契约：先列出导师要回答的 2–3 个问题，只保留回答这些问题必需的数字；默认不放置信区间、出处清单、内部文件路径和跨对象合计；详版另存，不进正文。交付前做一次"导师视角通读"：每一行是否回答了导师的问题？
+project-specific context: 缺失原因、模态与数字属于该项目；本条记录真实用户反馈，未证实调用了正式插件，不认定为插件运行回归。

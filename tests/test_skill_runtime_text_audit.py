@@ -19,7 +19,7 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
         self.assertIn("应交给 `product-ui-copy`", text)
 
     def test_generated_plugin_exposes_chinese_final_pass_trigger(self):
-        text = (REPO_ROOT / "plugins/codex/plugins/writing-style/skills/zh/SKILL.md").read_text(encoding="utf-8")
+        text = (REPO_ROOT / "plugins/codex/plugins/clear-writing/skills/zh/SKILL.md").read_text(encoding="utf-8")
         self.assertIn("任何中文 Markdown/PDF/报告/README/面向读者的文档型中文内容都应自动触发", text)
 
     def test_response_clarity_owns_ordinary_explanations_not_documents_or_machine_output(self):
@@ -33,7 +33,7 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
 
     def test_generated_plugin_exposes_response_clarity_route(self):
         text = (
-            REPO_ROOT / "plugins/codex/plugins/writing-style/skills/response-clarity/SKILL.md"
+            REPO_ROOT / "plugins/codex/plugins/clear-writing/skills/response-clarity/SKILL.md"
         ).read_text(encoding="utf-8")
         self.assertIn("Use this skill for ordinary answers to the user", text)
         self.assertIn("pure JSON, YAML, code, commands, raw logs", text)
@@ -43,7 +43,7 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
             encoding="utf-8"
         )
         generated = (
-            REPO_ROOT / "plugins/codex/plugins/writing-style/skills/response-clarity/SKILL.md"
+            REPO_ROOT / "plugins/codex/plugins/clear-writing/skills/response-clarity/SKILL.md"
         ).read_text(encoding="utf-8")
 
         for text in (source, generated):
@@ -58,7 +58,7 @@ class SkillRuntimeTextAuditTests(unittest.TestCase):
             encoding="utf-8"
         )
         generated = (
-            REPO_ROOT / "plugins/codex/plugins/writing-style/skills/response-clarity/SKILL.md"
+            REPO_ROOT / "plugins/codex/plugins/clear-writing/skills/response-clarity/SKILL.md"
         ).read_text(encoding="utf-8")
 
         for text in (source, generated):

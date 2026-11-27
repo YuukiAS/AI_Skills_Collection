@@ -1,6 +1,6 @@
 # Skill Catalog
 
-Generated at `2026-10-21T16:49:32+00:00` from `registry.json` metadata. Do not edit by hand.
+Generated at `2026-11-27T13:45:25+00:00` from `registry.json` metadata. Do not edit by hand.
 
 Budget warnings in this catalog are guidance for context hygiene; they do not make complete domain installation invalid.
 
@@ -241,11 +241,11 @@ Budget warnings in this catalog are guidance for context hygiene; they do not ma
 | `seaborn` | `skills/tools/visualization/seaborn` | Statistical visualization with pandas integration. Use for quick exploration of distributions, relationships, and categorical comparisons with attractive defaults. Best for box plots, violin plots, pair plots, heatmaps. Built on matplotlib. For interactive plots use plotly; for publication styling use scientific-visualization. | `project` | False | False | True | `2026-05-14` | `ai-skills install --target repo --skill tool/visualization/seaborn --mode symlink --write-agents-md` |
 | `theme-factory` | `skills/tools/visualization/theme-factory` | Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly. | `project` | False | False | True | `2026-05-14` | `ai-skills install --target repo --skill tool/visualization/theme-factory --mode symlink --write-agents-md` |
 
-## writing / research-writing / research
+## writing / research-authoring / research
 
 | Skill | Path | Description | Recommended scope | Network | Executes code | Writes files | Last reviewed | Install |
 |---|---|---|---|---:|---:|---:|---|---|
-| `academic-paper-writer-pro` | `skills/writing/research/academic-paper-writer-pro` | 学术论文排版、OCR恢复、DOCX/Markdown整理和模板化交付工作流。用于扫描 PDF、DOC/DOCX、Markdown 到 Word/PDF 的结构修复、断点恢复、参考文献整理和最终文件验收；内容写作、审稿和事实保真应路由到 research-writing 与 writing-fidelity。 | `project` | False | False | True | `2026-07-28` | `ai-skills install --target repo --skill writing/research/academic-paper-writer-pro --mode symlink --write-agents-md` |
+| `academic-paper-writer-pro` | `skills/writing/research/academic-paper-writer-pro` | 学术论文排版、OCR恢复、DOCX/Markdown整理和模板化交付工作流。用于扫描 PDF、DOC/DOCX、Markdown 到 Word/PDF 的结构修复、断点恢复、参考文献整理和最终文件验收；内容写作、审稿和事实保真应路由到 research-authoring 与 writing-fidelity。 | `project` | False | False | True | `2026-07-28` | `ai-skills install --target repo --skill writing/research/academic-paper-writer-pro --mode symlink --write-agents-md` |
 | `citation-verification` | `skills/writing/research/citation-verification` | Verify academic citations, references, BibTeX entries, DOI/PMID metadata, citation claims, and figure/table evidence before manuscript submission, review response, or report delivery. Use when citation existence or claim support matters more than citation formatting alone. | `project` | True | False | True | `2026-07-09` | `ai-skills install --target repo --skill writing/research/citation-verification --mode symlink --write-agents-md` |
 | `latex-paper-authoring` | `skills/writing/research/latex-paper-authoring` | Author, organize, repair, and prepare LaTeX research papers for arXiv, Overleaf, conference templates, or journal submission. Use when manuscript structure, LaTeX source hygiene, compilation, figures, bibliography, or template cleanup is central. | `project` | False | True | True | `2026-07-09` | `ai-skills install --target repo --skill writing/research/latex-paper-authoring --mode symlink --write-agents-md` |
 | `literature-review` | `skills/writing/research/literature-review` | Synthesize scholarly literature and create single-paper evidence cards. Use for systematic/scoping/narrative reviews, related work, paper精读, paper cards, claim-evidence extraction, method maps, thematic synthesis, and research-gap analysis. Route quick lookup, DOI/claim checks, BibTeX, and Zotero to citation skills. | `project` | False | False | True | `2026-05-14` | `ai-skills install --target repo --skill writing/research/literature-review --mode symlink --write-agents-md` |

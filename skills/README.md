@@ -35,7 +35,7 @@ not include archived skills.
 - `writing/`: first-class writing workflows. `writing/core/` is suitable for
   global guardrails; `writing/research/` is heavier and usually project-scoped.
 - `science/`: research discovery, ideation, communication, and presentation
-  workflows that are not themselves writing-style guardrails.
+  workflows that are not themselves clear-writing guardrails.
 - `projects/`: repo- or product-specific workflows, such as CardiacNexus/CMR.
 - `core/`: skill library maintenance, installer support, and Codex system
   compatibility workflows.

@@ -98,9 +98,9 @@ project-specific context: The specific TRACE papers, VicFlora and current XeLaTe
 status: NEW
 tracking: #34
 source: TRACE / a private research project 34-page group-meeting deck v9 review
-evidence: `<private repository>` commit `<private commit>`; v9 preflight confirms the active runtime was still `presentations 0.3` + `writing-style 0.1` and that the AI_Skills pull changed only TODO docs, not runtime files. The large language improvement came from the task/workflow instead: before drafting/revising prose it explicitly fixed the target audience, each slide's scientific job, why unfamiliar terms appear there, what the audience should remember, and then ran a full-deck first-use registry plus page-by-page language audit over P2–P34. The final human review judged v9's language markedly better than v8 even though the prose runtime itself had not changed.
-problem: This is strong positive evidence that `presentations` should own a **pre-writing audience/page-job brief** rather than merely hand already-written slide text to `scientific-prose`. For each content slide, presentation orchestration should establish: audience assumptions, the one scientific point of the page, prerequisite context, why each unfamiliar term is needed now, and the intended plain-language takeaway. That brief should then be handed to `writing-style`/`scientific-prose` to produce or revise the English. `presentations` should not duplicate prose-style rules; its responsibility is to provide the semantic/audience brief, require the writing handoff after scientific freeze, and then reread the final rendered deck for reader effort. The v9 `first_use_registry.md` and `full_deck_language_audit.md` are useful evidence patterns for this boundary.
-project-specific context: a private research project, VicFlora, COI, OTU, MGP and specific slide wording belong to TRACE. The generic lesson is orchestration: audience -> page job -> prerequisite/context -> term role -> takeaway -> writing-style -> rendered reader-effort review.
+evidence: `<private repository>` commit `<private commit>`; v9 preflight confirms the active runtime was still `presentations 0.3` + `clear-writing 0.1` and that the AI_Skills pull changed only TODO docs, not runtime files. The large language improvement came from the task/workflow instead: before drafting/revising prose it explicitly fixed the target audience, each slide's scientific job, why unfamiliar terms appear there, what the audience should remember, and then ran a full-deck first-use registry plus page-by-page language audit over P2–P34. The final human review judged v9's language markedly better than v8 even though the prose runtime itself had not changed.
+problem: This is strong positive evidence that `presentations` should own a **pre-writing audience/page-job brief** rather than merely hand already-written slide text to `scientific-prose`. For each content slide, presentation orchestration should establish: audience assumptions, the one scientific point of the page, prerequisite context, why each unfamiliar term is needed now, and the intended plain-language takeaway. That brief should then be handed to `clear-writing`/`scientific-prose` to produce or revise the English. `presentations` should not duplicate prose-style rules; its responsibility is to provide the semantic/audience brief, require the writing handoff after scientific freeze, and then reread the final rendered deck for reader effort. The v9 `first_use_registry.md` and `full_deck_language_audit.md` are useful evidence patterns for this boundary.
+project-specific context: a private research project, VicFlora, COI, OTU, MGP and specific slide wording belong to TRACE. The generic lesson is orchestration: audience -> page job -> prerequisite/context -> term role -> takeaway -> clear-writing -> rendered reader-effort review.
 
 ### Full-deck audience-context and responsive-layout review still regresses after repeated real revisions
 status: NEW
@@ -214,7 +214,7 @@ status: PROMOTED_BY_045
 source: TRACE / a private research project group-meeting deck v4 review
 evidence: v4 task要求读取 `scientific-prose`，但最终仍反复出现 `Failure prevented`, 机械 `Example.` 标签、noun-stack/table microcopy 和不自然开场；presentation skill 当前只规定英文 slide text “can use” scientific-prose
 problem: presentation 结构和科学事实稳定后，没有一个明确的 reader-facing English final-pass handoff/acceptance gate。仅“读取 writing skill”或让 Codex顺手润色不足以阻止模板化、机器式科研英语进入最终 PDF。
-project-specific context: 具体 该项目 术语和句子属于当前 deck；通用问题是 presentations 与 writing-style 的 routing/QA 边界，不能把 presentation layout 责任交给 writing-style。
+project-specific context: 具体 该项目 术语和句子属于当前 deck；通用问题是 presentations 与 clear-writing 的 routing/QA 边界，不能把 presentation layout 责任交给 clear-writing。
 
 
 ### Course-standard teaching template needs structural navigation, not only colours and bands
@@ -769,8 +769,8 @@ promotion_gate: 至少一个 simulation-heavy 和一个 real-data deck 的真实
 ### Natural scientific slide language
 status: CANDIDATE_GENERIC
 tracking: #48
-source: repeated presentation and writing-style feedback; STAT5060 Tutorial 1 annotated teaching deck review, 2026-09-29
-evidence: presentation maintenance archive + `docs/plugin-todos/writing-style.md` + nine pink annotations in the STAT5060 27-page tutorial candidate. The teaching deck still contained formulaic/AI-like prose even after a dedicated content rewrite, including generic caveat sentences, mechanical “same displayed probabilities”/“these are specified parameters” phrasing, and engineering-flavoured audience copy.
+source: repeated presentation and clear-writing feedback; STAT5060 Tutorial 1 annotated teaching deck review, 2026-09-29
+evidence: presentation maintenance archive + `docs/plugin-todos/clear-writing.md` + nine pink annotations in the STAT5060 27-page tutorial candidate. The teaching deck still contained formulaic/AI-like prose even after a dedicated content rewrite, including generic caveat sentences, mechanical “same displayed probabilities”/“these are specified parameters” phrasing, and engineering-flavoured audience copy.
 target layer: writing/qa
 problem: slides 仍可能出现内部流程词、模板化对比句、面向作者而不是面向听众的说法。
 candidate_action: 真实失败出现后再决定应该改 `research-presentations`、`scientific-prose`，还是两者的交接；不要重复造一套写作规则。

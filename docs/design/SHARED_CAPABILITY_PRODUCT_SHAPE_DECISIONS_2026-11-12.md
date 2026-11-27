@@ -4,7 +4,7 @@
 
 ## 共同规则
 
-- 下面七个能力都是独立插件：Research Authoring、Presentations、Artifact Content Design、Clear Writing、Reasoned Decision、Design Assurance、Delivery Assurance。
+- 下面七个能力都是独立插件：Research Authoring、Presentations、Content Selection、Clear Writing、Reasoned Decision、Design Assurance、Delivery Assurance。
 - GPT 写稿、做取舍、定措辞、判断成品。Codex 只做机械执行：渲染、建站、写代码、跑验收器、发布并回读。内容问题交回 GPT。
 - 调用了插件，交付时附上或推送一份执行证据：规则编号对应成品里的原句或位置，改写附前后对照。
 - v0.1 是骨架加少量必要回归，之后按版本加。
@@ -12,12 +12,12 @@
 
 ## 产物插件
 
-### Research Authoring（安装标识 `research-writing`）
+### Research Authoring（安装标识 `research-authoring`）
 
 - 四个技能，按读者分：`research-notes`（作者本人）、`research-story`（导师与组会）、`student-materials`（一份作业及其答案和评分说明）、`research-paper`（正式论文）。
 - `research-citations` 负责检索、引用和核验。旧名 `paper` → `research-paper`，`litcite` → `research-citations`，旧名保留转接。
 - GPT 端和 Codex 端分开写，各有各的职责。
-- 动笔前调用 Artifact Content Design 做取舍，内容定了调用 Clear Writing 写清，成品出来再调用 Artifact Content Design 复看整件。
+- 动笔前调用 Content Selection 做取舍，内容定了调用 Clear Writing 写清，成品出来再调用 Content Selection 复看整件。
 
 ### Presentations
 
@@ -28,7 +28,7 @@
 
 ## 被调用的插件
 
-### Artifact Content Design
+### Content Selection
 
 - 独立插件，和 Clear Writing 同层。
 - 制作前：按读者要理解、核验或完成的事，决定保留、压缩、可视化、降级或删除。内部审计说明、哈希、内部编号和页码、文件路径、新旧稿对照、自检通过说明、待确认、重复规定一律拦掉，直接删除，不留档。
@@ -36,10 +36,10 @@
 - 关键取舍写在原提纲或制作说明里。
 - 调用方：Research Authoring、Presentations、Frontend Design、科研可视化、文档和图像生成。
 
-### Clear Writing（安装标识 `writing-style`）
+### Clear Writing（安装标识 `clear-writing`）
 
 - 独立插件。三个技能：`response-clarity`（聊天回复）、`clear-artifact`（文档、报告、幻灯片文字）、`interface-text`（界面文字）。
-- 只管已选定内容怎么写清；内容该不该出现归 Artifact Content Design。
+- 只管已选定内容怎么写清；内容该不该出现归 Content Selection。
 - `interface-text` 以后和 Frontend Design 对接：前端定布局和交互，`interface-text` 定措辞。
 
 ## 任务型插件

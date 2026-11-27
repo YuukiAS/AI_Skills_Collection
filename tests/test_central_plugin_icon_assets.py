@@ -35,8 +35,8 @@ PROTECTED_REFERENCE_ICON_SHA256 = {
 }
 
 UNCHANGED_ICON_SHA256 = {
-    "writing-style": "ddd7a6edee8baaae8a5a6212c754fe501e61e5cb0754f522b175127f11f2923a",
-    "research-writing": "773b5b9d34c84c330274567ad2c16fecce32b4efd8d80415e4649aa6ebb13c00",
+    "clear-writing": "ddd7a6edee8baaae8a5a6212c754fe501e61e5cb0754f522b175127f11f2923a",
+    "research-authoring": "773b5b9d34c84c330274567ad2c16fecce32b4efd8d80415e4649aa6ebb13c00",
     "bioinformatics": "d69ea796cda5a4f58433e6377c64325bb93de74fe2c149bf87cdfc905449ad48",
 }
 

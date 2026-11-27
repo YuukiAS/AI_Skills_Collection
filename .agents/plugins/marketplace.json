@@ -29,10 +29,10 @@
       "category": "Developer Tools"
     },
     {
-      "name": "writing-style",
+      "name": "clear-writing",
       "source": {
         "source": "local",
-        "path": "./plugins/codex/plugins/writing-style"
+        "path": "./plugins/codex/plugins/clear-writing"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -41,10 +41,10 @@
       "category": "Research"
     },
     {
-      "name": "research-writing",
+      "name": "research-authoring",
       "source": {
         "source": "local",
-        "path": "./plugins/codex/plugins/research-writing"
+        "path": "./plugins/codex/plugins/research-authoring"
       },
       "policy": {
         "installation": "AVAILABLE",

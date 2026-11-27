@@ -74,14 +74,14 @@
       ]
     },
     {
-      "name": "writing-style",
+      "name": "clear-writing",
       "version": "0.5",
       "displayName": "Clear Writing",
       "description": "Writing quality layer with response clarity for ordinary explanations, source-fidelity guardrails, Product UI Copy for protected-meaning interface microcopy, heavy Chinese source-faithful structural rewrites, Chinese reader-facing say-it-plain final passes, and English scientific prose cleanup without detector evasion or research-structure decisions.",
       "category": "Research",
       "brandColor": "#7C3AED",
-      "composerIcon": "./assets/codex/plugin-icons/writing-style/composer.svg",
-      "logo": "./assets/codex/plugin-icons/writing-style/composer.svg",
+      "composerIcon": "./assets/codex/plugin-icons/clear-writing/composer.svg",
+      "logo": "./assets/codex/plugin-icons/clear-writing/composer.svg",
       "defaultPrompt": [
         "Make this text clearer without changing meaning or protected facts.",
         "Explain this result clearly to the user without changing facts, permissions, commands, paths, or status.",
@@ -136,14 +136,14 @@
       ]
     },
     {
-      "name": "research-writing",
+      "name": "research-authoring",
       "version": "0.2",
       "displayName": "Research Authoring",
       "description": "Repo reports, research documents, manuscripts, pre-submission review, literature review, citations, and claim-evidence organization.",
       "category": "Research",
       "brandColor": "#1D4ED8",
-      "composerIcon": "./assets/codex/plugin-icons/research-writing/composer.svg",
-      "logo": "./assets/codex/plugin-icons/research-writing/composer.svg",
+      "composerIcon": "./assets/codex/plugin-icons/research-authoring/composer.svg",
+      "logo": "./assets/codex/plugin-icons/research-authoring/composer.svg",
       "shared": [
         {
           "source": "skills/writing/research/shared",
@@ -311,7 +311,7 @@
             "When no palette is specified, or when a venue/figure type/domain context is provided, first run contextual discovery with `publication-figure-palettes` or `../../shared/scripts/palette.py discover`.",
             "Keep discovery and application separate: safe canonical palettes are plotting defaults; Notion candidates are contextual, non-official, and gated for snippets.",
             "For figure readiness checks, use `scientific-figure-qa` after plotting or layout decisions.",
-            "Venue templates belong to research-writing; this plugin owns figure color, plotting code, visual examples, schematics, and posters."
+            "Venue templates belong to research-authoring; this plugin owns figure color, plotting code, visual examples, schematics, and posters."
           ],
           "source_skills": [
             {

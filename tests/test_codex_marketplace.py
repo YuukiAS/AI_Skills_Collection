@@ -21,8 +21,8 @@ import skill_utils  # noqa: E402
 CENTRAL_PLUGIN_NAMES = [
     "workflow-core",
     "ai-skills-core",
-    "writing-style",
-    "research-writing",
+    "clear-writing",
+    "research-authoring",
     "presentations",
     "scientific-visualization",
     "web-development",
@@ -33,8 +33,8 @@ CENTRAL_PLUGIN_NAMES = [
 EXPECTED_PLUGIN_VERSIONS = {name: "0.1" for name in CENTRAL_PLUGIN_NAMES} | {
     "workflow-core": "0.5",
     "ai-skills-core": "0.5",
-    "writing-style": "0.5",
-    "research-writing": "0.2",
+    "clear-writing": "0.5",
+    "research-authoring": "0.2",
     "presentations": "0.4",
     "web-development": "0.4",
 }
@@ -189,7 +189,7 @@ class CodexMarketplaceTests(unittest.TestCase):
 
     def test_writing_style_exposes_response_clarity_without_renaming_existing_skills(self) -> None:
         data = json.loads((REPO_ROOT / "scripts" / "codex_marketplace_config.json").read_text(encoding="utf-8"))
-        writing = next(plugin for plugin in data["plugins"] if plugin["name"] == "writing-style")
+        writing = next(plugin for plugin in data["plugins"] if plugin["name"] == "clear-writing")
         sources = {entry["artifact_id"]: entry["source"] for entry in writing["skills"]}
 
         self.assertEqual(writing["version"], "0.5")
@@ -329,8 +329,8 @@ class CodexMarketplaceTests(unittest.TestCase):
                 not in {
                     "workflow-core",
                     "ai-skills-core",
-                    "writing-style",
-                    "research-writing",
+                    "clear-writing",
+                    "research-authoring",
                     "presentations",
                     "web-development",
                 }
@@ -342,8 +342,8 @@ class CodexMarketplaceTests(unittest.TestCase):
                 not in {
                     "workflow-core",
                     "ai-skills-core",
-                    "writing-style",
-                    "research-writing",
+                    "clear-writing",
+                    "research-authoring",
                     "presentations",
                     "web-development",
                 }
@@ -409,12 +409,12 @@ class CodexMarketplaceTests(unittest.TestCase):
         readme_section = agents.split("## 1.2 任务规模必须和读取规模匹配", 1)[0].split(
             "## 1.1 README 永远写给人看", 1
         )[1]
-        todo = (REPO_ROOT / "docs" / "plugin-todos" / "writing-style.md").read_text(encoding="utf-8")
-        issue12 = todo.split("### Promote `writing-style`", 1)[0]
+        todo = (REPO_ROOT / "docs" / "plugin-todos" / "clear-writing.md").read_text(encoding="utf-8")
+        issue12 = todo.split("### Promote `clear-writing`", 1)[0]
 
         self.assertIn("只要当前任务修改根 `README.md`", readme_section)
         self.assertIn("无论修改大小", readme_section)
-        self.assertIn("必须实际调用当前安装的 Clear Writing（`writing-style`）", readme_section)
+        self.assertIn("必须实际调用当前安装的 Clear Writing（`clear-writing`）", readme_section)
         self.assertIn("只读 `SKILL.md`、在提示词里声称遵守规则或做字符串扫描，都不算调用", readme_section)
         self.assertIn("版本、链接或其他机器字符串", readme_section)
         self.assertIn("原样放行", readme_section)
@@ -424,11 +424,11 @@ class CodexMarketplaceTests(unittest.TestCase):
 
         self.assertIn("### 任何 README.md 修改都必须经过 Clear Writing 检查", issue12)
         self.assertIn("无论修改大小", issue12)
-        self.assertIn("当前安装的 Clear Writing（`writing-style`）", issue12)
+        self.assertIn("当前安装的 Clear Writing（`clear-writing`）", issue12)
         self.assertIn("版本号、链接或其他机器字符串", issue12)
         self.assertIn("status: PROMOTED", issue12)
         self.assertIn("不接管 Research Authoring、`workflow-core` 或技术事实判断", issue12)
-        self.assertIn("没有修改 `writing-style`、`ai-skills-core`、`workflow-core` 或 `research-writing` 的 production skill source", issue12)
+        self.assertIn("没有修改 `clear-writing`、`ai-skills-core`、`workflow-core` 或 `research-authoring` 的 production skill source", issue12)
         self.assertNotIn("creates a new README or materially rewrites", issue12)
         self.assertNotIn("new README or materially rewrites", issue12)
 

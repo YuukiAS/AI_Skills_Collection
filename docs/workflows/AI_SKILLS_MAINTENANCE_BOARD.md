@@ -149,7 +149,7 @@ tracking Issue 是用户直接看的入口。标题必须自然、简洁，不�
 
 详细 evidence / history 放在后面。DOING / ADAPTING 至少有一个 current valid anchor。DONE / History 必须直接显示 Resolution commit。
 
-创建或实质改写 reader-facing Project / Issue copy 前，必须真实调用当前安装的 Clear Writing（`writing-style`）。Clear Writing 只能改善表达，不得改变：
+创建或实质改写 reader-facing Project / Issue copy 前，必须真实调用当前安装的 Clear Writing（`clear-writing`）。Clear Writing 只能改善表达，不得改变：
 
 - source maturity；
 - lifecycle Status；
@@ -432,8 +432,8 @@ labels use color `ededed` and description
 ```text
 area:workflow-core
 area:ai-skills-core
-area:writing-style
-area:research-writing
+area:clear-writing
+area:research-authoring
 area:presentations
 area:scientific-visualization
 area:web-development

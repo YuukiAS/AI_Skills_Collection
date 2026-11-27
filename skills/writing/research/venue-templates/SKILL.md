@@ -482,7 +482,7 @@ python scripts/validate_format.py \
 | **PLOS** | 300-600 dpi | TIFF, EPS | RGB |
 | **IEEE** | 300+ dpi | EPS, PDF | RGB or Grayscale |
 
-## Writing Style Guides
+## Clear Writing Guides
 
 Beyond formatting, this skill provides comprehensive **writing style guides** that capture how papers should *read* at different venues—not just how they should look.
 
@@ -529,7 +529,7 @@ Concrete examples are available in `assets/examples/`:
 
 ### Bundled Resources
 
-**Writing Style Guides** (in `references/`):
+**Clear Writing Guides** (in `references/`):
 - `venue_writing_styles.md`: Master style overview and comparison
 - `nature_science_style.md`: Nature/Science writing conventions
 - `cell_press_style.md`: Cell Press journal style

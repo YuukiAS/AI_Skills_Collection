@@ -12,7 +12,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 HELPER_PATH = REPO_ROOT / "skills/writing/core/scientific-rewrite/scripts/rewrite_support.py"
 GENERATED_HELPER_PATH = (
-    REPO_ROOT / "plugins/codex/plugins/writing-style/skills/scientific-rewrite/scripts/rewrite_support.py"
+    REPO_ROOT / "plugins/codex/plugins/clear-writing/skills/scientific-rewrite/scripts/rewrite_support.py"
 )
 
 
@@ -220,7 +220,7 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
             self.assertTrue(receipt_path.exists())
             self.assertEqual(receipt["schema"], helper.RUNTIME_SCHEMA)
             self.assertEqual(receipt["runtime"], helper.RUNTIME_NAME)
-            self.assertEqual(receipt["route_selection"]["selector_owner"], "writing-style")
+            self.assertEqual(receipt["route_selection"]["selector_owner"], "clear-writing")
             self.assertEqual(receipt["route_selection"]["selected_route"], "scientific-rewrite")
             self.assertTrue(receipt["route_selection"]["ordinary_user_prompt"])
             self.assertTrue(receipt["host_codex_owned_generation"])
@@ -459,7 +459,7 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
             stage_dir = root / "stage"
             write_json(stage_dir / "route_selection.json", {
                 "schema": helper.ROUTE_SELECTION_SCHEMA,
-                "selector_owner": "writing-style",
+                "selector_owner": "clear-writing",
                 "selected_route": "scientific-rewrite",
                 "forced_route": False,
                 "ordinary_user_prompt": True,
@@ -794,8 +794,8 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
 
     def test_writing_style_surface_keeps_existing_scientific_prose_route(self) -> None:
         config = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
-        profile = json.loads((REPO_ROOT / "profiles/codex-writing-style.json").read_text(encoding="utf-8"))
-        writing_style = next(plugin for plugin in config["plugins"] if plugin["name"] == "writing-style")
+        profile = json.loads((REPO_ROOT / "profiles/codex-clear-writing.json").read_text(encoding="utf-8"))
+        writing_style = next(plugin for plugin in config["plugins"] if plugin["name"] == "clear-writing")
         skill_sources = [entry["source"] for entry in writing_style["skills"]]
 
         self.assertIn("skills/writing/core/scientific-prose", skill_sources)
@@ -826,9 +826,9 @@ class ScientificRewriteHeavyRouteTests(unittest.TestCase):
 
     def test_generated_plugin_payload_contains_heavy_route_helper(self) -> None:
         plugin_json = json.loads(
-            (REPO_ROOT / "plugins/codex/plugins/writing-style/.codex-plugin/plugin.json").read_text(encoding="utf-8")
+            (REPO_ROOT / "plugins/codex/plugins/clear-writing/.codex-plugin/plugin.json").read_text(encoding="utf-8")
         )
-        generated_skill = REPO_ROOT / "plugins/codex/plugins/writing-style/skills/scientific-rewrite/SKILL.md"
+        generated_skill = REPO_ROOT / "plugins/codex/plugins/clear-writing/skills/scientific-rewrite/SKILL.md"
         generated_helper = load_helper_from(GENERATED_HELPER_PATH, "generated_scientific_rewrite_support")
 
         self.assertEqual(plugin_json["version"], "0.5")

@@ -2,7 +2,7 @@
 
 Maintenance inbox for a proposed standalone `course-assessment-authoring` skill.
 
-This candidate is intentionally separate from `research-writing`. Its target is the transformation of frozen course-assessment decisions into student-facing Homework, Project, Milestone, submission, template and oral-assessment materials, while keeping instructor grading materials and QA evidence separate.
+This candidate is intentionally separate from `research-authoring`. Its target is the transformation of frozen course-assessment decisions into student-facing Homework, Project, Milestone, submission, template and oral-assessment materials, while keeping instructor grading materials and QA evidence separate.
 
 The file records real project failures first. It does not yet authorize creating, publishing or releasing a new skill.
 

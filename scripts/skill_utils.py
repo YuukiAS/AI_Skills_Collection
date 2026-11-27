@@ -233,7 +233,7 @@ def infer_taxonomy(skill_file: Path) -> dict[str, str]:
     elif raw_scope == "writing" and len(parts) >= 3:
         category = parts[1]
         subcategory = category
-        domain = "writing" if category == "core" else f"{category}-writing"
+        domain = "writing" if category == "core" else "research-authoring"
     elif raw_scope in {"science", "research"} and len(parts) >= 3:
         category = parts[1]
         subcategory = category

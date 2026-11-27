@@ -1,4 +1,4 @@
-# Research Writing Shared Contracts
+# Research Authoring Shared Contracts
 
 For every non-trivial student-facing Homework, Project, milestone, policy, template or oral-brief task, read these files in full and in this order:
 

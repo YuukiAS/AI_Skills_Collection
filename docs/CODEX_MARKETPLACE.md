@@ -28,8 +28,8 @@ The generated marketplace currently publishes ten curated plugins. This is the r
 
 - `workflow-core` (`Verified Workflow`)
 - `ai-skills-core`
-- `writing-style` (`Clear Writing`)
-- `research-writing` (`Research Authoring`)
+- `clear-writing` (`Clear Writing`)
+- `research-authoring` (`Research Authoring`)
 - `presentations`
 - `scientific-visualization`
 - `web-development` (`Frontend Design`)

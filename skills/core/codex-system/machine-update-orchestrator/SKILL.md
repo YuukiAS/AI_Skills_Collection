@@ -22,7 +22,7 @@ Use this skill only inside the `ai-skills-core` plugin, displayed as `AI Skills 
 
 - `update presentations`
 - `update workflow-core`
-- `update research-writing`
+- `update research-authoring`
 - `update AI Skills`
 - `update Bridge Kit`
 - `sync this machine`

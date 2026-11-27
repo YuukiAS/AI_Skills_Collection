@@ -40,7 +40,7 @@ review_stage
 
 新的人类方案版本应采用简单、连续、可预测的形式，例如 `v0.1`、`v0.2`、`v1`、`v2`；只有确有成熟度含义时才使用 alpha、beta 或 rc。历史 `C11`、`R0`、Gate 编号和批次号可以保留为机器定位信息，不要求重命名；若新提案另造 `C'` 一类临时版本体系，应要求改回简单连续版本。
 
-多个 plugin 可以并行，但每个 review 都必须只使用该对象自己的 Proposal / Goal / evidence / branch。切换 plugin 时重新初始化 Active Review Context；不得把 `presentations` 的 Gate、`research-writing` 的 rubric、Clear Writing 的 source boundary 或另一个 task 的授权拿来判当前对象。Critic PASS 只对明确对象、版本和阶段有效。
+多个 plugin 可以并行，但每个 review 都必须只使用该对象自己的 Proposal / Goal / evidence / branch。切换 plugin 时重新初始化 Active Review Context；不得把 `presentations` 的 Gate、`research-authoring` 的 rubric、Clear Writing 的 source boundary 或另一个 task 的授权拿来判当前对象。Critic PASS 只对明确对象、版本和阶段有效。
 
 如果 repo 中同一 plugin 同时存在多个 proposal / task，而用户没有唯一指定，先定位当前 active source；确有实质歧义才要求澄清一次，不凭文件名相似自行选择。
 
@@ -140,7 +140,7 @@ Critic 还必须审 gate lifecycle：新 regression 是否被归入正确既有 
 
 唯一实质 `PASS` 的自然中文结论必须明确说明“本次批准的是……”以及“这不代表……”或等价边界。它只适用于该执行包和阶段；不授权付费、数据传输、merge，也不自动批准实现完成、正常入口可用、产品整体通过或正式发布。后续引用必须保留原边界，总体完成还须原合同中其他有效 gate 与用户验收。
 
-每个 Critic 人工轮次都先给可独立阅读的一屏自然中文摘要：本轮结论、相对上一轮的真实变化、对正常用户的影响、剩余真实问题、用户是否需要动作、下一接收方和原因。`REVISE` 先解释问题为何影响用户，不把 finding 列表当摘要；`PROCEED` 说清稳定项与尚未闭合项；唯一 `PASS` 用一屏讲清实际架构、主要默认行为和安全/恢复边界。然后再给审查字段和机器交接。正式 Clear Writing（`writing-style`）可调用时只检查用户摘要的最终表达；不可用时如实说明并自行检查，不得假称调用。`COPY TO PLANNER / CODEX` 等机器块、路径和协议值保持原文，不经 Clear Writing 改写。
+每个 Critic 人工轮次都先给可独立阅读的一屏自然中文摘要：本轮结论、相对上一轮的真实变化、对正常用户的影响、剩余真实问题、用户是否需要动作、下一接收方和原因。`REVISE` 先解释问题为何影响用户，不把 finding 列表当摘要；`PROCEED` 说清稳定项与尚未闭合项；唯一 `PASS` 用一屏讲清实际架构、主要默认行为和安全/恢复边界。然后再给审查字段和机器交接。正式 Clear Writing（`clear-writing`）可调用时只检查用户摘要的最终表达；不可用时如实说明并自行检查，不得假称调用。`COPY TO PLANNER / CODEX` 等机器块、路径和协议值保持原文，不经 Clear Writing 改写。
 
 ### 6.1 Execution-ready PASS 必须审完整执行包
 

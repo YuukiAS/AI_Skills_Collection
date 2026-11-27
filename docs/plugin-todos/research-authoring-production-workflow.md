@@ -6,7 +6,7 @@ Primary evidence: repeated STAT5060 HW1 / Final Project document failures and th
 
 Related inputs:
 
-- `docs/plugin-todos/research-writing-student-audience-and-pre-render-approval.md`
+- `docs/plugin-todos/research-authoring-student-audience-and-pre-render-approval.md`
 - `docs/plugin-todos/research-authoring-layout-convergence-and-human-review-budget.md`
 - `docs/plugin-todos/presentations-authoring-production-workflow.md`
 - `plugins/codex/plugins/presentations/shared/authoring-production-workflow.md`

@@ -16,7 +16,7 @@ executes_code: true
 secrets_needed:
 last_reviewed: 2026-07-09
 profile_tags:
-  - research-writing
+  - research-authoring
   - latex
 recommended_scope: project
 icon_small: assets/app-facing.svg

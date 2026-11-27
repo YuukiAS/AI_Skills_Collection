@@ -7,9 +7,9 @@ The proposed `course-assessment-authoring` capability now has a shared Research 
 
 Canonical read order:
 
-1. `plugins/codex/plugins/research-writing/shared/student-assessment-end-to-end-pre-execution-runbook.md`
-2. `plugins/codex/plugins/research-writing/shared/student-assessment-cumulative-acceptance-contract.md`
-3. `plugins/codex/plugins/research-writing/shared/student-assessment-hw1-nonrecurrence-amendment-v1.md`
+1. `plugins/codex/plugins/research-authoring/shared/student-assessment-end-to-end-pre-execution-runbook.md`
+2. `plugins/codex/plugins/research-authoring/shared/student-assessment-cumulative-acceptance-contract.md`
+3. `plugins/codex/plugins/research-authoring/shared/student-assessment-hw1-nonrecurrence-amendment-v1.md`
 
 Incident evidence and design rationale:
 

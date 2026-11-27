@@ -31,12 +31,12 @@ def make_repo(marketplace_plugin: dict | None = None) -> tuple[tempfile.Temporar
     tmp = tempfile.TemporaryDirectory()
     root = Path(tmp.name)
     (root / ".agents" / "plugins").mkdir(parents=True)
-    plugin_dir = root / "plugins" / "codex" / "plugins" / "writing-style"
+    plugin_dir = root / "plugins" / "codex" / "plugins" / "clear-writing"
     (plugin_dir / ".codex-plugin").mkdir(parents=True)
-    (plugin_dir / ".codex-plugin" / "plugin.json").write_text('{"name":"writing-style"}\n', encoding="utf-8")
+    (plugin_dir / ".codex-plugin" / "plugin.json").write_text('{"name":"clear-writing"}\n', encoding="utf-8")
     plugin_entry = marketplace_plugin or {
-        "name": "writing-style",
-        "source": {"source": "local", "path": "./plugins/codex/plugins/writing-style"},
+        "name": "clear-writing",
+        "source": {"source": "local", "path": "./plugins/codex/plugins/clear-writing"},
     }
     (root / ".agents" / "plugins" / "marketplace.json").write_text(
         json.dumps({"plugins": [plugin_entry]}, indent=2) + "\n",
@@ -69,25 +69,25 @@ class CandidateSourceTests(unittest.TestCase):
         tmp, root, _commit = make_repo()
         self.addCleanup(tmp.cleanup)
         with self.assertRaisesRegex(replay.ReplayError, "unknown candidate commit"):
-            replay.resolve_candidate_plugin(root, "deadbeef", "writing-style")
+            replay.resolve_candidate_plugin(root, "deadbeef", "clear-writing")
 
     def test_plugin_missing_from_committed_marketplace_fails(self) -> None:
         tmp, root, commit = make_repo({"name": "other", "source": {"source": "local", "path": "./plugins/other"}})
         self.addCleanup(tmp.cleanup)
         with self.assertRaisesRegex(replay.ReplayError, "exactly once"):
-            replay.resolve_candidate_plugin(root, commit, "writing-style")
+            replay.resolve_candidate_plugin(root, commit, "clear-writing")
 
     def test_non_local_source_fails(self) -> None:
-        tmp, root, commit = make_repo({"name": "writing-style", "source": {"source": "github", "path": "x"}})
+        tmp, root, commit = make_repo({"name": "clear-writing", "source": {"source": "github", "path": "x"}})
         self.addCleanup(tmp.cleanup)
         with self.assertRaisesRegex(replay.ReplayError, "source must be local"):
-            replay.resolve_candidate_plugin(root, commit, "writing-style")
+            replay.resolve_candidate_plugin(root, commit, "clear-writing")
 
     def test_escaping_source_fails(self) -> None:
-        tmp, root, commit = make_repo({"name": "writing-style", "source": {"source": "local", "path": "../evil"}})
+        tmp, root, commit = make_repo({"name": "clear-writing", "source": {"source": "local", "path": "../evil"}})
         self.addCleanup(tmp.cleanup)
         with self.assertRaisesRegex(replay.ReplayError, "must not escape"):
-            replay.resolve_candidate_plugin(root, commit, "writing-style")
+            replay.resolve_candidate_plugin(root, commit, "clear-writing")
 
     def test_replay_parser_rejects_arbitrary_runtime_flags(self) -> None:
         parser = replay.build_parser()
@@ -98,7 +98,7 @@ class CandidateSourceTests(unittest.TestCase):
                         [
                             "replay",
                             "--plugin",
-                            "writing-style",
+                            "clear-writing",
                             "--candidate-commit",
                             "abc",
                             "--task",
@@ -114,7 +114,7 @@ class CandidateSourceTests(unittest.TestCase):
                         [
                             "replay",
                             "--plugin",
-                            "writing-style",
+                            "clear-writing",
                             "--candidate-commit",
                             "abc",
                             "--task",
@@ -234,12 +234,12 @@ class ReplayMechanismTests(unittest.TestCase):
     def test_stale_cleanup_only_selects_fixed_candidate_namespace(self) -> None:
         payload = {
             "plugins": [
-                {"pluginId": "writing-style@ai-skills-candidate"},
-                {"pluginId": "writing-style@yuukias-ai-skills"},
+                {"pluginId": "clear-writing@ai-skills-candidate"},
+                {"pluginId": "clear-writing@yuukias-ai-skills"},
                 {"pluginId": "other@ai-bridge-candidate"},
             ]
         }
-        self.assertEqual(replay.candidate_plugin_ids(payload), ["writing-style@ai-skills-candidate"])
+        self.assertEqual(replay.candidate_plugin_ids(payload), ["clear-writing@ai-skills-candidate"])
 
     def test_actual_consumption_requires_parsed_json_event(self) -> None:
         installed = "/tmp/candidate/plugin"
@@ -259,7 +259,7 @@ class ReplayMechanismTests(unittest.TestCase):
         self.assertEqual(evidence.line_index, 2)
 
     def test_consumption_accepts_stable_candidate_cache_suffix(self) -> None:
-        installed = "/canonical/root/plugins/cache/ai-skills-candidate/writing-style/0.1"
+        installed = "/canonical/root/plugins/cache/ai-skills-candidate/clear-writing/0.1"
         event = json.dumps(
             {
                 "type": "item.completed",
@@ -267,7 +267,7 @@ class ReplayMechanismTests(unittest.TestCase):
                     "type": "command_execution",
                     "command": (
                         "cat /logical/root/plugins/cache/ai-skills-candidate/"
-                        "writing-style/0.1/skills/scientific-rewrite/SKILL.md"
+                        "clear-writing/0.1/skills/scientific-rewrite/SKILL.md"
                     ),
                 },
             }
@@ -279,13 +279,13 @@ class ReplayMechanismTests(unittest.TestCase):
         self.assertEqual(evidence.line_index, 1)
 
     def test_consumption_rejects_other_marketplace_same_plugin(self) -> None:
-        installed = "/canonical/root/plugins/cache/ai-skills-candidate/writing-style/0.1"
+        installed = "/canonical/root/plugins/cache/ai-skills-candidate/clear-writing/0.1"
         event = json.dumps(
             {
                 "type": "item.completed",
                 "item": {
                     "type": "command_execution",
-                    "command": "cat /logical/root/plugins/cache/other-market/writing-style/0.1/skills/zh/SKILL.md",
+                    "command": "cat /logical/root/plugins/cache/other-market/clear-writing/0.1/skills/zh/SKILL.md",
                 },
             }
         )
@@ -293,13 +293,13 @@ class ReplayMechanismTests(unittest.TestCase):
         self.assertIsNone(replay.parse_consumption(event + "\n", installed))
 
     def test_consumption_rejects_raw_non_json_candidate_path(self) -> None:
-        installed = "/canonical/root/plugins/cache/ai-skills-candidate/writing-style/0.1"
-        raw = "/logical/root/plugins/cache/ai-skills-candidate/writing-style/0.1/skills/zh/SKILL.md\n"
+        installed = "/canonical/root/plugins/cache/ai-skills-candidate/clear-writing/0.1"
+        raw = "/logical/root/plugins/cache/ai-skills-candidate/clear-writing/0.1/skills/zh/SKILL.md\n"
 
         self.assertIsNone(replay.parse_consumption(raw, installed))
 
     def test_consumption_rejects_assistant_text_candidate_path(self) -> None:
-        installed = "/canonical/root/plugins/cache/ai-skills-candidate/writing-style/0.1"
+        installed = "/canonical/root/plugins/cache/ai-skills-candidate/clear-writing/0.1"
         event = json.dumps(
             {
                 "type": "item.completed",
@@ -311,7 +311,7 @@ class ReplayMechanismTests(unittest.TestCase):
                             "type": "output_text",
                             "text": (
                                 "I used /logical/root/plugins/cache/ai-skills-candidate/"
-                                "writing-style/0.1/skills/zh/SKILL.md"
+                                "clear-writing/0.1/skills/zh/SKILL.md"
                             ),
                         }
                     ],
@@ -322,7 +322,7 @@ class ReplayMechanismTests(unittest.TestCase):
         self.assertIsNone(replay.parse_consumption(event + "\n", installed))
 
     def test_consumption_still_accepts_full_absolute_installed_path(self) -> None:
-        installed = "/canonical/root/plugins/cache/ai-skills-candidate/writing-style/0.1"
+        installed = "/canonical/root/plugins/cache/ai-skills-candidate/clear-writing/0.1"
         event = json.dumps(
             {
                 "type": "item.completed",
@@ -351,11 +351,11 @@ class ReplayMechanismTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             wrong = root / "wrong" / "staged" / "source"
-            correct = root / "correct" / "codex" / "cache" / "writing-style" / "0.1"
+            correct = root / "correct" / "codex" / "cache" / "clear-writing" / "0.1"
             wrong.mkdir(parents=True)
             correct.mkdir(parents=True)
             payload = {
-                "pluginId": "writing-style@ai-skills-candidate",
+                "pluginId": "clear-writing@ai-skills-candidate",
                 "source": {"path": str(wrong)},
                 "installedPath": str(correct),
             }
@@ -364,24 +364,24 @@ class ReplayMechanismTests(unittest.TestCase):
                 plugin_id, installed_path, returned_payload = replay.add_candidate_plugin(
                     Path("/repo/.local-runtime/codex/0.153.4/bin/codex"),
                     Path("/repo/.local-runtime/candidate-marketplace"),
-                    "writing-style",
+                    "clear-writing",
                 )
 
-        self.assertEqual(plugin_id, "writing-style@ai-skills-candidate")
+        self.assertEqual(plugin_id, "clear-writing@ai-skills-candidate")
         self.assertEqual(installed_path, str(correct))
         self.assertNotEqual(installed_path, str(wrong))
         self.assertIs(returned_payload, payload)
 
     def test_candidate_absent_after_normal_completion(self) -> None:
-        replay.assert_candidate_absent({"plugins": [{"pluginId": "writing-style@yuukias-ai-skills"}]})
+        replay.assert_candidate_absent({"plugins": [{"pluginId": "clear-writing@yuukias-ai-skills"}]})
         with self.assertRaisesRegex(replay.ReplayError, "still installed"):
-            replay.assert_candidate_absent({"plugins": [{"pluginId": "writing-style@ai-skills-candidate"}]})
+            replay.assert_candidate_absent({"plugins": [{"pluginId": "clear-writing@ai-skills-candidate"}]})
 
     def test_production_same_name_identity_unchanged(self) -> None:
-        before = [{"pluginId": "writing-style@yuukias-ai-skills", "enabled": True}]
-        replay.assert_production_unchanged(before, [{"pluginId": "writing-style@yuukias-ai-skills", "enabled": True}])
+        before = [{"pluginId": "clear-writing@yuukias-ai-skills", "enabled": True}]
+        replay.assert_production_unchanged(before, [{"pluginId": "clear-writing@yuukias-ai-skills", "enabled": True}])
         with self.assertRaisesRegex(replay.ReplayError, "production same-name"):
-            replay.assert_production_unchanged(before, [{"pluginId": "writing-style@yuukias-ai-skills", "enabled": False}])
+            replay.assert_production_unchanged(before, [{"pluginId": "clear-writing@yuukias-ai-skills", "enabled": False}])
 
     def test_plugin_add_failure_triggers_cleanup(self) -> None:
         tmp, root, commit = make_repo()
@@ -397,8 +397,8 @@ class ReplayMechanismTests(unittest.TestCase):
 
         def fake_run_codex_json(_codex: Path, args: list[str], **_kwargs):
             if args[:3] == ["plugin", "list", "--json"]:
-                return {"plugins": [{"pluginId": "writing-style@yuukias-ai-skills", "name": "writing-style", "enabled": True}]}
-            if args[-4:] == ["plugin", "add", "--json", "writing-style@ai-skills-candidate"]:
+                return {"plugins": [{"pluginId": "clear-writing@yuukias-ai-skills", "name": "clear-writing", "enabled": True}]}
+            if args[-4:] == ["plugin", "add", "--json", "clear-writing@ai-skills-candidate"]:
                 return {"pluginId": "wrong@ai-skills-candidate", "installedPath": "/tmp/nope"}
             return None
 
@@ -407,8 +407,8 @@ class ReplayMechanismTests(unittest.TestCase):
                 with mock.patch.object(replay, "run_codex_json", side_effect=fake_run_codex_json):
                     with mock.patch.object(replay, "remove_candidate_plugin", side_effect=lambda _c, plugin_id: remove_calls.append(plugin_id)):
                         with self.assertRaisesRegex(replay.ReplayError, "unexpected pluginId"):
-                            replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
-        self.assertEqual(remove_calls, ["writing-style@ai-skills-candidate"])
+                            replay.run_replay(root, "clear-writing", commit, "task.md", ["input.md"])
+        self.assertEqual(remove_calls, ["clear-writing@ai-skills-candidate"])
 
     def test_child_failure_triggers_cleanup(self) -> None:
         tmp, root, commit = make_repo()
@@ -426,7 +426,7 @@ class ReplayMechanismTests(unittest.TestCase):
 
         def fake_run_codex_json(_codex: Path, args: list[str], **_kwargs):
             if args[:3] == ["plugin", "list", "--json"]:
-                return {"plugins": [{"pluginId": "writing-style@yuukias-ai-skills", "name": "writing-style", "enabled": True}]}
+                return {"plugins": [{"pluginId": "clear-writing@yuukias-ai-skills", "name": "clear-writing", "enabled": True}]}
             return None
 
         child = replay.CommandResult(
@@ -441,7 +441,7 @@ class ReplayMechanismTests(unittest.TestCase):
                     with mock.patch.object(
                         replay,
                         "add_candidate_plugin",
-                        return_value=("writing-style@ai-skills-candidate", str(installed), {}),
+                        return_value=("clear-writing@ai-skills-candidate", str(installed), {}),
                     ):
                         with mock.patch.object(replay, "run_child_exec", return_value=child):
                             with mock.patch.object(
@@ -450,8 +450,8 @@ class ReplayMechanismTests(unittest.TestCase):
                                 side_effect=lambda _c, plugin_id: remove_calls.append(plugin_id),
                             ):
                                 with self.assertRaisesRegex(replay.ReplayError, "child exec failed"):
-                                    replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
-        self.assertEqual(remove_calls, ["writing-style@ai-skills-candidate"])
+                                    replay.run_replay(root, "clear-writing", commit, "task.md", ["input.md"])
+        self.assertEqual(remove_calls, ["clear-writing@ai-skills-candidate"])
 
     def test_consumption_proof_failure_still_persists_child_streams(self) -> None:
         tmp, root, commit = make_repo()
@@ -468,7 +468,7 @@ class ReplayMechanismTests(unittest.TestCase):
 
         def fake_run_codex_json(_codex: Path, args: list[str], **_kwargs):
             if args[:3] == ["plugin", "list", "--json"]:
-                return {"plugins": [{"pluginId": "writing-style@yuukias-ai-skills", "name": "writing-style", "enabled": True}]}
+                return {"plugins": [{"pluginId": "clear-writing@yuukias-ai-skills", "name": "clear-writing", "enabled": True}]}
             return None
 
         child_stdout = json.dumps({"type": "event", "message": "no candidate installed path here"}) + "\n"
@@ -480,12 +480,12 @@ class ReplayMechanismTests(unittest.TestCase):
                     with mock.patch.object(
                         replay,
                         "add_candidate_plugin",
-                        return_value=("writing-style@ai-skills-candidate", str(installed), {}),
+                        return_value=("clear-writing@ai-skills-candidate", str(installed), {}),
                     ):
                         with mock.patch.object(replay, "run_child_exec", return_value=child):
                             with mock.patch.object(replay, "remove_candidate_plugin"):
                                 with self.assertRaisesRegex(replay.ReplayError, "actual consumption"):
-                                    replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
+                                    replay.run_replay(root, "clear-writing", commit, "task.md", ["input.md"])
 
         stdout_files = list((root / ".local-runtime" / "candidate-plugin-replay" / "runs").glob("*/child.stdout.jsonl"))
         stderr_files = list((root / ".local-runtime" / "candidate-plugin-replay" / "runs").glob("*/child.stderr"))
@@ -495,7 +495,7 @@ class ReplayMechanismTests(unittest.TestCase):
         self.assertEqual(len(add_payload_files), 1)
         self.assertEqual(stdout_files[0].read_text(encoding="utf-8"), child_stdout)
         self.assertEqual(stderr_files[0].read_text(encoding="utf-8"), child_stderr)
-        self.assertEqual(json.loads(add_payload_files[0].read_text(encoding="utf-8")), {"writing-style": {}})
+        self.assertEqual(json.loads(add_payload_files[0].read_text(encoding="utf-8")), {"clear-writing": {}})
 
     def test_child_exec_normal_completion_persists_streams(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -518,7 +518,7 @@ class ReplayMechanismTests(unittest.TestCase):
             result = replay.run_child_exec(
                 codex,
                 root / "marketplace",
-                "writing-style@ai-skills-candidate",
+                "clear-writing@ai-skills-candidate",
                 workspace,
                 output_dir,
                 "prompt text",
@@ -545,7 +545,7 @@ class ReplayMechanismTests(unittest.TestCase):
             stderr_path = root / "run" / "child.stderr"
             run_json = root / "run" / "run.json"
             pid_path = root / "descendant.pid"
-            installed = root / "plugins" / "cache" / "ai-skills-candidate" / "writing-style" / "0.1"
+            installed = root / "plugins" / "cache" / "ai-skills-candidate" / "clear-writing" / "0.1"
             installed.mkdir(parents=True)
             codex = self.make_executable(
                 root,
@@ -571,7 +571,7 @@ class ReplayMechanismTests(unittest.TestCase):
                     replay.run_child_exec(
                         codex,
                         root / "marketplace",
-                        "writing-style@ai-skills-candidate",
+                        "clear-writing@ai-skills-candidate",
                         workspace,
                         output_dir,
                         "prompt text",
@@ -612,7 +612,7 @@ class ReplayMechanismTests(unittest.TestCase):
 
         def fake_run_codex_json(_codex: Path, args: list[str], **_kwargs):
             if args[:3] == ["plugin", "list", "--json"]:
-                return {"plugins": [{"pluginId": "writing-style@yuukias-ai-skills", "name": "writing-style", "enabled": True}]}
+                return {"plugins": [{"pluginId": "clear-writing@yuukias-ai-skills", "name": "clear-writing", "enabled": True}]}
             return None
 
         with mock.patch.object(replay, "ensure_runtime_available", return_value={"version": replay.EXPECTED_CODEX_VERSION}):
@@ -621,7 +621,7 @@ class ReplayMechanismTests(unittest.TestCase):
                     with mock.patch.object(
                         replay,
                         "add_candidate_plugin",
-                        return_value=("writing-style@ai-skills-candidate", str(installed), {}),
+                        return_value=("clear-writing@ai-skills-candidate", str(installed), {}),
                     ):
                         with mock.patch.object(
                             replay,
@@ -634,8 +634,8 @@ class ReplayMechanismTests(unittest.TestCase):
                                 side_effect=lambda _c, plugin_id: remove_calls.append(plugin_id),
                             ):
                                 with self.assertRaisesRegex(replay.ReplayError, "timed out"):
-                                    replay.run_replay(root, "writing-style", commit, "task.md", ["input.md"])
-        self.assertEqual(remove_calls, ["writing-style@ai-skills-candidate"])
+                                    replay.run_replay(root, "clear-writing", commit, "task.md", ["input.md"])
+        self.assertEqual(remove_calls, ["clear-writing@ai-skills-candidate"])
         run_json_files = list((root / ".local-runtime" / "candidate-plugin-replay" / "runs").glob("*/run.json"))
         self.assertEqual(run_json_files, [])
 
@@ -657,7 +657,7 @@ class ReplayMechanismTests(unittest.TestCase):
             replay.run_child_exec(
                 codex,
                 root / "candidate-marketplace",
-                "writing-style@ai-skills-candidate",
+                "clear-writing@ai-skills-candidate",
                 workspace,
                 output_dir,
                 "Rewrite this.",
@@ -669,8 +669,8 @@ class ReplayMechanismTests(unittest.TestCase):
 
             captured = json.loads(args_file.read_text(encoding="utf-8"))
 
-        self.assertIn("plugins.writing-style@ai-skills-candidate.enabled=true", captured)
-        self.assertNotIn('plugins."writing-style@ai-skills-candidate".enabled=true', captured)
+        self.assertIn("plugins.clear-writing@ai-skills-candidate.enabled=true", captured)
+        self.assertNotIn('plugins."clear-writing@ai-skills-candidate".enabled=true', captured)
 
     def test_child_exec_can_add_repo_local_writable_dirs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -692,7 +692,7 @@ class ReplayMechanismTests(unittest.TestCase):
             replay.run_child_exec(
                 codex,
                 root / "candidate-marketplace",
-                "writing-style@ai-skills-candidate",
+                "clear-writing@ai-skills-candidate",
                 workspace,
                 output_dir,
                 "Rewrite this.",
@@ -727,7 +727,7 @@ class ReplayMechanismTests(unittest.TestCase):
             replay.run_child_exec(
                 codex,
                 root / "candidate-marketplace",
-                ["web-development@ai-skills-candidate", "writing-style@ai-skills-candidate"],
+                ["web-development@ai-skills-candidate", "clear-writing@ai-skills-candidate"],
                 workspace,
                 output_dir,
                 "Plan product interface copy.",
@@ -740,7 +740,7 @@ class ReplayMechanismTests(unittest.TestCase):
             captured = json.loads(args_file.read_text(encoding="utf-8"))
 
         self.assertIn("plugins.web-development@ai-skills-candidate.enabled=true", captured)
-        self.assertIn("plugins.writing-style@ai-skills-candidate.enabled=true", captured)
+        self.assertIn("plugins.clear-writing@ai-skills-candidate.enabled=true", captured)
 
     def test_parser_accepts_repeated_plugin_arguments_for_same_session_replay(self) -> None:
         parser = replay.build_parser()
@@ -751,7 +751,7 @@ class ReplayMechanismTests(unittest.TestCase):
                 "--plugin",
                 "web-development",
                 "--plugin",
-                "writing-style",
+                "clear-writing",
                 "--candidate-commit",
                 "abc",
                 "--task",
@@ -761,7 +761,7 @@ class ReplayMechanismTests(unittest.TestCase):
             ]
         )
 
-        self.assertEqual(args.plugin, ["web-development", "writing-style"])
+        self.assertEqual(args.plugin, ["web-development", "clear-writing"])
 
 
 if __name__ == "__main__":

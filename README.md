@@ -27,14 +27,21 @@
 |---|---|
 | <img src="./assets/codex/plugin-icons/workflow-core/composer.svg" width="40" alt="Verified Workflow 图标"> | <strong>Verified Workflow</strong><br><code>workflow-core</code> · v`0.5`<br>复杂任务的执行、验证与可靠收尾。 |
 | <img src="./assets/codex/plugin-icons/ai-skills-core/composer.svg" width="40" alt="AI Skills Maintainer 图标"> | <strong>AI Skills Maintainer</strong><br><code>ai-skills-core</code> · v`0.5`<br>维护本仓库插件，也负责用短请求同步当前机器上的 AI_Skills 与 Bridge Kit 正式发布版本。 |
-| <img src="./assets/codex/plugin-icons/writing-style/composer.svg" width="40" alt="Clear Writing 图标"> | <strong>Clear Writing</strong><br><code>writing-style</code> · v`0.5`<br>在保留事实与原意的前提下，把普通解释、诊断、进度总结和科研/技术文档写得更清楚，也处理产品界面短文案。 |
-| <img src="./assets/codex/plugin-icons/research-writing/composer.svg" width="40" alt="Research Authoring 图标"> | <strong>Research Authoring</strong><br><code>research-writing</code> · v`0.2`<br>支持研究报告、论文、文献、引用和证据组织；正式 PDF 会交给配套渲染器处理。 |
+| <img src="./assets/codex/plugin-icons/clear-writing/composer.svg" width="40" alt="Clear Writing 图标"> | <strong>Clear Writing</strong><br><code>clear-writing</code> · v`0.5`<br>在保留事实与原意的前提下，把普通解释、诊断、进度总结和科研/技术文档写得更清楚，也处理产品界面短文案。 |
+| <img src="./assets/codex/plugin-icons/research-authoring/composer.svg" width="40" alt="Research Authoring 图标"> | <strong>Research Authoring</strong><br><code>research-authoring</code> · v`0.2`<br>支持研究报告、论文、文献、引用和证据组织；正式 PDF 会交给配套渲染器处理。 |
 | <img src="./assets/codex/plugin-icons/presentations/composer.svg" width="40" alt="Presentations 图标"> | <strong>Presentations</strong><br><code>presentations</code> · v`0.3`<br>规划和返修科研组会、研究汇报与商务演示文稿。 |
 | <img src="./assets/codex/plugin-icons/scientific-visualization/composer.svg" width="40" alt="Scientific Visualization 图标"> | <strong>Scientific Visualization</strong><br><code>scientific-visualization</code> · v`0.1`<br>处理科研图、配色、示意图、海报和视觉检查。 |
 | <img src="./assets/codex/plugin-icons/web-development/composer.svg" width="40" alt="Frontend Design 图标"> | <strong>Frontend Design</strong><br><code>web-development</code> · v`0.4`<br>让前端设计先进入统一协调入口，并能把界面内容架构交给 Clear Writing 做安全文案。 |
 | <img src="./assets/codex/plugin-icons/statistical-modeling/composer.svg" width="40" alt="Statistical Modeling 图标"> | <strong>Statistical Modeling</strong><br><code>statistical-modeling</code> · v`0.1`<br>支持统计建模、Bayesian 工作流、诊断和数据分析。 |
 | <img src="./assets/codex/plugin-icons/bioinformatics/composer.svg" width="40" alt="Bioinformatics 图标"> | <strong>Bioinformatics</strong><br><code>bioinformatics</code> · v`0.1`<br>覆盖数据库、单细胞、GWAS 和组学分析工作流。 |
 | <img src="./assets/codex/plugin-icons/medical-imaging/composer.svg" width="40" alt="Medical Imaging 图标"> | <strong>Medical Imaging</strong><br><code>medical-imaging</code> · v`0.1`<br>支持 DICOM/NIfTI、分割、配准和影像 AI 工作流。 |
+
+设计中，尚未发布：
+
+| | 插件 |
+|---|---|
+| <img src="./assets/codex/plugin-icons/content-selection/composer.svg" width="40" alt="Content Selection 图标"> | <strong>Content Selection</strong><br><code>content-selection</code><br>在制作前决定作品里放哪些内容，成品出来后整件复看。 |
+| <img src="./assets/codex/plugin-icons/reasoned-decision/composer.svg" width="40" alt="Reasoned Decision 图标"> | <strong>Reasoned Decision</strong><br><code>reasoned-decision</code><br>调查现实解空间、核证据、比较方案，给出有依据的推荐。 |
 
 ## 开始使用
 

@@ -10,7 +10,7 @@
 
 - `workflow-core`：规划、执行、review、完成这些流程边界；
 - `ai-skills-core`：AI_Skills plugin maintenance contract，包括 source authority、TODO/duplicate triage、domain ownership、generated parity、production replay、unrelated regression、version/changelog 和 release closure；
-- target domain plugin：目标领域专业判断，例如 `presentations`、`writing-style`、`statistical-modeling`、`bioinformatics` 或 `medical-imaging`。
+- target domain plugin：目标领域专业判断，例如 `presentations`、`clear-writing`、`statistical-modeling`、`bioinformatics` 或 `medical-imaging`。
 
 `ai-skills-core` 不替代 domain plugin，也不新增 workflow/state/schema。它只保证中央 plugin refinement 真的完成维护闭环。Planner/Executor 必须显式调用它；不要用全局 implicit trigger 解决。
 
@@ -63,7 +63,7 @@ docs/plugin-todos/
 例如：
 
 - `presentations`：布局、返修范围、公式/图/diagram 可读性、existing-deck routing、错误 fallback；
-- `research-writing`：报告结构、日志化语言、claim/evidence 组织；
+- `research-authoring`：报告结构、日志化语言、claim/evidence 组织；
 - `statistical-modeling`：通用统计 workflow、诊断、分析 routing；
 - `medical-imaging`：通用影像 workflow、数据格式、任务 routing。
 
@@ -176,7 +176,7 @@ Promotion 前必须明确：
 2. Scientific reasoning / narrative；
 3. Composition / rendering；
 4. QA / regression；
-5. Writing style；
+5. Clear writing；
 6. Repository / distribution。
 
 如果现有层能解决，就不要为了一个 TODO 新建顶级 skill/schema/state。
@@ -250,10 +250,10 @@ docs/plugin-todos/presentations.md
 
 ### Reporting
 
-下一份真实 advisor/group-meeting report 如果暴露 `research-writing` 的问题，直接写入：
+下一份真实 advisor/group-meeting report 如果暴露 `research-authoring` 的问题，直接写入：
 
 ```text
-docs/plugin-todos/research-writing.md
+docs/plugin-todos/research-authoring.md
 ```
 
 项目自身的科学结论和实验下一步仍留在项目 repo。

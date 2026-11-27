@@ -19,7 +19,7 @@ license: MIT-compatible local synthesis; architecture baseline from reviewed tas
 ---
 # Scientific Rewrite
 
-This is the heavy Chinese rewrite route inside `writing-style`. Use it when an
+This is the heavy Chinese rewrite route inside `clear-writing`. Use it when an
 ordinary user provides existing Chinese or Chinese-dominant scientific/technical
 material and asks to reorganize, restructure, or rewrite it into clearer Chinese
 while preserving exact scientific details. The user does not need to name this
@@ -40,7 +40,7 @@ implementation details, not user-facing activation words.
 
 The ordinary user should not need to name this skill. A natural request such as
 "把这份较长科研报告重新组织成自然中文，数字、公式、引用、比较条件和限制都不能丢" should be routed here by the installed
-`writing-style` plugin when the source is long enough to need document-level
+`clear-writing` plugin when the source is long enough to need document-level
 meaning planning.
 
 ## Boundaries
@@ -63,7 +63,7 @@ meaning planning.
 
 ```text
 raw source
--> ordinary writing-style route selection
+-> ordinary clear-writing route selection
 -> source anchors
 -> Meaning Map
 -> Reader Plan
@@ -88,7 +88,7 @@ system only to claim that the writer forgot the source.
 
 ## Route Selection
 
-The installed `writing-style` entrypoint must select this heavy route from an
+The installed `clear-writing` entrypoint must select this heavy route from an
 ordinary user request. The prompt may ask to rewrite a longer Chinese scientific
 or technical document naturally while preserving numbers, formulas, citations,
 comparisons, conditions, and limitations. The prompt must not name
@@ -99,7 +99,7 @@ Record route evidence in `route_selection.json` before validating the stage
 package:
 
 - `schema`: `SCIENTIFIC_REWRITE_ROUTE_SELECTION_V1`;
-- `selector_owner`: `writing-style`;
+- `selector_owner`: `clear-writing`;
 - `selected_route`: `scientific-rewrite`;
 - `forced_route`: `false`;
 - `ordinary_user_prompt`: `true`;
@@ -356,7 +356,7 @@ source comparison, editing commentary, peer review, provenance, or audit output.
 
 This route can claim process completion only when the stage package validates:
 
-- ordinary `writing-style` route selection chose `scientific-rewrite`;
+- ordinary `clear-writing` route selection chose `scientific-rewrite`;
 - no raw-source drafting leakage into realization, repair, or assembly;
 - complete source-anchor/meaning ownership;
 - explicit source-context exclusion for non-reader packaging metadata;

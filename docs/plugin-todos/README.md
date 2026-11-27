@@ -9,8 +9,8 @@
 - `delivery-assurance.md` — planned dedicated Delivery Assurance plugin；当前仅建立真实失败 inbox，尚未生产实现
 - `workflow-core.md`
 - `ai-skills-core.md`
-- `writing-style.md`
-- `research-writing.md`
+- `clear-writing.md`
+- `research-authoring.md`
 - `presentations.md`
 - `presentations-core-history-lock.md` — presentations 的 P0 历史预检、已验收页面锁、共享组件锁和图内数学符号要求
 - `scientific-visualization.md`

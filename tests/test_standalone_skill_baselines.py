@@ -47,8 +47,8 @@ EXPECTED_STANDALONE_SKILL_VERSIONS = {
 EXPECTED_PLUGIN_VERSIONS = {
     "workflow-core": "0.5",
     "ai-skills-core": "0.5",
-    "writing-style": "0.5",
-    "research-writing": "0.2",
+    "clear-writing": "0.5",
+    "research-authoring": "0.2",
     "presentations": "0.4",
     "scientific-visualization": "0.1",
     "web-development": "0.4",
@@ -98,7 +98,7 @@ class StandaloneSkillBaselineTests(unittest.TestCase):
         for slug, info in STANDALONE_SKILLS.items():
             self.assertIn((info["path"] / info["icon"]).as_posix(), sheet)
             self.assertRegex(sheet, rf">{re.escape(slug)}<")
-        for plugin in ["workflow-core", "ai-skills-core", "writing-style", "presentations"]:
+        for plugin in ["workflow-core", "ai-skills-core", "clear-writing", "presentations"]:
             self.assertIn(f"assets/codex/plugin-icons/{plugin}/composer.svg", sheet)
 
 

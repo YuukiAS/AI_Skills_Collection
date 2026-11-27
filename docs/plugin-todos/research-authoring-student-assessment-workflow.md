@@ -7,8 +7,8 @@ Reference workflow: `plugins/codex/plugins/presentations/shared/presentation-end
 
 Canonical candidate files:
 
-- `plugins/codex/plugins/research-writing/shared/student-assessment-end-to-end-pre-execution-runbook.md`
-- `plugins/codex/plugins/research-writing/shared/student-assessment-cumulative-acceptance-contract.md`
+- `plugins/codex/plugins/research-authoring/shared/student-assessment-end-to-end-pre-execution-runbook.md`
+- `plugins/codex/plugins/research-authoring/shared/student-assessment-cumulative-acceptance-contract.md`
 
 ## Purpose
 

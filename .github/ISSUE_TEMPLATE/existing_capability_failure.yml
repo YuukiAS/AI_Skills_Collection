@@ -20,7 +20,7 @@ body:
     attributes:
       label: Target plugin or skill
       description: Name the plugin or standalone skill if you know it.
-      placeholder: e.g. presentations, writing-style, render-chinese-math-pdf
+      placeholder: e.g. presentations, clear-writing, render-chinese-math-pdf
     validations:
       required: true
   - type: textarea

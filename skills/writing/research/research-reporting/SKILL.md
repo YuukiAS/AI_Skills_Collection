@@ -10,7 +10,7 @@ executes_code: false
 secrets_needed:
 last_reviewed: 2026-08-29
 profile_tags:
-  - research-writing
+  - research-authoring
 recommended_scope: project
 icon_small: assets/app-facing.svg
 icon_large: assets/app-facing.svg

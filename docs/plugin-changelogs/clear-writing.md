@@ -1,0 +1,94 @@
+# clear-writing Changelog
+
+## Unreleased
+
+- Added a user-confirmed positive example for compressing long technical audits into decision-ready explanations without dumping rule IDs or forcing low-risk reversible choices back onto the user.
+- Added a user-confirmed positive example for mathematical/statistical method explanations to `response-clarity`.
+- The route now explicitly prefers concrete problem setup -> mental model -> small worked example -> formula -> real gain/boundary -> literature connection for complex method explanations when that structure helps.
+- The example is guidance, not a rigid answer template; short questions should remain short and domain facts still come from the relevant domain owner.
+
+## 0.5 - 2026-10-19
+
+Before:
+
+- Clear Writing had no dedicated route for ordinary explanations, diagnostics,
+  progress updates, or task-result summaries after domain reasoning.
+- Complex scientific explanations could fragment one reasoning unit across
+  many short paragraphs or introduce unfamiliar multi-index objects before the
+  reader knew what they represented.
+- The `codex-clear-writing` profile did not expose the complete approved set of
+  six writing skills.
+
+After:
+
+- Added `response-clarity` for ordinary user-facing explanations, conclusions,
+  diagnostics, advice, progress updates, and task-result summaries while
+  preserving exact technical strings, facts, permissions, commands, paths,
+  status, and other protected meaning.
+- Complex scientific explanations now group complete semantic or reasoning
+  units and introduce unfamiliar methods, terms, and mathematical objects with
+  a source-supported reader model before formal terminology or formulas.
+  Missing definitions are stated explicitly instead of guessed.
+- Pure JSON, YAML, code, commands, raw logs, verbatim text, and exact machine
+  output remain exempt from this natural-language route.
+- The `codex-clear-writing` profile now matches the approved six-skill
+  exposure. The profile adds `response-clarity` and the already released
+  `product-ui-copy`; this does not change or revalidate Product UI Copy's
+  professional behavior.
+- Final real ChatGPT Web closure passed four answers. This release does not
+  claim `PLUGIN_LOADED_EVERY_TURN=PASS`, guaranteed background loading on every
+  turn, or a proved matched causal increment.
+
+## 0.4 - 2026-09-29
+
+Before:
+
+- Clear Writing handled long-form Chinese prose, source-faithful scientific
+  rewrites, fidelity guardrails and English scientific prose, but product UI
+  microcopy had no dedicated route.
+- Chinese interface labels, buttons, states, onboarding, settings help and
+  trust/privacy disclosures could fall into the long-form `chinese-prose`
+  route merely because they were Chinese.
+- Protected product consequences such as deletion, retention, visibility,
+  payment, eligibility, consent and privacy were not called out as a UI-copy
+  handoff contract.
+
+After:
+
+- Added `product-ui-copy` as a Clear Writing sibling route for product-interface
+  microcopy under frozen product meaning.
+- Product UI Copy covers labels, CTA/action text, empty/loading/error/success
+  states, onboarding, settings text, permission prompts, trust/privacy
+  disclosure, landing-page interface blocks and locale-specific UI wording.
+- `chinese-prose` now stays focused on document/report/README-style Chinese and
+  routes product interface short copy away to `product-ui-copy`.
+- `writing-fidelity` now protects product state, user consequence,
+  reversibility, external visibility, payment/subscription, deletion,
+  retention, consent, privacy, safety, legal/trust disclosure, and exact
+  product/brand/technical identities during Product UI Copy work.
+- Product UI Copy uses `KEEP`, `WORDING/NATURALNESS`, `LOCALE/REGISTER`,
+  `CONTENT ARCHITECTURE`, `PRODUCT SEMANTICS`, and `LEGAL/TRUST/SAFETY` as
+  ownership-preserving reasoning labels, and treats `zh-Hans` / `zh-Hant-HK` as
+  independent realizations rather than character conversion.
+
+## 0.3 - 2026-09-15
+
+Clear Writing's scientific-rewrite route now treats reader-facing relevance as an explicit semantic contract rather than a post-hoc cleanup pass. Reader Plans must assign a disposition to every meaning, including core content, supporting content, structured technical material, relocated reproduction details, source-author future work, wrappers, and irrelevant traces.
+
+Future-work and limitation statements now preserve completion state, subject/voice, temporal status, and epistemic status through realization, so source-author plans are not silently rewritten as current Executor work. Assembly packets also require whole-document finish metadata before a final candidate can validate.
+
+The route can now account for source packaging metadata such as webpage wrappers, language-link counts, archive ids, or alternate-language labels through explicit source-context exclusions. Reader-facing exact-item validation still protects method names, models, datasets, APIs, formulas, citations, paths, commands, and other technical identities when they matter for understanding or reproduction.
+
+## 0.2 - 2026-09-10
+
+Reader-facing scientific/technical rewrites now avoid source-process framing in standalone prose. The scientific-rewrite route rejects output that says things like "原文指出", "根据给定材料", or "源文说明" when the user asked for a normal reader-facing rewrite, while still preserving legitimate author or literature attribution.
+
+Reviewed Handoff Text Review packet construction now keeps workflow identities, gate labels, run ids, commits, hashes, and review-wrapper labels out of the prose body sent for external text review. Multi-document review packets use natural document titles instead.
+
+Regression evidence for this release covers the Bloom known regression, unrelated light Chinese polish, fidelity-only and English scientific-prose compatibility replays, two frozen public-safe fresh holdouts, one final Terra Text Review, and the full Codex Marketplace release workflow.
+
+## 0.1 - 2026-08-30
+
+Initial independent plugin baseline in AI_Skills_Collection repository `5.0.0`.
+
+Independent plugin versioning starts at `0.1` with AI_Skills_Collection repository `5.0.0`. Earlier `4.x` values were legacy lockstep release metadata; see the root `CHANGELOG.md` and Git history.

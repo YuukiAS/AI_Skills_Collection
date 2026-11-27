@@ -25,7 +25,7 @@ problem: High-stakes practical decisions are often answered too conservatively o
 scope examples: product/account/platform choices, software/service selection, migration choices, infrastructure strategy, purchasing, workflow/tool choice, and other reversible or semi-reversible decisions where current external evidence materially changes the answer.
 boundary: This capability does not replace domain experts, legal/medical/financial specialists, or research methods. It owns decision synthesis: evidence weighting, uncertainty handling, option elimination, recommendation, and stop/go criteria. Domain plugins remain responsible for domain facts.
 project-specific context: The Claude/Persona case below is evidence only. Do not encode Anthropic-specific KYC rules, supported regions, Chinese passport behavior, HKID behavior, or any single forum's claims as generic decision rules.
-next research step: refine the dedicated Reasoned Decision plugin architecture, keeping the internal skill set minimal and reviewing overlap with workflow-core, domain plugins, writing-style, prior-art/search-first methods, cross-turn Decision Delta behavior, and the real regression set. Do not create a standalone `reasoned-decision` skill or proliferate helper skills.
+next research step: refine the dedicated Reasoned Decision plugin architecture, keeping the internal skill set minimal and reviewing overlap with workflow-core, domain plugins, clear-writing, prior-art/search-first methods, cross-turn Decision Delta behavior, and the real regression set. Do not create a standalone `reasoned-decision` skill or proliferate helper skills.
 
 ## Accepted real-use evidence: Claude Pro / Persona KYC three-way decision
 

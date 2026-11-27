@@ -65,7 +65,7 @@ Repository version **只在形成一次正式、可安装、经过验证的 rele
 ```text
 Repository: 5.0.0 -> 5.0.1
 presentations: 0.1 -> 0.2
-research-writing: 0.1 (unchanged)
+research-authoring: 0.1 (unchanged)
 ```
 
 **单个 plugin 的正常升级，无论改动多少，默认都只触发 repository patch release。**

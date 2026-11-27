@@ -56,7 +56,7 @@ For non-trivial decks, collect:
 
 ## Writing Skill Handoff
 
-Presentation skills own deck structure, routing, artifact coordination, and visual QA. They do not duplicate writing-style rules. When the relevant writing skills are installed, final slide wording should hand off as follows:
+Presentation skills own deck structure, routing, artifact coordination, and visual QA. They do not duplicate clear-writing rules. When the relevant writing skills are installed, final slide wording should hand off as follows:
 
 - Chinese presentation text, including research, business, executive, strategy, product, and teaching decks, must pass through `writing-fidelity` plus `chinese-prose` before final artifact creation. Preserve facts, numbers, citations, labels, and user corrections while removing template-like or awkward Chinese.
 - English scientific slide text can pass through `scientific-prose` for evidence strength, limitation wording, captions, and claim calibration.

@@ -121,7 +121,7 @@ wrapper label，例如 `Gate`、`known regression`、`holdout`、`recovery`、
 而可定位的真实 candidate bytes 本身没有该问题，应分类为
 `REVIEW_PACKET_CONSTRUCTION_FAILURE`。这时 Reviewer 要求 Executor 重建只含真实 candidate text、
 用自然文档标题区分多文档的 packet；不得把 wrapper label failure
-当成 writing-style product failure，也不得把它改写成 PASS。
+当成 clear-writing product failure，也不得把它改写成 PASS。
 
 明显违反 frozen requirement 的 artifact 质量问题必须由 Reviewer 自行阻断，不得推给 `AWAIT_HUMAN_DECISION`：明显违反用户明确规则、明显机器腔、明显 layout failure、明显 artifact regression，都是 `REVISE` 或真实不可恢复时 `BLOCKED` 的依据。Human gate 默认只用于真正互斥的产品/科研选择、frozen criteria 无法决定的主观偏好、用户必须亲自授权的外部动作、显著风险/成本/隐私/许可决定，或 frozen Plan 明确要求的最终人工验收。
 

@@ -41,7 +41,7 @@ Use this aggregate Codex App skill when the task matches one of the source workf
 - When no palette is specified, or when a venue/figure type/domain context is provided, first run contextual discovery with `publication-figure-palettes` or `../../shared/scripts/palette.py discover`.
 - Keep discovery and application separate: safe canonical palettes are plotting defaults; Notion candidates are contextual, non-official, and gated for snippets.
 - For figure readiness checks, use `scientific-figure-qa` after plotting or layout decisions.
-- Venue templates belong to research-writing; this plugin owns figure color, plotting code, visual examples, schematics, and posters.
+- Venue templates belong to research-authoring; this plugin owns figure color, plotting code, visual examples, schematics, and posters.
 
 ## Workflow
 

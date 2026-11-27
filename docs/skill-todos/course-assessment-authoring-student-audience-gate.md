@@ -6,7 +6,7 @@ evidence:
 - rejected student Guide at candidate `145c7bc265265e4bc266824af8c770d9e3e55014`;
 - instructor PDF annotations and subsequent thread corrections, 2026-10-06;
 - primary candidate TODO: `docs/skill-todos/course-assessment-authoring.md`;
-- cross-domain Research Authoring note: `docs/plugin-todos/research-writing-student-audience-and-pre-render-approval.md`.
+- cross-domain Research Authoring note: `docs/plugin-todos/research-authoring-student-audience-and-pre-render-approval.md`.
 
 target layer: student-facing assessment authoring / content selection / human approval gate / revision protocol
 

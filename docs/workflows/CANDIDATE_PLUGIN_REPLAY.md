@@ -62,7 +62,7 @@ Do not use this workflow to:
 - add a permanent candidate marketplace;
 - clone another AI_Skills checkout merely to replay a candidate;
 - modify Bridge Kit or Host Policy just to make a candidate replay work;
-- overwrite `writing-style@yuukias-ai-skills` or another production identity with a candidate;
+- overwrite `clear-writing@yuukias-ai-skills` or another production identity with a candidate;
 - inject internal subskill/route names into a natural black-box production prompt merely to manufacture a PASS;
 - treat a receipt/test/JSONL event as reader-facing PRODUCT PASS.
 

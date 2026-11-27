@@ -2025,7 +2025,7 @@ def build_parser() -> argparse.ArgumentParser:
             "  ai-skills select\n"
             "  ai-skills install --target repo --domain bayesian --mode symlink --write-agents-md\n"
             "  ai-skills install --target repo --skill domain/bayesian/pymc --mode symlink --write-agents-md\n"
-            "  ai-skills install --target user --profile codex-writing-style --mode symlink\n"
+            "  ai-skills install --target user --profile codex-clear-writing --mode symlink\n"
             "  ai-skills doctor\n\n"
             "Fallback without editable install:\n"
             "  python3 /path/to/AI_Skills_Collection/scripts/skills.py <command> [options]"

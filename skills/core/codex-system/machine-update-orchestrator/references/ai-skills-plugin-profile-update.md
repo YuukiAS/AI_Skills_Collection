@@ -1,6 +1,6 @@
 # Route A: Isolated AI_Skills Plugin Or Profile Update
 
-Use Route A for central plugin or profile updates such as `update presentations`, `update workflow-core`, `update research-writing`, `update AI Skills`, or a named managed profile when release metadata does not declare cross-layer impact.
+Use Route A for central plugin or profile updates such as `update presentations`, `update workflow-core`, `update research-authoring`, `update AI Skills`, or a named managed profile when release metadata does not declare cross-layer impact.
 
 ## Default Scope
 

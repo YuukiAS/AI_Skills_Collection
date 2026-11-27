@@ -89,7 +89,7 @@ class ProductUiCopyCrossPluginTests(unittest.TestCase):
         config = json.loads((REPO_ROOT / "scripts/codex_marketplace_config.json").read_text(encoding="utf-8"))
         plugins = {plugin["name"]: plugin for plugin in config["plugins"]}
 
-        writing = plugins["writing-style"]
+        writing = plugins["clear-writing"]
         self.assertEqual(writing["version"], "0.5")
         self.assertIn("Product UI Copy", writing["description"])
         writing_sources = {skill["artifact_id"]: skill["source"] for skill in writing["skills"]}

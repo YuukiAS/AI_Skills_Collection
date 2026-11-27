@@ -1,6 +1,6 @@
 {
   "version": "5.5.2",
-  "generated_at": "2026-10-21T16:49:31+00:00",
+  "generated_at": "2026-11-27T13:45:24+00:00",
   "description": "Generated skill registry for AI_Skills_Collection. Do not edit by hand.",
   "include_archive": false,
   "skill_count": 156,
@@ -16,10 +16,10 @@
       "hpc",
       "medical-imaging",
       "medicine-clinical",
+      "research-authoring",
       "research-communication",
       "research-discovery",
       "research-ideation",
-      "research-writing",
       "visualization",
       "writing"
     ],
@@ -4387,7 +4387,7 @@
       "last_reviewed": "2026-10-06",
       "profile_tags": [
         "presentations",
-        "research-writing"
+        "research-authoring"
       ],
       "recommended_scope": "project",
       "selectors": [
@@ -5442,17 +5442,17 @@
       ]
     },
     {
-      "id": "writing.research-writing.academic-paper-writer-pro",
+      "id": "writing.research-authoring.academic-paper-writer-pro",
       "name": "academic-paper-writer-pro",
       "path": "skills/writing/research/academic-paper-writer-pro",
       "flat_name": "writing-research-academic-paper-writer-pro",
       "scope": "writing",
-      "domain": "research-writing",
+      "domain": "research-authoring",
       "category": "research",
       "subcategory": "research",
       "slug": "academic-paper-writer-pro",
       "install_selector": "writing/research/academic-paper-writer-pro",
-      "description": "学术论文排版、OCR恢复、DOCX/Markdown整理和模板化交付工作流。用于扫描 PDF、DOC/DOCX、Markdown 到 Word/PDF 的结构修复、断点恢复、参考文献整理和最终文件验收；内容写作、审稿和事实保真应路由到 research-writing 与 writing-fidelity。",
+      "description": "学术论文排版、OCR恢复、DOCX/Markdown整理和模板化交付工作流。用于扫描 PDF、DOC/DOCX、Markdown 到 Word/PDF 的结构修复、断点恢复、参考文献整理和最终文件验收；内容写作、审稿和事实保真应路由到 research-authoring 与 writing-fidelity。",
       "status": "active",
       "provenance": "unknown",
       "source_repo_url": "",
@@ -5479,12 +5479,12 @@
       ]
     },
     {
-      "id": "writing.research-writing.citation-verification",
+      "id": "writing.research-authoring.citation-verification",
       "name": "citation-verification",
       "path": "skills/writing/research/citation-verification",
       "flat_name": "writing-research-citation-verification",
       "scope": "writing",
-      "domain": "research-writing",
+      "domain": "research-authoring",
       "category": "research",
       "subcategory": "research",
       "slug": "citation-verification",
@@ -5506,7 +5506,7 @@
       "secrets_needed": [],
       "last_reviewed": "2026-07-09",
       "profile_tags": [
-        "research-writing",
+        "research-authoring",
         "citations"
       ],
       "recommended_scope": "project",
@@ -5519,12 +5519,12 @@
       ]
     },
     {
-      "id": "writing.research-writing.latex-paper-authoring",
+      "id": "writing.research-authoring.latex-paper-authoring",
       "name": "latex-paper-authoring",
       "path": "skills/writing/research/latex-paper-authoring",
       "flat_name": "writing-research-latex-paper-authoring",
       "scope": "writing",
-      "domain": "research-writing",
+      "domain": "research-authoring",
       "category": "research",
       "subcategory": "research",
       "slug": "latex-paper-authoring",
@@ -5546,7 +5546,7 @@
       "secrets_needed": [],
       "last_reviewed": "2026-07-09",
       "profile_tags": [
-        "research-writing",
+        "research-authoring",
         "latex"
       ],
       "recommended_scope": "project",
@@ -5559,12 +5559,12 @@
       ]
     },
     {
-      "id": "writing.research-writing.literature-review",
+      "id": "writing.research-authoring.literature-review",
       "name": "literature-review",
       "path": "skills/writing/research/literature-review",
       "flat_name": "writing-research-literature-review",
       "scope": "writing",
-      "domain": "research-writing",
+      "domain": "research-authoring",
       "category": "research",
       "subcategory": "research",
       "slug": "literature-review",
@@ -5596,12 +5596,12 @@
       ]
     },
     {
-      "id": "writing.research-writing.nature-manuscript-workflow",
+      "id": "writing.research-authoring.nature-manuscript-workflow",
       "name": "nature-manuscript-workflow",
       "path": "skills/writing/research/nature-manuscript-workflow",
       "flat_name": "writing-research-nature-manuscript-workflow",
       "scope": "writing",
-      "domain": "research-writing",
+      "domain": "research-authoring",
       "category": "research",
       "subcategory": "research",
       "slug": "nature-manuscript-workflow",
@@ -5623,7 +5623,7 @@
       "secrets_needed": [],
       "last_reviewed": "2026-07-09",
       "profile_tags": [
-        "research-writing",
+        "research-authoring",
         "nature"
       ],
       "recommended_scope": "project",
@@ -5636,12 +5636,12 @@
       ]
     },
     {
-      "id": "writing.research-writing.ocr-kb",
+      "id": "writing.research-authoring.ocr-kb",
       "name": "ocr-kb",
       "path": "skills/writing/research/ocr-kb",
       "flat_name": "writing-research-ocr-kb",
       "scope": "writing",
-      "domain": "research-writing",
+      "domain": "research-authoring",
       "category": "research",
       "subcategory": "research",
       "slug": "ocr-kb",
@@ -5673,12 +5673,12 @@
       ]
     },
     {
-      "id": "writing.research-writing.paper-workflow-orchestrator",
+      "id": "writing.research-authoring.paper-workflow-orchestrator",
       "name": "paper-workflow-orchestrator",
       "path": "skills/writing/research/paper-workflow-orchestrator",
       "flat_name": "writing-research-paper-workflow-orchestrator",
       "scope": "writing",
-      "domain": "research-writing",
+      "domain": "research-authoring",
       "category": "research",
       "subcategory": "research",
       "slug": "paper-workflow-orchestrator",
@@ -5700,7 +5700,7 @@
       "secrets_needed": [],
       "last_reviewed": "2026-07-09",
       "profile_tags": [
-        "research-writing"
+        "research-authoring"
       ],
       "recommended_scope": "project",
       "selectors": [
@@ -5712,12 +5712,12 @@
       ]
     },
     {
-      "id": "writing.research-writing.peer-review",
+      "id": "writing.research-authoring.peer-review",
       "name": "peer-review",
       "path": "skills/writing/research/peer-review",
       "flat_name": "writing-research-peer-review",
       "scope": "writing",
-      "domain": "research-writing",
+      "domain": "research-authoring",
       "category": "research",
       "subcategory": "research",
       "slug": "peer-review",
@@ -5749,12 +5749,12 @@
       ]
     },
     {
-      "id": "writing.research-writing.research-grants",
+      "id": "writing.research-authoring.research-grants",
       "name": "research-grants",
       "path": "skills/writing/research/research-grants",
       "flat_name": "writing-research-research-grants",
       "scope": "writing",
-      "domain": "research-writing",
+      "domain": "research-authoring",
       "category": "research",
       "subcategory": "research",
       "slug": "research-grants",
@@ -5786,12 +5786,12 @@
       ]
     },
     {
-      "id": "writing.research-writing.research-reporting",
+      "id": "writing.research-authoring.research-reporting",
       "name": "research-reporting",
       "path": "skills/writing/research/research-reporting",
       "flat_name": "writing-research-research-reporting",
       "scope": "writing",
-      "domain": "research-writing",
+      "domain": "research-authoring",
       "category": "research",
       "subcategory": "research",
       "slug": "research-reporting",
@@ -5813,7 +5813,7 @@
       "secrets_needed": [],
       "last_reviewed": "2026-08-29",
       "profile_tags": [
-        "research-writing"
+        "research-authoring"
       ],
       "recommended_scope": "project",
       "selectors": [
@@ -5825,12 +5825,12 @@
       ]
     },
     {
-      "id": "writing.research-writing.scholar-evaluation",
+      "id": "writing.research-authoring.scholar-evaluation",
       "name": "scholar-evaluation",
       "path": "skills/writing/research/scholar-evaluation",
       "flat_name": "writing-research-scholar-evaluation",
       "scope": "writing",
-      "domain": "research-writing",
+      "domain": "research-authoring",
       "category": "research",
       "subcategory": "research",
       "slug": "scholar-evaluation",
@@ -5862,12 +5862,12 @@
       ]
     },
     {
-      "id": "writing.research-writing.scientific-writing",
+      "id": "writing.research-authoring.scientific-writing",
       "name": "scientific-writing",
       "path": "skills/writing/research/scientific-writing",
       "flat_name": "writing-research-scientific-writing",
       "scope": "writing",
-      "domain": "research-writing",
+      "domain": "research-authoring",
       "category": "research",
       "subcategory": "research",
       "slug": "scientific-writing",
@@ -5899,12 +5899,12 @@
       ]
     },
     {
-      "id": "writing.research-writing.venue-templates",
+      "id": "writing.research-authoring.venue-templates",
       "name": "venue-templates",
       "path": "skills/writing/research/venue-templates",
       "flat_name": "writing-research-venue-templates",
       "scope": "writing",
-      "domain": "research-writing",
+      "domain": "research-authoring",
       "category": "research",
       "subcategory": "research",
       "slug": "venue-templates",

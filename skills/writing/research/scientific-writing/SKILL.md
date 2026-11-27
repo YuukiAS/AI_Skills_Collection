@@ -602,7 +602,7 @@ This skill works effectively with:
 | Technical reports | Use `scientific_report.sty` (this skill) |
 | Grant reports | Use `scientific_report.sty` (this skill) |
 
-### Venue-Specific Writing Styles
+### Venue-Specific Clear Writings
 
 **Before writing for a specific venue, consult the venue-templates skill for writing style guides:**
 

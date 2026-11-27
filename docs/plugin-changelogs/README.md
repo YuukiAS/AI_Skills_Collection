@@ -10,8 +10,8 @@ Independent plugin versioning starts at `0.1` with AI_Skills_Collection reposito
 |---|---|
 | `workflow-core` | [workflow-core.md](workflow-core.md) |
 | `ai-skills-core` | [ai-skills-core.md](ai-skills-core.md) |
-| `writing-style` | [writing-style.md](writing-style.md) |
-| `research-writing` | [research-writing.md](research-writing.md) |
+| `clear-writing` | [clear-writing.md](clear-writing.md) |
+| `research-authoring` | [research-authoring.md](research-authoring.md) |
 | `presentations` | [presentations.md](presentations.md) |
 | `scientific-visualization` | [scientific-visualization.md](scientific-visualization.md) |
 | `web-development` | [web-development.md](web-development.md) |

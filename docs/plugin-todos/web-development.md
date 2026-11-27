@@ -375,7 +375,7 @@ candidate_action:
 - Keep zh-Hans and zh-Hant-HK as separate locale realizations. Frontend Design owns placement and hierarchy; it must not treat mechanical Simplified/Traditional conversion as localization acceptance.
 - Rendered acceptance must re-check copy after layout. Mobile first viewport, CTA visibility, line wrapping, repeated labels, visual prominence, and the relationship between copy and controls are part of the content decision.
 - Do not create a generic ban-list or AI detector. The target is product clarity and natural UI behavior, not detector evasion.
-boundary: wording realization belongs to `writing-style`; this item defines Frontend Design ownership and handoff. Product/legal semantics that are unsafe or internally framed must be escalated rather than cosmetically rewritten.
+boundary: wording realization belongs to `clear-writing`; this item defines Frontend Design ownership and handoff. Product/legal semantics that are unsafe or internally framed must be escalated rather than cosmetically rewritten.
 promotion_gate: first stabilize the broader Frontend Design workflow/TODO consolidation so this contract lands on a reliable content/layout/state-review foundation; then validate the cross-plugin handoff on CUHK Date and at least one independent product before treating it as a mature generic production gate.
 
 additional evidence (2026-11-03, Project Atlas A/B pre-implementation review):

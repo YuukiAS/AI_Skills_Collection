@@ -119,7 +119,7 @@ target domain plugin
 示例：
 
 - 改 `presentations`：使用 `workflow-core` + `ai-skills-core` + `presentations`。
-- 改 `writing-style`：使用 `workflow-core` + `ai-skills-core` + `writing-style`。
+- 改 `clear-writing`：使用 `workflow-core` + `ai-skills-core` + `clear-writing`。
 - 改 `statistical-modeling`：使用 `workflow-core` + `ai-skills-core` + `statistical-modeling`。
 
 触发范围包括修改 `skills/`、plugin routing、runtime references、shared runtime、QA、generator、production scripts、Marketplace payload 或 profile exposure。`ai-skills-core` 是 maintenance companion，不是 domain expert，也不是第二套 workflow/state/schema。它负责 source authority、TODO/duplicate triage、domain ownership、generated parity、production replay、unrelated regression、version/changelog 和 release closure 是否真实执行。
@@ -141,7 +141,7 @@ target domain plugin
 **plugin 使用过程中暴露的问题**直接写回 AI_Skills_Collection 对应 plugin TODO。例如：
 
 - `presentations` 生成/返修的 PPT 箭头穿字、图太小、已接受页面被改坏、现有 deck 被错误重做；
-- `research-writing` 把导师报告写成运行日志；
+- `research-authoring` 把导师报告写成运行日志；
 - `statistical-modeling` 的通用分析流程或检查行为出现错误；
 - `medical-imaging` 的通用影像处理工作流出现可复现问题。
 
@@ -276,7 +276,7 @@ canonical plugin / standalone-skill TODO 继续保存真实问题、证据和 ma
 
 Codex 不等用户提醒才同步看板。若当前 surface 不能修改 GitHub Project，应输出 exact pending Project mutation；不得要求用户手工拖 Kanban 或手工补 locator，也不得声称已同步。
 
-任何 reader-facing tracking Issue / Project copy 在 GitHub mutation 前必须真实调用当前安装的 Clear Writing（`writing-style`）。Clear Writing 只能改善表达，不能改变 maturity、Project Status、Area、`tracking: #N`、consumer truth、exact locator、Resolution commit 或 evidence meaning。
+任何 reader-facing tracking Issue / Project copy 在 GitHub mutation 前必须真实调用当前安装的 Clear Writing（`clear-writing`）。Clear Writing 只能改善表达，不能改变 maturity、Project Status、Area、`tracking: #N`、consumer truth、exact locator、Resolution commit 或 evidence meaning。
 
 central implementation complete 不等于 machine-consumed workflow 的最终 DONE。需要 downstream consumer adaptation 时，Project 进入 `ADAPTING`；最终 `DONE` 只能按 canonical board policy 完整关闭。
 

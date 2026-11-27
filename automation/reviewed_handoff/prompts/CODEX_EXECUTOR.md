@@ -89,7 +89,7 @@ wrapper label 放进被审正文；这些 identity 只能放在
 身份命名文档。如果 Text Review finding 只命中 wrapper label，而真实 candidate
 bytes 没有该问题，必须分类为
 `REVIEW_PACKET_CONSTRUCTION_FAILURE`，先修 packet 构造，不能写成
-writing-style product failure。
+clear-writing product failure。
 
 如果 Plan 的 acceptance 依赖真实 artifact 质量，Executor 交接时必须提供 Reviewer 能实际读取或查看的 artifact evidence：
 

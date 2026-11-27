@@ -17,15 +17,15 @@ docs/plugin-todos/<plugin>.md
 | `delivery-assurance` | [docs/plugin-todos/delivery-assurance.md](docs/plugin-todos/delivery-assurance.md) |
 | `workflow-core` | [docs/plugin-todos/workflow-core.md](docs/plugin-todos/workflow-core.md) |
 | `ai-skills-core` | [docs/plugin-todos/ai-skills-core.md](docs/plugin-todos/ai-skills-core.md) |
-| `writing-style` | [docs/plugin-todos/writing-style.md](docs/plugin-todos/writing-style.md) |
-| `research-writing` | [docs/plugin-todos/research-writing.md](docs/plugin-todos/research-writing.md) |
+| `clear-writing` | [docs/plugin-todos/clear-writing.md](docs/plugin-todos/clear-writing.md) |
+| `research-authoring` | [docs/plugin-todos/research-authoring.md](docs/plugin-todos/research-authoring.md) |
 | `presentations` | [docs/plugin-todos/presentations.md](docs/plugin-todos/presentations.md) |
 | `scientific-visualization` | [docs/plugin-todos/scientific-visualization.md](docs/plugin-todos/scientific-visualization.md) |
 | `web-development` | [docs/plugin-todos/web-development.md](docs/plugin-todos/web-development.md) |
 | `statistical-modeling` | [docs/plugin-todos/statistical-modeling.md](docs/plugin-todos/statistical-modeling.md) |
 | `bioinformatics` | [docs/plugin-todos/bioinformatics.md](docs/plugin-todos/bioinformatics.md) |
 | `medical-imaging` | [docs/plugin-todos/medical-imaging.md](docs/plugin-todos/medical-imaging.md) |
-| `artifact-content-design` | [docs/plugin-todos/artifact-content-design.md](docs/plugin-todos/artifact-content-design.md) |
+| `content-selection` | [docs/plugin-todos/content-selection.md](docs/plugin-todos/content-selection.md) |
 
 详细规则见 [docs/plugin-todos/README.md](docs/plugin-todos/README.md)。
 
@@ -98,7 +98,7 @@ AI_Skills_Collection/docs/plugin-todos/presentations.md
 
 然后把这次真实问题作为 `NEW` 记录进去。
 
-同理：报告插件的问题写 `research-writing.md`，统计插件的问题写 `statistical-modeling.md`，医学影像插件的问题写 `medical-imaging.md`。
+同理：报告插件的问题写 `research-authoring.md`，统计插件的问题写 `statistical-modeling.md`，医学影像插件的问题写 `medical-imaging.md`。
 
 ## 真实项目 thread 应该怎样写一条新问题？
 
