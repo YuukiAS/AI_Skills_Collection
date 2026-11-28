@@ -17,7 +17,7 @@ from PIL import Image
 from scipy import ndimage
 
 
-DOWNLOADS = Path(r"C:\Users\yuukias\Downloads")
+DOWNLOADS = Path.home() / "Downloads"
 HEX_RE = re.compile(r"#[0-9A-Fa-f]{6}")
 
 MANUAL_VISIBLE_HEX: dict[tuple[str, int], list[str]] = {

@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "renderer": "/home/yuukias/AI_Skills_Collection/.cache/tools/squashfs-root/opt/libreoffice25.8/program/soffice",
+  "renderer": "<local>/soffice",
   "pptx_to_pdf": "results/023_research_presentation_deck_design_system_integration/generated/profile_mutation_regression/statistical_design_system_fixture_mutated_profile/pdf/statistical_design_system_fixture_mutated_profile.pdf",
   "png_count": 4,
   "rendered_png": [

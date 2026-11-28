@@ -1,8 +1,8 @@
 {
   "name": "cuhk-default",
   "source": {
-    "pdf": "C:\\Users\\humc2\\Downloads\\CUHK Template.pdf",
-    "zip": "C:\\Users\\humc2\\Downloads\\CUHK Template.zip",
+    "pdf": "<local>/CUHK Template.pdf",
+    "zip": "<local>/CUHK Template.zip",
     "audited_at": "2026-07-13",
     "note": "Derived from local CUHK Beamer template. Brand assets are not redistributed unless license is confirmed."
   },

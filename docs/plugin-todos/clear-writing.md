@@ -912,3 +912,14 @@ candidate_action:
 - 修复说明继续沿用前面已经建立的同一心智模型：说明原来的哪一步出错、现在把哪一步改走另一条路径、因此哪些外围系统不需要改。
 - 最终影响范围用“什么保持原样 / 什么被局部替换 / 用户现在得到什么结果”收口，而不是重新列实现模块、测试字段或内部状态。
 - 保留这种“技术上准确，但读者先看到动作和因果”的表达方式作为 Clear Writing 正向回归样本。
+
+## 2026-11-27: Add the delivery trigger to global agent instructions after the plugin ships
+
+Status: deferred until Clear Writing is implemented and released.
+
+Decision: before every delivery or report to the user, regardless of task type, Codex invokes Clear Writing once on the text it is about to send. Short reports stay short.
+
+When the plugin ships:
+- Add one trigger sentence to the global Codex agent instructions, in the delivery-wording section.
+- Put the detailed procedure in the Verified Execution `completion-status` skill.
+- Sync the local configuration through the normal instruction-sync path.

@@ -31,7 +31,7 @@ No pending released changes.
 ## 0.3 - 2026-09-01
 
 - Tightened Beamer/PDF render routing so <private repository> handoffs preserve the
-  current `/home/yuukias/render_resources/chinese_math_pdf` resource location and
+  probe-detected local render-resource directory and
   report missing local resources explicitly instead of substituting retired
   server-only paths.
 

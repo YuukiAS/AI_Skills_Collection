@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import csv
 import copy
+import os
 import re
 import subprocess
 import sys
@@ -496,8 +497,20 @@ class PresentationSharedTests(unittest.TestCase):
             for path in required
             if path.suffix in {".py", ".tex", ".sty", ".json", ".ps1"}
         )
-        for private_marker in ["/home/yuukias", "/users/a/e/aereinh", "Hu, Mingcheng", "YuukiAS/STAT5060-TA"]:
+        private_markers = [
+            marker.strip()
+            for marker in os.environ.get("AISC_PRIVATE_MARKERS", "").split(",")
+            if marker.strip()
+        ]
+        for private_marker in private_markers:
             self.assertNotIn(private_marker, public_text)
+
+        generic_private_path_patterns = [
+            r"(?<![A-Za-z0-9._-])/(?:home|users)/[^/<\s'\"`]+",
+            r"(?i)[A-Z]:\\Users\\(?!<)[^\\\s'\"`]+",
+        ]
+        for private_path_pattern in generic_private_path_patterns:
+            self.assertNotRegex(public_text, private_path_pattern)
 
         with ZipFile(cuhk / "pptx/cuhk-reference-deck.pptx") as deck:
             slide_names = [name for name in deck.namelist() if re.fullmatch(r"ppt/slides/slide\d+\.xml", name)]

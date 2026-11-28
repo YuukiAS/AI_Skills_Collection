@@ -913,7 +913,7 @@ Affected plugin versions:
 
 Affected plugins:
 - `presentations`: `0.2` -> `0.3`
-  Reason: Beamer/PDF presentation routing now preserves the current YuukiAS workstation render-resource path and reports missing local resources explicitly instead of substituting retired server-only paths.
+  Reason: Beamer/PDF presentation routing now preserves the probe-detected local render-resource directory and reports missing local resources explicitly instead of substituting retired server-only paths.
 
 Unchanged plugin versions: `workflow-core 0.1`, `ai-skills-core 0.2`, `writing-style 0.1`, `research-writing 0.1`, `scientific-visualization 0.1`, `web-development 0.1`, `statistical-modeling 0.1`, `bioinformatics 0.1`, `medical-imaging 0.1`.
 

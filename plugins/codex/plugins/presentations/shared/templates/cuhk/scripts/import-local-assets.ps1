@@ -1,5 +1,5 @@
 param(
-  [string]$TemplateZip = "C:\Users\humc2\Downloads\CUHK Template.zip",
+  [string]$TemplateZip = (Join-Path ([Environment]::GetFolderPath("UserProfile")) "Downloads\CUHK Template.zip"),
   [string]$Destination = ".\private-cuhk-assets"
 )
 
